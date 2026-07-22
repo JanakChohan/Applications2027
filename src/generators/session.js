@@ -53,6 +53,7 @@ export function generateSession({ seed, tier = 'intermediate', count = 18, typeW
   for (let i = 0; i < count; i++) {
     const aim = neediestLabel(labelCounts, items.length);
     let accepted = null;
+    let fallback = null; // a valid item whose label didn't match the target
 
     for (let attempt = 0; attempt < maxTriesPerItem && !accepted; attempt++) {
       // Bias type choice toward `aim`: insufficient guarantees Cannot Say.
@@ -72,12 +73,24 @@ export function generateSession({ seed, tier = 'intermediate', count = 18, typeW
       const sig = signature(item);
       if (seen.has(sig)) continue;          // reject duplicate question shapes
 
-      // Don't overshoot a label badly if a balanced alternative exists.
-      seen.add(sig);
       item.id = `${seed}-${i}`;
       item.index = i;
       item.verify = v;
-      accepted = item;
+
+      // Prefer an item whose computed label matches the target we're short on;
+      // this keeps the True/False/Cannot-Say mix close to TARGET_LABELS instead
+      // of drifting (the generators naturally skew a little towards False).
+      if (aim == null || item.label === aim) {
+        seen.add(sig);
+        accepted = item;
+      } else if (!fallback) {
+        fallback = { item, sig };
+      }
+    }
+
+    if (!accepted && fallback) {
+      seen.add(fallback.sig);
+      accepted = fallback.item;
     }
 
     // Fallback: if we somehow couldn't find a fresh verified item, take any
