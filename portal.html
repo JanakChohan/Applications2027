@@ -1,0 +1,484 @@
+<title>Cover Letter Portal</title>
+<style>
+  :root {
+    --paper:#F1EFE9; --panel:#FBFAF7; --panel-2:#F6F4EE;
+    --text:#212227; --muted:#6C6961; --line:#E4E1D9; --line-strong:#D6D2C8;
+    --accent:#2A4C63; --accent-soft:#E7EDF1;
+    --btn:#284C63; --btn-ink:#FFFFFF; --claret:#8A3B33;
+    --shadow:24px 30px 60px -32px rgba(28,26,20,.45), 0 2px 8px -4px rgba(28,26,20,.25);
+    /* sheet tokens — constant across themes; a letter is a letter */
+    --sheet:#FFFFFF; --sheet-ink:#1C1E23; --sheet-muted:#5E5B53; --sheet-line:#E0DCD2;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,Cambria,serif;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:#131519; --panel:#1B1E23; --panel-2:#20242A;
+      --text:#E8E5DD; --muted:#9A968C; --line:#2A2E35; --line-strong:#363B43;
+      --accent:#89B4CE; --accent-soft:#22333D;
+      --btn:#3A6C8C; --btn-ink:#FFFFFF;
+      --sheet:#FAF8F2; --sheet-ink:#1C1E23; --sheet-muted:#5E5B53; --sheet-line:#DED9CE;
+    }
+  }
+  :root[data-theme="light"] {
+    --paper:#F1EFE9; --panel:#FBFAF7; --panel-2:#F6F4EE; --text:#212227; --muted:#6C6961;
+    --line:#E4E1D9; --line-strong:#D6D2C8; --accent:#2A4C63; --accent-soft:#E7EDF1;
+    --btn:#284C63; --btn-ink:#FFFFFF; --sheet:#FFFFFF; --sheet-ink:#1C1E23;
+    --sheet-muted:#5E5B53; --sheet-line:#E0DCD2;
+  }
+  :root[data-theme="dark"] {
+    --paper:#131519; --panel:#1B1E23; --panel-2:#20242A; --text:#E8E5DD; --muted:#9A968C;
+    --line:#2A2E35; --line-strong:#363B43; --accent:#89B4CE; --accent-soft:#22333D;
+    --btn:#3A6C8C; --btn-ink:#FFFFFF; --sheet:#FAF8F2; --sheet-ink:#1C1E23;
+    --sheet-muted:#5E5B53; --sheet-line:#DED9CE;
+  }
+
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; }
+  body {
+    background:var(--paper); color:var(--text); font-family:var(--sans);
+    font-size:15px; line-height:1.5; -webkit-font-smoothing:antialiased;
+  }
+  .app { display:flex; flex-direction:column; min-height:100dvh; }
+
+  /* ---- masthead ---- */
+  header.mast {
+    display:flex; align-items:baseline; justify-content:space-between; gap:16px;
+    padding:20px 28px; border-bottom:1px solid var(--line); background:var(--panel);
+    position:sticky; top:0; z-index:20;
+  }
+  .brand { display:flex; align-items:baseline; gap:14px; min-width:0; }
+  .brand .mark {
+    font-family:var(--serif); font-size:22px; font-weight:600; letter-spacing:.01em;
+    color:var(--text); white-space:nowrap;
+  }
+  .brand .mark .amp { color:var(--accent); font-style:italic; padding:0 2px; }
+  .brand .tagline {
+    font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);
+    white-space:nowrap;
+  }
+  .mast-actions { display:flex; align-items:center; gap:10px; }
+  .theme-btn {
+    font:inherit; font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--muted); background:transparent; border:1px solid var(--line-strong);
+    border-radius:999px; padding:6px 14px; cursor:pointer;
+  }
+  .theme-btn:hover { color:var(--text); border-color:var(--accent); }
+
+  /* ---- layout ---- */
+  main { display:grid; grid-template-columns:352px 1fr; flex:1; min-height:0; }
+  .rail {
+    border-right:1px solid var(--line); background:var(--panel);
+    display:flex; flex-direction:column; min-height:0;
+  }
+  .stage { padding:40px; overflow:auto; display:flex; justify-content:center; }
+
+  /* ---- composer ---- */
+  .composer { padding:22px 22px 24px; border-bottom:1px solid var(--line); }
+  .composer h2, .library h2 {
+    font-family:var(--sans); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); margin:0 0 14px; font-weight:600;
+  }
+  .field { margin-bottom:12px; }
+  .field label {
+    display:block; font-size:11px; letter-spacing:.05em; text-transform:uppercase;
+    color:var(--muted); margin-bottom:5px;
+  }
+  .field input, .field select, .field textarea {
+    width:100%; font:inherit; font-size:14px; color:var(--text); background:var(--panel-2);
+    border:1px solid var(--line-strong); border-radius:8px; padding:9px 11px;
+  }
+  .field textarea { resize:vertical; min-height:66px; line-height:1.45; }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline:none; border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft);
+  }
+  .row2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .btn {
+    font:inherit; font-weight:600; font-size:14px; cursor:pointer; border-radius:8px;
+    border:1px solid transparent; padding:10px 14px; display:inline-flex; align-items:center;
+    justify-content:center; gap:8px;
+  }
+  .btn-primary { background:var(--btn); color:var(--btn-ink); width:100%; }
+  .btn-primary:hover { filter:brightness(1.06); }
+  .btn-primary:active { transform:translateY(1px); }
+  .btn-ghost {
+    background:transparent; color:var(--text); border-color:var(--line-strong);
+  }
+  .btn-ghost:hover { border-color:var(--accent); color:var(--accent); }
+  .composer .hint { font-size:12px; color:var(--muted); margin:12px 2px 0; line-height:1.5; }
+  .composer .hint b { color:var(--text); font-weight:600; }
+
+  /* ---- library ---- */
+  .library { padding:20px 14px 24px; overflow:auto; flex:1; min-height:0; }
+  .library h2 { padding:0 8px; }
+  .lib-item {
+    width:100%; text-align:left; background:transparent; border:1px solid transparent;
+    border-radius:10px; padding:12px 12px; cursor:pointer; display:block; margin-bottom:4px;
+    color:inherit; font:inherit;
+  }
+  .lib-item:hover { background:var(--panel-2); }
+  .lib-item.active { background:var(--panel-2); border-color:var(--line-strong); }
+  .lib-item .firm {
+    font-family:var(--serif); font-size:16px; color:var(--text); display:flex;
+    align-items:center; gap:8px;
+  }
+  .lib-item .role { font-size:12.5px; color:var(--muted); margin-top:2px; }
+  .lib-item .date { font-size:11px; letter-spacing:.05em; color:var(--muted); margin-top:6px; text-transform:uppercase; }
+  .tier {
+    font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    padding:2px 7px; border-radius:999px; background:var(--accent-soft); color:var(--accent);
+    white-space:nowrap;
+  }
+  .tier.specimen { background:transparent; border:1px solid var(--line-strong); color:var(--muted); }
+
+  /* ---- sheet / letter ---- */
+  .sheet-wrap { width:100%; max-width:820px; }
+  .toolbar {
+    display:flex; align-items:center; gap:14px; margin-bottom:22px; flex-wrap:wrap;
+  }
+  .toolbar .title {
+    font-family:var(--serif); font-size:22px; color:var(--text); margin-right:auto;
+    display:flex; align-items:baseline; gap:12px; min-width:0;
+  }
+  .toolbar .title .sub { font-family:var(--sans); font-size:12.5px; color:var(--muted); letter-spacing:.02em; }
+  .wc { font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums; letter-spacing:.03em; }
+  .wc.over { color:var(--claret); }
+
+  .sheet {
+    background:var(--sheet); color:var(--sheet-ink); border:1px solid var(--sheet-line);
+    border-radius:2px; box-shadow:var(--shadow); padding:64px 72px 72px;
+    font-family:var(--serif); font-size:16px; line-height:1.62;
+  }
+  .sheet .contact { text-align:right; line-height:1.5; margin-bottom:38px; }
+  .sheet .contact .name { font-weight:600; }
+  .sheet .date { margin-bottom:26px; }
+  .sheet .recipient { margin-bottom:26px; white-space:pre-line; }
+  .sheet .salutation { margin-bottom:20px; }
+  .sheet p.para { margin:0 0 18px; text-align:left; }
+  .sheet .signoff { margin-top:26px; }
+  .sheet .signoff .name { margin-top:26px; }
+
+  /* ---- notes ---- */
+  .notes { max-width:820px; width:100%; margin-top:26px; }
+  .notes details {
+    border:1px solid var(--line); border-radius:12px; background:var(--panel);
+    margin-bottom:10px; overflow:hidden;
+  }
+  .notes summary {
+    cursor:pointer; padding:13px 18px; font-size:12px; letter-spacing:.09em;
+    text-transform:uppercase; color:var(--muted); font-weight:600; list-style:none;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .notes summary::-webkit-details-marker { display:none; }
+  .notes summary::after { content:"+"; color:var(--accent); font-size:16px; }
+  .notes details[open] summary::after { content:"–"; }
+  .notes .body { padding:2px 18px 16px; font-family:var(--sans); font-size:13.5px; color:var(--text); line-height:1.55; }
+  .notes .body ul { margin:0; padding-left:18px; }
+  .notes .body li { margin-bottom:6px; }
+  .notes .body.claret { color:var(--claret); font-family:var(--serif); font-size:15px; font-style:italic; }
+
+  /* ---- empty ---- */
+  .empty { max-width:520px; text-align:center; margin:auto; color:var(--muted); }
+  .empty h3 { font-family:var(--serif); font-size:26px; color:var(--text); margin:0 0 12px; font-weight:600; }
+  .empty p { font-size:14.5px; line-height:1.6; }
+
+  /* ---- toast ---- */
+  .toast {
+    position:fixed; left:50%; bottom:30px; transform:translateX(-50%) translateY(20px);
+    background:var(--text); color:var(--paper); padding:11px 20px; border-radius:999px;
+    font-size:13px; letter-spacing:.02em; opacity:0; pointer-events:none; transition:.28s ease; z-index:50;
+    box-shadow:0 10px 30px -10px rgba(0,0,0,.4);
+  }
+  .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+  @media (max-width:860px) {
+    main { grid-template-columns:1fr; }
+    .rail { border-right:none; border-bottom:1px solid var(--line); }
+    .library { max-height:230px; }
+    .stage { padding:24px 16px; }
+    .sheet { padding:40px 28px 48px; font-size:15px; }
+  }
+  @media print {
+    header.mast, .rail, .toolbar, .notes, .theme-btn { display:none !important; }
+    body, .app, main, .stage { display:block; background:#fff; }
+    .stage { padding:0; overflow:visible; }
+    .sheet { box-shadow:none; border:none; padding:0; max-width:none; }
+    .sheet-wrap { max-width:none; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition:none !important; } }
+</style>
+
+<div class="app">
+  <header class="mast">
+    <div class="brand">
+      <span class="mark">Correspondence<span class="amp">&amp;</span>Co.</span>
+      <span class="tagline">Cover Letter Portal</span>
+    </div>
+    <div class="mast-actions">
+      <button class="theme-btn" id="themeBtn" type="button">Theme</button>
+    </div>
+  </header>
+
+  <main>
+    <aside class="rail">
+      <section class="composer">
+        <h2>New request</h2>
+        <div class="field">
+          <label for="f-firm">Firm</label>
+          <input id="f-firm" type="text" placeholder="e.g. Cinven" autocomplete="off">
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label for="f-role">Role / desk</label>
+            <input id="f-role" type="text" placeholder="Investment Analyst" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="f-city">Office</label>
+            <input id="f-city" type="text" placeholder="London" autocomplete="off">
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-prog">Programme</label>
+          <select id="f-prog">
+            <option value="">—</option>
+            <option>Full-time</option>
+            <option>Graduate</option>
+            <option>Summer internship</option>
+            <option>Spring / insight</option>
+            <option>Off-cycle</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-jd">Job description <span style="text-transform:none;letter-spacing:0">(paste, optional)</span></label>
+          <textarea id="f-jd" placeholder="Paste the advert here so the letter can speak to the actual mandate…"></textarea>
+        </div>
+        <button class="btn btn-primary" id="composeBtn" type="button">Copy request &rarr; paste to Claude</button>
+        <p class="hint">This portal doesn't write the letter on its own. It builds a precise brief and copies it to your clipboard &mdash; <b>paste it into the chat</b> and I'll run the full research &amp; drafting engine, then the finished letter appears here.</p>
+      </section>
+
+      <section class="library">
+        <h2>Applications</h2>
+        <div id="libList"></div>
+      </section>
+    </aside>
+
+    <section class="stage" id="stage"></section>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  "use strict";
+
+  // ---- Letter data. New letters get appended here on each redeploy. ----
+  const LETTERS = [
+    {
+      id: "optiver-equity-analyst",
+      firm: "Optiver",
+      role: "Equity Analyst",
+      city: "Amsterdam",
+      tier: "Specimen",
+      isSpecimen: true,
+      dateStr: "04 September 2025",
+      contact: { name: "Samuel Leong", lines: ["24 Tabor Gardens", "+44 7948 145353", "samleong789@gmail.com"] },
+      recipient: "Optiver\nStrawinskylaan 3095\n1077 ZX\nAmsterdam\nThe Netherlands",
+      salutation: "Dear Sir/Madam,",
+      paragraphs: [
+        "My journey to Optiver was unconventional; prior to joining in May, I undertook 5 formative internships across investment banking, private equity, and accounting. With each successive role, I developed deeper appreciation for intellectual exactitude and the corporate finance principles that underpin Equity Analyst roles.",
+        "Bayesian probability has always been more than just a university module to me; it has shaped my worldview and decision-making framework for the past decade – assigning probabilities to outcomes and identifying maximum-EV decisions in all facets of life. I once believed this perspective to be uniquely my own, until I walked through Optiver’s revolving doors and quickly learned that it’s precisely the mutual cognitive foundation that the company is defined by.",
+        "My internship at Optiver was nothing short of revelatory. As my first exposure to public markets, I appreciated the inherently objective, Bayesian nature of the work that remains absent in private equity. Whilst trading was enjoyable and intellectually demanding, the skillset of an equity analyst aligns much closer to my skills and experience – offering the perfect blend between the competitive, logical public markets and the analytical, business-focused field of corporate finance.",
+        "I spoke with Conor Cashman (Equity Analyst, Optiver), who reinforced my initial impressions of the role. On one hand, equity analysts devote significant time to the intricacies of company financials and fundamental analysis, while on the other, they apply probabilistic frameworks to assess the likelihood of events and the expectation of vol impact. My full-time role at BlackRock is largely identical on the corporate finance side, and the Equity Analyst position presents an opportunity to combine this with my mathematical background.",
+        "Optiver was by far my favourite internship, and I would treasure the opportunity to return, particularly in a role that aligns even more closely with my skills and experience.",
+        "Thank you very much for your time and consideration, and I look forward to hearing from you soon."
+      ],
+      signoff: "Yours faithfully,",
+      signName: "Samuel Leong",
+      notes: {
+        spine: "Tier 1–2 — interned there, spoke to a named analyst, and shares the firm's EV/Bayesian cognitive frame.",
+        sources: ["Reference specimen supplied by the user — the register anchor every new draft is written toward."],
+        unverified: [],
+        weakest: "“Thank you very much for your time and consideration” — the one line that would survive a find-and-replace of any firm; trim first if space is tight."
+      }
+    }
+  ];
+
+  const $ = (s, r=document) => r.querySelector(s);
+  const stage = $("#stage");
+  const libList = $("#libList");
+  let activeId = LETTERS.length ? LETTERS[0].id : null;
+
+  // ---------- theme ----------
+  const root = document.documentElement;
+  function currentTheme() {
+    return root.getAttribute("data-theme")
+      || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  }
+  $("#themeBtn").addEventListener("click", () => {
+    root.setAttribute("data-theme", currentTheme() === "dark" ? "light" : "dark");
+  });
+
+  // ---------- toast ----------
+  let toastT;
+  function toast(msg) {
+    const el = $("#toast");
+    el.textContent = msg; el.classList.add("show");
+    clearTimeout(toastT);
+    toastT = setTimeout(() => el.classList.remove("show"), 2600);
+  }
+
+  // ---------- helpers ----------
+  const esc = (s) => s.replace(/[&<>]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;" }[c]));
+  const wordCount = (L) => L.paragraphs.join(" ").trim().split(/\s+/).filter(Boolean).length;
+
+  function letterPlainText(L) {
+    const out = [];
+    out.push(L.contact.name);
+    L.contact.lines.forEach(l => out.push(l));
+    out.push("", L.dateStr, "", L.recipient, "", L.salutation, "");
+    L.paragraphs.forEach(p => { out.push(p); out.push(""); });
+    out.push(L.signoff, "", L.signName);
+    return out.join("\n");
+  }
+
+  // ---------- render library ----------
+  function renderLib() {
+    libList.innerHTML = "";
+    LETTERS.forEach(L => {
+      const b = document.createElement("button");
+      b.className = "lib-item" + (L.id === activeId ? " active" : "");
+      b.type = "button";
+      const tierCls = L.isSpecimen ? "tier specimen" : "tier";
+      b.innerHTML =
+        `<div class="firm">${esc(L.firm)} <span class="${tierCls}">${esc(L.tier || "")}</span></div>` +
+        `<div class="role">${esc(L.role)}${L.city ? " · " + esc(L.city) : ""}</div>` +
+        `<div class="date">${esc(L.dateStr)}</div>`;
+      b.addEventListener("click", () => { activeId = L.id; render(); });
+      libList.appendChild(b);
+    });
+  }
+
+  // ---------- render stage ----------
+  function render() {
+    renderLib();
+    const L = LETTERS.find(x => x.id === activeId);
+    if (!L) {
+      stage.innerHTML =
+        `<div class="empty"><h3>No letters yet</h3>` +
+        `<p>Fill in the firm on the left, copy the brief, and paste it into the chat. ` +
+        `Your finished letter will appear here — formatted, printable, and ready to send.</p></div>`;
+      return;
+    }
+    const wc = wordCount(L);
+    const over = wc > 520;
+    const n = L.notes || {};
+    const notesHTML = renderNotes(n);
+
+    stage.innerHTML =
+      `<div class="sheet-wrap">` +
+        `<div class="toolbar">` +
+          `<div class="title">${esc(L.firm)}<span class="sub">${esc(L.role)}${L.city ? ", " + esc(L.city) : ""}</span></div>` +
+          `<span class="wc${over ? " over" : ""}">${wc} words</span>` +
+          `<button class="btn btn-ghost" id="printBtn" type="button">Print / PDF</button>` +
+          `<button class="btn btn-ghost" id="dlBtn" type="button">Download</button>` +
+        `</div>` +
+        `<article class="sheet">` +
+          `<div class="contact"><span class="name">${esc(L.contact.name)}</span><br>` +
+            L.contact.lines.map(esc).join("<br>") + `</div>` +
+          `<div class="date">${esc(L.dateStr)}</div>` +
+          `<div class="recipient">${esc(L.recipient)}</div>` +
+          `<div class="salutation">${esc(L.salutation)}</div>` +
+          L.paragraphs.map(p => `<p class="para">${esc(p)}</p>`).join("") +
+          `<div class="signoff">${esc(L.signoff)}<div class="name">${esc(L.signName)}</div></div>` +
+        `</article>` +
+        notesHTML +
+      `</div>`;
+
+    const printBtn = $("#printBtn"); if (printBtn) printBtn.addEventListener("click", () => window.print());
+    const dlBtn = $("#dlBtn"); if (dlBtn) dlBtn.addEventListener("click", () => downloadLetter(L));
+  }
+
+  function renderNotes(n) {
+    const blocks = [];
+    if (n.spine) {
+      blocks.push(noteBlock("Spine", `<p style="margin:0">${esc(n.spine)}</p>`));
+    }
+    if (n.sources && n.sources.length) {
+      blocks.push(noteBlock("Sources", "<ul>" + n.sources.map(s => `<li>${esc(s)}</li>`).join("") + "</ul>"));
+    }
+    if (n.unverified && n.unverified.length) {
+      blocks.push(noteBlock("Unverified — confirm before sending", "<ul>" + n.unverified.map(s => `<li>${esc(s)}</li>`).join("") + "</ul>"));
+    }
+    if (n.weakest) {
+      blocks.push(noteBlockClaret("Weakest link", esc(n.weakest)));
+    }
+    if (!blocks.length) return "";
+    return `<div class="notes">${blocks.join("")}</div>`;
+  }
+  function noteBlock(title, inner) {
+    return `<details><summary>${esc(title)}</summary><div class="body">${inner}</div></details>`;
+  }
+  function noteBlockClaret(title, text) {
+    return `<details><summary>${esc(title)}</summary><div class="body claret">${text}</div></details>`;
+  }
+
+  // ---------- download ----------
+  async function downloadLetter(L) {
+    const dl = window.claude && window.claude.downloads;
+    const text = letterPlainText(L);
+    const base = (L.firm + "-" + L.role).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    const filename = base + "-cover-letter.txt";
+    if (!dl) {
+      // Fallback for environments without the downloads capability.
+      const blob = new Blob([text], { type: "text/plain" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob); a.download = filename; a.click();
+      URL.revokeObjectURL(a.href);
+      return;
+    }
+    try {
+      await dl.save({ filename, data: text });
+      toast("Letter saved.");
+    } catch (e) {
+      const code = e && e.code;
+      if (code === "declined") return;
+      if (code === "rate_limited") { toast("One moment — try the download again."); return; }
+      toast("Couldn't save the file here — use Print / PDF instead.");
+    }
+  }
+
+  // ---------- composer ----------
+  $("#composeBtn").addEventListener("click", async () => {
+    const firm = $("#f-firm").value.trim();
+    const role = $("#f-role").value.trim();
+    const city = $("#f-city").value.trim();
+    const prog = $("#f-prog").value.trim();
+    const jd   = $("#f-jd").value.trim();
+    if (!firm) { toast("Add a firm name first."); $("#f-firm").focus(); return; }
+
+    const lines = ["Draft me a cover letter with the /coverletter engine.", ""];
+    lines.push("Firm: " + firm);
+    if (role) lines.push("Role / desk: " + role);
+    if (city) lines.push("Office: " + city);
+    if (prog) lines.push("Programme: " + prog);
+    if (jd) { lines.push("", "Job description:", jd); }
+    else { lines.push("", "(No JD pasted — research the current advert for this role.)"); }
+    const msg = lines.join("\n");
+
+    try {
+      await navigator.clipboard.writeText(msg);
+      toast("Brief copied — paste it into the chat.");
+    } catch (e) {
+      // Clipboard blocked: select-and-copy fallback via a temp textarea.
+      const ta = document.createElement("textarea");
+      ta.value = msg; ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); toast("Brief copied — paste it into the chat."); }
+      catch (_) { toast("Copy failed — select the brief manually."); }
+      document.body.removeChild(ta);
+    }
+  });
+
+  // ---------- go ----------
+  render();
+</script>
