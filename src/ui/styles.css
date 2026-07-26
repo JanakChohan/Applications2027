@@ -161,3 +161,51 @@ label.chk { display: inline-flex; align-items: center; gap: 6px; }
 
 .banner { background: #fff7e6; border: 1px solid #f0dca0; border-radius: 6px; padding: 8px 12px; font-size: 13px; margin-top: 10px; }
 .hidden { display: none !important; }
+
+/* ---- module picker ---- */
+.modchips { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0; }
+.modchip { border: 1px solid var(--line); background: #eef1f4; color: var(--muted); border-radius: 20px; padding: 6px 14px; font-weight: 600; }
+.modchip.active { background: var(--brand); color: #fff; border-color: var(--brand); }
+.module-head { margin: 10px 0 2px; color: var(--ink); }
+
+/* ---- verbal passages ---- */
+.passage h4 { margin: 0 0 6px; color: var(--brand); }
+.passage p { margin: 0; max-width: 60ch; }
+.display-area .passage { font-size: 15.5px; line-height: 1.7; }
+.quote { font-style: italic; color: #444; }
+
+/* ---- shape stage (lst / ix) ---- */
+.display-area.stage, .shape-stage { display: flex; justify-content: center; align-items: center; }
+.obj-svg, .shape-svg { display: block; }
+
+/* shape sudoku */
+.sudoku { border-collapse: collapse; margin: 8px auto; }
+.sud-cell { width: 56px; height: 56px; border: 1px solid var(--line); text-align: center; vertical-align: middle; padding: 0; }
+.sud-cell.ask { background: #eaf2f8; color: var(--brand); font-size: 26px; font-weight: 700; outline: 2px solid var(--brand-2); }
+.sud-cell.scratch { background: #fbfcfd; cursor: pointer; }
+.sud-cell.scratch:hover { background: #eef4f8; }
+.scratch-hint { color: #bbb; font-size: 20px; }
+.options { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 6px; }
+.opt { border: 2px solid var(--line); border-radius: 8px; background: #fff; padding: 6px; cursor: pointer; }
+.opt:hover { border-color: var(--brand-2); }
+.opt.sel { border-color: var(--brand); background: #eaf2f8; }
+
+/* ix odd-one-out grid */
+.ix-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 300px; margin: 0 auto; }
+.ix-obj { border: 2px solid var(--line); border-radius: 8px; background: #fff; padding: 6px; cursor: pointer; display: flex; justify-content: center; }
+.ix-obj:hover { border-color: var(--brand-2); }
+.ix-obj.sel { border-color: var(--brand); background: #eaf2f8; }
+
+/* cls categorisation */
+.cls-examples { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+.cls-group { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
+.cls-glabel, .cls-tlabel { text-align: center; font-weight: 600; margin-bottom: 6px; font-size: 13px; }
+.cls-A { border-color: #d98a3d; } .cls-A .cls-glabel { color: #b5701f; }
+.cls-B { border-color: #4a6785; } .cls-B .cls-glabel { color: #35597f; }
+.cls-group .cls-grid { display: inline-table; margin: 4px; }
+.cls-grid { border-collapse: collapse; }
+.cls-grid td { width: 24px; height: 24px; border: 1px solid var(--line); text-align: center; font-size: 13px; font-variant-numeric: tabular-nums; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+.cls-grid.cls-A td { background: #fdf3e9; } .cls-grid.cls-B td { background: #eef2f7; }
+.cls-grid.target td { background: #fffef8; border-color: var(--warn); }
+.cls-target { text-align: center; margin-top: 14px; }
+.cls-target .cls-grid { display: inline-table; }

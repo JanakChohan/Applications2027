@@ -2,9 +2,17 @@
 // wrong-reason diagnosis — the coaching layer's correctness matters as much as
 // the generator's, since it's what the user learns from.
 import { describe, it, expect } from 'vitest';
-import { scoreSession } from '../src/coaching/scoring.js';
+import { scoreSession, requiredTabs } from '../src/coaching/scoring.js';
 import { diagnose } from '../src/coaching/diagnosis.js';
 import { percentileToStanine, rateToPercentile } from '../src/coaching/norms.js';
+
+// A minimal tab-based module stub for the generic scorer (mirrors numerical).
+const MOD = {
+  usesTabs: true,
+  answerOf: (it) => it.label,
+  requiredTabsOf: (it) => [...requiredTabs(it)],
+  diagnose,
+};
 
 // Build a fake session of simple items with known labels + required tabs.
 function fakeSession(labels) {
@@ -27,7 +35,7 @@ describe('scoreSession negative marking', () => {
       { given: null, timeMs: 0 },                                // blank
       { given: 'CANNOT_SAY', timeMs: 8000 },                     // correct
     ];
-    const s = scoreSession(session, answers, { wrongTabPenalty: true });
+    const s = scoreSession(session, answers, { wrongTabPenalty: true }, MOD);
     expect(s.correct).toBe(2);
     expect(s.wrong).toBe(1);
     expect(s.blank).toBe(1);
@@ -38,7 +46,7 @@ describe('scoreSession negative marking', () => {
 
   it('applies the wrong-tab penalty when answering on a non-required tab', () => {
     const session = fakeSession(['TRUE']);
-    const s = scoreSession(session, [{ given: 'TRUE', submittedTab: 'costs', timeMs: 5000 }], { wrongTabPenalty: true });
+    const s = scoreSession(session, [{ given: 'TRUE', submittedTab: 'costs', timeMs: 5000 }], { wrongTabPenalty: true }, MOD);
     expect(s.correct).toBe(1);
     expect(s.wrongTabEvents).toBe(1);
     expect(s.adjustedScore).toBe(0); // +1 correct − 1 wrong-tab
@@ -46,7 +54,7 @@ describe('scoreSession negative marking', () => {
 
   it('can disable the wrong-tab penalty', () => {
     const session = fakeSession(['TRUE']);
-    const s = scoreSession(session, [{ given: 'TRUE', submittedTab: 'costs' }], { wrongTabPenalty: false });
+    const s = scoreSession(session, [{ given: 'TRUE', submittedTab: 'costs' }], { wrongTabPenalty: false }, MOD);
     expect(s.adjustedScore).toBe(1);
   });
 });

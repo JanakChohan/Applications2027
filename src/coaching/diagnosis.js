@@ -56,6 +56,40 @@ export const REASONS = {
     label: 'Left blank',
     advice: 'You skipped this one. Blanks score 0 (no penalty), which is correct when you truly can’t narrow it — but in untimed practice, work it through to learn the pattern.',
   },
+  // ---- verbal-specific ----
+  used_outside_knowledge: {
+    label: 'Used outside knowledge',
+    advice: 'You judged this on what’s plausible in the real world, not on the passage. Aon’s own examples punish this — answer only from the tab; if it isn’t stated, it’s Cannot Say.',
+  },
+  quantifier_overreach: {
+    label: 'Absolute-word overreach',
+    advice: 'The statement used an absolute (“all / every / always”) the passage never supports. A general statement in the text does not license an absolute claim — that’s Cannot Say.',
+  },
+  paraphrase_miss: {
+    label: 'Paraphrase read wrong',
+    advice: 'A synonym that genuinely matches is True; a paraphrase that swaps a detail is False. Check each key word of the statement against a specific sentence.',
+  },
+  // ---- logical/inductive-specific ----
+  wrong_rule: {
+    label: 'Wrong rule',
+    advice: 'You inferred the wrong governing pattern. List what changes across the series and what stays fixed before deciding.',
+  },
+  checked_one_property: {
+    label: 'Checked only one property',
+    advice: 'You fixed on one attribute (say shape) and missed the one that actually varies (rotation, count, fill…). Scan every attribute before committing.',
+  },
+  pattern_slip: {
+    label: 'Pattern arithmetic slip',
+    advice: 'Right idea, miscounted the step (rotation degrees, count sequence). Re-count one more time under the rule.',
+  },
+  wrong_row_or_column: {
+    label: 'Used only row or column',
+    advice: 'In shape-sudoku the answer is fixed by BOTH its row and its column. Eliminate using both before choosing.',
+  },
+  wrong_group: {
+    label: 'Misapplied the rule',
+    advice: 'You assigned the grid to the wrong group. Re-state the hidden rule as one testable property, then apply it exactly.',
+  },
   panicked_guess: {
     label: 'Fast wrong guess',
     advice: 'Answered in under ~7s and missed. Blind guesses are negative-EV here (wrong = −1). If you can’t eliminate an option, leave it blank.',

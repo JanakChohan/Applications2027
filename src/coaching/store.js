@@ -1,97 +1,64 @@
 // -----------------------------------------------------------------------------
-// store.js — persistent progress store (localStorage in the browser, in-memory
-// fallback under Node so tests/audit can import this module).
-//
-// Tracks accuracy by item type, by difficulty, by wrong-reason, and a dated
-// history so the progress screen can show whether you're actually improving.
+// store.js — persistent progress across ALL modules (localStorage in the browser,
+// in-memory fallback under Node). Tracks accuracy by module, by fine-grained skill
+// (`module:skill`), by difficulty, by wrong-reason, and a dated history so the
+// progress screen can show whether you're improving on each test type.
 // -----------------------------------------------------------------------------
 
-const KEY = 'aon-scales-trainer:v1';
+const KEY = 'aon-scales-trainer:v2';
 
-// In-browser we use window.localStorage; elsewhere a tiny memory shim.
 const backend = (() => {
-  try {
-    if (typeof localStorage !== 'undefined') return localStorage;
-  } catch { /* access can throw in some sandboxes */ }
+  try { if (typeof localStorage !== 'undefined') return localStorage; } catch { /* sandboxed */ }
   const mem = new Map();
-  return {
-    getItem: (k) => (mem.has(k) ? mem.get(k) : null),
-    setItem: (k, v) => mem.set(k, v),
-    removeItem: (k) => mem.delete(k),
-  };
+  return { getItem: (k) => (mem.has(k) ? mem.get(k) : null), setItem: (k, v) => mem.set(k, v), removeItem: (k) => mem.delete(k) };
 })();
 
 function blank() {
-  return {
-    version: 1,
-    sessions: [],                 // one summary per completed session
-    byType: {},                   // type -> {seen, correct, wrong, blank, timeMs}
-    byTier: {},                   // tier -> {seen, correct, wrong, blank}
-    byReason: {},                 // diagnosis category -> count
-    history: [],                  // [{date, accuracy, stanine, adjusted, count}]
-  };
+  return { version: 2, sessions: [], byModule: {}, bySkill: {}, byTier: {}, byReason: {}, history: [] };
 }
 
 export function load() {
   try {
     const raw = backend.getItem(KEY);
     if (!raw) return blank();
-    const data = JSON.parse(raw);
-    return { ...blank(), ...data };
-  } catch {
-    return blank();
-  }
+    return { ...blank(), ...JSON.parse(raw) };
+  } catch { return blank(); }
 }
+export function save(data) { backend.setItem(KEY, JSON.stringify(data)); return data; }
+export function reset() { backend.removeItem(KEY); return blank(); }
 
-export function save(data) {
-  backend.setItem(KEY, JSON.stringify(data));
-  return data;
-}
+/** The fine-grained skill bucket for an item (falls back to its type). */
+export function skillOf(item) { return item.skill || item.type || 'general'; }
 
-export function reset() {
-  backend.removeItem(KEY);
-  return blank();
-}
-
-/**
- * Fold a scored session into the store.
- * @param {object} score  the result from scoreSession
- * @param {object} meta   { mode, tier, dateISO }
- */
 export function recordSession(score, meta) {
   const data = load();
-  const bump = (bucket, key, patch) => {
+  const bump = (bucket, key, outcome, timeMs = 0) => {
     const b = (bucket[key] ??= { seen: 0, correct: 0, wrong: 0, blank: 0, timeMs: 0 });
-    for (const k in patch) b[k] = (b[k] || 0) + patch[k];
+    b.seen++; b[outcome]++; b.timeMs += timeMs || 0;
   };
-
   for (const p of score.perItem) {
     const outcome = p.isBlank ? 'blank' : p.isCorrect ? 'correct' : 'wrong';
-    bump(data.byType, p.item.type, { seen: 1, [outcome]: 1, timeMs: p.timeMs || 0 });
-    bump(data.byTier, p.item.tier || meta.tier || 'intermediate', { seen: 1, [outcome]: 1 });
+    bump(data.byModule, meta.module, outcome, p.timeMs || 0);
+    bump(data.bySkill, `${meta.module}:${skillOf(p.item)}`, outcome, p.timeMs || 0);
+    bump(data.byTier, `${meta.module}:${p.item.tier || meta.tier}`, outcome, p.timeMs || 0);
     data.byReason[p.diagnosis.category] = (data.byReason[p.diagnosis.category] || 0) + 1;
   }
-
   data.sessions.push({
-    date: meta.dateISO, mode: meta.mode, tier: meta.tier, count: score.count,
+    date: meta.dateISO, module: meta.module, mode: meta.mode, tier: meta.tier, count: score.count,
     correct: score.correct, wrong: score.wrong, blank: score.blank,
     adjustedScore: score.adjustedScore, stanine: score.stanine, percentile: score.percentile,
     accuracyAttempted: score.accuracyAttempted, coverage: score.coverage,
   });
-  data.history.push({
-    date: meta.dateISO, accuracy: score.accuracyAttempted,
-    stanine: score.stanine, adjusted: score.adjustedScore, count: score.count,
-  });
-
+  data.history.push({ date: meta.dateISO, module: meta.module, accuracy: score.accuracyAttempted, stanine: score.stanine, count: score.count });
   return save(data);
 }
 
-/** Accuracy (correct / seen) per item type, with attempt counts. */
-export function typeAccuracy(data = load()) {
+/** Accuracy per fine-grained skill within a module. */
+export function skillAccuracy(moduleId, data = load()) {
   const out = {};
-  for (const [type, b] of Object.entries(data.byType)) {
-    out[type] = { seen: b.seen, accuracy: b.seen ? b.correct / b.seen : 0,
-      avgTimeMs: b.seen ? b.timeMs / b.seen : 0 };
+  for (const [key, b] of Object.entries(data.bySkill)) {
+    if (!key.startsWith(`${moduleId}:`)) continue;
+    out[key.slice(moduleId.length + 1)] = { seen: b.seen, accuracy: b.seen ? b.correct / b.seen : 0, avgTimeMs: b.seen ? b.timeMs / b.seen : 0 };
   }
   return out;
 }

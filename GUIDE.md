@@ -1,6 +1,8 @@
-# The Aon scales numerical playbook
+# The Aon scales playbook
 
-Everything here comes from Phase 1 research (`research/FINDINGS.md`), which cites its sources and rates confidence. This is preparation only — it teaches the *skills*, never how to cheat a live test.
+Everything here comes from Phase 1 research (`research/FINDINGS.md` and `research/FINDINGS_verbal_logical.md`), which cite their sources and rate confidence. This is preparation only — it teaches the *skills*, never how to cheat a live test.
+
+The trainer covers five modules — **scales numerical**, **scales verbal**, **scales ix** (odd-one-out), **scales lst** (shape-sudoku), and **scales cls** (grid categorisation). One rule holds across all of them: **negative marking** — a right answer is +1, a **wrong answer is −1**, a blank is 0 — so **blind guessing loses points**. Skip rather than guess unless you can eliminate an option. You are **not expected to finish** any of them; accuracy beats coverage. Read the module section for whichever test you're facing, then drill it.
 
 ---
 
@@ -80,3 +82,80 @@ From Aon's own worked examples *(aon.com practice PDF — High confidence)*:
 ## What "getting better" looks like
 
 Track it on the Progress screen: your **accuracy on attempted items** should rise while your **wrong-tab** and **missed-Cannot-Say** counts fall. Coverage (how many you reach) matters less than staying accurate. Use **Adaptive drill** to over-serve whatever category you're weakest in.
+
+*(The sections above are the scales **numerical** playbook. The other four modules follow.)*
+
+---
+
+# scales verbal (True / False / Cannot Say over text)
+
+~49 statements in 12 minutes (~15s each), across ~5–6 topic **tabs** of short passages, all about one fictional company. You judge each statement against the **one** tab it relates to — and you must find that tab yourself. *(Confirmed against Aon's official verbal practice PDF.)*
+
+## The decision rule (from Aon's own worked examples)
+- **True** — the relevant tab **entails** the statement, *including via a genuine synonym or paraphrase* ("imported" ⇒ "sourced outside Italy" is True).
+- **False** — the statement **contradicts** the tab, even partly. Aon's Ex4: a statement that was right except it said "online" where the passage said "on-premises" is **False**. *Any* contradicted element ⇒ False.
+- **Cannot Say** — the tab **neither confirms nor denies** it: the attribute simply isn't stated, or it needs an unstated inference.
+
+> Read each key word of the statement and find the specific sentence that confirms it. If a single word isn't supported, it's not True.
+
+## The traps
+- **Outside knowledge** — the single biggest error. Judge only from the passage; if it's not stated, it's Cannot Say, however plausible it sounds. *(Aon's Ex5 is built as this trap.)*
+- **Absolute words** ("all / always / every / only") — a general statement in the text never licenses an absolute claim → usually Cannot Say (or False if contradicted).
+- **Paraphrase flip vs synonym match** — a synonym that genuinely matches is True; a paraphrase that swaps a detail is False.
+- **Wrong tab** — answering against the wrong passage loses points even if right. Match the statement's subject to the tab label; after ~10 items you'll know the tabs.
+
+## Checklist
+1. What exactly does the statement claim (entity, attribute, scope word)?
+2. Which tab is it about? Open it.
+3. Is the exact claim stated there? Not stated → **Cannot Say**.
+4. Does any word contradict the passage → **False**. Fully supported → **True**. Don't import outside knowledge.
+
+---
+
+# scales ix (odd-one-out / discovering rules)
+
+20 items in 5 minutes (~15s). Each shows **9 objects**; eight share a hidden rule and **one breaks it** — click the breaker.
+
+## How to attack it
+- **Scan every attribute, not just the first.** The rule can be shape, number of sides, fill (solid vs outline), rotation/orientation, presence of an inner shape, or count. Fixing on one property and missing the one that actually varies is the classic error.
+- List what's constant across the objects and what changes; the odd one is the only object that violates the shared property.
+- With ~15s, if you can't see it, **skip** — a wrong click costs a point.
+
+## Common rules to check
+even vs odd number of sides · same shape · solid vs outline · same orientation · has/doesn't have an inner shape.
+
+---
+
+# scales lst (shape-sudoku / gapChallenge)
+
+A grid where **each shape appears once per row and once per column** (Latin square), 4×4 growing to 5×5. One cell is a **"?"** — pick the shape that belongs there. You can **pre-fill** blank cells to reason.
+
+## How to attack it
+- The "?" is fixed by **both** its row and its column. List the shapes already in its row; the missing one is the answer — then confirm the column agrees.
+- Use the pre-fill cells as scratch space on harder 5×5 grids.
+- Using only the row (or only the column) is the usual slip — check both.
+
+---
+
+# scales cls (grid categorisation)
+
+Six 3×3 grids of letters/numbers are **colour-sorted into two groups** by a hidden rule; classify the new grid. 12 tasks / 12 minutes.
+
+## How to attack it
+- State the rule as **one testable property** before you classify: e.g. "Group A = the centre cell is a number", "…contains the letter K at least twice", "…has an even number of distinct characters".
+- Test candidate rules against **all** the coloured examples — the right rule separates them perfectly. Then apply it to the target.
+- Count carefully (occurrences, distinct symbols); miscounting is the main error.
+
+*(Note: `clx` is a **different**, related test — "pick the 2 of 4 shape-grids that match a reference rule". Same discipline: find the one rule that fits the references, then apply it. It can be added to the trainer as its own module.)*
+
+---
+
+# The integrity reality — why practising the skill is the only thing that works
+
+This matters, so it's stated plainly *(sources in `research/FINDINGS_verbal_logical.md §C`)*:
+
+- **You get a unique, randomised set of items** drawn from a large bank — there is **no fixed answer key to memorise**, and each candidate's test differs.
+- **Scores are norm-referenced and negatively marked** — the only durable way to raise your percentile/Stanine is faster, more accurate reasoning.
+- **You are re-tested under supervision.** Aon's own guidance: *"If you are invited to an interview after the online assessment, you will be expected to complete a repeat module… If you cheated in the online assessment, it will come to light during the retest, at the very latest,"* and dishonest candidates are excluded. Some assessments are also webcam-proctored.
+
+So a score you didn't earn collapses at the supervised retest. **The only thing that transfers to the real, proctored, re-tested assessment is the trained skill.** Legitimate practice — building speed and accuracy on these item types — raises both the unsupervised and the supervised score identically. That is exactly what this trainer is for. It contains no answer lookup and nothing to help during a live test.
