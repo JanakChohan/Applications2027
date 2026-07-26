@@ -91,11 +91,16 @@ const PCT = (label = '%') => ({ kind: 'percent', symbol: '', scale: 1, decimals:
 const CNT = (label = '') => ({ kind: 'count', symbol: '', scale: 1, decimals: 0, label });
 const IDX = (label = 'index (base 100)') => ({ kind: 'index', symbol: '', scale: 1, decimals: 0, label });
 
+// Chart type per metric, matched to Aon's real scales numerical displays (see
+// the chart-types research). Tables are the most common form; market share is a
+// doughnut with a total caption; headcount is a stacked column; a metric across
+// future periods is a grouped HORIZONTAL bar (Aon's FORECAST form); trends are
+// line charts. Weighting via repetition (e.g. table twice for costs).
 const CHART_OPTIONS = {
-  revenue: ['groupedBar', 'line', 'table'],
-  costs: ['table', 'bar', 'line'],
-  share: ['pie', 'stackedBar', 'bar'],
-  headcount: ['bar', 'table'],
+  revenue: ['groupedBarH', 'line', 'table'],
+  costs: ['table', 'table', 'stackedBar'],
+  share: ['doughnut', 'doughnut', 'pie'],
+  headcount: ['stackedBar', 'table'],
   margin: ['line', 'table'],
   index: ['line'],
 };

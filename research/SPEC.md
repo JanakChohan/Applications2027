@@ -94,7 +94,16 @@ Every item — including Cannot Say — is checked by an **independent verifier*
 
 ## 8. Data domains (procedural, never hardcoded banks)
 
-Random but plausible business datasets, e.g.: sales by region × quarter, headcount by division, market share by brand, revenue/costs/profit by year, survey results, production volumes. Units deliberately vary (thousands/millions, %, currency, index base-100) to exercise the unit traps. Each dataset renders across ~6 tabs as a mix of **bar / grouped-bar / stacked-bar / line charts and plain tables**, hand-rolled as **SVG** (legible, boring).
+Random but plausible business datasets, e.g.: sales by region × quarter, headcount by division, market share by brand, revenue/costs/profit by year, survey results, production volumes. Units deliberately vary (thousands/millions, %, currency, index base-100) to exercise the unit traps.
+
+**Chart types matched to the real test** (from Aon's official practice PDF — its 5 worked examples use exactly these forms; see the chart-types research):
+- **Plain data table** — dark-slate header, bold "Total" row, zebra rows, units in a footnote ("All data in thousand dollars"). The most common form.
+- **Doughnut (ring) chart** — % labels beside each arc, legend below, and an absolute-**total caption** underneath ("Total revenue: $X million") that combination items rely on.
+- **Stacked vertical bar** — values printed **inside** each segment, unit in the rotated axis title ("… in thousands").
+- **Grouped *horizontal* bar** (Aon's FORECAST form) — category axis vertical, value axis horizontal titled with the unit ("… in million"), value printed at each bar's end.
+- **Line chart** — a metric over time (vendor-attested).
+
+Styling replicates Aon's signature: flat 2D (no 3D/shadow), UPPERCASE titles, light horizontal gridlines only, small-square legends below the plot, data values on the marks, a compact red/teal/green/orange/magenta palette. Each metric maps to its realistic chart (share → doughnut, headcount → stacked column, a metric across future periods → grouped horizontal bar, costs → table, trends → line). Hand-rolled as **SVG**.
 
 ## 9. Coaching artefacts the format must support (Phase 3 hooks)
 
