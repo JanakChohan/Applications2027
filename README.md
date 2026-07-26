@@ -68,7 +68,7 @@ contract). Highlights:
 | Untimed drill | 15 | — | learn the reasoning |
 | Adaptive drill | 15 | — | serves more of your weakest categories |
 
-Difficulty tiers **medium / intermediate / hard** control how many tabs you must cross-reference,
+Difficulty tiers **beginner / intermediate / advanced** control how many tabs you must cross-reference,
 arithmetic complexity, unit trickiness, and how subtle the Cannot-Say traps are.
 
 ---

@@ -103,9 +103,9 @@ const CHART_OPTIONS = {
 // Tier tuning: harder tiers use bigger unit gaps and more entities/periods to
 // juggle. Difficulty of the *reasoning* is applied in items.js.
 const TIER = {
-  medium: { entities: 4, periods: 3, latentBefore: 2, latentAfter: 0 },
+  beginner: { entities: 3, periods: 3, latentBefore: 2, latentAfter: 0 },
   intermediate: { entities: 4, periods: 4, latentBefore: 3, latentAfter: 1 },
-  hard: { entities: 5, periods: 5, latentBefore: 3, latentAfter: 1 },
+  advanced: { entities: 5, periods: 5, latentBefore: 3, latentAfter: 1 },
 };
 
 /**

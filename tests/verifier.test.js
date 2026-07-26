@@ -60,7 +60,7 @@ describe('verifyItem rejects a deliberately mislabelled item', () => {
 });
 
 describe('PIPELINE INVARIANT: every generated item verifies', () => {
-  const tiers = ['medium', 'intermediate', 'hard'];
+  const tiers = ['beginner', 'intermediate', 'advanced'];
   it('no mislabelled items across many seeds', () => {
     let n = 0;
     for (let s = 0; s < 30; s++) {
@@ -78,7 +78,7 @@ describe('PIPELINE INVARIANT: every generated item verifies', () => {
 
   it('decidable items never depend on a hidden cell; Cannot Say always does', () => {
     for (let s = 0; s < 20; s++) {
-      const session = generateSession({ seed: `inv-${s}`, tier: 'hard', count: 18 });
+      const session = generateSession({ seed: `inv-${s}`, tier: 'advanced', count: 18 });
       const ds = session.dataset;
       const key = (c) => `${c.m}::${c.e}::${c.p}`;
       const visible = new Set();

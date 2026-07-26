@@ -190,7 +190,7 @@ function genLookup(dataset, rng, tier, aim) {
   // Unit trap on harder tiers: phrase a currency threshold in the other word.
   const traps = [];
   let forceWord;
-  if (tier !== 'medium' && unit.kind === 'currency' && rng.chance(0.5)) {
+  if (tier !== 'beginner' && unit.kind === 'currency' && rng.chance(0.5)) {
     forceWord = unit.word === 'million' ? 'thousand' : 'million';
     traps.push('unit');
   }

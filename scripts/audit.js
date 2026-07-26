@@ -10,7 +10,7 @@
 import { generateSession } from '../src/generators/session.js';
 import { verifyItem, deriveLabel } from '../src/verify/verifier.js';
 
-const TIERS = ['medium', 'intermediate', 'hard'];
+const TIERS = ['beginner', 'intermediate', 'advanced'];
 const TARGET = 200;
 
 function run() {

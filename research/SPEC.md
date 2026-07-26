@@ -116,7 +116,7 @@ screen picks the test type; each module is self-contained (`modules/<name>/gener
 + `render.js` + `review.js`) but shares the timer, negative-marking scoring, progress store, coaching
 diagnosis, and adaptive drilling. The existing numerical module is left intact and registered as one
 module among several. Difficulty tiers are named **beginner / intermediate / advanced** for the new
-modules (the numerical module keeps medium/intermediate/hard). All modules offer **timed and untimed**.
+modules (all modules, numerical included, use beginner/intermediate/advanced). All offer **timed and untimed**.
 
 **Shared item contract** (so coaching/scoring work uniformly): every module's item exposes
 `{ module, type, tier, prompt, choices, answer, label?, traps[], solution{steps[], rationale}, requiredTab? }`

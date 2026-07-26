@@ -52,11 +52,11 @@ function render() {
 }
 
 // =============================================================================
-// HOME — pick a module, then a mode
+// HOME — a progress dashboard on top, then the session launcher
 // =============================================================================
 function renderHome() {
   const m = activeModule();
-  if (!state.tier) state.tier = m.tiers[Math.min(1, m.tiers.length - 1)];
+  if (!state.tier || !m.tiers.includes(state.tier)) state.tier = m.tiers[Math.min(1, m.tiers.length - 1)];
   const chips = MODULES.map((mod) =>
     `<button class="modchip${mod.id === state.moduleId ? ' active' : ''}" data-mod="${mod.id}">${esc(mod.label)}</button>`).join('');
   const cards = m.modes.map((mode) => `
@@ -65,10 +65,11 @@ function renderHome() {
       <div class="spec">${esc(mode.desc)}</div>
       <div style="margin-top:10px"><button class="btn" data-start="${mode.key}">Start</button></div>
     </div>`).join('');
+
   return `${topbar('')}
+  ${renderDashboard()}
   <div class="panel">
-    <h2 style="margin-top:0">Practise the Aon “scales” assessments</h2>
-    <p class="muted">Choose a test type. Every question is generated fresh and independently verified, so the answer key is always provably correct. Negative marking is on — a wrong answer costs a point, a blank costs nothing.</p>
+    <h2 style="margin-top:0">Start a session</h2>
     <div class="modchips">${chips}</div>
     <div class="module-head"><strong>${esc(m.label)}</strong> — ${esc(m.blurb)}</div>
     <div class="controls" style="margin:12px 0">
@@ -77,11 +78,68 @@ function renderHome() {
       </label>
       ${m.usesTabs ? `<label class="chk"><input type="checkbox" data-opt="wrongTabPenalty"${state.options.wrongTabPenalty ? ' checked' : ''}/> Wrong-tab penalty</label>` : ''}
       <label class="chk"><input type="checkbox" data-opt="allowBack"${state.options.allowBack ? ' checked' : ''}/> Allow going back</label>
-      <span class="btn ghost" data-nav="progress">Progress</span>
-      <span class="btn ghost" data-nav="guide">Guide</span>
     </div>
     <div class="mode-grid">${cards}</div>
     <div class="banner">Preparation only — a practice simulator, not affiliated with Aon, with no live-test answer lookup. The Stanine/percentile after a session is an illustrative synthetic estimate. See the Guide’s integrity note on why practising the skill (not memorising) is what actually transfers.</div>
+  </div>`;
+}
+
+// The dashboard: at-a-glance progress across every module, with quick actions.
+function renderDashboard() {
+  const data = load();
+  const active = MODULES.filter((mod) => data.byModule[mod.id] && data.byModule[mod.id].seen);
+
+  if (!active.length) {
+    return `<div class="panel dash-empty">
+      <h2 style="margin-top:0">Your dashboard</h2>
+      <p class="muted">No sessions yet. Pick a test below and start a drill — your accuracy, weakest areas, and trend will appear here so you can track progress at a glance.</p>
+      <div class="controls"><span class="btn ghost" data-nav="guide">Read the guide first</span></div>
+    </div>`;
+  }
+
+  // overall totals
+  let seen = 0, correct = 0;
+  for (const mod of active) { const b = data.byModule[mod.id]; seen += b.seen; correct += b.correct; }
+  const sessions = data.sessions.length;
+  const overallAcc = seen ? correct / seen : 0;
+  const todayISO = new Date().toISOString().slice(0, 10);
+  const today = data.sessions.filter((s) => (s.date || '').slice(0, 10) === todayISO).length;
+
+  const cards = active.map((mod) => {
+    const b = data.byModule[mod.id];
+    const acc = b.seen ? b.correct / b.seen : 0;
+    const modSessions = data.sessions.filter((s) => s.module === mod.id);
+    const hist = data.history.filter((h) => h.module === mod.id).slice(-14);
+    const maxH = Math.max(...hist.map((h) => h.accuracy), 1);
+    const spark = hist.map((h) => `<div class="b" style="height:${Math.max(3, h.accuracy / maxH * 40)}px" title="${pct(h.accuracy)}"></div>`).join('');
+    const last = modSessions[modSessions.length - 1];
+    const weak = weakestWithStats(mod.id, data, 1)[0];
+    const accCls = acc < 0.5 ? 'bad' : acc < 0.75 ? 'warn' : 'good';
+    return `<div class="dash-card">
+      <div class="dash-top"><span class="dash-name">${esc(mod.label)}</span><span class="dash-acc ${accCls}">${pct(acc)}</span></div>
+      <div class="spark mini">${spark || ''}</div>
+      <div class="dash-meta">${modSessions.length} session${modSessions.length !== 1 ? 's' : ''} · ${b.seen} items${last ? ` · last Stanine ${last.stanine}` : ''}</div>
+      ${weak ? `<div class="dash-weak">Focus: <strong>${esc(weak.skill)}</strong> (${pct(weak.accuracy)})</div>` : '<div class="dash-weak muted">Keep drilling to surface weak spots.</div>'}
+      <div class="dash-actions">
+        <button class="btn secondary" data-mod="${mod.id}">Practise</button>
+        ${mod.adaptive ? `<button class="btn" data-drillmod="${mod.id}">Drill weakest ▶</button>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+
+  return `<div class="panel">
+    <div class="dash-head">
+      <h2 style="margin:0">Your dashboard</h2>
+      <div class="dash-summary">
+        <span><strong>${sessions}</strong> sessions</span>
+        <span><strong>${seen}</strong> items</span>
+        <span><strong>${pct(overallAcc)}</strong> overall</span>
+        ${today ? `<span class="muted">${today} today</span>` : ''}
+        <span class="btn ghost" data-nav="progress">Full progress</span>
+        <span class="btn ghost" data-nav="guide">Guide</span>
+      </div>
+    </div>
+    <div class="dash-grid">${cards}</div>
   </div>`;
 }
 
@@ -365,6 +423,7 @@ function wire() {
   if (state.screen === 'home') {
     app.querySelectorAll('[data-mod]').forEach((el) => (el.onclick = () => { state.moduleId = el.dataset.mod; state.tier = null; render(); }));
     app.querySelectorAll('[data-start]').forEach((el) => (el.onclick = () => startSession(el.dataset.start)));
+    app.querySelectorAll('[data-drillmod]').forEach((el) => (el.onclick = () => startAdaptive(el.dataset.drillmod)));
     const tierSel = app.querySelector('[data-tier]');
     if (tierSel) tierSel.onchange = () => { state.tier = tierSel.value; };
     app.querySelectorAll('[data-opt]').forEach((el) => (el.onchange = () => { state.options[el.dataset.opt] = el.checked; }));

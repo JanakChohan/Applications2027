@@ -14,7 +14,7 @@ export default {
   id: 'numerical',
   label: 'scales numerical',
   blurb: 'Interpret charts and tables across six tabs; judge each statement True / False / Cannot Say.',
-  tiers: ['medium', 'intermediate', 'hard'],
+  tiers: ['beginner', 'intermediate', 'advanced'],
   usesTabs: true,
   answerKind: 'tfc',
   modes: [
