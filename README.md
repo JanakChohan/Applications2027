@@ -71,6 +71,14 @@ contract). Highlights:
 Difficulty tiers **beginner / intermediate / advanced** control how many tabs you must cross-reference,
 arithmetic complexity, unit trickiness, and how subtle the Cannot-Say traps are.
 
+The numerical datasets also rotate through **financial-statement flavours** for firms that use accounting
+terminology — **income statement** (Revenue, Cost of Sales → Gross Profit, Gross Margin, EPS), **balance
+sheet** (Assets, Liabilities → Net Assets, Return on Assets), and **cash flow** (Operating Cash Flow,
+Capital Expenditure → Free Cash Flow) — alongside the retail/manufacturing/SaaS/bank themes. The charts
+match Aon's real displays (doughnut, grouped-horizontal bar, stacked column, dark-header tables). The
+in-app **Guide** (`GUIDE.md`) now includes a full finance-terminology section and a step-by-step mental
+process for every question type.
+
 ---
 
 ## How the answer key stays provably correct

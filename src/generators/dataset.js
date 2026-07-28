@@ -42,6 +42,7 @@ const THEMES = [
       headcount: 'Employees', margin: 'Net Margin', index: 'Customer Satisfaction',
     },
     latentMetricLabel: 'Units Sold', // exists in world, shown on no tab
+    diff: 'operating profit', countNoun: 'people',
   },
   {
     key: 'manufacturing',
@@ -54,6 +55,7 @@ const THEMES = [
       headcount: 'Workforce', margin: 'Capacity Utilisation', index: 'Quality Index',
     },
     latentMetricLabel: 'Defect Rate',
+    diff: 'operating surplus', countNoun: 'workers',
   },
   {
     key: 'saas',
@@ -66,6 +68,7 @@ const THEMES = [
       headcount: 'Team Size', margin: 'Gross Margin', index: 'NPS Index',
     },
     latentMetricLabel: 'Active Users',
+    diff: 'operating profit', countNoun: 'people',
   },
   {
     key: 'bank',
@@ -78,6 +81,50 @@ const THEMES = [
       headcount: 'Staff', margin: 'Cost-Income Ratio', index: 'Service Index',
     },
     latentMetricLabel: 'Complaints',
+    diff: 'operating profit', countNoun: 'people',
+  },
+  // ---- financial-statement flavours (firms that use accounting terminology) ---
+  {
+    key: 'income-statement',
+    entityLabel: 'Segment',
+    entities: ['Retail', 'Wholesale', 'Online', 'Licensing', 'Services', 'Exports', 'Franchise'],
+    periodLabel: 'FY',
+    currency: { symbol: '$', word: 'dollars' },
+    titles: {
+      revenue: 'Revenue', costs: 'Cost of Sales', share: 'Revenue Mix',
+      headcount: 'Headcount', margin: 'Gross Margin', index: 'EPS Index',
+    },
+    latentMetricLabel: 'Order Backlog',
+    // Revenue − Cost of Sales = Gross Profit
+    diff: 'gross profit', countNoun: 'employees',
+  },
+  {
+    key: 'balance-sheet',
+    entityLabel: 'Division',
+    entities: ['Retail Bank', 'Corporate', 'Markets', 'Wealth', 'Insurance', 'Cards', 'Treasury'],
+    periodLabel: 'FY',
+    currency: { symbol: '£', word: 'pounds' },
+    titles: {
+      revenue: 'Assets', costs: 'Liabilities', share: 'Asset Mix',
+      headcount: 'Branches', margin: 'Return on Assets', index: 'Net Asset Value Index',
+    },
+    latentMetricLabel: 'Risk-Weighted Assets',
+    // Assets − Liabilities = Net Assets (equity)
+    diff: 'net assets', countNoun: 'branches',
+  },
+  {
+    key: 'cash-flow',
+    entityLabel: 'Segment',
+    entities: ['Manufacturing', 'Distribution', 'Retail', 'Digital', 'Logistics', 'Services', 'Property'],
+    periodLabel: 'FY',
+    currency: { symbol: '$', word: 'dollars' },
+    titles: {
+      revenue: 'Operating Cash Flow', costs: 'Capital Expenditure', share: 'Cash Flow Mix',
+      headcount: 'Headcount', margin: 'Free Cash Flow Margin', index: 'Cash Conversion Index',
+    },
+    latentMetricLabel: 'Dividends Paid',
+    // Operating Cash Flow − Capital Expenditure = Free Cash Flow
+    diff: 'free cash flow', countNoun: 'people',
   },
 ];
 
@@ -144,8 +191,8 @@ export function generateDataset(seed, tier = 'intermediate') {
   const units = {
     revenue: CUR(theme.currency.symbol, bigScale, bigScale >= 1e6 ? 'million' : 'thousand'),
     costs: CUR(theme.currency.symbol, costScale, costScale >= 1e6 ? 'million' : 'thousand'),
-    share: PCT('% of revenue'),
-    headcount: CNT(theme.entityLabel === 'Plant' ? 'workers' : 'people'),
+    share: PCT('% of total'),
+    headcount: CNT(theme.countNoun || 'people'),
     margin: PCT('%'),
     index: IDX(),
     revenueTotal: CUR(theme.currency.symbol, bigScale, bigScale >= 1e6 ? 'million' : 'thousand'),
@@ -279,6 +326,7 @@ export function generateDataset(seed, tier = 'intermediate') {
     seed, tier, theme, meta: {
       domain: theme.key, entityLabel: theme.entityLabel, periodLabel: theme.periodLabel,
       currency: theme.currency, latentMetricLabel: theme.latentMetricLabel,
+      diffLabel: theme.diff || 'operating profit',
     },
     entitiesVisible, entityLatent, allEntities,
     periodsVisible, periodLatentBefore, periodLatentAfter, worldPeriods,

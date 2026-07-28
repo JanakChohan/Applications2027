@@ -357,13 +357,14 @@ function genMultiTab(dataset, rng, tier, aim) {
     const profit = rev - cost;
     const unit = dataset.units.revenue;
     const tgt = niceValue(Math.abs(profit) * rng.pick([0.7, 1.25]), unit);
+    const diffName = dataset.meta.diffLabel; // operating profit / gross profit / net assets / free cash flow
     const claim = { kind: 'cmp', lhs: sub(cell('revenue', e, p), cell('costs', e, p)), op: '>', rhs: num(tgt) };
     return finalize(dataset, {
       type: 'multi_tab', traps: ['multi_tab'], tier, claim,
-      text: `${e}'s operating profit (${TITLES_LOWER(dataset, 'revenue')} minus ` +
+      text: `${e}'s ${diffName} (${TITLES_LOWER(dataset, 'revenue')} minus ` +
         `${TITLES_LOWER(dataset, 'costs')}) in ${p} exceeded ${money(tgt, unit.word, unit.symbol)}.`,
       narrative: [
-        `Profit = ${TITLES_LOWER(dataset, 'revenue')} − ${TITLES_LOWER(dataset, 'costs')} ` +
+        `${diffName.charAt(0).toUpperCase() + diffName.slice(1)} = ${TITLES_LOWER(dataset, 'revenue')} − ${TITLES_LOWER(dataset, 'costs')} ` +
         `= ${formatValue(unit, rev)} − ${formatValue(dataset.units.costs, cost)} = ${formatValue(unit, profit)}.`,
         `The two figures live on DIFFERENT tabs — note the units may differ.`,
       ],
