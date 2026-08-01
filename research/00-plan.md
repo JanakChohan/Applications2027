@@ -31,15 +31,15 @@ Each provider needs all of 5.1–5.13. Legend: ⬜ not started · 🟡 researchi
 |---|---|---|---|
 | 01 | SHL | 🟩 | ✍️ (sample chapter drafted for checkpoint) |
 | 02 | Aon / cut-e | 🟩 | ⬜ |
-| 03 | Arctic Shores | ⬜ | ⬜ |
-| 04 | Pymetrics (Harver) | ⬜ | ⬜ |
-| 05 | Cappfinity | ⬜ | ⬜ |
-| 06 | Amberjack | ⬜ | ⬜ |
-| 07 | Plum | ⬜ | ⬜ |
-| 08 | HireVue | ⬜ | ⬜ |
-| 09 | Willo | ⬜ | ⬜ |
-| 10 | TestGorilla | ⬜ | ⬜ |
-| 11 | Morgan Stanley (firm-built) | ⬜ | ⬜ |
+| 03 | Arctic Shores | 🟩 | ⬜ |
+| 04 | Pymetrics (Harver) | 🟩 | ⬜ |
+| 05 | Cappfinity | 🟩 | ✅ drafted |
+| 06 | Amberjack | 🟩 | 🟡 agent drafting |
+| 07 | Plum | 🟩 | 🟡 agent drafting |
+| 08 | HireVue | 🟩 | ⬜ |
+| 09 | Willo | 🟩 | 🟡 agent drafting |
+| 10 | TestGorilla | 🟩 | 🟡 agent drafting |
+| 11 | Morgan Stanley (firm-built) | 🟩 | ⬜ |
 | 12 | Other firm-built (rolling capture) | ⬜ | ⬜ |
 
 ### Per-provider subsection grid (mark ✅ / [UNKNOWN] as filled)
@@ -55,11 +55,11 @@ For every provider row above, track: 5.1 Snapshot · 5.2 Why exists · 5.3 Why t
 |---|---|---|
 | 6.1 | Why online assessments exist | ⬜ |
 | 6.2 | Vendor landscape & procurement | ⬜ |
-| 6.3 | Psychometrics for candidates | ⬜ |
+| 6.3 | Psychometrics for candidates | ✅ |
 | 6.4 | Construct-by-construct performance manual | ⬜ |
 | 6.5 | 6-week preparation programme | ⬜ |
 | 6.6 | Integrity monitoring cross-provider taxonomy | ⬜ |
-| 6.7 | Legal rights & regulatory picture (UK/EU) | ⬜ |
+| 6.7 | Legal rights & regulatory picture (UK/EU) | ✅ |
 | 6.8 | Employer → provider mapping (by programme type) | ⬜ |
 | 6.9 | Quick-reference appendices | ⬜ |
 

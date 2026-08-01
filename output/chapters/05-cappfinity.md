@@ -125,7 +125,7 @@ The proctoring surface is small, so the checklist is short:
 Because the stage is unproctored, a rejection here is almost always a **score/fit outcome**, not an integrity flag — so the route is a feedback query and, if you want the underlying data, a DSAR. Your rights are the UK ones set out in full in Chapter 6.7.
 
 - **Ask for feedback.** Some Cappfinity builds return a personalised report; if you didn't get one, ask the recruiter whether feedback is available and whether reapplication in a future cycle is possible.
-- **DSAR (UK GDPR Article 15)** to the **employer** (the data controller): request your **scores/profile**, the **framework/norm** you were assessed against, and the **logic of any automated decision** (Article 22). One-month response window, free.
+- **DSAR (UK GDPR Article 15)** to the **employer** (the data controller): request your **scores/profile**, the **framework/norm** you were assessed against, and the **logic of any automated decision** (Articles 22A–22C, as amended by the Data (Use and Access) Act 2025 — see Chapter 6.7). One-month response window, free.
 - **Adjustments (Equality Act 2010):** if a condition affected you and no adjustment was in place, this is the strongest basis for requesting a re-sit or reconsideration.
 
 **Template — pre-assessment adjustments request:**
@@ -134,7 +134,7 @@ Because the stage is unproctored, a rejection here is almost always a **score/fi
 
 **Template — post-rejection feedback / DSAR:**
 > Subject: Assessment outcome — feedback and data request — [name], [ref]
-> Dear [team], Thank you for the update. Could you share any feedback on my Cappfinity assessment and whether reapplication is possible next cycle? Separately, under Article 15 UK GDPR I request the personal data held about my assessment — my scores/strengths profile, the framework I was assessed against, and the logic of any automated decision under Article 22. Please respond within one month.
+> Dear [team], Thank you for the update. Could you share any feedback on my Cappfinity assessment and whether reapplication is possible next cycle? Separately, under Article 15 UK GDPR I request the personal data held about my assessment — my scores/strengths profile, the framework I was assessed against, and the logic of any automated decision (Articles 22A–22C UK GDPR, as amended by the Data (Use and Access) Act 2025). Please respond within one month.
 
 ## 5.12 Step-by-step: how to win this assessment
 
