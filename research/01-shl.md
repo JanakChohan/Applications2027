@@ -28,6 +28,15 @@
 - Delivery: "automated, remotely proctored"; uses drag-and-drop / gamified interactions in Interactive range. [VENDOR] cognitive-assessments page
 - Partial-scoring methodology mentioned. [VENDOR]
 
+## VERIFIED PRIMARY FIGURES — from SHL Verify Technical Manual (extracted via pdftotext, 2026-08-01) [VENDOR-manual, primary]
+- **Reliability (internal consistency) of Verify Ability Tests: 0.77 to 0.84.** (manual p.15 area)
+- Score reporting: theta → **T-scores (mean 50, SD 10)** and **Sten (mean 5.5, SD 2)**; percentiles are ordinal ("should not be averaged"). SEM = √(1−rxx)·SD.
+- **Verification model, quantified:** ability & verification tests **correlated 0.70 and above**; a "Confidence Indicator (CI)" flags aberrant (cheating-consistent) scores. Validated by **Monte Carlo simulations**: 10,000-candidate normal theta distribution, 100 IRT-built tests, cheating modelled as **+2 SD** score inflation (proxy/collusion), assumed **−0.3 correlation between ability and propensity to cheat** (Cizek 1999). A "benefits ratio" quantifies detection at cut-scores (e.g. 30th vs 70th pct).
+- Manual explicitly frames "Not Verified" as needing investigation (distractions, didn't attempt all items, physical/psychological factors, whether they used shldirect.com practice) — NOT auto-guilt. [VENDOR-manual]
+- Manual cites **Schmidt & Hunter** for GMA as predictor of job performance; construct validity via Bartram (2005). 
+- Telling candidates upfront that honesty is expected + verification will be used **reduces cheating incidence**. [VENDOR-manual]
+- Extracted text saved: research/_shl_manual.txt (112k chars).
+
 ## Psychometrics (5.2 / 6.3)
 - SHL Verify Technical Manual v2.0 (Oct 2007) — uses **both CTT and IRT**; reliability ~**0.80** cited ("80% of variance = true measurement"). [VENDOR-manual via search index] hrmforce PDF.
 - **70 comparison groups** (test type × job level × industry) in the Verify range. [VENDOR-manual]
