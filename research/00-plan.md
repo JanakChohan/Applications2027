@@ -29,17 +29,17 @@ Each provider needs all of 5.1–5.13. Legend: ⬜ not started · 🟡 researchi
 
 | # | Provider | Research | Draft |
 |---|---|---|---|
-| 01 | SHL | 🟩 | ✍️ (sample chapter drafted for checkpoint) |
-| 02 | Aon / cut-e | 🟩 | ⬜ |
-| 03 | Arctic Shores | 🟩 | ⬜ |
-| 04 | Pymetrics (Harver) | 🟩 | ⬜ |
+| 01 | SHL | 🟩 | ✅ |
+| 02 | Aon / cut-e | 🟩 | ✅ |
+| 03 | Arctic Shores | 🟩 | ✅ |
+| 04 | Pymetrics (Harver) | 🟩 | ✅ |
 | 05 | Cappfinity | 🟩 | ✅ drafted |
-| 06 | Amberjack | 🟩 | 🟡 agent drafting |
-| 07 | Plum | 🟩 | 🟡 agent drafting |
-| 08 | HireVue | 🟩 | ⬜ |
-| 09 | Willo | 🟩 | 🟡 agent drafting |
-| 10 | TestGorilla | 🟩 | 🟡 agent drafting |
-| 11 | Morgan Stanley (firm-built) | 🟩 | ⬜ |
+| 06 | Amberjack | 🟩 | ✅ |
+| 07 | Plum | 🟩 | ✅ |
+| 08 | HireVue | 🟩 | ✅ |
+| 09 | Willo | 🟩 | ✅ |
+| 10 | TestGorilla | 🟩 | ✅ |
+| 11 | Morgan Stanley (firm-built) | 🟩 | ✅ |
 | 12 | Other firm-built (rolling capture) | ⬜ | ⬜ |
 
 ### Per-provider subsection grid (mark ✅ / [UNKNOWN] as filled)
@@ -53,15 +53,15 @@ For every provider row above, track: 5.1 Snapshot · 5.2 Why exists · 5.3 Why t
 
 | Ref | Chapter | Status |
 |---|---|---|
-| 6.1 | Why online assessments exist | ⬜ |
-| 6.2 | Vendor landscape & procurement | ⬜ |
+| 6.1 | Why online assessments exist | ✅ |
+| 6.2 | Vendor landscape & procurement | ✅ |
 | 6.3 | Psychometrics for candidates | ✅ |
-| 6.4 | Construct-by-construct performance manual | ⬜ |
-| 6.5 | 6-week preparation programme | ⬜ |
-| 6.6 | Integrity monitoring cross-provider taxonomy | ⬜ |
+| 6.4 | Construct-by-construct performance manual | ✅ |
+| 6.5 | 6-week preparation programme | ✅ |
+| 6.6 | Integrity monitoring cross-provider taxonomy | ✅ |
 | 6.7 | Legal rights & regulatory picture (UK/EU) | ✅ |
-| 6.8 | Employer → provider mapping (by programme type) | ⬜ |
-| 6.9 | Quick-reference appendices | ⬜ |
+| 6.8 | Employer → provider mapping (by programme type) | ✅ |
+| 6.9 | Quick-reference appendices | ✅ |
 
 ### Prompt-specific additions to honour
 - **§3.1 Tier 5:** add UK-specific communities — WSO London/UK forums, r/FinancialCareers UK threads, r/UKPersonalFinance-adjacent careers, **The Student Room IB & Finance forums**, UK finance LinkedIn/Instagram creators, university IB/finance society shared docs.
@@ -83,11 +83,11 @@ Buy-side / hedge / private markets: Bridgewater, Citadel, Point72, Millennium, M
 ## Phase roadmap & status
 
 - [x] **Phase 1 — Scoping.** Dirs created, tools confirmed, plan written. → *Awaiting user OK on plan.*
-- [ ] **Phase 2 — Provider research.** One file per provider. **CHECKPOINT after SHL + Aon/cut-e:** show sample chapter, confirm depth/format before continuing the other 10.
-- [ ] **Phase 3 — Cross-cutting research.**
+- [x] **Phase 2 — Provider research.** DONE (all 11 + firm-built).
+- [x] **Phase 3 — Cross-cutting research.** DONE.
 - [ ] **Phase 4 — Gap audit.** Re-run ≥2 searches per unchecked item before conceding `[UNKNOWN]`.
-- [ ] **Phase 5 — Drafting** into `output/chapters/`.
-- [ ] **Phase 6 — Assembly + PDF** (check PDF skill first; verify render, TOC, page numbers, no clipped tables).
+- [x] **Phase 5 — Drafting** into `output/chapters/`. DONE (21 sections).
+- [x] **Phase 6 — Assembly + PDF** DONE — 197pp, clickable TOC, page numbers, verified no clipped tables.
 
 ## Evidence discipline (applied everywhere)
 Tags: `[VENDOR]` `[INDEPENDENT]` `[CANDIDATE]` (state # of agreeing reports) `[INFERRED]` (show reasoning) `[UNKNOWN]` (say why + proxy). No invented numbers. Conflicts shown both ways. Current vs legacy flagged. Quotes <15 words, one per source. No live test items.
