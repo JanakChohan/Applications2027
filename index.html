@@ -1,0 +1,2416 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CCAT Trainer — offline practice simulator</title>
+<style>
+:root{
+  --bg:#f5f6f8; --panel:#ffffff; --ink:#111418; --muted:#5b6470; --line:#e2e5ea;
+  --accent:#2b5cff; --accent-ink:#ffffff; --good:#127a3f; --good-bg:#e6f4ec;
+  --bad:#b3261e; --bad-bg:#fbeae9; --warn:#a8620a; --warn-bg:#fdf0e2;
+  --amber:#c07a00; --red:#b3261e; --chip:#eef1f6; --shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.04);
+  --radius:10px; --maxw:900px;
+}
+[data-theme="dark"]{
+  --bg:#0f1216; --panel:#171b21; --ink:#e8ebef; --muted:#9aa4b2; --line:#262c34;
+  --accent:#5b82ff; --accent-ink:#0b0e12; --good:#4cc98a; --good-bg:#0f2a1c;
+  --bad:#ff6b61; --bad-bg:#2a1310; --warn:#e0a24a; --warn-bg:#2a1f10;
+  --amber:#e0a24a; --red:#ff6b61; --chip:#1f242c; --shadow:0 1px 3px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--ink);
+  font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent)}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 16px 80px}
+header.topbar{
+  position:sticky; top:0; z-index:50; background:var(--panel); border-bottom:1px solid var(--line);
+  display:flex; align-items:center; gap:14px; padding:10px 16px; box-shadow:var(--shadow);
+}
+.topbar .brand{font-weight:700; letter-spacing:.2px; cursor:pointer}
+.topbar nav{display:flex; gap:4px; flex-wrap:wrap}
+.topbar nav button{
+  background:transparent; border:0; color:var(--muted); padding:6px 10px; border-radius:8px;
+  cursor:pointer; font-size:14px;
+}
+.topbar nav button:hover{background:var(--chip); color:var(--ink)}
+.topbar nav button.active{background:var(--chip); color:var(--ink); font-weight:600}
+.topbar .spacer{flex:1}
+.iconbtn{background:var(--chip); border:1px solid var(--line); color:var(--ink); border-radius:8px; padding:6px 10px; cursor:pointer; font-size:13px}
+.panel{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); margin:16px 0}
+.panel h2{margin:.1em 0 .4em; font-size:20px}
+.panel h3{margin:1em 0 .4em; font-size:16px}
+.grid{display:grid; gap:14px}
+.grid.cols2{grid-template-columns:1fr 1fr}
+.grid.cols3{grid-template-columns:1fr 1fr 1fr}
+.grid.cols4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:720px){.grid.cols2,.grid.cols3,.grid.cols4{grid-template-columns:1fr}}
+.btn{background:var(--accent); color:var(--accent-ink); border:0; border-radius:8px; padding:10px 16px; font-size:15px; font-weight:600; cursor:pointer}
+.btn:hover{filter:brightness(1.05)}
+.btn.ghost{background:var(--chip); color:var(--ink); border:1px solid var(--line)}
+.btn.danger{background:var(--bad); color:#fff}
+.btn.sm{padding:6px 10px; font-size:13px}
+.btn:disabled{opacity:.5; cursor:not-allowed}
+.muted{color:var(--muted)}
+.big{font-size:34px; font-weight:800; line-height:1.1}
+.kpi{display:flex; flex-direction:column; gap:2px}
+.kpi .lbl{font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.5px}
+.tag{display:inline-block; font-size:11px; padding:2px 8px; border-radius:999px; background:var(--chip); color:var(--muted); border:1px solid var(--line)}
+.tag.good{background:var(--good-bg); color:var(--good); border-color:transparent}
+.tag.bad{background:var(--bad-bg); color:var(--bad); border-color:transparent}
+.tag.warn{background:var(--warn-bg); color:var(--warn); border-color:transparent}
+.bar{height:8px; background:var(--chip); border-radius:999px; overflow:hidden}
+.bar > i{display:block; height:100%; background:var(--accent)}
+table{border-collapse:collapse; width:100%}
+th,td{border:1px solid var(--line); padding:6px 10px; text-align:left; font-size:14px}
+th{background:var(--chip)}
+hr{border:0; border-top:1px solid var(--line); margin:16px 0}
+code,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+kbd{font-family:ui-monospace,monospace; background:var(--chip); border:1px solid var(--line); border-bottom-width:2px; border-radius:5px; padding:1px 6px; font-size:12px}
+/* ---- test screen ---- */
+.exam{max-width:760px; margin:0 auto; padding:24px 16px}
+.exam .topline{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px}
+.exam .counter{font-weight:600; color:var(--muted)}
+.exam .timer{font-variant-numeric:tabular-nums; font-weight:800; font-size:24px; padding:4px 12px; border-radius:8px; background:var(--chip)}
+.exam .timer.warn{background:var(--warn-bg); color:var(--warn)}
+.exam .timer.danger{background:var(--bad-bg); color:var(--bad)}
+.exam .qelapsed{font-variant-numeric:tabular-nums; font-size:13px; color:var(--muted)}
+.exam .qelapsed.amber{color:var(--amber); font-weight:700}
+.exam .qelapsed.red{color:var(--red); font-weight:700}
+.exam .stem{font-size:19px; line-height:1.55; margin:10px 0 8px; white-space:pre-wrap}
+.exam .stem .cap{font-weight:700}
+.exam .figwrap{display:flex; justify-content:center; margin:12px 0}
+.exam .figwrap svg{background:#fff; border:1px solid var(--line); border-radius:8px}
+.opts{display:flex; flex-direction:column; gap:10px; margin-top:14px}
+.opt{display:flex; gap:12px; align-items:center; text-align:left; background:var(--panel); border:1.5px solid var(--line); border-radius:10px; padding:12px 14px; cursor:pointer; font-size:16px; width:100%}
+.opt:hover{border-color:var(--accent)}
+.opt.sel{border-color:var(--accent); background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.opt .num{flex:0 0 26px; height:26px; border-radius:6px; background:var(--chip); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px}
+.opt .fig svg{background:#fff; border-radius:6px}
+.opt.correct{border-color:var(--good); background:var(--good-bg)}
+.opt.wrong{border-color:var(--bad); background:var(--bad-bg)}
+.exam .actions{display:flex; justify-content:space-between; align-items:center; margin-top:20px}
+.progressline{height:5px; background:var(--chip); border-radius:999px; overflow:hidden; margin-bottom:16px}
+.progressline > i{display:block; height:100%; background:var(--accent)}
+.explain{background:var(--chip); border-radius:10px; padding:14px; margin-top:14px; font-size:14px}
+.explain .why{margin:8px 0}
+.center{text-align:center}
+.pill-row{display:flex; gap:8px; flex-wrap:wrap}
+.pill{border:1px solid var(--line); background:var(--panel); border-radius:999px; padding:6px 12px; cursor:pointer; font-size:13px}
+.pill.on{background:var(--accent); color:var(--accent-ink); border-color:transparent}
+.ladder{display:flex; flex-direction:column; gap:8px}
+.rung{display:flex; gap:12px; align-items:flex-start; border:1px solid var(--line); border-radius:10px; padding:12px; background:var(--panel)}
+.rung.cur{border-color:var(--accent); box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 25%,transparent)}
+.rung .n{flex:0 0 34px; height:34px; border-radius:8px; background:var(--chip); display:flex; align-items:center; justify-content:center; font-weight:800}
+.rung.done .n{background:var(--good-bg); color:var(--good)}
+.rung.cur .n{background:var(--accent); color:var(--accent-ink)}
+.heat{display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:6px}
+.heatcell{border-radius:8px; padding:8px; font-size:12px; color:#111; border:1px solid var(--line)}
+.timeline{width:100%; overflow-x:auto}
+.day{border:1px solid var(--line); border-radius:10px; padding:12px; margin:10px 0; background:var(--panel)}
+.day h4{margin:0 0 6px}
+.check{display:flex; gap:8px; align-items:flex-start; margin:4px 0; cursor:pointer}
+.check input{margin-top:3px}
+.guidebody{max-width:760px}
+.guidebody h3{margin-top:1.4em}
+.guidebody p,.guidebody li{font-size:15px}
+.shortcard{border:1px dashed var(--accent); border-radius:10px; padding:12px; margin:12px 0; background:color-mix(in srgb,var(--accent) 6%,transparent)}
+.toc a{display:block; padding:4px 0}
+.notice{font-size:13px; color:var(--muted); border-left:3px solid var(--line); padding-left:12px; margin:12px 0}
+.res{display:flex; flex-direction:column; gap:2px; padding:12px; border:1px solid var(--line); border-radius:10px; margin:8px 0; background:var(--panel)}
+.res .u{font-size:13px; word-break:break-all}
+.hidden{display:none !important}
+.scrollx{overflow-x:auto}
+.flex{display:flex; gap:12px; align-items:center; flex-wrap:wrap}
+.flex.between{justify-content:space-between}
+.stat-inline{display:flex; gap:18px; flex-wrap:wrap}
+select,input[type=date],input[type=number]{background:var(--panel); color:var(--ink); border:1px solid var(--line); border-radius:8px; padding:8px 10px; font-size:14px}
+label.field{display:flex; flex-direction:column; gap:4px; font-size:13px; color:var(--muted)}
+.legend{display:flex; gap:14px; font-size:12px; color:var(--muted); flex-wrap:wrap}
+.legend b{display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:middle; margin-right:4px}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand" onclick="go('dashboard')">◧ CCAT&nbsp;Trainer</div>
+  <nav id="nav"></nav>
+  <div class="spacer"></div>
+  <button class="iconbtn" id="themeBtn" onclick="toggleTheme()">🌙 Dark</button>
+</header>
+<main class="wrap" id="app"></main>
+
+<script>
+/* =========================================================================
+   CCAT TRAINER — single-file offline practice simulator
+   All original content. Unaffiliated with Criteria Corp. CCAT is a trademark
+   of Criteria Corp. This is an independent study tool.
+   ========================================================================= */
+
+/* ---------- tiny helpers ---------- */
+const $ = (s,r=document)=>r.querySelector(s);
+const el = (t,a={},...kids)=>{const n=document.createElement(t);for(const k in a){if(k==='class')n.className=a[k];else if(k==='html')n.innerHTML=a[k];else if(k.startsWith('on'))n.addEventListener(k.slice(2),a[k]);else n.setAttribute(k,a[k]);}for(const c of kids){if(c==null)continue;n.append(c.nodeType?c:document.createTextNode(c));}return n;};
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const pct=(x)=>Math.round(x*100);
+const fmtT=(s)=>{s=Math.max(0,Math.round(s));const m=Math.floor(s/60);const ss=s%60;return m+':'+String(ss).padStart(2,'0');};
+const avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;
+const sum=a=>a.reduce((x,y)=>x+y,0);
+function shuffle(a,rng=Math.random){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+/* seedable RNG so generated banks are stable across reloads */
+function mulberry32(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+
+/* normal CDF for percentile vs median 24, sd 7 */
+function normCdf(x,mu,sd){const z=(x-mu)/(sd*Math.SQRT2);return 0.5*(1+erf(z));}
+function erf(x){const t=1/(1+0.3275911*Math.abs(x));const y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-0.284496736)*t+0.254829592)*t*Math.exp(-x*x);return x>=0?y:-y;}
+function percentileForScore(sc){return clamp(Math.round(normCdf(sc,24,7)*100),1,99);}
+
+/* =========================================================================
+   STATE / PERSISTENCE
+   ========================================================================= */
+const LS_KEY='ccat_trainer_v1';
+const DEFAULT_STATE=()=>({
+  createdAt:Date.now(),
+  testDate:null,             // ISO date string
+  theme:'light',
+  attempts:[],               // {id,mode,ts,answers:[{qid,cat,subtype,chosen,correct,ok,secs,targetSeconds,reached}], reached,correct,total,durationMs,scoreByCat}
+  perQuestion:{},            // qid -> {seen,correct,totalSecs, times:[]}
+  rung:{overall:1, math:1, verbal:1, spatial:1},
+  plan:{},                   // day-key -> {taskIdx:true}
+  streak:{last:null,count:0},
+  lifetimeAttempted:0,
+});
+let STATE=load();
+function load(){try{const s=JSON.parse(localStorage.getItem(LS_KEY));if(s&&s.attempts)return Object.assign(DEFAULT_STATE(),s);}catch(e){}return DEFAULT_STATE();}
+function save(){localStorage.setItem(LS_KEY,JSON.stringify(STATE));}
+function resetAll(){if(confirm('Erase ALL progress, attempts, timings and settings? This cannot be undone.')){localStorage.removeItem(LS_KEY);STATE=DEFAULT_STATE();applyTheme();go('dashboard');}}
+
+function applyTheme(){document.documentElement.setAttribute('data-theme',STATE.theme);$('#themeBtn').textContent=STATE.theme==='dark'?'☀︎ Light':'🌙 Dark';}
+function toggleTheme(){STATE.theme=STATE.theme==='dark'?'light':'dark';save();applyTheme();}
+
+/* record a single answered/reached question into long-term stats */
+function recordQuestion(qid,ok,secs){
+  const p=STATE.perQuestion[qid]||(STATE.perQuestion[qid]={seen:0,correct:0,totalSecs:0,times:[]});
+  p.seen++; if(ok)p.correct++; p.totalSecs+=secs; p.times.push(Math.round(secs));
+  if(p.times.length>20)p.times.shift();
+}
+function bumpStreak(){
+  const today=new Date().toISOString().slice(0,10);
+  const last=STATE.streak.last;
+  if(last===today)return;
+  const y=new Date(Date.now()-864e5).toISOString().slice(0,10);
+  STATE.streak.count=(last===y)?STATE.streak.count+1:1;
+  STATE.streak.last=today;
+}
+function daysUntilTest(){
+  if(!STATE.testDate)return null;
+  const d=Math.ceil((new Date(STATE.testDate+'T23:59:59')-Date.now())/864e5);
+  return d;
+}
+
+/* =========================================================================
+   QUESTION BANK
+   Every item is authored from scratch. Math & spatial items are produced by
+   original generators that COMPUTE the correct answer and derive each
+   distractor from a specific, named mistake (trapFlag). Verbal items are a
+   curated pool. Nothing is copied or paraphrased from any commercial source.
+   ========================================================================= */
+const BANK=[];              // filled below
+const RNG=mulberry32(20260802);   // fixed seed => stable bank every load
+
+/* Build a numeric multiple-choice item.
+   distractors: array of {v, note, trap}. We dedupe vs the correct value and
+   each other, keep 3, sort ascending, and locate the correct index. */
+function numItem(cfg){
+  const correct=cfg.correct;
+  let ds=[];
+  for(const d of cfg.distractors){
+    if(d==null||d.v==null)continue;
+    if(Math.abs(d.v-correct)<1e-9)continue;
+    if(ds.some(x=>Math.abs(x.v-d.v)<1e-9))continue;
+    ds.push(d);
+    if(ds.length>=3)break;
+  }
+  // pad if a mistake collided with the answer
+  let pad=1;
+  while(ds.length<3){
+    const cand=correct+pad*(cfg.pad||1)*(pad%2?1:-1);
+    if(cand> (cfg.min??-1e9) && !ds.some(x=>Math.abs(x.v-cand)<1e-9) && Math.abs(cand-correct)>1e-9){
+      ds.push({v:cand,note:'Not supported by the arithmetic.',trap:null});
+    }
+    pad++;
+    if(pad>40)break;
+  }
+  const all=[{v:correct,note:null,trap:'correct'}].concat(ds);
+  all.sort((a,b)=>a.v-b.v);
+  const idx=all.findIndex(x=>x.trap==='correct');
+  const fmt=cfg.fmt||(v=>String(v));
+  const notes={};
+  all.forEach((x,i)=>{if(i!==idx)notes[i]=x.note;});
+  const trap=(all.find(x=>x.trap&&x.trap!=='correct')||{}).trap||cfg.trap||null;
+  return {
+    category:cfg.category||'math', subtype:cfg.subtype, difficulty:cfg.difficulty,
+    stem:cfg.stem, options:all.map(x=>fmt(x.v)), correct:idx,
+    targetSeconds:cfg.targetSeconds||15, explanation:cfg.explanation,
+    distractorNotes:notes, technique:cfg.technique, trapFlag:trap
+  };
+}
+const R=(n)=>Math.floor(RNG()*n);          // 0..n-1
+const RR=(a,b)=>a+Math.floor(RNG()*(b-a+1)); // a..b inclusive
+const pick=(a)=>a[R(a.length)];
+const money=v=>'$'+ (Number.isInteger(v)?v:v.toFixed(2));
+
+/* ---------------------------------------------------------------- MATH ----- */
+
+/* 1. Rate / work / distance-speed-time word problems */
+function genRates(n){
+  const out=[];
+  for(let i=0;i<n;i++){
+    const t=i%4, diff=1+((i>>2)%3);
+    if(t===0){ // distance = speed*time, with a unit-switch trap (minutes)
+      const sp=pick([40,45,50,55,60,65,70]);
+      const mins=pick([90,120,150,180,210,240]);
+      const hrs=mins/60, dist=sp*hrs;
+      out.push(numItem({subtype:'word-problem',difficulty:diff,technique:'rate-time-distance',
+        stem:`A train travels at a constant ${sp} miles per hour. How far does it travel in ${mins} minutes?`,
+        correct:dist, fmt:v=>v+' miles',
+        distractors:[{v:sp*mins,note:'This multiplies speed by minutes without converting to hours.',trap:'unit-switch'},
+          {v:sp*Math.round(hrs),note:'Rounds the time to a whole number of hours first.',trap:'off-by-one'},
+          {v:sp*(mins/100),note:'Divides the minutes by 100 instead of 60.',trap:'unit-switch'}],
+        explanation:`${mins} minutes = ${mins}/60 = ${hrs} hours. Distance = speed × time = ${sp} × ${hrs} = ${dist} miles.\nFast method: convert minutes to hours FIRST, then a single multiply.`}));
+    } else if(t===1){ // combined work rate
+      const a=pick([2,3,4,5,6]), b=pick([3,4,6,8]);
+      const together=(a*b)/(a+b);
+      out.push(numItem({subtype:'word-problem',difficulty:diff,technique:'combined-work-rate',
+        stem:`One pump can fill a tank in ${a} hours. A second pump can fill the same tank in ${b} hours. Working together, how long do they take to fill it?`,
+        correct:Number(together.toFixed(2)), fmt:v=>v+' hours',
+        distractors:[{v:Number(((a+b)/2).toFixed(2)),note:'Averages the two times — rates add, times do not.',trap:'part-vs-whole'},
+          {v:a+b,note:'Adds the times together.',trap:'part-vs-whole'},
+          {v:Number((together+0.5).toFixed(2)),note:'Close, but the reciprocal sum was mis-added.',trap:'off-by-one'}],
+        explanation:`Add rates, not times. Pump 1 = 1/${a} tank/hr, Pump 2 = 1/${b} tank/hr. Combined = 1/${a}+1/${b} = ${(1/a+1/b).toFixed(3)} tank/hr. Time = 1 ÷ that = ${together.toFixed(2)} hours.\nShortcut for two workers: (a×b)/(a+b) = (${a}×${b})/(${a+b}) = ${together.toFixed(2)}.`}));
+    } else if(t===2){ // average speed there-and-back style / total trip
+      const d=pick([120,150,180,200,240]); const sp=pick([40,50,60]); const t2=d/sp;
+      out.push(numItem({subtype:'word-problem',difficulty:diff,technique:'rate-time-distance',
+        stem:`A delivery van covers ${d} miles at an average speed of ${sp} miles per hour. How many hours does the journey take?`,
+        correct:t2, fmt:v=>v+' hours',
+        distractors:[{v:d*sp/100,note:'Multiplies distance by speed instead of dividing.',trap:'reverse-percentage'},
+          {v:Number((t2+1).toFixed(2)),note:'One hour too many.',trap:'off-by-one'},
+          {v:Number((d/(sp+10)).toFixed(2)),note:'Uses the wrong speed.',trap:null}],
+        explanation:`Time = distance ÷ speed = ${d} ÷ ${sp} = ${t2} hours.`}));
+    } else { // people-work scaling
+      const p=pick([3,4,5,6]), days=pick([8,10,12,16]); const p2=pick([2,8]);
+      const nd=(p*days)/p2;
+      out.push(numItem({subtype:'word-problem',difficulty:diff,technique:'inverse-proportion',
+        stem:`${p} workers build a wall in ${days} days. Working at the same rate, how many days would ${p2} workers take?`,
+        correct:Number(nd.toFixed(2)), fmt:v=>v+' days',
+        distractors:[{v:Number(((days*p2)/p).toFixed(2)),note:'Scales directly (more workers → more days). Workers and days are inversely proportional.',trap:'reverse-percentage'},
+          {v:days,note:'Ignores the change in the number of workers.',trap:null},
+          {v:Number((nd+1).toFixed(2)),note:'Off by one day.',trap:'off-by-one'}],
+        explanation:`Total work = ${p}×${days} = ${p*days} worker-days. With ${p2} workers: ${p*days} ÷ ${p2} = ${nd} days.\nMore workers means FEWER days — inverse proportion.`}));
+    }
+  }
+  return out;
+}
+
+/* 2. Ratios & proportions */
+function genRatios(n){
+  const out=[];
+  for(let i=0;i<n;i++){
+    const diff=1+(i%3);
+    if(i%3===0){
+      const a=pick([2,3,4,5]), b=pick([3,5,7]), total=(a+b)*pick([4,6,8,10]);
+      const partA=total*a/(a+b);
+      out.push(numItem({subtype:'ratios',difficulty:diff,technique:'ratio-scaling',
+        stem:`A sum of ${money(total)} is split between two people in the ratio ${a}:${b}. How much does the first person receive?`,
+        correct:partA, fmt:money,
+        distractors:[{v:total*b/(a+b),note:"This is the OTHER person's share (the b part).",trap:'part-vs-whole'},
+          {v:total*a/b,note:'Divides by b instead of by (a+b).',trap:'part-vs-whole'},
+          {v:Math.round(total/2),note:'Splits evenly, ignoring the ratio.',trap:null}],
+        explanation:`Total parts = ${a}+${b} = ${a+b}. One part = ${money(total)} ÷ ${a+b} = ${money(total/(a+b))}. First person = ${a} parts = ${money(partA)}.`}));
+    } else if(i%3===1){
+      const r=pick([3,4,5]), base=pick([12,15,20,24]); const other=base*r;
+      out.push(numItem({subtype:'ratios',difficulty:diff,technique:'ratio-scaling',
+        stem:`The ratio of cats to dogs at a shelter is 1:${r}. If there are ${base} cats, how many dogs are there?`,
+        correct:other, fmt:v=>v+'',
+        distractors:[{v:base+r,note:'Adds the ratio number rather than multiplying.',trap:null},
+          {v:Math.round(base/r),note:'Divides instead of multiplying.',trap:'reverse-percentage'},
+          {v:other+base,note:'Gives the total animals, not the dogs.',trap:'part-vs-whole'}],
+        explanation:`1 cat corresponds to ${r} dogs. ${base} cats → ${base}×${r} = ${other} dogs.`}));
+    } else {
+      const recipe=pick([2,3,4]), scale=pick([3,4,5]); const need=recipe*scale;
+      const flour=pick([150,200,250,300]);
+      out.push(numItem({subtype:'ratios',difficulty:diff,technique:'ratio-scaling',
+        stem:`A recipe for ${recipe} servings uses ${flour} grams of flour. How much flour is needed for ${need} servings?`,
+        correct:flour*scale, fmt:v=>v+' g',
+        distractors:[{v:flour+scale,note:'Adds instead of scaling.',trap:null},
+          {v:flour*need,note:'Multiplies by the target servings, not the scale factor.',trap:'part-vs-whole'},
+          {v:Math.round(flour*need/recipe)+flour,note:'Double counts the base recipe.',trap:'off-by-one'}],
+        explanation:`Scale factor = ${need} ÷ ${recipe} = ${scale}. Flour = ${flour} × ${scale} = ${flour*scale} g.`}));
+    }
+  }
+  return out;
+}
+
+/* 3. Percentages / percentage change / reverse percentages */
+function genPercents(n){
+  const out=[];
+  for(let i=0;i<n;i++){
+    const diff=1+(i%3);
+    const kind=i%4;
+    if(kind===0){ // straight percent of
+      const base=pick([200,250,400,500,800,1200]); const p=pick([5,12,15,20,25,30]);
+      out.push(numItem({subtype:'percentages',difficulty:diff,technique:'percent-of',
+        stem:`What is ${p}% of ${base}?`,
+        correct:base*p/100, fmt:v=>v+'',
+        distractors:[{v:base*p/10,note:'Shifts the decimal one place too few (treats % as /10).',trap:'reverse-percentage'},
+          {v:base-(base*p/100),note:'Gives the remaining amount, not the percentage itself.',trap:'part-vs-whole'},
+          {v:Math.round(base*p/1000),note:'Divides by 1000.',trap:'unit-switch'}],
+        explanation:`${p}% of ${base} = ${base} × ${p}/100 = ${base*p/100}.\nAnchor on 10%: 10% of ${base} = ${base/10}, then scale to ${p}%.`}));
+    } else if(kind===1){ // percentage change
+      const from=pick([40,50,80,120,200]); const to=from+pick([10,20,30,-10,-20]);
+      const ch=Math.round((to-from)/from*100);
+      out.push(numItem({subtype:'percentages',difficulty:diff,technique:'percent-change',
+        stem:`A price changes from ${money(from)} to ${money(to)}. What is the percentage change?`,
+        correct:ch, fmt:v=>(v>0?'+':'')+v+'%',
+        distractors:[{v:Math.round((to-from)/to*100),note:'Divides by the NEW value; percentage change is always over the ORIGINAL.',trap:'reverse-percentage'},
+          {v:to-from,note:'This is the absolute change in dollars, not a percentage.',trap:'part-vs-whole'},
+          {v:-ch,note:'Correct size, wrong direction.',trap:'off-by-one'}],
+        explanation:`% change = (new − old) ÷ old × 100 = (${to} − ${from}) ÷ ${from} × 100 = ${ch}%. Divide by the ORIGINAL value.`}));
+    } else if(kind===2){ // reverse percentage
+      const orig=pick([80,120,150,200,250]); const p=pick([20,25,40,50]); const after=orig*(1+p/100);
+      out.push(numItem({subtype:'percentages',difficulty:Math.max(diff,2),technique:'reverse-percentage',
+        stem:`After a ${p}% increase, a price is now ${money(after)}. What was the original price?`,
+        correct:orig, fmt:money,
+        distractors:[{v:Number((after*(1-p/100)).toFixed(2)),note:`Subtracts ${p}% of the NEW price. You must divide by 1+${p}%, not subtract.`,trap:'reverse-percentage'},
+          {v:Number((after/(1-p/100)).toFixed(2)),note:'Uses a decrease factor instead of an increase factor.',trap:'reverse-percentage'},
+          {v:after,note:'Just restates the new price.',trap:null}],
+        explanation:`New = original × (1 + ${p}/100) = original × ${(1+p/100)}. So original = ${after} ÷ ${1+p/100} = ${money(orig)}.\nReverse-percentage trap: never subtract the percentage from the final figure — divide.`}));
+    } else { // discount then percentage
+      const base=pick([60,80,120,150,200]); const d=pick([10,15,20,25]);
+      const finalv=base*(1-d/100);
+      out.push(numItem({subtype:'percentages',difficulty:diff,technique:'discount',
+        stem:`A ${money(base)} item is reduced by ${d}%. What is the sale price?`,
+        correct:Number(finalv.toFixed(2)), fmt:money,
+        distractors:[{v:Number((base*d/100).toFixed(2)),note:`This is the discount amount, not the price you pay.`,trap:'part-vs-whole'},
+          {v:Number((base*(1+d/100)).toFixed(2)),note:'Adds the percentage instead of subtracting.',trap:'reverse-percentage'},
+          {v:base-d,note:'Subtracts the number of percent as dollars.',trap:'unit-switch'}],
+        explanation:`Pay 100% − ${d}% = ${100-d}% of ${money(base)} = ${money(base)} × ${(100-d)/100} = ${money(finalv)}.`}));
+    }
+  }
+  return out;
+}
+
+/* 4. Averages & weighted averages */
+function genAverages(n){
+  const out=[];
+  for(let i=0;i<n;i++){
+    const diff=1+(i%3);
+    if(i%3===0){
+      const nums=[pick([10,12,14]),pick([16,18,20]),pick([22,24,26]),pick([28,30])];
+      const a=sum(nums)/nums.length;
+      out.push(numItem({subtype:'averages',difficulty:diff,technique:'mean',
+        stem:`Find the average of these numbers: ${nums.join(', ')}.`,
+        correct:Number(a.toFixed(2)), fmt:v=>v+'',
+        distractors:[{v:sum(nums),note:'This is the total, not the average — divide by the count.',trap:'part-vs-whole'},
+          {v:Number((sum(nums)/(nums.length-1)).toFixed(2)),note:'Divides by one too few (miscounts the items).',trap:'off-by-one'},
+          {v:(Math.max(...nums)+Math.min(...nums))/2,note:'Averages only the largest and smallest.',trap:null}],
+        explanation:`Sum = ${sum(nums)}. Count = ${nums.length}. Average = ${sum(nums)} ÷ ${nums.length} = ${a}.`}));
+    } else if(i%3===1){ // missing value to reach a target mean
+      const known=[pick([70,72,74]),pick([80,82]),pick([88,90])]; const target=pick([80,82,85]);
+      const need=target*(known.length+1)-sum(known);
+      out.push(numItem({subtype:'averages',difficulty:Math.max(diff,2),technique:'mean-solve-back',
+        stem:`A student scores ${known.join(', ')} on three tests. What must they score on a fourth test to average ${target} across all four?`,
+        correct:need, fmt:v=>v+'',
+        distractors:[{v:target,note:'Assumes the fourth score equals the target average — only true if the others already average the target.',trap:null},
+          {v:target*known.length-sum(known),note:'Uses 3 tests in the total instead of 4.',trap:'off-by-one'},
+          {v:need-2,note:'Arithmetic slip in the subtraction.',trap:'off-by-one'}],
+        explanation:`To average ${target} over 4 tests you need a total of ${target}×4 = ${target*4}. Already have ${sum(known)}. Fourth score = ${target*4} − ${sum(known)} = ${need}.`}));
+    } else { // weighted average
+      const w1=pick([2,3]), w2=pick([1,2]), v1=pick([60,70,80]), v2=pick([90,95,100]);
+      const wa=(w1*v1+w2*v2)/(w1+w2);
+      out.push(numItem({subtype:'averages',difficulty:3,technique:'weighted-mean',
+        stem:`Coursework counts for ${w1} parts and the exam for ${w2} parts of a grade. A student scores ${v1} on coursework and ${v2} on the exam. What is the overall grade?`,
+        correct:Number(wa.toFixed(2)), fmt:v=>v+'',
+        distractors:[{v:Number(((v1+v2)/2).toFixed(2)),note:'Takes a plain average, ignoring the different weights.',trap:'part-vs-whole'},
+          {v:Number(((w2*v1+w1*v2)/(w1+w2)).toFixed(2)),note:'Swaps the two weights.',trap:'wrong-relation'},
+          {v:Number((wa+3).toFixed(2)),note:'Weighting mis-applied.',trap:null}],
+        explanation:`Weighted mean = (${w1}×${v1} + ${w2}×${v2}) ÷ (${w1}+${w2}) = (${w1*v1}+${w2*v2}) ÷ ${w1+w2} = ${wa.toFixed(2)}.`}));
+    }
+  }
+  return out;
+}
+
+/* 5. Simple algebra */
+function genAlgebra(n){
+  const out=[];
+  for(let i=0;i<n;i++){
+    const diff=1+(i%3);
+    if(i%3===0){ // ax+b=c
+      const a=pick([2,3,4,5]), x=pick([3,4,5,6,7]), b=pick([1,2,5,7]); const c=a*x+b;
+      out.push(numItem({subtype:'algebra',difficulty:diff,technique:'solve-linear',
+        stem:`If ${a}x + ${b} = ${c}, what is x?`,
+        correct:x, fmt:v=>'x = '+v,
+        distractors:[{v:Number(((c+b)/a).toFixed(2)),note:'Adds b instead of subtracting it.',trap:'reverse-percentage'},
+          {v:Number((c/a).toFixed(2)),note:'Forgets the + '+b+' term entirely.',trap:'off-by-one'},
+          {v:c-b,note:'Subtracts b but forgets to divide by '+a+'.',trap:'part-vs-whole'}],
+        explanation:`${a}x = ${c} − ${b} = ${c-b}. x = ${c-b} ÷ ${a} = ${x}. Undo +${b} first, then undo ×${a}.`}));
+    } else if(i%3===1){ // consecutive integers sum
+      const start=pick([10,12,15,20,24]); const s=start+(start+1)+(start+2);
+      out.push(numItem({subtype:'algebra',difficulty:2,technique:'consecutive-integers',
+        stem:`Three consecutive whole numbers add up to ${s}. What is the largest of them?`,
+        correct:start+2, fmt:v=>v+'',
+        distractors:[{v:start,note:'This is the smallest of the three, not the largest.',trap:'off-by-one'},
+          {v:Math.round(s/3),note:'This is the middle number.',trap:'part-vs-whole'},
+          {v:start+3,note:'One too high.',trap:'off-by-one'}],
+        explanation:`Middle number = ${s} ÷ 3 = ${start+1}. Largest = ${start+1}+1 = ${start+2}.`}));
+    } else { // two-step with subtraction
+      const x=pick([4,6,8,10]), k=pick([2,3]), b=pick([4,6,10]); const c=k*x-b;
+      out.push(numItem({subtype:'algebra',difficulty:diff,technique:'solve-linear',
+        stem:`If ${k}x − ${b} = ${c}, what is x?`,
+        correct:x, fmt:v=>'x = '+v,
+        distractors:[{v:Number(((c-b)/k).toFixed(2)),note:'Subtracts b instead of adding it back.',trap:'reverse-percentage'},
+          {v:c+b,note:'Forgets to divide by '+k+'.',trap:'part-vs-whole'},
+          {v:Number((c/k).toFixed(2)),note:'Ignores the −'+b+' term.',trap:'off-by-one'}],
+        explanation:`${k}x = ${c} + ${b} = ${c+b}. x = ${c+b} ÷ ${k} = ${x}.`}));
+    }
+  }
+  return out;
+}
+
+/* 6. Number series */
+function genSeries(n){
+  const out=[];
+  for(let i=0;i<n;i++){
+    const diff=1+(i%3);
+    const kind=i%5;
+    let seq,next,rule,ds;
+    if(kind===0){ const a=pick([2,3,4,5]), d=pick([3,4,5,6]); seq=[a,a+d,a+2*d,a+3*d]; next=a+4*d; rule=`add ${d} each step`;
+      ds=[{v:next+d,note:'Adds one extra step.',trap:'off-by-one'},{v:seq[3]+d+1,note:'Miscounts the common difference.',trap:'off-by-one'},{v:seq[3],note:'Repeats the last term.',trap:null}]; }
+    else if(kind===1){ const a=pick([1,2,3]), r=pick([2,3]); seq=[a,a*r,a*r*r,a*r*r*r]; next=seq[3]*r; rule=`multiply by ${r} each step`;
+      ds=[{v:seq[3]+ (seq[3]-seq[2]),note:'Treats it as an arithmetic (add-a-constant) series.',trap:'wrong-relation'},{v:seq[3]*r-1,note:'Off by one after multiplying.',trap:'off-by-one'},{v:seq[3]*(r+1),note:'Multiplies by the wrong factor.',trap:null}]; }
+    else if(kind===2){ const a=pick([1,2,3]); const inc=pick([1,2]); let arr=[a]; let step=inc; for(let k=0;k<3;k++){arr.push(arr[arr.length-1]+step);step+=inc;} seq=arr; next=seq[3]+step; rule=`the gap grows by ${inc} each time`;
+      ds=[{v:seq[3]+(seq[3]-seq[2]),note:'Assumes a constant gap; the gap is increasing.',trap:'wrong-relation'},{v:next+inc,note:'Adds one increment too many.',trap:'off-by-one'},{v:next-inc,note:'Adds one increment too few.',trap:'off-by-one'}]; }
+    else if(kind===3){ // alternating two series
+      const a=pick([2,4,6]), b=pick([1,3,5]), da=pick([3,4]), db=pick([2,5]); seq=[a,b,a+da,b+db]; next=a+2*da; rule=`two interleaved series: positions 1,3,5 add ${da}; positions 2,4 add ${db}`;
+      ds=[{v:b+2*db,note:'Continues the OTHER interleaved series.',trap:'wrong-relation'},{v:seq[3]+da,note:'Ignores the alternation.',trap:'off-by-one'},{v:a+3*da,note:'Skips a term of the correct sub-series.',trap:'off-by-one'}]; }
+    else { // subtract
+      const a=pick([40,50,60,80]), d=pick([4,5,6,7]); seq=[a,a-d,a-2*d,a-3*d]; next=a-4*d; rule=`subtract ${d} each step`;
+      ds=[{v:next-d,note:'Subtracts one step too many.',trap:'off-by-one'},{v:seq[3]+d,note:'Goes the wrong direction.',trap:'wrong-relation'},{v:seq[3],note:'Repeats the last term.',trap:null}]; }
+    out.push(numItem({subtype:'number-series',difficulty:diff,technique:'series-step',
+      stem:`Look at this series: ${seq.join(', ')}, ... What number should come next?`,
+      correct:next, fmt:v=>v+'', distractors:ds,
+      explanation:`The rule: ${rule}. Continuing: ${seq.join(', ')}, ${next}.\nMethod: write the differences between terms first — the pattern in the differences gives you the rule.`}));
+  }
+  return out;
+}
+
+/* 7. Probability & counting */
+function genProbability(n){
+  const out=[];
+  for(let i=0;i<n;i++){
+    const diff=1+(i%3);
+    if(i%3===0){ const r=pick([2,3,4]), b=pick([3,5,6]); const tot=r+b;
+      out.push(numItem({subtype:'probability',difficulty:diff,technique:'basic-probability',
+        stem:`A bag holds ${r} red and ${b} blue marbles. One is drawn at random. What is the probability it is red?`,
+        correct:Number((r/tot).toFixed(3)), fmt:v=>r+'/'+tot,
+        distractors:[{v:Number((r/b).toFixed(3)),note:'Uses red-to-blue odds, not probability out of the whole.',trap:'part-vs-whole'},
+          {v:Number((b/tot).toFixed(3)),note:'Gives the probability of BLUE.',trap:'wrong-relation'},
+          {v:Number((r/(tot+1)).toFixed(3)),note:'Miscounts the total.',trap:'off-by-one'}],
+        fmt2:true,
+        explanation:`P(red) = favourable ÷ total = ${r} ÷ ${tot} = ${r}/${tot}. The denominator is ALL marbles, not just the blue ones.`}));
+      // fix fmt so options render as fractions consistently
+      out[out.length-1].options=shuffleFractionOptions(r,b,tot,out[out.length-1]);
+    } else if(i%3===1){ // combined independent
+      out.push(numItem({subtype:'probability',difficulty:3,technique:'multiply-independent',
+        stem:`A fair coin is flipped twice. What is the probability of getting two heads?`,
+        correct:0.25, fmt:v=>({0.25:'1/4',0.5:'1/2',0.125:'1/8',0.75:'3/4'})[v]||v,
+        distractors:[{v:0.5,note:'Adds nothing — this is the chance of one head, not two.',trap:'wrong-relation'},
+          {v:0.75,note:'This is P(at least one head).',trap:'part-vs-whole'},
+          {v:0.125,note:'Uses three flips instead of two.',trap:'off-by-one'}],
+        explanation:`Independent events multiply: P(H)×P(H) = 1/2 × 1/2 = 1/4.`}));
+    } else { // simple counting / arrangements
+      const a=pick([3,4,5]); const fact=[1,1,2,6,24,120][a];
+      out.push(numItem({subtype:'combinatorics',difficulty:3,technique:'factorial-arrangements',
+        stem:`In how many different orders can ${a} people stand in a single line?`,
+        correct:fact, fmt:v=>v+'',
+        distractors:[{v:a*a,note:'Squares the count instead of taking the factorial.',trap:'wrong-relation'},
+          {v:a*(a-1),note:'Only arranges two positions.',trap:'part-vs-whole'},
+          {v:fact/a,note:'Off by a factor.',trap:'off-by-one'}],
+        explanation:`Number of orderings = ${a}! = ${Array.from({length:a},(_,k)=>a-k).join('×')} = ${fact}.`}));
+    }
+  }
+  return out;
+}
+function shuffleFractionOptions(r,b,tot,item){ // keep numeric ordering but show as fractions
+  const opts=[`${r}/${tot}`,`${b}/${tot}`,`${r}/${b}`,`${r}/${tot+1}`];
+  // ensure correct index maps to r/tot
+  const uniq=[...new Set(opts)];
+  while(uniq.length<4)uniq.push(`${r}/${tot+uniq.length}`);
+  item.correct=uniq.indexOf(`${r}/${tot}`);
+  item.distractorNotes={};
+  uniq.forEach((o,idx)=>{if(idx!==item.correct)item.distractorNotes[idx]={[`${b}/${tot}`]:'Probability of blue.',[`${r}/${b}`]:'Red-to-blue odds, not a probability.'}[o]||'Miscounts the total.';});
+  return uniq;
+}
+
+/* 8. Profit / loss / interest */
+function genProfit(n){
+  const out=[];
+  for(let i=0;i<n;i++){
+    const diff=1+(i%3);
+    if(i%3===0){ const cost=pick([40,50,80,120,200]); const m=pick([10,20,25,50]); const sell=cost*(1+m/100);
+      out.push(numItem({subtype:'profit-loss',difficulty:diff,technique:'markup',
+        stem:`A shop buys an item for ${money(cost)} and sells it at a ${m}% profit. What is the selling price?`,
+        correct:Number(sell.toFixed(2)), fmt:money,
+        distractors:[{v:Number((cost*m/100).toFixed(2)),note:'This is just the profit, not the selling price.',trap:'part-vs-whole'},
+          {v:Number((cost*(1-m/100)).toFixed(2)),note:'Subtracts the margin — that would be a loss.',trap:'reverse-percentage'},
+          {v:cost+m,note:'Adds the percent number as dollars.',trap:'unit-switch'}],
+        explanation:`Sell = cost × (1 + ${m}/100) = ${money(cost)} × ${1+m/100} = ${money(sell)}.`}));
+    } else if(i%3===1){ // simple interest
+      const P=pick([500,800,1000,1200]); const r=pick([4,5,6,8]); const t=pick([2,3,5]); const I=P*r*t/100;
+      out.push(numItem({subtype:'interest',difficulty:2,technique:'simple-interest',
+        stem:`${money(P)} is invested at ${r}% simple interest per year. How much interest is earned after ${t} years?`,
+        correct:Number(I.toFixed(2)), fmt:money,
+        distractors:[{v:Number((P*r/100).toFixed(2)),note:'Interest for one year only — forgets to multiply by '+t+' years.',trap:'off-by-one'},
+          {v:Number((P*(1+r*t/100)).toFixed(2)),note:'Gives the final balance, not the interest earned.',trap:'part-vs-whole'},
+          {v:Number((P*r*t/1000).toFixed(2)),note:'Divides by 1000 instead of 100.',trap:'unit-switch'}],
+        explanation:`Simple interest = P × r × t ÷ 100 = ${P} × ${r} × ${t} ÷ 100 = ${money(I)}.`}));
+    } else { // loss percentage
+      const cost=pick([80,120,150,200]); const sell=cost-pick([10,20,30,40]); const loss=Math.round((cost-sell)/cost*100);
+      out.push(numItem({subtype:'profit-loss',difficulty:3,technique:'loss-percent',
+        stem:`An item bought for ${money(cost)} is sold for ${money(sell)}. What is the percentage loss?`,
+        correct:loss, fmt:v=>v+'%',
+        distractors:[{v:Math.round((cost-sell)/sell*100),note:'Divides the loss by the selling price; percentage loss is over the COST.',trap:'reverse-percentage'},
+          {v:cost-sell,note:'This is the dollar loss, not a percentage.',trap:'part-vs-whole'},
+          {v:loss+2,note:'Rounding slip.',trap:'off-by-one'}],
+        explanation:`% loss = (cost − sell) ÷ cost × 100 = (${cost}−${sell}) ÷ ${cost} × 100 = ${loss}%. Loss and profit percentages are always over the COST price.`}));
+    }
+  }
+  return out;
+}
+
+/* 9. Unit conversion */
+function genUnits(n){
+  const out=[];
+  const table=[
+    {q:min=>`${min} minutes is how many hours?`,f:min=>min/60,mk:min=>({v:min*60,note:'Multiplies by 60 instead of dividing.',trap:'unit-switch'}),unit:'hours',pool:[90,120,150,180,240,300]},
+    {q:km=>`${km} kilometres is how many metres?`,f:km=>km*1000,mk:km=>({v:km/1000,note:'Divides instead of multiplying — wrong direction.',trap:'unit-switch'}),unit:'m',pool:[2,3,5,7,10]},
+    {q:g=>`${g} grams is how many kilograms?`,f:g=>g/1000,mk:g=>({v:g*1000,note:'Multiplies by 1000 — wrong direction.',trap:'unit-switch'}),unit:'kg',pool:[500,750,1500,2500,4000]},
+    {q:c=>`A ${c}-litre container holds how many millilitres?`,f:c=>c*1000,mk:c=>({v:c/1000,note:'Divides instead of multiplying.',trap:'unit-switch'}),unit:'ml',pool:[2,3,4,5,8]},
+  ];
+  for(let i=0;i<n;i++){
+    const t=table[i%table.length]; const v=pick(t.pool); const ans=t.f(v);
+    out.push(numItem({subtype:'unit-conversion',difficulty:1+(i%2),technique:'unit-conversion',
+      stem:t.q(v), correct:ans, fmt:x=>x+' '+t.unit,
+      distractors:[t.mk(v),{v:ans*10,note:'Off by a factor of ten.',trap:'unit-switch'},{v:ans/10,note:'Off by a factor of ten the other way.',trap:'unit-switch'}],
+      explanation:`Convert by the correct factor. ${t.q(v).replace('?','')} = ${ans} ${t.unit}. Always check whether the unit is getting BIGGER (divide) or SMALLER (multiply).`}));
+  }
+  return out;
+}
+
+/* 10. Data interpretation from a tiny table */
+function genData(n){
+  const out=[];
+  for(let i=0;i<n;i++){
+    const diff=1+(i%3);
+    const months=['Jan','Feb','Mar','Apr'];
+    const vals=[pick([120,140,160]),pick([180,200,220]),pick([150,170,190]),pick([210,230,250])];
+    const table=`Month | Units sold\n${months.map((m,k)=>m+' | '+vals[k]).join('\n')}`;
+    const kind=i%3;
+    if(kind===0){ const total=sum(vals);
+      out.push({category:'math',subtype:'data-interpretation',difficulty:diff,technique:'table-reading',
+        stem:`Use the table.\n\n${table}\n\nHow many units were sold in total over the four months?`,
+        options:[String(total-vals[0]),String(total),String(Math.round(total/4)),String(total+vals[3])].map(x=>x),
+        correct:1,targetSeconds:18,
+        explanation:`Add every row: ${vals.join(' + ')} = ${total}.`,
+        distractorNotes:{0:'Leaves out the first month.',2:'Gives the average, not the total.',3:'Double-counts the last month.'},trapFlag:'part-vs-whole'});
+    } else if(kind===1){ const total=sum(vals); const a=Number((avg(vals)).toFixed(1));
+      out.push({category:'math',subtype:'data-interpretation',difficulty:diff,technique:'table-reading',
+        stem:`Use the table.\n\n${table}\n\nWhat is the average number of units sold per month?`,
+        options:[String(total),String(a),String((a-5).toFixed(1)),String(Math.round(total/3))].map(x=>x),correct:1,targetSeconds:18,
+        explanation:`Average = total ÷ number of months = ${total} ÷ 4 = ${a}.`,
+        distractorNotes:{0:'This is the total, not the average.',2:'Arithmetic slip.',3:'Divides by 3 months instead of 4.'},trapFlag:'off-by-one'});
+    } else { const d=vals[3]-vals[0]; const p=Math.round(d/vals[0]*100);
+      out.push({category:'math',subtype:'data-interpretation',difficulty:3,technique:'table-reading',
+        stem:`Use the table.\n\n${table}\n\nBy what percentage did sales change from Jan to Apr?`,
+        options:[String(d),(p>0?'+':'')+p+'%',(Math.round(d/vals[3]*100))+'%',(p+5)+'%'],correct:1,targetSeconds:20,
+        explanation:`% change = (Apr − Jan) ÷ Jan × 100 = (${vals[3]}−${vals[0]}) ÷ ${vals[0]} × 100 = ${p}%.`,
+        distractorNotes:{0:'Absolute change in units, not a percentage.',2:'Divides by the April value instead of the January value.',3:'Rounding error.'},trapFlag:'reverse-percentage'});
+    }
+  }
+  return out;
+}
+
+/* 11. Logical deduction — true / false / uncertain */
+const DEDUCTIONS=[
+  {p:['All accountants in the firm are punctual.','Maria is an accountant in the firm.'],c:'Maria is punctual.',a:0,e:'Both premises hold, and Maria falls inside the "all accountants" set, so the conclusion must be true.'},
+  {p:['All the boxes in the warehouse are heavy.','Some heavy things are fragile.'],c:'Some boxes in the warehouse are fragile.',a:2,e:'The boxes are heavy, but only SOME heavy things are fragile — we are not told whether any box is among them. Uncertain.'},
+  {p:['No manager works on weekends.','Sam works on weekends.'],c:'Sam is a manager.',a:1,e:'If no manager works weekends and Sam does, Sam cannot be a manager. The statement is false.'},
+  {p:['Every product on shelf A is on sale.','This item is not on sale.'],c:'This item is on shelf A.',a:1,e:'Everything on shelf A is on sale; this item is not on sale, so it cannot be on shelf A. False (contrapositive).'},
+  {p:['Some drivers are trained in first aid.','All drivers wear a uniform.'],c:'Some people who wear a uniform are trained in first aid.',a:0,e:'The trained drivers are drivers, and all drivers wear a uniform, so those trained drivers wear uniforms. True.'},
+  {p:['If it rains, the match is cancelled.','The match was not cancelled.'],c:'It did not rain.',a:0,e:'Rain guarantees cancellation. No cancellation means it cannot have rained. True (contrapositive).'},
+  {p:['If it rains, the match is cancelled.','It did not rain.'],c:'The match was not cancelled.',a:2,e:'Rain is sufficient for cancellation but not necessary — the match could be cancelled for another reason. Uncertain.'},
+  {p:['All members pay a fee.','Some who pay a fee receive a discount.'],c:'All members receive a discount.',a:1,e:'Only SOME fee-payers get a discount, so we cannot conclude ALL members do. In fact "all" is not supported, making this claim false as stated.'},
+  {p:['Every ripe tomato is red.','This tomato is green.'],c:'This tomato is not ripe.',a:0,e:'Ripe implies red. Green is not red, so the tomato is not ripe. True.'},
+  {p:['Some engineers speak French.','All who speak French can read the manual.'],c:'Some engineers can read the manual.',a:0,e:'The French-speaking engineers can read the manual, so at least some engineers can. True.'},
+  {p:['No cats are dogs.','Some pets are cats.'],c:'Some pets are not dogs.',a:0,e:'The pets that are cats cannot be dogs, so some pets are not dogs. True.'},
+  {p:['All the invoices were paid late.','Some late payments incur a fee.'],c:'All the invoices incurred a fee.',a:2,e:'Only some late payments incur a fee; we do not know if these particular invoices did. Uncertain.'},
+  {p:['If the alarm is set, the door locks automatically.','The door did not lock.'],c:'The alarm was not set.',a:0,e:'Alarm set guarantees the lock. No lock means the alarm was not set. True.'},
+  {p:['Every book on the top shelf is a hardback.','Some hardbacks are illustrated.'],c:'Some books on the top shelf are illustrated.',a:2,e:'Top-shelf books are hardbacks, but only some hardbacks are illustrated — maybe none of these. Uncertain.'},
+  {p:['All the runners finished the race.','No one who finished received a penalty.'],c:'No runner received a penalty.',a:0,e:'All runners finished, and no finisher got a penalty, so no runner got one. True.'},
+  {p:['Some of the shipments are delayed.','All delayed shipments are refunded.'],c:'Some shipments are refunded.',a:0,e:'The delayed shipments exist and are all refunded, so some shipments are refunded. True.'},
+  {p:['If a worker is full-time, they get health cover.','Lee gets health cover.'],c:'Lee is full-time.',a:2,e:'Full-time is sufficient for cover, but part-timers might also get cover. Being covered does not prove full-time. Uncertain.'},
+  {p:['No item in aisle 3 is perishable.','The milk is perishable.'],c:'The milk is not in aisle 3.',a:0,e:'Nothing perishable is in aisle 3; milk is perishable, so it is not in aisle 3. True.'},
+  {p:['All the trainees passed the exam.','Some who passed were promoted.'],c:'No trainee was promoted.',a:1,e:'Some passers were promoted and all trainees passed, so it is possible a trainee was promoted — the claim that none were is not supported and is false as an absolute.'},
+  {p:['Every valid ticket has a barcode.','This ticket has no barcode.'],c:'This ticket is not valid.',a:0,e:'Valid implies barcode. No barcode means not valid. True.'},
+];
+function genDeduction(n){
+  const out=[];
+  for(let i=0;i<n;i++){
+    const d=DEDUCTIONS[i%DEDUCTIONS.length];
+    out.push({category:'math',subtype:'logical-deduction',difficulty:1+((i/DEDUCTIONS.length|0)%3? 2:1)+(d.a===2?0:0),
+      stem:`If the first two statements are true, is the final statement true, false, or uncertain?\n\n1. ${d.p[0]}\n2. ${d.p[1]}\n3. ${d.c}`,
+      options:['True','False','Uncertain'],correct:d.a,targetSeconds:18,technique:'conditional-reasoning',
+      explanation:d.e,
+      distractorNotes:{0:d.a!==0?'The premises do not force the conclusion to be true.':null,1:d.a!==1?'The premises do not make the conclusion impossible.':null,2:d.a!==2?'The premises settle the matter — it is not left open.':null},
+      trapFlag:'wrong-relation'});
+  }
+  return out;
+}
+
+/* 12. Attention to detail — exact match on strings/numbers */
+function randStr(len){const chars='ABCDEFGHJKLMNPRTUVWXY0123456789';let s='';for(let k=0;k<len;k++)s+=chars[R(chars.length)];return s;}
+function tweak(s){const i=R(s.length);const chars='ABCDEFGHJKLMNPRTUVWXY0123456789';let c;do{c=chars[R(chars.length)];}while(c===s[i]);return s.slice(0,i)+c+s.slice(i+1);}
+function genAttention(n){
+  const out=[];
+  for(let i=0;i<n;i++){
+    const kind=i%2;
+    if(kind===0){ // how many of the pairs are exact matches
+      const rows=4; let matches=0; const lines=[];
+      for(let r=0;r<rows;r++){const a=randStr(RR(6,9)); const same=RNG()<0.5; const b=same?a:tweak(a); if(same)matches++; lines.push(`${a}    ${b}`);}
+      out.push({category:'math',subtype:'attention-to-detail',difficulty:1+(i%3),
+        stem:`How many of the following pairs are EXACT matches?\n\n${lines.join('\n')}`,
+        options:['0','1','2','3','4'].slice(0,5),correct:matches,targetSeconds:18,technique:'scan-compare',
+        explanation:`Compare each pair character by character. Exactly ${matches} of the ${rows} pairs are identical. Scan from left to right and stop the moment a character differs.`,
+        distractorNotes:Object.fromEntries([0,1,2,3,4].filter(x=>x!==matches).map(x=>[x,x>matches?'Counts a pair that actually differs by one character.':'Misses a genuine match.'])),
+        trapFlag:'off-by-one'});
+    } else { // are these two identical?
+      const a=randStr(RR(8,12)); const same=RNG()<0.5; const b=same?a:tweak(a);
+      out.push({category:'math',subtype:'attention-to-detail',difficulty:1+(i%3),
+        stem:`Are these two strings identical?\n\n${a}\n${b}`,
+        options:['Identical','Different'],correct:same?0:1,targetSeconds:12,technique:'scan-compare',
+        explanation:same?`Every character matches — the strings are identical.`:`They differ. Compare position by position: the mismatch is what makes them different.`,
+        distractorNotes:{[same?1:0]:'A careful left-to-right scan settles it.'},trapFlag:'off-by-one'});
+    }
+  }
+  return out;
+}
+
+BANK.push(...genRates(20),...genRatios(15),...genPercents(20),...genAverages(15),...genAlgebra(15),
+  ...genSeries(18),...genProbability(12),...genProfit(12),...genUnits(9),...genData(10),
+  ...genDeduction(30),...genAttention(34));
+
+/* --------------------------------------------------------------- VERBAL ---- */
+function verbItem(subtype,difficulty,stem,correctText,distractors,explanation,technique){
+  const opts=[{w:correctText,note:null,trap:'correct'}].concat(distractors);
+  const order=shuffle(opts,RNG);
+  const correct=order.findIndex(o=>o.trap==='correct');
+  const notes={};
+  order.forEach((o,i)=>{if(i!==correct)notes[i]=o.note;});
+  const trap=(order.find(o=>o.trap&&o.trap!=='correct')||{}).trap||null;
+  return {category:'verbal',subtype,difficulty,stem,options:order.map(o=>o.w),correct,
+    targetSeconds:12,explanation,distractorNotes:notes,technique,trapFlag:trap};
+}
+
+/* Analogies: [A,B,C, relation, correct, [ {w,note,trap} ] ] */
+const ANALOGIES=[
+  ['cup','coaster','computer','protects/sits-under → the thing it rests on','mouse pad',[{w:'keyboard',note:'A keyboard is used WITH a computer, but a coaster is what a cup rests on. The parallel is the resting surface.',trap:'wrong-relation'},{w:'screen',note:'A screen is a part of a computer, not the surface beneath it.',trap:'wrong-relation'},{w:'monitor',note:'Matches the category "computer part", not the "rests-on" relationship.',trap:'wrong-relation'}]],
+  ['glove','hand','sock','worn on → body part','foot',[{w:'shoe',note:'A shoe is also worn on the foot, but it is another garment, not the body part.',trap:'wrong-relation'},{w:'leg',note:'A sock covers the foot specifically, not the whole leg.',trap:'near-synonym'},{w:'toe',note:'Too narrow — a sock covers the whole foot.',trap:'near-synonym'}]],
+  ['author','book','composer','creator → creation','symphony',[{w:'orchestra',note:'An orchestra performs music; it is not what a composer creates.',trap:'wrong-relation'},{w:'piano',note:'A piano is an instrument, not the created work.',trap:'wrong-relation'},{w:'note',note:'A note is a component, not the finished creation.',trap:'wrong-relation'}]],
+  ['thermometer','temperature','clock','instrument → what it measures','time',[{w:'hour',note:'An hour is a unit of time, not the quantity measured.',trap:'near-synonym'},{w:'hands',note:'Hands are a part of a clock, not what it measures.',trap:'wrong-relation'},{w:'speed',note:'A clock measures time, not speed.',trap:'wrong-relation'}]],
+  ['whisper','shout','walk','degree (mild → intense)','run',[{w:'stroll',note:'A stroll is a gentler walk — same low intensity, not the intensified version.',trap:'near-synonym'},{w:'step',note:'A step is a component of walking, not a more intense form.',trap:'wrong-relation'},{w:'jog',note:'Closer, but "run" is the stronger intensification that mirrors whisper→shout.',trap:'near-synonym'}]],
+  ['drought','rain','famine','cause: absence of → what is absent','food',[{w:'hunger',note:'Hunger is a RESULT of famine, not the thing whose absence causes it.',trap:'wrong-relation'},{w:'water',note:'Water shortage relates to drought, not famine.',trap:'wrong-relation'},{w:'crops',note:'Close, but the direct parallel to "rain" (the absent essential) is food.',trap:'near-synonym'}]],
+  ['library','books','arsenal','container → what it stores','weapons',[{w:'soldiers',note:'An arsenal stores weapons; soldiers use them.',trap:'wrong-relation'},{w:'war',note:'War is a context, not what is stored.',trap:'wrong-relation'},{w:'shelves',note:'Shelves are part of the storage, not the stored items.',trap:'wrong-relation'}]],
+  ['painter','brush','writer','worker → tool','pen',[{w:'book',note:'A book is the writer\'s output, not the tool.',trap:'wrong-relation'},{w:'paper',note:'Paper is the surface, not the tool that makes marks.',trap:'near-synonym'},{w:'word',note:'A word is a product, not an instrument.',trap:'wrong-relation'}]],
+  ['spark','fire','seed','beginning → full form','plant',[{w:'soil',note:'Soil is where a seed grows, not what it becomes.',trap:'wrong-relation'},{w:'root',note:'A root is a part, not the whole grown form.',trap:'wrong-relation'},{w:'flower',note:'A flower is one part of a plant, not the mature whole in general.',trap:'near-synonym'}]],
+  ['optimist','hopeful','pessimist','person → their trait','gloomy',[{w:'wrong',note:'A pessimist is not necessarily wrong — that judges accuracy, not disposition.',trap:'wrong-relation'},{w:'realist',note:'A realist is a different type of person, not the trait of a pessimist.',trap:'wrong-relation'},{w:'cheerful',note:'This is the opposite trait.',trap:'wrong-relation'}]],
+  ['island','ocean','oasis','isolated feature → surrounding expanse','desert',[{w:'water',note:'An oasis contains water; the surrounding expanse is the desert.',trap:'wrong-relation'},{w:'sand',note:'Sand is a material of the desert, not the expanse itself as a parallel to "ocean".',trap:'near-synonym'},{w:'palm',note:'A palm is a feature of an oasis, not its surroundings.',trap:'wrong-relation'}]],
+  ['novice','expert','sapling','early stage → mature stage','tree',[{w:'forest',note:'A forest is a group; the mature single form is a tree.',trap:'wrong-relation'},{w:'branch',note:'A branch is a part, not the mature whole.',trap:'wrong-relation'},{w:'leaf',note:'A leaf is a part, not the grown form.',trap:'wrong-relation'}]],
+  ['bee','hive','bird','animal → its home','nest',[{w:'sky',note:'A bird flies in the sky but does not live there as a home.',trap:'wrong-relation'},{w:'tree',note:'A tree may hold a nest, but the home itself is the nest.',trap:'near-synonym'},{w:'egg',note:'An egg is produced in the home, not the home.',trap:'wrong-relation'}]],
+  ['scale','weight','ruler','tool → measured quantity','length',[{w:'inch',note:'An inch is a unit of length, not the quantity itself.',trap:'near-synonym'},{w:'wood',note:'Rulers may be wooden, but that is material, not what is measured.',trap:'wrong-relation'},{w:'line',note:'A line is drawn with a ruler, not measured by it in this sense.',trap:'wrong-relation'}]],
+  ['dictionary','words','atlas','reference → contents','maps',[{w:'countries',note:'An atlas depicts countries via maps; the contents are the maps.',trap:'near-synonym'},{w:'travel',note:'Travel is a use, not the contents.',trap:'wrong-relation'},{w:'globe',note:'A globe is a different object, not the contents of an atlas.',trap:'wrong-relation'}]],
+  ['stitch','tear','patch','remedy → problem it fixes','hole',[{w:'cloth',note:'Cloth is the material, not the problem being fixed.',trap:'wrong-relation'},{w:'needle',note:'A needle is a tool, not the problem.',trap:'wrong-relation'},{w:'thread',note:'Thread is a material used, not the fault.',trap:'wrong-relation'}]],
+  ['captain','ship','pilot','leader → vehicle','aircraft',[{w:'sky',note:'The sky is where an aircraft flies, not the vehicle.',trap:'wrong-relation'},{w:'runway',note:'A runway is where an aircraft takes off, not the vehicle itself.',trap:'wrong-relation'},{w:'wing',note:'A wing is a part of the aircraft.',trap:'wrong-relation'}]],
+  ['famine','food','fatigue','deficiency → what is lacking','energy',[{w:'sleep',note:'Lack of sleep causes fatigue, but the thing depleted BY fatigue is energy.',trap:'near-synonym'},{w:'rest',note:'Rest is the remedy, not the depleted quantity.',trap:'wrong-relation'},{w:'work',note:'Work is a cause, not what is lacking.',trap:'wrong-relation'}]],
+  ['blueprint','building','recipe','plan → product','meal',[{w:'chef',note:'A chef follows the recipe; the product is the meal.',trap:'wrong-relation'},{w:'kitchen',note:'A kitchen is where it is made, not the product.',trap:'wrong-relation'},{w:'ingredient',note:'An ingredient is an input, not the finished product.',trap:'wrong-relation'}]],
+  ['mute','sound','blind','deprived of → sense/quality','sight',[{w:'eye',note:'An eye is the organ; the missing quality is sight.',trap:'near-synonym'},{w:'dark',note:'Dark is a condition, not the missing sense.',trap:'wrong-relation'},{w:'light',note:'Light is what enables sight, not the sense itself.',trap:'wrong-relation'}]],
+  ['coach','team','conductor','leader → group led','orchestra',[{w:'baton',note:'A baton is the conductor\'s tool, not the group.',trap:'wrong-relation'},{w:'music',note:'Music is produced, not the group.',trap:'wrong-relation'},{w:'stage',note:'A stage is the location, not the group.',trap:'wrong-relation'}]],
+  ['ember','blaze','ripple','small form → large form','wave',[{w:'water',note:'Water is the medium, not the intensified form.',trap:'wrong-relation'},{w:'pond',note:'A pond is a location, not the larger version of a ripple.',trap:'wrong-relation'},{w:'splash',note:'A splash is a related event but not the scaled-up continuous form.',trap:'near-synonym'}]],
+  ['key','lock','password','opener → barrier','account',[{w:'computer',note:'A computer may hold the account, but the thing a password opens is the account/system.',trap:'near-synonym'},{w:'code',note:'A code is another kind of key, not the barrier.',trap:'wrong-relation'},{w:'screen',note:'A screen is hardware, not the guarded thing.',trap:'wrong-relation'}]],
+  ['hammer','nail','screwdriver','tool → fastener it drives','screw',[{w:'wood',note:'Wood is the material joined, not the fastener.',trap:'wrong-relation'},{w:'bolt',note:'A bolt is turned by a spanner, not a screwdriver.',trap:'near-synonym'},{w:'handle',note:'A handle is part of the tool.',trap:'wrong-relation'}]],
+  ['prologue','story','overture','opening → whole work','opera',[{w:'song',note:'A song is smaller than the whole work an overture opens.',trap:'near-synonym'},{w:'stage',note:'The stage is the venue, not the work.',trap:'wrong-relation'},{w:'singer',note:'A singer performs; the work is the opera.',trap:'wrong-relation'}]],
+  ['flock','sheep','fleet','collective → member','ships',[{w:'ocean',note:'The ocean is where a fleet sails, not its members.',trap:'wrong-relation'},{w:'sailor',note:'Sailors crew the ships, but the fleet is made of ships.',trap:'near-synonym'},{w:'harbour',note:'A harbour holds ships but is not a member of the fleet.',trap:'wrong-relation'}]],
+  ['bark','dog','neigh','sound → animal','horse',[{w:'stable',note:'A stable houses a horse; it does not make the sound.',trap:'wrong-relation'},{w:'gallop',note:'A gallop is a movement, not the sound-maker.',trap:'wrong-relation'},{w:'cow',note:'A cow does not neigh.',trap:'wrong-relation'}]],
+  ['seed','fruit','question','leads to → result','answer',[{w:'teacher',note:'A teacher may ask questions, but the result of a question is an answer.',trap:'wrong-relation'},{w:'test',note:'A test contains questions but is not the result of one.',trap:'wrong-relation'},{w:'doubt',note:'Doubt may prompt a question rather than follow from it.',trap:'wrong-relation'}]],
+  ['calendar','days','thermostat','device → what it regulates/tracks','temperature',[{w:'heat',note:'Close, but a thermostat regulates temperature specifically.',trap:'near-synonym'},{w:'wall',note:'A wall is where it hangs, not what it tracks.',trap:'wrong-relation'},{w:'time',note:'Time is tracked by a clock, not a thermostat.',trap:'wrong-relation'}]],
+  ['sculptor','clay','baker','maker → raw material','dough',[{w:'oven',note:'An oven is a tool, not the raw material.',trap:'wrong-relation'},{w:'bread',note:'Bread is the finished product, not the raw material.',trap:'wrong-relation'},{w:'flour',note:'Flour is an ingredient, but the worked material shaped by a baker is dough.',trap:'near-synonym'}]],
+  ['anchor','drift','brake','prevents → the motion','motion',[{w:'car',note:'A car has brakes, but a brake prevents motion.',trap:'wrong-relation'},{w:'speed',note:'Close, but the general parallel to "drift" is unwanted motion.',trap:'near-synonym'},{w:'wheel',note:'A wheel enables motion; it is not what a brake stops in the abstract.',trap:'wrong-relation'}]],
+];
+function genAnalogies(n){
+  const out=[];
+  for(let i=0;i<n;i++){
+    const a=ANALOGIES[i%ANALOGIES.length];
+    const diff=1+(Math.floor(i/ANALOGIES.length)%3);
+    out.push(verbItem('analogy',diff,
+      `${a[0]} is to ${a[1]} as ${a[2]} is to ?`,
+      a[4],a[5],
+      `Relationship: ${a[3]}. Build a "bridge sentence" first — "${a[0]} ${a[3].split('→')[0].trim()} ${a[1]}" — then apply the SAME bridge to ${a[2]}, giving ${a[4]}.`,
+      'analogy-bridge'));
+  }
+  return out;
+}
+
+/* Synonyms & antonyms: [word, correct, [ {w,note,trap} ]] */
+const SYNONYMS=[
+  ['abundant','plentiful',[{w:'scarce',note:'Opposite meaning.',trap:'wrong-relation'},{w:'adequate',note:'"Adequate" means just enough — abundant means MORE than enough. Wrong degree.',trap:'near-synonym'},{w:'costly',note:'Unrelated dimension (price, not quantity).',trap:'wrong-relation'}]],
+  ['diligent','hardworking',[{w:'lazy',note:'Opposite.',trap:'wrong-relation'},{w:'clever',note:'Diligence is about effort, not intelligence.',trap:'near-synonym'},{w:'punctual',note:'Related work-virtue but not the same meaning.',trap:'near-synonym'}]],
+  ['candid','frank',[{w:'secretive',note:'Opposite.',trap:'wrong-relation'},{w:'polite',note:'Candid can be blunt; politeness is different.',trap:'near-synonym'},{w:'nervous',note:'Unrelated.',trap:'wrong-relation'}]],
+  ['prudent','cautious',[{w:'reckless',note:'Opposite.',trap:'wrong-relation'},{w:'wealthy',note:'Unrelated.',trap:'wrong-relation'},{w:'clever',note:'Prudence is about caution, not raw cleverness.',trap:'near-synonym'}]],
+  ['concise','brief',[{w:'lengthy',note:'Opposite.',trap:'wrong-relation'},{w:'vague',note:'Concise text can be very clear; brevity is the point, not vagueness.',trap:'near-synonym'},{w:'precise',note:'Related but means "exact", not "short".',trap:'near-synonym'}]],
+  ['obstinate','stubborn',[{w:'flexible',note:'Opposite.',trap:'wrong-relation'},{w:'firm',note:'"Firm" is milder and can be positive; obstinate is unreasonably fixed.',trap:'near-synonym'},{w:'anxious',note:'Unrelated.',trap:'wrong-relation'}]],
+  ['lucid','clear',[{w:'confusing',note:'Opposite.',trap:'wrong-relation'},{w:'bright',note:'"Lucid" here means easy to understand, not literally shining.',trap:'near-synonym'},{w:'brief',note:'Clarity is not the same as shortness.',trap:'near-synonym'}]],
+  ['meticulous','thorough',[{w:'careless',note:'Opposite.',trap:'wrong-relation'},{w:'quick',note:'Meticulous work is careful, often not quick.',trap:'wrong-relation'},{w:'tidy',note:'Related but "meticulous" is about detailed care, not just neatness.',trap:'near-synonym'}]],
+  ['ample','sufficient',[{w:'meagre',note:'Opposite.',trap:'wrong-relation'},{w:'excessive',note:'Ample means enough or a bit more, not too much.',trap:'near-synonym'},{w:'costly',note:'Unrelated.',trap:'wrong-relation'}]],
+  ['tenacious','persistent',[{w:'weak',note:'Opposite.',trap:'wrong-relation'},{w:'aggressive',note:'Tenacity is about persistence, not hostility.',trap:'near-synonym'},{w:'talented',note:'Unrelated dimension.',trap:'wrong-relation'}]],
+  ['ambiguous','unclear',[{w:'obvious',note:'Opposite.',trap:'wrong-relation'},{w:'complex',note:'Something can be complex yet perfectly clear.',trap:'near-synonym'},{w:'false',note:'Ambiguity is about meaning, not truth.',trap:'wrong-relation'}]],
+  ['frugal','thrifty',[{w:'wasteful',note:'Opposite.',trap:'wrong-relation'},{w:'poor',note:'Frugal describes a habit, not a lack of money.',trap:'near-synonym'},{w:'generous',note:'Roughly opposite in connotation.',trap:'wrong-relation'}]],
+  ['vigilant','watchful',[{w:'inattentive',note:'Opposite.',trap:'wrong-relation'},{w:'aggressive',note:'Vigilance is alertness, not aggression.',trap:'near-synonym'},{w:'tired',note:'Unrelated.',trap:'wrong-relation'}]],
+  ['scrutinise','examine',[{w:'ignore',note:'Opposite.',trap:'wrong-relation'},{w:'glance',note:'A glance is casual; scrutiny is close inspection.',trap:'near-synonym'},{w:'approve',note:'Unrelated.',trap:'wrong-relation'}]],
+  ['adept','skilled',[{w:'clumsy',note:'Opposite.',trap:'wrong-relation'},{w:'eager',note:'Eagerness is willingness, not ability.',trap:'near-synonym'},{w:'strong',note:'Physical strength is not skill.',trap:'wrong-relation'}]],
+  ['reluctant','unwilling',[{w:'eager',note:'Opposite.',trap:'wrong-relation'},{w:'unable',note:'Reluctance is about will, not ability.',trap:'near-synonym'},{w:'tired',note:'Unrelated.',trap:'wrong-relation'}]],
+  ['coherent','logical',[{w:'muddled',note:'Opposite.',trap:'wrong-relation'},{w:'loud',note:'Unrelated.',trap:'wrong-relation'},{w:'brief',note:'Coherence is about consistency, not length.',trap:'near-synonym'}]],
+  ['resilient','tough',[{w:'fragile',note:'Opposite.',trap:'wrong-relation'},{w:'flexible',note:'Related but means bendable, not able to recover.',trap:'near-synonym'},{w:'heavy',note:'Unrelated.',trap:'wrong-relation'}]],
+  ['novel','original',[{w:'ordinary',note:'Opposite.',trap:'wrong-relation'},{w:'old',note:'Novel means new, so this is opposite.',trap:'wrong-relation'},{w:'long',note:'The adjective "novel" here means new, not the book.',trap:'wrong-relation'}]],
+  ['deter','discourage',[{w:'encourage',note:'Opposite.',trap:'wrong-relation'},{w:'delay',note:'To deter is to put off doing at all, not merely to postpone.',trap:'near-synonym'},{w:'assist',note:'Opposite in spirit.',trap:'wrong-relation'}]],
+];
+const ANTONYMS=[
+  ['expand','contract',[{w:'stretch',note:'A near-synonym of expand, not its opposite.',trap:'near-synonym'},{w:'inflate',note:'Also means to grow — same side, not opposite.',trap:'near-synonym'},{w:'reveal',note:'Unrelated.',trap:'wrong-relation'}]],
+  ['praise','criticise',[{w:'admire',note:'A synonym of praise.',trap:'near-synonym'},{w:'ignore',note:'Neutral, not the opposite of praise.',trap:'near-synonym'},{w:'reward',note:'Same side as praise.',trap:'near-synonym'}]],
+  ['transparent','opaque',[{w:'clear',note:'A synonym of transparent.',trap:'near-synonym'},{w:'fragile',note:'Unrelated property.',trap:'wrong-relation'},{w:'shiny',note:'Unrelated property.',trap:'wrong-relation'}]],
+  ['generous','stingy',[{w:'kind',note:'A near-synonym of generous, not its opposite.',trap:'near-synonym'},{w:'wealthy',note:'Wealth is not the opposite of generosity.',trap:'wrong-relation'},{w:'gentle',note:'Same side, mild positive.',trap:'near-synonym'}]],
+  ['permanent','temporary',[{w:'lasting',note:'Synonym of permanent.',trap:'near-synonym'},{w:'solid',note:'Related feel but not the opposite.',trap:'near-synonym'},{w:'strong',note:'Unrelated dimension.',trap:'wrong-relation'}]],
+  ['humble','arrogant',[{w:'modest',note:'Synonym of humble.',trap:'near-synonym'},{w:'quiet',note:'A humble person may be quiet, but quiet is not the opposite.',trap:'near-synonym'},{w:'poor',note:'Unrelated.',trap:'wrong-relation'}]],
+  ['accelerate','decelerate',[{w:'hasten',note:'Synonym — to speed up.',trap:'near-synonym'},{w:'travel',note:'Unrelated.',trap:'wrong-relation'},{w:'steer',note:'A different driving action, not opposite in speed.',trap:'wrong-relation'}]],
+  ['scarce','plentiful',[{w:'rare',note:'Synonym of scarce.',trap:'near-synonym'},{w:'costly',note:'Scarcity may raise price, but price is a different idea.',trap:'wrong-relation'},{w:'small',note:'Size is not quantity.',trap:'near-synonym'}]],
+  ['reject','accept',[{w:'refuse',note:'Synonym of reject.',trap:'near-synonym'},{w:'consider',note:'To consider is neutral, not to accept.',trap:'near-synonym'},{w:'submit',note:'Unrelated action.',trap:'wrong-relation'}]],
+  ['ascend','descend',[{w:'climb',note:'Synonym of ascend.',trap:'near-synonym'},{w:'travel',note:'Unrelated direction.',trap:'wrong-relation'},{w:'rise',note:'Synonym of ascend.',trap:'near-synonym'}]],
+  ['flexible','rigid',[{w:'supple',note:'Synonym of flexible.',trap:'near-synonym'},{w:'strong',note:'Strength is not the opposite of flexibility.',trap:'wrong-relation'},{w:'smooth',note:'Unrelated texture.',trap:'wrong-relation'}]],
+  ['increase','diminish',[{w:'grow',note:'Synonym of increase.',trap:'near-synonym'},{w:'measure',note:'Unrelated.',trap:'wrong-relation'},{w:'double',note:'Same direction as increase.',trap:'near-synonym'}]],
+  ['optional','mandatory',[{w:'voluntary',note:'Synonym of optional.',trap:'near-synonym'},{w:'useful',note:'Unrelated.',trap:'wrong-relation'},{w:'free',note:'Unrelated meaning.',trap:'wrong-relation'}]],
+  ['conceal','reveal',[{w:'hide',note:'Synonym of conceal.',trap:'near-synonym'},{w:'protect',note:'Related but not the opposite.',trap:'near-synonym'},{w:'store',note:'Unrelated.',trap:'wrong-relation'}]],
+  ['victory','defeat',[{w:'triumph',note:'Synonym of victory.',trap:'near-synonym'},{w:'contest',note:'The event, not the opposite outcome.',trap:'wrong-relation'},{w:'reward',note:'A consequence, not the opposite.',trap:'wrong-relation'}]],
+  ['strengthen','weaken',[{w:'reinforce',note:'Synonym of strengthen.',trap:'near-synonym'},{w:'build',note:'Same side as strengthen.',trap:'near-synonym'},{w:'measure',note:'Unrelated.',trap:'wrong-relation'}]],
+  ['approve','condemn',[{w:'endorse',note:'Synonym of approve.',trap:'near-synonym'},{w:'review',note:'Neutral action.',trap:'near-synonym'},{w:'notice',note:'Unrelated.',trap:'wrong-relation'}]],
+  ['deliberate','accidental',[{w:'intentional',note:'Synonym of deliberate.',trap:'near-synonym'},{w:'slow',note:'"Deliberate" can mean unhurried, but the primary opposite pairs with intent.',trap:'near-synonym'},{w:'careful',note:'Related to deliberate, not opposite.',trap:'near-synonym'}]],
+  ['abundant','sparse',[{w:'ample',note:'Synonym of abundant.',trap:'near-synonym'},{w:'rich',note:'Same side, plentiful.',trap:'near-synonym'},{w:'heavy',note:'Unrelated.',trap:'wrong-relation'}]],
+  ['praiseworthy','deplorable',[{w:'admirable',note:'Synonym of praiseworthy.',trap:'near-synonym'},{w:'ordinary',note:'Neutral, not condemnable.',trap:'near-synonym'},{w:'costly',note:'Unrelated.',trap:'wrong-relation'}]],
+];
+function genSynonyms(n){
+  const out=[];
+  for(let i=0;i<n;i++){const s=SYNONYMS[i%SYNONYMS.length];const diff=1+(Math.floor(i/SYNONYMS.length)%3);
+    out.push(verbItem('synonym',diff,
+      `Which word is most nearly SIMILAR in meaning to the word below?\n\n${s[0].toUpperCase()}`,
+      s[1],s[2],
+      `"${s[0]}" means ${s[1]}. Watch near-synonyms that shift the degree or connotation — match the meaning precisely, not just the topic.`,
+      'connotation-match'));}
+  return out;
+}
+function genAntonyms(n){
+  const out=[];
+  for(let i=0;i<n;i++){const s=ANTONYMS[i%ANTONYMS.length];const diff=1+(Math.floor(i/ANTONYMS.length)%3);
+    out.push(verbItem('antonym',diff,
+      `Which word is most nearly OPPOSITE in meaning to the word below?\n\n${s[0].toUpperCase()}`,
+      s[1],s[2],
+      `The opposite of "${s[0]}" is "${s[1]}". The commonest trap is a SYNONYM sitting among the options — read the instruction word OPPOSITE carefully.`,
+      'antonym-flip'));}
+  return out;
+}
+
+/* Sentence completion: [sentence-with-___, correct, [ {w,note,trap} ], signal] */
+const SENTENCES=[
+  ['The report was praised for being ___; every figure was checked twice.','accurate',[{w:'lengthy',note:'Length is not what "checked twice" implies.',trap:'wrong-relation'},{w:'colourful',note:'Irrelevant to figures being checked.',trap:'wrong-relation'},{w:'late',note:'Contradicts "praised".',trap:'wrong-relation'}],'checked twice → accuracy'],
+  ['Although the plan looked promising, it ___ under closer scrutiny.','faltered',[{w:'succeeded',note:'"Although" flips the sentence — a positive verb would not fit.',trap:'wrong-relation'},{w:'improved',note:'The signal word "although" demands a downturn.',trap:'wrong-relation'},{w:'expanded',note:'Neutral-to-positive; the contrast requires a fall.',trap:'near-synonym'}]],
+  ['The manager remained ___, refusing to change her decision despite the objections.','resolute',[{w:'undecided',note:'Contradicts "refusing to change".',trap:'wrong-relation'},{w:'anxious',note:'Possible mood but not what "refusing to change" shows.',trap:'near-synonym'},{w:'cheerful',note:'Unrelated to firmness of decision.',trap:'wrong-relation'}]],
+  ['Because supplies were ___, the team rationed them carefully.','limited',[{w:'plentiful',note:'Rationing implies shortage, not plenty.',trap:'wrong-relation'},{w:'expensive',note:'Price is a different reason than scarcity for rationing.',trap:'near-synonym'},{w:'fresh',note:'Freshness does not explain rationing.',trap:'wrong-relation'}]],
+  ['Her explanation was so ___ that no one had any further questions.','clear',[{w:'brief',note:'Brevity alone would not remove all questions; clarity does.',trap:'near-synonym'},{w:'confusing',note:'Opposite of the effect described.',trap:'wrong-relation'},{w:'loud',note:'Volume is irrelevant.',trap:'wrong-relation'}]],
+  ['The evidence was ___; therefore the committee reached a quick verdict.','conclusive',[{w:'weak',note:'Weak evidence would not yield a quick verdict.',trap:'wrong-relation'},{w:'missing',note:'Contradicts "the evidence was".',trap:'wrong-relation'},{w:'costly',note:'Irrelevant dimension.',trap:'wrong-relation'}]],
+  ['He is usually punctual, but today he was ___ by an hour.','delayed',[{w:'early',note:'"But" signals a departure from being punctual toward lateness.',trap:'wrong-relation'},{w:'praised',note:'Does not fit "by an hour".',trap:'wrong-relation'},{w:'absent',note:'"By an hour" describes lateness, not absence.',trap:'near-synonym'}]],
+  ['The new policy was ___, applying the same rule to every department.','uniform',[{w:'selective',note:'Contradicts "same rule to every department".',trap:'wrong-relation'},{w:'temporary',note:'Time is not the point; consistency is.',trap:'wrong-relation'},{w:'popular',note:'Not implied by the sentence.',trap:'wrong-relation'}]],
+  ['Despite the setback, morale stayed ___ and the team pressed on.','high',[{w:'low',note:'"Pressed on" indicates morale did NOT drop.',trap:'wrong-relation'},{w:'absent',note:'Contradicts pressing on.',trap:'wrong-relation'},{w:'silent',note:'Not a description of morale level.',trap:'wrong-relation'}]],
+  ['The instructions were ___, leaving several workers unsure what to do.','ambiguous',[{w:'precise',note:'Precise instructions would not leave workers unsure.',trap:'wrong-relation'},{w:'brief',note:'Brevity does not necessarily cause confusion; ambiguity does.',trap:'near-synonym'},{w:'printed',note:'Format is irrelevant to being unsure.',trap:'wrong-relation'}]],
+  ['Sales rose sharply; consequently, the company ___ its production.','increased',[{w:'halted',note:'Rising sales lead to more, not stopped, production.',trap:'wrong-relation'},{w:'reduced',note:'"Consequently" after a rise implies scaling up.',trap:'wrong-relation'},{w:'delayed',note:'Not implied by higher demand.',trap:'near-synonym'}]],
+  ['The critic was known for being ___, rarely offering a kind word.','harsh',[{w:'generous',note:'Contradicts "rarely a kind word".',trap:'wrong-relation'},{w:'quiet',note:'Being critical is not the same as being quiet.',trap:'near-synonym'},{w:'fair',note:'"Rarely kind" leans negative, not merely fair.',trap:'near-synonym'}]],
+  ['The bridge was built to be ___, easily carrying heavy trucks.','sturdy',[{w:'elegant',note:'Elegance does not explain carrying heavy loads.',trap:'wrong-relation'},{w:'narrow',note:'Contradicts carrying heavy trucks.',trap:'wrong-relation'},{w:'cheap',note:'Cost is unrelated to load capacity.',trap:'wrong-relation'}]],
+  ['Since the data was ___, the analysts had to gather more before deciding.','insufficient',[{w:'complete',note:'Complete data would not require gathering more.',trap:'wrong-relation'},{w:'accurate',note:'Accuracy does not force collecting more.',trap:'near-synonym'},{w:'recent',note:'Recency does not imply a need for more.',trap:'wrong-relation'}]],
+  ['His tone was ___, putting the nervous client immediately at ease.','reassuring',[{w:'stern',note:'A stern tone would not put someone at ease.',trap:'wrong-relation'},{w:'hurried',note:'Haste rarely calms a nervous client.',trap:'near-synonym'},{w:'loud',note:'Volume is not what calms.',trap:'wrong-relation'}]],
+];
+function genSentence(n){
+  const out=[];
+  for(let i=0;i<n;i++){const s=SENTENCES[i%SENTENCES.length];const diff=1+(Math.floor(i/SENTENCES.length)%3);
+    out.push(verbItem('sentence-completion',diff,
+      `Choose the word that best completes the sentence.\n\n${s[0].replace('___','______')}`,
+      s[1],s[2],
+      `The sentence signals the answer${s[3]?' ('+s[3]+')':''}. Read the connective words (although, because, therefore, but) — they tell you whether the blank continues or reverses the idea. Answer: "${s[1]}".`,
+      'signal-words'));}
+  return out;
+}
+
+/* Odd word out: [ [members...], oddWord, reason, [notes per non-odd? we build simply] ] */
+const ODDVERB=[
+  [['rose','tulip','daisy','oak'],'oak','A rose, tulip and daisy are flowers; an oak is a tree.'],
+  [['copper','iron','gold','granite'],'granite','Copper, iron and gold are metals; granite is a rock.'],
+  [['whisper','shout','mutter','murmur'],'shout','Whisper, mutter and murmur are all quiet speech; shout is loud.'],
+  [['square','triangle','circle','cube'],'cube','Square, triangle and circle are 2-D shapes; a cube is 3-D.'],
+  [['apple','banana','carrot','grape'],'carrot','Apple, banana and grape are fruits; a carrot is a vegetable.'],
+  [['run','sprint','dash','crawl'],'crawl','Run, sprint and dash are fast; crawl is slow.'],
+  [['violin','cello','flute','viola'],'flute','Violin, cello and viola are string instruments; a flute is wind.'],
+  [['happy','joyful','cheerful','weary'],'weary','Three mean happy; weary means tired.'],
+  [['Paris','London','Tokyo','Asia'],'Asia','Paris, London and Tokyo are cities; Asia is a continent.'],
+  [['brief','concise','terse','rambling'],'rambling','Three mean short; rambling means long-winded.'],
+  [['knife','fork','spoon','plate'],'plate','Knife, fork and spoon are utensils you eat WITH; a plate holds food.'],
+  [['honest','truthful','sincere','deceptive'],'deceptive','Three describe honesty; deceptive is the opposite.'],
+  [['second','minute','hour','metre'],'metre','Second, minute and hour measure time; a metre measures length.'],
+  [['puppy','kitten','calf','dog'],'dog','Puppy, kitten and calf are young animals; a dog is an adult.'],
+  [['begin','start','commence','finish'],'finish','Three mean to begin; finish means to end.'],
+];
+function genOddVerbal(n){
+  const out=[];
+  for(let i=0;i<n;i++){const o=ODDVERB[i%ODDVERB.length];const diff=1+(Math.floor(i/ODDVERB.length)%3);
+    const order=shuffle(o[0],RNG);const correct=order.indexOf(o[1]);
+    const notes={};order.forEach((w,idx)=>{if(idx!==correct)notes[idx]='Belongs with the group — shares the common property.';});
+    out.push({category:'verbal',subtype:'odd-one-out-verbal',difficulty:diff,
+      stem:`Which of the following does not belong with the others?`,
+      options:order,correct,targetSeconds:12,technique:'classification',
+      explanation:o[2]+'\nMethod: find the property shared by THREE of the four; the fourth is the odd one out.',
+      distractorNotes:notes,trapFlag:'wrong-relation'});}
+  return out;
+}
+
+/* Word classification / relationship: reuse odd-one-out engine with category labels */
+const CLASSIFY=[
+  [['petal','stem','root','garden'],'garden','Petal, stem and root are PARTS of a plant; a garden contains plants but is not a part of one.'],
+  [['wheel','engine','brake','road'],'road','Wheel, engine and brake are parts of a car; a road is where it drives.'],
+  [['author','poet','novelist','reader'],'reader','Author, poet and novelist create writing; a reader consumes it.'],
+  [['inch','foot','yard','pound'],'pound','Inch, foot and yard measure length; a pound measures weight.'],
+  [['thermometer','barometer','odometer','microscope'],'microscope','The first three measure a quantity; a microscope magnifies rather than measures.'],
+  [['captain','sergeant','general','soldier'],'soldier','Captain, sergeant and general are ranks of authority; a soldier is the general term for the enlisted role here treated as the odd, non-officer.'],
+  [['add','subtract','multiply','equal'],'equal','Add, subtract and multiply are operations; "equal" states a result.'],
+  [['drizzle','downpour','shower','drought'],'drought','Three describe rainfall; drought is the absence of it.'],
+  [['saw','drill','hammer','nail'],'nail','Saw, drill and hammer are tools; a nail is a fastener the tools act on.'],
+  [['north','south','east','centre'],'centre','North, south and east are compass directions; centre is not.'],
+];
+function genClassify(n){
+  const out=[];
+  for(let i=0;i<n;i++){const o=CLASSIFY[i%CLASSIFY.length];const diff=1+(Math.floor(i/CLASSIFY.length)%3);
+    const order=shuffle(o[0],RNG);const correct=order.indexOf(o[1]);
+    const notes={};order.forEach((w,idx)=>{if(idx!==correct)notes[idx]='Shares the defining property of the group.';});
+    out.push({category:'verbal',subtype:'word-relationship',difficulty:diff,
+      stem:`Which of the following does not belong with the others?`,
+      options:order,correct,targetSeconds:13,technique:'classification',
+      explanation:o[2],distractorNotes:notes,trapFlag:'wrong-relation'});}
+  return out;
+}
+
+BANK.push(...genAnalogies(48),...genSynonyms(40),...genAntonyms(40),...genSentence(37),
+  ...genOddVerbal(25),...genClassify(20));
+
+/* -------------------------------------------------------------- SPATIAL ---- */
+/* Base figure: a SCALENE right triangle with an orientation dot. Being scalene
+   and marked, it is chiral — no rotation of it ever equals its mirror image,
+   so every rotation-vs-reflection item has exactly one defensible answer. */
+function baseInner(){return '<polygon points="26,74 26,34 78,74"/><circle cx="34" cy="66" r="5.5" fill="#fff"/>';}
+function fig(rot,flip,px=86){
+  const flipT=flip?'translate(100,0) scale(-1,1)':'';
+  return `<svg width="${px}" height="${px}" viewBox="0 0 100 100"><g transform="rotate(${rot} 50 50) ${flipT}" fill="#111" stroke="#111" stroke-width="1" stroke-linejoin="round">${baseInner()}</g></svg>`;
+}
+function ngon(n,rot=0,px=80){let pts=[];for(let k=0;k<n;k++){const a=(rot-90+k*360/n)*Math.PI/180;pts.push((50+33*Math.cos(a)).toFixed(1)+','+(50+33*Math.sin(a)).toFixed(1));}return `<svg width="${px}" height="${px}" viewBox="0 0 100 100"><polygon points="${pts.join(' ')}" fill="none" stroke="#111" stroke-width="4" stroke-linejoin="round"/></svg>`;}
+function spatialItem(subtype,difficulty,stem,stemSvg,correctSvg,distractors,explanation,technique,trap){
+  const opts=[{s:correctSvg,note:null,ok:true}].concat(distractors.map(d=>({s:d.s,note:d.note,trap:d.trap})));
+  const order=shuffle(opts,RNG);
+  const correct=order.findIndex(o=>o.ok);
+  const notes={};order.forEach((o,i)=>{if(i!==correct)notes[i]=o.note;});
+  const t=(order.find(o=>o.trap)||{}).trap||trap||null;
+  return {category:'spatial',subtype,difficulty,stem,svg:stemSvg||'',options:order.map(o=>o.s),correct,
+    targetSeconds:18,explanation,distractorNotes:notes,technique,trapFlag:t};
+}
+const norm=a=>((a%360)+360)%360;
+
+/* 1. Rotation series — which figure comes next */
+function genRotSeries(n){
+  const out=[];const steps=[45,-45,60,90,-60];
+  for(let i=0;i<n;i++){
+    const d=steps[i%steps.length];const r0=[0,30,45,90][i%4];const diff=1+(i%3);
+    const frames=[0,1,2,3].map(k=>fig(r0+k*d,false,70)).join(' ');
+    const next=r0+4*d;
+    out.push(spatialItem('rotation-series',diff,
+      `Which figure comes next in the series?`,
+      `<div style="display:flex;gap:6px;align-items:center">${frames}<span style="font-size:26px">?</span></div>`,
+      fig(next,false),
+      [{s:fig(next,true),note:'This is a MIRROR image of the correct figure, not a further rotation. Track a single feature (the marked corner) — under reflection its handedness flips.',trap:'mirrored-figure'},
+       {s:fig(r0+3*d,false),note:'This just repeats the last shown frame — the rotation was not advanced one more step.',trap:'partial-transformation'},
+       {s:fig(next+d,false),note:'Rotated one step too far.',trap:'off-by-one'}],
+      `Each step rotates the figure by ${Math.abs(d)}° ${d>0?'clockwise':'anticlockwise'}. Continue one more step to get the answer. Method: don't watch the whole shape — lock onto ONE corner and rotate just that.`,
+      'track-one-feature','mirrored-figure'));
+  }
+  return out;
+}
+
+/* 2. Mirror image — which option is the reflection */
+function genMirror(n){
+  const out=[];
+  for(let i=0;i<n;i++){
+    const base=[0,30,60,90,120][i%5];const diff=1+(i%3);
+    const rots=shuffle([45,135,225,315],RNG);
+    out.push(spatialItem('mirror-image',diff,
+      `Which of the figures is a MIRROR IMAGE of the figure on the left?`,
+      fig(base,false),
+      fig(base,true),   // any reflection is a valid mirror image; we present one
+      [{s:fig(base+rots[0],false),note:'This is a ROTATION of the original, not a reflection — same handedness.',trap:'partial-transformation'},
+       {s:fig(base+rots[1],false),note:'A rotation, not a mirror. The marked corner keeps the same handedness.',trap:'partial-transformation'},
+       {s:fig(base+rots[2],false),note:'Another rotation of the original.',trap:'partial-transformation'}],
+      `A mirror image reverses the figure's handedness (like a reflection in glass). Three options are rotations — the shape can be spun onto the original. Only one has flipped handedness: that is the mirror. Trick: watch which side the marked corner sits on.`,
+      'mirror-vs-rotation','mirrored-figure'));
+  }
+  return out;
+}
+
+/* 3. Odd one out among figures — three rotations + one reflection */
+function genOddFig(n){
+  const out=[];
+  for(let i=0;i<n;i++){
+    const base=[0,20,45,70,110][i%5];const diff=1+(i%3);
+    const rots=shuffle([0,90,180,270],RNG).slice(0,3).map(r=>base+r);
+    const items=[{s:fig(rots[0],false),ok:false,note:'A rotation of the shared figure.'},
+                 {s:fig(rots[1],false),ok:false,note:'A rotation of the shared figure.'},
+                 {s:fig(rots[2],false),ok:false,note:'A rotation of the shared figure.'},
+                 {s:fig(base+45,true),ok:true,note:null}];
+    const order=shuffle(items,RNG);const correct=order.findIndex(o=>o.ok);
+    const notes={};order.forEach((o,idx)=>{if(idx!==correct)notes[idx]=o.note;});
+    out.push({category:'spatial',subtype:'odd-one-out-figures',difficulty:diff,
+      stem:`Which of the following is the odd one out?`,svg:'',
+      options:order.map(o=>o.s),correct,targetSeconds:18,technique:'mirror-vs-rotation',
+      explanation:`Three of the figures are simply rotations of one another — spin any of them and it lands on the others. The fourth cannot be rotated to match; it is a MIRROR image (its marked corner is on the opposite side). That reflected one is the odd one out.`,
+      distractorNotes:notes,trapFlag:'mirrored-figure'});
+  }
+  return out;
+}
+
+/* 4. Rotation match — which option is the figure rotated (not mirrored) */
+function genRotMatch(n){
+  const out=[];
+  for(let i=0;i<n;i++){
+    const base=[0,40,80,120][i%4];const diff=1+(i%3);
+    const flips=shuffle([30,150,250],RNG);
+    out.push(spatialItem('shape-rotation',diff,
+      `Which figure is the figure on the left, ROTATED (not flipped)?`,
+      fig(base,false),
+      fig(base+120,false),
+      [{s:fig(base+60,true),note:'A mirror image — it has been flipped, not merely turned.',trap:'mirrored-figure'},
+       {s:fig(base+200,true),note:'Also a reflection: the marked corner has swapped sides.',trap:'mirrored-figure'},
+       {s:fig(base+300,true),note:'A flipped version, not a pure rotation.',trap:'mirrored-figure'}],
+      `Only one option preserves the figure's handedness — that is the pure rotation. The other three are reflections: you can tell because the marked corner sits on the wrong side and no amount of spinning fixes it.`,
+      'mirror-vs-rotation','mirrored-figure'));
+  }
+  return out;
+}
+
+/* 5. Polygon-count series — sides increase by one */
+function genPolySeries(n){
+  const out=[];
+  for(let i=0;i<n;i++){
+    const s0=3+(i%3);const diff=1+(i%3);
+    const frames=[0,1,2].map(k=>ngon(s0+k,10*k,64)).join(' ');
+    const next=s0+3;
+    out.push(spatialItem('figure-series',diff,
+      `Which figure comes next in the series?`,
+      `<div style="display:flex;gap:8px;align-items:center">${frames}<span style="font-size:26px">?</span></div>`,
+      ngon(next),
+      [{s:ngon(next-1),note:'This has the same number of sides as the previous figure — the count did not advance.',trap:'off-by-one'},
+       {s:ngon(next+1),note:'Two sides too many — the count advanced by one too much.',trap:'off-by-one'},
+       {s:ngon(next-2),note:'Miscounts the progression; too few sides.',trap:'off-by-one'}],
+      `Count the sides: ${s0}, ${s0+1}, ${s0+2}, so the next figure has ${next} sides. The rule is "+1 side each step". Rotation between frames is a decoy — only the side-count matters.`,
+      'count-sides','off-by-one'));
+  }
+  return out;
+}
+
+/* 6. Rotation matrix (3x3) */
+function matrixCell(col,row,inner){
+  return `<g transform="translate(${col*100},${row*100})"><rect x="5" y="5" width="90" height="90" fill="none" stroke="#dde1e7" stroke-width="2"/>${inner}</g>`;
+}
+function triInCell(rot,flip){
+  const flipT=flip?'translate(100,0) scale(-1,1)':'';
+  return `<g transform="rotate(${rot} 50 50) translate(16 16) scale(0.68) ${flipT}" fill="#111" stroke="#111" stroke-width="1">${baseInner()}</g>`;
+}
+function genMatrix(n){
+  const out=[];const steps=[45,-45,30,60];
+  for(let i=0;i<n;i++){
+    const step=steps[i%steps.length];const base=[0,20,45][i%3];const diff=2+(i%2);
+    let cells='';
+    for(let idx=0;idx<9;idx++){const col=idx%3,row=(idx/3|0);
+      if(idx===8){cells+=matrixCell(col,row,`<text x="50" y="66" font-size="52" text-anchor="middle" fill="#111">?</text>`);}
+      else{cells+=matrixCell(col,row,triInCell(base+idx*step,false));}}
+    const grid=`<svg width="240" height="240" viewBox="0 0 300 300">${cells}</svg>`;
+    const ansRot=base+8*step;
+    out.push(spatialItem('matrix',diff,
+      `Which figure completes the grid? Read the grid left to right, top to bottom.`,
+      grid,
+      fig(ansRot,false),
+      [{s:fig(ansRot,true),note:'Correct orientation but MIRRORED — the grid only ever rotates the figure, it never flips it.',trap:'mirrored-figure'},
+       {s:fig(base+7*step,false),note:'This repeats the previous cell — the rotation was not advanced into the last cell.',trap:'partial-transformation'},
+       {s:fig(ansRot+90,false),note:'Rotated by the wrong amount for this position.',trap:'off-by-one'}],
+      `Reading in order, each cell rotates the figure by a constant ${Math.abs(step)}°${step<0?' anticlockwise':' clockwise'}. The eight filled cells establish the step; apply it once more for the missing ninth cell. Never a reflection — the handedness stays constant throughout.`,
+      'matrix-single-rule','mirrored-figure'));
+  }
+  return out;
+}
+
+BANK.push(...genRotSeries(40),...genMirror(35),...genOddFig(35),...genRotMatch(30),
+  ...genPolySeries(20),...genMatrix(20));
+
+/* -------- finalise the bank: assign ids, per-category numbering -------- */
+(function finaliseBank(){
+  const counters={math:0,verbal:0,spatial:0};
+  const prefix={math:'m',verbal:'v',spatial:'s'};
+  for(const q of BANK){
+    counters[q.category]++;
+    q.id=prefix[q.category]+'-'+String(counters[q.category]).padStart(3,'0');
+    if(!q.targetSeconds)q.targetSeconds=15;
+    if(q.difficulty==null)q.difficulty=1;
+  }
+})();
+const BANK_BY_ID={};BANK.forEach(q=>BANK_BY_ID[q.id]=q);
+const BANK_STATS={total:BANK.length,
+  math:BANK.filter(q=>q.category==='math').length,
+  verbal:BANK.filter(q=>q.category==='verbal').length,
+  spatial:BANK.filter(q=>q.category==='spatial').length};
+const SUBTYPES=[...new Set(BANK.map(q=>q.subtype))];
+const SUBTYPE_CAT={};BANK.forEach(q=>SUBTYPE_CAT[q.subtype]=q.category);
+const CAT_LABEL={math:'Math & Logic',verbal:'Verbal',spatial:'Spatial'};
+const SUBTYPE_LABEL=s=>s.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+
+/* =========================================================================
+   QUESTION SELECTION
+   ========================================================================= */
+function questionSeen(q){return (STATE.perQuestion[q.id]||{}).seen||0;}
+/* pick `count` questions matching a filter, preferring least-seen, no repeats */
+function pickQuestions({count,cats,subtypes,difficulties}){
+  let pool=BANK.filter(q=>
+    (!cats||cats.includes(q.category)) &&
+    (!subtypes||subtypes.includes(q.subtype)) &&
+    (!difficulties||difficulties.includes(q.difficulty)));
+  if(!pool.length)pool=BANK.slice();
+  // shuffle then sort by times-seen so fresh items surface first
+  pool=shuffle(pool);
+  pool.sort((a,b)=>questionSeen(a)-questionSeen(b));
+  return pool.slice(0,Math.min(count,pool.length));
+}
+/* full-simulation selection: ramped difficulty, interleaved categories */
+function pickRampedMixed(count,easyFirst){
+  const want={math:Math.round(count*0.35),verbal:Math.round(count*0.35),spatial:0};
+  want.spatial=count-want.math-want.verbal;
+  let chosen=[];
+  for(const cat of ['math','verbal','spatial']){
+    chosen=chosen.concat(pickQuestions({count:want[cat],cats:[cat]}));
+  }
+  // ramp: sort by difficulty (easier earlier); optionally gentler ramp on first attempt
+  chosen.forEach(q=>q._r=q.difficulty+RNG()*0.9);
+  chosen.sort((a,b)=>a._r-b._r);
+  if(easyFirst){/* keep as is – already easy→hard */}
+  // interleave so no more than 2 of the same category run consecutively
+  const out=[];const buckets={math:[],verbal:[],spatial:[]};
+  chosen.forEach(q=>buckets[q.category].push(q));
+  // greedy interleave preserving difficulty order within each bucket
+  while(out.length<chosen.length){
+    // choose the category whose next item has the lowest ramp score and isn't 3-in-a-row
+    let best=null;
+    for(const c of ['math','verbal','spatial']){
+      if(!buckets[c].length)continue;
+      const last2=out.slice(-2);
+      if(last2.length===2&&last2[0].category===c&&last2[1].category===c)continue;
+      if(best===null||buckets[c][0]._r<buckets[best][0]._r)best=c;
+    }
+    if(best===null){for(const c of ['math','verbal','spatial'])if(buckets[c].length){best=c;break;}}
+    out.push(buckets[best].shift());
+  }
+  out.forEach(q=>delete q._r);
+  return out;
+}
+
+/* =========================================================================
+   SESSION ENGINE  (the exam runtime)
+   ========================================================================= */
+let SESSION=null;
+function startSession(cfg){
+  SESSION={
+    cfg, questions:cfg.questions, idx:0, answers:[],
+    selected:null, committed:false, retryUsed:false,
+    startedAt:Date.now(), qShownAt:Date.now(),
+    globalLeft:cfg.globalSeconds||null,
+    perQLeft:cfg.perQLimit||null,
+    ended:false, timerH:null, _laddered:{},
+  };
+  document.body.classList.add('exam-mode');
+  renderExam();
+  startTimers();
+  window.addEventListener('keydown',examKeys);
+}
+function startTimers(){
+  if(SESSION.timerH)clearInterval(SESSION.timerH);
+  SESSION.timerH=setInterval(()=>{
+    const s=SESSION;if(!s||s.ended)return;
+    if(s.globalLeft!=null){s.globalLeft-=1;if(s.globalLeft<=0){s.globalLeft=0;updateTimerUI();return endSession('time');}}
+    if(s.perQLeft!=null){s.perQLeft-=1;if(s.perQLeft<=0){autoForfeit();return;}}
+    updateTimerUI();
+  },1000);
+}
+function qElapsed(){return (Date.now()-SESSION.qShownAt)/1000;}
+function examKeys(e){
+  const s=SESSION;if(!s||s.ended)return;
+  const q=s.questions[s.idx];
+  if(e.key>='1'&&e.key<=String(q.options.length)){
+    if(s.committed&&!(s.cfg.allowRetry&&s.retryReady))return;
+    s.selected=parseInt(e.key)-1;e.preventDefault();renderOptions();
+  } else if(e.key==='Enter'){
+    e.preventDefault();advance();
+  }
+}
+function advance(){
+  const s=SESSION;const q=s.questions[s.idx];
+  if(!s.committed){commitAnswer();return;}
+  if(s.cfg.feedback==='immediate'&&!s._advancedOnce){ /* first Enter already committed+showed; second advances */ }
+  nextQuestion();
+}
+function commitAnswer(){
+  const s=SESSION;const q=s.questions[s.idx];
+  const ok=s.selected===q.correct;
+  const secs=qElapsed();
+  s.answers.push({qid:q.id,cat:q.category,subtype:q.subtype,difficulty:q.difficulty,
+    chosen:s.selected,correct:q.correct,ok,secs,targetSeconds:q.targetSeconds,
+    reached:true,position:s.idx});
+  recordQuestion(q.id,ok,secs);
+  s.committed=true;
+  if(s.cfg.perQLimit!=null){s.perQLeft=null;} // freeze per-q timer while reviewing
+  if(s.cfg.feedback==='immediate'){s.retryReady=s.cfg.allowRetry&&!ok;renderExam();}
+  else{nextQuestion();}
+}
+function autoForfeit(){
+  const s=SESSION;const q=s.questions[s.idx];
+  s.answers.push({qid:q.id,cat:q.category,subtype:q.subtype,difficulty:q.difficulty,
+    chosen:s.selected,correct:q.correct,ok:false,secs:qElapsed(),targetSeconds:q.targetSeconds,
+    reached:true,position:s.idx,timedOut:true});
+  recordQuestion(q.id,false,qElapsed());
+  s.committed=true;nextQuestion();
+}
+function retryQuestion(){
+  const s=SESSION;if(!s.cfg.allowRetry)return;
+  // pop the last recorded answer for this question and let them try again (learn mode only)
+  s.answers.pop();s.committed=false;s.selected=null;s.retryReady=false;s.qShownAt=Date.now();renderExam();
+}
+function nextQuestion(){
+  const s=SESSION;
+  // speed ladder difficulty tightening
+  if(s.cfg.speedLadder){
+    const correctCount=s.answers.filter(a=>a.ok).length;
+    if(correctCount>0&&correctCount%5===0&&!s._laddered[correctCount]){
+      s._laddered[correctCount]=true;
+      s.cfg.perQLimit=Math.max(10,s.cfg.perQLimit-2);
+    }
+  }
+  s.idx++;s.selected=null;s.committed=false;s.retryReady=false;s._advancedOnce=false;
+  if(s.idx>=s.questions.length){return endSession('done');}
+  s.qShownAt=Date.now();
+  if(s.cfg.perQLimit!=null)s.perQLeft=s.cfg.perQLimit;
+  renderExam();
+}
+function quitSession(){
+  if(!confirm('Quit this attempt? It will be recorded as ABANDONED and cannot be resumed.'))return;
+  endSession('abandoned');
+}
+function endSession(reason){
+  const s=SESSION;if(s.ended)return;s.ended=true;
+  clearInterval(s.timerH);window.removeEventListener('keydown',examKeys);
+  document.body.classList.remove('exam-mode');
+  const total=s.questions.length;
+  const reached=s.answers.length;
+  const correct=s.answers.filter(a=>a.ok).length;
+  const scoreByCat={math:{c:0,t:0},verbal:{c:0,t:0},spatial:{c:0,t:0}};
+  s.questions.forEach((q,i)=>{scoreByCat[q.category].t++;});
+  s.answers.forEach(a=>{if(a.ok)scoreByCat[a.cat].c++;});
+  const attempt={
+    id:'a'+Date.now(),mode:s.cfg.key,modeTitle:s.cfg.title,ts:Date.now(),
+    reason, total, reached, correct,
+    durationMs:Date.now()-s.startedAt,
+    answers:s.answers,
+    scoreByCat,
+    category:(new Set(s.questions.map(q=>q.category)).size===1?s.questions[0].category:'mixed'),
+    isFullSim:s.cfg.key==='fullsim'||s.cfg.key==='rung5',
+    perQBudget:s.cfg.perQBudget||18,
+    globalSeconds:s.cfg.globalSeconds||null,
+    speedLadder:!!s.cfg.speedLadder,
+    breakPoint:s.cfg.speedLadder?computeBreakPoint(s.answers):null,
+    ladderCategory:s.cfg.ladderCategory||null,
+    rung:s.cfg.rung||null,
+  };
+  STATE.attempts.push(attempt);
+  STATE.lifetimeAttempted+=reached;
+  bumpStreak();
+  if(reason!=='abandoned')maybeAdvanceRung(attempt);
+  save();
+  SESSION=null;
+  go('results',{id:attempt.id});
+}
+function computeBreakPoint(answers){
+  // first window where accuracy over the last 5 drops below 60%
+  for(let i=4;i<answers.length;i++){
+    const win=answers.slice(i-4,i+1);
+    if(win.filter(a=>a.ok).length<=2)return {atQuestion:i+1,allowance:null};
+  }
+  return null;
+}
+
+/* =========================================================================
+   EXAM SCREEN  (austere: question, options, timer, counter — nothing else)
+   ========================================================================= */
+function isSvgOpt(o){return typeof o==='string'&&o.trim().startsWith('<svg');}
+function renderStem(stem){
+  // bold only the capitalised keyword conventions
+  return stem.replace(/\b(OPPOSITE|SIMILAR|NOT|EXACT|MIRROR IMAGE|ROTATED|OPPOSITE)\b/g,'<span class="cap">$1</span>');
+}
+function renderExam(){
+  const s=SESSION;const q=s.questions[s.idx];const app=$('#app');
+  const showClock=s.cfg.clock&&s.cfg.clock!=='none';
+  const feedbackNow=s.committed&&s.cfg.feedback==='immediate';
+  app.innerHTML='';
+  const box=el('div',{class:'exam'});
+  // top line: counter + timers
+  const top=el('div',{class:'topline'});
+  top.append(el('div',{class:'counter'},`Question ${s.idx+1} of ${s.questions.length}`));
+  const right=el('div',{class:'flex'});
+  if(showClock){
+    right.append(el('div',{class:'qelapsed',id:'qelapsed'},''));
+    if(s.cfg.clock==='global')right.append(el('div',{class:'timer',id:'gtimer'},fmtT(s.globalLeft)));
+    if(s.cfg.perQLimit!=null)right.append(el('div',{class:'timer',id:'gtimer'},fmtT(s.perQLeft)));
+  } else {
+    right.append(el('span',{class:'tag'},'no timer — understanding only'));
+  }
+  top.append(right);
+  box.append(top);
+  // progress line
+  box.append(el('div',{class:'progressline'},el('i',{style:`width:${(s.idx)/s.questions.length*100}%`})));
+  // stem
+  const stem=el('div',{class:'stem'});
+  // stem may contain an inline data block for data-interpretation (keep as text)
+  stem.innerHTML=renderStem(q.stem).replace(/\n/g,'<br>');
+  box.append(stem);
+  // stem figure (spatial)
+  if(q.svg){const fw=el('div',{class:'figwrap'});fw.innerHTML=q.svg;box.append(fw);}
+  // options
+  const opts=el('div',{class:'opts',id:'opts'});
+  box.append(opts);
+  // feedback block
+  if(feedbackNow)box.append(buildFeedback(q));
+  // actions
+  const act=el('div',{class:'actions'});
+  act.append(el('button',{class:'btn ghost sm',onclick:quitSession},'Quit test'));
+  const rightAct=el('div',{class:'flex'});
+  if(feedbackNow&&s.retryReady)rightAct.append(el('button',{class:'btn ghost',onclick:retryQuestion},'Try again'));
+  const nextLabel=!s.committed?(s.cfg.feedback==='immediate'?'Submit':'Confirm & next  ⏎'):(s.idx+1>=s.questions.length?'Finish ⏎':'Next question ⏎');
+  rightAct.append(el('button',{class:'btn',onclick:advance},nextLabel));
+  act.append(rightAct);
+  box.append(act);
+  // helper hint
+  box.append(el('div',{class:'center muted',style:'margin-top:14px;font-size:12px'},
+    'Keys: '+q.options.map((_,i)=>i+1).join(' / ')+' to choose · Enter to '+(s.committed?'continue':'submit')+(s.cfg.forwardOnly?' · forward-only: no going back':'')));
+  app.append(box);
+  renderOptions();
+  updateTimerUI();
+}
+function renderOptions(){
+  const s=SESSION;const q=s.questions[s.idx];const opts=$('#opts');if(!opts)return;
+  const feedbackNow=s.committed&&s.cfg.feedback==='immediate';
+  opts.innerHTML='';
+  q.options.forEach((o,i)=>{
+    const cls=['opt'];
+    if(s.selected===i&&!feedbackNow)cls.push('sel');
+    if(feedbackNow){if(i===q.correct)cls.push('correct');else if(i===s.selected)cls.push('wrong');}
+    const b=el('button',{class:cls.join(' '),onclick:()=>{if(s.committed&&!s.retryReady)return;s.selected=i;renderOptions();}});
+    b.append(el('div',{class:'num'},String(i+1)));
+    if(isSvgOpt(o)){const f=el('div',{class:'fig'});f.innerHTML=o;b.append(f);}
+    else b.append(el('div',{html:renderStem(String(o))}));
+    opts.append(b);
+  });
+}
+function buildFeedback(q){
+  const s=SESSION;const a=s.answers[s.answers.length-1];
+  const box=el('div',{class:'explain'});
+  box.append(el('div',{class:a&&a.ok?'tag good':'tag bad'},a&&a.ok?'Correct':(a&&a.timedOut?'Timed out':'Not quite')));
+  box.append(el('div',{class:'why',html:'<b>Worked solution.</b> '+renderStem(q.explanation).replace(/\n/g,'<br>')}));
+  if(q.distractorNotes){
+    const notes=Object.entries(q.distractorNotes).filter(([k,v])=>v);
+    if(notes.length){
+      const ul=el('ul',{style:'margin:6px 0 0;padding-left:18px'});
+      notes.forEach(([k,v])=>{const label=isSvgOpt(q.options[k])?('Option '+(+k+1)):('“'+q.options[k]+'”');ul.append(el('li',{},label+': '+v));});
+      box.append(el('div',{class:'why',html:'<b>Why the traps are wrong:</b>'}));box.append(ul);
+    }
+  }
+  box.append(el('div',{class:'muted',style:'margin-top:8px;font-size:12px'},
+    'Technique: '+(q.technique||'—')+(q.trapFlag?' · Trap: '+q.trapFlag:'')+
+    ' · You took '+Math.round(a?a.secs:0)+'s (target '+q.targetSeconds+'s)'));
+  return box;
+}
+function updateTimerUI(){
+  const s=SESSION;if(!s||s.ended)return;
+  const qe=$('#qelapsed');
+  if(qe){const e=qElapsed();qe.textContent=Math.round(e)+'s on this question';qe.className='qelapsed'+(e>=30?' red':e>=20?' amber':'');}
+  const gt=$('#gtimer');
+  if(gt){
+    if(s.cfg.clock==='global'){gt.textContent=fmtT(s.globalLeft);gt.className='timer'+(s.globalLeft<=120?' danger':s.globalLeft<=180?' warn':'');}
+    else if(s.cfg.perQLimit!=null){gt.textContent=fmtT(s.perQLeft);gt.className='timer'+(s.perQLeft<=5?' danger':s.perQLeft<=10?' warn':'');}
+  }
+}
+
+/* =========================================================================
+   ROUTER
+   ========================================================================= */
+const ROUTES={};
+let CURRENT={route:'dashboard',params:{}};
+function go(route,params={}){
+  if(SESSION&&!SESSION.ended&&route!=='exam'){/* leaving exam not allowed except via quit */}
+  CURRENT={route,params};window.scrollTo(0,0);render();
+}
+function render(){
+  if(SESSION&&!SESSION.ended){renderExam();return;}
+  const app=$('#app');app.innerHTML='';
+  buildNav();
+  (ROUTES[CURRENT.route]||ROUTES.dashboard)(app,CURRENT.params);
+}
+const NAV=[['dashboard','Dashboard'],['practice','Practice'],['plan','7-Day Plan'],['guides','Guides'],['resources','Resources'],['data','My Data']];
+function buildNav(){
+  const nav=$('#nav');nav.innerHTML='';
+  NAV.forEach(([r,label])=>{
+    nav.append(el('button',{class:CURRENT.route===r?'active':'',onclick:()=>go(r)},label));
+  });
+}
+
+/* =========================================================================
+   THE PACING LADDER — rung definitions, criteria, progression
+   ========================================================================= */
+const RUNGS=[
+  {n:1,name:'Untimed · feedback on',trains:'Just understanding what these questions are. No clock at all, full explanation after every answer, retry as much as you like.',
+   crit:'80% correct across 30 untimed questions in a category'},
+  {n:2,name:'Untimed · feedback off',trains:'Committing to answers with no safety net. Still no clock, but explanations wait until the end.',
+   crit:'75% correct across a 20-question set'},
+  {n:3,name:'Generous timing · 40s',trains:'Getting used to a clock existing. More than double the real budget — comfortable on purpose.',
+   crit:'Finish a 20-question set in time at 70% accuracy'},
+  {n:4,name:'Realistic timing · 25s',trains:'Building triage instinct. Tight but survivable. Forward-only from here.',
+   crit:'Finish a 30-question set in time at 65% accuracy'},
+  {n:5,name:'Real conditions · 18s',trains:'The Full Simulation. 50 questions, 15 minutes, nothing held back.',
+   crit:'This is the top rung — live here for Days 5–7'},
+];
+function currentRung(){return clamp(STATE.rung.overall,1,5);}
+function maybeAdvanceRung(att){
+  const acc=att.reached?att.correct/att.reached:0;
+  const inTime=att.reason!=='time';
+  const cat=att.category;
+  // per-category untimed progress (rungs 1-2)
+  if(att.rung===1&&att.reached>=30&&acc>=0.80){
+    if(cat!=='mixed')STATE.rung[cat]=Math.max(STATE.rung[cat]||1,2);
+    STATE.rung.overall=Math.max(STATE.rung.overall,2);
+  }
+  if(att.rung===2&&att.reached>=20&&acc>=0.75){
+    if(cat!=='mixed')STATE.rung[cat]=Math.max(STATE.rung[cat]||1,3);
+    STATE.rung.overall=Math.max(STATE.rung.overall,3);
+  }
+  if(att.rung===3&&att.reached>=20&&att.reached>=att.total&&inTime&&acc>=0.70)
+    STATE.rung.overall=Math.max(STATE.rung.overall,4);
+  if(att.rung===4&&att.reached>=30&&att.reached>=att.total&&inTime&&acc>=0.65)
+    STATE.rung.overall=Math.max(STATE.rung.overall,5);
+}
+function rungCriterionMet(att){
+  const acc=att.reached?att.correct/att.reached:0;const inTime=att.reason!=='time';
+  if(att.rung===1)return att.reached>=30&&acc>=0.80;
+  if(att.rung===2)return att.reached>=20&&acc>=0.75;
+  if(att.rung===3)return att.reached>=att.total&&inTime&&acc>=0.70;
+  if(att.rung===4)return att.reached>=att.total&&inTime&&acc>=0.65;
+  return null;
+}
+
+/* =========================================================================
+   MODE LAUNCHERS
+   ========================================================================= */
+function catsFrom(sel){return sel==='all'?null:[sel];}
+function launchRung(n,category='all',count){
+  const cats=catsFrom(category);
+  if(n===1){count=count||30;startSession({key:'rung1',rung:1,title:`Rung 1 — Untimed (${category==='all'?'mixed':CAT_LABEL[category]})`,
+    clock:'none',feedback:'immediate',allowRetry:true,forwardOnly:false,perQBudget:18,
+    questions:pickQuestions({count,cats,difficulties:[1,2]})});}
+  else if(n===2){count=count||20;startSession({key:'rung2',rung:2,title:`Rung 2 — Untimed, feedback at end`,
+    clock:'none',feedback:'end',forwardOnly:true,perQBudget:18,
+    questions:pickQuestions({count,cats,difficulties:[1,2,3]})});}
+  else if(n===3){count=count||20;startSession({key:'rung3',rung:3,title:`Rung 3 — Generous timing (40s/question)`,
+    clock:'global',globalSeconds:count*40,perQBudget:40,feedback:'end',forwardOnly:true,
+    questions:pickQuestions({count,cats})});}
+  else if(n===4){count=count||30;startSession({key:'rung4',rung:4,title:`Rung 4 — Realistic timing (25s/question)`,
+    clock:'global',globalSeconds:count*25,perQBudget:25,feedback:'end',forwardOnly:true,
+    questions:pickRampedMixed(count,false)});}
+  else if(n===5){launchFullSim(false);}
+}
+function launchFullSim(easyFirst){
+  startSession({key:'fullsim',rung:5,title:'Full Simulation — 50 questions, 15 minutes',
+    clock:'global',globalSeconds:900,perQBudget:18,feedback:'end',forwardOnly:true,ramp:true,
+    questions:pickRampedMixed(50,easyFirst)});
+}
+function launchDrill(category,subtype,count,level){
+  const difficulties=level?[level]:null;
+  const subtypes=subtype&&subtype!=='all'?[subtype]:null;
+  const cats=catsFrom(category);
+  startSession({key:'drill',title:`Timed Drill — ${subtype&&subtype!=='all'?SUBTYPE_LABEL(subtype):(category==='all'?'Mixed':CAT_LABEL[category])}`,
+    clock:'global',globalSeconds:count*18,perQBudget:18,feedback:'end',forwardOnly:true,
+    questions:pickQuestions({count,cats,subtypes,difficulties})});
+}
+function launchLearn(category,subtype,level){
+  const difficulties=level?[level]:null;
+  const subtypes=subtype&&subtype!=='all'?[subtype]:null;
+  startSession({key:'learn',title:`Untimed Learn — ${subtype&&subtype!=='all'?SUBTYPE_LABEL(subtype):(category==='all'?'Mixed':CAT_LABEL[category])}`,
+    clock:'none',feedback:'immediate',allowRetry:true,forwardOnly:false,perQBudget:18,
+    questions:pickQuestions({count:15,cats:catsFrom(category),subtypes,difficulties})});
+}
+function launchSpeedLadder(category){
+  startSession({key:'speedladder',title:'Speed Ladder',ladderCategory:category,
+    clock:'perQuestion',perQLimit:30,perQBudget:18,feedback:'end',forwardOnly:true,speedLadder:true,
+    questions:pickQuestions({count:40,cats:catsFrom(category)})});
+}
+function weakSubtypes(nn=3){
+  const rows=SUBTYPES.map(st=>{
+    let seen=0,correct=0,secs=0;
+    BANK.filter(q=>q.subtype===st).forEach(q=>{const p=STATE.perQuestion[q.id];if(p){seen+=p.seen;correct+=p.correct;secs+=p.totalSecs;}});
+    return {st,seen,acc:seen?correct/seen:null,avg:seen?secs/seen:null};
+  }).filter(r=>r.seen>=3);
+  rows.sort((a,b)=>{
+    // worst accuracy first, tie-break slowest
+    if(a.acc==null)return 1;if(b.acc==null)return -1;
+    if(Math.abs(a.acc-b.acc)>0.01)return a.acc-b.acc;
+    return (b.avg||0)-(a.avg||0);
+  });
+  return rows.slice(0,nn);
+}
+function launchWeakSpot(){
+  const weak=weakSubtypes(3);
+  if(!weak.length){alert('Not enough history yet. Do a couple of drills first, then the auto-drill can target your weak spots.');return;}
+  const subtypes=weak.map(w=>w.st);
+  startSession({key:'weakspot',title:'Weak-Spot Auto-Drill',
+    clock:'global',globalSeconds:20*18,perQBudget:18,feedback:'end',forwardOnly:true,
+    questions:pickQuestions({count:20,subtypes})});
+}
+
+/* =========================================================================
+   CHART HELPERS (inline SVG, theme-aware via currentColor)
+   ========================================================================= */
+function C(){const d=STATE.theme==='dark';return {good:d?'#4cc98a':'#127a3f',bad:d?'#ff6b61':'#b3261e',line:d?'#3a424c':'#c9ced6',ink:d?'#e8ebef':'#111',muted:d?'#9aa4b2':'#5b6470',accent:d?'#5b82ff':'#2b5cff',grid:d?'#262c34':'#e2e5ea',budget:d?'#e0a24a':'#a8620a'};}
+function timelineChart(answers,budget,total){
+  const c=C();const W=Math.max(640,answers.length*15+40);const H=200;const pad=28;
+  const maxS=Math.max(20,...answers.map(a=>a.secs),budget+5);
+  const bw=(W-pad*2)/Math.max(answers.length,1);
+  const y=s=>H-pad-(s/maxS)*(H-pad*2);
+  let bars='';
+  answers.forEach((a,i)=>{
+    const h=(a.secs/maxS)*(H-pad*2);const x=pad+i*bw;
+    const col=a.timedOut?c.budget:(a.ok?c.good:c.bad);
+    bars+=`<rect x="${x+1}" y="${H-pad-h}" width="${Math.max(2,bw-2)}" height="${h}" fill="${col}" rx="1"><title>Q${i+1}: ${Math.round(a.secs)}s · ${a.ok?'correct':'incorrect'}</title></rect>`;
+  });
+  const by=y(budget);
+  return `<div class="timeline"><svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+    <line x1="${pad}" y1="${H-pad}" x2="${W-pad}" y2="${H-pad}" stroke="${c.grid}"/>
+    <line x1="${pad}" y1="${by}" x2="${W-pad}" y2="${by}" stroke="${c.budget}" stroke-dasharray="5 4" stroke-width="1.5"/>
+    <text x="${W-pad}" y="${by-4}" text-anchor="end" font-size="11" fill="${c.budget}">${budget}s budget</text>
+    ${bars}
+    <text x="${pad}" y="${H-8}" font-size="11" fill="${c.muted}">Q1</text>
+    <text x="${W-pad}" y="${H-8}" text-anchor="end" font-size="11" fill="${c.muted}">Q${answers.length}</text>
+  </svg></div>`;
+}
+function trendChart(scores){
+  const c=C();const W=640,H=180,pad=32;
+  if(scores.length<1)return '<p class="muted">No full simulations yet — your score trend will appear here.</p>';
+  const maxY=50;const xs=scores.length>1?(W-pad*2)/(scores.length-1):0;
+  const y=v=>H-pad-(v/maxY)*(H-pad*2);
+  let pts=scores.map((s,i)=>`${pad+i*xs},${y(s)}`).join(' ');
+  let dots=scores.map((s,i)=>`<circle cx="${pad+i*xs}" cy="${y(s)}" r="3.5" fill="${c.accent}"><title>Attempt ${i+1}: ${s}/50</title></circle>`).join('');
+  const g24=y(24),g35=y(35);
+  return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" style="max-width:100%">
+    <line x1="${pad}" y1="${g24}" x2="${W-pad}" y2="${g24}" stroke="${c.muted}" stroke-dasharray="4 4"/>
+    <text x="${pad+2}" y="${g24-3}" font-size="10" fill="${c.muted}">median 24</text>
+    <line x1="${pad}" y1="${g35}" x2="${W-pad}" y2="${g35}" stroke="${c.good}" stroke-dasharray="4 4"/>
+    <text x="${pad+2}" y="${g35-3}" font-size="10" fill="${c.good}">target 35</text>
+    ${scores.length>1?`<polyline points="${pts}" fill="none" stroke="${c.accent}" stroke-width="2"/>`:''}
+    ${dots}
+  </svg>`;
+}
+function accByPosition(answers,total){
+  // buckets of 10
+  const buckets=[];
+  for(let b=0;b<total;b+=10){
+    const seg=answers.filter(a=>a.position>=b&&a.position<b+10);
+    const reached=seg.length;const correct=seg.filter(a=>a.ok).length;
+    buckets.push({label:`Q${b+1}–${Math.min(b+10,total)}`,reached,correct,acc:reached?correct/reached:null});
+  }
+  return buckets;
+}
+
+/* =========================================================================
+   TRIAGE COACH
+   ========================================================================= */
+function triageDiagnosis(att){
+  const acc=att.reached?att.correct/att.reached:0;
+  const reachRate=att.reached/att.total;
+  // category time distribution
+  const catTime={math:0,verbal:0,spatial:0},catN={math:0,verbal:0,spatial:0};
+  att.answers.forEach(a=>{catTime[a.cat]+=a.secs;catN[a.cat]++;});
+  const catAvg={};['math','verbal','spatial'].forEach(c=>catAvg[c]=catN[c]?catTime[c]/catN[c]:0);
+  const avgs=Object.entries(catAvg).filter(([c,v])=>catN[c]>0);
+  const slowest=avgs.slice().sort((a,b)=>b[1]-a[1])[0];
+  const meanAvg=avg(avgs.map(x=>x[1]));
+  let mode,body,rx;
+  if(acc>=0.75&&reachRate<0.75){
+    mode='The Perfectionist';
+    body=`Your accuracy is high (${pct(acc)}% of what you answered) but you only reached ${att.reached} of ${att.total}. You are spending too long making sure — and the questions you never see cost you far more than the odd wrong guess would.`;
+    rx='Impose a hard 20-second abandon rule. When the clock hits 20s, pick your best guess and move — every time, no exceptions. Practise it in the Speed Ladder.';
+  } else if(reachRate>=0.85&&acc<0.55){
+    mode='The Sprinter';
+    body=`You reached ${att.reached} of ${att.total} — great pace — but accuracy was only ${pct(acc)}%. You are moving so fast you are walking into traps, especially on questions that reward a second look.`;
+    rx='Slow down deliberately on math word problems: read the question twice and check units before answering. You have time to spare — spend a little of it on accuracy.';
+  } else if(slowest&&meanAvg>0&&slowest[1]>meanAvg*1.6){
+    mode='The Category Sinkhole';
+    body=`${CAT_LABEL[slowest[0]]} is eating your clock: ${slowest[1].toFixed(1)}s per question there versus about ${meanAvg.toFixed(1)}s elsewhere. One category is quietly draining the time you need for the rest.`;
+    rx=`Drill ${CAT_LABEL[slowest[0]]} until the method is automatic, and adopt a "guess-on-sight" rule for its hardest subtype so it never swallows more than ~20s.`;
+  } else {
+    mode='Balanced';
+    body=`No single failure mode dominates: pace and accuracy are reasonably matched (${pct(acc)}% accuracy, ${att.reached}/${att.total} reached).`;
+    rx='The lever now is volume. Grind timed drills to push both speed and accuracy up together, and keep taking full simulations to hold your nerve.';
+  }
+  return {mode,body,rx};
+}
+
+/* =========================================================================
+   RESULTS SCREEN
+   ========================================================================= */
+ROUTES.results=function(app,params){
+  const att=STATE.attempts.find(a=>a.id===params.id);
+  if(!att){app.append(el('div',{class:'panel'},'Attempt not found.'));return;}
+  const acc=att.reached?att.correct/att.reached:0;
+  const wrap=el('div',{});
+  // headline
+  const head=el('div',{class:'panel'});
+  head.append(el('div',{class:'flex between'},
+    el('h2',{},att.reason==='abandoned'?'Attempt abandoned':att.modeTitle),
+    el('span',{class:'tag'+(att.reason==='time'?' warn':'')},att.reason==='time'?'ran out of time':att.reason==='abandoned'?'abandoned':'completed')));
+  if(att.reason==='abandoned'){
+    head.append(el('p',{class:'muted'},'This attempt was abandoned and is recorded as such. Timings for the questions you did answer are still saved.'));
+  }
+  const g=el('div',{class:'grid cols4'});
+  g.append(kpi('Score',att.correct+' / '+att.total,att.reason==='time'?'reached '+att.reached:''));
+  g.append(kpi('Accuracy',pct(acc)+'%','of what you answered'));
+  g.append(kpi('Reached',att.reached+' / '+att.total, att.reached<att.total?'not finishing is normal':'finished'));
+  if(att.isFullSim){
+    const p=percentileForScore(att.correct);
+    g.append(kpi('Percentile','~'+p+'th','vs median 24 · SD 7'));
+  } else {
+    g.append(kpi('Avg / question',(avg(att.answers.map(a=>a.secs))||0).toFixed(1)+'s','budget '+att.perQBudget+'s'));
+  }
+  head.append(g);
+  if(att.isFullSim){
+    const dist=35-att.correct;
+    head.append(el('div',{class:'notice'},dist>0
+      ?`You are ${dist} short of the 35 competitive-finance target band. `+(att.correct>=24?'You are already above the normative median of 24.':'The normative median is 24.')
+      :`You are at or above the 35 target band for a competitive finance role — excellent.`));
+  }
+  // subscores
+  const sub=el('div',{class:'grid cols3',style:'margin-top:12px'});
+  ['math','verbal','spatial'].forEach(c=>{
+    const sc=att.scoreByCat[c];const seg=att.answers.filter(a=>a.cat===c);
+    const a2=seg.length?seg.filter(x=>x.ok).length/seg.length:0;
+    const card=el('div',{class:'panel',style:'margin:0'});
+    card.append(el('div',{class:'lbl muted',style:'font-size:12px;text-transform:uppercase'},CAT_LABEL[c]));
+    card.append(el('div',{class:'big',style:'font-size:24px'},sc.c+' / '+sc.t));
+    card.append(el('div',{class:'muted',style:'font-size:12px'},seg.length?pct(a2)+'% · '+(avg(seg.map(x=>x.secs))).toFixed(1)+'s avg':'—'));
+    sub.append(card);
+  });
+  head.append(sub);
+  wrap.append(head);
+
+  // rung outcome
+  if(att.rung&&att.rung<5&&att.reason!=='abandoned'){
+    const met=rungCriterionMet(att);
+    const p=el('div',{class:'panel'});
+    p.append(el('h3',{},'Pacing Ladder — Rung '+att.rung));
+    if(met){p.append(el('div',{class:'tag good'},'Criterion met — Rung '+(att.rung+1)+' unlocked'));
+      p.append(el('p',{},'You cleared the bar for this rung. The dashboard now recommends Rung '+(att.rung+1)+'.'));}
+    else{p.append(el('div',{class:'tag bad'},'Not yet — stay on Rung '+att.rung));
+      p.append(el('p',{},'To advance: '+RUNGS[att.rung-1].crit+'. '+rungAdvice(att)));}
+    wrap.append(p);
+  }
+
+  // speed ladder break point
+  if(att.speedLadder){
+    const p=el('div',{class:'panel'});
+    p.append(el('h3',{},'Speed Ladder — break point'));
+    if(att.breakPoint)p.append(el('p',{},`Your accuracy first collapsed around question ${att.breakPoint.atQuestion}, as the per-question allowance tightened. That is roughly the pace at which your reliable solving breaks down — the zone to train.`));
+    else p.append(el('p',{},'Your accuracy held up across the whole ladder — impressive. Try starting the ladder at a lower allowance next time.'));
+    wrap.append(p);
+  }
+
+  // triage coach
+  if((att.isFullSim||att.reached>=15)&&att.reason!=='abandoned'){
+    const dx=triageDiagnosis(att);
+    const p=el('div',{class:'panel'});
+    p.append(el('h3',{},'Triage Coach'));
+    p.append(el('div',{class:'flex'},el('span',{class:'tag warn'},dx.mode)));
+    p.append(el('p',{},dx.body));
+    p.append(el('p',{html:'<b>Prescription:</b> '+dx.rx}));
+    wrap.append(p);
+  }
+
+  // timeline + time analysis
+  const tp=el('div',{class:'panel'});
+  tp.append(el('h3',{},'Per-question timeline'));
+  tp.append(el('div',{class:'legend'},
+    el('span',{html:`<b style="background:${C().good}"></b>correct`}),
+    el('span',{html:`<b style="background:${C().bad}"></b>incorrect`}),
+    el('span',{html:`<b style="background:${C().budget}"></b>timed out / budget line`})));
+  const tchart=el('div',{});tchartHTML(tchart,att);tp.append(tchart);
+  // time bled + sinkholes
+  const wrongSecs=Math.round(sum(att.answers.filter(a=>!a.ok).map(a=>a.secs)));
+  const sinkholes=att.answers.map((a,i)=>({...a,q:i+1})).filter(a=>a.secs>45);
+  const bled=el('div',{class:'grid cols2',style:'margin-top:12px'});
+  const b1=el('div',{class:'panel',style:'margin:0'});
+  b1.append(el('div',{class:'lbl muted'},'Time bled'));
+  b1.append(el('div',{class:'big',style:'font-size:26px'},wrongSecs+'s'));
+  b1.append(el('div',{class:'muted',style:'font-size:13px'},`You spent ${wrongSecs} seconds on questions you got wrong — that's about ${Math.round(wrongSecs/18)} easy questions you never reached.`));
+  bled.append(b1);
+  const b2=el('div',{class:'panel',style:'margin:0'});
+  b2.append(el('div',{class:'lbl muted'},'Sinkholes (>45s)'));
+  if(sinkholes.length){
+    b2.append(el('div',{class:'big',style:'font-size:26px'},String(sinkholes.length)));
+    b2.append(el('div',{class:'muted',style:'font-size:13px'},`Questions ${sinkholes.map(s=>s.q).join(', ')} each ran over 45s. Abandoning at 20s would have freed time for about ${Math.round(sum(sinkholes.map(s=>s.secs-20))/18)} more attempts.`));
+  } else {b2.append(el('div',{class:'big',style:'font-size:26px'},'0'));b2.append(el('div',{class:'muted',style:'font-size:13px'},'No question ran over 45s. Good discipline.'));}
+  bled.append(b2);
+  tp.append(bled);
+  // accuracy by position
+  const buckets=accByPosition(att.answers,att.total);
+  const posWrap=el('div',{style:'margin-top:12px'});
+  posWrap.append(el('div',{class:'lbl muted'},'Accuracy by position (fatigue / panic check)'));
+  const pr=el('div',{class:'grid cols'+Math.min(buckets.length,5),style:'margin-top:6px'});
+  buckets.forEach(b=>{
+    const card=el('div',{class:'panel',style:'margin:0;padding:10px'});
+    card.append(el('div',{style:'font-size:12px'},b.label));
+    card.append(el('div',{style:'font-weight:700'},b.acc==null?'—':pct(b.acc)+'%'));
+    card.append(el('div',{class:'muted',style:'font-size:11px'},b.correct+'/'+b.reached));
+    pr.append(card);
+  });
+  posWrap.append(pr);
+  tp.append(posWrap);
+  wrap.append(tp);
+
+  // review
+  const rev=el('div',{class:'panel'});
+  rev.append(el('div',{class:'flex between'},el('h3',{style:'margin:0'},'Question-by-question review'),
+    el('div',{class:'flex'},
+      el('button',{class:'btn ghost sm',id:'filterBtn',onclick:()=>{rev._mistakes=!rev._mistakes;$('#filterBtn').textContent=rev._mistakes?'Show all':'Only my mistakes';drawReview(rev,att,list);}},'Only my mistakes'),
+      (att.answers.some(a=>!a.ok)?el('button',{class:'btn sm',onclick:()=>retryMistakes(att)},'Retry my mistakes as a drill'):null))));
+  const list=el('div',{});rev.append(list);drawReview(rev,att,list);
+  wrap.append(rev);
+
+  // next actions
+  const foot=el('div',{class:'panel center'});
+  foot.append(el('button',{class:'btn',onclick:()=>go('dashboard')},'Back to dashboard'));
+  foot.append(el('span',{},' '));
+  foot.append(el('button',{class:'btn ghost',onclick:()=>go('practice')},'Practice again'));
+  wrap.append(foot);
+  app.append(wrap);
+};
+function tchartHTML(node,att){node.innerHTML=timelineChart(att.answers,att.perQBudget||18,att.total);}
+function rungAdvice(att){
+  const acc=att.reached?att.correct/att.reached:0;
+  if(att.reached<att.total)return `You reached ${att.reached} of ${att.total} — focus first on finishing the set in the time given.`;
+  if(acc<0.5)return 'Accuracy is the gap right now — drop back to Untimed Learn on your weak subtypes before pushing pace.';
+  return `You are close: ${pct(acc)}% accuracy. A little more precision on your weak subtypes should get you over the line.`;
+}
+function drawReview(rev,att,list){
+  list.innerHTML='';
+  att.answers.forEach((a,i)=>{
+    if(rev._mistakes&&a.ok)return;
+    const q=BANK_BY_ID[a.qid];if(!q)return;
+    const card=el('div',{style:'border:1px solid var(--line);border-radius:10px;padding:12px;margin:8px 0'});
+    card.append(el('div',{class:'flex between'},
+      el('div',{class:'muted',style:'font-size:12px'},`Q${i+1} · ${SUBTYPE_LABEL(q.subtype)} · ${CAT_LABEL[q.category]}`),
+      el('span',{class:a.ok?'tag good':'tag bad'},a.ok?'correct':(a.timedOut?'timed out':'wrong'))));
+    const st=el('div',{style:'margin:6px 0;white-space:pre-wrap'});st.innerHTML=renderStem(q.stem).replace(/\n/g,'<br>');card.append(st);
+    if(q.svg){const f=el('div',{class:'figwrap'});f.innerHTML=q.svg;card.append(f);}
+    // options
+    q.options.forEach((o,idx)=>{
+      const row=el('div',{style:'display:flex;gap:8px;align-items:center;padding:3px 0'});
+      let mark=' ';if(idx===q.correct)mark='✓';else if(idx===a.chosen)mark='✗';
+      row.append(el('span',{style:`width:16px;color:${idx===q.correct?'var(--good)':(idx===a.chosen?'var(--bad)':'var(--muted)')}`},mark));
+      if(isSvgOpt(o)){const fg=el('div',{class:'fig'});fg.innerHTML=o;row.append(fg);}
+      else row.append(el('span',{html:renderStem(String(o))}));
+      if(idx===a.chosen&&idx!==q.correct)row.append(el('span',{class:'muted',style:'font-size:12px'},' ← your answer'));
+      card.append(row);
+    });
+    card.append(el('div',{class:'explain'},
+      el('div',{html:'<b>Solution.</b> '+renderStem(q.explanation).replace(/\n/g,'<br>')}),
+      el('div',{class:'muted',style:'margin-top:6px;font-size:12px'},`Technique: ${q.technique||'—'} · time ${Math.round(a.secs)}s vs ${q.targetSeconds}s target`+
+        (q.trapFlag?` · this item's trap: ${q.trapFlag}`:'')),
+      el('div',{style:'margin-top:6px'},el('a',{href:'#',onclick:(e)=>{e.preventDefault();go('guides');}},'Study the '+(q.technique||'technique')+' guide →'))));
+    list.append(card);
+  });
+  if(!list.children.length)list.append(el('p',{class:'muted'},'No mistakes to show — everything here was correct.'));
+}
+function retryMistakes(att){
+  const ids=att.answers.filter(a=>!a.ok).map(a=>a.qid);
+  const qs=ids.map(id=>BANK_BY_ID[id]).filter(Boolean);
+  if(!qs.length){alert('No mistakes to retry.');return;}
+  startSession({key:'drill',title:'Retry — your mistakes',clock:'global',globalSeconds:qs.length*18,
+    perQBudget:18,feedback:'immediate',forwardOnly:false,allowRetry:true,questions:qs});
+}
+function kpi(lbl,val,sub){const k=el('div',{class:'panel',style:'margin:0'});k.append(el('div',{class:'lbl'},lbl));k.append(el('div',{class:'big',style:'font-size:26px'},val));if(sub)k.append(el('div',{class:'muted',style:'font-size:12px'},sub));return k;}
+
+/* =========================================================================
+   AGGREGATE STATS
+   ========================================================================= */
+function catAgg(){
+  const agg={math:{seen:0,correct:0,secs:0},verbal:{seen:0,correct:0,secs:0},spatial:{seen:0,correct:0,secs:0}};
+  for(const id in STATE.perQuestion){const q=BANK_BY_ID[id];if(!q)continue;const p=STATE.perQuestion[id];
+    agg[q.category].seen+=p.seen;agg[q.category].correct+=p.correct;agg[q.category].secs+=p.totalSecs;}
+  return agg;
+}
+function subtypeAgg(){
+  const m={};
+  SUBTYPES.forEach(st=>m[st]={cat:SUBTYPE_CAT[st],seen:0,correct:0,secs:0});
+  for(const id in STATE.perQuestion){const q=BANK_BY_ID[id];if(!q)continue;const p=STATE.perQuestion[id];
+    m[q.subtype].seen+=p.seen;m[q.subtype].correct+=p.correct;m[q.subtype].secs+=p.totalSecs;}
+  return m;
+}
+function fullSims(){return STATE.attempts.filter(a=>a.isFullSim&&a.reason!=='abandoned');}
+function overallPace(){let seen=0,secs=0;for(const id in STATE.perQuestion){seen+=STATE.perQuestion[id].seen;secs+=STATE.perQuestion[id].totalSecs;}return seen?secs/seen:null;}
+function heatColor(acc){if(acc==null)return {bg:'var(--chip)',fg:'var(--muted)'};const h=Math.round(acc*125);return {bg:`hsl(${h} 55% ${STATE.theme==='dark'?'30%':'82%'})`,fg:STATE.theme==='dark'?'#eaeef3':'#14202b'};}
+function nextAction(){
+  const sims=fullSims();
+  // 1) weak subtype with enough data
+  const weak=weakSubtypes(1)[0];
+  if(weak&&weak.acc!=null&&weak.acc<0.7){
+    return {label:`Drill ${SUBTYPE_LABEL(weak.st)} — ${pct(weak.acc)}% accuracy, ${weak.avg?weak.avg.toFixed(0):'?'}s average`,
+      run:()=>launchDrill(weak.cat||SUBTYPE_CAT[weak.st],weak.st,10)};
+  }
+  const rung=currentRung();
+  if(STATE.attempts.length===0)return {label:'Start here — Rung 1: Untimed Learn (mixed)',run:()=>launchRung(1,'all')};
+  if(rung<5)return {label:`Continue the ladder — Rung ${rung}: ${RUNGS[rung-1].name}`,run:()=>launchRung(rung,recommendCategoryForRung(rung))};
+  return {label:'Take a Full Simulation',run:()=>launchFullSim(false)};
+}
+function recommendCategoryForRung(rung){
+  if(rung>2)return 'all';
+  // pick the category with the lowest per-category rung / weakest untimed accuracy
+  const agg=catAgg();let best='math',bestAcc=2;
+  ['math','verbal','spatial'].forEach(c=>{const a=agg[c].seen?agg[c].correct/agg[c].seen:0;if(a<bestAcc){bestAcc=a;best=c;}});
+  return best;
+}
+
+/* =========================================================================
+   DASHBOARD
+   ========================================================================= */
+ROUTES.dashboard=function(app){
+  if(!STATE.testDate){const d=new Date(Date.now()+7*864e5);STATE.testDate=d.toISOString().slice(0,10);save();}
+  const days=daysUntilTest();
+  const sims=fullSims();
+  const scores=sims.map(a=>a.correct);
+  const best=scores.length?Math.max(...scores):null;
+  const latest=scores.length?scores[scores.length-1]:null;
+  const wrap=el('div',{});
+
+  // hero row
+  const hero=el('div',{class:'grid cols4'});
+  const dd=el('div',{class:'panel',style:'margin:0'});
+  dd.append(el('div',{class:'lbl muted'},'Days until test'));
+  dd.append(el('div',{class:'big'},days!=null?String(days):'—'));
+  const dinp=el('input',{type:'date',value:STATE.testDate||'',onchange:e=>{STATE.testDate=e.target.value;save();go('dashboard');}});
+  dd.append(dinp);
+  hero.append(dd);
+  hero.append(kpi('Best full sim',best!=null?best+'/50':'—',best!=null?'~'+percentileForScore(best)+'th percentile':'no sims yet'));
+  hero.append(kpi('Latest full sim',latest!=null?latest+'/50':'—',latest!=null?(35-latest>0?(35-latest)+' from target 35':'at/above target'):'—'));
+  hero.append(kpi('Current rung',String(currentRung()),RUNGS[currentRung()-1].name));
+  wrap.append(hero);
+
+  // recommended action
+  const na=nextAction();
+  const rec=el('div',{class:'panel',style:'display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap'});
+  rec.append(el('div',{},el('div',{class:'lbl muted'},'Next recommended action'),el('div',{style:'font-weight:600;font-size:16px'},na.label)));
+  rec.append(el('button',{class:'btn',onclick:na.run},'Start →'));
+  wrap.append(rec);
+
+  // pacing ladder
+  const lad=el('div',{class:'panel'});
+  lad.append(el('div',{class:'flex between'},el('h2',{style:'margin:0'},'The Pacing Ladder'),el('span',{class:'muted',style:'font-size:13px'},'your recommended path — clock introduced only once accuracy is established')));
+  const lw=el('div',{class:'ladder',style:'margin-top:10px'});
+  RUNGS.forEach(r=>{
+    const cur=currentRung();
+    const cls='rung'+(r.n===cur?' cur':'')+(r.n<cur?' done':'');
+    const row=el('div',{class:cls});
+    row.append(el('div',{class:'n'},r.n<cur?'✓':String(r.n)));
+    const mid=el('div',{style:'flex:1'});
+    mid.append(el('div',{style:'font-weight:600'},'Rung '+r.n+' — '+r.name));
+    mid.append(el('div',{class:'muted',style:'font-size:13px'},r.trains));
+    mid.append(el('div',{class:'muted',style:'font-size:12px;margin-top:2px'},'Advance when: '+r.crit));
+    row.append(mid);
+    const cat=r.n<=2?recommendCategoryForRung(r.n):'all';
+    row.append(el('button',{class:r.n===cur?'btn':'btn ghost',style:'align-self:center',onclick:()=>launchRung(r.n,cat)},r.n===cur?'Recommended':'Start'));
+    lw.append(row);
+  });
+  lad.append(lw);
+  lad.append(el('div',{class:'muted',style:'font-size:12px;margin-top:8px'},'Per-category readiness: '+['math','verbal','spatial'].map(c=>CAT_LABEL[c]+' Rung '+(STATE.rung[c]||1)).join(' · ')+'. You can jump to any rung at any time.'));
+  wrap.append(lad);
+
+  // trend
+  const tr=el('div',{class:'panel'});
+  tr.append(el('h3',{},'Score trend (full simulations)'));
+  const trd=el('div',{});trd.innerHTML=trendChart(scores);tr.append(trd);
+  wrap.append(tr);
+
+  // category breakdown
+  const agg=catAgg();
+  const cb=el('div',{class:'panel'});
+  cb.append(el('h3',{},'Category breakdown'));
+  const cbg=el('div',{class:'grid cols3'});
+  ['math','verbal','spatial'].forEach(c=>{
+    const a=agg[c];const acc=a.seen?a.correct/a.seen:null;const av=a.seen?a.secs/a.seen:null;
+    const card=el('div',{class:'panel',style:'margin:0'});
+    card.append(el('div',{class:'lbl muted'},CAT_LABEL[c]));
+    card.append(el('div',{style:'font-weight:700;font-size:20px'},acc==null?'—':pct(acc)+'%'));
+    card.append(el('div',{class:'bar',style:'margin:6px 0'},el('i',{style:`width:${acc==null?0:pct(acc)}%`})));
+    card.append(el('div',{class:'muted',style:'font-size:12px'},av==null?'no data':`${av.toFixed(1)}s / question (budget 18s) · ${a.seen} attempted`));
+    cbg.append(card);
+  });
+  cb.append(cbg);
+  wrap.append(cb);
+
+  // pace + lifetime + streak
+  const pace=overallPace();
+  const pm=el('div',{class:'grid cols3'});
+  pm.append(kpi('Pace',pace==null?'—':pace.toFixed(1)+'s',pace==null?'no data':(pace<=18?'inside the 18s budget':(pace-18).toFixed(1)+'s over budget')));
+  pm.append(kpi('Questions attempted (lifetime)',String(STATE.lifetimeAttempted),BANK.length+' in the bank'));
+  pm.append(kpi('Day streak',String(STATE.streak.count),STATE.streak.last?'last practised '+STATE.streak.last:'start today'));
+  wrap.append(pm);
+
+  // subtype heatmap
+  const hm=el('div',{class:'panel'});
+  hm.append(el('h3',{},'Subtype heatmap'));
+  hm.append(el('div',{class:'muted',style:'font-size:12px;margin-bottom:8px'},'Coloured by accuracy — grey means not enough data yet. Click any cell to drill it.'));
+  const sub=subtypeAgg();
+  ['math','verbal','spatial'].forEach(c=>{
+    hm.append(el('div',{style:'font-size:13px;font-weight:600;margin:8px 0 4px'},CAT_LABEL[c]));
+    const grid=el('div',{class:'heat'});
+    Object.entries(sub).filter(([st,v])=>v.cat===c).forEach(([st,v])=>{
+      const acc=v.seen?v.correct/v.seen:null;const col=heatColor(acc);
+      const cell=el('div',{class:'heatcell',style:`background:${col.bg};color:${col.fg};cursor:pointer`,onclick:()=>launchDrill(c,st,10)});
+      cell.append(el('div',{style:'font-weight:600'},SUBTYPE_LABEL(st)));
+      cell.append(el('div',{style:'font-size:11px'},acc==null?'no data':pct(acc)+'% · '+(v.secs/v.seen).toFixed(0)+'s'));
+      grid.append(cell);
+    });
+    hm.append(grid);
+  });
+  wrap.append(hm);
+
+  // disclaimer
+  wrap.append(el('div',{class:'notice'},'Independent study tool, unaffiliated with and not endorsed by Criteria Corp. CCAT is a registered trademark of Criteria Corp. All '+BANK.length+' questions are original, written for practice. Practise on a laptop — the real test should be taken on one too.'));
+  app.append(wrap);
+};
+
+/* =========================================================================
+   PRACTICE HUB
+   ========================================================================= */
+function selectEl(options,val,onchange){const s=el('select',{onchange:e=>onchange(e.target.value)});options.forEach(([v,l])=>{const o=el('option',{value:v},l);if(v===val)o.setAttribute('selected','');s.append(o);});return s;}
+ROUTES.practice=function(app){
+  const wrap=el('div',{});
+  wrap.append(el('div',{class:'panel'},el('h2',{},'Practice'),el('p',{class:'muted'},'Every mode is forward-only, mirroring the real test — no skipping, no going back, except Untimed Learn where you may retry. The Pacing Ladder is your recommended path; it lives on the dashboard too.')));
+
+  // Full simulation
+  const fs=el('div',{class:'panel'});
+  fs.append(el('h3',{},'A · Full Simulation'));
+  fs.append(el('p',{class:'muted'},'50 questions, 15 minutes, mixed and ramping. Nothing on screen but question, options, timer and counter. This is the mode that matters.'));
+  const firstTime=fullSims().length===0;
+  fs.append(el('label',{class:'check'},el('input',{type:'checkbox',id:'easyRamp',...(firstTime?{checked:''}:{})}),el('span',{},'Gentler ramp for my first attempt')));
+  fs.append(el('button',{class:'btn',onclick:()=>launchFullSim($('#easyRamp').checked)},'Start Full Simulation'));
+  wrap.append(fs);
+
+  // Timed drill
+  const dr=el('div',{class:'panel'});
+  dr.append(el('h3',{},'B · Timed Drill'));
+  dr.append(el('p',{class:'muted'},'Pick a scope and a size; get a proportional 18s-per-question limit. Forward-only.'));
+  let dCat='all',dSub='all',dCount=20,dLevel='';
+  const subOptions=()=>[['all','All subtypes']].concat(SUBTYPES.filter(st=>dCat==='all'||SUBTYPE_CAT[st]===dCat).map(st=>[st,SUBTYPE_LABEL(st)]));
+  const subSelWrap=el('label',{class:'field'},'Subtype');
+  const rebuildSub=()=>{subSelWrap.querySelectorAll('select').forEach(s=>s.remove());const ss=selectEl(subOptions(),dSub,v=>dSub=v);subSelWrap.append(ss);};
+  const controls=el('div',{class:'flex'});
+  controls.append(el('label',{class:'field'},'Category',selectEl([['all','Mixed'],['math','Math & Logic'],['verbal','Verbal'],['spatial','Spatial']],'all',v=>{dCat=v;dSub='all';rebuildSub();})));
+  controls.append(subSelWrap);rebuildSub();
+  controls.append(el('label',{class:'field'},'Questions',selectEl([['10','10'],['20','20'],['30','30']],'20',v=>dCount=+v)));
+  controls.append(el('label',{class:'field'},'Level',selectEl([['','All'],['1','Beginner'],['2','Intermediate'],['3','Advanced']],'',v=>dLevel=v)));
+  dr.append(controls);
+  dr.append(el('button',{class:'btn',style:'margin-top:10px',onclick:()=>launchDrill(dCat,dSub,dCount,dLevel?+dLevel:null)},'Start Drill'));
+  wrap.append(dr);
+
+  // Untimed learn
+  const ln=el('div',{class:'panel'});
+  ln.append(el('h3',{},'C · Untimed Learn'));
+  ln.append(el('p',{class:'muted'},'No clock. Full explanation after every answer — the technique used and why each distractor is wrong. Retry as much as you like. This is where the learning happens.'));
+  let lCat='all',lSub='all',lLevel='';
+  const lSubWrap=el('label',{class:'field'},'Subtype');
+  const lRebuild=()=>{lSubWrap.querySelectorAll('select').forEach(s=>s.remove());lSubWrap.append(selectEl([['all','All subtypes']].concat(SUBTYPES.filter(st=>lCat==='all'||SUBTYPE_CAT[st]===lCat).map(st=>[st,SUBTYPE_LABEL(st)])),lSub,v=>lSub=v));};
+  const lc=el('div',{class:'flex'});
+  lc.append(el('label',{class:'field'},'Category',selectEl([['all','Mixed'],['math','Math & Logic'],['verbal','Verbal'],['spatial','Spatial']],'all',v=>{lCat=v;lSub='all';lRebuild();})));
+  lc.append(lSubWrap);lRebuild();
+  lc.append(el('label',{class:'field'},'Level',selectEl([['','All'],['1','Beginner'],['2','Intermediate'],['3','Advanced']],'',v=>lLevel=v)));
+  ln.append(lc);
+  ln.append(el('button',{class:'btn',style:'margin-top:10px',onclick:()=>launchLearn(lCat,lSub,lLevel?+lLevel:null)},'Start Learning'));
+  wrap.append(ln);
+
+  // Speed ladder + weak spot
+  const g2=el('div',{class:'grid cols2'});
+  const sl=el('div',{class:'panel',style:'margin:0'});
+  sl.append(el('h3',{},'D · Speed Ladder'));
+  sl.append(el('p',{class:'muted'},'Starts at 30s per question; every 5 correct answers the allowance drops by 2s, down to a floor of 10s. Finds exactly where your accuracy collapses — your "break point". Per-question timer auto-advances on expiry.'));
+  let slCat='all';
+  sl.append(el('label',{class:'field'},'Category',selectEl([['all','Mixed'],['math','Math & Logic'],['verbal','Verbal'],['spatial','Spatial']],'all',v=>slCat=v)));
+  sl.append(el('button',{class:'btn',style:'margin-top:10px',onclick:()=>launchSpeedLadder(slCat)},'Start Speed Ladder'));
+  g2.append(sl);
+  const ws=el('div',{class:'panel',style:'margin:0'});
+  ws.append(el('h3',{},'E · Weak-Spot Auto-Drill'));
+  ws.append(el('p',{class:'muted'},'Reads your history, finds the three subtypes with the worst accuracy (or slowest time), and builds a targeted 20-question set. One click.'));
+  const weak=weakSubtypes(3);
+  if(weak.length)ws.append(el('div',{class:'muted',style:'font-size:13px;margin-bottom:8px'},'Currently targeting: '+weak.map(w=>SUBTYPE_LABEL(w.st)+' ('+(w.acc!=null?pct(w.acc)+'%':'—')+')').join(', ')));
+  ws.append(el('button',{class:'btn',onclick:launchWeakSpot},'Auto-Drill my weak spots'));
+  g2.append(ws);
+  wrap.append(g2);
+  app.append(wrap);
+};
+
+/* =========================================================================
+   7-DAY STUDY PLAN
+   ========================================================================= */
+function planData(){
+  return [
+    {d:1,title:'Day 1 — Orientation & first contact',tasks:[
+      ['Read the Orientation guide (format, rules, scoring, the Two-Pass Myth)',()=>go('guide',{id:'orientation'})],
+      ['Rung 1 (untimed) — Math & Logic, ~30 questions',()=>launchRung(1,'math')],
+      ['Rung 1 (untimed) — Verbal, ~30 questions',()=>launchRung(1,'verbal')],
+      ['Rung 1 (untimed) — Spatial, ~30 questions',()=>launchRung(1,'spatial')],
+    ],note:'Do NOT attempt a full simulation today. The only goal is to learn what these questions are — no clock, no score anxiety.'},
+    {d:2,title:'Day 2 — Weakest category + mental arithmetic',tasks:[
+      ['Guide: your weakest category',()=>go('guides')],
+      ['Mental arithmetic bootcamp',()=>go('guide',{id:'math'})],
+      ['More Rung 1 on the weakest category',()=>launchRung(1,recommendCategoryForRung(1))],
+      ['Rung 2 (untimed, feedback at end) once accuracy holds',()=>launchRung(2,'all')],
+    ]},
+    {d:3,title:'Day 3 — First clock (Rung 3, 40s)',tasks:[
+      ['Verbal guide',()=>go('guide',{id:'verbal'})],
+      ['Spatial guide',()=>go('guide',{id:'spatial'})],
+      ['Rung 3 — generous 40s timing, 20 questions',()=>launchRung(3,'all')],
+    ],note:'The clock appears for the first time, with more than double the real budget. The point is only to normalise a timer existing.'},
+    {d:4,title:'Day 4 — Rung 4 (25s) + baseline simulation',tasks:[
+      ['Timing & Triage guide',()=>go('guide',{id:'timing'})],
+      ['Rung 4 — realistic 25s timing, 30 questions',()=>launchRung(4,'all')],
+      ['First Full Simulation — a BASELINE, not a verdict',()=>launchFullSim(false)],
+    ],note:'Target: be at Rung 5 by today. Treat the first full sim as a diagnostic to expose weak spots — not a judgement of your ability.'},
+    {d:5,title:'Day 5 — Attack the weak spots',tasks:[
+      ['Weak-Spot Auto-Drill on what the sim exposed',()=>launchWeakSpot()],
+      ['Speed Ladder — find your break point',()=>launchSpeedLadder('all')],
+      ['Second Full Simulation',()=>launchFullSim(false)],
+    ]},
+    {d:6,title:'Day 6 — Consolidate + the other tests',tasks:[
+      ['Targeted drills on remaining weak subtypes',()=>go('practice')],
+      ['Third Full Simulation',()=>launchFullSim(false)],
+      ['Read the Personality Test (EPP) module',()=>go('guide',{id:'epp'})],
+      ['Read the Test-Day Protocol',()=>go('guide',{id:'testday'})],
+    ]},
+    {d:7,title:'Day 7 — Light and rest',tasks:[
+      ['One light Full Simulation early in the day, then stop',()=>launchFullSim(false)],
+      ['Review shortcut cards only',()=>go('guide',{id:'timing'})],
+      ['Rest. Do not cram.',null],
+    ],note:'One easy simulation early, then stop. Reviewing shortcut cards is fine; grinding new material the day before is not.'},
+  ];
+}
+ROUTES.plan=function(app){
+  const wrap=el('div',{});
+  const days=daysUntilTest();
+  wrap.append(el('div',{class:'panel'},el('h2',{},'7-Day Study Plan'),
+    el('p',{class:'muted'},'Adaptive plan routed through the Pacing Ladder — it introduces the clock only once your accuracy is solid, and aims to have you living at Rung 5 (real conditions) by Day 4. '+(days!=null?`You have ${days} day${days===1?'':'s'} until your test.`:'')),
+    el('p',{class:'muted',style:'font-size:13px'},'Progress is saved. Current rung: '+currentRung()+' — '+RUNGS[currentRung()-1].name)));
+  planData().forEach(day=>{
+    const dk='day'+day.d;
+    const box=el('div',{class:'day'});
+    box.append(el('h4',{},day.title));
+    day.tasks.forEach((t,ti)=>{
+      const key=dk+'_'+ti;
+      const row=el('label',{class:'check'});
+      const cbx=el('input',{type:'checkbox',...(STATE.plan[key]?{checked:''}:{}),onchange:e=>{STATE.plan[key]=e.target.checked;save();}});
+      row.append(cbx);
+      const span=el('span',{});
+      span.append(t[0]);
+      if(t[1]){span.append(' ');span.append(el('a',{href:'#',onclick:e=>{e.preventDefault();t[1]();}},'▶ start'));}
+      row.append(span);
+      box.append(row);
+    });
+    if(day.note)box.append(el('div',{class:'notice'},day.note));
+    wrap.append(box);
+  });
+  app.append(wrap);
+};
+
+/* =========================================================================
+   RESOURCES
+   ========================================================================= */
+ROUTES.resources=function(app){
+  const R=[
+    ['Criteria Corp — official candidate prep','criteriacorp.com/candidates/ccat-prep','Free','The only authentic-format free practice, from the test maker itself. Do this one first.'],
+    ['JobTestPrep — free CCAT practice','jobtestprep.com/free-ccat-practice-test','Free test, paid course','A free 50-question simulation; paid course behind it. Good for a second full-format run.'],
+    ['iPREP','iprep.online','Free course','Strong strategy write-ups and a free course. Good for understanding the "why" behind each type.'],
+    ['PrepTerminal','prepterminal.com/ccat-practice-test','Free','Free 5-minute and 50-question versions. Useful for a quick warm-up or a longer run.'],
+    ['AptitudeAce','aptitudeace.com/ccat-practice-test','Free','A free timed mini-mock. Handy extra reps under time pressure.'],
+    ['Union Test Prep','uniontestprep.com/ccat/practice-test','Free','Free practice tests across the question types.'],
+    ['Practice Test Geeks','practicetestgeeks.com/ccat-practice-test-exam','Free','Free subtype-specific quizzes — good for isolating one weak area.'],
+  ];
+  const wrap=el('div',{});
+  wrap.append(el('div',{class:'panel'},el('h2',{},'Resources'),el('p',{class:'muted'},'Genuinely useful external practice, labelled by cost. Start with the official Criteria page for the most authentic format, then use the others for extra volume.')));
+  const list=el('div',{class:'panel'});
+  R.forEach(([name,url,cost,desc])=>{
+    const r=el('div',{class:'res'});
+    r.append(el('div',{class:'flex between'},el('b',{},name),el('span',{class:'tag'+(cost.startsWith('Free')?' good':'')},cost)));
+    r.append(el('div',{class:'u muted'},url));
+    r.append(el('div',{},desc));
+    list.append(r);
+  });
+  wrap.append(list);
+  const comm=el('div',{class:'panel'});
+  comm.append(el('h3',{},'Candidate accounts & walkthroughs'));
+  comm.append(el('p',{},el('b',{},'Reddit'),' — search "CCAT" in r/recruitinghell, r/jobs and r/cscareerquestions for real candidate accounts and score expectations. Useful for calibration; unreliable for facts, and never a source of actual questions.'));
+  comm.append(el('p',{},el('b',{},'YouTube'),' — search "CCAT practice test walkthrough", "CCAT 50 questions 15 minutes", and "CCAT spatial reasoning explained". Prefer full timed walkthroughs over tip-list videos; watching someone solve under the clock teaches pacing.'));
+  wrap.append(comm);
+  wrap.append(el('div',{class:'notice'},'This tool is independent and unaffiliated with, and not endorsed by, Criteria Corp. CCAT is a registered trademark of Criteria Corp. All questions in this app are original and written for practice. External sites are listed for convenience; their content is their own.'));
+  app.append(wrap);
+};
+
+/* =========================================================================
+   MY DATA
+   ========================================================================= */
+ROUTES.data=function(app){
+  const wrap=el('div',{});
+  const p=el('div',{class:'panel'});
+  p.append(el('h2',{},'My Data'));
+  p.append(el('p',{class:'muted'},'Everything is stored locally in your browser (localStorage) — no account, no network, works fully offline.'));
+  const g=el('div',{class:'grid cols3'});
+  g.append(kpi('Attempts',String(STATE.attempts.length),''));
+  g.append(kpi('Questions attempted',String(STATE.lifetimeAttempted),''));
+  g.append(kpi('Unique items seen',String(Object.keys(STATE.perQuestion).length),'of '+BANK.length));
+  p.append(g);
+  wrap.append(p);
+  // attempt history
+  const h=el('div',{class:'panel'});
+  h.append(el('h3',{},'Attempt history'));
+  if(!STATE.attempts.length)h.append(el('p',{class:'muted'},'No attempts yet.'));
+  else{
+    const t=el('table');t.append(el('tr',{},el('th',{},'When'),el('th',{},'Mode'),el('th',{},'Score'),el('th',{},'Reached'),el('th',{},'')));
+    STATE.attempts.slice().reverse().forEach(a=>{
+      const date=new Date(a.ts).toLocaleString();
+      t.append(el('tr',{},
+        el('td',{},date),
+        el('td',{},a.modeTitle+(a.reason==='abandoned'?' (abandoned)':'')),
+        el('td',{},a.correct+'/'+a.total),
+        el('td',{},a.reached+'/'+a.total),
+        el('td',{},el('a',{href:'#',onclick:e=>{e.preventDefault();go('results',{id:a.id});}},'review'))));
+    });
+    h.append(el('div',{class:'scrollx'},t));
+  }
+  wrap.append(h);
+  // export/import + reset
+  const d=el('div',{class:'panel'});
+  d.append(el('h3',{},'Backup & reset'));
+  d.append(el('button',{class:'btn ghost',onclick:exportData},'Export my data (JSON)'));
+  d.append(el('span',{},' '));
+  const imp=el('input',{type:'file',accept:'application/json',style:'display:none',id:'importFile',onchange:importData});
+  d.append(imp);
+  d.append(el('button',{class:'btn ghost',onclick:()=>$('#importFile').click()},'Import data'));
+  d.append(el('hr'));
+  d.append(el('button',{class:'btn danger',onclick:resetAll},'Reset ALL data'));
+  d.append(el('div',{class:'muted',style:'font-size:12px;margin-top:6px'},'Reset erases every attempt, timing, rung and setting. This cannot be undone.'));
+  wrap.append(d);
+  app.append(wrap);
+};
+function exportData(){
+  const blob=new Blob([JSON.stringify(STATE,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ccat-trainer-backup.json';a.click();
+}
+function importData(e){
+  const f=e.target.files[0];if(!f)return;const r=new FileReader();
+  r.onload=()=>{try{const s=JSON.parse(r.result);if(s&&s.attempts){STATE=Object.assign(DEFAULT_STATE(),s);save();applyTheme();go('dashboard');alert('Data imported.');}else alert('That does not look like a valid backup file.');}catch(err){alert('Could not read that file.');}};
+  r.readAsText(f);
+}
+
+/* =========================================================================
+   GUIDES — the teaching curriculum
+   ========================================================================= */
+const VOCAB=[
+  ['abate','to lessen or subside'],['aberration','a departure from the norm'],['abstain','to hold back from doing'],['adept','highly skilled'],['adverse','harmful; unfavourable'],['aggregate','a total gathered from parts'],['alleviate','to make less severe'],['ambiguous','open to more than one meaning'],['ample','more than enough'],['arbitrary','based on whim, not reason'],['articulate','to express clearly'],['augment','to increase'],['austere','severe; plain'],['benign','gentle; harmless'],['brevity','shortness'],['candid','frank; honest'],['circumvent','to get around'],['coherent','logically consistent'],['concede','to admit or yield'],['concise','brief and clear'],['consensus','general agreement'],['contentious','causing disagreement'],['conventional','following accepted practice'],['curtail','to cut short'],['deference','respectful yielding'],['deleterious','harmful'],['deter','to discourage'],['diligent','hard-working and careful'],['discrepancy','an inconsistency'],['disparate','distinctly different'],['dogmatic','asserting opinions as fact'],['ephemeral','short-lived'],['equitable','fair'],['erroneous','mistaken'],['exacerbate','to make worse'],['exemplary','serving as a model'],['exhaustive','thorough; complete'],['expedite','to speed up'],['facilitate','to make easier'],['feasible','possible to do'],['frugal','economical; sparing'],['futile','pointless'],['garner','to gather or earn'],['gregarious','sociable'],['hamper','to hinder'],['hierarchy','a ranked order'],['impartial','unbiased'],['impede','to obstruct'],['implicit','implied, not stated'],['inadvertent','unintentional'],['incentive','a motivating reward'],['incremental','in small steps'],['indifferent','showing no interest'],['inevitable','certain to happen'],['innocuous','harmless'],['intricate','complex; detailed'],['jeopardise','to put at risk'],['lucid','clear; easy to follow'],['meticulous','very careful about detail'],['mitigate','to make less severe'],['mundane','ordinary; dull'],['negligible','too small to matter'],['nominal','in name only; very small'],['novel','new; original'],['nuance','a subtle difference'],['obscure','unclear; little known'],['obsolete','out of date'],['ostensible','apparent but perhaps not real'],['paramount','of chief importance'],['plausible','believable'],['pragmatic','practical'],['precedent','an earlier case used as a guide'],['prudent','careful; sensible'],['proliferate','to increase rapidly'],['reciprocal','mutual; given in return'],['redundant','excess; no longer needed'],['reticent','reserved; reluctant to speak'],['rigorous','strict; thorough'],['salient','most noticeable'],['scrutinise','to examine closely'],['spurious','false; not genuine'],['stringent','strict'],['substantiate','to support with evidence'],['succinct','briefly and clearly stated'],['superfluous','more than is needed'],['tangible','able to be touched; real'],['tenable','defensible; able to be held'],['tentative','provisional; unsure'],['transient','lasting a short time'],['ubiquitous','present everywhere'],['unilateral','done by one side alone'],['viable','able to work; feasible'],['volatile','liable to sudden change'],['zealous','fervent; enthusiastic'],
+];
+function vocabTable(){
+  return '<div class="scrollx"><table><tr><th>Word</th><th>Meaning</th><th>Word</th><th>Meaning</th></tr>'+
+    (()=>{let rows='';for(let i=0;i<VOCAB.length;i+=2){const a=VOCAB[i],b=VOCAB[i+1]||['',''];rows+=`<tr><td><b>${a[0]}</b></td><td>${a[1]}</td><td><b>${b[0]}</b></td><td>${b[1]}</td></tr>`;}return rows;})()+
+    '</table></div>';
+}
+const GUIDES=[
+  {id:'orientation',n:'0',title:'Orientation',blurb:'What the CCAT is, the exact rules, the scoring model, and the single most important strategic fact: you cannot go back.',
+   drill:{label:'Try a gentle mixed set',run:()=>launchLearn('all','all',1)},
+   html:`
+<h3>What the CCAT is and why employers use it</h3>
+<p>The CCAT (Criteria Cognitive Aptitude Test) is a short, fast general-aptitude test. Employers — especially in finance — use it as a quick, standardised signal of how quickly you learn, reason and solve unfamiliar problems under pressure. It is deliberately harder to <em>finish</em> than to <em>do</em>: the content is GCSE-level at most, but the time limit means almost nobody completes every question. That is by design. The test is measuring your problem-solving <b>rate</b>, not just whether you can eventually get the answer.</p>
+<h3>The exact format and rules</h3>
+<ul>
+<li><b>50 questions in 15 minutes.</b> One global countdown, not a timer per question.</li>
+<li><b>~18 seconds per question</b> is the implied budget (900s ÷ 50). This app surfaces that number constantly.</li>
+<li><b>No calculator.</b> None is provided or allowed. Pen and paper usually are — use them.</li>
+<li><b>No skipping and no going back.</b> Once you answer or pass a question, it is gone. There is no review screen and no flagging.</li>
+<li><b>No pausing</b> once the timer starts.</li>
+<li><b>Mixed order.</b> Math, verbal and spatial are interleaved unpredictably — you are constantly switching mode.</li>
+<li><b>Difficulty ramps upward</b> across the 50 questions.</li>
+<li><b>No negative marking.</b> Your score is simply the number correct out of 50. A blank and a wrong answer score the same — so <b>never leave a blank</b>.</li>
+</ul>
+<h3>The scoring model</h3>
+<p>Your raw score is correct-out-of-50. The normative <b>median is about 24</b>, with a <b>standard deviation of about 7</b>. That means:</p>
+<ul><li>~24 puts you at roughly the 50th percentile.</li><li>~31 is about one SD above — strong.</li><li><b>35+ is the competitive band</b> for demanding finance roles, and what you should aim for.</li></ul>
+<p>This app shows your percentile against a normal curve with those parameters after every full simulation, and marks the 35 target explicitly.</p>
+<div class="shortcard"><b>The Two-Pass Myth.</b> On most timed tests the winning move is "skip the hard ones, come back later". <b>On the CCAT this is impossible</b> — there is no going back. So the classic two-pass strategy does not exist here. The only strategy is <b>instantaneous triage</b>: for each question, within about 20 seconds, either solve it or make your best guess and move on. There is no "later".</div>
+<h3>The psychology of not finishing</h3>
+<p>Most candidates do not reach all 50 questions, and that is completely normal. Reaching ~35–40 with high accuracy beats rushing through 50 with careless errors. Do not panic when the counter shows questions remaining as time runs low — plan for it. In the last 60 seconds, stop solving and spend the time <b>answering every remaining question with a guess</b>, because a guess can only help.</p>
+`},
+  {id:'math',n:'1',title:'Math & Logic',blurb:'Every math subtype from first principles, plus a mental-arithmetic bootcamp: percentage anchoring, fraction conversions, ratio scaling and working backwards from the options.',
+   drill:{label:'Drill mixed math & logic',run:()=>launchDrill('math','all',15)},
+   html:`
+<h3>The core idea</h3>
+<p>The maths never exceeds arithmetic, ratios, percentages, averages, simple algebra and basic probability. The difficulty is entirely <b>time pressure</b> and <b>traps</b>. So the whole game is (a) recognise the type instantly, (b) apply a fast method, (c) dodge the built-in trap.</p>
+
+<h3>Mental Arithmetic Bootcamp</h3>
+<p><b>Times tables to 15 and squares to 25.</b> These must be automatic — if you compute 12×13 slowly you have already lost the question. Drill them until they are recall, not calculation.</p>
+<div class="shortcard"><b>Percentage shortcuts</b><br>
+• <b>10% anchor:</b> 10% of any number = move the decimal one place. 10% of 340 = 34.<br>
+• <b>5% = half of 10%.</b> 5% of 340 = 17.<br>
+• <b>1% = move two places.</b> 1% of 340 = 3.4.<br>
+• Build any percentage from these: 15% = 10% + 5%; 20% = 10%×2; 35% = 10%×3 + 5%.<br>
+• <b>Percentages reverse:</b> x% of y = y% of x. 16% of 25 is the same as 25% of 16 = 4.</div>
+<div class="shortcard"><b>Fraction ↔ decimal ↔ percentage (memorise)</b><br>
+1/2 = .5 = 50% · 1/3 = .333 = 33% · 1/4 = .25 = 25% · 1/5 = .2 = 20% · 1/6 = .167 = 17% · 1/8 = .125 = 12.5% · 1/10 = .1 = 10% · 3/4 = .75 = 75% · 2/3 = .667 = 67% · 2/5 = .4 = 40%. Recognising "37.5% = 3/8" turns a hard sum into an instant one.</div>
+<div class="shortcard"><b>Ratio scaling without cross-multiplication.</b> To split in ratio a:b, find <b>one part</b> = total ÷ (a+b), then multiply. $600 in 2:3 → one part = 600÷5 = 120 → shares are 240 and 360. No equations needed.</div>
+<div class="shortcard"><b>Working backwards from the options.</b> On multiple choice you do not always have to solve forwards. If a question asks "what price, after a 25% rise, gives $150?", test the options ×1.25 and see which lands on 150. Often faster than algebra, and it dodges the reverse-percentage trap.</div>
+<div class="shortcard"><b>Estimate and eliminate by magnitude.</b> Before precise work, ask "roughly how big is the answer?" If a 20%-off calculation should be a bit under the original, any option above it is instantly wrong. Kill two options in two seconds, then choose.</div>
+
+<h3>The subtypes</h3>
+<p><b>Word problems (rate · work · distance).</b> Distance = speed × time; always convert minutes to hours <em>first</em> (the unit-switch trap). For two workers finishing a job, time together = (a×b)/(a+b). More workers → fewer days (inverse proportion), not more.</p>
+<p><b>Ratios & proportions.</b> Find one part, then scale. Watch the part-vs-whole trap: the question may want the <em>other</em> share or the <em>total</em>, not the part you computed.</p>
+<p><b>Percentages.</b> Percentage change is always over the <b>original</b> value. For a reverse percentage ("after a 20% rise it is $120, what was it?") you <b>divide</b> by 1.2 — never subtract 20% of the new figure.</p>
+<p><b>Averages.</b> Average = sum ÷ count. To hit a target average, work with the required <em>total</em>: to average 80 over 4 tests you need 320 total, then subtract what you have. Weighted averages multiply each value by its weight before dividing by the total weight.</p>
+<p><b>Simple algebra.</b> Undo operations in reverse order: strip the added constant first, then divide. Check by substituting your answer back.</p>
+<p><b>Number series.</b> Write the <b>differences between terms</b> first. A constant difference = arithmetic (+k). A constant ratio = geometric (×k). A growing difference = the step itself increases. Interleaved series alternate two patterns — check every <em>other</em> term.</p>
+<p><b>Probability & counting.</b> P = favourable ÷ total, over the <em>whole</em>. Independent events multiply. n distinct items arrange in n! orders.</p>
+<p><b>Profit / loss / interest.</b> Profit and loss percentages are over the <b>cost</b>. Simple interest = P×r×t/100 — do not forget the number of years.</p>
+<p><b>Unit conversion.</b> Decide first whether the unit gets bigger (divide) or smaller (multiply), then apply the factor. Most errors are direction errors.</p>
+<p><b>Data interpretation.</b> Read exactly what the question asks — total vs average vs change. Do not compute a percentage change over the wrong base.</p>
+<p><b>Logical deduction (true / false / uncertain).</b> "All A are B" plus "x is A" ⇒ x is B (true). The contrapositive is your friend: "all valid tickets have a barcode; this has none ⇒ not valid" (true). Beware "some": "some A are B" never lets you conclude "all". When the premises leave it genuinely open, the answer is <b>uncertain</b> — and uncertain is a real, common answer, not a cop-out.</p>
+<p><b>Attention to detail.</b> Compare strings left to right and stop at the first mismatch. For "how many pairs match", check each pair independently; the trap is miscounting by one.</p>
+`},
+  {id:'verbal',n:'2',title:'Verbal',blurb:'The relationship taxonomy for analogies, the bridge-sentence method, root/prefix decomposition for unknown words, signal words in sentence completion, and a high-frequency vocabulary list.',
+   drill:{label:'Drill mixed verbal',run:()=>launchDrill('verbal','all',15)},
+   html:`
+<h3>Analogies — encode the relationship</h3>
+<p>An analogy is never about the words themselves; it is about the <b>relationship</b> between them. The reliable method is the <b>bridge sentence</b>: state the relationship in words <em>before</em> you look at the options.</p>
+<p>"glove is to hand" → bridge: "a glove is worn on a hand". Now apply the identical bridge to "sock is to ___": "a sock is worn on a ___" → foot. The trap answer (shoe) is another thing worn on the foot but breaks the bridge, and (leg) is the wrong body part.</p>
+<div class="shortcard"><b>Relationship taxonomy</b> — the bridge is almost always one of these:<br>
+• <b>Part / whole</b> (petal : flower) · <b>Function</b> (knife : cut) · <b>Category</b> (rose : flower) · <b>Degree</b> (warm : hot) · <b>Cause / effect</b> (rain : flood) · <b>Antonym</b> (hot : cold) · <b>Sequence</b> (seed : plant) · <b>Worker / tool</b> (painter : brush) · <b>Object / location</b> (car : garage).</div>
+<p>The commonest analogy trap (<code>wrong-relation</code>) is an option that matches the <em>category</em> of the third word rather than the <em>relationship</em>. Always re-apply the exact bridge.</p>
+
+<h3>Synonyms & antonyms</h3>
+<p>Read the instruction word carefully — <b>SIMILAR</b> vs <b>OPPOSITE</b>. The single biggest trap on antonym questions is a <b>synonym</b> planted among the options; on synonym questions it is a <b>near-synonym of the wrong degree or connotation</b> ("adequate" is not "abundant").</p>
+<p>When the target word is unfamiliar, decompose it:</p>
+<div class="shortcard"><b>Roots, prefixes, suffixes</b><br>
+Prefixes: <b>a-/an-</b> = without (amoral) · <b>de-</b> = down/away (deter) · <b>circum-</b> = around (circumvent) · <b>bene-</b> = good (benign) · <b>mal-</b> = bad · <b>super-/sur-</b> = over (superfluous) · <b>sub-</b> = under.<br>
+"Benign" → <b>bene</b> (good) → gentle/harmless. "Deleterious" → sounds like "delete" → harmful. Guess by connotation: does the word <em>feel</em> positive or negative? That alone often eliminates two options.</div>
+
+<h3>Sentence completion — follow the signal words</h3>
+<p>Small connecting words control the meaning. Spot them first:</p>
+<ul>
+<li><b>Continuation</b> (and, because, therefore, so, since): the blank agrees with the rest of the sentence.</li>
+<li><b>Reversal</b> (but, although, however, despite, yet): the blank <em>opposes</em> the rest.</li>
+</ul>
+<p>"Although the plan looked promising, it ___ under scrutiny." The "although" demands a downturn → "faltered", not "succeeded". Decide the <em>direction</em> of the blank from the signal word before weighing individual options.</p>
+
+<h3>Elimination discipline</h3>
+<p>You rarely need to love your answer — you need the other three to be defensibly wrong. Cross options off explicitly (in your head or on paper) and take the last one standing. This is faster and less error-prone than trying to positively confirm one option.</p>
+
+<h3>High-frequency vocabulary</h3>
+<p>These words recur in tests of this register. Learn the meaning and, crucially, the <b>connotation</b> (positive / negative / neutral) — that is what the near-synonym traps exploit.</p>
+`+vocabTable()},
+  {id:'spatial',n:'3',title:'Spatial & Abstract',blurb:'Rotation as a procedure not a guess, distinguishing mirror from rotation instantly, matrix logic, series steps, and systematic odd-one-out.',
+   drill:{label:'Drill mixed spatial',run:()=>launchDrill('spatial','all',12)},
+   html:`
+<h3>Rotation is a procedure, not intuition</h3>
+<p>Do not try to rotate the <em>whole</em> figure in your head — it is slow and error-prone. Instead, <b>track one distinctive feature</b>: a marked corner, an arrow tip, the odd protrusion. Ask only "where does <em>that one feature</em> go?" and check the options for it. In this app's figures, the small light dot marks a corner — follow only the dot.</p>
+
+<div class="shortcard"><b>Mirror vs rotation — tell them apart instantly.</b> A <b>rotation</b> keeps the figure's <b>handedness</b>: spin it and it lands exactly on the original. A <b>mirror image reverses handedness</b> — like your reflection raising the opposite hand — and no amount of spinning fixes it. Trick: pick an asymmetric feature and see which <em>side</em> it sits on. If the marked corner has swapped sides, it is a reflection, not a rotation.</div>
+
+<h3>Matrix logic (3×3 grids)</h3>
+<p>Read the grid systematically: <b>rows first, then columns, then diagonals.</b> Name the transformation that takes one cell to the next — it is one of: <b>rotation, addition (a part appears), subtraction (a part vanishes), reflection, count change, shading change</b>. Once you can name the rule, apply it to the empty cell. In a well-formed matrix there is exactly one rule per direction — if you have "found" two conflicting rules, you have misread one.</p>
+
+<h3>Series continuation</h3>
+<p>Identify the <b>step</b> between consecutive figures — rotate by k degrees, add a side, add a dot — then apply it once more. Decoys often change something <em>irrelevant</em> (a figure rotates while the real pattern is the side-count). Isolate the one attribute that changes consistently.</p>
+
+<h3>Odd-one-out among figures</h3>
+<p>Enumerate attributes systematically rather than eyeballing: <b>count</b> (sides, dots), <b>shading</b>, <b>orientation</b>, <b>size</b>, <b>symmetry</b>. Three figures will share a property the fourth breaks. A classic version: three figures are rotations of one shape and the fourth is its <b>mirror image</b> — the reflected one is the odd one out.</p>
+
+<div class="shortcard"><b>The plausible-but-mirrored distractor.</b> The most common spatial trap is an option that is the correct figure <em>reflected</em> instead of rotated. It looks almost right. Always run the handedness check on your chosen answer before committing.</div>
+`},
+  {id:'timing',n:'4',title:'Timing & Triage Strategy',blurb:'The 18-second budget, the 20-second abandon rule and how to train it, guessing strategy, managing the ramp, and the last 60 seconds.',
+   drill:{label:'Train triage on the Speed Ladder',run:()=>launchSpeedLadder('all')},
+   html:`
+<h3>The 18-second budget</h3>
+<p>900 seconds ÷ 50 questions = 18 seconds each. That is the rhythm. It feels fast because it <em>is</em> fast — but many questions take 8–10 seconds, which banks time for the harder ones. The skill is not being fast on every question; it is <b>not being slow on any question</b>.</p>
+
+<div class="shortcard"><b>The 20-second abandon rule.</b> If you have not cracked a question by ~20 seconds, you probably will not crack it cheaply — and every extra second is stolen from a question you could have answered. So at 20 seconds: pick your best guess, mark it, move. No exceptions. This one habit separates high scorers from perfectionists.</div>
+
+<h3>How to train the abandon rule</h3>
+<p>It is a reflex, and reflexes need reps. Use the <b>Speed Ladder</b>: the per-question clock tightens as you go, forcing the abandon decision. Use the <b>amber (20s) / red (30s)</b> elapsed indicators in timed drills as your cue — when it turns amber, you are on the clock to decide. After each full simulation, read your <b>sinkholes</b> list: those are the exact moments the rule would have saved you.</p>
+
+<h3>Guessing strategy</h3>
+<p>There is no negative marking, so <b>a blank is strictly worse than a guess</b> — a guess has a ~25% chance of being right, a blank has 0%. Never leave a question unanswered. If you must guess blind, eliminate any option you can by magnitude or by trap-spotting first, then pick. If you cannot eliminate anything, just pick and move — do not spend time agonising over a guess.</p>
+
+<h3>Which subtypes to abandon on sight</h3>
+<p>This is personal and data-driven. After a few attempts, check your subtype heatmap: if one subtype is both <b>low-accuracy and slow</b>, adopt a "guess-on-sight" rule for it — answer instantly with a guess and bank the time for subtypes you are good at. It is better to reliably reach ten more questions you <em>can</em> do than to fight one you can't.</p>
+
+<h3>Managing the difficulty ramp</h3>
+<p>Questions get harder on average as you go. So protect your time early: do the easy early questions <em>accurately but briskly</em> — do not dawdle just because they are easy. The time you save at the start is what lets you think on the harder later questions.</p>
+
+<div class="shortcard"><b>The last 60 seconds.</b> Stop solving. Spend the final minute making sure <b>every remaining question has an answer selected</b> — even random ones. Since forward-only means you cannot return, and blanks score zero, filling them in can only raise your score.</div>
+`},
+  {id:'testday',n:'5',title:'Test-Day Protocol',blurb:'Environment setup, what proctoring watches and how to avoid innocent flags, the "do not peek" rule, a warm-up routine, and nerves.',
+   drill:{label:'Do a light full simulation',run:()=>launchFullSim(false)},
+   html:`
+<h3>Environment setup</h3>
+<ul>
+<li>Take it on a <b>laptop or desktop</b>, never a phone — the spatial figures and the pace demand a real screen and keyboard. Practise the same way.</li>
+<li>Use a <b>wired or reliable connection</b>. Close other tabs and apps. Restart the browser beforehand so nothing steals focus.</li>
+<li>Have <b>pen and paper</b> ready — it is allowed and strongly recommended for arithmetic and for tracking spatial features.</li>
+<li>Clear your desk of everything else. Good lighting, comfortable chair, water within reach.</li>
+</ul>
+
+<h3>What proctoring may monitor — and how to avoid innocent flags</h3>
+<p>Remote assessments may capture <b>periodic webcam images</b>, sample your <b>screen and audio</b>, and verify your <b>identity</b>. None of that is sinister, but ordinary behaviour can look suspicious to an automated flagger. To stay clean:</p>
+<ul>
+<li><b>Clear desk</b> — no notes, no second device visible.</li>
+<li><b>No second monitor.</b> Unplug it; a detected external display is a common flag.</li>
+<li><b>Phone in another room</b> — not just face-down on the desk.</li>
+<li><b>Do not talk aloud</b>, even to yourself, and do not read questions out.</li>
+<li><b>Do not leave the camera frame</b> or look off-screen repeatedly. Keep your face visible and your eyes on the screen.</li>
+<li>Make sure your face is <b>well lit</b> for the identity check.</li>
+</ul>
+
+<div class="shortcard"><b>Do not "open it to have a look".</b> On most setups the <b>timer starts the moment you open the assessment</b>. There is no preview. Only open it when you are fully ready to sit all 15 minutes.</div>
+
+<h3>Warm-up routine (the 10 minutes before)</h3>
+<ul>
+<li>Do <b>5–10 easy questions in Untimed Learn</b> to get your brain into the right mode — do not attempt anything hard.</li>
+<li>Run through the <b>shortcut cards</b>: percentage anchors, fraction table, the abandon rule.</li>
+<li>Do <b>not</b> take a full practice simulation right before — you want to arrive fresh, not depleted.</li>
+</ul>
+
+<h3>Nerves</h3>
+<p>Some adrenaline sharpens you; too much freezes you. Breathe slowly (in for 4, out for 6) for a minute before you start. Remember the two facts that lower the stakes: <b>nobody finishes</b>, and <b>you cannot go back</b>, so there is nothing to agonise over — solve or guess, then forward. Treat each question as disposable. That mindset is faster <em>and</em> calmer.</p>
+`},
+  {id:'epp',n:'6',title:'The Personality Test (EPP)',blurb:'Guidance, not practice: what the EPP measures, why honesty and speed matter, the validity checks, and the traits that matter for a client-facing seat.',
+   drill:null,
+   html:`
+<h3>Why this section exists</h3>
+<p>The ~40-minute invitation you receive almost certainly bundles a <b>personality inventory</b> (an EPP-style instrument) alongside the ~15-minute CCAT. This section is <b>guidance only</b> — there is nothing to drill, and you should not try to "practise" a personality test.</p>
+
+<h3>What it measures</h3>
+<p>It profiles you across roughly <b>twelve traits</b> — things like assertiveness, cooperativeness, conscientiousness, patience, sociability, stress tolerance — and compares your profile against a benchmark for the role. There are no right answers in the CCAT sense; there is only how well your genuine profile fits the seat.</p>
+
+<div class="shortcard"><b>Answer honestly and fast — and here is why.</b> The instrument runs <b>consistency checks</b> (it asks the same trait several ways) and <b>social-desirability checks</b> (items designed to catch people painting themselves as flawless). If you try to game it, you produce an inconsistent or implausibly perfect pattern, and the system <b>flags the profile as invalid or distorted</b>. A flagged profile is <b>worse than an ordinary one</b> — it reads as "this person tried to fake it." An average honest profile beats a suspiciously perfect one every time.</div>
+
+<h3>The traits that genuinely matter for a client-servicing finance seat</h3>
+<p>For a client-facing role, benchmarks typically reward: <b>conscientiousness</b> (diligent, reliable, detail-focused), <b>cooperativeness</b> (a team player), <b>patience</b>, <b>diplomacy</b> (tactful under pressure), and <b>stress tolerance</b> (stays composed). You do not need to fake these — but knowing they matter helps you answer as your <em>professional</em> self rather than second-guessing.</p>
+
+<h3>Practical instruction</h3>
+<ul>
+<li><b>First instinct.</b> Read the statement, pick the response that feels true, move on. Your first read is the most consistent.</li>
+<li><b>Do not deliberate.</b> Overthinking creates the inconsistencies the validity checks look for.</li>
+<li><b>Do not construct a character.</b> You cannot reliably maintain a fabricated persona across a few hundred items — the instrument is built to catch exactly that. Be your steady, professional self and answer quickly.</li>
+</ul>
+`},
+];
+const GUIDE_BY_ID={};GUIDES.forEach(g=>GUIDE_BY_ID[g.id]=g);
+ROUTES.guides=function(app){
+  const wrap=el('div',{});
+  wrap.append(el('div',{class:'panel'},el('h2',{},'Guides'),el('p',{class:'muted'},'A full teaching curriculum, taught from first principles. Work through them in order, or jump to a weak area. Every module ends with a "Drill this now" button that launches targeted practice on exactly that content.')));
+  GUIDES.forEach(g=>{
+    const c=el('div',{class:'panel',style:'display:flex;gap:14px;align-items:flex-start'});
+    c.append(el('div',{class:'rung',style:'flex:0 0 auto;border:0;padding:0'},el('div',{class:'n'},g.n)));
+    const mid=el('div',{style:'flex:1'});
+    mid.append(el('div',{style:'font-weight:700;font-size:17px'},g.title));
+    mid.append(el('div',{class:'muted',style:'font-size:14px;margin:4px 0'},g.blurb));
+    mid.append(el('button',{class:'btn sm',onclick:()=>go('guide',{id:g.id})},'Open module'));
+    c.append(mid);
+    wrap.append(c);
+  });
+  app.append(wrap);
+};
+ROUTES.guide=function(app,params){
+  const g=GUIDE_BY_ID[params.id];if(!g){go('guides');return;}
+  const wrap=el('div',{});
+  const nav=el('div',{class:'flex between'},
+    el('button',{class:'btn ghost sm',onclick:()=>go('guides')},'← All guides'),
+    el('div',{class:'muted',style:'font-size:13px'},'Module '+g.n));
+  wrap.append(nav);
+  const body=el('div',{class:'panel guidebody'});
+  body.append(el('h2',{},g.title));
+  body.append(el('div',{html:g.html}));
+  wrap.append(body);
+  const foot=el('div',{class:'panel center'});
+  if(g.drill){
+    foot.append(el('div',{class:'muted',style:'margin-bottom:8px'},'Ready to apply it?'));
+    foot.append(el('button',{class:'btn',onclick:g.drill.run},'Drill this now — '+g.drill.label));
+  } else {
+    foot.append(el('div',{class:'muted'},'This module is guidance only — there is nothing to drill.'));
+  }
+  // prev/next
+  const idx=GUIDES.findIndex(x=>x.id===g.id);
+  const pn=el('div',{class:'flex between',style:'margin-top:12px'});
+  pn.append(idx>0?el('button',{class:'btn ghost sm',onclick:()=>go('guide',{id:GUIDES[idx-1].id})},'← '+GUIDES[idx-1].title):el('span',{}));
+  pn.append(idx<GUIDES.length-1?el('button',{class:'btn ghost sm',onclick:()=>go('guide',{id:GUIDES[idx+1].id})},GUIDES[idx+1].title+' →'):el('span',{}));
+  foot.append(pn);
+  wrap.append(foot);
+  app.append(wrap);
+};
+
+/* =========================================================================
+   BOOT
+   ========================================================================= */
+applyTheme();
+render();
+</script>
+</body>
+</html>
