@@ -1,0 +1,235 @@
+/* ============ PAGE SETUP ============ */
+@page {
+  size: A4;
+  margin: 22mm 20mm 20mm 20mm;
+  @top-left {
+    content: "The Finance CV Playbook";
+    font-family: "Liberation Sans", sans-serif;
+    font-size: 7.5pt; color: #9aa3b2; letter-spacing: 0.03em;
+    vertical-align: bottom; padding-bottom: 3mm;
+  }
+  @top-right {
+    content: string(section-title);
+    font-family: "Liberation Sans", sans-serif;
+    font-size: 7.5pt; color: #9aa3b2; letter-spacing: 0.02em;
+    vertical-align: bottom; padding-bottom: 3mm;
+  }
+  @bottom-right {
+    content: counter(page);
+    font-family: "Liberation Sans", sans-serif;
+    font-size: 8.5pt; color: #5a6478;
+    vertical-align: top; padding-top: 3mm;
+  }
+  @bottom-left {
+    content: "Janak Chohan";
+    font-family: "Liberation Sans", sans-serif;
+    font-size: 7.5pt; color: #b8bfca;
+    vertical-align: top; padding-top: 3mm;
+  }
+}
+@page :first { margin: 0; }
+@page cover { margin: 0;
+  @top-left { content: none; } @top-right { content: none; }
+  @bottom-right { content: none; } @bottom-left { content: none; }
+}
+
+/* ============ BASE ============ */
+html { font-size: 10.3pt; }
+body {
+  font-family: "Bitstream Charter", "Liberation Serif", serif;
+  color: #1c2230; line-height: 1.42; margin: 0; padding: 0;
+  hyphens: auto; text-align: left;
+}
+p { margin: 0 0 6pt 0; }
+strong { color: #101726; }
+em { color: #2a3346; }
+a { color: #14315e; text-decoration: none; }
+
+/* ============ HEADINGS ============ */
+h1 {
+  font-family: "Liberation Sans", sans-serif;
+  font-size: 21pt; font-weight: 700; color: #0f2350;
+  line-height: 1.1; margin: 0 0 2mm 0;
+  padding: 0 0 3mm 0; border-bottom: 2.5pt solid #0f2350;
+  string-set: section-title content();
+  break-before: avoid; break-after: avoid;
+}
+p.kick {
+  font-family: "Liberation Sans", sans-serif; font-weight: 700; font-size: 9pt;
+  letter-spacing: 0.14em; text-transform: uppercase; color: #b58b2a;
+  margin: 0 0 2mm 0; break-before: page; break-after: avoid;
+}
+h2 {
+  font-family: "Liberation Sans", sans-serif;
+  font-size: 13.5pt; font-weight: 700; color: #14315e;
+  margin: 7mm 0 2mm 0; break-after: avoid; line-height: 1.15;
+}
+h3 {
+  font-family: "Liberation Sans", sans-serif;
+  font-size: 11pt; font-weight: 700; color: #2a3652;
+  margin: 5mm 0 1.5mm 0; break-after: avoid;
+}
+h4 {
+  font-family: "Liberation Sans", sans-serif;
+  font-size: 9.7pt; font-weight: 700; color: #45506a;
+  margin: 3.5mm 0 1mm 0; break-after: avoid;
+  text-transform: uppercase; letter-spacing: 0.04em;
+}
+h2 + p, h3 + p, h4 + p { margin-top: 0; }
+
+/* ============ LISTS ============ */
+ul, ol { margin: 3pt 0 7pt 0; padding-left: 5.2mm; }
+li { margin: 0 0 2.5pt 0; }
+li::marker { color: #8792a6; }
+ul ul, ol ol, ul ol, ol ul { margin: 2pt 0 2pt 0; }
+
+/* ============ TABLES ============ */
+table {
+  border-collapse: collapse; width: 100%; margin: 3mm 0 5mm 0;
+  font-size: 8.6pt; line-height: 1.3; break-inside: auto;
+}
+thead { display: table-header-group; }
+tr { break-inside: avoid; }
+th {
+  background: #0f2350; color: #fff; font-family: "Liberation Sans", sans-serif;
+  font-weight: 700; text-align: left; padding: 4pt 6pt; font-size: 8.3pt;
+  vertical-align: top; border: 0.5pt solid #0f2350;
+}
+td {
+  padding: 4pt 6pt; border: 0.5pt solid #cfd6e0; vertical-align: top;
+}
+tbody tr:nth-child(even) { background: #f0f3f8; }
+table.tight { font-size: 8.2pt; }
+
+/* ============ CALLOUT BOXES ============ */
+.box {
+  break-inside: avoid; margin: 4mm 0; padding: 3.5mm 4mm 2mm 4mm;
+  border-radius: 1.5mm; font-size: 9.6pt; line-height: 1.38;
+}
+.box p:last-child, .box ul:last-child, .box ol:last-child { margin-bottom: 2pt; }
+.box .lbl {
+  display: block; font-family: "Liberation Sans", sans-serif; font-weight: 700;
+  font-size: 8.2pt; letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 1.5mm;
+}
+.note    { background: #eef4fb; border-left: 3pt solid #2f6bb0; }
+.note .lbl { color: #2f6bb0; }
+.warning { background: #fdeeee; border-left: 3pt solid #b3283a; }
+.warning .lbl { color: #b3283a; }
+.honest  { background: #fbf3e6; border-left: 3pt solid #b58b2a; }
+.honest .lbl { color: #97701c; }
+.good    { background: #eaf6ef; border-left: 3pt solid #1f7a4d; }
+.good .lbl { color: #1f7a4d; }
+.disagree { background: #f4f0fa; border-left: 3pt solid #6a4ca3; }
+.disagree .lbl { color: #6a4ca3; }
+
+/* ============ BEFORE / AFTER BULLET BLOCKS ============ */
+.ba {
+  break-inside: avoid; margin: 3.5mm 0; border: 0.5pt solid #d5dbe4;
+  border-radius: 1.5mm; overflow: hidden;
+}
+.ba .before, .ba .after { padding: 2.5mm 3.5mm; font-size: 9.5pt; line-height: 1.36; }
+.ba .before { background: #fbeeee; border-bottom: 0.5pt solid #e3c3c3; }
+.ba .after  { background: #ecf6f0; }
+.ba .tag {
+  font-family: "Liberation Sans", sans-serif; font-weight: 700; font-size: 7.6pt;
+  letter-spacing: 0.09em; text-transform: uppercase; display: inline-block;
+  margin-right: 2mm; padding: 0.3mm 1.6mm; border-radius: 0.8mm; color: #fff;
+  vertical-align: 12%;
+}
+.ba .before .tag { background: #b3283a; }
+.ba .after .tag  { background: #1f7a4d; }
+.ba .why {
+  font-size: 8.7pt; color: #444d60; font-style: italic;
+  margin-top: 1.5mm; line-height: 1.3;
+}
+
+/* ============ SKELETON / MONO ============ */
+pre, .skeleton {
+  font-family: "DejaVu Sans Mono", monospace; font-size: 7.9pt; line-height: 1.32;
+  background: #f5f6f8; border: 0.5pt solid #d5dbe4; border-radius: 1.5mm;
+  padding: 3.5mm 4mm; white-space: pre-wrap; break-inside: auto; color: #222836;
+}
+code {
+  font-family: "DejaVu Sans Mono", monospace; font-size: 0.86em;
+  background: #eef0f4; padding: 0.2mm 1mm; border-radius: 0.8mm; color: #7a2438;
+}
+pre code { background: none; padding: 0; color: inherit; }
+
+/* ============ VERB BANK ============ */
+.verbbank { column-count: 2; column-gap: 7mm; font-size: 9pt; margin: 3mm 0; break-inside: auto; }
+.verbbank .grp { break-inside: avoid; margin-bottom: 3mm; }
+.verbbank .grp b { font-family: "Liberation Sans", sans-serif; color: #14315e; }
+
+/* ============ INLINE CITATIONS ============ */
+.src { font-size: 0.82em; color: #6b7488; font-style: italic; }
+.q { color: #33405a; }
+blockquote {
+  margin: 3mm 0; padding: 1mm 0 1mm 4mm; border-left: 2.5pt solid #b9c2d0;
+  color: #33405a; font-style: italic; font-size: 9.6pt;
+}
+
+/* ============ COVER ============ */
+.cover {
+  page: cover; break-after: page; height: 297mm; width: 210mm;
+  background: #0f2350; color: #fff; position: relative; box-sizing: border-box;
+  padding: 40mm 26mm;
+}
+.cover::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 8mm;
+  background: #b58b2a;
+}
+.cover .eyebrow {
+  font-family: "Liberation Sans", sans-serif; font-size: 10pt; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase; color: #d9b968; margin-bottom: 10mm;
+}
+.cover .ct {
+  font-family: "Liberation Sans", sans-serif; font-size: 40pt; font-weight: 800;
+  line-height: 1.04; color: #fff; margin: 0 0 6mm 0; padding: 0;
+}
+.cover .sub {
+  font-size: 14pt; line-height: 1.4; color: #c3ccdb; font-style: italic;
+  max-width: 130mm; margin-bottom: 22mm;
+}
+.cover .meta { position: absolute; bottom: 34mm; left: 26mm; right: 26mm; font-size: 9.5pt; color: #aeb8ca; line-height: 1.6; }
+.cover .meta .big { font-family: "Liberation Sans", sans-serif; color:#fff; font-size: 11pt; font-weight: 700; letter-spacing: 0.02em; }
+.cover .rule { height: 0.5pt; background: #34456b; margin: 5mm 0; }
+
+/* ============ TABLE OF CONTENTS ============ */
+.toc { break-after: auto; }
+.toc-title { font-family: "Liberation Sans", sans-serif; font-size: 21pt; font-weight: 800;
+  color: #0f2350; padding: 0 0 3mm 0; border-bottom: 2.5pt solid #0f2350; margin: 4mm 0 0 0; }
+.toc h1 { break-before: avoid; }
+.toc ul { list-style: none; padding-left: 0; margin: 4mm 0 0 0; }
+.toc > ul > li {
+  font-family: "Liberation Sans", sans-serif; font-weight: 700; font-size: 10.5pt;
+  color: #0f2350; margin: 3.2mm 0 0 0;
+}
+.toc ul ul { margin: 1mm 0 2mm 0; }
+.toc ul ul li {
+  font-family: "Bitstream Charter", serif; font-weight: 400; font-size: 9.3pt;
+  color: #45506a; margin: 0.8mm 0;
+}
+.toc a { color: inherit; display: flex; }
+.toc a::after {
+  content: target-counter(attr(href), page);
+  margin-left: auto; padding-left: 2mm; color: #8792a6;
+  font-family: "Liberation Sans", sans-serif; font-weight: 400; font-size: 9pt;
+}
+.toc .leader { flex: 1; border-bottom: 0.4pt dotted #c3cad6; margin: 0 1.5mm 1mm 1.5mm; }
+
+/* ============ MISC ============ */
+.lead { font-size: 11pt; color: #33405a; line-height: 1.45; margin-bottom: 4mm; }
+hr { border: 0; border-top: 0.5pt solid #d5dbe4; margin: 6mm 0; }
+.small { font-size: 8.6pt; color: #5a6478; }
+.tick { color: #1f7a4d; font-weight: 700; }
+.cross { color: #b3283a; font-weight: 700; }
+.sectionmeta {
+  font-family: "Liberation Sans", sans-serif; font-size: 8.5pt; color:#8792a6;
+  margin: -1mm 0 4mm 0; font-style: italic;
+}
+h2, h3 { break-inside: avoid; }
+figure { margin: 3mm 0; break-inside: avoid; }
+.chk li { list-style: none; }
+.chk { padding-left: 2mm; }
+.chk li::before { content: "\2610  "; color: #2f6bb0; font-weight: 700; }
