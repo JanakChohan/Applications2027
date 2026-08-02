@@ -20,6 +20,7 @@ ORDER = [
     ("chapter", "09-willo.md"),
     ("chapter", "10-testgorilla.md"),
     ("chapter", "11-morgan-stanley.md"),
+    ("chapter", "12-criteria-corp.md"),
     ("part", "Part II — Cross-Cutting Reference"),
     ("chapter", "61-why-assessments-exist.md"),
     ("chapter", "62-vendor-landscape.md"),
