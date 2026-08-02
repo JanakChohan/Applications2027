@@ -19,6 +19,7 @@ These are the pages to print, screenshot and keep beside you. Everything here is
 | **Willo** (Ch. 9) | Async video (lightweight) | Video/audio/text/MCQ; 1–5 min answer; retakes employer-set | Employer scorecards; **no norms**; AI-assisted, **human-decided** | Minimal by design | Human-reviewed | **No documented front-office IB use** |
 | **TestGorilla** (Ch. 10) | Self-serve skills library | ≤5 tests + custom Q; most ~10 min; one attempt | Per-test **%**, candidate ranking; benchmarks | **Anti-cheat suite** (webcam snapshots, tab-switch, IP) | Mixed | **Fintechs/challengers**, not bulge-bracket |
 | **Morgan Stanley** (Ch. 11) | Firm stack (vendor-supplied) | cut-e battery (gated) + HireVue + HackerRank | As per Aon + HireVue; **programme/division-gated** | As per vendors | As per vendors | The firm itself (case study) |
+| **Criteria Corp** (Ch. 12) | Cognitive + personality + games + video | **CCAT 50 Q/15 min** (most don't finish); UCAT; EPP; Cognify; Alcami | Raw → **percentile** vs norm; employer sets bar via published job-family ranges | Optional **AI proctoring** (no lockdown); dynamic item bank; **"Invalid Result"** detector | Cognitive: no. EPP: validity scales catch it | **Thin/absent in UK IB-AM**; US-PE (Vista) & US fintech |
 
 *Every cell is unpacked and sourced in the referenced chapter. Cut-offs are omitted here because no reliable public figures exist — see the Confidence Register.*
 
