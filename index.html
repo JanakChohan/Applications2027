@@ -2117,6 +2117,31 @@ ROUTES.resources=function(app){
     list.append(r);
   });
   wrap.append(list);
+  // comprehensive web list of free practice-question sets (imitations)
+  const WEB=[
+    ['12MinPrep — free 30-question sample','12minprep.com/knowledge-hub/free-criteria-cognitive-aptitude-test-practice/','https://www.12minprep.com/knowledge-hub/free-criteria-cognitive-aptitude-test-practice/','Free','Free 30-question sample test with a score report and answers.'],
+    ['BoostPrep — free full-length sim','boostprep.com/ccat-practice-test/','https://www.boostprep.com/ccat-practice-test/','Free','Free 50-question simulated exam with detailed answer explanations.'],
+    ['CCATPracticeTest.com — 30 free questions','ccatpracticetest.com/free-ccat-practice-test/','https://www.ccatpracticetest.com/free-ccat-practice-test/','Free','30 CCAT-style questions across all four types, with a full answer key and explanations.'],
+    ['CCATPracticeTest.com — free question PDF','ccatpracticetest.com/media/files/free-ccat-practice-test-questions.pdf','https://www.ccatpracticetest.com/media/files/free-ccat-practice-test-questions.pdf','PDF','Downloadable printable question set — good for a pen-and-paper timed run.'],
+    ['HeyAcademy — 50 questions (free PDF)','heycademy.com/en/ccat-practice-questions-pdf/','https://heycademy.com/en/ccat-practice-questions-pdf/','PDF','50 practice questions with answers as a free PDF download.'],
+    ['Prepopedia — free 50-question test','prepopedia.com/free-ccat-practice-test/','https://prepopedia.com/free-ccat-practice-test/','Free','Free 50-questions-in-15-minutes simulation with answers.'],
+    ['Practice4Me — samples + free PDF','practice4me.com/free-criteria-cognitive-aptitude-test-ccat-practice/','https://www.practice4me.com/free-criteria-cognitive-aptitude-test-ccat-practice/','Free · PDF','Sample questions with worked answers plus a downloadable printable PDF.'],
+    ['PsychometricTests.org — Criteria practice','psychometrictests.org/publishers/criteria-corp/','https://www.psychometrictests.org/publishers/criteria-corp/','Free','Free Criteria-style practice questions with explanations.'],
+    ['AssessmentDay — CCAT preparation','assessmentday.com/ccat-criteria.htm','https://www.assessmentday.com/ccat-criteria.htm','Free','Free practice questions and a preparation write-up from a well-known UK provider.'],
+    ['GraduatesFirst — Criteria assessments guide','graduatesfirst.com/criteria-corp-assessments','https://www.graduatesfirst.com/criteria-corp-assessments','Free','Free practice and a full guide covering the CCAT and Criteria’s other assessments.'],
+  ];
+  const web=el('div',{class:'panel'});
+  web.append(el('h3',{style:'margin-top:0'},'More free practice-question sets across the web'));
+  web.append(el('p',{class:'muted',style:'font-size:13px'},'Every link below is a FREE set of CCAT-style practice questions — original imitations, not real leaked papers (which do not exist for this test). Items marked PDF are downloadable question sets you can print and do on paper under the clock. Quality varies; treat them as extra volume once you have done the official Criteria practice and this app.'));
+  WEB.forEach(([name,disp,href,cost,desc])=>{
+    const r=el('div',{class:'res'});
+    r.append(el('div',{class:'flex between'},el('b',{},name),el('span',{class:'tag'+(cost.includes('PDF')&&!cost.includes('Free')?'':' good')},cost)));
+    r.append(el('a',{class:'u',href,target:'_blank',rel:'noopener noreferrer'},disp+' ↗'));
+    r.append(el('div',{},desc));
+    web.append(r);
+  });
+  web.append(el('div',{class:'notice'},'These are third-party sites, listed for convenience; their content is their own and this app does not endorse or control it. Beware any site claiming to sell or share "the real CCAT questions" — those are leaked copyrighted items, and because the test uses dynamic delivery, memorising them will not help you.'));
+  wrap.append(web);
   const comm=el('div',{class:'panel'});
   comm.append(el('h3',{},'Candidate accounts & walkthroughs'));
   comm.append(el('p',{},el('b',{},'Reddit'),' — search "CCAT" in r/recruitinghell, r/jobs and r/cscareerquestions for real candidate accounts and score expectations. Useful for calibration; unreliable for facts, and never a source of actual questions.'));
