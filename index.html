@@ -2090,6 +2090,24 @@ ROUTES.resources=function(app){
   ];
   const wrap=el('div',{});
   wrap.append(el('div',{class:'panel'},el('h2',{},'Resources'),el('p',{class:'muted'},'Genuinely useful external practice, labelled by cost. Start with the official Criteria page for the most authentic format, then use the others for extra volume.')));
+  const pp=el('div',{class:'panel',style:'border-color:var(--accent)'});
+  pp.append(el('h3',{style:'margin-top:0'},'Looking for "real past papers"?'));
+  pp.append(el('p',{},'There are none — the CCAT uses dynamic item delivery, so every candidate sees a different set and no real forms are ever published. Sites claiming "real questions" are either leaked copyrighted items (useless to memorise, since you will never see them again) or original imitations like this app. The genuinely authentic practice is Criteria’s own official material, below.'));
+  pp.append(el('button',{class:'btn sm',onclick:()=>go('guide',{id:'authentic'})},'Read: Authentic Practice & the Truth About Past Papers'));
+  wrap.append(pp);
+  const off=el('div',{class:'panel'});
+  off.append(el('h3',{style:'margin-top:0'},'Official — from Criteria Corp (do these first)'));
+  [['Criteria official practice tests','criteriacorp.com/candidates/practice-tests','https://www.criteriacorp.com/candidates/practice-tests','Shortened, official-format simulations from the test-maker. The most authentic format available anywhere.'],
+   ['Criteria Candidate Resource Hub','criteriacorp.com/candidates/resource-hub','https://www.criteriacorp.com/candidates/resource-hub','Official prep tips, candidate FAQs and what the day looks like.'],
+   ['Official CCAT Information Brief (PDF)','criteriacorp.com/files/Criteria-InfoBrief-CCAT.pdf','https://www.criteriacorp.com/files/Criteria-InfoBrief-CCAT.pdf','Format, scoring model and score bands, straight from the source.']]
+   .forEach(([name,disp,href,desc])=>{
+     const r=el('div',{class:'res'});
+     r.append(el('div',{class:'flex between'},el('b',{},name),el('span',{class:'tag good'},'Official · Free')));
+     r.append(el('a',{class:'u',href,target:'_blank',rel:'noopener noreferrer'},disp+' ↗'));
+     r.append(el('div',{},desc));
+     off.append(r);
+   });
+  wrap.append(off);
   const list=el('div',{class:'panel'});
   R.forEach(([name,url,cost,desc])=>{
     const r=el('div',{class:'res'});
@@ -2199,6 +2217,48 @@ const GUIDES=[
 <div class="shortcard"><b>The Two-Pass Myth.</b> On most timed tests the winning move is "skip the hard ones, come back later". <b>On the CCAT this is impossible</b> — there is no going back. So the classic two-pass strategy does not exist here. The only strategy is <b>instantaneous triage</b>: for each question, within about 20 seconds, either solve it or make your best guess and move on. There is no "later".</div>
 <h3>The psychology of not finishing</h3>
 <p>Most candidates do not reach all 50 questions, and that is completely normal. Reaching ~35–40 with high accuracy beats rushing through 50 with careless errors. Do not panic when the counter shows questions remaining as time runs low — plan for it. In the last 60 seconds, stop solving and spend the time <b>answering every remaining question with a guess</b>, because a guess can only help.</p>
+`},
+  {id:'authentic',n:'★',title:'Authentic Practice & the Truth About "Past Papers"',blurb:'Why the CCAT has no past papers, what the "real questions" sites actually are, and where the genuinely authentic practice lives — starting with the official material from the test maker itself.',
+   drill:null,
+   html:`
+<h3>There are no CCAT "past papers" — and that is deliberate</h3>
+<p>The CCAT is not like a school or university exam that publishes old papers each year. Criteria uses <b>dynamic item delivery</b>: every candidate is served a different set of questions drawn from a large, confidential item bank, and the real test forms are <b>never released</b>. So there is no "past paper" to track down — not because it is hidden, but because for this test the thing simply does not exist. Criteria's own information brief is explicit that even <em>their</em> practice tests are shortened, simulated versions that "don't reflect the exact experience or full difficulty level."</p>
+
+<div class="shortcard"><b>Why chasing "real questions" is a trap.</b> Because no two candidates see the same set, memorising specific items is <b>worthless</b> — you will never meet that exact question again. What actually transfers is <b>pattern recognition and speed</b>: knowing the shape of a reverse-percentage problem, or spotting a mirrored-figure distractor, in two seconds. That is trained by doing <em>many</em> same-format items, which is exactly what this app's 600 questions are for. An hour spent hunting leaked papers is an hour not spent building the reflex that is actually scored.</div>
+
+<h3>What the "real CCAT questions" websites actually are</h3>
+<p>When a site advertises "real CCAT questions", it is almost always one of two things:</p>
+<ul>
+<li><b>Leaked, copyrighted test items.</b> These are Criteria's confidential property. Reproducing or drilling them is a copyright and test-security problem — and, as above, pedagogically useless because of dynamic delivery.</li>
+<li><b>Original imitations.</b> Questions written by a prep vendor to <em>match the style</em> of the real thing — exactly like the items in this app. This is the legitimate, useful kind. Judge it on how faithfully it mirrors the format and difficulty, not on any claim of being "the real test".</li>
+</ul>
+
+<h3>The one genuinely authentic source: Criteria's own practice</h3>
+<p>The closest legitimate thing to "the real test" is the practice material from the test-maker itself. Do this first:</p>
+<ul>
+<li><b>Criteria official practice tests</b> — <span class="mono">criteriacorp.com/candidates/practice-tests</span><br><a href="https://www.criteriacorp.com/candidates/practice-tests" target="_blank" rel="noopener noreferrer">open ↗</a> — shortened, official-format simulations from Criteria Corp. The most authentic format available anywhere.</li>
+<li><b>Criteria Candidate Resource Hub</b> — <span class="mono">criteriacorp.com/candidates/resource-hub</span><br><a href="https://www.criteriacorp.com/candidates/resource-hub" target="_blank" rel="noopener noreferrer">open ↗</a> — official prep tips, FAQs and what to expect on the day.</li>
+<li><b>Official CCAT Information Brief (PDF)</b> — <span class="mono">criteriacorp.com/files/Criteria-InfoBrief-CCAT.pdf</span><br><a href="https://www.criteriacorp.com/files/Criteria-InfoBrief-CCAT.pdf" target="_blank" rel="noopener noreferrer">open ↗</a> — the format, scoring model and score bands, straight from the source.</li>
+</ul>
+
+<h3>Legit free full-length imitations worth doing</h3>
+<p>After the official material, these free mocks give you extra reps in something close to the real format. They are imitations, not real papers — use them for volume and timing, and see the Resources page for the full annotated list.</p>
+<ul>
+<li><b>JobTestPrep</b> — free 50-question simulation · <span class="mono">jobtestprep.com/free-ccat-practice-test</span></li>
+<li><b>PrepTerminal</b> — free 5-minute and 50-question versions · <span class="mono">prepterminal.com/ccat-practice-test</span></li>
+<li><b>iPREP</b> — free course with strong strategy write-ups · <span class="mono">iprep.online</span></li>
+<li><b>Practice Test Geeks</b> — free subtype-specific quizzes · <span class="mono">practicetestgeeks.com/ccat-practice-test-exam</span></li>
+</ul>
+
+<div class="shortcard"><b>Make any practice feel like the real test.</b> Authenticity is as much about <em>conditions</em> as content:<br>
+• Full 50 questions / 15 minutes, one sitting, no pausing.<br>
+• Laptop only, pen and paper beside you, phone in another room.<br>
+• Forward-only — never let yourself go back (this app enforces it; on paper mocks, cover answered questions).<br>
+• Do it at the <b>time of day</b> your real test is booked.<br>
+Practise the <em>format and the pressure</em>, and the specific questions on the day will feel unsurprising — which is the whole goal.</div>
+
+<h3>If a question type here feels "off"</h3>
+<p>This bank is built to match the real conventions — terse business English, the standard stems ("Which word is most nearly OPPOSITE…", "Look at this series…"), GCSE-level maths where the difficulty is time and traps, and unambiguous line-drawing spatial figures. If a particular <em>type</em> feels different from what you have seen elsewhere, that is fixable — note which subtype and it can be retuned. Specific answers cannot be sourced; faithful format can always be improved.</p>
 `},
   {id:'math',n:'1',title:'Math & Logic',blurb:'Every math subtype from first principles, plus a mental-arithmetic bootcamp: percentage anchoring, fraction conversions, ratio scaling and working backwards from the options.',
    drill:{label:'Drill mixed math & logic',run:()=>launchDrill('math','all',15)},
