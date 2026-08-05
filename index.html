@@ -925,159 +925,255 @@ function genClassify(n){
 BANK.push(...genAnalogies(48),...genSynonyms(40),...genAntonyms(40),...genSentence(37),
   ...genOddVerbal(25),...genClassify(20));
 
-/* -------------------------------------------------------------- SPATIAL ---- */
-/* Base figure: a SCALENE right triangle with an orientation dot. Being scalene
-   and marked, it is chiral — no rotation of it ever equals its mirror image,
-   so every rotation-vs-reflection item has exactly one defensible answer. */
-function baseInner(){return '<polygon points="26,74 26,34 78,74"/><circle cx="34" cy="66" r="5.5" fill="#fff"/>';}
-function fig(rot,flip,px=86){
-  const flipT=flip?'translate(100,0) scale(-1,1)':'';
-  return `<svg width="${px}" height="${px}" viewBox="0 0 100 100"><g transform="rotate(${rot} 50 50) ${flipT}" fill="#111" stroke="#111" stroke-width="1" stroke-linejoin="round">${baseInner()}</g></svg>`;
+/* ========================================================================
+   SPATIAL v2 — diverse, real-CCAT-style abstract reasoning.
+   Eight primitives and eight rule families (rotation, motion, count,
+   size, two-rule, analogy, matrix, odd-one-out) so no two items look
+   alike. Every answer is computed; every distractor is a real mistake.
+   ======================================================================== */
+const SVGF='#111';
+function svgBox(inner,px=84,frame=true){return `<svg width="${px}" height="${px}" viewBox="0 0 100 100">${frame?'<rect x="4" y="4" width="92" height="92" rx="6" fill="none" stroke="#c9ced6" stroke-width="2"/>':''}${inner}</svg>`;}
+function pPts(n,cx,cy,r,rot){let p=[];for(let k=0;k<n;k++){const a=(rot-90+k*360/n)*Math.PI/180;p.push((cx+r*Math.cos(a)).toFixed(1)+','+(cy+r*Math.sin(a)).toFixed(1));}return p.join(' ');}
+function sPts(cx,cy,r,rot){let p=[];for(let k=0;k<10;k++){const rr=(k%2?r*0.44:r);const a=(rot-90+k*36)*Math.PI/180;p.push((cx+rr*Math.cos(a)).toFixed(1)+','+(cy+rr*Math.sin(a)).toFixed(1));}return p.join(' ');}
+function aPts(cx,cy,r){const pts=[[-r,-r*0.30],[r*0.25,-r*0.30],[r*0.25,-r*0.60],[r,0],[r*0.25,r*0.60],[r*0.25,r*0.30],[-r,r*0.30]];return pts.map(([x,y])=>(cx+x).toFixed(1)+','+(cy+y).toFixed(1)).join(' ');}
+function glyph(kind,cx,cy,r,{rot=0,fill=true,sw=4}={}){
+  const F=fill?SVGF:'none';const st=`stroke="${SVGF}" stroke-width="${sw}" stroke-linejoin="round"`;
+  if(kind==='circle')return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${F}" ${st}/>`;
+  if(kind==='square')return `<rect x="${(cx-r).toFixed(1)}" y="${(cy-r).toFixed(1)}" width="${(2*r).toFixed(1)}" height="${(2*r).toFixed(1)}" fill="${F}" ${st} transform="rotate(${rot} ${cx} ${cy})"/>`;
+  const nm={triangle:3,diamond:4,pentagon:5,hexagon:6};
+  if(nm[kind])return `<polygon points="${pPts(nm[kind],cx,cy,r,rot)}" fill="${F}" ${st}/>`;
+  if(kind==='star')return `<polygon points="${sPts(cx,cy,r,rot)}" fill="${F}" ${st}/>`;
+  if(kind==='arrow')return `<polygon points="${aPts(cx,cy,r)}" fill="${F}" ${st} transform="rotate(${rot} ${cx} ${cy})"/>`;
+  return '';
 }
-function ngon(n,rot=0,px=80){let pts=[];for(let k=0;k<n;k++){const a=(rot-90+k*360/n)*Math.PI/180;pts.push((50+33*Math.cos(a)).toFixed(1)+','+(50+33*Math.sin(a)).toFixed(1));}return `<svg width="${px}" height="${px}" viewBox="0 0 100 100"><polygon points="${pts.join(' ')}" fill="none" stroke="#111" stroke-width="4" stroke-linejoin="round"/></svg>`;}
-function spatialItem(subtype,difficulty,stem,stemSvg,correctSvg,distractors,explanation,technique,trap){
-  const opts=[{s:correctSvg,note:null,ok:true}].concat(distractors.map(d=>({s:d.s,note:d.note,trap:d.trap})));
+/* chiral pointer: arrow + offset dot, so rotation and reflection are always distinguishable */
+function pointer(cx,cy,r,rot,flip,fill=true){
+  const flipT=flip?`translate(${(2*cx).toFixed(1)},0) scale(-1,1)`:'';
+  const F=fill?SVGF:'none';
+  return `<g transform="rotate(${rot} ${cx} ${cy}) ${flipT}"><polygon points="${aPts(cx,cy,r)}" fill="${F}" stroke="${SVGF}" stroke-width="3.4" stroke-linejoin="round"/><circle cx="${(cx-r*0.4).toFixed(1)}" cy="${(cy-r*0.7).toFixed(1)}" r="${(r*0.2).toFixed(1)}" fill="#fff" stroke="${SVGF}" stroke-width="2"/></g>`;
+}
+const SHAPES=['circle','square','triangle','diamond','pentagon','hexagon','star'];
+function spat(subtype,difficulty,stem,stemSvg,opts,explanation,technique,trap,tsec){
   const order=shuffle(opts,RNG);
   const correct=order.findIndex(o=>o.ok);
   const notes={};order.forEach((o,i)=>{if(i!==correct)notes[i]=o.note;});
-  const t=(order.find(o=>o.trap)||{}).trap||trap||null;
   return {category:'spatial',subtype,difficulty,stem,svg:stemSvg||'',options:order.map(o=>o.s),correct,
-    targetSeconds:18,explanation,distractorNotes:notes,technique,trapFlag:t};
+    targetSeconds:tsec||18,explanation,distractorNotes:notes,technique,
+    trapFlag:(order.find(o=>o.trap&&!o.ok)||{}).trap||trap||null};
 }
-const norm=a=>((a%360)+360)%360;
+function strip(framesArr){return `<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">${framesArr.join('')}<span style="font-size:24px;padding:0 4px">?</span></div>`;}
 
-/* 1. Rotation series — which figure comes next */
-function genRotSeries(n){
-  const out=[];const steps=[45,-45,60,90,-60];
+/* 1. Rotation series (chiral pointer) */
+function genRotationSeries(n){
+  const out=[];const steps=[45,-45,90,-90,60,-60];
   for(let i=0;i<n;i++){
-    const d=steps[i%steps.length];const r0=[0,30,45,90][i%4];const diff=1+(i%3);
-    const frames=[0,1,2,3].map(k=>fig(r0+k*d,false,70)).join(' ');
+    const d=steps[i%steps.length];const r0=[0,30,45,90,120][i%5];const diff=1+(i%3);
+    const fr=[0,1,2,3].map(k=>svgBox(pointer(50,50,26,r0+k*d,false),66));
     const next=r0+4*d;
-    out.push(spatialItem('rotation-series',diff,
-      `Which figure comes next in the series?`,
-      `<div style="display:flex;gap:6px;align-items:center">${frames}<span style="font-size:26px">?</span></div>`,
-      fig(next,false),
-      [{s:fig(next,true),note:'This is a MIRROR image of the correct figure, not a further rotation. Track a single feature (the marked corner) — under reflection its handedness flips.',trap:'mirrored-figure'},
-       {s:fig(r0+3*d,false),note:'This just repeats the last shown frame — the rotation was not advanced one more step.',trap:'partial-transformation'},
-       {s:fig(next+d,false),note:'Rotated one step too far.',trap:'off-by-one'}],
-      `Each step rotates the figure by ${Math.abs(d)}° ${d>0?'clockwise':'anticlockwise'}. Continue one more step to get the answer. Method: don't watch the whole shape — lock onto ONE corner and rotate just that.`,
-      'track-one-feature','mirrored-figure'));
+    out.push(spat('figure-series-rotation',diff,'Which figure comes next in the series?',strip(fr),[
+      {s:svgBox(pointer(50,50,26,next,false)),ok:true},
+      {s:svgBox(pointer(50,50,26,next,true)),note:'A mirror image (flipped), not a further turn — the marker dot sits on the wrong side.',trap:'mirrored-figure'},
+      {s:svgBox(pointer(50,50,26,r0+3*d,false)),note:'Repeats the previous frame; the rotation was not advanced.',trap:'partial-transformation'},
+      {s:svgBox(pointer(50,50,26,next+d,false)),note:'Turned one step too far.',trap:'off-by-one'},
+      {s:svgBox(pointer(50,50,26,next+135,false)),note:'Turned by the wrong amount.',trap:null},
+    ],`Each step rotates the arrow by ${Math.abs(d)}° ${d>0?'clockwise':'anticlockwise'}. Track one feature — the dot — and turn it one more step. The dot's side never flips under rotation, so any option with the dot mirrored is wrong.`,'track-one-feature','mirrored-figure'));
   }
   return out;
 }
-
-/* 2. Mirror image — which option is the reflection */
-function genMirror(n){
-  const out=[];
+/* 2. Motion series — a marker moves one position around a ring; a constant central shape adds context */
+function ringPos(idx,cx,cy,R){const a=(idx*45-90)*Math.PI/180;return [cx+R*Math.cos(a),cy+R*Math.sin(a)];}
+function motionFrame(idx,center,px){const [x,y]=ringPos(((idx%8)+8)%8,50,50,30);return svgBox(center+`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="6.5" fill="${SVGF}"/>`,px||70);}
+function genMotionSeries(n){
+  const out=[];const centers=['circle','square','triangle','diamond','pentagon','hexagon'];
   for(let i=0;i<n;i++){
-    const base=[0,30,60,90,120][i%5];const diff=1+(i%3);
-    const rots=shuffle([45,135,225,315],RNG);
-    out.push(spatialItem('mirror-image',diff,
-      `Which of the figures is a MIRROR IMAGE of the figure on the left?`,
-      fig(base,false),
-      fig(base,true),   // any reflection is a valid mirror image; we present one
-      [{s:fig(base+rots[0],false),note:'This is a ROTATION of the original, not a reflection — same handedness.',trap:'partial-transformation'},
-       {s:fig(base+rots[1],false),note:'A rotation, not a mirror. The marked corner keeps the same handedness.',trap:'partial-transformation'},
-       {s:fig(base+rots[2],false),note:'Another rotation of the original.',trap:'partial-transformation'}],
-      `A mirror image reverses the figure's handedness (like a reflection in glass). Three options are rotations — the shape can be spun onto the original. Only one has flipped handedness: that is the mirror. Trick: watch which side the marked corner sits on.`,
-      'mirror-vs-rotation','mirrored-figure'));
+    const ds=(i%2)?1:-1;const s=i%8;const diff=1+(i%3);
+    const center=glyph(centers[i%centers.length],50,50,13,{fill:false});
+    const fr=[0,1,2,3].map(k=>motionFrame(s+k*ds,center));
+    const nx=s+4*ds;
+    out.push(spat('figure-series-motion',diff,'The marker moves around the frame. Which figure comes next?',strip(fr),[
+      {s:motionFrame(nx,center,84),ok:true},
+      {s:motionFrame(nx-ds,center,84),note:'This repeats the previous position — the marker did not move on.',trap:'partial-transformation'},
+      {s:motionFrame(nx+ds,center,84),note:'Moves one position too far.',trap:'off-by-one'},
+      {s:motionFrame(nx+2,center,84),note:'Wrong number of positions moved.',trap:null},
+      {s:motionFrame(nx+4,center,84),note:'Places the marker on the opposite side of the frame.',trap:null},
+    ],`The marker advances one position ${ds>0?'clockwise':'anticlockwise'} around the ring each step; the central shape never changes. Follow only the marker and move it one more place.`,'track-motion','off-by-one'));
   }
   return out;
 }
-
-/* 3. Odd one out among figures — three rotations + one reflection */
-function genOddFig(n){
+/* 3. Count progression — number of elements grows by one */
+const SLOTS6=[[31,34],[50,34],[69,34],[31,66],[50,66],[69,66]];
+function countFrame(m,kind,px){let inner='';for(let k=0;k<m;k++){const [x,y]=SLOTS6[k];inner+=glyph(kind,x,y,8.5,{fill:true});}return svgBox(inner,px||70);}
+function genCountProgression(n){
+  const out=[];const kinds=['circle','square','triangle','diamond','star'];
+  for(let i=0;i<n;i++){
+    const base=(i%2)?2:1;const kind=kinds[i%kinds.length];const diff=1+(i%3);
+    const fr=[0,1,2,3].map(k=>countFrame(base+k,kind,66));const next=base+4;
+    const cand=[next,next-1,next-2,next-3,next+1].filter(c=>c>=1&&c<=6);
+    while(cand.length<5){for(let c=1;c<=6;c++)if(!cand.includes(c)){cand.push(c);break;}}
+    const opts=cand.slice(0,5).map(c=>({s:countFrame(c,kind,84),ok:c===next,
+      note:c===next?null:(c<next?`Only ${c} shapes — the count did not reach ${next}.`:`Too many — ${c} shapes overshoots the pattern.`),trap:'off-by-one'}));
+    if(!opts.some(o=>o.ok))opts[0]={s:countFrame(next,kind,84),ok:true};
+    out.push(spat('figure-series-count',diff,'Which figure comes next in the series?',strip(fr),opts,
+      `The number of shapes increases by one each step: ${base}, ${base+1}, ${base+2}, ${base+3}, so the next frame has ${next}. Count, do not eyeball — the trap is being off by one.`,'count-elements','off-by-one'));
+  }
+  return out;
+}
+/* 4. Size progression — one shape grows by a fixed amount */
+function genSizeProgression(n){
   const out=[];
   for(let i=0;i<n;i++){
-    const base=[0,20,45,70,110][i%5];const diff=1+(i%3);
-    const rots=shuffle([0,90,180,270],RNG).slice(0,3).map(r=>base+r);
-    const items=[{s:fig(rots[0],false),ok:false,note:'A rotation of the shared figure.'},
-                 {s:fig(rots[1],false),ok:false,note:'A rotation of the shared figure.'},
-                 {s:fig(rots[2],false),ok:false,note:'A rotation of the shared figure.'},
-                 {s:fig(base+45,true),ok:true,note:null}];
-    const order=shuffle(items,RNG);const correct=order.findIndex(o=>o.ok);
+    const kind=SHAPES[i%SHAPES.length];const st=5;const r0=10;const diff=1+(i%3);
+    const fr=[0,1,2,3].map(k=>svgBox(glyph(kind,50,50,r0+k*st,{fill:i%2===0,rot:i%2?18:0}),66));
+    const nr=r0+4*st;
+    const sizes=[nr,nr-st,nr+st,nr-2*st,nr+2*st].map(x=>clamp(x,7,44));
+    const uniq=[...new Set(sizes)];while(uniq.length<5)uniq.push(clamp(nr+ (uniq.length)*3,7,46));
+    out.push(spat('figure-series-size',diff,'Which figure comes next in the series?',strip(fr),
+      uniq.slice(0,5).map(r=>({s:svgBox(glyph(kind,50,50,r,{fill:i%2===0,rot:i%2?18:0}),84),ok:r===nr,
+        note:r===nr?null:(r<nr?'This figure is too small — it has not grown enough.':'This figure is too large — it has grown too much.'),trap:'off-by-one'})),
+      `The shape grows by the same amount each step. Continue the growth one more step. Judge size against the previous frames, not in isolation.`,'track-size','off-by-one'));
+  }
+  return out;
+}
+/* 5. Two-rule series — pointer rotates AND fill alternates (two simultaneous rules) */
+function genTwoRuleSeries(n){
+  const out=[];const steps=[45,90,-45,-90,60];
+  for(let i=0;i<n;i++){
+    const d=steps[i%steps.length];const r0=[0,45,90][i%3];const diff=2+(i%2);
+    const fr=[0,1,2,3].map(k=>svgBox(pointer(50,50,25,r0+k*d,false,k%2===0),66));
+    const next=r0+4*d;const nextFill=true; // k=4 even => filled
+    out.push(spat('figure-series-tworule',diff,'Two things change each step. Which figure comes next?',strip(fr),[
+      {s:svgBox(pointer(50,50,25,next,false,nextFill)),ok:true},
+      {s:svgBox(pointer(50,50,25,next,false,!nextFill)),note:'Right rotation, but the fill is wrong — only one of the two rules was applied.',trap:'partial-transformation'},
+      {s:svgBox(pointer(50,50,25,next,true,nextFill)),note:'A mirror image — the figure was flipped rather than rotated.',trap:'mirrored-figure'},
+      {s:svgBox(pointer(50,50,25,next+d,false,!nextFill)),note:'Both rules applied wrongly.',trap:null},
+      {s:svgBox(pointer(50,50,25,r0+3*d,false,false)),note:'Repeats the previous frame.',trap:'partial-transformation'},
+    ],`Two rules run at once: the arrow rotates ${Math.abs(d)}° each step, and the fill alternates solid / outline. Apply BOTH for the next frame — solid and turned one more step. Solving only one rule is the classic trap.`,'two-rules-at-once','partial-transformation'));
+  }
+  return out;
+}
+/* 6. Figure analogy — A : B :: C : ? */
+function anaStem(a,b,c){return `<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">${a}<b style="font-size:20px">→</b>${b}<span style="font-size:20px;padding:0 6px">::</span>${c}<b style="font-size:20px">→</b><span style="font-size:24px">?</span></div>`;}
+function genFigureAnalogy(n){
+  const out=[];
+  for(let i=0;i<n;i++){
+    const type=i%3;const diff=1+(i%3);
+    if(type===0){ // rotation by theta
+      const th=[90,180,-90][i%3];const rA=[0,30][i%2];const rC=[60,120][i%2];
+      const A=svgBox(pointer(50,50,25,rA,false),70),B=svgBox(pointer(50,50,25,rA+th,false),70),Cc=svgBox(pointer(50,50,25,rC,false),70);
+      out.push(spat('figure-analogy',diff,'Complete the analogy: the first pair are related in the same way as the second.',anaStem(A,B,Cc),[
+        {s:svgBox(pointer(50,50,25,rC+th,false)),ok:true},
+        {s:svgBox(pointer(50,50,25,rC+th,true)),note:'A mirror image — the relationship is a rotation, not a flip.',trap:'mirrored-figure'},
+        {s:svgBox(pointer(50,50,25,rC,false)),note:'No change applied — the second figure must transform just like the first pair.',trap:'partial-transformation'},
+        {s:svgBox(pointer(50,50,25,rC-th,false)),note:'Rotated the wrong way.',trap:null},
+        {s:svgBox(pointer(50,50,25,rC+th+90,false)),note:'Rotated by the wrong amount.',trap:null},
+      ],`The first figure rotates by ${Math.abs(th)}° to become the second. Apply exactly the same rotation to the third figure.`,'apply-same-transform','mirrored-figure'));
+    } else if(type===1){ // fill toggle
+      const k1=SHAPES[i%SHAPES.length],k2=SHAPES[(i+3)%SHAPES.length];
+      const A=svgBox(glyph(k1,50,50,24,{fill:true}),70),B=svgBox(glyph(k1,50,50,24,{fill:false}),70),Cc=svgBox(glyph(k2,50,50,24,{fill:true}),70);
+      out.push(spat('figure-analogy',diff,'Complete the analogy: the first pair are related in the same way as the second.',anaStem(A,B,Cc),[
+        {s:svgBox(glyph(k2,50,50,24,{fill:false})),ok:true},
+        {s:svgBox(glyph(k2,50,50,24,{fill:true})),note:'No change — but the relationship toggles a solid shape to an outline.',trap:'partial-transformation'},
+        {s:svgBox(glyph(k1,50,50,24,{fill:false})),note:'Right fill, wrong shape — the shape should stay the same as the third figure.',trap:null},
+        {s:svgBox(glyph(k1,50,50,24,{fill:true})),note:'Wrong shape and no change applied.',trap:null},
+        {s:svgBox(glyph(k2,50,50,16,{fill:false})),note:'The size was changed; only the fill should change.',trap:null},
+      ],`The first figure goes from solid to outline. Apply the same change to the third: keep its shape, switch it to an outline.`,'apply-same-transform','partial-transformation'));
+    } else { // reflection
+      const rA=[20,70,110][i%3];const rC=[0,140][i%2];
+      const A=svgBox(pointer(50,50,25,rA,false),70),B=svgBox(pointer(50,50,25,rA,true),70),Cc=svgBox(pointer(50,50,25,rC,false),70);
+      out.push(spat('figure-analogy',diff,'Complete the analogy: the first pair are related in the same way as the second.',anaStem(A,B,Cc),[
+        {s:svgBox(pointer(50,50,25,rC,true)),ok:true},
+        {s:svgBox(pointer(50,50,25,rC,false)),note:'No change — the relationship is a mirror flip.',trap:'partial-transformation'},
+        {s:svgBox(pointer(50,50,25,rC+90,false)),note:'A rotation, not a reflection.',trap:'mirrored-figure'},
+        {s:svgBox(pointer(50,50,25,rC+180,false)),note:'A half-turn rotation, not a mirror image.',trap:'mirrored-figure'},
+        {s:svgBox(pointer(50,50,25,rC+45,true)),note:'Mirrored but also turned — only a flip is required.',trap:null},
+      ],`The first figure is reflected (flipped) to become the second. Apply the same flip to the third figure — watch the marker dot swap sides.`,'apply-same-transform','mirrored-figure'));
+    }
+  }
+  return out;
+}
+/* 7. Matrix (3x3) — two simultaneous rules */
+function cellMulti(kind,count){let inner='';for(let k=0;k<count;k++){const [x,y]=SLOTS6[k];inner+=glyph(kind,x,y,8.5,{fill:true});}return inner;}
+function gridSvg(cellFn){
+  let cells='';for(let idx=0;idx<9;idx++){const col=idx%3,row=(idx/3|0);
+    const inner=idx===8?`<text x="50" y="66" font-size="50" text-anchor="middle" fill="${SVGF}">?</text>`:cellFn(row,col);
+    cells+=`<g transform="translate(${col*100},${row*100})"><rect x="4" y="4" width="92" height="92" fill="none" stroke="#dde1e7" stroke-width="2"/>${inner}</g>`;}
+  return `<svg width="234" height="234" viewBox="0 0 300 300">${cells}</svg>`;
+}
+function genMatrix2Rule(n){
+  const out=[];
+  for(let i=0;i<n;i++){
+    const variant=i%2;const diff=2+(i%2);
+    if(variant===0){ // shape by row × count by column
+      const three=shuffle(['circle','square','triangle','diamond','pentagon','star'],RNG).slice(0,3);
+      const grid=gridSvg((r,c)=>cellMulti(three[r],c+1));
+      const ansK=three[2],ansC=3;
+      out.push(spat('matrix',diff,'Which figure completes the grid?',grid,[
+        {s:svgBox(cellMulti(ansK,ansC)),ok:true},
+        {s:svgBox(cellMulti(ansK,2)),note:'Right shape, wrong count — the column rule adds one shape per column, so the last column needs three.',trap:'off-by-one'},
+        {s:svgBox(cellMulti(three[1],ansC)),note:'Right count, wrong shape — each row is a fixed shape; the bottom row is '+ansK+'.',trap:'partial-transformation'},
+        {s:svgBox(cellMulti(three[0],ansC)),note:'Wrong shape for this row.',trap:'partial-transformation'},
+        {s:svgBox(cellMulti(ansK,ansC+1)),note:'Too many shapes.',trap:'off-by-one'},
+      ],`Two rules: each ROW is a fixed shape (${three[0]}, ${three[1]}, ${three[2]}), and each COLUMN adds one more copy (1, 2, 3). The missing cell is the bottom row, third column: three ${ansK}s.`,'matrix-two-rules','partial-transformation'));
+    } else { // rotation by column × size by row (chiral pointer)
+      const base=[0,30][i%2];const sizes=[12,18,24];
+      const grid=gridSvg((r,c)=>pointer(50,50,sizes[r],base+c*90,false));
+      const ansR=24,ansRot=base+180;
+      out.push(spat('matrix',diff,'Which figure completes the grid?',grid,[
+        {s:svgBox(pointer(50,50,ansR,ansRot,false)),ok:true},
+        {s:svgBox(pointer(50,50,18,ansRot,false)),note:'Right rotation, wrong size — each row is a fixed size; the bottom row is the largest.',trap:'partial-transformation'},
+        {s:svgBox(pointer(50,50,ansR,base+90,false)),note:'Right size, wrong rotation — each column turns the arrow another 90°.',trap:'partial-transformation'},
+        {s:svgBox(pointer(50,50,ansR,ansRot,true)),note:'A mirror image — the grid only rotates, it never flips.',trap:'mirrored-figure'},
+        {s:svgBox(pointer(50,50,12,base+90,false)),note:'Wrong on both rules.',trap:null},
+      ],`Two rules: each COLUMN rotates the arrow another 90°, and each ROW is a fixed size (small, medium, large). The missing cell is large and rotated to the third column's angle.`,'matrix-two-rules','partial-transformation'));
+    }
+  }
+  return out;
+}
+/* 8. Odd one out — exactly one figure broken on exactly one attribute.
+   The four "belong" figures are varied by rotation (a NON-classifying
+   attribute) so they are visually distinct, while a single attribute
+   (shading / shape / count) isolates exactly one figure. */
+const ROTABLE=['square','triangle','diamond','pentagon','hexagon','star','arrow'];
+function cellMultiRot(kind,count,baseRot){let inner='';for(let k=0;k<count;k++){const [x,y]=SLOTS6[k];inner+=glyph(kind,x,y,8.5,{fill:true,rot:baseRot+k*20});}return inner;}
+function genOddOneOut(n){
+  const out=[];const R5=[15,80,145,210,290];
+  for(let i=0;i<n;i++){
+    const variant=i%4;const diff=1+(i%3);let figs,explain,tech,trap;
+    if(variant===0){ // one is an outline among solids (same shape, all different rotations)
+      const k=ROTABLE[i%ROTABLE.length];
+      figs=[0,1,2,3].map(j=>({s:svgBox(glyph(k,50,50,24,{fill:true,rot:R5[j]})),ok:false,note:'A solid '+k+' — belongs with the group.'}));
+      figs.push({s:svgBox(glyph(k,50,50,24,{fill:false,rot:R5[4]})),ok:true,note:null});
+      explain='Every figure is the same shape at a different angle, so orientation is not the point. Four are solid; one is only an outline. Shading is the odd feature.';tech='enumerate-attributes';trap='partial-transformation';
+    } else if(variant===1){ // one different shape (four of shape A at different rotations, one of shape B)
+      const k1=ROTABLE[i%ROTABLE.length];let k2=ROTABLE[(i+2)%ROTABLE.length];if(k2===k1)k2=ROTABLE[(i+3)%ROTABLE.length];
+      figs=[0,1,2,3].map(j=>({s:svgBox(glyph(k1,50,50,24,{fill:true,rot:R5[j]})),ok:false,note:'A '+k1+' — belongs with the group.'}));
+      figs.push({s:svgBox(glyph(k2,50,50,24,{fill:true,rot:R5[4]})),ok:true,note:null});
+      explain='Four figures are the same shape (turned to different angles); one is a different shape entirely. The different shape is the odd one out.';tech='enumerate-attributes';trap='wrong-relation';
+    } else if(variant===2){ // one different count (same shape & count for four, rotations differ; one has one more)
+      const k=ROTABLE[i%ROTABLE.length];const c=2+(i%2);
+      figs=[0,1,2,3].map(j=>({s:svgBox(cellMultiRot(k,c,R5[j])),ok:false,note:'Contains '+c+' shapes — belongs with the group.'}));
+      figs.push({s:svgBox(cellMultiRot(k,c+1,R5[4])),ok:true,note:null});
+      explain='Every figure holds the same shape at varied angles. Count them: four contain '+c+' shapes, one contains '+(c+1)+'. The different count is the odd one out.';tech='enumerate-attributes';trap='off-by-one';
+    } else { // one is a mirror among rotations (chiral)
+      const base=i*23;
+      figs=[0,80,170,250].map(r=>({s:svgBox(pointer(50,50,25,base+r,false)),ok:false,note:'A rotation of the shared figure.'}));
+      figs.push({s:svgBox(pointer(50,50,25,base+40,true)),ok:true,note:null});
+      explain='Four of the figures are rotations of one another — spin any onto the others. The fifth is a MIRROR image (its marker dot is on the opposite side) and cannot be rotated to match. That reflected figure is the odd one out.';tech='mirror-vs-rotation';trap='mirrored-figure';
+    }
+    const order=shuffle(figs,RNG);const correct=order.findIndex(o=>o.ok);
     const notes={};order.forEach((o,idx)=>{if(idx!==correct)notes[idx]=o.note;});
     out.push({category:'spatial',subtype:'odd-one-out-figures',difficulty:diff,
-      stem:`Which of the following is the odd one out?`,svg:'',
-      options:order.map(o=>o.s),correct,targetSeconds:18,technique:'mirror-vs-rotation',
-      explanation:`Three of the figures are simply rotations of one another — spin any of them and it lands on the others. The fourth cannot be rotated to match; it is a MIRROR image (its marked corner is on the opposite side). That reflected one is the odd one out.`,
-      distractorNotes:notes,trapFlag:'mirrored-figure'});
+      stem:'Which of the following is the odd one out?',svg:'',
+      options:order.map(o=>o.s),correct,targetSeconds:18,technique:tech,
+      explanation:explain+'\nMethod: check attributes in turn — shape, count, shading, orientation — until you find the one where four agree and one differs.',
+      distractorNotes:notes,trapFlag:trap});
   }
   return out;
 }
 
-/* 4. Rotation match — which option is the figure rotated (not mirrored) */
-function genRotMatch(n){
-  const out=[];
-  for(let i=0;i<n;i++){
-    const base=[0,40,80,120][i%4];const diff=1+(i%3);
-    const flips=shuffle([30,150,250],RNG);
-    out.push(spatialItem('shape-rotation',diff,
-      `Which figure is the figure on the left, ROTATED (not flipped)?`,
-      fig(base,false),
-      fig(base+120,false),
-      [{s:fig(base+60,true),note:'A mirror image — it has been flipped, not merely turned.',trap:'mirrored-figure'},
-       {s:fig(base+200,true),note:'Also a reflection: the marked corner has swapped sides.',trap:'mirrored-figure'},
-       {s:fig(base+300,true),note:'A flipped version, not a pure rotation.',trap:'mirrored-figure'}],
-      `Only one option preserves the figure's handedness — that is the pure rotation. The other three are reflections: you can tell because the marked corner sits on the wrong side and no amount of spinning fixes it.`,
-      'mirror-vs-rotation','mirrored-figure'));
-  }
-  return out;
-}
-
-/* 5. Polygon-count series — sides increase by one */
-function genPolySeries(n){
-  const out=[];
-  for(let i=0;i<n;i++){
-    const s0=3+(i%3);const diff=1+(i%3);
-    const frames=[0,1,2].map(k=>ngon(s0+k,10*k,64)).join(' ');
-    const next=s0+3;
-    out.push(spatialItem('figure-series',diff,
-      `Which figure comes next in the series?`,
-      `<div style="display:flex;gap:8px;align-items:center">${frames}<span style="font-size:26px">?</span></div>`,
-      ngon(next),
-      [{s:ngon(next-1),note:'This has the same number of sides as the previous figure — the count did not advance.',trap:'off-by-one'},
-       {s:ngon(next+1),note:'Two sides too many — the count advanced by one too much.',trap:'off-by-one'},
-       {s:ngon(next-2),note:'Miscounts the progression; too few sides.',trap:'off-by-one'}],
-      `Count the sides: ${s0}, ${s0+1}, ${s0+2}, so the next figure has ${next} sides. The rule is "+1 side each step". Rotation between frames is a decoy — only the side-count matters.`,
-      'count-sides','off-by-one'));
-  }
-  return out;
-}
-
-/* 6. Rotation matrix (3x3) */
-function matrixCell(col,row,inner){
-  return `<g transform="translate(${col*100},${row*100})"><rect x="5" y="5" width="90" height="90" fill="none" stroke="#dde1e7" stroke-width="2"/>${inner}</g>`;
-}
-function triInCell(rot,flip){
-  const flipT=flip?'translate(100,0) scale(-1,1)':'';
-  return `<g transform="rotate(${rot} 50 50) translate(16 16) scale(0.68) ${flipT}" fill="#111" stroke="#111" stroke-width="1">${baseInner()}</g>`;
-}
-function genMatrix(n){
-  const out=[];const steps=[45,-45,30,60];
-  for(let i=0;i<n;i++){
-    const step=steps[i%steps.length];const base=[0,20,45][i%3];const diff=2+(i%2);
-    let cells='';
-    for(let idx=0;idx<9;idx++){const col=idx%3,row=(idx/3|0);
-      if(idx===8){cells+=matrixCell(col,row,`<text x="50" y="66" font-size="52" text-anchor="middle" fill="#111">?</text>`);}
-      else{cells+=matrixCell(col,row,triInCell(base+idx*step,false));}}
-    const grid=`<svg width="240" height="240" viewBox="0 0 300 300">${cells}</svg>`;
-    const ansRot=base+8*step;
-    out.push(spatialItem('matrix',diff,
-      `Which figure completes the grid? Read the grid left to right, top to bottom.`,
-      grid,
-      fig(ansRot,false),
-      [{s:fig(ansRot,true),note:'Correct orientation but MIRRORED — the grid only ever rotates the figure, it never flips it.',trap:'mirrored-figure'},
-       {s:fig(base+7*step,false),note:'This repeats the previous cell — the rotation was not advanced into the last cell.',trap:'partial-transformation'},
-       {s:fig(ansRot+90,false),note:'Rotated by the wrong amount for this position.',trap:'off-by-one'}],
-      `Reading in order, each cell rotates the figure by a constant ${Math.abs(step)}°${step<0?' anticlockwise':' clockwise'}. The eight filled cells establish the step; apply it once more for the missing ninth cell. Never a reflection — the handedness stays constant throughout.`,
-      'matrix-single-rule','mirrored-figure'));
-  }
-  return out;
-}
-
-BANK.push(...genRotSeries(40),...genMirror(35),...genOddFig(35),...genRotMatch(30),
-  ...genPolySeries(20),...genMatrix(20));
+BANK.push(...genRotationSeries(30),...genMotionSeries(28),...genCountProgression(26),
+  ...genSizeProgression(20),...genTwoRuleSeries(24),...genFigureAnalogy(24),
+  ...genMatrix2Rule(28),...genOddOneOut(32));
 
 /* -------- finalise the bank: assign ids, per-category numbering -------- */
 (function finaliseBank(){
@@ -2363,6 +2459,15 @@ Prefixes: <b>a-/an-</b> = without (amoral) · <b>de-</b> = down/away (deter) · 
 
 <h3>Series continuation</h3>
 <p>Identify the <b>step</b> between consecutive figures — rotate by k degrees, add a side, add a dot — then apply it once more. Decoys often change something <em>irrelevant</em> (a figure rotates while the real pattern is the side-count). Isolate the one attribute that changes consistently.</p>
+<div class="shortcard"><b>The six rule families</b> — almost every abstract series or grid is built from one (or a combination) of these. Scan for them in order:<br>
+• <b>Rotation</b> — an element turns by a fixed angle each step.<br>
+• <b>Motion</b> — an element <em>moves position</em> (e.g. a dot travels one place around the frame each step).<br>
+• <b>Count</b> — the number of elements grows or shrinks by a fixed amount.<br>
+• <b>Size</b> — an element steadily grows or shrinks.<br>
+• <b>Shading</b> — fill alternates or cycles (solid → outline → solid …).<br>
+• <b>Reflection</b> — the figure flips.<br>
+The hard items run <b>two families at once</b> (e.g. rotate <em>and</em> alternate shading). When two things change, solve them <em>separately</em> — find the rotation rule, then the shading rule — and an option that gets only one of them right is the trap.</div>
+<p><b>Figure analogies (A : B :: C : ?).</b> Treat these as a one-step series: work out the single transformation that turns A into B (rotate 90°, flip, toggle the fill), then apply exactly that transformation to C. The traps are "no change applied" and a rotation offered where the rule was a reflection.</p>
 
 <h3>Odd-one-out among figures</h3>
 <p>Enumerate attributes systematically rather than eyeballing: <b>count</b> (sides, dots), <b>shading</b>, <b>orientation</b>, <b>size</b>, <b>symmetry</b>. Three figures will share a property the fourth breaks. A classic version: three figures are rotations of one shape and the fourth is its <b>mirror image</b> — the reflected one is the odd one out.</p>
