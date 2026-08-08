@@ -60,6 +60,10 @@ Named finance users recur across candidate and prep sources — **Goldman Sachs,
 
 Separately, HireVue offers a battery of short **psychometric games** measuring cognitive abilities and emotional-intelligence traits; there is **no fixed game count** (new games are added over time, so prep-site claims of "~13 games" are `[PREP-VENDOR, unverified]`). Its **CodeVue** product is a library of 200+ auto-scored coding challenges for technical/quant roles. `[VENDOR]` For front-office IBD you are unlikely to meet these; for technology and quant streams you may.
 
+### Behavioural / personality questionnaires (the Likert-scale questions)
+
+Many HireVue-stage assessments — and the wider battery an employer bundles around the video — include a **behavioural or personality questionnaire**: statements you rate on a five- or seven-point **Likert scale** (*Strongly disagree → Strongly agree*), such as "I stay calm under pressure" or "I prefer to plan carefully before acting." `[CANDIDATE/PREP-VENDOR — common in bundled deployments; HireVue's exact instrument and scoring are employer-configured and not publicly documented, [UNKNOWN]]` These measure **work-relevant traits** (conscientiousness, drive, resilience, teamwork, and so on) against the role's competency profile, and they are scored on a completely different logic from the video. The question of how to answer them — and specifically whether to pick the "best" option every time or to moderate — is one of the most common and consequential in this whole guide, so it gets its own treatment in §8.7 below.
+
 ### A realistic walkthrough
 
 You get an invitation with a deadline (often a few days). You log in, confirm identity and consent to the terms (which include any monitoring), and are offered **practice questions** — do them, unlimited, unscored, to settle nerves and test your camera, mic and lighting. Then the real interview: a question appears, you get ~20–30 seconds to gather your thoughts (a countdown shows), then recording starts automatically and you have ~60–180 seconds. When you finish or the timer hits zero, it moves on. Usually you cannot re-record. At the end you submit; you almost never see a score. `[CANDIDATE/PREP-VENDOR consistent]`
@@ -91,6 +95,32 @@ The reason they were removed is quantitatively revealing and worth carrying with
 **Framing, lighting, eye-line — still matter, but for the *human* reviewer, not an emotion algorithm.** Put a soft light in front of you (a window works), set the camera at eye level, and **look into the lens, not at your own image on screen** — it reads as eye contact. Neutral background, tested mic. None of this is scored by the algorithm any more, but a human is often watching, and clarity helps them.
 
 **Recovering from a fumble.** If there's no re-record and you stumble, **keep going** — the substance is what's scored. A simple reset phrase ("let me put that more clearly") is fine; dead silence or restarting from panic is worse.
+
+### The Likert behavioural questions — "spam the best answer, or moderate it?"
+
+This is the question candidates ask most, and the honest answer is: **do neither as a blanket rule.** Both "always pick the strongest desirable option" and "keep everything safely in the middle" are **measurably self-defeating**, and understanding *why* tells you exactly how to answer. `[INFERRED from standard personality-psychometrics — the mechanisms below are documented across the instrument literature; HireVue's specific implementation is [UNKNOWN]]`
+
+**How these questions are actually scored** (so you know what you're up against). Each statement loads onto a **trait** (conscientiousness, drive, resilience, teamwork, emotional stability, and so on). Your answers are combined into trait scores, which are compared to a **norm group and/or the role's "success profile"** to produce a fit or competency score — usually a band or ranking, rarely a simple percentage (see Chapter 6.3 on norm-referencing and Chapter 6.4 on personality). Crucially, the questionnaire also runs **embedded validity checks** that are invisible to you:
+
+- **Reverse-keyed items.** Some statements are worded so that the *desirable* answer is to **disagree** — e.g. "I sometimes cut corners when I'm busy" or "I lose my temper when under pressure." A well-designed instrument is full of these, deliberately.
+- **Consistency / infrequency checks.** Near-duplicate statements are scattered through the test; answering them inconsistently flags careless or strategic responding.
+- **Social-desirability ("fake-good") scales.** Items designed to catch an implausibly saintly, all-strengths-no-weaknesses profile.
+- **Straight-lining detection.** Identical responses straight down the column is a data-quality red flag.
+
+**Why "spamming the best possible option" fails.** The moment you blanket-pick "Strongly agree" (or always the most flattering end), the **reverse-keyed items** turn against you — you'll *strongly agree* that you cut corners and lose your temper, tanking the very traits you were trying to inflate and **contradicting** your answers to the positively-worded versions. The **social-desirability scale** then flags a too-perfect profile, and the whole result can be **discounted or marked low-confidence**. Extreme-on-everything also destroys the *discriminating information* the employer wants, so even where it isn't flagged it produces a flat, uninformative profile. Spamming is the single most common way honest, capable candidates fail these — not because the system caught them cheating, but because they made themselves look either fake or incoherent.
+
+**Why "moderating everything to the middle" also fails.** Clustering at the neutral mid-point produces a **flat, low-signal, indecisive profile.** If the role's success profile rewards high conscientiousness, drive and resilience — and finance roles do — a wall of "neither agree nor disagree" says you are *average* on exactly the traits that clear the bar. You don't pass a fit threshold by being beige. Excessive hedging reads as evasive and leaves you below the cut on the traits that matter.
+
+**So how do you actually score as high as possible — legitimately?**
+
+1. **Know the target traits first.** Read the firm's published competencies/values and infer what the role rewards (typically drive, conscientiousness, resilience, teamwork, learning orientation, integrity, and commercial/customer focus). This is your compass for where to be strong.
+2. **Answer each item on its own merits — read for reverse wording.** There is no global rule; a statement about a strength you genuinely have earns a confident "Strongly agree," while a negatively-worded statement earns a confident "Strongly disagree." Blanket rules are exactly what the validity scales are built to catch.
+3. **Be decisive where you're genuinely strong — this is where most people leave marks on the table.** The commonest error among capable candidates is *false modesty*: moderating their real strengths to "agree" or "neutral." If you genuinely stay calm under pressure and hold yourself to high standards, **use the extreme** and say so. Reserve the mid-point for traits where you honestly sit in the middle. Decisive-and-authentic beats both maximal and beige.
+4. **Stay consistent.** Answer the scattered near-duplicate items the same way — because they're checking that you do.
+5. **Don't fake a trait you lack.** Two reasons: the validity scales, and the fact that a fabricated profile is one you then have to *embody* at the assessment centre and on the job. If you're a genuinely poor fit on the traits a role demands, gaming the questionnaire only defers the mismatch.
+6. **Don't overthink transparent items, and answer at a natural pace** — laboured, second-guessed responding both wastes time and can trip consistency checks.
+
+**The one-line version:** answer **truthfully and decisively in the direction of your genuine strengths that fit the role** — lean into the extremes where you really do feel strongly (especially on role-relevant strengths), moderate only where you genuinely are middling, and read every item for reverse wording so you never contradict yourself. The profile that passes is *authentic, decisive and internally consistent* — not maximal, and not moderate. (The same logic governs SHL's OPQ and Cappfinity's strengths items — Chapters 1, 5, and the personality section of Chapter 6.4.)
 
 **Worked example — weak vs strong (author-constructed illustration, `[INFERRED]`).**
 - *Weak:* "Umm, I guess I work well in teams — at uni we did a group project and it went fine, everyone was happy." No structure, no result, no evidence.
