@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HSBC &quot;Immersive Online Assessment&quot; — Candidate Briefing</title>
+<style>
+/* ---------- Theme tokens ---------- */
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#eef1f5; --text:#1c2126;
+  --muted:#5b6470; --border:#d8dee6; --accent:#c8102e; --accent-2:#8a0b20;
+  --link:#0b5cad; --shadow:0 1px 3px rgba(20,30,45,.08),0 6px 24px rgba(20,30,45,.06);
+  --p-official-bg:#e4f4ea; --p-official-fg:#116338; --p-official-bd:#8fd3ab;
+  --p-corrob-bg:#e5eefb; --p-corrob-fg:#1554a6; --p-corrob-bd:#9dc0ef;
+  --p-anec-bg:#fdf0dc; --p-anec-fg:#8a5a09; --p-anec-bd:#eec98a;
+  --p-infer-bg:#efe7fb; --p-infer-fg:#5b309e; --p-infer-bd:#c9b1ef;
+  --p-flag-bg:#eceff3; --p-flag-fg:#4a5563; --p-flag-bd:#c4ccd6;
+  --mark:#fff3a3;
+}
+:root[data-theme="dark"]{
+  --bg:#0f1318; --surface:#161c24; --surface-2:#1e2731; --text:#e6eaef;
+  --muted:#9aa6b2; --border:#2b3542; --accent:#ff5a72; --accent-2:#ff8095;
+  --link:#6db3ff; --shadow:0 1px 3px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35);
+  --p-official-bg:#123528; --p-official-fg:#7fe0ab; --p-official-bd:#1f5c42;
+  --p-corrob-bg:#122b47; --p-corrob-fg:#8fbdf7; --p-corrob-bd:#22497a;
+  --p-anec-bg:#3a2c11; --p-anec-fg:#f0c583; --p-anec-bd:#6a4f1d;
+  --p-infer-bg:#2a1f45; --p-infer-fg:#c7abf5; --p-infer-bd:#4a3576;
+  --p-flag-bg:#222b35; --p-flag-fg:#aeb9c5; --p-flag-bd:#39444f;
+  --mark:#6b5d00;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1318; --surface:#161c24; --surface-2:#1e2731; --text:#e6eaef;
+    --muted:#9aa6b2; --border:#2b3542; --accent:#ff5a72; --accent-2:#ff8095;
+    --link:#6db3ff; --shadow:0 1px 3px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35);
+    --p-official-bg:#123528; --p-official-fg:#7fe0ab; --p-official-bd:#1f5c42;
+    --p-corrob-bg:#122b47; --p-corrob-fg:#8fbdf7; --p-corrob-bd:#22497a;
+    --p-anec-bg:#3a2c11; --p-anec-fg:#f0c583; --p-anec-bd:#6a4f1d;
+    --p-infer-bg:#2a1f45; --p-infer-fg:#c7abf5; --p-infer-bd:#4a3576;
+    --p-flag-bg:#222b35; --p-flag-fg:#aeb9c5; --p-flag-bd:#39444f;
+    --mark:#6b5d00;
+  }
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-text-size-adjust:100%;
+}
+.skip{position:absolute;left:-999px;top:0;background:var(--accent);color:#fff;padding:8px 14px;z-index:200;border-radius:0 0 6px 0}
+.skip:focus{left:0}
+
+/* ---------- Top bar ---------- */
+.topbar{
+  position:sticky;top:0;z-index:100;display:flex;align-items:center;gap:12px;
+  background:var(--surface);border-bottom:1px solid var(--border);
+  padding:10px 16px;box-shadow:var(--shadow);
+}
+.brand{font-weight:700;font-size:15px;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand::before{content:"";display:inline-block;width:10px;height:16px;background:var(--accent);margin-right:8px;vertical-align:-2px;border-radius:1px}
+.topbar-tools{margin-left:auto;display:flex;align-items:center;gap:8px}
+#search{
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  border-radius:20px;padding:7px 14px;font-size:14px;width:min(38vw,260px);
+}
+#search:focus{outline:2px solid var(--link);outline-offset:1px}
+.iconbtn{
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  border-radius:8px;width:38px;height:36px;font-size:16px;cursor:pointer;line-height:1;
+}
+.iconbtn:hover{border-color:var(--accent)}
+#menuBtn{display:none}
+
+/* ---------- Layout ---------- */
+.layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:0;max-width:1240px;margin:0 auto}
+.sidebar{
+  position:sticky;top:57px;align-self:start;height:calc(100vh - 57px);overflow-y:auto;
+  padding:18px 14px 40px;border-right:1px solid var(--border);background:var(--bg);
+}
+.content{padding:26px clamp(16px,4vw,48px) 80px;min-width:0}
+
+/* readable column */
+.content > section, .doc-foot{max-width:72ch}
+.content h2{max-width:72ch}
+
+/* ---------- Filters ---------- */
+.filters{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:16px}
+.filters-title{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:8px;font-weight:700}
+.pill-toggle{display:flex;align-items:center;gap:8px;padding:4px 2px;cursor:pointer;user-select:none}
+.pill-toggle input{accent-color:var(--accent);width:15px;height:15px}
+.pill-toggle input:not(:checked) ~ .pill{opacity:.35;text-decoration:line-through}
+.legend-note{font-size:12px;color:var(--muted);margin-top:8px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+
+/* ---------- ToC / scroll-spy ---------- */
+.toc ul{list-style:none;margin:0;padding:0}
+.toc li{margin:1px 0}
+.toc a{display:block;text-decoration:none;color:var(--muted);padding:5px 10px;border-radius:7px;font-size:13.5px;border-left:2px solid transparent;line-height:1.35}
+.toc a:hover{background:var(--surface-2);color:var(--text)}
+.toc-l3 a{padding-left:22px;font-size:12.5px}
+.toc a.active{color:var(--accent);background:var(--surface-2);border-left-color:var(--accent);font-weight:600}
+
+/* ---------- Typography ---------- */
+h1,h2,h3,h4{line-height:1.25;color:var(--text)}
+.content h2{font-size:26px;margin:38px 0 6px;padding-bottom:8px;border-bottom:2px solid var(--border);scroll-margin-top:70px}
+.content section:first-child h2{margin-top:6px}
+.content h3{font-size:19px;margin:26px 0 4px;color:var(--accent-2);scroll-margin-top:70px}
+.content p{margin:10px 0}
+.content a{color:var(--link)}
+.content ul,.content ol{margin:8px 0 8px;padding-left:24px}
+.content li{margin:5px 0}
+strong{font-weight:700}
+code{background:var(--surface-2);border:1px solid var(--border);border-radius:5px;padding:1px 5px;font-size:.88em}
+hr{border:none;border-top:1px solid var(--border);margin:26px 0}
+
+/* first paragraph after H1 area (intro) */
+#intro > p:first-of-type{font-size:17px;color:var(--muted)}
+
+/* golden-rule / callout blockquotes */
+blockquote{
+  margin:16px 0;padding:12px 16px;background:var(--surface);
+  border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;
+}
+blockquote p{margin:6px 0}
+
+/* ---------- Pills ---------- */
+.pill{
+  display:inline-block;font-size:11px;font-weight:800;letter-spacing:.03em;
+  padding:1px 8px;border-radius:999px;border:1px solid;vertical-align:1px;white-space:nowrap;
+}
+.pill-official{background:var(--p-official-bg);color:var(--p-official-fg);border-color:var(--p-official-bd)}
+.pill-corroborated{background:var(--p-corrob-bg);color:var(--p-corrob-fg);border-color:var(--p-corrob-bd)}
+.pill-anecdotal{background:var(--p-anec-bg);color:var(--p-anec-fg);border-color:var(--p-anec-bd)}
+.pill-inferred{background:var(--p-infer-bg);color:var(--p-infer-fg);border-color:var(--p-infer-bd)}
+.pill-flag{background:var(--p-flag-bg);color:var(--p-flag-fg);border-color:var(--p-flag-bd)}
+.qual{font-size:.92em;color:var(--muted)}
+.pill.dim{opacity:.28}
+
+/* ---------- Citations ---------- */
+sup.cite{font-size:11px;line-height:0}
+sup.cite a{color:var(--link);text-decoration:none;font-weight:700;padding:0 1px}
+sup.cite a:hover{text-decoration:underline}
+a.reflink{font-weight:600}
+.src-item:target,.tgt-flash{animation:flash 1.8s ease}
+@keyframes flash{0%,40%{background:var(--mark)}100%{background:transparent}}
+.srcback{text-decoration:none;color:var(--muted);font-weight:700;margin-left:4px}
+.srcback:hover{color:var(--accent)}
+.exturl{word-break:break-all;font-size:.92em}
+
+/* ---------- Tables ---------- */
+.content table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;display:block;overflow-x:auto}
+.content th,.content td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+.content thead th{background:var(--surface-2);font-weight:700}
+.content tbody tr:nth-child(even){background:var(--surface)}
+
+/* ---------- Details / verbatim ---------- */
+details{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin:14px 0;padding:0 14px}
+details[open]{padding-bottom:8px}
+summary{cursor:pointer;padding:12px 0;font-weight:600;color:var(--accent-2);list-style-position:inside}
+summary:hover{color:var(--accent)}
+details.verbatim blockquote{border-left-color:var(--p-anec-bd)}
+
+/* ---------- filtered / hidden ---------- */
+.claim.hide-claim{display:none !important}
+section.search-hidden{display:none !important}
+.toc li.search-hidden{display:none}
+
+/* ---------- back to top ---------- */
+.totop{position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;
+  border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:18px;
+  cursor:pointer;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .2s;z-index:90}
+.totop.show{opacity:1;pointer-events:auto}
+.totop:hover{border-color:var(--accent);color:var(--accent)}
+
+.scrim{display:none}
+.print-toc{display:none}
+.doc-foot{margin-top:40px;padding-top:16px;border-top:1px solid var(--border);color:var(--muted);font-size:13px}
+
+/* ---------- Responsive: hamburger under 768px ---------- */
+@media (max-width:768px){
+  #menuBtn{display:inline-block}
+  .layout{grid-template-columns:1fr}
+  .sidebar{
+    position:fixed;top:0;left:0;height:100vh;width:min(84vw,320px);z-index:120;
+    transform:translateX(-100%);transition:transform .25s ease;border-right:1px solid var(--border);
+    box-shadow:var(--shadow);padding-top:64px;
+  }
+  body.nav-open .sidebar{transform:translateX(0)}
+  body.nav-open .scrim{display:block;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:110}
+  #search{width:44vw}
+  .brand{font-size:13px}
+}
+@media (max-width:480px){
+  #search{width:38vw}
+  .content h2{font-size:22px}
+}
+
+/* ---------- Print ---------- */
+@media print{
+  .topbar,.sidebar,.totop,#scrim,.skip,.srcback,.filters{display:none !important}
+  .layout{display:block;max-width:none}
+  .content{padding:0;max-width:none}
+  .content > section,.content h2{max-width:none}
+  body{background:#fff;color:#000;font-size:11.5pt}
+  /* expand everything regardless of filter/search/collapse */
+  .claim.hide-claim{display:revert !important}
+  section.search-hidden{display:revert !important}
+  .pill.dim{opacity:1 !important}
+  details{border:1px solid #bbb;break-inside:avoid}
+  details > *:not(summary){display:revert !important}   /* reveal collapsed content */
+  summary{color:#000}
+  a{color:#000;text-decoration:none}
+  .exturl{color:#333}
+  table,tr,td,th,blockquote,details{break-inside:avoid}
+  h2,h3{break-after:avoid}
+  .content h2{border-bottom:1px solid #000}
+  /* contents page */
+  .print-toc{display:block !important;break-after:page}
+  .print-cover{padding:40px 0 28px;border-bottom:3px solid var(--accent);margin-bottom:24px}
+  .print-kicker{display:block;font-size:10pt;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+  .print-title{font-size:24pt;margin:8px 0 0;line-height:1.15}
+  .print-contents-h{font-size:15pt;border:none;margin:0 0 8px}
+  .print-toc ul{list-style:none;padding:0;margin:0}
+  .print-toc li{margin:3px 0;font-size:11pt}
+  .print-toc .pt-l3{padding-left:22px;font-size:10pt;color:#333}
+  .print-toc a{color:#000;text-decoration:none}
+  .content > section{scroll-margin-top:0}
+  @page{margin:16mm 15mm 18mm}
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <button id="menuBtn" class="iconbtn" aria-label="Toggle contents" aria-expanded="false">☰</button>
+  <span class="brand">HSBC &quot;Immersive Online Assessment&quot; — Candidate Briefing</span>
+  <div class="topbar-tools">
+    <input id="search" type="search" placeholder="Search sections…" aria-label="Search sections">
+    <button id="themeBtn" class="iconbtn" aria-label="Toggle dark/light">◐</button>
+  </div>
+</header>
+<div class="layout">
+  <aside id="sidebar" class="sidebar" aria-label="Sidebar">
+    <div class="filters">
+      <div class="filters-title">Evidence filter</div>
+      <label class="pill-toggle"><input type="checkbox" data-filter="official" checked><span class="pill pill-official">OFFICIAL</span></label>
+      <label class="pill-toggle"><input type="checkbox" data-filter="corroborated" checked><span class="pill pill-corroborated">CORROBORATED</span></label>
+      <label class="pill-toggle"><input type="checkbox" data-filter="anecdotal" checked><span class="pill pill-anecdotal">ANECDOTAL</span></label>
+      <label class="pill-toggle"><input type="checkbox" data-filter="inferred" checked><span class="pill pill-inferred">INFERRED</span></label>
+      <div class="legend-note"><span class="pill pill-flag">FLAG</span> = disagreement / gap / caveat (always shown)</div>
+    </div>
+    <nav class="toc" aria-label="Table of contents"><ul>
+<li class="toc-l2"><a href="#how-to-read-this-briefing">How to read this briefing</a></li>
+<li class="toc-l2"><a href="#executive-summary-one-page">Executive summary (one page)</a></li>
+<li class="toc-l2"><a href="#vendor-provenance-phase-1">Vendor &amp; provenance (Phase 1)</a></li>
+<li class="toc-l3"><a href="#1-who-builds-and-hosts-it">1. Who builds and hosts it</a></li>
+<li class="toc-l3"><a href="#2-multiple-vendors-across-stages-the-nuance-a-single-vendor-answer-misses">2. Multiple vendors across stages — the nuance a single-vendor answer misses</a></li>
+<li class="toc-l3"><a href="#3-date-stamping-obsolescence-phase-1-item-3">3. Date-stamping &amp; obsolescence (Phase 1 item 3)</a></li>
+<li class="toc-l2"><a href="#q1-structure-every-stage-in-order">Q1 — STRUCTURE (every stage, in order)</a></li>
+<li class="toc-l3"><a href="#full-application-sequence">Full application sequence</a></li>
+<li class="toc-l3"><a href="#inside-the-immersive-assessment">Inside the immersive assessment</a></li>
+<li class="toc-l3"><a href="#timing-navigation-device">Timing, navigation, device</a></li>
+<li class="toc-l3"><a href="#business-lines-regions-phase-1-item-2">Business lines &amp; regions (Phase 1 item 2)</a></li>
+<li class="toc-l2"><a href="#q2-content-what-each-section-actually-contains">Q2 — CONTENT (what each section actually contains)</a></li>
+<li class="toc-l3"><a href="#two-distinct-stages-sources-conflate-them">Two distinct stages — sources conflate them</a></li>
+<li class="toc-l3"><a href="#stage-1-section-by-section">Stage 1 — section by section</a></li>
+<li class="toc-l3"><a href="#stage-2-the-four-micro-exercises">Stage 2 — the four micro-exercises</a></li>
+<li class="toc-l3"><a href="#values-the-sjt-is-scored-against">Values the SJT is scored against</a></li>
+<li class="toc-l2"><a href="#q3-scoring-and-ranking-the-priority">Q3 — SCORING AND RANKING (the priority)</a></li>
+<li class="toc-l3"><a href="#the-vendors-philosophy-dictates-the-logic">The vendor&#x27;s philosophy dictates the logic</a></li>
+<li class="toc-l3"><a href="#how-each-item-type-is-scored">How each item type is scored</a></li>
+<li class="toc-l3"><a href="#cut-score-percentile-ranked-list">Cut score, percentile, ranked list?</a></li>
+<li class="toc-l3"><a href="#weighting-carry-forward-human-review-benchmarking">Weighting, carry-forward, human review, benchmarking</a></li>
+<li class="toc-l3"><a href="#why-the-strengths-logic-matters-for-scoring">Why the strengths logic matters for scoring</a></li>
+<li class="toc-l2"><a href="#q4-the-model-underneath">Q4 — THE MODEL UNDERNEATH</a></li>
+<li class="toc-l3"><a href="#hsbcs-current-values-framework-what-the-behavioural-items-score-against">HSBC&#x27;s current values framework (what the behavioural items score against)</a></li>
+<li class="toc-l3"><a href="#mapping-each-section-to-the-traits-it-probes-the-reasoning-not-an-answer-key">Mapping each section to the traits it probes (the reasoning, not an answer key)</a></li>
+<li class="toc-l2"><a href="#q5-what-separates-passes-from-fails">Q5 — WHAT SEPARATES PASSES FROM FAILS</a></li>
+<li class="toc-l3"><a href="#common-failure-patterns">Common failure patterns</a></li>
+<li class="toc-l3"><a href="#time-management-traps">Time-management traps</a></li>
+<li class="toc-l3"><a href="#underestimated-sections">Underestimated sections</a></li>
+<li class="toc-l3"><a href="#consistency-and-extreme-vs-moderate-responses">Consistency, and extreme vs moderate responses</a></li>
+<li class="toc-l3"><a href="#retake-reapplication-policy-cooling-off">Retake / reapplication policy &amp; cooling-off</a></li>
+<li class="toc-l2"><a href="#q6-integrity-monitoring-framed-for-an-honest-candidate">Q6 — INTEGRITY &amp; MONITORING (framed for an honest candidate)</a></li>
+<li class="toc-l3"><a href="#what-hsbcs-own-privacy-notice-establishes">What HSBC&#x27;s own Privacy Notice establishes</a></li>
+<li class="toc-l3"><a href="#what-cappfinity-markets-integrity-features">What Cappfinity markets (integrity features)</a></li>
+<li class="toc-l3"><a href="#monitored-behaviour-honest-candidate-accidental-trigger-how-to-avoid-it">Monitored behaviour → honest-candidate accidental trigger → how to avoid it</a></li>
+<li class="toc-l3"><a href="#what-the-terms-prohibit-and-the-consequences">What the terms prohibit — and the consequences</a></li>
+<li class="toc-l2"><a href="#q7-legitimate-preparation">Q7 — LEGITIMATE PREPARATION</a></li>
+<li class="toc-l3"><a href="#most-faithful-to-the-real-thing-start-here">Most faithful to the real thing (start here)</a></li>
+<li class="toc-l3"><a href="#paid-third-party-packs">Paid third-party packs</a></li>
+<li class="toc-l3"><a href="#free-resources">Free resources</a></li>
+<li class="toc-l3"><a href="#honest-relevance-verdict">Honest relevance verdict</a></li>
+<li class="toc-l2"><a href="#verbatim-candidate-reports">Verbatim candidate reports</a></li>
+<li class="toc-l2"><a href="#what-i-could-not-verify-read-this">What I could NOT verify (read this)</a></li>
+<li class="toc-l2"><a href="#source-list-grouped-by-reliability">Source list (grouped by reliability)</a></li>
+<li class="toc-l3"><a href="#tier-1-official-primary-hsbc-the-vendor">Tier 1 — Official primary (HSBC &amp; the vendor)</a></li>
+<li class="toc-l3"><a href="#tier-2-industry-prep-guides-secondary-commercial-bias-corroborate-on-format">Tier 2 — Industry / prep guides (secondary; commercial bias; corroborate on format)</a></li>
+<li class="toc-l3"><a href="#tier-3-general-reference-mechanism-not-hsbc-specific">Tier 3 — General reference (mechanism, not HSBC-specific)</a></li>
+<li class="toc-l3"><a href="#tier-4-genuine-candidate-voice-gated-snippet-only-or-unopened">Tier 4 — Genuine candidate voice (gated; snippet-only or unopened)</a></li>
+</ul></nav>
+  </aside>
+  <div id="scrim" class="scrim"></div>
+  <main id="main" class="content" tabindex="-1">
+    <nav class="print-toc" aria-hidden="true"><div class="print-cover"><span class="print-kicker">Candidate briefing · 8 August 2026</span><h1 class="print-title">HSBC &quot;Immersive Online Assessment&quot; — Candidate Briefing</h1></div><h2 class="print-contents-h">Contents</h2><ul><li class="pt-l2"><a href="#how-to-read-this-briefing">How to read this briefing</a></li><li class="pt-l2"><a href="#executive-summary-one-page">Executive summary (one page)</a></li><li class="pt-l2"><a href="#vendor-provenance-phase-1">Vendor &amp; provenance (Phase 1)</a></li><li class="pt-l3"><a href="#1-who-builds-and-hosts-it">1. Who builds and hosts it</a></li><li class="pt-l3"><a href="#2-multiple-vendors-across-stages-the-nuance-a-single-vendor-answer-misses">2. Multiple vendors across stages — the nuance a single-vendor answer misses</a></li><li class="pt-l3"><a href="#3-date-stamping-obsolescence-phase-1-item-3">3. Date-stamping &amp; obsolescence (Phase 1 item 3)</a></li><li class="pt-l2"><a href="#q1-structure-every-stage-in-order">Q1 — STRUCTURE (every stage, in order)</a></li><li class="pt-l3"><a href="#full-application-sequence">Full application sequence</a></li><li class="pt-l3"><a href="#inside-the-immersive-assessment">Inside the immersive assessment</a></li><li class="pt-l3"><a href="#timing-navigation-device">Timing, navigation, device</a></li><li class="pt-l3"><a href="#business-lines-regions-phase-1-item-2">Business lines &amp; regions (Phase 1 item 2)</a></li><li class="pt-l2"><a href="#q2-content-what-each-section-actually-contains">Q2 — CONTENT (what each section actually contains)</a></li><li class="pt-l3"><a href="#two-distinct-stages-sources-conflate-them">Two distinct stages — sources conflate them</a></li><li class="pt-l3"><a href="#stage-1-section-by-section">Stage 1 — section by section</a></li><li class="pt-l3"><a href="#stage-2-the-four-micro-exercises">Stage 2 — the four micro-exercises</a></li><li class="pt-l3"><a href="#values-the-sjt-is-scored-against">Values the SJT is scored against</a></li><li class="pt-l2"><a href="#q3-scoring-and-ranking-the-priority">Q3 — SCORING AND RANKING (the priority)</a></li><li class="pt-l3"><a href="#the-vendors-philosophy-dictates-the-logic">The vendor&#x27;s philosophy dictates the logic</a></li><li class="pt-l3"><a href="#how-each-item-type-is-scored">How each item type is scored</a></li><li class="pt-l3"><a href="#cut-score-percentile-ranked-list">Cut score, percentile, ranked list?</a></li><li class="pt-l3"><a href="#weighting-carry-forward-human-review-benchmarking">Weighting, carry-forward, human review, benchmarking</a></li><li class="pt-l3"><a href="#why-the-strengths-logic-matters-for-scoring">Why the strengths logic matters for scoring</a></li><li class="pt-l2"><a href="#q4-the-model-underneath">Q4 — THE MODEL UNDERNEATH</a></li><li class="pt-l3"><a href="#hsbcs-current-values-framework-what-the-behavioural-items-score-against">HSBC&#x27;s current values framework (what the behavioural items score against)</a></li><li class="pt-l3"><a href="#mapping-each-section-to-the-traits-it-probes-the-reasoning-not-an-answer-key">Mapping each section to the traits it probes (the reasoning, not an answer key)</a></li><li class="pt-l2"><a href="#q5-what-separates-passes-from-fails">Q5 — WHAT SEPARATES PASSES FROM FAILS</a></li><li class="pt-l3"><a href="#common-failure-patterns">Common failure patterns</a></li><li class="pt-l3"><a href="#time-management-traps">Time-management traps</a></li><li class="pt-l3"><a href="#underestimated-sections">Underestimated sections</a></li><li class="pt-l3"><a href="#consistency-and-extreme-vs-moderate-responses">Consistency, and extreme vs moderate responses</a></li><li class="pt-l3"><a href="#retake-reapplication-policy-cooling-off">Retake / reapplication policy &amp; cooling-off</a></li><li class="pt-l2"><a href="#q6-integrity-monitoring-framed-for-an-honest-candidate">Q6 — INTEGRITY &amp; MONITORING (framed for an honest candidate)</a></li><li class="pt-l3"><a href="#what-hsbcs-own-privacy-notice-establishes">What HSBC&#x27;s own Privacy Notice establishes</a></li><li class="pt-l3"><a href="#what-cappfinity-markets-integrity-features">What Cappfinity markets (integrity features)</a></li><li class="pt-l3"><a href="#monitored-behaviour-honest-candidate-accidental-trigger-how-to-avoid-it">Monitored behaviour → honest-candidate accidental trigger → how to avoid it</a></li><li class="pt-l3"><a href="#what-the-terms-prohibit-and-the-consequences">What the terms prohibit — and the consequences</a></li><li class="pt-l2"><a href="#q7-legitimate-preparation">Q7 — LEGITIMATE PREPARATION</a></li><li class="pt-l3"><a href="#most-faithful-to-the-real-thing-start-here">Most faithful to the real thing (start here)</a></li><li class="pt-l3"><a href="#paid-third-party-packs">Paid third-party packs</a></li><li class="pt-l3"><a href="#free-resources">Free resources</a></li><li class="pt-l3"><a href="#honest-relevance-verdict">Honest relevance verdict</a></li><li class="pt-l2"><a href="#verbatim-candidate-reports">Verbatim candidate reports</a></li><li class="pt-l2"><a href="#what-i-could-not-verify-read-this">What I could NOT verify (read this)</a></li><li class="pt-l2"><a href="#source-list-grouped-by-reliability">Source list (grouped by reliability)</a></li><li class="pt-l3"><a href="#tier-1-official-primary-hsbc-the-vendor">Tier 1 — Official primary (HSBC &amp; the vendor)</a></li><li class="pt-l3"><a href="#tier-2-industry-prep-guides-secondary-commercial-bias-corroborate-on-format">Tier 2 — Industry / prep guides (secondary; commercial bias; corroborate on format)</a></li><li class="pt-l3"><a href="#tier-3-general-reference-mechanism-not-hsbc-specific">Tier 3 — General reference (mechanism, not HSBC-specific)</a></li><li class="pt-l3"><a href="#tier-4-genuine-candidate-voice-gated-snippet-only-or-unopened">Tier 4 — Genuine candidate voice (gated; snippet-only or unopened)</a></li></ul></nav><section class="doc-section" id="intro"><p><strong>Prepared:</strong> 8 August 2026 · <strong>For:</strong> a candidate preparing legitimately · <strong>Scope:</strong> HSBC graduate / early-careers / experienced-hire early-stage online assessment(s).</p><p>This is an evidence-based briefing, not an answer key. Every claim carries a reliability label (see <em>How to read this briefing</em>). Where sources disagree, the disagreement is shown rather than resolved silently. Where something could not be verified, that is stated plainly.</p><blockquote>
+<p><strong>Golden rule that falls out of the research:</strong> the assessment is a <strong>strengths-based</strong> instrument that cross-checks your answers for authenticity and consistency, plus a <strong>hard cognitive filter</strong> where accuracy matters. The winning strategy is <em>be accurate on the data questions and genuinely, consistently yourself on the behavioural ones</em> — not to perform an "ideal banker." This is a research conclusion, not motivational filler; the mechanism is explained in §3–§5.</p>
+</blockquote><hr/></section><section class="doc-section" id="how-to-read-this-briefing"><h2 id="how-to-read-this-briefing-h">How to read this briefing</h2><p><strong>Reliability labels</strong> (applied to every substantive claim):</p><ul>
+<li class="claim" data-labels="official"><strong><span class="pill pill-official" data-label="official">OFFICIAL</span></strong> — stated by HSBC or the assessment vendor in a primary source.</li>
+<li class="claim" data-labels="corroborated"><strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> — three or more independent candidate/industry sources agree.</li>
+<li class="claim" data-labels="anecdotal"><strong><span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span></strong> — a single or weak/second-hand source.</li>
+<li class="claim" data-labels="inferred"><strong><span class="pill pill-inferred" data-label="inferred">INFERRED</span></strong> — my reasoning from the available evidence; not a documented fact.</li>
+</ul><p class="claim" data-labels="inferred"><strong>A sourcing limitation you must weigh.</strong> The richest candidate-voice sources — <strong>Reddit, The Student Room, Wall Street Oasis, Glassdoor, YouTube comments</strong> — were <strong>blocked (HTTP 403 / login / captcha)</strong> to the research tooling. Almost all readable detail therefore comes from <strong>commercial prep-site guides</strong>, which reconstruct the test and frequently copy one another. Treat prep-site "example questions" as <strong><span class="pill pill-inferred" data-label="inferred">INFERRED</span> approximations, not verbatim candidate memory</strong>, and treat prep-site agreement as weaker evidence than the raw count suggests. The strongest primary anchors in this briefing are HSBC's own 2024–2025 transcripts and Applicant Privacy Notice, and Cappfinity's own 2024 methodology whitepaper.</p><p>Citations are numbered <code>[n]</code> and resolve to the <strong>Source list</strong> at the end.</p><hr/></section><section class="doc-section" id="executive-summary-one-page"><h2 id="executive-summary-one-page-h">Executive summary (one page)</h2><ul>
+<li class="claim" data-labels="corroborated"><strong>Vendor.</strong> The immersive assessment is built for HSBC by <strong>Cappfinity</strong> (formerly Capp / Capp &amp; Co; a UK strengths-assessment firm founded 2005) — <strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> across 8+ industry sources <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup><sup class="cite"><a data-cite="18" href="#s18">[18]</a></sup><sup class="cite"><a data-cite="21" href="#s21">[21]</a></sup><sup class="cite"><a data-cite="23" href="#s23">[23]</a></sup><sup class="cite"><a data-cite="25" href="#s25">[25]</a></sup><sup class="cite"><a data-cite="29" href="#s29">[29]</a></sup><sup class="cite"><a data-cite="31" href="#s31">[31]</a></sup><sup class="cite"><a data-cite="33" href="#s33">[33]</a></sup>. <strong>Caveat:</strong> no HSBC or Cappfinity primary source that could be read actually <em>names</em> HSBC as a Cappfinity client — the attribution is well-corroborated second-hand but <strong>not first-party confirmed</strong> <sup class="cite"><a data-cite="9" href="#s9">[9]</a></sup><sup class="cite"><a data-cite="8" href="#s8">[8]</a></sup>. The later <strong>video "Job Simulation"</strong> stage is variously attributed to <strong>Cappfinity or HireVue</strong> — genuinely disputed <sup class="cite"><a data-cite="18" href="#s18">[18]</a></sup><sup class="cite"><a data-cite="32" href="#s32">[32]</a></sup>.</li>
+<li class="claim" data-labels="official"><strong>Shape of the process.</strong> <strong><span class="pill pill-official" data-label="official">OFFICIAL</span></strong> HSBC runs three stages: (1) online application form (~10–15 min); (2) <strong>online assessment(s)</strong> — "one or two stages", each "around 40 minutes", inside a ~90-minute slot; (3) assessment centre (~3 hours; "Super Day" in the US) — replaced by an online interview for insight/work-experience programmes <sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup><sup class="cite"><a data-cite="2" href="#s2">[2]</a></sup>.</li>
+<li class="claim" data-labels="corroborated"><strong>The immersive assessment itself.</strong> <strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> ~<strong>38 questions across 5 scenario-linked sections</strong>, delivered as clickable "tiles" that unlock sequentially; ~16 cognitive (numerical / verbal / inductive) + ~22 situational-judgement / personality items; <strong>officially untimed but ~50 minutes</strong> in practice; SJT items are <strong>ranked 1–5</strong> <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup><sup class="cite"><a data-cite="21" href="#s21">[21]</a></sup><sup class="cite"><a data-cite="23" href="#s23">[23]</a></sup><sup class="cite"><a data-cite="25" href="#s25">[25]</a></sup>. Exact section names and counts are <strong>single-source and cycle-dependent</strong> — do not over-index on them.</li>
+<li class="claim" data-labels="corroborated official"><strong>Scoring.</strong> <strong><span class="pill pill-official" data-label="official">OFFICIAL</span></strong> Cappfinity is strengths-based: it scores whether your <em>authentic, energising pattern of behaviour</em> fits the role, not whether you picked a "correct" personality answer <sup class="cite"><a data-cite="7" href="#s7">[7]</a></sup>. <strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> Cognitive items are <strong>right/wrong, benchmarked against a graduate norm group</strong>, and behave as a <strong>hard filter</strong>; SJT/strengths items are <strong>profile-matched</strong> against HSBC's values with "no single right answer"; <strong>time taken is recorded and factored in</strong> even though the test is "untimed" <sup class="cite"><a data-cite="19" href="#s19">[19]</a></sup><sup class="cite"><a data-cite="29" href="#s29">[29]</a></sup><sup class="cite"><a data-cite="35" href="#s35">[35]</a></sup>. <strong>The exact cut score and weighting are proprietary and undisclosed — a real, verified gap.</strong></li>
+<li class="claim" data-labels="corroborated"><strong>The model underneath.</strong> <strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> The behavioural items map to HSBC's <strong>four current values: We value difference · We succeed together · We take responsibility · We get it done</strong> <sup class="cite"><a data-cite="38" href="#s38">[38]</a></sup>. Some prep pages still cite the <strong>obsolete pre-2021 triad "Open / Connected / Dependable"</strong> — a dated-source disagreement to ignore <sup class="cite"><a data-cite="30" href="#s30">[30]</a></sup><sup class="cite"><a data-cite="35" href="#s35">[35]</a></sup>.</li>
+<li class="claim" data-labels="corroborated"><strong>What separates passes from fails.</strong> <strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><span class="qual"> as a pattern</span></strong> Numerical/data errors are the classic killer; faking a "perfect" values profile backfires because strengths are cross-probed for consistency; the cognitive sections are the ones candidates underestimate <sup class="cite"><a data-cite="19" href="#s19">[19]</a></sup><sup class="cite"><a data-cite="33" href="#s33">[33]</a></sup><sup class="cite"><a data-cite="35" href="#s35">[35]</a></sup>.</li>
+<li class="claim" data-labels="official"><strong>Integrity.</strong> <strong><span class="pill pill-official" data-label="official">OFFICIAL</span></strong> Cappfinity markets integrity features — <strong>Camera-On Assessment, Copy Prevention, Time-Recorded Assessment, and an Integrity Dashboard that flags likely AI use</strong> <sup class="cite"><a data-cite="10" href="#s10">[10]</a></sup>. <strong><span class="pill pill-official" data-label="official">OFFICIAL</span></strong> HSBC's Applicant Privacy Notice records video answers, may use them in decisions, uses automated decisioning (with a right to human review), and warns that detected malpractice can lead to refusal of employment; results are retained 12 months <sup class="cite"><a data-cite="5" href="#s5">[5]</a></sup>. For an honest candidate the risk is <em>accidental</em> flags — covered in §6 with how to avoid each.</li>
+<li class="claim" data-labels="official"><strong>Preparation.</strong> <strong><span class="pill pill-official" data-label="official">OFFICIAL</span></strong> The most faithful practice is Cappfinity's own demo and Preparation Hub, plus HSBC's post-application Candidate Hub <sup class="cite"><a data-cite="11" href="#s11">[11]</a></sup><sup class="cite"><a data-cite="12" href="#s12">[12]</a></sup>. Paid HSBC-specific packs (JobTestPrep, Graduates First) help most on the SJT/strengths/video dimension; generic aptitude packs (Practice Aptitude Tests, Prepterminal's SHL/Hogan course) help only on numerical/verbal speed <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup><sup class="cite"><a data-cite="28" href="#s28">[28]</a></sup><sup class="cite"><a data-cite="18" href="#s18">[18]</a></sup><sup class="cite"><a data-cite="36" href="#s36">[36]</a></sup>. See the separate <strong><code>prep-plan.md</code></strong> for a two-week schedule.</li>
+</ul><hr/></section><section class="doc-section" id="vendor-provenance-phase-1"><h2 id="vendor-provenance-phase-1-h">Vendor &amp; provenance (Phase 1)</h2><h3 id="1-who-builds-and-hosts-it">1. Who builds and hosts it</h3><ul>
+<li class="claim" data-labels="corroborated"><strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> The immersive assessment vendor is <strong>Cappfinity</strong> — named independently by JobTestPrep, Practice Aptitude Tests, AssessmentCentreHQ, AptitudePrep, TestSolve, GraduatesFirst, AssessmentDay and Intervyo <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup><sup class="cite"><a data-cite="18" href="#s18">[18]</a></sup><sup class="cite"><a data-cite="21" href="#s21">[21]</a></sup><sup class="cite"><a data-cite="23" href="#s23">[23]</a></sup><sup class="cite"><a data-cite="25" href="#s25">[25]</a></sup><sup class="cite"><a data-cite="29" href="#s29">[29]</a></sup><sup class="cite"><a data-cite="31" href="#s31">[31]</a></sup><sup class="cite"><a data-cite="33" href="#s33">[33]</a></sup>.</li>
+<li class="claim" data-labels="inferred"><strong><span class="pill pill-inferred" data-label="inferred">INFERRED</span><span class="qual"> / important caveat</span></strong> The attribution is <strong>not confirmed by any first-party source that could be read</strong>. HSBC's own materials describe the assessment generically ("immersive experiences", "real-life scenarios") and <strong>never name a vendor</strong> <sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup><sup class="cite"><a data-cite="2" href="#s2">[2]</a></sup><sup class="cite"><a data-cite="3" href="#s3">[3]</a></sup>. Cappfinity's own website is JavaScript-rendered and did not return readable body text, so its client list could not be checked at source <sup class="cite"><a data-cite="9" href="#s9">[9]</a></sup><sup class="cite"><a data-cite="8" href="#s8">[8]</a></sup>. The "HSBC is a Cappfinity client" claim reaches this briefing only second-hand (e.g. Intervyo lists HSBC among Cappfinity clients) <sup class="cite"><a data-cite="33" href="#s33">[33]</a></sup>.</li>
+<li class="claim" data-labels="official"><strong><span class="pill pill-official" data-label="official">OFFICIAL</span><span class="qual"> — vendor product identity</span></strong> Cappfinity does market an <strong>"immersive" / VR work-preview product line</strong>, consistent with the "immersive assessment" branding <sup class="cite"><a data-cite="13" href="#s13">[13]</a></sup>.</li>
+</ul><h3 id="2-multiple-vendors-across-stages-the-nuance-a-single-vendor-answer-misses">2. Multiple vendors across stages — the nuance a single-vendor answer misses</h3><table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Vendor claimed</th>
+<th>Confidence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="claim" data-labels="corroborated">
+<td>Immersive assessment (cognitive + SJT + strengths)</td>
+<td><strong>Cappfinity</strong></td>
+<td><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span> <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup><sup class="cite"><a data-cite="21" href="#s21">[21]</a></sup><sup class="cite"><a data-cite="23" href="#s23">[23]</a></sup><sup class="cite"><a data-cite="25" href="#s25">[25]</a></sup></td>
+</tr>
+<tr>
+<td>Video "Job Simulation"</td>
+<td><strong>HireVue</strong> <em>or</em> <strong>Cappfinity</strong></td>
+<td><span class="pill pill-flag" data-label="flag">DISPUTED</span> — HireVue per <sup class="cite"><a data-cite="18" href="#s18">[18]</a></sup><sup class="cite"><a data-cite="32" href="#s32">[32]</a></sup>; Cappfinity per <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup></td>
+</tr>
+<tr class="claim" data-labels="anecdotal">
+<td>"Values Assessment" (older framing)</td>
+<td><strong>SHL</strong></td>
+<td><span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span> — single source <sup class="cite"><a data-cite="22" href="#s22">[22]</a></sup></td>
+</tr>
+</tbody>
+</table><ul>
+<li class="claim" data-labels="inferred"><strong><span class="pill pill-inferred" data-label="inferred">INFERRED</span></strong> Most likely current reading: the immersive cognitive/SJT stage is <strong>Cappfinity</strong>; the recorded-video interview is <strong>HireVue</strong>; the "SHL Values Assessment" attribution is probably a <strong>stale carry-over</strong> from HSBC's pre-2023 process.</li>
+<li class="claim" data-labels="corroborated"><strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> <strong>Arctic Shores, Amberjack and Pymetrics</strong> — <strong>no evidence</strong> links any of them to HSBC's current process (Arctic Shores is KPMG's game-based test). <strong>SHL / Kenexa</strong> belong to HSBC's <strong>older</strong> process.</li>
+</ul><h3 id="3-date-stamping-obsolescence-phase-1-item-3">3. Date-stamping &amp; obsolescence (Phase 1 item 3)</h3><ul>
+<li><strong>Current process (Cappfinity immersive):</strong> consolidated ~2023–2026; this is what 2025–2026 sources describe and is reliable for a 2026 applicant.</li>
+<li><strong>Legacy process (pre-~2023):</strong> standalone <strong>SHL</strong> numerical/verbal + SJT, <strong>HireVue</strong> video, <strong>Kenexa</strong>. <strong>Any source describing "separate SHL numerical and verbal tests" as the first stage is describing the obsolete process.</strong></li>
+<li>The 2018 HSBC "Hints and tips" PDF is ~8 years old — <strong>obsolete</strong> <sup class="cite"><a data-cite="4" href="#s4">[4]</a></sup>. Many prep pages are auto-stamped "2026/2027" for SEO while the underlying detail is 2023–2025 vintage; the one clearly outdated prep guide flagged here (Practice Reasoning Tests) was last updated Nov 2023 <sup class="cite"><a data-cite="30" href="#s30">[30]</a></sup>. <strong>Best anchors:</strong> HSBC's Dec 2024 / Jan 2025 transcripts and current careers site <sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup><sup class="cite"><a data-cite="2" href="#s2">[2]</a></sup><sup class="cite"><a data-cite="3" href="#s3">[3]</a></sup>.</li>
+</ul><hr/></section><section class="doc-section" id="q1-structure-every-stage-in-order"><h2 id="q1-structure-every-stage-in-order-h">Q1 — STRUCTURE (every stage, in order)</h2><h3 id="full-application-sequence">Full application sequence</h3><p class="claim" data-labels="corroborated"><strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><span class="qual">, reconciling official + prep</span>:</strong></p><ol>
+<li class="claim" data-labels="official"><strong>Online application form</strong> — CV/transcripts; <strong><span class="pill pill-official" data-label="official">OFFICIAL</span></strong> "~10–15 mins"; no long written questions <sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup>.</li>
+<li><strong>Online Immersive Assessment</strong> — cognitive + SJT + strengths (detail below).</li>
+<li><strong>Job Simulation / video interview</strong> — present for <em>some</em> roles (HSBC's "one or two stages") and <strong>tailored to your business area</strong> <sup class="cite"><a data-cite="2" href="#s2">[2]</a></sup><sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup>.</li>
+<li class="claim" data-labels="official"><strong>Assessment Centre</strong> — <strong><span class="pill pill-official" data-label="official">OFFICIAL</span></strong> "~3 hours", mostly virtual, called <strong>"Super Days" in the US</strong>; <strong>replaced by an online interview</strong> for insight / work-experience programmes <sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup><sup class="cite"><a data-cite="2" href="#s2">[2]</a></sup>.</li>
+</ol><h3 id="inside-the-immersive-assessment">Inside the immersive assessment</h3><ul>
+<li class="claim" data-labels="official"><strong><span class="pill pill-official" data-label="official">OFFICIAL</span></strong> HSBC: the online assessment slot is <strong>90 minutes</strong>; it contains "audio or video content, mock emails, data tables and graphs, or written articles" and requires "short written and video responses"; "<strong>takes around 40 minutes to complete</strong>" and there may be "<strong>one or two stages</strong>" depending on the role <sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup><sup class="cite"><a data-cite="2" href="#s2">[2]</a></sup>.</li>
+<li class="claim" data-labels="corroborated"><strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> Prep-site consensus: <strong>38 questions total</strong> = ~<strong>16 cognitive</strong> (numerical, verbal, inductive) + ~<strong>22 SJT / personality-values</strong>; "officially untimed" but <strong>~50 minutes</strong> expected <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup><sup class="cite"><a data-cite="21" href="#s21">[21]</a></sup><sup class="cite"><a data-cite="23" href="#s23">[23]</a></sup><sup class="cite"><a data-cite="25" href="#s25">[25]</a></sup>.</li>
+<li class="claim" data-labels="anecdotal"><strong><span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span><span class="qual"> — single detailed source</span></strong> Five named sections. <strong>Two naming conventions circulate</strong> (probably different cycles or just paraphrase); both are shown because sources genuinely disagree:</li>
+</ul><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Naming set A (JobTestPrep, TestSolve)</th>
+<th>Naming set B (AssessmentCentreHQ, AptitudePrep, Practice4Me)</th>
+<th>Content</th>
+<th>Items</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Project Kick-Off</td>
+<td>Creating a New Team</td>
+<td>SJT — form a team, set standards</td>
+<td>4 SJT</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Global Engagement</td>
+<td>Working with Others</td>
+<td>SJT — collaboration / conflict across roles &amp; cultures</td>
+<td>4 SJT</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Data Monitoring</td>
+<td>Communicating Globally</td>
+<td>Cognitive + SJT on 5–6 data sources</td>
+<td>10 (8 cog + 2 SJT)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Navigating Competing Commitments</td>
+<td>Competing Commitments</td>
+<td>Cognitive + SJT — juggling side projects</td>
+<td><strong>9 or 10</strong> (disagreement)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Pause and Reflect</td>
+<td>Completing the Project Delivery</td>
+<td>SJT + personality — deadlines, errors, prioritisation</td>
+<td>11</td>
+</tr>
+</tbody>
+</table><p>Sources: <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup><sup class="cite"><a data-cite="21" href="#s21">[21]</a></sup><sup class="cite"><a data-cite="23" href="#s23">[23]</a></sup><sup class="cite"><a data-cite="25" href="#s25">[25]</a></sup><sup class="cite"><a data-cite="26" href="#s26">[26]</a></sup><sup class="cite"><a data-cite="31" href="#s31">[31]</a></sup>. <strong><span class="pill pill-flag" data-label="flag">DISAGREEMENT</span><span class="qual"> on total count</span></strong> 38 (dominant) <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup> vs "~40 MCQs" (GraduatesFirst) <sup class="cite"><a data-cite="28" href="#s28">[28]</a></sup> vs "26 questions total" (a Student Room candidate, ~2019, <strong>likely obsolete</strong>) <sup class="cite"><a data-cite="43" href="#s43">[43]</a></sup>.</p><h3 id="timing-navigation-device">Timing, navigation, device</h3><ul>
+<li class="claim" data-labels="corroborated"><strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> Timing is <strong>overall, not per-question</strong>, for the immersive part; officially untimed but ~40–50 min expected <sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup><sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup><sup class="cite"><a data-cite="23" href="#s23">[23]</a></sup>.</li>
+<li class="claim" data-labels="anecdotal"><strong><span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span></strong> Sub-tests <strong>unlock sequentially</strong>; you can <strong>skip and review/revise within a sub-test before submitting it, but not after</strong> submitting a section <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup>.</li>
+<li class="claim" data-labels="corroborated"><strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> The <strong>video "Job Simulation" IS per-question timed</strong>: ~15 items across ~4 micro-exercises, ~35–50 min total; <strong>~30 sec–2 min prep, ~2 min record</strong> per question; no live interviewer; <strong>no re-record once started</strong>; a free-text email task capped at <strong>~2,500–3,000 characters</strong> <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup><sup class="cite"><a data-cite="16" href="#s16">[16]</a></sup><sup class="cite"><a data-cite="20" href="#s20">[20]</a></sup><sup class="cite"><a data-cite="27" href="#s27">[27]</a></sup>. <strong><span class="pill pill-flag" data-label="flag">DISAGREEMENT</span><span class="qual"> on video timing</span></strong> "2 min prep / 2 min record" (most) <sup class="cite"><a data-cite="16" href="#s16">[16]</a></sup><sup class="cite"><a data-cite="20" href="#s20">[20]</a></sup> vs "30 sec prep / 3 min answer" (TestSolve) <sup class="cite"><a data-cite="25" href="#s25">[25]</a></sup>.</li>
+<li class="claim" data-labels="corroborated"><strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> <strong>Device:</strong> webcam + microphone required for the video stage; quiet room; pen &amp; paper recommended; a <strong>physical/handheld calculator is permitted</strong> for the numerical section <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup><sup class="cite"><a data-cite="32" href="#s32">[32]</a></sup>. No formal OS/browser spec surfaced.</li>
+<li class="claim" data-labels="corroborated"><strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> <strong>Total end-to-end:</strong> application ~10–15 min; immersive ~40–50 min; job simulation ~15–50 min; assessment centre ~3 hrs.</li>
+</ul><h3 id="business-lines-regions-phase-1-item-2">Business lines &amp; regions (Phase 1 item 2)</h3><ul>
+<li class="claim" data-labels="official"><strong><span class="pill pill-official" data-label="official">OFFICIAL</span></strong> HSBC uses <strong>one common early-careers framework</strong> across programmes and states assessments are "<strong>tailored to the business area</strong> you are interested in" — but publishes no per-line or per-region breakdown <sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup>.</li>
+<li class="claim" data-labels="inferred"><strong><span class="pill pill-inferred" data-label="inferred">INFERRED</span></strong> The <strong>same Cappfinity platform</strong> is used across GBM (Global Banking &amp; Markets) / Wealth &amp; Personal Banking / Commercial / Technology, with <strong>scenario content tailored</strong> and the values/cognitive core held constant. No source shows GBM using a <em>different vendor or fundamentally different structure</em> at the immersive stage; line-specific differences concentrate <strong>later</strong> (technical interviews at the assessment centre; GBM/Markets-Tech front-office roles carry heavier technical interviewing).</li>
+<li><strong><span class="pill pill-flag" data-label="flag">UNVERIFIED</span></strong> <strong>UK vs Hong Kong vs elsewhere:</strong> no direct evidence the immersive assessment differs by region. The only confirmed regional variation is <strong>terminology and later-stage logistics</strong> (US = "Super Days"). Whether HSBC Asia uses an identical Cappfinity instance, a localised version, or a different provider is <strong>not documented</strong> — treat as unknown, not "the same". <em>(Note: "HSBC immersive" web searches also surface an unrelated private-banking client "Tech Immersive Tour" in Asia — not a recruitment assessment; do not conflate.)</em></li>
+</ul><hr/></section><section class="doc-section" id="q2-content-what-each-section-actually-contains"><h2 id="q2-content-what-each-section-actually-contains-h">Q2 — CONTENT (what each section actually contains)</h2><blockquote>
+<p class="claim" data-labels="inferred">All concrete "examples" below are <strong>prep-site reconstructions <span class="pill pill-inferred" data-label="inferred">INFERRED</span></strong>, not verbatim candidate memory, unless explicitly marked as a candidate quote. They illustrate <em>format and flavour</em>, not questions you will see.</p>
+</blockquote><h3 id="two-distinct-stages-sources-conflate-them">Two distinct stages — sources conflate them</h3><ul>
+<li class="claim" data-labels="corroborated"><strong>Stage 1 — Online Immersive Assessment (Cappfinity):</strong> the ~38-question, tile-based, mixed cognitive + SJT test; <strong>generic</strong>, not business-area-specific. <strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup><sup class="cite"><a data-cite="21" href="#s21">[21]</a></sup><sup class="cite"><a data-cite="25" href="#s25">[25]</a></sup></li>
+<li class="claim" data-labels="corroborated"><strong>Stage 2 — Job Simulation (HireVue/Cappfinity video):</strong> shorter, ~15 items, recorded <strong>video</strong> answers + a <strong>written email</strong> task, <strong>tailored to your business area</strong>; reached only after passing Stage 1. <strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup><sup class="cite"><a data-cite="20" href="#s20">[20]</a></sup><sup class="cite"><a data-cite="27" href="#s27">[27]</a></sup></li>
+</ul><p>Because the terms "immersive assessment", "job simulation", "simulation game" and "virtual experience" are used interchangeably, when reading any single report <strong>check whether it describes video answers (Stage 2) or ranking tiles (Stage 1).</strong></p><h3 id="stage-1-section-by-section">Stage 1 — section by section</h3><ul>
+<li class="claim" data-labels="corroborated"><strong>SJT sections (Project Kick-Off / Global Engagement, etc.).</strong> <strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> Present a workplace scenario, then ask you to <strong>rank 5 options 1–5</strong> (drag-and-drop; 1 = most likely, 5 = least likely) <sup class="cite"><a data-cite="21" href="#s21">[21]</a></sup><sup class="cite"><a data-cite="23" href="#s23">[23]</a></sup><sup class="cite"><a data-cite="30" href="#s30">[30]</a></sup>.</li>
+<li class="claim" data-labels="inferred"><em><span class="pill pill-inferred" data-label="inferred">INFERRED</span><span class="qual"> example, AptitudePrep</span></em> "While you have been diligently working on a project for several weeks, <strong>Kieran</strong>, a new member who recently joined HSBC, has brought forward other suggestions and identified flaws in your work" → "How do you incorporate Kieran's feedback?" → rank 1–5 <sup class="cite"><a data-cite="23" href="#s23">[23]</a></sup>.</li>
+<li class="claim" data-labels="inferred"><em><span class="pill pill-inferred" data-label="inferred">INFERRED</span><span class="qual"> example, AptitudePrep</span></em> A team feedback session on displaying client-brochure findings in an app; "only some colleagues are actively participating"; options include "Actively asking quieter members questions to encourage contribution" <sup class="cite"><a data-cite="24" href="#s24">[24]</a></sup>.</li>
+<li class="claim" data-labels="corroborated"><strong>Cognitive sections (Data Monitoring / Competing Commitments).</strong> <strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> Multiple-choice numerical/verbal reasoning drawn from <strong>5–6 information tabs</strong> (tables, graphs, pie charts, an email) <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup><sup class="cite"><a data-cite="25" href="#s25">[25]</a></sup>.</li>
+<li class="claim" data-labels="inferred"><em><span class="pill pill-inferred" data-label="inferred">INFERRED</span><span class="qual"> example, JobTestPrep</span></em> analyse NGO subscriber data across months → "Which of the following NGOs had the second-highest percentage increase in subscribers?" <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup>.</li>
+<li class="claim" data-labels="inferred"><em><span class="pill pill-inferred" data-label="inferred">INFERRED</span><span class="qual">, TestSolve</span></em> each cognitive item bundles roughly "1 table chart, 2 graphs, 1 pie chart, and an email from a colleague"; question shapes like "Which region showed the largest percentage decline in Q3?" <sup class="cite"><a data-cite="25" href="#s25">[25]</a></sup>.</li>
+<li class="claim" data-labels="corroborated"><strong>Personality / work-style (Pause and Reflect).</strong> <strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> Forced-choice <strong>preference scales</strong> — e.g. a slider between "I support on small elements of a variety of tasks" and "I see a task through to completion" <sup class="cite"><a data-cite="23" href="#s23">[23]</a></sup>. This feeds the strengths/trait profile and the consistency check (see §3, §5).</li>
+</ul><h3 id="stage-2-the-four-micro-exercises">Stage 2 — the four micro-exercises</h3><p class="claim" data-labels="inferred"><strong><span class="pill pill-inferred" data-label="inferred">INFERRED</span><span class="qual"> structure, CORROBORATED that it exists</span></strong> <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup><sup class="cite"><a data-cite="16" href="#s16">[16]</a></sup><sup class="cite"><a data-cite="20" href="#s20">[20]</a></sup><sup class="cite"><a data-cite="27" href="#s27">[27]</a></sup><sup class="cite"><a data-cite="30" href="#s30">[30]</a></sup>:</p><ol>
+<li><strong>Video set-up</strong> — one practice video question (e.g. "introduce yourself" / "your biggest strength"); framed as an unassessed connection test (<strong>but prep sites warn to treat every item as assessed</strong> <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup>).</li>
+<li><strong>SJT on a fictitious news article</strong> — e.g. an article about an event (a "G7 Summit" example is cited); video + 1–5 ranking; tests "approach to commencing a research project."</li>
+<li><strong>Fictitious company analysis</strong> — ~6 items, personality + SJT.</li>
+<li><strong>Further analysis / email task</strong> — ~6 items, video + SJT + a <strong>free-text email reply</strong> (≤ ~3,000 chars) — "respond to an email or report as if you're already on the job." <em>This 3,000-character email is the single most consistently repeated concrete detail across sources.</em></li>
+</ol><h3 id="values-the-sjt-is-scored-against">Values the SJT is scored against</h3><ul>
+<li class="claim" data-labels="corroborated"><strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> Current SJT rubric = HSBC's four values (see §4). Some sources cite the older triad "Dependable / Open / Connected" — <strong>likely obsolete</strong> <sup class="cite"><a data-cite="26" href="#s26">[26]</a></sup><sup class="cite"><a data-cite="30" href="#s30">[30]</a></sup>. <em>(A 2019 candidate advised mentioning "dependable" as a keyword — see verbatim quotes; this reflects the old values and may no longer apply.)</em></li>
+</ul><hr/></section><section class="doc-section" id="q3-scoring-and-ranking-the-priority"><h2 id="q3-scoring-and-ranking-the-priority-h">Q3 — SCORING AND RANKING (the priority)</h2><p class="claim" data-labels="inferred official"><strong>Up-front verified gap:</strong> Cappfinity treats its scoring algorithm as proprietary. <strong>No source — official or otherwise — discloses the actual cut score, section weightings, or trait-inference formula.</strong> Everything about <em>mechanism</em> below is either Cappfinity's published <em>philosophy</em> <span class="pill pill-official" data-label="official">OFFICIAL</span> or industry <em>inference</em> about how it is operationalised <span class="pill pill-inferred" data-label="inferred">INFERRED</span><span class="qual">/CORROBORATED</span>.</p><h3 id="the-vendors-philosophy-dictates-the-logic">The vendor's philosophy dictates the logic</h3><ul>
+<li class="claim" data-labels="official"><strong><span class="pill pill-official" data-label="official">OFFICIAL</span></strong> From Cappfinity's 2024 whitepaper <em>The Scientific Origins of Skills &amp; Strengths</em> (Edition 8): a strength is "a pre-existing capacity for a particular way of behaving, thinking or feeling that is <strong>authentic and energizing</strong> to the user"; the assessment measures "two or more of the three dimensions of <strong>performance, motivation and use</strong>" <sup class="cite"><a data-cite="7" href="#s7">[7]</a></sup>. <strong>The scored construct is not "did you pick the correct answer" — it is "does your natural, energising behaviour match what the role rewards."</strong></li>
+<li class="claim" data-labels="official"><strong><span class="pill pill-official" data-label="official">OFFICIAL</span></strong> Cappfinity explicitly rejects the competency "big-bucket" model ("a descent into mediocrity") in favour of its <strong>80-skill set</strong>, and states "<strong>every Cappfinity skill has been benchmarked against workplace performance over multiple years</strong>", using a <strong>"Futuremark" / "Success Analysis"</strong> method that profiles what success looks like in a role and scores candidates against it — i.e. <strong>criterion validation against the client's own success profile</strong> <sup class="cite"><a data-cite="7" href="#s7">[7]</a></sup><sup class="cite"><a data-cite="8" href="#s8">[8]</a></sup>.</li>
+</ul><h3 id="how-each-item-type-is-scored">How each item type is scored</h3><table>
+<thead>
+<tr>
+<th>Item type</th>
+<th>Scoring logic</th>
+<th>Confidence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="claim" data-labels="corroborated">
+<td><strong>Numerical / Verbal (cognitive)</strong></td>
+<td><strong>Right/wrong, objective</strong>, benchmarked against a <strong>graduate/professional norm group</strong>; no negative marking; unanswered = 0; often <strong>adaptive</strong>.</td>
+<td><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span> <sup class="cite"><a data-cite="19" href="#s19">[19]</a></sup><sup class="cite"><a data-cite="28" href="#s28">[28]</a></sup><sup class="cite"><a data-cite="35" href="#s35">[35]</a></sup></td>
+</tr>
+<tr class="claim" data-labels="corroborated">
+<td><strong>Situational Judgement</strong></td>
+<td><strong>Ranked/rated</strong> (drag 5 options 1–5), scored against HSBC's behavioural/values model — "<strong>no single correct answer</strong>", but responses closer to the desired pattern score higher. Best described as <strong>behaviourally-anchored + partially ipsative</strong>.</td>
+<td><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span> <sup class="cite"><a data-cite="23" href="#s23">[23]</a></sup><sup class="cite"><a data-cite="30" href="#s30">[30]</a></sup><sup class="cite"><a data-cite="35" href="#s35">[35]</a></sup></td>
+</tr>
+<tr class="claim" data-labels="corroborated">
+<td><strong>Personality profiling</strong></td>
+<td>Self-report preference scales feeding <strong>algorithmic trait inference</strong> into the strengths profile.</td>
+<td><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span> <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup><sup class="cite"><a data-cite="20" href="#s20">[20]</a></sup></td>
+</tr>
+<tr class="claim" data-labels="corroborated inferred">
+<td><strong>Time taken</strong></td>
+<td><strong>Time-factored</strong> — "untimed" but the time you take "<strong>is taken into account</strong>" alongside accuracy; speed can break ties.</td>
+<td><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span> <sup class="cite"><a data-cite="19" href="#s19">[19]</a></sup><sup class="cite"><a data-cite="29" href="#s29">[29]</a></sup>; tie-break effect <span class="pill pill-inferred" data-label="inferred">INFERRED</span></td>
+</tr>
+</tbody>
+</table><h3 id="cut-score-percentile-ranked-list">Cut score, percentile, ranked list?</h3><ul>
+<li class="claim" data-labels="corroborated"><strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> The <strong>cognitive component is norm-referenced</strong> (percentile vs a graduate norm group) — you compete against other graduates, not an absolute bar <sup class="cite"><a data-cite="35" href="#s35">[35]</a></sup>.</li>
+<li class="claim" data-labels="anecdotal"><strong><span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span><span class="qual">/INFERRED</span></strong> The <strong>behavioural/strengths component is profile-matched</strong> against the role/intake benchmark: "the same answers can fit one route, such as audit or advisory, better than another" <sup class="cite"><a data-cite="33" href="#s33">[33]</a></sup>.</li>
+<li><strong><span class="pill pill-flag" data-label="flag">VERIFIED GAP</span></strong> The <strong>exact numeric cut score is not published anywhere.</strong></li>
+<li class="claim" data-labels="anecdotal"><strong><span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span><span class="qual"> — folklore, treat as such</span></strong> Widely repeated but unverifiable figures: only ~10% clear the online gate; HSBC's overall offer rate ~3% <sup class="cite"><a data-cite="35" href="#s35">[35]</a></sup><sup class="cite"><a data-cite="43" href="#s43">[43]</a></sup>.</li>
+</ul><h3 id="weighting-carry-forward-human-review-benchmarking">Weighting, carry-forward, human review, benchmarking</h3><ul>
+<li class="claim" data-labels="anecdotal"><strong><span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span></strong> Weighting is undisclosed, but the mechanism implies <strong>cognitive accuracy acts as a hard filter</strong> while strengths/values shape fit ("weak data interpretation can hold back an otherwise strong profile") <sup class="cite"><a data-cite="33" href="#s33">[33]</a></sup>.</li>
+<li class="claim" data-labels="inferred"><strong><span class="pill pill-inferred" data-label="inferred">INFERRED</span><span class="qual"> / weak</span></strong> Whether the score <strong>numerically carries forward</strong> is unconfirmed; the immersive stage is best understood as a <strong>gate</strong>, with later stages separately assessed. (Results are <em>retained</em> 12 months for reuse across applications — a data-retention fact, not evidence of a rolling score <sup class="cite"><a data-cite="5" href="#s5">[5]</a></sup>.)</li>
+<li class="claim" data-labels="corroborated"><strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> <strong>Human review:</strong> the immersive stage is <strong>machine-scored</strong>; human assessors enter later — the Job Simulation free-text/video and the assessment centre are <strong>human-reviewed</strong> <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup><sup class="cite"><a data-cite="20" href="#s20">[20]</a></sup>. HSBC confirms automated decisioning is used, <strong>with a right to human review</strong> <sup class="cite"><a data-cite="5" href="#s5">[5]</a></sup>.</li>
+<li class="claim" data-labels="official"><strong><span class="pill pill-official" data-label="official">OFFICIAL</span><span class="qual"> that the method exists; INFERRED for HSBC specifically</span></strong> Cappfinity's Futuremark method is <em>designed</em> to benchmark against a client's high performers; that HSBC specifically ran it on its own top performers is plausible but <strong>not independently verified</strong> <sup class="cite"><a data-cite="7" href="#s7">[7]</a></sup>.</li>
+</ul><h3 id="why-the-strengths-logic-matters-for-scoring">Why the strengths logic matters for scoring</h3><ul>
+<li class="claim" data-labels="corroborated"><strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><span class="qual"> as philosophy</span></strong> Because the same strengths are probed repeatedly in different forms, <strong>coherence is scored, not just content</strong>: "inconsistent or exaggerated answers stand out. A coherent, authentic profile scores better than one that swings around to chase an ideal candidate" <sup class="cite"><a data-cite="33" href="#s33">[33]</a></sup>. This is the <em>mechanical</em> reason that trying to "give HSBC what it wants" backfires.</li>
+</ul><hr/></section><section class="doc-section" id="q4-the-model-underneath"><h2 id="q4-the-model-underneath-h">Q4 — THE MODEL UNDERNEATH</h2><h3 id="hsbcs-current-values-framework-what-the-behavioural-items-score-against">HSBC's current values framework (what the behavioural items score against)</h3><p class="claim" data-labels="corroborated"><strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> HSBC's four current values (adopted ~2021, current as of 2026) <sup class="cite"><a data-cite="38" href="#s38">[38]</a></sup>:</p><ol>
+<li><strong>We value difference</strong> — empathy for diversity; actively seek views different from your own; inclusive.</li>
+<li><strong>We succeed together</strong> — trust, support and connect with others; collaborate across boundaries.</li>
+<li><strong>We take responsibility</strong> — high standards, accountability, good judgement, speaking up.</li>
+<li><strong>We get it done</strong> — move steadily toward goals, continuously improve, make clear decisive choices.</li>
+</ol><ul>
+<li><strong><span class="pill pill-flag" data-label="flag">DISAGREEMENT</span><span class="qual"> to flag</span></strong> Several 2026 prep pages still describe the <strong>older triad "Open / Connected / Dependable"</strong> (HSBC's pre-2021 values) — <strong>treat as obsolete</strong>; prepare around the current four <sup class="cite"><a data-cite="30" href="#s30">[30]</a></sup><sup class="cite"><a data-cite="35" href="#s35">[35]</a></sup>.</li>
+<li><strong><span class="pill pill-flag" data-label="flag">OUTLIER</span><span class="qual"> — do not rely on</span></strong> One site describes an <strong>OPQ32 / SHL "Great 8"</strong> forced-choice model with "Most/Least" ranking <sup class="cite"><a data-cite="37" href="#s37">[37]</a></sup>. That is inconsistent with a Cappfinity strengths assessment and probably describes HSBC's older SHL-era test or a conflation.</li>
+</ul><h3 id="mapping-each-section-to-the-traits-it-probes-the-reasoning-not-an-answer-key">Mapping each section to the traits it probes (the reasoning, not an answer key)</h3><table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Item mix</th>
+<th>Competency / value it probes — <em>why</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Project Kick-Off / Creating a Team</strong></td>
+<td>SJT</td>
+<td><em>We succeed together</em> + <em>We get it done</em> — mobilising a team and setting direction</td>
+</tr>
+<tr>
+<td><strong>Global Engagement / Working with Others</strong></td>
+<td>SJT</td>
+<td><em>We value difference</em> + <em>We succeed together</em> — cross-cultural collaboration and conflict handling</td>
+</tr>
+<tr>
+<td><strong>Data Monitoring</strong></td>
+<td>Cognitive + SJT</td>
+<td>Cognitive rigour + <em>We take responsibility</em> — accurate judgement under ambiguity</td>
+</tr>
+<tr>
+<td><strong>Navigating Competing Commitments</strong></td>
+<td>Cognitive + SJT</td>
+<td>Prioritisation + <em>We get it done</em> — trade-offs under constraint</td>
+</tr>
+<tr>
+<td><strong>Pause and Reflect</strong></td>
+<td>SJT + personality</td>
+<td>Self-awareness + values coherence — feeds the trait/strengths profile and the <strong>consistency check</strong></td>
+</tr>
+</tbody>
+</table><p class="claim" data-labels="corroborated inferred"><strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> The <strong>Job Simulation</strong> probes the same four values plus <strong>communication and prioritisation under a realistic work scenario</strong>, and is partly human-reviewed <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup><sup class="cite"><a data-cite="20" href="#s20">[20]</a></sup>. <strong><span class="pill pill-inferred" data-label="inferred">INFERRED</span></strong> The strengths quadrant Cappfinity uses (performance × energy × use) means it is trying to distinguish <em>realised strengths</em> (you're good at it <strong>and</strong> it energises you) from <em>learned behaviours</em> (good at it but draining) — which is why authenticity, not just competence, is being measured <sup class="cite"><a data-cite="39" href="#s39">[39]</a></sup>.</p><hr/></section><section class="doc-section" id="q5-what-separates-passes-from-fails"><h2 id="q5-what-separates-passes-from-fails-h">Q5 — WHAT SEPARATES PASSES FROM FAILS</h2><h3 id="common-failure-patterns">Common failure patterns</h3><ul>
+<li class="claim" data-labels="corroborated"><strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><span class="qual"> as a pattern; underlying reports second-hand</span></strong> <strong>Numerical/data errors are the classic killer</strong> — misreading units, percentage-change slips, rushing data interpretation. The recurring (forum-sourced) warning: "you can't make numerical mistakes as you'll be rejected", while SJT is "more flexible" <sup class="cite"><a data-cite="43" href="#s43">[43]</a></sup><sup class="cite"><a data-cite="19" href="#s19">[19]</a></sup><sup class="cite"><a data-cite="35" href="#s35">[35]</a></sup>.</li>
+<li class="claim" data-labels="corroborated"><strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> On verbal items, <strong>over-using "Cannot Say"</strong> and <strong>importing outside knowledge</strong> instead of reasoning strictly from the passage <sup class="cite"><a data-cite="35" href="#s35">[35]</a></sup>.</li>
+<li class="claim" data-labels="corroborated"><strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><span class="qual"> as philosophy</span></strong> <strong>Faking a values profile</strong> — because strengths are cross-probed, an incoherent "ideal candidate" performance is detectable and scores <em>worse</em> than an authentic one <sup class="cite"><a data-cite="33" href="#s33">[33]</a></sup>.</li>
+<li class="claim" data-labels="anecdotal"><strong><span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span></strong> Treating the <strong>set-up/practice video as "not counted"</strong> — prep sites warn every item may be assessed <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup>.</li>
+</ul><h3 id="time-management-traps">Time-management traps</h3><ul>
+<li class="claim" data-labels="corroborated"><strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> The test is "untimed" <strong>but time is recorded and factored in</strong> — over-deliberating on every item can disadvantage you, and speed breaks ties at equal accuracy. Cited pacing: budget ~50 min; ~80 s per numerical item, ~45–50 s per verbal item <sup class="cite"><a data-cite="19" href="#s19">[19]</a></sup><sup class="cite"><a data-cite="35" href="#s35">[35]</a></sup>.</li>
+<li class="claim" data-labels="anecdotal"><strong><span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span></strong> <strong>Review-before-submit is per-subtest only</strong> — don't submit a section prematurely <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup>.</li>
+</ul><h3 id="underestimated-sections">Underestimated sections</h3><ul>
+<li class="claim" data-labels="inferred"><strong><span class="pill pill-inferred" data-label="inferred">INFERRED</span><span class="qual"> + CORROBORATED</span></strong> The <strong>cognitive/data sections</strong> are underestimated because the branding is "immersive/behavioural" — yet accuracy there is what most often ends applications; candidates report <strong>speed</strong> as the hardest aspect <sup class="cite"><a data-cite="19" href="#s19">[19]</a></sup>.</li>
+<li class="claim" data-labels="inferred"><strong><span class="pill pill-inferred" data-label="inferred">INFERRED</span></strong> The <strong>personality/consistency layer</strong> is dismissed as "just a personality quiz" when it materially shapes the strengths-fit score.</li>
+</ul><h3 id="consistency-and-extreme-vs-moderate-responses">Consistency, and extreme vs moderate responses</h3><ul>
+<li class="claim" data-labels="corroborated"><strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><span class="qual"> as philosophy</span></strong> <strong>Consistency matters and is measured</strong> — cross-probing of the same strengths means an internally consistent, authentic profile scores better than a self-contradictory or exaggerated one <sup class="cite"><a data-cite="33" href="#s33">[33]</a></sup>.</li>
+<li class="claim" data-labels="inferred"><strong><span class="pill pill-inferred" data-label="inferred">INFERRED</span><span class="qual"> — general SJT literature, not an HSBC rule</span></strong> Be <strong>decisive and honest, not performatively extreme</strong>: committing clearly to genuine best/worst rankings beats fence-sitting, but artificially maxing every "desirable" trait ("extreme responding") is a known red flag that consistency checks catch <sup class="cite"><a data-cite="40" href="#s40">[40]</a></sup><sup class="cite"><a data-cite="41" href="#s41">[41]</a></sup>. <strong><span class="pill pill-flag" data-label="flag">VERIFIED GAP</span></strong> No HSBC-specific rule on extreme-vs-moderate is published.</li>
+</ul><h3 id="retake-reapplication-policy-cooling-off">Retake / reapplication policy &amp; cooling-off</h3><ul>
+<li class="claim" data-labels="corroborated"><strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> <strong>No retake within the same application cycle</strong> for underperformance — only genuine, documented <strong>technical</strong> failures reported within ~24–48 h are re-issued <sup class="cite"><a data-cite="33" href="#s33">[33]</a></sup><sup class="cite"><a data-cite="35" href="#s35">[35]</a></sup>.</li>
+<li class="claim" data-labels="anecdotal"><strong><span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span><span class="qual">/CORROBORATED</span></strong> You may <strong>reapply in the next intake cycle</strong>, and "your previous result does not appear on future applications" <sup class="cite"><a data-cite="35" href="#s35">[35]</a></sup>.</li>
+<li class="claim" data-labels="anecdotal"><strong><span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span><span class="qual"> / INFERRED — explicit gap</span></strong> <strong>Cooling-off:</strong> no official HSBC number is published. Generic industry guidance cited is <strong>~6 months minimum, up to 12 months</strong>; one HSBC-specific anecdote mentioned ~6 months (for a customer-consultant, not graduate, role). <strong>Treat 6–12 months as an estimate and verify with HSBC graduate recruitment</strong> <sup class="cite"><a data-cite="34" href="#s34">[34]</a></sup>.</li>
+</ul><hr/></section><section class="doc-section" id="q6-integrity-monitoring-framed-for-an-honest-candidate"><h2 id="q6-integrity-monitoring-framed-for-an-honest-candidate-h">Q6 — INTEGRITY &amp; MONITORING (framed for an honest candidate)</h2><blockquote>
+<p><strong>Purpose:</strong> so an honest candidate understands the rules and avoids <strong>accidental</strong> flags. Nothing here describes how to defeat detection. Where a monitored behaviour is listed, the "avoid" advice is about <em>not tripping a system while behaving normally</em>, not evasion.</p>
+</blockquote><p class="claim" data-labels="inferred"><strong>Context.</strong> <strong><span class="pill pill-inferred" data-label="inferred">INFERRED</span><span class="qual"> from take-home format; CORROBORATED it is take-home</span></strong> The immersive assessment is best understood as an <strong>unproctored, deadline-based take-home</strong> test (a link, "a set number of days", completed unsupervised) — <em>except</em> for the recorded <strong>video</strong> question(s), which use your webcam <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup><sup class="cite"><a data-cite="20" href="#s20">[20]</a></sup>.</p><h3 class="claim" data-labels="official" id="what-hsbcs-own-privacy-notice-establishes">What HSBC's own Privacy Notice establishes <span class="pill pill-official" data-label="official">OFFICIAL</span> <sup class="cite"><a data-cite="5" href="#s5">[5]</a></sup></h3><ul>
+<li>Records "video chats" and "may use these recordings to make decisions on the outcome of your application."</li>
+<li>"May capture additional information about … the <strong>devices or software that you use</strong>"; uses cookies and similar technologies.</li>
+<li>Uses <strong>automated systems</strong> in decisions, <strong>with a right to request human review</strong>.</li>
+<li>Processes data to detect "<strong>fraud, other unlawful or dishonest conduct, malpractice, and other seriously improper conduct</strong>"; verbatim consequence: "<strong>If any of these are detected, you could be refused certain services or employment.</strong>"</li>
+<li>"May pass information to relevant agencies if we think you've given us <strong>false or inaccurate information</strong>."</li>
+<li>Assessment <strong>results are retained 12 months</strong> and reused for future HSBC applications.</li>
+</ul><h3 id="what-cappfinity-markets-integrity-features">What Cappfinity markets (integrity features)</h3><p class="claim" data-labels="anecdotal official"><strong><span class="pill pill-official" data-label="official">OFFICIAL</span></strong> that the features exist; <strong><span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span><span class="qual">/INFERRED</span></strong> for their mechanics — the feature pages are JavaScript-rendered and could not be read in full <sup class="cite"><a data-cite="10" href="#s10">[10]</a></sup>.</p><p>Named features: <strong>Camera-On Assessment</strong>, <strong>Copy Prevention</strong>, <strong>Time-Recorded Assessment</strong>, <strong>Integrity Dashboard</strong> (which surfaces flags to recruiters and "highlights behaviour indicative of AI model use"), and <strong>Image Assessment Stimuli</strong>. <strong><span class="pill pill-flag" data-label="flag">NOT VERIFIED</span></strong> whether HSBC switches Camera-On on for the graduate immersive specifically, or whether it is periodic capture vs continuous recording.</p><h3 id="monitored-behaviour-honest-candidate-accidental-trigger-how-to-avoid-it">Monitored behaviour → honest-candidate accidental trigger → how to avoid it</h3><table>
+<thead>
+<tr>
+<th>Monitored</th>
+<th>How an honest candidate could accidentally trigger it</th>
+<th>How to avoid it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Webcam / Camera-On</strong> (video answers) <sup class="cite"><a data-cite="10" href="#s10">[10]</a></sup><sup class="cite"><a data-cite="5" href="#s5">[5]</a></sup></td>
+<td>Being off-camera, poorly lit, another person visible/audible; repeatedly looking off-screen (reading notes) can read as external help</td>
+<td>Sit alone in a quiet, well-lit room; face the camera; speak to camera (glancing at the on-screen question is fine); run the built-in <strong>video set-up</strong> first <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup></td>
+</tr>
+<tr>
+<td><strong>Copy-paste / tab-switch detection</strong> (Copy Prevention, Integrity Dashboard) <sup class="cite"><a data-cite="10" href="#s10">[10]</a></sup></td>
+<td>Opening another tab to check a definition or a <strong>calculator app</strong>; pasting text drafted elsewhere into a free-text box; notification pop-ups stealing focus</td>
+<td>Use only on-screen tools; keep a <strong>physical calculator</strong> on the desk (permitted) rather than an app/tab <sup class="cite"><a data-cite="32" href="#s32">[32]</a></sup>; <strong>type answers directly</strong>; close other apps and silence notifications</td>
+</tr>
+<tr>
+<td><strong>Response-latency / time recording</strong> (Time-Recorded Assessment) <sup class="cite"><a data-cite="10" href="#s10">[10]</a></sup><sup class="cite"><a data-cite="19" href="#s19">[19]</a></sup></td>
+<td>Answering <em>implausibly fast</em> (complex numerical items in seconds); very long uneven gaps from walking away mid-question</td>
+<td>Work at a genuine, steady pace; complete each section in one focused sitting; take breaks <em>between</em> sections. There is <strong>no penalty for taking sensible time</strong> — don't rush into errors to look "fast"</td>
+</tr>
+<tr>
+<td><strong>IP / device fingerprinting</strong> <sup class="cite"><a data-cite="5" href="#s5">[5]</a></sup></td>
+<td>Using a <strong>VPN/proxy/Tor</strong> (mismatched or datacentre IP looks evasive); switching devices/networks midway; shared/public Wi-Fi another applicant used</td>
+<td>Use your <strong>normal home connection without a VPN</strong>; stay on <strong>one device on one network</strong> start to finish</td>
+</tr>
+<tr class="claim" data-labels="inferred">
+<td><strong>Social-desirability / consistency scales</strong> (embedded in personality/SJT) <span class="pill pill-inferred" data-label="inferred">INFERRED</span></td>
+<td>Giving the "ideal banker" answer to everything → an all-perfect, internally inconsistent profile these scales are built to catch; rushing paired items into contradictions</td>
+<td><strong>Answer honestly and consistently</strong>; read each item; pick what genuinely reflects you</td>
+</tr>
+<tr>
+<td><strong>AI / plagiarism detection</strong> (Integrity Dashboard "highlights AI use") <sup class="cite"><a data-cite="10" href="#s10">[10]</a></sup></td>
+<td>Free-text that reads as AI-generated (generic, over-polished, boilerplate) can be flagged <strong>even if you wrote it</strong>; reading a scripted answer verbatim to camera looks like external prompting</td>
+<td>Write in your <strong>own natural voice</strong> with specific personal examples; <strong>speak from bullet notes</strong>, not a full script</td>
+</tr>
+</tbody>
+</table><h3 id="what-the-terms-prohibit-and-the-consequences">What the terms prohibit — and the consequences</h3><ul>
+<li class="claim" data-labels="official"><strong><span class="pill pill-official" data-label="official">OFFICIAL</span><span class="qual">/CORROBORATED</span></strong> Commonly prohibited: <strong>third-party help / impersonation, using AI tools where disallowed, recording / screenshotting / transcribing content, and sharing or reproducing questions</strong>. Cappfinity keeps an <strong>integrity record</strong>; flags can affect future assessments/roles <sup class="cite"><a data-cite="10" href="#s10">[10]</a></sup>.</li>
+<li class="claim" data-labels="official"><strong><span class="pill pill-official" data-label="official">OFFICIAL</span></strong> Detected malpractice can lead to <strong>refusal of employment</strong> and information being passed to relevant agencies <sup class="cite"><a data-cite="5" href="#s5">[5]</a></sup>.</li>
+<li class="claim" data-labels="inferred"><strong><span class="pill pill-inferred" data-label="inferred">INFERRED</span><span class="qual"> — read this yourself</span></strong> The <strong>exact, binding rules for your sitting are on the pre-assessment instruction screen and the declaration/consent box you tick before you start.</strong> A standalone HSBC "assessment honour code" page could not be found; the Applicant Privacy Notice is the strongest official document that could be fully read <sup class="cite"><a data-cite="5" href="#s5">[5]</a></sup>.</li>
+</ul><hr/></section><section class="doc-section" id="q7-legitimate-preparation"><h2 id="q7-legitimate-preparation-h">Q7 — LEGITIMATE PREPARATION</h2><h3 id="most-faithful-to-the-real-thing-start-here">Most faithful to the real thing (start here)</h3><table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Link</th>
+<th>Cost</th>
+<th>Honest relevance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="claim" data-labels="official">
+<td><strong>Cappfinity official demo</strong></td>
+<td><a class="reflink" href="#s11">practice.cappassessments.com</a></td>
+<td>Free demo</td>
+<td><strong><span class="pill pill-official" data-label="official">OFFICIAL</span></strong> Same <em>engine/interface</em> as the real tests (numerical/verbal/critical-reasoning demos). Best for the question <strong>UI</strong>; limited breadth</td>
+</tr>
+<tr class="claim" data-labels="official">
+<td><strong>Cappfinity Preparation Hub / Preparation Plus</strong></td>
+<td><a class="reflink" href="#s12">hub.preparationplus.com</a></td>
+<td>Free (vendor)</td>
+<td><strong><span class="pill pill-official" data-label="official">OFFICIAL</span></strong> Prep from the actual test vendor; closest match to real format</td>
+</tr>
+<tr class="claim" data-labels="corroborated">
+<td><strong>HSBC Candidate Hub</strong></td>
+<td>(unlocked after you apply)</td>
+<td>Free</td>
+<td><strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><span class="qual">-claim</span></strong> HSBC reportedly gives applicants tailored tips/practice once you've applied — check it first <sup class="cite"><a data-cite="3" href="#s3">[3]</a></sup></td>
+</tr>
+</tbody>
+</table><p class="claim" data-labels="inferred"><strong><span class="pill pill-inferred" data-label="inferred">INFERRED</span></strong> No public official practice test appears to exist <em>before</em> application; official practice sits inside the Candidate Hub / Cappfinity demo.</p><h3 id="paid-third-party-packs">Paid third-party packs</h3><table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Link</th>
+<th>Price (as seen)</th>
+<th>Honest relevance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="claim" data-labels="anecdotal">
+<td><strong>JobTestPrep</strong></td>
+<td><a class="reflink" href="#s15">HSBC immersive pack</a></td>
+<td>Not displayed (1/3/6-mo sub; geo-gated)</td>
+<td><strong><span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span></strong> HSBC-specific pack simulating the 5 sections; reasonably targeted but claims are self-made, no independent calibration</td>
+</tr>
+<tr class="claim" data-labels="anecdotal">
+<td><strong>Graduates First</strong></td>
+<td><a class="reflink" href="#s28">HSBC tests</a></td>
+<td>Not shown; money-back-if-you-don't-pass</td>
+<td><strong><span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span></strong> Covers verbal/numerical/logical + <strong>SJT + video interview + AC</strong> — the video/strengths coverage makes it more relevant than pure aptitude; used by many UK universities</td>
+</tr>
+<tr class="claim" data-labels="anecdotal">
+<td><strong>Practice Aptitude Tests</strong></td>
+<td><a class="reflink" href="#s18">HSBC profile</a></td>
+<td>"Pro" sub (not shown); some free samples</td>
+<td><strong><span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span></strong> Explicit disclaimer that its tests are "not designed to be identical to any employer" — <strong>generic aptitude drills</strong>; good for numerical/verbal <em>speed</em>, weak on the immersive feel</td>
+</tr>
+<tr class="claim" data-labels="official">
+<td><strong>Prepterminal</strong></td>
+<td><a class="reflink" href="#s36">HSBC course</a></td>
+<td><strong>$68 / 90 days</strong></td>
+<td><strong><span class="pill pill-official" data-label="official">OFFICIAL</span><span class="qual"> price</span></strong> SHL/<strong>Hogan</strong>-based video course; <strong>makes no Cappfinity claim</strong>; least tailored to the immersive</td>
+</tr>
+</tbody>
+</table><h3 id="free-resources">Free resources</h3><ul>
+<li class="claim" data-labels="anecdotal"><strong><span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span></strong> Fintest (free via sign-up; good stage breakdown, dated May 2024) <sup class="cite"><a data-cite="32" href="#s32">[32]</a></sup>; Psychometric Success (free guide, Nov 2024) <sup class="cite"><a data-cite="20" href="#s20">[20]</a></sup>; AptitudePrep (free sample cognitive + SJT, Jun 2025) <sup class="cite"><a data-cite="23" href="#s23">[23]</a></sup>. <strong>Flag:</strong> Practice Reasoning Tests is dated Nov 2023 — possibly obsolete <sup class="cite"><a data-cite="30" href="#s30">[30]</a></sup>.</li>
+<li class="claim" data-labels="inferred"><strong><span class="pill pill-inferred" data-label="inferred">INFERRED</span></strong> University careers services and YouTube walkthroughs are useful for <strong>strengths-interview and video-answer practice</strong>, but are not HSBC-calibrated.</li>
+</ul><h3 id="honest-relevance-verdict">Honest relevance verdict</h3><ul>
+<li><strong>Most faithful:</strong> Cappfinity demo + Preparation Hub, then HSBC's Candidate Hub <sup class="cite"><a data-cite="11" href="#s11">[11]</a></sup><sup class="cite"><a data-cite="12" href="#s12">[12]</a></sup>.</li>
+<li><strong>Good for the strengths/SJT/video dimension:</strong> Graduates First and JobTestPrep's HSBC packs <sup class="cite"><a data-cite="28" href="#s28">[28]</a></sup><sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup>.</li>
+<li><strong>Generic aptitude value only:</strong> Practice Aptitude Tests, Prepterminal (SHL/Hogan) <sup class="cite"><a data-cite="18" href="#s18">[18]</a></sup><sup class="cite"><a data-cite="36" href="#s36">[36]</a></sup>.</li>
+<li class="claim" data-labels="inferred"><strong><span class="pill pill-inferred" data-label="inferred">INFERRED</span> Biggest gap across almost all packs:</strong> thin coverage of the <strong>video/immersive simulation</strong> itself — so <strong>practise recording yourself answering timed prompts</strong>, which no aptitude pack replicates well.</li>
+</ul><p><em>(A concrete day-by-day schedule is in the separate <code>prep-plan.md</code>.)</em></p><hr/></section><section class="doc-section" id="verbatim-candidate-reports"><h2 id="verbatim-candidate-reports-h">Verbatim candidate reports</h2><p>Only <strong>two genuine candidate-voice fragments</strong> could be recovered — both via search-engine snippets, because the underlying pages returned 403 / login walls. Everything else circulating as "candidate questions" on prep sites is reconstruction, not memory.</p><details class="verbatim"><summary>Verbatim candidate report — ANECDOTAL— Glassdoor candidate, via search snippet; date not visible, page login</summary><blockquote>
+<p class="claim" data-labels="anecdotal"><strong><span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span><span class="qual"> — Glassdoor candidate, via search snippet; date not visible, page login-gated; ref QTN_6902278</span></strong> <sup class="cite"><a data-cite="42" href="#s42">[42]</a></sup>
+"The Online Immersive Assessment consist of behavioural questions which ask you to rank your actions in the given situations and math questions ask you to questions with the given datas and graphs."</p>
+<p class="claim" data-labels="anecdotal"><strong><span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span><span class="qual"> — The Student Room "Hsbc immersive test" (thread t=5603334), via search snippet; older thread ~2019, POSSIBLY OBSOLETE</span></strong> <sup class="cite"><a data-cite="43" href="#s43">[43]</a></sup>
+"The Immersive Online Assessment is a combination of situational judgment questions and numerical questions based on data sources provided, with 26 questions in total. Only 10% of applicants pass as competition is extremely high. You can't make numerical mistakes as you'll be rejected. Situational judgment questions are more flexible. You should mention key values such as 'dependable', otherwise you may automatically fail as software catches the 'keywords'."
+<em>Caveat: the "26 questions" count and the "dependable" keyword advice conflict with 2025–26 descriptions (current values dropped "dependable") and may be out of date.</em></p>
+</blockquote></details><p><strong>Unopened but relevant candidate threads</strong> (403/login-gated to the tooling — a human can open them directly): The Student Room t=6707088 ("HSBC Job Simulation 2021"), t=6156362, t=6709852; Wall Street Oasis "HSBC Job Simulation"; Glassdoor HSBC interview hub; YouTube "2025 HSBC Online Immersive Assessment… Exact Questions" (watch?v=9zthcTo0Xbg) <sup class="cite"><a data-cite="44" href="#s44">[44]</a></sup><sup class="cite"><a data-cite="45" href="#s45">[45]</a></sup><sup class="cite"><a data-cite="46" href="#s46">[46]</a></sup><sup class="cite"><a data-cite="47" href="#s47">[47]</a></sup><sup class="cite"><a data-cite="42" href="#s42">[42]</a></sup><sup class="cite"><a data-cite="48" href="#s48">[48]</a></sup>.</p><hr/></section><section class="doc-section" id="what-i-could-not-verify-read-this"><h2 id="what-i-could-not-verify-read-this-h">What I could NOT verify (read this)</h2><ol>
+<li><strong>Vendor at first-party level.</strong> Cappfinity is well-corroborated by industry sources but <strong>no readable HSBC/Cappfinity primary source names HSBC as a client</strong> <sup class="cite"><a data-cite="9" href="#s9">[9]</a></sup>.</li>
+<li><strong>Which vendor runs the video "Job Simulation"</strong> — Cappfinity vs HireVue is genuinely disputed <sup class="cite"><a data-cite="18" href="#s18">[18]</a></sup><sup class="cite"><a data-cite="32" href="#s32">[32]</a></sup>.</li>
+<li><strong>Exact scoring internals</strong> — cut score, section weightings, trait-inference algorithm: <strong>proprietary and undisclosed everywhere</strong> <sup class="cite"><a data-cite="7" href="#s7">[7]</a></sup><sup class="cite"><a data-cite="21" href="#s21">[21]</a></sup>.</li>
+<li><strong>Whether HSBC ran concurrent validation on its own high performers</strong> — the method exists; HSBC-specific calibration is not documented <sup class="cite"><a data-cite="7" href="#s7">[7]</a></sup>.</li>
+<li><strong>Whether the immersive score numerically carries into later stages</strong> — unconfirmed; likely a gate <sup class="cite"><a data-cite="5" href="#s5">[5]</a></sup>.</li>
+<li><strong>Exact HSBC cooling-off period</strong> for graduate reapplication — 6–12 months is an estimate, not confirmed policy <sup class="cite"><a data-cite="34" href="#s34">[34]</a></sup>.</li>
+<li><strong>Precise ipsative-vs-keyed implementation of the SJT</strong> — described as ranked/profile-matched, exact method unpublished.</li>
+<li><strong>Exact section names/counts</strong> — single-source and cycle-dependent (38 vs ~40 vs 26; section 4 = 9 or 10) <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup><sup class="cite"><a data-cite="28" href="#s28">[28]</a></sup><sup class="cite"><a data-cite="43" href="#s43">[43]</a></sup>.</li>
+<li><strong>Whether HSBC enables Camera-On / continuous proctoring for the grad immersive</strong>, and Cappfinity's exact IP/device-fingerprinting and consistency-scale behaviour — feature <em>existence</em> is official, mechanics are not <sup class="cite"><a data-cite="10" href="#s10">[10]</a></sup>.</li>
+<li><strong>A standalone HSBC assessment terms/honour-code page</strong> — not found; rely on the on-screen declaration before your sitting <sup class="cite"><a data-cite="5" href="#s5">[5]</a></sup>.</li>
+<li><strong>Regional variants (esp. Hong Kong/Asia)</strong> — undocumented; unknown, not "identical."</li>
+</ol><p><strong>Paywalled / gated and therefore not verified:</strong> HSBC's live Candidate Hub / Practice Zone (login) <sup class="cite"><a data-cite="6" href="#s6">[6]</a></sup>; Cappfinity marketing/integrity-feature page bodies (JavaScript-rendered) <sup class="cite"><a data-cite="9" href="#s9">[9]</a></sup><sup class="cite"><a data-cite="10" href="#s10">[10]</a></sup>; Capp help-desk device-requirements article (403) <sup class="cite"><a data-cite="14" href="#s14">[14]</a></sup>; Glassdoor, Wall Street Oasis, The Student Room threads, Reddit, YouTube comments (403 / login / captcha) <sup class="cite"><a data-cite="42" href="#s42">[42]</a></sup><sup class="cite"><a data-cite="43" href="#s43">[43]</a></sup><sup class="cite"><a data-cite="47" href="#s47">[47]</a></sup>; JobTestPrep / Graduates First / Practice Aptitude Tests prices (geo-gated).</p><hr/></section><section class="doc-section" id="source-list-grouped-by-reliability"><h2 id="source-list-grouped-by-reliability-h">Source list (grouped by reliability)</h2><h3 id="tier-1-official-primary-hsbc-the-vendor">Tier 1 — Official primary (HSBC &amp; the vendor)</h3><ol start="1">
+<li class="src-item" id="s1">HSBC Careers — Students &amp; Graduates <em>Application guide</em> (current, 2026) — <a class="exturl" href="https://www.hsbc.com/careers/students-and-graduates/application-guide" rel="noopener" target="_blank">https://www.hsbc.com/careers/students-and-graduates/application-guide</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s2">HSBC — <em>The application process</em> video transcript (PDF, 3 Jan 2025) — <a class="exturl" href="https://www.hsbc.com/-/files/hsbc/careers/students-and-graduates/pdf/250103-the-application-process-transcript.pdf" rel="noopener" target="_blank">https://www.hsbc.com/-/files/hsbc/careers/students-and-graduates/pdf/250103-the-application-process-transcript.pdf</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s3">HSBC — <em>HSBC Assessments: Supporting Your Application</em> transcript (PDF, 18 Dec 2024) — <a class="exturl" href="https://www.hsbc.com/-/files/hsbc/careers/students-and-graduates/pdf/241218-hsbc-assessment-supporting-your-application-transcript.pdf" rel="noopener" target="_blank">https://www.hsbc.com/-/files/hsbc/careers/students-and-graduates/pdf/241218-hsbc-assessment-supporting-your-application-transcript.pdf</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s4">HSBC — <em>Hints and tips: Internships and graduate assessments</em> transcript (PDF, 2018 — <strong>OBSOLETE</strong>) — <a class="exturl" href="https://www.hsbc.com/-/files/hsbc/media-gallery/transcripts/181020-hsbc-how-to-transcript.pdf" rel="noopener" target="_blank">https://www.hsbc.com/-/files/hsbc/media-gallery/transcripts/181020-hsbc-how-to-transcript.pdf</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s5">HSBC — <em>Applicant Privacy Notice</em> (PDF; generic/RESTRICTED; companion version last updated 1 Jan 2025) — <a class="exturl" href="https://www.hsbc.com/appendices/ApplicantPrivacyNotice-Generic.pdf" rel="noopener" target="_blank">https://www.hsbc.com/appendices/ApplicantPrivacyNotice-Generic.pdf</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s6">HSBC — Candidate portal (login-gated, not accessible) — <a class="exturl" href="https://apply.careers.hsbc.com/" rel="noopener" target="_blank">https://apply.careers.hsbc.com/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s7">Cappfinity — <em>The Scientific Origins of Skills &amp; Strengths</em>, Edition 8 (PDF, 2024) — <a class="exturl" href="https://files.strengthsprofile.com/Deployable/LocalizableResources/en-gb/Resources/Edition8CappfinitySkillsSeries-ScientificOriginasofSkillsandStrengths_UK.pdf" rel="noopener" target="_blank">https://files.strengthsprofile.com/Deployable/LocalizableResources/en-gb/Resources/Edition8CappfinitySkillsSeries-ScientificOriginasofSkillsandStrengths_UK.pdf</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s8">Cappfinity — Skills &amp; Strengths Assessment product page — <a class="exturl" href="https://cappfinity.com/solutions/for-talent-leaders/assessments/skills-strengths-assessment/" rel="noopener" target="_blank">https://cappfinity.com/solutions/for-talent-leaders/assessments/skills-strengths-assessment/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s9">Cappfinity — homepage (JavaScript-rendered; body not readable) — <a class="exturl" href="https://www.cappfinity.com/" rel="noopener" target="_blank">https://www.cappfinity.com/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s10">Cappfinity — Integrity Features hub + sub-pages (Camera-On / Copy Prevention / Time-Recorded / Integrity Dashboard; existence confirmed, bodies not readable) — <a class="exturl" href="https://cappfinity.com/integrity-features/" rel="noopener" target="_blank">https://cappfinity.com/integrity-features/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s11">Cappfinity — official practice / demo — <a class="exturl" href="https://practice.cappassessments.com/" rel="noopener" target="_blank">https://practice.cappassessments.com/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s12">Cappfinity — Preparation Hub / Preparation Plus FAQs — <a class="exturl" href="https://hub.preparationplus.com/faqs" rel="noopener" target="_blank">https://hub.preparationplus.com/faqs</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s13">Cappfinity — PR: "transforms Gen Z hiring with VR &amp; immersive work previews" (2022) — <a class="exturl" href="https://www.prnewswire.com/news-releases/cappfinity-transforms-gen-z-hiring-with-virtual-reality-and-immersive-work-previews-301559721.html" rel="noopener" target="_blank">https://www.prnewswire.com/news-releases/cappfinity-transforms-gen-z-hiring-with-virtual-reality-and-immersive-work-previews-301559721.html</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s14">Capp Help Desk — Device Requirements for Online Assessments (HTTP 403, not readable) — <a class="exturl" href="https://capphelpdesk.zendesk.com/hc/en-us/articles/25465900866589-Device-Requirements-for-Online-Assessments" rel="noopener" target="_blank">https://capphelpdesk.zendesk.com/hc/en-us/articles/25465900866589-Device-Requirements-for-Online-Assessments</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+</ol><h3 id="tier-2-industry-prep-guides-secondary-commercial-bias-corroborate-on-format">Tier 2 — Industry / prep guides (secondary; commercial bias; corroborate on format)</h3><ol start="15">
+<li class="src-item" id="s15">JobTestPrep — HSBC Online Immersive Assessment (2026) — <a class="exturl" href="https://www.jobtestprep.co.uk/hsbc-online-immersive-assessment" rel="noopener" target="_blank">https://www.jobtestprep.co.uk/hsbc-online-immersive-assessment</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s16">JobTestPrep — HSBC Assessment Centre / Job Simulation (2026) — <a class="exturl" href="https://www.jobtestprep.co.uk/hsbc-assessment-centre" rel="noopener" target="_blank">https://www.jobtestprep.co.uk/hsbc-assessment-centre</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s17">JobTestPrep — HSBC practice tests hub — <a class="exturl" href="https://www.jobtestprep.co.uk/hsbc-practice-tests" rel="noopener" target="_blank">https://www.jobtestprep.co.uk/hsbc-practice-tests</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s18">Practice Aptitude Tests — HSBC assessments (upd Mar 2025; Job Sim = HireVue) — <a class="exturl" href="https://www.practiceaptitudetests.com/top-employer-profiles/hsbc-assessments/" rel="noopener" target="_blank">https://www.practiceaptitudetests.com/top-employer-profiles/hsbc-assessments/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s19">Practice Aptitude Tests — Cappfinity publisher page (algorithmic + time-factored) — <a class="exturl" href="https://www.practiceaptitudetests.com/testing-publishers/cappfinity/" rel="noopener" target="_blank">https://www.practiceaptitudetests.com/testing-publishers/cappfinity/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s20">Psychometric Success — HSBC Online Job Simulation (Nov 2024) — <a class="exturl" href="https://psychometric-success.com/aptitude-tests/test-types/hsbc-online-job-simulation" rel="noopener" target="_blank">https://psychometric-success.com/aptitude-tests/test-types/hsbc-online-job-simulation</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s21">AssessmentCentreHQ — HSBC Online Immersive test (2026) — <a class="exturl" href="https://www.assessmentcentrehq.com/hsbc-online-immersive-test/" rel="noopener" target="_blank">https://www.assessmentcentrehq.com/hsbc-online-immersive-test/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s22">AssessmentCentreHQ — HSBC Job Simulation (outlier: Cappfinity + SHL) — <a class="exturl" href="https://www.assessmentcentrehq.com/hsbc-job-simulation-assessment/" rel="noopener" target="_blank">https://www.assessmentcentrehq.com/hsbc-job-simulation-assessment/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s23">AptitudePrep — HSBC Immersive Online Assessment (Jun 2025) — <a class="exturl" href="https://www.aptitudeprep.com/hsbc-immersive-online-assessment/" rel="noopener" target="_blank">https://www.aptitudeprep.com/hsbc-immersive-online-assessment/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s24">AptitudePrep — HSBC Simulate assessment — <a class="exturl" href="https://www.aptitudeprep.com/hsbc-simulate-assessment/" rel="noopener" target="_blank">https://www.aptitudeprep.com/hsbc-simulate-assessment/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s25">TestSolve — HSBC (2026) — <a class="exturl" href="https://www.testsolve.ai/companies/hsbc/" rel="noopener" target="_blank">https://www.testsolve.ai/companies/hsbc/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s26">Practice4Me — HSBC assessment tests (2026) — <a class="exturl" href="https://www.practice4me.com/hsbc-assessment-tests/" rel="noopener" target="_blank">https://www.practice4me.com/hsbc-assessment-tests/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s27">GraduatesFirst — HSBC Job Simulation — <a class="exturl" href="https://www.graduatesfirst.com/hsbc-job-simulation" rel="noopener" target="_blank">https://www.graduatesfirst.com/hsbc-job-simulation</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s28">GraduatesFirst — HSBC assessment tests (upd May 2026) — <a class="exturl" href="https://www.graduatesfirst.com/hsbc-assessment-tests" rel="noopener" target="_blank">https://www.graduatesfirst.com/hsbc-assessment-tests</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s29">GraduatesFirst — Cappfinity publisher guide (upd Jan 2026) — <a class="exturl" href="https://www.graduatesfirst.com/aptitude-tests-publishers/cappfinity" rel="noopener" target="_blank">https://www.graduatesfirst.com/aptitude-tests-publishers/cappfinity</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s30">Practice Reasoning Tests — HSBC Online Job Simulation (upd Nov 2023 — <strong>possibly obsolete</strong>; uses old values) — <a class="exturl" href="https://www.practicereasoningtests.com/hsbc-online-job-simulation-assessment" rel="noopener" target="_blank">https://www.practicereasoningtests.com/hsbc-online-job-simulation-assessment</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s31">AssessmentDay — HSBC Online Immersive Assessment (2026) — <a class="exturl" href="https://www.assessmentday.co.uk/profiles/hsbc-online-immersive-assessment.html" rel="noopener" target="_blank">https://www.assessmentday.co.uk/profiles/hsbc-online-immersive-assessment.html</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s32">Fintest — HSBC (upd May 2024; Job Sim = HireVue; calculator allowed) — <a class="exturl" href="https://www.fintest.io/employers/hsbc/" rel="noopener" target="_blank">https://www.fintest.io/employers/hsbc/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s33">Intervyo — Cappfinity Immersive Assessment guide (2026; blended profile, consistency scored) — <a class="exturl" href="https://www.intervyo.co.uk/assessments/cappfinity" rel="noopener" target="_blank">https://www.intervyo.co.uk/assessments/cappfinity</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s34">Intervyo — Can you retake an online assessment (upd Jun 2026; 6–12-mo generic) — <a class="exturl" href="https://www.intervyo.co.uk/answers/online-assessment/can-you-retake-an-online-assessment" rel="noopener" target="_blank">https://www.intervyo.co.uk/answers/online-assessment/can-you-retake-an-online-assessment</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s35">CareerTestPrep — HSBC Online Assessment guide (2026; norm group, ~3% offer, retake-next-cycle) — <a class="exturl" href="https://www.careertestprep.com/blog/hsbc-online-assessment-guide" rel="noopener" target="_blank">https://www.careertestprep.com/blog/hsbc-online-assessment-guide</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s36">Prepterminal — HSBC assessments course (upd Jul 2026; $68/90 days; SHL/Hogan) — <a class="exturl" href="https://www.prepterminal.com/courses/hsbc-assessments" rel="noopener" target="_blank">https://www.prepterminal.com/courses/hsbc-assessments</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s37"><strong><span class="pill pill-flag" data-label="flag">OUTLIER</span><span class="qual"> — treat with caution</span></strong> Aptitude-Test-Prep — HSBC Values Assessment (upd Apr 2026; describes OPQ32/SHL, methodology mismatch) — <a class="exturl" href="https://aptitude-test-prep.com/employers/finance-and-investment-banking-assessments/hsbc-values-assessment/" rel="noopener" target="_blank">https://aptitude-test-prep.com/employers/finance-and-investment-banking-assessments/hsbc-values-assessment/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s38">Built In — HSBC culture &amp; values (2026; corroborates the four current values) — <a class="exturl" href="https://builtin.com/company/hsbc-bank/faq/culture-values" rel="noopener" target="_blank">https://builtin.com/company/hsbc-bank/faq/culture-values</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s39">High5 — Cappfinity Strengths Test overview (strengths quadrant) — <a class="exturl" href="https://high5test.com/cappfinity-strengths-test/" rel="noopener" target="_blank">https://high5test.com/cappfinity-strengths-test/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+</ol><h3 id="tier-3-general-reference-mechanism-not-hsbc-specific">Tier 3 — General reference (mechanism, not HSBC-specific)</h3><ol start="40">
+<li class="src-item" id="s40">US OPM — Situational Judgement Tests — <a class="exturl" href="https://www.opm.gov/policy-data-oversight/assessment-and-selection/other-assessment-methods/situational-judgment-tests/" rel="noopener" target="_blank">https://www.opm.gov/policy-data-oversight/assessment-and-selection/other-assessment-methods/situational-judgment-tests/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s41">University of Manchester Careers — SJTs — <a class="exturl" href="https://www.careers.manchester.ac.uk/applicationsinterviews/psychometric/sjt/" rel="noopener" target="_blank">https://www.careers.manchester.ac.uk/applicationsinterviews/psychometric/sjt/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+</ol><h3 id="tier-4-genuine-candidate-voice-gated-snippet-only-or-unopened">Tier 4 — Genuine candidate voice (gated; snippet-only or unopened)</h3><ol start="42">
+<li class="src-item" id="s42">Glassdoor — HSBC interview questions hub (login-gated; one snippet recovered, QTN_6902278) — <a class="exturl" href="https://www.glassdoor.com/Interview/HSBC-Interview-Questions-E3482.htm" rel="noopener" target="_blank">https://www.glassdoor.com/Interview/HSBC-Interview-Questions-E3482.htm</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s43">The Student Room — "Hsbc immersive test" t=5603334 (~2019, snippet only; possibly obsolete) — <a class="exturl" href="https://www.thestudentroom.co.uk/showthread.php?t=5603334" rel="noopener" target="_blank">https://www.thestudentroom.co.uk/showthread.php?t=5603334</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s44">The Student Room — "HSBC Job Simulation 2021" t=6707088 (403, unopened) — <a class="exturl" href="https://www.thestudentroom.co.uk/showthread.php?t=6707088" rel="noopener" target="_blank">https://www.thestudentroom.co.uk/showthread.php?t=6707088</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s45">The Student Room — "HSBC Job Simulation" t=6156362 (403, unopened) — <a class="exturl" href="https://www.thestudentroom.co.uk/showthread.php?t=6156362" rel="noopener" target="_blank">https://www.thestudentroom.co.uk/showthread.php?t=6156362</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s46">The Student Room — "HSBC online immersive assessment" t=6709852 (403, unopened) — <a class="exturl" href="https://www.thestudentroom.co.uk/showthread.php?t=6709852" rel="noopener" target="_blank">https://www.thestudentroom.co.uk/showthread.php?t=6709852</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s47">Wall Street Oasis — "HSBC Job Simulation" (403/login, unopened) — <a class="exturl" href="https://www.wallstreetoasis.com/forum/investment-banking/hsbc-job-simulation" rel="noopener" target="_blank">https://www.wallstreetoasis.com/forum/investment-banking/hsbc-job-simulation</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s48">YouTube — "2025 HSBC Online Immersive Assessment, Job Simulation… Exact Questions" (captcha-blocked, unopened) — <a class="exturl" href="https://www.youtube.com/watch?v=9zthcTo0Xbg" rel="noopener" target="_blank">https://www.youtube.com/watch?v=9zthcTo0Xbg</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+</ol><hr/><p><em>Compiled 8 August 2026 from the sources above. Reliability labels reflect the state of evidence at that date; HSBC's process changes frequently, so re-verify stage names and timings against your own invitation email and the pre-assessment instructions.</em></p></section>
+    <footer class="doc-foot">
+      <p>Self-contained briefing · rendered from <code>hsbc-assessment-briefing.md</code> · 8 August 2026.
+      Reliability labels reflect the evidence at that date; HSBC's process changes frequently.</p>
+    </footer>
+  </main>
+</div>
+<button id="toTop" class="totop" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+(function(){
+  "use strict";
+  var root = document.documentElement;
+
+  /* ---------- Theme ---------- */
+  var themeBtn = document.getElementById("themeBtn");
+  try {
+    var saved = localStorage.getItem("hsbc-theme");
+    if (saved) root.setAttribute("data-theme", saved);
+  } catch(e){}
+  function currentTheme(){
+    var t = root.getAttribute("data-theme");
+    if (t) return t;
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme:dark)").matches ? "dark" : "light";
+  }
+  themeBtn.addEventListener("click", function(){
+    var next = currentTheme() === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("hsbc-theme", next); } catch(e){}
+  });
+
+  /* ---------- Hamburger / drawer ---------- */
+  var menuBtn = document.getElementById("menuBtn");
+  var scrim = document.getElementById("scrim");
+  function closeNav(){ document.body.classList.remove("nav-open"); menuBtn.setAttribute("aria-expanded","false"); }
+  menuBtn.addEventListener("click", function(){
+    var open = document.body.classList.toggle("nav-open");
+    menuBtn.setAttribute("aria-expanded", open ? "true":"false");
+  });
+  scrim.addEventListener("click", closeNav);
+
+  /* ---------- Scroll-spy ---------- */
+  var tocLinks = Array.prototype.slice.call(document.querySelectorAll(".toc a"));
+  var linkById = {};
+  tocLinks.forEach(function(a){ linkById[a.getAttribute("href").slice(1)] = a; });
+  var heads = Array.prototype.slice.call(document.querySelectorAll(".content h2, .content h3"));
+  function setActive(id){
+    tocLinks.forEach(function(a){ a.classList.remove("active"); });
+    var link = linkById[id];
+    if (link){ link.classList.add("active");
+      // keep active link in view within sidebar
+      var sb = document.getElementById("sidebar");
+      var lr = link.getBoundingClientRect(), sr = sb.getBoundingClientRect();
+      if (lr.top < sr.top || lr.bottom > sr.bottom) link.scrollIntoView({block:"nearest"});
+    }
+  }
+  if ("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          var id = en.target.id.replace(/-h$/, "");
+          // for h2 the anchor id is section id; map from heading id
+          var secId = en.target.id.endsWith("-h") ? en.target.id.slice(0,-2) : en.target.id;
+          setActive(secId);
+        }
+      });
+    }, {rootMargin:"-64px 0px -70% 0px", threshold:0});
+    heads.forEach(function(h){ io.observe(h); });
+  }
+  // clicking a toc link closes drawer on mobile
+  tocLinks.forEach(function(a){ a.addEventListener("click", function(){ if (window.innerWidth<=768) closeNav(); }); });
+
+  /* ---------- Evidence filters ---------- */
+  var filterBoxes = Array.prototype.slice.call(document.querySelectorAll("[data-filter]"));
+  function applyFilters(){
+    var active = {};
+    filterBoxes.forEach(function(b){ active[b.getAttribute("data-filter")] = b.checked; });
+    // dim/undim individual pills
+    document.querySelectorAll(".content .pill[data-label]").forEach(function(p){
+      var l = p.getAttribute("data-label");
+      if (l==="flag") return;
+      p.classList.toggle("dim", !active[l]);
+    });
+    // hide a claim block only if ALL its labels are inactive
+    document.querySelectorAll(".content .claim[data-labels]").forEach(function(el){
+      var labels = el.getAttribute("data-labels").split(/\s+/).filter(Boolean);
+      var anyActive = labels.some(function(l){ return active[l]; });
+      el.classList.toggle("hide-claim", !anyActive);
+    });
+  }
+  filterBoxes.forEach(function(b){ b.addEventListener("change", applyFilters); });
+
+  /* ---------- Search (section-level) ---------- */
+  var search = document.getElementById("search");
+  var sections = Array.prototype.slice.call(document.querySelectorAll(".content > section"));
+  function runSearch(){
+    var q = (search.value||"").trim().toLowerCase();
+    sections.forEach(function(sec){
+      var hit = !q || sec.textContent.toLowerCase().indexOf(q) !== -1;
+      sec.classList.toggle("search-hidden", !hit);
+      var link = linkById[sec.id];
+      if (link) link.parentElement.classList.toggle("search-hidden", !hit);
+    });
+  }
+  var t;
+  search.addEventListener("input", function(){ clearTimeout(t); t=setTimeout(runSearch,120); });
+  search.addEventListener("keydown", function(e){ if(e.key==="Escape"){ search.value=""; runSearch(); } });
+
+  /* ---------- Citations: jump to source + remember for "back" ---------- */
+  var lastCiteId = null;
+  document.querySelectorAll("sup.cite a, a.reflink").forEach(function(a){
+    a.addEventListener("click", function(){
+      lastCiteId = "cite-anchor";
+      // drop a temporary marker where we clicked
+      var old = document.getElementById("cite-anchor");
+      if (old) old.removeAttribute("id");
+      a.id = "cite-anchor";
+      var tgt = document.getElementById(a.getAttribute("href").slice(1));
+      if (tgt){ tgt.classList.remove("tgt-flash"); void tgt.offsetWidth; tgt.classList.add("tgt-flash"); }
+    });
+  });
+  document.querySelectorAll(".srcback").forEach(function(b){
+    b.addEventListener("click", function(e){
+      e.preventDefault();
+      var anchor = document.getElementById("cite-anchor");
+      if (anchor) anchor.scrollIntoView({behavior:"smooth", block:"center"});
+      else window.scrollTo({top:0,behavior:"smooth"});
+    });
+  });
+
+  /* ---------- Back to top ---------- */
+  var toTop = document.getElementById("toTop");
+  window.addEventListener("scroll", function(){
+    toTop.classList.toggle("show", window.scrollY > 600);
+  }, {passive:true});
+  toTop.addEventListener("click", function(){ window.scrollTo({top:0,behavior:"smooth"}); });
+
+  /* ---------- Print: expand all details, remember state ---------- */
+  var toggled = [];
+  window.addEventListener("beforeprint", function(){
+    toggled = [];
+    document.querySelectorAll("details:not([open])").forEach(function(d){ d.open=true; toggled.push(d); });
+  });
+  window.addEventListener("afterprint", function(){
+    toggled.forEach(function(d){ d.open=false; }); toggled=[];
+  });
+
+  applyFilters();
+})();
+
+</script>
+</body>
+</html>
