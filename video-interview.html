@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HSBC Video Interview — The Complete Playbook</title>
+<style>
+/* ---------- Theme tokens ---------- */
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#eef1f5; --text:#1c2126;
+  --muted:#5b6470; --border:#d8dee6; --accent:#c8102e; --accent-2:#8a0b20;
+  --link:#0b5cad; --shadow:0 1px 3px rgba(20,30,45,.08),0 6px 24px rgba(20,30,45,.06);
+  --p-official-bg:#e4f4ea; --p-official-fg:#116338; --p-official-bd:#8fd3ab;
+  --p-corrob-bg:#e5eefb; --p-corrob-fg:#1554a6; --p-corrob-bd:#9dc0ef;
+  --p-anec-bg:#fdf0dc; --p-anec-fg:#8a5a09; --p-anec-bd:#eec98a;
+  --p-infer-bg:#efe7fb; --p-infer-fg:#5b309e; --p-infer-bd:#c9b1ef;
+  --p-flag-bg:#eceff3; --p-flag-fg:#4a5563; --p-flag-bd:#c4ccd6;
+  --mark:#fff3a3;
+}
+:root[data-theme="dark"]{
+  --bg:#0f1318; --surface:#161c24; --surface-2:#1e2731; --text:#e6eaef;
+  --muted:#9aa6b2; --border:#2b3542; --accent:#ff5a72; --accent-2:#ff8095;
+  --link:#6db3ff; --shadow:0 1px 3px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35);
+  --p-official-bg:#123528; --p-official-fg:#7fe0ab; --p-official-bd:#1f5c42;
+  --p-corrob-bg:#122b47; --p-corrob-fg:#8fbdf7; --p-corrob-bd:#22497a;
+  --p-anec-bg:#3a2c11; --p-anec-fg:#f0c583; --p-anec-bd:#6a4f1d;
+  --p-infer-bg:#2a1f45; --p-infer-fg:#c7abf5; --p-infer-bd:#4a3576;
+  --p-flag-bg:#222b35; --p-flag-fg:#aeb9c5; --p-flag-bd:#39444f;
+  --mark:#6b5d00;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1318; --surface:#161c24; --surface-2:#1e2731; --text:#e6eaef;
+    --muted:#9aa6b2; --border:#2b3542; --accent:#ff5a72; --accent-2:#ff8095;
+    --link:#6db3ff; --shadow:0 1px 3px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35);
+    --p-official-bg:#123528; --p-official-fg:#7fe0ab; --p-official-bd:#1f5c42;
+    --p-corrob-bg:#122b47; --p-corrob-fg:#8fbdf7; --p-corrob-bd:#22497a;
+    --p-anec-bg:#3a2c11; --p-anec-fg:#f0c583; --p-anec-bd:#6a4f1d;
+    --p-infer-bg:#2a1f45; --p-infer-fg:#c7abf5; --p-infer-bd:#4a3576;
+    --p-flag-bg:#222b35; --p-flag-fg:#aeb9c5; --p-flag-bd:#39444f;
+    --mark:#6b5d00;
+  }
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-text-size-adjust:100%;
+}
+.skip{position:absolute;left:-999px;top:0;background:var(--accent);color:#fff;padding:8px 14px;z-index:200;border-radius:0 0 6px 0}
+.skip:focus{left:0}
+
+/* ---------- Top bar ---------- */
+.topbar{
+  position:sticky;top:0;z-index:100;display:flex;align-items:center;gap:12px;
+  background:var(--surface);border-bottom:1px solid var(--border);
+  padding:10px 16px;box-shadow:var(--shadow);
+}
+.brand{font-weight:700;font-size:15px;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand::before{content:"";display:inline-block;width:10px;height:16px;background:var(--accent);margin-right:8px;vertical-align:-2px;border-radius:1px}
+.topbar-tools{margin-left:auto;display:flex;align-items:center;gap:8px}
+#search{
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  border-radius:20px;padding:7px 14px;font-size:14px;width:min(38vw,260px);
+}
+#search:focus{outline:2px solid var(--link);outline-offset:1px}
+.iconbtn{
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  border-radius:8px;width:38px;height:36px;font-size:16px;cursor:pointer;line-height:1;
+}
+.iconbtn:hover{border-color:var(--accent)}
+#menuBtn{display:none}
+
+/* ---------- Layout ---------- */
+.layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:0;max-width:1240px;margin:0 auto}
+.sidebar{
+  position:sticky;top:57px;align-self:start;height:calc(100vh - 57px);overflow-y:auto;
+  padding:18px 14px 40px;border-right:1px solid var(--border);background:var(--bg);
+}
+.content{padding:26px clamp(16px,4vw,48px) 80px;min-width:0}
+
+/* readable column */
+.content > section, .doc-foot{max-width:72ch}
+.content h2{max-width:72ch}
+
+/* ---------- Filters ---------- */
+.filters{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:16px}
+.filters-title{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:8px;font-weight:700}
+.pill-toggle{display:flex;align-items:center;gap:8px;padding:4px 2px;cursor:pointer;user-select:none}
+.pill-toggle input{accent-color:var(--accent);width:15px;height:15px}
+.pill-toggle input:not(:checked) ~ .pill{opacity:.35;text-decoration:line-through}
+.legend-note{font-size:12px;color:var(--muted);margin-top:8px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+
+/* ---------- ToC / scroll-spy ---------- */
+.toc ul{list-style:none;margin:0;padding:0}
+.toc li{margin:1px 0}
+.toc a{display:block;text-decoration:none;color:var(--muted);padding:5px 10px;border-radius:7px;font-size:13.5px;border-left:2px solid transparent;line-height:1.35}
+.toc a:hover{background:var(--surface-2);color:var(--text)}
+.toc-l3 a{padding-left:22px;font-size:12.5px}
+.toc a.active{color:var(--accent);background:var(--surface-2);border-left-color:var(--accent);font-weight:600}
+
+/* ---------- Typography ---------- */
+h1,h2,h3,h4{line-height:1.25;color:var(--text)}
+.content h2{font-size:26px;margin:38px 0 6px;padding-bottom:8px;border-bottom:2px solid var(--border);scroll-margin-top:70px}
+.content section:first-child h2{margin-top:6px}
+.content h3{font-size:19px;margin:26px 0 4px;color:var(--accent-2);scroll-margin-top:70px}
+.content p{margin:10px 0}
+.content a{color:var(--link)}
+.content ul,.content ol{margin:8px 0 8px;padding-left:24px}
+.content li{margin:5px 0}
+strong{font-weight:700}
+code{background:var(--surface-2);border:1px solid var(--border);border-radius:5px;padding:1px 5px;font-size:.88em}
+hr{border:none;border-top:1px solid var(--border);margin:26px 0}
+
+/* first paragraph after H1 area (intro) */
+#intro > p:first-of-type{font-size:17px;color:var(--muted)}
+
+/* golden-rule / callout blockquotes */
+blockquote{
+  margin:16px 0;padding:12px 16px;background:var(--surface);
+  border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;
+}
+blockquote p{margin:6px 0}
+
+/* ---------- Pills ---------- */
+.pill{
+  display:inline-block;font-size:11px;font-weight:800;letter-spacing:.03em;
+  padding:1px 8px;border-radius:999px;border:1px solid;vertical-align:1px;white-space:nowrap;
+}
+.pill-official{background:var(--p-official-bg);color:var(--p-official-fg);border-color:var(--p-official-bd)}
+.pill-corroborated{background:var(--p-corrob-bg);color:var(--p-corrob-fg);border-color:var(--p-corrob-bd)}
+.pill-anecdotal{background:var(--p-anec-bg);color:var(--p-anec-fg);border-color:var(--p-anec-bd)}
+.pill-inferred{background:var(--p-infer-bg);color:var(--p-infer-fg);border-color:var(--p-infer-bd)}
+.pill-flag{background:var(--p-flag-bg);color:var(--p-flag-fg);border-color:var(--p-flag-bd)}
+.qual{font-size:.92em;color:var(--muted)}
+.pill.dim{opacity:.28}
+
+/* ---------- Citations ---------- */
+sup.cite{font-size:11px;line-height:0}
+sup.cite a{color:var(--link);text-decoration:none;font-weight:700;padding:0 1px}
+sup.cite a:hover{text-decoration:underline}
+a.reflink{font-weight:600}
+.src-item:target,.tgt-flash{animation:flash 1.8s ease}
+@keyframes flash{0%,40%{background:var(--mark)}100%{background:transparent}}
+.srcback{text-decoration:none;color:var(--muted);font-weight:700;margin-left:4px}
+.srcback:hover{color:var(--accent)}
+.exturl{word-break:break-all;font-size:.92em}
+
+/* ---------- Tables ---------- */
+.content table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;display:block;overflow-x:auto}
+.content th,.content td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+.content thead th{background:var(--surface-2);font-weight:700}
+.content tbody tr:nth-child(even){background:var(--surface)}
+
+/* ---------- Details / verbatim ---------- */
+details{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin:14px 0;padding:0 14px}
+details[open]{padding-bottom:8px}
+summary{cursor:pointer;padding:12px 0;font-weight:600;color:var(--accent-2);list-style-position:inside}
+summary:hover{color:var(--accent)}
+details.verbatim blockquote{border-left-color:var(--p-anec-bd)}
+
+/* ---------- filtered / hidden ---------- */
+.claim.hide-claim{display:none !important}
+section.search-hidden{display:none !important}
+.toc li.search-hidden{display:none}
+
+/* ---------- back to top ---------- */
+.totop{position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;
+  border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:18px;
+  cursor:pointer;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .2s;z-index:90}
+.totop.show{opacity:1;pointer-events:auto}
+.totop:hover{border-color:var(--accent);color:var(--accent)}
+
+.scrim{display:none}
+.print-toc{display:none}
+.doc-foot{margin-top:40px;padding-top:16px;border-top:1px solid var(--border);color:var(--muted);font-size:13px}
+
+/* ---------- Responsive: hamburger under 768px ---------- */
+@media (max-width:768px){
+  #menuBtn{display:inline-block}
+  .layout{grid-template-columns:1fr}
+  .sidebar{
+    position:fixed;top:0;left:0;height:100vh;width:min(84vw,320px);z-index:120;
+    transform:translateX(-100%);transition:transform .25s ease;border-right:1px solid var(--border);
+    box-shadow:var(--shadow);padding-top:64px;
+  }
+  body.nav-open .sidebar{transform:translateX(0)}
+  body.nav-open .scrim{display:block;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:110}
+  #search{width:44vw}
+  .brand{font-size:13px}
+}
+@media (max-width:480px){
+  #search{width:38vw}
+  .content h2{font-size:22px}
+}
+
+/* ---------- Print ---------- */
+@media print{
+  .topbar,.sidebar,.totop,#scrim,.skip,.srcback,.filters{display:none !important}
+  .layout{display:block;max-width:none}
+  .content{padding:0;max-width:none}
+  .content > section,.content h2{max-width:none}
+  body{background:#fff;color:#000;font-size:11.5pt}
+  /* expand everything regardless of filter/search/collapse */
+  .claim.hide-claim{display:revert !important}
+  section.search-hidden{display:revert !important}
+  .pill.dim{opacity:1 !important}
+  details{border:1px solid #bbb;break-inside:avoid}
+  details > *:not(summary){display:revert !important}   /* reveal collapsed content */
+  summary{color:#000}
+  a{color:#000;text-decoration:none}
+  .exturl{color:#333}
+  table,tr,td,th,blockquote,details{break-inside:avoid}
+  h2,h3{break-after:avoid}
+  .content h2{border-bottom:1px solid #000}
+  /* contents page */
+  .print-toc{display:block !important;break-after:page}
+  .print-cover{padding:40px 0 28px;border-bottom:3px solid var(--accent);margin-bottom:24px}
+  .print-kicker{display:block;font-size:10pt;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+  .print-title{font-size:24pt;margin:8px 0 0;line-height:1.15}
+  .print-contents-h{font-size:15pt;border:none;margin:0 0 8px}
+  .print-toc ul{list-style:none;padding:0;margin:0}
+  .print-toc li{margin:3px 0;font-size:11pt}
+  .print-toc .pt-l3{padding-left:22px;font-size:10pt;color:#333}
+  .print-toc a{color:#000;text-decoration:none}
+  .content > section{scroll-margin-top:0}
+  @page{margin:16mm 15mm 18mm}
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <button id="menuBtn" class="iconbtn" aria-label="Toggle contents" aria-expanded="false">☰</button>
+  <span class="brand">HSBC Video Interview — The Complete Playbook</span>
+  <div class="topbar-tools">
+    <input id="search" type="search" placeholder="Search sections…" aria-label="Search sections">
+    <button id="themeBtn" class="iconbtn" aria-label="Toggle dark/light">◐</button>
+  </div>
+</header>
+<div class="layout">
+  <aside id="sidebar" class="sidebar" aria-label="Sidebar">
+    <div class="filters">
+      <div class="filters-title">Evidence filter</div>
+      <label class="pill-toggle"><input type="checkbox" data-filter="official" checked><span class="pill pill-official">OFFICIAL</span></label>
+      <label class="pill-toggle"><input type="checkbox" data-filter="corroborated" checked><span class="pill pill-corroborated">CORROBORATED</span></label>
+      <label class="pill-toggle"><input type="checkbox" data-filter="anecdotal" checked><span class="pill pill-anecdotal">ANECDOTAL</span></label>
+      <label class="pill-toggle"><input type="checkbox" data-filter="inferred" checked><span class="pill pill-inferred">INFERRED</span></label>
+      <div class="legend-note"><span class="pill pill-flag">FLAG</span> = disagreement / gap / caveat (always shown)</div>
+    </div>
+    <nav class="toc" aria-label="Table of contents"><ul>
+<li class="toc-l2"><a href="#how-to-read-this">How to read this</a></li>
+<li class="toc-l2"><a href="#executive-summary-the-12-things-that-matter-most">Executive summary — the 12 things that matter most</a></li>
+<li class="toc-l2"><a href="#1-what-the-video-part-actually-is-and-a-vendor-nuance-that-trips-people-up">1. What the video part actually is (and a vendor nuance that trips people up)</a></li>
+<li class="toc-l2"><a href="#2-exact-mechanics-how-the-recording-works">2. Exact mechanics — how the recording works</a></li>
+<li class="toc-l2"><a href="#3-how-a-single-video-answer-is-scored">3. How a single video answer is scored</a></li>
+<li class="toc-l2"><a href="#4-what-sinks-people-on-video-the-screen-out-patterns">4. What sinks people on video (the screen-out patterns)</a></li>
+<li class="toc-l2"><a href="#5-integrity-on-the-video-dont-trip-it-by-accident">5. Integrity on the video — don&#x27;t trip it by accident</a></li>
+<li class="toc-l2"><a href="#6-delivery-technique-set-up-and-performance">6. Delivery technique — set-up and performance</a></li>
+<li class="toc-l3"><a href="#set-up-fix-this-during-the-warm-up">Set-up (fix this during the warm-up)</a></li>
+<li class="toc-l3"><a href="#performance-while-recording">Performance (while recording)</a></li>
+<li class="toc-l3"><a href="#using-the-2-minute-prep-window">Using the ~2-minute prep window</a></li>
+<li class="toc-l3"><a href="#if-you-blank-or-fumble-remember-no-re-record">If you blank or fumble (remember: no re-record)</a></li>
+<li class="toc-l2"><a href="#7-the-video-question-bank-cib-weighted">7. The video question bank (CIB-weighted)</a></li>
+<li class="toc-l3"><a href="#the-eight-you-should-definitely-prepare">The eight you should definitely prepare</a></li>
+<li class="toc-l3"><a href="#full-bank-by-category">Full bank by category</a></li>
+<li class="toc-l2"><a href="#8-answer-frameworks-skeletons-to-rehearse-not-scripts">8. Answer frameworks — skeletons to rehearse (not scripts)</a></li>
+<li class="toc-l3"><a href="#tell-me-about-yourself-90120-s-present-path-future">Tell me about yourself (~90–120 s) — Present → Path → Future</a></li>
+<li class="toc-l3"><a href="#why-hsbc-90-s-three-layers-then-make-it-personal">Why HSBC? (~90 s) — three layers, then make it personal</a></li>
+<li class="toc-l3"><a href="#why-cib-this-division-90-s">Why CIB / this division? (~90 s)</a></li>
+<li class="toc-l3"><a href="#joining-a-new-senior-team-introduce-yourself-build-relationships-90-s-forward-looking-no-star">Joining a new senior team — introduce yourself &amp; build relationships (~90 s) — forward-looking, no STAR</a></li>
+<li class="toc-l3"><a href="#behavioural-teamwork-leadership-failure-conflict-2-min-starr">Behavioural (teamwork / leadership / failure / conflict) (~2 min) — STAR(+R)</a></li>
+<li class="toc-l3"><a href="#strengths-weakness-7590-s">Strengths / weakness (~75–90 s)</a></li>
+<li class="toc-l3"><a href="#recent-macro-event-market-impact-90120-s-analyst-mini-structure">Recent macro event &amp; market impact (~90–120 s) — analyst mini-structure</a></li>
+<li class="toc-l3"><a href="#a-recent-deal-industry-you-find-interesting-90-s">A recent deal / industry you find interesting (~90 s)</a></li>
+<li class="toc-l3"><a href="#weaving-the-four-values-every-answer">Weaving the four values (every answer)</a></li>
+<li class="toc-l2"><a href="#9-a-focused-video-rehearsal-plan-inside-your-10-day-window">9. A focused video rehearsal plan (inside your ~10-day window)</a></li>
+<li class="toc-l2"><a href="#what-i-could-not-verify">What I could not verify</a></li>
+<li class="toc-l2"><a href="#source-list-grouped-by-reliability">Source list (grouped by reliability)</a></li>
+<li class="toc-l3"><a href="#tier-1-official-hsbc-cappfinity">Tier 1 — Official (HSBC &amp; Cappfinity)</a></li>
+<li class="toc-l3"><a href="#tier-2-industry-prep-guides-secondary-20252026">Tier 2 — Industry / prep guides (secondary; 2025–2026)</a></li>
+<li class="toc-l3"><a href="#tier-3-genuine-candidate-voice-gated-snippet-only">Tier 3 — Genuine candidate voice (gated; snippet-only)</a></li>
+<li class="toc-l3"><a href="#tier-4-context-cib">Tier 4 — Context (CIB)</a></li>
+</ul></nav>
+  </aside>
+  <div id="scrim" class="scrim"></div>
+  <main id="main" class="content" tabindex="-1">
+    <nav class="print-toc" aria-hidden="true"><div class="print-cover"><span class="print-kicker">Candidate briefing · 8 August 2026</span><h1 class="print-title">HSBC Video Interview — The Complete Playbook</h1></div><h2 class="print-contents-h">Contents</h2><ul><li class="pt-l2"><a href="#how-to-read-this">How to read this</a></li><li class="pt-l2"><a href="#executive-summary-the-12-things-that-matter-most">Executive summary — the 12 things that matter most</a></li><li class="pt-l2"><a href="#1-what-the-video-part-actually-is-and-a-vendor-nuance-that-trips-people-up">1. What the video part actually is (and a vendor nuance that trips people up)</a></li><li class="pt-l2"><a href="#2-exact-mechanics-how-the-recording-works">2. Exact mechanics — how the recording works</a></li><li class="pt-l2"><a href="#3-how-a-single-video-answer-is-scored">3. How a single video answer is scored</a></li><li class="pt-l2"><a href="#4-what-sinks-people-on-video-the-screen-out-patterns">4. What sinks people on video (the screen-out patterns)</a></li><li class="pt-l2"><a href="#5-integrity-on-the-video-dont-trip-it-by-accident">5. Integrity on the video — don&#x27;t trip it by accident</a></li><li class="pt-l2"><a href="#6-delivery-technique-set-up-and-performance">6. Delivery technique — set-up and performance</a></li><li class="pt-l3"><a href="#set-up-fix-this-during-the-warm-up">Set-up (fix this during the warm-up)</a></li><li class="pt-l3"><a href="#performance-while-recording">Performance (while recording)</a></li><li class="pt-l3"><a href="#using-the-2-minute-prep-window">Using the ~2-minute prep window</a></li><li class="pt-l3"><a href="#if-you-blank-or-fumble-remember-no-re-record">If you blank or fumble (remember: no re-record)</a></li><li class="pt-l2"><a href="#7-the-video-question-bank-cib-weighted">7. The video question bank (CIB-weighted)</a></li><li class="pt-l3"><a href="#the-eight-you-should-definitely-prepare">The eight you should definitely prepare</a></li><li class="pt-l3"><a href="#full-bank-by-category">Full bank by category</a></li><li class="pt-l2"><a href="#8-answer-frameworks-skeletons-to-rehearse-not-scripts">8. Answer frameworks — skeletons to rehearse (not scripts)</a></li><li class="pt-l3"><a href="#tell-me-about-yourself-90120-s-present-path-future">Tell me about yourself (~90–120 s) — Present → Path → Future</a></li><li class="pt-l3"><a href="#why-hsbc-90-s-three-layers-then-make-it-personal">Why HSBC? (~90 s) — three layers, then make it personal</a></li><li class="pt-l3"><a href="#why-cib-this-division-90-s">Why CIB / this division? (~90 s)</a></li><li class="pt-l3"><a href="#joining-a-new-senior-team-introduce-yourself-build-relationships-90-s-forward-looking-no-star">Joining a new senior team — introduce yourself &amp; build relationships (~90 s) — forward-looking, no STAR</a></li><li class="pt-l3"><a href="#behavioural-teamwork-leadership-failure-conflict-2-min-starr">Behavioural (teamwork / leadership / failure / conflict) (~2 min) — STAR(+R)</a></li><li class="pt-l3"><a href="#strengths-weakness-7590-s">Strengths / weakness (~75–90 s)</a></li><li class="pt-l3"><a href="#recent-macro-event-market-impact-90120-s-analyst-mini-structure">Recent macro event &amp; market impact (~90–120 s) — analyst mini-structure</a></li><li class="pt-l3"><a href="#a-recent-deal-industry-you-find-interesting-90-s">A recent deal / industry you find interesting (~90 s)</a></li><li class="pt-l3"><a href="#weaving-the-four-values-every-answer">Weaving the four values (every answer)</a></li><li class="pt-l2"><a href="#9-a-focused-video-rehearsal-plan-inside-your-10-day-window">9. A focused video rehearsal plan (inside your ~10-day window)</a></li><li class="pt-l2"><a href="#what-i-could-not-verify">What I could not verify</a></li><li class="pt-l2"><a href="#source-list-grouped-by-reliability">Source list (grouped by reliability)</a></li><li class="pt-l3"><a href="#tier-1-official-hsbc-cappfinity">Tier 1 — Official (HSBC &amp; Cappfinity)</a></li><li class="pt-l3"><a href="#tier-2-industry-prep-guides-secondary-20252026">Tier 2 — Industry / prep guides (secondary; 2025–2026)</a></li><li class="pt-l3"><a href="#tier-3-genuine-candidate-voice-gated-snippet-only">Tier 3 — Genuine candidate voice (gated; snippet-only)</a></li><li class="pt-l3"><a href="#tier-4-context-cib">Tier 4 — Context (CIB)</a></li></ul></nav><section class="doc-section" id="intro"><p><strong>For:</strong> Janak · <strong>Role:</strong> Corporate &amp; Institutional Banking (CIB) — Graduate Insight Programme · <strong>Focus:</strong> the recorded <strong>video</strong> answers inside the Cappfinity Job Simulation · <strong>Prepared:</strong> 10 August 2026.</p><p>This is everything about the part you said is hardest — the recorded video interview: exactly how it works, how a human/marker scores a single video answer, what sinks people on camera, the integrity rules, the full CIB-weighted question bank, and answer skeletons + delivery technique so you can rehearse and land it.</p><blockquote>
+<p><strong>One-line strategy for video:</strong> each answer is <strong>one take, no re-record</strong>, scored mainly on the <strong>content and structure of what you say</strong> (not your looks). Win by using the prep time to build a tight <strong>STAR / point-first</strong> skeleton, speaking to the <strong>camera lens</strong> in a calm, specific, first-person voice, and <strong>evidencing an HSBC value</strong> in every answer. Authenticity is scored — deliver <em>your</em> examples, not a memorised script.</p>
+<p><strong>I did not open your assessment link.</strong> Everything here is from independent research; your <code>apitake.cappassessments.com</code> link is single-use and I won't touch it.</p>
+</blockquote><hr/></section><section class="doc-section" id="how-to-read-this"><h2 id="how-to-read-this-h">How to read this</h2><p class="claim" data-labels="anecdotal corroborated inferred official">Labels on every claim: <strong><span class="pill pill-official" data-label="official">OFFICIAL</span></strong> (HSBC/Cappfinity primary) · <strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> (multiple independent sources) · <strong><span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span></strong> (single/second-hand) · <strong><span class="pill pill-inferred" data-label="inferred">INFERRED</span></strong> (my reasoning). Citations <code>[n]</code> → Source list at the end. Candidate forums (Reddit, WSO, The Student Room, Glassdoor, YouTube) are login/bot-gated, so candidate detail is via search snippets, not full pages — weigh accordingly. The strongest anchors here are <strong>HSBC's own video-interview PDFs</strong> and <strong>Cappfinity's help-desk/product pages</strong>.</p><hr/></section><section class="doc-section" id="executive-summary-the-12-things-that-matter-most"><h2 id="executive-summary-the-12-things-that-matter-most-h">Executive summary — the 12 things that matter most</h2><ol>
+<li class="claim" data-labels="official"><strong>It's Cappfinity, one take.</strong> Your video answers sit inside the Cappfinity Job Simulation; Cappfinity states plainly that <strong>"video responses for assessed questions cannot be re-recorded"</strong> <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="8" href="#s8">[8]</a></sup>. Treat every recording as live.</li>
+<li class="claim" data-labels="corroborated"><strong>Timing:</strong> expect <strong>~2 minutes to prepare and up to ~2 minutes to record</strong> per question (HSBC's likely setting; Cappfinity's generic default is 30 s prep / up to 3 min — the on-screen timer is authoritative on the day) <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><span class="qual"> / OFFICIAL configurable</span><sup class="cite"><a data-cite="13" href="#s13">[13]</a></sup><sup class="cite"><a data-cite="8" href="#s8">[8]</a></sup>.</li>
+<li class="claim" data-labels="anecdotal"><strong>How many:</strong> the video sits in the simulation's final exercise — roughly <strong>~6 questions mixing recorded video, situational-judgement and free text</strong> <span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span><span class="qual">/CORROBORATED</span><sup class="cite"><a data-cite="20" href="#s20">[20]</a></sup>.</li>
+<li class="claim" data-labels="anecdotal official"><strong>A warm-up comes first.</strong> Cappfinity gives you a camera/mic set-up where you <strong>record and replay a test video "several times until you can see and hear yourself well,"</strong> and sometimes a non-assessed practice question <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="9" href="#s9">[9]</a></sup>. Use it fully. (One prep source claims the set-up question <em>is</em> scored — so treat it as if it counts <span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span><sup class="cite"><a data-cite="13" href="#s13">[13]</a></sup>.)</li>
+<li class="claim" data-labels="official"><strong>A human decides.</strong> Cappfinity video can be <strong>"AI-assisted… or human-led"</strong> at the employer's choice <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="7" href="#s7">[7]</a></sup>, but <strong>HSBC states the platform makes no automated decisions — all decisions are made by the hiring team</strong> <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="3" href="#s3">[3]</a></sup>. Assume a person watches you.</li>
+<li class="claim" data-labels="anecdotal corroborated"><strong>Scored on content, not looks.</strong> The dominant factor is a <strong>specific, well-structured answer that evidences the target strength/value</strong> — not your appearance <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><span class="qual">/INFERRED</span><sup class="cite"><a data-cite="7" href="#s7">[7]</a></sup>. Ignore the "smile for the emotion AI" advice on some prep sites — that misattributes an old HireVue feature and isn't supported for Cappfinity (see §3) <span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span><span class="qual">, flagged</span><sup class="cite"><a data-cite="16" href="#s16">[16]</a></sup>.</li>
+<li class="claim" data-labels="corroborated official"><strong>Structure with STAR.</strong> HSBC explicitly recommends STAR: <em>"explain the situation you faced; the specific task required; the action that you took; and the result of this action"</em> — examples <em>"don't have to be drawn from work"</em> <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="3" href="#s3">[3]</a></sup>. Add a one-line <strong>Reflection</strong> (STAR+R) <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="16" href="#s16">[16]</a></sup>.</li>
+<li class="claim" data-labels="corroborated"><strong>Front-load.</strong> Say your point in sentence one and land the result by ~90 s so the 2-minute cut-off never costs you the punchline <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup>.</li>
+<li class="claim" data-labels="official"><strong>Look at the lens.</strong> HSBC: <em>"Look directly at the camera and avoid looking at yourself on screen, imagine the interviewer… is there and you are talking to that person"</em> <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup>.</li>
+<li class="claim" data-labels="official"><strong>Environment:</strong> <em>"a quiet room… well lit and free of distractions,"</em> notifications closed, dressed <em>"as you would for a face-to-face interview"</em> <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup>.</li>
+<li class="claim" data-labels="official"><strong>AI rule:</strong> HSBC forbids using AI to <em>"generate responses during live or recorded interviews"</em> — so prep with AI all you like, but <strong>the words you say on camera must be your own</strong> <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="3" href="#s3">[3]</a></sup>.</li>
+<li class="claim" data-labels="official"><strong>Evidence a value every time:</strong> We value difference · We succeed together · We take responsibility · We get it done — show them, don't name them <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="5" href="#s5">[5]</a></sup>.</li>
+</ol><hr/></section><section class="doc-section" id="1-what-the-video-part-actually-is-and-a-vendor-nuance-that-trips-people-up"><h2 id="1-what-the-video-part-actually-is-and-a-vendor-nuance-that-trips-people-up-h">1. What the video part actually is (and a vendor nuance that trips people up)</h2><ul>
+<li class="claim" data-labels="corroborated"><strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> The recorded video answers are part of the <strong>Cappfinity Job Simulation</strong> (its "Snapshot"/Video Interview product), inside the simulation's storyline — not a standalone interview <sup class="cite"><a data-cite="7" href="#s7">[7]</a></sup><sup class="cite"><a data-cite="20" href="#s20">[20]</a></sup><sup class="cite"><a data-cite="18" href="#s18">[18]</a></sup>.</li>
+<li class="claim" data-labels="official"><strong><span class="pill pill-official" data-label="official">OFFICIAL</span> Two different HSBC video systems exist — don't confuse the guidance.</strong> HSBC's public <em>"On Demand"</em> and <em>"Live"</em> video-interview hints PDFs describe a tool called <strong>Modern Hire</strong>, used for <em>some</em> roles instead of a phone interview <sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup><sup class="cite"><a data-cite="2" href="#s2">[2]</a></sup>. Your graduate Job Simulation video is <strong>Cappfinity</strong>, not Modern Hire. <strong>Why it matters:</strong> HSBC's <em>delivery</em> advice (dress, environment, look at the camera, STAR) applies to both, but the <strong>re-record rule differs</strong> — Modern Hire <em>sometimes</em> allows a retake; <strong>Cappfinity's assessed questions do not</strong> <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="8" href="#s8">[8]</a></sup><sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup>. When in doubt, follow the on-screen instructions in your actual assessment.</li>
+</ul><hr/></section><section class="doc-section" id="2-exact-mechanics-how-the-recording-works"><h2 id="2-exact-mechanics-how-the-recording-works-h">2. Exact mechanics — how the recording works</h2><p class="claim" data-labels="official"><strong><span class="pill pill-official" data-label="official">OFFICIAL</span><span class="qual"> unless noted</span><sup class="cite"><a data-cite="8" href="#s8">[8]</a></sup><sup class="cite"><a data-cite="9" href="#s9">[9]</a></sup><sup class="cite"><a data-cite="13" href="#s13">[13]</a></sup><sup class="cite"><a data-cite="20" href="#s20">[20]</a></sup>:</strong></p><ul>
+<li class="claim" data-labels="anecdotal"><strong>Number of video questions:</strong> the simulation's final exercise contains ~6 questions, a subset recorded on video (the rest SJT/free-text) <span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span><sup class="cite"><a data-cite="20" href="#s20">[20]</a></sup>. Across sources, plan for <strong>roughly 3–6 recorded video answers</strong>.</li>
+<li class="claim" data-labels="anecdotal corroborated official"><strong>Prep and record time:</strong> <strong>~2 min to prepare, up to ~2 min to record</strong> per question is the HSBC-configured figure most sources report <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="13" href="#s13">[13]</a></sup>; Cappfinity's generic default elsewhere is ~30 s prep / up to 3 min <span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span><sup class="cite"><a data-cite="8" href="#s8">[8]</a></sup>. Cappfinity's own line: <strong>"the exact time will be specified as you attempt the question"</strong> <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="8" href="#s8">[8]</a></sup>. <strong>Read the on-screen timer — it's authoritative.</strong></li>
+<li class="claim" data-labels="corroborated"><strong>A countdown is shown</strong>, for both the prep window and the record window; recording auto-starts when prep ends and auto-stops at the limit <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><span class="qual">/INFERRED</span><sup class="cite"><a data-cite="8" href="#s8">[8]</a></sup>.</li>
+<li class="claim" data-labels="official"><strong>One take, no re-record (assessed questions):</strong> <em>"Video responses for assessed questions cannot be re-recorded, but you have time to prepare your answer ahead of the question"</em> <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="8" href="#s8">[8]</a></sup>. Do <strong>not</strong> count on a retake.</li>
+<li class="claim" data-labels="anecdotal official"><strong>Warm-up / set-up first:</strong> you <em>"verify that your camera and microphone are working… by recording a short video,"</em> replay it, and can <em>"record this video several times until you can see and hear yourself well,"</em> then sometimes answer a <em>"non-assessed, timed"</em> practice question in the real format <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="9" href="#s9">[9]</a></sup>. <strong>Fix framing, lighting and audio here.</strong> (Conflict: one prep source says HSBC's set-up question <em>is</em> scored — so <strong>treat it as if it counts</strong> <span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span><sup class="cite"><a data-cite="13" href="#s13">[13]</a></sup>.)</li>
+<li class="claim" data-labels="official"><strong>Question format:</strong> the question is typically <strong>shown on screen as text</strong> (sometimes a short clip); you answer by video <span class="pill pill-official" data-label="official">OFFICIAL</span><span class="qual">/CORROBORATED</span><sup class="cite"><a data-cite="8" href="#s8">[8]</a></sup>. Expect to <em>read</em> the prompt, then prep, then record.</li>
+<li class="claim" data-labels="inferred"><strong>Pause:</strong> no source indicates you can pause a live recording; the one-take timed design implies you cannot <span class="pill pill-inferred" data-label="inferred">INFERRED</span><sup class="cite"><a data-cite="8" href="#s8">[8]</a></sup>.</li>
+<li class="claim" data-labels="official"><strong>The container is "untimed," the video answers are not.</strong> HSBC says <em>"our online assessments are not timed, but you can ask for additional time during any of the interview stages"</em> — i.e. you control when you sit it within your ~10-day window, but each video answer is individually timed; <strong>extra time is an available adjustment if you need it</strong> <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="4" href="#s4">[4]</a></sup>.</li>
+</ul><hr/></section><section class="doc-section" id="3-how-a-single-video-answer-is-scored"><h2 id="3-how-a-single-video-answer-is-scored-h">3. How a single video answer is scored</h2><ul>
+<li class="claim" data-labels="official"><strong>AI-assisted or human — HSBC's answer is human.</strong> Cappfinity's product offers <strong>"AI-assisted scoring to accelerate reviews, or human-led evaluation when nuance matters most,"</strong> with <strong>"structured questions and scoring criteria to reduce bias"</strong> <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="7" href="#s7">[7]</a></sup>. But the governing HSBC statement is: <strong>"The AI-based platform does not make any automated decisions… all decisions will be made by our hiring team"</strong> <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="3" href="#s3">[3]</a></sup>. Net: a <strong>human reviews your video</strong>; any AI only assists triage.</li>
+<li class="claim" data-labels="corroborated"><strong>What a marker is actually weighing</strong> (from Cappfinity's strengths methodology + HSBC's stated criteria) <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><span class="qual">/INFERRED</span><sup class="cite"><a data-cite="7" href="#s7">[7]</a></sup><sup class="cite"><a data-cite="3" href="#s3">[3]</a></sup>:
+  1. <strong>Content / evidence (dominant):</strong> a real, specific example that demonstrates the target strength/competency and answers the actual question.
+  2. <strong>Structure:</strong> a clear, logical answer (STAR / point-first).
+  3. <strong>Communication / delivery:</strong> clarity, steady pace, articulation, minimal filler.
+  4. <strong>Values &amp; motivation:</strong> genuine fit with HSBC's four values and real reasons for the role/bank.
+  5. <strong>Authenticity &amp; consistency:</strong> natural, first-person delivery consistent with the rest of your assessment (strengths tests reward what you genuinely do well and flag "gamed" answers).</li>
+<li class="claim" data-labels="anecdotal"><strong>Myth to ignore.</strong> A prep site claims the video <em>"uses an AI feature to track your facial expressions"</em> — that <strong>misattributes an old HireVue-style feature</strong>; HSBC's simulation is Cappfinity and there's no official evidence it scores facial emotion <span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span><span class="qual">, flagged</span><sup class="cite"><a data-cite="16" href="#s16">[16]</a></sup>. <strong>Don't perform expressions — communicate content clearly.</strong> (Being calm and personable still helps; being <em>theatrical</em> doesn't.)</li>
+<li class="claim" data-labels="inferred"><strong>No public rubric with weightings exists</strong> — the five factors above are inferred from official methodology, not a leaked scoresheet <span class="pill pill-inferred" data-label="inferred">INFERRED</span>.</li>
+</ul><hr/></section><section class="doc-section" id="4-what-sinks-people-on-video-the-screen-out-patterns"><h2 id="4-what-sinks-people-on-video-the-screen-out-patterns-h">4. What sinks people on video (the screen-out patterns)</h2><p class="claim" data-labels="corroborated">Synthesised from candidate reports + prep guidance <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><span class="qual"> unless noted</span><sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup><sup class="cite"><a data-cite="16" href="#s16">[16]</a></sup><sup class="cite"><a data-cite="3" href="#s3">[3]</a></sup>:</p><ul>
+<li><strong>Rambling / no structure</strong> — the number-one killer. Without a skeleton you wander and get cut off before the result.</li>
+<li><strong>Not answering the actual question</strong> — drifting into a rehearsed story that doesn't fit the prompt.</li>
+<li><strong>Running out of prep or record time</strong> — over-scripting in prep, then reading slowly and getting cut off; or finishing in 30 seconds with nothing of substance.</li>
+<li><strong>Generic answers</strong> — "HSBC is a big respected bank" / textbook values with no personal specifics.</li>
+<li><strong>Reciting a script</strong> — reads as robotic and inauthentic; the strengths/consistency checks and a human reviewer both notice.</li>
+<li><strong>Weak commercial awareness</strong> — for CIB, being unable to discuss a recent market development is a visible gap.</li>
+<li><strong>Delivery basics</strong> — poor lighting/audio, looking at your own image instead of the lens, low energy/monotone, heavy filler ("um, like").</li>
+<li class="claim" data-labels="official"><strong>Technical failure</strong> — untested webcam/mic, weak Wi-Fi, notification pop-ups, device dying mid-answer (HSBC literally says <em>"fully charge your… device"</em>) <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup>.</li>
+</ul><hr/></section><section class="doc-section" id="5-integrity-on-the-video-dont-trip-it-by-accident"><h2 id="5-integrity-on-the-video-dont-trip-it-by-accident-h">5. Integrity on the video — don't trip it by accident</h2><p class="claim" data-labels="official">The video runs under Cappfinity's integrity layer (Camera-On recording, Time-Recording, and an Integrity Dashboard that flags likely AI use) <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="12" href="#s12">[12]</a></sup>. For an honest candidate the risks are <em>accidental</em>:</p><ul>
+<li><strong>Reading a script off-screen / eyes darting</strong> → looks like reading external help. <strong>Look at the lens; glance at your prep notes only briefly.</strong></li>
+<li><strong>Another person or voice in frame</strong> → looks like assistance. <strong>Be alone in the room.</strong></li>
+<li class="claim" data-labels="official"><strong>AI-generated answers.</strong> HSBC explicitly prohibits using AI to <em>"generate responses during live or recorded interviews"</em> and requires you can <em>"personally explain, validate, or replicate"</em> what you submit <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="3" href="#s3">[3]</a></sup>. <strong>Prep with AI; never read AI text to camera.</strong></li>
+<li><strong>Timing extremes</strong> — answers that are implausibly polished/fast can look pre-read; work at a natural pace.</li>
+<li><strong>Read the on-screen declaration/instructions</strong> before you start — those are the binding rules for your sitting.</li>
+</ul><p>(Per your ask, nothing here is about defeating detection — it's about not looking dishonest while being honest.)</p><hr/></section><section class="doc-section" id="6-delivery-technique-set-up-and-performance"><h2 id="6-delivery-technique-set-up-and-performance-h">6. Delivery technique — set-up and performance</h2><h3 id="set-up-fix-this-during-the-warm-up">Set-up (fix this during the warm-up)</h3><ul>
+<li class="claim" data-labels="corroborated"><strong>Camera at eye level</strong>, laptop raised if needed; you should look slightly <em>up or level</em>, not down. Face and shoulders in frame, ~an arm's length away <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup>.</li>
+<li class="claim" data-labels="corroborated"><strong>Light in front of you</strong> (a window or lamp facing you), never behind — backlight turns you into a silhouette <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup>.</li>
+<li class="claim" data-labels="official"><strong>Look at the lens, not your self-view</strong> — HSBC's explicit instruction; put the question/notes near the webcam so your eyeline stays up <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup>.</li>
+<li class="claim" data-labels="official"><strong>Audio:</strong> quiet room, no echo; test in the warm-up and replay it <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="9" href="#s9">[9]</a></sup>.</li>
+<li class="claim" data-labels="official"><strong>Background:</strong> tidy, neutral, no one walking through. <strong>Close notification apps</strong> <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup>.</li>
+<li class="claim" data-labels="official"><strong>Dress</strong> as for a face-to-face interview — smart; it also puts you "in the zone" <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup>.</li>
+<li class="claim" data-labels="official"><strong>Device charged / on power; stable connection</strong> <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup>.</li>
+</ul><h3 id="performance-while-recording">Performance (while recording)</h3><ul>
+<li class="claim" data-labels="corroborated"><strong>Front-load:</strong> first sentence states your answer/point; then evidence; then result. Assume you might be cut at the limit <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup>.</li>
+<li class="claim" data-labels="corroborated"><strong>Pace:</strong> steady and clear; slightly slower than feels natural; pause instead of "um" <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="16" href="#s16">[16]</a></sup>.</li>
+<li class="claim" data-labels="corroborated"><strong>Energy &amp; body language:</strong> sit upright, natural hand gestures, a genuine (not forced) smile, warmth and calm confidence <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="16" href="#s16">[16]</a></sup>.</li>
+<li><strong>Length:</strong> aim to fill most of the ~2 minutes with substance; land the result by ~90 s. Don't pad to hit the limit.</li>
+<li><strong>Voice:</strong> first person — "<strong>I</strong> did", not "we"; specific numbers and outcomes beat adjectives.</li>
+</ul><h3 id="using-the-2-minute-prep-window">Using the ~2-minute prep window</h3><p class="claim" data-labels="corroborated">Jot a <strong>skeleton, not a script</strong> <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup>:
+- Behavioural → one keyword per <strong>S-T-A-R(-R)</strong> letter + the number you'll land on.
+- "Why" / motivational → your 2–3 points + opening line.
+- Pick <strong>one</strong> specific example; note how it evidences a value.</p><h3 id="if-you-blank-or-fumble-remember-no-re-record">If you blank or fumble (remember: no re-record)</h3><ul>
+<li class="claim" data-labels="inferred"><strong>Pause, breathe, continue</strong> — a brief natural recovery reads fine; don't spiral <span class="pill pill-inferred" data-label="inferred">INFERRED</span><sup class="cite"><a data-cite="8" href="#s8">[8]</a></sup>.</li>
+<li>Fall back to the <strong>STAR spine</strong>: "The situation was… my task was… so I… and the result was…" to get moving.</li>
+<li><strong>Misspoke? Correct and carry on</strong>: "—to be clear, the result was…". Reviewers expect natural speech.</li>
+<li>Watch the countdown and give a <strong>clean one-sentence close</strong> before it ends rather than trailing off.</li>
+</ul><hr/></section><section class="doc-section" id="7-the-video-question-bank-cib-weighted"><h2 id="7-the-video-question-bank-cib-weighted-h">7. The video question bank (CIB-weighted)</h2><p class="claim" data-labels="anecdotal corroborated inferred">Labels: <strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> = across multiple sources / candidate reports · <strong><span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span></strong> = single report · <strong><span class="pill pill-inferred" data-label="inferred">INFERRED</span></strong> = prep-list guess, not confirmed from an HSBC candidate. <strong>Practice prompts to build your material — not a leaked paper.</strong> Highest-confidence set first.</p><h3 id="the-eight-you-should-definitely-prepare">The eight you should definitely prepare</h3><ol>
+<li class="claim" data-labels="corroborated"><strong>Tell me about yourself</strong> <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="21" href="#s21">[21]</a></sup> — the opener/warm-up.</li>
+<li class="claim" data-labels="corroborated"><strong>Why HSBC?</strong> <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="21" href="#s21">[21]</a></sup><sup class="cite"><a data-cite="16" href="#s16">[16]</a></sup> — the most consistently reported prompt.</li>
+<li class="claim" data-labels="corroborated"><strong>Why Corporate &amp; Institutional Banking / this division? / Why finance?</strong> <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="24" href="#s24">[24]</a></sup><sup class="cite"><a data-cite="21" href="#s21">[21]</a></sup></li>
+<li class="claim" data-labels="corroborated"><strong>Joining a new team of senior people you've never met — how do you introduce yourself and build relationships/trust?</strong> <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><span class="qual"> for the "building trust with a new team" wording; the exact "senior people you've never met" phrasing is ANECDOTAL/plausible — forums were gated</span><sup class="cite"><a data-cite="21" href="#s21">[21]</a></sup></li>
+<li class="claim" data-labels="corroborated"><strong>Tell me about a recent macro/economic event and how it impacted markets</strong> <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><span class="qual"> — the key CIB/GBM commercial-awareness prompt</span><sup class="cite"><a data-cite="23" href="#s23">[23]</a></sup></li>
+<li class="claim" data-labels="corroborated"><strong>Tell me about a time you worked in a team to achieve a common goal / showed leadership</strong> <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="16" href="#s16">[16]</a></sup><sup class="cite"><a data-cite="21" href="#s21">[21]</a></sup></li>
+<li class="claim" data-labels="corroborated"><strong>What are your strengths? / What's your greatest weakness?</strong> <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="21" href="#s21">[21]</a></sup><sup class="cite"><a data-cite="18" href="#s18">[18]</a></sup></li>
+<li class="claim" data-labels="corroborated"><strong>How do you stay up to date on financial news? / a deal or industry you find interesting</strong> <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><span class="qual"> / INFERRED for the deal wording</span><sup class="cite"><a data-cite="21" href="#s21">[21]</a></sup><sup class="cite"><a data-cite="23" href="#s23">[23]</a></sup></li>
+</ol><h3 id="full-bank-by-category">Full bank by category</h3><ul>
+<li class="claim" data-labels="corroborated"><strong>Motivational:</strong> Why HSBC · Why CIB/division · Why finance · Where will an HSBC career take you (5–10 yrs) · Why hire you over another / what value do you add · What do you know about HSBC's history <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><span class="qual">, last one ANECDOTAL</span><sup class="cite"><a data-cite="21" href="#s21">[21]</a></sup><sup class="cite"><a data-cite="24" href="#s24">[24]</a></sup>.</li>
+<li class="claim" data-labels="corroborated"><strong>New team / relationships:</strong> How do you build trust with a new team · How do you build relationships with colleagues/clients · Joining a senior team you've never met — introducing yourself <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><span class="qual"> / #last ANECDOTAL</span><sup class="cite"><a data-cite="21" href="#s21">[21]</a></sup>.</li>
+<li><strong>Competency / behavioural (STAR):</strong> a time you took ownership · led by example · an accomplishment you're proud of · something that didn't go to plan (failure/resilience) · someone challenged your direction (openness/influencing) · disagreed with a leader / a conflict (conflict) · a decision made without all the information · adapting to significant change · delivering on a commitment despite obstacles · raising a concern or flagging a risk when uncomfortable (ethics) · what you'd do if you suspected a colleague of unethical behaviour · working under pressure <a class="reflink" href="#s21">mostly CORROBORATED, a couple ANECDOTAL</a><sup class="cite"><a data-cite="22" href="#s22">[22]</a></sup><sup class="cite"><a data-cite="24" href="#s24">[24]</a></sup>.</li>
+<li class="claim" data-labels="corroborated"><strong>Strengths-based:</strong> your strengths · greatest weakness (and how you're improving) · how others/managers would describe you · alone vs team · what you do in your free time · comfort in an inclusive/diverse environment <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="21" href="#s21">[21]</a></sup><sup class="cite"><a data-cite="18" href="#s18">[18]</a></sup>.</li>
+<li class="claim" data-labels="corroborated"><strong>Commercial awareness (heaviest for CIB):</strong> a recent macro event and its market impact · a recent economic development and its implication · current issues facing HSBC · a recent development in the industry and its impact on your division · a deal or industry you find interesting · assessing the creditworthiness of a corporate client · name an HSBC product / challenges facing banking · (long-view) "what will the world look like in 2050" <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><span class="qual"> / a couple ANECDOTAL</span><sup class="cite"><a data-cite="23" href="#s23">[23]</a></sup><sup class="cite"><a data-cite="22" href="#s22">[22]</a></sup><sup class="cite"><a data-cite="24" href="#s24">[24]</a></sup>.</li>
+<li class="claim" data-labels="corroborated"><strong>Intro / logistics:</strong> tell me about your education · comfort with background checks <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><span class="qual"> / ANECDOTAL</span><sup class="cite"><a data-cite="21" href="#s21">[21]</a></sup>.</li>
+</ul><p class="claim" data-labels="inferred"><strong>Ignore the retail-flavoured items</strong> on generic "HireVue" lists (pillars of customer service, teller stress, etc.) — they're US-retail and low-relevance for CIB <span class="pill pill-inferred" data-label="inferred">INFERRED</span><sup class="cite"><a data-cite="21" href="#s21">[21]</a></sup>.</p><hr/></section><section class="doc-section" id="8-answer-frameworks-skeletons-to-rehearse-not-scripts"><h2 id="8-answer-frameworks-skeletons-to-rehearse-not-scripts-h">8. Answer frameworks — skeletons to rehearse (not scripts)</h2><p class="claim" data-labels="official">HSBC recommends <strong>STAR</strong> for behavioural answers and a strengths/values-based approach; deliver in your own words, since authenticity is scored <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="3" href="#s3">[3]</a></sup>.</p><h3 id="tell-me-about-yourself-90120-s-present-path-future">Tell me about yourself (~90–120 s) — Present → Path → Future</h3><ul>
+<li><strong>Now</strong> (1 line): who you are + a hook relevant to CIB.</li>
+<li><strong>Path</strong> (2–3 lines): two experiences showing the skills the role needs (analysis, stakeholder/client work, teamwork under pressure) — evidence, not your whole CV.</li>
+<li><strong>Why here/now</strong> (1–2 lines): banking → HSBC → this division, pointing forward.</li>
+<li>Slip in one value implicitly (e.g. an international detail → <em>We value difference</em>).</li>
+</ul><h3 id="why-hsbc-90-s-three-layers-then-make-it-personal">Why HSBC? (~90 s) — three layers, then make it personal</h3><ul>
+<li><strong>HSBC's distinctive edge:</strong> the leading <em>international</em> bank — Asia–Europe–Middle East corridors, trade-finance leadership, a global network few peers match (not "big and respected").</li>
+<li><strong>Division fit:</strong> tie that edge to CIB specifically (cross-border client coverage, trade &amp; payments, markets franchise).</li>
+<li><strong>You:</strong> one concrete personal reason that proves real research (a language, an international background, a specific HSBC deal/report/strategy you followed).</li>
+<li>Weave <em>We succeed together</em> + <em>We value difference</em>. Keep to 2–3 points, concrete.</li>
+</ul><h3 id="why-cib-this-division-90-s">Why CIB / this division? (~90 s)</h3><ul>
+<li><strong>What CIB does</strong>, in one accurate sentence (shows you know it's the wholesale, markets-led + financing bank — not retail).</li>
+<li><strong>Why it suits you:</strong> the work that genuinely energises you (long-horizon client relationships + analytical rigour; or market/deal tempo) tied to evidence.</li>
+<li><strong>Why HSBC's version</strong> beats peers (network, sector coverage, East–West clients).</li>
+<li>Forward look: what you want to learn. Map <em>We get it done</em> + <em>We take responsibility</em>.</li>
+</ul><h3 id="joining-a-new-senior-team-introduce-yourself-build-relationships-90-s-forward-looking-no-star">Joining a new senior team — introduce yourself &amp; build relationships (~90 s) — forward-looking, no STAR</h3><ul>
+<li><strong>Posture:</strong> brief, confident, humble intro — who you are, what you bring, genuine eagerness to learn; don't over-claim to seniors.</li>
+<li><strong>Listen-first actions:</strong> ask their priorities, observe how the team works, offer help on small things early, find a buddy/mentor, adapt your communication to each person.</li>
+<li><strong>Over time:</strong> deliver reliably on your first tasks (credibility), follow up, show you value their expertise.</li>
+<li><strong>Close on</strong> <em>We value difference</em> (learn from varied perspectives) + <em>We succeed together</em>.</li>
+</ul><h3 id="behavioural-teamwork-leadership-failure-conflict-2-min-starr">Behavioural (teamwork / leadership / failure / conflict) (~2 min) — STAR(+R)</h3><ul>
+<li><strong>S</strong> (1–2 sentences, brief context) · <strong>T</strong> (your specific responsibility) · <strong>A</strong> (the bulk, ~50–60% of airtime; <strong>"I"</strong>, concrete steps and <em>why</em>) · <strong>R</strong> (quantified outcome + what you learned) · <strong>+R</strong> one-line reflection.</li>
+<li>Choose a story that also demonstrates a value; end failure/conflict on <strong>resolution + learning</strong>, never blame.</li>
+</ul><h3 id="strengths-weakness-7590-s">Strengths / weakness (~75–90 s)</h3><ul>
+<li><strong>Strength:</strong> name one (max two) relevant to the role → a crisp proof example → why it matters here. Pick something you're genuinely energised by (authenticity is scored).</li>
+<li><strong>Weakness:</strong> a real, non-fatal one (not a disguised humble-brag) → the concrete steps you're taking → evidence of progress. Avoid anything core to the role.</li>
+</ul><h3 id="recent-macro-event-market-impact-90120-s-analyst-mini-structure">Recent macro event &amp; market impact (~90–120 s) — analyst mini-structure</h3><ul>
+<li><strong>Event:</strong> name one, precise and recent (a rates decision, an inflation print, a geopolitical/trade shock, a big FX/commodity move).</li>
+<li><strong>Transmission:</strong> <em>how</em> it moves markets — rates → bonds/FX → equities/credit → corporate financing costs.</li>
+<li><strong>So-what for HSBC/CIB:</strong> impact on clients, deal flow, trade finance, or the markets desks (this connect-back is what separates strong answers).</li>
+<li><strong>Balanced read:</strong> one risk, one opportunity; show you follow markets habitually. Map <em>We take responsibility</em>.</li>
+</ul><h3 id="a-recent-deal-industry-you-find-interesting-90-s">A recent deal / industry you find interesting (~90 s)</h3><ul>
+<li><strong>Name it</strong> (recent, ideally an HSBC/CIB angle) → <strong>facts</strong> (parties, rationale, rough size/structure, 1–2 lines) → <strong>your analysis</strong> (strategic logic, financing, risks, trend) → <strong>HSBC relevance</strong> (adviser/lender/markets) → <strong>personal hook</strong> (why it grabs you).</li>
+</ul><h3 id="weaving-the-four-values-every-answer">Weaving the four values (every answer)</h3><p class="claim" data-labels="official">Don't announce them — <strong>evidence</strong> them. <em>We value difference</em> = cross-cultural examples, seeking other views · <em>We succeed together</em> = collaboration, credit to the team · <em>We take responsibility</em> = owning outcomes/mistakes, flagging risk, the long view · <em>We get it done</em> = pace, decisiveness with limited info, delivering under pressure. Aim for <strong>1–2 values per answer</strong>, never a checklist of all four <span class="pill pill-official" data-label="official">OFFICIAL</span><span class="qual"> values</span><sup class="cite"><a data-cite="5" href="#s5">[5]</a></sup>.</p><hr/></section><section class="doc-section" id="9-a-focused-video-rehearsal-plan-inside-your-10-day-window"><h2 id="9-a-focused-video-rehearsal-plan-inside-your-10-day-window-h">9. A focused video rehearsal plan (inside your ~10-day window)</h2><ul>
+<li><strong>Day 1 — Material bank.</strong> Write 6–8 STAR(+R) stories that between them cover teamwork, leadership, failure, conflict, ownership, a decision with limited info, and adapting to change. Tag each to a value.</li>
+<li><strong>Day 2 — Motivation.</strong> Draft your <em>Tell me about yourself</em>, <em>Why HSBC</em>, <em>Why CIB</em> skeletons (bullets, not scripts). Nail one specific HSBC/CIB fact per answer.</li>
+<li><strong>Day 3 — Commercial awareness.</strong> Prepare 2 recent market stories using the §8 event→transmission→so-what structure. Skim FT/Bloomberg on HSBC and CIB daily from here.</li>
+<li><strong>Day 4 — Record &amp; review.</strong> Record yourself (phone is fine) answering 5 prompts in ~2 min each, from bullets. Watch back for: eyeline on lens, structure, filler, pace, energy. Redo the worst two.</li>
+<li><strong>Day 5 — The flagged prompts.</strong> Rehearse the <em>new senior team</em> intro (#4) and a <em>recent macro event</em> (#5) until they're tight and natural.</li>
+<li><strong>Day 6 — Delivery polish.</strong> Fix your set-up (camera height, front light, tidy background, quiet room). Practise front-loading and a clean one-sentence close under the timer.</li>
+<li><strong>Day 7 — Mock under pressure.</strong> Do 6 questions back-to-back, one take each, no restarts — simulate the real constraint.</li>
+<li><strong>Days 8–9 — Platform dry run.</strong> Register on the Preparation Plus portal, run its practice, confirm webcam/mic/browser, and repeat any weak answers.</li>
+<li><strong>Day 10 — Sit it</strong> fresh, quiet room, front light, charged device, home connection, on the lens. Do the warm-up properly (record/replay until audio and framing are right), then go.</li>
+</ul><hr/></section><section class="doc-section" id="what-i-could-not-verify"><h2 id="what-i-could-not-verify-h">What I could not verify</h2><ul>
+<li>The <strong>exact HSBC-configured</strong> prep/record seconds (best evidence ~2 min / 2 min; generic Cappfinity default 30 s / up to 3 min) — the on-screen timer governs <sup class="cite"><a data-cite="8" href="#s8">[8]</a></sup><sup class="cite"><a data-cite="13" href="#s13">[13]</a></sup>.</li>
+<li>Whether the <strong>set-up/practice question is scored</strong> (Cappfinity says non-assessed; a prep site says HSBC scores it) — treat it as if it counts <sup class="cite"><a data-cite="9" href="#s9">[9]</a></sup><sup class="cite"><a data-cite="13" href="#s13">[13]</a></sup>.</li>
+<li>The <strong>verbatim wording</strong> of the "new senior team" and "recent deal" prompts — the relatives are corroborated, the exact phrasings are not (candidate forums were gated) <sup class="cite"><a data-cite="21" href="#s21">[21]</a></sup>.</li>
+<li>Whether HSBC uses <strong>AI-assisted or purely human</strong> video review (Cappfinity supports both; HSBC states no automated <em>decisions</em>) <sup class="cite"><a data-cite="7" href="#s7">[7]</a></sup><sup class="cite"><a data-cite="3" href="#s3">[3]</a></sup>.</li>
+<li>A <strong>published scoring rubric with weightings</strong> (none public) <sup class="cite"><a data-cite="7" href="#s7">[7]</a></sup>.</li>
+<li>The prep-site <strong>"facial-expression AI"</strong> claim — unsupported for Cappfinity; likely a misattributed HireVue feature <sup class="cite"><a data-cite="16" href="#s16">[16]</a></sup>.</li>
+<li><strong>Candidate forums</strong> (Reddit, WSO, The Student Room, Glassdoor, YouTube) were 403/gated — quotes are via search snippets.</li>
+</ul><hr/></section><section class="doc-section" id="source-list-grouped-by-reliability"><h2 id="source-list-grouped-by-reliability-h">Source list (grouped by reliability)</h2><h3 id="tier-1-official-hsbc-cappfinity">Tier 1 — Official (HSBC &amp; Cappfinity)</h3><ol start="1">
+<li class="src-item" id="s1">HSBC — <em>On Demand Video Interviewing: Hints &amp; Tips for Candidates</em> (PDF; verbatim delivery guidance; names Modern Hire) — <a class="exturl" href="https://www.hsbc.com/-/files/hsbc/careers/pdf/on-demand-video-interviewing-hints-tips-candidates.pdf?download=1" rel="noopener" target="_blank">https://www.hsbc.com/-/files/hsbc/careers/pdf/on-demand-video-interviewing-hints-tips-candidates.pdf?download=1</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s2">HSBC — <em>Live Video Interviewing: Hints &amp; Tips for Candidates</em> (PDF) — <a class="exturl" href="https://www.hsbc.com/-/files/hsbc/careers/pdf/live-video-interviewing-hints-tips-candidates.pdf?download=1" rel="noopener" target="_blank">https://www.hsbc.com/-/files/hsbc/careers/pdf/live-video-interviewing-hints-tips-candidates.pdf?download=1</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s3">HSBC — <em>Application hints and tips</em> (STAR verbatim; strengths; AI-use policy; "no automated decisions") — <a class="exturl" href="https://www.hsbc.com/careers/application-hints-and-tips" rel="noopener" target="_blank">https://www.hsbc.com/careers/application-hints-and-tips</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s4">HSBC — <em>Assessments: Supporting Your Application</em> transcript (18 Dec 2024; "not timed… ask for additional time"; feedback report) — <a class="exturl" href="https://www.hsbc.com/-/files/hsbc/careers/students-and-graduates/pdf/241218-hsbc-assessment-supporting-your-application-transcript.pdf?download=1" rel="noopener" target="_blank">https://www.hsbc.com/-/files/hsbc/careers/students-and-graduates/pdf/241218-hsbc-assessment-supporting-your-application-transcript.pdf?download=1</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s5">HSBC — <em>Our values</em> (the four current values) — <a class="exturl" href="https://www.hsbc.com/who-we-are/our-strategy-and-values/our-values" rel="noopener" target="_blank">https://www.hsbc.com/who-we-are/our-strategy-and-values/our-values</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s6">HSBC — <em>Corporate &amp; Institutional Banking</em> business area — <a class="exturl" href="https://www.hsbc.com/careers/our-business-areas-and-teams/corporate-and-institutional-banking" rel="noopener" target="_blank">https://www.hsbc.com/careers/our-business-areas-and-teams/corporate-and-institutional-banking</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s7">Cappfinity — Video Interview product ("AI-assisted… or human-led"; structured scoring criteria) — <a class="exturl" href="https://cappfinity.com/solutions/for-talent-leaders/assessments/video-interview/" rel="noopener" target="_blank">https://cappfinity.com/solutions/for-talent-leaders/assessments/video-interview/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s8">Cappfinity — help desk: <em>Will I be able to re-record a video response?</em> (assessed = no re-record; timing specified per question) — <a class="exturl" href="https://capphelpdesk.zendesk.com/hc/en-us/articles/4402640631953-Will-I-be-able-to-re-record-a-video-response" rel="noopener" target="_blank">https://capphelpdesk.zendesk.com/hc/en-us/articles/4402640631953-Will-I-be-able-to-re-record-a-video-response</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s9">Cappfinity — help desk: <em>Will I get a chance to practice my response?</em> (camera/mic warm-up; record several times; non-assessed practice question) — <a class="exturl" href="https://capphelpdesk.zendesk.com/hc/en-us/articles/4402646411025-Will-I-get-a-chance-to-practice-my-response" rel="noopener" target="_blank">https://capphelpdesk.zendesk.com/hc/en-us/articles/4402646411025-Will-I-get-a-chance-to-practice-my-response</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s10">Cappfinity — help desk: <em>How much time do I have to complete the assessment?</em> — <a class="exturl" href="https://capphelpdesk.zendesk.com/hc/en-us/articles/4402645592977-How-much-time-do-I-have-to-complete-the-assessment" rel="noopener" target="_blank">https://capphelpdesk.zendesk.com/hc/en-us/articles/4402645592977-How-much-time-do-I-have-to-complete-the-assessment</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s11">Cappfinity — Device Requirements for Online Assessments — <a class="exturl" href="https://capphelpdesk.zendesk.com/hc/en-us/articles/25465900866589-Device-Requirements-for-Online-Assessments" rel="noopener" target="_blank">https://capphelpdesk.zendesk.com/hc/en-us/articles/25465900866589-Device-Requirements-for-Online-Assessments</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s12">Cappfinity — Integrity Dashboard ("highlights behaviour indicative of AI model use") — <a class="exturl" href="https://cappfinity.com/our-products/integrity-dashboards/" rel="noopener" target="_blank">https://cappfinity.com/our-products/integrity-dashboards/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+</ol><h3 id="tier-2-industry-prep-guides-secondary-20252026">Tier 2 — Industry / prep guides (secondary; 2025–2026)</h3><ol start="13">
+<li class="src-item" id="s13">JobTestPrep — HSBC Assessment Centre / Job Simulation (2 min prep / 2 min record; Video Set-Up; Exercise 4) — <a class="exturl" href="https://www.jobtestprep.co.uk/hsbc-assessment-centre" rel="noopener" target="_blank">https://www.jobtestprep.co.uk/hsbc-assessment-centre</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s14">JobTestPrep — HSBC Online Immersive Assessment — <a class="exturl" href="https://www.jobtestprep.co.uk/hsbc-online-immersive-assessment" rel="noopener" target="_blank">https://www.jobtestprep.co.uk/hsbc-online-immersive-assessment</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s15">JobTestPrep — Pre-recorded (one-way) video interview mechanics &amp; delivery — <a class="exturl" href="https://www.jobtestprep.co.uk/pre-recorded-interview" rel="noopener" target="_blank">https://www.jobtestprep.co.uk/pre-recorded-interview</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s16">GraduatesFirst — HSBC video interview (3–6 Qs; STAR+R; the facial-tracking claim I flag as unreliable) — <a class="exturl" href="https://www.graduatesfirst.com/hsbc-interviews" rel="noopener" target="_blank">https://www.graduatesfirst.com/hsbc-interviews</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s17">GraduatesFirst — Cappfinity publisher (Snapshot format; delivery tips) — <a class="exturl" href="https://www.graduatesfirst.com/aptitude-tests-publishers/cappfinity" rel="noopener" target="_blank">https://www.graduatesfirst.com/aptitude-tests-publishers/cappfinity</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s18">Psychometric Success — HSBC Online Job Simulation (video 2 min/2 min; sample strengths item) — <a class="exturl" href="https://psychometric-success.com/aptitude-tests/test-types/hsbc-online-job-simulation" rel="noopener" target="_blank">https://psychometric-success.com/aptitude-tests/test-types/hsbc-online-job-simulation</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s19">Practice Aptitude Tests — HSBC assessments (four values; format) — <a class="exturl" href="https://www.practiceaptitudetests.com/top-employer-profiles/hsbc-assessments/" rel="noopener" target="_blank">https://www.practiceaptitudetests.com/top-employer-profiles/hsbc-assessments/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s20">AssessmentCentreHQ — HSBC Job Simulation (Exercise 4 = ~6 video/SJT/free-text) — <a class="exturl" href="https://www.assessmentcentrehq.com/hsbc-job-simulation-assessment/" rel="noopener" target="_blank">https://www.assessmentcentrehq.com/hsbc-job-simulation-assessment/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s21">MockQuestions — HSBC HireVue (30-question candidate-sourced bank; some US-retail) — <a class="exturl" href="https://www.mockquestions.com/company/HSBC+Bank/HireVue/" rel="noopener" target="_blank">https://www.mockquestions.com/company/HSBC+Bank/HireVue/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s22">Indeed — HSBC interview questions (limited-info decision; strengths/weakness; corporate-client credit) — <a class="exturl" href="https://in.indeed.com/career-advice/interviewing/hsbc-interview-questions" rel="noopener" target="_blank">https://in.indeed.com/career-advice/interviewing/hsbc-interview-questions</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s23">Graduate-jobs.com — HSBC interviews (commercial-awareness prompts; older values) — <a class="exturl" href="https://www.graduate-jobs.com/interviews/company/hsbc" rel="noopener" target="_blank">https://www.graduate-jobs.com/interviews/company/hsbc</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s24">Ophyai — HSBC interview guide (division-specific examples; cites older values — treat as INFERRED) — <a class="exturl" href="https://ophyai.com/blog/company-guides/hsbc-interview-guide" rel="noopener" target="_blank">https://ophyai.com/blog/company-guides/hsbc-interview-guide</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s25">Corporate Finance Institute — HireVue interview guide (one-way video technique) — <a class="exturl" href="https://corporatefinanceinstitute.com/resources/careers/interviews/about-hirevue-interview/" rel="noopener" target="_blank">https://corporatefinanceinstitute.com/resources/careers/interviews/about-hirevue-interview/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+</ol><h3 id="tier-3-genuine-candidate-voice-gated-snippet-only">Tier 3 — Genuine candidate voice (gated; snippet-only)</h3><ol start="26">
+<li class="src-item" id="s26">Glassdoor — HSBC interview hub incl. a genuine job-simulation description (video + email) — <a class="exturl" href="https://www.glassdoor.com/Interview/HSBC-Interview-Questions-E3482.htm" rel="noopener" target="_blank">https://www.glassdoor.com/Interview/HSBC-Interview-Questions-E3482.htm</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s27">Wall Street Oasis — HSBC interview hub (front-office/commercial-awareness themes) — <a class="exturl" href="https://www.wallstreetoasis.com/company/hsbc/interview" rel="noopener" target="_blank">https://www.wallstreetoasis.com/company/hsbc/interview</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s28">Wall Street Oasis — HSBC Markets HireVue thread (macro &amp; situational video prompts) — <a class="exturl" href="https://www.wallstreetoasis.com/forum/trading/hsbc-markets-hirevue" rel="noopener" target="_blank">https://www.wallstreetoasis.com/forum/trading/hsbc-markets-hirevue</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s29">The Student Room — HSBC job simulation, finance graduate 2024 (new-team &amp; invest-email prompts) — <a class="exturl" href="https://www.thestudentroom.co.uk/showthread.php?t=7453447" rel="noopener" target="_blank">https://www.thestudentroom.co.uk/showthread.php?t=7453447</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s30">YouTube — "Pass the HSBC Interview 2025 | HireVue" (title only; not retrievable) — <a class="exturl" href="https://www.youtube.com/watch?v=cfaeKGm5zL4" rel="noopener" target="_blank">https://www.youtube.com/watch?v=cfaeKGm5zL4</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+</ol><h3 id="tier-4-context-cib">Tier 4 — Context (CIB)</h3><ol start="31">
+<li class="src-item" id="s31">East &amp; Partners — "HSBC splits into four" (CIB = former GBM + Commercial ex-UK/HK + Western markets) — <a class="exturl" href="https://eastandpartners.com/news/hsbc-splits-into-four/" rel="noopener" target="_blank">https://eastandpartners.com/news/hsbc-splits-into-four/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+</ol><hr/><p><em>Compiled 10 August 2026. Labels reflect the evidence at that date; HSBC's process changes frequently, so the on-screen instructions in your own assessment and your invitation email are the final authority. Prep with AI freely; the words you say on camera must be your own.</em></p></section>
+    <footer class="doc-foot">
+      <p>Self-contained briefing · rendered from <code>hsbc-assessment-briefing.md</code> · 8 August 2026.
+      Reliability labels reflect the evidence at that date; HSBC's process changes frequently.</p>
+    </footer>
+  </main>
+</div>
+<button id="toTop" class="totop" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+(function(){
+  "use strict";
+  var root = document.documentElement;
+
+  /* ---------- Theme ---------- */
+  var themeBtn = document.getElementById("themeBtn");
+  try {
+    var saved = localStorage.getItem("hsbc-theme");
+    if (saved) root.setAttribute("data-theme", saved);
+  } catch(e){}
+  function currentTheme(){
+    var t = root.getAttribute("data-theme");
+    if (t) return t;
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme:dark)").matches ? "dark" : "light";
+  }
+  themeBtn.addEventListener("click", function(){
+    var next = currentTheme() === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("hsbc-theme", next); } catch(e){}
+  });
+
+  /* ---------- Hamburger / drawer ---------- */
+  var menuBtn = document.getElementById("menuBtn");
+  var scrim = document.getElementById("scrim");
+  function closeNav(){ document.body.classList.remove("nav-open"); menuBtn.setAttribute("aria-expanded","false"); }
+  menuBtn.addEventListener("click", function(){
+    var open = document.body.classList.toggle("nav-open");
+    menuBtn.setAttribute("aria-expanded", open ? "true":"false");
+  });
+  scrim.addEventListener("click", closeNav);
+
+  /* ---------- Scroll-spy ---------- */
+  var tocLinks = Array.prototype.slice.call(document.querySelectorAll(".toc a"));
+  var linkById = {};
+  tocLinks.forEach(function(a){ linkById[a.getAttribute("href").slice(1)] = a; });
+  var heads = Array.prototype.slice.call(document.querySelectorAll(".content h2, .content h3"));
+  function setActive(id){
+    tocLinks.forEach(function(a){ a.classList.remove("active"); });
+    var link = linkById[id];
+    if (link){ link.classList.add("active");
+      // keep active link in view within sidebar
+      var sb = document.getElementById("sidebar");
+      var lr = link.getBoundingClientRect(), sr = sb.getBoundingClientRect();
+      if (lr.top < sr.top || lr.bottom > sr.bottom) link.scrollIntoView({block:"nearest"});
+    }
+  }
+  if ("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          var id = en.target.id.replace(/-h$/, "");
+          // for h2 the anchor id is section id; map from heading id
+          var secId = en.target.id.endsWith("-h") ? en.target.id.slice(0,-2) : en.target.id;
+          setActive(secId);
+        }
+      });
+    }, {rootMargin:"-64px 0px -70% 0px", threshold:0});
+    heads.forEach(function(h){ io.observe(h); });
+  }
+  // clicking a toc link closes drawer on mobile
+  tocLinks.forEach(function(a){ a.addEventListener("click", function(){ if (window.innerWidth<=768) closeNav(); }); });
+
+  /* ---------- Evidence filters ---------- */
+  var filterBoxes = Array.prototype.slice.call(document.querySelectorAll("[data-filter]"));
+  function applyFilters(){
+    var active = {};
+    filterBoxes.forEach(function(b){ active[b.getAttribute("data-filter")] = b.checked; });
+    // dim/undim individual pills
+    document.querySelectorAll(".content .pill[data-label]").forEach(function(p){
+      var l = p.getAttribute("data-label");
+      if (l==="flag") return;
+      p.classList.toggle("dim", !active[l]);
+    });
+    // hide a claim block only if ALL its labels are inactive
+    document.querySelectorAll(".content .claim[data-labels]").forEach(function(el){
+      var labels = el.getAttribute("data-labels").split(/\s+/).filter(Boolean);
+      var anyActive = labels.some(function(l){ return active[l]; });
+      el.classList.toggle("hide-claim", !anyActive);
+    });
+  }
+  filterBoxes.forEach(function(b){ b.addEventListener("change", applyFilters); });
+
+  /* ---------- Search (section-level) ---------- */
+  var search = document.getElementById("search");
+  var sections = Array.prototype.slice.call(document.querySelectorAll(".content > section"));
+  function runSearch(){
+    var q = (search.value||"").trim().toLowerCase();
+    sections.forEach(function(sec){
+      var hit = !q || sec.textContent.toLowerCase().indexOf(q) !== -1;
+      sec.classList.toggle("search-hidden", !hit);
+      var link = linkById[sec.id];
+      if (link) link.parentElement.classList.toggle("search-hidden", !hit);
+    });
+  }
+  var t;
+  search.addEventListener("input", function(){ clearTimeout(t); t=setTimeout(runSearch,120); });
+  search.addEventListener("keydown", function(e){ if(e.key==="Escape"){ search.value=""; runSearch(); } });
+
+  /* ---------- Citations: jump to source + remember for "back" ---------- */
+  var lastCiteId = null;
+  document.querySelectorAll("sup.cite a, a.reflink").forEach(function(a){
+    a.addEventListener("click", function(){
+      lastCiteId = "cite-anchor";
+      // drop a temporary marker where we clicked
+      var old = document.getElementById("cite-anchor");
+      if (old) old.removeAttribute("id");
+      a.id = "cite-anchor";
+      var tgt = document.getElementById(a.getAttribute("href").slice(1));
+      if (tgt){ tgt.classList.remove("tgt-flash"); void tgt.offsetWidth; tgt.classList.add("tgt-flash"); }
+    });
+  });
+  document.querySelectorAll(".srcback").forEach(function(b){
+    b.addEventListener("click", function(e){
+      e.preventDefault();
+      var anchor = document.getElementById("cite-anchor");
+      if (anchor) anchor.scrollIntoView({behavior:"smooth", block:"center"});
+      else window.scrollTo({top:0,behavior:"smooth"});
+    });
+  });
+
+  /* ---------- Back to top ---------- */
+  var toTop = document.getElementById("toTop");
+  window.addEventListener("scroll", function(){
+    toTop.classList.toggle("show", window.scrollY > 600);
+  }, {passive:true});
+  toTop.addEventListener("click", function(){ window.scrollTo({top:0,behavior:"smooth"}); });
+
+  /* ---------- Print: expand all details, remember state ---------- */
+  var toggled = [];
+  window.addEventListener("beforeprint", function(){
+    toggled = [];
+    document.querySelectorAll("details:not([open])").forEach(function(d){ d.open=true; toggled.push(d); });
+  });
+  window.addEventListener("afterprint", function(){
+    toggled.forEach(function(d){ d.open=false; }); toggled=[];
+  });
+
+  applyFilters();
+})();
+
+</script>
+</body>
+</html>
