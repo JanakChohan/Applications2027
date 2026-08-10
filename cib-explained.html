@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HSBC Corporate &amp; Institutional Banking — Explained Simply</title>
+<style>
+/* ---------- Theme tokens ---------- */
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#eef1f5; --text:#1c2126;
+  --muted:#5b6470; --border:#d8dee6; --accent:#c8102e; --accent-2:#8a0b20;
+  --link:#0b5cad; --shadow:0 1px 3px rgba(20,30,45,.08),0 6px 24px rgba(20,30,45,.06);
+  --p-official-bg:#e4f4ea; --p-official-fg:#116338; --p-official-bd:#8fd3ab;
+  --p-corrob-bg:#e5eefb; --p-corrob-fg:#1554a6; --p-corrob-bd:#9dc0ef;
+  --p-anec-bg:#fdf0dc; --p-anec-fg:#8a5a09; --p-anec-bd:#eec98a;
+  --p-infer-bg:#efe7fb; --p-infer-fg:#5b309e; --p-infer-bd:#c9b1ef;
+  --p-flag-bg:#eceff3; --p-flag-fg:#4a5563; --p-flag-bd:#c4ccd6;
+  --mark:#fff3a3;
+}
+:root[data-theme="dark"]{
+  --bg:#0f1318; --surface:#161c24; --surface-2:#1e2731; --text:#e6eaef;
+  --muted:#9aa6b2; --border:#2b3542; --accent:#ff5a72; --accent-2:#ff8095;
+  --link:#6db3ff; --shadow:0 1px 3px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35);
+  --p-official-bg:#123528; --p-official-fg:#7fe0ab; --p-official-bd:#1f5c42;
+  --p-corrob-bg:#122b47; --p-corrob-fg:#8fbdf7; --p-corrob-bd:#22497a;
+  --p-anec-bg:#3a2c11; --p-anec-fg:#f0c583; --p-anec-bd:#6a4f1d;
+  --p-infer-bg:#2a1f45; --p-infer-fg:#c7abf5; --p-infer-bd:#4a3576;
+  --p-flag-bg:#222b35; --p-flag-fg:#aeb9c5; --p-flag-bd:#39444f;
+  --mark:#6b5d00;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1318; --surface:#161c24; --surface-2:#1e2731; --text:#e6eaef;
+    --muted:#9aa6b2; --border:#2b3542; --accent:#ff5a72; --accent-2:#ff8095;
+    --link:#6db3ff; --shadow:0 1px 3px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35);
+    --p-official-bg:#123528; --p-official-fg:#7fe0ab; --p-official-bd:#1f5c42;
+    --p-corrob-bg:#122b47; --p-corrob-fg:#8fbdf7; --p-corrob-bd:#22497a;
+    --p-anec-bg:#3a2c11; --p-anec-fg:#f0c583; --p-anec-bd:#6a4f1d;
+    --p-infer-bg:#2a1f45; --p-infer-fg:#c7abf5; --p-infer-bd:#4a3576;
+    --p-flag-bg:#222b35; --p-flag-fg:#aeb9c5; --p-flag-bd:#39444f;
+    --mark:#6b5d00;
+  }
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-text-size-adjust:100%;
+}
+.skip{position:absolute;left:-999px;top:0;background:var(--accent);color:#fff;padding:8px 14px;z-index:200;border-radius:0 0 6px 0}
+.skip:focus{left:0}
+
+/* ---------- Top bar ---------- */
+.topbar{
+  position:sticky;top:0;z-index:100;display:flex;align-items:center;gap:12px;
+  background:var(--surface);border-bottom:1px solid var(--border);
+  padding:10px 16px;box-shadow:var(--shadow);
+}
+.brand{font-weight:700;font-size:15px;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand::before{content:"";display:inline-block;width:10px;height:16px;background:var(--accent);margin-right:8px;vertical-align:-2px;border-radius:1px}
+.topbar-tools{margin-left:auto;display:flex;align-items:center;gap:8px}
+#search{
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  border-radius:20px;padding:7px 14px;font-size:14px;width:min(38vw,260px);
+}
+#search:focus{outline:2px solid var(--link);outline-offset:1px}
+.iconbtn{
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  border-radius:8px;width:38px;height:36px;font-size:16px;cursor:pointer;line-height:1;
+}
+.iconbtn:hover{border-color:var(--accent)}
+#menuBtn{display:none}
+
+/* ---------- Layout ---------- */
+.layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:0;max-width:1240px;margin:0 auto}
+.sidebar{
+  position:sticky;top:57px;align-self:start;height:calc(100vh - 57px);overflow-y:auto;
+  padding:18px 14px 40px;border-right:1px solid var(--border);background:var(--bg);
+}
+.content{padding:26px clamp(16px,4vw,48px) 80px;min-width:0}
+
+/* readable column */
+.content > section, .doc-foot{max-width:72ch}
+.content h2{max-width:72ch}
+
+/* ---------- Filters ---------- */
+.filters{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:16px}
+.filters-title{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:8px;font-weight:700}
+.pill-toggle{display:flex;align-items:center;gap:8px;padding:4px 2px;cursor:pointer;user-select:none}
+.pill-toggle input{accent-color:var(--accent);width:15px;height:15px}
+.pill-toggle input:not(:checked) ~ .pill{opacity:.35;text-decoration:line-through}
+.legend-note{font-size:12px;color:var(--muted);margin-top:8px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+
+/* ---------- ToC / scroll-spy ---------- */
+.toc ul{list-style:none;margin:0;padding:0}
+.toc li{margin:1px 0}
+.toc a{display:block;text-decoration:none;color:var(--muted);padding:5px 10px;border-radius:7px;font-size:13.5px;border-left:2px solid transparent;line-height:1.35}
+.toc a:hover{background:var(--surface-2);color:var(--text)}
+.toc-l3 a{padding-left:22px;font-size:12.5px}
+.toc a.active{color:var(--accent);background:var(--surface-2);border-left-color:var(--accent);font-weight:600}
+
+/* ---------- Typography ---------- */
+h1,h2,h3,h4{line-height:1.25;color:var(--text)}
+.content h2{font-size:26px;margin:38px 0 6px;padding-bottom:8px;border-bottom:2px solid var(--border);scroll-margin-top:70px}
+.content section:first-child h2{margin-top:6px}
+.content h3{font-size:19px;margin:26px 0 4px;color:var(--accent-2);scroll-margin-top:70px}
+.content p{margin:10px 0}
+.content a{color:var(--link)}
+.content ul,.content ol{margin:8px 0 8px;padding-left:24px}
+.content li{margin:5px 0}
+strong{font-weight:700}
+code{background:var(--surface-2);border:1px solid var(--border);border-radius:5px;padding:1px 5px;font-size:.88em}
+hr{border:none;border-top:1px solid var(--border);margin:26px 0}
+
+/* first paragraph after H1 area (intro) */
+#intro > p:first-of-type{font-size:17px;color:var(--muted)}
+
+/* golden-rule / callout blockquotes */
+blockquote{
+  margin:16px 0;padding:12px 16px;background:var(--surface);
+  border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;
+}
+blockquote p{margin:6px 0}
+
+/* ---------- Pills ---------- */
+.pill{
+  display:inline-block;font-size:11px;font-weight:800;letter-spacing:.03em;
+  padding:1px 8px;border-radius:999px;border:1px solid;vertical-align:1px;white-space:nowrap;
+}
+.pill-official{background:var(--p-official-bg);color:var(--p-official-fg);border-color:var(--p-official-bd)}
+.pill-corroborated{background:var(--p-corrob-bg);color:var(--p-corrob-fg);border-color:var(--p-corrob-bd)}
+.pill-anecdotal{background:var(--p-anec-bg);color:var(--p-anec-fg);border-color:var(--p-anec-bd)}
+.pill-inferred{background:var(--p-infer-bg);color:var(--p-infer-fg);border-color:var(--p-infer-bd)}
+.pill-flag{background:var(--p-flag-bg);color:var(--p-flag-fg);border-color:var(--p-flag-bd)}
+.qual{font-size:.92em;color:var(--muted)}
+.pill.dim{opacity:.28}
+
+/* ---------- Citations ---------- */
+sup.cite{font-size:11px;line-height:0}
+sup.cite a{color:var(--link);text-decoration:none;font-weight:700;padding:0 1px}
+sup.cite a:hover{text-decoration:underline}
+a.reflink{font-weight:600}
+.src-item:target,.tgt-flash{animation:flash 1.8s ease}
+@keyframes flash{0%,40%{background:var(--mark)}100%{background:transparent}}
+.srcback{text-decoration:none;color:var(--muted);font-weight:700;margin-left:4px}
+.srcback:hover{color:var(--accent)}
+.exturl{word-break:break-all;font-size:.92em}
+
+/* ---------- Tables ---------- */
+.content table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;display:block;overflow-x:auto}
+.content th,.content td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+.content thead th{background:var(--surface-2);font-weight:700}
+.content tbody tr:nth-child(even){background:var(--surface)}
+
+/* ---------- Details / verbatim ---------- */
+details{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin:14px 0;padding:0 14px}
+details[open]{padding-bottom:8px}
+summary{cursor:pointer;padding:12px 0;font-weight:600;color:var(--accent-2);list-style-position:inside}
+summary:hover{color:var(--accent)}
+details.verbatim blockquote{border-left-color:var(--p-anec-bd)}
+
+/* ---------- filtered / hidden ---------- */
+.claim.hide-claim{display:none !important}
+section.search-hidden{display:none !important}
+.toc li.search-hidden{display:none}
+
+/* ---------- back to top ---------- */
+.totop{position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;
+  border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:18px;
+  cursor:pointer;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .2s;z-index:90}
+.totop.show{opacity:1;pointer-events:auto}
+.totop:hover{border-color:var(--accent);color:var(--accent)}
+
+.scrim{display:none}
+.print-toc{display:none}
+.doc-foot{margin-top:40px;padding-top:16px;border-top:1px solid var(--border);color:var(--muted);font-size:13px}
+
+/* ---------- Responsive: hamburger under 768px ---------- */
+@media (max-width:768px){
+  #menuBtn{display:inline-block}
+  .layout{grid-template-columns:1fr}
+  .sidebar{
+    position:fixed;top:0;left:0;height:100vh;width:min(84vw,320px);z-index:120;
+    transform:translateX(-100%);transition:transform .25s ease;border-right:1px solid var(--border);
+    box-shadow:var(--shadow);padding-top:64px;
+  }
+  body.nav-open .sidebar{transform:translateX(0)}
+  body.nav-open .scrim{display:block;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:110}
+  #search{width:44vw}
+  .brand{font-size:13px}
+}
+@media (max-width:480px){
+  #search{width:38vw}
+  .content h2{font-size:22px}
+}
+
+/* ---------- Print ---------- */
+@media print{
+  .topbar,.sidebar,.totop,#scrim,.skip,.srcback,.filters{display:none !important}
+  .layout{display:block;max-width:none}
+  .content{padding:0;max-width:none}
+  .content > section,.content h2{max-width:none}
+  body{background:#fff;color:#000;font-size:11.5pt}
+  /* expand everything regardless of filter/search/collapse */
+  .claim.hide-claim{display:revert !important}
+  section.search-hidden{display:revert !important}
+  .pill.dim{opacity:1 !important}
+  details{border:1px solid #bbb;break-inside:avoid}
+  details > *:not(summary){display:revert !important}   /* reveal collapsed content */
+  summary{color:#000}
+  a{color:#000;text-decoration:none}
+  .exturl{color:#333}
+  table,tr,td,th,blockquote,details{break-inside:avoid}
+  h2,h3{break-after:avoid}
+  .content h2{border-bottom:1px solid #000}
+  /* contents page */
+  .print-toc{display:block !important;break-after:page}
+  .print-cover{padding:40px 0 28px;border-bottom:3px solid var(--accent);margin-bottom:24px}
+  .print-kicker{display:block;font-size:10pt;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+  .print-title{font-size:24pt;margin:8px 0 0;line-height:1.15}
+  .print-contents-h{font-size:15pt;border:none;margin:0 0 8px}
+  .print-toc ul{list-style:none;padding:0;margin:0}
+  .print-toc li{margin:3px 0;font-size:11pt}
+  .print-toc .pt-l3{padding-left:22px;font-size:10pt;color:#333}
+  .print-toc a{color:#000;text-decoration:none}
+  .content > section{scroll-margin-top:0}
+  @page{margin:16mm 15mm 18mm}
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <button id="menuBtn" class="iconbtn" aria-label="Toggle contents" aria-expanded="false">☰</button>
+  <span class="brand">HSBC Corporate &amp; Institutional Banking — Explained Simply</span>
+  <div class="topbar-tools">
+    <input id="search" type="search" placeholder="Search sections…" aria-label="Search sections">
+    <button id="themeBtn" class="iconbtn" aria-label="Toggle dark/light">◐</button>
+  </div>
+</header>
+<div class="layout">
+  <aside id="sidebar" class="sidebar" aria-label="Sidebar">
+    <div class="filters">
+      <div class="filters-title">Evidence filter</div>
+      <label class="pill-toggle"><input type="checkbox" data-filter="official" checked><span class="pill pill-official">OFFICIAL</span></label>
+      <label class="pill-toggle"><input type="checkbox" data-filter="corroborated" checked><span class="pill pill-corroborated">CORROBORATED</span></label>
+      <label class="pill-toggle"><input type="checkbox" data-filter="anecdotal" checked><span class="pill pill-anecdotal">ANECDOTAL</span></label>
+      <label class="pill-toggle"><input type="checkbox" data-filter="inferred" checked><span class="pill pill-inferred">INFERRED</span></label>
+      <div class="legend-note"><span class="pill pill-flag">FLAG</span> = disagreement / gap / caveat (always shown)</div>
+    </div>
+    <nav class="toc" aria-label="Table of contents"><ul>
+<li class="toc-l2"><a href="#part-1-start-at-the-very-beginning-what-kind-of-bank-is-this">Part 1 — Start at the very beginning: what kind of bank is this?</a></li>
+<li class="toc-l2"><a href="#part-2-what-it-actually-is-the-one-paragraph-version">Part 2 — What it actually is (the one-paragraph version)</a></li>
+<li class="toc-l2"><a href="#part-3-who-are-the-customers-the-buyers">Part 3 — Who are the customers (the &quot;buyers&quot;)?</a></li>
+<li class="toc-l2"><a href="#part-4-what-are-the-actual-products-each-one-is-just-a-solved-problem">Part 4 — What are the actual products? (each one is just a solved problem)</a></li>
+<li class="toc-l2"><a href="#part-5-how-the-division-is-split-the-five-teams-in-plain-terms">Part 5 — How the division is split (the five teams, in plain terms)</a></li>
+<li class="toc-l2"><a href="#part-6-how-they-make-money-the-two-engines-explained-simply">Part 6 — How they make money (the two engines, explained simply)</a></li>
+<li class="toc-l3"><a href="#engine-1-the-gap-on-money-interest-income">Engine 1 — the &quot;gap&quot; on money (interest income)</a></li>
+<li class="toc-l3"><a href="#engine-2-fees-for-services-fee-income">Engine 2 — fees for services (fee income)</a></li>
+<li class="toc-l3"><a href="#putting-the-two-together">Putting the two together</a></li>
+<li class="toc-l2"><a href="#part-7-how-they-operate-and-how-relationships-are-built">Part 7 — How they operate and how relationships are built</a></li>
+<li class="toc-l2"><a href="#part-8-the-usp-what-actually-makes-this-special">Part 8 — The USP: what actually makes this special</a></li>
+<li class="toc-l2"><a href="#part-9-the-strategy-and-the-future-of-the-firm-the-why-and-whats-next">Part 9 — The strategy and the future of the firm (the &quot;why,&quot; and what&#x27;s next)</a></li>
+<li class="toc-l2"><a href="#part-10-glossary-every-technical-word-in-one-place">Part 10 — Glossary (every technical word, in one place)</a></li>
+<li class="toc-l2"><a href="#what-ive-simplified-so-you-know-the-edges">What I&#x27;ve simplified (so you know the edges)</a></li>
+<li class="toc-l2"><a href="#source-list">Source list</a></li>
+</ul></nav>
+  </aside>
+  <div id="scrim" class="scrim"></div>
+  <main id="main" class="content" tabindex="-1">
+    <nav class="print-toc" aria-hidden="true"><div class="print-cover"><span class="print-kicker">Candidate briefing · 8 August 2026</span><h1 class="print-title">HSBC Corporate &amp; Institutional Banking — Explained Simply</h1></div><h2 class="print-contents-h">Contents</h2><ul><li class="pt-l2"><a href="#part-1-start-at-the-very-beginning-what-kind-of-bank-is-this">Part 1 — Start at the very beginning: what kind of bank is this?</a></li><li class="pt-l2"><a href="#part-2-what-it-actually-is-the-one-paragraph-version">Part 2 — What it actually is (the one-paragraph version)</a></li><li class="pt-l2"><a href="#part-3-who-are-the-customers-the-buyers">Part 3 — Who are the customers (the &quot;buyers&quot;)?</a></li><li class="pt-l2"><a href="#part-4-what-are-the-actual-products-each-one-is-just-a-solved-problem">Part 4 — What are the actual products? (each one is just a solved problem)</a></li><li class="pt-l2"><a href="#part-5-how-the-division-is-split-the-five-teams-in-plain-terms">Part 5 — How the division is split (the five teams, in plain terms)</a></li><li class="pt-l2"><a href="#part-6-how-they-make-money-the-two-engines-explained-simply">Part 6 — How they make money (the two engines, explained simply)</a></li><li class="pt-l3"><a href="#engine-1-the-gap-on-money-interest-income">Engine 1 — the &quot;gap&quot; on money (interest income)</a></li><li class="pt-l3"><a href="#engine-2-fees-for-services-fee-income">Engine 2 — fees for services (fee income)</a></li><li class="pt-l3"><a href="#putting-the-two-together">Putting the two together</a></li><li class="pt-l2"><a href="#part-7-how-they-operate-and-how-relationships-are-built">Part 7 — How they operate and how relationships are built</a></li><li class="pt-l2"><a href="#part-8-the-usp-what-actually-makes-this-special">Part 8 — The USP: what actually makes this special</a></li><li class="pt-l2"><a href="#part-9-the-strategy-and-the-future-of-the-firm-the-why-and-whats-next">Part 9 — The strategy and the future of the firm (the &quot;why,&quot; and what&#x27;s next)</a></li><li class="pt-l2"><a href="#part-10-glossary-every-technical-word-in-one-place">Part 10 — Glossary (every technical word, in one place)</a></li><li class="pt-l2"><a href="#what-ive-simplified-so-you-know-the-edges">What I&#x27;ve simplified (so you know the edges)</a></li><li class="pt-l2"><a href="#source-list">Source list</a></li></ul></nav><section class="doc-section" id="intro"><p><strong>For:</strong> Janak · <strong>Prepared:</strong> 10 August 2026 · <strong>Style:</strong> plain English, built from the ground up. Every technical word is explained the first time it appears, and again in the glossary at the end. No unexplained abbreviations.</p><blockquote>
+<p><strong>How to use this:</strong> read Parts 1–4 to <em>understand</em> the business, Parts 5–7 for how the money and relationships actually work, and Parts 8–9 for the strategy and where it's all heading. The glossary (Part 10) is your quick-reference for any word that feels technical.</p>
+</blockquote><p class="claim" data-labels="corroborated inferred official">A few figures carry a small tag so you know how solid they are: <strong><span class="pill pill-official" data-label="official">OFFICIAL</span></strong> means it comes straight from HSBC or the government; <strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> means several reliable sources agree; <strong><span class="pill pill-inferred" data-label="inferred">INFERRED</span></strong> means it's my explanation, not a quoted fact. Plain teaching text has no tag. Small bracketed numbers in the text are footnote markers that link to the source list at the end.</p><hr/></section><section class="doc-section" id="part-1-start-at-the-very-beginning-what-kind-of-bank-is-this"><h2 id="part-1-start-at-the-very-beginning-what-kind-of-bank-is-this-h">Part 1 — Start at the very beginning: what kind of bank is this?</h2><p>A bank does two simple things: it <strong>looks after people's money</strong> (deposits) and it <strong>lends money out</strong> (loans), and it earns the difference. But banks serve very different customers, and that's the first thing to get straight.</p><ul>
+<li><strong>Retail banking</strong> is the bank you already know: current accounts, mortgages, credit cards — for <em>ordinary people and small businesses</em>.</li>
+<li><strong>Wholesale banking</strong> is the bank for <em>large organisations</em>: big companies, governments, and other financial firms. "Wholesale" just means "dealing in large amounts with big, professional customers," the way a wholesaler sells in bulk to businesses rather than singly to shoppers.</li>
+</ul><p><strong>Corporate and Institutional Banking</strong> — HSBC's name for this division, which people shorten to "the C-I-B" or just "CIB" — is HSBC's <strong>wholesale bank</strong>. Break the name down:</p><ul>
+<li><strong>"Corporate"</strong> = big companies (think a global carmaker, an airline, a mining group, a technology firm).</li>
+<li><strong>"Institutional"</strong> = large <em>financial</em> organisations — other banks, insurance companies, pension funds, asset managers, and governments. These are often called <strong>institutional clients</strong> because they are institutions rather than individuals.</li>
+</ul><p class="claim" data-labels="official">So in one sentence: <strong>Corporate and Institutional Banking is the part of HSBC that banks big companies, governments, and financial institutions — especially ones that operate across borders.</strong> <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup></p><hr/></section><section class="doc-section" id="part-2-what-it-actually-is-the-one-paragraph-version"><h2 id="part-2-what-it-actually-is-the-one-paragraph-version-h">Part 2 — What it actually is (the one-paragraph version)</h2><p class="claim" data-labels="official">HSBC positions this division as a <strong>"markets-led, financing-focused business that provides investment and financial solutions"</strong> to corporate, government and institutional clients <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup>. Translated into plain words: it is the arm of HSBC that helps large organisations <strong>move money around the world, get paid safely when they trade with foreign partners, borrow money, protect themselves against price swings, raise money from investors, and keep their investments safe</strong> — and it does this across roughly 55 countries. It is <strong>not</strong> mainly a "mergers and takeovers advice" shop like the banks you see in films. Its heart is the everyday plumbing of global business: <strong>payments, trade, and financing.</strong> <span class="pill pill-official" data-label="official">OFFICIAL</span><span class="qual">/INFERRED</span><sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup></p><p>Why this matters for you: most candidates think "investment bank = advising on takeovers." HSBC's division is different, and saying so shows you actually understand it.</p><hr/></section><section class="doc-section" id="part-3-who-are-the-customers-the-buyers"><h2 id="part-3-who-are-the-customers-the-buyers-h">Part 3 — Who are the customers (the "buyers")?</h2><p class="claim" data-labels="official">HSBC groups the customers into four types <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup>:</p><ol>
+<li><strong>Global Corporates</strong> — the largest multinational companies.</li>
+<li><strong>Institutions</strong> — banks, insurers, investors, pension funds, and the public sector (governments and state bodies).</li>
+<li><strong>International Mid-Market</strong> — medium-sized companies that are growing across borders.</li>
+<li><strong>Innovation Banking</strong> — younger, venture-capital-backed technology and life-science companies.</li>
+</ol><p>But here's the part people miss: <strong>a company is not a single buyer — a <em>person</em> inside it makes the decision.</strong> Knowing <em>who</em> helps you understand how the bank sells. The usual decision-makers are:</p><ul>
+<li>The <strong>Treasurer</strong> or <strong>Finance Director / Chief Financial Officer</strong> — the person responsible for the company's cash, funding and risk. They choose who handles the company's payments, who lends to it, and who helps it manage currency and interest-rate risk. <em>This is the single most important buyer in wholesale banking.</em></li>
+<li><strong>Procurement / operations</strong> for the day-to-day trade and supply-chain needs.</li>
+<li>On the <strong>institutional</strong> side: <strong>portfolio managers</strong> and <strong>traders</strong> at investment firms (the people who buy and sell investments), who need the bank to trade with them and to safe-keep their assets.</li>
+</ul><p class="claim" data-labels="inferred"><strong><span class="pill pill-inferred" data-label="inferred">INFERRED</span></strong> So the "sale" is a relationship with a company's finance team, not a one-off transaction. That is why relationships (Part 7) are everything.</p><hr/></section><section class="doc-section" id="part-4-what-are-the-actual-products-each-one-is-just-a-solved-problem"><h2 id="part-4-what-are-the-actual-products-each-one-is-just-a-solved-problem-h">Part 4 — What are the actual products? (each one is just a solved problem)</h2><p>The easiest way to understand the products is to see the <strong>real-world problem</strong> each one solves. Here are the big ones, in plain language.</p><p class="claim" data-labels="official"><strong>Problem: "I need to pay a supplier in another country, in another currency, quickly and safely."</strong>
+→ <strong>Payments and cash management.</strong> HSBC moves the money across borders and gives the company a single screen to see and control its cash in many countries. HSBC's name for this team is <strong>Global Payments Solutions</strong> — think of it as <em>"the international payments and cash-control arm."</em> It handles payments in about 130 currencies across 175 markets <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup>.</p><p class="claim" data-labels="official"><strong>Problem: "I'm selling goods to a buyer overseas I don't fully trust — how do I make sure I get paid, and how do I fund the gap while I wait?"</strong>
+→ <strong>Trade finance.</strong> The classic tool is a <strong>letter of credit</strong>: the buyer's bank promises to pay the seller once proof of shipment is provided, so neither side has to trust the other — they trust the banks in the middle. HSBC also lends against goods and invoices so the company isn't short of cash while it waits to be paid. HSBC's team here is <strong>Global Trade Solutions</strong> — <em>"the trade-finance arm"</em> — with more than 100 trade products, and HSBC is repeatedly ranked the <strong>world's number-one trade-finance bank</strong> <span class="pill pill-official" data-label="official">OFFICIAL</span><span class="qual">/CORROBORATED</span><sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup><sup class="cite"><a data-cite="7" href="#s7">[7]</a></sup>.</p><p><strong>Problem: "I need to borrow money — for working capital, an acquisition, or to build a factory."</strong>
+→ <strong>Financing / lending.</strong> The bank lends directly, or arranges a bigger loan shared among several banks (called a <strong>syndicated loan</strong> — "syndicated" just means "split between a group of lenders so no single bank carries all the risk").</p><p class="claim" data-labels="official"><strong>Problem: "Exchange rates and interest rates keep moving and could wipe out my profit."</strong>
+→ <strong>Markets (also called trading).</strong> The bank sells tools that lock in a price in advance so the company isn't exposed to swings. These tools are called <strong>derivatives</strong> — contracts whose value is <em>derived</em> from something else (a currency, an interest rate, a commodity). Using one to reduce a risk is called <strong>hedging</strong> (like insurance against price moves). HSBC's team here — <strong>Markets and Securities Services</strong> — trades foreign exchange (currencies), interest rates, credit, and shares. <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup></p><p><strong>Problem: "I need to raise a large amount of money from investors, not just borrow from a bank."</strong>
+→ <strong>Capital markets.</strong> The bank helps the company sell <strong>bonds</strong> (a bond is simply a loan from many investors that the company promises to pay back with interest) or <strong>shares</strong> (a slice of ownership in the company) to big investors. Arranging and guaranteeing these sales is called <strong>underwriting</strong>. This sits in the <strong>Banking</strong> team alongside <strong>advisory</strong> (advice on deals such as buying another company).</p><p><strong>Problem: "I'm a big investment firm — I need someone to hold my investments safely and handle all the paperwork."</strong>
+→ <strong>Securities services (also called custody).</strong> The bank safe-keeps investments, collects the income on them, and settles trades. Boring-sounding, but it's steady, reliable fee income — the bank is paid a small amount on a huge pile of assets it looks after.</p><p><strong>Problem: "I need expert analysis of economies, currencies and companies to make decisions."</strong>
+→ <strong>Research.</strong> HSBC's economists and analysts publish views that help clients decide — and help HSBC's own trading and lending teams. It supports the other teams rather than being sold on its own.</p><hr/></section><section class="doc-section" id="part-5-how-the-division-is-split-the-five-teams-in-plain-terms"><h2 id="part-5-how-the-division-is-split-the-five-teams-in-plain-terms-h">Part 5 — How the division is split (the five teams, in plain terms)</h2><p class="claim" data-labels="official">Corporate and Institutional Banking is organised into five teams. Here they are with a one-line "what it really is." <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup></p><table>
+<thead>
+<tr>
+<th>The team (HSBC's name)</th>
+<th>In plain English</th>
+<th>Who it's for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Banking</strong></td>
+<td>The relationship managers who own the client, plus the people who arrange loans, bond/share sales and deal advice</td>
+<td>Big companies needing funding or advice</td>
+</tr>
+<tr>
+<td><strong>Global Trade Solutions</strong></td>
+<td>The trade-finance arm — helps companies buy and sell across borders and get paid safely</td>
+<td>Importers and exporters</td>
+</tr>
+<tr>
+<td><strong>Global Payments Solutions</strong></td>
+<td>The payments and cash-management arm — moves money worldwide and shows companies their cash</td>
+<td>Any company operating in many countries</td>
+</tr>
+<tr>
+<td><strong>Markets and Securities Services</strong></td>
+<td>The trading and safekeeping arm — currencies, interest rates, shares, and holding investors' assets</td>
+<td>Companies hedging risk; big investors trading and needing custody</td>
+</tr>
+<tr>
+<td><strong>Global Research</strong></td>
+<td>The in-house analysts and economists whose views guide clients and the bank's own teams</td>
+<td>Investor clients; internal teams</td>
+</tr>
+</tbody>
+</table><p class="claim" data-labels="inferred"><strong><span class="pill pill-inferred" data-label="inferred">INFERRED</span></strong> Notice the shape: <strong>Banking "owns the relationship," and the other teams are the "products" that get sold into that relationship.</strong> That structure is the key to how they operate (Part 7).</p><hr/></section><section class="doc-section" id="part-6-how-they-make-money-the-two-engines-explained-simply"><h2 id="part-6-how-they-make-money-the-two-engines-explained-simply-h">Part 6 — How they make money (the two engines, explained simply)</h2><p>A wholesale bank has <strong>two ways to earn</strong>, and understanding the difference is the single most useful thing you can know.</p><h3 id="engine-1-the-gap-on-money-interest-income">Engine 1 — the "gap" on money (interest income)</h3><p>Companies and savers leave money with the bank; this is called a <strong>deposit</strong>. The bank pays them little or no interest on money that just sits in a current account. The bank then <strong>lends that money out</strong>, or invests it, at a higher rate. The <strong>difference between the two rates is the bank's profit</strong> on money. That profit is called <strong>net interest income</strong> — literally the interest it earns <em>minus</em> the interest it pays. The percentage size of that gap is the <strong>net interest margin</strong> ("margin" just means the gap as a percentage).</p><p class="claim" data-labels="official">A simple made-up example: a company leaves £100 in its account and earns almost nothing. The bank lends that £100 to another company at, say, 6%. The bank keeps most of that 6% as its "gap." Do this across roughly <strong>$1.65 trillion of deposits</strong> and you can see why it's huge <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="4" href="#s4">[4]</a></sup>.</p><p class="claim" data-labels="official"><strong>Why HSBC is unusually good at this:</strong> it has an enormous pile of <strong>cheap, sticky deposits</strong> — especially in Hong Kong and the United Kingdom — that don't demand much interest and don't move around when rates change. Cheap money in, higher rate out, at massive scale. HSBC holds far more deposits than it lends (about <strong>$1.65 trillion of deposits versus $0.93 trillion of loans</strong> <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="4" href="#s4">[4]</a></sup>), so it has a big surplus to invest.</p><p><strong>The catch:</strong> this engine depends on interest rates. When central banks <em>raise</em> rates, the gap widens and the bank earns more. When they <em>cut</em> rates, the gap narrows and the bank earns less. So this income is powerful but <strong>cyclical</strong> (it goes up and down with the rate cycle). That single fact drives much of the strategy in Part 9.</p><h3 id="engine-2-fees-for-services-fee-income">Engine 2 — fees for services (fee income)</h3><p>Every time the bank makes a payment, issues a letter of credit, arranges a bond sale, executes a trade, or safe-keeps assets, it charges a <strong>fee</strong>. This income doesn't depend much on interest rates, and — importantly — it uses very little of the bank's own money to earn. Bankers call that <strong>"capital-light."</strong></p><p class="claim" data-labels="inferred"><strong>Why "capital-light" is prized <span class="pill pill-inferred" data-label="inferred">INFERRED</span>:</strong> regulators require a bank to hold a safety cushion of its own money against the loans it makes (in case they go bad). Lending therefore "ties up" money. Fee services barely tie up any money, so every pound of profit from fees gives a <strong>higher return</strong> than a pound from lending. That's why HSBC loves fee income and is chasing more of it.</p><h3 id="putting-the-two-together">Putting the two together</h3><p class="claim" data-labels="official">Across the whole of HSBC, roughly <strong>half the revenue is the interest "gap," and the rest is fees and trading</strong> <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="4" href="#s4">[4]</a></sup>. Within Corporate and Institutional Banking, the <strong>payments and trade businesses are the prize</strong>, because they combine <em>both</em> engines: they earn <strong>fees</strong>, <em>and</em> they leave large operational <strong>deposits</strong> sitting at the bank that feed the interest engine. That is why this division is HSBC's biggest single profit contributor — about <strong>40% of group profit</strong> in the first half of 2025 <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="5" href="#s5">[5]</a></sup>.</p><hr/></section><section class="doc-section" id="part-7-how-they-operate-and-how-relationships-are-built"><h2 id="part-7-how-they-operate-and-how-relationships-are-built-h">Part 7 — How they operate and how relationships are built</h2><p>This is the part interviewers rarely hear explained well, so it's worth getting right.</p><p><strong>The "relationship manager" model.</strong> Each major client is "owned" by a <strong>relationship manager</strong> (sometimes called <strong>coverage</strong> — as in, that banker "covers" the client). Their job is to understand the client's business deeply and be the single trusted point of contact. They don't personally do payments or trading; instead they <strong>bring in the specialist product teams</strong> (payments, trade, markets, financing) when the client needs them. Think of the relationship manager as a <strong>family doctor</strong> who knows the patient and calls in the specialists.</p><p><strong>Land and expand.</strong> Banks rarely win a giant client all at once. They <strong>"land"</strong> with one product — often payments or trade, because those are everyday needs — and then <strong>"expand"</strong> by cross-selling more: lending, currency hedging, bond issuance, and so on. Selling a second and third product to an existing client is called <strong>cross-selling</strong>, and it's far cheaper than winning a new client.</p><p class="claim" data-labels="corroborated"><strong>Why relationships get "sticky."</strong> Once a big company runs its <strong>payments, cash management, trade finance and currency hedging</strong> through HSBC across fifteen countries, moving to another bank means re-plumbing its entire treasury operation — a huge, risky job. So it usually doesn't. This "stickiness" is a real competitive advantage: the revenue is <strong>recurring</strong> (it comes back year after year) rather than one-off. HSBC's own results say a large majority of this division's revenue comes from clients that operate in <strong>multiple countries</strong> — exactly the clients who are hardest to prise away <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="6" href="#s6">[6]</a></sup>.</p><p class="claim" data-labels="corroborated"><strong>"Flow" business.</strong> A lot of what the division does is <strong>high-volume, repeated activity</strong> — millions of payments, constant currency trades, steady trade finance. Bankers call this <strong>"flow."</strong> It's not glamorous, but it's <strong>reliable and diversified</strong>, which is why it held up even through recent trade-tariff turmoil <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="8" href="#s8">[8]</a></sup>.</p><p class="claim" data-labels="inferred"><strong>How a typical need plays out <span class="pill pill-inferred" data-label="inferred">INFERRED</span>:</strong> a carmaker wants to build a plant in Vietnam and sell into Europe. The relationship manager coordinates: the <strong>financing</strong> team arranges the loan; the <strong>trade</strong> team sets up letters of credit so Vietnamese suppliers get paid; the <strong>payments</strong> team runs the cross-border cash; the <strong>markets</strong> team hedges the currency risk between euros and Vietnamese dong; and if the carmaker later raises money from investors, the <strong>capital markets</strong> team handles the bond sale. One client, five products, one coordinated relationship. That is the division working as designed.</p><hr/></section><section class="doc-section" id="part-8-the-usp-what-actually-makes-this-special"><h2 id="part-8-the-usp-what-actually-makes-this-special-h">Part 8 — The USP: what actually makes this special</h2><p>A <strong>unique selling point</strong> (the "USP") is the thing a rival can't easily copy. HSBC's has three parts that only really matter <em>together</em>.</p><ol>
+<li>
+<p class="claim" data-labels="inferred"><strong>It banks both ends of a cross-border flow.</strong> To handle a trade between, say, Vietnam and Germany, a bank needs a licensed, funded presence <strong>and</strong> relationships at <em>both</em> ends. Very few banks can — HSBC, the American bank Citigroup, and Standard Chartered are the short list. HSBC has built this over 160 years across 50-plus countries. A local champion can bank one end; HSBC banks both. <span class="pill pill-inferred" data-label="inferred">INFERRED</span><span class="qual">, evidence-based</span><sup class="cite"><a data-cite="6" href="#s6">[6]</a></sup></p>
+</li>
+<li>
+<p class="claim" data-labels="corroborated"><strong>It sits on two mountains of cheap deposits</strong> (Hong Kong and the United Kingdom) that <strong>fund</strong> all of that activity at low cost. Rivals can't simply buy a deposit base like that. In Hong Kong, HSBC reportedly holds roughly <strong>twice the deposits of its nearest competitor</strong> <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="6" href="#s6">[6]</a></sup>.</p>
+</li>
+<li>
+<p><strong>It leads in trade finance and cross-border payments</strong> — the sticky, fee-earning, capital-light businesses that lock clients in.</p>
+</li>
+</ol><p class="claim" data-labels="inferred"><strong>The point is the combination.</strong> Plenty of banks have one of these. Almost none have all three in a single organisation. The American bank Citigroup is the closest match on the <em>network</em>, but it earns <strong>lower returns</strong> than HSBC; Standard Chartered has a similar map but is smaller; the strong Asian banks earn great returns but lack the global reach. <strong>HSBC's edge is that no single rival has the network <em>and</em> the cheap deposits <em>and</em> the Asian scale at once.</strong> <span class="pill pill-inferred" data-label="inferred">INFERRED</span><sup class="cite"><a data-cite="6" href="#s6">[6]</a></sup></p><p class="claim" data-labels="inferred"><strong>Be honest about the marketing, though.</strong> HSBC likes to say it "touches around 85–90% of global trade flows." That means it <em>operates in the places where that trade happens</em> — it is <strong>not</strong> a claim to that share of the market. The genuinely impressive, provable facts are the ones above: multi-country client revenue, number-one in trade finance, the deposit lead, and higher returns than its closest network rival. Using the honest version makes you sound sharp, not sales-y. <span class="pill pill-inferred" data-label="inferred">INFERRED</span><sup class="cite"><a data-cite="6" href="#s6">[6]</a></sup><sup class="cite"><a data-cite="7" href="#s7">[7]</a></sup></p><hr/></section><section class="doc-section" id="part-9-the-strategy-and-the-future-of-the-firm-the-why-and-whats-next"><h2 id="part-9-the-strategy-and-the-future-of-the-firm-the-why-and-whats-next-h">Part 9 — The strategy and the future of the firm (the "why," and what's next)</h2><p>Here is the reasoning behind what HSBC is doing, and what it means for where the firm is going.</p><p class="claim" data-labels="official"><strong>The core problem HSBC is solving.</strong> Half its profit comes from the interest "gap," which <strong>shrinks when interest rates fall</strong> — and rates have been coming down from their recent highs <span class="pill pill-official" data-label="official">OFFICIAL</span><span class="qual">/CORROBORATED</span><sup class="cite"><a data-cite="2" href="#s2">[2]</a></sup><sup class="cite"><a data-cite="6" href="#s6">[6]</a></sup>. If HSBC did nothing, falling rates would slowly eat its profits. So the whole strategy is about <strong>making the profits more durable and less dependent on interest rates.</strong></p><p><strong>What they're actually doing about it:</strong></p><ul>
+<li class="claim" data-labels="official"><strong>Leaning into fees, especially wealth in Asia.</strong> Growing income that doesn't depend on rates — managing money for wealthy customers in Asia, and the fee-earning payments and trade businesses in this division. Wealth income was growing at roughly <strong>+20% a year</strong> in 2025 <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="2" href="#s2">[2]</a></sup>. Think of the wealth push as a <strong>deliberate cushion</strong> against falling rates.</li>
+<li class="claim" data-labels="official"><strong>Focusing this division on what it's best at.</strong> HSBC is <strong>pulling back from advising on takeovers and share sales in Europe, the United Kingdom and the Americas</strong>, and concentrating on <strong>Asia and the Middle East</strong> and on the <strong>payments/trade/financing</strong> engine where it's genuinely world-class <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="2" href="#s2">[2]</a></sup>. In other words, it stopped trying to be a second-rate Wall Street deal shop and doubled down on being the world's best international transaction bank.</li>
+<li class="claim" data-labels="official"><strong>Simplifying the company.</strong> In 2025 it collapsed a complicated structure into <strong>four clear businesses</strong> (Hong Kong; the United Kingdom; this division; and international wealth) to cut duplicated management and save around <strong>$1.5 billion of costs</strong> <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup><sup class="cite"><a data-cite="2" href="#s2">[2]</a></sup>.</li>
+<li class="claim" data-labels="official"><strong>Retreating from places where it isn't special.</strong> It sold or exited retail banking in the United States, France, Canada and Argentina — markets where it lacked the scale to win — to free up money for Asia and wealth <span class="pill pill-official" data-label="official">OFFICIAL</span><span class="qual">/CORROBORATED</span><sup class="cite"><a data-cite="2" href="#s2">[2]</a></sup><sup class="cite"><a data-cite="11" href="#s11">[11]</a></sup>.</li>
+<li class="claim" data-labels="official"><strong>Handing surplus cash back to shareholders</strong> through dividends and share buybacks, on a large scale <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup>.</li>
+</ul><p class="claim" data-labels="inferred"><strong>What this means for the future <span class="pill pill-inferred" data-label="inferred">INFERRED</span>:</strong></p><ul>
+<li><strong>The firm is becoming "more Asian, more fee-driven, and simpler."</strong> Expect a bigger share of profit from Asian wealth and from steady payment/trade fees, and a smaller share from rate-sensitive lending and from Western deal-making.</li>
+<li><strong>This division's job in that future</strong> is to be the <strong>engine room</strong>: the reliable, capital-light, sticky, cross-border business that funds the group and feeds wealthy business owners into the wealth arm. It is already the largest single profit contributor, and its importance is designed to grow.</li>
+<li><strong>The tailwinds</strong> (things blowing in its favour): world trade rewiring around new supply chains (good for trade finance), the modernisation of cross-border payments, and rising Asian wealth.</li>
+<li class="claim" data-labels="corroborated"><strong>The threats</strong> (things that could go wrong): HSBC leans heavily on <strong>Hong Kong and China</strong>, so a China slowdown, weak Hong Kong commercial property, or a flare-up in United States–China tensions all hit it directly; and if interest rates fall faster than expected, the "gap" engine shrinks faster than the fee engine can grow <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="6" href="#s6">[6]</a></sup><sup class="cite"><a data-cite="12" href="#s12">[12]</a></sup>. The honest one-liner: <strong>HSBC's greatest strength — Hong Kong — is also its greatest concentration risk.</strong></li>
+</ul><p class="claim" data-labels="inferred"><strong>A five-years-out picture <span class="pill pill-inferred" data-label="inferred">INFERRED</span>:</strong> a leaner HSBC that looks more like a <strong>fee-earning international transaction-and-wealth bank centred on Asia</strong>, less like a rate-dependent global lender — with this division as its beating heart. That is the bet Georges Elhedery (the chief executive since September 2024) is making.</p><hr/></section><section class="doc-section" id="part-10-glossary-every-technical-word-in-one-place"><h2 id="part-10-glossary-every-technical-word-in-one-place-h">Part 10 — Glossary (every technical word, in one place)</h2><ul>
+<li><strong>Retail banking</strong> — banking for ordinary people and small businesses.</li>
+<li><strong>Wholesale banking</strong> — banking for large organisations (big companies, governments, financial firms).</li>
+<li><strong>Corporate client</strong> — a large company that is a customer of the bank.</li>
+<li><strong>Institutional client</strong> — a large <em>financial</em> organisation (bank, insurer, pension fund, asset manager) or a government, as a customer.</li>
+<li><strong>Deposit</strong> — money customers leave with the bank; the bank can lend or invest it.</li>
+<li><strong>Loan / financing</strong> — money the bank lends out, to be repaid with interest.</li>
+<li><strong>Interest</strong> — the price of money: what a borrower pays, or a saver earns, over time.</li>
+<li><strong>Net interest income</strong> — the interest the bank <em>earns</em> on loans/investments minus the interest it <em>pays</em> on deposits. One of its two profit engines.</li>
+<li><strong>Net interest margin</strong> — that same "gap," expressed as a percentage. A bigger margin means more profit per pound lent.</li>
+<li><strong>Fee income</strong> — money earned from charging for services (payments, trade, trading, custody, arranging deals). The other profit engine.</li>
+<li><strong>Capital-light</strong> — a business that earns fees without tying up much of the bank's own money; it therefore produces a higher return.</li>
+<li><strong>Capital / safety cushion (sometimes shown as a "core capital ratio")</strong> — the bank's own money set aside by law to absorb losses. More lending needs more of this cushion.</li>
+<li><strong>Return on tangible equity</strong> — a report-card number: the profit the bank makes for every pound of shareholders' money it uses. Higher is better; mid-teens percent is considered strong.</li>
+<li><strong>Transaction banking</strong> — the everyday plumbing: payments, cash management, and trade finance. Steady, fee-earning, sticky.</li>
+<li><strong>Trade finance</strong> — products that help companies buy and sell across borders safely and fund the wait to be paid.</li>
+<li><strong>Letter of credit</strong> — a bank's promise to pay a seller once proof of shipment is shown, so buyer and seller don't have to trust each other directly.</li>
+<li><strong>Payments / cash management</strong> — moving money across borders and helping a company see and control its cash in many countries.</li>
+<li><strong>Liquidity</strong> — how much ready cash is available; "managing liquidity" means making sure money is where it's needed, when it's needed.</li>
+<li><strong>Foreign exchange</strong> — buying and selling currencies (turning euros into dollars, and so on).</li>
+<li><strong>Hedging</strong> — using a financial tool to reduce a risk, like insurance against price moves.</li>
+<li><strong>Derivative</strong> — a contract whose value comes from something else (a currency, an interest rate, a commodity); often used for hedging.</li>
+<li><strong>Markets / trading</strong> — the bank buying and selling currencies, interest-rate products, credit and shares, for clients and to manage risk.</li>
+<li><strong>Bid-offer spread</strong> — the small difference between the price to buy and the price to sell; the trading desk's margin.</li>
+<li><strong>Capital markets</strong> — helping a company raise money directly from investors by selling bonds or shares.</li>
+<li><strong>Bond</strong> — a loan from many investors to a company or government, repaid with interest.</li>
+<li><strong>Share (equity)</strong> — a slice of ownership in a company.</li>
+<li><strong>Underwriting</strong> — a bank arranging and guaranteeing a sale of bonds or shares.</li>
+<li><strong>Syndicated loan</strong> — a large loan shared among several banks so none carries all the risk.</li>
+<li><strong>Custody / securities services</strong> — safe-keeping investors' assets and handling the related paperwork and settlement, for a fee.</li>
+<li><strong>Relationship manager / coverage</strong> — the banker who "owns" a client, understands them, and brings in specialist product teams.</li>
+<li><strong>Cross-selling</strong> — selling additional products to an existing client.</li>
+<li><strong>Flow business</strong> — high-volume, repeated activity (payments, currency trades) that is reliable and diversified.</li>
+<li><strong>Sticky revenue</strong> — income that recurs because the client finds it hard or costly to leave.</li>
+<li><strong>Structural hedge</strong> — a rolling portfolio HSBC uses to lock in interest rates for a few years, smoothing its income as rates move.</li>
+<li><strong>Cyclical</strong> — goes up and down with the economic or interest-rate cycle.</li>
+</ul><hr/></section><section class="doc-section" id="what-ive-simplified-so-you-know-the-edges"><h2 id="what-ive-simplified-so-you-know-the-edges-h">What I've simplified (so you know the edges)</h2><p class="claim" data-labels="corroborated official">To keep this clear, I've rounded figures and skipped some technical nuance. The safe, quotable numbers are HSBC's <strong>2024 full-year</strong> and <strong>first-half 2025</strong> results <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="4" href="#s4">[4]</a></sup><sup class="cite"><a data-cite="5" href="#s5">[5]</a></sup>. The very latest figures (late-2025 and 2026) are directionally right here but should be checked against HSBC's newest results before you quote exact decimals <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="6" href="#s6">[6]</a></sup><sup class="cite"><a data-cite="13" href="#s13">[13]</a></sup>. And the point that this division is "not very technical to get into at the insight stage" is candidate-reported experience, not an HSBC statement.</p><hr/></section><section class="doc-section" id="source-list"><h2 id="source-list-h">Source list</h2><ol start="1">
+<li class="src-item" id="s1">HSBC — Corporate &amp; Institutional Banking (careers) — <a class="exturl" href="https://www.hsbc.com/careers/our-business-areas-and-teams/corporate-and-institutional-banking" rel="noopener" target="_blank">https://www.hsbc.com/careers/our-business-areas-and-teams/corporate-and-institutional-banking</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s2">HSBC — Interim (first-half) Results 2025 media release (PDF, 30 Jul 2025) — <a class="exturl" href="https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2025/interim/pdfs/hsbc-holdings-plc/250730-hsbc-holdings-plc-interim-results-2025-media-release.pdf" rel="noopener" target="_blank">https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2025/interim/pdfs/hsbc-holdings-plc/250730-hsbc-holdings-plc-interim-results-2025-media-release.pdf</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s3">HSBC — Introducing Corporate &amp; Institutional Banking — <a class="exturl" href="https://www.business.hsbc.com/en-gb/campaigns/introducing-cib" rel="noopener" target="_blank">https://www.business.hsbc.com/en-gb/campaigns/introducing-cib</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s4">HSBC — 2024 Full-Year Results media release (PDF, 19 Feb 2025) — <a class="exturl" href="https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2024/annual/pdfs/hsbc-holdings-plc/250219-annual-results-2024-media-release.pdf" rel="noopener" target="_blank">https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2024/annual/pdfs/hsbc-holdings-plc/250219-annual-results-2024-media-release.pdf</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s5">HSBC — Interim Results 2025 announcement — <a class="exturl" href="https://www.hsbc.com/news-and-views/news/media-releases/2025/hsbc-holdings-plc-interim-results-2025" rel="noopener" target="_blank">https://www.hsbc.com/news-and-views/news/media-releases/2025/hsbc-holdings-plc-interim-results-2025</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s6">The Asian Banker — HSBC 2025 returns, deposits, wealth and Hong Kong risk — <a class="exturl" href="https://www.theasianbanker.com/updates-and-articles/hsbc-delivers-17-2-rote-as-wealth-and-cross-border-franchise-reinforce-return-leadership" rel="noopener" target="_blank">https://www.theasianbanker.com/updates-and-articles/hsbc-delivers-17-2-rote-as-wealth-and-cross-border-franchise-reinforce-return-leadership</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s7">Euromoney — World's Best Trade Finance Bank 2025: HSBC — <a class="exturl" href="https://www.euromoney.com/article/dxr898gq5ggkcos48gkws48c0/corporate-banking/the-worlds-best-trade-finance-bank-2025-hsbc/" rel="noopener" target="_blank">https://www.euromoney.com/article/dxr898gq5ggkcos48gkws48c0/corporate-banking/the-worlds-best-trade-finance-bank-2025-hsbc/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s8">The Motley Fool — HSBC first-half 2026 earnings-call transcript (management commentary) — <a class="exturl" href="https://www.fool.com/earnings/call-transcripts/2026/08/04/hsbc-hsbc-q2-2026-earnings-call-transcript/" rel="noopener" target="_blank">https://www.fool.com/earnings/call-transcripts/2026/08/04/hsbc-hsbc-q2-2026-earnings-call-transcript/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s9">HSBC — Global Trade Solutions (product page) — <a class="exturl" href="https://www.business.hsbc.com/en-gb/products/global-trade-solutions" rel="noopener" target="_blank">https://www.business.hsbc.com/en-gb/products/global-trade-solutions</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s10">HSBC — completion of the global reorganisation (four businesses) — <a class="exturl" href="https://www.hsbc.com/news-and-views/news/media-releases/2024/hsbc-announces-completion-of-next-stage-of-global-reorganisation" rel="noopener" target="_blank">https://www.hsbc.com/news-and-views/news/media-releases/2024/hsbc-announces-completion-of-next-stage-of-global-reorganisation</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s11">HSBC — exits United States mass-market retail banking (2021) — <a class="exturl" href="https://www.hsbc.com/news-and-views/news/media-releases/2021/hsbc-exits-us-mass-market-retail-banking" rel="noopener" target="_blank">https://www.hsbc.com/news-and-views/news/media-releases/2021/hsbc-exits-us-mass-market-retail-banking</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s12">CNBC — HSBC 2025 full-year results — <a class="exturl" href="https://www.cnbc.com/2026/02/25/hsbc-2025-full-year-earnings-results.html" rel="noopener" target="_blank">https://www.cnbc.com/2026/02/25/hsbc-2025-full-year-earnings-results.html</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s13">HigherIn — HSBC Corporate &amp; Institutional Banking insight programme review — <a class="exturl" href="https://higherin.com/review/19409/" rel="noopener" target="_blank">https://higherin.com/review/19409/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+</ol><hr/><p><em>Compiled 10 August 2026. Full-year 2024 and first-half 2025 figures are from HSBC's own results; later figures are corroborated from reliable summaries and should be checked against HSBC's newest results pack before quoting exact decimals.</em></p></section>
+    <footer class="doc-foot">
+      <p>Self-contained briefing · rendered from <code>hsbc-assessment-briefing.md</code> · 8 August 2026.
+      Reliability labels reflect the evidence at that date; HSBC's process changes frequently.</p>
+    </footer>
+  </main>
+</div>
+<button id="toTop" class="totop" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+(function(){
+  "use strict";
+  var root = document.documentElement;
+
+  /* ---------- Theme ---------- */
+  var themeBtn = document.getElementById("themeBtn");
+  try {
+    var saved = localStorage.getItem("hsbc-theme");
+    if (saved) root.setAttribute("data-theme", saved);
+  } catch(e){}
+  function currentTheme(){
+    var t = root.getAttribute("data-theme");
+    if (t) return t;
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme:dark)").matches ? "dark" : "light";
+  }
+  themeBtn.addEventListener("click", function(){
+    var next = currentTheme() === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("hsbc-theme", next); } catch(e){}
+  });
+
+  /* ---------- Hamburger / drawer ---------- */
+  var menuBtn = document.getElementById("menuBtn");
+  var scrim = document.getElementById("scrim");
+  function closeNav(){ document.body.classList.remove("nav-open"); menuBtn.setAttribute("aria-expanded","false"); }
+  menuBtn.addEventListener("click", function(){
+    var open = document.body.classList.toggle("nav-open");
+    menuBtn.setAttribute("aria-expanded", open ? "true":"false");
+  });
+  scrim.addEventListener("click", closeNav);
+
+  /* ---------- Scroll-spy ---------- */
+  var tocLinks = Array.prototype.slice.call(document.querySelectorAll(".toc a"));
+  var linkById = {};
+  tocLinks.forEach(function(a){ linkById[a.getAttribute("href").slice(1)] = a; });
+  var heads = Array.prototype.slice.call(document.querySelectorAll(".content h2, .content h3"));
+  function setActive(id){
+    tocLinks.forEach(function(a){ a.classList.remove("active"); });
+    var link = linkById[id];
+    if (link){ link.classList.add("active");
+      // keep active link in view within sidebar
+      var sb = document.getElementById("sidebar");
+      var lr = link.getBoundingClientRect(), sr = sb.getBoundingClientRect();
+      if (lr.top < sr.top || lr.bottom > sr.bottom) link.scrollIntoView({block:"nearest"});
+    }
+  }
+  if ("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          var id = en.target.id.replace(/-h$/, "");
+          // for h2 the anchor id is section id; map from heading id
+          var secId = en.target.id.endsWith("-h") ? en.target.id.slice(0,-2) : en.target.id;
+          setActive(secId);
+        }
+      });
+    }, {rootMargin:"-64px 0px -70% 0px", threshold:0});
+    heads.forEach(function(h){ io.observe(h); });
+  }
+  // clicking a toc link closes drawer on mobile
+  tocLinks.forEach(function(a){ a.addEventListener("click", function(){ if (window.innerWidth<=768) closeNav(); }); });
+
+  /* ---------- Evidence filters ---------- */
+  var filterBoxes = Array.prototype.slice.call(document.querySelectorAll("[data-filter]"));
+  function applyFilters(){
+    var active = {};
+    filterBoxes.forEach(function(b){ active[b.getAttribute("data-filter")] = b.checked; });
+    // dim/undim individual pills
+    document.querySelectorAll(".content .pill[data-label]").forEach(function(p){
+      var l = p.getAttribute("data-label");
+      if (l==="flag") return;
+      p.classList.toggle("dim", !active[l]);
+    });
+    // hide a claim block only if ALL its labels are inactive
+    document.querySelectorAll(".content .claim[data-labels]").forEach(function(el){
+      var labels = el.getAttribute("data-labels").split(/\s+/).filter(Boolean);
+      var anyActive = labels.some(function(l){ return active[l]; });
+      el.classList.toggle("hide-claim", !anyActive);
+    });
+  }
+  filterBoxes.forEach(function(b){ b.addEventListener("change", applyFilters); });
+
+  /* ---------- Search (section-level) ---------- */
+  var search = document.getElementById("search");
+  var sections = Array.prototype.slice.call(document.querySelectorAll(".content > section"));
+  function runSearch(){
+    var q = (search.value||"").trim().toLowerCase();
+    sections.forEach(function(sec){
+      var hit = !q || sec.textContent.toLowerCase().indexOf(q) !== -1;
+      sec.classList.toggle("search-hidden", !hit);
+      var link = linkById[sec.id];
+      if (link) link.parentElement.classList.toggle("search-hidden", !hit);
+    });
+  }
+  var t;
+  search.addEventListener("input", function(){ clearTimeout(t); t=setTimeout(runSearch,120); });
+  search.addEventListener("keydown", function(e){ if(e.key==="Escape"){ search.value=""; runSearch(); } });
+
+  /* ---------- Citations: jump to source + remember for "back" ---------- */
+  var lastCiteId = null;
+  document.querySelectorAll("sup.cite a, a.reflink").forEach(function(a){
+    a.addEventListener("click", function(){
+      lastCiteId = "cite-anchor";
+      // drop a temporary marker where we clicked
+      var old = document.getElementById("cite-anchor");
+      if (old) old.removeAttribute("id");
+      a.id = "cite-anchor";
+      var tgt = document.getElementById(a.getAttribute("href").slice(1));
+      if (tgt){ tgt.classList.remove("tgt-flash"); void tgt.offsetWidth; tgt.classList.add("tgt-flash"); }
+    });
+  });
+  document.querySelectorAll(".srcback").forEach(function(b){
+    b.addEventListener("click", function(e){
+      e.preventDefault();
+      var anchor = document.getElementById("cite-anchor");
+      if (anchor) anchor.scrollIntoView({behavior:"smooth", block:"center"});
+      else window.scrollTo({top:0,behavior:"smooth"});
+    });
+  });
+
+  /* ---------- Back to top ---------- */
+  var toTop = document.getElementById("toTop");
+  window.addEventListener("scroll", function(){
+    toTop.classList.toggle("show", window.scrollY > 600);
+  }, {passive:true});
+  toTop.addEventListener("click", function(){ window.scrollTo({top:0,behavior:"smooth"}); });
+
+  /* ---------- Print: expand all details, remember state ---------- */
+  var toggled = [];
+  window.addEventListener("beforeprint", function(){
+    toggled = [];
+    document.querySelectorAll("details:not([open])").forEach(function(d){ d.open=true; toggled.push(d); });
+  });
+  window.addEventListener("afterprint", function(){
+    toggled.forEach(function(d){ d.open=false; }); toggled=[];
+  });
+
+  applyFilters();
+})();
+
+</script>
+</body>
+</html>
