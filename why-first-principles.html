@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why HSBC, From First Principles</title>
+<style>
+/* ---------- Theme tokens ---------- */
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#eef1f5; --text:#1c2126;
+  --muted:#5b6470; --border:#d8dee6; --accent:#c8102e; --accent-2:#8a0b20;
+  --link:#0b5cad; --shadow:0 1px 3px rgba(20,30,45,.08),0 6px 24px rgba(20,30,45,.06);
+  --p-official-bg:#e4f4ea; --p-official-fg:#116338; --p-official-bd:#8fd3ab;
+  --p-corrob-bg:#e5eefb; --p-corrob-fg:#1554a6; --p-corrob-bd:#9dc0ef;
+  --p-anec-bg:#fdf0dc; --p-anec-fg:#8a5a09; --p-anec-bd:#eec98a;
+  --p-infer-bg:#efe7fb; --p-infer-fg:#5b309e; --p-infer-bd:#c9b1ef;
+  --p-flag-bg:#eceff3; --p-flag-fg:#4a5563; --p-flag-bd:#c4ccd6;
+  --mark:#fff3a3;
+}
+:root[data-theme="dark"]{
+  --bg:#0f1318; --surface:#161c24; --surface-2:#1e2731; --text:#e6eaef;
+  --muted:#9aa6b2; --border:#2b3542; --accent:#ff5a72; --accent-2:#ff8095;
+  --link:#6db3ff; --shadow:0 1px 3px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35);
+  --p-official-bg:#123528; --p-official-fg:#7fe0ab; --p-official-bd:#1f5c42;
+  --p-corrob-bg:#122b47; --p-corrob-fg:#8fbdf7; --p-corrob-bd:#22497a;
+  --p-anec-bg:#3a2c11; --p-anec-fg:#f0c583; --p-anec-bd:#6a4f1d;
+  --p-infer-bg:#2a1f45; --p-infer-fg:#c7abf5; --p-infer-bd:#4a3576;
+  --p-flag-bg:#222b35; --p-flag-fg:#aeb9c5; --p-flag-bd:#39444f;
+  --mark:#6b5d00;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1318; --surface:#161c24; --surface-2:#1e2731; --text:#e6eaef;
+    --muted:#9aa6b2; --border:#2b3542; --accent:#ff5a72; --accent-2:#ff8095;
+    --link:#6db3ff; --shadow:0 1px 3px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35);
+    --p-official-bg:#123528; --p-official-fg:#7fe0ab; --p-official-bd:#1f5c42;
+    --p-corrob-bg:#122b47; --p-corrob-fg:#8fbdf7; --p-corrob-bd:#22497a;
+    --p-anec-bg:#3a2c11; --p-anec-fg:#f0c583; --p-anec-bd:#6a4f1d;
+    --p-infer-bg:#2a1f45; --p-infer-fg:#c7abf5; --p-infer-bd:#4a3576;
+    --p-flag-bg:#222b35; --p-flag-fg:#aeb9c5; --p-flag-bd:#39444f;
+    --mark:#6b5d00;
+  }
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-text-size-adjust:100%;
+}
+.skip{position:absolute;left:-999px;top:0;background:var(--accent);color:#fff;padding:8px 14px;z-index:200;border-radius:0 0 6px 0}
+.skip:focus{left:0}
+
+/* ---------- Top bar ---------- */
+.topbar{
+  position:sticky;top:0;z-index:100;display:flex;align-items:center;gap:12px;
+  background:var(--surface);border-bottom:1px solid var(--border);
+  padding:10px 16px;box-shadow:var(--shadow);
+}
+.brand{font-weight:700;font-size:15px;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand::before{content:"";display:inline-block;width:10px;height:16px;background:var(--accent);margin-right:8px;vertical-align:-2px;border-radius:1px}
+.topbar-tools{margin-left:auto;display:flex;align-items:center;gap:8px}
+#search{
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  border-radius:20px;padding:7px 14px;font-size:14px;width:min(38vw,260px);
+}
+#search:focus{outline:2px solid var(--link);outline-offset:1px}
+.iconbtn{
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  border-radius:8px;width:38px;height:36px;font-size:16px;cursor:pointer;line-height:1;
+}
+.iconbtn:hover{border-color:var(--accent)}
+#menuBtn{display:none}
+
+/* ---------- Layout ---------- */
+.layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:0;max-width:1240px;margin:0 auto}
+.sidebar{
+  position:sticky;top:57px;align-self:start;height:calc(100vh - 57px);overflow-y:auto;
+  padding:18px 14px 40px;border-right:1px solid var(--border);background:var(--bg);
+}
+.content{padding:26px clamp(16px,4vw,48px) 80px;min-width:0}
+
+/* readable column */
+.content > section, .doc-foot{max-width:72ch}
+.content h2{max-width:72ch}
+
+/* ---------- Filters ---------- */
+.filters{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:16px}
+.filters-title{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:8px;font-weight:700}
+.pill-toggle{display:flex;align-items:center;gap:8px;padding:4px 2px;cursor:pointer;user-select:none}
+.pill-toggle input{accent-color:var(--accent);width:15px;height:15px}
+.pill-toggle input:not(:checked) ~ .pill{opacity:.35;text-decoration:line-through}
+.legend-note{font-size:12px;color:var(--muted);margin-top:8px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+
+/* ---------- ToC / scroll-spy ---------- */
+.toc ul{list-style:none;margin:0;padding:0}
+.toc li{margin:1px 0}
+.toc a{display:block;text-decoration:none;color:var(--muted);padding:5px 10px;border-radius:7px;font-size:13.5px;border-left:2px solid transparent;line-height:1.35}
+.toc a:hover{background:var(--surface-2);color:var(--text)}
+.toc-l3 a{padding-left:22px;font-size:12.5px}
+.toc a.active{color:var(--accent);background:var(--surface-2);border-left-color:var(--accent);font-weight:600}
+
+/* ---------- Typography ---------- */
+h1,h2,h3,h4{line-height:1.25;color:var(--text)}
+.content h2{font-size:26px;margin:38px 0 6px;padding-bottom:8px;border-bottom:2px solid var(--border);scroll-margin-top:70px}
+.content section:first-child h2{margin-top:6px}
+.content h3{font-size:19px;margin:26px 0 4px;color:var(--accent-2);scroll-margin-top:70px}
+.content p{margin:10px 0}
+.content a{color:var(--link)}
+.content ul,.content ol{margin:8px 0 8px;padding-left:24px}
+.content li{margin:5px 0}
+strong{font-weight:700}
+code{background:var(--surface-2);border:1px solid var(--border);border-radius:5px;padding:1px 5px;font-size:.88em}
+hr{border:none;border-top:1px solid var(--border);margin:26px 0}
+
+/* first paragraph after H1 area (intro) */
+#intro > p:first-of-type{font-size:17px;color:var(--muted)}
+
+/* golden-rule / callout blockquotes */
+blockquote{
+  margin:16px 0;padding:12px 16px;background:var(--surface);
+  border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;
+}
+blockquote p{margin:6px 0}
+
+/* ---------- Pills ---------- */
+.pill{
+  display:inline-block;font-size:11px;font-weight:800;letter-spacing:.03em;
+  padding:1px 8px;border-radius:999px;border:1px solid;vertical-align:1px;white-space:nowrap;
+}
+.pill-official{background:var(--p-official-bg);color:var(--p-official-fg);border-color:var(--p-official-bd)}
+.pill-corroborated{background:var(--p-corrob-bg);color:var(--p-corrob-fg);border-color:var(--p-corrob-bd)}
+.pill-anecdotal{background:var(--p-anec-bg);color:var(--p-anec-fg);border-color:var(--p-anec-bd)}
+.pill-inferred{background:var(--p-infer-bg);color:var(--p-infer-fg);border-color:var(--p-infer-bd)}
+.pill-flag{background:var(--p-flag-bg);color:var(--p-flag-fg);border-color:var(--p-flag-bd)}
+.qual{font-size:.92em;color:var(--muted)}
+.pill.dim{opacity:.28}
+
+/* ---------- Citations ---------- */
+sup.cite{font-size:11px;line-height:0}
+sup.cite a{color:var(--link);text-decoration:none;font-weight:700;padding:0 1px}
+sup.cite a:hover{text-decoration:underline}
+a.reflink{font-weight:600}
+.src-item:target,.tgt-flash{animation:flash 1.8s ease}
+@keyframes flash{0%,40%{background:var(--mark)}100%{background:transparent}}
+.srcback{text-decoration:none;color:var(--muted);font-weight:700;margin-left:4px}
+.srcback:hover{color:var(--accent)}
+.exturl{word-break:break-all;font-size:.92em}
+
+/* ---------- Tables ---------- */
+.content table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;display:block;overflow-x:auto}
+.content th,.content td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+.content thead th{background:var(--surface-2);font-weight:700}
+.content tbody tr:nth-child(even){background:var(--surface)}
+
+/* ---------- Details / verbatim ---------- */
+details{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin:14px 0;padding:0 14px}
+details[open]{padding-bottom:8px}
+summary{cursor:pointer;padding:12px 0;font-weight:600;color:var(--accent-2);list-style-position:inside}
+summary:hover{color:var(--accent)}
+details.verbatim blockquote{border-left-color:var(--p-anec-bd)}
+
+/* ---------- filtered / hidden ---------- */
+.claim.hide-claim{display:none !important}
+section.search-hidden{display:none !important}
+.toc li.search-hidden{display:none}
+
+/* ---------- back to top ---------- */
+.totop{position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;
+  border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:18px;
+  cursor:pointer;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .2s;z-index:90}
+.totop.show{opacity:1;pointer-events:auto}
+.totop:hover{border-color:var(--accent);color:var(--accent)}
+
+.scrim{display:none}
+.print-toc{display:none}
+.doc-foot{margin-top:40px;padding-top:16px;border-top:1px solid var(--border);color:var(--muted);font-size:13px}
+
+/* ---------- Responsive: hamburger under 768px ---------- */
+@media (max-width:768px){
+  #menuBtn{display:inline-block}
+  .layout{grid-template-columns:1fr}
+  .sidebar{
+    position:fixed;top:0;left:0;height:100vh;width:min(84vw,320px);z-index:120;
+    transform:translateX(-100%);transition:transform .25s ease;border-right:1px solid var(--border);
+    box-shadow:var(--shadow);padding-top:64px;
+  }
+  body.nav-open .sidebar{transform:translateX(0)}
+  body.nav-open .scrim{display:block;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:110}
+  #search{width:44vw}
+  .brand{font-size:13px}
+}
+@media (max-width:480px){
+  #search{width:38vw}
+  .content h2{font-size:22px}
+}
+
+/* ---------- Print ---------- */
+@media print{
+  .topbar,.sidebar,.totop,#scrim,.skip,.srcback,.filters{display:none !important}
+  .layout{display:block;max-width:none}
+  .content{padding:0;max-width:none}
+  .content > section,.content h2{max-width:none}
+  body{background:#fff;color:#000;font-size:11.5pt}
+  /* expand everything regardless of filter/search/collapse */
+  .claim.hide-claim{display:revert !important}
+  section.search-hidden{display:revert !important}
+  .pill.dim{opacity:1 !important}
+  details{border:1px solid #bbb;break-inside:avoid}
+  details > *:not(summary){display:revert !important}   /* reveal collapsed content */
+  summary{color:#000}
+  a{color:#000;text-decoration:none}
+  .exturl{color:#333}
+  table,tr,td,th,blockquote,details{break-inside:avoid}
+  h2,h3{break-after:avoid}
+  .content h2{border-bottom:1px solid #000}
+  /* contents page */
+  .print-toc{display:block !important;break-after:page}
+  .print-cover{padding:40px 0 28px;border-bottom:3px solid var(--accent);margin-bottom:24px}
+  .print-kicker{display:block;font-size:10pt;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+  .print-title{font-size:24pt;margin:8px 0 0;line-height:1.15}
+  .print-contents-h{font-size:15pt;border:none;margin:0 0 8px}
+  .print-toc ul{list-style:none;padding:0;margin:0}
+  .print-toc li{margin:3px 0;font-size:11pt}
+  .print-toc .pt-l3{padding-left:22px;font-size:10pt;color:#333}
+  .print-toc a{color:#000;text-decoration:none}
+  .content > section{scroll-margin-top:0}
+  @page{margin:16mm 15mm 18mm}
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <button id="menuBtn" class="iconbtn" aria-label="Toggle contents" aria-expanded="false">☰</button>
+  <span class="brand">Why HSBC, From First Principles</span>
+  <div class="topbar-tools">
+    <input id="search" type="search" placeholder="Search sections…" aria-label="Search sections">
+    <button id="themeBtn" class="iconbtn" aria-label="Toggle dark/light">◐</button>
+  </div>
+</header>
+<div class="layout">
+  <aside id="sidebar" class="sidebar" aria-label="Sidebar">
+    <div class="filters">
+      <div class="filters-title">Evidence filter</div>
+      <label class="pill-toggle"><input type="checkbox" data-filter="official" checked><span class="pill pill-official">OFFICIAL</span></label>
+      <label class="pill-toggle"><input type="checkbox" data-filter="corroborated" checked><span class="pill pill-corroborated">CORROBORATED</span></label>
+      <label class="pill-toggle"><input type="checkbox" data-filter="anecdotal" checked><span class="pill pill-anecdotal">ANECDOTAL</span></label>
+      <label class="pill-toggle"><input type="checkbox" data-filter="inferred" checked><span class="pill pill-inferred">INFERRED</span></label>
+      <div class="legend-note"><span class="pill pill-flag">FLAG</span> = disagreement / gap / caveat (always shown)</div>
+    </div>
+    <nav class="toc" aria-label="Table of contents"><ul>
+<li class="toc-l2"><a href="#part-a0-the-five-minute-foundation-start-here">Part A0 — The five-minute foundation (start here)</a></li>
+<li class="toc-l2"><a href="#part-a1-reason-1-the-two-ended-network-what-it-is-from-zero">Part A1 — Reason 1: The two-ended network (what it is, from zero)</a></li>
+<li class="toc-l3"><a href="#the-problem-it-solves">The problem it solves</a></li>
+<li class="toc-l3"><a href="#how-this-links-to-the-business-model-follow-the-money">How this links to the business model (follow the money)</a></li>
+<li class="toc-l3"><a href="#the-deals-now-that-you-can-see-the-machine">The deals, now that you can see the machine</a></li>
+<li class="toc-l3"><a href="#why-this-makes-hsbc-stand-out-the-honest-comparison">Why this makes HSBC stand out (the honest comparison)</a></li>
+<li class="toc-l2"><a href="#part-a2-reason-2-the-china-connection-what-it-is-from-zero">Part A2 — Reason 2: The China connection (what it is, from zero)</a></li>
+<li class="toc-l3"><a href="#first-the-thing-you-need-to-know-about-chinas-money">First, the thing you need to know about China&#x27;s money</a></li>
+<li class="toc-l3"><a href="#the-gates-in-plain-english">The gates, in plain English</a></li>
+<li class="toc-l3"><a href="#the-deals-now-that-you-can-see-the-gates">The deals, now that you can see the gates</a></li>
+<li class="toc-l3"><a href="#how-this-links-to-the-business-model">How this links to the business model</a></li>
+<li class="toc-l3"><a href="#why-this-makes-hsbc-stand-out">Why this makes HSBC stand out</a></li>
+<li class="toc-l2"><a href="#part-b-execution-turning-this-into-a-standout-video-answer">Part B — Execution: turning this into a standout video answer</a></li>
+<li class="toc-l3"><a href="#b1-first-decode-why-the-courses-tricks-work-and-what-to-change">B1. First, decode why the course&#x27;s tricks work (and what to change)</a></li>
+<li class="toc-l3"><a href="#b2-your-15-second-contents-section-the-formula-and-the-scripts">B2. Your 15-second contents section — the formula and the scripts</a></li>
+<li class="toc-l3"><a href="#b3-where-the-humour-goes-and-where-it-doesnt">B3. Where the humour goes (and where it doesn&#x27;t)</a></li>
+<li class="toc-l3"><a href="#b4-one-fully-assembled-example-so-you-can-see-all-the-parts-click">B4. One fully-assembled example (so you can see all the parts click)</a></li>
+<li class="toc-l3"><a href="#b5-practice-drill-20-minutes-twice-before-the-real-thing">B5. Practice drill (20 minutes, twice before the real thing)</a></li>
+<li class="toc-l2"><a href="#honesty-notes">Honesty notes</a></li>
+<li class="toc-l2"><a href="#mini-glossary-one-line-each">Mini-glossary (one line each)</a></li>
+<li class="toc-l2"><a href="#source-list">Source list</a></li>
+</ul></nav>
+  </aside>
+  <div id="scrim" class="scrim"></div>
+  <main id="main" class="content" tabindex="-1">
+    <nav class="print-toc" aria-hidden="true"><div class="print-cover"><span class="print-kicker">Candidate briefing · 8 August 2026</span><h1 class="print-title">Why HSBC, From First Principles</h1></div><h2 class="print-contents-h">Contents</h2><ul><li class="pt-l2"><a href="#part-a0-the-five-minute-foundation-start-here">Part A0 — The five-minute foundation (start here)</a></li><li class="pt-l2"><a href="#part-a1-reason-1-the-two-ended-network-what-it-is-from-zero">Part A1 — Reason 1: The two-ended network (what it is, from zero)</a></li><li class="pt-l3"><a href="#the-problem-it-solves">The problem it solves</a></li><li class="pt-l3"><a href="#how-this-links-to-the-business-model-follow-the-money">How this links to the business model (follow the money)</a></li><li class="pt-l3"><a href="#the-deals-now-that-you-can-see-the-machine">The deals, now that you can see the machine</a></li><li class="pt-l3"><a href="#why-this-makes-hsbc-stand-out-the-honest-comparison">Why this makes HSBC stand out (the honest comparison)</a></li><li class="pt-l2"><a href="#part-a2-reason-2-the-china-connection-what-it-is-from-zero">Part A2 — Reason 2: The China connection (what it is, from zero)</a></li><li class="pt-l3"><a href="#first-the-thing-you-need-to-know-about-chinas-money">First, the thing you need to know about China&#x27;s money</a></li><li class="pt-l3"><a href="#the-gates-in-plain-english">The gates, in plain English</a></li><li class="pt-l3"><a href="#the-deals-now-that-you-can-see-the-gates">The deals, now that you can see the gates</a></li><li class="pt-l3"><a href="#how-this-links-to-the-business-model">How this links to the business model</a></li><li class="pt-l3"><a href="#why-this-makes-hsbc-stand-out">Why this makes HSBC stand out</a></li><li class="pt-l2"><a href="#part-b-execution-turning-this-into-a-standout-video-answer">Part B — Execution: turning this into a standout video answer</a></li><li class="pt-l3"><a href="#b1-first-decode-why-the-courses-tricks-work-and-what-to-change">B1. First, decode why the course&#x27;s tricks work (and what to change)</a></li><li class="pt-l3"><a href="#b2-your-15-second-contents-section-the-formula-and-the-scripts">B2. Your 15-second contents section — the formula and the scripts</a></li><li class="pt-l3"><a href="#b3-where-the-humour-goes-and-where-it-doesnt">B3. Where the humour goes (and where it doesn&#x27;t)</a></li><li class="pt-l3"><a href="#b4-one-fully-assembled-example-so-you-can-see-all-the-parts-click">B4. One fully-assembled example (so you can see all the parts click)</a></li><li class="pt-l3"><a href="#b5-practice-drill-20-minutes-twice-before-the-real-thing">B5. Practice drill (20 minutes, twice before the real thing)</a></li><li class="pt-l2"><a href="#honesty-notes">Honesty notes</a></li><li class="pt-l2"><a href="#mini-glossary-one-line-each">Mini-glossary (one line each)</a></li><li class="pt-l2"><a href="#source-list">Source list</a></li></ul></nav><section class="doc-section" id="intro"><style>
+figure.diagram{break-inside:avoid;margin:18px 0;text-align:center}
+figure.diagram svg{max-width:100%;height:auto}
+figure.diagram figcaption{font-size:13px;color:#5b6470;margin-top:6px}
+</style><p><strong>For:</strong> Janak · <strong>Prepared:</strong> 11 August 2026 · <strong>Style:</strong> completely beginner-friendly. Every term is explained the moment it appears. No abbreviation is used without being spelled out first. Diagrams are in colour.</p><blockquote>
+<p><strong>What this document does.</strong> You liked two of the "why HSBC" reasons — the <strong>two-ended network</strong> and the <strong>China connection</strong> — but wanted to actually <em>understand</em> them: what they are in simple terms, how they link to how HSBC makes money, and why they make HSBC stand out. <strong>Part A</strong> rebuilds both reasons from zero, with diagrams. <strong>Part B</strong> then takes the interview technique from your course — the 15-second "contents section", the "non-Googleable insight", light humour — and shows exactly how to execute it for <em>your</em> stage and <em>your</em> two reasons: names, not jargon; confident, not forced.</p>
+</blockquote><p class="claim" data-labels="corroborated inferred official">Tags used sparingly: <strong><span class="pill pill-official" data-label="official">OFFICIAL</span></strong> = from HSBC or a named counterparty · <strong><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span></strong> = reputable independent reporting · <strong><span class="pill pill-inferred" data-label="inferred">INFERRED</span></strong> = my explanation or coaching, not a quoted fact. Bracketed numbers like <sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup> link to the source list at the end.</p><hr/></section><section class="doc-section" id="part-a0-the-five-minute-foundation-start-here"><h2 id="part-a0-the-five-minute-foundation-start-here-h">Part A0 — The five-minute foundation (start here)</h2><p>Before the two reasons can make sense, you need four simple ideas. That's all — four.</p><p><strong>1. What a bank actually does.</strong> People and companies leave money with a bank — that's a <strong>deposit</strong>. The bank pays them little or no interest on it. The bank then <strong>lends</strong> that money to others at a higher rate, and keeps the difference. It also charges <strong>fees</strong> for useful services — moving money, safekeeping things, arranging deals. So a bank has exactly two engines: <strong>the interest gap</strong> on money, and <strong>fees</strong> for services.</p><p class="claim" data-labels="official"><strong>2. What "Corporate and Institutional Banking" is.</strong> It's HSBC's bank <em>for big organisations</em> — large companies, governments, and financial institutions — rather than for people like you and me. Its bread and butter is not glamorous takeover advice; it's the <strong>plumbing of global business</strong>: making international payments, financing trade between countries, lending, and helping big organisations raise and protect money. <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="11" href="#s11">[11]</a></sup></p><p><strong>3. What a "bond" is.</strong> A bond is simply <strong>a loan chopped into pieces and sold to many investors</strong>. A company or government that needs, say, £500 million doesn't borrow it all from one bank — it sells bonds to hundreds of investors, promising to pay interest and repay later. Banks like HSBC get paid to <strong>organise and run that sale</strong>.</p><p><strong>4. What a "currency" problem looks like.</strong> A British company selling to Vietnam gets paid in one currency, pays staff in another, and borrows in a third. Every border adds friction: different money, different rules, different banks. <strong>Removing that friction is, in one sentence, what HSBC sells.</strong></p><p>That's the foundation. Now the two reasons.</p><hr/></section><section class="doc-section" id="part-a1-reason-1-the-two-ended-network-what-it-is-from-zero"><h2 id="part-a1-reason-1-the-two-ended-network-what-it-is-from-zero-h">Part A1 — Reason 1: The two-ended network (what it is, from zero)</h2><h3 id="the-problem-it-solves">The problem it solves</h3><p>Imagine a company in Britain buying jackets from a factory in Vietnam. Two worries appear immediately:</p><ul>
+<li>The <strong>British buyer</strong> worries: <em>"If I pay upfront, will the goods actually arrive?"</em></li>
+<li>The <strong>Vietnamese factory</strong> worries: <em>"If I ship first, will I actually get paid?"</em></li>
+</ul><p>Neither side fully trusts the other — they've maybe never met. The classic fix is that <strong>each side's bank stands in the middle</strong>: the buyer's bank promises the seller's bank that payment will happen once the goods are proven to be shipped. The banks trust each other, so the companies don't have to trust each other.</p><p>Here's the catch: <strong>most banks can only stand at one end.</strong> A British high-street bank has no branches, no licence, and no relationships in Vietnam. So the deal needs <em>two</em> banks, a hand-off between them, extra cost, extra delay, extra risk.</p><p class="claim" data-labels="official"><strong>HSBC's difference: it is at both ends itself.</strong> It has a real, licensed, staffed bank in about 56 markets — built over 160 years — so the same institution can hold the buyer's account in London <em>and</em> the factory's account in Vietnam. One bank, both ends, no hand-off. <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="11" href="#s11">[11]</a></sup></p><figure class="diagram">
+<svg aria-label="Domestic bank versus HSBC two-ended network" role="img" viewbox="0 0 700 330" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#ffffff" height="330" stroke="#d8dee6" width="700" x="0" y="0"></rect>
+<text fill="#4a5563" font-size="15" font-weight="bold" x="20" y="30">A typical domestic bank — can only hold ONE end</text>
+<rect fill="#e5eefb" height="52" rx="8" stroke="#1554a6" width="150" x="20" y="45"></rect>
+<text fill="#1554a6" font-size="13" font-weight="bold" text-anchor="middle" x="95" y="67">UK company</text>
+<text fill="#1554a6" font-size="12" text-anchor="middle" x="95" y="85">(the buyer)</text>
+<rect fill="#eceff3" height="52" rx="8" stroke="#4a5563" width="150" x="215" y="45"></rect>
+<text fill="#4a5563" font-size="13" font-weight="bold" text-anchor="middle" x="290" y="67">Domestic bank</text>
+<text fill="#4a5563" font-size="12" text-anchor="middle" x="290" y="85">stops at the border</text>
+<line stroke="#4a5563" stroke-width="2" x1="170" x2="215" y1="71" y2="71"></line>
+<line stroke="#8a5a09" stroke-dasharray="6 5" stroke-width="2" x1="365" x2="440" y1="71" y2="71"></line>
+<text fill="#8a5a09" font-size="11" text-anchor="middle" x="402" y="60">hand-off to a</text>
+<text fill="#8a5a09" font-size="11" text-anchor="middle" x="402" y="112">partner bank…</text>
+<rect fill="#fdf0dc" height="52" rx="8" stroke="#8a5a09" width="115" x="440" y="45"></rect>
+<text fill="#8a5a09" font-size="12" text-anchor="middle" x="497" y="67">someone</text>
+<text fill="#8a5a09" font-size="12" text-anchor="middle" x="497" y="84">else's bank</text>
+<rect fill="#e4f4ea" height="52" rx="8" stroke="#116338" width="105" x="580" y="45"></rect>
+<text fill="#116338" font-size="12" font-weight="bold" text-anchor="middle" x="632" y="67">Vietnam</text>
+<text fill="#116338" font-size="12" text-anchor="middle" x="632" y="84">factory</text>
+<line stroke="#8a5a09" stroke-dasharray="6 5" stroke-width="2" x1="555" x2="580" y1="71" y2="71"></line>
+<text fill="#8a5a09" font-size="12" x="20" y="152">= two banks, extra cost, extra delay, two relationships to manage</text>
+<text fill="#c8102e" font-size="15" font-weight="bold" x="20" y="196">HSBC — the SAME bank holds BOTH ends</text>
+<rect fill="#e5eefb" height="52" rx="8" stroke="#1554a6" width="150" x="20" y="212"></rect>
+<text fill="#1554a6" font-size="13" font-weight="bold" text-anchor="middle" x="95" y="234">UK company</text>
+<text fill="#1554a6" font-size="12" text-anchor="middle" x="95" y="252">HSBC account, London</text>
+<rect fill="#fde8ea" height="66" rx="10" stroke="#c8102e" stroke-width="2" width="330" x="215" y="205"></rect>
+<text fill="#c8102e" font-size="14" font-weight="bold" text-anchor="middle" x="380" y="231">HSBC — one bank, ~56 markets</text>
+<text fill="#c8102e" font-size="12" text-anchor="middle" x="380" y="252">payments · trade finance · currency · lending</text>
+<rect fill="#e4f4ea" height="52" rx="8" stroke="#116338" width="105" x="580" y="212"></rect>
+<text fill="#116338" font-size="12" font-weight="bold" text-anchor="middle" x="632" y="234">Vietnam</text>
+<text fill="#116338" font-size="10" text-anchor="middle" x="632" y="251">HSBC account, Hanoi</text>
+<line stroke="#c8102e" stroke-width="2.5" x1="170" x2="215" y1="238" y2="238"></line>
+<line stroke="#c8102e" stroke-width="2.5" x1="545" x2="580" y1="238" y2="238"></line>
+<text fill="#116338" font-size="12" x="20" y="305">= one relationship, one system, no hand-off — and the client rarely leaves once its money runs on these rails</text>
+</svg>
+<figcaption>Diagram 1 — Why "two-ended" matters: a domestic bank must hand off at the border; HSBC holds the account at both ends itself.</figcaption>
+</figure><h3 id="how-this-links-to-the-business-model-follow-the-money">How this links to the business model (follow the money)</h3><p>This is the part you said you didn't fully see — so here is the chain, step by step:</p><ol>
+<li class="claim" data-labels="corroborated"><strong>Being at both ends wins the everyday business.</strong> The client routes its <strong>payments</strong> (money moving between countries) and <strong>trade finance</strong> (the get-paid-safely products above) through HSBC, because one bank at both ends is simpler and safer. HSBC earns a <strong>fee on every one of those actions</strong> — small each time, enormous in total, and repeated every single month. This is called <strong>transaction banking</strong>, and HSBC has been ranked the <strong>world's number-one trade-finance bank nine years running</strong> <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="10" href="#s10">[10]</a></sup>.</li>
+<li><strong>The everyday business leaves money sitting at HSBC.</strong> A company that runs its payments through HSBC keeps its working cash <em>in HSBC accounts</em> — those are <strong>deposits</strong>, the cheap raw material of banking. HSBC then earns the <strong>interest gap</strong> by putting that money to work. So one client relationship feeds <em>both</em> engines of the bank at once.</li>
+<li><strong>The relationship compounds.</strong> Once the plumbing is in place, the client adds more: a loan here, currency protection there, help raising a bond later. Bankers call this <strong>cross-selling</strong>; the everyday version is simply "the client keeps coming back." Switching all of this to another bank across fifteen countries would be a huge, risky project — so clients stay. That makes the revenue <strong>sticky</strong> (it recurs year after year).</li>
+<li class="claim" data-labels="official"><strong>The proof in one number:</strong> <strong>62% of HSBC's revenue comes from clients it banks in more than one country</strong> <span class="pill pill-official" data-label="official">OFFICIAL</span><span class="qual"> — HSBC's own figure, cited in an industry award</span><sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup>. A one-country bank cannot even compete for that revenue.</li>
+</ol><figure class="diagram">
+<svg aria-label="The HSBC flywheel" role="img" viewbox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#ffffff" height="300" stroke="#d8dee6" width="700" x="0" y="0"></rect>
+<text fill="#1c2126" font-size="15" font-weight="bold" text-anchor="middle" x="350" y="28">The flywheel — how one client relationship feeds both money engines</text>
+<rect fill="#e5eefb" height="64" rx="10" stroke="#1554a6" stroke-width="2" width="190" x="30" y="55"></rect>
+<text fill="#1554a6" font-size="13" font-weight="bold" text-anchor="middle" x="125" y="80">1. Cheap deposits</text>
+<text fill="#1554a6" font-size="12" text-anchor="middle" x="125" y="98">clients' cash sits at HSBC</text>
+<rect fill="#fde8ea" height="64" rx="10" stroke="#c8102e" stroke-width="2" width="190" x="480" y="55"></rect>
+<text fill="#c8102e" font-size="13" font-weight="bold" text-anchor="middle" x="575" y="80">2. Funds the network</text>
+<text fill="#c8102e" font-size="12" text-anchor="middle" x="575" y="98">lending, trade, payments</text>
+<rect fill="#e4f4ea" height="64" rx="10" stroke="#116338" stroke-width="2" width="190" x="480" y="190"></rect>
+<text fill="#116338" font-size="13" font-weight="bold" text-anchor="middle" x="575" y="215">3. Clients run daily life</text>
+<text fill="#116338" font-size="12" text-anchor="middle" x="575" y="233">through HSBC's rails</text>
+<rect fill="#fdf0dc" height="64" rx="10" stroke="#8a5a09" stroke-width="2" width="190" x="30" y="190"></rect>
+<text fill="#8a5a09" font-size="13" font-weight="bold" text-anchor="middle" x="125" y="215">4. Fees flow in — and</text>
+<text fill="#8a5a09" font-size="12" text-anchor="middle" x="125" y="233">more cash stays on deposit</text>
+<line marker-end="url(#arr)" stroke="#5b6470" stroke-width="2.5" x1="220" x2="480" y1="87" y2="87"></line>
+<line marker-end="url(#arr)" stroke="#5b6470" stroke-width="2.5" x1="575" x2="575" y1="119" y2="190"></line>
+<line marker-end="url(#arr)" stroke="#5b6470" stroke-width="2.5" x1="480" x2="220" y1="222" y2="222"></line>
+<line marker-end="url(#arr)" stroke="#5b6470" stroke-width="2.5" x1="125" x2="125" y1="190" y2="119"></line>
+<defs><marker id="arr" markerheight="9" markerwidth="9" orient="auto" refx="7" refy="4.5"><path d="M0,0 L9,4.5 L0,9 z" fill="#5b6470"></path></marker></defs>
+<text fill="#5b6470" font-size="12.5" font-style="italic" text-anchor="middle" x="350" y="160">each loop makes the relationship harder to leave — "sticky" revenue</text>
+</svg>
+<figcaption>Diagram 2 — The business-model link: the network wins the daily business, the daily business leaves deposits, the deposits fund the network. Round and round.</figcaption>
+</figure><h3 id="the-deals-now-that-you-can-see-the-machine">The deals, now that you can see the machine</h3><ul>
+<li class="claim" data-labels="official"><strong>PVH Corporation (owner of Calvin Klein and Tommy Hilfiger), 2022.</strong> PVH's clothes come from a huge web of factories across Asia. HSBC built a programme where <strong>it pays those suppliers early</strong> — so factories aren't starved of cash while waiting months for payment — and <strong>suppliers that treat workers and the environment better get the money cheaper</strong> <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="2" href="#s2">[2]</a></sup>. Look at it through Diagram 1: only a bank <em>already at both ends</em> (PVH's end <em>and</em> the factories' end) could run this at all. And through Diagram 2: HSBC just became part of the daily plumbing of an entire supplier network — hundreds of relationships, all sticky.</li>
+</ul><figure class="diagram">
+<svg aria-label="PVH supply chain finance flow" role="img" viewbox="0 0 700 270" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#ffffff" height="270" stroke="#d8dee6" width="700" x="0" y="0"></rect>
+<text fill="#1c2126" font-size="15" font-weight="bold" text-anchor="middle" x="350" y="28">The PVH programme in one picture ("supply-chain finance")</text>
+<rect fill="#e4f4ea" height="60" rx="10" stroke="#116338" stroke-width="2" width="180" x="40" y="60"></rect>
+<text fill="#116338" font-size="13" font-weight="bold" text-anchor="middle" x="130" y="84">Factory in Asia</text>
+<text fill="#116338" font-size="12" text-anchor="middle" x="130" y="102">ships the jackets</text>
+<rect fill="#e5eefb" height="60" rx="10" stroke="#1554a6" stroke-width="2" width="180" x="480" y="60"></rect>
+<text fill="#1554a6" font-size="13" font-weight="bold" text-anchor="middle" x="570" y="84">PVH (Calvin Klein)</text>
+<text fill="#1554a6" font-size="12" text-anchor="middle" x="570" y="102">receives the goods</text>
+<rect fill="#fde8ea" height="60" rx="10" stroke="#c8102e" stroke-width="2" width="180" x="260" y="180"></rect>
+<text fill="#c8102e" font-size="13" font-weight="bold" text-anchor="middle" x="350" y="204">HSBC</text>
+<text fill="#c8102e" font-size="12" text-anchor="middle" x="350" y="222">stands in the middle</text>
+<line marker-end="url(#arr2)" stroke="#5b6470" stroke-width="2.5" x1="220" x2="480" y1="90" y2="90"></line>
+<text fill="#5b6470" font-size="12" text-anchor="middle" x="350" y="80">goods travel one way…</text>
+<line marker-end="url(#arr2)" stroke="#116338" stroke-width="2.5" x1="300" x2="150" y1="180" y2="123"></line>
+<text fill="#116338" font-size="12" x="148" y="160">HSBC pays the factory EARLY —</text>
+<text fill="#116338" font-size="12" x="148" y="176">cheaper if it scores well on</text>
+<text fill="#116338" font-size="12" x="148" y="192">fair pay + environment</text>
+<line marker-end="url(#arr2)" stroke="#1554a6" stroke-width="2.5" x1="560" x2="405" y1="123" y2="180"></line>
+<text fill="#1554a6" font-size="12" x="470" y="160">PVH repays HSBC later,</text>
+<text fill="#1554a6" font-size="12" x="470" y="176">on normal terms</text>
+<defs><marker id="arr2" markerheight="9" markerwidth="9" orient="auto" refx="7" refy="4.5"><path d="M0,0 L9,4.5 L0,9 z" fill="#5b6470"></path></marker></defs>
+<text fill="#5b6470" font-size="12" font-style="italic" text-anchor="middle" x="350" y="260">everyone wins: the factory gets cash now, PVH gets breathing room, HSBC earns a small fee on a huge volume</text>
+</svg>
+<figcaption>Diagram 3 — Supply-chain finance, the PVH way: the first programme of its kind to reward suppliers for both environmental and social standards.</figcaption>
+</figure><ul>
+<li class="claim" data-labels="corroborated"><strong>Vingroup and VinFast (Vietnam's biggest private company and its electric-car arm), 2018 → 2022.</strong> This is Diagram 2 playing out over years: HSBC started banking Vingroup in 2018 and, deal by deal, the relationship grew — about <strong>five financings</strong>, each bigger and more sophisticated, up to a <strong>US$500 million international green loan</strong> (a loan whose money must fund environmentally beneficial projects, shared among several banks so no single one carries all the risk) <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="3" href="#s3">[3]</a></sup>. The client came back again and again. <em>That</em> is what "relationship banking" means in practice.</li>
+<li class="claim" data-labels="official"><strong>Cotton Growers Services (Australia) and HP Inc.</strong> The unglamorous but telling ones: Australia's first "<strong>TradePay</strong>" facility — trade loans that draw down in under a minute, no paperwork — and a custom <strong>cash-forecasting tool</strong> for HP across Asia <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="4" href="#s4">[4]</a></sup><sup class="cite"><a data-cite="5" href="#s5">[5]</a></sup>. Small stories, same lesson: HSBC wires itself into the client's <em>daily operations</em>. Daily operations are exactly what a client never rips out.</li>
+</ul><h3 id="why-this-makes-hsbc-stand-out-the-honest-comparison">Why this makes HSBC <em>stand out</em> (the honest comparison)</h3><p class="claim" data-labels="corroborated">Only about three banks on Earth can genuinely claim a two-ended global network — HSBC, the American bank Citigroup, and Standard Chartered. Standard Chartered is much smaller. Citigroup is the real rival — but HSBC <strong>earns clearly higher returns</strong> doing it, partly because its huge, cheap Hong Kong and United Kingdom deposit bases fund the machine <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="12" href="#s12">[12]</a></sup>. So the standout claim isn't "HSBC is global" (everyone says that) — it's: <strong>"HSBC is one of ~3 banks that can hold both ends of a client's cross-border life, and of those, it's the one that makes the model pay best."</strong> That's specific, true, and not something a rival's candidate can borrow.</p><hr/></section><section class="doc-section" id="part-a2-reason-2-the-china-connection-what-it-is-from-zero"><h2 id="part-a2-reason-2-the-china-connection-what-it-is-from-zero-h">Part A2 — Reason 2: The China connection (what it is, from zero)</h2><h3 id="first-the-thing-you-need-to-know-about-chinas-money">First, the thing you need to know about China's money</h3><p>China's currency is the <strong>renminbi</strong> (also called the <strong>yuan</strong>). Unlike pounds or dollars, it doesn't flow freely across borders — China keeps its financial system partly <strong>walled off</strong>, and money crosses the wall only through <strong>official gates</strong> that the Chinese authorities control. There are effectively two versions of the currency: renminbi <strong>inside</strong> mainland China ("onshore") and renminbi circulating <strong>outside</strong>, mostly in Hong Kong ("offshore").</p><p>Why does anyone care? Because China is the world's second-largest economy with the <strong>world's second-largest bond market</strong>, and global companies and investors <em>badly</em> want in and out. Whoever holds the keys to the gates gets paid every time someone passes through.</p><h3 id="the-gates-in-plain-english">The gates, in plain English</h3><ul>
+<li><strong>Gate 1 — the "panda bond":</strong> a <em>foreign</em> organisation raising money <strong>inside</strong> China, in onshore renminbi. (Foreign issuer + Chinese market = they named it after the panda.) To run one of these sales you need a <strong>Chinese underwriting licence</strong> — a permission that is genuinely hard for a foreign bank to get.</li>
+<li><strong>Gate 2 — the "dim sum bond":</strong> a bond in <strong>offshore</strong> renminbi, sold <em>outside</em> the mainland, usually in Hong Kong. (Named after Hong Kong's food. Finance people are not subtle.) This is how China's currency gets used internationally.</li>
+<li><strong>Gate 3 — the investor channels:</strong> "<strong>Bond Connect</strong>" lets global investors <em>buy</em> mainland Chinese bonds via Hong Kong; "<strong>Swap Connect</strong>" lets them <em>protect themselves</em> ("hedge") against Chinese interest-rate moves; and a newer channel lets them use Chinese bonds as <strong>collateral</strong> (security for borrowing). These are the pipes global money actually flows through.</li>
+</ul><figure class="diagram">
+<svg aria-label="China's walled market and its gates" role="img" viewbox="0 0 700 360" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#ffffff" height="360" stroke="#d8dee6" width="700" x="0" y="0"></rect>
+<text fill="#1c2126" font-size="15" font-weight="bold" text-anchor="middle" x="350" y="26">China's "walled garden" — and the gates HSBC holds keys to</text>
+<rect fill="#fde8ea" height="290" rx="10" stroke="#c8102e" stroke-width="2.5" width="230" x="20" y="48"></rect>
+<text fill="#c8102e" font-size="13.5" font-weight="bold" text-anchor="middle" x="135" y="74">MAINLAND CHINA</text>
+<text fill="#c8102e" font-size="12" text-anchor="middle" x="135" y="93">onshore renminbi</text>
+<text fill="#c8102e" font-size="12" text-anchor="middle" x="135" y="111">world's 2nd-largest bond market</text>
+<rect fill="#ffffff" height="46" rx="8" stroke="#c8102e" width="190" x="40" y="130"></rect>
+<text fill="#c8102e" font-size="11.5" text-anchor="middle" x="135" y="149">needs a Chinese licence</text>
+<text fill="#c8102e" font-size="11.5" font-weight="bold" text-anchor="middle" x="135" y="166">HSBC has it — few rivals do</text>
+<rect fill="#e5eefb" height="290" rx="10" stroke="#1554a6" stroke-width="2.5" width="230" x="450" y="48"></rect>
+<text fill="#1554a6" font-size="13.5" font-weight="bold" text-anchor="middle" x="565" y="74">REST OF THE WORLD</text>
+<text fill="#1554a6" font-size="12" text-anchor="middle" x="565" y="93">global companies + investors</text>
+<text fill="#1554a6" font-size="12" text-anchor="middle" x="565" y="111">wanting in and out of China</text>
+<rect fill="#e4f4ea" height="290" rx="10" stroke="#116338" stroke-width="2" width="130" x="285" y="48"></rect>
+<text fill="#116338" font-size="13" font-weight="bold" text-anchor="middle" x="350" y="74">HONG KONG</text>
+<text fill="#116338" font-size="11.5" text-anchor="middle" x="350" y="92">the hinge — and</text>
+<text fill="#116338" font-size="11.5" text-anchor="middle" x="350" y="108">HSBC's home turf</text>
+<rect fill="#ffffff" height="34" rx="6" stroke="#c8102e" width="188" x="256" y="126"></rect>
+<text fill="#c8102e" font-size="12" font-weight="bold" text-anchor="middle" x="350" y="140">Gate 1: PANDA BOND</text>
+<text fill="#c8102e" font-size="10" text-anchor="middle" x="350" y="154">foreigners raise money INSIDE China</text>
+<line marker-end="url(#arr3)" stroke="#c8102e" stroke-width="3" x1="450" x2="250" y1="172" y2="172"></line>
+<rect fill="#ffffff" height="34" rx="6" stroke="#116338" width="188" x="256" y="196"></rect>
+<text fill="#116338" font-size="12" font-weight="bold" text-anchor="middle" x="350" y="210">Gate 2: DIM SUM BOND</text>
+<text fill="#116338" font-size="10" text-anchor="middle" x="350" y="224">China's currency used OUTSIDE</text>
+<line marker-end="url(#arr3)" stroke="#116338" stroke-width="3" x1="250" x2="450" y1="242" y2="242"></line>
+<rect fill="#ffffff" height="34" rx="6" stroke="#1554a6" width="188" x="256" y="266"></rect>
+<text fill="#1554a6" font-size="12" font-weight="bold" text-anchor="middle" x="350" y="280">Gate 3: BOND / SWAP CONNECT</text>
+<text fill="#1554a6" font-size="10" text-anchor="middle" x="350" y="294">investors buy + hedge — HSBC live day one</text>
+<line marker-end="url(#arr3)" stroke="#1554a6" stroke-width="3" x1="450" x2="250" y1="312" y2="312"></line>
+<line marker-end="url(#arr3)" stroke="#1554a6" stroke-width="3" x1="250" x2="450" y1="324" y2="324"></line>
+<defs><marker id="arr3" markerheight="9" markerwidth="9" orient="auto" refx="7" refy="4.5"><path d="M0,0 L9,4.5 L0,9 z" fill="#5b6470"></path></marker></defs>
+</svg>
+<figcaption>Diagram 4 — The China machine: a partly walled market, three kinds of gate, and one Western bank unusually well placed at all of them.</figcaption>
+</figure><h3 id="the-deals-now-that-you-can-see-the-gates">The deals, now that you can see the gates</h3><ul>
+<li class="claim" data-labels="official"><strong>HSBC's own panda bond (November 2024).</strong> HSBC itself raised <strong>4.5 billion renminbi inside China's bond market, with its own Chinese arm running the sale</strong> — at the lowest interest rate any foreign commercial bank had achieved for that kind of bond, with demand almost double the amount on offer <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="6" href="#s6">[6]</a></sup>. Read it through Diagram 4: this is HSBC <em>walking through Gate 1 using its own key</em>, proving the licence isn't a plaque on a wall — it works.</li>
+<li class="claim" data-labels="corroborated"><strong>Egypt's panda bond (2023).</strong> HSBC helped <strong>the government of Egypt</strong> — a country in Africa — raise <strong>3.5 billion renminbi inside China</strong>, in the <strong>first panda bond ever from Africa</strong>, with two international development banks guaranteeing it <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="7" href="#s7">[7]</a></sup>. One trade, three parties, three continents — and HSBC in the middle, because it's one of the only banks with a seat at every table involved.</li>
+<li class="claim" data-labels="corroborated"><strong>Swire Properties' green dim sum bond (2023).</strong> HSBC led a Hong Kong company's <strong>3.2-billion-renminbi green bond</strong> — the first public green bond in China's currency from a Hong Kong company, and the largest of its kind <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="8" href="#s8">[8]</a></sup>. That's Gate 2.</li>
+<li class="claim" data-labels="corroborated"><strong>Day one on the plumbing (2023 and 2025).</strong> When <strong>Swap Connect</strong> opened, HSBC executed trades <em>on the first day</em> — acting for global investment funds as both the dealer and the clearing bank. When the <strong>collateral channel</strong> opened in 2025, HSBC again did some of the first trades <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><sup class="cite"><a data-cite="9" href="#s9">[9]</a></sup>. This is Gate 3 — and being live on day one tells you HSBC helped <em>build</em> the pipes, not just use them.</li>
+</ul><h3 id="how-this-links-to-the-business-model">How this links to the business model</h3><p class="claim" data-labels="inferred">Every gate is a toll booth. A panda bond pays HSBC an <strong>arranging fee</strong>. A dim sum bond pays a fee. Every investor buying, hedging or borrowing through the Connect channels pays a <strong>trading margin</strong>. And a client who used HSBC to get <em>into</em> China usually stays for the payments, accounts and currency work <em>inside</em> China — which loops you straight back to Reason 1's flywheel (Diagram 2). China isn't a separate story; <strong>it's the two-ended network's most valuable, hardest-to-copy corridor</strong> — anchored by Hong Kong, which is HSBC's original home and still its single biggest profit engine. <span class="pill pill-inferred" data-label="inferred">INFERRED</span><span class="qual">, built on the official figures</span><sup class="cite"><a data-cite="12" href="#s12">[12]</a></sup></p><h3 id="why-this-makes-hsbc-stand-out">Why this makes HSBC <em>stand out</em></h3><p class="claim" data-labels="inferred">Any bank can <em>say</em> "we do business in China." Almost none can say: <em>we hold the onshore underwriting licences, we lead the offshore market in Hong Kong, and we were live on day one of the investor channels in between.</em> American banks are constrained; Chinese banks don't have the Western client base; only HSBC really sits across all three panels of Diagram 4. <strong>That's a moat made of licences and infrastructure — things a competitor cannot buy quickly at any price.</strong> <span class="pill pill-inferred" data-label="inferred">INFERRED</span></p><hr/></section><section class="doc-section" id="part-b-execution-turning-this-into-a-standout-video-answer"><h2 id="part-b-execution-turning-this-into-a-standout-video-answer-h">Part B — Execution: turning this into a standout video answer</h2><p>Now the second half of your request: taking the course's techniques and making them work for <em>you</em> — an insight-stage, client-facing candidate on a one-take, human-reviewed video — without sounding over the top or forced.</p><h3 id="b1-first-decode-why-the-courses-tricks-work-and-what-to-change">B1. First, decode <em>why</em> the course's tricks work (and what to change)</h3><p class="claim" data-labels="inferred"><strong>The "contents section" logic.</strong> Your course is right about the psychology: whoever reviews your video is human, busy, and watching many of these. The first 15 seconds set their expectation of everything that follows, so front-loading your best material is smart. Two calibrations for <em>your</em> situation, though <span class="pill pill-inferred" data-label="inferred">INFERRED</span>:</p><ul>
+<li class="claim" data-labels="official"><strong>HSBC's video is one take, no re-record, and reviewed by a human against structured criteria that include authenticity</strong> <span class="pill pill-official" data-label="official">OFFICIAL</span><sup class="cite"><a data-cite="13" href="#s13">[13]</a></sup><sup class="cite"><a data-cite="14" href="#s14">[14]</a></sup>. So the technique survives, but <em>recitation</em> doesn't — a memorised script is exactly what a trained reviewer clocks. You want a <strong>structure you know cold, in words that vary each time.</strong></li>
+<li><strong>The course's example jargon is tuned for a different job.</strong> "120% IRR… DCF, DDM, reverse LBO" is a mergers-and-acquisitions analyst flexing valuation methods. You're applying to the <strong>client-facing side of a transaction bank at insight stage</strong>. Fired at your reviewer, that word-salad sounds borrowed — and worse, miscalibrated, like showing up to a driving lesson listing parts of a jet engine. <strong>Your version of "technical" is different: named deals, one precise structural term, and a number.</strong> "PVH's supplier network", "panda bond", "62% of revenue from multi-country clients" — these <em>are</em> your IRRs. They prove homework without the alphabet.</li>
+</ul><p><strong>The "non-Googleable insight" logic.</strong> The course's Moelis example works because it describes the firm's <em>structure</em> ("hourglass seniority"), not its brochure. Your Part A gives you the exact HSBC equivalents — structural facts that are technically public but that <strong>almost no candidate understands well enough to say</strong>:
+- <em>"HSBC's wholesale bank is transaction-banking-led, not merger-fee-led — the money is in the plumbing, and the plumbing is why clients never leave."</em>
+- <em>"The network isn't a slogan — it's a funding model: cheap Hong Kong and UK deposits paying for the machine, which is why HSBC out-earns the only real rival with the same map."</em>
+- <em>"Its China edge is literally made of licences — you can't buy your way into a panda-bond underwriting permission."</em>
+Any of those, said naturally, is your "hourglass line." (If you can also get one real insight from an actual HSBC person via a networking chat, even better — mention <em>that</em> conversation; it's the most non-Googleable source there is.)</p><h3 id="b2-your-15-second-contents-section-the-formula-and-the-scripts">B2. Your 15-second contents section — the formula and the scripts</h3><p><strong>The formula (three beats):</strong> ① a half-second of human warmth → ② the <em>map</em> of your answer, naming your two or three flags (a deal name, a structural term, a number) → ③ dive into the first one. The map is doing the course's job: it front-loads competence and proves the answer is planned, not improvised.</p><p><strong>Script 1 — "Why HSBC?", network-led (your Reason 1):</strong></p><blockquote>
+<p><em>"Thanks for watching this — I'll keep it worth your time. Three things genuinely sold me on HSBC, and I'll take them in turn: the way it financed Calvin Klein's entire supplier network against fair-pay standards, the fact that sixty-two percent of its revenue comes from clients it banks in more than one country, and what both of those told me about the kind of client relationships I want to learn. So — the supplier programme first…"</em></p>
+</blockquote><p><strong>Script 2 — "Why HSBC?", China-led (your Reason 2, the boldest):</strong></p><blockquote>
+<p><em>"Thank you for taking the time. In this answer I want to explain the two discoveries that turned my interest in HSBC into a genuine first choice: that it underwrote its own panda bond inside China's bond market — I'll unpack what that means — and that it was live on day one of Swap Connect, the channel that lets global investors hedge Chinese bonds. Almost no Western bank can say either, and here's why that matters to me…"</em></p>
+</blockquote><p><strong>Script 3 — "Why this role?" (client-facing, relationship management):</strong></p><blockquote>
+<p><em>"I'll give you the honest version. Three things pull me to the relationship side of Corporate and Institutional Banking: it's the seat that owns the client and calls in every specialist, the revenue it builds is the sticky, comes-back-every-year kind — HSBC's supplier programme for Calvin Klein is my favourite example — and frankly, it rewards being genuinely interested in people and in numbers at the same time, which is the combination I've got. Let me start with that first one…"</em></p>
+</blockquote><p class="claim" data-labels="inferred"><strong>Notice what the scripts do — and don't do:</strong> each one lands <strong>a named client, a structural term, and at most one number</strong> in fifteen seconds. Nobody hearing them doubts you've done the work — and there's not a single unexplained acronym. That's the course's technique, re-tailored to your stage. <span class="pill pill-inferred" data-label="inferred">INFERRED</span></p><figure class="diagram">
+<svg aria-label="90 second answer timeline" role="img" viewbox="0 0 700 170" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#ffffff" height="170" stroke="#d8dee6" width="700" x="0" y="0"></rect>
+<text fill="#1c2126" font-size="15" font-weight="bold" text-anchor="middle" x="350" y="26">The whole 90-second answer, on one bar</text>
+<rect fill="#c8102e" height="42" rx="6" width="110" x="30" y="50"></rect>
+<rect fill="#8a5a09" height="42" rx="0" width="75" x="140" y="50"></rect>
+<rect fill="#1554a6" height="42" rx="0" width="220" x="215" y="50"></rect>
+<rect fill="#116338" height="42" rx="0" width="130" x="435" y="50"></rect>
+<rect fill="#5b309e" height="42" rx="6" width="105" x="565" y="50"></rect>
+<text fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle" x="85" y="76">0–15s</text>
+<text fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle" x="177" y="76">15–25s</text>
+<text fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle" x="325" y="76">25–55s</text>
+<text fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle" x="500" y="76">55–75s</text>
+<text fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle" x="617" y="76">75–90s</text>
+<text fill="#c8102e" font-size="11.5" text-anchor="middle" x="85" y="112">contents section</text>
+<text fill="#c8102e" font-size="11.5" text-anchor="middle" x="85" y="127">(names + a number)</text>
+<text fill="#8a5a09" font-size="11.5" text-anchor="middle" x="177" y="112">the reason,</text>
+<text fill="#8a5a09" font-size="11.5" text-anchor="middle" x="177" y="127">plainly</text>
+<text fill="#1554a6" font-size="11.5" text-anchor="middle" x="325" y="112">ONE deal, told like a story</text>
+<text fill="#1554a6" font-size="11.5" text-anchor="middle" x="325" y="127">(who → what → why it's clever)</text>
+<text fill="#116338" font-size="11.5" text-anchor="middle" x="500" y="112">tie to the</text>
+<text fill="#116338" font-size="11.5" text-anchor="middle" x="500" y="127">money machine</text>
+<text fill="#5b309e" font-size="11.5" text-anchor="middle" x="617" y="112">your personal</text>
+<text fill="#5b309e" font-size="11.5" text-anchor="middle" x="617" y="127">why + close</text>
+<text fill="#5b6470" font-size="12" font-style="italic" text-anchor="middle" x="350" y="158">one reason · one deal · one number · one personal line — land the close before the timer does</text>
+</svg>
+<figcaption>Diagram 5 — Where the 15-second contents section sits inside the full answer.</figcaption>
+</figure><h3 id="b3-where-the-humour-goes-and-where-it-doesnt">B3. Where the humour goes (and where it doesn't)</h3><p class="claim" data-labels="inferred">Humour's job here is single: it proves you're <strong>relaxed and enjoyable to work with</strong> — which, for a client-facing role, is practically a competency. The craft rules: <strong>one light touch per answer</strong>, placed either in the warmth beat (second one) or attached to your nerdiest moment (to show self-awareness), aimed only at yourself, said with a smile, <strong>then move on without waiting for a reaction</strong>. <span class="pill pill-inferred" data-label="inferred">INFERRED</span></p><p><strong>Placement A — inside the contents section (warmth beat):</strong></p><blockquote>
+<p><em>"Thanks for watching — fair warning, I went properly down the rabbit hole on HSBC, my browser history is basically bond deals now. But three things stuck…"</em></p>
+</blockquote><p><strong>Placement B — attached to the technical term (self-aware flex):</strong></p><blockquote>
+<p><em>"…it was live on day one of Swap Connect — which I'll admit sounds like a dating app, but it's actually how global investors hedge Chinese bonds, and I find that genuinely brilliant."</em></p>
+<p><em>"…I got weirdly invested in a supplier-financing programme for Calvin Klein. Not the hobby I predicted for myself this year, but here we are — and here's why it won me over."</em></p>
+</blockquote><p><strong>Placement C — in the personal close:</strong></p><blockquote>
+<p><em>"…and honestly, I like that this job rewards being nosy in a professional way — I want to understand how a business actually works, and now someone might pay me to ask."</em></p>
+</blockquote><p><strong>The don'ts:</strong> no jokes about HSBC, rivals, China, regulators, or the assessment itself; never two jokes in one answer; and if on the day it doesn't feel natural — drop it. A warm tone with zero jokes beats one forced joke every time.</p><h3 id="b4-one-fully-assembled-example-so-you-can-see-all-the-parts-click">B4. One fully-assembled example (so you can see all the parts click)</h3><p class="claim" data-labels="inferred"><em>"Why HSBC?" — network-led, ~90 seconds, humour at Placement A:</em> <span class="pill pill-inferred" data-label="inferred">INFERRED</span><span class="qual"> — a model to adapt, never to memorise word-for-word</span></p><blockquote>
+<p><em>"Thanks for watching this. Full disclosure — I went properly down the rabbit hole researching HSBC, so my browser history is mostly bond deals now. But three things stuck, and I'll take them in turn: the Calvin Klein supplier programme, one number — sixty-two percent — and what those taught me about the job I'm applying for.</em>
+<em>So, the supplier programme. PVH — the company behind Calvin Klein and Tommy Hilfiger — makes clothes through a huge network of factories across Asia. HSBC built a scheme where it pays those factories early, so they're not starved of cash waiting for payment — and factories that treat their workers and the environment better get the money cheaper. What struck me is that only a bank already sitting at both ends — the brand's end and the factories' end — could even build that.</em>
+<em>And that's what the sixty-two percent means: nearly two-thirds of HSBC's revenue comes from clients it banks in more than one country. The network isn't a slogan, it's the business model — win the client's daily plumbing, and the relationship compounds for years.</em>
+<em>That's why I'm applying to the relationship side specifically: I want to be the person who understands the client and brings that whole network to them. I like work where trust builds over years — and this is that job, at the biggest scale I can find."</em></p>
+</blockquote><p>Count the flags: one named deal, one structural insight, one number, one honest personal close, one smile-line — and <strong>zero unexplained jargon.</strong> That's the entire method.</p><h3 id="b5-practice-drill-20-minutes-twice-before-the-real-thing">B5. Practice drill (20 minutes, twice before the real thing)</h3><ol>
+<li>Write your <strong>three flags</strong> for each reason on a card: <em>deal name · structural term · number.</em> (Reason 1: PVH · "transaction-banking-led / both ends" · 62%. Reason 2: own panda bond · "licences you can't buy" · day-one Swap Connect.)</li>
+<li>Record yourself once from the card — <strong>bullets only, never sentences.</strong></li>
+<li>Watch it back asking only three questions: did the map land in 15 seconds? did I tell <em>one</em> story properly? did I smile once?</li>
+<li>Re-record <strong>saying it differently.</strong> If the second take uses different words and still hits the flags, you've learned the structure, not a script — which is exactly the goal, and exactly what an authenticity-checked, one-take video rewards.</li>
+</ol><hr/></section><section class="doc-section" id="honesty-notes"><h2 id="honesty-notes-h">Honesty notes</h2><ul>
+<li>The <strong>62% figure</strong> is HSBC's own, cited in an industry award write-up — say "around two-thirds" if you'd rather not defend a decimal <sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup>. The panda-bond "lowest coupon" and oversubscription details are from HSBC's announcement <sup class="cite"><a data-cite="6" href="#s6">[6]</a></sup>; the Egypt and Swire details are corroborated by the counterparties and their lawyers <sup class="cite"><a data-cite="7" href="#s7">[7]</a></sup><sup class="cite"><a data-cite="8" href="#s8">[8]</a></sup>.</li>
+<li>The <strong>reviewer-psychology claims</strong> ("tired, multitasking") are your course's framing; what's verifiable is that HSBC's video answers are <strong>one-take</strong> and <strong>human-decided</strong> with structured criteria including authenticity <sup class="cite"><a data-cite="13" href="#s13">[13]</a></sup><sup class="cite"><a data-cite="14" href="#s14">[14]</a></sup>. The advice above works under both readings.</li>
+<li>All scripts are <strong>models to adapt, not memorise</strong> — HSBC explicitly prohibits reading AI-generated answers on camera, and requires that you can explain and reproduce anything you submit <sup class="cite"><a data-cite="15" href="#s15">[15]</a></sup>. Practise from bullets; speak your own words.</li>
+</ul></section><section class="doc-section" id="mini-glossary-one-line-each"><h2 id="mini-glossary-one-line-each-h">Mini-glossary (one line each)</h2><p><strong>Deposit</strong> — money left with a bank. <strong>Bond</strong> — a loan chopped into pieces and sold to many investors. <strong>Trade finance</strong> — products that let strangers in different countries trade safely. <strong>Transaction banking</strong> — the everyday plumbing: payments, cash, trade. <strong>Cross-selling</strong> — selling an existing client more products. <strong>Sticky revenue</strong> — income that recurs because leaving is painful. <strong>Renminbi / yuan</strong> — China's currency; <em>onshore</em> inside the mainland, <em>offshore</em> outside it. <strong>Panda bond</strong> — a foreigner raising onshore renminbi inside China. <strong>Dim sum bond</strong> — an offshore-renminbi bond, usually in Hong Kong. <strong>Underwriting licence</strong> — official permission to run bond sales in a market. <strong>Bond Connect / Swap Connect</strong> — the Hong Kong channels for buying and hedging mainland Chinese bonds. <strong>Hedge</strong> — protect against a price move. <strong>Collateral</strong> — an asset pledged as security for borrowing.</p></section><section class="doc-section" id="source-list"><h2 id="source-list-h">Source list</h2><ol start="1">
+<li class="src-item" id="s1">Euromoney — World's Best Bank for Large Corporates 2025: HSBC (the 62% multi-jurisdiction revenue figure) — <a class="exturl" href="https://www.euromoney.com/article/589syg86wuo8kgo0g8kogc4kw/awards/awards-for-excellence/worlds-best-bank-for-large-corporates-2025-hsbc" rel="noopener" target="_blank">https://www.euromoney.com/article/589syg86wuo8kgo0g8kogc4kw/awards/awards-for-excellence/worlds-best-bank-for-large-corporates-2025-hsbc</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s2">HSBC USA — HSBC and PVH Corp. partner on first sustainable supply-chain finance programme (2022) — <a class="exturl" href="https://www.about.us.hsbc.com/newsroom/press-releases/hsbc-and-pvh-corp-partner-on-first-sustainable-supply-chain" rel="noopener" target="_blank">https://www.about.us.hsbc.com/newsroom/press-releases/hsbc-and-pvh-corp-partner-on-first-sustainable-supply-chain</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s3">The Investor (Vietnam) — HSBC arranges first green syndicated loan for Vingroup/VinFast (2022) — <a class="exturl" href="https://theinvestor.vn/hsbc-arranges-first-green-syndicated-loan-for-vingroup-vinfast-d51.html" rel="noopener" target="_blank">https://theinvestor.vn/hsbc-arranges-first-green-syndicated-loan-for-vingroup-vinfast-d51.html</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s4">HSBC Australia — Cotton Growers Services: first TradePay facility in Australia (2025) — <a class="exturl" href="https://www.business.hsbc.com.au/en-au/insights/innovation-and-transformation/cgs-case-study" rel="noopener" target="_blank">https://www.business.hsbc.com.au/en-au/insights/innovation-and-transformation/cgs-case-study</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s5">HSBC — cash-management case studies incl. HP Inc. (2024) — <a class="exturl" href="https://www.business.hsbc.com/en-gb/insights/operational-efficiency-and-cash-management" rel="noopener" target="_blank">https://www.business.hsbc.com/en-gb/insights/operational-efficiency-and-cash-management</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s6">HSBC Hong Kong — HSBC Asia-Pacific completes RMB4.5bn panda bond (Nov 2024) — <a class="exturl" href="https://www.about.hsbc.com.hk/news-and-media/hsbc-asia-pacific-completes-issuance-of-rmb4-5-billion-panda-bond" rel="noopener" target="_blank">https://www.about.hsbc.com.hk/news-and-media/hsbc-asia-pacific-completes-issuance-of-rmb4-5-billion-panda-bond</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s7">White &amp; Case — Egypt's debut sustainable panda bond (HSBC joint lead underwriter, 2023) — <a class="exturl" href="https://www.whitecase.com/news/press-release/white-case-advises-aiib-and-afdb-egypts-debut-sustainable-development-panda" rel="noopener" target="_blank">https://www.whitecase.com/news/press-release/white-case-advises-aiib-and-afdb-egypts-debut-sustainable-development-panda</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s8">Swire Properties — first Hong Kong company to issue a public green dim sum bond (2023) — <a class="exturl" href="https://www.swireproperties.com/en/media/press-releases/2023/20230719_green-dim-sum-bond/" rel="noopener" target="_blank">https://www.swireproperties.com/en/media/press-releases/2023/20230719_green-dim-sum-bond/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s9">Finadium — HSBC and Tradeweb complete first Swap Connect trades (2023); and HSBC Hong Kong — maiden offshore renminbi bond-repo trades (2025) — <a class="exturl" href="https://finadium.com/hsbc-and-tradeweb-complete-first-set-of-trades-under-china-swap-connect/" rel="noopener" target="_blank">https://finadium.com/hsbc-and-tradeweb-complete-first-set-of-trades-under-china-swap-connect/</a> · <a class="exturl" href="https://www.about.hsbc.com.hk/news-and-media/hsbc-completes-maiden-trades-with-investors-under-offshore-rmb-bond" rel="noopener" target="_blank">https://www.about.hsbc.com.hk/news-and-media/hsbc-completes-maiden-trades-with-investors-under-offshore-rmb-bond</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s10">Euromoney — HSBC, world's best trade-finance bank (nine consecutive years #1) — <a class="exturl" href="https://www.euromoney.com/article/3l6tu7eba36s8ksw0k4sw0ccc/tf26-global-hsbc/" rel="noopener" target="_blank">https://www.euromoney.com/article/3l6tu7eba36s8ksw0k4sw0ccc/tf26-global-hsbc/</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s11">HSBC — Introducing Corporate &amp; Institutional Banking (structure; trade and payments reach) — <a class="exturl" href="https://www.business.hsbc.com/en-gb/campaigns/introducing-cib" rel="noopener" target="_blank">https://www.business.hsbc.com/en-gb/campaigns/introducing-cib</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s12">HSBC — Interim Results 2025 media release (segment profits; Hong Kong engine) — <a class="exturl" href="https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2025/interim/pdfs/hsbc-holdings-plc/250730-hsbc-holdings-plc-interim-results-2025-media-release.pdf" rel="noopener" target="_blank">https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2025/interim/pdfs/hsbc-holdings-plc/250730-hsbc-holdings-plc-interim-results-2025-media-release.pdf</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s13">Cappfinity help desk — assessed video responses cannot be re-recorded — <a class="exturl" href="https://capphelpdesk.zendesk.com/hc/en-us/articles/4402640631953-Will-I-be-able-to-re-record-a-video-response" rel="noopener" target="_blank">https://capphelpdesk.zendesk.com/hc/en-us/articles/4402640631953-Will-I-be-able-to-re-record-a-video-response</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s14">HSBC — Application hints and tips (human decisions; authenticity; STAR) — <a class="exturl" href="https://www.hsbc.com/careers/application-hints-and-tips" rel="noopener" target="_blank">https://www.hsbc.com/careers/application-hints-and-tips</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s15">HSBC — same page: acceptable and unacceptable AI use (no generated answers in recorded interviews) — <a class="exturl" href="https://www.hsbc.com/careers/application-hints-and-tips" rel="noopener" target="_blank">https://www.hsbc.com/careers/application-hints-and-tips</a><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+</ol><hr/><p><em>Compiled 11 August 2026. Part A is built on the deal research in <code>hsbc-why-three-reasons-deals.md</code> (same sources, same honesty flags). Part B is coaching — adapt everything into your own words; never memorise a script.</em></p></section>
+    <footer class="doc-foot">
+      <p>Self-contained briefing · rendered from <code>hsbc-assessment-briefing.md</code> · 8 August 2026.
+      Reliability labels reflect the evidence at that date; HSBC's process changes frequently.</p>
+    </footer>
+  </main>
+</div>
+<button id="toTop" class="totop" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+(function(){
+  "use strict";
+  var root = document.documentElement;
+
+  /* ---------- Theme ---------- */
+  var themeBtn = document.getElementById("themeBtn");
+  try {
+    var saved = localStorage.getItem("hsbc-theme");
+    if (saved) root.setAttribute("data-theme", saved);
+  } catch(e){}
+  function currentTheme(){
+    var t = root.getAttribute("data-theme");
+    if (t) return t;
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme:dark)").matches ? "dark" : "light";
+  }
+  themeBtn.addEventListener("click", function(){
+    var next = currentTheme() === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("hsbc-theme", next); } catch(e){}
+  });
+
+  /* ---------- Hamburger / drawer ---------- */
+  var menuBtn = document.getElementById("menuBtn");
+  var scrim = document.getElementById("scrim");
+  function closeNav(){ document.body.classList.remove("nav-open"); menuBtn.setAttribute("aria-expanded","false"); }
+  menuBtn.addEventListener("click", function(){
+    var open = document.body.classList.toggle("nav-open");
+    menuBtn.setAttribute("aria-expanded", open ? "true":"false");
+  });
+  scrim.addEventListener("click", closeNav);
+
+  /* ---------- Scroll-spy ---------- */
+  var tocLinks = Array.prototype.slice.call(document.querySelectorAll(".toc a"));
+  var linkById = {};
+  tocLinks.forEach(function(a){ linkById[a.getAttribute("href").slice(1)] = a; });
+  var heads = Array.prototype.slice.call(document.querySelectorAll(".content h2, .content h3"));
+  function setActive(id){
+    tocLinks.forEach(function(a){ a.classList.remove("active"); });
+    var link = linkById[id];
+    if (link){ link.classList.add("active");
+      // keep active link in view within sidebar
+      var sb = document.getElementById("sidebar");
+      var lr = link.getBoundingClientRect(), sr = sb.getBoundingClientRect();
+      if (lr.top < sr.top || lr.bottom > sr.bottom) link.scrollIntoView({block:"nearest"});
+    }
+  }
+  if ("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          var id = en.target.id.replace(/-h$/, "");
+          // for h2 the anchor id is section id; map from heading id
+          var secId = en.target.id.endsWith("-h") ? en.target.id.slice(0,-2) : en.target.id;
+          setActive(secId);
+        }
+      });
+    }, {rootMargin:"-64px 0px -70% 0px", threshold:0});
+    heads.forEach(function(h){ io.observe(h); });
+  }
+  // clicking a toc link closes drawer on mobile
+  tocLinks.forEach(function(a){ a.addEventListener("click", function(){ if (window.innerWidth<=768) closeNav(); }); });
+
+  /* ---------- Evidence filters ---------- */
+  var filterBoxes = Array.prototype.slice.call(document.querySelectorAll("[data-filter]"));
+  function applyFilters(){
+    var active = {};
+    filterBoxes.forEach(function(b){ active[b.getAttribute("data-filter")] = b.checked; });
+    // dim/undim individual pills
+    document.querySelectorAll(".content .pill[data-label]").forEach(function(p){
+      var l = p.getAttribute("data-label");
+      if (l==="flag") return;
+      p.classList.toggle("dim", !active[l]);
+    });
+    // hide a claim block only if ALL its labels are inactive
+    document.querySelectorAll(".content .claim[data-labels]").forEach(function(el){
+      var labels = el.getAttribute("data-labels").split(/\s+/).filter(Boolean);
+      var anyActive = labels.some(function(l){ return active[l]; });
+      el.classList.toggle("hide-claim", !anyActive);
+    });
+  }
+  filterBoxes.forEach(function(b){ b.addEventListener("change", applyFilters); });
+
+  /* ---------- Search (section-level) ---------- */
+  var search = document.getElementById("search");
+  var sections = Array.prototype.slice.call(document.querySelectorAll(".content > section"));
+  function runSearch(){
+    var q = (search.value||"").trim().toLowerCase();
+    sections.forEach(function(sec){
+      var hit = !q || sec.textContent.toLowerCase().indexOf(q) !== -1;
+      sec.classList.toggle("search-hidden", !hit);
+      var link = linkById[sec.id];
+      if (link) link.parentElement.classList.toggle("search-hidden", !hit);
+    });
+  }
+  var t;
+  search.addEventListener("input", function(){ clearTimeout(t); t=setTimeout(runSearch,120); });
+  search.addEventListener("keydown", function(e){ if(e.key==="Escape"){ search.value=""; runSearch(); } });
+
+  /* ---------- Citations: jump to source + remember for "back" ---------- */
+  var lastCiteId = null;
+  document.querySelectorAll("sup.cite a, a.reflink").forEach(function(a){
+    a.addEventListener("click", function(){
+      lastCiteId = "cite-anchor";
+      // drop a temporary marker where we clicked
+      var old = document.getElementById("cite-anchor");
+      if (old) old.removeAttribute("id");
+      a.id = "cite-anchor";
+      var tgt = document.getElementById(a.getAttribute("href").slice(1));
+      if (tgt){ tgt.classList.remove("tgt-flash"); void tgt.offsetWidth; tgt.classList.add("tgt-flash"); }
+    });
+  });
+  document.querySelectorAll(".srcback").forEach(function(b){
+    b.addEventListener("click", function(e){
+      e.preventDefault();
+      var anchor = document.getElementById("cite-anchor");
+      if (anchor) anchor.scrollIntoView({behavior:"smooth", block:"center"});
+      else window.scrollTo({top:0,behavior:"smooth"});
+    });
+  });
+
+  /* ---------- Back to top ---------- */
+  var toTop = document.getElementById("toTop");
+  window.addEventListener("scroll", function(){
+    toTop.classList.toggle("show", window.scrollY > 600);
+  }, {passive:true});
+  toTop.addEventListener("click", function(){ window.scrollTo({top:0,behavior:"smooth"}); });
+
+  /* ---------- Print: expand all details, remember state ---------- */
+  var toggled = [];
+  window.addEventListener("beforeprint", function(){
+    toggled = [];
+    document.querySelectorAll("details:not([open])").forEach(function(d){ d.open=true; toggled.push(d); });
+  });
+  window.addEventListener("afterprint", function(){
+    toggled.forEach(function(d){ d.open=false; }); toggled=[];
+  });
+
+  applyFilters();
+})();
+
+</script>
+</body>
+</html>
