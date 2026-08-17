@@ -47,7 +47,8 @@
 - **Percentile vs norm group** (typically recent graduates or role-specific). Adaptive tests (lst, and smartPredict) give stable percentile estimates. [PREP-VENDOR]
 - Aptitude scored on **accuracy**, with timed performance contributing; SJT → percentile band; personality → dimensional, no pass/fail. [PREP-VENDOR]
 - **Cut-off estimates [PREP-VENDOR ESTIMATE, not Aon-confirmed]:** standard roles 50th–75th; competitive grad 70th–80th. SJT "good" ~70th–80th. Present as range, label.
-- **Speed vs accuracy:** because many sections are "do as many as you can", *unanswered ≈ not attempted*; the score is items-correct within time → **attempt rate matters**. [INFERRED from design] Negative marking not indicated. Confirm per test.
+- **Speed vs accuracy:** because many sections are "do as many as you can", *unanswered ≈ not attempted*; the score is items-correct within time → **attempt rate matters**. [INFERRED from design]
+- **NEGATIVE MARKING — CORRECTED 2026-08-01 (second pass):** earlier note said "not indicated"; targeted verification found **prep-vendor consensus that wrong answers ARE deducted** on the cut-e ability tests. PracticeAptitudeTests (fetched full): "Points are awarded for a correct answer and deducted for a wrong answer" (numerical/verbal/mechanical/logic; NOT personality). JobTestPrep-family: formula scoring, correct minus ~1/3 or ~1/4 of incorrect. Fintest (verbal): one mark lost per error. Sources conflict on MAGNITUDE, agree on EXISTENCE. Exact algorithm [UNKNOWN — Aon doesn't publish]. Strategy consequence: wild guessing penalised (unlike SHL); educated elimination-guessing still +EV; blanks acceptable. URLs: practiceaptitudetests.com/testing-publishers/cut-e/ ; jobtestprep.com/aon-numerical-test ; fintest.io/magazine/preparing-for-cute-scales-verbal-practice-tests/ (accessed 2026-08-01).
 - Norm group = graduates / firm applicant pool depending on employer config. [PREP-VENDOR]
 
 ## Integrity (5.8)

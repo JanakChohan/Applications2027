@@ -9,7 +9,7 @@ These are the pages to print, screenshot and keep beside you. Everything here is
 | Provider | Type | Format & timing | Scoring model | Proctoring | Fake-able? | UK finance footprint |
 |---|---|---|---|---|---|---|
 | **SHL** (Ch. 1) | Cognitive + personality + video | Verify ~24 adaptive items/36 min; OPQ32 ~104 forced-choice; Smart Interview video | Norm-referenced **percentile** vs chosen norm group; A–D band; sten | Unproctored + **verification re-test** (Confidence Indicator); webcam a separate opt-in | Cognitive: no. OPQ: forced-choice resists it | **High** — bulge brackets, many AMs |
-| **Aon / cut-e** (Ch. 2) | Cognitive + games + personality + video | Speeded "scales" (e.g. ~37 num/12 min); smartPredict games; ADEPT-15; vidAssess | Percentile vs norm; **accuracy + attempt-rate** under extreme time | Mostly **unproctored**; unique item bank; webcam optional | Cognitive: no | **High** — Deutsche Bank, MS, UBS, BNP |
+| **Aon / cut-e** (Ch. 2) | Cognitive + games + personality + video | Speeded "scales" (e.g. ~37 num/12 min); smartPredict games; ADEPT-15; vidAssess | Percentile vs norm; **accuracy + attempt-rate** under extreme time; **wrong answers deducted** (formula undisclosed) | Mostly **unproctored**; unique item bank; webcam optional | Cognitive: no | **High** — Deutsche Bank, MS, UBS, BNP |
 | **Arctic Shores** (Ch. 3) | Game/task-based behavioural | Legacy games or new task-based; ~20–30 min; "12,000 data points" | **No score** — telemetry → trait fit; banded | **Unproctored / low-surveillance** | No — behavioural fit | Trading/quant-prop, prof-services bespoke |
 | **pymetrics** (Harver) (Ch. 4) | Neuroscience games | **12 games**, ~25–30 min | **No pass/fail** — match to role model; 50th/70th fit tiers | **Unproctored**; hard-to-fake by design | No — mismatches model | **JPMorgan (anchor)**, BNP |
 | **Cappfinity** (Ch. 5) | Strengths + SJT + aptitude | Bespoke immersive ~60–90 min; SST + embedded num/verbal | Composite: strengths fit + accuracy + **speed** + consistency; firm-keyed | **Largely unproctored** (consistency checks) | Partly — coachable via framework | **High** — HSBC, Big Four, some banks |
@@ -58,7 +58,7 @@ These are the pages to print, screenshot and keep beside you. Everything here is
 *Cut this out. Full technique in Chapter 6.4.*
 
 - **Know your test's design first.** Fixed vs speeded ("do as many as you can") vs adaptive changes everything.
-- **Never leave a scored item blank** where there's no negative marking — reasoned guess, move on. (Exception: Goldman-style **negative marking** — then don't wild-guess.)
+- **Never leave a scored item blank** where there's no negative marking — reasoned guess, move on. (Exceptions: **Aon/cut-e scales** — wrong answers deducted, so eliminate-then-commit or skip (Ch. 2); and Goldman-style **negative marking** — same rule.)
 - **Adaptive tests: harder = you're winning.** Don't panic when difficulty climbs; start carefully (early errors cost more).
 - **Speeded sections: throughput over perfectionism.** You're not meant to finish; accuracy on attempted items is the score. Don't rescue one item for 3 minutes.
 - **Numerical:** find the right two numbers first; percentage-change and units/scale are the traps.
@@ -116,6 +116,7 @@ The parts of this guide to trust least, in one place. Every important estimate a
 | **Cappfinity / Arctic Shores / Plum validity** | `[UNKNOWN]` | No independent peer-reviewed validation of the vendors' *own* instruments located | Vendor technical manuals (sales-gated) |
 | **pymetrics games→job-performance validity** | `[UNKNOWN]` | Only audited AUC ~0.70–0.72; Baker 2019 validation deck confidential | Independent study (none public) |
 | **Aon "scales" adaptivity** | Conflict | Sources disagree (fixed pool vs adaptive) | Vendor technical doc |
+| **Aon negative-marking formula** | Existence confirmed (consensus); **magnitude `[UNKNOWN]`** | Prep sources agree wrong answers are deducted but conflict on the fraction (full mark vs ⅓ vs ¼); Aon doesn't publish the algorithm | Vendor technical doc; the eliminate-then-commit strategy holds under any reported formula |
 | **Integrity telemetry (Aon, Cappfinity, Plum, Arctic Shores)** | `[UNKNOWN]` | Tab-switch/clipboard specifics undocumented; help pages bot-blocked | Vendor candidate privacy notices |
 | **Re-record visibility to reviewer (HireVue/Willo)** | `[UNKNOWN]` | No source confirmed whether reviewers see take-count | Ask the employer |
 | **HireVue current facial-analysis stance** | **Resolved** | Discontinued 2021 (NLP/content only) — well-sourced | — (settled) |
