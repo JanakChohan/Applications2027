@@ -21,6 +21,7 @@ ORDER = [
     ("chapter", "10-testgorilla.md"),
     ("chapter", "11-morgan-stanley.md"),
     ("chapter", "12-criteria-corp.md"),
+    ("chapter", "13-korn-ferry.md"),
     ("part", "Part II — Cross-Cutting Reference"),
     ("chapter", "61-why-assessments-exist.md"),
     ("chapter", "62-vendor-landscape.md"),
@@ -63,6 +64,9 @@ sub = re.search(r"^### (.+)$", front_text, re.M)
 subtitle = sub.group(1).strip() if sub else ""
 
 for kind, val in ORDER:
+    if kind == "chapter" and not (CH / val).exists():
+        print(f"WARNING: {val} not found — skipping")
+        continue
     if kind == "part":
         pid = "part-" + re.sub(r"[^a-z0-9]+", "-", val.lower()).strip("-")
         toc_entries.append(("PART", pid, val))
