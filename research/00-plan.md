@@ -42,6 +42,7 @@ Each provider needs all of 5.1–5.13. Legend: ⬜ not started · 🟡 researchi
 | 11 | Morgan Stanley (firm-built) | 🟩 | ✅ |
 | 12 | Other firm-built (rolling capture) | ✅ (in Ch.11) | ✅ |
 | 12b | Criteria Corp (added on request) | 🟩 | ✅ |
+| 13 | Korn Ferry / Talent Q (added on request) | 🟩 | ✅ |
 
 ### Per-provider subsection grid (mark ✅ / [UNKNOWN] as filled)
 For every provider row above, track: 5.1 Snapshot · 5.2 Why exists · 5.3 Why this vendor · 5.4 Mechanics · 5.5 Role-tailoring · 5.6 Scoring/norms/cut-offs · 5.7 How to score well · 5.8 Integrity detection · 5.9 How candidates trip it (incl. false positives) · 5.10 Being unambiguously clean · 5.11 If flagged/rejected (+templates) · 5.12 Step-by-step playbook · 5.13 Sources.

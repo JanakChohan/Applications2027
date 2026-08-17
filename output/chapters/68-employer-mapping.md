@@ -13,9 +13,9 @@ Cross-reference each provider's own chapter for mechanics. "Stage" indicates whe
 | **Morgan Stanley** | **Aon / cut-e** "scales" battery (numerical, verbal, `ix` inductive) + email-inbox SJT + `switchChallenge` — *programme/division-gated* | **HireVue** (near-universal) | HackerRank for tech/quant; MS↔cut-e since ~2019; **not** SHL despite some hedged sources | `[PREP-VENDOR + CANDIDATE]` |
 | **Goldman Sachs** | Legacy aptitude with **negative marking** reported; HackerRank (tech) | **HireVue** pre-recorded (signature screen) | Then "Superday"; process evolving with AI updates 2024–25 | `[PREP-VENDOR]` |
 | **J.P. Morgan** | **pymetrics** 12 games (now Harver) — the real selection OA | **HireVue** | **Forage "virtual experience" is NOT selection** (self-paced upskilling) — don't conflate | `[PREP-VENDOR]` |
-| **Citi** | **Korn Ferry / Talent Q** (numerical + logical) | (HireVue reported some divisions) | Plum reported for some grad screening elsewhere — contested | `[PREP-VENDOR]` |
+| **Citi** | **Korn Ferry / Talent Q Elements** (numerical + logical — see Ch. 13) | (HireVue reported some divisions) | Some prep sites brand it the "Citi **Plum** test… powered by Korn Ferry Talent Q" — best-evidenced reading: **Talent Q engine**, Plum naming confusion (Ch. 7, Ch. 13) | `[PREP-VENDOR]` |
 | **Barclays** | **SHL** (cognitive + personality + mindset) — *another source says pymetrics* | HireVue | **Vendor conflict — verify per cycle** | `[PREP-VENDOR, conflicting]` |
-| **UBS** | **Korn Ferry / Talent Q** culture-match SJT; **Aon/cut-e** numerical/verbal/inductive | HireVue | Dual-vendor | `[PREP-VENDOR]` |
+| **UBS** | **Korn Ferry "Culture Match"** bespoke SJT (18 scenarios, most/least — see Ch. 13); **Aon/cut-e** numerical/verbal/inductive | HireVue | Dual-vendor | `[PREP-VENDOR]` |
 | **Deutsche Bank** | **SHL** SJT; **Aon/cut-e** scales reported historically | HireVue | cut-e is the best-corroborated DB aptitude engine | `[PREP-VENDOR]` |
 | **HSBC** | **Cappfinity** "Online Immersive Assessment" (numerical/verbal/inductive + SJT keyed to Core Values) | **HireVue** (after the immersive) | The "immersive/day-in-the-life" archetype | `[PREP-VENDOR]` |
 | **Bank of America** | **HireVue**-led; IBM Kenexa / SHL TalentCentral also cited | HireVue (~5 Q) | **Vendor conflict — verify** | `[PREP-VENDOR, conflicting]` |
