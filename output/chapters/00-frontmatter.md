@@ -8,7 +8,7 @@
 
 **Version 1.0**  ·  Generated **1 August 2026**
 
-Covers twelve assessment providers and firm-built stacks: SHL · Aon/cut-e · Arctic Shores · pymetrics (Harver) · Cappfinity · Amberjack · Plum · HireVue · Willo · TestGorilla · Morgan Stanley · Criteria Corp — plus nine cross-cutting chapters on the psychometrics, the law, integrity monitoring, the vendor landscape, a preparation programme, and an employer→provider map.
+Covers thirteen assessment providers and firm-built stacks: SHL · Aon/cut-e · Arctic Shores · pymetrics (Harver) · Cappfinity · Amberjack · Plum · HireVue · Willo · TestGorilla · Morgan Stanley · Criteria Corp · Korn Ferry (Talent Q) — plus nine cross-cutting chapters on the psychometrics, the law, integrity monitoring, the vendor landscape, a preparation programme, and an employer→provider map.
 
 ---
 
