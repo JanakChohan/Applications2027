@@ -1,0 +1,869 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><style>
+@page {
+  size: A4; margin: 22mm 20mm 20mm 20mm;
+  @bottom-center { content: counter(page); font-family: Georgia, serif; font-size: 9pt; color: #555; }
+  @top-right { content: string(runhead); font-family: Georgia, serif; font-size: 8.5pt; color: #777; font-style: italic; }
+}
+@page :first { @top-right { content: none; } @bottom-center { content: none; } }
+@page titlepage { @top-right { content: none; } @bottom-center { content: none; } }
+html { font-family: Georgia, 'Times New Roman', serif; font-size: 10.5pt; line-height: 1.5; color: #1a1a1a; }
+body { margin: 0; }
+.titlepage { page: titlepage; break-after: page; text-align: left; padding-top: 30mm; }
+.titlepage h1 { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 30pt; line-height: 1.15; color: #7a1f1f; margin: 0 0 10mm 0; border: none; }
+.titlepage .subtitle { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 13pt; color: #6e3737; font-weight: 400; line-height: 1.4; margin-bottom: 14mm; }
+.titlepage .meta { font-size: 10pt; color: #555; border-top: 2px solid #7a1f1f; padding-top: 6mm; }
+h1.chaptertitle, h1.parttitle { string-set: runhead content(); font-family: 'Helvetica Neue', Arial, sans-serif; color: #7a1f1f; font-size: 20pt; break-before: page; padding-bottom: 3mm; border-bottom: 2px solid #7a1f1f; margin: 0 0 6mm 0; }
+.partdiv { break-before: page; padding-top: 60mm; text-align: center; }
+h1.parttitle { border: none; font-size: 26pt; break-before: avoid; }
+h2 { font-family: 'Helvetica Neue', Arial, sans-serif; color: #8a2c2c; font-size: 13.5pt; margin-top: 7mm; margin-bottom: 2mm; break-after: avoid; }
+h3 { font-family: 'Helvetica Neue', Arial, sans-serif; color: #2a2a2a; font-size: 11.5pt; margin-top: 5mm; margin-bottom: 1.5mm; break-after: avoid; }
+p { margin: 0 0 2.4mm 0; text-align: justify; }
+a { color: #7a1f1f; text-decoration: none; }
+strong { color: #111; }
+code { font-family: 'DejaVu Sans Mono', monospace; font-size: 8.6pt; background: #f5efef; padding: 0 2px; border-radius: 2px; word-break: break-word; }
+blockquote { background: #faf4f4; border-left: 3px solid #a94444; margin: 4mm 0; padding: 3mm 4mm; break-inside: avoid; font-size: 10pt; }
+blockquote h3 { margin-top: 0; color: #7a1f1f; }
+blockquote p { text-align: left; }
+table { border-collapse: collapse; width: 100%; margin: 3mm 0; font-size: 8.6pt; line-height: 1.35; table-layout: fixed; }
+th, td { border: 0.5pt solid #cdb8b8; padding: 1.4mm 2mm; text-align: left; vertical-align: top; word-wrap: break-word; overflow-wrap: anywhere; }
+th { background: #7a1f1f; color: #fff; font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: 600; font-size: 8.4pt; }
+tr:nth-child(even) td { background: #faf6f6; }
+thead { display: table-header-group; }
+tr { break-inside: avoid; }
+ul, ol { margin: 1mm 0 3mm 0; padding-left: 6mm; }
+li { margin-bottom: 1.2mm; text-align: justify; }
+hr { border: none; border-top: 0.5pt solid #ccc; margin: 5mm 0; }
+.toc { break-before: page; }
+.toc ul { list-style: none; padding-left: 0; }
+.toc li { margin-bottom: 1.6mm; }
+.toc a { display: block; }
+.toc a::after { content: target-counter(attr(href), page); float: right; color: #555; font-variant-numeric: tabular-nums; }
+.toc-part a { font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: 700; color: #7a1f1f; margin-top: 4mm; font-size: 11pt; }
+.toc-ch a { padding-left: 5mm; font-size: 10pt; }
+.chapter, .frontmatter { break-before: page; }
+</style></head><body><section class="titlepage"><h1>The Aon (cut-e) Assessment Deep-Dive</h1><div class="subtitle">Every instrument in the catalogue — what it is, exactly how it is marked, how to win it, and what stops you cheating on it</div><div class="meta">Version 1.0 &nbsp;·&nbsp; Generated 1 August 2026<br>Companion volume to <i>The Definitive Guide to UK Finance Early-Careers Online Assessments</i></div></section><section class="toc" id="toc"><h1 class="chaptertitle">Contents</h1><ul><li class="toc-part"><a href="#part-part-i-the-ability-tests-scales">Part I — The Ability Tests (scales)</a></li><li class="toc-ch"><a href="#ch-01-scales-numerical-verbal">Chapter 1 — scales numerical &amp; scales verbal</a></li><li class="toc-ch"><a href="#ch-02-scales-logic">Chapter 2 — The Logic Family: scales cls, clx, ix and lst</a></li><li class="toc-ch"><a href="#ch-03-scales-speed-skills">Chapter 3 — Speed &amp; Special-Skills Tests: eql, e3+, mt, tmt, mtu, stm and the Full Catalogue</a></li><li class="toc-part"><a href="#part-part-ii-games-judgement-simulation">Part II — Games, Judgement &amp; Simulation</a></li><li class="toc-ch"><a href="#ch-04-smartpredict-games">Chapter 4 — The smartPredict Games: switchChallenge, gridChallenge, digitChallenge, motionChallenge</a></li><li class="toc-ch"><a href="#ch-05-chatassess-squares">Chapter 5 — chatAssess (the messaging-simulation SJT) and squares (the integrity questionnaire)</a></li><li class="toc-part"><a href="#part-part-iii-personality-motivation-video">Part III — Personality, Motivation &amp; Video</a></li><li class="toc-ch"><a href="#ch-06-personality-motivation">Chapter 6 — Personality &amp; Motivation: shapes, views, motive.q and ADEPT-15</a></li><li class="toc-ch"><a href="#ch-07-vidassess">Chapter 7 — vidAssess-AI: The Video Interview</a></li><li class="toc-part"><a href="#part-part-iv-scoring-integrity-consolidated">Part IV — Scoring &amp; Integrity, Consolidated</a></li><li class="toc-ch"><a href="#ch-08-how-aon-marks">Chapter 8 — How Aon Marks You: The Consolidated Scoring Reference</a></li><li class="toc-ch"><a href="#ch-09-anti-cheating">Chapter 9 — The Anti-Cheating Architecture</a></li><li class="toc-ch"><a href="#ch-10-practice-resources">Chapter 10 — Practice Resources, Compared Honestly</a></li><li class="toc-ch"><a href="#ch-11-confidence-register">Chapter 11 — Confidence Register and Residual Gaps</a></li></ul></section><section class="frontmatter" id="frontmatter"><h3 id="every-instrument-in-the-catalogue-what-it-is-exactly-how-it-is-marked-how-to-win-it-and-what-stops-you-cheating-on-it">Every instrument in the catalogue — what it is, exactly how it is marked, how to win it, and what stops you cheating on it</h3>
+<hr />
+<h2 id="why-this-report-exists">Why this report exists</h2>
+<p>Assessment vendors profit from opacity. Aon Assessment Solutions — still known to most candidates by its pre-2017 name, <strong>cut-e</strong> — publishes almost nothing about how its tests are scored, what the pass thresholds are, or how its integrity systems work. Candidates sit tests whose marking rules they are never told, get rejected by algorithms whose logic is confidential, and fill the vacuum with forum folklore and the marketing of practice-test sellers. This report exists to <strong>shrink that information asymmetry</strong> as far as the public record allows — and to be honest, line by line, about where the public record stops.</p>
+<p>Two subjects get emphatic priority throughout, because they are the two the vendor documents least and candidates need most:</p>
+<ol>
+<li><strong>How the marking actually works</strong> — what earns points, what loses them (Aon's ability tests carry <strong>negative marking</strong>, which most candidates don't know and which inverts the guessing strategy they learned on SHL), how raw performance becomes a percentile, and what "score" even means on a game with no visible score.</li>
+<li><strong>The anti-cheating architecture</strong> — what cut-e's design makes impossible, what its optional monitoring detects, what a re-test can expose, and what an honest candidate can be wrongly flagged by.</li>
+</ol>
+<h2 id="who-aon-is-one-paragraph">Who Aon is (one paragraph)</h2>
+<p>cut-e was founded in Hamburg in 2002 and acquired by <strong>Aon plc in 2017</strong>, becoming Aon Assessment Solutions. Its design philosophy is distinct in the industry: <strong>very short tests under extreme time pressure</strong>, drawn from <strong>item banks that generate a different test for every candidate</strong>, delivered through its <strong>mapTQ</strong> platform. In UK finance it is a first-rank gatekeeper: <strong>Morgan Stanley</strong> (since ~2019), <strong>Deutsche Bank</strong>, <strong>UBS</strong> (alongside Korn Ferry) and <strong>BNP Paribas</strong> all deploy cut-e instruments in early-careers funnels. <code>[PREP-VENDOR — corroborated across sources; full mapping in the companion guide]</code></p>
+<h2 id="how-to-read-this-report">How to read this report</h2>
+<p>Each instrument gets its own section with the same skeleton: <strong>What it is → How it is marked → How to win → Anti-cheat notes → Quirks and adjustments.</strong> Part IV then consolidates the two priority subjects — the marking rules across all instruments in one table, and the full anti-cheating architecture — plus a comparison of practice resources and a <strong>confidence register</strong> listing every estimate and unknown in one place.</p>
+<p><strong>Evidence tags</strong> appear on every substantive claim: <code>[VENDOR]</code> Aon's own claim; <code>[INDEPENDENT]</code> peer-reviewed/independent; <code>[CANDIDATE, n=X]</code> candidate testimony with a count of agreeing reports; <code>[PREP-VENDOR]</code> commercial practice-test sellers — often right on format, commercially biased, and prone to stating confidential figures as fact; <code>[INFERRED]</code> reasoning from first principles, shown; <code>[UNKNOWN]</code> not publicly available, with the reason and best proxy. <strong>No number in this report is invented.</strong> Where the marking formula or a cut-off is confidential — as most are — you will see <code>[UNKNOWN]</code> and a reasoned range, never a fabricated figure. A clearly-labelled estimate is useful; a confident fabrication is worse than useless.</p>
+<p><strong>One boundary:</strong> this report teaches understanding and legitimate preparation. It contains no live test items, no answer keys, and no evasion techniques — the anti-cheating chapter is written so you understand the system and never trip it honestly, not so you can beat it dishonestly.</p></section><section class="partdiv" id="part-part-i-the-ability-tests-scales"><h1 class="parttitle">Part I — The Ability Tests (scales)</h1></section><section class="chapter" id="ch-01-scales-numerical-verbal"><h1 class="chaptertitle">Chapter 1 — scales numerical &amp; scales verbal</h1><blockquote>
+<h3 id="the-two-flagship-reasoning-tests">⚡ The two flagship reasoning tests</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>scales numerical</strong></th>
+<th><strong>scales verbal</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Format</strong></td>
+<td>True / False / Cannot Say statements against <strong>6 tabbed data sheets</strong> (tables, charts, text) for a fictional company</td>
+<td>Same engine; the six sheets are <strong>prose</strong> (strategy, structure, governance, products, locations, bios)</td>
+</tr>
+<tr>
+<td><strong>Length / clock</strong></td>
+<td>Full: <strong>37 tasks / 12 min</strong>. Compact-mobile: <strong>18 / 6 min</strong></td>
+<td>Full: <strong>49 tasks / 12 min</strong> (~14–15 s per item). Compact-mobile: <strong>18 / 6 min</strong></td>
+</tr>
+<tr>
+<td><strong>Marking</strong></td>
+<td><strong>+1 correct · −0.5 incorrect · 0 blank</strong> <code>[VENDOR-VIA-CLIENT — Aon-authored candidate guide]</code></td>
+<td>Identical: <strong>+1 / −0.5 / 0</strong> <code>[same source]</code></td>
+</tr>
+<tr>
+<td><strong>Calculator</strong></td>
+<td><strong>Explicitly allowed</strong> (plus rough paper) <code>[VENDOR-VIA-CLIENT]</code></td>
+<td>n/a</td>
+</tr>
+<tr>
+<td><strong>Adaptive</strong></td>
+<td>No — unique per-candidate item draw, fixed once started</td>
+<td>No — same</td>
+</tr>
+<tr>
+<td><strong>Navigation</strong></td>
+<td>Free — skip, return, change answers via a statement panel; auto-submits at time-out; <strong>cannot pause</strong></td>
+<td>Same</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<hr />
+<h2 id="what-they-are">What they are</h2>
+<p>These are the two tests a UK finance applicant is most likely to meet from Aon — they are the online assessment at <strong>Morgan Stanley</strong> and <strong>Deutsche Bank</strong>, among others. <code>[PREP-VENDOR — employer mapping in the companion guide]</code> Both run on the same engine: you are shown <strong>one statement at a time</strong> and must judge it <strong>True, False, or Cannot Say</strong> against a set of <strong>six "data sheets"</strong> presented as tabs — in the numerical test these are tables, pie and line charts and short data texts for a fictional company; in the verbal test they are prose passages about the company's structure, strategy, governance principles, products, locations and board. <strong>Each statement relates to exactly one sheet, and finding the right sheet is part of the task.</strong> <code>[VENDOR-VIA-CLIENT — the Aon-authored SMU candidate guide, which reproduces the real mapTQ test instructions and screens]</code></p>
+<p>Sizing: the classic desktop versions run <strong>37 numerical tasks or 49 verbal tasks in 12 minutes</strong>; a <strong>compact mobile version of each runs 18 tasks in 6 minutes</strong> (the literal mapTQ task name is "Numerical/Verbal Reasoning (mobile consumer compact)"). Which you get is the employer's choice. The timer covers the whole test, starts when the first statement appears, and <strong>the test cannot be paused</strong> — it auto-submits at time-out. Navigation is free: a statement-selection panel lets you skip, return and change answers. <code>[VENDOR-VIA-CLIENT + PREP-VENDOR, consistent]</code></p>
+<p><strong>Industry variants exist but difficulty does not change.</strong> The vendor catalogue and prep sources confirm parallel versions — <strong>admin, consumer, finance, industry</strong> (and an <em>instruct</em> strand) — whose difference "is not in the level of difficulty or mathematical ability but subject matter only." A bank will typically deploy the finance or consumer flavour; prepare on any of them. <code>[VENDOR page titles + PREP-VENDOR — AssessmentDay, JobTestPrep]</code></p>
+<p>Not adaptive: your items are drawn from a large bank at launch (no two candidates sit the same test — an anti-cheating design, Chapter 9) but the set is fixed once you start; difficulty does not react to your answers. <code>[PREP-VENDOR consistent]</code></p>
+<h2 id="how-they-are-marked-the-headline-of-this-report">How they are marked — the headline of this report</h2>
+<p>This is the best-documented marking rule in the entire Aon catalogue, and it comes from Aon's own candidate instructions rather than prep-site guesswork:</p>
+<blockquote>
+<p>"Each correct response is worth <strong>1 point</strong>, and each incorrect response is worth <strong>−0.5 points</strong>. No points will be awarded for empty responses."
+— Aon-authored candidate guide (SMU Admissions Test, mapTQ screens), stated identically for scales numerical and scales verbal <code>[VENDOR-VIA-CLIENT]</code></p>
+</blockquote>
+<p>Three consequences follow, and they overturn the strategy most candidates import from SHL:</p>
+<ol>
+<li><strong>Random guessing is worthless by design.</strong> On a three-option True/False/Cannot-Say item, a blind guess has expected value ⅓ × (+1) + ⅔ × (−0.5) = <strong>exactly zero</strong> — the −0.5 penalty is calibrated so that spraying answers gains you nothing on average, while adding variance that can easily leave you <em>below</em> where honest blanks would. <code>[INFERRED — arithmetic shown, from the vendor formula]</code></li>
+<li><strong>Elimination flips the maths.</strong> Rule out even one option and a guess between the remaining two has EV +0.25 per item. So the working rule is: <strong>commit when you can eliminate one option; leave true unknowns blank.</strong> Blanks genuinely score 0, not "wrong."</li>
+<li><strong>Accuracy is worth more than pace beyond a threshold.</strong> A wrong answer doesn't just miss a point — it claws back half of a previous correct one. Two errors erase a correct answer. The official in-test advice ("avoid guessing") is, for once, not platitude but a literal description of the scoring function.</li>
+</ol>
+<p><strong>One caveat for honesty:</strong> this formula is documented for the numerical and verbal tests in one client deployment. Whether −0.5 is universal across all clients or a configurable parameter is <code>[UNKNOWN]</code> — prep vendors report other magnitudes (a third, a quarter, a full mark), which are now second-ranked evidence but recorded in the confidence register. The <em>existence</em> of negative marking is beyond doubt; treat the exact size as best-evidenced-at-−0.5.</p>
+<p>After the raw score, performance converts to a <strong>percentile against a norm group</strong> — country plus role-type benchmark; the mapTQ login flow collects your age band, country, education and occupational area precisely to feed these norms. The employer sets its own threshold; there is no universal pass mark. <code>[VENDOR-VIA-CLIENT + PREP-VENDOR]</code></p>
+<p>One prep-vendor claim deserves a flag rather than trust: that submitting a correct answer <strong>with the wrong data-sheet tab open</strong> loses the point. This appears in one source family only, is not in the official instructions, and is recorded as <strong>unverified</strong> <code>[PREP-VENDOR, single-source]</code> — but since opening the correct tab first is good technique anyway, the practical advice is unaffected.</p>
+<h2 id="how-to-win">How to win</h2>
+<p><strong>The core skill is statement-first navigation.</strong> Read the statement <em>before</em> touching the data sheets, identify which of the six tabs it must live in (the tabs are themed — revenue, market share, costs, and so on), open only that tab, and extract. Candidates who read the sheets first, or browse tabs hunting, burn the whole budget. On the verbal test the same applies to passages: statement first, then scan the one relevant sheet.</p>
+<p><strong>Respect "Cannot Say" as a first-class answer.</strong> In Aon's own practice set, half the answers turned on distinguishing <em>data absence</em> from <em>falsity</em>. The official answer rationales are strict-entailment: a statement the sheets do not specifically support is <strong>Cannot Say</strong> even if plausible; a universal claim ("all products…") broken by one counter-instance is <strong>False</strong>. Never import outside knowledge — on the finance variant especially, your real-world knowledge is a trap. <code>[VENDOR-VIA-CLIENT answer keys]</code></p>
+<p><strong>Pace to the negative marking, not the item count.</strong> You are not expected to finish ("not everyone will be able to complete all 18," says Aon of even the compact version). The optimal loop: solve fast items cleanly; on a slow item, either eliminate-and-commit or <strong>skip via the panel and return</strong>; never blind-guess; leave genuine unknowns blank at time-out. Rushing is directly punished — as one prep source puts it, rushing "will impact accuracy," and accuracy is where the points are. <code>[VENDOR-VIA-CLIENT + PREP-VENDOR]</code></p>
+<p><strong>Use the permitted tools.</strong> A calculator and rough paper are officially allowed for the numerical test — have both ready. Drill percentage change, ratios, and share-of-total extractions so the calculator handles arithmetic while you handle <em>finding the right two numbers</em>.</p>
+<p><strong>Practice resources</strong> (all <code>[PREP-VENDOR]</code>, commercially biased; Chapter 10 compares them): Aon's <strong>own free demo versions</strong> linked from its product pages are the single best-matched practice; then JobTestPrep's cut-e numerical/verbal simulations, AssessmentDay's variant walkthroughs (admin/consumer/finance/industry), Fintest (finance-flavoured free questions), GraduatesFirst, and PracticeAptitudeTests' free cut-e samples.</p>
+<h2 id="anti-cheat-notes">Anti-cheat notes</h2>
+<p>Your test is <strong>generated uniquely from an item bank</strong> — a friend's answers are useless to you. Session behaviour is logged (timing, connectivity, actions), and where the employer enables Aon's virtual proctoring, webcam photos, object detection and <strong>tab-switch telemetry</strong> are collected — the full architecture is Chapter 9. The honest-candidate risks here are mundane: don't close, refresh or use the back button (mapTQ warns you can be <strong>blocked from the test</strong>); a started test <strong>cannot be resumed</strong>, so sit it on your most stable connection in one protected window. <code>[VENDOR-VIA-CLIENT]</code></p>
+<h2 id="quirks-and-adjustments">Quirks and adjustments</h2>
+<p>The compact-mobile versions are officially sat on phones — but a laptop with a full-size screen makes six-tab navigation materially easier; use one where you have the choice. Extra time and other adjustments are requested <strong>through the employer</strong> (Equality Act 2010 in the UK — the companion guide's Chapter 6.7 has templates); Aon's own candidate-facing adjustments policy is not publicly documented <code>[UNKNOWN]</code>, which is itself a reason to put the request in writing early.</p></section><section class="chapter" id="ch-02-scales-logic"><h1 class="chaptertitle">Chapter 2 — The Logic Family: scales cls, clx, ix and lst</h1><blockquote>
+<h3 id="at-a-glance">⚡ At a glance</h3>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>What it measures</th>
+<th>Length / clock</th>
+<th>Key mechanic</th>
+<th>Marking</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>scales cls</strong></td>
+<td>Inductive logic (rule discovery)</td>
+<td><strong>12 items / 12 min</strong></td>
+<td>Six example tables split into two colour-marked categories; find the rule; classify 4 new tables</td>
+<td>Negative marking <strong>confirmed by Aon</strong>, magnitude unstated; blanks 0</td>
+</tr>
+<tr>
+<td><strong>scales clx</strong></td>
+<td>Inductive logic (rule matching)</td>
+<td><strong>6 min</strong></td>
+<td>A pair of grids shares a rule; pick the matching 2 of 4 candidates; <strong>no back-navigation</strong></td>
+<td><code>[UNKNOWN]</code> — family negative marking assumed</td>
+</tr>
+<tr>
+<td><strong>scales ix</strong></td>
+<td>Inductive logic (rule breaking)</td>
+<td><strong>5–6 min, up to 20 tasks</strong></td>
+<td>Nine figures; find the one that breaks the shared rule</td>
+<td><code>[UNKNOWN]</code> — as above</td>
+</tr>
+<tr>
+<td><strong>scales lst</strong></td>
+<td>Deductive logic</td>
+<td><strong>6 min</strong> (+ ~8 min instructions/practice)</td>
+<td>Sudoku-like symbol grids, 4×4 growing to 5×5+; identify the symbol at the marked cell; <strong>adaptive</strong></td>
+<td><code>[UNKNOWN]</code> — adaptive scoring model undocumented</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<hr />
+<h2 id="scales-cls-the-rule-discovery-test">scales cls — the rule-discovery test</h2>
+<p><strong>What it is.</strong> Aon's deepest inductive instrument, and the one with official documentation. You see <strong>six tables of numbers and letters</strong>, colour-marked into <strong>two categories</strong> (for example marked above versus below, or blue versus gold). Some shared rule separates the categories. Your task: <strong>discover the rule, then assign four unassigned tables</strong> to the correct category. <strong>12 items in 12 minutes</strong>, and Aon's own instructions say plainly that "most people are unable to complete all 12." You may skip and reorder via the control panel (Aon recommends sequential order), each item has exactly one solution, and the test cannot be paused. <code>[VENDOR-VIA-CLIENT — Aon-authored SMU candidate guide]</code> The vendor targets it at roles built on data analysis — controllers, processing staff, R&amp;D, trainees, junior-to-middle managers. <code>[VENDOR catalogue snippet]</code></p>
+<p><strong>How it is marked.</strong> Aon's instructions state: "<strong>Negative marking is applicable in this test</strong> for incorrect responses only. No points will be deducted for empty responses." The <em>magnitude</em> of the deduction is not stated for cls (unlike the −0.5 documented for numerical/verbal — Chapter 1), and Aon's in-test advice is explicit: "<strong>Avoid guessing.</strong>" <code>[VENDOR-VIA-CLIENT]</code> Raw score converts to a percentile against a norm group as with the rest of the family.</p>
+<p><strong>How to win.</strong> A minute per item is generous by cut-e standards — this test rewards <strong>methodical rule-hunting, not speed</strong>. The recurring rules are countable properties: how many times a letter or number appears, repeated characters, positions ("contains the same letter three times"). The discipline that separates scorers: <strong>test your candidate rule against all six example tables before assigning anything</strong> — a rule that fits five tables and fails the sixth is the designed trap. If no rule yields, skip via the panel and return; with negative marking confirmed and the magnitude unknown, an unverified classification is a bad bet, and a blank costs nothing. <code>[PREP-VENDOR consensus + INFERRED]</code></p>
+<h2 id="scales-clx-and-scales-ix-the-fast-inductive-pair">scales clx and scales ix — the fast inductive pair</h2>
+<p><strong>clx</strong>: six minutes; each task shows an <strong>example pair of grids</strong> sharing a rule, and you must pick <strong>which two of four candidate grids</strong> follow the same rule. Unlike cls, there is <strong>no back-navigation</strong> — a skipped item is gone, so the skip decision is permanent. <strong>ix</strong>: five to six minutes, up to ~20 tasks; <strong>nine figures share a rule and one breaks it</strong> — find the odd one out. <code>[PREP-VENDOR — GraduatesFirst, Fintest; consistent with the companion guide]</code></p>
+<p><strong>Marking:</strong> no per-test documentation; the family-wide negative-marking rule is prep-vendor-supported for the logic tests but magnitudes are <code>[UNKNOWN]</code>. Play the same policy: eliminate-then-commit, blanks over blind guesses.</p>
+<p><strong>How to win.</strong> Both tests are decomposition drills. Run the dimensions checklist — <strong>shape, count, size, shading, position, orientation</strong> — one at a time rather than staring for a gestalt; most items encode <strong>two simultaneous rules</strong> (a shape rotates <em>and</em> a count increments). On ix, remember the mental operation is different from a sequence: you're finding the rule the <em>other eight share</em>, then the breaker. On clx, note both grids of the example pair before testing candidates — the rule lives in what they have <em>in common</em>. The no-back-navigation rule on clx means your per-item budget must be a hard one: decide, answer or skip, move.</p>
+<h2 id="scales-lst-the-adaptive-deductive-grid">scales lst — the adaptive deductive grid</h2>
+<p><strong>What it is.</strong> A six-minute deductive test (with roughly eight minutes of instructions and practice beforehand): <strong>sudoku-like grids</strong> where every symbol appears exactly once per row and column, and you identify which symbol belongs in the <strong>marked cell</strong>. Grids start 4×4 and grow — 5×5 and, per some sources, 6×6 — as you succeed: this is one of the family's genuinely <strong>adaptive</strong> tests. You can select blank tiles to test hypotheses. <code>[PREP-VENDOR — Fintest, AssessmentDay, and the companion guide]</code></p>
+<p><strong>How it is marked.</strong> Undocumented in detail — <code>[UNKNOWN]</code>. As an adaptive test its output is an ability estimate reported as a stable percentile (the companion guide's Chapter 6.3 explains why raw counts aren't comparable on adaptive tests); whether an explicit point deduction also applies is not documented. What is clear from the design: <strong>wrong answers demote you to smaller grids</strong>, which caps your ceiling — the adaptive ladder is itself the penalty.</p>
+<p><strong>How to win.</strong> The key insight comes straight from the format: <strong>you do not need to complete the grid — only enough cells to pin the marked one.</strong> Scan the marked cell's <strong>row and column first</strong>: the symbols already present exclude candidates immediately, and often two intersecting constraints solve it outright. Work outward only as needed. Because it's adaptive, early accuracy matters most (it sets your difficulty path), and growing grids mean you're winning — climb calmly. <code>[PREP-VENDOR technique + INFERRED]</code></p>
+<h2 id="anti-cheat-notes-family">Anti-cheat notes (family)</h2>
+<p>All four draw from generated item banks — no two candidates sit the same items, so shared answers are worthless, and lst's adaptivity adds a second layer (your path depends on your answers). Session logging and the optional proctoring layer apply as everywhere (Chapter 9). Honest-candidate risks: the <strong>no-pause rule</strong> (a disconnection mid-test cannot be resumed — stable connection, protected window), and on clx the <strong>no-return rule</strong> — neither is an integrity flag, but both can wreck a sitting.</p>
+<h2 id="quirks-and-adjustments">Quirks and adjustments</h2>
+<p>The instructions-plus-practice phases before each test are untimed and repeatable <strong>before</strong> you start the real clock — use them fully, every time; they are the only official rehearsal of the exact mechanic you'll face. Adjustments (extra time, alternative formats) go through the employer; nothing vendor-published exists for this family <code>[UNKNOWN]</code>.</p></section><section class="chapter" id="ch-03-scales-speed-skills"><h1 class="chaptertitle">Chapter 3 — Speed &amp; Special-Skills Tests: eql, e3+, mt, tmt, mtu, stm and the Full Catalogue</h1><blockquote>
+<h3 id="naming-correction-that-matters">⚡ Naming correction that matters</h3>
+<p>Candidate folklore often calls Aon's multitasking test "<strong>scales tmt</strong>". <strong>That is wrong.</strong> The vendor catalogue is unambiguous: <strong>scales tmt is "Applied Numeracy / Calculating Capacity"</strong> — a numerical-intensity test — while the <strong>multitasking test is "scales mt"</strong>, with aviation (<strong>mt avi</strong>) and driving (<strong>mt drv</strong>) variants. <code>[VENDOR catalogue entries — page titles/snippets; JobTestPrep independently agrees]</code> Any prep material telling you "tmt = multitasking" is mislabelled.</p>
+</blockquote>
+<hr />
+<h2 id="scales-eql-mental-arithmetic">scales eql — mental arithmetic</h2>
+<p><strong>What it is.</strong> Five minutes of pure numeracy: equations with <strong>missing numbers or operators</strong> which you complete to make the equation true ("fill in the gaps to get the correct answer"), with escalating difficulty and an <strong>unlimited task supply</strong> — the classic cut-e "do as many as you can" design. It is the non-game ancestor of the digitChallenge (Chapter 4 — the game is officially "based on scales eql"). <code>[PREP-VENDOR — AssessmentDay, GraduatesFirst; VENDOR mapping via the smartPredict roster]</code></p>
+<p><strong>Marking.</strong> Per-item counts and the penalty magnitude are <code>[UNKNOWN]</code>; the family-wide rule (points for correct, deductions for wrong — Chapter 8) is prep-vendor-supported here. Attempt-rate drives the raw score; percentile vs norm follows.</p>
+<p><strong>How to win.</strong> This is a <em>fluency</em> test: the preparation is drilling number bonds, times tables, and two reverse-engineering tricks — work backwards from the <strong>units digit</strong> (which candidate digit produces the right final digit?) and use <strong>magnitude bounds</strong> (is the missing operand roughly tens or hundreds?) to reject options without full computation. Accuracy still rules under negative marking: a fast wrong fill is worse than a skipped one.</p>
+<h2 id="scales-e3-concentration-error-checking">scales e3+ — concentration / error-checking</h2>
+<p><strong>What it is.</strong> A <strong>two-minute</strong> sustained-attention sprint: rapid compare-and-check error detection. The vendor targets it at "roles requiring concentration and accurate management of data or detail — call-centre or service-centre staff, data entry, administrative roles, quality assurance." <code>[VENDOR catalogue snippet]</code> Detailed mechanics beyond this are <code>[UNKNOWN]</code> — the product page was unreachable in this pass.</p>
+<p><strong>How to win.</strong> Two minutes leaves no room for a slow start: use the untimed practice phase to lock the comparison method (chunk two-to-three characters at a time, fixed left-to-right rhythm, no backtracking), then hold the rhythm. Perfectionist re-checking is the score-killer on any checking test.</p>
+<h2 id="scales-mt-the-multitasking-test-and-its-avidrv-variants">scales mt — the multitasking test (and its avi/drv variants)</h2>
+<p><strong>What it is.</strong> The genuine multitasking instrument: the candidate juggles <strong>simultaneous sub-tasks</strong> — the vendor describes "responding to a signal under time pressure, focused calculation and focused checking" running at once, with <strong>immediate feedback on answers</strong> and <strong>graduated difficulty levels</strong>. <code>[VENDOR catalogue snippets]</code> The <strong>avi</strong> variant serves aviation selection (pilot/cadet batteries — pilot-prep sources describe added audio streams and measures like "control stability, correction discipline"), and <strong>drv</strong> serves driving/rail roles. <code>[VENDOR page titles + PREP-VENDOR pilot-prep sites]</code></p>
+<p><strong>Marking.</strong> Duration, item counts and the scoring formula are <strong><code>[UNKNOWN]</code></strong> — the vendor domains were unreachable (DNS-dead from this research environment) and the archive was blocked; this is the biggest single mechanics gap in the report (see Chapter 11). Given immediate feedback and graduated levels, scoring is plausibly <strong>level-and-accuracy-under-load</strong> rather than simple right-minus-wrong. <code>[INFERRED]</code></p>
+<p><strong>How to win</strong> (from the documented mechanic): in any simultaneous-task design, the <strong>reaction-signal stream is the priority</strong> — a missed signal is unrecoverable, while a paused calculation can be resumed. Let the calculation/checking tasks absorb the slack between signals. And know that the test is <em>built</em> to overload you: errors under load are normed against everyone else's errors under the same load, so a feeling of drowning is the design, not your failure. <code>[INFERRED from mechanics]</code></p>
+<h2 id="scales-tmt-applied-numeracy-calculating-capacity">scales tmt — applied numeracy (calculating capacity)</h2>
+<p><strong>What it is.</strong> Business/applied numeracy — "roles which require an intense use of numerical information" — sitting between scales numerical (data reasoning) and eql (pure arithmetic). Used, among others, in aviation batteries alongside nav and cmo. <code>[VENDOR snippet + PREP-VENDOR]</code> Timings, items and scoring: <code>[UNKNOWN]</code>.</p>
+<h2 id="scales-mtu-mechanical-technical-understanding">scales mtu — mechanical-technical understanding</h2>
+<p><strong>What it is.</strong> Multiple-choice questions on mechanical/technical drawings — gears, pulleys, forces, circuit-style graphics — over a comparatively generous <strong>15 minutes</strong> (plus ~5 minutes of instructions/practice). Aimed at engineering, manufacturing and apprentice roles. <code>[PREP-VENDOR — Fintest, Psychometric-Success]</code> Marking: the family negative-marking statement explicitly includes mechanical (<code>[PREP-VENDOR]</code>); magnitude <code>[UNKNOWN]</code>. <strong>How to win:</strong> classic mechanical-comprehension prep transfers directly — gear direction alternates through a train, ratios from tooth counts, pulley mechanical advantage, lever arms, pressure — and the time budget rewards care over speed.</p>
+<h2 id="scales-stm-short-term-memory">scales stm — short-term memory</h2>
+<p><strong>What it is.</strong> Vendor positioning: "roles which require detailed observation," service contexts. The prep-vendor description of the mechanic: <strong>5 minutes, 10 tasks</strong> — images exposed for ~<strong>8 seconds</strong>, then recall which items appeared, with ~7-second gaps; <strong>no pausing</strong>. <code>[VENDOR snippet + PREP-VENDOR]</code> Scoring: <code>[UNKNOWN]</code>. <strong>How to win:</strong> encode verbally during exposure (name the objects fast — dual-coding beats passive staring) and accept that capacity, not strategy, dominates a pure span task; arrive rested.</p>
+<h2 id="scales-verbal-instruct-understanding-basic-instructions">scales verbal (instruct) — understanding basic instructions</h2>
+<p><strong>What it is.</strong> A simpler, faster verbal strand for <strong>apprentice and administrative selection</strong>: "simple instructions and instruction manuals… evaluate — as fast as possible — whether a statement referring to the text is correct or incorrect." <strong>Binary correct/incorrect</strong> responses (not True/False/Cannot-Say), <strong>8 minutes of test time</strong> (~12 with instructions), and — notably — the vendor states the test is built by an <strong>item generator at run-time</strong>, so every candidate's test is unique. <code>[VENDOR catalogue snippet]</code> Scoring magnitude: <code>[UNKNOWN]</code>.</p>
+<h2 id="scales-lt-language-tests">scales lt — language tests</h2>
+<p><strong>scales lt-e</strong> is the English-language proficiency test ("roles requiring practical knowledge of the English language"); parallel versions exist for other languages. (Earlier materials sometimes render this strand as "scales it" — the vendor code is <strong>lt</strong>.) <code>[VENDOR page title/snippet]</code> Detail: <code>[UNKNOWN]</code>.</p>
+<h2 id="the-rest-of-the-special-skills-catalogue-full-sweep">The rest of the special-skills catalogue (full sweep)</h2>
+<p>The catalogue extends well beyond what UK finance deploys — most of these serve aviation, transport, control-room and safety selection. For completeness, with what is documented:</p>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Construct</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>scales rt</strong></td>
+<td>Reaction time / speed</td>
+<td><code>[VENDOR title; detail UNKNOWN]</code></td>
+</tr>
+<tr>
+<td><strong>scales clues</strong></td>
+<td>Information handling</td>
+<td><code>[VENDOR title; detail UNKNOWN]</code></td>
+</tr>
+<tr>
+<td><strong>scales nav</strong></td>
+<td>Sense of direction</td>
+<td>Aviation batteries <code>[VENDOR + PREP-VENDOR]</code></td>
+</tr>
+<tr>
+<td><strong>scales cmo</strong></td>
+<td>Monitoring ability</td>
+<td>ATC-style vigilance <code>[VENDOR title]</code></td>
+</tr>
+<tr>
+<td><strong>scales ndb</strong></td>
+<td>Spatial orientation</td>
+<td>Aviation <code>[VENDOR title]</code></td>
+</tr>
+<tr>
+<td><strong>scales lct</strong></td>
+<td>Learning efficiency</td>
+<td>Early screening for "focused observation and detailed memory… identify learning aptitude" <code>[VENDOR snippet]</code></td>
+</tr>
+<tr>
+<td><strong>scales blo</strong></td>
+<td>Working memory</td>
+<td><code>[VENDOR title; detail UNKNOWN]</code></td>
+</tr>
+<tr>
+<td><strong>scales spr</strong></td>
+<td>Spatial reasoning</td>
+<td>Create nets from geometric shapes; <strong>10 min (+5 practice)</strong> <code>[PREP-VENDOR — Fintest]</code></td>
+</tr>
+</tbody>
+</table>
+<p>Timings and scoring for rt/clues/nav/cmo/ndb/lct/blo are <code>[UNKNOWN]</code> — logged in the confidence register. A UK finance candidate is very unlikely to meet any of them; they matter here because the report promised the <em>whole</em> catalogue, and because their existence shows how the same design grammar (short, speeded, item-generated, negatively-marked) repeats across every construct Aon measures.</p>
+<h2 id="anti-cheat-and-platform-notes-all-tests-in-this-chapter">Anti-cheat and platform notes (all tests in this chapter)</h2>
+<p>Everything here runs on mapTQ under the platform rules of Chapter 9: unique generated items, session logging with <strong>window-switch telemetry</strong>, no pausing once started, optional webcam proctoring where the employer enables it. The practical honest-candidate rules are unchanged: stable connection, one protected sitting, use the untimed practice phases, and put any adjustment request in writing to the employer before you sit (Aon accommodates case-by-case — extra time for dyslexia and screen magnifiers are cited examples — but publishes no candidate-facing policy <code>[VENDOR-adjacent, weakly sourced; UNKNOWN mechanics]</code>).</p></section><section class="partdiv" id="part-part-ii-games-judgement-simulation"><h1 class="parttitle">Part II — Games, Judgement &amp; Simulation</h1></section><section class="chapter" id="ch-04-smartpredict-games"><h1 class="chaptertitle">Chapter 4 — The smartPredict Games: switchChallenge, gridChallenge, digitChallenge, motionChallenge</h1><blockquote>
+<h3 id="the-official-roster-exactly-four-games">⚡ The official roster — exactly four games</h3>
+<p>Aon's own product page lists precisely four smartPredict games, each mapped to a legacy cut-e instrument: <strong>motionChallenge</strong> ("complex planning capability"), <strong>gridChallenge</strong> ("executive attention"), <strong>switchChallenge</strong> ("logical reasoning — based on scales sx"), <strong>digitChallenge</strong> ("numeracy — based on scales eql"). Each can be used alone or combined with any other Aon test. There is <strong>no fifth game</strong> — claims of extra smartPredict games are prep-site padding. The series is designed <strong>smartphone-first</strong>. <code>[VENDOR — smartPredict product page]</code></p>
+</blockquote>
+<p><strong>How the games are scored — the shared model.</strong> None of the four shows you a score, and none has a documented points formula. What the evidence supports instead is an <strong>adaptive ladder</strong>: answer correctly and you are promoted to harder, higher-value items; answer wrongly and you are <strong>demoted to easier content, "limiting your score potential."</strong> The de-facto penalty for errors on the games is therefore <strong>demotion, not a stated point deduction</strong> — whether an explicit deduction <em>also</em> applies is <code>[UNKNOWN]</code> (unlike the scales tests, where negative marking is documented — Chapter 8). Output is a <strong>percentile against a norm group</strong>, and the vendor markets the capture of "<strong>over a thousand behavioural data points</strong>" (reaction time, learning rate, error recovery, effort under pressure) — a marketing figure with no published telemetry specification. <code>[PREP-VENDOR — JobTestPrep, 12minprep; VENDOR-marketing; UNKNOWN exact algorithms]</code></p>
+<p>The strategic consequence is identical across all four: <strong>protect early accuracy.</strong> Early errors drop you down the ladder, and "the more questions you get wrong, the harder it is to recover and achieve a good grade." Speed matters only after accuracy is secured.</p>
+<hr />
+<h2 id="switchchallenge-deductive-funnel-logic-based-on-scales-sx">switchChallenge — deductive "funnel" logic (based on scales sx)</h2>
+<p><strong>What it is.</strong> Rows of abstract symbols pass through a "funnel" — an <strong>operator written as a 4-digit number</strong> whose digits specify the new order of the symbol positions (operator 3421 = third symbol first, then fourth, second, first). You choose which operator produces the transformation shown. Difficulty escalates from two rows to three and from single operators to <strong>chained multiple funnels</strong>. <strong>Six minutes standard (a 3-minute variant exists at some employers), unlimited item supply, adaptive.</strong> <code>[PREP-VENDOR — JobTestPrep, 12minprep, consistent]</code></p>
+<p><strong>How it is marked.</strong> The adaptive ladder above: correct → harder/higher-value; wrong → demoted. Percentile output. Exact points per tier <code>[UNKNOWN]</code>.</p>
+<p><strong>How to win.</strong> Learn to read a 4-digit operator as a <strong>position map</strong>, not by re-deriving each symbol: "3421" should <em>feel</em> like "third-fourth-second-first" the way a word feels like a word. That single automation is most of the score. Then: nail the early items at whatever pace accuracy requires (they set your ladder), and only then accelerate. On chained funnels, apply operators one at a time on the middle row rather than attempting the composition in your head. UK finance note: this game appears in real bank batteries — BNP Paribas's 2026 graduate online test included switchChallenge, which candidates called "always demanding." <code>[CANDIDATE — TSR thread, snippet-level]</code> Morgan Stanley also deploys it. <code>[PREP-VENDOR]</code></p>
+<h2 id="gridchallenge-working-memory-under-interference-executive-attention">gridChallenge — working memory under interference (executive attention)</h2>
+<p><strong>What it is.</strong> A complex-span design in a game skin. The loop: memorise a highlighted <strong>dot position</strong> on a grid → answer one or more <strong>interference tasks</strong> (symmetry judgements, rotation checks, shape combinations) → memorise another dot → … → at round end, <strong>recall all dot positions in order</strong>. Memory load runs <strong>3–5 dots per round</strong> with matching interleaved questions. Duration is reported as <strong>9 minutes/~9 rounds</strong> (UK sources) or <strong>6 minutes</strong> (US/P&amp;G sources) — likely employer-variant lengths, treat as 6–9 minutes. Adaptivity is reported both ways; the more detailed source describes real-time adaptation with harder items "worth more points." <code>[PREP-VENDOR — conflicting on duration/adaptivity; both recorded]</code></p>
+<p><strong>How it is marked.</strong> <strong>Both streams score</strong> — the dot recalls <em>and</em> the interference answers — on the point-weighted ladder; the weighting between them is <code>[UNKNOWN]</code>. This is the single most misunderstood fact about the game: candidates who sacrifice the symmetry questions to rehearse dots are throwing away scored items.</p>
+<p><strong>How to win.</strong> Encode dots verbally/spatially in one beat ("top-right", "centre-left") rather than staring; answer the interference items <strong>fast and honestly</strong> — they are the recoverable stream; keep the dot sequence as a rehearsed chant between interruptions. Expect the 5-dot rounds to feel beyond you — they are normed that way.</p>
+<p><strong>A fairness note you should know.</strong> Aon's own (later-withdrawn) technical documentation, as cited in the ACLU's 2024 FTC complaint, reported <strong>race disparities on gridChallenge</strong> — non-white test-takers scoring lower on average, with the largest gap for Black test-takers. Aon markets the games as bias-reducing; the dispute is unresolved and both positions are recorded in Chapter 9 and the companion guide. <code>[INDEPENDENT — ACLU citing Aon's technical documentation; VENDOR claims contrary]</code></p>
+<h2 id="digitchallenge-mental-arithmetic-based-on-scales-eql">digitChallenge — mental arithmetic (based on scales eql)</h2>
+<p><strong>What it is.</strong> Inverted arithmetic: you see the <strong>answer</strong> and an equation with missing figures; fill in the missing digits (and in some builds, operators) to make it true. <strong>Five minutes, unlimited tasks, adaptive.</strong> <code>[PREP-VENDOR + VENDOR mapping to scales eql]</code></p>
+<p><strong>How it is marked.</strong> Speed + accuracy on the adaptive ladder; demotion on errors; percentile output. <code>[PREP-VENDOR; exact model UNKNOWN]</code></p>
+<p><strong>How to win.</strong> Work backwards from the <strong>units digit</strong>; know times tables cold; use magnitude bounds to reject candidate digits without full computation. As always: early accuracy first, speed second.</p>
+<h2 id="motionchallenge-planning-rush-hour-style">motionChallenge — planning (Rush-Hour-style)</h2>
+<p><strong>What it is.</strong> A ball on a grid must reach an exit; obstacles of different sizes block it; movable obstacles slide horizontally/vertically only when the path is clear; some obstacles are immovable. Solve <strong>in as few moves as possible</strong>. <strong>Six minutes, unlimited puzzles, adaptive.</strong> <code>[PREP-VENDOR consistent]</code></p>
+<p><strong>How it is marked.</strong> Both <strong>throughput and move-efficiency</strong> count — a solved puzzle with wasted moves is worth less. Whether <strong>planning latency</strong> before your first move is itself scored is <code>[UNKNOWN]</code> — the "behavioural data points" marketing implies telemetry like this exists, but nothing is published. <code>[PREP-VENDOR + VENDOR-marketing]</code></p>
+<p><strong>How to win.</strong> This is the one game where <em>pausing is strategy</em>: <strong>plan the complete move sequence before touching anything</strong>, because moves — not seconds — are the scarce currency within each puzzle. Work backwards from the exit: which obstacle must clear the final corridor, and what must move to free it? Committing to a half-plan and improvising is exactly what the efficiency scoring punishes.</p>
+<hr />
+<h2 id="anti-cheat-notes-all-four-games">Anti-cheat notes (all four games)</h2>
+<p>The games inherit the platform's strongest protections: <strong>item streams are generated per candidate and the path adapts to your answers</strong>, so no two candidates play the same sequence and leaked "answer keys" are meaningless — the realistic threat model is a proxy player, against which the (optional) webcam proctoring and any later supervised re-test are the controls (Chapter 9). No game-specific telemetry disclosure exists <code>[UNKNOWN]</code>, but platform-wide <strong>window-switch logging</strong> is confirmed. The honest-candidate implications: play in one clean sitting on a stable connection, and don't be alarmed by the difficulty ramp — feeling out of your depth by the end is the adaptive design working, and it means climbing, not failing.</p>
+<h2 id="practice-all-four">Practice (all four)</h2>
+<p>Because content is generated and adaptive, <strong>memorising questions is worthless — practice buys mechanic familiarity and speed automation</strong>, which is genuinely valuable (especially operator-reading in switchChallenge and slide-heuristics in motionChallenge). Free: <strong>Aon's own demo video of the series</strong> (the best authentic look at the real UI), AssessmentDay's free gamified samples, GraduatesFirst's guide. Paid: JobTestPrep's smartPredict pack (interactive replicas of all four with unlimited generated items), and its P&amp;G-flavoured grid/switch/digit pack. <code>[PREP-VENDOR — compared properly in Chapter 10]</code> One employer-specific data point circulating: JobTestPrep claims under 20% pass P&amp;G's full interactive assessment, with a 12-month reapply cooldown — P&amp;G-specific, unverified, and a reminder that thresholds are employer property, not game property. <code>[PREP-VENDOR, unverified]</code></p></section><section class="chapter" id="ch-05-chatassess-squares"><h1 class="chaptertitle">Chapter 5 — chatAssess (the messaging-simulation SJT) and squares (the integrity questionnaire)</h1><p>These two instruments measure judgement and character rather than speed — and their scoring logic is entirely different from the ability tests: <strong>there is no negative marking here, because there are no "wrong answers" in the arithmetic sense.</strong> Instead, your responses are matched against a key or profile the employer helped build. That changes both how you prepare and what "cheating" even means.</p>
+<hr />
+<h2 id="chatassess-the-situational-judgement-test-in-a-messaging-app">chatAssess — the situational judgement test in a messaging app</h2>
+<p><strong>What it is.</strong> Aon's flagship simulation: "a <strong>customised situational judgement questionnaire embedded into an instant-messaging simulation</strong> for smart devices." <code>[VENDOR — verbatim from Aon's Rolls-Royce case study PDF]</code> The interface is a messenger app: named virtual colleagues ("Sarah Walford", "Daniel Popper" in the vendor's screenshots) send you messages — sometimes with images or video attached — and you reply by choosing from <strong>multiple-choice message bubbles</strong>. New messages keep arriving during the assessment, <strong>including replies to what you sent</strong>, so it plays as a flowing conversation; whether the storyline genuinely <em>branches</em> on your choices is <code>[UNKNOWN]</code> — the documented behaviour is responsive messaging, not confirmed adaptive branching. It runs about <strong>20 minutes</strong> under an overall time limit rather than per-message clocks — though note that <strong>response latency may be recorded even where nothing is visibly timed</strong>. <code>[VENDOR + PREP-VENDOR]</code> (JobTestPrep sells a "90-minute chatAssess simulation" — that is the <em>practice product's</em> length, not the real test's; a conflict worth resolving explicitly since it misleads candidates about the commitment. <code>[PREP-VENDOR]</code>)</p>
+<p><strong>How it is marked.</strong> Your chosen replies are compared against <strong>employer-keyed "best-fit" responses</strong> — the key is built with the hiring organisation against its values and competency framework — and benchmarked against a norm group, producing a <strong>percentile plus per-competency sub-scores</strong> (communication, drive, analysis, decision-making, adaptability, social interaction, workplace judgement — the exact set varies by build). There is <strong>no universal pass mark</strong>: the "right" answer at one firm can be mediocre at another, because the key encodes that firm's culture. <code>[PREP-VENDOR + VENDOR structure]</code></p>
+<p><strong>Bespoke per employer — confirmed at the source.</strong> The Rolls-Royce case study describes a chatAssess <strong>custom-built</strong> for RR's Business and Engineering graduate streams. <code>[VENDOR]</code> In finance, JobTestPrep names <strong>Morgan Stanley, Deloitte and Credit Suisse</strong> among users <code>[PREP-VENDOR]</code>; the companion guide's Morgan Stanley chapter documents an email/inbox-style SJT keyed to the Business Unit applied to — the same product family. The practical meaning: <strong>research the firm before the SJT, because the firm wrote the answer key.</strong></p>
+<p><strong>The vendor's own performance claims</strong> — worth knowing, tagged as the case-study marketing they are <code>[VENDOR — Rolls-Royce case study]</code>: high chatAssess scorers were "50% more likely to get a job" and "65% more likely to perform highly at the assessment centre"; completion rates rose sharply when it replaced conventional tests (Business stream 74%→96%); over 60% of graduates preferred it to previous online assessments. Whatever the spin, the underlying signal is real: employers weight this instrument, and candidates under-prepare for it relative to the numerical tests.</p>
+<p><strong>How to win.</strong>
+1. <strong>Learn the firm's published values and competency language first</strong> — this is legitimate and decisive, because the key is literally derived from them.
+2. Apply the standard SJT keying logic (companion guide, Chapter 6.4): responses showing <strong>ownership, constructive direct communication, and proportionate escalation</strong> key high; avoidance, blame, and reflexive escalation key low.
+3. <strong>Stay in character consistently.</strong> The virtual colleagues' threads interleave; answering one storyline as a diplomat and another as a steamroller reads as incoherent judgement.
+4. Don't rush — but don't stall either, since latency may be logged. Read each incoming message fully; some carry information that re-frames an earlier thread.</p>
+<p><strong>Anti-cheat notes.</strong> Unlike the ability tests, <strong>chatAssess content is not randomised per candidate</strong> — scenarios are fixed per employer build (the vendor's parallel-forms technology covers the <em>aptitude</em> instruments). Within one employer's cycle, answer-sharing is therefore theoretically possible, and the counter-measures are content refresh, the employer-specific key (a shared "best answer" from last year's build may simply be wrong this year), and latency telemetry. <code>[INFERRED + PREP-VENDOR; specifics UNKNOWN]</code> For you, the flip side matters more: <strong>coaching folklore about "the right chatAssess answers" is unreliable by construction</strong>, because keys differ by firm.</p>
+<hr />
+<h2 id="squares-the-integrity-counterproductive-work-behaviour-questionnaire">squares — the integrity / counterproductive-work-behaviour questionnaire</h2>
+<p><strong>What it is.</strong> cut-e's dedicated <strong>integrity test</strong> — designed to "predict unproductive behaviours at work": proneness to <strong>counterproductive work behaviour (CWB)</strong> — the vendor's list runs "distraction, boredom, superficiality, indifference, ambiguity, opportunism." It is built on a <strong>situational model of CWB</strong> which the vendor argues "does not stigmatise" and "offers the opportunity for change through training," improving candidate acceptance. Deployed for security- and risk-heavy roles especially, but positioned as valid for all jobs — and also used for tenure and safety prediction. <code>[VENDOR — catalogue snippet + the cut-e vendor deck]</code></p>
+<p><strong>Format.</strong> Around <strong>10 minutes</strong> of self-descriptive statements answered on a <strong>sliding scale with three anchors — "holds less true for me than for others" / "equally true" / "more true for me than for others"</strong> — a <em>self-versus-others comparative</em> idiom shared with the shapes/views family (any position on the slider is selectable). <code>[PREP-VENDOR — psychometrictests.org]</code> One source family claims "~150 questions," which is implausible in 10 minutes and likely conflates squares with the full shapes battery — both figures are recorded, exact item count <code>[UNKNOWN]</code>. <code>[conflict noted]</code></p>
+<p><strong>How it is marked.</strong> Six scales — how <strong>empathetic, honest, reflective, disciplined, conscientious and cautious</strong> you are, grouped into ethical awareness and impulse control — scored as a <strong>profile matched against an "ideal candidate" profile</strong> (often alongside shapes results), with a risk-flag output for CWB-proneness. Not a percentile ladder; a fit-and-risk read. <code>[VENDOR snippet + PREP-VENDOR]</code></p>
+<p><strong>Faking detection:</strong> <code>[UNKNOWN]</code> — no source documents a lie/social-desirability scale for squares specifically. The comparative-slider format itself is argued (for the cut-e questionnaire family generally) to resist extreme-response faking, since "more true for me than for others" invites calibration rather than maximal self-praise. <code>[INFERRED from format; not vendor-confirmed]</code></p>
+<p><strong>How to win — and why "winning" is the wrong frame here.</strong> An integrity test is the one instrument where strategic answering is both most tempting and most dangerous. The desirable direction of most items is transparent (be honest, be disciplined) — but the profile is matched, not maximised, and a saint-shaped profile on a <em>self-versus-others</em> scale ("I am more honest than everyone, more cautious than everyone, more disciplined than everyone…") is exactly the pattern a matched-profile system reads as non-credible. The defensible approach: answer <strong>truthfully, calibrated against real other people</strong>, lean genuinely toward the conscientious end where it is genuinely you, and keep your answers consistent with the shapes profile you gave (where both run, they are read together). And remember the sharpest practical point: anything you claim here can be probed at interview — prep sources note candidates who distort "might get further questions at a later stage for verification." <code>[PREP-VENDOR + INFERRED]</code></p>
+<p><strong>Anti-cheat notes.</strong> As with chatAssess, content is fixed rather than candidate-randomised; the integrity protections are the format's own resistance, cross-instrument consistency reading, and downstream verification at interview. Session telemetry (Chapter 9) applies as everywhere on mapTQ.</p></section><section class="partdiv" id="part-part-iii-personality-motivation-video"><h1 class="parttitle">Part III — Personality, Motivation &amp; Video</h1></section><section class="chapter" id="ch-06-personality-motivation"><h1 class="chaptertitle">Chapter 6 — Personality &amp; Motivation: shapes, views, motive.q and ADEPT-15</h1><p>Aon runs two personality lineages side by side: the <strong>cut-e questionnaire family</strong> (shapes, views, motive.q) built on its "adalloc" allocation format, and the US-lineage <strong>ADEPT-15</strong> inherited from Aon Hewitt. They share one strategic truth — <strong>none of them can be beaten by picking "good" answers, because none of them scores answers as good or bad</strong> — but their mechanics differ enough to matter.</p>
+<hr />
+<h2 id="shapes-the-adaptive-personality-questionnaire">shapes — the adaptive personality questionnaire</h2>
+<p><strong>What it is.</strong> cut-e's flagship personality instrument, and mechanically the most unusual in this report. Each page presents a <strong>block of three statements</strong>, and you <strong>allocate six points across the three</strong> to weight how well each describes you — cut-e's patented <strong>adalloc™</strong> ("Adaptive Allocation of Consent") format. It is a <em>self-description</em> questionnaire covering work behaviours, potentials and competencies. <code>[VENDOR — the cut-e vendor deck, verbatim descriptions]</code></p>
+<p>Two design features most candidates never learn:</p>
+<ul>
+<li><strong>It is adaptive — in a personality test.</strong> Which statements get grouped together on later pages <strong>depends on your earlier answers</strong>: the engine re-pairs statements to sharpen discrimination between traits you rated similarly, which is how "a highly sophisticated profile" comes from "a very short questionnaire" (~15–20 minutes, no per-item clock). <code>[VENDOR]</code></li>
+<li><strong>Even the personality items are randomly drawn</strong> from an item pool — per-candidate variation extends beyond the ability tests. <code>[VENDOR deck — "random item selection and adalloc™ measuring technology"; note this corrects prep-vendor claims that only aptitude tests randomise]</code></li>
+</ul>
+<p><strong>The six variants — verified from the vendor's own deck</strong> <code>[VENDOR]</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Variant</th>
+<th>Scales</th>
+<th>Items per scale</th>
+<th>Built for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>shapes <strong>basic</strong></td>
+<td>15</td>
+<td>6</td>
+<td>Administrative staff &amp; apprentices</td>
+</tr>
+<tr>
+<td>shapes <strong>graduate</strong></td>
+<td><strong>18</strong></td>
+<td>6</td>
+<td><strong>Graduates (the one you'll meet)</strong></td>
+</tr>
+<tr>
+<td>shapes <strong>sales</strong></td>
+<td>24</td>
+<td>6</td>
+<td>Sales / direct customer contact</td>
+</tr>
+<tr>
+<td>shapes <strong>expert</strong></td>
+<td>18</td>
+<td>8</td>
+<td>Specialists without management duties</td>
+</tr>
+<tr>
+<td>shapes <strong>management</strong></td>
+<td>18</td>
+<td>8</td>
+<td>Middle/senior management</td>
+</tr>
+<tr>
+<td>shapes <strong>executive</strong></td>
+<td>24</td>
+<td>8</td>
+<td>Senior management</td>
+</tr>
+</tbody>
+</table>
+<p>The management variant's dimensions give the flavour of what's measured: Influence, Networking, Execution, Systematic approach, Constructive teamwork, Vision and strategy, Initiative and responsibility, Steadiness, Bottom-line focus, Analysis and judgement, Innovation, Self-development, and so on. <code>[VENDOR deck]</code></p>
+<p><strong>How it is marked.</strong> Your allocations build a <strong>trait profile</strong>, which is matched against a <strong>role or "ideal candidate" competency profile</strong> chosen by the employer. No absolute pass/fail; fit is the output. <code>[VENDOR structure + PREP-VENDOR]</code> The anti-faking control is <strong>built into the format</strong>: six points across three statements is zero-sum — you <em>cannot</em> rate everything "very me" — and the adaptive re-pairing keeps re-testing the same traits in fresh combinations, so a fabricated persona has to be maintained consistently across dozens of shifting trade-offs. A named lie/consistency index is <code>[UNKNOWN — not documented]</code>; the format is the control. One prep source adds the practical deterrent: distorted answers "might get further questions at a later stage for verification" — your interview panel reads this profile. <code>[PREP-VENDOR]</code></p>
+<p><strong>How to win.</strong> Decide before you start which authentic version of yourself fits the role (read the firm's competency language), then <strong>allocate decisively and consistently from that persona</strong>. Wild point-splitting (2-2-2 on every page) produces a flat, incoherent profile; so does flipping persona mid-test. The trade-off format actually favours the honest candidate: real preferences are easy to reproduce consistently for twenty minutes, fabricated ones are not.</p>
+<h2 id="views-values-motives-and-interests">views — values, motives and interests</h2>
+<p><strong>What it is.</strong> The person–culture fit questionnaire: <strong>18 value characteristics in three areas</strong> — <strong>Objectives</strong> (professional challenge, recognition, financial reward, development, fun at work, identification), <strong>Relationships</strong> (harmony, honesty, cooperativeness, security, fairness, hierarchy), and <strong>Environment</strong> (structure, rate of change, integrity, absence of stress, influence, working environment). <strong>108 items in blocks of three = 36 pages</strong>, same six-point adalloc allocation, 15–20 minutes, adaptive like shapes. <code>[VENDOR deck — verbatim value model]</code></p>
+<p><strong>How it is marked.</strong> A <strong>preferences profile</strong> matched against the employer's culture/values profile. Genuinely no right answers — this is two-way matching, and it is the one instrument where "gaming" is most obviously self-defeating: talking your way into a culture you'd hate is a cost you pay later, in the job. <strong>How to approach it:</strong> answer honestly and let it work as the fit-check it is.</p>
+<h2 id="motiveq-the-motivation-questionnaire-legacy-still-live-at-clients">motive.q — the motivation questionnaire (legacy, still live at clients)</h2>
+<p><strong>What it is.</strong> The cut-e motivation questionnaire — reportedly still part of <strong>Deutsche Bank's</strong> battery alongside scales numerical and verbal. <code>[PREP-VENDOR, repeated across guides]</code> It is assessed <strong>against a role-specific profile</strong> — "the ideal score depends on what the employer is hiring for." <code>[PREP-VENDOR]</code> It does not appear in the core cut-e product deck, suggesting a separate/regional lineage; its current catalogue status, and any relationship to a successor "drives"-style product, is <code>[UNKNOWN]</code>. Treat it as live where prep guides still document it, and approach it exactly like views: honest, role-aware, consistent.</p>
+<h2 id="adept-15-aons-us-lineage-adaptive-personality-test">ADEPT-15 — Aon's US-lineage adaptive personality test</h2>
+<p><strong>What it is.</strong> Aon's other personality flagship: <strong>15 personality "aspects"</strong> (ten mapping to the Big Five plus five leadership-relevant additions — names include Awareness, Positivity, Liveliness, Sensitivity, Drive), grouped into six higher-order styles (Task, Adaptation, Achievement, Interaction, Emotional, Teamwork). Delivered as a <strong>computerised-adaptive test</strong>: pairs of statements, and you indicate <strong>which you agree with more and how strongly</strong> (a slider between the pair), across roughly 25–30 minutes, usually untimed. The version in Aon's own technical documentation was <strong>7.1 (November 2022)</strong>. <code>[VENDOR + INDEPENDENT — the ACLU model cards, which cite Aon's technical documentation]</code></p>
+<p><strong>How it is marked — the deepest psychometrics in the catalogue.</strong> The forced-choice pairs are scored with <strong>IRT models — MUPP (Multi-Unidimensional Pairwise Preference) and GGUM (Generalized Graded Unfolding Model)</strong> — and the adaptive algorithm picks each next pair based on your prior responses. <code>[VENDOR technical documentation, corroborated across academic and Aon sources]</code> Output: scores on all 15 aspects (or an employer-configured subset), which can be composited with other instruments — including gridChallenge — into ranked candidate lists. <code>[INDEPENDENT — ACLU citing Aon docs]</code> The faking-resistance argument is the standard forced-choice one, with independent meta-analytic support at the <em>format</em> level: desirability-matched pairs remove the "agree with everything nice" strategy, and adaptivity means your own answers steer which trade-offs you face next. A named social-desirability index: <code>[UNKNOWN]</code>.</p>
+<p><strong>The fairness dispute — recorded both ways, because it matters to this report's audience.</strong> In 2024 the <strong>ACLU filed an FTC complaint</strong> alleging that ADEPT-15's constructs are "closely tied to characteristics commonly associated with autism and mental-health diagnoses," that Aon's "bias-free" marketing overstates the evidence, and that the technical documentation shows no autism- or mental-health-specific mitigation. Aon's marketing asserts the opposite — designed from the ground up for minimal demographic differences, including disability. The technical documentation itself was withdrawn from public availability. Neither position has been adjudicated; both are recorded, and the practical takeaway for a neurodivergent candidate is the companion guide's standing advice — <strong>request adjustments in writing, in advance, through the employer</strong>, where the Equality Act 2010 duty attaches. <code>[INDEPENDENT (ACLU) vs VENDOR — unresolved]</code></p>
+<p><strong>How to win.</strong> As with every forced-choice instrument in this guide family: know the role's competency model, answer as your genuine relevant self, <strong>decisively and consistently</strong>, and don't attempt trait-inflation — the pairing format spends your every attempt to look perfect on a trade-off against something else desirable, and inconsistency is itself a signal. The adaptive delivery means there is no answer key even in principle: your test is assembled live from your own responses.</p></section><section class="chapter" id="ch-07-vidassess"><h1 class="chaptertitle">Chapter 7 — vidAssess-AI: The Video Interview</h1><p><strong>What it is.</strong> Aon's asynchronous ("one-way") video interview. The employer configures <strong>up to 10 questions</strong> — drawing on a bank of 600+ or writing their own — and, critically, sets <strong>per question</strong> the recording time and the <strong>number of retries</strong>. Questions are presented sequentially; you record your answers to camera in your own time before the deadline. <code>[VENDOR — product pages; PREP-VENDOR]</code> The classic "vidAssess" (without AI) also exists as plain competency-based video interviewing that humans review; "vidAssess-AI" adds the machine-scoring layer. <code>[VENDOR — cut-e deck lineage]</code></p>
+<h2 id="how-it-is-marked-what-the-ai-actually-scores">How it is marked — what the AI actually scores</h2>
+<p>The pipeline is documented, and its two most important facts cut in opposite directions:</p>
+<ol>
+<li><strong>No facial analysis.</strong> vidAssess-AI runs <strong>speech-to-text transcription, then NLP scoring of the transcript</strong> — it "scans the words spoken." Your face, expressions, eye movements and body language are <strong>not</strong> scored by the algorithm. <code>[VENDOR — explicit; consistent with the industry's post-2021 retreat from facial analysis, see the companion guide's HireVue chapter]</code></li>
+<li><strong>The NLP scores your words against personality constructs — specifically ADEPT-15's.</strong> Per the ACLU's model cards, which cite Aon's own technical documentation: employers' questions are <strong>mapped to specific ADEPT-15 constructs</strong>, and the NLP <strong>associates words and phrases in your transcript with those personality constructs</strong>. In other words, the AI layer is not a generic "answer quality" grader — it is, in effect, <strong>a language-based personality scorer</strong>. <code>[INDEPENDENT — ACLU citing Aon technical documentation pp. 89–97; the strongest single finding in this chapter]</code></li>
+</ol>
+<p>Scores are reported to employers per competency/construct "in a variety of formats"; recruiters can also watch the recordings themselves, and whether a human reviews before decisions is an <strong>employer configuration</strong>, not a vendor guarantee. <code>[VENDOR; UNKNOWN per deployment]</code> Retakes: whatever the employer set per question — there is no universal retake right. <code>[VENDOR]</code></p>
+<h2 id="the-fairness-conflict-recorded-both-ways">The fairness conflict — recorded both ways</h2>
+<p>Aon markets vidAssess-AI as fair and bias-minimising (and describes it as patented). The ACLU counters that <strong>speech-to-text and NLP systems perform measurably worse for Black speakers, non-native English speakers, and speakers with speech or other disabilities</strong> — so a transcript-scoring pipeline risks importing transcription error into personality inference, compounding the ADEPT-15 concerns of Chapter 6. Unadjudicated; both recorded. <code>[VENDOR vs INDEPENDENT]</code> The practical protections for an affected candidate: speak slightly slower and more clearly than feels natural (cleaner transcription is directly in your interest since <em>words are the only signal</em>), give full-length answers (thin transcripts are thin evidence), and request an adjustment or alternative format in advance where a speech difference or disability is in play.</p>
+<h2 id="how-to-win">How to win</h2>
+<p>Everything from the companion guide's async-video method applies (Chapter 8 there: STAR/CARL structure, headline-first openings, ~100–125 words per minute, story bank, lens-eye-contact for the human reviewer). The vidAssess-specific edge comes from knowing what the machine reads:</p>
+<ul>
+<li><strong>Your words are the entire algorithmic signal.</strong> Polish the <em>content</em>: concrete actions, first-person ownership ("I analysed… I decided…"), results with numbers, and vocabulary that reflects the competencies the question is transparently probing (a resilience question is looking for the language of persistence, learning and composure — say the substance, and the words follow).</li>
+<li><strong>Fill the allotted time with substance.</strong> Transcript-based scoring cannot reward what you didn't say; a 30-second answer to a 2-minute window is self-sabotage.</li>
+<li><strong>Use your retries deliberately</strong> where the employer allows them: first take for structure, second for delivery. Whether reviewers see the number of takes is undocumented <code>[UNKNOWN]</code> — assume they might and don't burn ten.</li>
+<li><strong>Don't script and read.</strong> Flat, read-aloud delivery is obvious to human reviewers, and bullet-prompt speaking produces more natural, better-transcribed speech anyway.</li>
+</ul>
+<h2 id="anti-cheat-notes">Anti-cheat notes</h2>
+<p>vidAssess <strong>cannot be combined with Aon's virtual proctoring</strong> — the flyer states proctoring "cannot be added to those assessments which already access the device's camera." The camera itself is the integrity layer: you are visibly you, on the record. <code>[VENDOR]</code> The realistic integrity checks are identity (the recording), response-similarity to coached scripts (undocumented for Aon, <code>[UNKNOWN]</code>), and simple human review. The honest-candidate rules: sit it alone, front-lit, on a stable connection; notes as bullet prompts beside the camera, not scripts in front of it.</p></section><section class="partdiv" id="part-part-iv-scoring-integrity-consolidated"><h1 class="parttitle">Part IV — Scoring &amp; Integrity, Consolidated</h1></section><section class="chapter" id="ch-08-how-aon-marks"><h1 class="chaptertitle">Chapter 8 — How Aon Marks You: The Consolidated Scoring Reference</h1><p>This chapter consolidates everything this report established about marking into one reference — because <em>how the points work</em> changes what you should do in the test, and it is precisely what the vendor least advertises.</p>
+<h2 id="the-master-marking-table">The master marking table</h2>
+<table>
+<thead>
+<tr>
+<th>Instrument</th>
+<th>What earns points</th>
+<th>Penalty for errors</th>
+<th>Blanks</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>scales numerical</strong></td>
+<td>+1 per correct T/F/Cannot-Say judgement</td>
+<td><strong>−0.5 per wrong</strong> <code>[VENDOR-VIA-CLIENT — official]</code></td>
+<td><strong>0</strong> (official)</td>
+<td>Raw → percentile vs norm</td>
+</tr>
+<tr>
+<td><strong>scales verbal</strong></td>
+<td>+1 per correct</td>
+<td><strong>−0.5 per wrong</strong> <code>[official, same source]</code></td>
+<td>0</td>
+<td>Raw → percentile</td>
+</tr>
+<tr>
+<td><strong>scales cls</strong></td>
+<td>Correct classifications</td>
+<td><strong>Negative marking confirmed; magnitude unstated</strong> <code>[VENDOR-VIA-CLIENT]</code></td>
+<td>0 (official)</td>
+<td>Raw → percentile</td>
+</tr>
+<tr>
+<td><strong>scales clx / ix / eql / e3+ / mtu / specials</strong></td>
+<td>Correct answers within the clock</td>
+<td>Family negative marking <code>[PREP-VENDOR]</code>; magnitudes <code>[UNKNOWN]</code></td>
+<td>Presumed 0</td>
+<td>Raw → percentile</td>
+</tr>
+<tr>
+<td><strong>scales lst</strong> (adaptive)</td>
+<td>Ability estimate from level + accuracy</td>
+<td><strong>Demotion to smaller grids</strong> caps ceiling; explicit deduction <code>[UNKNOWN]</code></td>
+<td>n/a</td>
+<td>Percentile (stable estimate)</td>
+</tr>
+<tr>
+<td><strong>smartPredict games</strong> (switch/grid/digit/motion)</td>
+<td>Volume × difficulty tier on an <strong>adaptive ladder</strong>; motionChallenge also scores <strong>move-efficiency</strong></td>
+<td><strong>Demotion</strong> to lower-value items — "limiting your score potential"; explicit deduction <code>[UNKNOWN]</code></td>
+<td>n/a</td>
+<td>Percentile vs norm</td>
+</tr>
+<tr>
+<td><strong>chatAssess</strong> (SJT)</td>
+<td>Match to <strong>employer-keyed best-fit responses</strong></td>
+<td>No arithmetic penalty — un-keyed choices simply score lower</td>
+<td>n/a</td>
+<td>Percentile + per-competency sub-scores</td>
+</tr>
+<tr>
+<td><strong>shapes / views / motive.q</strong></td>
+<td>Profile built from zero-sum 6-point allocations</td>
+<td>None — <strong>profile-match</strong>, not points</td>
+<td>n/a</td>
+<td>Fit vs role/culture profile</td>
+</tr>
+<tr>
+<td><strong>squares</strong> (integrity)</td>
+<td>Six-scale profile vs "ideal candidate"</td>
+<td>None — profile + CWB risk-flag</td>
+<td>n/a</td>
+<td>Fit + risk read</td>
+</tr>
+<tr>
+<td><strong>ADEPT-15</strong></td>
+<td>IRT (MUPP/GGUM) estimates from forced-choice pairs</td>
+<td>None — trait estimation</td>
+<td>n/a</td>
+<td>15 aspect scores; composites/ranks</td>
+</tr>
+<tr>
+<td><strong>vidAssess-AI</strong></td>
+<td>NLP association of your transcript's words with mapped (ADEPT-15) constructs</td>
+<td>None — thin/off-construct answers score low</td>
+<td>n/a</td>
+<td>Per-competency scores; human review varies</td>
+</tr>
+</tbody>
+</table>
+<h2 id="the-five-rules-this-table-implies">The five rules this table implies</h2>
+<p><strong>1. On the classic ability tests, the marking is +1 / −0.5 / 0 — so guessing policy is everything.</strong> The −0.5 penalty (documented verbatim in Aon's own candidate instructions for numerical and verbal, with negative marking confirmed-but-unquantified for cls and prep-vendor-supported family-wide) is calibrated so that a <strong>blind guess on a three-option item has exactly zero expected value</strong>: ⅓(+1) + ⅔(−0.5) = 0. <code>[INFERRED — arithmetic from the official formula]</code> The operating rules that follow:
+   - <strong>Eliminate one option and the guess turns profitable</strong> (EV +0.25 between two remaining options). Commit.
+   - <strong>Can't eliminate anything? Leave it blank.</strong> Blanks officially score zero — they are a <em>tool</em>, not a failure.
+   - <strong>Never spray answers at time-out.</strong> On Aon (unlike SHL) the end-of-test scramble to fill every remaining item is score-neutral at best and actively harmful with any option-count above three.
+   - Two wrong answers erase one correct one. Accuracy is literally worth double what it looks like.</p>
+<p><strong>2. On adaptive instruments, the penalty is your ceiling, not your total.</strong> The games and lst punish errors by <strong>demoting you to easier, lower-value content</strong> — and recovery is slow ("the more questions you get wrong, the harder it is to recover"). Early accuracy therefore buys more than late speed, everywhere the ladder exists.</p>
+<p><strong>3. On judgement and personality instruments, there are no points to lose — only a profile to fit.</strong> chatAssess is keyed to <em>the employer's</em> values; shapes/views/squares/ADEPT-15 match you against role or culture profiles. Maximal answering is either impossible by format (zero-sum allocations, forced-choice pairs) or self-defeating (non-credible saint profiles). The scoring rewards <strong>consistency and authenticity aimed at the role</strong> — which is why the "how to win" advice for these is behavioural, not tactical.</p>
+<p><strong>4. Every score becomes a percentile against a norm group you don't choose.</strong> The mapTQ login flow collects your country, age band, education and occupational area <strong>specifically to place you in a norm group</strong> <code>[VENDOR-VIA-CLIENT]</code>; adaptive tests output stable percentile estimates; and the employer then applies its own threshold. <strong>There is no universal pass mark anywhere in the catalogue.</strong> The prep-vendor cut-off folklore (50th–80th percentile depending on competitiveness) remains estimate-grade — see the companion guide's Chapter 2 for the full treatment and the register in Chapter 11 here.</p>
+<p><strong>5. Batteries are multi-hurdle.</strong> A finance deployment typically stacks 3–5 instruments (e.g. Morgan Stanley: numerical + verbal + logical + SJT within 48 hours of application). Each module is normed and thresholded separately in the standard configuration — a stellar numerical does not rescue a failed verbal — so preparation must cover the whole battery, weighted toward your weakest module. <code>[PREP-VENDOR + INFERRED, per the companion guide]</code></p>
+<h2 id="what-the-recruiter-sees">What the recruiter sees</h2>
+<p>A dashboard of <strong>per-module percentiles</strong>, any SJT competency sub-scores, personality/values profiles against the role model, and — where enabled — proctoring output (Chapter 9). Candidates typically see none of it. Your one lever for transparency after the fact is a <strong>UK GDPR Article 15 subject-access request</strong> through the employer, which can legitimately ask for your raw and scaled scores, the norm group applied, and any threshold outcome — the companion guide's Chapter 6.7 carries the template.</p>
+<h2 id="the-honest-boundary-of-this-chapter">The honest boundary of this chapter</h2>
+<p>The −0.5 figure is documented for one client deployment of two tests; whether it is universal or configurable, and every other magnitude in the catalogue, is <code>[UNKNOWN]</code> and logged in Chapter 11. Nothing in this chapter is invented; where the table says unknown, that is the state of the public record — and the strategy rules above are chosen to be <strong>robust to every reported variant</strong> of the unknown parameters.</p></section><section class="chapter" id="ch-09-anti-cheating"><h1 class="chaptertitle">Chapter 9 — The Anti-Cheating Architecture</h1><p>This is the report's flagship chapter, built substantially from <strong>Aon's own documents</strong> — the cut-e design deck and the Virtual Proctoring flyer — rather than folklore. Aon's integrity model is unusual and worth understanding precisely, because it is <strong>preventive by design rather than surveillant by default</strong>: the system is built so that cheating barely pays, monitoring is a bolt-on the employer chooses, and verification (not accusation) is the endgame. For an honest candidate — especially one who has been falsely flagged elsewhere — this is one of the most benign integrity environments in the industry. Here is the whole machine, layer by layer.</p>
+<h2 id="layer-1-design-security-tests-that-make-cheating-pointless">Layer 1 — Design security: tests that make cheating pointless</h2>
+<p>The vendor's own instrument-security principles, verbatim from its design deck <code>[VENDOR — primary]</code>:</p>
+<ul>
+<li><strong>"Item generation"</strong> — test items are generated rule-based/parameterised, not drawn from a small static pool;</li>
+<li><strong>"Individual parallel versions (sample solutions do NOT exist!)"</strong> — every candidate receives a psychometrically parallel but <em>different</em> test;</li>
+<li><strong>"Cheat-proof — our unique technology ensures that a different test is generated for each participant"</strong> (the scales marketing line);</li>
+<li><strong>adalloc™</strong> randomisation extends item-level variation even into the personality questionnaires.</li>
+</ul>
+<p>The consequences are structural. <strong>Leaked question banks and answer keys are worthless</strong> — there is no fixed form to leak. <strong>Collusion between candidates fails</strong> — your friend's test was not your test. On the adaptive instruments (lst, the four games, shapes, ADEPT-15) the test's <em>path</em> additionally depends on your own answers, so no two sittings are even structurally identical. And the extreme time pressure does quiet integrity work too: with ~15 seconds per item, a helper on a second device or a lookup adds latency the format cannot absorb — though note honestly that the vendor sells short-timed tests as <em>efficiency</em>, and the anti-collusion effect is inference and prep-vendor commentary rather than a vendor claim. <code>[VENDOR + INFERRED/PREP-VENDOR]</code></p>
+<p>The exceptions matter: <strong>chatAssess scenarios and squares items are fixed per employer build</strong>, not per-candidate randomised — so within one employer's cycle, answer-sharing is <em>theoretically</em> possible there. The countermeasures are employer-specific keys (a shared "best answer" from another firm or year is simply wrong), content refresh, and latency telemetry. <code>[INFERRED + PREP-VENDOR; specifics UNKNOWN]</code></p>
+<h2 id="layer-2-platform-telemetry-what-maptq-logs-on-everyone">Layer 2 — Platform telemetry: what mapTQ logs on everyone</h2>
+<p>Two things are documented, one of them a finding this report can state with unusual confidence:</p>
+<ul>
+<li><strong>Session logging</strong> — time in assessment, connectivity, actions; a started test cannot be paused or resumed, and closing/refreshing/back-navigating can <strong>block you from the test</strong>. <code>[VENDOR-VIA-CLIENT — mapTQ candidate instructions]</code></li>
+<li><strong>Window-switch telemetry exists platform-wide — including on unproctored sittings.</strong> The proof is in Aon's own proctoring flyer, which reports the percentage of candidates who "switched away from the active test window" in <strong>both</strong> proctored <strong>and unproctored</strong> settings (12.3% vs 19.4% — see Layer 3). You cannot report a number you did not measure: <strong>mapTQ logs tab/window focus regardless of whether proctoring is on.</strong> <code>[VENDOR — deduced directly from Aon's own published statistics]</code></li>
+</ul>
+<p>What is <em>not</em> documented: clipboard monitoring, IP/device fingerprinting, or post-hoc statistical data-forensics beyond the photo-comparison ratings below — all <code>[UNKNOWN]</code>. The honest reading is that Aon's telemetry is real but narrow, and nothing suggests a hair-trigger.</p>
+<h2 id="layer-3-optional-monitoring-aon-virtual-proctoring-fully-documented">Layer 3 — Optional monitoring: Aon "Virtual Proctoring", fully documented</h2>
+<p>Where an employer switches it on, Aon's virtual proctoring runs a four-step, consent-first workflow <code>[VENDOR — the proctoring flyer, full text]</code>:</p>
+<ol>
+<li><strong>Consent</strong> — you are asked to agree to proctoring before anything is captured;</li>
+<li><strong>Reference photo</strong> — one identity snapshot;</li>
+<li><strong>"Protecting"</strong> — further webcam <strong>photos periodically throughout the assessment</strong> (snapshots, <em>not</em> continuous video);</li>
+<li><strong>Rating</strong> — the "Eye in the Sky" system compares photos and <strong>flags inconsistencies</strong> — is it the same person throughout, is a second face or a phone visible — producing an algorithmic <em>likelihood</em> rating, not a verdict.</li>
+</ol>
+<p>It also watches navigation ("spots those who may be accessing other sites"). Critically, <strong>the employer — not Aon — decides everything consequential</strong>: whether proctoring is mandatory or opt-out-able, and what happens on a flag. It cannot run on vidAssess (the camera is already in use). Refusal-consequences are therefore employer policy; if you have privacy concerns, the flyer's own framing gives you standing to ask the recruiter what the opt-out means in practice. <code>[VENDOR]</code></p>
+<p><strong>Aon's own numbers (internal study, n &gt; 30,000, self-reported)</strong> <code>[VENDOR study]</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Signal</th>
+<th>Unproctored</th>
+<th>Proctored</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"Moderate cheating likelihood" rating</td>
+<td><strong>6.52%</strong></td>
+<td>2.25%</td>
+</tr>
+<tr>
+<td>"High cheating likelihood" rating</td>
+<td>0.07%</td>
+<td>0.02%</td>
+</tr>
+<tr>
+<td>Switched away from test window ≥ once</td>
+<td><strong>19.4%</strong></td>
+<td>12.3%</td>
+</tr>
+</tbody>
+</table>
+<p>Read these carefully, because they contain the false-positive story the vendor doesn't spell out. First, base rates are tiny — genuine high-likelihood flags are seven in ten thousand. Second, <strong>"likelihood of cheating" is an algorithmic photo-comparison rating, not confirmed cheating</strong> — the gap between 6.52% flagged and any plausible real cheating rate <em>is</em> an unquantified false-positive surface. Third, one in five honest unproctored candidates switched windows at least once — notifications, accidental keystrokes, connection hiccups — which is exactly why a single focus-loss cannot be, and per all available evidence is not, treated as guilt. <code>[INFERRED from the vendor's own figures]</code></p>
+<h2 id="layer-4-verification-the-endgame-is-a-re-test-not-an-accusation">Layer 4 — Verification: the endgame is a re-test, not an accusation</h2>
+<p>The design deck states it in five words: <strong>"onsite re-test for verification is possible."</strong> <code>[VENDOR — verbatim]</code> Because every sitting generates a fresh parallel form, an employer who doubts an online score can simply re-test the candidate under supervision — at the assessment centre, on a new form the candidate has never seen — and compare. Whether Aon currently productises this as a formal statistical verification service (à la SHL's Confidence Indicator) is <code>[UNKNOWN]</code>; the capability is inherent in the parallel-forms design, and prep sources echo it at the behavioural level too: distorted questionnaire answers "might get further questions at a later stage for verification." For you this is the single most useful fact in the chapter: <strong>an honest candidate's best insurance is that they can always reproduce their score.</strong> If you are ever doubted, <em>ask for the supervised re-sit</em> — it is the system working as designed, in your favour.</p>
+<h2 id="what-happens-on-a-flag-and-what-youre-told">What happens on a flag — and what you're told</h2>
+<p>Undocumented, honestly: <code>[UNKNOWN]</code>. The employer receives the proctoring ratings and evidence; no documentation describes automatic rejection, and Aon's structural posture (prevent, then verify) argues against it — but consequences are employer policy, and <strong>no source documents candidates being told they were flagged.</strong> No false-positive cases specific to Aon's proctoring are documented anywhere <code>[UNKNOWN — absence]</code>. The adjacent, well-documented dispute is different in kind: the <strong>ACLU's 2024 FTC complaint and EEOC charges</strong> concern alleged <em>construct</em> unfairness (disability, race) in gridChallenge, ADEPT-15 and vidAssess-AI — assessment fairness, not cheat-flagging — and is recorded both ways in Chapters 4, 6 and 7.</p>
+<h2 id="the-honest-candidates-checklist-aon-specific">The honest candidate's checklist (Aon-specific)</h2>
+<p>The environment is low-surveillance; the risks are technical and behavioural, not paranoid:</p>
+<ul>
+<li><strong>One protected sitting per test</strong> — no pause, no resume; stable connection, ideally wired; close everything else <em>before</em> launching (window-switch is logged even unproctored — give it nothing to log).</li>
+<li><strong>Never close, refresh or back-navigate</strong> — mapTQ can block you.</li>
+<li><strong>Calculator and rough paper are officially fine</strong> for the numerical test — no need to hide ordinary working; where a calculator isn't allowed, you'll be told.</li>
+<li><strong>If proctoring is on</strong>: consent screens tell you; front-light your face, clear the frame of other people and phones, and don't leave frame without need.</li>
+<li><strong>Answer questionnaires as one consistent, authentic persona</strong> — cross-instrument consistency is the behavioural integrity check, and your interviewers will hold your profile.</li>
+<li><strong>If flagged or doubted, request the supervised re-test</strong> — the architecture's own remedy, and the honest candidate's friend.</li>
+<li><strong>Adjustments in advance, in writing, via the employer</strong> — extra time for dyslexia and screen magnifiers are documented accommodations, case-by-case <code>[VENDOR-adjacent]</code>; the request also creates the paper trail that protects you if anything downstream is ever misread.</li>
+</ul></section><section class="chapter" id="ch-10-practice-resources"><h1 class="chaptertitle">Chapter 10 — Practice Resources, Compared Honestly</h1><p>One principle governs everything in this chapter: because Aon's tests are <strong>generated per candidate and often adaptive, memorising questions is structurally worthless.</strong> What practice buys — and it buys a lot — is <strong>mechanic familiarity</strong> (no test-day seconds lost decoding an unfamiliar interface), <strong>automated operations</strong> (percentage change, operator-reading, T/F/Cannot-Say discipline as reflexes), and <strong>pace calibration</strong> under the real clocks. Buy or use practice for those three things only, and judge every resource below against them. All entries are <code>[PREP-VENDOR]</code> unless noted; every commercial provider has an interest in making the tests sound harder than they are.</p>
+<h2 id="start-free-and-start-official">Start free — and start official</h2>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>What it gives you</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Aon's own test demos</strong> <code>[VENDOR]</code></td>
+<td>Every scales test has an untimed instructions-plus-practice phase built in, and Aon hosts public demo/trial versions linked from its product pages (client guides route candidates there)</td>
+<td><strong>The best-matched practice in existence</strong> — the real engine, the real item styles. Use first, always</td>
+</tr>
+<tr>
+<td><strong>Aon's smartPredict demo video (YouTube)</strong> <code>[VENDOR]</code></td>
+<td>The real game UI for all four challenges</td>
+<td>Best free look at authentic game mechanics before you touch a paid replica</td>
+</tr>
+<tr>
+<td><strong>JobTestPrep free cut-e test</strong></td>
+<td>Free sampler of the main scales formats</td>
+<td>Good first diagnostic</td>
+</tr>
+<tr>
+<td><strong>PracticeAptitudeTests — cut-e hub</strong></td>
+<td>Free samples + the family scoring note ("points… deducted for a wrong answer")</td>
+<td>Solid free volume; the scoring documentation earns it a place</td>
+</tr>
+<tr>
+<td><strong>Fintest — cut-e publisher hub</strong></td>
+<td>Free questions with a <strong>finance flavour</strong></td>
+<td>Most relevant free drilling for bank applicants</td>
+</tr>
+<tr>
+<td><strong>GraduatesFirst — Aon/cut-e guide</strong></td>
+<td>The most detailed free UK-facing mechanics walkthrough (all scales + games + personality)</td>
+<td>Read it even if you buy nothing — often free via university careers services</td>
+</tr>
+<tr>
+<td><strong>AssessmentDay</strong></td>
+<td>Free samples + walkthroughs of the <strong>admin/consumer/finance/industry variants</strong></td>
+<td>The variant coverage is unique among free sources</td>
+</tr>
+<tr>
+<td><strong>careerroo / psychometrictests.org / 24practice / assessment-training</strong></td>
+<td>Further free question volume</td>
+<td>Marginal additional value; fine for extra reps</td>
+</tr>
+</tbody>
+</table>
+<h2 id="paid-worth-it-only-for-specific-gaps">Paid — worth it only for specific gaps</h2>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Covers</th>
+<th>Honest assessment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>JobTestPrep cut-e pack</strong></td>
+<td>Simulations of numerical/verbal/cls/clx/ix/lst/eql/mtu</td>
+<td>The broadest replica set; buy if you need timed, format-faithful volume beyond the free tier</td>
+</tr>
+<tr>
+<td><strong>JobTestPrep smartPredict pack</strong></td>
+<td>Interactive replicas of all four games with <strong>unlimited generated items</strong></td>
+<td>The only meaningful way to drill the games at volume; the generated-item design mirrors the real thing's logic</td>
+</tr>
+<tr>
+<td><strong>JobTestPrep chatAssess pack</strong></td>
+<td>A 90-minute extended simulation + 15 SJT practice sets</td>
+<td>Useful for SJT reasoning practice — but remember the real test is ~20 minutes and <strong>keyed to your specific employer's values</strong>, which no generic pack can teach</td>
+</tr>
+<tr>
+<td><strong>Fintest paid tier</strong></td>
+<td>Finance-flavoured numerical/verbal</td>
+<td>Good fit for bank batteries specifically</td>
+</tr>
+<tr>
+<td><strong>12minprep switchChallenge course</strong></td>
+<td>Switch-specific drilling</td>
+<td>Niche; the free operator-reading habit matters more than the paid volume</td>
+</tr>
+<tr>
+<td><strong>Pilot-prep providers</strong> (pilotaptitudetest.com, cadetprep.academy)</td>
+<td>scales mt (avi), nav, cmo aviation batteries</td>
+<td>Only relevant for aviation; noted for completeness</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What not to pay for:</strong> anything promising "real cut-e questions," "leaked banks," or "the answers" — structurally impossible (Chapter 9: "sample solutions do NOT exist"), ethically off-limits for this report, and practically a scam by definition. Also skip duplicate packs: one replica source per format family is enough.</p>
+<h2 id="how-to-practise-the-method-not-just-the-materials">How to practise (the method, not just the materials)</h2>
+<ol>
+<li><strong>Diagnose free and official first</strong>: Aon demos + one free timed set per format → find your two weakest formats.</li>
+<li><strong>Drill the operations, not the items</strong>: percentage/ratio extraction for numerical; statement-first + Cannot-Say discipline for verbal; dimension-checklists for the logic family; operator-reading for switchChallenge; units-digit tricks for eql/digitChallenge.</li>
+<li><strong>Always timed, always the real clocks</strong> (12 min/37 items feels nothing like untimed practice), and always applying the <strong>marking rules from Chapter 8</strong> — practise <em>leaving blanks</em> on unknowns and eliminate-then-commit guessing; the habit must be automatic before test day because it is the opposite of SHL-trained instinct.</li>
+<li><strong>Two or three familiarisation runs per game</strong> — then stop; the games measure traits, and grinding them past familiarity yields nothing further.</li>
+<li><strong>Keep an error log by cause</strong> (misread / wrong tab / arithmetic slip / rule missed / time-out) and drill the cause, not the score. The full six-week programme in the companion guide (Chapter 6.5) slots these materials straight in.</li>
+<li><strong>Don't practise the questionnaires</strong> (shapes, views, squares, ADEPT-15) beyond one look at the format — preparation there is reading the firm's competency language and deciding your authentic presentation, per Chapters 5–6.</li>
+</ol></section><section class="chapter" id="ch-11-confidence-register"><h1 class="chaptertitle">Chapter 11 — Confidence Register and Residual Gaps</h1><p>The promise of this report is labelled honesty: no invented numbers, conflicts shown both ways, and every unknown collected here so you know exactly which parts to trust least — and how each gap could be closed. The strongest material in this report comes from Aon's own documents (the candidate guide with the marking formula, the design deck, the proctoring flyer); the weakest is anything resting on a single prep-vendor line. This chapter sorts it all.</p>
+<h2 id="what-this-report-established-at-high-confidence">What this report established at high confidence</h2>
+<table>
+<thead>
+<tr>
+<th>Finding</th>
+<th>Basis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>+1 / −0.5 / 0 marking</strong> on scales numerical &amp; verbal; negative marking confirmed on cls; blanks score zero</td>
+<td>Aon-authored candidate instructions <code>[VENDOR-VIA-CLIENT]</code></td>
+</tr>
+<tr>
+<td><strong>Blind guessing has zero expected value</strong> on 3-option items; elimination flips it positive</td>
+<td>Arithmetic from the official formula <code>[INFERRED, shown]</code></td>
+</tr>
+<tr>
+<td><strong>Item generation / "individual parallel versions — sample solutions do NOT exist"</strong> as the core anti-cheat</td>
+<td>Vendor design deck, verbatim <code>[VENDOR]</code></td>
+</tr>
+<tr>
+<td><strong>Window-switch telemetry runs platform-wide, even unproctored</strong></td>
+<td>Deduced from Aon's own proctoring-study statistics <code>[VENDOR]</code></td>
+</tr>
+<tr>
+<td><strong>Virtual Proctoring = consent → reference photo → periodic snapshots → AI inconsistency rating</strong>; employer controls mandate &amp; consequences; can't run on vidAssess</td>
+<td>Aon proctoring flyer, full text <code>[VENDOR]</code></td>
+</tr>
+<tr>
+<td><strong>"Onsite re-test for verification is possible"</strong> — verification, not accusation, is the endgame</td>
+<td>Vendor deck, verbatim <code>[VENDOR]</code></td>
+</tr>
+<tr>
+<td><strong>scales tmt = applied numeracy; the multitasking test is scales mt</strong></td>
+<td>Vendor catalogue <code>[VENDOR]</code>, correcting folklore</td>
+</tr>
+<tr>
+<td><strong>smartPredict = exactly four games</strong>, mapped to scales sx/eql lineage; games penalise errors by <strong>adaptive demotion</strong></td>
+<td>Vendor roster + consistent prep documentation</td>
+</tr>
+<tr>
+<td><strong>shapes: 6 variants with exact scale/item counts; adaptive adalloc; random item selection even in personality</strong></td>
+<td>Vendor deck <code>[VENDOR]</code></td>
+</tr>
+<tr>
+<td><strong>views: 18 values / 3 areas; 108 items / 36 pages</strong></td>
+<td>Vendor deck <code>[VENDOR]</code></td>
+</tr>
+<tr>
+<td><strong>ADEPT-15: MUPP + GGUM IRT scoring, CAT delivery, v7.1</strong></td>
+<td>Aon technical documentation via ACLU <code>[INDEPENDENT citing VENDOR]</code></td>
+</tr>
+<tr>
+<td><strong>vidAssess-AI: speech-to-text + NLP on the transcript only, no facial analysis; NLP maps words to ADEPT-15 constructs</strong></td>
+<td>Vendor pages + ACLU model cards <code>[VENDOR + INDEPENDENT]</code></td>
+</tr>
+<tr>
+<td><strong>chatAssess: customised per employer; percentile + competency sub-scores</strong></td>
+<td>Aon Rolls-Royce case study <code>[VENDOR]</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="the-register-of-unknowns-and-estimates">The register of unknowns and estimates</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Status</th>
+<th>What's missing / why</th>
+<th>How to close</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Whether −0.5 is universal or client-configured</strong></td>
+<td><code>[UNKNOWN]</code></td>
+<td>Documented in one deployment; prep vendors report ⅓/¼/full-mark variants</td>
+<td>Aon technical documentation; a DSAR revealing your own scoring</td>
+</tr>
+<tr>
+<td><strong>Penalty magnitudes for cls, lst, clx, ix, eql, e3+, mtu, all specials</strong></td>
+<td><code>[UNKNOWN]</code></td>
+<td>Existence confirmed (cls officially; family by prep consensus); sizes nowhere public</td>
+<td>Same</td>
+</tr>
+<tr>
+<td><strong>Game scoring algorithms</strong> (points per tier; any explicit deduction; whether planning latency is scored)</td>
+<td><code>[UNKNOWN]</code></td>
+<td>"1000+ behavioural data points" is marketing; no telemetry spec published</td>
+<td>Vendor technical docs — never public to date</td>
+</tr>
+<tr>
+<td><strong>scales mt (multitasking) timings/items/scoring</strong></td>
+<td><code>[UNKNOWN]</code></td>
+<td>Vendor domains unreachable during research (DNS-dead; archive blocked)</td>
+<td>Retry vendor pages / archive from another network</td>
+</tr>
+<tr>
+<td><strong>Employer cut-offs</strong> (e.g. "70th–80th for competitive finance")</td>
+<td><strong>Estimate only</strong></td>
+<td>Prep-vendor figures, self-disclaimed; no employer publishes</td>
+<td>DSAR after sitting (your percentile + threshold outcome)</td>
+</tr>
+<tr>
+<td><strong>gridChallenge duration &amp; adaptivity</strong> (6 vs 9 min; adaptive vs not)</td>
+<td>Conflict</td>
+<td>Prep sources disagree; employer-variant hypothesis unconfirmed</td>
+<td>Current-cycle candidate reports</td>
+</tr>
+<tr>
+<td><strong>squares item count</strong> (10-min slider vs "~150 questions") and any faking scale</td>
+<td>Conflict / <code>[UNKNOWN]</code></td>
+<td>Sources conflate squares with shapes battery</td>
+<td>Vendor documentation</td>
+</tr>
+<tr>
+<td><strong>chatAssess branching</strong> (do answers change the storyline?)</td>
+<td><code>[UNKNOWN]</code></td>
+<td>Responsive messaging documented; true branching not</td>
+<td>Candidate reports; vendor docs</td>
+</tr>
+<tr>
+<td><strong>shapes/ADEPT-15 named consistency or social-desirability indices</strong></td>
+<td><code>[UNKNOWN]</code></td>
+<td>Format-as-control is documented; named indices are not</td>
+<td>Technical manuals (withdrawn/gated)</td>
+</tr>
+<tr>
+<td><strong>motive.q current catalogue status</strong></td>
+<td><code>[UNKNOWN]</code></td>
+<td>Still in prep guides for Deutsche Bank; absent from core deck</td>
+<td>Current-cycle DB candidate reports</td>
+</tr>
+<tr>
+<td><strong>Flag consequences &amp; candidate notification</strong> (proctoring)</td>
+<td><code>[UNKNOWN]</code></td>
+<td>Employer-controlled; no documentation of what candidates are told</td>
+<td>Ask the recruiter in writing pre-test; DSAR post-test</td>
+</tr>
+<tr>
+<td><strong>Proctoring false-positive rate</strong></td>
+<td><code>[UNKNOWN]</code></td>
+<td>The 6.52% "moderate likelihood" figure is an algorithmic rating, not confirmed cheating — the gap is an unquantified FP surface</td>
+<td>Aon has not published validation of the ratings</td>
+</tr>
+<tr>
+<td><strong>Clipboard/IP/device telemetry; post-hoc data forensics</strong></td>
+<td><code>[UNKNOWN]</code></td>
+<td>Nothing documented beyond photos + window-switch + session logs</td>
+<td>Vendor security documentation</td>
+</tr>
+<tr>
+<td><strong>Adjustments mechanics</strong> (extra-time multiplier? untimed?) &amp; current UK GDPR notice</td>
+<td><code>[UNKNOWN]</code></td>
+<td>Case-by-case accommodation confirmed weakly; policy not public</td>
+<td>Put the request to the employer in writing; their reply is your documentation</td>
+</tr>
+<tr>
+<td><strong>BPS reviews; "Assessment Barometer"; current-era validity studies</strong></td>
+<td><code>[UNKNOWN]</code></td>
+<td>Paywalled/registration or not located; legacy DNV/ITC certification documented</td>
+<td>BPS PTC access</td>
+</tr>
+<tr>
+<td><strong>ACLU vs Aon fairness dispute</strong> (ADEPT-15/gridChallenge/vidAssess)</td>
+<td><strong>Open, both ways</strong></td>
+<td>FTC complaint + EEOC charges vs vendor "bias-free" claims; tech docs withdrawn</td>
+<td>Regulatory outcome — watch the docket</td>
+</tr>
+<tr>
+<td><strong>"Wrong tab open loses the point"</strong> (numerical)</td>
+<td>Unverified</td>
+<td>Single prep-vendor line, not in official instructions</td>
+<td>Ignore strategically — correct-tab-first is right technique anyway</td>
+</tr>
+</tbody>
+</table>
+<h2 id="closing-note-the-asymmetry-measured">Closing note — the asymmetry, measured</h2>
+<p>Set out this way, the asymmetry this report was commissioned to attack turns out to have a specific shape. What Aon keeps genuinely secret is <strong>parameters</strong>: penalty magnitudes, algorithms, thresholds, telemetry specs. What is knowable — and now, in this report, known — is <strong>structure</strong>: the formats, the marking logic, the strategic rules robust to every hidden parameter, the anti-cheat architecture and its remedies. Structure is what preparation runs on. The remaining parameter gaps close one of three ways: Aon publishes (rarely), regulators force disclosure (the ACLU docket may), or <strong>you extract your own numbers after sitting, via a subject-access request</strong> — the one instrument of transparency that is yours by right, template in the companion guide, Chapter 6.7.</p>
+<p><em>Full source lists with URLs and access dates live in the research files (research/30–32 and 02) committed alongside this report; the companion guide's Chapter 2 covers Aon's corporate history, employer mapping and funnel position.</em></p></section></body></html>
