@@ -1,0 +1,764 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Barclays Private Bank &amp; Wealth Management</title><style>@page { size: A4; margin: 16mm 15mm 15mm 15mm; }
+@page :first { margin: 0; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  font-family: Helvetica, Arial, sans-serif; font-size: 9.7pt; line-height: 1.55;
+  color: #16283d; margin: 0; padding: 0; }
+
+/* ---------- cover ---------- */
+.cover { height: 297mm; width: 210mm; background: #0B1F35; color: #fff;
+  padding: 44mm 22mm; position: relative; page-break-after: always; }
+.cover:before { content: ""; position: absolute; inset: 0;
+  background: linear-gradient(150deg, rgba(0,174,239,.30) 0%, rgba(0,174,239,0) 46%); }
+.cover > * { position: relative; }
+.cover .eyebrow { font-size: 9pt; letter-spacing: 2.6px; text-transform: uppercase;
+  color: #6fd3f7; font-weight: 700; }
+.cover h1 { font-size: 40pt; line-height: 1.04; margin: 16mm 0 0; font-weight: 700;
+  letter-spacing: -1px; }
+.cover h1 em { font-style: normal; color: #45c7f4; display: block; }
+.cover .lede { font-size: 12pt; line-height: 1.5; color: #c3d3e2; margin-top: 9mm;
+  max-width: 128mm; }
+.cover .rule { width: 46mm; height: 3px; background: #00AEEF; margin: 9mm 0; }
+.cover .meta { position: absolute; bottom: 26mm; left: 22mm; right: 22mm;
+  font-size: 9pt; color: #93a8bd; border-top: 1px solid #26405c; padding-top: 5mm;
+  display: flex; justify-content: space-between; }
+.cover .stats { display: flex; gap: 12mm; margin-top: 26mm; }
+.cover .stats div b { display: block; font-size: 19pt; color: #fff; letter-spacing: -.5px; }
+.cover .stats div span { font-size: 8.4pt; color: #8fa6bd; }
+
+/* ---------- structure ---------- */
+.pb { page-break-before: always; }
+section { page-break-inside: auto; }
+h2 { font-size: 17pt; line-height: 1.15; margin: 0 0 1mm; color: #0B1F35;
+  letter-spacing: -.4px; page-break-after: avoid; }
+h2 .num { color: #00AEEF; font-size: 11pt; display: block; letter-spacing: 2px;
+  margin-bottom: 2.5mm; font-weight: 700; }
+h3 { font-size: 11.6pt; margin: 7mm 0 2mm; color: #0B1F35; page-break-after: avoid; }
+h4 { font-size: 10pt; margin: 5mm 0 1.5mm; color: #16375C; page-break-after: avoid; }
+.sub { color: #5B6B7F; font-size: 10.4pt; margin: 0 0 6mm; padding-bottom: 4mm;
+  border-bottom: 2px solid #DCE3EA; }
+p { margin: 0 0 3.2mm; }
+ul, ol { margin: 0 0 3.5mm; padding-left: 5.5mm; }
+li { margin-bottom: 1.6mm; }
+strong { color: #0B1F35; }
+em.term { font-style: normal; font-weight: 700; color: #0F6FB5; }
+a { color: #0F6FB5; text-decoration: none; }
+
+/* ---------- charts ---------- */
+svg.chart { display: block; margin: 5mm 0 6mm; page-break-inside: avoid; }
+figure { margin: 0; page-break-inside: avoid; }
+
+/* ---------- tables ---------- */
+table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin: 3mm 0 5mm;
+  page-break-inside: avoid; }
+caption { text-align: left; font-size: 8.6pt; color: #5B6B7F; padding-bottom: 1.8mm;
+  caption-side: top; }
+th { background: #0B1F35; color: #fff; text-align: left; padding: 2mm 2.2mm;
+  font-weight: 700; font-size: 8pt; letter-spacing: .3px; }
+th.n, td.n { text-align: right; }
+td { padding: 1.8mm 2.2mm; border-bottom: .5px solid #DCE3EA; vertical-align: top; }
+tbody tr:nth-child(even) td { background: #F5F8FB; }
+tr.total td { font-weight: 700; background: #E7F1F8 !important; border-top: 1.2px solid #0B1F35; }
+td.pos { color: #1E7A5E; font-weight: 700; }
+td.neg { color: #C1553B; font-weight: 700; }
+.tag { display: inline-block; font-size: 7pt; font-weight: 700; letter-spacing: .5px;
+  padding: .6mm 1.6mm; border-radius: 2px; text-transform: uppercase; }
+
+/* ---------- callouts ---------- */
+.key { border-left: 3px solid #00AEEF; background: #EEF7FC; padding: 4mm 5mm;
+  margin: 4.5mm 0; page-break-inside: avoid; }
+.key .lab { font-size: 7.6pt; letter-spacing: 1.6px; text-transform: uppercase;
+  color: #0F6FB5; font-weight: 700; display: block; margin-bottom: 1.5mm; }
+.key p:last-child { margin-bottom: 0; }
+.warn { border-left: 3px solid #C1553B; background: #FBF0ED; padding: 4mm 5mm;
+  margin: 4.5mm 0; page-break-inside: avoid; }
+.warn .lab { font-size: 7.6pt; letter-spacing: 1.6px; text-transform: uppercase;
+  color: #C1553B; font-weight: 700; display: block; margin-bottom: 1.5mm; }
+.warn p:last-child { margin-bottom: 0; }
+.say { border: 1px solid #00B39A; border-left: 3px solid #00B39A; background: #EDF9F7;
+  padding: 4mm 5mm; margin: 4.5mm 0; page-break-inside: avoid; }
+.say .lab { font-size: 7.6pt; letter-spacing: 1.6px; text-transform: uppercase;
+  color: #007F6E; font-weight: 700; display: block; margin-bottom: 1.5mm; }
+.say p:last-child { margin-bottom: 0; }
+.say q { font-style: italic; quotes: "\201C" "\201D"; color: #0B1F35; }
+
+/* ---------- cards ---------- */
+.cards { display: flex; flex-wrap: wrap; gap: 3.5mm; margin: 4mm 0 5mm; }
+.card { flex: 1 1 46%; border: 1px solid #DCE3EA; border-top: 3px solid #00AEEF;
+  border-radius: 3px; padding: 3.5mm 4mm; page-break-inside: avoid; background: #fff; }
+.card h5 { margin: 0 0 1.5mm; font-size: 9.4pt; color: #0B1F35; }
+.card p { font-size: 8.5pt; margin: 0 0 2mm; color: #44586e; }
+.card p:last-child { margin-bottom: 0; }
+.card.ib { border-top-color: #16375C; } .card.buk { border-top-color: #00AEEF; }
+.card.ukcb { border-top-color: #0F6FB5; } .card.pbwm { border-top-color: #00B39A; }
+.card.uscb { border-top-color: #EF9B20; }
+
+.kpis { display: flex; gap: 3mm; margin: 4mm 0 5mm; page-break-inside: avoid; }
+.kpi { flex: 1; background: #F5F8FB; border-radius: 3px; padding: 3mm; text-align: center;
+  border-bottom: 2px solid #00AEEF; }
+.kpi b { display: block; font-size: 15pt; color: #0B1F35; letter-spacing: -.5px; line-height: 1.2; }
+.kpi span { font-size: 7.4pt; color: #5B6B7F; display: block; margin-top: .8mm; line-height: 1.3; }
+
+.divhead { display: flex; align-items: baseline; gap: 3mm; border-bottom: 2px solid #0B1F35;
+  padding-bottom: 1.5mm; margin: 8mm 0 3mm; page-break-after: avoid; }
+.divhead h3 { margin: 0; font-size: 13pt; flex: 1; }
+.divhead .badge { font-size: 8pt; font-weight: 700; color: #fff; padding: 1mm 2.5mm;
+  border-radius: 2px; background: #00AEEF; white-space: nowrap; }
+
+.quote { border-left: 2px solid #DCE3EA; padding: 1mm 0 1mm 4mm; margin: 3mm 0;
+  color: #44586e; font-size: 8.8pt; page-break-inside: avoid; }
+.quote .src { display: block; font-size: 7.6pt; color: #7d8fa3; margin-top: 1.2mm;
+  font-style: normal; }
+
+.toc { columns: 2; column-gap: 10mm; font-size: 9pt; }
+.toc div { break-inside: avoid; margin-bottom: 2mm; padding-left: 9mm; text-indent: -9mm; }
+.toc b { color: #00AEEF; display: inline-block; width: 7mm; text-indent: 0; }
+
+.src-list { font-size: 7.6pt; color: #5B6B7F; columns: 2; column-gap: 8mm; }
+.src-list div { break-inside: avoid; margin-bottom: 1.6mm; padding-left: 5mm; text-indent: -5mm; }
+.footnote { font-size: 7.8pt; color: #7d8fa3; border-top: 1px solid #DCE3EA;
+  padding-top: 2mm; margin-top: 4mm; }
+</style></head><body><div class="cover">
+  <div class="eyebrow">Divisional deep dive &nbsp;·&nbsp; Barclays Insight Day &times; SEO London, 14 September 2026</div>
+  <h1>Private Bank<em>&amp; Wealth Management</em></h1>
+  <div class="rule"></div>
+  <div class="lede">First: the firm split up clearly, so the revenue picture finally makes sense.
+  Then everything about the wealth business — how it is structured, how it earns, who it
+  targets, where it ranks, what it has just won and lost, and why a client picks Barclays
+  over UBS, Coutts or an independent.</div>
+  <div class="stats">
+    <div><b>£1,380m</b><span>FY2025 income</span></div>
+    <div><b>26.3%</b><span>RoTE — best in the group</span></div>
+    <div><b>£227.6bn</b><span>client assets &amp; liabilities</span></div>
+    <div><b>£55.8bn</b><span>AUM, June 2026</span></div>
+    <div><b>~1,300</b><span>private bank staff</span></div>
+  </div>
+  <div class="meta">
+    <span>Companion to the main Barclays business breakdown. Sources listed at the end.</span>
+    <span>Compiled 23 August 2026</span>
+  </div>
+</div>
+
+<section>
+<h2><span class="num">PART ONE</span>The firm, split up — properly this time</h2>
+<p class="sub">Barclays has exactly five operating divisions. Not business areas, not brands — five, each with its own published income, profit and returns. Here they are drawn to scale.</p>
+
+<svg class="chart" viewBox="0 0 720 401" width="100%" preserveAspectRatio="xMidYMid meet" role="img"><text x="0.0" y="14.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">The whole firm, drawn to scale</text><text x="0.0" y="33.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Every box is one division. Box AREA = share of the £29.1bn of FY2025 income. This is the answer to &quot;which division is biggest&quot;.</text><g transform="translate(0,41)"><rect x="0.0" y="0.0" width="324.0" height="360.0" rx="3" fill="#16375C"/><text x="11.0" y="24.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#ffffff" text-anchor="start" font-weight="700" letter-spacing="0">Investment Bank</text><text x="11.0" y="46.0" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#ffffff" text-anchor="start" font-weight="700" letter-spacing="0">£13,055m</text><text x="11.0" y="63.0" font-family="Helvetica, Arial, sans-serif" font-size="9.4" fill="#ffffff" text-anchor="start" font-weight="400" letter-spacing="0.4">45.2% of income</text><text x="11.0" y="334.0" font-family="Helvetica, Arial, sans-serif" font-size="9.4" fill="#ffffff" text-anchor="start" font-weight="400" letter-spacing="0">Trading, advisory, bond &amp; share issuance,</text><text x="11.0" y="346.0" font-family="Helvetica, Arial, sans-serif" font-size="9.4" fill="#ffffff" text-anchor="start" font-weight="400" letter-spacing="0">transaction banking for multinationals</text><rect x="327.0" y="0.0" width="393.0" height="196.3" rx="3" fill="#00AEEF"/><text x="338.0" y="24.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#ffffff" text-anchor="start" font-weight="700" letter-spacing="0">Barclays UK</text><text x="338.0" y="46.0" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#ffffff" text-anchor="start" font-weight="700" letter-spacing="0">£8,708m</text><text x="338.0" y="63.0" font-family="Helvetica, Arial, sans-serif" font-size="9.4" fill="#ffffff" text-anchor="start" font-weight="400" letter-spacing="0.4">30.1% of income</text><text x="338.0" y="170.3" font-family="Helvetica, Arial, sans-serif" font-size="9.4" fill="#ffffff" text-anchor="start" font-weight="400" letter-spacing="0">Current accounts, mortgages,</text><text x="338.0" y="182.3" font-family="Helvetica, Arial, sans-serif" font-size="9.4" fill="#ffffff" text-anchor="start" font-weight="400" letter-spacing="0">Barclaycard, Tesco Bank</text><rect x="327.0" y="199.3" width="199.9" height="160.7" rx="3" fill="#EF9B20"/><text x="338.0" y="221.3" font-family="Helvetica, Arial, sans-serif" font-size="10.8" fill="#ffffff" text-anchor="start" font-weight="700" letter-spacing="0">US Consumer Bank</text><text x="338.0" y="239.3" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#ffffff" text-anchor="start" font-weight="700" letter-spacing="0">£3,681m</text><text x="338.0" y="252.3" font-family="Helvetica, Arial, sans-serif" font-size="9.4" fill="#ffffff" text-anchor="start" font-weight="400" letter-spacing="0.4">12.7% of income</text><rect x="529.9" y="199.3" width="112.1" height="160.7" rx="3" fill="#0F6FB5"/><text x="537.9" y="218.3" font-family="Helvetica, Arial, sans-serif" font-size="9.0" fill="#ffffff" text-anchor="start" font-weight="700" letter-spacing="0">UK Corporate Bank</text><text x="537.9" y="236.3" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#ffffff" text-anchor="start" font-weight="700" letter-spacing="0">£2,064m</text><text x="537.9" y="249.3" font-family="Helvetica, Arial, sans-serif" font-size="8.6" fill="#ffffff" text-anchor="start" font-weight="400" letter-spacing="0.4">7.1%</text><rect x="645.0" y="199.3" width="75.0" height="160.7" rx="3" fill="#00B39A"/><text x="653.0" y="218.3" font-family="Helvetica, Arial, sans-serif" font-size="9.0" fill="#ffffff" text-anchor="start" font-weight="700" letter-spacing="0">Private Bank</text><text x="653.0" y="229.3" font-family="Helvetica, Arial, sans-serif" font-size="9.0" fill="#ffffff" text-anchor="start" font-weight="700" letter-spacing="0">&amp; Wealth</text><text x="653.0" y="247.3" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#ffffff" text-anchor="start" font-weight="700" letter-spacing="0">£1,380m</text><text x="653.0" y="260.3" font-family="Helvetica, Arial, sans-serif" font-size="8.6" fill="#ffffff" text-anchor="start" font-weight="400" letter-spacing="0.4">4.8%</text></g></svg>
+
+<p>That single picture answers the question. <strong>The Investment Bank is the biggest revenue
+division by a wide margin</strong> — £13.1bn, more than the other four combined would need
+Barclays UK's help to match. Barclays UK is a clear second at £8.7bn. Then there is a steep
+drop to the US Consumer Bank, the UK Corporate Bank, and finally the Private Bank &amp; Wealth
+Management at £1,380m.</p>
+
+<svg class="chart" viewBox="0 0 720 201" width="100%" preserveAspectRatio="xMidYMid meet" role="img"><text x="0.0" y="14.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Ranked by income — the direct answer</text><text x="0.0" y="33.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">FY2025 total income by division. Head Office (£252m) is a central cost centre, not a business, and is excluded.</text><g transform="translate(0,41)"><rect x="200" y="6" width="415.7" height="16" rx="2" fill="#16375C"/><text x="190.0" y="18.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">1 · Investment Bank</text><text x="623.7" y="18.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£13,055m</text><rect x="200" y="36" width="277.3" height="16" rx="2" fill="#00AEEF"/><text x="190.0" y="48.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">2 · Barclays UK</text><text x="485.3" y="48.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£8,708m</text><rect x="200" y="66" width="117.2" height="16" rx="2" fill="#EF9B20"/><text x="190.0" y="78.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">3 · US Consumer Bank</text><text x="325.2" y="78.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£3,681m</text><rect x="200" y="96" width="65.7" height="16" rx="2" fill="#0F6FB5"/><text x="190.0" y="108.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">4 · UK Corporate Bank</text><text x="273.7" y="108.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£2,064m</text><rect x="200" y="126" width="43.9" height="16" rx="2" fill="#00B39A"/><text x="190.0" y="138.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">5 · Private Bank &amp; Wealth</text><text x="251.9" y="138.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£1,380m</text></g></svg>
+
+<table>
+<caption>The same thing as a table, with running totals — so you can see how concentrated the income is.</caption>
+<thead><tr><th style="width:30%">Division</th><th class="n">FY2025 income</th><th class="n">Share</th><th class="n">Running total</th><th style="width:34%">What it sells, in one line</th></tr></thead>
+<tbody>
+<tr><td><strong>Investment Bank</strong></td><td class="n">£13,055m</td><td class="n">45.2%</td><td class="n">45.2%</td><td>Trading, advice and capital-raising for institutions and big companies</td></tr>
+<tr><td><strong>Barclays UK</strong></td><td class="n">£8,708m</td><td class="n">30.1%</td><td class="n">75.3%</td><td>The high street — accounts, mortgages, Barclaycard, Tesco Bank</td></tr>
+<tr><td><strong>US Consumer Bank</strong></td><td class="n">£3,681m</td><td class="n">12.7%</td><td class="n">88.0%</td><td>American credit cards issued under partner brands</td></tr>
+<tr><td><strong>UK Corporate Bank</strong></td><td class="n">£2,064m</td><td class="n">7.1%</td><td class="n">95.2%</td><td>Banking for British SMEs and mid-caps</td></tr>
+<tr><td style="background:#EDF9F7 !important"><strong>Private Bank &amp; Wealth</strong></td><td class="n" style="background:#EDF9F7 !important">£1,380m</td><td class="n" style="background:#EDF9F7 !important">4.8%</td><td class="n" style="background:#EDF9F7 !important">100%</td><td style="background:#EDF9F7 !important">Investing, planning and lending for wealthy individuals and families</td></tr>
+<tr class="total"><td>Five divisions</td><td class="n">£28,888m</td><td class="n">100%</td><td class="n">—</td><td>Plus £252m of Head Office income; Group total £29,140m</td></tr>
+</tbody>
+</table>
+
+<div class="key"><span class="lab">Now the twist — and it is the reason this report exists</span>
+<p>Rank the same five divisions by <strong>return on the capital they use</strong> instead of by
+revenue, and the order almost exactly reverses. The division that earns the least money is the
+one that earns the most <em>per pound of shareholder capital risked</em>.</p></div>
+
+<svg class="chart" viewBox="0 0 720 201" width="100%" preserveAspectRatio="xMidYMid meet" role="img"><text x="0.0" y="14.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Ranked by return on capital — the ranking flips</text><text x="0.0" y="33.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">FY2025 RoTE. The smallest division by income is the most profitable per pound of shareholder capital in the entire group.</text><g transform="translate(0,41)"><rect x="200" y="6" width="415.7" height="16" rx="2" fill="#00B39A"/><text x="190.0" y="18.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">1 · Private Bank &amp; Wealth</text><text x="623.7" y="18.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">26.3%</text><rect x="200" y="36" width="327.2" height="16" rx="2" fill="#00AEEF"/><text x="190.0" y="48.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">2 · Barclays UK</text><text x="535.2" y="48.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">20.7%</text><rect x="200" y="66" width="298.7" height="16" rx="2" fill="#0F6FB5"/><text x="190.0" y="78.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">3 · UK Corporate Bank</text><text x="506.7" y="78.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">18.9%</text><rect x="200" y="96" width="173.9" height="16" rx="2" fill="#EF9B20"/><text x="190.0" y="108.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">4 · US Consumer Bank</text><text x="381.9" y="108.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">11.0%</text><rect x="200" y="126" width="167.5" height="16" rx="2" fill="#16375C"/><text x="190.0" y="138.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">5 · Investment Bank</text><text x="375.5" y="138.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">10.6%</text></g></svg>
+
+<p><strong>Private Bank &amp; Wealth Management produced 4.8% of Barclays' income and did it on
+2.2% of the bank's risk-weighted assets</strong> — £8.0bn out of £356.8bn. That is why its RoTE
+is 26.3% while the Investment Bank, five times its size, managed 10.6%. Small division, best
+economics. Everything in the rest of this report follows from that fact.</p>
+
+<h3>Where the wealth business physically sits in the group</h3>
+<p>One structural detail worth knowing, because it is unusual and it comes up: Barclays is
+legally split by the UK ring-fence into <strong>Barclays Bank UK PLC</strong> (retail, protected)
+and <strong>Barclays Bank PLC</strong> (international, markets). Four of the five divisions sit
+cleanly on one side or the other.</p>
+<p><strong>Private Bank &amp; Wealth Management is the exception — it straddles the fence.</strong>
+The UK wealth business sits inside the ring-fence; the international private bank, booked in
+Switzerland, Monaco, the Crown Dependencies and soon Singapore, sits outside it. That is not a
+quirk of reporting: it means the division operates under two regulatory regimes at once, which
+is part of why it can serve both a Premier customer in Leeds and a cross-border family office in
+Geneva.</p>
+</section>
+
+<section class="pb">
+<h2><span class="num">PART TWO</span>How the wealth division splits up</h2>
+<p class="sub">"Private Bank &amp; Wealth Management" is one reporting line covering several quite different businesses. Here is what is actually inside it.</p>
+
+<h3>The two halves</h3>
+<p>Barclays runs the division as <strong>PBWM UK</strong> and <strong>PBWM International</strong>,
+and the split is roughly even: <strong>about half of income is generated in the UK and about half
+internationally.</strong> That balance is unusual — most UK wealth managers are overwhelmingly
+domestic, and most Swiss private banks have no retail funnel at all.</p>
+<div class="cards">
+  <div class="card pbwm"><h5>PBWM UK</h5>
+  <p>Domestic wealth, sitting inside the ring-fenced bank. Covers Premier Wealth Management,
+  Direct Investing (the platform formerly called Smart Investor), UK private banking, and the
+  Wealth Management &amp; Investments business transferred in from Barclays UK in 2024.</p>
+  <p>Fed directly by ~20 million Barclays UK customers. This is the volume engine.</p></div>
+  <div class="card ib"><h5>PBWM International</h5>
+  <p>Booked outside the ring-fence, through centres in Switzerland, Monaco, the Crown
+  Dependencies and — being built out during 2026 — Singapore. Dubai and Singapore have operated
+  as sales offices, with Singapore gaining full booking capability.</p>
+  <p><strong>Private Banking International serves clients with £5m+ of investable assets.</strong>
+  Higher minimums, more complex needs, cross-border structuring. This is the margin engine.</p></div>
+</div>
+
+<h3>The client ladder — the single best thing about this business</h3>
+<p>Barclays does not have one wealth product. It has a staircase, and a client can be moved up
+it as their wealth grows without ever leaving the bank. Very few competitors own more than two
+or three of these rungs.</p>
+
+<svg class="chart" viewBox="0 0 720 421" width="100%" preserveAspectRatio="xMidYMid meet" role="img"><text x="0.0" y="14.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">The wealth ladder — every rung is a Barclays product</text><text x="0.0" y="33.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Read bottom to top. No competitor owns this many rungs, and that is the whole commercial argument.</text><g transform="translate(0,41)"><rect x="0" y="318.0" width="130" height="56" rx="3" fill="#9AA6B4"/><text x="10.0" y="340.0" font-family="Helvetica, Arial, sans-serif" font-size="10.4" fill="#ffffff" text-anchor="start" font-weight="700" letter-spacing="0">GoHenry</text><text x="10.0" y="355.0" font-family="Helvetica, Arial, sans-serif" font-size="9.2" fill="#ffffff" text-anchor="start" font-weight="400" letter-spacing="0">ages 6–18</text><text x="146.0" y="338.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Kids’ money app. £180m acquisition announced June 2026,</text><text x="146.0" y="351.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">completing Q4 2026. ~500,000 UK children.</text><text x="718.0" y="340.0" font-family="Helvetica, Arial, sans-serif" font-size="8.4" fill="#DCE3EA" text-anchor="end" font-weight="700" letter-spacing="1.2">TIER 6</text><rect x="0" y="256.0" width="156" height="56" rx="3" fill="#00AEEF"/><text x="10.0" y="278.0" font-family="Helvetica, Arial, sans-serif" font-size="10.4" fill="#ffffff" text-anchor="start" font-weight="700" letter-spacing="0">Barclays UK</text><text x="10.0" y="293.0" font-family="Helvetica, Arial, sans-serif" font-size="9.2" fill="#ffffff" text-anchor="start" font-weight="400" letter-spacing="0">everyday banking</text><text x="172.0" y="276.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Current account, savings, mortgage. ~20 million customers —</text><text x="172.0" y="289.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">the top of the funnel for everything above.</text><text x="718.0" y="278.0" font-family="Helvetica, Arial, sans-serif" font-size="8.4" fill="#DCE3EA" text-anchor="end" font-weight="700" letter-spacing="1.2">TIER 5</text><rect x="0" y="194.0" width="182" height="56" rx="3" fill="#0F6FB5"/><text x="10.0" y="216.0" font-family="Helvetica, Arial, sans-serif" font-size="10.4" fill="#ffffff" text-anchor="start" font-weight="700" letter-spacing="0">Premier Banking</text><text x="10.0" y="231.0" font-family="Helvetica, Arial, sans-serif" font-size="9.2" fill="#ffffff" text-anchor="start" font-weight="400" letter-spacing="0">£75k income or £100k held</text><text x="198.0" y="214.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Mass-affluent tier. Relationship banking, preferential rates,</text><text x="198.0" y="227.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">and the recruiting ground for the wealth business.</text><text x="718.0" y="216.0" font-family="Helvetica, Arial, sans-serif" font-size="8.4" fill="#DCE3EA" text-anchor="end" font-weight="700" letter-spacing="1.2">TIER 4</text><rect x="0" y="132.0" width="208" height="56" rx="3" fill="#00B39A"/><text x="10.0" y="154.0" font-family="Helvetica, Arial, sans-serif" font-size="10.4" fill="#ffffff" text-anchor="start" font-weight="700" letter-spacing="0">Premier Wealth Management</text><text x="10.0" y="169.0" font-family="Helvetica, Arial, sans-serif" font-size="9.2" fill="#ffffff" text-anchor="start" font-weight="400" letter-spacing="0">£150k to invest</text><text x="224.0" y="152.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Launched April 2026. Dedicated planning and advice,</text><text x="224.0" y="165.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">no upfront fee for the initial review.</text><text x="718.0" y="154.0" font-family="Helvetica, Arial, sans-serif" font-size="8.4" fill="#DCE3EA" text-anchor="end" font-weight="700" letter-spacing="1.2">TIER 3</text><rect x="0" y="70.0" width="234" height="56" rx="3" fill="#00B39A"/><text x="10.0" y="92.0" font-family="Helvetica, Arial, sans-serif" font-size="10.4" fill="#ffffff" text-anchor="start" font-weight="700" letter-spacing="0">Private Bank — UK</text><text x="10.0" y="107.0" font-family="Helvetica, Arial, sans-serif" font-size="9.2" fill="#ffffff" text-anchor="start" font-weight="400" letter-spacing="0">~£3m investable</text><text x="250.0" y="90.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Dedicated private banker, discretionary and advisory</text><text x="250.0" y="103.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">portfolios, bespoke lending, trusts and estate planning.</text><text x="718.0" y="92.0" font-family="Helvetica, Arial, sans-serif" font-size="8.4" fill="#DCE3EA" text-anchor="end" font-weight="700" letter-spacing="1.2">TIER 2</text><rect x="0" y="8.0" width="260" height="56" rx="3" fill="#16375C"/><text x="10.0" y="30.0" font-family="Helvetica, Arial, sans-serif" font-size="10.4" fill="#ffffff" text-anchor="start" font-weight="700" letter-spacing="0">Private Banking — International</text><text x="10.0" y="45.0" font-family="Helvetica, Arial, sans-serif" font-size="9.2" fill="#ffffff" text-anchor="start" font-weight="400" letter-spacing="0">£5m+ investable</text><text x="276.0" y="28.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Booked in Switzerland, Monaco, the Crown Dependencies</text><text x="276.0" y="41.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">and, from 2026, Singapore. Cross-border families.</text><text x="718.0" y="30.0" font-family="Helvetica, Arial, sans-serif" font-size="8.4" fill="#DCE3EA" text-anchor="end" font-weight="700" letter-spacing="1.2">TIER 1</text></g></svg>
+
+<div class="key"><span class="lab">Why the ladder is the commercial argument</span>
+<p>Client acquisition is the dominant cost in wealth management. An independent firm must buy or
+win every single client from cold. Barclays does not: it already banks the person, already sees
+their salary land, already knows when they sell their company, and can simply invite them up a
+rung. The GoHenry acquisition in June 2026 — roughly <strong>£180m for a money app used by about
+500,000 UK children</strong> — makes the logic almost comically explicit. Barclays is now
+attempting to hold a relationship from a child's first debit card through to a family's estate
+plan.</p></div>
+
+<h3>The thresholds, precisely</h3>
+<table>
+<caption>Entry points into each tier. Know these — they are the most concrete facts about the business and almost nobody at an insight day has them.</caption>
+<thead><tr><th style="width:28%">Tier</th><th style="width:26%">You qualify with</th><th style="width:46%">What you get</th></tr></thead>
+<tbody>
+<tr><td><strong>Premier Banking</strong></td><td>£75,000 gross annual income <em>or</em> £100,000 in savings and eligible investments</td><td>Relationship banking, preferential products. The recruiting ground for everything above.</td></tr>
+<tr><td><strong>Premier Wealth Management</strong><br><span class="tag" style="background:#EDF9F7;color:#007F6E">LAUNCHED APRIL 2026</span></td><td>£150,000 to invest</td><td>A dedicated expert, in-depth financial review with <strong>no upfront fee</strong> — you pay ongoing fees only if you proceed with advice.</td></tr>
+<tr><td><strong>Direct Investing</strong><br>(formerly Smart Investor)</td><td>No minimum</td><td>Self-directed ISAs and investment accounts. Barclays has <strong>removed the monthly customer/custody fee</strong> on these.</td></tr>
+<tr><td><strong>Private Bank — UK</strong></td><td>Around £3m investable (sources vary by tier and relationship)</td><td>A named private banker, discretionary and advisory portfolios, bespoke secured lending, trusts, estate and succession planning.</td></tr>
+<tr><td><strong>Private Banking — International</strong></td><td><strong>£5m+ investable</strong></td><td>Cross-border booking, multi-jurisdiction structuring, access to private markets and institutional products.</td></tr>
+</tbody>
+</table>
+<p>Typical ongoing management fees run in the region of <strong>0.50%–1.45%</strong> of assets a
+year, depending on service level and mandate.</p>
+</section>
+
+<section class="pb">
+<h2><span class="num">PART THREE</span>How wealth management actually makes money</h2>
+<p class="sub">This is the core mechanism, and it is genuinely different from every other division in Barclays.</p>
+
+<svg class="chart" viewBox="0 0 720 237" width="100%" preserveAspectRatio="xMidYMid meet" role="img"><text x="0.0" y="14.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">How the wealth division earns its £1,380m</text><text x="0.0" y="33.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">FY2025. The split matters: interest income is rate-driven and shrinking in importance; fee income is what the strategy is chasing.</text><g transform="translate(0,41)"><rect x="0" y="0" width="352" height="188" rx="6" fill="#EEF4F9" stroke="#00AEEF" stroke-width="1.2"/><rect x="368" y="0" width="352" height="188" rx="6" fill="#EDF9F7" stroke="#00B39A" stroke-width="1.2"/><text x="18.0" y="24.0" font-family="Helvetica, Arial, sans-serif" font-size="10.4" fill="#00AEEF" text-anchor="start" font-weight="700" letter-spacing="0.6">INTEREST — 58% OF INCOME</text><text x="18.0" y="48.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£799m</text><text x="18.0" y="74.0" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Wealthy clients hold a lot of cash. The division held</text><text x="18.0" y="86.6" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">£72.0bn of deposits against just £14.7bn of lending —</text><text x="18.0" y="99.2" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">a five-to-one surplus it passes to the wider group.</text><text x="18.0" y="111.8" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0"></text><text x="18.0" y="124.4" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Lending is secured against portfolios and property,</text><text x="18.0" y="137.0" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">structured case by case. Credit losses are close to</text><text x="18.0" y="149.6" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">zero: FY2025 booked an £8m impairment RELEASE.</text><text x="18.0" y="162.2" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0"></text><text x="18.0" y="174.8" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Rate-sensitive, so it falls as rates fall.</text><text x="386.0" y="24.0" font-family="Helvetica, Arial, sans-serif" font-size="10.4" fill="#007F6E" text-anchor="start" font-weight="700" letter-spacing="0.6">FEES — 42% OF INCOME</text><text x="386.0" y="48.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£581m</text><text x="386.0" y="74.0" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Charged as a percentage of invested assets, roughly</text><text x="386.0" y="86.6" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">0.50%–1.45% a year, billed whether markets rise or fall.</text><text x="386.0" y="99.2" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0"></text><text x="386.0" y="111.8" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Three kinds (H1 2024 disclosure, £234m total):</text><text x="386.0" y="124.4" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">·  Advisory and management fees — £156m</text><text x="386.0" y="137.0" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">·  Brokerage and execution — £62m</text><text x="386.0" y="149.6" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">·  Transactional banking fees — £16m</text><text x="386.0" y="162.2" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0"></text><text x="386.0" y="174.8" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Recurring, capital-light, and what investors pay up for.</text></g></svg>
+
+<h3>The thing most people get wrong</h3>
+<p>Ask a student how a private bank makes money and they will say "fees on assets". That is only
+<strong>42%</strong> of it. In FY2025 the division earned £1,380m of income, of which
+<strong>£581m was net fee, commission and other income</strong> — leaving roughly
+<strong>£799m of net interest income</strong>.</p>
+<p>Wealthy clients hold a great deal of cash. The division held <strong>£72.0bn of customer
+deposits against only £14.7bn of lending</strong>. That surplus is passed to the wider group and
+earns a spread. It is the same structural-hedge dynamic that drives Barclays UK — which is why
+this division's returns benefited enormously from rates rising, and why management is now
+working hard to grow the fee half before that tailwind fades.</p>
+
+<h3>Why the returns are so good — the capital point</h3>
+<p>The division earns 26.3% on tangible equity because of what it <em>doesn't</em> do:</p>
+<ul>
+<li><strong>It barely uses capital.</strong> £8.0bn of RWAs — 2.2% of the group's total — for
+4.8% of the group's income. Managing someone's portfolio consumes almost no regulatory capital;
+underwriting a bond does.</li>
+<li><strong>It barely loses money on credit.</strong> Lending is secured against liquid
+portfolios and property and structured case by case. FY2025 recorded an <strong>£8m impairment
+release</strong> — the division gave money <em>back</em>. Compare the US Consumer Bank's £1,521m
+of impairment charges.</li>
+<li><strong>Its income is recurring.</strong> Management fees are billed on assets whether markets
+rise or fall, which is exactly the "all-weather" income Barclays' management keeps talking about.</li>
+</ul>
+<p>The trade-off is the cost line. At a <strong>73% cost:income ratio</strong> this is the least
+efficient division in Barclays, because the product is expensive, experienced people. It is a
+high-return, low-capital, high-cost business. Understanding that triangle is understanding the
+whole thing.</p>
+
+<h3>The three asset numbers — and why they are not interchangeable</h3>
+<p>Barclays quotes three different figures. Journalists mix them up constantly. Getting them
+right is a cheap way to sound like you have read the accounts.</p>
+
+<svg class="chart" viewBox="0 0 720 206" width="100%" preserveAspectRatio="xMidYMid meet" role="img"><text x="0.0" y="14.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Three different asset numbers, and why people confuse them</text><text x="0.0" y="33.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Barclays quotes AUM, assets under supervision and client assets &amp; liabilities. They mean different things and only one of them is the</text><text x="0.0" y="46.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">fee engine. FY2025 figures; components sum to £227.3bn against £227.6bn reported.</text><g transform="translate(0,54)"><text x="0.0" y="16.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0.4">CLIENT ASSETS &amp; LIABILITIES  ·  £227.6bn as reported</text><rect x="0.0" y="34" width="275.8" height="42" rx="3" fill="#00B39A"/><text x="10.0" y="53.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#ffffff" text-anchor="start" font-weight="700" letter-spacing="0">£87.7bn</text><text x="10.0" y="67.0" font-family="Helvetica, Arial, sans-serif" font-size="9.2" fill="#ffffff" text-anchor="start" font-weight="400" letter-spacing="0">39%</text><text x="0.0" y="94.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Assets under supervision</text><text x="0.0" y="106.0" font-family="Helvetica, Arial, sans-serif" font-size="8.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">advised / overseen</text><rect x="277.8" y="34" width="165.6" height="42" rx="3" fill="#16375C"/><text x="287.8" y="53.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#ffffff" text-anchor="start" font-weight="700" letter-spacing="0">£52.9bn</text><text x="287.8" y="67.0" font-family="Helvetica, Arial, sans-serif" font-size="9.2" fill="#ffffff" text-anchor="start" font-weight="400" letter-spacing="0">23%</text><text x="277.8" y="94.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Assets under management</text><text x="277.8" y="106.0" font-family="Helvetica, Arial, sans-serif" font-size="8.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">discretionary — fee-richest</text><rect x="445.4" y="34" width="226.1" height="42" rx="3" fill="#00AEEF"/><text x="455.4" y="53.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#ffffff" text-anchor="start" font-weight="700" letter-spacing="0">£72.0bn</text><text x="455.4" y="67.0" font-family="Helvetica, Arial, sans-serif" font-size="9.2" fill="#ffffff" text-anchor="start" font-weight="400" letter-spacing="0">32%</text><text x="445.4" y="94.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Deposits</text><text x="445.4" y="106.0" font-family="Helvetica, Arial, sans-serif" font-size="8.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">cash held with the bank</text><rect x="673.4" y="34" width="44.6" height="42" rx="3" fill="#EF9B20"/><text x="679.4" y="53.0" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="start" font-weight="700" letter-spacing="0">£14.7bn</text><text x="679.4" y="67.0" font-family="Helvetica, Arial, sans-serif" font-size="8.6" fill="#ffffff" text-anchor="start" font-weight="400" letter-spacing="0">6%</text><text x="720.0" y="94.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">Lending</text><text x="720.0" y="106.0" font-family="Helvetica, Arial, sans-serif" font-size="8.8" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">secured</text><path d="M0,120 L0,126 L443.4,126 L443.4,120" fill="none" stroke="#00B39A" stroke-width="1.8"/><text x="222.7" y="141.0" font-family="Helvetica, Arial, sans-serif" font-size="9.4" fill="#00B39A" text-anchor="middle" font-weight="700" letter-spacing="0">INVESTED ASSETS £140.6bn — the number that earns fees</text></g></svg>
+
+<table>
+<caption>What each number means and why it matters.</caption>
+<thead><tr><th style="width:26%">Measure</th><th style="width:16%">FY2025</th><th style="width:58%">What it is</th></tr></thead>
+<tbody>
+<tr><td><strong>Assets under management (AUM)</strong></td><td><strong>£52.9bn</strong><br>(£55.8bn at Jun 2026)</td><td>Money Barclays manages on a <em>discretionary</em> basis — it makes the investment decisions. The highest-fee, stickiest category. This is the number to watch.</td></tr>
+<tr><td><strong>Assets under supervision (AUS)</strong></td><td>£87.7bn<br>(£86.7bn at Jun 2026)</td><td>Assets Barclays advises on or oversees but does not manage discretionarily. Lower fee per pound.</td></tr>
+<tr><td><strong>Invested assets</strong></td><td>£140.6bn</td><td>AUM + AUS. The pool that generates fee income.</td></tr>
+<tr><td><strong>Client assets &amp; liabilities (CA&amp;L)</strong></td><td><strong>£227.6bn</strong><br>(from £208.9bn)</td><td>The widest measure: invested assets <em>plus</em> deposits <em>plus</em> lending. The total client footprint — and the number Barclays prefers to quote, because it is the biggest.</td></tr>
+<tr><td><strong>Net new AUM</strong></td><td>£3.3bn FY2025<br>£1.8bn in H1 2026</td><td>New money won, net of money lost, stripping out market movement. <strong>The single cleanest measure of whether the business is actually winning.</strong></td></tr>
+</tbody>
+</table>
+<div class="warn"><span class="lab">The nuance that separates you from the room</span>
+<p>AUM rose from £52.9bn to £55.8bn in H1 2026 — but net new AUM was only £1.8bn of that, and
+Q2's 15% year-on-year AUM growth was helped by <strong>favourable market valuations</strong>.
+Rising markets flatter every wealth manager's headline. If you want to know whether Barclays is
+winning clients rather than riding an index, you look at net new AUM — and at £1.8bn it was
+slightly <em>below</em> the same period in 2025.</p></div>
+</section>
+
+<section class="pb">
+<h2><span class="num">PART FOUR</span>The numbers, read honestly</h2>
+<p class="sub">The division is the best-returning in Barclays and its profit is currently falling. Both are true, and the reason is the most interesting thing about it right now.</p>
+
+<table>
+<caption>Barclays Private Bank &amp; Wealth Management — the full picture (£m unless stated).</caption>
+<thead><tr><th>Measure</th><th class="n">FY2024</th><th class="n">FY2025</th><th class="n">H1 2025</th><th class="n">H1 2026</th></tr></thead>
+<tbody>
+<tr><td>Total income</td><td class="n">1,309</td><td class="n">1,380</td><td class="n">697</td><td class="n">713</td></tr>
+<tr><td>&nbsp;&nbsp;of which net fee, commission &amp; other</td><td class="n">543</td><td class="n">581</td><td class="n">—</td><td class="n">—</td></tr>
+<tr><td>Operating expenses</td><td class="n">920</td><td class="n">1,013</td><td class="n">474</td><td class="n">524</td></tr>
+<tr><td>Credit impairment</td><td class="n">6</td><td class="n pos">(8)</td><td class="n pos">(11)</td><td class="n">3</td></tr>
+<tr><td><strong>Profit before tax</strong></td><td class="n">383</td><td class="n">375</td><td class="n">234</td><td class="n">186</td></tr>
+<tr><td>Attributable profit</td><td class="n">288</td><td class="n">291</td><td class="n">185</td><td class="n neg">148</td></tr>
+<tr><td><strong>RoTE</strong></td><td class="n">28.1%</td><td class="n">26.3%</td><td class="n">33.2%</td><td class="n">26.1%</td></tr>
+<tr><td>Cost:income ratio</td><td class="n">70%</td><td class="n">73%</td><td class="n">68%</td><td class="n neg">73%</td></tr>
+<tr><td>Risk weighted assets (£bn)</td><td class="n">7.9</td><td class="n">8.0</td><td class="n">7.9</td><td class="n">8.0</td></tr>
+<tr><td>Customer deposits (£bn)</td><td class="n">69.5</td><td class="n">72.0</td><td class="n">—</td><td class="n">—</td></tr>
+<tr><td>Loans &amp; advances (£bn)</td><td class="n">14.5</td><td class="n">14.7</td><td class="n">—</td><td class="n">—</td></tr>
+<tr><td>Assets under management (£bn)</td><td class="n">47.7</td><td class="n">52.9</td><td class="n">—</td><td class="n">55.8</td></tr>
+<tr><td>Net new AUM (£bn)</td><td class="n">3.7</td><td class="n">3.3</td><td class="n">~2.0</td><td class="n">1.8</td></tr>
+<tr><td>Client assets &amp; liabilities (£bn)</td><td class="n">208.9</td><td class="n">227.6</td><td class="n">—</td><td class="n">—</td></tr>
+</tbody>
+</table>
+
+<svg class="chart" viewBox="0 0 720 273" width="100%" preserveAspectRatio="xMidYMid meet" role="img"><text x="0.0" y="14.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">The honest picture: costs are growing faster than income</text><text x="0.0" y="33.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Year-on-year percentage change. This is deliberate — Barclays is spending ahead of the revenue — but it is why profit fell.</text><g transform="translate(0,41)"><line x1="42" y1="188.0" x2="708" y2="188.0" stroke="#DCE3EA" stroke-width="0.8"/><text x="35.0" y="191.5" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">0</text><line x1="42" y1="155.6" x2="708" y2="155.6" stroke="#DCE3EA" stroke-width="0.8"/><text x="35.0" y="159.1" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">3</text><line x1="42" y1="123.2" x2="708" y2="123.2" stroke="#DCE3EA" stroke-width="0.8"/><text x="35.0" y="126.7" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">5</text><line x1="42" y1="90.8" x2="708" y2="90.8" stroke="#DCE3EA" stroke-width="0.8"/><text x="35.0" y="94.3" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">8</text><line x1="42" y1="58.4" x2="708" y2="58.4" stroke="#DCE3EA" stroke-width="0.8"/><text x="35.0" y="61.9" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">10</text><line x1="42" y1="26.0" x2="708" y2="26.0" stroke="#DCE3EA" stroke-width="0.8"/><text x="35.0" y="29.5" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">13</text><rect x="180.5" y="124.5" width="25.0" height="63.5" rx="1.5" fill="#00B39A"/><text x="193.0" y="119.5" font-family="Helvetica, Arial, sans-serif" font-size="8.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">+5%</text><rect x="208.5" y="61.0" width="25.0" height="127.0" rx="1.5" fill="#C1553B"/><text x="221.0" y="56.0" font-family="Helvetica, Arial, sans-serif" font-size="8.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">+10%</text><text x="208.5" y="203.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#0B1F35" text-anchor="middle" font-weight="400" letter-spacing="0">FY2025 vs FY2024</text><rect x="513.5" y="162.6" width="25.0" height="25.4" rx="1.5" fill="#00B39A"/><text x="526.0" y="157.6" font-family="Helvetica, Arial, sans-serif" font-size="8.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">+2%</text><rect x="541.5" y="48.3" width="25.0" height="139.7" rx="1.5" fill="#C1553B"/><text x="554.0" y="43.3" font-family="Helvetica, Arial, sans-serif" font-size="8.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">+11%</text><text x="541.5" y="203.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#0B1F35" text-anchor="middle" font-weight="400" letter-spacing="0">H1 2026 vs H1 2025</text><rect x="42" y="214" width="9" height="9" rx="1.5" fill="#00B39A"/><text x="55.0" y="222.0" font-family="Helvetica, Arial, sans-serif" font-size="9.4" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Income growth</text><rect x="126.89999999999999" y="214" width="9" height="9" rx="1.5" fill="#C1553B"/><text x="139.9" y="222.0" font-family="Helvetica, Arial, sans-serif" font-size="9.4" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Cost growth</text></g></svg>
+
+<h3>What is actually happening</h3>
+<p>In H1 2026 income grew <strong>2%</strong> to £713m while operating expenses grew
+<strong>11%</strong> to £524m. Attributable profit fell <strong>20%</strong> to £148m, the
+cost:income ratio widened from 68% to 73%, and RoTE fell from 33.2% to 26.1%. Barclays'
+own explanation is <q>investment to support business growth strategy and inflationary
+headwinds</q>, partly offset by efficiency savings.</p>
+<p>Two other things moved: credit impairment swung from an £11m release in H1 2025 to a £3m
+charge — a swing of £14m on its own — and the prior-year comparison was unusually strong.</p>
+
+<svg class="chart" viewBox="0 0 720 294" width="100%" preserveAspectRatio="xMidYMid meet" role="img"><text x="0.0" y="14.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Return on tangible equity — still comfortably above target</text><text x="0.0" y="33.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">The fall from 33.2% is the cost of the growth plan, not a deterioration in the business. The division is still the best-returning in</text><text x="0.0" y="46.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Barclays.</text><g transform="translate(0,54)"><line x1="44" y1="192.0" x2="698" y2="192.0" stroke="#DCE3EA" stroke-width="0.8"/><text x="37.0" y="195.5" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">0%</text><line x1="44" y1="162.7" x2="698" y2="162.7" stroke="#DCE3EA" stroke-width="0.8"/><text x="37.0" y="166.2" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">7%</text><line x1="44" y1="133.3" x2="698" y2="133.3" stroke="#DCE3EA" stroke-width="0.8"/><text x="37.0" y="136.8" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">14%</text><line x1="44" y1="104.0" x2="698" y2="104.0" stroke="#DCE3EA" stroke-width="0.8"/><text x="37.0" y="107.5" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">21%</text><line x1="44" y1="74.7" x2="698" y2="74.7" stroke="#DCE3EA" stroke-width="0.8"/><text x="37.0" y="78.2" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">28%</text><line x1="44" y1="45.3" x2="698" y2="45.3" stroke="#DCE3EA" stroke-width="0.8"/><text x="37.0" y="48.8" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">35%</text><line x1="44" y1="16.0" x2="698" y2="16.0" stroke="#DCE3EA" stroke-width="0.8"/><text x="37.0" y="19.5" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">42%</text><path d="M98.5,74.2 L207.5,52.9 L316.5,81.8 L425.5,82.6 L534.5,87.2 L643.5,87.2" fill="none" stroke="#00AEEF" stroke-width="2.4"/><circle cx="98.5" cy="74.2" r="6" fill="#00AEEF" stroke="#00AEEF" stroke-width="2.4"/><text x="98.5" y="61.2" font-family="Helvetica, Arial, sans-serif" font-size="10.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">28.1%</text><text x="98.5" y="209.0" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">FY2024</text><text x="98.5" y="222.0" font-family="Helvetica, Arial, sans-serif" font-size="8.8" fill="#5B6B7F" text-anchor="middle" font-weight="400" letter-spacing="0">pre-investment</text><circle cx="207.5" cy="52.9" r="6" fill="#00AEEF" stroke="#00AEEF" stroke-width="2.4"/><text x="207.5" y="39.9" font-family="Helvetica, Arial, sans-serif" font-size="10.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">33.2%</text><text x="207.5" y="209.0" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">H1 2025</text><text x="207.5" y="222.0" font-family="Helvetica, Arial, sans-serif" font-size="8.8" fill="#5B6B7F" text-anchor="middle" font-weight="400" letter-spacing="0">peak</text><circle cx="316.5" cy="81.8" r="6" fill="#00AEEF" stroke="#00AEEF" stroke-width="2.4"/><text x="316.5" y="68.8" font-family="Helvetica, Arial, sans-serif" font-size="10.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">26.3%</text><text x="316.5" y="209.0" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">FY2025</text><text x="316.5" y="222.0" font-family="Helvetica, Arial, sans-serif" font-size="8.8" fill="#5B6B7F" text-anchor="middle" font-weight="400" letter-spacing="0">spending starts</text><circle cx="425.5" cy="82.6" r="6" fill="#00AEEF" stroke="#00AEEF" stroke-width="2.4"/><text x="425.5" y="69.6" font-family="Helvetica, Arial, sans-serif" font-size="10.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">26.1%</text><text x="425.5" y="209.0" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">H1 2026</text><text x="425.5" y="222.0" font-family="Helvetica, Arial, sans-serif" font-size="8.8" fill="#5B6B7F" text-anchor="middle" font-weight="400" letter-spacing="0">latest</text><circle cx="534.5" cy="87.2" r="6" fill="#ffffff" stroke="#00AEEF" stroke-width="2.4"/><text x="534.5" y="74.2" font-family="Helvetica, Arial, sans-serif" font-size="10.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">25.0%</text><text x="534.5" y="209.0" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">2026 target</text><text x="534.5" y="222.0" font-family="Helvetica, Arial, sans-serif" font-size="8.8" fill="#5B6B7F" text-anchor="middle" font-weight="400" letter-spacing="0">&gt; 25%</text><circle cx="643.5" cy="87.2" r="6" fill="#ffffff" stroke="#00AEEF" stroke-width="2.4"/><text x="643.5" y="74.2" font-family="Helvetica, Arial, sans-serif" font-size="10.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">25.0%</text><text x="643.5" y="209.0" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">2028 target</text><text x="643.5" y="222.0" font-family="Helvetica, Arial, sans-serif" font-size="8.8" fill="#5B6B7F" text-anchor="middle" font-weight="400" letter-spacing="0">&gt; 25%</text><text x="44.0" y="238.0" font-family="Helvetica, Arial, sans-serif" font-size="8.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Hollow markers are targets, not results.</text></g></svg>
+
+<div class="key"><span class="lab">How to talk about this — the mature reading</span>
+<p>A naive candidate sees profit down 20% and calls it a problem. A better reading: Barclays is
+<strong>deliberately spending ahead of revenue</strong> because it has decided this is the
+division worth investing in. The spending is specific and disclosed — <strong>up to 100 new
+wealth managers</strong> hired into the cost base, and <strong>annual technology spend for wealth
+up more than 75%</strong> on its 2021–22 level.</p>
+<p>Advisers are a lagging cost and a leading indicator: you pay them for eighteen months before
+they bring in the assets. So the shape you would expect — costs up first, income later — is
+exactly the shape in the accounts. And even mid-investment the division is delivering
+<strong>26.1% RoTE against a target of "greater than 25%"</strong>, and remains the highest-returning
+business in Barclays. That is the answer, and it shows you can read an income statement in
+context rather than in isolation.</p></div>
+</section>
+
+<section class="pb">
+<h2><span class="num">PART FIVE</span>Where it ranks</h2>
+<p class="sub">Be accurate about this. Barclays is a serious wealth manager and it is not a global giant, and pretending otherwise is the fastest way to lose credibility.</p>
+
+<h3>The global picture</h3>
+<table>
+<caption>Global wealth managers by scale. Read the "measure" column carefully — these are not like-for-like, and conflating them is the most common error made about this industry.</caption>
+<thead><tr><th style="width:30%">Firm</th><th style="width:24%">Scale</th><th style="width:22%">Measure</th><th style="width:24%">As at</th></tr></thead>
+<tbody>
+<tr><td>Morgan Stanley Wealth Management</td><td class="n">$7.35trn</td><td>Total client assets</td><td>Mar 2026</td></tr>
+<tr><td>UBS (group)</td><td class="n">$7.3trn</td><td>Invested assets, group-wide</td><td>Q2 2026</td></tr>
+<tr><td>Julius Baer</td><td class="n">CHF 547bn</td><td>Assets under management</td><td>Jun 2026</td></tr>
+<tr><td>HSBC Global Private Banking</td><td class="n">$395bn</td><td>Private banking assets</td><td>Dec 2024</td></tr>
+<tr><td>NatWest + Evelyn Partners</td><td class="n">£128bn</td><td>Combined AUM, pro-forma</td><td>Deal agreed Feb 2026</td></tr>
+<tr class="total"><td><strong>Barclays PB&amp;WM</strong></td><td class="n"><strong>£140.6bn</strong> invested assets<br><strong>£55.8bn</strong> AUM</td><td>Invested assets / AUM</td><td>FY2025 / Jun 2026</td></tr>
+</tbody>
+</table>
+<p><strong>The honest verdict:</strong> Barclays is not in the same weight class as UBS or Morgan
+Stanley and is not trying to be. It is comparable to Julius Baer and HSBC's private bank in
+ambition but smaller in managed assets, and it is genuinely in the front rank in the UK. Its
+international footprint — Switzerland, Monaco, the Crown Dependencies, India, the Gulf and now
+Singapore — is real and long-established, but it is a focused network rather than a global one.</p>
+
+<h3>The UK picture — and the event that just reshaped it</h3>
+<svg class="chart" viewBox="0 0 720 184" width="100%" preserveAspectRatio="xMidYMid meet" role="img"><text x="0.0" y="14.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">The UK league table — and what NatWest just did to it</text><text x="0.0" y="33.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Assets under management, most recent disclosure. NatWest agreed to buy Evelyn Partners for £2.7bn in February 2026, beating Barclays</text><text x="0.0" y="46.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">in the auction. On AUM alone that leapfrogs Barclays overnight.</text><g transform="translate(0,54)"><rect x="200" y="6" width="415.7" height="16" rx="2" fill="#C1553B"/><text x="190.0" y="18.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">NatWest + Evelyn (combined)</text><text x="623.7" y="18.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£128.0bn</text><rect x="200" y="36" width="224.1" height="16" rx="2" fill="#9AA6B4"/><text x="190.0" y="48.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">Evelyn Partners (alone)</text><text x="432.1" y="48.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£69.0bn</text><rect x="200" y="66" width="190.0" height="16" rx="2" fill="#9AA6B4"/><text x="190.0" y="78.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">NatWest PB&amp;WM incl. Coutts</text><text x="398.0" y="78.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£58.5bn</text><rect x="200" y="96" width="181.2" height="16" rx="2" fill="#00B39A"/><text x="190.0" y="108.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">Barclays PB&amp;WM — AUM</text><text x="389.2" y="108.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£55.8bn</text></g></svg>
+<div class="warn"><span class="lab">The most important thing that has happened in UK wealth this year</span>
+<p>In February 2026 <strong>NatWest agreed to buy Evelyn Partners for £2.7bn</strong>, taking its
+private banking and wealth AUM from around £59bn to a combined <strong>£128bn</strong>.
+<strong>Barclays bid for Evelyn and lost.</strong> The auction, run by Evercore, also drew RBC
+and several private equity firms.</p>
+<p>This matters for three reasons. First, it tells you Barclays' strategic conviction is real —
+it was willing to spend billions on the mass-affluent segment. Second, it tells you Barclays is
+now committed to <strong>organic growth by necessity as much as by choice</strong>: the biggest
+available UK acquisition has gone. Third, it defines the competitive question for the next three
+years — can Barclays' internal referral engine win clients faster than NatWest can integrate a
+£69bn acquisition?</p>
+<p>If you say one current thing about this division on 14 September, say this.</p></div>
+</section>
+
+<section class="pb">
+<h2><span class="num">PART SIX</span>The clients, and why these ones</h2>
+<p class="sub">Barclays has been unusually explicit about who it is chasing. The target is not, primarily, the ultra-rich.</p>
+
+<h3>The gap Barclays is aiming at</h3>
+<p>Sasha Wiggins, chief executive of the division, frames the opportunity in one number:
+<q>The UK is a large market with client investable assets totalling some 3.5 trillion pounds.</q>
+Against that, Barclays' own £140.6bn of invested assets is about 4% — which is the point. There
+is enormous room to grow inside a market Barclays already banks.</p>
+<div class="kpis">
+  <div class="kpi"><b>~4 million</b><span>Barclays UK customers with £250k–£3m investable — the core target</span></div>
+  <div class="kpi"><b>£3.5trn</b><span>total UK client investable assets</span></div>
+  <div class="kpi"><b>£250k–£3m</b><span>the "mass affluent" band the whole plan is built around</span></div>
+  <div class="kpi"><b>£5m+</b><span>threshold for Private Banking International</span></div>
+</div>
+<p><strong>Read that first number again.</strong> Roughly four million people who already bank
+with Barclays have between £250,000 and £3m to invest. Barclays does not need to find them,
+market to them, or buy them — it already has their salary, their mortgage and their app. It
+simply needs to convert them. That is the single most important sentence in this report, and it
+is why Premier Wealth Management was launched in April 2026 with <strong>no upfront fee</strong>
+and why custody fees on Direct Investing were scrapped: remove every possible reason to say no.</p>
+
+<h3>Why this segment and not the ultra-wealthy</h3>
+<table>
+<thead><tr><th style="width:24%">Segment</th><th style="width:38%">Why Barclays wants them</th><th style="width:38%">The catch</th></tr></thead>
+<tbody>
+<tr><td><strong>Mass affluent</strong><br>£250k–£3m</td>
+<td>Barclays already owns the relationship, so acquisition cost is near zero. Huge in number. Advice can be standardised and delivered digitally, so margins improve with scale.</td>
+<td>Fee per client is small; it only works at volume, which is exactly why technology spend is up more than 75%.</td></tr>
+<tr><td><strong>UK high-net-worth</strong><br>~£3m+</td>
+<td>Full private banking economics — discretionary mandates, secured lending, trusts. Often business owners already banked by the UK Corporate Bank.</td>
+<td>Competitive and service-intensive. Coutts, UBS and independents fight hard for these clients.</td></tr>
+<tr><td><strong>International / cross-border</strong><br>£5m+</td>
+<td>Highest fees and most complex needs. Barclays' Swiss, Monaco, Crown Dependency and Singapore booking centres are a genuine barrier to entry that took decades to build.</td>
+<td>Heavy regulatory and compliance burden across multiple jurisdictions.</td></tr>
+<tr><td><strong>Entrepreneurs at exit</strong></td>
+<td>The crown jewel. When a founder sells a company — often advised by Barclays' own investment bank — a large sum of cash appears, and Barclays is already in the room.</td>
+<td>Timing-dependent and relationship-driven; you cannot manufacture a liquidity event.</td></tr>
+</tbody>
+</table>
+
+<h3>Where in the world</h3>
+<p>Barclays named its growth hubs explicitly: <strong>London, Geneva, Dubai and India</strong>,
+plus <strong>Singapore</strong>, where a full booking centre is being built during 2026 —
+Werner Schlossmacher was appointed COO for Barclays Private Bank Asia, based in Singapore,
+reporting to Leo Müller, the division's COO. Barclays has had a presence across Asia since 1864
+and has provided investment services in India since 1990.</p>
+<div class="warn"><span class="lab">And where it has explicitly ruled out</span>
+<p><strong>The United States.</strong> Barclays has publicly ruled out re-entering US wealth
+management on grounds of cost and competition — a striking decision for a bank with a
+bulge-bracket Wall Street investment bank and a large American card business. It is also a
+decision with history behind it: Barclays <strong>sold its US Wealth &amp; Investment Management
+business to Stifel in December 2015</strong>, roughly 180 advisers and about $56bn of client
+assets. UBS, by contrast, is pushing hard into US mass-affluent wealth. The two firms have
+diverged deliberately, and being able to name that divergence is a genuinely sophisticated
+observation.</p></div>
+</section>
+
+<section class="pb">
+<h2><span class="num">PART SEVEN</span>How long they have been doing this</h2>
+<p class="sub">You asked how long they have been around. In wealth management, longevity is not sentiment — it is licences, booking centres and trust businesses that competitors cannot replicate quickly.</p>
+
+<svg class="chart" viewBox="0 0 720 704" width="100%" preserveAspectRatio="xMidYMid meet" role="img"><text x="0.0" y="14.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Barclays has been doing this for 335 years</text><text x="0.0" y="33.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Longevity is not just heritage here — booking centres, trust licences and cross-border permissions take decades to build and are a</text><text x="0.0" y="46.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">genuine barrier to entry.</text><g transform="translate(0,54)"><line x1="74" y1="6" x2="74" y2="634" stroke="#DCE3EA" stroke-width="2"/><circle cx="74" cy="14" r="5" fill="#00AEEF"/><circle cx="74" cy="14" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="18.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">1690</text><text x="92.0" y="13.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Barclays begins on Lombard Street</text><text x="92.0" y="27.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Two Quaker goldsmith-bankers. Private banking for wealthy families is the original business — the retail bank came later.</text><circle cx="74" cy="60" r="5" fill="#00AEEF"/><circle cx="74" cy="60" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="64.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">1864</text><text x="92.0" y="59.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Presence begins across Asia</text><text x="92.0" y="73.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">The foundation of what is now the international private bank.</text><circle cx="74" cy="106" r="5" fill="#00AEEF"/><circle cx="74" cy="106" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="110.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">~1920s</text><text x="92.0" y="105.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Over a century in the Crown Dependencies</text><text x="92.0" y="119.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Jersey, Guernsey and the Isle of Man — still core booking centres today.</text><circle cx="74" cy="152" r="5" fill="#00AEEF"/><circle cx="74" cy="152" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="156.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">1922</text><text x="92.0" y="151.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Monaco</text><text x="92.0" y="165.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Barclays is the longest-serving foreign wealth manager in the Principality.</text><circle cx="74" cy="198" r="5" fill="#00AEEF"/><circle cx="74" cy="198" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="202.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">mid-1980s</text><text x="92.0" y="197.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Geneva and Zurich established</text><text x="92.0" y="211.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Swiss booking capability — the entry ticket to serving international wealth.</text><circle cx="74" cy="244" r="5" fill="#00AEEF"/><circle cx="74" cy="244" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="248.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">1990</text><text x="92.0" y="243.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">India</text><text x="92.0" y="257.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Investment services begin; India is now a named growth hub.</text><circle cx="74" cy="290" r="5" fill="#00AEEF"/><circle cx="74" cy="290" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="294.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">2003</text><text x="92.0" y="289.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Gerrard acquired for £210m</text><text x="92.0" y="303.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Bought from Old Mutual with £12.5bn of assets and 116,000 clients. Combined with Barclays Investment Management it created a ~£21bn business — then the UK’s largest adviser to wealthy investors.</text><circle cx="74" cy="336" r="5" fill="#00AEEF"/><circle cx="74" cy="336" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="340.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">2000s</text><text x="92.0" y="335.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Barclays Wealth formed</text><text x="92.0" y="349.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Private Bank, Stockbrokers, International Private Bank, Gerrard, Estates &amp; Trust pulled into one division.</text><circle cx="74" cy="382" r="5" fill="#00AEEF"/><circle cx="74" cy="382" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="386.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">2015</text><text x="92.0" y="381.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">The US wealth business is sold to Stifel</text><text x="92.0" y="395.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">~180 advisers and ~$56bn of client assets. Barclays gave up on American wealth — and has ruled out going back.</text><circle cx="74" cy="428" r="5" fill="#00AEEF"/><circle cx="74" cy="428" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="432.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">Feb 2024</text><text x="92.0" y="427.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Made a standalone reporting division</text><text x="92.0" y="441.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Sasha Wiggins appointed CEO. Wealth Management &amp; Investments transferred in from Barclays UK.</text><circle cx="74" cy="474" r="5" fill="#00AEEF"/><circle cx="74" cy="474" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="478.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">Dec 2024</text><text x="92.0" y="473.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Business deep dive sets the growth plan</text><text x="92.0" y="487.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">RoTE target of &gt;25%, tech spend up more than 75%, international build-out.</text><circle cx="74" cy="520" r="5" fill="#00AEEF"/><circle cx="74" cy="520" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="524.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">Feb 2026</text><text x="92.0" y="519.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Barclays bids for Evelyn Partners — and loses</text><text x="92.0" y="533.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">NatWest pays £2.7bn. Barclays commits to organic growth instead.</text><circle cx="74" cy="566" r="5" fill="#00AEEF"/><circle cx="74" cy="566" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="570.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">Apr 2026</text><text x="92.0" y="565.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Premier Wealth Management launches</text><text x="92.0" y="579.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Advice from £150k invested, no upfront fee. Direct Investing custody fees removed.</text><circle cx="74" cy="612" r="5" fill="#00AEEF"/><circle cx="74" cy="612" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="616.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">2026</text><text x="92.0" y="611.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Singapore booking centre; GoHenry acquired</text><text x="92.0" y="625.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">A full return to Asian on-the-ground presence, and the bottom rung of the ladder bought for ~£180m.</text></g></svg>
+
+<div class="key"><span class="lab">Why the history is a commercial moat, not a brochure line</span>
+<p>To serve an international private client you need a booking centre in the right jurisdiction,
+a trust and fiduciary licence, cross-border marketing permissions, and a regulator who trusts
+you. Barclays has been <strong>over a century in the Crown Dependencies</strong>, is the
+<strong>longest-serving foreign wealth manager in Monaco</strong>, established
+<strong>Geneva and Zurich in the mid-1980s</strong>, and has run investment services in
+<strong>India since 1990</strong>. A well-funded new entrant cannot buy that in five years —
+which is precisely why NatWest had to spend £2.7bn to buy scale rather than build it.</p></div>
+
+<h3>The 2003 deal that made the modern business</h3>
+<p>The most important single transaction in this division's history is one almost nobody
+mentions. In <strong>December 2003 Barclays bought the Gerrard group from Old Mutual for
+£210m</strong>. Gerrard came with <strong>£12.5bn under management and 116,000 clients</strong>,
+and a lineage traceable to at least 1870. Combined with Barclays Investment Management it created
+a business running more than <strong>£21bn</strong> in discretionary and advisory portfolios —
+at the time <strong>the UK's largest adviser to wealthy investors</strong>.</p>
+<p><strong>What Barclays specifically did:</strong> it bought a distribution network and a client
+book, not an investment process. Gerrard's value was 116,000 existing relationships and the
+advisers who held them. Barclays then folded Gerrard together with Barclays Private Bank,
+Barclays Stockbrokers, the International Private Bank and the Estates &amp; Trust business to
+create Barclays Wealth. Every rung of today's ladder above Premier traces to that consolidation.
+It is also the template Barclays tried to repeat with Evelyn Partners in 2026 — buy the client
+book, plug it into the existing platform — and this time it was outbid.</p>
+</section>
+
+<section class="pb">
+<h2><span class="num">PART EIGHT</span>News, deals, wins and losses</h2>
+<p class="sub">You asked for success stories, deals and closures. Here is everything material in the last eighteen months, with what each one actually tells you.</p>
+
+<div class="cards">
+<div class="card pbwm"><h5>WON — Premier Wealth Management launched, April 2026</h5>
+<p>Advice and financial planning for Barclays Premier customers with <strong>£150,000+ to
+invest</strong>. Begins with a no-obligation in-depth financial review carrying
+<strong>no upfront fee</strong>; clients pay ongoing fees only if they proceed.</p>
+<p><em>What it tells you:</em> this is the mass-affluent conversion engine going live. CEO
+C.S. Venkatakrishnan described the strategy as a play to <q>own the entirety of the customer</q>.
+Removing the upfront fee removes the last friction between four million existing customers and
+an advice relationship.</p></div>
+
+<div class="card pbwm"><h5>WON — Direct Investing custody fees abolished</h5>
+<p>Barclays removed the monthly customer fee on Investment ISAs and Investment Accounts held
+with Direct Investing (renamed from Smart Investor).</p>
+<p><em>What it tells you:</em> deliberate margin sacrifice to buy scale and volume at the
+bottom of the ladder, betting those clients climb it later. It is also a direct response to
+zero-fee digital platforms.</p></div>
+
+<div class="card ho"><h5>LOST — the Evelyn Partners auction, February 2026</h5>
+<p>Barclays bid for Evelyn Partners (£69bn AUM, £250k minimum for discretionary management).
+<strong>NatWest won at £2.7bn</strong>, completing summer 2026, taking its combined wealth AUM to
+about £128bn. RBC and several private equity firms also participated in the Evercore-run process.</p>
+<p><em>What it tells you:</em> the single most important competitive fact in UK wealth right
+now. Barclays wanted to buy scale in exactly the segment it is targeting, was willing to pay
+billions, and was beaten. Organic execution is now the only route.</p></div>
+
+<div class="card buk"><h5>WON — GoHenry acquired, June 2026</h5>
+<p>Roughly <strong>£180m</strong> for GoHenry's UK business, brand and app — a money-management
+platform for 6–18 year-olds with more than <strong>500,000 UK children</strong> (about 2.3
+million globally). Completing Q4 2026, pending regulatory approval. GoHenry will keep running as
+its own brand rather than being absorbed.</p>
+<p><em>What it tells you:</em> lifecycle banking taken to its logical extreme. Win the parent,
+win the child, hold the relationship from a first debit card to a family estate plan.</p></div>
+
+<div class="card ib"><h5>BUILDING — Singapore booking centre, 2026</h5>
+<p>A full return to on-the-ground private banking in Singapore, upgrading it from a sales office
+to a booking centre. Werner Schlossmacher appointed COO for Barclays Private Bank Asia, based in
+Singapore, reporting to Leo Müller.</p>
+<p><em>What it tells you:</em> Asia is where new wealth is being created fastest. A booking
+centre — not just a sales office — means assets can be held locally, which is what serious
+Asian and Middle Eastern clients require.</p></div>
+
+<div class="card ukcb"><h5>BUILDING — 100 wealth managers, tech spend up 75%+</h5>
+<p>Up to <strong>100 new advisers</strong> — relationship managers and operational staff —
+embedded in FY2026 cost guidance. Annual technology spend for wealth up
+<strong>more than 75%</strong> on its 2021–22 level. Hubs: London, Geneva, Dubai, India.</p>
+<p><em>What it tells you:</em> the division is actively hiring, which is directly relevant to
+you. It also explains the 11% cost growth in H1 2026.</p></div>
+
+<div class="card ho"><h5>CLOSED — US Wealth &amp; Investment Management sold to Stifel, 2015</h5>
+<p>Completed 4 December 2015: approximately <strong>180 financial advisers and $56bn of client
+assets</strong> transferred to Stifel Financial.</p>
+<p><em>What it tells you:</em> Barclays has failed at American wealth before and has explicitly
+ruled out returning on cost and competition grounds. This is the honest counterweight to the
+growth story, and mentioning it shows you have looked past the good news.</p></div>
+
+<div class="card pbwm"><h5>CONTEXT — the transfer that created today's division</h5>
+<p>In 2024 Barclays moved Wealth Management &amp; Investments out of Barclays UK and into the
+private bank, creating the five-division structure and making PB&amp;WM a standalone reported
+business under Sasha Wiggins from February 2024. Private bank income rose 17% to £1.2bn that
+year, with client assets and liabilities reaching nearly £180bn.</p>
+<p><em>What it tells you:</em> the division exists in its current form only because Barclays
+decided wealth deserved its own scoreboard. It is a young reporting line with old roots.</p></div>
+</div>
+</section>
+
+<section class="pb">
+<h2><span class="num">PART NINE</span>Why a client picks Barclays over anyone else</h2>
+<p class="sub">This is your question — what is it in the business model? The answer is not service quality or investment performance, because every competitor claims both.</p>
+
+<h3>The four genuine structural advantages</h3>
+<ol>
+<li><strong>The referral engine no independent can replicate.</strong> Barclays does not have to
+find wealthy clients. It banks around 20 million UK customers and can see, in its own data, who
+has just received a large sum, whose income has jumped, whose business account just recorded a
+sale. Roughly four million existing customers sit in the £250k–£3m target band. An Evelyn
+Partners or a Rathbones must win every single client from a standing start; Barclays sends an
+invitation up its own ladder. <em>This is the whole argument, and everything else is secondary.</em></li>
+<li><strong>The investment bank connection.</strong> When Barclays' investment bank advises a
+founder on selling their company, the private bank is present at the moment the cash lands.
+Coutts, Julius Baer and every UK independent lack a bulge-bracket M&amp;A franchise. UBS has one
+— which is precisely why UBS is the most credible comparison.</li>
+<li><strong>Balance sheet.</strong> Barclays can lend meaningfully against a portfolio, a
+property, or an unlisted holding, structured case by case, funded by a £1.7trn bank. A pure
+wealth manager cannot lend at all, and this matters enormously to entrepreneurs who are asset-rich
+and cash-poor. It is also why the division's lending carries almost no credit losses.</li>
+<li><strong>Cross-border booking that took a century to build.</strong> Switzerland, Monaco,
+the Crown Dependencies, India, the Gulf, and Singapore from 2026. For a family with money and
+members in three countries, that is not a nice-to-have — it is the entire requirement, and most
+UK competitors simply cannot serve it.</li>
+</ol>
+
+<table>
+<caption>Head to head — what each competitor has that Barclays does not, and vice versa.</caption>
+<thead><tr><th style="width:20%">Competitor</th><th style="width:40%">Their advantage over Barclays</th><th style="width:40%">Barclays' advantage over them</th></tr></thead>
+<tbody>
+<tr><td><strong>UBS</strong></td><td>Vastly larger — $7.3trn of invested assets. The definitive global brand in private banking, with unmatched Swiss heritage and reach.</td><td>Barclays owns a UK high-street funnel UBS has nothing like. UBS is chasing US mass-affluent; Barclays already owns four million British ones.</td></tr>
+<tr><td><strong>Coutts</strong> (NatWest)</td><td>Iconic British private-banking brand, and — post-Evelyn — a larger UK AUM base at ~£128bn combined.</td><td>Barclays has genuine international booking centres and a bulge-bracket investment bank. Coutts is overwhelmingly domestic. NatWest must now integrate a £69bn acquisition, which takes years.</td></tr>
+<tr><td><strong>HSBC Global Private Banking</strong></td><td>$395bn of private banking assets and far deeper Asian roots.</td><td>Barclays is stronger in the UK domestic funnel; HSBC's UK retail-to-wealth pipeline is smaller relative to its ambitions.</td></tr>
+<tr><td><strong>Julius Baer</strong></td><td>CHF 547bn AUM, pure-play focus, no distractions, deep Swiss credibility.</td><td>No retail bank, no lending balance sheet of Barclays' size, no investment bank. Every client must be won from cold.</td></tr>
+<tr><td><strong>Evelyn Partners / Rathbones / Quilter / SJP</strong></td><td>Independence — no conflict with a parent bank — and often lower minimums with deep financial-planning expertise.</td><td>No cheap client acquisition, no meaningful lending, no cross-border booking, no capital strength. This is the gap Barclays is exploiting with Premier Wealth Management.</td></tr>
+</tbody>
+</table>
+
+<div class="warn"><span class="lab">The honest weaknesses — say these too</span>
+<p><strong>Scale.</strong> £55.8bn of AUM is a fraction of UBS or Morgan Stanley, and NatWest has
+just leapfrogged Barclays on UK AUM by acquisition.</p>
+<p><strong>Cost.</strong> A 73% cost:income ratio is the worst in Barclays, and costs are
+currently growing five times faster than income.</p>
+<p><strong>The conflict question.</strong> Independents will always argue that a bank-owned
+wealth manager is conflicted — pushing in-house product and using wealth as a funnel for the
+rest of the bank. Barclays' answer is that integration is a feature, not a bug; the client gets
+lending, banking and advice in one place. Both arguments are legitimate.</p>
+<p><strong>Rate dependency.</strong> 58% of income is net interest income. As rates fall that
+half comes under pressure, and the fee half has to grow fast enough to cover it.</p></div>
+</section>
+
+<section class="pb">
+<h2><span class="num">PART TEN</span>Why you would want to work here</h2>
+<p class="sub">The roles, what the work actually is, and the honest case for and against — given you have decided this is the side of the business you care about.</p>
+
+<h3>What the jobs actually are</h3>
+<table>
+<caption>The main career tracks inside Private Bank &amp; Wealth Management.</caption>
+<thead><tr><th style="width:26%">Role</th><th style="width:42%">What you actually do</th><th style="width:32%">Suits you if</th></tr></thead>
+<tbody>
+<tr><td><strong>Private Banker /<br>Relationship Manager</strong></td><td>Own the client relationship end to end — understand their wealth, their family, their business, and coordinate every specialist around them. Ultimately a revenue-owning role.</td><td>You want commercial ownership and are genuinely interested in people's lives, not just markets.</td></tr>
+<tr><td><strong>Investment Counsellor /<br>Advisor</strong></td><td>Translate the house investment view into a specific portfolio for a specific client, and defend it when markets fall. The bridge between the investment engine and the client.</td><td>You want markets exposure but with a named human on the other side of the conversation.</td></tr>
+<tr><td><strong>Discretionary Portfolio Manager</strong></td><td>Actually manage the money — asset allocation, manager and security selection, risk. This is the £55.8bn of AUM.</td><td>You want to be judged on investment decisions rather than relationships.</td></tr>
+<tr><td><strong>Wealth Planner</strong></td><td>Tax, trusts, succession, estate and business-exit planning. Long-horizon, technical, and the piece clients value most in practice.</td><td>You like technical problem-solving with a legal and tax edge.</td></tr>
+<tr><td><strong>Credit &amp; Lending Structuring</strong></td><td>Structure bespoke lending against portfolios, property and unlisted holdings. Barclays' balance sheet is a differentiator; this is the team that deploys it.</td><td>You want credit analysis with genuinely non-standard cases.</td></tr>
+<tr><td><strong>Product, COO &amp; Business Management</strong></td><td>Build the platform — Direct Investing, the app, digital advice, the Singapore booking centre. Where the "tech spend up 75%" is actually being spent.</td><td>You want to shape how advice scales rather than deliver it one client at a time.</td></tr>
+</tbody>
+</table>
+
+<h3>The case for joining this division</h3>
+<ul>
+<li><strong>It is the best-returning business in Barclays</strong> — 26.3% RoTE in FY2025, 26.1%
+in H1 2026, against a target of "greater than 25%". You are not joining a problem child.</li>
+<li><strong>It is small enough that you are visible.</strong> Around 1,300 people in the private
+bank against 91,065 across the group. On an investment banking analyst class you are one of
+hundreds; here you are not.</li>
+<li><strong>It is actively hiring into a stated plan</strong> — up to 100 advisers funded in the
+2026 cost base. Growth divisions promote faster than mature ones.</li>
+<li><strong>The strategic priority is real and expensive.</strong> Technology spend up more than
+75%; a £2.7bn bid tabled for Evelyn Partners. Firms do not bid billions on businesses they
+intend to run down.</li>
+<li><strong>The skills compound rather than expire.</strong> A private banker's value is a book of
+relationships and technical judgement built over decades — it grows with age, unlike the
+stamina-driven early years of an investment banking career.</li>
+<li><strong>It sits at the intersection of everything.</strong> To serve one entrepreneur well you
+touch the corporate bank, the investment bank, credit, tax and markets. Few seats give you that
+view of a universal bank.</li>
+</ul>
+
+<div class="warn"><span class="lab">The case against — know it, and be ready for it</span>
+<p><strong>It is slower.</strong> Relationships are built over years. If you want to point at a
+completed transaction after eight weeks, this is the wrong division.</p>
+<p><strong>Exit options are narrower</strong> than investment banking. There is no conventional
+private equity path out of wealth management; the route is to other wealth managers, to a family
+office, or to independence.</p>
+<p><strong>Costs are under pressure.</strong> A 73% cost:income ratio with costs growing 11%
+against 2% income growth will not be tolerated indefinitely. The investment has to pay off.</p>
+<p><strong>Scale is a live disadvantage.</strong> NatWest just bought its way past Barclays on UK
+AUM. The organic strategy has to work.</p></div>
+
+<h3>Ten numbers to have ready</h3>
+<table>
+<thead><tr><th style="width:58%">Fact</th><th style="width:42%">Figure</th></tr></thead>
+<tbody>
+<tr><td>Divisional income and its share of the group</td><td><strong>£1,380m — 4.8%</strong> of Barclays' FY2025 income</td></tr>
+<tr><td>RoTE, and its rank in the group</td><td><strong>26.3%</strong> FY2025 — <strong>highest of the five divisions</strong></td></tr>
+<tr><td>Capital consumed</td><td><strong>£8.0bn of RWAs — just 2.2%</strong> of the group</td></tr>
+<tr><td>The target</td><td><strong>RoTE &gt;25%</strong> in both 2026 and 2028</td></tr>
+<tr><td>Assets under management</td><td><strong>£55.8bn</strong> (June 2026), from £52.9bn at end-2025</td></tr>
+<tr><td>Client assets &amp; liabilities</td><td><strong>£227.6bn</strong>, up from £208.9bn</td></tr>
+<tr><td>The revenue split</td><td><strong>58% net interest income, 42% fees</strong></td></tr>
+<tr><td>The target market</td><td><strong>~4 million</strong> Barclays UK customers with <strong>£250k–£3m</strong></td></tr>
+<tr><td>The investment being made</td><td><strong>100 advisers</strong>; tech spend <strong>up &gt;75%</strong></td></tr>
+<tr><td>The competitive event of the year</td><td><strong>NatWest bought Evelyn for £2.7bn; Barclays bid and lost</strong></td></tr>
+</tbody>
+</table>
+
+<h3>Six questions to ask on 14 September</h3>
+<ol>
+<li><q>Roughly 58% of the division's income is net interest income rather than fees. As rates
+come down, how hard is it to grow the fee side fast enough to replace it?</q>
+<em>— shows you understand the revenue model, not just the brand.</em></li>
+<li><q>Net new AUM was £1.8bn in the first half, a little below last year, while headline AUM rose
+on market moves. What are you doing to accelerate genuinely new money?</q>
+<em>— this is the metric insiders actually watch.</em></li>
+<li><q>NatWest bought Evelyn and Barclays is growing organically. Does that change the pace you
+have to move at with the Premier Wealth Management proposition?</q>
+<em>— current, sharp, and impossible to have got from a careers page.</em></li>
+<li><q>Around four million Barclays UK customers sit in the £250k–£3m band. What is the actual
+bottleneck in converting them — is it advisers, technology, or client willingness?</q>
+<em>— demonstrates you understand the growth plan's mechanics.</em></li>
+<li><q>The division straddles the ring-fence, with UK wealth inside and international outside.
+How does that shape what you can offer a client with money in two countries?</q>
+<em>— almost nobody knows this.</em></li>
+<li><q>How much of the work is actually investment judgement versus planning, tax and structuring?
+I want to understand what the job is day to day.</q>
+<em>— honest, useful to you, and shows you are choosing deliberately.</em></li>
+</ol>
+
+<div class="say"><span class="lab">Your answer to "why wealth management, and why Barclays?"</span>
+<p><q>Wealth management is the best-returning business inside Barclays — 26% return on tangible
+equity on about 2% of the group's capital — and it's the one they've chosen to invest in, with a
+hundred new advisers and technology spend up more than 75%. What makes Barclays' version
+interesting to me specifically is the funnel: roughly four million existing Barclays UK customers
+have between £250,000 and £3 million to invest, so unlike an independent, Barclays doesn't have
+to find its clients. It also has a bulge-bracket investment bank, so it's in the room when a
+founder actually sells their company. I like that it's a business where your value compounds
+over a career rather than burning out early — and I'd rather join while they're still building it
+than after it's finished.</q></p></div>
+
+<div class="key"><span class="lab">One thing to get right</span>
+<p>Do not say "assets under management" when you mean total client assets. Barclays has
+<strong>£55.8bn of AUM</strong>, <strong>£140.6bn of invested assets</strong> (AUM plus assets
+under supervision), and <strong>£227.6bn of client assets and liabilities</strong> (which adds
+deposits and lending). Using the right one for the right point is the clearest possible signal
+that you read the results rather than a summary of them.</p></div>
+</section>
+
+<section class="pb">
+<h2><span class="num">PART ELEVEN</span>Sources</h2>
+<p class="sub">Primary filings first; opinion clearly separated from fact.</p>
+<div class="src-list">
+<div><strong>Barclays primary sources</strong></div>
+<div>· Barclays PLC 2025 Results Announcement — divisional tables, FY2025</div>
+<div>· Barclays PLC Form 6-K, H1 2026 results (SEC) — divisional tables, H1 2026</div>
+<div>· Barclays PLC Form 6-K, Q1 2026 results (SEC)</div>
+<div>· Private Bank &amp; Wealth Management Business Deep Dive, 10 December 2024 (presentation and management speech)</div>
+<div>· Barclays Private Bank &amp; Wealth Management Investor Update, 20 February 2024</div>
+<div>· Barclays press release: "Barclays supports investors with launch of new wealth offering", April 2026</div>
+<div>· Barclays press release: "Barclays to acquire GoHenry", June 2026</div>
+<div>· Barclays Q2 2026 results materials and earnings call, 28 July 2026</div>
+<div>· barclays.co.uk — Premier Banking, Premier Wealth Management and Direct Investing product pages</div>
+<div>· privatebank.barclays.com — "Where we're located"; Barclays Bank (Suisse) SA annual report</div>
+<div>· Barclays archive — Gerrard Group; Barclays history pages</div>
+
+<div>&nbsp;</div>
+<div><strong>Trade and financial press</strong></div>
+<div>· WealthBriefing — "Attributable Profit Slips At Barclays' Private Bank, Wealth Arm In H1 2026"</div>
+<div>· WealthBriefing — "Barclays' Wealth, Private Bank Profit Slips In 2025; Group Earnings Gain"</div>
+<div>· WealthBriefing — "Barclays Gets Ready For Singapore Private Bank Booking Centre"; "Barclays Launches New Wealth Offering"</div>
+<div>· Spear's — "Barclays targets Britain's wealthy with plans to expand private banking arm"</div>
+<div>· Spear's — "NatWest to buy UK wealth manager Evelyn Partners for £2.7 billion"</div>
+<div>· Bloomberg — "NatWest Said to Near £2.7 Billion Deal to Take Over Evelyn", 7 February 2026</div>
+<div>· Nasdaq / Bloomberg — "Barclays Explores Evelyn Partners Deal in Push into Affluent Clients"</div>
+<div>· Investment Week — "NatWest and Barclays set to launch rival bids for Evelyn Partners"</div>
+<div>· International Adviser — NatWest Private Banking &amp; Wealth Management AUM 2025</div>
+<div>· Banking Dive — "UBS, Barclays diverge on whether to chase US wealth"</div>
+<div>· Finextra, FinTech Futures, Open Banking Expo — GoHenry acquisition</div>
+<div>· Money Marketing — "Barclays buys £210m Gerrard"; UK Competition Commission filing on the Gerrard acquisition</div>
+<div>· WilmerHale, Pensions &amp; Investments, Private Banker International — Barclays / Stifel 2015</div>
+<div>· Hubbis — Sasha Wiggins appointment</div>
+
+<div>&nbsp;</div>
+<div><strong>Competitor data</strong></div>
+<div>· UBS Group AG Form 6-K, Q2 2026 — invested assets</div>
+<div>· Morgan Stanley — Wealth Management client assets, Q1 2026</div>
+<div>· Julius Baer — H1 2026 results and interim management statement</div>
+<div>· HSBC Global Private Banking disclosures</div>
+<div>· NatWest Group 2025 Annual Results, 13 February 2026</div>
+</div>
+<p class="footnote">Compiled 23 August 2026 for the Barclays Insight Day &times; SEO London, 14 September 2026.
+Figures are as reported by the companies concerned. Asset measures are not directly comparable
+across firms — AUM, invested assets and total client assets mean different things, and the
+measure used is named in each case. Nothing in this document is investment advice.</p>
+</section>
+</body></html>

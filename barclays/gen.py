@@ -241,11 +241,15 @@ def steps(points, title=None, sub=None, w=720, h=240):
     """points = [(label, value, note, is_target)]"""
     ml, mr, mt, mb = 44, 22, 16, 48
     px, pw, py, ph = ml, w - ml - mr, mt, h - mt - mb
-    vmax = 18.0
+    raw = max(p[1] for p in points) * 1.18
+    stepv = max(1, int(round(raw / 6.0)))
+    ticks = 6
+    vmax = stepv * ticks
     n = len(points)
     xs = [px + pw * (i + 0.5) / n for i in range(n)]
     b = []
-    for gv in range(0, 19, 3):
+    for k in range(ticks + 1):
+        gv = stepv * k
         gy = py + ph - ph * gv / vmax
         b.append(f'<line x1="{px}" y1="{gy:.1f}" x2="{px+pw}" y2="{gy:.1f}" stroke="{C["grid"]}" stroke-width="0.8"/>')
         b.append(_t(px - 7, gy + 3.5, f'{gv}%', 9, C['mut'], anchor='end'))
@@ -335,3 +339,152 @@ def engines(w=720):
     return _svg(w, 208, ''.join(b),
                 'The two ways Barclays turns a balance sheet into revenue',
                 'Every line of every division reduces to one of these two, or a blend')
+
+
+def treemap(w=720, h=360):
+    """Group income FY2025 as area. Five operating divisions; Head Office excluded."""
+    D = [
+        ('Investment Bank', 13055, C['ib'], 'Trading, advisory, bond & share issuance,\ntransaction banking for multinationals'),
+        ('Barclays UK', 8708, C['buk'], 'Current accounts, mortgages,\nBarclaycard, Tesco Bank'),
+        ('US Consumer Bank', 3681, C['uscb'], 'American co-brand\ncredit cards'),
+        ('UK Corporate Bank', 2064, C['ukcb'], 'SME and mid-cap\nbanking'),
+        ('Private Bank\n& Wealth', 1380, C['pbwm'], 'Wealthy individuals\nand families'),
+    ]
+    tot = sum(d[1] for d in D)
+    g = 3
+    b = []
+
+    def cell(x, y, bw, bh, name, val, col, desc, big):
+        b.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bw:.1f}" height="{bh:.1f}" rx="3" fill="{col}"/>')
+        tight = (not big) and bw < 115
+        pad = 8 if tight else 11
+        nf = 13 if big else (9.0 if tight else 10.8)
+        vf = 17 if big else (11.5 if tight else 13)
+        lh = 15 if big else (11 if tight else 12.5)
+        ty = last = y + pad + (13 if big else 11)
+        for i, ln in enumerate(name.split('\n')):
+            b.append(_t(x + pad, ty + i * lh, ln, nf, '#ffffff', weight='700'))
+            last = ty + i * lh
+        b.append(_t(x + pad, last + (22 if big else 18), f'£{val:,}m', vf, '#ffffff', weight='700'))
+        share = f'{val/tot*100:.1f}%' if tight else f'{val/tot*100:.1f}% of income'
+        b.append(_t(x + pad, last + (39 if big else 31), share, 8.6 if tight else 9.4,
+                    '#ffffff', ls='0.4'))
+        if big:
+            for i, ln in enumerate(desc.split('\n')):
+                b.append(_t(x + pad, y + bh - 26 + i * 12, ln, 9.4, '#ffffff'))
+
+    # Left column: the Investment Bank, full height.
+    wA = (w - g) * D[0][1] / tot
+    cell(0, 0, wA, h, D[0][0], D[0][1], D[0][2], D[0][3], True)
+    # Right column: Barclays UK on top, three smaller divisions beneath.
+    xB, wB = wA + g, w - wA - g
+    hTop = (h - g) * D[1][1] / (tot - D[0][1])
+    cell(xB, 0, wB, hTop, D[1][0], D[1][1], D[1][2], D[1][3], True)
+    yBot, hBot = hTop + g, h - hTop - g
+    rest = sum(d[1] for d in D[2:])
+    x = xB
+    for nm, val, col, desc in D[2:]:
+        cw = (wB - 2 * g) * val / rest
+        cell(x, yBot, cw, hBot, nm, val, col, desc, False)
+        x += cw + g
+    return _svg(w, h, ''.join(b),
+                'The whole firm, drawn to scale',
+                'Every box is one division. Box AREA = share of the £29.1bn of FY2025 income. This is the answer to "which division is biggest".')
+
+
+def ladder(w=720):
+    """The Barclays wealth ladder, entry threshold by tier."""
+    T = [
+        ('GoHenry', 'ages 6–18', 'Kids’ money app. £180m acquisition announced June 2026,\ncompleting Q4 2026. ~500,000 UK children.', C['ho']),
+        ('Barclays UK', 'everyday banking', 'Current account, savings, mortgage. ~20 million customers —\nthe top of the funnel for everything above.', C['buk']),
+        ('Premier Banking', '£75k income or £100k held', 'Mass-affluent tier. Relationship banking, preferential rates,\nand the recruiting ground for the wealth business.', C['ukcb']),
+        ('Premier Wealth Management', '£150k to invest', 'Launched April 2026. Dedicated planning and advice,\nno upfront fee for the initial review.', C['pbwm']),
+        ('Private Bank — UK', '~£3m investable', 'Dedicated private banker, discretionary and advisory\nportfolios, bespoke lending, trusts and estate planning.', C['pbwm']),
+        ('Private Banking — International', '£5m+ investable', 'Booked in Switzerland, Monaco, the Crown Dependencies\nand, from 2026, Singapore. Cross-border families.', C['ib']),
+    ]
+    rowh, h = 62, 62 * len(T) + 8
+    b = []
+    for i, (nm, thr, desc, col) in enumerate(T):
+        y = h - (i + 1) * rowh
+        step_w = 130 + i * 26
+        b.append(f'<rect x="0" y="{y:.1f}" width="{step_w}" height="{rowh-6}" rx="3" fill="{col}"/>')
+        cap = int((step_w - 20) / 5.5)
+        b.append(_t(10, y + 22, nm if len(nm) <= cap else nm[:cap - 1] + '…', 10.4, '#ffffff', weight='700'))
+        b.append(_t(10, y + 37, thr, 9.2, '#ffffff'))
+        for j, ln in enumerate(desc.split('\n')):
+            b.append(_t(step_w + 16, y + 20 + j * 13, ln, 9.6, C['mut']))
+        b.append(_t(w - 2, y + 22, f'TIER {len(T)-i}', 8.4, C['grid'], anchor='end', weight='700', ls='1.2'))
+    return _svg(w, h, ''.join(b),
+                'The wealth ladder — every rung is a Barclays product',
+                'Read bottom to top. No competitor owns this many rungs, and that is the whole commercial argument.')
+
+
+def assets_stack(w=720):
+    """FY2025 client assets and liabilities, decomposed. Invested-asset components first."""
+    parts = [('Assets under supervision', 87.7, C['pbwm'], 'advised / overseen'),
+             ('Assets under management', 52.9, C['ib'], 'discretionary — fee-richest'),
+             ('Deposits', 72.0, C['buk'], 'cash held with the bank'),
+             ('Lending', 14.7, C['uscb'], 'secured')]
+    tot = sum(p[1] for p in parts)
+    invested = parts[0][1] + parts[1][1]
+    y = 34
+    b = [_t(0, 16, 'CLIENT ASSETS & LIABILITIES  ·  £227.6bn as reported', 12, C['ink'],
+            weight='700', ls='0.4')]
+    x = 0
+    for i, (nm, v, col, note) in enumerate(parts):
+        cw = w * v / tot
+        narrow = cw < 95
+        b.append(f'<rect x="{x:.1f}" y="{y}" width="{cw-2:.1f}" height="42" rx="3" fill="{col}"/>')
+        b.append(_t(x + (6 if narrow else 10), y + 19, f'£{v:.1f}bn', 10 if narrow else 12.5,
+                    '#ffffff', weight='700'))
+        b.append(_t(x + (6 if narrow else 10), y + 33, f'{v/tot*100:.0f}%', 8.6 if narrow else 9.2, '#ffffff'))
+        last = (i == len(parts) - 1)
+        cx = w if last else x
+        b.append(_t(cx, y + 60, nm, 9.8, C['ink'], weight='700', anchor='end' if last else 'start'))
+        b.append(_t(cx, y + 72, note, 8.8, C['mut'], anchor='end' if last else 'start'))
+        x += cw
+    iw = w * invested / tot
+    b.append(f'<path d="M0,{y+86} L0,{y+92} L{iw-2:.1f},{y+92} L{iw-2:.1f},{y+86}" fill="none" stroke="{C["pbwm"]}" stroke-width="1.8"/>')
+    b.append(_t(iw / 2, y + 107, 'INVESTED ASSETS £140.6bn — the number that earns fees', 9.4,
+                C['pbwm'], anchor='middle', weight='700'))
+    return _svg(w, 152, ''.join(b),
+                'Three different asset numbers, and why people confuse them',
+                'Barclays quotes AUM, assets under supervision and client assets & liabilities. They mean different things and only one of them is the fee engine. FY2025 figures; components sum to £227.3bn against £227.6bn reported.')
+
+
+def revmodel(w=720):
+    """How PB&WM earns its £1,380m."""
+    b = []
+    b.append(f'<rect x="0" y="0" width="352" height="188" rx="6" fill="{C["pale"]}" stroke="{C["buk"]}" stroke-width="1.2"/>')
+    b.append(f'<rect x="368" y="0" width="352" height="188" rx="6" fill="#EDF9F7" stroke="{C["pbwm"]}" stroke-width="1.2"/>')
+    b.append(_t(18, 24, 'INTEREST — 58% OF INCOME', 10.4, C['buk'], weight='700', ls='0.6'))
+    b.append(_t(18, 48, '£799m', 22, C['ink'], weight='700'))
+    for i, ln in enumerate([
+        'Wealthy clients hold a lot of cash. The division held',
+        '£72.0bn of deposits against just £14.7bn of lending —',
+        'a five-to-one surplus it passes to the wider group.',
+        '',
+        'Lending is secured against portfolios and property,',
+        'structured case by case. Credit losses are close to',
+        'zero: FY2025 booked an £8m impairment RELEASE.',
+        '',
+        'Rate-sensitive, so it falls as rates fall.',
+    ]):
+        b.append(_t(18, 74 + i * 12.6, ln, 9.5, C['mut']))
+    b.append(_t(386, 24, 'FEES — 42% OF INCOME', 10.4, '#007F6E', weight='700', ls='0.6'))
+    b.append(_t(386, 48, '£581m', 22, C['ink'], weight='700'))
+    for i, ln in enumerate([
+        'Charged as a percentage of invested assets, roughly',
+        '0.50%–1.45% a year, billed whether markets rise or fall.',
+        '',
+        'Three kinds (H1 2024 disclosure, £234m total):',
+        '·  Advisory and management fees — £156m',
+        '·  Brokerage and execution — £62m',
+        '·  Transactional banking fees — £16m',
+        '',
+        'Recurring, capital-light, and what investors pay up for.',
+    ]):
+        b.append(_t(386, 74 + i * 12.6, ln, 9.5, C['mut']))
+    return _svg(w, 196, ''.join(b),
+                'How the wealth division earns its £1,380m',
+                'FY2025. The split matters: interest income is rate-driven and shrinking in importance; fee income is what the strategy is chasing.')
