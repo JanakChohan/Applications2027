@@ -1,0 +1,2117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Dartmouth Partners — A Field Guide</title>
+<style>
+  :root{
+    --ink:#14213d; --navy:#0f2a43; --gold:#b3853a; --teal:#25636f;
+    --grey:#5b6572; --light:#8a929c; --line:#dde2e8; --soft:#f4f6f9; --soft2:#eef2f6;
+    --green:#2f6f4f; --amber:#9a6b00; --red:#a33a3a;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+  body{
+    font-family:"Liberation Serif",Georgia,"Times New Roman",serif;
+    font-size:10.2pt; line-height:1.52; color:#1c2430; margin:0; padding:0 16mm;
+  }
+  h1,h2,h3,h4,.sans,table,figcaption,.callout-title,.stat,.tag{font-family:"Liberation Sans",Helvetica,Arial,sans-serif;}
+  h1{font-size:20pt;line-height:1.14;color:var(--navy);margin:0 0 4mm;letter-spacing:-.2px;}
+  h2{font-size:13pt;color:var(--navy);margin:8mm 0 2.5mm;padding-bottom:1.5mm;border-bottom:1.5px solid var(--line);}
+  h3{font-size:11pt;color:var(--teal);margin:6mm 0 1.5mm;}
+  h4{font-size:9.8pt;color:var(--ink);margin:4mm 0 1mm;text-transform:uppercase;letter-spacing:.6px;}
+  p{margin:0 0 2.6mm;text-align:justify;hyphens:auto;}
+  ul,ol{margin:0 0 3mm;padding-left:5mm;}
+  li{margin-bottom:1.4mm;}
+  strong{color:var(--navy);}
+  em{color:#33404f;}
+  a{color:var(--teal);text-decoration:none;}
+  .pb{page-break-before:always;}
+  .nb{page-break-inside:avoid;}
+  .bleed{margin:0 -16mm;padding:0 16mm;}
+
+  /* ---------- cover ---------- */
+  .cover{height:247mm;display:flex;flex-direction:column;justify-content:space-between;padding-top:14mm;}
+  .cover .rule{height:5px;background:linear-gradient(90deg,var(--navy) 0%,var(--teal) 55%,var(--gold) 100%);margin-bottom:9mm;}
+  .cover .kicker{font-family:"Liberation Sans",Arial,sans-serif;font-size:9pt;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:6mm;}
+  .cover h1{font-size:36pt;line-height:1.05;margin-bottom:5mm;}
+  .cover .sub{font-size:13pt;color:var(--grey);line-height:1.4;max-width:135mm;}
+  .cover .meta{font-family:"Liberation Sans",Arial,sans-serif;font-size:8.5pt;color:var(--light);border-top:1px solid var(--line);padding-top:4mm;}
+  .cover .meta b{color:var(--navy);}
+  .coverbox{background:var(--soft);border-left:4px solid var(--navy);padding:6mm 7mm;margin:10mm 0;}
+  .coverbox p{margin:0;font-size:10.5pt;}
+
+  /* ---------- components ---------- */
+  .lead{font-size:11.5pt;line-height:1.5;color:#2a3644;border-left:3px solid var(--gold);padding-left:5mm;margin:0 0 6mm;text-align:left;}
+  .callout{background:var(--soft);border:1px solid var(--line);border-left:4px solid var(--teal);padding:4mm 5mm;margin:4mm 0;page-break-inside:avoid;}
+  .callout.key{border-left-color:var(--navy);background:#eef2f7;}
+  .callout.warn{border-left-color:var(--amber);background:#fdf7e9;}
+  .callout.do{border-left-color:var(--green);background:#eef5f0;}
+  .callout p:last-child{margin-bottom:0;}
+  .callout-title{font-size:8.6pt;text-transform:uppercase;letter-spacing:1.1px;color:var(--teal);margin-bottom:2mm;font-weight:bold;}
+  .callout.key .callout-title{color:var(--navy);}
+  .callout.warn .callout-title{color:var(--amber);}
+  .callout.do .callout-title{color:var(--green);}
+
+  table{width:100%;border-collapse:collapse;font-size:8.6pt;margin:3mm 0 5mm;page-break-inside:avoid;}
+  th{background:var(--navy);color:#fff;text-align:left;padding:2mm 2.5mm;font-weight:bold;font-size:8.2pt;letter-spacing:.3px;}
+  td{padding:2mm 2.5mm;border-bottom:1px solid var(--line);vertical-align:top;}
+  tr:nth-child(even) td{background:#fafbfc;}
+  table.compact td,table.compact th{padding:1.4mm 2mm;font-size:8pt;}
+  caption{caption-side:top;text-align:left;font-family:"Liberation Sans",Arial,sans-serif;font-size:8.4pt;color:var(--grey);padding-bottom:1.5mm;}
+
+  figure{margin:5mm 0 6mm;page-break-inside:avoid;}
+  figure svg{width:100%;height:auto;display:block;}
+  figcaption{font-size:8.2pt;color:var(--grey);margin-top:2mm;border-top:1px solid var(--line);padding-top:1.5mm;}
+  figcaption b{color:var(--navy);}
+
+  .stats{display:flex;gap:3mm;margin:4mm 0 6mm;flex-wrap:wrap;}
+  .stat{flex:1 1 30mm;background:var(--soft);border-top:3px solid var(--gold);padding:3mm;}
+  .stat .n{font-size:15pt;font-weight:bold;color:var(--navy);line-height:1;}
+  .stat .l{font-size:7.6pt;color:var(--grey);text-transform:uppercase;letter-spacing:.5px;margin-top:1.5mm;line-height:1.3;}
+
+  .toc-item{display:flex;justify-content:space-between;border-bottom:1px dotted var(--line);padding:1.6mm 0;font-family:"Liberation Sans",Arial,sans-serif;font-size:9.4pt;}
+  .toc-item .t{color:var(--navy);}
+  .toc-item .p{color:var(--light);}
+  .toc-part{font-family:"Liberation Sans",Arial,sans-serif;font-size:8.4pt;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin:6mm 0 1mm;}
+  .toc-sub{padding-left:6mm;font-size:8.8pt;color:var(--grey);}
+
+  .tag{display:inline-block;font-size:7.2pt;letter-spacing:.6px;text-transform:uppercase;padding:.6mm 2mm;border-radius:2px;vertical-align:middle;}
+  .tag.c{background:#e4efe9;color:var(--green);}     /* confirmed */
+  .tag.r{background:#fdf1e0;color:var(--amber);}     /* reported */
+  .tag.i{background:#eceff3;color:var(--grey);}      /* inferred */
+
+  .parthead{background:var(--navy);color:#fff;margin:0 -16mm 7mm;padding:9mm 16mm 8mm;}
+  .parthead .pn{font-family:"Liberation Sans",Arial,sans-serif;font-size:8.4pt;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:3mm;}
+  .parthead h1{color:#fff;margin:0 0 3mm;font-size:23pt;}
+  .parthead .pd{color:#c3cfdb;font-size:10pt;max-width:150mm;margin:0;}
+
+  ol.steps{counter-reset:s;list-style:none;padding-left:0;}
+  ol.steps>li{counter-increment:s;position:relative;padding-left:9mm;margin-bottom:2.6mm;}
+  ol.steps>li:before{content:counter(s);position:absolute;left:0;top:0.2mm;width:6mm;height:6mm;background:var(--teal);color:#fff;
+    font-family:"Liberation Sans",Arial,sans-serif;font-size:8pt;font-weight:bold;text-align:center;line-height:6mm;border-radius:50%;}
+  ul.check{list-style:none;padding-left:0;}
+  ul.check>li{position:relative;padding-left:6mm;margin-bottom:1.8mm;}
+  ul.check>li:before{content:"";position:absolute;left:0;top:1.2mm;width:3.2mm;height:3.2mm;border:1.2px solid var(--navy);}
+  .mono{font-family:"Liberation Mono","DejaVu Sans Mono",monospace;font-size:8pt;background:#f2f4f7;border:1px solid var(--line);
+    padding:2.5mm 3mm;white-space:pre-wrap;word-break:break-word;margin:2.5mm 0;line-height:1.45;color:#25313f;}
+  .twocol{column-count:2;column-gap:8mm;}
+  .twocol p,.twocol li{text-align:left;}
+  .src{font-size:7.6pt;color:var(--light);}
+  .footnote{font-size:8pt;color:var(--grey);border-top:1px solid var(--line);padding-top:2mm;margin-top:4mm;}
+  .qbox{border-left:3px solid var(--line);padding-left:5mm;color:#3a4652;font-style:italic;margin:3mm 0;}
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<section class="cover">
+  <div>
+    <div class="rule"></div>
+    <div class="kicker">Market Intelligence Dossier &nbsp;·&nbsp; Edition 1.0</div>
+    <h1>Dartmouth&nbsp;Partners</h1>
+    <p class="sub">A field guide to the recruitment firm that sits between London&rsquo;s
+    boutique investment firms and the people they hire &mdash; how it makes money, how it
+    screens, how it finds you on LinkedIn, and how to be the candidate it puts forward.</p>
+
+    <div class="coverbox">
+      <p><strong>Written for someone with zero prior knowledge of the recruitment industry.</strong>
+      Every term is defined on first use. Every claim is labelled by how well it is evidenced:
+      <span class="tag c">Confirmed</span> from the firm&rsquo;s own materials or public records,
+      <span class="tag r">Reported</span> from third parties and practitioner forums, and
+      <span class="tag i">Inferred</span> from how the industry demonstrably works.</p>
+    </div>
+  </div>
+
+  <div class="meta">
+    <b>Subject:</b> Dartmouth Partners Limited (UK company no. 05974472), part of Kernel Global &nbsp;|&nbsp;
+    <b>Compiled:</b> 23 August 2026 &nbsp;|&nbsp;
+    <b>Scope:</b> Business model · internal operations · sourcing &amp; screening mechanics · LinkedIn discoverability · candidate playbook<br>
+    <b>Status:</b> Independent research. Not affiliated with, endorsed by, or sourced from Dartmouth Partners.
+    Not affiliated with Dartmouth College.
+  </div>
+</section>
+
+<!-- ============ CONTENTS ============ -->
+<section class="pb">
+  <h1>Contents</h1>
+
+  <div class="toc-part">Front matter</div>
+  <div class="toc-item"><span class="t">How to use this document</span><span class="p">4</span></div>
+  <div class="toc-item"><span class="t">Executive summary &mdash; the twenty things that matter</span><span class="p">5</span></div>
+
+  <div class="toc-part">Part I &mdash; What Dartmouth Partners actually is</div>
+  <div class="toc-item"><span class="t">1.1 &nbsp;The one-paragraph answer</span><span class="p">7</span></div>
+  <div class="toc-item"><span class="t">1.2 &nbsp;Corporate anatomy: Dartmouth, Kernel, Pure, Catalyst</span><span class="p">7</span></div>
+  <div class="toc-item"><span class="t">1.3 &nbsp;Timeline: 2005 to 2026</span><span class="p">8</span></div>
+  <div class="toc-item"><span class="t">1.4 &nbsp;Scale, offices and the numbers they publish</span><span class="p">8</span></div>
+  <div class="toc-item"><span class="t">1.5 &nbsp;What Dartmouth is <em>not</em></span><span class="p">9</span></div>
+
+  <div class="toc-part">Part II &mdash; The business model: who pays, and why</div>
+  <div class="toc-item"><span class="t">2.1 &nbsp;The two-sided market</span><span class="p">11</span></div>
+  <div class="toc-item"><span class="t">2.2 &nbsp;Contingent, retained, interim: the three ways they get paid</span><span class="p">11</span></div>
+  <div class="toc-item"><span class="t">2.3 &nbsp;A worked fee example, end to end</span><span class="p">12</span></div>
+  <div class="toc-item"><span class="t">2.4 &nbsp;Why a 12-person fund pays £30,000 to hire one associate</span><span class="p">13</span></div>
+  <div class="toc-item"><span class="t">2.5 &nbsp;Desk economics &mdash; and what they mean for you</span><span class="p">14</span></div>
+  <div class="toc-item"><span class="t">2.6 &nbsp;The legal floor: it is free for you, by statute</span><span class="p">15</span></div>
+
+  <div class="toc-part">Part III &mdash; The eleven desks and where you fit</div>
+  <div class="toc-item"><span class="t">3.1 &nbsp;Sector map</span><span class="p">16</span></div>
+  <div class="toc-item"><span class="t">3.2 &nbsp;Which desk owns you, by career stage</span><span class="p">18</span></div>
+
+  <div class="toc-part">Part IV &mdash; The back end: what actually happens</div>
+  <div class="toc-item"><span class="t">4.1 &nbsp;The mandate pipeline, stage by stage</span><span class="p">19</span></div>
+  <div class="toc-item"><span class="t">4.2 &nbsp;Where candidates come from: the five sourcing channels</span><span class="p">20</span></div>
+  <div class="toc-item"><span class="t">4.3 &nbsp;The database is the asset &mdash; what is in your record</span><span class="p">21</span></div>
+  <div class="toc-item"><span class="t">4.4 &nbsp;The screening stack</span><span class="p">23</span></div>
+  <div class="toc-item"><span class="t">4.5 &nbsp;Internal incentives &mdash; why consultants behave as they do</span><span class="p">24</span></div>
+
+  <div class="toc-part">Part V &mdash; LinkedIn: the machine that finds you</div>
+  <div class="toc-item"><span class="t">5.1 &nbsp;What LinkedIn Recruiter is and what it can see</span><span class="p">25</span></div>
+  <div class="toc-item"><span class="t">5.2 &nbsp;The search funnel and where you get eliminated</span><span class="p">25</span></div>
+  <div class="toc-item"><span class="t">5.3 &nbsp;The Boolean strings they are running for you</span><span class="p">26</span></div>
+  <div class="toc-item"><span class="t">5.4 &nbsp;Field-by-field profile rebuild</span><span class="p">27</span></div>
+  <div class="toc-item"><span class="t">5.5 &nbsp;Spotlights: the second-order signals</span><span class="p">29</span></div>
+  <div class="toc-item"><span class="t">5.6 &nbsp;Before and after</span><span class="p">31</span></div>
+
+  <div class="toc-part">Part VI &mdash; The candidate playbook</div>
+  <div class="toc-item"><span class="t">6.1 &nbsp;Getting into the database on purpose</span><span class="p">32</span></div>
+  <div class="toc-item"><span class="t">6.2 &nbsp;The screening call: what is being scored</span><span class="p">33</span></div>
+  <div class="toc-item"><span class="t">6.3 &nbsp;Tiering &mdash; the uncomfortable truth</span><span class="p">33</span></div>
+  <div class="toc-item"><span class="t">6.4 &nbsp;The London hiring calendar</span><span class="p">35</span></div>
+  <div class="toc-item"><span class="t">6.5 &nbsp;Events, foundations and side doors</span><span class="p">35</span></div>
+  <div class="toc-item"><span class="t">6.6 &nbsp;Running a multi-agency strategy without getting burned</span><span class="p">36</span></div>
+  <div class="toc-item"><span class="t">6.7 &nbsp;Twelve mistakes that get you quietly deprioritised</span><span class="p">37</span></div>
+
+  <div class="toc-part">Part VII &mdash; Evidence, caveats and sources</div>
+  <div class="toc-item"><span class="t">7.1 &nbsp;Confidence register</span><span class="p">39</span></div>
+  <div class="toc-item"><span class="t">7.2 &nbsp;Source list</span><span class="p">40</span></div>
+
+  <div class="toc-part">Appendices</div>
+  <div class="toc-item"><span class="t">A &mdash; Contact directory</span><span class="p">41</span></div>
+  <div class="toc-item"><span class="t">B &mdash; LinkedIn audit checklist (printable)</span><span class="p">42</span></div>
+  <div class="toc-item"><span class="t">C &mdash; Screening-call prep sheet</span><span class="p">44</span></div>
+  <div class="toc-item"><span class="t">D &mdash; Subject Access Request template</span><span class="p">45</span></div>
+  <div class="toc-item"><span class="t">E &mdash; Competitor map</span><span class="p">46</span></div>
+  <div class="toc-item"><span class="t">F &mdash; Glossary</span><span class="p">47</span></div>
+</section>
+
+<!-- ============ HOW TO USE ============ -->
+<section class="pb">
+  <h1>How to use this document</h1>
+  <p class="lead">You asked for the ins and outs &mdash; not the marketing copy. This guide is built in
+  two halves. Parts I to IV explain the machine: what Dartmouth Partners sells, to whom, for how much,
+  and what happens inside the firm between a client&rsquo;s phone call and a candidate&rsquo;s offer
+  letter. Parts V and VI turn that understanding into actions you can take this week.</p>
+
+  <h3>The confidence labels</h3>
+  <p>Recruitment is a deliberately opaque industry. Firms publish polished summaries of their process
+  and almost nothing about their internal mechanics. Rather than blur the line between fact and
+  informed reconstruction, every substantive claim in this document carries one of three labels:</p>
+
+  <table>
+    <tr><th style="width:26mm">Label</th><th>Meaning</th></tr>
+    <tr><td><span class="tag c">Confirmed</span></td><td>Stated by Dartmouth Partners or Kernel Global in their own published materials, or recorded in a public register (Companies House), or set out in legislation.</td></tr>
+    <tr><td><span class="tag r">Reported</span></td><td>Asserted by identifiable third parties: press releases from investors, industry rankings, employee-review platforms, practitioner forums such as Wall Street Oasis. Useful, directionally reliable, individually unverifiable.</td></tr>
+    <tr><td><span class="tag i">Inferred</span></td><td>Not stated anywhere by Dartmouth, but a near-certain consequence of documented industry structure &mdash; how contingent recruitment fees work, how LinkedIn Recruiter functions, how a commission-driven desk behaves. Treat as a working model, not gospel.</td></tr>
+  </table>
+
+  <div class="callout warn">
+    <div class="callout-title">One honest caveat before you start</div>
+    <p>No one outside the firm has seen Dartmouth&rsquo;s internal scorecards, its client fee
+    agreements, or its consultant commission plan. Anyone who claims otherwise in a blog post is
+    guessing. What <em>can</em> be established with precision is the shape of the machine, because
+    the shape is dictated by economics and law that apply to every UK recruitment agency, and by a
+    LinkedIn product whose behaviour is publicly documented. That shape is enough to give you the
+    asymmetric advantage you are after.</p>
+  </div>
+
+  <h3>If you only have twenty minutes</h3>
+  <ol class="steps">
+    <li>Read the Executive Summary (next page).</li>
+    <li>Read &sect;4.2 &mdash; where candidates actually come from.</li>
+    <li>Read &sect;5.3 and &sect;5.4 &mdash; the Boolean searches being run, and the exact profile fields that decide whether you appear in them.</li>
+    <li>Work through Appendix B with your LinkedIn profile open in another window.</li>
+    <li>Register through the routes in Appendix A. Do it properly, once.</li>
+  </ol>
+</section>
+
+<!-- ============ EXEC SUMMARY ============ -->
+<section class="pb">
+  <h1>Executive summary</h1>
+  <p class="lead">Twenty findings that change how you should think about Dartmouth Partners &mdash;
+  and about every headhunter who messages you on LinkedIn.</p>
+
+  <ol class="steps">
+    <li><strong>Dartmouth Partners is a recruitment agency, not an employer and not a job board.</strong>
+    It is paid by hiring firms to find people. Founded as a trading brand in 2012, headquartered at
+    125 London Wall in the City, with offices in New York, Charlotte and Hong Kong.
+    <span class="tag c">Confirmed</span></li>
+
+    <li><strong>It sits inside a larger group.</strong> Dartmouth is one of three brands under
+    <em>Kernel Global</em>, alongside Pure Search (tax, legal, treasury, audit, compliance) and
+    Catalyst Partners (HR). Kernel was built by Logan Naidu, who founded Dartmouth and remains Group
+    CEO. Terri Loska is Dartmouth&rsquo;s CEO. <span class="tag c">Confirmed</span></li>
+
+    <li><strong>It is private-equity backed itself.</strong> Literacy Capital invested in 2018;
+    Three Hills Capital Partners took a significant minority stake via a preferred instrument in
+    March 2025. That matters to you: PE-backed recruiters run to growth targets, which means more
+    outreach, more mandates, more desks &mdash; and pressure on consultants to convert.
+    <span class="tag c">Confirmed</span></li>
+
+    <li><strong>The group publishes its scale: 280+ employees, 900+ clients, a network of 260,000+
+    candidates.</strong> Dartmouth alone says it screens <em>over 40,000 CVs a year</em> through its
+    Early Careers operation. You are being processed at industrial volume.
+    <span class="tag c">Confirmed</span></li>
+
+    <li><strong>Their differentiator is a lifecycle strategy called &ldquo;Classroom to
+    Boardroom&rdquo;.</strong> Capture people as students and school-leavers, place them into
+    internships and graduate roles, then re-place the same individuals every two to four years for
+    the next thirty years. A student is not a low-value placement to them &mdash; a student is the
+    beginning of an annuity. <span class="tag c">Confirmed</span></li>
+
+    <li><strong>That is precisely why they message interns on LinkedIn.</strong> Your value to a
+    contingent recruiter is not only today&rsquo;s fee. It is the option on your next six moves, plus
+    the day you become a hiring manager and call them with a mandate.
+    <span class="tag i">Inferred</span></li>
+
+    <li><strong>Small and boutique investment firms use agencies because they have no internal
+    recruiting function.</strong> A 12-person fund has no talent-acquisition team, no employer brand,
+    no campus presence and no time. It rents all four for a one-off fee.
+    <span class="tag i">Inferred</span></li>
+
+    <li><strong>The standard UK fee is 15&ndash;30% of the hire&rsquo;s first-year base salary</strong>
+    &mdash; typically 17&ndash;20% for finance and accounting roles, and 20&ndash;30% for specialist,
+    senior or hard-to-fill searches. On a £65,000 associate that is roughly £11,000&ndash;£19,500;
+    on a £150,000 principal, £30,000&ndash;£45,000. <span class="tag r">Reported</span></li>
+
+    <li><strong>You never pay a penny, and legally you cannot be charged.</strong> The Employment
+    Agencies Act 1973 and the Conduct of Employment Agencies and Employment Businesses Regulations
+    2003 prohibit charging a work-seeker a fee for finding them work. Any &ldquo;recruiter&rdquo;
+    asking you for money to be put forward is breaking the law. <span class="tag c">Confirmed</span></li>
+
+    <li><strong>Most contingent work is unpaid until someone starts.</strong> The consultant does the
+    mapping, the calls, the screening and the shortlist on spec. If the client hires elsewhere, the
+    consultant earns nothing. This single fact explains almost every behaviour you will observe:
+    the urgency, the chasing, the pressure to accept, the silence when you stop being placeable.
+    <span class="tag i">Inferred</span></li>
+
+    <li><strong>They do publish a job board &mdash; but it is the minority of the business.</strong>
+    Their live board typically shows a few dozen roles across eleven sectors and a dozen cities.
+    Sensitive buy-side mandates &mdash; the ones you actually want &mdash; are generally not
+    advertised; they are run silently through the database and direct outreach.
+    <span class="tag c">Confirmed</span> / <span class="tag i">Inferred</span></li>
+
+    <li><strong>The published candidate journey has six steps</strong>: submit CV, meet a specialist
+    consultant, sit skills and psychometric testing, interview with preparation and feedback, offer
+    negotiation, then ongoing career support. The Early Careers version specifies English, Maths and
+    psychometric assessments plus a client-side CV review. <span class="tag c">Confirmed</span></li>
+
+    <li><strong>The client-side promise is a &ldquo;demanding pre-screening process&rdquo; with
+    technical and competency testing</strong>, plus market mapping and benchmarking. Dartmouth refers
+    to a &ldquo;multi-layered proprietary screening platform&rdquo;. Translation: they filter hard
+    before a client ever sees your name, because a bad shortlist costs them the account.
+    <span class="tag c">Confirmed</span></li>
+
+    <li><strong>Their privacy policy is the single most revealing public document about their back
+    end.</strong> It confirms they build candidate records from LinkedIn, corporate websites, job
+    boards and CV libraries &mdash; without you applying &mdash; using &ldquo;legitimate
+    interests&rdquo; as the lawful basis, and that they share data across Kernel Group brands. It
+    also names their applicant-tracking system, <em>AppTracker</em>.
+    <span class="tag c">Confirmed</span></li>
+
+    <li><strong>You have a legal right to see your own file.</strong> A Subject Access Request to
+    <span class="mono" style="display:inline;padding:0 1mm;border:0;background:#f2f4f7">privacy@dartmouthpartners.com</span>
+    obliges them to disclose the personal data they hold on you, normally within one month. Very few
+    candidates ever do this. Appendix D is a ready-to-send template.
+    <span class="tag c">Confirmed</span></li>
+
+    <li><strong>LinkedIn Recruiter is the primary discovery tool, and it is a search engine you can
+    optimise for.</strong> It offers 40+ filters over roughly a billion profiles, with Boolean
+    keyword search. Roughly nine in ten recruiter searches use the job-title field. Your title
+    strings, location, employer names and skills are the index. <span class="tag r">Reported</span></li>
+
+    <li><strong>&ldquo;Spotlights&rdquo; decide who floats to the top of their results.</strong>
+    LinkedIn surfaces candidates who are open to work (privately, recruiter-only), who recently
+    updated their profile, who follow or engage with the searcher&rsquo;s company, who are connected
+    to its employees, or whom the firm has contacted before. Four of those five are things you
+    control. <span class="tag c">Confirmed</span></li>
+
+    <li><strong>Headhunters tier candidates on first contact, and the tier is sticky.</strong>
+    A screening call is a real interview. Firm, university, deal exposure, articulacy and
+    seriousness get written into your record, and that record routes which mandates you are shown
+    for years. <span class="tag r">Reported</span></li>
+
+    <li><strong>London buy-side hiring is off-cycle and lumpy, unlike US on-cycle.</strong> The dense
+    windows are September to early December and January to April, with processes running from three
+    days to six weeks. Being in the database <em>before</em> a window opens is worth more than any
+    application submitted during one. <span class="tag r">Reported</span></li>
+
+    <li><strong>No single agency covers the whole market, so a single relationship is a bad
+    strategy.</strong> Dartmouth is one of a handful of firms &mdash; alongside KEA Consultants,
+    Blackwood, PER, Walker Hamill, Arkesden, Altus and others &mdash; that split London buy-side
+    coverage between them, fund by fund, and the map changes yearly.
+    <span class="tag r">Reported</span></li>
+  </ol>
+</section>
+
+<!-- ============ PART I ============ -->
+<section class="pb">
+  <div class="parthead">
+    <div class="pn">Part I</div>
+    <h1>What Dartmouth Partners actually is</h1>
+    <p class="pd">The corporate anatomy, the ownership, the scale, and the five things people
+    routinely mistake it for.</p>
+  </div>
+
+  <h2>1.1 &nbsp;The one-paragraph answer</h2>
+  <p>Dartmouth Partners is a specialist recruitment agency &mdash; a commercial intermediary whose
+  entire product is <em>access to people</em>. Investment firms, banks, funds and corporates hire it
+  to find, filter and deliver candidates for roles they need to fill. It is paid by those hiring
+  firms, never by candidates. It was launched as a brand in 2012 by Logan Naidu, it specialises in
+  financial and professional services &mdash; private equity, credit, M&amp;A, senior finance,
+  investor relations, public markets and adjacent fields &mdash; and it deliberately spans the
+  entire career arc, from school-leaver apprenticeships through to chief financial officers. It is
+  headquartered in the City of London with US and Asian offices, employs a few hundred people across
+  its group, and is itself owned by its founder alongside private-equity investors.</p>
+
+  <div class="callout key">
+    <div class="callout-title">The mental model to hold</div>
+    <p>Do not think of Dartmouth as a careers service that happens to charge companies. Think of it
+    as a <strong>market maker in a market with terrible information</strong>. Funds cannot easily see
+    which good people are quietly willing to move; good people cannot easily see which funds are
+    quietly hiring. Dartmouth stands in the middle, holds both sets of information privately, and
+    charges the side with money for a match. Everything else &mdash; the events, the compensation
+    reports, the campus programmes, the LinkedIn outreach &mdash; exists to deepen the two piles of
+    private information it sits on.</p>
+  </div>
+
+  <h2>1.2 &nbsp;Corporate anatomy: Dartmouth, Kernel, Pure, Catalyst</h2>
+  <p>Understanding the group structure explains behaviour you would otherwise find puzzling &mdash;
+  such as why a consultant covering tax roles might have your CV, or why a firm that headhunts
+  private-equity principals also runs school outreach programmes.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 372" xmlns="http://www.w3.org/2000/svg" font-family="Liberation Sans, Arial, sans-serif">
+      <rect x="0" y="0" width="700" height="372" fill="#ffffff"/>
+      <!-- investors -->
+      <rect x="28" y="14" width="180" height="46" rx="3" fill="#f4f6f9" stroke="#b3853a" stroke-width="1.2"/>
+      <text x="118" y="32" font-size="11" font-weight="bold" fill="#0f2a43" text-anchor="middle">Literacy Capital</text>
+      <text x="118" y="47" font-size="9" fill="#5b6572" text-anchor="middle">PE investment, 2018</text>
+
+      <rect x="492" y="14" width="180" height="46" rx="3" fill="#f4f6f9" stroke="#b3853a" stroke-width="1.2"/>
+      <text x="582" y="30" font-size="11" font-weight="bold" fill="#0f2a43" text-anchor="middle">Three Hills Capital</text>
+      <text x="582" y="44" font-size="9" fill="#5b6572" text-anchor="middle">Significant minority stake,</text>
+      <text x="582" y="55" font-size="9" fill="#5b6572" text-anchor="middle">preferred instrument, Mar 2025</text>
+
+      <rect x="255" y="14" width="190" height="46" rx="3" fill="#f4f6f9" stroke="#dde2e8"/>
+      <text x="350" y="32" font-size="11" font-weight="bold" fill="#0f2a43" text-anchor="middle">Logan Naidu</text>
+      <text x="350" y="47" font-size="9" fill="#5b6572" text-anchor="middle">Founder &amp; Group CEO</text>
+
+      <path d="M118 60 L118 76 L350 76" fill="none" stroke="#9aa4b0" stroke-width="1.2"/>
+      <path d="M582 60 L582 76 L350 76" fill="none" stroke="#9aa4b0" stroke-width="1.2"/>
+      <path d="M350 60 L350 100" fill="none" stroke="#9aa4b0" stroke-width="1.2"/>
+      <polygon points="350,104 346,96 354,96" fill="#9aa4b0"/>
+
+      <!-- kernel -->
+      <rect x="200" y="104" width="300" height="62" rx="3" fill="#0f2a43"/>
+      <text x="350" y="126" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">KERNEL GLOBAL</text>
+      <text x="350" y="142" font-size="8.4" fill="#c3cfdb" text-anchor="middle">Multi-brand recruitment platform</text>
+      <text x="350" y="156" font-size="8.4" fill="#c3cfdb" text-anchor="middle">280+ staff &#183; 900+ clients &#183; 260,000+ candidate network</text>
+
+      <path d="M350 166 L350 180" stroke="#9aa4b0" stroke-width="1.2" fill="none"/>
+      <path d="M128 180 L572 180" stroke="#9aa4b0" stroke-width="1.2" fill="none"/>
+      <path d="M128 180 L128 196 M350 180 L350 196 M572 180 L572 196" stroke="#9aa4b0" stroke-width="1.2" fill="none"/>
+
+      <!-- brands -->
+      <rect x="28" y="196" width="200" height="80" rx="3" fill="#25636f"/>
+      <text x="128" y="220" font-size="12.5" font-weight="bold" fill="#ffffff" text-anchor="middle">Dartmouth Partners</text>
+      <text x="128" y="238" font-size="8.6" fill="#d3e3e6" text-anchor="middle">Investment &amp; advisory recruitment</text>
+      <text x="128" y="251" font-size="8.6" fill="#d3e3e6" text-anchor="middle">PE · Credit · M&amp;A · CFO · Early Careers</text>
+      <text x="128" y="266" font-size="8.6" fill="#ffffff" text-anchor="middle" font-style="italic">&#8220;Classroom to Boardroom&#8221;</text>
+
+      <rect x="250" y="196" width="200" height="80" rx="3" fill="#4a5c6a"/>
+      <text x="350" y="220" font-size="12.5" font-weight="bold" fill="#ffffff" text-anchor="middle">Pure Search</text>
+      <text x="350" y="238" font-size="8.6" fill="#dfe5ea" text-anchor="middle">Tax · Treasury · Legal · Audit</text>
+      <text x="350" y="251" font-size="8.6" fill="#dfe5ea" text-anchor="middle">Compliance &amp; governance</text>
+      <text x="350" y="266" font-size="8.6" fill="#ffffff" text-anchor="middle">Acquired 2019</text>
+
+      <rect x="472" y="196" width="200" height="80" rx="3" fill="#6b7683"/>
+      <text x="572" y="220" font-size="12.5" font-weight="bold" fill="#ffffff" text-anchor="middle">Catalyst Partners</text>
+      <text x="572" y="238" font-size="8.6" fill="#e4e8ec" text-anchor="middle">HR &amp; people-function</text>
+      <text x="572" y="251" font-size="8.6" fill="#e4e8ec" text-anchor="middle">recruitment</text>
+
+      <!-- desks -->
+      <path d="M128 276 L128 292" stroke="#9aa4b0" stroke-width="1.2" fill="none"/>
+      <rect x="28" y="292" width="644" height="64" rx="3" fill="#f4f6f9" stroke="#dde2e8"/>
+      <text x="40" y="308" font-size="9" font-weight="bold" fill="#0f2a43">Dartmouth&#8217;s eleven specialist desks</text>
+      <g font-size="8.2" fill="#25313f">
+        <text x="40" y="326">· Private Equity</text><text x="150" y="326">· Credit</text><text x="240" y="326">· Corporate Finance &amp; M&amp;A</text><text x="410" y="326">· CFO &amp; Senior Finance</text><text x="560" y="326">· Real Assets</text>
+        <text x="40" y="342">· Early Careers</text><text x="150" y="342">· Finance into Funds</text><text x="290" y="342">· Equities &amp; Multi-Asset</text><text x="450" y="342">· Investor Relations &amp; Distribution</text>
+        <text x="40" y="356" fill="#25313f">· Strategy &amp; Corporate Development</text><text x="240" y="356">· Technology Leadership</text><text x="390" y="356" fill="#5b6572">(plus an Interim / contract capability across desks)</text>
+      </g>
+    </svg>
+    <figcaption><b>Figure 1 &mdash; Group structure.</b> Dartmouth is the investment-and-advisory
+    brand within Kernel Global. Candidate data is shared between Kernel companies where a specialist
+    from another brand can help &mdash; a fact stated explicitly in Dartmouth&rsquo;s privacy policy.
+    <span class="tag c">Confirmed</span></figcaption>
+  </figure>
+
+  <p><strong>Why the group matters to you.</strong> Three practical consequences. First, if you
+  register with Dartmouth you are, in effect, registering with a platform that also covers tax,
+  legal, treasury, audit, compliance and HR &mdash; so a chartered accountant who tells Dartmouth
+  they are open to industry may find a Pure Search consultant calling. Second, group-level growth
+  targets flow down to desk-level activity targets, which is why outreach volume is high. Third, the
+  group can afford things a small agency cannot: proprietary compensation research, a global events
+  series, a charitable foundation, campus teams. Those are candidate-acquisition assets. When you
+  attend one of their events, you are entering the database.</p>
+</section>
+
+<section>
+  <h2>1.3 &nbsp;Timeline: 2005 to 2026</h2>
+  <figure>
+    <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg" font-family="Liberation Sans, Arial, sans-serif">
+      <rect x="0" y="0" width="700" height="250" fill="#ffffff"/>
+      <line x1="30" y1="125" x2="670" y2="125" stroke="#0f2a43" stroke-width="2"/>
+      <polygon points="676,125 666,120 666,130" fill="#0f2a43"/>
+
+      <g stroke="#b3853a" stroke-width="1.2">
+        <line x1="52" y1="125" x2="52" y2="98"/><line x1="128" y1="125" x2="128" y2="152"/>
+        <line x1="204" y1="125" x2="204" y2="98"/><line x1="272" y1="125" x2="272" y2="152"/>
+        <line x1="340" y1="125" x2="340" y2="98"/><line x1="408" y1="125" x2="408" y2="152"/>
+        <line x1="472" y1="125" x2="472" y2="98"/><line x1="536" y1="125" x2="536" y2="152"/>
+        <line x1="600" y1="125" x2="600" y2="98"/><line x1="656" y1="125" x2="656" y2="152"/>
+      </g>
+      <g fill="#b3853a">
+        <circle cx="52" cy="125" r="4"/><circle cx="128" cy="125" r="4"/><circle cx="204" cy="125" r="4"/>
+        <circle cx="272" cy="125" r="4"/><circle cx="340" cy="125" r="4"/><circle cx="408" cy="125" r="4"/>
+        <circle cx="472" cy="125" r="4"/><circle cx="536" cy="125" r="4"/><circle cx="600" cy="125" r="4"/><circle cx="656" cy="125" r="4"/>
+      </g>
+
+      <!-- above -->
+      <g text-anchor="middle">
+        <text x="52" y="88" font-size="10.5" font-weight="bold" fill="#0f2a43">2005</text>
+        <text x="52" y="76" font-size="8.2" fill="#5b6572">Naidu co-founds</text>
+        <text x="52" y="66" font-size="8.2" fill="#5b6572">Cornell Partnership</text>
+        <text x="52" y="56" font-size="8.2" fill="#5b6572">(later exits via MBO)</text>
+
+        <text x="204" y="88" font-size="10.5" font-weight="bold" fill="#0f2a43">2014</text>
+        <text x="204" y="76" font-size="8.2" fill="#5b6572">First Women in</text>
+        <text x="204" y="66" font-size="8.2" fill="#5b6572">Private Equity event</text>
+        <text x="204" y="56" font-size="8.2" fill="#5b6572">— now a global series</text>
+
+        <text x="340" y="88" font-size="10.5" font-weight="bold" fill="#0f2a43">2019</text>
+        <text x="340" y="76" font-size="8.2" fill="#5b6572">Pure Search acquired;</text>
+        <text x="340" y="66" font-size="8.2" fill="#5b6572">Kernel platform created</text>
+
+        <text x="472" y="88" font-size="10.5" font-weight="bold" fill="#0f2a43">2022</text>
+        <text x="472" y="76" font-size="8.2" fill="#5b6572">#33 in Sunday Times 100</text>
+        <text x="472" y="66" font-size="8.2" fill="#5b6572">fastest-growing companies</text>
+
+        <text x="600" y="88" font-size="10.5" font-weight="bold" fill="#0f2a43">Mar 2025</text>
+        <text x="600" y="76" font-size="8.2" fill="#5b6572">Three Hills Capital</text>
+        <text x="600" y="66" font-size="8.2" fill="#5b6572">minority investment</text>
+      </g>
+      <!-- below -->
+      <g text-anchor="middle">
+        <text x="128" y="168" font-size="10.5" font-weight="bold" fill="#0f2a43">2012</text>
+        <text x="128" y="180" font-size="8.2" fill="#5b6572">Dartmouth Partners</text>
+        <text x="128" y="190" font-size="8.2" fill="#5b6572">launched in London</text>
+
+        <text x="272" y="168" font-size="10.5" font-weight="bold" fill="#0f2a43">2018</text>
+        <text x="272" y="180" font-size="8.2" fill="#5b6572">Literacy Capital</text>
+        <text x="272" y="190" font-size="8.2" fill="#5b6572">invests (round one)</text>
+
+        <text x="408" y="168" font-size="10.5" font-weight="bold" fill="#0f2a43">2021</text>
+        <text x="408" y="180" font-size="8.2" fill="#5b6572">New York office</text>
+        <text x="408" y="190" font-size="8.2" fill="#5b6572">opens</text>
+
+        <text x="536" y="168" font-size="10.5" font-weight="bold" fill="#0f2a43">2023</text>
+        <text x="536" y="180" font-size="8.2" fill="#5b6572">Charlotte, NC</text>
+        <text x="536" y="190" font-size="8.2" fill="#5b6572">team launched</text>
+
+        <text x="656" y="168" font-size="10.5" font-weight="bold" fill="#0f2a43">2026</text>
+        <text x="656" y="180" font-size="8.2" fill="#5b6572">Four offices;</text>
+        <text x="656" y="190" font-size="8.2" fill="#5b6572">group 280+ staff</text>
+      </g>
+      <text x="30" y="228" font-size="8" fill="#8a929c">Note: the legal entity Dartmouth Partners Limited (no. 05974472) shows an incorporation date of 23 October 2006 at Companies House —</text>
+      <text x="30" y="240" font-size="8" fill="#8a929c">consistent with a pre-existing company being renamed and used for the 2012 brand launch. The trading brand dates from 2012.</text>
+    </svg>
+    <figcaption><b>Figure 2 &mdash; Two decades in one line.</b> The pattern to notice: a founder-led
+    specialist agency that took institutional capital twice and used it to buy adjacent brands and
+    open overseas offices. <span class="tag c">Confirmed</span> / <span class="tag r">Reported</span></figcaption>
+  </figure>
+
+  <h2>1.4 &nbsp;Scale, offices and the numbers they publish</h2>
+  <div class="stats">
+    <div class="stat"><div class="n">280+</div><div class="l">Employees across Kernel Global</div></div>
+    <div class="stat"><div class="n">900+</div><div class="l">Client companies served</div></div>
+    <div class="stat"><div class="n">260,000+</div><div class="l">Candidates in the network</div></div>
+    <div class="stat"><div class="n">40,000+</div><div class="l">CVs screened per year, Early Careers alone</div></div>
+    <div class="stat"><div class="n">11</div><div class="l">Specialist sector desks at Dartmouth</div></div>
+    <div class="stat"><div class="n">4</div><div class="l">Offices: London, New York, Charlotte, Hong Kong</div></div>
+  </div>
+
+  <table>
+    <caption>Public markers of scale and standing, with the source and what it does and does not prove.</caption>
+    <tr><th style="width:52mm">Marker</th><th>Detail</th><th style="width:24mm">Confidence</th></tr>
+    <tr><td>Registered office</td><td>125 London Wall, London EC2Y 5AS &mdash; a City of London address a short walk from Moorgate, in the same square mile as most of their clients.</td><td><span class="tag c">Confirmed</span></td></tr>
+    <tr><td>Legal entity</td><td>Dartmouth Partners Limited, company no. 05974472. SIC code 78109, &ldquo;other activities of employment placement agencies&rdquo;. Active; accounts filed to 31 December 2025.</td><td><span class="tag c">Confirmed</span></td></tr>
+    <tr><td>Team page</td><td>Roughly 100+ named individuals on Dartmouth&rsquo;s own site, with a ladder running Associate → Consultant → Senior Consultant → Principal → Associate Director → Director → Executive Director → Managing Director.</td><td><span class="tag c">Confirmed</span></td></tr>
+    <tr><td>Leadership</td><td>Terri Loska (CEO, Dartmouth), Logan Naidu (Group CEO &amp; Founder, Kernel), Darren Sookramanien (Group CFO), Will Lambeth (Head of London, PE background).</td><td><span class="tag c">Confirmed</span></td></tr>
+    <tr><td>Growth recognition</td><td>Sunday Times 100 fastest-growing private companies (#33 in the 2022 list, three-year CAGR reported near 96%); FT ranking of Europe&rsquo;s fastest-growing companies; FT UK Leading Recruiters; Recruiter Hot 100.</td><td><span class="tag r">Reported</span></td></tr>
+    <tr><td>Candidate-side standing</td><td>Placed #10 among UK recruiters overall and #3 for investment banking in eFinancialCareers&rsquo; Ideal Recruiter 2024&ndash;25 rankings.</td><td><span class="tag r">Reported</span></td></tr>
+    <tr><td>Diversity claim</td><td>54% female placements into private equity portfolio roles, cited in the 2025 Three Hills announcement. Sister brand Pure claims 30% of sitting FTSE 100 Heads of Tax.</td><td><span class="tag r">Reported</span></td></tr>
+    <tr><td>Revenue</td><td>Third-party data aggregators publish wildly inconsistent figures (one shows £19m with a 46% year-on-year fall; another shows c.$53m). <em>Treat all of them as unreliable.</em> Use Companies House filings directly if you need a real number.</td><td><span class="tag r">Reported</span></td></tr>
+  </table>
+
+  <h2>1.5 &nbsp;What Dartmouth is <em>not</em></h2>
+  <p>Five misconceptions, each of which leads candidates to behave badly.</p>
+  <ol class="steps">
+    <li><strong>Not connected to Dartmouth College.</strong> The name is a City naming convention &mdash;
+    Naidu&rsquo;s earlier firm was &ldquo;The Cornell Partnership&rdquo;. Ivy-League-sounding names are
+    a deliberate branding trope in UK financial recruitment. There is no academic affiliation.</li>
+
+    <li><strong>Not your employer, and not your agent.</strong> When they place you, you sign a
+    contract with the client, not with Dartmouth. Their contractual and commercial duty runs to the
+    fee-payer. Their <em>interest</em> in you is real but conditional: it lasts exactly as long as you
+    are placeable. This is not cynicism, it is structure &mdash; and knowing it lets you use them
+    correctly instead of feeling betrayed by them.</li>
+
+    <li><strong>Not a pure executive-search house.</strong> Classic executive search (Heidrick &amp;
+    Struggles, Egon Zehnder, Spencer Stuart) is retained-only, board-level, and paid in thirds
+    regardless of outcome. Dartmouth does offer retained and executive solutions, but the bulk of its
+    volume &mdash; certainly at analyst and associate level &mdash; is contingent: no placement, no
+    fee. The economics of contingency drive everything you will experience.</li>
+
+    <li><strong>Not a careers service.</strong> The CV workshops, mock interviews, compensation
+    reports and student network are genuine and useful, and they are also the top of a funnel. Take
+    the help. Understand why it is free.</li>
+
+    <li><strong>Not a monopoly gatekeeper.</strong> Coverage in London is split across a dozen firms,
+    fund by fund and often mandate by mandate. Dartmouth cannot show you a role it does not hold.
+    Anyone who tells you a single headhunter relationship is sufficient is either lazy or selling
+    something.</li>
+  </ol>
+</section>
+
+<!-- ============ PART II ============ -->
+<section class="pb">
+  <div class="parthead">
+    <div class="pn">Part II</div>
+    <h1>The business model: who pays, and why</h1>
+    <p class="pd">Follow the money and every behaviour becomes predictable &mdash; the outreach, the
+    urgency, the chasing, the silence.</p>
+  </div>
+
+  <h2>2.1 &nbsp;The two-sided market</h2>
+  <p>Dartmouth operates a classic two-sided market. On one side sit <strong>clients</strong>: private
+  equity funds, credit funds, investment banks, asset managers, PE-backed portfolio companies and
+  corporates. On the other sit <strong>candidates</strong>. Value flows both ways, but cash flows
+  only one way.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 316" xmlns="http://www.w3.org/2000/svg" font-family="Liberation Sans, Arial, sans-serif">
+      <rect x="0" y="0" width="700" height="316" fill="#ffffff"/>
+      <!-- client box -->
+      <rect x="18" y="34" width="192" height="230" rx="4" fill="#f4f6f9" stroke="#0f2a43" stroke-width="1.4"/>
+      <rect x="18" y="34" width="192" height="26" rx="0" fill="#0f2a43"/>
+      <text x="114" y="52" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">CLIENTS (they pay)</text>
+      <g font-size="8.6" fill="#25313f">
+        <text x="30" y="80">· PE funds: large-cap, mid-market,</text><text x="30" y="92">  growth, VC, secondaries</text>
+        <text x="30" y="110">· Private credit &amp; direct lending funds</text>
+        <text x="30" y="128">· Investment banks &amp; advisory boutiques</text>
+        <text x="30" y="146">· Asset managers, hedge funds</text>
+        <text x="30" y="164">· Infrastructure &amp; real estate funds</text>
+        <text x="30" y="182">· PE-backed portfolio companies</text>
+        <text x="30" y="200">· Corporates hiring CFOs, strategy,</text><text x="30" y="212">  corp dev, technology leadership</text>
+      </g>
+      <text x="30" y="238" font-size="8.4" fill="#a33a3a" font-style="italic">Typical pain: no in-house recruiting</text>
+      <text x="30" y="250" font-size="8.4" fill="#a33a3a" font-style="italic">team, hiring 1–5 people a year.</text>
+
+      <!-- middle -->
+      <rect x="248" y="76" width="204" height="146" rx="4" fill="#25636f"/>
+      <text x="350" y="104" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">DARTMOUTH</text>
+      <text x="350" y="120" font-size="9" fill="#d3e3e6" text-anchor="middle">holds both sides&#8217; private information</text>
+      <line x1="272" y1="132" x2="428" y2="132" stroke="#5f9aa4"/>
+      <g font-size="8.6" fill="#ffffff">
+        <text x="272" y="150">· Who is quietly hiring</text>
+        <text x="272" y="166">· Who is quietly looking</text>
+        <text x="272" y="182">· What each side will pay / accept</text>
+        <text x="272" y="198">· Who performed well, and where</text>
+        <text x="272" y="214">· 260,000-name database</text>
+      </g>
+
+      <!-- candidate box -->
+      <rect x="490" y="34" width="192" height="230" rx="4" fill="#f4f6f9" stroke="#25636f" stroke-width="1.4"/>
+      <rect x="490" y="34" width="192" height="26" fill="#25636f"/>
+      <text x="586" y="52" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">CANDIDATES (never pay)</text>
+      <g font-size="8.6" fill="#25313f">
+        <text x="502" y="80">· School leavers &amp; apprentices</text>
+        <text x="502" y="98">· Students &amp; interns</text>
+        <text x="502" y="116">· Graduates</text>
+        <text x="502" y="134">· IB analysts, ACAs, consultants</text>
+        <text x="502" y="152">· PE / credit associates</text>
+        <text x="502" y="170">· VPs, principals, directors</text>
+        <text x="502" y="188">· Partners, CFOs, C-suite</text>
+      </g>
+      <text x="502" y="216" font-size="8.4" fill="#2f6f4f" font-style="italic">Typical pain: cannot see which</text>
+      <text x="502" y="228" font-size="8.4" fill="#2f6f4f" font-style="italic">funds are hiring, or how they rank.</text>
+      <text x="502" y="250" font-size="8.4" fill="#0f2a43" font-weight="bold">You are here.</text>
+
+      <!-- arrows -->
+      <path d="M210 118 L246 118" stroke="#0f2a43" stroke-width="1.6" fill="none" marker-end="url(#a1)"/>
+      <path d="M246 176 L210 176" stroke="#0f2a43" stroke-width="1.6" fill="none" marker-end="url(#a1)"/>
+      <path d="M488 118 L454 118" stroke="#25636f" stroke-width="1.6" fill="none" marker-end="url(#a2)"/>
+      <path d="M454 176 L488 176" stroke="#25636f" stroke-width="1.6" fill="none" marker-end="url(#a2)"/>
+      <defs>
+        <marker id="a1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><polygon points="0,0 7,3 0,6" fill="#0f2a43"/></marker>
+        <marker id="a2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><polygon points="0,0 7,3 0,6" fill="#25636f"/></marker>
+      </defs>
+      <text x="228" y="112" font-size="7.6" fill="#0f2a43" text-anchor="middle">mandate</text>
+      <text x="228" y="192" font-size="7.6" fill="#0f2a43" text-anchor="middle">shortlist</text>
+      <text x="228" y="204" font-size="7.6" fill="#0f2a43" text-anchor="middle">+ invoice</text>
+      <text x="471" y="112" font-size="7.6" fill="#25636f" text-anchor="middle">access,</text>
+      <text x="471" y="124" font-size="7.6" fill="#25636f" text-anchor="middle">intel, prep</text>
+      <text x="471" y="192" font-size="7.6" fill="#25636f" text-anchor="middle">CV, data,</text>
+      <text x="471" y="204" font-size="7.6" fill="#25636f" text-anchor="middle">preferences</text>
+
+      <rect x="18" y="282" width="664" height="24" rx="3" fill="#eef2f7" stroke="#dde2e8"/>
+      <text x="350" y="298" font-size="9.2" fill="#0f2a43" text-anchor="middle">£ &nbsp;Cash moves in exactly one direction: client → Dartmouth. Never candidate → Dartmouth. This is not policy; it is UK law.</text>
+    </svg>
+    <figcaption><b>Figure 3 &mdash; The two-sided market.</b> You are not the customer. You are the
+    inventory <em>and</em> a future customer &mdash; which is why the good firms treat candidates
+    well anyway. <span class="tag i">Inferred structure</span>, <span class="tag c">confirmed inputs</span></figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2>2.2 &nbsp;Contingent, retained, interim: the three ways they get paid</h2>
+  <p>Dartmouth publicly offers permanent, interim, executive, retained and succession services. Those
+  collapse into three commercial models, and it is worth knowing which one you are inside, because it
+  changes how hard the consultant will work for you and how much control they have.</p>
+
+  <table>
+    <tr><th style="width:30mm">Model</th><th>How it works</th><th>What it means for you</th></tr>
+    <tr>
+      <td><strong>Contingent</strong><br><span class="src">The default for analyst → VP</span></td>
+      <td>No fee unless a candidate the agency introduced is hired and starts. Often several agencies
+      compete on the same role. Fee is a percentage of first-year base salary, invoiced on start date,
+      payable typically within 7&ndash;30 days, with a rebate if you leave early.</td>
+      <td>Speed is everything. The consultant is racing rivals and racing the client&rsquo;s own direct
+      applicants. Expect fast turnarounds, pressure to say yes, and a strong preference for candidates
+      who are decisive and interview-ready <em>now</em>.</td>
+    </tr>
+    <tr>
+      <td><strong>Retained / executive</strong><br><span class="src">Senior, confidential, or scarce</span></td>
+      <td>Client pays in instalments &mdash; classically a third on engagement, a third on shortlist
+      delivery, a third on placement &mdash; regardless of outcome. The agency is exclusive.</td>
+      <td>Slower, more thorough, more honest. A retained consultant will spend real time with you
+      because they are paid to run a proper process, and they have no rival agency to beat. If you are
+      told a search is retained and exclusive, the consultant genuinely controls access.</td>
+    </tr>
+    <tr>
+      <td><strong>Interim / contract</strong><br><span class="src">Cover, projects, transformations</span></td>
+      <td>The agency acts as an <em>employment business</em>: it may pay the worker itself and bill the
+      client a day rate with a margin on top, or introduce a contractor for a placement fee. IR35 status
+      and right-to-work checks sit here &mdash; which is why their privacy policy collects NI numbers,
+      bank details and payroll data.</td>
+      <td>Different rules apply: you may be paid by Dartmouth rather than the client, and you should
+      always know your margin, your rate, and your IR35 determination before signing.</td>
+    </tr>
+  </table>
+
+  <h2>2.3 &nbsp;A worked fee example, end to end</h2>
+  <p>Say a mid-market private equity fund needs one associate. It calls three agencies, Dartmouth
+  among them, on a contingent basis. Dartmouth maps the market, contacts perhaps sixty relevant
+  people, screens fifteen, submits four, and one is hired at a base salary of £90,000.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 330" xmlns="http://www.w3.org/2000/svg" font-family="Liberation Sans, Arial, sans-serif">
+      <rect x="0" y="0" width="700" height="330" fill="#ffffff"/>
+      <text x="14" y="18" font-size="10" font-weight="bold" fill="#0f2a43">Illustrative agency fee by seniority (UK market norms, first-year base salary basis)</text>
+
+      <g font-size="8.4" fill="#25313f">
+        <text x="14" y="46">Graduate / apprentice</text><text x="14" y="57" fill="#8a929c">£35,000 base @ ~15%</text>
+        <text x="14" y="92">IB analyst</text><text x="14" y="103" fill="#8a929c">£60,000 base @ ~18%</text>
+        <text x="14" y="138">PE associate</text><text x="14" y="149" fill="#8a929c">£90,000 base @ ~20%</text>
+        <text x="14" y="184">Credit VP</text><text x="14" y="195" fill="#8a929c">£150,000 base @ ~22.5%</text>
+        <text x="14" y="230">CFO (retained)</text><text x="14" y="241" fill="#8a929c">£250,000 base @ ~27.5%</text>
+      </g>
+
+      <g>
+        <rect x="150" y="34" width="29" height="24" fill="#c9d4dd"/><text x="186" y="51" font-size="9" fill="#0f2a43">£5,250</text>
+        <rect x="150" y="80" width="60" height="24" fill="#a8bccb"/><text x="217" y="97" font-size="9" fill="#0f2a43">£10,800</text>
+        <rect x="150" y="126" width="100" height="24" fill="#6f97b0"/><text x="257" y="143" font-size="9" fill="#0f2a43">£18,000</text>
+        <rect x="150" y="172" width="187" height="24" fill="#3d6f8c"/><text x="344" y="189" font-size="9" fill="#0f2a43">£33,750</text>
+        <rect x="150" y="218" width="380" height="24" fill="#0f2a43"/><text x="537" y="235" font-size="9" fill="#0f2a43">£68,750</text>
+      </g>
+
+      <line x1="150" y1="256" x2="686" y2="256" stroke="#dde2e8"/>
+      <text x="14" y="278" font-size="9.6" font-weight="bold" fill="#0f2a43">What happens after the offer is signed</text>
+
+      <line x1="60" y1="300" x2="660" y2="300" stroke="#25636f" stroke-width="1.6"/>
+      <g fill="#25636f"><circle cx="60" cy="300" r="4"/><circle cx="210" cy="300" r="4"/><circle cx="360" cy="300" r="4"/><circle cx="510" cy="300" r="4"/><circle cx="660" cy="300" r="4"/></g>
+      <g font-size="8" fill="#25313f" text-anchor="middle">
+        <text x="60" y="292">offer accepted</text><text x="60" y="316">no fee yet</text>
+        <text x="210" y="292">notice period</text><text x="210" y="316">1–3 months, still no fee</text>
+        <text x="360" y="292">start date</text><text x="360" y="316">invoice raised</text>
+        <text x="510" y="292">payment terms</text><text x="510" y="316">7–30 days</text>
+        <text x="660" y="292">rebate window ends</text><text x="660" y="316">typically 8–12 weeks</text>
+      </g>
+    </svg>
+    <figcaption><b>Figure 4 &mdash; Fee scale and cash timing.</b> Percentages are UK market norms,
+    not Dartmouth&rsquo;s published rates, which are commercially confidential and negotiated per
+    client. Note how long the agency waits for cash: a placement agreed in March may not be paid
+    until July, and can be clawed back until September.
+    <span class="tag r">Reported norms</span> <span class="tag i">Illustrative figures</span></figcaption>
+  </figure>
+
+  <div class="callout key">
+    <div class="callout-title">The three consequences you can actually use</div>
+    <p><strong>1. Your base salary is their revenue line.</strong> A consultant negotiating your offer
+    upward is not being kind; they are being paid more. This is the rare moment when your interests
+    and theirs align almost perfectly. Use them hard at the offer stage.</p>
+    <p><strong>2. The rebate makes them care whether you stay.</strong> If you resign in week six,
+    the agency may have to refund part or all of the fee. That is why a good consultant will push
+    back on a bad fit &mdash; and why they will call you a month after you start.</p>
+    <p><strong>3. Early-career placements are low-fee, high-volume.</strong> A £5,000 fee cannot
+    support a bespoke, hand-held search. Early Careers is therefore a <em>process</em> business:
+    standardised tests, batch screening, 40,000 CVs a year. Being memorable inside a batch process
+    requires different tactics than being memorable in a bespoke one &mdash; see &sect;6.1.</p>
+  </div>
+
+  <h2>2.4 &nbsp;Why a 12-person fund pays £30,000 to hire one associate</h2>
+  <p>This is the question you asked most directly: <em>why do small boutique firms use Dartmouth?</em>
+  The answer is a build-versus-buy calculation that almost always resolves the same way.</p>
+
+  <table>
+    <tr><th style="width:44mm">What hiring requires</th><th>If the fund does it in-house</th><th>If it hires Dartmouth</th></tr>
+    <tr><td>Knowing who exists</td><td>Someone must map every analyst at 30 banks and every associate at 40 funds, by hand, and keep it current.</td><td>Already mapped, already in a 260,000-name database, refreshed continuously by eleven desks.</td></tr>
+    <tr><td>Reaching passive people</td><td>A partner cold-messaging analysts signals desperation and leaks the mandate to the market.</td><td>An agency can approach anyone without revealing the fund&rsquo;s name until it chooses to.</td></tr>
+    <tr><td>Confidentiality</td><td>Advertising &ldquo;we are hiring an associate&rdquo; tells LPs, competitors and your existing team things you may not want known &mdash; especially if the hire is a replacement.</td><td>Blind mandates are standard. This is a major, underappreciated reason boutiques use agencies.</td></tr>
+    <tr><td>Filtering</td><td>Partners bill their time at deal-team rates. Reading 300 CVs is the most expensive screening in the world.</td><td>Screening is the agency&rsquo;s core cost, amortised across many clients.</td></tr>
+    <tr><td>Benchmarking</td><td>A fund hiring once a year has no idea what the market pays this quarter.</td><td>Dartmouth publishes compensation reports across PE, credit, infrastructure, equities, IB and early careers, drawn from hundreds of practitioner conversations.</td></tr>
+    <tr><td>Risk</td><td>A failed hire in a 12-person fund is catastrophic and consumes a year.</td><td>Rebate periods transfer part of that risk back to the agency.</td></tr>
+    <tr><td>Cost</td><td>An in-house recruiter costs £70k&ndash;£120k fully loaded, every year, whether or not you hire.</td><td>£18k&ndash;£35k, once, only if a hire actually starts.</td></tr>
+  </table>
+
+  <p>Run the arithmetic. A boutique hiring two people a year would pay roughly £36,000&ndash;£70,000
+  in agency fees. An in-house recruiter capable of running buy-side searches costs more than that
+  and sits idle ten months of the year. Below roughly ten to fifteen hires a year, buying is simply
+  cheaper than building &mdash; which is exactly the range most boutique funds occupy. Large banks,
+  by contrast, cross that threshold easily, which is why they run enormous internal talent-acquisition
+  teams and use agencies only for niche or senior roles. <span class="tag i">Inferred</span></p>
+
+  <div class="callout">
+    <div class="callout-title">The asymmetry hiding in that table</div>
+    <p>The reason funds pay is <em>information</em>, not labour. If you make yourself
+    <strong>legible and reachable</strong> &mdash; easy to find, easy to categorise, easy to
+    represent &mdash; you make the agency&rsquo;s product cheaper to produce. Consultants
+    systematically over-represent candidates who are cheap to represent: whose CV needs no
+    explanation, whose motivations are clear, who answer within an hour, who have no messy gaps to
+    justify. That is the whole game, and it is almost entirely within your control.</p>
+  </div>
+
+  <h2>2.5 &nbsp;Desk economics &mdash; and what they mean for you</h2>
+  <p>Dartmouth does not publish consultant targets, and the numbers below are an industry-standard
+  reconstruction rather than internal data. But the shape is reliable, and the shape is what
+  determines whether your email gets answered. <span class="tag i">Inferred throughout</span></p>
+
+  <figure>
+    <svg viewBox="0 0 700 270" xmlns="http://www.w3.org/2000/svg" font-family="Liberation Sans, Arial, sans-serif">
+      <rect x="0" y="0" width="700" height="270" fill="#ffffff"/>
+      <text x="14" y="18" font-size="10" font-weight="bold" fill="#0f2a43">The funnel a single mid-level consultant runs to bill one year&#8217;s target</text>
+      <g>
+        <polygon points="70,36 630,36 560,72 140,72" fill="#0f2a43"/>
+        <polygon points="140,76 560,76 505,112 195,112" fill="#1d4a6b"/>
+        <polygon points="195,116 505,116 455,152 245,152" fill="#25636f"/>
+        <polygon points="245,156 455,156 410,192 290,192" fill="#4a8a92"/>
+        <polygon points="290,196 410,196 372,232 328,232" fill="#b3853a"/>
+      </g>
+      <g font-size="9" fill="#ffffff" text-anchor="middle" font-weight="bold">
+        <text x="350" y="59">~1,500–2,500 people contacted or reviewed per year</text>
+        <text x="350" y="99">~400–600 meaningful conversations</text>
+        <text x="350" y="139">~150–250 candidates screened properly</text>
+        <text x="350" y="179">~60–100 CVs submitted to clients</text>
+        <text x="350" y="219">15–25 placements</text>
+      </g>
+      <g font-size="8.4" fill="#5b6572">
+        <text x="640" y="59" text-anchor="end" fill="#ffffff">source</text>
+        <text x="14" y="252">Implied ratios: roughly 1 placement per 100 people touched; roughly 1 in 4 submitted CVs converts. At an average fee of £15,000–£20,000,</text>
+        <text x="14" y="264">15–25 placements is £250,000–£450,000 of annual billings — a normal target for an established consultant on a specialist desk.</text>
+      </g>
+    </svg>
+    <figcaption><b>Figure 5 &mdash; Why they message so many people.</b> The maths forces high-volume
+    outreach. It also explains why a non-reply is rarely personal: at the top of that funnel, you were
+    one of two thousand. <span class="tag i">Inferred</span></figcaption>
+  </figure>
+
+  <p>Four behavioural predictions fall out of this funnel, and you will observe every one of them:</p>
+  <ul>
+    <li><strong>Response speed is triaged by placeability, not politeness.</strong> A consultant with
+    a live mandate you fit will answer in minutes. The same person will leave a thoughtful message
+    unanswered for three weeks if you fit nothing currently open. This is queue management, not rudeness.</li>
+    <li><strong>They prefer candidates already in process elsewhere.</strong> A candidate with two
+    competing offers proves the market values them and creates urgency with the client. Mentioning
+    (truthfully) that you are in another process raises your internal priority.</li>
+    <li><strong>They will ask where else you have applied &mdash; and there is a reason.</strong> If
+    another agency already submitted you to a fund, Dartmouth cannot claim the fee for that
+    introduction. &ldquo;Ownership&rdquo; of a candidate-client pairing is contractual and
+    time-limited. Answer honestly; it protects you as much as them.</li>
+    <li><strong>Consultants change desks and firms often.</strong> Recruitment has high turnover. The
+    person who owns your relationship may be gone in eighteen months, which is why you should
+    maintain a relationship with the <em>firm</em> (registered, in the database, on the events list),
+    not only with one individual.</li>
+  </ul>
+
+  <h2>2.6 &nbsp;The legal floor: it is free for you, by statute</h2>
+  <p>UK recruitment operates under the Employment Agencies Act 1973 and the Conduct of Employment
+  Agencies and Employment Businesses Regulations 2003, enforced by the Employment Agency Standards
+  Inspectorate. The provisions worth knowing: <span class="tag c">Confirmed</span></p>
+  <ul>
+    <li><strong>No fees to work-seekers.</strong> An agency must not charge you for finding or
+    attempting to find you work. The narrow statutory exceptions concern entertainment and modelling,
+    not finance. Optional extra services such as CV writing may be charged for, but must be genuinely
+    optional and separately agreed &mdash; and no agency may make finding you work conditional on
+    buying them.</li>
+    <li><strong>The fee is a business-to-business matter.</strong> The Regulations do not cap what
+    agencies charge employers; that is a commercial negotiation. So there is no published rate card
+    and never will be.</li>
+    <li><strong>Terms must be agreed with you in writing</strong> before the agency acts for you,
+    including whether they are acting as an employment agency (permanent) or employment business
+    (temporary/interim).</li>
+    <li><strong>You cannot be charged for, or penalised for, refusing a role.</strong> Pressure to
+    accept is a sales tactic, not an obligation.</li>
+  </ul>
+
+  <div class="callout warn">
+    <div class="callout-title">If something feels wrong</div>
+    <p>Two escalation routes exist and both are free. For data issues &mdash; being contacted about
+    roles you never asked for, or wanting to see and correct your file &mdash; use UK GDPR rights and
+    complain to the Information Commissioner&rsquo;s Office. For conduct issues &mdash; fees demanded,
+    your CV sent somewhere without permission, misleading role descriptions &mdash; the Employment
+    Agency Standards Inspectorate is the regulator. Sending your CV to a client <em>without your
+    consent</em> is a genuine breach, not a grey area, and it is worth telling any agency early and
+    politely that you expect to approve every submission by name.</p>
+  </div>
+</section>
+
+<!-- ============ PART III ============ -->
+<section class="pb">
+  <div class="parthead">
+    <div class="pn">Part III</div>
+    <h1>The eleven desks and where you fit</h1>
+    <p class="pd">Dartmouth is not one business. It is eleven specialist desks sharing a brand, a
+    database and a floor. Talking to the wrong one wastes a first impression you only get once.</p>
+  </div>
+
+  <h2>3.1 &nbsp;Sector map</h2>
+  <table>
+    <caption>The eleven published desks, what each sells, and the candidate profile it buys. <span class="tag c">Desks and role types confirmed</span> <span class="tag i">Profile column inferred from role types</span></caption>
+    <tr><th style="width:36mm">Desk</th><th style="width:56mm">Roles it fills</th><th>Who it recruits</th></tr>
+    <tr><td><strong>Private Equity</strong></td><td>Associate, Senior Associate, Principal, Partner; portfolio/operations executives; origination directors. Large-cap, mid-market, growth, VC and secondaries funds.</td><td>Investment-banking analysts, strategy consultants, existing PE associates, occasionally Big Four transaction-services and corporate-finance people.</td></tr>
+    <tr><td><strong>Credit</strong></td><td>Private credit and direct lending: analyst to director, across origination, underwriting and portfolio management.</td><td>Leveraged finance and DCM analysts, restructuring bankers, credit-fund associates, ratings-agency analysts.</td></tr>
+    <tr><td><strong>Corporate Finance &amp; M&amp;A</strong></td><td>Advisory and in-house M&amp;A: analyst through director, at banks, boutiques and corporates.</td><td>Bankers moving bank-to-bank, corporate-development professionals, ACAs from corporate finance.</td></tr>
+    <tr><td><strong>CFO &amp; Senior Finance</strong></td><td>CFO, finance director, financial controller, group reporting, FP&amp;A leadership &mdash; heavily into PE-backed portfolio companies.</td><td>Qualified accountants (ACA/ACCA/CIMA) with five to twenty-five years&rsquo; experience.</td></tr>
+    <tr><td><strong>Finance into Funds</strong></td><td>The in-house finance function <em>of the fund itself</em>: fund controller, head of fund finance, EMEA financial controller, FP&amp;A director, fund CFO.</td><td>Mid-to-senior finance professionals with fund or alternatives experience. The classic destination for audit and fund-administration accountants.</td></tr>
+    <tr><td><strong>Investor Relations &amp; Distribution</strong></td><td>Fundraising, LP relations, product specialists, capital formation, marketing and distribution inside funds.</td><td>Ex-bankers, ex-consultants, placement-agent staff, and increasingly ACAs pivoting out of audit into commercial fund roles.</td></tr>
+    <tr><td><strong>Equities &amp; Multi-Asset</strong></td><td>Public-markets investment roles: research analysts, portfolio managers, multi-asset and long-only investment professionals.</td><td>Sell-side equity research, buy-side analysts, hedge-fund analysts.</td></tr>
+    <tr><td><strong>Real Assets</strong></td><td>Infrastructure, real estate, energy and renewables investment teams: analyst to director, plus asset management.</td><td>Infra bankers, project-finance specialists, engineers with finance training, existing real-asset investors.</td></tr>
+    <tr><td><strong>Strategy &amp; Corporate Development</strong></td><td>In-house strategy, corporate development and transformation, largely at corporates and PE-backed businesses.</td><td>Management consultants (MBB and Big Four strategy houses), bankers moving in-house.</td></tr>
+    <tr><td><strong>Technology Leadership</strong></td><td>CTO, CIO, CPO, head of engineering and digital-transformation leadership in financial services and PE portfolios.</td><td>Senior technologists; not an early-career route.</td></tr>
+    <tr><td><strong>Early Careers</strong></td><td>Apprenticeships, insight days, work experience (one day to two weeks), internships and graduate roles, across banks, funds, asset managers, corporates and start-ups.</td><td><strong>Students, school leavers, penultimate- and final-year undergraduates, and recent graduates. If you are currently an intern, this is your desk.</strong></td></tr>
+  </table>
+
+  <h2>3.2 &nbsp;Which desk owns you, by career stage</h2>
+  <figure>
+    <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" font-family="Liberation Sans, Arial, sans-serif">
+      <rect x="0" y="0" width="700" height="300" fill="#ffffff"/>
+      <!-- axis -->
+      <line x1="150" y1="34" x2="150" y2="272" stroke="#dde2e8"/>
+      <g font-size="8" fill="#8a929c" text-anchor="middle">
+        <text x="150" y="28">School /</text><text x="150" y="38">university</text>
+        <text x="272" y="28">0–2 yrs</text><text x="272" y="38">analyst</text>
+        <text x="394" y="28">3–6 yrs</text><text x="394" y="38">associate / VP</text>
+        <text x="516" y="28">7–15 yrs</text><text x="516" y="38">director / principal</text>
+        <text x="640" y="28">15 yrs +</text><text x="640" y="38">partner / C-suite</text>
+      </g>
+      <g stroke="#eef2f6"><line x1="211" y1="46" x2="211" y2="272"/><line x1="333" y1="46" x2="333" y2="272"/><line x1="455" y1="46" x2="455" y2="272"/><line x1="577" y1="46" x2="577" y2="272"/></g>
+
+      <g font-size="8.6" fill="#25313f">
+        <text x="12" y="62">Early Careers</text>
+        <text x="12" y="88">Corporate Finance &amp; M&amp;A</text>
+        <text x="12" y="114">Private Equity</text>
+        <text x="12" y="140">Credit</text>
+        <text x="12" y="166">Equities &amp; Multi-Asset</text>
+        <text x="12" y="192">Real Assets</text>
+        <text x="12" y="218">Investor Relations</text>
+        <text x="12" y="244">Finance into Funds</text>
+        <text x="12" y="268">CFO &amp; Senior Finance</text>
+      </g>
+      <g rx="2">
+        <rect x="152" y="52" width="118" height="14" fill="#b3853a"/>
+        <rect x="215" y="78" width="240" height="14" fill="#25636f"/>
+        <rect x="270" y="104" width="310" height="14" fill="#0f2a43"/>
+        <rect x="270" y="130" width="310" height="14" fill="#1d4a6b"/>
+        <rect x="270" y="156" width="310" height="14" fill="#3d6f8c"/>
+        <rect x="270" y="182" width="310" height="14" fill="#4a8a92"/>
+        <rect x="333" y="208" width="310" height="14" fill="#5f7d8c"/>
+        <rect x="394" y="234" width="290" height="14" fill="#6b7683"/>
+        <rect x="455" y="258" width="230" height="14" fill="#4a5c6a"/>
+      </g>
+      <text x="152" y="290" font-size="7.7" fill="#5b6572">Shaded bar = the career range each desk actively recruits. The Early Careers desk is the only entry point that does not require prior full-time experience.</text>
+    </svg>
+    <figcaption><b>Figure 6 &mdash; Desk coverage by seniority.</b> Note the handover: Early Careers
+    places you into your first role, then hands you &mdash; and your record &mdash; to a sector desk
+    two or three years later. That handover <em>is</em> the Classroom-to-Boardroom model.
+    <span class="tag i">Inferred mapping from published role types</span></figcaption>
+  </figure>
+
+  <div class="callout do">
+    <div class="callout-title">Practical routing rule</div>
+    <p>Contact the desk that matches <strong>where you will be in twelve months</strong>, not where
+    you are today &mdash; but register with the desk that matches where you are today. If you are an
+    intern heading into a graduate role, Early Careers is your registration point
+    (<span class="mono" style="display:inline;padding:0 1mm;border:0;background:#f2f4f7">earlycareers@dartmouthpartners.com</span>).
+    If you are a first-year analyst hoping to move to a fund, the Private Equity or Credit desk is
+    the one to build a relationship with now, because they will be running the mandates you want in
+    eighteen months. Sending the same email to all eleven inboxes marks you as unfocused and gets
+    filed as such.</p>
+  </div>
+</section>
+
+<!-- ============ PART IV ============ -->
+<section class="pb">
+  <div class="parthead">
+    <div class="pn">Part IV</div>
+    <h1>The back end: what actually happens</h1>
+    <p class="pd">From the client&rsquo;s phone call to the invoice, and everything the candidate
+    never sees &mdash; the database record, the screening stack, and the incentives driving both.</p>
+  </div>
+
+  <h2>4.1 &nbsp;The mandate pipeline, stage by stage</h2>
+  <p>Every placement follows the same twelve-stage arc. Dartmouth&rsquo;s own published client
+  process &mdash; consultation, tailored search strategy, network access, demanding pre-screening
+  with technical and competency testing, interview management, feedback, offer negotiation,
+  onboarding support, ongoing partnership &mdash; is this arc, described from the client&rsquo;s
+  side. <span class="tag c">Stages 1&ndash;3 and 6&ndash;11 confirmed</span>
+  <span class="tag i">Internal mechanics inferred</span></p>
+
+  <figure>
+    <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" font-family="Liberation Sans, Arial, sans-serif">
+      <rect x="0" y="0" width="700" height="320" fill="#ffffff"/>
+      <defs><marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><polygon points="0,0 7,3 0,6" fill="#8a929c"/></marker></defs>
+      <g font-size="8.2">
+        <!-- row 1 -->
+        <rect x="12" y="20" width="150" height="62" rx="3" fill="#0f2a43"/>
+        <text x="22" y="36" fill="#b3853a" font-size="8" font-weight="bold">01 · CLIENT</text>
+        <text x="22" y="52" fill="#ffffff" font-weight="bold">Brief taken</text>
+        <text x="22" y="66" fill="#c3cfdb">Role, team, comp band,</text><text x="22" y="76" fill="#c3cfdb">exclusivity, fee, deadline</text>
+
+        <rect x="187" y="20" width="150" height="62" rx="3" fill="#0f2a43"/>
+        <text x="197" y="36" fill="#b3853a" font-size="8" font-weight="bold">02 · INTERNAL</text>
+        <text x="197" y="52" fill="#ffffff" font-weight="bold">Mandate qualified</text>
+        <text x="197" y="66" fill="#c3cfdb">Is it winnable? Contingent</text><text x="197" y="76" fill="#c3cfdb">or retained? Who owns it?</text>
+
+        <rect x="362" y="20" width="150" height="62" rx="3" fill="#1d4a6b"/>
+        <text x="372" y="36" fill="#b3853a" font-size="8" font-weight="bold">03 · RESEARCH</text>
+        <text x="372" y="52" fill="#ffffff" font-weight="bold">Market map</text>
+        <text x="372" y="66" fill="#c8d7e2">Every plausible person at</text><text x="372" y="76" fill="#c8d7e2">every comparable firm</text>
+
+        <rect x="537" y="20" width="150" height="62" rx="3" fill="#1d4a6b"/>
+        <text x="547" y="36" fill="#b3853a" font-size="8" font-weight="bold">04 · DATABASE</text>
+        <text x="547" y="52" fill="#ffffff" font-weight="bold">Longlist built</text>
+        <text x="547" y="66" fill="#c8d7e2">Existing records first,</text><text x="547" y="76" fill="#c8d7e2">then new names</text>
+
+        <path d="M162 51 L185 51" stroke="#8a929c" marker-end="url(#ar)"/>
+        <path d="M337 51 L360 51" stroke="#8a929c" marker-end="url(#ar)"/>
+        <path d="M512 51 L535 51" stroke="#8a929c" marker-end="url(#ar)"/>
+        <path d="M687 51 L694 51 L694 96 L6 96 L6 141 L10 141" stroke="#8a929c" fill="none" marker-end="url(#ar)"/>
+
+        <!-- row 2 -->
+        <rect x="12" y="110" width="150" height="62" rx="3" fill="#25636f"/>
+        <text x="22" y="126" fill="#b3853a" font-size="8" font-weight="bold">05 · OUTREACH</text>
+        <text x="22" y="142" fill="#ffffff" font-weight="bold">Approach</text>
+        <text x="22" y="156" fill="#d3e3e6">LinkedIn InMail, email,</text><text x="22" y="166" fill="#d3e3e6">phone, referral, network</text>
+
+        <rect x="187" y="110" width="150" height="62" rx="3" fill="#25636f"/>
+        <text x="197" y="126" fill="#b3853a" font-size="8" font-weight="bold">06 · SCREEN</text>
+        <text x="197" y="142" fill="#ffffff" font-weight="bold">Consultant call</text>
+        <text x="197" y="156" fill="#d3e3e6">20–45 min. Motivation,</text><text x="197" y="166" fill="#d3e3e6">deals, comp, timing</text>
+
+        <rect x="362" y="110" width="150" height="62" rx="3" fill="#25636f"/>
+        <text x="372" y="126" fill="#b3853a" font-size="8" font-weight="bold">07 · ASSESS</text>
+        <text x="372" y="142" fill="#ffffff" font-weight="bold">Testing</text>
+        <text x="372" y="156" fill="#d3e3e6">Technical, competency,</text><text x="372" y="166" fill="#d3e3e6">psychometric, numeracy</text>
+
+        <rect x="537" y="110" width="150" height="62" rx="3" fill="#4a8a92"/>
+        <text x="547" y="126" fill="#0f2a43" font-size="8" font-weight="bold">08 · SUBMIT</text>
+        <text x="547" y="142" fill="#ffffff" font-weight="bold">Shortlist sent</text>
+        <text x="547" y="156" fill="#eaf3f4">3–6 CVs + written pitch</text><text x="547" y="166" fill="#eaf3f4">on each candidate</text>
+
+        <path d="M162 141 L185 141" stroke="#8a929c" marker-end="url(#ar)"/>
+        <path d="M337 141 L360 141" stroke="#8a929c" marker-end="url(#ar)"/>
+        <path d="M512 141 L535 141" stroke="#8a929c" marker-end="url(#ar)"/>
+        <path d="M687 141 L694 141 L694 186 L6 186 L6 231 L10 231" stroke="#8a929c" fill="none" marker-end="url(#ar)"/>
+
+        <!-- row 3 -->
+        <rect x="12" y="200" width="150" height="62" rx="3" fill="#4a8a92"/>
+        <text x="22" y="216" fill="#0f2a43" font-size="8" font-weight="bold">09 · PROCESS</text>
+        <text x="22" y="232" fill="#ffffff" font-weight="bold">Interviews managed</text>
+        <text x="22" y="246" fill="#eaf3f4">Scheduling, briefing,</text><text x="22" y="256" fill="#eaf3f4">two-way feedback</text>
+
+        <rect x="187" y="200" width="150" height="62" rx="3" fill="#4a8a92"/>
+        <text x="197" y="216" fill="#0f2a43" font-size="8" font-weight="bold">10 · CLOSE</text>
+        <text x="197" y="232" fill="#ffffff" font-weight="bold">Offer &amp; negotiation</text>
+        <text x="197" y="246" fill="#eaf3f4">Comp benchmarking,</text><text x="197" y="256" fill="#eaf3f4">counter-offer defence</text>
+
+        <rect x="362" y="200" width="150" height="62" rx="3" fill="#b3853a"/>
+        <text x="372" y="216" fill="#2a2000" font-size="8" font-weight="bold">11 · INVOICE</text>
+        <text x="372" y="232" fill="#ffffff" font-weight="bold">Fee billed on start</text>
+        <text x="372" y="246" fill="#f7edda">Rebate clock begins;</text><text x="372" y="256" fill="#f7edda">onboarding check-ins</text>
+
+        <rect x="537" y="200" width="150" height="62" rx="3" fill="#5b6572"/>
+        <text x="547" y="216" fill="#ffe9c2" font-size="8" font-weight="bold">12 · RETAIN</text>
+        <text x="547" y="232" fill="#ffffff" font-weight="bold">Record updated</text>
+        <text x="547" y="246" fill="#e4e8ec">You become a future</text><text x="547" y="256" fill="#e4e8ec">candidate — and client</text>
+
+        <path d="M162 231 L185 231" stroke="#8a929c" marker-end="url(#ar)"/>
+        <path d="M337 231 L360 231" stroke="#8a929c" marker-end="url(#ar)"/>
+        <path d="M512 231 L535 231" stroke="#8a929c" marker-end="url(#ar)"/>
+        <path d="M612 262 L612 292 L96 292 L96 20" stroke="#b3853a" stroke-dasharray="4 3" fill="none" marker-end="url(#ar)"/>
+        <text x="350" y="288" font-size="8" fill="#b3853a" text-anchor="middle">the loop: today&#8217;s placement is tomorrow&#8217;s hiring manager, and tomorrow&#8217;s mandate</text>
+      </g>
+    </svg>
+    <figcaption><b>Figure 7 &mdash; The twelve-stage mandate pipeline.</b> Candidates only ever see
+    stages 5 to 10. The commercially decisive stages are 1, 2 and 4 &mdash; all of which happen
+    before you know the role exists. Being in the database at stage 4 is the entire objective.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <table>
+    <caption>The same twelve stages, with realistic timings and the single highest-value action available to you at each. <span class="tag i">Timings are typical ranges, not Dartmouth&rsquo;s published SLAs</span></caption>
+    <tr><th style="width:8mm">#</th><th style="width:38mm">Stage</th><th style="width:22mm">Typical duration</th><th>What you can do about it</th></tr>
+    <tr><td>1</td><td>Client brief taken</td><td>1 call, 30&ndash;60 min</td><td>Nothing directly &mdash; but a consultant who already knows you will think of you <em>during</em> this call. That is the whole value of being known early.</td></tr>
+    <tr><td>2</td><td>Mandate qualified internally</td><td>Same day</td><td>Nothing.</td></tr>
+    <tr><td>3</td><td>Market map / search strategy</td><td>1&ndash;5 days</td><td>Be findable. Your LinkedIn title, employer and location decide whether you appear in the map at all. See Part V.</td></tr>
+    <tr><td>4</td><td>Longlist built from database first</td><td>Hours</td><td>Be <em>in</em> the database, correctly tagged, with a current CV. This is the cheapest, most neglected action in the whole process.</td></tr>
+    <tr><td>5</td><td>Outreach</td><td>2&ndash;10 days</td><td>Reply within hours, even to say &ldquo;not now, but here is my situation&rdquo;. Non-repliers get re-tagged as unresponsive.</td></tr>
+    <tr><td>6</td><td>Consultant screening call</td><td>20&ndash;45 min</td><td>Treat it as a real interview. It is the stage where your permanent tier is set. See &sect;6.2.</td></tr>
+    <tr><td>7</td><td>Testing</td><td>30 min&ndash;3 hrs</td><td>For early careers: numerical, verbal and psychometric. For investment roles: technical and competency assessment. Practise numerical reasoning before you need it.</td></tr>
+    <tr><td>8</td><td>Shortlist submitted</td><td>Same week</td><td>Give the consultant the raw material for their written pitch &mdash; three sharp lines on why you fit <em>this</em> fund. Many will use your wording verbatim.</td></tr>
+    <tr><td>9</td><td>Interviews</td><td>3 days&ndash;6 weeks</td><td>Demand the briefing. Ask who you are meeting, what they test, whether there is a modelling test or case study, and what previous candidates got wrong. They know, and they will tell you.</td></tr>
+    <tr><td>10</td><td>Offer and negotiation</td><td>2&ndash;10 days</td><td>Let them negotiate. Their fee rises with your base. Be explicit about your number early so they can position it.</td></tr>
+    <tr><td>11</td><td>Start date, invoice, rebate window</td><td>1&ndash;3 months later</td><td>Answer their check-in calls. A consultant whose placement went well will move you again in three years.</td></tr>
+    <tr><td>12</td><td>Record updated, relationship retained</td><td>Ongoing</td><td>Update them when you change role or get promoted. Two emails a year keeps your record live and correctly tiered.</td></tr>
+  </table>
+
+  <h2>4.2 &nbsp;Where candidates come from: the five sourcing channels</h2>
+  <p>When a consultant needs twenty plausible names by Friday, they draw from five pools in a
+  predictable order of cost. Cheapest first, always.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg" font-family="Liberation Sans, Arial, sans-serif">
+      <rect x="0" y="0" width="700" height="280" fill="#ffffff"/>
+      <text x="14" y="16" font-size="9.6" font-weight="bold" fill="#0f2a43">Relative weight of sourcing channels on a specialist finance desk (illustrative)</text>
+
+      <g font-size="8.6" fill="#25313f">
+        <text x="14" y="46">1 · Existing database</text><text x="14" y="57" fill="#8a929c">people already known to the firm</text>
+        <text x="14" y="94">2 · LinkedIn Recruiter</text><text x="14" y="105" fill="#8a929c">proactive Boolean search of passive talent</text>
+        <text x="14" y="142">3 · Referrals</text><text x="14" y="153" fill="#8a929c">&#8220;who else should I be speaking to?&#8221;</text>
+        <text x="14" y="190">4 · Inbound</text><text x="14" y="201" fill="#8a929c">job-board applications, CV registration, email</text>
+        <text x="14" y="238">5 · Campus &amp; events</text><text x="14" y="249" fill="#8a929c">university partnerships, insight days, foundation</text>
+      </g>
+      <g>
+        <rect x="230" y="32" width="330" height="26" fill="#0f2a43"/><text x="570" y="50" font-size="8.6" fill="#0f2a43">largest &mdash; and free to search</text>
+        <rect x="230" y="80" width="255" height="26" fill="#1d4a6b"/><text x="495" y="98" font-size="8.6" fill="#0f2a43">primary route to people not yet known</text>
+        <rect x="230" y="128" width="150" height="26" fill="#25636f"/><text x="390" y="146" font-size="8.6" fill="#0f2a43">highest quality per contact</text>
+        <rect x="230" y="176" width="110" height="26" fill="#4a8a92"/><text x="350" y="194" font-size="8.6" fill="#0f2a43">low volume, but pre-qualified intent</text>
+        <rect x="230" y="224" width="85" height="26" fill="#b3853a"/><text x="325" y="242" font-size="8.6" fill="#0f2a43">Early Careers desk only &mdash; but it feeds all the others later</text>
+      </g>
+      <text x="14" y="272" font-size="7.8" fill="#8a929c">Proportions are an industry-typical illustration, not Dartmouth data. The ordering — database first, paid search second, referrals third — is near-universal because it tracks cost per name.</text>
+    </svg>
+    <figcaption><b>Figure 8 &mdash; Channel mix.</b> The two channels you can directly influence are
+    #1 (register, and keep your record fresh) and #2 (be searchable). Channel #3 &mdash; referrals
+    &mdash; is influenced indirectly: be the person other candidates name.
+    <span class="tag i">Inferred</span></figcaption>
+  </figure>
+
+  <div class="callout key">
+    <div class="callout-title">Why this ordering is the single most useful fact in this document</div>
+    <p>A consultant with a live mandate searches their own database <em>first</em>, because it costs
+    nothing and the records already contain salary, motivation and quality notes that LinkedIn cannot
+    show. Only when the database is thin do they open LinkedIn Recruiter and start paying for InMails
+    and cold conversations.</p>
+    <p>Which means: <strong>the candidate who registered eight months ago, uploaded a clean CV, had a
+    twenty-minute call and updated their record when they changed teams is structurally ahead of an
+    identical candidate who is merely findable on LinkedIn.</strong> Everyone optimises LinkedIn.
+    Almost nobody optimises being in the database properly. Do both.</p>
+  </div>
+
+  <h2>4.3 &nbsp;The database is the asset &mdash; what is in your record</h2>
+  <p>Kernel Global publishes a candidate network figure of 260,000+. That database, not the office
+  or the brand, is the firm&rsquo;s balance sheet. Dartmouth&rsquo;s privacy policy is unusually
+  informative about what sits inside it, and it is the closest thing to a public description of their
+  back end that exists. <span class="tag c">Confirmed &mdash; all items below are drawn from their
+  published privacy policy</span></p>
+
+  <table>
+    <tr><th style="width:44mm">Category</th><th>What they record</th></tr>
+    <tr><td>Identity &amp; contact</td><td>Name, address, email, telephone, date of birth, gender, next of kin.</td></tr>
+    <tr><td>Professional</td><td>CV, photograph, LinkedIn profile and other public professional profiles, qualifications and their verification.</td></tr>
+    <tr><td>Compliance</td><td>Right-to-work documentation, IR35 status, criminal-record checks where lawful.</td></tr>
+    <tr><td>Payroll (interim/temp)</td><td>National Insurance number, bank details, payroll records, tax status.</td></tr>
+    <tr><td>Special category</td><td>Diversity data and health information &mdash; explicit consent only.</td></tr>
+    <tr><td>Behavioural</td><td>Website interactions, IP address, browser data, event registrations, survey responses.</td></tr>
+  </table>
+
+  <h4>Where the data comes from &mdash; including when you never applied</h4>
+  <p>The policy states plainly that personal data is collected not only from you directly (website
+  applications through their <em>AppTracker</em> system, CV submissions, account creation, event
+  registration, surveys) but also from third parties: <strong>&ldquo;LinkedIn, corporate websites,
+  job board websites, online CV libraries&rdquo;</strong> and personal recommendations. Where data
+  comes from a third party they undertake to notify you within thirty days. The lawful basis is
+  primarily <strong>legitimate interests</strong> &mdash; identifying relevant candidates &mdash;
+  not consent.</p>
+
+  <p>This is the mechanical answer to your question about colleagues being contacted out of the blue.
+  They did not opt in. A researcher or consultant found them by name and employer, built a record,
+  and approached them. It is lawful, standard across the industry, and it is why a strong public
+  profile functions as a permanent, passive application to every search firm in London.</p>
+
+  <h4>Who else sees it</h4>
+  <p>The policy discloses sharing with: other Kernel Group companies, prospective employers and
+  clients, job boards, payroll providers, identity-verification companies, insurers, analytics and
+  advertising networks, sub-contractors, and &mdash; notably &mdash; prospective buyers of the
+  business. International transfers outside the UK/EEA are made under Standard Contractual Clauses
+  or an International Data Transfer Agreement.</p>
+
+  <h4>Retention</h4>
+  <p>No fixed period is published. Retention is described as depending on contractual and legal
+  obligations, legitimate business interests, potential disputes and regulator guidance, with a
+  separate retention notice available on request. Records may be archived, kept on financial systems
+  only, or deleted from the CRM. In practice, assume that <strong>a record created about you today
+  will still exist in some form in five years.</strong></p>
+
+  <div class="callout do">
+    <div class="callout-title">The lever almost nobody pulls</div>
+    <p>Under UK GDPR you can submit a <strong>Subject Access Request</strong> and require them to
+    disclose the personal data they hold about you &mdash; normally within one month, free. In
+    practice this can surface the consultant notes and categorisations attached to your record: how
+    you were described, which mandates you were considered for, what salary and motivation were
+    logged. You also have rights to rectification (fix a wrong salary or job title in your record),
+    objection to processing based on legitimate interests, restriction, portability, and complaint to
+    the ICO.</p>
+    <p>Two caveats: they may lawfully redact information that would reveal third parties &mdash;
+    including client identities and, sometimes, consultants&rsquo; personal opinions where these are
+    intertwined with others&rsquo; data. And filing an SAR does mark you out. It is a tool for
+    correcting a record you believe is wrong or stale, not a routine move. Template in Appendix D;
+    address it to <span class="mono" style="display:inline;padding:0 1mm;border:0;background:#f2f4f7">privacy@dartmouthpartners.com</span>
+    or <span class="mono" style="display:inline;padding:0 1mm;border:0;background:#f2f4f7">privacy@kernel-global.com</span>.</p>
+  </div>
+</section>
+
+<section class="pb">
+  <h2>4.4 &nbsp;The screening stack</h2>
+  <p>Dartmouth tells clients it runs a &ldquo;demanding pre-screening process&rdquo; with technical
+  and competency testing, and describes a &ldquo;multi-layered proprietary screening platform&rdquo;
+  supported by detailed market mapping. Its Early Careers process specifies English, Maths and
+  psychometric assessment, followed by a client-side CV review. Put together with how agency
+  screening universally works, the stack looks like this.
+  <span class="tag c">Layers 3 and 6 confirmed</span> <span class="tag i">Layer detail inferred</span></p>
+
+  <figure>
+    <svg viewBox="0 0 700 340" xmlns="http://www.w3.org/2000/svg" font-family="Liberation Sans, Arial, sans-serif">
+      <rect x="0" y="0" width="700" height="340" fill="#ffffff"/>
+      <g>
+        <rect x="20" y="20" width="500" height="40" fill="#dfe6ec"/>
+        <rect x="55" y="66" width="430" height="40" fill="#c1cfda"/>
+        <rect x="95" y="112" width="350" height="40" fill="#8fa9bd"/>
+        <rect x="135" y="158" width="270" height="40" fill="#4a7793"/>
+        <rect x="170" y="204" width="200" height="40" fill="#25636f"/>
+        <rect x="200" y="250" width="140" height="40" fill="#0f2a43"/>
+        <rect x="225" y="296" width="90" height="34" fill="#b3853a"/>
+      </g>
+      <g font-size="8.8" fill="#25313f">
+        <text x="30" y="38" font-weight="bold">Layer 0 · The universe</text>
+        <text x="30" y="52">Everyone plausibly relevant, mapped or in the database</text>
+
+        <text x="65" y="84" font-weight="bold">Layer 1 · Machine filter</text>
+        <text x="65" y="98">Keyword and attribute search in the CRM; LinkedIn Boolean; parsed CV fields</text>
+
+        <text x="105" y="130" font-weight="bold" fill="#0f2a43">Layer 2 · Human CV screen</text>
+        <text x="105" y="144" fill="#0f2a43">Seconds per CV. School, university, grades, firm, progression, gaps, formatting</text>
+
+        <text x="145" y="176" font-weight="bold" fill="#ffffff">Layer 3 · Testing</text>
+        <text x="145" y="190" fill="#e8eef3">English &amp; Maths &amp; psychometric (early careers); technical &amp; competency (investment)</text>
+
+        <text x="180" y="222" font-weight="bold" fill="#ffffff">Layer 4 · Screening call</text>
+        <text x="180" y="236" fill="#d3e3e6">Articulacy, motivation, realism, credibility, deal ownership</text>
+
+        <text x="210" y="272" font-weight="bold" fill="#ffffff">Layer 5 · Internal calibration</text>
+        <text x="210" y="286" fill="#c3cfdb">Tiered against this mandate and the client&#8217;s known preferences</text>
+
+        <text x="235" y="318" font-weight="bold" fill="#ffffff">Layer 6 · Client CV review</text>
+      </g>
+      <g font-size="8" fill="#8a929c" text-anchor="end">
+        <text x="686" y="44">no human has looked at you yet</text>
+        <text x="686" y="90">exclusion here is silent and invisible</text>
+        <text x="686" y="136">the classic 6–10 second scan</text>
+        <text x="686" y="182">objective, scored, hard to argue with</text>
+        <text x="686" y="228">where your tier is actually set</text>
+        <text x="686" y="274">where good candidates lose to fit, not quality</text>
+        <text x="686" y="320">the first time the client sees you</text>
+      </g>
+    </svg>
+    <figcaption><b>Figure 9 &mdash; Six filters before a client reads your name.</b> Four of the six
+    are invisible to you. The two you can prepare for &mdash; testing and the screening call &mdash;
+    are the two most candidates treat casually. <span class="tag i">Inferred structure</span></figcaption>
+  </figure>
+
+  <h4>What each layer is really testing</h4>
+  <ul>
+    <li><strong>Layer 1 (machine).</strong> Whether your record contains the literal strings a
+    consultant types. &ldquo;M&amp;A&rdquo; is not &ldquo;Mergers and Acquisitions&rdquo; to a naive
+    keyword search; &ldquo;Summer Analyst&rdquo; is not &ldquo;Intern&rdquo;. Redundancy in your own
+    wording is free insurance &mdash; write both forms somewhere in your CV and profile.</li>
+    <li><strong>Layer 2 (CV scan).</strong> In finance recruitment the scan looks for a small number
+    of hard tokens: university and degree class, A-levels or equivalent (still routinely asked for at
+    junior level in the UK), employer names, exact dates, promotion velocity, and deal or project
+    names. Anything requiring interpretation costs the reader time they do not have, and time is
+    the thing they are minimising.</li>
+    <li><strong>Layer 3 (testing).</strong> For early careers this is genuinely mechanical &mdash;
+    numerical and verbal reasoning under time pressure, plus a personality instrument. These are
+    practisable and most candidates do not practise. For investment roles, expect technical
+    questions on accounting, valuation and LBO mechanics, and structured competency questions.</li>
+    <li><strong>Layer 4 (the call).</strong> The consultant is answering one question: <em>if I put
+    this person in front of my client, do I look good or stupid?</em> Everything they probe &mdash;
+    why you want this, what you actually did on that deal, what you earn, what you would accept,
+    when you can start &mdash; feeds that judgement.</li>
+    <li><strong>Layer 5 (calibration).</strong> Purely internal, and the reason strong candidates get
+    told nothing. A client with a known preference for a particular bank, or a partner who dislikes
+    career-changers, shapes the shortlist invisibly. You cannot win this layer; you can only be so
+    obviously strong that you are hard to leave out.</li>
+    <li><strong>Layer 6 (client CV review).</strong> Dartmouth&rsquo;s own Early Careers process
+    lists this explicitly as a step. Your CV is judged again, by someone with different priorities,
+    often against internal candidates you will never hear about.</li>
+  </ul>
+
+  <h2>4.5 &nbsp;Internal incentives &mdash; why consultants behave as they do</h2>
+  <p>The last piece of the back end is the human one. Recruitment desks run on a well-documented set
+  of incentives, and Dartmouth&rsquo;s own employee-review footprint is consistent with the industry
+  pattern. <span class="tag r">Reported &mdash; employee-review platforms and industry norms</span></p>
+
+  <table>
+    <tr><th style="width:40mm">Mechanism</th><th>How it works</th><th>Effect you will feel</th></tr>
+    <tr><td><strong>The 360 desk</strong></td><td>One consultant owns both business development (winning mandates from clients) and delivery (finding candidates). Some desks split into 180 roles &mdash; separate researchers and account managers.</td><td>Your consultant may be selling to clients half the week. Slow replies are often a diary problem, not a verdict on you.</td></tr>
+    <tr><td><strong>Commission</strong></td><td>Industry structures typically pay a percentage of billings above a threshold, often escalating in bands. Employee reviews of Dartmouth mention modest base salaries, and commission structures where meaningful upside is tied to originating the role yourself rather than merely filling it.</td><td>A consultant who <em>won</em> the mandate fights harder for it than one who inherited it. It is fair to ask, politely, &ldquo;is this your client relationship?&rdquo;</td></tr>
+    <tr><td><strong>Activity KPIs</strong></td><td>Calls, meetings, CV submissions, interviews arranged, client meetings booked &mdash; tracked weekly.</td><td>Some outreach exists to satisfy a metric. Not every message means a live, matched role. Ask directly: &ldquo;is there a specific mandate behind this?&rdquo;</td></tr>
+    <tr><td><strong>Competitions and incentive trips</strong></td><td>Dartmouth publicly advertises monthly, quarterly and annual competitions, prizes, lunch clubs and incentive trips, plus a long-term incentive plan.</td><td>Quarter-ends and year-ends are real. Pressure to close rises predictably in late March, June, September and December.</td></tr>
+    <tr><td><strong>Training and tenure</strong></td><td>Formalised training programmes, mentorship and a defined ladder from Associate to Managing Director. Reviews describe fast progression and strong L&amp;D alongside long hours and intensity; roughly two-thirds of reviewers would recommend the firm.</td><td>Junior consultants may be new to your sector. Seniority correlates with client access. Working with a Principal or Director on a specialist desk is materially different from working with a first-year Associate.</td></tr>
+  </table>
+
+  <div class="callout">
+    <div class="callout-title">Reading the incentives without cynicism</div>
+    <p>None of this makes headhunters adversaries. It makes them <em>predictable</em>. A consultant
+    who believes you are placeable, well-briefed, responsive and honest about your situation is being
+    handed the cheapest possible route to their own target. Every piece of advice in Part VI is
+    really the same advice: <strong>lower the cost of representing you.</strong></p>
+  </div>
+</section>
+
+<!-- ============ PART V ============ -->
+<section class="pb">
+  <div class="parthead">
+    <div class="pn">Part V</div>
+    <h1>LinkedIn: the machine that finds you</h1>
+    <p class="pd">Your colleagues were not discovered by intuition. They were returned by a database
+    query. This part explains the query &mdash; and how to be inside it.</p>
+  </div>
+
+  <h2>5.1 &nbsp;What LinkedIn Recruiter is, and what it can see</h2>
+  <p>LinkedIn Recruiter is a paid enterprise product, entirely distinct from the LinkedIn you use.
+  Its published capabilities: search across LinkedIn&rsquo;s full member base of roughly a billion
+  profiles, more than forty filters, Boolean keyword search, saved &ldquo;projects&rdquo; that
+  function as talent pipelines, bulk InMail with a monthly credit allowance, integration with the
+  agency&rsquo;s own applicant-tracking system, and &ldquo;Spotlights&rdquo; that re-rank results by
+  likelihood of engagement. <span class="tag r">Reported &mdash; LinkedIn product documentation and
+  vendor guides</span></p>
+
+  <p>Three properties of that product matter enormously and are widely misunderstood:</p>
+  <ol class="steps">
+    <li><strong>It is a structured search, not a feed.</strong> Recruiters are not scrolling and
+    spotting you. They are constructing a query &mdash; title, location, employer, seniority, years
+    of experience, skills, school &mdash; and receiving a ranked list. If your profile does not
+    satisfy the filters, you do not exist for that search. There is no partial credit.</li>
+    <li><strong>Roughly nine in ten Recruiter searches use the job-title field.</strong> Your current
+    and past <em>job titles</em> are the highest-leverage text on your entire profile. A brilliant
+    &ldquo;About&rdquo; section cannot rescue a title field that says &ldquo;Intern&rdquo; with no
+    context.</li>
+    <li><strong>InMail is metered.</strong> Recruiter seats come with a fixed monthly credit
+    allowance, and credits are typically returned when a candidate responds. That creates a real,
+    quantifiable incentive to message people likely to reply &mdash; which is exactly what Spotlights
+    are for, and why the &ldquo;open to work&rdquo; and recency signals in &sect;5.5 are worth more
+    than they appear.</li>
+  </ol>
+
+  <h2>5.2 &nbsp;The search funnel, and where you get eliminated</h2>
+  <figure>
+    <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" font-family="Liberation Sans, Arial, sans-serif">
+      <rect x="0" y="0" width="700" height="320" fill="#ffffff"/>
+      <g font-size="8.6">
+        <rect x="16" y="24" width="330" height="34" fill="#0f2a43"/>
+        <text x="26" y="45" fill="#ffffff" font-weight="bold" font-size="9.4">~1,000,000,000 LinkedIn members</text>
+        <text x="356" y="45" fill="#5b6572">the raw index</text>
+
+        <rect x="16" y="66" width="290" height="34" fill="#1d4a6b"/>
+        <text x="26" y="87" fill="#ffffff" font-weight="bold" font-size="9.4">Filter: location = London / UK</text>
+        <text x="316" y="87" fill="#5b6572">your Location field, and whether it is set at all</text>
+
+        <rect x="16" y="108" width="250" height="34" fill="#25636f"/>
+        <text x="26" y="129" fill="#ffffff" font-weight="bold" font-size="9.4">Filter: job title contains &#8220;Analyst&#8221; OR &#8220;Intern&#8221;…</text>
+        <text x="276" y="129" fill="#5b6572">your Title fields, current and past</text>
+
+        <rect x="16" y="150" width="205" height="34" fill="#3d7f8a"/>
+        <text x="26" y="171" fill="#ffffff" font-weight="bold" font-size="9.4">Filter: current company / industry</text>
+        <text x="231" y="171" fill="#5b6572">your Company must be the linked entity, not free text</text>
+
+        <rect x="16" y="192" width="160" height="34" fill="#4a8a92"/>
+        <text x="26" y="213" fill="#ffffff" font-weight="bold" font-size="9.4">Keywords: LBO, DCF, M&amp;A…</text>
+        <text x="186" y="213" fill="#5b6572">anywhere in your profile text and skills</text>
+
+        <rect x="16" y="234" width="120" height="34" fill="#8a6f2f"/>
+        <text x="26" y="255" fill="#ffffff" font-weight="bold" font-size="9.4">Spotlights re-rank</text>
+        <text x="146" y="255" fill="#5b6572">open to work · recently updated · follows the firm · connected to it</text>
+
+        <rect x="16" y="276" width="72" height="34" fill="#b3853a"/>
+        <text x="26" y="297" fill="#ffffff" font-weight="bold" font-size="9.4">InMail</text>
+        <text x="98" y="297" fill="#5b6572">the message that lands in your inbox — the only part you ever see</text>
+      </g>
+    </svg>
+    <figcaption><b>Figure 10 &mdash; From a billion profiles to your inbox.</b> Each band is a filter
+    you either pass or fail on a single profile field. The last two bands are where identical
+    candidates diverge. <span class="tag r">Reported mechanics</span></figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2>5.3 &nbsp;The Boolean strings they are running for you</h2>
+  <p>Below are reconstructions of the kind of searches a Dartmouth consultant would run for four
+  common mandates. They are illustrative, not exfiltrated &mdash; but they are built from the
+  documented filter set and from the screening criteria London buy-side recruiters are reported to
+  apply. Read them as a specification for your own profile.
+  <span class="tag i">Illustrative reconstructions</span></p>
+
+  <h4>A. Early Careers &mdash; graduate pipeline for a bank or fund</h4>
+  <div class="mono">FILTERS
+  Location:        Greater London  OR  United Kingdom
+  Schools:         [target university list]
+  Years experience: less than 1
+KEYWORDS / TITLE
+  ("Summer Analyst" OR "Summer Intern" OR "Spring Week" OR "Spring Insight"
+   OR "Off-Cycle Analyst" OR "Investment Banking Intern" OR "Penultimate Year")
+  AND ("Investment Banking" OR "M&A" OR "Private Equity" OR "Asset Management"
+       OR "Equity Research" OR "Leveraged Finance")
+  NOT ("Recruiter" OR "Talent Acquisition" OR "Career Coach")</div>
+  <p><em>What this punishes:</em> a profile whose current position reads only &ldquo;Intern&rdquo;
+  with no discipline, no firm linked, and no location set. <em>What it rewards:</em> the exact
+  vocabulary of the market &mdash; &ldquo;Summer Analyst&rdquo;, &ldquo;Off-Cycle&rdquo;,
+  &ldquo;Penultimate Year&rdquo; &mdash; written where a title filter can read it.</p>
+
+  <h4>B. Private Equity associate &mdash; the classic banker-to-buy-side search</h4>
+  <div class="mono">FILTERS
+  Location:        Greater London
+  Years in current company: 1 – 3
+  Current company: [list of 25–40 named banks and advisory boutiques]
+  Seniority:       Entry / Associate
+TITLE
+  ("Analyst" OR "Investment Banking Analyst" OR "Associate")
+KEYWORDS
+  ("LBO" OR "leveraged buyout" OR "sell-side" OR "buy-side" OR "due diligence"
+   OR "financial modelling" OR "valuation")
+  AND ("German" OR "French" OR "Italian" OR "Spanish" OR "Nordic")   ← the tiebreak filter</div>
+  <p><em>The language filter is not decorative.</em> London desks cover continental Europe, and
+  where two candidates are equal, the one with a useful second European language is reported to win
+  more or less every time. If you speak one, it belongs in the Languages section <em>and</em> in your
+  profile text, because the two are searched differently.</p>
+
+  <h4>C. Credit / direct lending</h4>
+  <div class="mono">TITLE ("Analyst" OR "Associate" OR "Vice President")
+KEYWORDS ("leveraged finance" OR "LevFin" OR "direct lending" OR "private credit"
+          OR "restructuring" OR "unitranche" OR "credit analysis" OR "covenant")
+FILTERS  Location: Greater London · Years experience: 1–6</div>
+
+  <h4>D. Finance into Funds &mdash; the qualified-accountant route</h4>
+  <div class="mono">KEYWORDS ("ACA" OR "ACCA" OR "CIMA" OR "Chartered Accountant")
+  AND ("financial services" OR "asset management" OR "private equity"
+       OR "fund accounting" OR "fund administration" OR "audit")
+FILTERS  Current company: [Big Four + fund administrators] · Location: London</div>
+
+  <div class="callout key">
+    <div class="callout-title">The general rule these all share</div>
+    <p>Recruiters search in <strong>the market&rsquo;s own vocabulary</strong>, not yours. Every
+    piece of jargon you replace with a plain-English paraphrase makes you invisible to one more
+    search. Write &ldquo;M&amp;A&rdquo; <em>and</em> &ldquo;Mergers &amp; Acquisitions&rdquo;;
+    &ldquo;LBO&rdquo; <em>and</em> &ldquo;leveraged buyout&rdquo;; &ldquo;Summer Analyst&rdquo;
+    <em>and</em> &ldquo;internship&rdquo;. Redundancy costs you nothing and buys you coverage across
+    differently-worded queries.</p>
+  </div>
+
+  <h2>5.4 &nbsp;Field-by-field profile rebuild</h2>
+  <p>Work through these in order. The first six are worth more than everything else combined,
+  because they are the fields the filters actually read.</p>
+
+  <table>
+    <tr><th style="width:30mm">Field</th><th style="width:14mm">Weight</th><th>What to do</th></tr>
+    <tr><td><strong>Current job title</strong></td><td>Critical</td><td>Use the market&rsquo;s exact title, not your firm&rsquo;s internal one. &ldquo;Summer Analyst, Investment Banking (M&amp;A)&rdquo; beats &ldquo;Intern&rdquo;. If your firm gave you an odd title, put the real one first and the internal one in the role description.</td></tr>
+    <tr><td><strong>Company</strong></td><td>Critical</td><td>Select the official LinkedIn company page from the dropdown so you are linked to the entity. A free-text employer name is invisible to the &ldquo;current company&rdquo; filter &mdash; one of the most common and most costly profile errors.</td></tr>
+    <tr><td><strong>Location</strong></td><td>Critical</td><td>Set it to the city where you want to work, not your parental home town. A blank or mismatched location fails the first filter in almost every search. If you are a student intending to work in London, say London.</td></tr>
+    <tr><td><strong>Headline</strong></td><td>Very high</td><td>220 characters, highest search weight of any free text, and the only line that travels with you into search results. Format: <em>Role/Trajectory · Firm or Field · Specialism · Distinguishing fact</em>. Front-load the keywords; mobile truncates.</td></tr>
+    <tr><td><strong>Dates &amp; employment type</strong></td><td>High</td><td>Exact months. &ldquo;Years of experience&rdquo; and &ldquo;years in current company&rdquo; are filters computed from your dates; vague dates put you in the wrong bucket or none at all.</td></tr>
+    <tr><td><strong>Education</strong></td><td>High</td><td>University selected from the dropdown (so the school filter finds you), degree, subject, dates, and your grade or predicted grade if it is competitive. UK finance recruiters still ask about A-levels at junior level &mdash; if yours are strong, they belong on the CV and are worth a line in the education entry.</td></tr>
+    <tr><td><strong>Skills</strong></td><td>High</td><td>A searchable keyword list. Fill it with market terms: Financial Modelling, Valuation, LBO Modelling, DCF, Due Diligence, Excel, PowerPoint, Bloomberg, Capital IQ, Python if genuine. Pin the five that matter most.</td></tr>
+    <tr><td><strong>About</strong></td><td>Medium</td><td>The first ~220 characters carry the weight. Two or three sentences: what you do, what you are building toward, what you want next. Then a short keyword-dense paragraph. No third-person prose, no manifesto.</td></tr>
+    <tr><td><strong>Role descriptions</strong></td><td>Medium</td><td>Three or four bullets per role, each with a verb, a specific artefact and a number. &ldquo;Built a three-statement model for a £120m carve-out&rdquo; not &ldquo;assisted the team with financial analysis&rdquo;.</td></tr>
+    <tr><td><strong>Languages</strong></td><td>Medium</td><td>Populate honestly with proficiency level. This is a genuine tiebreak filter on London desks covering Europe.</td></tr>
+    <tr><td><strong>Certifications</strong></td><td>Medium</td><td>CFA Level I candidate, ACA progress, financial-modelling certificates. Real signals of intent for career-changers.</td></tr>
+    <tr><td><strong>Photo &amp; banner</strong></td><td>Low for search, high for reply</td><td>No effect on whether you are returned; large effect on whether the consultant clicks and messages. A plain, well-lit, professional headshot is table stakes.</td></tr>
+    <tr><td><strong>Custom URL &amp; contact info</strong></td><td>Low</td><td>Clean vanity URL. Add an email address you actually check to your contact info &mdash; some consultants will email rather than spend an InMail credit.</td></tr>
+    <tr><td><strong>Recommendations</strong></td><td>Low</td><td>Two or three from managers who supervised real work. They are read at the click stage, not the search stage.</td></tr>
+  </table>
+
+  <h4>Headline formulas that work for someone in your position</h4>
+  <div class="mono">Penultimate-year student, targeting IB:
+  Penultimate Year Economics @ [University] · Incoming Summer Analyst, Investment Banking
+  @ [Firm] · M&A · Financial Modelling · Seeking 2027 Graduate Analyst roles
+
+Current intern, targeting a return offer plus options:
+  Summer Analyst, Investment Banking (M&A) @ [Firm] · Leveraged Finance & Valuation ·
+  Fluent German · London
+
+Graduate, targeting the buy-side in 18 months:
+  Investment Banking Analyst @ [Firm] · Sponsors / M&A · LBO & Financial Modelling ·
+  Interested in Private Equity & Private Credit · London</div>
+
+  <div class="callout warn">
+    <div class="callout-title">Three things not to do</div>
+    <p><strong>Do not keyword-stuff.</strong> A headline reading &ldquo;PE | IB | M&amp;A | LBO |
+    DCF | VC | HF | Finance | Analyst&rdquo; reads as desperate to the human who opens it, and the
+    human is the one who decides to message you. Keywords must sit inside real sentences.</p>
+    <p><strong>Do not claim titles you do not hold.</strong> Recruiters verify, clients verify, and
+    inflated deal involvement is the single most-cited reason a headhunter drops a candidate
+    permanently. Anything on your profile is fair game in an interview.</p>
+    <p><strong>Do not put &ldquo;#OpenToWork&rdquo; on your photo</strong> if you are currently
+    employed or interning. Use the recruiter-only setting instead &mdash; same signal to the people
+    who matter, no signal to your current employer.</p>
+  </div>
+
+  <h2>5.5 &nbsp;Spotlights: the second-order signals</h2>
+  <p>Spotlights are LinkedIn&rsquo;s way of telling a recruiter which of the two hundred people in
+  their result list are most likely to reply. They re-rank the list you are already in. Four of them
+  are directly actionable. <span class="tag c">Confirmed &mdash; LinkedIn Recruiter documentation</span></p>
+
+  <table>
+    <tr><th style="width:44mm">Spotlight</th><th>What triggers it</th><th style="width:62mm">Your move</th></tr>
+    <tr><td><strong>Open to Work</strong></td><td>You privately told LinkedIn you are open to hearing from recruiters, and shared your career interests with Recruiter users.</td><td>Turn it on, set to <em>recruiters only</em>. Fill in target titles, locations and start date &mdash; those feed the filters too. This is the highest-return single click on the platform.</td></tr>
+    <tr><td><strong>Active Talent</strong></td><td>Recent profile updates, a CV shared with recruiters, or unusually long tenure in a current role relative to peers.</td><td>Make a small, genuine profile edit every few weeks during an active search. Upload a CV where LinkedIn offers to store one for recruiters.</td></tr>
+    <tr><td><strong>Have Company Connections</strong></td><td>You are a first-degree connection of someone at the searching organisation.</td><td>Connect with Dartmouth consultants on the desks relevant to you &mdash; with a one-line note, not a bare request. This literally re-ranks you in their searches.</td></tr>
+    <tr><td><strong>Interested in Your Company</strong></td><td>You follow the company page, or you liked, shared or commented on its posts.</td><td>Follow Dartmouth Partners. Engage occasionally and substantively with their compensation reports and market posts. Low effort, real signal.</td></tr>
+    <tr><td><strong>Rediscovered Candidates</strong></td><td>Prior InMail, a saved project, a past application, or an existing record in the firm&rsquo;s ATS linked to Recruiter.</td><td>This is the payoff for registering properly and replying to old outreach. Once you are in their system, you resurface in every future search.</td></tr>
+    <tr><td><strong>Applicants / Internal</strong></td><td>Applied to a job posted through the project; or an existing employee flagged for internal mobility.</td><td>Applying to their live board puts you in the applicant spotlight for that mandate &mdash; a small but real boost.</td></tr>
+  </table>
+
+  <div class="callout do">
+    <div class="callout-title">The compounding play</div>
+    <p>Individually each spotlight is a nudge. Stacked, they are decisive. A candidate who is
+    <em>open to work (recruiters only)</em>, <em>recently active</em>, <em>connected to two Dartmouth
+    consultants</em>, <em>following the company page</em> and <em>already in their ATS from a
+    registration six months ago</em> will surface at or near the top of a result list containing
+    hundreds of technically-equivalent people. That is not luck. That is five deliberate settings.</p>
+  </div>
+</section>
+
+<section class="pb">
+  <h2>5.6 &nbsp;Before and after</h2>
+  <p>The same person, the same experience, two profiles. The left-hand version appears in perhaps
+  one of the four searches in &sect;5.3. The right-hand version appears in all four and ranks near
+  the top of two.</p>
+
+  <table>
+    <tr><th style="width:26mm">Field</th><th style="width:36%">Typical (invisible)</th><th>Rebuilt (findable)</th></tr>
+    <tr><td>Headline</td><td><em>&ldquo;Student at University of Nottingham | Aspiring finance professional&rdquo;</em></td><td><em>&ldquo;Penultimate Year Economics @ Nottingham · Summer Analyst, Investment Banking (M&amp;A) @ [Firm] · Financial Modelling &amp; Valuation · Fluent French · London&rdquo;</em></td></tr>
+    <tr><td>Current role title</td><td>&ldquo;Intern&rdquo;</td><td>&ldquo;Summer Analyst &mdash; Investment Banking, M&amp;A&rdquo;</td></tr>
+    <tr><td>Company</td><td>Typed as free text, unlinked</td><td>Selected from the dropdown, logo showing, so the company filter finds it</td></tr>
+    <tr><td>Location</td><td>Blank, or home town</td><td>London, United Kingdom</td></tr>
+    <tr><td>Dates</td><td>&ldquo;2026&rdquo;</td><td>&ldquo;June 2026 &ndash; August 2026&rdquo;, employment type: Internship</td></tr>
+    <tr><td>Description</td><td>&ldquo;Gained exposure to various aspects of the business and developed my skills.&rdquo;</td><td>&ldquo;Built a three-statement operating model and DCF for a £200m consumer target; drafted two sections of a sell-side information memorandum; ran comparable-company and precedent-transaction analysis across 14 comparables.&rdquo;</td></tr>
+    <tr><td>Skills</td><td>&ldquo;Teamwork, Communication, Microsoft Office&rdquo;</td><td>&ldquo;Financial Modelling · Valuation · DCF · LBO Modelling · Comparable Company Analysis · Due Diligence · Excel · Capital IQ&rdquo;</td></tr>
+    <tr><td>Education</td><td>University typed as text, no grade</td><td>Selected from dropdown; BSc Economics; predicted First; A-levels A*A*A listed on CV</td></tr>
+    <tr><td>Settings</td><td>Nothing enabled</td><td>Open to Work (recruiters only) with target titles and London set; CV stored for recruiters; following Dartmouth Partners; connected to two consultants on relevant desks</td></tr>
+  </table>
+
+  <div class="callout">
+    <div class="callout-title">A calibration point</div>
+    <p>None of this fabricates anything. Every entry on the right is the same summer, described in
+    the vocabulary the search engine and the reader both use. The gap between the two columns is not
+    experience. It is <strong>legibility</strong> &mdash; and legibility is the product recruiters
+    are selling to their clients.</p>
+  </div>
+</section>
+
+<!-- ============ PART VI ============ -->
+<section class="pb">
+  <div class="parthead">
+    <div class="pn">Part VI</div>
+    <h1>The candidate playbook</h1>
+    <p class="pd">Everything above turned into an ordered sequence of things to do, in the order to
+    do them.</p>
+  </div>
+
+  <h2>6.1 &nbsp;Getting into the database on purpose</h2>
+  <p>Being findable on LinkedIn gets you into channel #2. Being <em>in the database</em> gets you
+  into channel #1 &mdash; the one they search first, and the one that persists whether or not a
+  particular consultant ever sees your profile. There are four doors, and they are not equivalent.</p>
+
+  <ol class="steps">
+    <li><strong>Register your CV through their portal.</strong> Dartmouth operates a
+    &ldquo;register your CV&rdquo; route through their AppTracker system. This creates the record
+    that stages 4 and 12 of the pipeline depend on. Upload a clean, one-page, PDF CV named
+    <span class="mono" style="display:inline;padding:0 1mm;border:0;background:#f2f4f7">Firstname-Lastname-CV.pdf</span>.
+    Do this even when you are not looking &mdash; especially when you are not looking.</li>
+
+    <li><strong>Apply to one genuinely relevant live role.</strong> Their board carries a few dozen
+    open roles across sectors and cities. An application attaches you to a specific consultant and a
+    specific mandate, and puts you in the Applicant spotlight. Applying to eight unrelated roles does
+    the opposite: it tags you as unfocused.</li>
+
+    <li><strong>Email the right desk directly, once, well.</strong> Sector inboxes are published
+    (Appendix A). A good email is six lines: who you are and where, what you have done in one
+    sentence with a number in it, what you are targeting and by when, your salary reality if
+    relevant, CV attached, and a specific ask. Do not attach a cover letter. Do not email eleven desks.</li>
+
+    <li><strong>Turn up to something.</strong> Events and campus programmes are candidate-acquisition
+    channels &mdash; which is precisely why attending puts you in the system with a human association
+    attached. See &sect;6.5.</li>
+  </ol>
+
+  <div class="callout do">
+    <div class="callout-title">Template: the cold email that gets a reply</div>
+    <div class="mono">Subject: Summer Analyst (IB, M&A) at [Firm] — 2027 graduate roles, London
+
+Hi [Name],
+
+I'm a penultimate-year Economics student at [University], currently a Summer
+Analyst in Investment Banking (M&A) at [Firm], where I've built models on two
+live sell-side processes. Predicted First; A*A*A at A-level; fluent French.
+
+I'm targeting 2027 graduate analyst roles in M&A or leveraged finance in
+London, and would eventually like to move to the buy-side. CV attached.
+
+Could I have 15 minutes at some point to understand which of those routes you
+see most demand in? Happy to work around your diary.
+
+[Name] · [phone] · [LinkedIn URL]</div>
+    <p>Why it works: it is short, it is specific, it contains every token a consultant needs to
+    categorise you in ten seconds (stage, firm, discipline, grades, language, target, timing,
+    geography), and the ask is cheap to say yes to.</p>
+  </div>
+
+  <h2>6.2 &nbsp;The screening call: what is being scored</h2>
+  <p>The twenty to forty-five minute call &mdash; whether it is framed as a &ldquo;quick chat&rdquo;,
+  a coffee or a formal registration meeting &mdash; is the most consequential conversation you will
+  have with any agency, because the notes taken during it define how you are represented for years.
+  Reported practice across London buy-side headhunters is consistent: this is a first-round interview
+  wearing casual clothes. <span class="tag r">Reported</span></p>
+
+  <table>
+    <tr><th style="width:38mm">What they ask</th><th>What they are actually scoring</th></tr>
+    <tr><td>&ldquo;Walk me through your CV.&rdquo;</td><td>Can you structure ninety seconds under mild pressure? Bankers who ramble here get marked down instantly, because clients will hear the same ramble.</td></tr>
+    <tr><td>&ldquo;Tell me about a deal you worked on.&rdquo;</td><td>Ownership and depth. What <em>you</em> built, the size, the sector, the outcome, the mechanics. Vagueness reads as either inexperience or exaggeration; both are fatal.</td></tr>
+    <tr><td>&ldquo;Why do you want to move / why this sector?&rdquo;</td><td>Whether your story survives a partner asking the same question. &ldquo;I want more ownership and a longer-term view on assets&rdquo; is a story. &ldquo;PE is the natural next step&rdquo; is not.</td></tr>
+    <tr><td>&ldquo;What are you earning, and what are you looking for?&rdquo;</td><td>Placeability. If your expectation is outside the client&rsquo;s band, you are unsellable regardless of quality. Give a real number and a real range.</td></tr>
+    <tr><td>&ldquo;What else are you looking at?&rdquo;</td><td>Two things: competitive urgency, and whether another agency already owns an introduction to a fund they were about to submit you to. Answer honestly.</td></tr>
+    <tr><td>&ldquo;What sort of fund appeals &mdash; large-cap, mid-market, growth?&rdquo;</td><td>Market literacy. Knowing the difference, and having a reasoned preference, separates you from the majority who say &ldquo;I&rsquo;m open to anything.&rdquo;</td></tr>
+    <tr><td>&ldquo;When could you start?&rdquo;</td><td>Notice period, visa status, exam commitments, and whether you are a real candidate or a browser.</td></tr>
+    <tr><td>Anything about grades, A-levels, university</td><td>UK finance screening still uses these as hard filters at junior level, and the consultant needs to know whether you clear each client&rsquo;s bar before spending a submission on you.</td></tr>
+  </table>
+
+  <div class="callout key">
+    <div class="callout-title">The five things to say in every screening call</div>
+    <ol style="margin:0 0 0 4mm;padding-left:3mm">
+      <li>A crisp ninety-second narrative, rehearsed out loud, ending in what you want next.</li>
+      <li>One deal or project described with a number, your specific contribution, and what you learned.</li>
+      <li>A reasoned preference &mdash; a fund size, a sector, a geography &mdash; with a reason attached.</li>
+      <li>Your true compensation and your true minimum, stated without embarrassment.</li>
+      <li>An honest map of your other processes, and a direct question: &ldquo;based on what I&rsquo;ve told you, where do you see me being competitive, and what should I fix?&rdquo; Consultants answer that question properly, and it is worth more than any online guide.</li>
+    </ol>
+  </div>
+
+  <h2>6.3 &nbsp;Tiering &mdash; the uncomfortable truth</h2>
+  <p>Headhunters sort candidates. Not formally, not published, but consistently: the strongest are
+  shown the best mandates first, and everyone else is shown what remains. Reported practice in London
+  is that this sorting happens fast, largely on the first call, and that it is durable.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" font-family="Liberation Sans, Arial, sans-serif">
+      <rect x="0" y="0" width="700" height="300" fill="#ffffff"/>
+      <polygon points="250,16 320,84 180,84" fill="#b3853a"/>
+      <polygon points="178,88 322,88 370,156 130,156" fill="#0f2a43"/>
+      <polygon points="128,160 372,160 420,228 80,228" fill="#25636f"/>
+      <polygon points="78,232 422,232 460,288 40,288" fill="#c1cfda"/>
+      <g text-anchor="middle" fill="#ffffff" font-size="9">
+        <text x="250" y="58" font-weight="bold" font-size="10">TIER 1</text>
+        <text x="250" y="120" font-weight="bold" font-size="10">TIER 2</text>
+        <text x="250" y="192" font-weight="bold" font-size="10">TIER 3</text>
+        <text x="250" y="264" font-weight="bold" font-size="10" fill="#0f2a43">TIER 4</text>
+      </g>
+      <g font-size="8" fill="#25313f">
+        <text x="452" y="52" font-weight="bold" fill="#b3853a">Called first, before the mandate is public</text>
+        <text x="452" y="65">Top bank or fund, strong academics, clean progression,</text>
+        <text x="452" y="77">articulate, decisive, realistic on comp, responsive.</text>
+
+        <text x="452" y="112" font-weight="bold" fill="#0f2a43">Submitted when Tier 1 declines or falls out</text>
+        <text x="452" y="125">Strong but with one friction: a less-known firm, a gap,</text>
+        <text x="452" y="137">a stretch in sector, or an unclear story.</text>
+
+        <text x="452" y="184" font-weight="bold" fill="#25636f">Kept in the database; contacted when a fit appears</text>
+        <text x="452" y="197">Credible, but not currently matched to a live mandate.</text>
+        <text x="452" y="209">Most people are here most of the time. This is normal.</text>
+
+        <text x="452" y="256" font-weight="bold" fill="#5b6572">Not actively represented</text>
+        <text x="452" y="269">Unresponsive, unrealistic on comp, inconsistent story,</text>
+        <text x="452" y="281">or previously embarrassed the consultant in front of a client.</text>
+      </g>
+      <line x1="440" y1="30" x2="440" y2="288" stroke="#dde2e8"/>
+    </svg>
+    <figcaption><b>Figure 11 &mdash; How you are sorted, and what moves you.</b> Tier is not a
+    judgement of your worth; it is a prediction of your placement probability against
+    <em>currently open</em> mandates. It changes when your circumstances change &mdash; which is why
+    telling them about a promotion matters. <span class="tag i">Inferred model, consistent with reported practice</span></figcaption>
+  </figure>
+
+  <p>Three things actually move you up a tier, and none of them is charm:</p>
+  <ul>
+    <li><strong>A change in your objective facts</strong> &mdash; promotion, a marquee deal closing,
+    a qualification passed, a language reaching fluency, a move to a better-regarded firm. Tell them
+    when it happens; records go stale silently.</li>
+    <li><strong>Demonstrated market realism.</strong> Candidates who know what they are worth and
+    what they will accept are cheap to place. Candidates chasing a number the market does not pay are
+    expensive, and get quietly deprioritised without ever being told why.</li>
+    <li><strong>Reliability.</strong> Turning up, replying fast, not pulling out late, not
+    renegotiating after accepting. One late withdrawal costs a consultant a client relationship, and
+    they remember for years.</li>
+  </ul>
+</section>
+
+<section class="pb">
+  <h2>6.4 &nbsp;The London hiring calendar</h2>
+  <p>London is not New York. US private-equity &ldquo;on-cycle&rdquo; recruiting compresses an entire
+  year of associate hiring into a frantic few days, driven by headhunter datasheets and pre-scheduled
+  interview weekends. London does not work that way. Buy-side hiring here is reported to be
+  <strong>off-cycle</strong>: mandates open when someone resigns or a fund raises, processes run from
+  three days to six weeks, and interviews typically happen three to four months before a start date.
+  There are dense windows rather than a single starting gun. <span class="tag r">Reported</span></p>
+
+  <figure>
+    <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" font-family="Liberation Sans, Arial, sans-serif">
+      <rect x="0" y="0" width="700" height="300" fill="#ffffff"/>
+      <g font-size="8.2" fill="#5b6572" text-anchor="middle">
+        <text x="196" y="34">JAN</text><text x="239" y="34">FEB</text><text x="282" y="34">MAR</text><text x="325" y="34">APR</text>
+        <text x="368" y="34">MAY</text><text x="411" y="34">JUN</text><text x="454" y="34">JUL</text><text x="497" y="34">AUG</text>
+        <text x="540" y="34">SEP</text><text x="583" y="34">OCT</text><text x="625" y="34">NOV</text><text x="668" y="34">DEC</text>
+      </g>
+      <g stroke="#eef2f6">
+        <line x1="175" y1="40" x2="175" y2="272"/><line x1="217.9" y1="40" x2="217.9" y2="272"/><line x1="260.8" y1="40" x2="260.8" y2="272"/>
+        <line x1="303.7" y1="40" x2="303.7" y2="272"/><line x1="346.6" y1="40" x2="346.6" y2="272"/><line x1="389.5" y1="40" x2="389.5" y2="272"/>
+        <line x1="432.4" y1="40" x2="432.4" y2="272"/><line x1="475.3" y1="40" x2="475.3" y2="272"/><line x1="518.2" y1="40" x2="518.2" y2="272"/>
+        <line x1="561.1" y1="40" x2="561.1" y2="272"/><line x1="604" y1="40" x2="604" y2="272"/><line x1="646.9" y1="40" x2="646.9" y2="272"/><line x1="689.8" y1="40" x2="689.8" y2="272"/>
+      </g>
+      <g font-size="8.4" fill="#25313f">
+        <text x="10" y="58">Spring week / insight apps</text>
+        <text x="10" y="86">Summer internship apps</text>
+        <text x="10" y="114">Graduate scheme apps</text>
+        <text x="10" y="142">Buy-side window A</text>
+        <text x="10" y="170">Buy-side window B</text>
+        <text x="10" y="198">Bonus paid → resignations</text>
+        <text x="10" y="226">Newly-qualified ACA exits</text>
+        <text x="10" y="254">Market goes quiet</text>
+      </g>
+      <g>
+        <rect x="475.3" y="46" width="214.5" height="16" fill="#b3853a"/>
+        <rect x="475.3" y="74" width="214.5" height="16" fill="#b3853a"/><rect x="175" y="74" width="42.9" height="16" fill="#b3853a"/>
+        <rect x="518.2" y="102" width="171.6" height="16" fill="#c79a52"/><rect x="175" y="102" width="42.9" height="16" fill="#c79a52"/>
+        <rect x="518.2" y="130" width="141.6" height="16" fill="#0f2a43"/>
+        <rect x="175" y="158" width="171.6" height="16" fill="#0f2a43"/>
+        <rect x="217.9" y="186" width="128.7" height="16" fill="#25636f"/>
+        <rect x="196.5" y="214" width="64.3" height="16" fill="#4a8a92"/><rect x="518.2" y="214" width="85.8" height="16" fill="#4a8a92"/>
+        <rect x="453.9" y="242" width="64.3" height="16" fill="#c1cfda"/><rect x="672.6" y="242" width="17.2" height="16" fill="#c1cfda"/>
+      </g>
+      <g font-size="7.6" fill="#ffffff">
+        <text x="484" y="58">open Aug&#8211;Dec, rolling &#8212; apply in the first fortnight</text>
+        <text x="484" y="86">deadlines cluster Oct&#8211;Jan; many close early when full</text>
+        <text x="527" y="114">final-year and post-graduation schemes</text>
+        <text x="527" y="142">Sept → early December</text>
+        <text x="184" y="170">January → April</text>
+        <text x="226" y="198">the single busiest movement period</text>
+        <text x="205" y="226">Jan intake</text><text x="527" y="226">Sept/Oct intake</text>
+      </g>
+      <text x="460" y="254" font-size="7.6" fill="#5b6572">mid-Jul → Aug</text><text x="660" y="270" font-size="7.6" fill="#5b6572" text-anchor="middle">late Dec</text>
+      <text x="10" y="288" font-size="7.8" fill="#8a929c">Indicative. Off-cycle mandates open in every month of the year; these are the periods when volume is highest and competition for consultants&#8217; attention is fiercest.</text>
+    </svg>
+    <figcaption><b>Figure 12 &mdash; The rhythm of the London year.</b> The strategic implication:
+    make contact in the <em>trough</em> (May&ndash;July, or late December) when consultants have time
+    to talk properly, so that you are already a known, tiered record when the peak arrives.
+    <span class="tag r">Reported windows</span> <span class="tag i">Interpretation</span></figcaption>
+  </figure>
+
+  <h2>6.5 &nbsp;Events, foundations and side doors</h2>
+  <p>Dartmouth runs a genuine and unusually large programme of candidate-facing activity. Each item
+  is both a real service and a front door into the database. Use them in that spirit.
+  <span class="tag c">Confirmed</span></p>
+
+  <table>
+    <tr><th style="width:46mm">Programme</th><th>What it is</th><th style="width:44mm">Who should use it</th></tr>
+    <tr><td><strong>Women in Private Equity</strong></td><td>An industry-first event launched in 2014, now a global breakfast series aimed at women in the early stages of their careers &mdash; typically up to five years&rsquo; experience &mdash; or looking to move into PE. Recent editions have run across London, Frankfurt, Milan and Madrid, with a broader Women in Private Markets series alongside.</td><td>Early-career women targeting the buy-side. Direct access to PE professionals plus the consultants who staff those funds.</td></tr>
+    <tr><td><strong>Classroom to Boardroom Foundation</strong></td><td>Their charitable arm, focused on socio-economic access: insight days with employers, CV and cover-letter sessions, realistic interview practice, and a student mentoring network.</td><td>Students, particularly those without family or school networks in finance. Genuine value, and it puts a human association on your record.</td></tr>
+    <tr><td><strong>Campus programmes</strong></td><td>Partnerships with universities; the Early Careers team engages with students on campus annually, feeding the buy-side desks later.</td><td>Anyone at a partner university &mdash; find out whether yours is one.</td></tr>
+    <tr><td><strong>Work experience</strong></td><td>Programmes from one day to two weeks combining workshops, insight sessions and on-the-job learning, across start-ups, corporates and financial services.</td><td>Students with no formal internship yet. Low barrier, real signal.</td></tr>
+    <tr><td><strong>Compensation reports</strong></td><td>Published research across PE, credit, infrastructure, equities and multi-asset, investment banking and early careers &mdash; the Early Careers 2025 edition drew on 348+ candidates and clients; the equities guide on 600+ investment professionals.</td><td>Everyone. Download them: they are free, specific, and they let you negotiate and target with real numbers. Downloading also puts you in the system, which is the point &mdash; and is fine.</td></tr>
+  </table>
+
+  <h2>6.6 &nbsp;Running a multi-agency strategy without getting burned</h2>
+  <p>Dartmouth holds some mandates. It does not hold most. London buy-side coverage is split across a
+  cluster of firms, allocated fund by fund, and reshuffled regularly as relationships and consultants
+  move. Practitioner forums are the only public source for who covers whom, and they are
+  crowd-sourced, partial and quickly dated &mdash; treat any coverage list, including the one below,
+  as a starting hypothesis to verify, never as fact. <span class="tag r">Reported, unverified,
+  time-sensitive</span></p>
+
+  <table>
+    <tr><th style="width:38mm">Firm</th><th>Reported positioning in London</th></tr>
+    <tr><td><strong>Dartmouth Partners</strong></td><td>Strong in investment banking and increasingly in buy-side coverage; broad across credit, CFO, IR and early careers. Reported to work with names including CD&amp;R, Bridgepoint, Nordic Capital, Advent, Investcorp, PAI, Terra Firma and Searchlight at various times. Uniquely deep at the early-career end.</td></tr>
+    <tr><td>KEA Consultants</td><td>Consistently named alongside Dartmouth and Blackwood as handling the bulk of mega-fund PE hiring in London.</td></tr>
+    <tr><td>Blackwood</td><td>Buy-side focused; frequently named for large-cap PE mandates.</td></tr>
+    <tr><td>PER (Private Equity Recruitment)</td><td>Long-established buy-side specialist across PE and infrastructure.</td></tr>
+    <tr><td>Walker Hamill</td><td>Long-standing PE and PE-backed finance recruiter.</td></tr>
+    <tr><td>Arkesden Partners</td><td>Buy-side and alternatives search: PE, credit, infrastructure, energy, real estate and renewables, with mandates across Europe, North America and the Middle East.</td></tr>
+    <tr><td>Altus Partners</td><td>Buy-side and private markets search.</td></tr>
+  </table>
+
+  <div class="callout warn">
+    <div class="callout-title">The rules of engagement</div>
+    <ul style="margin:0">
+      <li><strong>Work with three to five firms, not one and not fifteen.</strong> Below three you
+      miss most of the market; above five you lose control of who is submitting you where.</li>
+      <li><strong>Never let anyone submit you without naming the client first.</strong> Say this once,
+      politely, at the start: <em>&ldquo;happy to work together &mdash; I just need to approve each
+      submission by name before it goes.&rdquo;</em> This is your right, it is regulatory good
+      practice, and it prevents the single worst outcome in agency recruitment.</li>
+      <li><strong>Duplicate submissions kill candidacies.</strong> If two agencies send you to the
+      same fund, the fund may drop you entirely rather than adjudicate a fee dispute. Keep a simple
+      spreadsheet: fund, agency, date, stage.</li>
+      <li><strong>Do not badmouth other agencies</strong> to a consultant, and do not repeat what one
+      told you about a client&rsquo;s process to another. The market is small and everyone talks.</li>
+      <li><strong>Apply directly where you can.</strong> A direct application costs the fund nothing
+      and is often welcomed &mdash; but if an agency has already introduced you, the introduction
+      usually stands for a contractual period. Sequence matters: decide, then act.</li>
+    </ul>
+  </div>
+
+  <h2>6.7 &nbsp;Twelve mistakes that get you quietly deprioritised</h2>
+  <ol class="steps">
+    <li><strong>Treating the first call as informal.</strong> It is the interview that sets your tier.</li>
+    <li><strong>Saying &ldquo;I&rsquo;m open to anything.&rdquo;</strong> It reads as no thesis, and a candidate with no thesis is hard to pitch.</li>
+    <li><strong>Inflating deal involvement.</strong> Verified constantly; unrecoverable when caught.</li>
+    <li><strong>Being vague about compensation.</strong> Makes you unpriceable, which makes you unsubmittable.</li>
+    <li><strong>Slow replies.</strong> In a contingent race, a 48-hour reply can cost you the process outright.</li>
+    <li><strong>Going silent mid-process.</strong> The single fastest route to Tier 4.</li>
+    <li><strong>Withdrawing after a final round, or accepting then reneging.</strong> Costs the consultant a client; you will not be represented again.</li>
+    <li><strong>Using a counter-offer as leverage.</strong> Legitimate to accept a counter-offer &mdash; but say so early. Discovering it at the offer stage burns the relationship.</li>
+    <li><strong>Emailing every desk with the same message.</strong> Marks you as unfocused before anyone has read your CV.</li>
+    <li><strong>A CV that requires interpretation.</strong> One page at junior level, exact dates, grades, deal names, numbers.</li>
+    <li><strong>Never updating them.</strong> A record that says &ldquo;first-year analyst, 2024&rdquo; in 2026 will be searched as a first-year analyst.</li>
+    <li><strong>Expecting them to work for you.</strong> They work for the client. Your leverage is being the easiest strong candidate to sell &mdash; not appealing to loyalty that structurally does not exist.</li>
+  </ol>
+</section>
+
+<!-- ============ PART VII ============ -->
+<section class="pb">
+  <div class="parthead">
+    <div class="pn">Part VII</div>
+    <h1>Evidence, caveats and sources</h1>
+    <p class="pd">What is solid, what is second-hand, and what is reconstruction &mdash; so you can
+    weigh each claim yourself.</p>
+  </div>
+
+  <h2>7.1 &nbsp;Confidence register</h2>
+  <table>
+    <tr><th style="width:52mm">Claim area</th><th style="width:22mm">Confidence</th><th>Basis and caveat</th></tr>
+    <tr><td>Corporate structure, ownership, offices, leadership, sectors, published process steps, events, foundation, compensation reports</td><td><span class="tag c">Confirmed</span></td><td>Dartmouth&rsquo;s and Kernel&rsquo;s own published materials plus Companies House. Marketing language, but factual on structure.</td></tr>
+    <tr><td>Data collection, sources, sharing, retention, candidate rights, ATS name</td><td><span class="tag c">Confirmed</span></td><td>Dartmouth&rsquo;s published privacy policy &mdash; a legally-drafted document, and the most reliable window into their back end.</td></tr>
+    <tr><td>Prohibition on charging candidates; regulator</td><td><span class="tag c">Confirmed</span></td><td>Employment Agencies Act 1973; Conduct Regulations 2003; government guidance.</td></tr>
+    <tr><td>LinkedIn Recruiter filters, Boolean, Spotlights, InMail mechanics</td><td><span class="tag c">Confirmed</span> / <span class="tag r">Reported</span></td><td>LinkedIn&rsquo;s own Recruiter help documentation for Spotlights; vendor guides for filter counts and usage statistics, which are directionally reliable but not audited.</td></tr>
+    <tr><td>Fee percentages, rebate periods, payment terms</td><td><span class="tag r">Reported</span></td><td>UK market norms from multiple independent recruitment-industry sources. Dartmouth&rsquo;s actual rates are confidential and client-specific.</td></tr>
+    <tr><td>Fund coverage lists; candidate service quality; internal culture and commission commentary</td><td><span class="tag r">Reported</span></td><td>Practitioner forums and employee-review platforms. Anonymous, self-selecting, frequently out of date, and known to skew negative. Directionally useful, individually unreliable.</td></tr>
+    <tr><td>Rankings and awards</td><td><span class="tag r">Reported</span></td><td>Third-party lists with their own methodologies and, in some cases, commercial dimensions.</td></tr>
+    <tr><td>Revenue and headcount from data aggregators</td><td><span class="tag r">Reported</span></td><td>Mutually contradictory. Use Companies House filings if a real figure matters to you.</td></tr>
+    <tr><td>Desk economics, funnel ratios, tiering model, sourcing channel mix, Boolean reconstructions, screening-layer detail</td><td><span class="tag i">Inferred</span></td><td>Built from documented industry structure and economics, not from internal Dartmouth data. Reliable as a model of behaviour; not a claim about specific internal policy.</td></tr>
+  </table>
+
+  <div class="callout warn">
+    <div class="callout-title">Two honest limitations</div>
+    <p><strong>Forum evidence cuts both ways.</strong> Candidate forums contain both praise and
+    sharp criticism of Dartmouth &mdash; disorganised processes, patchy feedback &mdash; as they do
+    for every large agency. People post when angry far more than when satisfied. Do not form a view
+    of an individual consultant from an anonymous post written three years ago.</p>
+    <p><strong>Coverage maps decay fast.</strong> Which agency covers which fund changes as
+    consultants move firms, often taking relationships with them. Anything you read about coverage,
+    here or elsewhere, should be re-verified by asking the consultant directly: <em>&ldquo;which
+    funds do you currently work with at this level?&rdquo;</em> They will usually answer.</p>
+  </div>
+
+  <h2>7.2 &nbsp;Source list</h2>
+  <h4>Primary &mdash; Dartmouth Partners and Kernel Global</h4>
+  <p class="src">
+  dartmouthpartners.com &mdash; About us · FAQs · Sectors index · Private Equity · Early Careers ·
+  Early Careers Candidates · Finance into Funds · Meet the team · Current Roles (job board) ·
+  Women in Private Equity · Classroom to Boardroom Foundation · Diversity · Privacy Policy ·
+  Early Careers Compensation Report 2025 · 2025 Credit Compensation Report · Infrastructure
+  Compensation Report 2025 · Equities and Multi-Asset Compensation Guide · Investment Banking
+  Compensation Report · blog posts on the Three Hills investment and Sunday Times ranking.<br>
+  kernel-global.com &mdash; group overview, Dartmouth Partners brand page, leadership pages,
+  FT1000 announcement. careers.kernel-global.com &mdash; internal careers and incentives.
+  </p>
+
+  <h4>Public records and legislation</h4>
+  <p class="src">
+  Companies House &mdash; Dartmouth Partners Limited, company no. 05974472 (registered office, SIC
+  code, incorporation date, filing history). ·
+  Employment Agencies Act 1973. ·
+  The Conduct of Employment Agencies and Employment Businesses Regulations 2003 (SI 2003/3319),
+  and GOV.UK guidance &ldquo;Overview of the Conduct Regulations 2003&rdquo;. ·
+  UK GDPR / Data Protection Act 2018 and ICO guidance on subject access.
+  </p>
+
+  <h4>Third-party reporting</h4>
+  <p class="src">
+  Three Hills Capital Partners investment announcement (March 2025). ·
+  Houlihan Lokey transaction note on Kernel. ·
+  Sunday Times 100 fastest-growing private companies. ·
+  Financial Times UK Leading Recruiters and FT1000 rankings. ·
+  eFinancialCareers Ideal Recruiter 2024&ndash;25 rankings. ·
+  Glassdoor company, salary and review pages for Dartmouth Partners. ·
+  Mergers &amp; Inquisitions, &ldquo;London Private Equity Recruiting: How to Win Offers&rdquo;. ·
+  Financial Edge, &ldquo;Guide to Private Equity: Headhunters&rdquo;. ·
+  Wall Street Oasis forum threads on London headhunter coverage and candidate experience. ·
+  LinkedIn Talent Solutions product pages and Recruiter Help documentation on Spotlights and Boolean
+  search. · UK recruitment-industry fee surveys and agency-fee guides (2026).
+  </p>
+
+  <div class="callout">
+    <div class="callout-title">How to keep this current</div>
+    <p>Three checks, twice a year, will keep everything in this guide accurate for you personally:
+    re-read Dartmouth&rsquo;s <em>Meet the team</em> page to see who now runs your desk; download
+    whichever compensation report covers your target sector; and ask any consultant you speak to
+    which funds they are currently mandated on. Those three inputs beat any static coverage list.</p>
+  </div>
+</section>
+
+<!-- ============ APPENDICES ============ -->
+<section class="pb">
+  <h1>Appendix A &mdash; Contact directory</h1>
+  <table>
+    <tr><th style="width:44mm">Route</th><th>Detail</th></tr>
+    <tr><td>Head office</td><td>125 London Wall, London EC2Y 5AS &mdash; +44 (0)20 3696 0700</td></tr>
+    <tr><td>General enquiries</td><td>info@dartmouthpartners.com</td></tr>
+    <tr><td><strong>Early Careers desk</strong></td><td>earlycareers@dartmouthpartners.com &mdash; <strong>your registration point as a student or intern</strong></td></tr>
+    <tr><td>Private Equity desk</td><td>privateequity@dartmouthpartners.com</td></tr>
+    <tr><td>Finance into Funds desk</td><td>fundfinance@dartmouthpartners.com</td></tr>
+    <tr><td>Other desks</td><td>Each sector page on dartmouthpartners.com publishes its own inbox and names its consultants. Read the page and write to the desk, not the switchboard. Do not guess addresses.</td></tr>
+    <tr><td>Register your CV</td><td>The &ldquo;register your CV&rdquo; form linked from their candidate pages, hosted on their AppTracker system (trkr.app). This is the action that creates your database record.</td></tr>
+    <tr><td>Live roles</td><td>dartmouthpartners.com/jobs &mdash; filterable by sector, location, work type and salary. A US-focused board sits at /us/jobs.</td></tr>
+    <tr><td>Data protection</td><td>privacy@dartmouthpartners.com or privacy@kernel-global.com; postal: Data Protection, Dartmouth Partners Limited, 125 London Wall, London EC2Y 5AS</td></tr>
+    <tr><td>Other offices</td><td>New York (opened 2021), Charlotte NC (2023), Hong Kong</td></tr>
+    <tr><td>Group</td><td>kernel-global.com &mdash; Kernel Global, parent of Dartmouth Partners, Pure Search and Catalyst Partners</td></tr>
+  </table>
+
+  <h1 class="pb">Appendix B &mdash; LinkedIn audit checklist</h1>
+  <p class="lead">Print this. Open your profile. Work down the list. Anything unticked is a search you
+  are currently invisible to.</p>
+
+  <h4>Findability &mdash; the filter fields</h4>
+  <ul class="check">
+    <li>Location is set to the city I want to work in, not my home town</li>
+    <li>Current employer is selected from the dropdown and shows the company logo</li>
+    <li>Current job title uses the market&rsquo;s vocabulary (&ldquo;Summer Analyst, Investment Banking&rdquo;, not &ldquo;Intern&rdquo;)</li>
+    <li>Every role has exact start and end months, and an employment type</li>
+    <li>University is selected from the dropdown; degree, subject and grade are filled in</li>
+    <li>Headline front-loads role, field, specialism and one distinguishing fact within 220 characters</li>
+    <li>Skills list contains at least ten market keywords, with the top five pinned</li>
+    <li>Both the abbreviation and the full form of key jargon appear somewhere (M&amp;A / Mergers and Acquisitions; LBO / leveraged buyout)</li>
+    <li>Languages section is populated with proficiency levels</li>
+    <li>Certifications include anything in progress (CFA Level I candidate, ACA)</li>
+  </ul>
+
+  <h4>Rank &mdash; the spotlight signals</h4>
+  <ul class="check">
+    <li>&ldquo;Open to work&rdquo; is on, set to <strong>recruiters only</strong></li>
+    <li>Career interests specify target titles, London, and an availability date</li>
+    <li>A current CV is stored where LinkedIn offers to share it with recruiters</li>
+    <li>I have made a genuine profile edit in the last three weeks</li>
+    <li>I follow Dartmouth Partners&rsquo; company page</li>
+    <li>I am connected to at least two consultants on the desks relevant to me</li>
+    <li>I have engaged substantively with at least one of their posts or reports</li>
+  </ul>
+
+  <h4>Conversion &mdash; what happens after they click</h4>
+  <ul class="check">
+    <li>Professional headshot, plain background, good light</li>
+    <li>About section: first two sentences say what I do and what I want next</li>
+    <li>Every role has three or four bullets, each with a verb, an artefact and a number</li>
+    <li>Two recommendations from people who supervised real work</li>
+    <li>Custom URL claimed; a monitored email address is in my contact info</li>
+    <li>Nothing on the profile is exaggerated to a degree I could not defend in an interview</li>
+  </ul>
+
+  <h4>Beyond LinkedIn</h4>
+  <ul class="check">
+    <li>Registered directly through Dartmouth&rsquo;s CV portal</li>
+    <li>Applied to one genuinely relevant live role on their board</li>
+    <li>Emailed the single correct desk with a six-line, specific message</li>
+    <li>Downloaded the compensation report for my target sector</li>
+    <li>Registered for one relevant event</li>
+    <li>Repeated the above for three to five other agencies</li>
+    <li>Diary reminder set: update every agency the day my role, title or qualification changes</li>
+  </ul>
+</section>
+
+<section class="pb">
+  <h1>Appendix C &mdash; Screening-call prep sheet</h1>
+  <p class="lead">Fill this in before any first call with any headhunter. Keep it to one page and
+  keep it in front of you during the call.</p>
+
+  <table>
+    <tr><th style="width:52mm">Prompt</th><th>Your answer (write it out, then say it aloud twice)</th></tr>
+    <tr><td><strong>Ninety-second walkthrough</strong><br><span class="src">School → university → why finance → current role → what next</span></td><td style="height:22mm"></td></tr>
+    <tr><td><strong>Deal or project one</strong><br><span class="src">Size, sector, your specific contribution, outcome, what you learned</span></td><td style="height:22mm"></td></tr>
+    <tr><td><strong>Deal or project two</strong></td><td style="height:22mm"></td></tr>
+    <tr><td><strong>Why this sector, in one sentence with a reason attached</strong></td><td style="height:16mm"></td></tr>
+    <tr><td><strong>Preference and rationale</strong><br><span class="src">Fund size / strategy / geography, and why</span></td><td style="height:16mm"></td></tr>
+    <tr><td><strong>Compensation</strong><br><span class="src">Current base, bonus, and the minimum you would genuinely accept</span></td><td style="height:14mm"></td></tr>
+    <tr><td><strong>Availability</strong><br><span class="src">Notice period, visa status, exams, earliest start</span></td><td style="height:14mm"></td></tr>
+    <tr><td><strong>Other processes</strong><br><span class="src">Firm, stage, which agency introduced you</span></td><td style="height:16mm"></td></tr>
+    <tr><td><strong>Your three questions for them</strong><br><span class="src">Suggested: which funds are you mandated on at my level? Where am I competitive, and where am I not? What should I fix before you put me forward?</span></td><td style="height:22mm"></td></tr>
+  </table>
+</section>
+
+<section class="pb">
+  <h1>Appendix D &mdash; Subject Access Request template</h1>
+  <p>Send by email. They must normally respond within one month. You do not need to give a reason,
+  and there is no fee. Attach photo ID only if they ask for it.</p>
+  <div class="mono">To: privacy@dartmouthpartners.com
+Cc: privacy@kernel-global.com
+Subject: Subject Access Request — [Your Full Name], DOB [dd/mm/yyyy]
+
+Dear Data Protection team,
+
+I am making a subject access request under Article 15 of the UK GDPR for a
+copy of all personal data you hold about me.
+
+My details:  Full name: [ ]   Date of birth: [ ]
+             Email addresses you may hold for me: [ ]
+             Telephone: [ ]   Approximate dates of contact: [ ]
+
+Please include, so far as they constitute my personal data:
+
+  1. All records held about me in your CRM / applicant tracking system,
+     including consultant notes, categorisations, tags and ratings.
+  2. My CV(s) and any versions you have amended or reformatted.
+  3. A record of the roles and clients I have been submitted to, and the
+     dates of those submissions.
+  4. Any assessment or test results held about me.
+  5. Correspondence about me between members of your staff.
+  6. The source(s) from which you obtained my personal data, where it was
+     not provided by me directly.
+  7. The categories of recipients to whom my data has been disclosed,
+     including any other Kernel Group companies.
+  8. Your retention period, or the criteria used to determine it.
+
+Please provide the response in a commonly used electronic format.
+
+If you consider any part of this request to require clarification, please
+contact me promptly rather than delaying the response as a whole.
+
+Kind regards,
+[Name] · [email] · [phone]</div>
+  <p class="src">Note: they may lawfully withhold or redact material that would disclose the personal
+  data of others, including client identities, and certain confidential references. A partial
+  response is normal; a non-response is not, and can be escalated to the Information
+  Commissioner&rsquo;s Office.</p>
+</section>
+
+<section class="pb">
+  <h1>Appendix E &mdash; Competitor map and submission tracker</h1>
+  <p>Use the left table to plan coverage; use the right-hand template to prevent the duplicate
+  submissions that end candidacies.</p>
+
+  <table>
+    <tr><th style="width:40mm">Agency</th><th style="width:22mm">Registered?</th><th style="width:26mm">Consultant</th><th>Notes / which funds they say they cover at my level</th></tr>
+    <tr><td>Dartmouth Partners</td><td></td><td></td><td style="height:11mm"></td></tr>
+    <tr><td>KEA Consultants</td><td></td><td></td><td style="height:11mm"></td></tr>
+    <tr><td>Blackwood</td><td></td><td></td><td style="height:11mm"></td></tr>
+    <tr><td>PER</td><td></td><td></td><td style="height:11mm"></td></tr>
+    <tr><td>Walker Hamill</td><td></td><td></td><td style="height:11mm"></td></tr>
+    <tr><td>Arkesden Partners</td><td></td><td></td><td style="height:11mm"></td></tr>
+    <tr><td>Altus Partners</td><td></td><td></td><td style="height:11mm"></td></tr>
+    <tr><td>&nbsp;</td><td></td><td></td><td style="height:11mm"></td></tr>
+  </table>
+
+  <table>
+    <tr><th style="width:44mm">Client / fund</th><th style="width:36mm">Introduced by</th><th style="width:24mm">Date</th><th>Stage / outcome</th></tr>
+    <tr><td style="height:9mm"></td><td></td><td></td><td></td></tr>
+    <tr><td style="height:9mm"></td><td></td><td></td><td></td></tr>
+    <tr><td style="height:9mm"></td><td></td><td></td><td></td></tr>
+    <tr><td style="height:9mm"></td><td></td><td></td><td></td></tr>
+    <tr><td style="height:9mm"></td><td></td><td></td><td></td></tr>
+    <tr><td style="height:9mm"></td><td></td><td></td><td></td></tr>
+    <tr><td style="height:9mm"></td><td></td><td></td><td></td></tr>
+  </table>
+</section>
+
+<section class="pb">
+  <h1>Appendix F &mdash; Glossary</h1>
+  <div class="twocol" style="font-size:9pt">
+    <p><strong>ATS / CRM.</strong> Applicant tracking system / candidate relationship management &mdash; the database where your record lives. Dartmouth&rsquo;s is called AppTracker.</p>
+    <p><strong>Buy-side.</strong> Firms that invest capital &mdash; PE funds, credit funds, hedge funds, asset managers. As opposed to the sell-side (banks and advisers).</p>
+    <p><strong>Contingent search.</strong> No placement, no fee. The dominant model at junior and mid level, and the source of most recruiter behaviour.</p>
+    <p><strong>Datasheet.</strong> A standardised candidate summary a headhunter compiles &mdash; background, grades, deals, preferences &mdash; and circulates to clients. Central to US on-cycle; used less formally in London.</p>
+    <p><strong>Desk.</strong> A team covering one sector or niche. Dartmouth publishes eleven.</p>
+    <p><strong>Employment agency vs employment business.</strong> Legal distinction: an agency introduces candidates for permanent roles; an employment business supplies temporary workers it pays itself. Different obligations apply.</p>
+    <p><strong>Exclusivity.</strong> A client commitment to use one agency for a search &mdash; usually accompanying a retained fee.</p>
+    <p><strong>InMail.</strong> LinkedIn&rsquo;s paid direct message to someone you are not connected to. Metered, which is why recruiters target likely responders.</p>
+    <p><strong>Longlist / shortlist.</strong> Everyone plausible (dozens to hundreds) versus the three to six CVs actually submitted to the client.</p>
+    <p><strong>Mandate.</strong> An instruction from a client to fill a role. Everything in an agency revolves around live mandates.</p>
+    <p><strong>Market map.</strong> A systematic list of every person at every relevant firm who could do the job &mdash; the research artefact underpinning a search.</p>
+    <p><strong>Off-cycle.</strong> Hiring that happens whenever a seat opens, rather than in a synchronised annual process. The London norm on the buy-side.</p>
+    <p><strong>On-cycle.</strong> The compressed, synchronised US private-equity associate recruiting process.</p>
+    <p><strong>PSL.</strong> Preferred supplier list &mdash; the small set of agencies a large client permits to work on its roles.</p>
+    <p><strong>Rebate / clawback.</strong> Contractual refund of part of the fee if the placed candidate leaves within a defined window, typically 8&ndash;12 weeks.</p>
+    <p><strong>Retained search.</strong> Fee paid in instalments regardless of outcome, in exchange for exclusivity and a committed process.</p>
+    <p><strong>Spotlight.</strong> A LinkedIn Recruiter re-ranking signal &mdash; open to work, recently active, connected to the firm, following it, or previously in its ATS.</p>
+    <p><strong>360 / 180 desk.</strong> Whether one consultant does both business development and candidate delivery (360), or the two are split between specialists (180).</p>
+    <p><strong>SAR.</strong> Subject access request &mdash; your statutory right to obtain the personal data an organisation holds about you.</p>
+  </div>
+
+  <div class="footnote">
+    <strong>About this document.</strong> Compiled 23 August 2026 from publicly available sources.
+    Independent research, not affiliated with or endorsed by Dartmouth Partners, Kernel Global, or
+    any firm named. Details change &mdash; consultants move, coverage shifts, product features
+    evolve &mdash; so verify anything you intend to act on materially. Nothing here is legal, career
+    or financial advice.
+  </div>
+</section>
+
+</body>
+</html>
