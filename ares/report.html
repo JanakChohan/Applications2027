@@ -1,0 +1,1739 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ares Management — Candidate Deep Dive</title>
+<style>
+@page { size: A4; margin: 14mm 13mm 16mm 13mm; }
+:root{
+  --navy:#0d2340; --navy2:#16355e; --ink:#12202f; --body:#33414f;
+  --mute:#6b7a8a; --line:#dfe5ec; --bg:#ffffff; --soft:#f4f7fb;
+  --gold:#c8963e; --teal:#1f7a72; --red:#b4413c; --green:#2f7d55;
+  --violet:#5b4b8a; --amber:#d18b1e;
+}
+*{box-sizing:border-box;}
+body{font-family:"Segoe UI",-apple-system,"Helvetica Neue",Arial,sans-serif;
+ color:var(--body); font-size:9.6pt; line-height:1.5; margin:0; background:var(--bg);}
+h1,h2,h3,h4{color:var(--navy); margin:0 0 .4em; line-height:1.22; font-weight:650;}
+h1{font-size:23pt; letter-spacing:-.4px;}
+h2{font-size:15.5pt; letter-spacing:-.2px;}
+h3{font-size:11.6pt;}
+h4{font-size:10pt; color:var(--navy2);}
+p{margin:0 0 .7em;}
+a{color:var(--navy2); text-decoration:none;}
+small{font-size:8pt;}
+.page-break{page-break-before:always;}
+.avoid{page-break-inside:avoid;}
+
+/* ---------- cover ---------- */
+.cover{height:263mm; display:flex; flex-direction:column; justify-content:space-between;
+  background:linear-gradient(150deg,#0d2340 0%,#16355e 55%,#1f4570 100%); color:#fff;
+  margin:-14mm -13mm 0 -13mm; padding:24mm 18mm 16mm 18mm; page-break-after:always;}
+.cover h1{color:#fff; font-size:35pt; line-height:1.06; letter-spacing:-1px;}
+.cover .kicker{font-size:9.5pt; letter-spacing:3.2px; text-transform:uppercase;
+  color:#9dc0e8; font-weight:600; margin-bottom:14mm;}
+.cover .sub{font-size:13pt; color:#cfe0f2; font-weight:300; max-width:135mm; line-height:1.5; margin-top:7mm;}
+.cover .rule{width:64mm; height:3px; background:var(--gold); margin:9mm 0;}
+.covergrid{display:grid; grid-template-columns:repeat(4,1fr); gap:5mm; margin-top:10mm;}
+.covergrid div{border-top:2px solid rgba(255,255,255,.28); padding-top:3mm;}
+.covergrid b{display:block; font-size:16pt; color:#fff; font-weight:650;}
+.covergrid span{font-size:7.6pt; color:#9dc0e8; text-transform:uppercase; letter-spacing:1.1px;}
+.cover footer{font-size:8.2pt; color:#8fb0d6; border-top:1px solid rgba(255,255,255,.2); padding-top:4mm;}
+
+/* ---------- structure ---------- */
+.part{background:var(--navy); color:#fff; padding:5mm 6mm; margin:0 0 6mm;
+  border-radius:3px; page-break-inside:avoid; page-break-after:avoid;}
+.part .n{font-size:7.8pt; letter-spacing:2.6px; text-transform:uppercase; color:var(--gold); font-weight:600;}
+.part h2{color:#fff; margin:1.5mm 0 0;}
+.part p{margin:1.5mm 0 0; color:#c3d5ea; font-size:9pt;}
+
+section{margin-bottom:6mm;}
+.lead{font-size:10.6pt; color:var(--navy2); line-height:1.55; font-weight:400;}
+
+/* ---------- components ---------- */
+.card{border:1px solid var(--line); border-radius:4px; padding:4.5mm 5mm; margin:0 0 4mm;
+  background:#fff; page-break-inside:avoid;}
+.card.soft{background:var(--soft); border-color:#d8e2ee;}
+.card h4{margin-bottom:2mm;}
+
+.callout{border-left:3.5px solid var(--gold); background:#fdf8ef; padding:4mm 5mm;
+  margin:0 0 4mm; border-radius:0 4px 4px 0; page-break-inside:avoid;}
+.callout.edge{border-left-color:var(--teal); background:#eff7f6;}
+.callout.warn{border-left-color:var(--red); background:#fcf2f1;}
+.callout.key{border-left-color:var(--navy2); background:#eef3fa;}
+.callout .tag{display:block; font-size:7.4pt; letter-spacing:2px; text-transform:uppercase;
+  font-weight:700; color:var(--gold); margin-bottom:1.5mm;}
+.callout.edge .tag{color:var(--teal);} .callout.warn .tag{color:var(--red);}
+.callout.key .tag{color:var(--navy2);}
+.callout p:last-child{margin-bottom:0;}
+
+table{width:100%; border-collapse:collapse; font-size:8.3pt; margin:0 0 4mm; page-break-inside:avoid;}
+th{background:var(--navy); color:#fff; text-align:left; padding:2.4mm 2.6mm; font-weight:600;
+  font-size:7.7pt; letter-spacing:.4px; text-transform:uppercase;}
+td{padding:2.2mm 2.6mm; border-bottom:1px solid var(--line); vertical-align:top;}
+tr:nth-child(even) td{background:#fafcfe;}
+td.num,th.num{text-align:right; font-variant-numeric:tabular-nums;}
+.tbl-note{font-size:7.6pt; color:var(--mute); margin:-2mm 0 4mm;}
+
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:4mm;}
+.grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:4mm;}
+.grid4{display:grid; grid-template-columns:repeat(4,1fr); gap:3mm;}
+
+.stat{border:1px solid var(--line); border-top:3px solid var(--navy2); border-radius:3px;
+  padding:3mm 3.5mm; background:#fff;}
+.stat b{display:block; font-size:15pt; color:var(--navy); font-weight:650; line-height:1.15;}
+.stat span{display:block; font-size:7.5pt; color:var(--mute); text-transform:uppercase;
+  letter-spacing:.9px; margin-top:1mm;}
+.stat i{display:block; font-style:normal; font-size:7.8pt; color:var(--body); margin-top:1.5mm;}
+.stat.g{border-top-color:var(--green);} .stat.r{border-top-color:var(--red);}
+.stat.t{border-top-color:var(--teal);} .stat.a{border-top-color:var(--amber);}
+
+figure{margin:0 0 5mm; page-break-inside:avoid;}
+figcaption{font-size:7.8pt; color:var(--mute); margin-top:2mm; line-height:1.45;}
+figcaption b{color:var(--navy2);}
+svg{display:block; max-width:100%;}
+
+ul,ol{margin:0 0 .7em; padding-left:4.5mm;}
+li{margin-bottom:1.6mm;}
+.tight li{margin-bottom:.8mm;}
+
+.term{font-weight:650; color:var(--navy);}
+.src{font-size:7.4pt; color:var(--mute); font-style:italic;}
+.pill{display:inline-block; font-size:7pt; font-weight:700; letter-spacing:.7px;
+  text-transform:uppercase; padding:.8mm 2mm; border-radius:2px; color:#fff; background:var(--navy2);}
+.pill.gold{background:var(--gold);} .pill.red{background:var(--red);}
+.pill.green{background:var(--green);} .pill.teal{background:var(--teal);}
+.pill.violet{background:var(--violet);}
+.q{background:var(--soft); border:1px solid #d8e2ee; border-radius:3px; padding:3mm 3.5mm; margin-bottom:3mm;}
+.q .lbl{font-size:7.4pt; letter-spacing:1.6px; text-transform:uppercase; color:var(--navy2); font-weight:700;}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div>
+    <div class="kicker">Candidate Intelligence Dossier</div>
+    <h1>Ares<br>Management</h1>
+    <div class="rule"></div>
+    <div class="sub">A zero-to-technical deep dive on the firm, its business model, its
+    insurance engine, and the two roles you are applying for — <b>Investor Relations</b>
+    and <b>Client Solutions</b>.</div>
+  </div>
+  <div>
+    <div class="covergrid">
+      <div><b>$671bn</b><span>AUM, Q2 2026</span></div>
+      <div><b>$36.4bn</b><span>Raised in Q2 alone</span></div>
+      <div><b>93%</b><span>Fees from locked capital</span></div>
+      <div><b>200+</b><span>In the sales team</span></div>
+    </div>
+    <div class="covergrid" style="margin-top:6mm">
+      <div><b>1997</b><span>Founded</span></div>
+      <div><b>4,250</b><span>Employees</span></div>
+      <div><b>2,850</b><span>Institutional clients</span></div>
+      <div><b>S&amp;P 500</b><span>Added Dec 2025</span></div>
+    </div>
+  </div>
+  <footer>
+    Built from primary sources: Ares Management Form 10-K filings FY2019–FY2025 (SEC EDGAR,
+    CIK 1176948) · 2025 Annual Shareholder Letter · Q2 2026 earnings call and slides ·
+    supplemented with market and trade press. Every figure is sourced; see Part 14.<br>
+    Compiled 23 August 2026. Assumes no prior knowledge of private markets.
+  </footer>
+</div>
+
+<section>
+<div class="card soft avoid">
+<h3>How to read this report</h3>
+<p>This is written for someone who has <b>never worked in private markets</b>. Part 1 builds the
+vocabulary from nothing. Parts 2–9 are the firm itself. Parts 10–12 are your roles and the
+application. Nothing here assumes you already know what an LP, a GP, a drawdown fund or a
+BDC is — those are all explained as they appear, and collected in the glossary at Part 13.</p>
+<p style="margin-bottom:0"><b>Three things to look out for.</b> Boxes marked
+<span class="pill teal">Edge</span> are facts most candidates will not have — they come from
+reading seven years of 10-K filings line by line, not from the careers page. Boxes marked
+<span class="pill red">Careful</span> are places where the popular narrative is wrong and
+repeating it would hurt you. Boxes marked <span class="pill gold">Say this</span> are
+phrasings you can use more or less directly.</p>
+</div>
+</section>
+
+<div class="part">
+  <div class="n">Part 1</div>
+  <h2>The industry from zero</h2>
+  <p>What an alternative asset manager actually is, who pays it, and how it earns money.</p>
+</div>
+
+<section>
+<p class="lead">Start with the only sentence that matters: <b>Ares is not an investor of its own
+money. It is a manager of other people's money, and it gets paid a percentage for managing
+it.</b> Almost everything else about the firm — its strategy, its structure, and the entire
+reason your role exists — follows from that one fact.</p>
+
+<h3>1.1 The four players</h3>
+<p>Every private markets transaction has the same four characters. Learn these four words and
+80% of the jargon collapses.</p>
+
+<figure>
+<svg viewBox="0 0 760 250" role="img" aria-label="Diagram of the four players: asset owners, the manager, the funds, and the borrowers">
+  <defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 z" fill="#16355e"/>
+    </marker>
+    <marker id="arg" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 z" fill="#2f7d55"/>
+    </marker>
+  </defs>
+  <rect x="6" y="52" width="150" height="96" rx="5" fill="#eef3fa" stroke="#16355e" stroke-width="1.5"/>
+  <text x="81" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0d2340">The asset owner</text>
+  <text x="81" y="93" text-anchor="middle" font-size="10" fill="#33414f">Pension fund, insurer,</text>
+  <text x="81" y="107" text-anchor="middle" font-size="10" fill="#33414f">sovereign fund, you</text>
+  <text x="81" y="128" text-anchor="middle" font-size="9.5" font-style="italic" fill="#6b7a8a">Has money. Needs return.</text>
+  <text x="81" y="141" text-anchor="middle" font-size="9.5" font-weight="700" fill="#16355e">Called the &#8220;LP&#8221;</text>
+
+  <rect x="205" y="52" width="150" height="96" rx="5" fill="#0d2340" stroke="#0d2340"/>
+  <text x="280" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">The manager</text>
+  <text x="280" y="93" text-anchor="middle" font-size="10" fill="#c3d5ea">ARES</text>
+  <text x="280" y="112" text-anchor="middle" font-size="9.5" font-style="italic" fill="#9dc0e8">Has skill. Needs money</text>
+  <text x="280" y="124" text-anchor="middle" font-size="9.5" font-style="italic" fill="#9dc0e8">to manage.</text>
+  <text x="280" y="141" text-anchor="middle" font-size="9.5" font-weight="700" fill="#c8963e">Called the &#8220;GP&#8221;</text>
+
+  <rect x="404" y="52" width="150" height="96" rx="5" fill="#eff7f6" stroke="#1f7a72" stroke-width="1.5"/>
+  <text x="479" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0d2340">The fund</text>
+  <text x="479" y="93" text-anchor="middle" font-size="10" fill="#33414f">A legal pot of money</text>
+  <text x="479" y="107" text-anchor="middle" font-size="10" fill="#33414f">with rules and a clock</text>
+  <text x="479" y="128" text-anchor="middle" font-size="9.5" font-style="italic" fill="#6b7a8a">The vehicle in between.</text>
+  <text x="479" y="141" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1f7a72">Ares runs 300+ of these</text>
+
+  <rect x="603" y="52" width="150" height="96" rx="5" fill="#fdf8ef" stroke="#c8963e" stroke-width="1.5"/>
+  <text x="678" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0d2340">The borrower</text>
+  <text x="678" y="93" text-anchor="middle" font-size="10" fill="#33414f">A mid-sized company,</text>
+  <text x="678" y="107" text-anchor="middle" font-size="10" fill="#33414f">a warehouse, a stadium</text>
+  <text x="678" y="128" text-anchor="middle" font-size="9.5" font-style="italic" fill="#6b7a8a">Needs capital.</text>
+  <text x="678" y="141" text-anchor="middle" font-size="9.5" font-weight="700" fill="#c8963e">Pays interest</text>
+
+  <line x1="158" y1="88" x2="202" y2="88" stroke="#16355e" stroke-width="2" marker-end="url(#ar)"/>
+  <text x="180" y="80" text-anchor="middle" font-size="8.5" fill="#16355e" font-weight="600">commits</text>
+  <line x1="357" y1="88" x2="401" y2="88" stroke="#16355e" stroke-width="2" marker-end="url(#ar)"/>
+  <text x="379" y="80" text-anchor="middle" font-size="8.5" fill="#16355e" font-weight="600">manages</text>
+  <line x1="556" y1="88" x2="600" y2="88" stroke="#16355e" stroke-width="2" marker-end="url(#ar)"/>
+  <text x="578" y="80" text-anchor="middle" font-size="8.5" fill="#16355e" font-weight="600">lends</text>
+
+  <path d="M678 152 L678 185 L81 185 L81 152" fill="none" stroke="#2f7d55" stroke-width="2" marker-end="url(#arg)"/>
+  <rect x="300" y="176" width="160" height="18" fill="#ffffff"/>
+  <text x="380" y="189" text-anchor="middle" font-size="9.5" fill="#2f7d55" font-weight="700">interest + principal flows back</text>
+
+  <path d="M280 152 L280 220 L640 220" fill="none" stroke="#c8963e" stroke-width="2" stroke-dasharray="4 3"/>
+  <text x="470" y="234" text-anchor="middle" font-size="9.5" fill="#c8963e" font-weight="700">Ares keeps a small slice on the way past &#8212; that slice is the entire business</text>
+</svg>
+<figcaption><b>The whole industry in one picture.</b> LP = Limited Partner (the investor who
+commits money and has limited liability). GP = General Partner (the manager who runs the fund
+and makes the decisions). You will hear "LP" and "GP" constantly; they simply mean
+<i>client</i> and <i>us</i>.</figcaption>
+</figure>
+
+<div class="callout key">
+<span class="tag">The one-line business model</span>
+<p>Ares raises money from asset owners, puts it into funds, lends or invests it, and charges a
+percentage fee on the money it manages. It earns that fee <b>whether or not the fund has made
+a gain yet</b>. That is why the industry obsesses over one number — <span class="term">AUM</span>,
+assets under management — and why a sales job here is a revenue job, not a support job.</p>
+</div>
+
+<h3>1.2 Why does this industry exist at all?</h3>
+<p>Because banks retreated. After the 2008 financial crisis, regulation made it expensive for
+banks to hold risky loans to mid-sized companies on their balance sheets. Those companies still
+needed to borrow. At the same time, pension funds and insurers faced a decade of very low
+interest rates and could not hit their return targets in government bonds.</p>
+<p>Private credit is the bridge between those two problems: money that needs yield, meeting
+borrowers that need capital, with a manager in the middle doing the underwriting the bank used
+to do. Ares' own 10-K describes its direct lending business as serving companies
+"increasingly underserved by traditional bank lenders."
+<span class="src">Ares FY2025 10-K, Item 1.</span></p>
+
+<h3>1.3 The two shapes of fund — and why this matters more than anything else</h3>
+<p>This is the single most important technical distinction in the report. Nearly every strategic
+decision Ares has made in the last six years comes back to it.</p>
+
+<div class="grid2">
+<div class="card">
+<h4><span class="pill">Shape A</span> &nbsp;The drawdown fund</h4>
+<p>The traditional model. Investors <b>commit</b> (say) $100m but don't hand it over. Ares
+"calls" the money down as it finds deals. The fund invests for ~5 years, harvests for ~5, then
+<b>dies and returns the cash</b>.</p>
+<p style="margin-bottom:0"><b>The problem for Ares:</b> the fee dies with the fund. Every few
+years you must go back and raise the successor fund — Fund IV, Fund V, Fund VI — or your
+revenue falls off a cliff. <b>This is a treadmill.</b></p>
+</div>
+<div class="card">
+<h4><span class="pill teal">Shape B</span> &nbsp;Perpetual capital</h4>
+<p>The modern model. The vehicle has <b>no end date</b>. Money comes in, stays in, and is
+reinvested indefinitely. Investors can ask to leave, but usually only a limited percentage per
+quarter.</p>
+<p style="margin-bottom:0"><b>Why Ares wants this:</b> the fee never expires. Ares defines it
+precisely — capital that has "an indefinite term, is not in liquidation, and for which there is
+no immediate requirement to return invested capital."
+<span class="src">FY2025 10-K glossary.</span> <b>This is an annuity.</b></p>
+</div>
+</div>
+
+<div class="callout edge">
+<span class="tag">Edge · the number that reframes the firm</span>
+<p><b>93% of Ares' management fees in 2025 came from perpetual capital or long-dated funds</b>
+(funds with a contractual life of five years or more at inception). It was 95% in 2024, 2023,
+2022 and 2021.
+<span class="src">FY2021–FY2025 10-Ks, "Management Fees By Type".</span></p>
+<p style="margin-bottom:0">Read that again. Roughly nineteen out of every twenty fee dollars
+Ares earns are contractually locked in for years or forever. This is the answer to
+"how are they surviving the fundraising slowdown" — and almost no other candidate will have it.</p>
+</div>
+
+<h3>1.4 The three ways a manager gets paid</h3>
+<table>
+<tr><th style="width:19%">Revenue type</th><th style="width:17%">What triggers it</th><th>How it works at Ares, specifically</th><th class="num" style="width:15%">Reliability</th></tr>
+<tr><td><b>Management fee</b></td><td>Simply having the money</td>
+<td>A % of the fee base, charged whether the fund is up or down. Ares' rates by strategy:
+US &amp; European direct lending <b>0.75%–1.50%</b>; opportunistic credit <b>1.50%</b>; corporate
+private equity <b>1.50%</b>; liquid credit <b>0.25%–1.00%</b>; insurance solutions <b>0.28%</b>.
+<span class="src">FY2025 10-K, fee table.</span></td>
+<td class="num"><span class="pill green">Very high</span><br><small>The bedrock</small></td></tr>
+<tr><td><b>Performance fee</b><br><small>carried interest</small></td><td>Realised profit above a hurdle</td>
+<td>Typically the GP keeps ~20% of gains once investors have received their capital back plus a
+preferred return. Lumpy — depends on exits.</td>
+<td class="num"><span class="pill red">Low</span><br><small>Cyclical</small></td></tr>
+<tr><td><b>Part&nbsp;I / Part&nbsp;II fees</b></td><td>Income earned each quarter</td>
+<td>A quirk of credit vehicles. ARCC pays <b>20% of net investment income</b> above a 1.75%
+quarterly hurdle; ASIF pays <b>12.5%</b> above 1.25%. Because these are recurring and cash-settled
+quarterly, Ares classifies Part I fees as <i>management fees</i>, not performance fees.
+<span class="src">FY2025 10-K.</span></td>
+<td class="num"><span class="pill green">High</span><br><small>Recurring</small></td></tr>
+</table>
+
+<div class="callout">
+<span class="tag">Say this</span>
+<p style="margin-bottom:0">"What drew me to Ares specifically is the <i>quality</i> of the earnings,
+not just the size. Ninety-three percent of management fees come from perpetual or long-dated
+vehicles, and fee-related earnings were ninety-six percent of realised income last year. That
+tells me the firm is being run for durability rather than for a good vintage — and it means a
+client-facing role is compounding an annuity, not chasing a one-off close."</p>
+</div>
+
+<h3>1.5 FRE, RI, FPAUM — the four acronyms in every Ares earnings call</h3>
+<div class="grid4">
+<div class="stat"><b>AUM</b><span>Assets under mgmt</span><i>Everything Ares manages. The headline vanity metric. $671bn.</i></div>
+<div class="stat t"><b>FPAUM</b><span>Fee-paying AUM</span><i>The subset actually paying a fee today. $410bn. <b>This is the real number.</b></i></div>
+<div class="stat g"><b>FRE</b><span>Fee related earnings</span><i>Profit from fees alone, stripping out volatile performance income. The quality metric.</i></div>
+<div class="stat a"><b>RI</b><span>Realized income</span><i>FRE plus performance income actually banked in cash.</i></div>
+</div>
+<p style="margin-top:3mm">Note the gap: <b>$671bn AUM but only $410bn fee-paying.</b> The
+$261bn difference is money that is committed but not yet deployed, or in vehicles that don't
+charge on committed capital. Ares calls the fee-eligible portion of this
+<span class="term">"AUM not yet paying fees"</span> or, informally,
+<span class="term">shadow AUM</span> — and it is a growth engine hiding in plain sight.</p>
+
+<div class="callout edge">
+<span class="tag">Edge · the embedded growth argument</span>
+<p style="margin-bottom:0">At 31 December 2025 Ares had <b>$78.8bn of AUM available for future
+deployment plus $4.3bn of development assets not yet stabilised</b>, which it states could
+"collectively generate approximately <b>$730.4 million in potential incremental annual management
+fees</b>, which represents a <b>23% embedded growth rate</b> in our 2025 base management fees."
+<span class="src">FY2025 10-K, MD&amp;A.</span> By Q2 2026 AUM not yet paying fees had risen to
+$114.0bn. In plain English: <b>Ares could stop raising a single new dollar tomorrow and still grow
+management fees by roughly a quarter</b> simply by deploying what it already holds.</p>
+</div>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 2</div>
+  <h2>What Ares actually is</h2>
+  <p>Founded 1997. A credit house that grew into a four-legged platform — and never stopped being a credit house.</p>
+</div>
+
+<section>
+<h3>2.1 The origin story, and why it still shapes the firm</h3>
+<p>Ares was founded in 1997 in Los Angeles by <b>Antony (Tony) Ressler</b>, <b>John Kissick</b>
+and <b>Bennett Rosenthal</b>. Ressler had co-founded <b>Apollo Management</b> in 1990 and ran its
+capital markets activities — high-yield bonds, leveraged loans, distressed debt — until leaving
+to start Ares. Rosenthal came from Merrill Lynch's global leveraged finance group. For its first
+five years Ares operated as effectively the West Coast credit affiliate of Apollo.</p>
+<p>Two things follow from that history and both are worth saying out loud in an interview:</p>
+<ul>
+<li><b>Ares is a credit firm by DNA, not by pivot.</b> Blackstone and KKR are private equity
+firms that later added credit. Ares started in leveraged finance. Its 10-K says every investment
+group employs "a disciplined, <b>credit-oriented</b> investment philosophy" — including the
+private equity and real estate teams.</li>
+<li><b>It is not a New York firm.</b> Headquarters remain Los Angeles. Culturally this matters:
+Ares' stated values are "collaborative, responsible, entrepreneurial, self-aware and
+trustworthy," and the 10-K explicitly notes there is <b>no centralised investment committee</b> —
+committees are deliberately built with overlapping membership across groups.</li>
+</ul>
+
+<h3>2.2 Milestones</h3>
+<table>
+<tr><th style="width:11%">Year</th><th style="width:30%">Event</th><th>Why it mattered</th></tr>
+<tr><td><b>1997</b></td><td>Firm founded</td><td>Credit-first identity established.</td></tr>
+<tr><td><b>2004</b></td><td>Ares Capital Corp (ARCC) IPOs</td><td>Raised ~$165m at $15/share. ARCC becomes the largest publicly traded BDC and, twenty years on, still contributes <b>~31% of Credit Group management fees</b>. <span class="src">FY2025 10-K.</span></td></tr>
+<tr><td><b>2014</b></td><td>Ares Management IPOs (NYSE: ARES)</td><td>Raised $216m at $19/share with $74bn AUM. The manager itself becomes a public company.</td></tr>
+<tr><td><b>2020</b></td><td>SSG Capital (Asia) acquired</td><td>First real APAC footprint.</td></tr>
+<tr><td><b>2021</b></td><td>Landmark Partners + Black Creek + AMP Capital</td><td>The transformational year — see Part 6.</td></tr>
+<tr><td><b>2025</b></td><td>GCP International closes (1 Mar); added to <b>S&amp;P 500</b> (Dec)</td><td>$3.7bn deal nearly doubles real estate AUM. Index inclusion is a credibility milestone.</td></tr>
+<tr><td><b>2026</b></td><td>Record $36.4bn raised in Q2 alone</td><td>Achieved in the worst private-credit sentiment environment since 2008.</td></tr>
+</table>
+
+<h3>2.3 The four investment groups</h3>
+<p>Ares organises itself into four <b>investment groups</b> plus a bucket called Other Businesses.
+Note how lopsided this is — and note that the lopsidedness is the point.</p>
+
+<figure>
+<svg viewBox="0 0 760 320" role="img" aria-label="Bar chart of Ares AUM by investment group at 31 December 2025">
+  <text x="0" y="14" font-size="11" font-weight="700" fill="#0d2340">AUM by group, 31 Dec 2025 &#8212; $622.5bn total</text>
+  <!-- Credit -->
+  <rect x="0" y="34" width="620" height="42" rx="3" fill="#0d2340"/>
+  <text x="12" y="52" font-size="12" font-weight="700" fill="#ffffff">CREDIT GROUP</text>
+  <text x="12" y="68" font-size="9.5" fill="#9dc0e8">Direct lending &#183; liquid credit &#183; alternative credit &#183; opportunistic &#183; APAC</text>
+  <text x="608" y="61" text-anchor="end" font-size="15" font-weight="700" fill="#ffffff">$406.9bn</text>
+  <text x="632" y="61" font-size="10" font-weight="700" fill="#0d2340">65%</text>
+  <!-- Real Assets -->
+  <rect x="0" y="88" width="212" height="42" rx="3" fill="#1f7a72"/>
+  <text x="12" y="106" font-size="12" font-weight="700" fill="#ffffff">REAL ASSETS</text>
+  <text x="12" y="121" font-size="9.5" fill="#c9e4e1">Real estate &#183; infrastructure &#183; data centres</text>
+  <text x="222" y="115" font-size="13" font-weight="700" fill="#1f7a72">$139.1bn</text>
+  <text x="292" y="115" font-size="10" font-weight="700" fill="#6b7a8a">22%</text>
+  <!-- Secondaries -->
+  <rect x="0" y="142" width="64" height="42" rx="3" fill="#5b4b8a"/>
+  <text x="12" y="160" font-size="11" font-weight="700" fill="#ffffff">SEC.</text>
+  <text x="12" y="175" font-size="8.5" fill="#ddd6ee">2nd-hand</text>
+  <text x="74" y="169" font-size="13" font-weight="700" fill="#5b4b8a">$42.1bn</text>
+  <text x="144" y="169" font-size="10" font-weight="700" fill="#6b7a8a">7%</text>
+  <!-- PE -->
+  <rect x="0" y="196" width="39" height="42" rx="3" fill="#c8963e"/>
+  <text x="12" y="222" font-size="11" font-weight="700" fill="#ffffff">PE</text>
+  <text x="49" y="223" font-size="13" font-weight="700" fill="#c8963e">$25.3bn</text>
+  <text x="119" y="223" font-size="10" font-weight="700" fill="#6b7a8a">4%</text>
+  <text x="160" y="223" font-size="9.5" font-style="italic" fill="#6b7a8a">&#8212; the smallest group, and shrinking as a share</text>
+  <!-- Other -->
+  <rect x="0" y="250" width="15" height="42" rx="3" fill="#6b7a8a"/>
+  <text x="25" y="270" font-size="12" font-weight="700" fill="#6b7a8a">OTHER BUSINESSES</text>
+  <text x="25" y="285" font-size="9.5" fill="#6b7a8a">Ares Insurance Solutions &#183; venture capital &#183; SPAC legacy</text>
+  <text x="330" y="277" font-size="13" font-weight="700" fill="#6b7a8a">$9.1bn</text>
+  <text x="400" y="277" font-size="9.5" font-style="italic" fill="#6b7a8a">&#8212; but see Part 3: this understates insurance enormously</text>
+  <line x1="0" y1="306" x2="760" y2="306" stroke="#dfe5ec"/>
+  <text x="0" y="318" font-size="8.5" fill="#6b7a8a">Bars are to scale. Source: Ares FY2025 Form 10-K, AUM rollforward by segment.</text>
+</svg>
+<figcaption><b>Two-thirds of Ares is credit.</b> If someone asks "what is Ares?", the correct
+one-word answer is <b>credit</b> — and specifically <b>direct lending</b>, which alone is
+$274.3bn, or 44% of the whole firm.</figcaption>
+</figure>
+
+<h3>2.4 Inside the Credit Group — where the firm really lives</h3>
+<table>
+<tr><th style="width:22%">Strategy</th><th class="num" style="width:11%">AUM</th><th class="num" style="width:13%">People</th><th>What it actually does</th></tr>
+<tr><td><b>US direct lending</b></td><td class="num">$189.6bn</td><td class="num">225+ inv. pros</td>
+<td>Lends directly to US mid-sized companies — typically <b>$10m to over $500m of EBITDA</b> — covering <b>520+ private equity sponsors</b>. Wants to be lead or sole lender so it controls terms. Homes: ARCC (listed) and ASIF (non-traded).</td></tr>
+<tr><td><b>European direct lending</b></td><td class="num">$84.7bn</td><td class="num">100+ inv. pros</td>
+<td>Same model in Europe: companies with <b>€10m to over €250m EBITDA</b>, covering <b>435+ sponsors</b>. Ares is one of the two or three genuine scale players in Europe — a real moat.</td></tr>
+<tr><td><b>Liquid credit</b></td><td class="num">$53.1bn</td><td class="num">45+ inv. pros</td>
+<td>Traded loans and high-yield bonds, plus CLOs. Low fee (0.25%–1.00%) but very sticky.</td></tr>
+<tr><td><b>Alternative credit</b><br><small>asset-based finance</small></td><td class="num">$48.1bn</td><td class="num">85+ pros</td>
+<td>Lending against <i>assets and cash flows</i> rather than companies — royalties, equipment, receivables, aircraft. The fastest-growing frontier. Home of the <b>Pathfinder</b> funds.</td></tr>
+<tr><td><b>Opportunistic credit</b></td><td class="num">$19.8bn</td><td class="num">35+ inv. pros</td>
+<td>Stressed and distressed situations "in the void between traditional senior private debt and private equity." Highest fee rate at a flat 1.50%.</td></tr>
+<tr><td><b>APAC credit</b></td><td class="num">$11.5bn</td><td class="num">60+ inv. pros</td>
+<td>Asia-Pacific direct origination. Smallest but strategically prioritised.</td></tr>
+</table>
+<p class="tbl-note">Source: Ares FY2025 Form 10-K, Item 1 — Credit Group. AUM includes vehicles managed by Ivy Hill Asset Management.</p>
+
+<div class="callout edge">
+<span class="tag">Edge · the sponsor-coverage number</span>
+<p style="margin-bottom:0">Ares covers <b>520+ private equity sponsors in the US and 435+ in
+Europe</b>. That is the real moat, and it is not a marketing claim — it is disclosed in the
+10-K. Private equity firms buy companies and need debt to do it. If you are the lender that
+955 sponsors already know, deal flow comes to you. In Q2 2026, <b>75% of Ares' US direct
+lending deployment went to companies already in the portfolio</b> — incumbency compounds.
+When a competitor and Ares bid on the same deal, Ares often already lent to the business.</p>
+</div>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 3</div>
+  <h2>Follow the money: the insurance engine</h2>
+  <p>From a retired person's monthly cheque, through an insurer, into an Ares fund, out to a company, and back again.</p>
+</div>
+
+<section>
+<p class="lead">You asked for this specifically, and you were right to. <b>Insurance is the most
+important and least understood part of Ares' story</b> — and it is the part that most candidates
+will get factually wrong, because they will assume Ares works the way Apollo does. It does not.</p>
+
+<h3>3.1 Why insurers are the perfect client for private credit</h3>
+<p>An insurer that sells <span class="term">annuities</span> — a product where you hand over a
+lump sum and they promise you a fixed income for life — has a very specific problem. They have
+made a promise that runs for <b>thirty or forty years</b>, and they must hold assets that
+generate enough income to fund it. They need:</p>
+<ul class="tight">
+<li><b>Long duration</b> — assets that pay out over decades, to match the liability.</li>
+<li><b>Predictable income</b> — not capital gains; contractual coupons.</li>
+<li><b>Yield above government bonds</b> — the spread between what they earn and what they promised is their profit.</li>
+<li><b>Investment-grade-equivalent credit quality</b> — because regulators charge capital against risky assets.</li>
+<li><b>They do not need liquidity</b> — nobody can demand their annuity back early.</li>
+</ul>
+<p>That is an almost perfect description of a directly originated senior secured loan. Insurers
+can accept illiquidity — which is exactly what private credit charges a premium for. Roughly
+<b>$1 trillion of the ~$6 trillion held by US life and annuity insurers is now in private
+credit</b>.</p>
+
+<h3>3.2 The full flow, end to end</h3>
+<figure>
+<svg viewBox="0 0 760 470" role="img" aria-label="Flow diagram of money from a retail saver through an insurer into Ares funds, out to borrowers, and back">
+  <defs>
+    <marker id="b1" markerWidth="10" markerHeight="10" refX="9" refY="3.4" orient="auto"><path d="M0,0 L9,3.4 L0,6.8 z" fill="#16355e"/></marker>
+    <marker id="g1" markerWidth="10" markerHeight="10" refX="9" refY="3.4" orient="auto"><path d="M0,0 L9,3.4 L0,6.8 z" fill="#2f7d55"/></marker>
+    <marker id="o1" markerWidth="10" markerHeight="10" refX="9" refY="3.4" orient="auto"><path d="M0,0 L9,3.4 L0,6.8 z" fill="#c8963e"/></marker>
+  </defs>
+
+  <text x="0" y="12" font-size="8.5" font-weight="700" fill="#16355e">&#9660; BLUE = money flowing OUT (saver to borrower)</text>
+  <text x="270" y="12" font-size="8.5" font-weight="700" fill="#2f7d55">&#9650; GREEN = money flowing BACK (borrower to saver)</text>
+  <text x="560" y="12" font-size="8.5" font-weight="700" fill="#c8963e">&#9679; GOLD = what Ares keeps</text>
+
+  <!-- STAGE 1 -->
+  <rect x="0" y="30" width="140" height="86" rx="5" fill="#eef3fa" stroke="#16355e" stroke-width="1.5"/>
+  <text x="70" y="50" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0d2340">1. THE SAVER</text>
+  <text x="70" y="67" text-anchor="middle" font-size="9" fill="#33414f">A 65-year-old buys a</text>
+  <text x="70" y="79" text-anchor="middle" font-size="9" fill="#33414f">$200,000 annuity, or</text>
+  <text x="70" y="91" text-anchor="middle" font-size="9" fill="#33414f">a pension scheme needs</text>
+  <text x="70" y="103" text-anchor="middle" font-size="9" fill="#33414f">to fund its members</text>
+
+  <!-- STAGE 2 -->
+  <rect x="168" y="30" width="150" height="86" rx="5" fill="#eef3fa" stroke="#16355e" stroke-width="1.5"/>
+  <text x="243" y="50" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0d2340">2. THE INSURER</text>
+  <text x="243" y="67" text-anchor="middle" font-size="9" fill="#33414f">Promises income for life.</text>
+  <text x="243" y="79" text-anchor="middle" font-size="9" fill="#33414f">Now holds a 30-year</text>
+  <text x="243" y="91" text-anchor="middle" font-size="9" fill="#33414f">liability and must find</text>
+  <text x="243" y="103" text-anchor="middle" font-size="9" fill="#33414f">assets that beat it.</text>
+
+  <!-- STAGE 3 -->
+  <rect x="346" y="30" width="164" height="86" rx="5" fill="#0d2340"/>
+  <text x="428" y="50" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff">3. ARES</text>
+  <text x="428" y="66" text-anchor="middle" font-size="9" fill="#c3d5ea">Insurer gives Ares a mandate:</text>
+  <text x="428" y="78" text-anchor="middle" font-size="9" fill="#c3d5ea">an SMA, a fund stake, or a</text>
+  <text x="428" y="90" text-anchor="middle" font-size="9" fill="#c3d5ea">whole-portfolio relationship</text>
+  <text x="428" y="105" text-anchor="middle" font-size="8.5" font-weight="700" fill="#c8963e">&#9668; YOUR TEAM WINS THIS</text>
+
+  <!-- STAGE 4 -->
+  <rect x="538" y="30" width="150" height="86" rx="5" fill="#fdf8ef" stroke="#c8963e" stroke-width="1.5"/>
+  <text x="613" y="50" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0d2340">4. THE BORROWER</text>
+  <text x="613" y="67" text-anchor="middle" font-size="9" fill="#33414f">A mid-market company &#8212;</text>
+  <text x="613" y="79" text-anchor="middle" font-size="9" fill="#33414f">Jiffy Lube, a warehouse</text>
+  <text x="613" y="91" text-anchor="middle" font-size="9" fill="#33414f">portfolio, a data centre &#8212;</text>
+  <text x="613" y="103" text-anchor="middle" font-size="9" fill="#33414f">borrows at SOFR + 5%</text>
+
+  <line x1="142" y1="73" x2="165" y2="73" stroke="#16355e" stroke-width="2.2" marker-end="url(#b1)"/>
+  <line x1="320" y1="73" x2="343" y2="73" stroke="#16355e" stroke-width="2.2" marker-end="url(#b1)"/>
+  <line x1="512" y1="73" x2="535" y2="73" stroke="#16355e" stroke-width="2.2" marker-end="url(#b1)"/>
+  <text x="153" y="66" text-anchor="middle" font-size="6.8" fill="#16355e" font-weight="700">pays</text>
+  <text x="331" y="66" text-anchor="middle" font-size="6.8" fill="#16355e" font-weight="700">hires</text>
+  <text x="523" y="66" text-anchor="middle" font-size="6.8" fill="#16355e" font-weight="700">lends</text>
+
+  <!-- RETURN PATH -->
+  <path d="M613 120 L613 152 L428 152" fill="none" stroke="#2f7d55" stroke-width="2.2" marker-end="url(#g1)"/>
+  <text x="530" y="147" text-anchor="middle" font-size="8.5" font-weight="700" fill="#2f7d55">interest, quarterly</text>
+  <path d="M428 160 L428 186 L243 186" fill="none" stroke="#2f7d55" stroke-width="2.2" marker-end="url(#g1)"/>
+  <text x="345" y="181" text-anchor="middle" font-size="8.5" font-weight="700" fill="#2f7d55">yield, net of Ares&#8217; fee</text>
+  <path d="M243 194 L243 220 L70 220 L70 122" fill="none" stroke="#2f7d55" stroke-width="2.2" marker-end="url(#g1)"/>
+  <text x="165" y="215" text-anchor="middle" font-size="8.5" font-weight="700" fill="#2f7d55">the monthly annuity cheque</text>
+
+  <!-- FEE EXTRACTION -->
+  <rect x="346" y="240" width="164" height="52" rx="5" fill="#c8963e"/>
+  <text x="428" y="260" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff">ARES&#8217; SLICE</text>
+  <text x="428" y="276" text-anchor="middle" font-size="9" fill="#fdf3e2">~0.28% on insurance mandates,</text>
+  <text x="428" y="287" text-anchor="middle" font-size="9" fill="#fdf3e2">tiered 0.30% down to 0.15%</text>
+  <line x1="428" y1="160" x2="428" y2="237" stroke="#c8963e" stroke-width="2.2" stroke-dasharray="5 3" marker-end="url(#o1)"/>
+
+  <!-- WHY EACH PARTY WINS -->
+  <line x1="0" y1="315" x2="760" y2="315" stroke="#dfe5ec"/>
+  <text x="0" y="332" font-size="10.5" font-weight="700" fill="#0d2340">Why every party in the chain is better off &#8212; this is the answer to &#8220;is this just financial engineering?&#8221;</text>
+
+  <rect x="0" y="344" width="182" height="94" rx="4" fill="#f4f7fb" stroke="#dfe5ec"/>
+  <text x="10" y="362" font-size="9" font-weight="700" fill="#16355e">The saver</text>
+  <text x="10" y="378" font-size="8.5" fill="#33414f">Gets a higher guaranteed</text>
+  <text x="10" y="390" font-size="8.5" fill="#33414f">income than a government-</text>
+  <text x="10" y="402" font-size="8.5" fill="#33414f">bond-only insurer could</text>
+  <text x="10" y="414" font-size="8.5" fill="#33414f">offer, and never sees any</text>
+  <text x="10" y="426" font-size="8.5" fill="#33414f">of this complexity.</text>
+
+  <rect x="194" y="344" width="182" height="94" rx="4" fill="#f4f7fb" stroke="#dfe5ec"/>
+  <text x="204" y="362" font-size="9" font-weight="700" fill="#16355e">The insurer</text>
+  <text x="204" y="378" font-size="8.5" fill="#33414f">Earns a spread over what</text>
+  <text x="204" y="390" font-size="8.5" fill="#33414f">it promised, with assets</text>
+  <text x="204" y="402" font-size="8.5" fill="#33414f">whose duration matches its</text>
+  <text x="204" y="414" font-size="8.5" fill="#33414f">liabilities &#8212; without hiring</text>
+  <text x="204" y="426" font-size="8.5" fill="#33414f">300 credit analysts.</text>
+
+  <rect x="388" y="344" width="182" height="94" rx="4" fill="#f4f7fb" stroke="#dfe5ec"/>
+  <text x="398" y="362" font-size="9" font-weight="700" fill="#16355e">Ares</text>
+  <text x="398" y="378" font-size="8.5" fill="#33414f">Gets the stickiest capital in</text>
+  <text x="398" y="390" font-size="8.5" fill="#33414f">the industry. An insurer</text>
+  <text x="398" y="402" font-size="8.5" fill="#33414f">cannot redeem &#8212; it has a</text>
+  <text x="398" y="414" font-size="8.5" fill="#33414f">30-year liability. Low fee</text>
+  <text x="398" y="426" font-size="8.5" fill="#33414f">rate, near-permanent life.</text>
+
+  <rect x="582" y="344" width="178" height="94" rx="4" fill="#f4f7fb" stroke="#dfe5ec"/>
+  <text x="592" y="362" font-size="9" font-weight="700" fill="#16355e">The borrower</text>
+  <text x="592" y="378" font-size="8.5" fill="#33414f">Gets certainty of funding</text>
+  <text x="592" y="390" font-size="8.5" fill="#33414f">from one lender, in days</text>
+  <text x="592" y="402" font-size="8.5" fill="#33414f">not months, with terms</text>
+  <text x="592" y="414" font-size="8.5" fill="#33414f">tailored to it &#8212; which a</text>
+  <text x="592" y="426" font-size="8.5" fill="#33414f">syndicated bank loan can&#8217;t.</text>
+
+  <text x="0" y="460" font-size="8" fill="#6b7a8a">Fee rates: Ares FY2025 Form 10-K management fee table &#8212; Ares Insurance Solutions earns a tiered fee starting at 0.30% stepping down to 0.15% of monthly weighted average market value.</text>
+</svg>
+<figcaption><b>The chain has four links and no villain.</b> The reason this matters for your
+interview: when someone asks "what does Ares do?", the sophisticated answer is not "it invests" —
+it is <b>"it converts long-dated liabilities into long-dated assets, and charges a fee for the
+underwriting in between."</b></figcaption>
+</figure>
+
+<h3>3.3 How big is insurance at Ares, really?</h3>
+<p>The 10-K segment chart shows "Other Businesses" at just $9.1bn, which badly understates it.
+The real number is disclosed in a footnote, and this is where the edge is.</p>
+
+<div class="grid3">
+<div class="stat"><b>$86.5bn</b><span>Total insurance AUM</span><i>Money from insurance companies invested <b>across all</b> Ares strategies. Sits inside Credit, Real Assets etc — not in "Other".</i></div>
+<div class="stat t"><b>$25.9bn</b><span>Managed by AIS</span><i>Ares Insurance Solutions' own mandate, of which $16.9bn is sub-advised back into Ares vehicles.</i></div>
+<div class="stat g"><b>+54%</b><span>Insurance FPAUM growth</span><i>Year-on-year at Q2 2026 — <b>the fastest-growing channel in the entire firm.</b></i></div>
+</div>
+
+<p style="margin-top:3mm">The trend line is the story: insurance AUM was <b>$56.9bn at end-2023</b>,
+<b>$71.5bn at end-2024</b> and <b>$86.5bn at end-2025</b> — a 52% increase in two years.
+<span class="src">FY2023, FY2024 and FY2025 10-Ks, Investment Groups footnote 2.</span></p>
+
+<div class="callout warn">
+<span class="tag">Careful · the mistake most candidates will make</span>
+<p><b>Ares does not run the Apollo model, and saying it does will expose you.</b></p>
+<p>Apollo <b>owns</b> Athene. KKR <b>owns</b> Global Atlantic outright. Those firms put an
+insurance company's balance sheet on their own books: they capture the investment spread as
+well as a fee, but they also carry the insurance risk, the capital requirements and the
+ratings-agency scrutiny.</p>
+<p style="margin-bottom:0">Ares deliberately went the other way. Its partner insurer,
+<b>Aspida</b>, is capitalised largely by <b>third-party money</b> — in January 2025 Ares
+announced it had raised <b>over $2.3bn of equity commitments</b> for Aspida "from third parties,
+Ares and affiliates of Ares," on top of $700m of credit facilities. Ares is treated by the
+Bermuda Monetary Authority as the "shareholder controller" of Aspida Re, and acts as its
+"dedicated investment manager, capital solutions and corporate development partner" — but the
+economics are structured to keep the balance sheet risk largely <i>off</i> Ares.</p>
+</div>
+
+<div class="callout edge">
+<span class="tag">Edge · Ares' own words, and the phrase to use</span>
+<p style="margin-bottom:0">The 2025 Annual Shareholder Letter, signed by Michael Arougheti and
+Antony Ressler, states: <i>"With more than $150 billion in available capital matched with our
+<b>asset-light balance sheet approach</b>, we believe we are very well positioned for growth in
+the year ahead."</i> <b>"Asset-light" is the firm's own self-description.</b> Use that phrase.
+It signals you have read the shareholder letter, not the website.</p>
+</div>
+
+<h3>3.4 So where does Ares' resilience actually come from?</h3>
+<p>You asked whether the balance sheet is what has protected Ares. It is worth being precise,
+because the honest answer is more interesting than the assumed one.</p>
+<table>
+<tr><th style="width:26%">The protection</th><th style="width:37%">What it is</th><th>The evidence</th></tr>
+<tr><td><b>Fee-base lock-in</b><br><span class="pill green">Primary</span></td>
+<td>Capital that legally cannot leave quickly, so fees survive a bad market.</td>
+<td><b>93%</b> of management fees from perpetual or long-dated funds; <b>$223.3bn</b> of perpetual capital at Q2 2026, up 34% YoY.</td></tr>
+<tr><td><b>Diversification</b><br><span class="pill green">Primary</span></td>
+<td>Four groups, ~38 products, so a freeze in one channel doesn't stop the firm.</td>
+<td>2025 fundraising: $66.9bn Credit, $24.0bn Real Assets, $12.9bn Secondaries, $2.3bn PE, $7.1bn Other.</td></tr>
+<tr><td><b>Client stickiness</b><br><span class="pill green">Primary</span></td>
+<td>Existing clients re-upping and buying second and third products.</td>
+<td><b>79%</b> of 2025 institutional fundraising came from existing investors. Relationships up from 1,090 (2020) to 2,850 (2025).</td></tr>
+<tr><td><b>Insurance capital</b><br><span class="pill teal">Real but indirect</span></td>
+<td>Not an owned balance sheet — but insurers as <i>clients</i> provide capital that structurally cannot run.</td>
+<td>$86.5bn of insurance AUM; insurance FPAUM +54% YoY.</td></tr>
+<tr><td><b>Owned balance sheet</b><br><span class="pill red">Not the answer</span></td>
+<td>Ares explicitly runs "asset-light". This is Apollo's and KKR's protection, not Ares'.</td>
+<td>2025 Annual Letter; Aspida funded with $2.3bn of largely third-party equity.</td></tr>
+</table>
+
+<div class="callout">
+<span class="tag">Say this</span>
+<p style="margin-bottom:0">"I think Ares' resilience is often misattributed. It isn't an owned
+insurance balance sheet the way Apollo has Athene — Ares describes itself as asset-light. The
+protection is structural on the <i>fee</i> side: ninety-three percent of management fees come
+from perpetual or long-dated vehicles, so the revenue base doesn't reprice when sentiment turns.
+Insurance matters enormously, but as a <i>client</i> segment — eighty-six and a half billion of
+insurance AUM growing fifty-four percent — because an insurer with a thirty-year annuity book
+is the one client who structurally cannot redeem in a panic."</p>
+</div>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 4</div>
+  <h2>How the firm's thinking changed, 2019&#8211;2026</h2>
+  <p>Read seven annual reports back to back and the strategy shift is visible in the vocabulary, not just the numbers.</p>
+</div>
+
+<section>
+<p class="lead">This section is built by reading the FY2019 through FY2025 Form 10-Ks line by line
+and tracking what changed. It is the part of this report you are least likely to be able to get
+anywhere else, and the part most likely to make a partner sit up.</p>
+
+<h3>4.1 The headline numbers</h3>
+<table>
+<tr><th>Fiscal year</th><th class="num">AUM</th><th class="num">Gross raised</th><th class="num">Vehicles</th><th class="num">Employees</th><th class="num">Offices</th><th class="num">Institutional relationships</th></tr>
+<tr><td><b>2019</b></td><td class="num">$148.9bn</td><td class="num">$23.8bn</td><td class="num">75+</td><td class="num">1,200+</td><td class="num">20+</td><td class="num">850+</td></tr>
+<tr><td><b>2020</b></td><td class="num">$197.0bn</td><td class="num">$41.2bn</td><td class="num">85+</td><td class="num">1,450+</td><td class="num">25+</td><td class="num">1,090+</td></tr>
+<tr><td><b>2021</b></td><td class="num">$305.8bn</td><td class="num">$76.8bn</td><td class="num">135+</td><td class="num">2,100+</td><td class="num">40+</td><td class="num">1,800+</td></tr>
+<tr><td><b>2022</b></td><td class="num">$352.0bn</td><td class="num">$56.8bn</td><td class="num">135+</td><td class="num">2,550+</td><td class="num">30+</td><td class="num">1,900+</td></tr>
+<tr><td><b>2023</b></td><td class="num">$418.8bn</td><td class="num">$74.5bn</td><td class="num">125+</td><td class="num">2,850+</td><td class="num">35+</td><td class="num">2,300+</td></tr>
+<tr><td><b>2024</b></td><td class="num">$484.4bn</td><td class="num">$92.7bn</td><td class="num">185+</td><td class="num">3,200+</td><td class="num">35+</td><td class="num">approx. 2,700</td></tr>
+<tr><td><b>2025</b></td><td class="num"><b>$622.5bn</b></td><td class="num"><b>$113.2bn</b></td><td class="num">190+</td><td class="num">4,250+</td><td class="num">55+</td><td class="num">2,850+</td></tr>
+<tr><td><b>Q2 2026</b></td><td class="num"><b>$671.3bn</b></td><td class="num">$36.4bn <small>(qtr)</small></td><td class="num">&#8212;</td><td class="num">&#8212;</td><td class="num">&#8212;</td><td class="num">&#8212;</td></tr>
+</table>
+<p class="tbl-note">Every figure taken from the "Overview" paragraph of the relevant Form 10-K, Item 1. Q2 2026 from earnings release.</p>
+
+<figure>
+<svg viewBox="0 0 760 330" role="img" aria-label="Bar chart of Ares AUM growth 2019 to Q2 2026">
+  <text x="0" y="13" font-size="10.5" font-weight="700" fill="#0d2340">Assets under management, $bn &#8212; a 4.5x increase in six and a half years</text>
+  <line x1="42" y1="292" x2="755" y2="292" stroke="#33414f" stroke-width="1.2"/>
+  <g font-size="8" fill="#6b7a8a" text-anchor="end">
+    <text x="37" y="295">0</text><text x="37" y="230">200</text><text x="37" y="165">400</text><text x="37" y="100">600</text>
+  </g>
+  <line x1="42" y1="227" x2="755" y2="227" stroke="#eef1f5"/><line x1="42" y1="162" x2="755" y2="162" stroke="#eef1f5"/><line x1="42" y1="97" x2="755" y2="97" stroke="#eef1f5"/>
+  <g>
+    <rect x="60"  y="243.6" width="66" height="48.4" fill="#7d93ad"/><text x="93"  y="237" text-anchor="middle" font-size="9" font-weight="700" fill="#0d2340">148.9</text><text x="93"  y="306" text-anchor="middle" font-size="8.5" fill="#33414f">2019</text>
+    <rect x="147" y="228"   width="66" height="64"   fill="#7d93ad"/><text x="180" y="221" text-anchor="middle" font-size="9" font-weight="700" fill="#0d2340">197.0</text><text x="180" y="306" text-anchor="middle" font-size="8.5" fill="#33414f">2020</text>
+    <rect x="234" y="192.6" width="66" height="99.4" fill="#4f6b8c"/><text x="267" y="186" text-anchor="middle" font-size="9" font-weight="700" fill="#0d2340">305.8</text><text x="267" y="306" text-anchor="middle" font-size="8.5" fill="#33414f">2021</text>
+    <rect x="321" y="177.6" width="66" height="114.4" fill="#4f6b8c"/><text x="354" y="171" text-anchor="middle" font-size="9" font-weight="700" fill="#0d2340">352.0</text><text x="354" y="306" text-anchor="middle" font-size="8.5" fill="#33414f">2022</text>
+    <rect x="408" y="155.9" width="66" height="136.1" fill="#2f4f75"/><text x="441" y="149" text-anchor="middle" font-size="9" font-weight="700" fill="#0d2340">418.8</text><text x="441" y="306" text-anchor="middle" font-size="8.5" fill="#33414f">2023</text>
+    <rect x="495" y="134.6" width="66" height="157.4" fill="#2f4f75"/><text x="528" y="128" text-anchor="middle" font-size="9" font-weight="700" fill="#0d2340">484.4</text><text x="528" y="306" text-anchor="middle" font-size="8.5" fill="#33414f">2024</text>
+    <rect x="582" y="89.8"  width="66" height="202.2" fill="#0d2340"/><text x="615" y="83"  text-anchor="middle" font-size="9" font-weight="700" fill="#0d2340">622.5</text><text x="615" y="306" text-anchor="middle" font-size="8.5" fill="#33414f">2025</text>
+    <rect x="669" y="73.9"  width="66" height="218.1" fill="#c8963e"/><text x="702" y="67"  text-anchor="middle" font-size="9" font-weight="700" fill="#c8963e">671.3</text><text x="702" y="306" text-anchor="middle" font-size="8.5" font-weight="700" fill="#c8963e">Q2&#8217;26</text>
+  </g>
+  <text x="0" y="325" font-size="8" fill="#6b7a8a">Source: Ares Form 10-K filings FY2019&#8211;FY2025; Q2 2026 earnings release. Ares reports a 26% five-year and 21% ten-year AUM CAGR.</text>
+</svg>
+</figure>
+
+<h3>4.2 The vocabulary shift — the finding that matters most</h3>
+<p>Counting how often a word appears in a legal document sounds trivial. It is not. A 10-K is
+drafted by lawyers and signed by the CEO; language changes only when management decides the
+business has changed. Here is what happened to the word <b>"wealth"</b>:</p>
+
+<figure>
+<svg viewBox="0 0 760 250" role="img" aria-label="Chart showing frequency of the word wealth in Ares 10-K filings from 2019 to 2025">
+  <text x="0" y="13" font-size="10.5" font-weight="700" fill="#0d2340">Occurrences of the word &#8220;wealth&#8221; in the Ares Form 10-K</text>
+  <line x1="42" y1="205" x2="755" y2="205" stroke="#33414f" stroke-width="1.2"/>
+  <g font-size="8" fill="#6b7a8a" text-anchor="end"><text x="37" y="208">0</text><text x="37" y="145">30</text><text x="37" y="85">60</text><text x="37" y="45">80</text></g>
+  <g>
+    <rect x="62"  y="197" width="70" height="8"   fill="#b9c6d5"/><text x="97"  y="192" text-anchor="middle" font-size="9" font-weight="700" fill="#6b7a8a">4</text><text x="97"  y="220" text-anchor="middle" font-size="8.5" fill="#33414f">2019</text>
+    <rect x="152" y="197" width="70" height="8"   fill="#b9c6d5"/><text x="187" y="192" text-anchor="middle" font-size="9" font-weight="700" fill="#6b7a8a">4</text><text x="187" y="220" text-anchor="middle" font-size="8.5" fill="#33414f">2020</text>
+    <rect x="242" y="183" width="70" height="22"  fill="#b9c6d5"/><text x="277" y="178" text-anchor="middle" font-size="9" font-weight="700" fill="#6b7a8a">11</text><text x="277" y="220" text-anchor="middle" font-size="8.5" fill="#33414f">2021</text>
+    <rect x="332" y="179" width="70" height="26"  fill="#b9c6d5"/><text x="367" y="174" text-anchor="middle" font-size="9" font-weight="700" fill="#6b7a8a">13</text><text x="367" y="220" text-anchor="middle" font-size="8.5" fill="#33414f">2022</text>
+    <rect x="422" y="185" width="70" height="20"  fill="#b9c6d5"/><text x="457" y="180" text-anchor="middle" font-size="9" font-weight="700" fill="#6b7a8a">10</text><text x="457" y="220" text-anchor="middle" font-size="8.5" fill="#33414f">2023</text>
+    <rect x="512" y="69"  width="70" height="136" fill="#c8963e"/><text x="547" y="64"  text-anchor="middle" font-size="10" font-weight="700" fill="#c8963e">68</text><text x="547" y="220" text-anchor="middle" font-size="8.5" font-weight="700" fill="#0d2340">2024</text>
+    <rect x="602" y="27"  width="70" height="178" fill="#c8963e"/><text x="637" y="22"  text-anchor="middle" font-size="10" font-weight="700" fill="#c8963e">89</text><text x="637" y="220" text-anchor="middle" font-size="8.5" font-weight="700" fill="#0d2340">2025</text>
+  </g>
+  <path d="M497 40 L497 205" stroke="#b4413c" stroke-width="1.3" stroke-dasharray="4 3"/>
+  <text x="690" y="120" text-anchor="middle" font-size="8.5" font-weight="700" fill="#b4413c">the pivot</text>
+  <text x="0" y="243" font-size="8" fill="#6b7a8a">Author&#8217;s count, full text of each Form 10-K. Over the same period the word &#8220;retail&#8221; fell from 24 (2023) to 10 (2024).</text>
+</svg>
+<figcaption><b>Between FY2023 and FY2024 the firm stopped saying "retail" and started saying
+"wealth."</b> That is not cosmetic. The FY2024 10-K also renamed the vehicles themselves — what
+had been "non-traded vehicles" in FY2023 became <b>"perpetual wealth vehicles"</b>. The firm
+re-labelled a channel it had treated as an accessory into a core, named, permanent pillar of the
+business.</figcaption>
+</figure>
+
+<h3>4.3 The sales team was rebuilt — and this is your section</h3>
+<p>The 10-K discloses the size of the in-house relationship management team each year. Here is
+the series, <b>with an important caveat</b>: the definition changed. In FY2019 and FY2020 Ares
+disclosed a combined "strategy <i>and</i> relationship management teams" figure (~120 and ~140).
+From FY2021 it narrowed to the relationship management team alone. So the honest comparison
+runs from 2021 onwards:</p>
+
+<figure>
+<svg viewBox="0 0 760 235" role="img" aria-label="Chart of Ares in-house relationship management team headcount 2021 to 2025">
+  <text x="0" y="13" font-size="10.5" font-weight="700" fill="#0d2340">In-house relationship management professionals &#8212; the client-facing sales team</text>
+  <line x1="42" y1="190" x2="700" y2="190" stroke="#33414f" stroke-width="1.2"/>
+  <g font-size="8" fill="#6b7a8a" text-anchor="end"><text x="37" y="193">0</text><text x="37" y="128">100</text><text x="37" y="63">200</text></g>
+  <g>
+    <rect x="72"  y="144.5" width="88" height="45.5" fill="#7d93ad"/><text x="116" y="138" text-anchor="middle" font-size="10" font-weight="700" fill="#0d2340">70+</text><text x="116" y="206" text-anchor="middle" font-size="8.5" fill="#33414f">FY2021</text>
+    <rect x="192" y="154.3" width="88" height="35.7" fill="#7d93ad"/><text x="236" y="148" text-anchor="middle" font-size="10" font-weight="700" fill="#0d2340">55+</text><text x="236" y="206" text-anchor="middle" font-size="8.5" fill="#33414f">FY2022</text>
+    <rect x="312" y="102.3" width="88" height="87.7" fill="#1f7a72"/><text x="356" y="96"  text-anchor="middle" font-size="10" font-weight="700" fill="#1f7a72">135+</text><text x="356" y="206" text-anchor="middle" font-size="8.5" fill="#33414f">FY2023</text>
+    <rect x="432" y="76.3"  width="88" height="113.7" fill="#1f7a72"/><text x="476" y="70"  text-anchor="middle" font-size="10" font-weight="700" fill="#1f7a72">175+</text><text x="476" y="206" text-anchor="middle" font-size="8.5" fill="#33414f">FY2024</text>
+    <rect x="552" y="60"    width="88" height="130"   fill="#0d2340"/><text x="596" y="53"  text-anchor="middle" font-size="10" font-weight="700" fill="#0d2340">200+</text><text x="596" y="206" text-anchor="middle" font-size="8.5" font-weight="700" fill="#0d2340">FY2025</text>
+  </g>
+  <text x="655" y="100" font-size="9" font-weight="700" fill="#c8963e">3.6x</text>
+  <text x="655" y="113" font-size="8" fill="#6b7a8a">in three</text>
+  <text x="655" y="124" font-size="8" fill="#6b7a8a">years</text>
+  <text x="0" y="228" font-size="8" fill="#6b7a8a">Source: Ares Form 10-K FY2021&#8211;FY2025, Item 1 &#8212; Investor Base and Fundraising. Separately, Ares Wealth Management Solutions employs 175+ (FY2024) rising to 140&#8211;175+ professionals dedicated to the wealth channel.</text>
+</svg>
+<figcaption>Ares grew its institutional client-facing team from <b>55+ to 200+ in three years</b>
+— while the wider industry was cutting distribution headcount. Separately, Ares Wealth Management
+Solutions employs <b>175+ professionals</b> covering the wealth channel. <b>Add them together and
+Ares has close to 400 people whose full-time job is raising and keeping capital.</b></figcaption>
+</figure>
+
+<div class="callout edge">
+<span class="tag">Edge · why the 2022 dip is the interesting bit</span>
+<p style="margin-bottom:0">The team <i>fell</i> from 70+ to 55+ in FY2022 — the year fundraising
+dropped from $76.8bn to $56.8bn as rates spiked. Then Ares tripled it. Management looked at the
+worst fundraising year of the period and concluded the answer was <b>more distribution, not
+less</b>. That is a genuine strategic conviction, and it is precisely why they are hiring into
+your team now. If you want one line that proves you understand where you'd be sitting, it is
+this one.</p>
+</div>
+
+<h3>4.4 The structural shifts, in order</h3>
+<table>
+<tr><th style="width:14%">Period</th><th style="width:26%">The shift</th><th>What the filings show</th></tr>
+<tr><td><b>2019&#8211;2020</b></td><td>From three groups to a platform</td>
+<td>FY2019 describes "three distinct but complementary investment groups in Credit, Private Equity and Real Estate." FY2020 adds "Strategic Initiatives." The firm starts thinking in terms of a platform rather than three funds.</td></tr>
+<tr><td><b>2021</b></td><td>Buy the gaps</td>
+<td>Three acquisitions in one year (Landmark, Black Creek, AMP Capital). AUM jumps 55% to $305.8bn. "Secondary Solutions" appears as a named group. Headcount jumps from 1,450 to 2,100.</td></tr>
+<tr><td><b>2022</b></td><td>Real <i>Estate</i> becomes Real <i>Assets</i></td>
+<td>A one-word rename that signals infrastructure is now co-equal with property. Also the year fundraising fell 26% — the stress test.</td></tr>
+<tr><td><b>2023</b></td><td>Simplify to four</td>
+<td>"Strategic Initiatives" disappears as a named group. Four clean groups: Credit, Private Equity, Real Assets, Secondaries. Relationship management team more than doubles to 135+.</td></tr>
+<tr><td><b>2024</b></td><td><b>Retail becomes Wealth</b></td>
+<td>The vocabulary pivot. "Perpetual wealth vehicles" enters the lexicon. Ordering of groups changes to <b>Credit, Real Assets, Private Equity, Secondaries</b> — credit and real assets promoted, PE demoted to third.</td></tr>
+<tr><td><b>2025</b></td><td>Vertical integration and geography</td>
+<td>GCP closes. Offices go from 35+ to 55+, countries from 15+ to 25+, staff from 3,200 to 4,250. Ares brands its own operating platforms — <b>Marq Logistics</b> (industrial property) and <b>Ada Infrastructure</b> (data centres). Capital Solutions Group formalised. S&amp;P 500 inclusion.</td></tr>
+</table>
+
+<div class="callout">
+<span class="tag">Say this</span>
+<p style="margin-bottom:0">"If you read the 10-Ks back to back, there are two turns. The first is
+2021 — Ares bought the capabilities it didn't have, Landmark for secondaries and Black Creek and
+AMP for real assets. The second is 2024, and it's a language change: 'retail' becomes 'wealth',
+and non-traded vehicles get renamed 'perpetual wealth vehicles'. That's the firm deciding the
+individual investor is a permanent pillar rather than an experiment. Both turns point the same
+way — toward distribution being the constrained resource. Which is presumably why the
+relationship management team went from fifty-five people to over two hundred in three years."</p>
+</div>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 5</div>
+  <h2>The product shelf</h2>
+  <p>Every fund you could plausibly be asked about, what it raised, and how it has performed.</p>
+</div>
+
+<section>
+<p>Think of Ares as a shop. Part 2 showed the departments; this is the inventory. You will not be
+expected to know all of it — but knowing five funds by name, vintage and size puts you ahead of
+essentially every other applicant.</p>
+
+<h3>5.1 The flagship perpetual vehicles &#8212; the fee annuities</h3>
+<table>
+<tr><th style="width:26%">Vehicle</th><th style="width:16%">Strategy</th><th class="num" style="width:9%">Started</th><th class="num" style="width:11%">AUM</th><th class="num" style="width:11%">Net return</th><th>Why it matters</th></tr>
+<tr><td><b>ARCC</b><br><small>Ares Capital Corp (Nasdaq)</small></td><td>US direct lending</td><td class="num">2004</td><td class="num">$35.9bn</td><td class="num">12.0% <small>s.i.</small></td>
+<td>The largest publicly traded BDC. <b>~31% of all Credit Group management fees.</b> Twenty-one years of track record — the single most valuable sales asset the firm owns.</td></tr>
+<tr><td><b>ASIF</b><br><small>Ares Strategic Income Fund</small></td><td>US direct lending</td><td class="num">2023</td><td class="num">$24.3bn</td><td class="num">10.9% <small>s.i.</small></td>
+<td>The non-traded BDC — the flagship <b>wealth</b> product. Went from zero to $24bn in under three years. Also the source of the 2026 redemption story (Part 9).</td></tr>
+<tr><td><b>CADC</b></td><td>US direct lending</td><td class="num">2017</td><td class="num">$8.7bn</td><td class="num">7.0% <small>s.i.</small></td><td>Institutional direct lending vehicle.</td></tr>
+<tr><td><b>Open-ended core alternative credit fund</b></td><td>Alternative credit</td><td class="num">2021</td><td class="num">$7.5bn</td><td class="num">8.8% <small>s.i.</small></td><td>Perpetual asset-based finance. Ares donates 5% of its incentive fees here to charity.</td></tr>
+<tr><td><b>Open-ended European direct lending fund</b></td><td>European DL</td><td class="num">2024</td><td class="num">$6.4bn</td><td class="num">9.6% <small>s.i.</small></td><td>Newest perpetual — $6.4bn in under two years shows the machine working.</td></tr>
+<tr><td><b>Industrial non-traded REIT</b></td><td>Real estate</td><td class="num">2017</td><td class="num">$7.6bn</td><td class="num">8.5% <small>s.i.</small></td><td rowspan="3">The real estate perpetual complex. The <b>J-REIT</b> is Tokyo-listed and has returned 13.3% since inception — evidence Ares' Japan business predates GCP.</td></tr>
+<tr><td><b>J-REIT</b> <small>(Japan)</small></td><td>Real estate</td><td class="num">2012</td><td class="num">$7.5bn</td><td class="num">13.3% <small>s.i.</small></td></tr>
+<tr><td><b>Diversified non-traded REIT</b></td><td>Real estate</td><td class="num">2012</td><td class="num">$7.4bn</td><td class="num">6.5% <small>s.i.</small></td></tr>
+<tr><td><b>APMF</b></td><td>PE secondaries</td><td class="num">2022</td><td class="num">$5.0bn</td><td class="num">14.2% <small>s.i.</small></td><td>Best since-inception net return of the perpetual set.</td></tr>
+</table>
+<p class="tbl-note">"s.i." = annualised since inception, net of fees. Source: Ares FY2025 Form 10-K, Fund Performance Metrics tables, as at 31 December 2025. Past performance is not indicative of future results.</p>
+
+<h3>5.2 The drawdown funds &#8212; the ones you raise, close and repeat</h3>
+<table>
+<tr><th style="width:19%">Fund</th><th style="width:16%">Strategy</th><th class="num" style="width:8%">Vintage</th><th class="num" style="width:10%">AUM</th><th class="num" style="width:12%">Commitments</th><th class="num" style="width:9%">Net MoIC</th><th class="num" style="width:9%">Net IRR</th><th>Stage</th></tr>
+<tr><td><b>SDL III</b><br><small>Senior Direct Lending III</small></td><td>US direct lending</td><td class="num">2023</td><td class="num">$27.4bn</td><td class="num">$15.3bn equity<br><small>$33.6bn total base</small></td><td class="num">1.1&#8211;1.2x</td><td class="num">9.6&#8211;17.3%</td><td>Deploying</td></tr>
+<tr><td><b>ACE VI</b><br><small>Ares Capital Europe VI</small></td><td>European DL</td><td class="num">2022</td><td class="num">$24.7bn</td><td class="num">$7.4bn unlev.<br>$9.7bn lev.</td><td class="num">1.1&#8211;1.2x</td><td class="num">8.8&#8211;13.2%</td><td>Deploying</td></tr>
+<tr><td><b>ACE V</b></td><td>European DL</td><td class="num">2020</td><td class="num">$17.4bn</td><td class="num">$7.0bn / $6.4bn</td><td class="num">1.3&#8211;1.4x</td><td class="num">7.5&#8211;10.3%</td><td>Harvesting</td></tr>
+<tr><td><b>SDL II</b></td><td>US direct lending</td><td class="num">2021</td><td class="num">$16.3bn</td><td class="num">$2.0bn / $6.0bn</td><td class="num">1.2&#8211;1.3x</td><td class="num">8.9&#8211;13.3%</td><td>Harvesting</td></tr>
+<tr><td><b>ASOF II</b><br><small>Special Opportunities II</small></td><td>Opportunistic credit</td><td class="num">2021</td><td class="num">$9.1bn</td><td class="num">$7.1bn</td><td class="num">1.3x</td><td class="num">13.1%</td><td>Deploying</td></tr>
+<tr><td><b>Pathfinder II</b></td><td>Alternative credit</td><td class="num">2023</td><td class="num">$7.2bn</td><td class="num">$6.6bn</td><td class="num">1.2x</td><td class="num">15.3%</td><td>Deploying</td></tr>
+<tr><td><b>PCS II</b><br><small>Private Credit Solutions II</small></td><td>US direct lending</td><td class="num">2020</td><td class="num">$6.5bn</td><td class="num">$5.1bn</td><td class="num">1.3x</td><td class="num">9.2%</td><td>Deploying</td></tr>
+<tr><td><b>ACE IV</b></td><td>European DL</td><td class="num">2018</td><td class="num">$5.2bn</td><td class="num">$2.9bn / $4.8bn</td><td class="num">1.3&#8211;1.4x</td><td class="num">5.7&#8211;7.7%</td><td>Harvesting</td></tr>
+<tr><td><b>LEP XVI</b></td><td>PE secondaries</td><td class="num">2016</td><td class="num">$4.1bn</td><td class="num">$4.9bn</td><td class="num">1.2x</td><td class="num">8.6%</td><td>Harvesting</td></tr>
+<tr><td><b>EIP II</b></td><td>European logistics</td><td class="num">2020</td><td class="num">$4.1bn</td><td class="num">$1.8bn</td><td class="num">1.1x</td><td class="num">2.4%</td><td>Harvesting</td></tr>
+</table>
+<p class="tbl-note">Where two figures are shown, they are the unlevered and levered sleeves of the same fund. "MoIC" = multiple of invested capital. Source: FY2025 10-K Fund Performance Metrics, 31 Dec 2025.</p>
+
+<div class="callout edge">
+<span class="tag">Edge · read the ladder, not the rows</span>
+<p style="margin-bottom:0">Look at the European direct lending series: <b>ACE IV (2018) $2.9bn
+&#8594; ACE V (2020) $7.0bn &#8594; ACE VI (2022) $7.4bn</b>, with fund AUM rising $5.2bn &#8594;
+$17.4bn &#8594; $24.7bn. <b>That ladder is the single best illustration of what your job produces.</b>
+Each successor fund is larger because the previous one performed and because the relationship
+team converted more of the existing base and added new investors. In 2025, <b>79% of institutional
+fundraising came from existing investors</b>. The job is compounding a book, not cold-calling.</p>
+</div>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 6</div>
+  <h2>Strategic moves: what Ares bought, and why</h2>
+  <p>Ares' growth is roughly half organic, half acquired. The pattern behind the deals is very consistent.</p>
+</div>
+
+<section>
+<table>
+<tr><th class="num" style="width:8%">Year</th><th style="width:20%">Target</th><th class="num" style="width:11%">Price / size</th><th style="width:17%">What it bought</th><th>The strategic logic</th></tr>
+<tr><td class="num"><b>2020</b></td><td><b>SSG Capital Holdings</b></td><td class="num">~$6bn AUM</td><td>Asia-Pacific credit and special situations</td><td>Ares had almost no APAC presence. Bought a platform rather than building one. Today APAC credit is $11.5bn.</td></tr>
+<tr><td class="num"><b>2021</b></td><td><b>AMP Capital</b><br><small>infrastructure debt</small></td><td class="num">Controlling stake</td><td>Infrastructure debt team</td><td>Added a genuinely new asset class. Infrastructure is now $25.3bn.</td></tr>
+<tr><td class="num"><b>2021</b></td><td><b>Landmark Partners</b></td><td class="num">~$1.08bn<br><small>$19.6bn AUM</small></td><td>Secondaries &#8212; PE, real estate, infrastructure</td><td>Created the Secondaries Group from nothing. Now $42.1bn and the <b>highest-margin growth segment</b>: FRE up 65% in 2025 on management fees up 40%.</td></tr>
+<tr><td class="num"><b>2021</b></td><td><b>Black Creek Group</b></td><td class="num">$23.3bn assets built/bought</td><td>US industrial and core real estate; two non-traded REITs</td><td>Bought the <b>wealth distribution machine</b> as much as the property. The non-traded REITs became the template for the perpetual wealth strategy.</td></tr>
+<tr><td class="num"><b>2024</b></td><td><b>Walton Street Mexico</b></td><td class="num">$2.1bn AUM</td><td>Mexican industrial real estate</td><td>Nearshoring thesis: manufacturing moving from Asia to Mexico needs warehouses.</td></tr>
+<tr><td class="num"><b>2025</b></td><td><b>GCP International</b><br><small>from GLP Capital Partners</small></td><td class="num"><b>$3.7bn</b><br><small>+ up to $1.5bn earn-out</small></td><td>$44bn AUM in logistics, digital infrastructure, self-storage &#8212; ex-China</td><td>The largest deal in Ares' history. <b>Nearly doubled real estate AUM to ~$96bn</b>, added <b>470 investment professionals</b> and 13 new metro areas, and made Ares the <b>third-largest global owner-operator of logistics property</b>.</td></tr>
+</table>
+
+<div class="callout key">
+<span class="tag">The pattern &#8212; say this if asked about M&amp;A</span>
+<p style="margin-bottom:0">Ares does not buy competitors to buy market share in what it already
+does. <b>Every single acquisition added a capability Ares did not have</b> — a geography (SSG,
+Walton Street), an asset class (AMP, Landmark), or a distribution channel (Black Creek). The
+GCP deal added all three at once. The CEO's own filter, stated on the Q2 2026 call, is that a
+deal must be <i>"culturally accretive, strategically accretive, and financially accretive."</i>
+Contrast that with buying a rival direct lender — which Ares has never done, because it already
+has the scale there.</p>
+</div>
+
+<h3>6.1 Vertical integration: the newest idea</h3>
+<p>The 2025 shift is subtler than an acquisition. Ares has started <b>operating</b> assets, not
+just financing them, and it has given the operating businesses their own brands:</p>
+<div class="grid2">
+<div class="card"><h4>Marq Logistics</h4>
+<p style="margin-bottom:0">The consolidated global brand for Ares' industrial property platform,
+formed after GCP. Ares owns, develops and operates warehouses across the Americas, Europe and
+APAC — it is not merely a landlord-by-proxy.</p></div>
+<div class="card"><h4>Ada Infrastructure</h4>
+<p style="margin-bottom:0">The in-house data centre development and operating platform, staffed
+with people from hyperscalers. As of Q2 2026 it has <b>approximately 1 gigawatt of compute
+capacity</b> across seven large campuses. Ares raised its <b>first data centre development fund
+at $2.4bn</b> in 2025.</p></div>
+</div>
+<p style="margin-top:3mm">Why this matters commercially: an integrated owner-operator captures
+development profit, operating margin <i>and</i> the management fee, rather than just the fee.
+The 2025 letter says it "increases our ability to control value creation through the full
+investment lifecycle." For a client-facing role, it is also a <b>differentiated story to sell</b>
+— you are not offering exposure to data centres, you are offering exposure to a team that
+builds and runs them.</p>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 7</div>
+  <h2>Recent wins: closes, deals and client outcomes</h2>
+  <p>Specific, nameable, recent. These are your ammunition.</p>
+</div>
+
+<section>
+<h3>7.1 Fund closes &#8212; the "client success stories" you asked for</h3>
+<table>
+<tr><th style="width:23%">Close</th><th class="num" style="width:12%">Date</th><th class="num" style="width:13%">Size</th><th>The story &#8212; why it is impressive in <i>this</i> market</th></tr>
+<tr><td><b>Ares Pathfinder Fund III</b><br><small>asset-based finance</small></td><td class="num">Jun 2026</td><td class="num"><b>$8.5bn</b></td>
+<td>Target was $6.5bn. Closed <b>oversubscribed at a raised hard cap</b>, and held its <b>first and final close in under six months</b> from a January 2026 launch. Described as the <b>largest global ABF fund in the market</b>. Including related vehicles, the Pathfinder strategy raised <b>~$12.7bn in nine months</b>. <b>This happened during the worst private-credit sentiment in years.</b></td></tr>
+<tr><td><b>SDL III</b><br><small>US senior direct lending</small></td><td class="num">2024&#8211;25</td><td class="num"><b>$33.6bn</b><br><small>total capital base</small></td><td>~$15.3bn of equity commitments plus leverage and related vehicles. Among the largest direct lending funds ever raised anywhere.</td></tr>
+<tr><td><b>Japan Industrial Development Fund V</b></td><td class="num">2026</td><td class="num">$3.4bn</td><td>Beat the prior vintage's $2.5bn by 36% — proof the GCP Japan platform is compounding, not just consolidating.</td></tr>
+<tr><td><b>First data centre development fund</b></td><td class="num">2025</td><td class="num">$2.4bn</td><td>A brand-new product line raised from a standing start.</td></tr>
+<tr><td><b>Sports, Media &amp; Entertainment I</b></td><td class="num">2022</td><td class="num">$3.7bn</td><td>Target was $1.5bn; closed at more than double, oversubscribed. Fund II held a $1bn first close toward a $2bn target.</td></tr>
+</table>
+
+<h3>7.2 Named transactions</h3>
+<p>Ares disclosed these as selected Q2 2026 US direct lending transactions, where it acted as
+administrative agent, lead arranger and/or bookrunner supporting private equity sponsors:</p>
+<div class="card soft">
+<p style="margin-bottom:2mm"><b>AeriTek</b> &#183; <b>Atwell</b> &#183; <b>Frontline Road Safety</b>
+&#183; <b>Jiffy Lube</b> &#183; <b>MAI Capital Management</b> &#183; <b>Precinmac</b> &#183;
+<b>Relation Insurance</b> &#183; <b>Sunvair Aerospace Group</b> &#183; <b>Valcourt Group</b>,
+plus growth financing for <b>Firebird Music</b>.</p>
+<p style="margin-bottom:0"><small><b>Use Jiffy Lube.</b> It is the one name a non-specialist
+interviewer will recognise instantly, and it makes the abstraction concrete: "Ares lends to
+businesses like Jiffy Lube — real, cash-generative, mid-sized companies that a bank would once
+have syndicated."</small></p>
+</div>
+
+<p>On the sports side, the SME fund has committed capital across 19 portfolio companies including
+<b>Atl&#233;tico de Madrid</b>, the <b>San Diego Padres</b>, <b>McLaren Racing</b> and <b>Inter
+Miami CF</b>, with further stakes reported in the <b>Miami Dolphins</b> and <b>Chelsea FC</b>.
+This is the single easiest Ares product to talk about with genuine enthusiasm, and it is a real
+business — not a vanity line.</p>
+
+<h3>7.3 Scale of activity</h3>
+<div class="grid4">
+<div class="stat"><b>$55.0bn</b><span>US direct lending 2025</span><i>Across 358 transactions — a record year.</i></div>
+<div class="stat"><b>$52.3bn</b><span>Trailing 12m to Q2'26</span><i>$8.2bn closed in Q2 2026 alone.</i></div>
+<div class="stat"><b>$145.8bn</b><span>Deployed in 2025</span><i>Up from $106.7bn in 2024.</i></div>
+<div class="stat"><b>$170.0bn</b><span>Dry powder, Q2'26</span><i>Available capital, up 13% YoY.</i></div>
+</div>
+
+<div class="callout edge">
+<span class="tag">Edge · the deal nobody will mention</span>
+<p style="margin-bottom:0">In July 2026 Ares moved to sell roughly <b>$3.4bn (€3bn) of bundled
+limited partner interests in ACE IV</b>, its fourth European direct lending vintage, to
+credit-secondaries buyers — reported as potentially one of the largest private credit
+secondaries sales ever. Why it is clever: ACE IV is a 2018 fund in harvest mode. Rather than
+wait years for it to wind down, Ares is helping create liquidity for investors who want out —
+<b>and Ares also runs a credit secondaries business that buys exactly these assets</b>. It is a
+firm solving its own clients' liquidity problem using another of its own products. If you can
+articulate that, you are talking like someone who works there.</p>
+</div>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 8</div>
+  <h2>The competitive set</h2>
+  <p>Who Ares is measured against, and the one thing it genuinely does differently.</p>
+</div>
+
+<section>
+<h3>8.1 The scoreboard</h3>
+<table>
+<tr><th style="width:15%">Firm</th><th class="num" style="width:10%">AUM</th><th style="width:19%">Identity</th><th style="width:19%">Insurance model</th><th>How Ares differs</th></tr>
+<tr><td><b>Blackstone</b></td><td class="num">~$1.3tn</td><td>The everything-store. Real estate first, then credit, then everything.</td><td>Partner/manage; no owned life insurer at Apollo's scale.</td><td>Blackstone is broader and more brand-led. Ares is deeper in one thing — <b>credit is 65% of Ares vs a minority of Blackstone</b>.</td></tr>
+<tr><td><b>Apollo</b></td><td class="num">~$938bn</td><td>Credit + insurance conglomerate. Increasingly a lender competing with banks.</td><td><b>Owns Athene outright.</b> Balance-sheet heavy.</td><td>Apollo has ~86% of fee-earning assets in credit and captures the spread. <b>Ares takes fees only</b> — lower earnings per dollar, but far less balance-sheet risk.</td></tr>
+<tr><td><b>KKR</b></td><td class="num">~$744bn</td><td>Private equity house that added credit, infra and insurance.</td><td><b>Owns Global Atlantic</b> (100% since Jan 2024).</td><td>KKR is PE-led (~48% of fee assets in credit). <b>Ares' PE is only 4% of AUM</b> — Ares is not really competing for the same buyout mandates.</td></tr>
+<tr><td><b>Ares</b></td><td class="num"><b>~$671bn</b></td><td><b>Credit specialist at scale, plus real assets.</b></td><td><b>Asset-light.</b> Manages insurer money; Aspida largely third-party funded.</td><td>&#8212;</td></tr>
+<tr><td><b>Blue Owl</b></td><td class="num">~$290bn</td><td>The purest direct lending + GP-stakes play.</td><td>Growing insurance solutions arm.</td><td>Blue Owl is more concentrated in US direct lending and <b>has been hit hardest by 2026 redemptions</b> (see 9.3). Ares is more diversified across geography and asset class.</td></tr>
+<tr><td><b>Brookfield</b></td><td class="num">~$603bn <small>fee-bearing</small></td><td>Real assets and infrastructure first.</td><td>Owns Brookfield Wealth Solutions.</td><td>Different centre of gravity. Overlaps with Ares only in real assets.</td></tr>
+</table>
+<p class="tbl-note">AUM figures are approximate and drawn from 2026 market reporting; measurement bases differ between firms (Brookfield reports fee-bearing capital). Credit-concentration figures: Apollo 86% of fee-earning assets / 72% of base fees; Ares 66% / 65%; Blue Owl 53% / 61%; KKR 48% / 30%.</p>
+
+<h3>8.2 The positioning map</h3>
+<figure>
+<svg viewBox="0 0 760 400" role="img" aria-label="Positioning map of alternative asset managers by credit concentration and balance sheet intensity">
+  <line x1="70" y1="350" x2="720" y2="350" stroke="#33414f" stroke-width="1.3"/>
+  <line x1="70" y1="40" x2="70" y2="350" stroke="#33414f" stroke-width="1.3"/>
+  <text x="395" y="378" text-anchor="middle" font-size="10" font-weight="700" fill="#0d2340">How concentrated in credit &#8594;</text>
+  <text x="26" y="195" text-anchor="middle" font-size="10" font-weight="700" fill="#0d2340" transform="rotate(-90 26 195)">Balance-sheet intensity &#8594;</text>
+  <text x="90" y="365" font-size="8" fill="#6b7a8a">diversified</text>
+  <text x="690" y="365" text-anchor="end" font-size="8" fill="#6b7a8a">credit-pure</text>
+  <text x="58" y="330" text-anchor="end" font-size="8" fill="#6b7a8a">light</text>
+  <text x="58" y="55" text-anchor="end" font-size="8" fill="#6b7a8a">heavy</text>
+
+  <rect x="70" y="200" width="325" height="150" fill="#f6f9fc"/>
+  <rect x="395" y="200" width="325" height="150" fill="#eff7f6"/>
+  <text x="557" y="343" text-anchor="middle" font-size="8.5" font-style="italic" fill="#1f7a72">fee-driven credit specialists</text>
+  <text x="232" y="343" text-anchor="middle" font-size="8.5" font-style="italic" fill="#6b7a8a">fee-driven generalists</text>
+
+  <circle cx="150" cy="255" r="30" fill="#7d93ad" opacity=".85"/>
+  <text x="150" y="252" text-anchor="middle" font-size="9.5" font-weight="700" fill="#fff">BLACK-</text>
+  <text x="150" y="264" text-anchor="middle" font-size="9.5" font-weight="700" fill="#fff">STONE</text>
+  <text x="150" y="300" text-anchor="middle" font-size="8" fill="#6b7a8a">$1.3tn</text>
+
+  <circle cx="290" cy="130" r="24" fill="#5b4b8a" opacity=".85"/>
+  <text x="290" y="134" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">KKR</text>
+  <text x="290" y="168" text-anchor="middle" font-size="8" fill="#6b7a8a">$744bn &#183; owns Global Atlantic</text>
+
+  <circle cx="600" cy="98" r="28" fill="#b4413c" opacity=".88"/>
+  <text x="600" y="102" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">APOLLO</text>
+  <text x="600" y="140" text-anchor="middle" font-size="8" fill="#6b7a8a">$938bn &#183; owns Athene</text>
+
+  <circle cx="560" cy="285" r="27" fill="#0d2340"/>
+  <text x="560" y="282" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fff">ARES</text>
+  <text x="560" y="294" text-anchor="middle" font-size="7.5" fill="#9dc0e8">$671bn</text>
+  <circle cx="560" cy="285" r="35" fill="none" stroke="#c8963e" stroke-width="2" stroke-dasharray="4 3"/>
+
+  <circle cx="675" cy="300" r="21" fill="#1f7a72" opacity=".85"/>
+  <text x="675" y="298" text-anchor="middle" font-size="8.5" font-weight="700" fill="#fff">BLUE</text>
+  <text x="675" y="308" text-anchor="middle" font-size="8.5" font-weight="700" fill="#fff">OWL</text>
+  <text x="675" y="332" text-anchor="middle" font-size="8" fill="#6b7a8a">$290bn</text>
+
+  <circle cx="185" cy="180" r="22" fill="#d18b1e" opacity=".8"/>
+  <text x="185" y="177" text-anchor="middle" font-size="8.5" font-weight="700" fill="#fff">BROOK-</text>
+  <text x="185" y="187" text-anchor="middle" font-size="8.5" font-weight="700" fill="#fff">FIELD</text>
+
+  <path d="M600 240 Q580 250 566 250" fill="none" stroke="#c8963e" stroke-width="1.5"/>
+  <text x="612" y="228" font-size="9" font-weight="700" fill="#c8963e">Ares sits alone here:</text>
+  <text x="612" y="240" font-size="9" font-weight="700" fill="#c8963e">credit-concentrated</text>
+  <text x="612" y="252" font-size="9" font-weight="700" fill="#c8963e"><tspan font-style="italic">and</tspan> asset-light</text>
+  <text x="0" y="396" font-size="8" fill="#6b7a8a">Bubble size approximates AUM. Positions are illustrative, based on disclosed credit concentration and insurance ownership structure.</text>
+</svg>
+<figcaption><b>The quadrant is the argument.</b> Every other firm at Ares' scale that is this
+concentrated in credit has bought an insurance balance sheet to feed it. Ares is the largest
+firm that has stayed fee-only while going all-in on credit.</figcaption>
+</figure>
+
+<div class="callout key">
+<span class="tag">If asked: &#8220;what makes Ares different?&#8221; &#8212; the one distinct thing</span>
+<p><b>Most candidates will say "scale" or "culture." Both are true and both are forgettable.</b>
+Here is the sharper answer, and it has three layers:</p>
+<p><b>1. Ares is the scale leader in the two hardest direct lending markets simultaneously.</b>
+Plenty of firms are large in US direct lending. Very few are genuinely scaled in <i>European</i>
+direct lending, because it requires local teams in multiple legal and language jurisdictions.
+Ares has <b>$189.6bn in the US and $84.7bn in Europe</b>, covering 520+ and 435+ sponsors
+respectively. That two-continent scale is close to unreplicable, and it is why a European
+sponsor calls Ares.</p>
+<p style="margin-bottom:0"><b>2. It got there without an owned insurance balance sheet</b> — so
+its earnings are fee-based and the risk sits with clients' capital, not Ares'. <b>3. And it is
+vertically integrated in real assets</b> through Marq and Ada, which almost no credit-led peer
+is. Scale in credit, asset-light in structure, operator in real assets: that combination is
+genuinely unique.</p>
+</div>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 9</div>
+  <h2>The market right now &#8212; and why it is still a good time to join</h2>
+  <p>An honest read of the private credit slowdown, what it is doing to Ares, and the argument for going in anyway.</p>
+</div>
+
+<section>
+<p class="lead">You asked for macro news on fundraising, and specifically whether it is still a
+good time to want this role. The honest answer is <b>yes, but not for the reason most people
+give</b> — and being able to discuss the stress credibly will do more for you than pretending
+it isn't there.</p>
+
+<h3>9.1 What actually happened</h3>
+<p>Private credit had a decade-long boom. In late 2025 two bankruptcies punctured the confidence:</p>
+<ul>
+<li><b>Tricolor</b>, a subprime auto lender, filed in September 2025 after investigators found it
+had <b>pledged the same auto-loan collateral to multiple lenders</b>. Lenders were owed more
+than $900m.</li>
+<li><b>First Brands</b>, an auto parts supplier, collapsed with <b>$11.6bn of liabilities</b>
+amid creditor allegations of fabricated receivables, double-pledged inventory and diverted cash.</li>
+</ul>
+<p>Neither was a credit-cycle event. Both were <b>fraud</b>. Cambridge Associates' assessment is
+that they are idiosyncratic rather than systemic. But markets do not distinguish carefully in
+the moment, and the effect was a broad loss of confidence in an asset class that had never been
+stress-tested at its current size.</p>
+
+<h3>9.2 The numbers on the slowdown</h3>
+<div class="grid4">
+<div class="stat r"><b>&#8722;55%</b><span>US direct lending vol.</span><i>Q2 2026 vs Q1: $33.6bn from $74.7bn. Weakest quarter since Q2 2023.</i></div>
+<div class="stat r"><b>&#8722;82%</b><span>Non-traded BDC raising</span><i>Fell to $2bn in Q2 2026 from $11bn a year earlier — industry-wide.</i></div>
+<div class="stat r"><b>154</b><span>Deals completed</span><i>Down from 217 the prior quarter.</i></div>
+<div class="stat a"><b>~1.5%</b><span>Direct lending default rate</span><i>KBRA forecast for 2025 — <b>down</b> from 1.8% in 2024. Fundamentals held.</i></div>
+</div>
+<p style="margin-top:3mm">Note the tension in those four boxes: <b>activity and sentiment
+collapsed, but credit performance did not.</b> That gap is the whole investment case, and it is
+the gap Ares is exploiting.</p>
+
+<h3>9.3 The redemption story &#8212; including the bit that is bad for Ares</h3>
+<p>The clearest symptom of stress is investors asking for their money back from non-traded
+vehicles. These funds cap withdrawals at ~5% of shares per quarter, so when requests exceed that,
+they are pro-rated. Requests in 2026:</p>
+
+<figure>
+<svg viewBox="0 0 760 250" role="img" aria-label="Chart comparing redemption requests across non-traded credit funds in 2026">
+  <text x="0" y="13" font-size="10.5" font-weight="700" fill="#0d2340">2026 redemption requests as a % of shares outstanding, against the standard 5% quarterly cap</text>
+  <line x1="200" y1="36" x2="200" y2="200" stroke="#b4413c" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="204" y="46" font-size="8.5" font-weight="700" fill="#b4413c">5% cap</text>
+  <g font-size="9">
+    <text x="0" y="66" font-size="9" font-weight="700" fill="#0d2340">Blue Owl tech fund</text>
+    <rect x="200" y="55" width="410" height="15" fill="#b4413c"/><text x="618" y="67" font-size="9.5" font-weight="700" fill="#b4413c">41%</text>
+    <text x="0" y="94" font-size="9" font-weight="700" fill="#0d2340">Blue Owl OCIC</text>
+    <rect x="200" y="83" width="220" height="15" fill="#d18b1e"/><text x="428" y="95" font-size="9.5" font-weight="700" fill="#d18b1e">22%</text>
+    <text x="0" y="122" font-size="9" font-weight="700" fill="#0d2340">Ares ASIF <tspan font-weight="400" font-size="8">(Q2)</tspan></text>
+    <rect x="200" y="111" width="144" height="15" fill="#0d2340"/><text x="352" y="123" font-size="9.5" font-weight="700" fill="#0d2340">14.4%</text>
+    <text x="0" y="150" font-size="9" font-weight="700" fill="#0d2340">Ares ASIF <tspan font-weight="400" font-size="8">(Q1)</tspan></text>
+    <rect x="200" y="139" width="116" height="15" fill="#4f6b8c"/><text x="324" y="151" font-size="9.5" font-weight="700" fill="#4f6b8c">11.6%</text>
+    <text x="0" y="178" font-size="9" font-weight="700" fill="#0d2340">Apollo</text>
+    <rect x="200" y="167" width="112" height="15" fill="#7d93ad"/><text x="320" y="179" font-size="9.5" font-weight="700" fill="#7d93ad">11.2%</text>
+  </g>
+  <line x1="0" y1="212" x2="760" y2="212" stroke="#dfe5ec"/>
+  <text x="0" y="228" font-size="8.5" fill="#33414f"><tspan font-weight="700">Read it this way:</tspan> the whole sector is under pressure. Ares is squarely in the middle of the pack &#8212; materially better than Blue Owl, roughly level with Apollo.</text>
+  <text x="0" y="243" font-size="8" fill="#6b7a8a">Source: 2026 market reporting on quarterly tender offers. All funds shown capped repurchases at 5%.</text>
+</svg>
+</figure>
+
+<div class="callout warn">
+<span class="tag">Careful · do not claim Ares is immune</span>
+<p><b>Ares has pro-rated two consecutive quarterly tenders at ASIF.</b> In Q1 2026 requests hit
+11.6% against the 5% cap — 43.1% of each request was honoured, paying out $523.5m. In Q2 requests
+rose to 14.4%. If you walk in saying Ares has been untouched, an informed interviewer will
+correct you, and you will lose the room.</p>
+<p style="margin-bottom:0"><b>Say the nuanced version instead</b> — because the detail is genuinely
+favourable. Ares disclosed that repurchase requests from its <b>US private wealth channel — the
+largest part of ASIF's investor base — were only 2.4% of shares outstanding, a fall of more than
+35% quarter on quarter</b>. Nearly <b>half</b> of all redemption requests came from smaller
+non-US institutions and family offices which represent <b>less than 1% of the fund's 20,000+
+shareholders</b>. Management's summary: roughly <b>95% of the BDC's investor base did not want to
+redeem</b>. The pressure was concentrated in a thin, non-core, largely offshore tail.</p>
+</div>
+
+<h3>9.4 What Ares did while the market froze</h3>
+<div class="grid2">
+<div class="card"><h4 style="color:var(--green)">The counter-evidence</h4>
+<ul class="tight" style="margin-bottom:0">
+<li><b>Record $36.4bn raised in Q2 2026</b> — the best quarter in firm history, in the worst quarter for sentiment.</li>
+<li><b>~$66bn raised in H1 2026.</b></li>
+<li><b>Pathfinder III closed oversubscribed at $8.5bn</b> against a $6.5bn target, in under six months, while non-traded BDC fundraising industry-wide fell 82%.</li>
+<li><b>FRE up 20% to $491m</b>; FRE margin 42.3% YTD, ~100bps above prior year.</li>
+<li><b>Dividend raised over 20%</b> to $1.35/quarter.</li>
+<li><b>Insurance FPAUM +54% YoY</b> — the firm's fastest-growing channel.</li>
+</ul></div>
+<div class="card"><h4 style="color:var(--red)">The pressure points</h4>
+<ul class="tight" style="margin-bottom:0">
+<li>Two consecutive pro-rated tenders at ASIF.</li>
+<li>ARES shares down ~15% in 2026 — worse than Apollo and Blackstone (~12%), better than Blue Owl (~18%).</li>
+<li>Q2 revenue of $1.26bn <b>missed</b> consensus of $1.32bn.</li>
+<li>The FY2025 10-K itself concedes "increased negative publicity with respect to the private credit industry" following "certain high profile defaults and bankruptcies," while noting Ares "<b>has not been involved in those particular defaults</b>."</li>
+<li>Wealth channel gross commitments of $3.9bn grew only 15% YoY — decelerating.</li>
+</ul></div>
+</div>
+
+<h3>9.5 The three reasons this is a good time to join &#8212; in sales specifically</h3>
+
+<div class="card avoid">
+<h4><span class="pill teal">1</span> &nbsp;Distribution is the scarce resource, so distribution is where the hiring is</h4>
+<p style="margin-bottom:0">When money was easy, product raised itself and the constraint was
+deployment. Now capital is the constraint, which makes the people who source capital the
+constraint. Ares has already voted with its headcount: <b>55+ to 200+ relationship managers in
+three years, plus 175+ in wealth</b>. In a market where capital is hard to raise, a firm that
+just posted a record raise is the firm you want to be selling for — you are joining the platform
+that is <i>taking</i> share, not defending it.</p>
+</div>
+
+<div class="card avoid">
+<h4><span class="pill teal">2</span> &nbsp;The cross-sell opportunity is enormous and explicitly stated</h4>
+<p style="margin-bottom:0">From the 2025 Annual Letter: Ares ended the year with <b>eight
+semi-liquid products</b> and at least one product on <b>more than 80 global platforms</b> — but
+<i>"<b>nearly half of our global distribution partners currently offer just one Ares product</b>,
+highlighting the substantial opportunity to broaden our footprint within established partnerships
+and unlock incremental growth."</i> <b>That sentence is a job description.</b> Roughly half the
+firm's distribution relationships are single-product. Widening them does not require winning new
+clients — it requires someone who knows the shelf and the relationship. That is exactly what a
+Client Solutions analyst grows into.</p>
+</div>
+
+<div class="card avoid">
+<h4><span class="pill teal">3</span> &nbsp;Selling into a downturn is where you actually learn the job</h4>
+<p style="margin-bottom:0">Anyone can raise capital in 2021. Learning to raise it in 2026 — when
+your client has read the First Brands headlines and wants to know why your non-accruals are
+different — forces you to understand the product properly. And Ares' answer is strong:
+<b>US direct lending non-accruals under 2%, the non-traded BDC at 0.5%, portfolio EBITDA growth
+of 9% and 13% respectively</b>. Meanwhile the CEO notes the deployment environment has improved:
+<i>"spreads have widened, less competition and therefore, an ability to deploy maybe quicker and
+better returns."</i> Fewer lenders competing means better loans. The vintage being written now
+may be one of the best.</p>
+</div>
+
+<div class="callout">
+<span class="tag">Say this &#8212; the full answer to &#8220;why now?&#8221;</span>
+<p style="margin-bottom:0">"I know I'd be joining private credit at its first real test, and I
+think that's the argument for rather than against. The dislocation is a sentiment and liquidity
+event, not a credit event — Ares' US direct lending non-accruals are under two percent and
+portfolio EBITDA is still growing nine percent. Meanwhile the industry raised eighty-two percent
+less in non-traded BDCs last quarter and Ares had its largest fundraising quarter ever at
+thirty-six billion, and closed Pathfinder III oversubscribed at eight and a half billion against
+a six and a half billion target. When capital gets scarce, the constraint on the firm moves from
+deployment to distribution — which is precisely the team I'm applying to. And I'd rather learn
+to tell this story in a hard market than an easy one."</p>
+</div>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 10</div>
+  <h2>Your two roles: where they sit and what they actually do</h2>
+  <p>Investor Relations vs Client Solutions &#8212; the real difference, the reporting line, and the day-to-day.</p>
+</div>
+
+<section>
+<h3>10.1 First, answer your own question: are these roles closer to product or to sales?</h3>
+<p>You asked whether these teams sit nearer the investment side (implying the firm prioritises
+product) or the sales side (implying it prioritises distribution). <b>The 10-K answers this
+directly, and the answer is unusually clean.</b></p>
+
+<div class="callout edge">
+<span class="tag">Edge · the structural fact almost nobody will know</span>
+<p>Ares reports its financials in five buckets: the four investment groups, plus the
+<b>Operations Management Group (OMG)</b>. The 10-K states that the OMG provides support in
+"accounting/finance, operations, information technology, legal, compliance, human resources,
+<b>strategy and relationship management, and distribution, including AWMS</b>."</p>
+<p style="margin-bottom:0">So <b>Client Solutions, relationship management and wealth distribution
+sit in the OMG — not inside any investment group.</b> And critically: <i>"The OMG's revenues and
+expenses are <b>not allocated to our operating segments</b>."</i> The function is deliberately
+<b>horizontal</b> — it sits across all four investment groups rather than reporting into one.</p>
+</div>
+
+<figure>
+<svg viewBox="0 0 760 300" role="img" aria-label="Diagram showing the Operations Management Group sitting horizontally beneath all four Ares investment groups">
+  <text x="0" y="14" font-size="10.5" font-weight="700" fill="#0d2340">Where you would sit in the Ares operating structure</text>
+  <rect x="240" y="30" width="280" height="34" rx="4" fill="#0d2340"/>
+  <text x="380" y="52" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fff">ARES MANAGEMENT CORPORATION</text>
+
+  <line x1="380" y1="64" x2="380" y2="80" stroke="#33414f" stroke-width="1.3"/>
+  <line x1="90" y1="80" x2="670" y2="80" stroke="#33414f" stroke-width="1.3"/>
+  <g stroke="#33414f" stroke-width="1.3">
+    <line x1="90" y1="80" x2="90" y2="96"/><line x1="283" y1="80" x2="283" y2="96"/>
+    <line x1="476" y1="80" x2="476" y2="96"/><line x1="670" y1="80" x2="670" y2="96"/>
+  </g>
+
+  <rect x="10" y="96" width="160" height="66" rx="4" fill="#eef3fa" stroke="#0d2340" stroke-width="1.3"/>
+  <text x="90" y="118" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0d2340">CREDIT</text>
+  <text x="90" y="134" text-anchor="middle" font-size="9" fill="#33414f">$406.9bn</text>
+  <text x="90" y="150" text-anchor="middle" font-size="8" fill="#6b7a8a">makes the product</text>
+
+  <rect x="203" y="96" width="160" height="66" rx="4" fill="#eff7f6" stroke="#1f7a72" stroke-width="1.3"/>
+  <text x="283" y="118" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0d2340">REAL ASSETS</text>
+  <text x="283" y="134" text-anchor="middle" font-size="9" fill="#33414f">$139.1bn</text>
+  <text x="283" y="150" text-anchor="middle" font-size="8" fill="#6b7a8a">makes the product</text>
+
+  <rect x="396" y="96" width="160" height="66" rx="4" fill="#f4f1fa" stroke="#5b4b8a" stroke-width="1.3"/>
+  <text x="476" y="118" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0d2340">SECONDARIES</text>
+  <text x="476" y="134" text-anchor="middle" font-size="9" fill="#33414f">$42.1bn</text>
+  <text x="476" y="150" text-anchor="middle" font-size="8" fill="#6b7a8a">makes the product</text>
+
+  <rect x="590" y="96" width="160" height="66" rx="4" fill="#fdf8ef" stroke="#c8963e" stroke-width="1.3"/>
+  <text x="670" y="118" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0d2340">PRIVATE EQUITY</text>
+  <text x="670" y="134" text-anchor="middle" font-size="9" fill="#33414f">$25.3bn</text>
+  <text x="670" y="150" text-anchor="middle" font-size="8" fill="#6b7a8a">makes the product</text>
+
+  <g stroke="#c8963e" stroke-width="1.6" stroke-dasharray="3 2">
+    <line x1="90" y1="162" x2="90" y2="186"/><line x1="283" y1="162" x2="283" y2="186"/>
+    <line x1="476" y1="162" x2="476" y2="186"/><line x1="670" y1="162" x2="670" y2="186"/>
+  </g>
+
+  <rect x="10" y="186" width="740" height="62" rx="4" fill="#c8963e"/>
+  <text x="380" y="208" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fff">OPERATIONS MANAGEMENT GROUP &#8212; sits under ALL four groups</text>
+  <text x="380" y="226" text-anchor="middle" font-size="9.5" fill="#fdf3e2">Global Client Solutions &#183; Investor Relations &#183; Ares Wealth Management Solutions &#183; Finance &#183; Legal &#183; Technology</text>
+  <text x="380" y="241" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff">&#9660; YOU ARE HERE &#8212; one team selling four groups&#8217; products &#9660;</text>
+
+  <line x1="0" y1="262" x2="760" y2="262" stroke="#dfe5ec"/>
+  <text x="0" y="278" font-size="8.5" fill="#33414f"><tspan font-weight="700">The structural implication:</tspan> because you sit above the products rather than inside one, your job is inherently <tspan font-style="italic">cross-platform</tspan>. You are not the Credit salesperson.</text>
+  <text x="0" y="292" font-size="8.5" fill="#33414f">You are the person who owns the <tspan font-weight="700">client</tspan> &#8212; and sells whichever of the four groups fits what that client needs.</text>
+</svg>
+</figure>
+
+<div class="callout key">
+<span class="tag">What this means &#8212; the answer to your question</span>
+<p style="margin-bottom:0">Ares does <b>not</b> organise distribution product-by-product. It
+organises it <b>client-by-client</b>, as a firm-wide function. That is a deliberate choice and it
+tells you two things. <b>First</b>, the firm prioritises the <i>relationship</i> as the asset —
+consistent with 79% of fundraising coming from existing investors and with the stated goal of
+widening single-product partners. <b>Second</b>, it means the role has unusual breadth for a
+graduate: you learn credit, real estate, infrastructure, secondaries and private equity, because
+your client might buy any of them. A product-embedded sales role at a competitor teaches you one
+asset class.</p>
+</div>
+
+<h3>10.2 The OMG is not a cost centre being squeezed &#8212; it is being funded</h3>
+<div class="grid3">
+<div class="stat"><b>$808.2m</b><span>OMG cost, 2025</span><i>Up 30% from $620.9m in 2024 — the firm is spending materially more on this function.</i></div>
+<div class="stat g"><b>42.3%</b><span>FRE margin, YTD Q2'26</span><i>Up ~100bps YoY <b>despite</b> that spend. Growth is outrunning cost.</i></div>
+<div class="stat t"><b>2,550+</b><span>OMG professionals</span><i>vs 1,650+ investment professionals. <b>The non-investment side is the larger half of Ares.</b></i></div>
+</div>
+<p style="margin-top:3mm">That last statistic is worth pausing on. <b>Ares has more people in the
+Operations Management Group than in its investment groups.</b> If you have any anxiety that a
+non-investment role is a second-class seat at an investment firm, the headcount says otherwise —
+and so does the fact that the 10-K names "institutional fundraising" as one of the three
+destinations of its formal internship programme, alongside investment and wealth management.</p>
+
+<h3>10.3 Investor Relations vs Client Solutions &#8212; the real distinction</h3>
+<p>At many firms these titles are used interchangeably. At Ares they sit within the same broad
+group — the London summer analyst programme lists the division as <b>"Investor Relations and
+Global Client Solutions"</b> — but they are different jobs, and the distinction is worth getting
+right because it will almost certainly be asked.</p>
+
+<figure>
+<svg viewBox="0 0 760 300" role="img" aria-label="Diagram comparing Investor Relations and Client Solutions across the fundraising lifecycle">
+  <text x="0" y="14" font-size="10.5" font-weight="700" fill="#0d2340">The client lifecycle, and who owns which part</text>
+  <rect x="0" y="28" width="150" height="30" rx="3" fill="#f4f7fb" stroke="#dfe5ec"/><text x="75" y="47" text-anchor="middle" font-size="9" font-weight="700" fill="#0d2340">1. Identify</text>
+  <rect x="154" y="28" width="150" height="30" rx="3" fill="#f4f7fb" stroke="#dfe5ec"/><text x="229" y="47" text-anchor="middle" font-size="9" font-weight="700" fill="#0d2340">2. Pitch &amp; diligence</text>
+  <rect x="308" y="28" width="150" height="30" rx="3" fill="#f4f7fb" stroke="#dfe5ec"/><text x="383" y="47" text-anchor="middle" font-size="9" font-weight="700" fill="#0d2340">3. Close</text>
+  <rect x="462" y="28" width="150" height="30" rx="3" fill="#f4f7fb" stroke="#dfe5ec"/><text x="537" y="47" text-anchor="middle" font-size="9" font-weight="700" fill="#0d2340">4. Report &amp; service</text>
+  <rect x="616" y="28" width="144" height="30" rx="3" fill="#f4f7fb" stroke="#dfe5ec"/><text x="688" y="47" text-anchor="middle" font-size="9" font-weight="700" fill="#0d2340">5. Re-up / cross-sell</text>
+
+  <rect x="0" y="76" width="530" height="44" rx="4" fill="#1f7a72" opacity=".92"/>
+  <text x="14" y="94" font-size="10.5" font-weight="700" fill="#fff">CLIENT SOLUTIONS</text>
+  <text x="14" y="111" font-size="9" fill="#cfe8e5">Wins and structures the mandate &#8212; the front end. Product knowledge as a selling tool.</text>
+
+  <rect x="308" y="132" width="452" height="44" rx="4" fill="#16355e"/>
+  <text x="322" y="150" font-size="10.5" font-weight="700" fill="#fff">INVESTOR RELATIONS</text>
+  <text x="322" y="167" font-size="9" fill="#c3d5ea">Keeps and deepens the relationship &#8212; the back end. Trust and transparency as the tool.</text>
+
+  <rect x="308" y="76" width="222" height="100" fill="none" stroke="#c8963e" stroke-width="2" stroke-dasharray="4 3"/>
+  <text x="419" y="196" text-anchor="middle" font-size="9" font-weight="700" fill="#c8963e">THE OVERLAP &#8212; where most of the work actually is</text>
+
+  <line x1="0" y1="212" x2="760" y2="212" stroke="#dfe5ec"/>
+  <text x="0" y="232" font-size="9.5" font-weight="700" fill="#0d2340">Why the overlap matters:</text>
+  <text x="0" y="248" font-size="9" fill="#33414f">Because 79% of Ares&#8217; 2025 institutional fundraising came from <tspan font-weight="700">existing</tspan> investors, stage 5 feeds straight back into stage 2.</text>
+  <text x="0" y="264" font-size="9" fill="#33414f">At Ares the &#8220;retention&#8221; job and the &#8220;raising&#8221; job are the same job for four fifths of the money. That is why the teams sit together,</text>
+  <text x="0" y="280" font-size="9" fill="#33414f">and why applying to both is sensible rather than indecisive.</text>
+</svg>
+</figure>
+
+<table>
+<tr><th style="width:20%">Dimension</th><th style="width:40%">Investor Relations</th><th>Client Solutions</th></tr>
+<tr><td><b>Core question</b></td><td>"Is our existing investor well-informed, well-served and likely to come back?"</td><td>"Which investor should own which of our products, and how do we get them there?"</td></tr>
+<tr><td><b>Primary output</b></td><td>Quarterly reports, capital account statements, capital call and distribution notices, LP meetings, ad-hoc investor queries, annual investor conference.</td><td>Pitch materials, RFPs and DDQs, product positioning, fund launch campaigns, consultant relationships, competitive analysis.</td></tr>
+<tr><td><b>Clock they run on</b></td><td><b>External and immovable.</b> Quarter-end reporting deadlines set by fund documents. Audit dates. Regulatory filings. If it's late, the client notices.</td><td><b>Campaign-driven.</b> Fund launch dates, first close and final close targets, RFP submission deadlines set by the client.</td></tr>
+<tr><td><b>Who they answer to</b></td><td>The LP, plus internal fund accounting, legal and the investment teams who supply the commentary.</td><td>The prospect or consultant, plus the investment team whose product is being sold and whose time is being asked for.</td></tr>
+<tr><td><b>Measured on</b></td><td>Retention, re-up rates, satisfaction, error-free and on-time reporting, speed of query resolution.</td><td>Capital raised, number of new relationships, products per client, RFP win rate, pipeline conversion.</td></tr>
+<tr><td><b>The graduate reality</b></td><td>Heavy on accuracy and process. You become the person who knows where every number comes from — which is genuinely powerful.</td><td>Heavy on synthesis and materials. You become the person who can explain any of the four groups to a non-expert.</td></tr>
+</table>
+
+<h3>10.4 The bottom line of each team, and the stakeholders</h3>
+<p>You asked specifically for the bottom-line goal and whether the deadlines are internal or
+external. Here it is, without the generic day-in-the-life fluff:</p>
+
+<div class="grid2">
+<div class="card"><h4>The team's actual bottom line</h4>
+<p><b>One number: fee-paying AUM.</b> Not AUM — <b>FPAUM</b>. The team exists to move money from
+"committed" to "fee-paying" and to stop it leaving. Every activity ladders up to that.</p>
+<p style="margin-bottom:0">You can even quantify the leverage. Ares' blended effective management
+fee is roughly 1% of FPAUM. So <b>a £100m mandate is worth roughly £1m of recurring annual
+revenue, for as long as it stays</b> — and in a perpetual vehicle that is potentially forever.
+That is why a sales seat here is a revenue seat.</p></div>
+<div class="card"><h4>Internal vs external stakeholders</h4>
+<p><b>Both, and the internal ones are harder.</b></p>
+<ul class="tight" style="margin-bottom:0">
+<li><b>External:</b> LPs, investment consultants (Mercer, Aon, bfinance — the gatekeepers who
+rate managers for pension schemes), private banks and wealth platforms, and their operational
+due diligence teams.</li>
+<li><b>Internal:</b> the investment teams. This is the real skill. A Credit portfolio manager's
+time is the scarcest resource in the building, and you need it — for a client meeting, a
+performance explanation, a DDQ answer. Getting that time, repeatedly, without burning goodwill,
+<b>is the job</b>. Ares' 10-K even names the supporting cast: the relationship team "is supported
+by product managers and investor relations professionals with deep experience in each of our
+complementary investment groups."</li>
+</ul></div>
+</div>
+
+<div class="callout">
+<span class="tag">Say this &#8212; the difference, in one answer</span>
+<p style="margin-bottom:0">"I'd put it this way: Client Solutions owns the <i>question</i> — which
+investor should own which product and why — and Investor Relations owns the <i>promise</i> —
+making sure what we told them happens, and is reported accurately. At Ares they sit in the same
+group and I think that's deliberate, because seventy-nine percent of last year's institutional
+fundraising came from existing investors. When four fifths of your new money comes from people
+who already own something, servicing well <i>is</i> selling. That's also why I'm comfortable
+applying to both — they're two halves of the same relationship."</p>
+</div>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 11</div>
+  <h2>The customers and the map</h2>
+  <p>Who actually buys from Ares, how that differs from competitors, and why Ares plays where it plays.</p>
+</div>
+
+<section>
+<h3>11.1 The target audience &#8212; and how it splits</h3>
+<p>Using your shop analogy: Ares has four distinct customer types, and they behave completely
+differently.</p>
+
+<figure>
+<svg viewBox="0 0 760 240" role="img" aria-label="Chart of Ares AUM split by client channel at 31 December 2025">
+  <text x="0" y="13" font-size="10.5" font-weight="700" fill="#0d2340">AUM by channel, 31 Dec 2025 &#8212; who the $622.5bn belongs to</text>
+  <rect x="0" y="30" width="574" height="46" fill="#0d2340"/>
+  <rect x="574" y="30" width="132" height="46" fill="#1f7a72"/>
+  <rect x="706" y="30" width="54" height="46" fill="#c8963e"/>
+  <text x="287" y="52" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">INSTITUTIONAL DIRECT &#8212; $470.1bn</text>
+  <text x="287" y="67" text-anchor="middle" font-size="9" fill="#9dc0e8">76% of AUM &#183; 2,850+ relationships</text>
+  <text x="640" y="52" text-anchor="middle" font-size="9.5" font-weight="700" fill="#fff">WEALTH + LISTED</text>
+  <text x="640" y="66" text-anchor="middle" font-size="8.5" fill="#cfe8e5">$108.4bn &#183; 17%</text>
+  <text x="733" y="56" text-anchor="middle" font-size="8.5" font-weight="700" fill="#fff">INTERM.</text>
+
+  <text x="0" y="104" font-size="10" font-weight="700" fill="#0d2340">Inside the institutional 76%, by client type:</text>
+  <g font-size="9">
+    <rect x="0" y="114" width="150" height="22" fill="#16355e"/><text x="8" y="129" fill="#fff" font-size="9" font-weight="700">PENSION FUNDS</text>
+    <rect x="154" y="114" width="128" height="22" fill="#2f4f75"/><text x="162" y="129" fill="#fff" font-size="9" font-weight="700">INSURANCE</text>
+    <rect x="286" y="114" width="96" height="22" fill="#4f6b8c"/><text x="294" y="129" fill="#fff" font-size="8.5" font-weight="700">SOVEREIGN</text>
+    <rect x="386" y="114" width="86" height="22" fill="#7d93ad"/><text x="394" y="129" fill="#fff" font-size="8.5" font-weight="700">BANKS</text>
+    <rect x="476" y="114" width="150" height="22" fill="#b9c6d5"/><text x="484" y="129" fill="#33414f" font-size="8.5" font-weight="700">INV. MANAGERS / OTHER</text>
+    <rect x="630" y="114" width="130" height="22" fill="#dfe5ec"/><text x="638" y="129" fill="#33414f" font-size="8.5" font-weight="700">HNW / PRIVATE BANK</text>
+  </g>
+  <text x="0" y="152" font-size="8.5" fill="#6b7a8a">Ares discloses this split as a chart rather than a table; widths above are indicative of the disclosed ordering, not exact percentages.</text>
+
+  <line x1="0" y1="164" x2="760" y2="164" stroke="#dfe5ec"/>
+  <text x="0" y="182" font-size="9.5" font-weight="700" fill="#0d2340">The two structural facts that define the client base:</text>
+  <text x="0" y="200" font-size="9" fill="#33414f">&#9679; <tspan font-weight="700">$139.6bn &#8212; 30% of institutional AUM &#8212; is in separately managed accounts (SMAs)</tspan>, single-client mandates rather than pooled funds. Up from 27% in 2024.</text>
+  <text x="0" y="218" font-size="9" fill="#33414f">&#9679; <tspan font-weight="700">79% of 2025 institutional fundraising came from existing investors</tspan> &#8212; either a new product, or the next vintage of one they already own.</text>
+  <text x="0" y="236" font-size="8" fill="#6b7a8a">Source: Ares FY2025 Form 10-K, Item 1 &#8212; Investor Base and Fundraising.</text>
+</svg>
+</figure>
+
+<div class="callout edge">
+<span class="tag">Edge · what makes Ares' client base different from peers'</span>
+<p><b>Ares is more institutional and more SMA-heavy than the firms it is compared to.</b> While
+Blackstone has built a consumer-facing brand — its private wealth AUM is ~$324bn, roughly a
+quarter of its business — Ares' wealth and listed vehicles are 17% of AUM. Ares is
+<b>three-quarters institutional</b>.</p>
+<p style="margin-bottom:0">The SMA number is the more interesting one for your role. <b>Thirty
+percent of institutional money is in bespoke, single-client mandates.</b> An SMA is not a product
+off the shelf — it is a negotiated structure designed around one client's regulatory
+constraints, return target and risk appetite. That is a <b>solutions</b> business, not a
+<b>distribution</b> business, and it is precisely why the team is called Client
+<i>Solutions</i>. It also explains why the function is horizontal: you cannot build a bespoke
+mandate for an insurer out of one investment group's products.</p>
+</div>
+
+<h3>11.2 Where in the world, and why there</h3>
+<table>
+<tr><th style="width:16%">Region</th><th style="width:30%">What Ares does there</th><th>Why here and not elsewhere</th></tr>
+<tr><td><b>North America</b><br><small>HQ Los Angeles</small></td><td>The core. US direct lending $189.6bn, US real estate, PE, all of Secondaries.</td><td>Deepest sponsor-backed mid-market in the world and the most developed non-bank lending culture. This is where the model was invented.</td></tr>
+<tr><td><b>Europe</b><br><small>London-led</small></td><td>European direct lending <b>$84.7bn</b>, 100+ investment professionals, 435+ sponsors covered. Plus European logistics and real estate debt.</td><td><b>The genuine differentiator.</b> Europe is hard: multiple legal systems, languages and insolvency regimes. That difficulty is the moat — few can build it, so those who have face less competition than in the US. Ares got in early via its Ares Capital Europe series from 2018 onward.</td></tr>
+<tr><td><b>Asia-Pacific</b><br><small>incl. Japan, Australia</small></td><td>APAC credit $11.5bn, APAC private equity, and — post-GCP — a large Japanese industrial property and J-REIT business.</td><td>The growth option. Bought in via SSG (2020) and GCP (2025) rather than built. Japan is singled out in the 2026 priorities: expanding private credit, infrastructure and <b>wealth products for Japanese individual investors</b>.</td></tr>
+<tr><td><b>Latin America</b></td><td>Mexican industrial real estate via Walton Street Mexico.</td><td>A focused thematic bet on nearshoring, not a general LatAm push. The 10-K names Latin America and Australia as areas of "strategic initiatives" for expansion.</td></tr>
+<tr><td><b>Middle East</b></td><td>Not an investing region — a <b>capital-raising</b> region. The relationship management team is explicitly located in "North America, Europe, APAC and the Middle East."</td><td>Sovereign wealth funds. Note this: the Middle East appears in Ares' <i>distribution</i> footprint, not its investment footprint. A useful distinction to draw in interview.</td></tr>
+</table>
+
+<div class="callout key">
+<span class="tag">The geography logic in one line</span>
+<p style="margin-bottom:0"><b>Ares invests where banks have retreated and it can be the lead lender;
+it raises capital where the large pools of long-dated savings sit.</b> Those are not the same map,
+and conflating them is a common candidate error. Ares lends in the US and Europe; it
+<i>fundraises</i> across the US, Europe, the Gulf and increasingly Japan and Australia.</p>
+</div>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 12</div>
+  <h2>The application: Dartmouth Partners and how to spend your time</h2>
+  <p>How the screen works, what it weights, and how to rank your effort across the questions.</p>
+</div>
+
+<section>
+<h3>12.1 What Dartmouth Partners actually is</h3>
+<p>Dartmouth Partners is a <b>specialist financial services recruitment agency</b>, not part of
+Ares. They are engaged by Ares to run early-careers hiring. This matters practically:</p>
+<ul>
+<li><b>They are paid on placement.</b> Their commercial interest is in you succeeding — but only
+if you succeed <i>at Ares</i>. They are not a neutral careers service; they are a filter with a
+quota of strong candidates to deliver.</li>
+<li><b>They screen before Ares ever sees you.</b> Their published process runs: application/CV
+&#8594; consultant call &#8594; screening and testing &#8594; interview with the client &#8594;
+offer. Their own materials describe "a demanding pre-screening process on all candidates" with
+"technical and competency-based tests," and note that testing depends on the client's needs.</li>
+<li><b>They give feedback at every stage.</b> Unusually, they commit to "detailed feedback after
+every stage." <b>Ask for it, always.</b> This is a genuine asymmetric advantage over applying
+direct.</li>
+<li><b>Reported timelines are short</b> — one Glassdoor account describes a two-week process.
+Assume you may go from application to interview quickly.</li>
+</ul>
+
+<h3>12.2 CV versus application answers &#8212; where the weight sits</h3>
+<p>You asked how much weight goes on the CV versus the written questions. Neither Ares nor
+Dartmouth publishes a formula, so treat what follows as a <b>reasoned model, not a disclosed
+fact</b> — but the logic is sound and reflects how agency-run early-careers screens work:</p>
+
+<figure>
+<svg viewBox="0 0 760 210" role="img" aria-label="Diagram showing how weighting shifts from CV to application answers across screening stages">
+  <text x="0" y="13" font-size="10.5" font-weight="700" fill="#0d2340">How the weighting shifts as you move through the funnel</text>
+  <g>
+    <text x="0" y="42" font-size="9" font-weight="700" fill="#0d2340">Stage 1 &#8212; CV sift</text>
+    <rect x="150" y="30" width="490" height="20" fill="#0d2340"/><text x="395" y="44" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">CV does ~80% of the work</text>
+    <rect x="640" y="30" width="120" height="20" fill="#c8963e"/><text x="700" y="44" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">answers</text>
+
+    <text x="0" y="80" font-size="9" font-weight="700" fill="#0d2340">Stage 2 &#8212; written answers</text>
+    <rect x="150" y="68" width="180" height="20" fill="#0d2340"/><text x="240" y="82" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">CV</text>
+    <rect x="330" y="68" width="430" height="20" fill="#c8963e"/><text x="545" y="82" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">Answers now carry it &#8212; this is the differentiator</text>
+
+    <text x="0" y="118" font-size="9" font-weight="700" fill="#0d2340">Stage 3 &#8212; Dartmouth call</text>
+    <rect x="150" y="106" width="120" height="20" fill="#0d2340"/><text x="210" y="120" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">CV</text>
+    <rect x="270" y="106" width="200" height="20" fill="#c8963e"/><text x="370" y="120" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">consistency with answers</text>
+    <rect x="470" y="106" width="290" height="20" fill="#1f7a72"/><text x="615" y="120" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">Can you talk? Motivation, polish</text>
+
+    <text x="0" y="156" font-size="9" font-weight="700" fill="#0d2340">Stage 4 &#8212; Ares interview</text>
+    <rect x="150" y="144" width="70" height="20" fill="#0d2340"/><text x="185" y="158" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">CV</text>
+    <rect x="220" y="144" width="540" height="20" fill="#16355e"/><text x="490" y="158" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">Depth of firm knowledge, commercial judgement, fit &#8212; where this report earns its keep</text>
+  </g>
+  <text x="0" y="192" font-size="8.5" fill="#33414f"><tspan font-weight="700">Practical takeaway:</tspan> the CV gets you read. The written answers get you called. Nothing you write can rescue a CV that fails the sift &#8212;</text>
+  <text x="0" y="205" font-size="8.5" fill="#33414f">but a strong CV with generic answers dies at stage 2, which is where the majority of well-qualified candidates are actually lost.</text>
+</svg>
+<figcaption>This is an inferred model based on how agency-run graduate screens typically
+function, not a weighting published by Ares or Dartmouth Partners. Treat it as a guide to effort
+allocation.</figcaption>
+</figure>
+
+<h3>12.3 Ranking your three questions</h3>
+<div class="callout warn">
+<span class="tag">An assumption I have to flag</span>
+<p style="margin-bottom:0">You mentioned there are three application questions but didn't tell me
+what they are. What follows is built on the <b>three standard archetypes</b> that essentially
+every alternative-manager early-careers form uses. <b>Send me the actual questions and I will
+redo this properly</b> — including drafting answers against your real CV.</p>
+</div>
+
+<div class="q">
+<div class="lbl"><span class="pill red">Non-negotiable &#183; spend 50% of your time</span></div>
+<h4 style="margin-top:2mm">Archetype 1: "Why Ares?" / "Why this firm specifically?"</h4>
+<p><b>This is the needle-mover, and it is the one nearly everyone fails.</b> The failure mode is
+predictable: candidates write about scale, culture and "market-leading platform" — language
+lifted from the homepage that would apply equally to Blackstone or Blue Owl.</p>
+<p style="margin-bottom:0"><b>The test:</b> could you swap "Ares" for a competitor's name and have
+the answer still work? If yes, rewrite it. <b>What to use instead</b> — pick two, not five:
+the 93% perpetual/long-dated fee base; the 55&#8594;200+ relationship management build-out; the
+"nearly half of our distribution partners offer just one Ares product" line from the shareholder
+letter; the asset-light contrast with Apollo/Athene; European direct lending scale as the real
+moat. Any one of those proves you read primary documents.</p>
+</div>
+
+<div class="q">
+<div class="lbl"><span class="pill red">Non-negotiable &#183; spend 30% of your time</span></div>
+<h4 style="margin-top:2mm">Archetype 2: "Why this role?" / "Why Client Solutions or Investor Relations?"</h4>
+<p><b>Second most important, and the one where your two-choice application needs a coherent
+story.</b> Listing both IR and Client Solutions can read as indecisive unless you frame it —
+so frame it explicitly using 10.3: they are two halves of one relationship, and at Ares 79% of
+institutional fundraising comes from existing investors, so servicing and selling are the same
+motion.</p>
+<p style="margin-bottom:0"><b>What separates a strong answer:</b> demonstrating you understand
+this is a <i>commercial</i> role, not a support one. Reference that the function sits in the OMG
+horizontally across all four investment groups — so the job is client-led, not product-led — and
+that you want the breadth that comes with it. Show you know the bottom line is FPAUM.</p>
+</div>
+
+<div class="q">
+<div class="lbl"><span class="pill green">Needle-mover, but capped &#183; spend 20% of your time</span></div>
+<h4 style="margin-top:2mm">Archetype 3: "Tell us about a time you..." (competency / behavioural)</h4>
+<p><b>Necessary but rarely decisive.</b> These are screened for <b>structure and evidence</b>,
+not creativity. Use STAR (Situation, Task, Action, Result) and make sure there is a
+<b>quantified result</b> — a number, a rank, a percentage, a headcount. Reviewers scan for the
+result line.</p>
+<p style="margin-bottom:0"><b>The one upgrade worth making:</b> choose an example that maps onto
+the actual job. Persuading someone with no obligation to help you; managing a deadline set by
+somebody else; explaining something technical to a non-expert; keeping a relationship alive over
+months. Those mirror the internal-stakeholder problem described in 10.4. An example about
+winning a competition is fine; an example about <i>getting a busy person to give you their
+time</i> is better.</p>
+</div>
+
+<h3>12.4 Vocabulary to deploy &#8212; and vocabulary to avoid</h3>
+<div class="grid2">
+<div class="card"><h4 style="color:var(--green)">Use these &#8212; they signal insider fluency</h4>
+<p style="margin-bottom:0"><b>FPAUM</b> (not just AUM) &#183; <b>fee-related earnings</b> /
+<b>FRE margin</b> &#183; <b>perpetual capital</b> &#183; <b>AUM not yet paying fees</b> or
+<b>shadow AUM</b> &#183; <b>dry powder</b> &#183; <b>drawdown vs evergreen</b> &#183;
+<b>semi-liquid</b> &#183; <b>re-up</b> &#183; <b>SMA</b> &#183; <b>DDQ</b> and <b>RFP</b> &#183;
+<b>sponsor coverage</b> &#183; <b>unitranche</b> &#183; <b>non-accrual</b> &#183; <b>asset-light</b>
+&#183; <b>asset-based finance (ABF)</b> &#183; <b>catch-up fees</b> &#183; <b>Part I fees</b>.</p></div>
+<div class="card"><h4 style="color:var(--red)">Avoid these &#8212; they signal a website skim</h4>
+<p style="margin-bottom:0">"Market-leading platform" &#183; "I'm passionate about finance" &#183;
+"world-class culture" &#183; "I want to learn from the best" &#183; "Ares' impressive track
+record" &#183; any use of "synergies" &#183; and above all, <b>claiming Ares has been unaffected
+by the private credit downturn</b> — it has pro-rated two consecutive tenders and an informed
+interviewer knows it.</p></div>
+</div>
+
+<h3>12.5 How much pressure is this, really?</h3>
+<p>Straightforwardly: <b>competitive but winnable.</b> Ares runs a formal, small internship
+programme — the 10-K describes it as a programme "for students between their junior and senior
+years of college with the possibility of conversion to a full-time position," spanning
+"investment, wealth management and institutional fundraising businesses." The London summer
+analyst programme is ten weeks and only launched in 2023, so cohorts are small.</p>
+<p style="margin-bottom:0">The realistic assessment: the technical bar for a non-investment role
+is <b>lower</b> than for direct lending or private equity — nobody expects an LBO model. But the
+bar for <b>commercial curiosity and communication is higher</b>, because the job is
+communication. That is good news for you: the differentiator is depth of firm knowledge and the
+ability to explain it clearly, and that is <i>earnable</i> in a way that a modelling test is not.
+Almost nobody will have read the 10-Ks. You now have.</p>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 13</div>
+  <h2>Glossary</h2>
+  <p>Every term used in this report, defined. Where Ares defines a term itself, its own wording is used.</p>
+</div>
+
+<section>
+<table>
+<tr><th style="width:20%">Term</th><th>Definition</th></tr>
+<tr><td><b>Alternative asset manager</b></td><td>A firm that manages investments outside public stocks and bonds — private credit, private equity, real estate, infrastructure. Ares is one.</td></tr>
+<tr><td><b>ABF</b><br><small>asset-based finance</small></td><td>Lending secured against specific assets or cash flows — receivables, royalties, equipment, aircraft — rather than against a company as a whole. Ares' fastest-growing credit frontier; home of the Pathfinder funds.</td></tr>
+<tr><td><b>AUM</b></td><td>Assets under management. Ares defines it as fund NAV plus drawn and undrawn fund-level debt plus uncalled committed capital. Note this includes borrowed and un-received money — which is why FPAUM matters more.</td></tr>
+<tr><td><b>AUM not yet paying fees</b><br><small>"shadow AUM"</small></td><td>Ares' term for "AUM that is not currently paying fees and is eligible to earn management fees upon deployment." $114.0bn at Q2 2026. Future revenue already contracted.</td></tr>
+<tr><td><b>BDC</b><br><small>business development company</small></td><td>A US-regulated vehicle that lends to mid-sized companies and must distribute most of its income. ARCC is listed; ASIF is non-traded. A BDC is how a retail investor can own private credit.</td></tr>
+<tr><td><b>Carried interest</b><br><small>"carry"</small></td><td>The manager's share of profits — typically ~20% — payable only after investors get their capital back plus a preferred return. The upside, but lumpy and uncertain.</td></tr>
+<tr><td><b>Catch-up fees</b></td><td>Management fees charged retroactively to investors who join a fund after its first close, so that all investors are treated ratably. Watch for these when comparing quarters — Ares flags when a quarter contains none.</td></tr>
+<tr><td><b>CLO</b></td><td>Collateralised loan obligation. A structured vehicle holding a pool of loans, financed in tranches. ~2–3% of Ares' management fees.</td></tr>
+<tr><td><b>DDQ</b></td><td>Due diligence questionnaire. The long standard document a prospective investor sends before committing. Producing and maintaining these is core Client Solutions work.</td></tr>
+<tr><td><b>Direct lending</b></td><td>Lending straight to a company, negotiated bilaterally, rather than buying a loan syndicated by a bank. $274.3bn at Ares — 44% of the firm.</td></tr>
+<tr><td><b>Drawdown fund</b></td><td>A fund with a fixed life where investors commit capital that is "called" over time and returned at the end. The traditional model.</td></tr>
+<tr><td><b>Dry powder</b></td><td>Committed but uninvested capital. Ares had <b>$170.0bn</b> at Q2 2026.</td></tr>
+<tr><td><b>Effective management fee rate</b></td><td>Annualised management fees divided by average FPAUM, excluding catch-up fees. The real blended price the firm charges.</td></tr>
+<tr><td><b>Evergreen / perpetual</b></td><td>A vehicle with no fixed end date. See perpetual capital.</td></tr>
+<tr><td><b>FPAUM</b></td><td>Fee-paying AUM — the portion of AUM actually generating a management fee today. <b>$409.9bn</b> at Q2 2026. The number that drives revenue.</td></tr>
+<tr><td><b>FRE</b></td><td>Fee-related earnings. Profit from management and recurring fees only, excluding volatile performance income. The quality-of-earnings measure. <b>$491.1m</b> in Q2 2026, up 20%.</td></tr>
+<tr><td><b>GP / LP</b></td><td>General Partner (the manager — Ares) and Limited Partner (the investor). "LP" is used constantly as a synonym for "client."</td></tr>
+<tr><td><b>Hurdle rate</b></td><td>The minimum return a fund must deliver before the manager earns performance fees. ARCC's Part I hurdle is 1.75% per quarter (7% a year).</td></tr>
+<tr><td><b>IRR / MoIC</b></td><td>Internal rate of return (annualised %) and multiple of invested capital (e.g. 1.3x). The two standard measures of fund performance. Always check gross vs net — net is after fees.</td></tr>
+<tr><td><b>Non-accrual</b></td><td>A loan where the borrower has stopped paying and the lender stops booking interest income. <b>The single most important health metric in private credit.</b> Ares: under 2% in US direct lending; 0.5% in the non-traded BDC.</td></tr>
+<tr><td><b>OMG</b><br><small>Operations Management Group</small></td><td>Ares' shared services function — including Client Solutions, Investor Relations and wealth distribution. Costs are <b>not</b> allocated to investment segments. 2,550+ people; $808.2m of cost in 2025.</td></tr>
+<tr><td><b>Part I / Part II fees</b></td><td>Part I: a quarterly fee on net investment income of certain listed and perpetual vehicles — recurring, so Ares counts it as a management fee. Part II: an annual fee on realised capital gains.</td></tr>
+<tr><td><b>Perpetual capital</b></td><td>Ares' definition: AUM of vehicles that "have an indefinite term, are not in liquidation, and for which there is no immediate requirement to return invested capital." <b>$223.3bn</b> at Q2 2026, up 34% YoY.</td></tr>
+<tr><td><b>Re-up</b></td><td>An existing investor committing to the next vintage of a fund they already own. The lifeblood — 79% of Ares' 2025 institutional fundraising came from existing investors.</td></tr>
+<tr><td><b>RFP</b></td><td>Request for proposal. A formal competitive tender, often run by an investment consultant on behalf of a pension scheme. Ares has a dedicated RFP team within Global Client Solutions.</td></tr>
+<tr><td><b>RI</b><br><small>realized income</small></td><td>FRE plus performance income actually realised in cash. FRE was <b>96%</b> of RI in 2025 — i.e. almost all of Ares' income is fee income.</td></tr>
+<tr><td><b>Semi-liquid</b></td><td>A vehicle offering periodic — usually quarterly — limited redemptions, typically capped at ~5% of shares. The standard wealth-channel structure. Ares ended 2025 with eight such products.</td></tr>
+<tr><td><b>SMA</b></td><td>Separately managed account. A bespoke single-client mandate rather than a pooled fund. <b>$139.6bn — 30% of Ares' institutional AUM.</b></td></tr>
+<tr><td><b>Sponsor</b></td><td>A private equity firm that buys companies. Ares' direct lending business exists largely to finance sponsors' acquisitions — hence "sponsor coverage."</td></tr>
+<tr><td><b>Tender offer</b></td><td>The mechanism by which a non-traded fund buys back shares from investors who want out. When requests exceed the cap they are <b>pro-rated</b>. ASIF pro-rated in both Q1 and Q2 2026.</td></tr>
+<tr><td><b>Unitranche</b></td><td>A single loan blending senior and subordinated debt into one instrument at one blended rate. Faster and simpler for the borrower — a key reason companies choose private credit over a bank syndicate.</td></tr>
+<tr><td><b>Vintage</b></td><td>The year a fund started investing. Vintages matter enormously: a 2021 vintage deployed at peak valuations, a 2026 vintage deploys into wider spreads.</td></tr>
+<tr><td><b>Waterfall</b></td><td>The order in which fund cash is distributed. <b>European-style</b>: investors get all capital plus preferred return before the GP sees carry. <b>American-style</b>: carry is paid deal-by-deal. Ares' credit funds mostly use European-style — better for investors.</td></tr>
+</table>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 14</div>
+  <h2>Sources</h2>
+  <p>Where every claim in this report comes from, so you can verify anything before you quote it.</p>
+</div>
+
+<section>
+<h3>Primary sources &#8212; the backbone of this report</h3>
+<p>The great majority of figures here come from documents Ares filed with the US Securities and
+Exchange Commission. These are legally binding, signed by the CEO and CFO, and are the highest
+grade of evidence available. All are free at <b>sec.gov</b> under CIK <b>0001176948</b>.</p>
+<table>
+<tr><th style="width:26%">Document</th><th style="width:16%">Filed</th><th>Used for</th></tr>
+<tr><td><b>Form 10-K, FY2025</b></td><td>25 Feb 2026</td><td>The core of Parts 1–3, 5, 10, 11, 13. Segment AUM, fund performance tables, fee schedules, glossary definitions, investor base, OMG description, competition and risk factors.</td></tr>
+<tr><td><b>Form 10-K, FY2024</b></td><td>27 Feb 2025</td><td rowspan="5">Part 4 longitudinal analysis — AUM, fundraising, headcount, relationship management team size, word-frequency comparison, segment naming changes, insurance AUM trend, SMA percentages.</td></tr>
+<tr><td><b>Form 10-K, FY2023</b></td><td>27 Feb 2024</td></tr>
+<tr><td><b>Form 10-K, FY2022</b></td><td>24 Feb 2023</td></tr>
+<tr><td><b>Form 10-K, FY2021</b></td><td>28 Feb 2022</td></tr>
+<tr><td><b>Form 10-K, FY2020 &amp; FY2019</b></td><td>25 Feb 2021 / 28 Feb 2020</td></tr>
+<tr><td><b>2025 Annual Shareholder Letter</b><br><small>Form ARS</small></td><td>21 Apr 2026</td><td>The "asset-light balance sheet approach" quote; 2026 priorities; the "nearly half of our distribution partners offer just one Ares product" statistic; GCP integration; Marq Logistics and Ada Infrastructure; S&amp;P 500 inclusion; 2025 key metrics.</td></tr>
+<tr><td><b>Q2 2026 earnings call, release and slides</b></td><td>Jul–Aug 2026</td><td>$671.3bn AUM, $409.9bn FPAUM, $36.4bn raised, $491.1m FRE, 42.2% margin, $223.3bn perpetual capital, $170.0bn dry powder, non-accrual rates, insurance FPAUM +54%, Arougheti quotes.</td></tr>
+</table>
+
+<h3>Secondary sources</h3>
+<ul class="tight">
+<li><b>Ares press releases via Businesswire</b> — GCP International acquisition ($3.7bn, Oct 2024 announcement); Landmark Partners and Black Creek completions (June/July 2021); Aspida $2.3bn equity commitments (Jan 2025); Pathfinder III $8.5bn close (June 2026); SME $3.7bn (Sept 2022); Sarah Cole appointment as Co-Head of Global Capital Solutions (July 2025).</li>
+<li><b>Bloomberg</b> — ASIF redemption caps (June 2026); ACE IV €3bn secondaries bundling (July 2026); "Private Credit Makes a Big Pivot as Direct Lending Funds Shrink" (Aug 2026); Ares 2014 IPO debut.</li>
+<li><b>Pensions &amp; Investments, Private Equity Wire, PitchBook, AltsWire, Alternatives Watch</b> — private credit fundraising and deployment data; direct lending volume declines; non-traded BDC fundraising down 82%; BDC redemption peak analysis.</li>
+<li><b>Cambridge Associates</b> — assessment that First Brands and Tricolor were idiosyncratic and fraud-driven rather than systemic.</li>
+<li><b>KBRA</b> — direct lending default rate forecast of 1.5% for 2025 (down from 1.8% in 2024).</li>
+<li><b>Morningstar, Yahoo Finance, Zacks/Benzinga, Fortune, Reuters</b> — peer AUM comparisons, credit-concentration percentages, 2026 share price performance, sector redemption comparisons.</li>
+<li><b>NAIC and Chicago Fed working papers</b> — insurer allocation to private credit (~$1tn of ~$6tn), risk-based capital and asset adequacy testing context used in Part 3.</li>
+<li><b>Dartmouth Partners</b> — published FAQ, candidate and early-careers pages describing the five-stage process and pre-screening; Glassdoor interview reports for timeline.</li>
+<li><b>Wall Street Oasis</b> — Ares company reviews and the Global Client Solutions pay-structure discussion, used only for directional colour on culture and compensation.</li>
+<li><b>Wikipedia and Milken Institute</b> — Ares founding history, Ressler/Kissick/Rosenthal biography, Apollo relationship. Cross-checked against SEC filings where possible.</li>
+</ul>
+
+<div class="callout warn">
+<span class="tag">Honesty notes &#8212; read before you quote anything</span>
+<ul class="tight" style="margin-bottom:0">
+<li><b>The relationship management headcount series has a definitional break.</b> FY2019–20 disclosed a combined "strategy and relationship management teams" figure (~120, ~140); FY2021 onward narrowed to relationship management alone. The 55&#8594;200+ comparison (FY2022&#8594;FY2025) is like-for-like; do not compare it to the 2019 number.</li>
+<li><b>The word-frequency analysis in 4.2 is my own count</b> of the full text of each 10-K, not an Ares disclosure. It is reproducible but it is an interpretation, so present it as an observation rather than a fact.</li>
+<li><b>The CV-versus-answers weighting in 12.2 is an inferred model</b>, not published by Ares or Dartmouth Partners.</li>
+<li><b>Peer AUM figures are approximate</b> and measured on different bases between firms — Brookfield reports fee-bearing capital, others report total AUM. Use them for order of magnitude, not precision.</li>
+<li><b>The question ranking in 12.3 assumes three standard archetypes</b> because the actual questions were not available. Verify against the real form.</li>
+<li><b>Fund performance figures are as at 31 December 2025</b> and are historical. Past performance is not indicative of future results.</li>
+</ul>
+</div>
+
+<div class="card soft" style="margin-top:5mm">
+<h4>If you remember only five things</h4>
+<ol class="tight" style="margin-bottom:0">
+<li><b>93% of management fees come from perpetual or long-dated capital.</b> That is why Ares is resilient — not an insurance balance sheet.</li>
+<li><b>Ares calls itself "asset-light."</b> It is the largest credit-concentrated manager that has <i>not</i> bought an insurer. Apollo owns Athene; KKR owns Global Atlantic; Ares owns neither.</li>
+<li><b>The sales team went from 55+ to 200+ in three years</b>, plus 175+ in wealth. The firm's answer to a hard fundraising market was more distribution.</li>
+<li><b>"Nearly half of our global distribution partners currently offer just one Ares product."</b> That sentence from the shareholder letter is the commercial rationale for your job.</li>
+<li><b>Ares raised a record $36.4bn in Q2 2026</b> while industry non-traded BDC fundraising fell 82% — but it also pro-rated two consecutive ASIF tenders. Hold both facts at once.</li>
+</ol>
+</div>
+</section>
+
+</body>
+</html>
