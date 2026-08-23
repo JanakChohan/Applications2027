@@ -1,0 +1,1422 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Barclays — A Complete Business Breakdown</title><style>@page { size: A4; margin: 16mm 15mm 15mm 15mm; }
+@page :first { margin: 0; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  font-family: Helvetica, Arial, sans-serif; font-size: 9.7pt; line-height: 1.55;
+  color: #16283d; margin: 0; padding: 0; }
+
+/* ---------- cover ---------- */
+.cover { height: 297mm; width: 210mm; background: #0B1F35; color: #fff;
+  padding: 44mm 22mm; position: relative; page-break-after: always; }
+.cover:before { content: ""; position: absolute; inset: 0;
+  background: linear-gradient(150deg, rgba(0,174,239,.30) 0%, rgba(0,174,239,0) 46%); }
+.cover > * { position: relative; }
+.cover .eyebrow { font-size: 9pt; letter-spacing: 2.6px; text-transform: uppercase;
+  color: #6fd3f7; font-weight: 700; }
+.cover h1 { font-size: 40pt; line-height: 1.04; margin: 16mm 0 0; font-weight: 700;
+  letter-spacing: -1px; }
+.cover h1 em { font-style: normal; color: #45c7f4; display: block; }
+.cover .lede { font-size: 12pt; line-height: 1.5; color: #c3d3e2; margin-top: 9mm;
+  max-width: 128mm; }
+.cover .rule { width: 46mm; height: 3px; background: #00AEEF; margin: 9mm 0; }
+.cover .meta { position: absolute; bottom: 26mm; left: 22mm; right: 22mm;
+  font-size: 9pt; color: #93a8bd; border-top: 1px solid #26405c; padding-top: 5mm;
+  display: flex; justify-content: space-between; }
+.cover .stats { display: flex; gap: 12mm; margin-top: 26mm; }
+.cover .stats div b { display: block; font-size: 19pt; color: #fff; letter-spacing: -.5px; }
+.cover .stats div span { font-size: 8.4pt; color: #8fa6bd; }
+
+/* ---------- structure ---------- */
+.pb { page-break-before: always; }
+section { page-break-inside: auto; }
+h2 { font-size: 17pt; line-height: 1.15; margin: 0 0 1mm; color: #0B1F35;
+  letter-spacing: -.4px; page-break-after: avoid; }
+h2 .num { color: #00AEEF; font-size: 11pt; display: block; letter-spacing: 2px;
+  margin-bottom: 2.5mm; font-weight: 700; }
+h3 { font-size: 11.6pt; margin: 7mm 0 2mm; color: #0B1F35; page-break-after: avoid; }
+h4 { font-size: 10pt; margin: 5mm 0 1.5mm; color: #16375C; page-break-after: avoid; }
+.sub { color: #5B6B7F; font-size: 10.4pt; margin: 0 0 6mm; padding-bottom: 4mm;
+  border-bottom: 2px solid #DCE3EA; }
+p { margin: 0 0 3.2mm; }
+ul, ol { margin: 0 0 3.5mm; padding-left: 5.5mm; }
+li { margin-bottom: 1.6mm; }
+strong { color: #0B1F35; }
+em.term { font-style: normal; font-weight: 700; color: #0F6FB5; }
+a { color: #0F6FB5; text-decoration: none; }
+
+/* ---------- charts ---------- */
+svg.chart { display: block; margin: 5mm 0 6mm; page-break-inside: avoid; }
+figure { margin: 0; page-break-inside: avoid; }
+
+/* ---------- tables ---------- */
+table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin: 3mm 0 5mm;
+  page-break-inside: avoid; }
+caption { text-align: left; font-size: 8.6pt; color: #5B6B7F; padding-bottom: 1.8mm;
+  caption-side: top; }
+th { background: #0B1F35; color: #fff; text-align: left; padding: 2mm 2.2mm;
+  font-weight: 700; font-size: 8pt; letter-spacing: .3px; }
+th.n, td.n { text-align: right; }
+td { padding: 1.8mm 2.2mm; border-bottom: .5px solid #DCE3EA; vertical-align: top; }
+tbody tr:nth-child(even) td { background: #F5F8FB; }
+tr.total td { font-weight: 700; background: #E7F1F8 !important; border-top: 1.2px solid #0B1F35; }
+td.pos { color: #1E7A5E; font-weight: 700; }
+td.neg { color: #C1553B; font-weight: 700; }
+.tag { display: inline-block; font-size: 7pt; font-weight: 700; letter-spacing: .5px;
+  padding: .6mm 1.6mm; border-radius: 2px; text-transform: uppercase; }
+
+/* ---------- callouts ---------- */
+.key { border-left: 3px solid #00AEEF; background: #EEF7FC; padding: 4mm 5mm;
+  margin: 4.5mm 0; page-break-inside: avoid; }
+.key .lab { font-size: 7.6pt; letter-spacing: 1.6px; text-transform: uppercase;
+  color: #0F6FB5; font-weight: 700; display: block; margin-bottom: 1.5mm; }
+.key p:last-child { margin-bottom: 0; }
+.warn { border-left: 3px solid #C1553B; background: #FBF0ED; padding: 4mm 5mm;
+  margin: 4.5mm 0; page-break-inside: avoid; }
+.warn .lab { font-size: 7.6pt; letter-spacing: 1.6px; text-transform: uppercase;
+  color: #C1553B; font-weight: 700; display: block; margin-bottom: 1.5mm; }
+.warn p:last-child { margin-bottom: 0; }
+.say { border: 1px solid #00B39A; border-left: 3px solid #00B39A; background: #EDF9F7;
+  padding: 4mm 5mm; margin: 4.5mm 0; page-break-inside: avoid; }
+.say .lab { font-size: 7.6pt; letter-spacing: 1.6px; text-transform: uppercase;
+  color: #007F6E; font-weight: 700; display: block; margin-bottom: 1.5mm; }
+.say p:last-child { margin-bottom: 0; }
+.say q { font-style: italic; quotes: "\201C" "\201D"; color: #0B1F35; }
+
+/* ---------- cards ---------- */
+.cards { display: flex; flex-wrap: wrap; gap: 3.5mm; margin: 4mm 0 5mm; }
+.card { flex: 1 1 46%; border: 1px solid #DCE3EA; border-top: 3px solid #00AEEF;
+  border-radius: 3px; padding: 3.5mm 4mm; page-break-inside: avoid; background: #fff; }
+.card h5 { margin: 0 0 1.5mm; font-size: 9.4pt; color: #0B1F35; }
+.card p { font-size: 8.5pt; margin: 0 0 2mm; color: #44586e; }
+.card p:last-child { margin-bottom: 0; }
+.card.ib { border-top-color: #16375C; } .card.buk { border-top-color: #00AEEF; }
+.card.ukcb { border-top-color: #0F6FB5; } .card.pbwm { border-top-color: #00B39A; }
+.card.uscb { border-top-color: #EF9B20; }
+
+.kpis { display: flex; gap: 3mm; margin: 4mm 0 5mm; page-break-inside: avoid; }
+.kpi { flex: 1; background: #F5F8FB; border-radius: 3px; padding: 3mm; text-align: center;
+  border-bottom: 2px solid #00AEEF; }
+.kpi b { display: block; font-size: 15pt; color: #0B1F35; letter-spacing: -.5px; line-height: 1.2; }
+.kpi span { font-size: 7.4pt; color: #5B6B7F; display: block; margin-top: .8mm; line-height: 1.3; }
+
+.divhead { display: flex; align-items: baseline; gap: 3mm; border-bottom: 2px solid #0B1F35;
+  padding-bottom: 1.5mm; margin: 8mm 0 3mm; page-break-after: avoid; }
+.divhead h3 { margin: 0; font-size: 13pt; flex: 1; }
+.divhead .badge { font-size: 8pt; font-weight: 700; color: #fff; padding: 1mm 2.5mm;
+  border-radius: 2px; background: #00AEEF; white-space: nowrap; }
+
+.quote { border-left: 2px solid #DCE3EA; padding: 1mm 0 1mm 4mm; margin: 3mm 0;
+  color: #44586e; font-size: 8.8pt; page-break-inside: avoid; }
+.quote .src { display: block; font-size: 7.6pt; color: #7d8fa3; margin-top: 1.2mm;
+  font-style: normal; }
+
+.toc { columns: 2; column-gap: 10mm; font-size: 9pt; }
+.toc div { break-inside: avoid; margin-bottom: 2mm; padding-left: 9mm; text-indent: -9mm; }
+.toc b { color: #00AEEF; display: inline-block; width: 7mm; text-indent: 0; }
+
+.src-list { font-size: 7.6pt; color: #5B6B7F; columns: 2; column-gap: 8mm; }
+.src-list div { break-inside: avoid; margin-bottom: 1.6mm; padding-left: 5mm; text-indent: -5mm; }
+.footnote { font-size: 7.8pt; color: #7d8fa3; border-top: 1px solid #DCE3EA;
+  padding-top: 2mm; margin-top: 4mm; }
+</style></head><body><div class="cover">
+  <div class="eyebrow">Company primer &nbsp;·&nbsp; prepared for the Barclays Insight Day &times; SEO London, 14 September 2026</div>
+  <h1>Barclays<em>from first principles</em></h1>
+  <div class="rule"></div>
+  <div class="lede">What the firm actually is, how every pound of its income is earned,
+  which parts make the money, what it has bought and sold and why, how it differs from
+  everyone else it competes with — and what that means for the division you pick.</div>
+  <div class="stats">
+    <div><b>£29.1bn</b><span>FY2025 income</span></div>
+    <div><b>£9.1bn</b><span>FY2025 pre-tax profit</span></div>
+    <div><b>~48m</b><span>customers &amp; clients</span></div>
+    <div><b>91,065</b><span>employees</span></div>
+    <div><b>1690</b><span>founded</span></div>
+  </div>
+  <div class="meta">
+    <span>Assumes no prior knowledge. Every figure sourced; sources listed at the end.</span>
+    <span>Compiled 23 August 2026</span>
+  </div>
+</div>
+
+<section>
+<h2><span class="num">CONTENTS</span>How to use this report</h2>
+<p class="sub">Read Parts 1–4 if you read nothing else. They contain the argument that everything else hangs off.</p>
+
+<div class="toc">
+  <div><b>1</b> What Barclays actually is — and the 335 years that made it that shape</div>
+  <div><b>2</b> How a bank makes money: the two engines</div>
+  <div><b>3</b> The five divisions, and the sub-divisions inside them</div>
+  <div><b>4</b> The scorecard: which parts earn, which parts consume</div>
+  <div><b>5</b> Strategy: the 2024–26 plan and what replaces it</div>
+  <div><b>6</b> Acquisitions and disposals, explained not listed</div>
+  <div><b>7</b> The relationship businesses and how deals actually get won</div>
+  <div><b>8</b> Competitors — and what makes Barclays genuinely different</div>
+  <div><b>9</b> Clients: who they are, and why these ones</div>
+  <div><b>10</b> The output: what Barclays literally sells</div>
+  <div><b>11</b> The market's view: earnings calls, analysts, press, forums</div>
+  <div><b>12</b> Navigating 2026: rates, redress, and a reshuffled investment bank</div>
+  <div><b>13</b> Choosing a division — and what to say on 14 September</div>
+  <div><b>14</b> Sources</div>
+</div>
+
+<h3>The whole thing in six sentences</h3>
+<p><strong>One.</strong> Barclays is a 335-year-old British bank that does two very different
+jobs under one roof: it is a mass-market UK retail bank with roughly 20 million everyday
+customers, and it is one of only a handful of non-American firms that runs a genuinely
+global investment bank at scale.</p>
+<p><strong>Two.</strong> Those two jobs are legally separated by a wall called the
+ring-fence, and understanding that wall explains most of Barclays' structure, its funding
+costs and its politics.</p>
+<p><strong>Three.</strong> In FY2025 it earned £29.1bn of income and £9.1bn of pre-tax
+profit. The Investment Bank produced 45% of the income; Barclays UK produced 30%.</p>
+<p><strong>Four.</strong> But the Investment Bank consumes 55% of the group's regulatory
+capital to do it, which is why the group's return on tangible equity (11.3% in FY2025) has
+historically lagged UK peers — and why the entire corporate strategy since February 2024
+has been about shifting capital out of the investment bank and into the UK.</p>
+<p><strong>Five.</strong> That plan is working faster than promised: H1 2026 RoTE was 14.8%
+against a 2026 target of "greater than 12%", and management has already set a new bar of
+more than 14% by 2028 with over £15bn of capital returned to shareholders.</p>
+<p><strong>Six.</strong> What makes Barclays <em>Barclays</em> — the thing no competitor
+replicates — is that it is the only bank in the world that is simultaneously a top-tier UK
+high-street lender, a top-five US credit card issuer, and a bulge-bracket Wall Street
+investment bank. That combination is the entire investment case, the entire risk, and the
+reason the graduate roles differ so much from division to division.</p>
+</section>
+
+<section class="pb">
+<h2><span class="num">PART ONE</span>What Barclays actually is</h2>
+<p class="sub">Start from zero. A bank is a business that rents money. Barclays rents it in five distinct ways, to five distinct kinds of customer, on two continents.</p>
+
+<h3>The plain-English version</h3>
+<p>Strip away the jargon and Barclays does four things, all of which are variations on the
+same trick — <strong>stand between people who have money and people who need it, and charge
+for standing there</strong>:</p>
+<ol>
+<li><strong>It holds other people's money.</strong> About £430bn of customer deposits sit with
+Barclays. Depositors get safety, a card, an app, and a small amount of interest — often none.</li>
+<li><strong>It lends that money out.</strong> Mortgages, credit cards, loans to businesses,
+loans to hedge funds. Borrowers pay meaningfully more than depositors receive. The gap is
+the profit.</li>
+<li><strong>It stands in the middle of markets.</strong> When a pension fund wants to buy
+£200m of government bonds, or a manufacturer wants to protect itself against the dollar
+moving, Barclays quotes a price to buy and a price to sell, and keeps the difference.</li>
+<li><strong>It gets paid for advice and access.</strong> When a company buys another company,
+or floats on the stock exchange, or issues bonds, it hires banks to advise and to find the
+buyers. Barclays takes a percentage.</li>
+</ol>
+<p>Every division in this report is one of those four activities, aimed at a different
+customer. That is genuinely all a universal bank is.</p>
+
+<div class="kpis">
+  <div class="kpi"><b>£1,730bn</b><span>total assets<br>(H1 2026)</span></div>
+  <div class="kpi"><b>£29.1bn</b><span>income<br>FY2025</span></div>
+  <div class="kpi"><b>£9.1bn</b><span>profit before tax<br>FY2025</span></div>
+  <div class="kpi"><b>11.3%</b><span>RoTE<br>FY2025</span></div>
+  <div class="kpi"><b>14.3%</b><span>CET1 capital ratio<br>Q2 2026</span></div>
+  <div class="kpi"><b>~48m</b><span>customers<br>and clients</span></div>
+</div>
+
+<h3>The 335 years that explain the shape</h3>
+<p>Barclays' structure looks strange until you know how it got there. It was never designed;
+it accreted. Three episodes matter more than the rest, and all three are still visible in
+the 2026 balance sheet.</p>
+
+<svg class="chart" viewBox="0 0 720 599" width="100%" preserveAspectRatio="xMidYMid meet" role="img"><text x="0.0" y="14.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Three hundred and thirty-five years in thirteen lines</text><text x="0.0" y="33.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Barclays’ present shape is not a design. It is the residue of these decisions.</text><g transform="translate(0,41)"><line x1="74" y1="6" x2="74" y2="542" stroke="#DCE3EA" stroke-width="2"/><circle cx="74" cy="14" r="5" fill="#00AEEF"/><circle cx="74" cy="14" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="18.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">1690</text><text x="92.0" y="13.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Two Quaker goldsmith-bankers set up on Lombard Street</text><text x="92.0" y="27.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">John Freame and Thomas Gould. Barclays still dates itself from here — 335 years.</text><circle cx="74" cy="60" r="5" fill="#00AEEF"/><circle cx="74" cy="60" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="64.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">1736</text><text x="92.0" y="59.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">James Barclay becomes a partner</text><text x="92.0" y="73.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">The family name arrives and never leaves.</text><circle cx="74" cy="106" r="5" fill="#00AEEF"/><circle cx="74" cy="106" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="110.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">1896</text><text x="92.0" y="105.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Twenty family banks merge into Barclay &amp; Company</text><text x="92.0" y="119.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">£26m of deposits. The modern joint-stock bank is born — a federation, not a founder.</text><circle cx="74" cy="152" r="5" fill="#00AEEF"/><circle cx="74" cy="152" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="156.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">1966</text><text x="92.0" y="151.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Barclaycard launches — Britain’s first credit card</text><text x="92.0" y="165.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">A genuine first. Sixty years on, cards are still a core Barclays skill on both sides of the Atlantic.</text><circle cx="74" cy="198" r="5" fill="#00AEEF"/><circle cx="74" cy="198" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="202.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">1986</text><text x="92.0" y="197.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Big Bang: Barclays buys de Zoete &amp; Bevan and Wedd Durlacher, forming BZW</text><text x="92.0" y="211.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">The first attempt to bolt an investment bank onto a clearing bank.</text><circle cx="74" cy="244" r="5" fill="#00AEEF"/><circle cx="74" cy="244" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="248.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">1997</text><text x="92.0" y="243.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">BZW’s equities and advisory arms are sold to CSFB</text><text x="92.0" y="257.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">The first attempt fails. What is kept — fixed income — is renamed Barclays Capital.</text><circle cx="74" cy="290" r="5" fill="#00AEEF"/><circle cx="74" cy="290" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="294.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">2008</text><text x="92.0" y="289.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Barclays buys Lehman Brothers’ North American business out of bankruptcy</text><text x="92.0" y="303.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">$1.75bn for the US franchise, HQ and data centres — and none of the toxic assets. The defining act.</text><circle cx="74" cy="336" r="5" fill="#00AEEF"/><circle cx="74" cy="336" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="340.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">2016–17</text><text x="92.0" y="335.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Barclays sells down Absa and exits Africa</text><text x="92.0" y="349.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">A deliberate retreat to two home markets: the UK and the US.</text><circle cx="74" cy="382" r="5" fill="#00AEEF"/><circle cx="74" cy="382" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="386.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">2018</text><text x="92.0" y="381.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Ring-fencing splits the bank into two legal entities</text><text x="92.0" y="395.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Barclays Bank UK PLC (retail) and Barclays Bank PLC (international) — by law.</text><circle cx="74" cy="428" r="5" fill="#00AEEF"/><circle cx="74" cy="428" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="432.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">2023</text><text x="92.0" y="427.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Kensington Mortgages acquired</text><text x="92.0" y="441.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Specialist UK lending capability bought in.</text><circle cx="74" cy="474" r="5" fill="#00AEEF"/><circle cx="74" cy="474" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="478.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">2024</text><text x="92.0" y="473.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Tesco Bank acquired; three-year plan launched</text><text x="92.0" y="487.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">£600m, plus a 10-year exclusive to sell financial products under the Tesco brand.</text><circle cx="74" cy="520" r="5" fill="#00AEEF"/><circle cx="74" cy="520" r="9" fill="none" stroke="#00AEEF" stroke-width="1" opacity="0.35"/><text x="56.0" y="524.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="end" font-weight="700" letter-spacing="0">2026</text><text x="92.0" y="519.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Best Egg bought, American Airlines portfolio sold</text><text x="92.0" y="533.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Recycling US capital out of low-return co-brand cards into higher-return personal loans.</text></g></svg>
+
+<div class="key">
+  <span class="lab">Why the history matters commercially</span>
+  <p><strong>1896 explains the UK franchise.</strong> Barclays did not grow a branch network —
+  it federated twenty existing local banks in one go. That is why it arrived in the twentieth
+  century with genuine national reach and a brand older than most of its customers' families.</p>
+  <p><strong>2008 explains the investment bank.</strong> Barclays bought Lehman Brothers' North
+  American business for $1.75bn out of bankruptcy — $250m for the operating business and $1.5bn
+  for the New York headquarters and two data centres. It acquired the people, the client
+  relationships and the trading franchise while leaving the toxic assets behind in the estate.
+  Nothing else in modern European banking bought so much American market share so cheaply.
+  Every US corporate relationship Barclays has today traces back to that fortnight.</p>
+  <p><strong>2016–17 explains the focus.</strong> Barclays sold down its controlling stake in
+  Absa and left Africa. It was once a genuinely global bank; it chose to be a bank with two
+  home markets instead. Everything since has been an argument about the balance between them.</p>
+</div>
+
+<h3>The legal structure — and why the ring-fence matters</h3>
+<p>After 2008, UK legislators decided that a bank holding ordinary people's deposits should
+not be able to lose them on trading positions. From 2019, any UK bank with more than £25bn
+of deposits has been required to place its retail operations inside a separately capitalised,
+separately governed legal entity — a <em class="term">ring-fenced bank</em>. Barclays was the
+first to get approval, in March 2018.</p>
+
+<svg class="chart" viewBox="0 0 720 407" width="100%" preserveAspectRatio="xMidYMid meet" role="img"><text x="0.0" y="14.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">How Barclays is put together</text><text x="0.0" y="33.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Two banks under one holding company, five reporting divisions</text><g transform="translate(0,41)"><rect x="250" y="0" width="220" height="40" rx="4" fill="#0B1F35" stroke="#0B1F35" stroke-width="1"/><text x="360.0" y="17.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="700" letter-spacing="0">Barclays PLC</text><text x="360.0" y="31.0" font-family="Helvetica, Arial, sans-serif" font-size="8.8" fill="#ffffff" text-anchor="middle" font-weight="400" letter-spacing="0">Listed holding company (LSE / NYSE)</text><path d="M360.0,40.0 L360.0,57.0 L175.0,57.0 L175.0,74.0" fill="none" stroke="#DCE3EA" stroke-width="1.6"/><path d="M360.0,40.0 L360.0,57.0 L545.0,57.0 L545.0,74.0" fill="none" stroke="#DCE3EA" stroke-width="1.6"/><rect x="30" y="74" width="290" height="42" rx="4" fill="#00AEEF" stroke="#00AEEF" stroke-width="1"/><text x="175.0" y="92.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="700" letter-spacing="0">Barclays Bank UK PLC</text><text x="175.0" y="106.0" font-family="Helvetica, Arial, sans-serif" font-size="8.8" fill="#ffffff" text-anchor="middle" font-weight="400" letter-spacing="0">RING-FENCED · UK retail + smaller business</text><rect x="400" y="74" width="290" height="42" rx="4" fill="#16375C" stroke="#16375C" stroke-width="1"/><text x="545.0" y="92.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="700" letter-spacing="0">Barclays Bank PLC</text><text x="545.0" y="106.0" font-family="Helvetica, Arial, sans-serif" font-size="8.8" fill="#ffffff" text-anchor="middle" font-weight="400" letter-spacing="0">NON-RING-FENCED · international + markets</text><line x1="360" y1="60" x2="360" y2="330" stroke="#C1553B" stroke-width="1.4" stroke-dasharray="6 4" opacity="0.55"/><text x="360.0" y="340.0" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#C1553B" text-anchor="middle" font-weight="700" letter-spacing="0">the ring-fence — capital, funding and boards kept legally separate</text><rect x="30" y="150" width="290" height="34" rx="4" fill="#EEF4F9" stroke="#00AEEF" stroke-width="1"/><text x="175.0" y="170.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">Barclays UK</text><rect x="30" y="192" width="290" height="34" rx="4" fill="#EEF4F9" stroke="#0F6FB5" stroke-width="1"/><text x="175.0" y="212.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">Barclays UK Corporate Bank</text><rect x="400" y="150" width="290" height="34" rx="4" fill="#EEF4F9" stroke="#16375C" stroke-width="1"/><text x="545.0" y="170.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">Barclays Investment Bank</text><rect x="400" y="192" width="290" height="34" rx="4" fill="#EEF4F9" stroke="#EF9B20" stroke-width="1"/><text x="545.0" y="212.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">Barclays US Consumer Bank</text><rect x="215" y="250" width="290" height="34" rx="4" fill="#EEF4F9" stroke="#00B39A" stroke-width="1"/><text x="360.0" y="270.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">Private Bank &amp; Wealth Management</text><path d="M175.0,116.0 L175.0,133.0 L175.0,133.0 L175.0,150.0" fill="none" stroke="#DCE3EA" stroke-width="1.6"/><path d="M175.0,116.0 L175.0,154.0 L175.0,154.0 L175.0,192.0" fill="none" stroke="#DCE3EA" stroke-width="1.6"/><path d="M545.0,116.0 L545.0,133.0 L545.0,133.0 L545.0,150.0" fill="none" stroke="#DCE3EA" stroke-width="1.6"/><path d="M545.0,116.0 L545.0,154.0 L545.0,154.0 L545.0,192.0" fill="none" stroke="#DCE3EA" stroke-width="1.6"/><text x="360.0" y="308.0" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="middle" font-weight="400" letter-spacing="0">PB&amp;WM straddles the fence — UK wealth sits inside it, international private banking outside</text></g></svg>
+
+<p>This is not a diagram trick — the two entities have different boards, different capital,
+different credit ratings and different funding costs. Three practical consequences follow,
+and they come up constantly in interviews:</p>
+<ul>
+<li><strong>Cheap deposits cannot freely fund the trading floor.</strong> Barclays Bank UK's
+£430bn-odd deposit base is largely trapped inside the fence. The Investment Bank must fund
+itself in wholesale markets at a higher cost. This is a structural handicap versus JPMorgan
+or Bank of America, who face no such rule.</li>
+<li><strong>It creates trapped capital and a permanent internal argument</strong> about where
+the next pound of capital should go — the argument that the whole 2024–26 strategy is an
+answer to.</li>
+<li><strong>It makes the UK businesses safer and therefore cheaper to run,</strong> which is
+one reason Barclays UK, UK Corporate Bank and Private Bank all post RoTEs around and above
+20% while the Investment Bank historically struggled to reach 10%.</li>
+</ul>
+<p>Barclays' five reporting divisions map onto this structure but do not perfectly respect it:
+Private Bank &amp; Wealth Management straddles the fence, with UK wealth inside and
+international private banking outside.</p>
+</section>
+
+<section class="pb">
+<h2><span class="num">PART TWO</span>How the money is actually made</h2>
+<p class="sub">Two engines. Every revenue line in every division is one of them, or a blend of the two. If you understand this page you can read any bank's results.</p>
+
+<svg class="chart" viewBox="0 0 720 249" width="100%" preserveAspectRatio="xMidYMid meet" role="img"><text x="0.0" y="14.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">The two ways Barclays turns a balance sheet into revenue</text><text x="0.0" y="33.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Every line of every division reduces to one of these two, or a blend</text><g transform="translate(0,41)"><rect x="0" y="0" width="342" height="200" rx="6" fill="#EEF4F9" stroke="#00AEEF" stroke-width="1.2"/><rect x="378" y="0" width="342" height="200" rx="6" fill="#F4F1EC" stroke="#EF9B20" stroke-width="1.2"/><text x="18.0" y="24.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#00AEEF" text-anchor="start" font-weight="700" letter-spacing="0.6">ENGINE 1 — NET INTEREST INCOME</text><text x="18.0" y="44.0" font-family="Helvetica, Arial, sans-serif" font-size="21" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£16.0bn</text><text x="112.0" y="44.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">FY2025 · ~55% of income</text><text x="18.0" y="70.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Take deposits at a low rate. Lend at a higher one.</text><text x="18.0" y="82.8" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Keep the spread. Barclays holds ~£430bn of customer</text><text x="18.0" y="95.6" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">deposits, much of it paying little or nothing.</text><text x="18.0" y="108.4" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0"></text><text x="18.0" y="121.2" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#0B1F35" text-anchor="start" font-weight="400" letter-spacing="0">The structural hedge: Barclays parks a rolling ~5-year</text><text x="18.0" y="134.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">ladder of swaps/gilts against deposits that pay no</text><text x="18.0" y="146.8" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">interest. As old low-rate tranches mature and reprice</text><text x="18.0" y="159.6" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">into today’s higher rates, income rises mechanically —</text><text x="18.0" y="172.4" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">even if the Bank of England is cutting. This is the</text><text x="18.0" y="185.2" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">single biggest reason UK bank earnings keep climbing.</text><text x="396.0" y="24.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#EF9B20" text-anchor="start" font-weight="700" letter-spacing="0.6">ENGINE 2 — FEES, COMMISSIONS &amp; TRADING</text><text x="396.0" y="44.0" font-family="Helvetica, Arial, sans-serif" font-size="21" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£13.1bn</text><text x="490.0" y="44.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">FY2025 · ~45% of income</text><text x="396.0" y="70.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Charge for doing something, not for lending money.</text><text x="396.0" y="82.8" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0"></text><text x="396.0" y="95.6" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">· Trading spreads — buy at the bid, sell at the offer,</text><text x="396.0" y="108.4" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">  thousands of times a day, for institutional clients.</text><text x="396.0" y="121.2" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">· Underwriting fees — a % of every bond or share issue.</text><text x="396.0" y="134.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">· Advisory fees — a % of M&amp;A deal value, paid on close.</text><text x="396.0" y="146.8" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">· Transaction-banking and card interchange fees.</text><text x="396.0" y="159.6" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">· Management fees on private-bank assets.</text><text x="396.0" y="172.4" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0"></text><text x="396.0" y="185.2" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Higher margin, no capital tied up in loans — but cyclical.</text></g></svg>
+
+<h3>Engine one: net interest income, and the trick inside it</h3>
+<p>The simple version — borrow at 1%, lend at 5%, keep 4% — is only half the story, and the
+half that most candidates miss is the half that is currently driving UK bank profits.</p>
+<p>A large slice of Barclays' deposits sit in current accounts paying <strong>zero or near-zero
+interest</strong>. That money has no maturity: customers could withdraw it tomorrow, but in
+aggregate they never do. So the bank has, in effect, a permanent pool of free funding — and
+it needs to earn a return on it without taking a bet on interest rates.</p>
+<p>The solution is the <em class="term">structural hedge</em>. Barclays invests that pool in a
+rolling ladder of fixed-rate instruments — typically a rolling five-year programme, so roughly
+one-fifth matures and is reinvested every year. When a tranche bought at 2015's near-zero
+rates matures in 2026 and is reinvested at today's yields, income rises <strong>mechanically,
+with no new lending and no new customers</strong>, and keeps rising even while the Bank of
+England is cutting rates.</p>
+
+<div class="key">
+  <span class="lab">The single most useful thing you can say about UK banks in 2026</span>
+  <p>UK bank earnings are climbing not because lending is booming but because the structural
+  hedge is repricing off a decade of near-zero rates. It is a slow, visible, largely
+  contractual tailwind — which is exactly why Barclays can guide to group NII (excluding the
+  Investment Bank and Head Office) of <strong>over £13.7bn in 2026</strong>, upgraded at Q2
+  from £13.5bn, and to Barclays UK NII of £8.1–8.3bn, with real confidence. It is also why
+  the tailwind eventually exhausts itself — which is why management keeps pointing at fee
+  income and efficiency instead.</p>
+</div>
+
+<h3>Engine two: fees, commissions and trading spreads</h3>
+<p>The other ~45% of income is earned by <em>doing something</em> rather than by lending. It
+breaks into four mechanically different things, and the distinction matters because they
+behave differently in a downturn:</p>
+<ul>
+<li><strong>Market-making spreads.</strong> Barclays continuously quotes two-way prices in
+bonds, currencies, rates and equities. It earns the bid–offer spread on enormous volume. This
+income <em>rises</em> when markets are volatile — which is why the Investment Bank's Global
+Markets business grew income 15% in 2025 while everyone else was worrying.</li>
+<li><strong>Underwriting fees.</strong> A percentage of every bond or share issue Barclays
+brings to market. Depends on issuance volumes, so it is cyclical but broad.</li>
+<li><strong>Advisory fees.</strong> A percentage of M&amp;A deal value, usually contingent on
+completion. The most prestigious, most volatile, and least capital-intensive income in banking.</li>
+<li><strong>Recurring service fees.</strong> Card interchange, transaction-banking charges,
+and management fees on private-bank assets. Boring, sticky, and highly prized by investors
+precisely because it does not disappear in a bad year.</li>
+</ul>
+
+<h3>The three numbers that judge all of it</h3>
+<p>Bank results are reported in a private language. These three terms will be used repeatedly
+on 14 September and are worth genuinely understanding rather than memorising.</p>
+
+<table>
+<caption>The vocabulary you need. Barclays figures are FY2025 unless stated.</caption>
+<thead><tr><th style="width:19%">Term</th><th style="width:52%">What it actually means</th><th style="width:29%">Barclays</th></tr></thead>
+<tbody>
+<tr><td><strong>RoTE</strong><br>return on tangible equity</td>
+<td>Profit divided by the shareholders' money genuinely at risk. The single scoreboard number
+in banking. Below roughly 10–12% a bank is destroying value, because that is broadly what
+shareholders demand for the risk.</td>
+<td><strong>11.3%</strong> FY2025<br>14.8% H1 2026<br>Target &gt;12% (2026), &gt;14% (2028)</td></tr>
+<tr><td><strong>RWAs</strong><br>risk weighted assets</td>
+<td>The regulator's measure of how much risk a bank is running. A £1m mortgage might count as
+£150k of RWAs; £1m of derivatives exposure might count as far more. Every pound of RWA
+requires roughly 14p of shareholder capital to be held against it. <strong>RWAs, not cash,
+are the scarce resource inside a bank</strong> — this is the concept most candidates have
+never heard of and the one that explains Barclays' entire strategy.</td>
+<td><strong>£356.8bn</strong> FY2025<br>£364.5bn Q1 2026</td></tr>
+<tr><td><strong>CET1 ratio</strong></td>
+<td>Capital divided by RWAs — the bank's shock absorber. Too low and the regulator intervenes;
+too high and the bank is hoarding money it should return to shareholders. The buffer above
+the requirement is what funds buybacks and dividends.</td>
+<td><strong>14.3%</strong> Q2 2026<br>(14.0% after the £1bn buyback)</td></tr>
+<tr><td><strong>Cost:income</strong></td>
+<td>What share of every pound of revenue is eaten by running the bank. Lower is better.</td>
+<td><strong>61%</strong> FY2025 → 54% in Q2 2026<br>Target: high-50s 2026, low-50s 2028</td></tr>
+<tr><td><strong>Loan loss rate</strong></td>
+<td>Bad debts as a share of lending, in basis points. Tells you how risky the loan book is.
+US credit cards run far hotter than UK mortgages — which is the whole story of the US
+Consumer Bank's returns.</td>
+<td><strong>62bps</strong> H1 2026<br>Through-cycle guide: 50–60bps</td></tr>
+</tbody>
+</table>
+
+<div class="say">
+  <span class="lab">Use this on the day</span>
+  <p>Almost every student at an insight day talks about revenue. Very few talk about
+  <em>capital</em>. If you ask a Barclays professional
+  <q>how does your desk think about RWA efficiency — income per unit of risk-weighted
+  assets — rather than just revenue?</q> you will be having a different conversation from
+  everyone else in the room, because that is the internal metric they are actually managed
+  against.</p>
+</div>
+</section>
+
+<section class="pb">
+<h2><span class="num">PART THREE</span>The five divisions</h2>
+<p class="sub">Since Q1 2024 Barclays has reported as five operating divisions plus Head Office. Before that it reported as three, and the change was itself a strategic statement: management wanted each business judged on its own returns, in public, with nowhere to hide.</p>
+
+<svg class="chart" viewBox="0 0 720 231" width="100%" preserveAspectRatio="xMidYMid meet" role="img"><text x="0.0" y="14.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Where the £29.1bn of FY2025 income came from</text><text x="0.0" y="33.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Total income by division, year ended 31 December 2025</text><g transform="translate(0,41)"><rect x="200" y="6" width="415.7" height="16" rx="2" fill="#16375C"/><text x="190.0" y="18.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">Investment Bank</text><text x="623.7" y="18.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£13,055m</text><rect x="200" y="36" width="277.3" height="16" rx="2" fill="#00AEEF"/><text x="190.0" y="48.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">Barclays UK</text><text x="485.3" y="48.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£8,708m</text><rect x="200" y="66" width="117.2" height="16" rx="2" fill="#EF9B20"/><text x="190.0" y="78.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">US Consumer Bank</text><text x="325.2" y="78.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£3,681m</text><rect x="200" y="96" width="65.7" height="16" rx="2" fill="#0F6FB5"/><text x="190.0" y="108.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">UK Corporate Bank</text><text x="273.7" y="108.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£2,064m</text><rect x="200" y="126" width="43.9" height="16" rx="2" fill="#00B39A"/><text x="190.0" y="138.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">Private Bank &amp; Wealth</text><text x="251.9" y="138.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£1,380m</text><rect x="200" y="156" width="8.0" height="16" rx="2" fill="#9AA6B4"/><text x="190.0" y="168.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">Head Office</text><text x="216.0" y="168.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£252m</text></g></svg>
+<svg class="chart" viewBox="0 0 720 201" width="100%" preserveAspectRatio="xMidYMid meet" role="img"><text x="0.0" y="14.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Where the profit came from</text><text x="0.0" y="33.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Profit before tax by division, FY2025. Head Office ran a £748m loss, which is why these sum to more than the £9,139m Group figure.</text><g transform="translate(0,41)"><rect x="200" y="6" width="415.7" height="16" rx="2" fill="#16375C"/><text x="190.0" y="18.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">Investment Bank</text><text x="623.7" y="18.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£4,614m</text><rect x="200" y="36" width="307.5" height="16" rx="2" fill="#00AEEF"/><text x="190.0" y="48.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">Barclays UK</text><text x="515.5" y="48.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£3,413m</text><rect x="200" y="66" width="87.4" height="16" rx="2" fill="#0F6FB5"/><text x="190.0" y="78.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">UK Corporate Bank</text><text x="295.4" y="78.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£970m</text><rect x="200" y="96" width="46.4" height="16" rx="2" fill="#EF9B20"/><text x="190.0" y="108.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">US Consumer Bank</text><text x="254.4" y="108.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£515m</text><rect x="200" y="126" width="33.8" height="16" rx="2" fill="#00B39A"/><text x="190.0" y="138.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">Private Bank &amp; Wealth</text><text x="241.8" y="138.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£375m</text></g></svg>
+
+<table>
+<caption>The complete divisional scorecard, FY2025 (£m unless stated). This table is the reference sheet for the rest of the report.</caption>
+<thead><tr>
+<th>Division</th><th class="n">Income</th><th class="n">Costs</th><th class="n">Impairment</th>
+<th class="n">PBT</th><th class="n">RoTE</th><th class="n">Cost:income</th><th class="n">RWAs (£bn)</th>
+</tr></thead>
+<tbody>
+<tr><td><strong>Barclays UK</strong></td><td class="n">8,708</td><td class="n">4,746</td><td class="n">413</td><td class="n">3,413</td><td class="n pos">20.7%</td><td class="n">56%</td><td class="n">85.8</td></tr>
+<tr><td><strong>UK Corporate Bank</strong></td><td class="n">2,064</td><td class="n">989</td><td class="n">37</td><td class="n">970</td><td class="n pos">18.9%</td><td class="n">51%</td><td class="n">26.5</td></tr>
+<tr><td><strong>Private Bank &amp; Wealth</strong></td><td class="n">1,380</td><td class="n">994</td><td class="n">(8)</td><td class="n">375</td><td class="n pos">26.3%</td><td class="n">73%</td><td class="n">8.0</td></tr>
+<tr><td><strong>Investment Bank</strong></td><td class="n">13,055</td><td class="n">7,927</td><td class="n">305</td><td class="n">4,614</td><td class="n neg">10.6%</td><td class="n">62%</td><td class="n">196.7</td></tr>
+<tr><td><strong>US Consumer Bank</strong></td><td class="n">3,681</td><td class="n">1,637</td><td class="n">1,521</td><td class="n">515</td><td class="n neg">11.0%</td><td class="n">45%</td><td class="n">27.4</td></tr>
+<tr><td>Head Office</td><td class="n">252</td><td class="n">747</td><td class="n">11</td><td class="n">(748)</td><td class="n">—</td><td class="n">—</td><td class="n">12.3</td></tr>
+<tr class="total"><td>GROUP</td><td class="n">29,140</td><td class="n">17,040</td><td class="n">2,279</td><td class="n">9,139</td><td class="n">11.3%</td><td class="n">61%</td><td class="n">356.8</td></tr>
+</tbody>
+</table>
+
+<div class="divhead"><h3>1 · Barclays UK</h3><span class="badge" style="background:#00AEEF">£8,708m income · RoTE 20.7%</span></div>
+<p><strong>What it is:</strong> the ring-fenced high-street bank. More than 20 million
+customers, £216.5bn of loans and £244.6bn of deposits — the largest single pool of cheap
+funding in the group and the reason the structural hedge matters so much. Income grew 5% in
+FY2025 with net interest income up 15% to £7.7bn, driven by the hedge and by Tesco Bank.</p>
+<h4>Sub-divisions inside it</h4>
+<ul>
+<li><strong>Personal Banking</strong> — current accounts, savings, the app. The customer
+acquisition engine; individually low-margin, collectively the foundation of everything.</li>
+<li><strong>Premier Banking</strong> — the mass-affluent tier, and deliberately the feeder
+into the Private Bank. Barclays has been removing custody fees on direct investing and
+launching no-upfront-fee advice for Premier clients, which CEO C.S. Venkatakrishnan
+described as a play to <q>own the entirety of the customer</q>.</li>
+<li><strong>Mortgages</strong> — the biggest chunk of the loan book, including
+<strong>Kensington Mortgage Company</strong>, the specialist lender bought in 2023 for
+customers with complex or self-employed incomes.</li>
+<li><strong>Barclaycard UK</strong> — UK consumer credit cards. Higher-margin, higher-risk
+lending; the direct descendant of the 1966 launch.</li>
+<li><strong>Savings, and Tesco Bank</strong> — the acquired Tesco book plus a ten-year
+exclusive licence to sell financial products under the Tesco brand.</li>
+<li><strong>Business Banking</strong> — start-ups and smaller SMEs turning over under £6.5m.
+Above that threshold, clients graduate into the UK Corporate Bank.</li>
+</ul>
+<p><strong>Why the RoTE fell from 23.1% to 20.7%:</strong> not deterioration but investment —
+costs rose 12% as Tesco Bank was integrated and the division absorbed acquisition and
+restructuring spend. H1 2026 cost:income improved to 53%.</p>
+
+<div class="divhead"><h3>2 · Barclays UK Corporate Bank</h3><span class="badge" style="background:#0F6FB5">£2,064m income · RoTE 18.9%</span></div>
+<p><strong>What it is:</strong> the bank for real British businesses — SMEs above the £6.5m
+turnover line up to mid-caps. Barclays banks <strong>roughly one in four UK corporates</strong>,
+which is an extraordinary market position and the least-discussed asset in the group.</p>
+<p><strong>What it sells:</strong> lending and working capital, cash management and payments
+(clearing in GBP, EUR, INR and 100+ currencies), trade and supply-chain finance via the
+Barclays iPortal platform, FX and rates hedging, and asset and sales finance. It was named
+Best Trade Finance Bank in the UK at the 2026 GTR Leaders in Trade Awards.</p>
+<div class="key"><span class="lab">The economics that make this division special</span>
+<p>Look at the FY2025 table: £88.7bn of customer deposits against only £30.0bn of loans. This
+division is a <strong>net supplier of funding to the group</strong>. Corporate treasurers park
+operating cash in accounts that pay little, because they need the payment rails and the
+relationship more than they need the yield. That is why income rose 16% and RoTE jumped to
+18.9% — and to 20.6% in H1 2026 — on a modest £26.5bn of RWAs. Sticky deposits plus fee income
+plus low capital intensity is the most attractive combination in banking.</p></div>
+
+<div class="divhead"><h3>3 · Barclays Private Bank &amp; Wealth Management</h3><span class="badge" style="background:#00B39A">£1,380m income · RoTE 26.3%</span></div>
+<p><strong>What it is:</strong> the smallest division by income and <strong>the highest-returning
+by some distance</strong>. It serves high-net-worth and ultra-high-net-worth individuals,
+families, entrepreneurs and family offices — typically from around £3m of investable assets,
+with tiering above that.</p>
+<p><strong>What it sells:</strong> discretionary and advisory portfolio management, bespoke
+lending against assets, trust and fiduciary services, succession and estate planning, and
+access to private markets and institutional products retail clients cannot reach. Management
+fees typically run in the region of 0.50%–1.45% of assets.</p>
+<p><strong>Why it earns 26.3% on capital:</strong> £72.0bn of client deposits against just
+£8.0bn of RWAs. It earns fees on assets rather than spread on loans, so it barely consumes
+capital at all. Its weakness is the mirror image: a 73% cost:income ratio, because the
+product <em>is</em> expensive senior people. Barclays has embedded the hiring of up to 100 new
+wealth managers into its 2026 cost guidance, and is explicitly trying to scale advice
+digitally so the economics improve as it grows.</p>
+
+<div class="divhead"><h3>4 · Barclays Investment Bank</h3><span class="badge" style="background:#16375C">£13,055m income · RoTE 10.6%</span></div>
+<p><strong>What it is:</strong> the largest division, and the most misunderstood. It is a
+genuinely global, top-tier franchise serving governments, corporations, pension funds, asset
+managers, hedge funds and financial institutions. It is also the reason the group's headline
+returns have lagged. Both statements are true simultaneously, and holding both in your head
+is the mark of someone who has actually read the accounts.</p>
+
+<svg class="chart" viewBox="0 0 720 253" width="100%" preserveAspectRatio="xMidYMid meet" role="img"><text x="0.0" y="14.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">What the Investment Bank actually sells</text><text x="0.0" y="33.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">FY2025 income, £13,055m. Bar lengths are shares of divisional income.</text><g transform="translate(0,41)"><text x="0.0" y="13.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Global Markets</text><text x="0.0" y="27.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">£8,654m  ·  66% of IB income</text><rect x="300" y="2" width="198.9" height="20" rx="2" fill="#16375C"/><text x="16.0" y="47.0" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">·  FICC — rates, credit, FX, commodities, securitised</text><rect x="300" y="38" width="124.8" height="13" rx="1.5" fill="#16375C" opacity="0.45"/><text x="431.8" y="48.0" font-family="Helvetica, Arial, sans-serif" font-size="9.4" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£5,429m</text><text x="16.0" y="67.0" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">·  Equities — cash, derivatives, prime/financing</text><rect x="300" y="58" width="74.1" height="13" rx="1.5" fill="#16375C" opacity="0.45"/><text x="381.1" y="68.0" font-family="Helvetica, Arial, sans-serif" font-size="9.4" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£3,225m</text><text x="0.0" y="99.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Investment Banking</text><text x="0.0" y="113.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">£4,401m  ·  34% of IB income</text><rect x="300" y="88" width="101.1" height="20" rx="2" fill="#0F6FB5"/><text x="16.0" y="133.0" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">·  Debt Capital Markets + leveraged finance</text><rect x="300" y="124" width="34.7" height="13" rx="1.5" fill="#0F6FB5" opacity="0.45"/><text x="341.7" y="134.0" font-family="Helvetica, Arial, sans-serif" font-size="9.4" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£1,510m</text><text x="16.0" y="153.0" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">·  Advisory (M&amp;A)</text><rect x="300" y="144" width="15.5" height="13" rx="1.5" fill="#0F6FB5" opacity="0.45"/><text x="322.5" y="154.0" font-family="Helvetica, Arial, sans-serif" font-size="9.4" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£676m</text><text x="16.0" y="173.0" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">·  Equity Capital Markets</text><rect x="300" y="164" width="6.4" height="13" rx="1.5" fill="#0F6FB5" opacity="0.45"/><text x="313.4" y="174.0" font-family="Helvetica, Arial, sans-serif" font-size="9.4" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£278m</text><text x="16.0" y="193.0" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">·  International Corporate Bank (transaction banking)</text><rect x="300" y="184" width="44.5" height="13" rx="1.5" fill="#0F6FB5" opacity="0.45"/><text x="351.5" y="194.0" font-family="Helvetica, Arial, sans-serif" font-size="9.4" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">£1,937m</text></g></svg>
+
+<h4>The sub-divisions, and what each actually does</h4>
+<ul>
+<li><strong>Global Markets — FICC (£5,429m).</strong> Fixed income, currencies and commodities:
+government and corporate bonds, interest-rate and credit derivatives, FX, securitised
+products. Barclays is a primary dealer in the major sovereign markets. This is the direct
+inheritance of BZW and Barclays Capital — the historic core.</li>
+<li><strong>Global Markets — Equities (£3,225m).</strong> Cash equities, equity derivatives,
+and prime brokerage/financing for hedge funds. <strong>The strategic success story:</strong>
+equities have grown from about 22% of markets income in 2023 to roughly 32%, a deliberate
+rebalancing towards a more stable, financing-led revenue stream. Equities income rose 45%
+year-on-year in Q2 2026.</li>
+<li><strong>Advisory (£676m).</strong> M&amp;A. The most visible business, the smallest by
+revenue, and the one with the greatest halo effect. Advisory fees rose 67% to £443m in H1 2026.</li>
+<li><strong>Equity Capital Markets (£278m).</strong> IPOs, follow-on share issues, convertibles.
+Fees rose 65% to £249m in H1 2026 as issuance recovered.</li>
+<li><strong>Debt Capital Markets (£1,510m).</strong> Bond issuance and leveraged finance — the
+largest of the three fee pools and a genuine Barclays strength, reflecting the fixed-income
+DNA.</li>
+<li><strong>International Corporate Bank (£1,937m).</strong> Transaction banking for
+multinationals — cash management, payments, trade finance outside the UK ring-fence. Recurring,
+capital-light income that anchors relationships between deals.</li>
+</ul>
+<p><strong>The problem, stated honestly:</strong> £196.7bn of RWAs — 55% of the group total —
+for a 10.6% return in FY2025. That is why RoTE at group level was 11.3%. <strong>The
+improvement, stated equally honestly:</strong> H1 2026 RoTE reached 15.5% and Q2 hit 16.0%,
+with income of £7,986m in six months, achieved while holding RWAs broadly flat for a fourth
+consecutive year. The division did not shrink its way to returns; it grew income on a static
+capital base. That is precisely what the plan asked for.</p>
+
+<div class="divhead"><h3>5 · Barclays US Consumer Bank</h3><span class="badge" style="background:#EF9B20">£3,681m income · RoTE 11.0%</span></div>
+<p><strong>What it is:</strong> a top-tier American credit card business, run out of Barclays
+Bank Delaware. It is overwhelmingly a <em class="term">co-brand</em> issuer: rather than
+marketing its own card, it issues cards carrying a partner's brand — Frontier Airlines, the
+Gap group, AARP, cruise lines and others — and shares the economics with the partner.</p>
+<p><strong>What it sells:</strong> co-branded, private-label and small-business credit cards;
+instalment loans; and, increasingly, retail deposits — online savings accounts and CDs that
+fund the lending. Following the May 2026 completion of the Best Egg acquisition it also
+originates unsecured personal loans direct to consumers.</p>
+<div class="warn"><span class="lab">Read the impairment line</span>
+<p>US Consumer Bank income of £3,681m came with <strong>£1,521m of credit impairment</strong> —
+more than two-thirds of the entire group's bad-debt charge, from a division producing under
+13% of income. American card lending is structurally high-yield and high-loss. The 45%
+cost:income ratio is the best in the group; the returns are among the worst, because losses
+eat the margin. Understanding that trade-off is the key to this division.</p></div>
+<p><strong>What is being done about it:</strong> a deliberate reshaping. Barclays exited the
+American Airlines co-brand portfolio in Q1 2026, releasing about £5bn of RWAs and booking a
+gain of roughly £225m; it sold around $1.1bn of receivables to Blackstone while retaining
+servicing; and it acquired Best Egg for $800m. H1 2026 income rose to £2,119m and reported
+RoTE to 24.2% — though on an underlying basis, stripping out the portfolio gain, Q2 RoTE was
+10.5%. Be precise about that distinction if it comes up; it is exactly the kind of nuance that
+separates a candidate who read the release from one who read the headline.</p>
+</section>
+
+<section class="pb">
+<h2><span class="num">PART FOUR</span>The scorecard: what actually makes the money</h2>
+<p class="sub">You asked which parts make the most money. The honest answer requires two different rankings — because the division that earns the most income is not the division that creates the most value.</p>
+
+<h3>Ranking one: by income and profit</h3>
+<p>By revenue the Investment Bank wins comfortably: £13.1bn of FY2025 income, 45% of the group,
+and £4.6bn of pre-tax profit — 47% of the divisional total. Barclays UK is second on both
+counts. On this measure Barclays is an investment bank with a retail bank attached.</p>
+
+<h3>Ranking two: by return on the capital consumed</h3>
+<p>Now divide by what each division ties up. This inverts the table completely, and it is the
+ranking Barclays' own management is judged on.</p>
+
+<svg class="chart" viewBox="0 0 720 242" width="100%" preserveAspectRatio="xMidYMid meet" role="img"><text x="0.0" y="14.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">The single most important chart in this report</text><text x="0.0" y="33.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Bars pointing left = how much of the Group’s regulatory capital a division ties up. Bars pointing right = how much income it earns.</text><text x="0.0" y="46.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Where left beats right, the division is diluting returns.</text><g transform="translate(0,54)"><text x="260.0" y="10.0" font-family="Helvetica, Arial, sans-serif" font-size="8.6" fill="#5B6B7F" text-anchor="end" font-weight="700" letter-spacing="0.7">SHARE OF GROUP CAPITAL (RWAs)</text><text x="460.0" y="10.0" font-family="Helvetica, Arial, sans-serif" font-size="8.6" fill="#5B6B7F" text-anchor="start" font-weight="700" letter-spacing="0.7">SHARE OF GROUP INCOME</text><rect x="52.5" y="25" width="207.5" height="18" rx="2" fill="#16375C" opacity="0.40"/><rect x="460.0" y="25" width="168.7" height="18" rx="2" fill="#16375C"/><text x="360.0" y="38.5" font-family="Helvetica, Arial, sans-serif" font-size="10.2" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">Investment Bank</text><text x="45.5" y="38.5" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#5B6B7F" text-anchor="end" font-weight="700" letter-spacing="0">55%</text><text x="635.7" y="38.5" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">45%</text><rect x="169.6" y="57" width="90.4" height="18" rx="2" fill="#00AEEF" opacity="0.40"/><rect x="460.0" y="57" width="112.6" height="18" rx="2" fill="#00AEEF"/><text x="360.0" y="70.5" font-family="Helvetica, Arial, sans-serif" font-size="10.2" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">Barclays UK</text><text x="162.6" y="70.5" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#5B6B7F" text-anchor="end" font-weight="700" letter-spacing="0">24%</text><text x="579.6" y="70.5" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">30%</text><rect x="231.0" y="89" width="29.0" height="18" rx="2" fill="#EF9B20" opacity="0.40"/><rect x="460.0" y="89" width="47.5" height="18" rx="2" fill="#EF9B20"/><text x="360.0" y="102.5" font-family="Helvetica, Arial, sans-serif" font-size="10.2" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">US Consumer Bank</text><text x="224.0" y="102.5" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#5B6B7F" text-anchor="end" font-weight="700" letter-spacing="0">8%</text><text x="514.5" y="102.5" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">13%</text><rect x="232.1" y="121" width="27.9" height="18" rx="2" fill="#0F6FB5" opacity="0.40"/><rect x="460.0" y="121" width="26.7" height="18" rx="2" fill="#0F6FB5"/><text x="360.0" y="134.5" font-family="Helvetica, Arial, sans-serif" font-size="10.2" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">UK Corporate Bank</text><text x="225.1" y="134.5" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#5B6B7F" text-anchor="end" font-weight="700" letter-spacing="0">7%</text><text x="493.7" y="134.5" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">7%</text><rect x="251.7" y="153" width="8.3" height="18" rx="2" fill="#00B39A" opacity="0.40"/><rect x="460.0" y="153" width="17.7" height="18" rx="2" fill="#00B39A"/><text x="360.0" y="166.5" font-family="Helvetica, Arial, sans-serif" font-size="10.2" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">Private Bank &amp; Wealth</text><text x="244.7" y="166.5" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#5B6B7F" text-anchor="end" font-weight="700" letter-spacing="0">2%</text><text x="484.7" y="166.5" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">5%</text><line x1="260.0" y1="20" x2="260.0" y2="182" stroke="#DCE3EA" stroke-width="1"/><line x1="460.0" y1="20" x2="460.0" y2="182" stroke="#DCE3EA" stroke-width="1"/></g></svg>
+
+<table>
+<caption>Capital efficiency, FY2025 — income earned per £1 of risk-weighted assets, and RoTE.</caption>
+<thead><tr><th>Division</th><th class="n">Income (£m)</th><th class="n">RWAs (£bn)</th>
+<th class="n">Income per £1 of RWA</th><th class="n">RoTE FY2025</th><th class="n">RoTE H1 2026</th></tr></thead>
+<tbody>
+<tr><td><strong>Private Bank &amp; Wealth</strong></td><td class="n">1,380</td><td class="n">8.0</td><td class="n pos">17.3p</td><td class="n">26.3%</td><td class="n">26.1%</td></tr>
+<tr><td><strong>US Consumer Bank</strong></td><td class="n">3,681</td><td class="n">27.4</td><td class="n">13.4p</td><td class="n">11.0%</td><td class="n">24.2%*</td></tr>
+<tr><td><strong>Barclays UK</strong></td><td class="n">8,708</td><td class="n">85.8</td><td class="n">10.2p</td><td class="n">20.7%</td><td class="n">20.1%</td></tr>
+<tr><td><strong>UK Corporate Bank</strong></td><td class="n">2,064</td><td class="n">26.5</td><td class="n">7.8p</td><td class="n">18.9%</td><td class="n">20.6%</td></tr>
+<tr><td><strong>Investment Bank</strong></td><td class="n">13,055</td><td class="n">196.7</td><td class="n neg">6.6p</td><td class="n">10.6%</td><td class="n">15.5%</td></tr>
+</tbody>
+</table>
+<p class="footnote">*US Consumer Bank H1 2026 RoTE is flattered by the ~£225m gain on the American Airlines portfolio sale; the underlying Q2 figure was 10.5%.</p>
+
+<svg class="chart" viewBox="0 0 720 291" width="100%" preserveAspectRatio="xMidYMid meet" role="img"><text x="0.0" y="14.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Return on tangible equity by division</text><text x="0.0" y="33.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">RoTE is the number that matters: profit earned per pound of shareholder capital. The Group must clear 12% in 2026 and 14% by 2028.</text><g transform="translate(0,41)"><line x1="42" y1="206.0" x2="708" y2="206.0" stroke="#DCE3EA" stroke-width="0.8"/><text x="35.0" y="209.5" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">0</text><line x1="42" y1="170.0" x2="708" y2="170.0" stroke="#DCE3EA" stroke-width="0.8"/><text x="35.0" y="173.5" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">6</text><line x1="42" y1="134.0" x2="708" y2="134.0" stroke="#DCE3EA" stroke-width="0.8"/><text x="35.0" y="137.5" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">12</text><line x1="42" y1="98.0" x2="708" y2="98.0" stroke="#DCE3EA" stroke-width="0.8"/><text x="35.0" y="101.5" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">18</text><line x1="42" y1="62.0" x2="708" y2="62.0" stroke="#DCE3EA" stroke-width="0.8"/><text x="35.0" y="65.5" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">24</text><line x1="42" y1="26.0" x2="708" y2="26.0" stroke="#DCE3EA" stroke-width="0.8"/><text x="35.0" y="29.5" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">31</text><rect x="69.5" y="83.9" width="25.0" height="122.1" rx="1.5" fill="#9AA6B4"/><text x="82.0" y="78.9" font-family="Helvetica, Arial, sans-serif" font-size="8.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">20.7</text><rect x="97.5" y="87.4" width="25.0" height="118.6" rx="1.5" fill="#00AEEF"/><text x="110.0" y="82.4" font-family="Helvetica, Arial, sans-serif" font-size="8.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">20.1</text><text x="97.5" y="221.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#0B1F35" text-anchor="middle" font-weight="400" letter-spacing="0">Barclays UK</text><rect x="180.5" y="94.5" width="25.0" height="111.5" rx="1.5" fill="#9AA6B4"/><text x="193.0" y="89.5" font-family="Helvetica, Arial, sans-serif" font-size="8.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">18.9</text><rect x="208.5" y="84.5" width="25.0" height="121.5" rx="1.5" fill="#00AEEF"/><text x="221.0" y="79.5" font-family="Helvetica, Arial, sans-serif" font-size="8.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">20.6</text><text x="208.5" y="221.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#0B1F35" text-anchor="middle" font-weight="400" letter-spacing="0">UK Corporate</text><rect x="291.5" y="50.8" width="25.0" height="155.2" rx="1.5" fill="#9AA6B4"/><text x="304.0" y="45.8" font-family="Helvetica, Arial, sans-serif" font-size="8.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">26.3</text><rect x="319.5" y="52.0" width="25.0" height="154.0" rx="1.5" fill="#00AEEF"/><text x="332.0" y="47.0" font-family="Helvetica, Arial, sans-serif" font-size="8.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">26.1</text><text x="319.5" y="221.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#0B1F35" text-anchor="middle" font-weight="400" letter-spacing="0">Private Bank</text><rect x="402.5" y="143.5" width="25.0" height="62.5" rx="1.5" fill="#9AA6B4"/><text x="415.0" y="138.5" font-family="Helvetica, Arial, sans-serif" font-size="8.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">10.6</text><rect x="430.5" y="114.5" width="25.0" height="91.5" rx="1.5" fill="#00AEEF"/><text x="443.0" y="109.5" font-family="Helvetica, Arial, sans-serif" font-size="8.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">15.5</text><text x="430.5" y="221.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#0B1F35" text-anchor="middle" font-weight="400" letter-spacing="0">Investment Bank</text><rect x="513.5" y="141.1" width="25.0" height="64.9" rx="1.5" fill="#9AA6B4"/><text x="526.0" y="136.1" font-family="Helvetica, Arial, sans-serif" font-size="8.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">11.0</text><rect x="541.5" y="63.2" width="25.0" height="142.8" rx="1.5" fill="#00AEEF"/><text x="554.0" y="58.2" font-family="Helvetica, Arial, sans-serif" font-size="8.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">24.2</text><text x="541.5" y="221.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#0B1F35" text-anchor="middle" font-weight="400" letter-spacing="0">US Consumer</text><rect x="624.5" y="139.3" width="25.0" height="66.7" rx="1.5" fill="#9AA6B4"/><text x="637.0" y="134.3" font-family="Helvetica, Arial, sans-serif" font-size="8.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">11.3</text><rect x="652.5" y="118.7" width="25.0" height="87.3" rx="1.5" fill="#00AEEF"/><text x="665.0" y="113.7" font-family="Helvetica, Arial, sans-serif" font-size="8.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">14.8</text><text x="652.5" y="221.0" font-family="Helvetica, Arial, sans-serif" font-size="9.6" fill="#0B1F35" text-anchor="middle" font-weight="400" letter-spacing="0">GROUP</text><rect x="42" y="232" width="9" height="9" rx="1.5" fill="#9AA6B4"/><text x="55.0" y="240.0" font-family="Helvetica, Arial, sans-serif" font-size="9.4" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">FY2025</text><rect x="89.8" y="232" width="9" height="9" rx="1.5" fill="#00AEEF"/><text x="102.8" y="240.0" font-family="Helvetica, Arial, sans-serif" font-size="9.4" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">H1 2026</text></g></svg>
+<svg class="chart" viewBox="0 0 720 384" width="100%" preserveAspectRatio="xMidYMid meet" role="img"><text x="0.0" y="14.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">The whole business on one chart (FY2025)</text><text x="0.0" y="33.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Ideal position is top-left: high return, little capital. The Investment Bank sits bottom-right — the strategic problem Barclays has</text><text x="0.0" y="46.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">spent three years fixing.</text><g transform="translate(0,54)"><line x1="52" y1="290.0" x2="598" y2="290.0" stroke="#DCE3EA" stroke-width="0.8"/><text x="44.0" y="293.5" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">0%</text><line x1="52" y1="246.3" x2="598" y2="246.3" stroke="#DCE3EA" stroke-width="0.8"/><text x="44.0" y="249.8" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">5%</text><line x1="52" y1="202.7" x2="598" y2="202.7" stroke="#DCE3EA" stroke-width="0.8"/><text x="44.0" y="206.2" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">10%</text><line x1="52" y1="159.0" x2="598" y2="159.0" stroke="#DCE3EA" stroke-width="0.8"/><text x="44.0" y="162.5" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">15%</text><line x1="52" y1="115.3" x2="598" y2="115.3" stroke="#DCE3EA" stroke-width="0.8"/><text x="44.0" y="118.8" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">20%</text><line x1="52" y1="71.7" x2="598" y2="71.7" stroke="#DCE3EA" stroke-width="0.8"/><text x="44.0" y="75.2" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">25%</text><line x1="52" y1="28.0" x2="598" y2="28.0" stroke="#DCE3EA" stroke-width="0.8"/><text x="44.0" y="31.5" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">30%</text><line x1="52.0" y1="28" x2="52.0" y2="290" stroke="#DCE3EA" stroke-width="0.8"/><text x="52.0" y="306.0" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="middle" font-weight="400" letter-spacing="0">£0bn</text><line x1="176.1" y1="28" x2="176.1" y2="290" stroke="#DCE3EA" stroke-width="0.8"/><text x="176.1" y="306.0" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="middle" font-weight="400" letter-spacing="0">£50bn</text><line x1="300.2" y1="28" x2="300.2" y2="290" stroke="#DCE3EA" stroke-width="0.8"/><text x="300.2" y="306.0" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="middle" font-weight="400" letter-spacing="0">£100bn</text><line x1="424.3" y1="28" x2="424.3" y2="290" stroke="#DCE3EA" stroke-width="0.8"/><text x="424.3" y="306.0" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="middle" font-weight="400" letter-spacing="0">£150bn</text><line x1="548.4" y1="28" x2="548.4" y2="290" stroke="#DCE3EA" stroke-width="0.8"/><text x="548.4" y="306.0" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="middle" font-weight="400" letter-spacing="0">£200bn</text><line x1="52" y1="185.2" x2="598" y2="185.2" stroke="#C1553B" stroke-width="1.2" stroke-dasharray="4 3"/><text x="598.0" y="20.0" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#C1553B" text-anchor="end" font-weight="700" letter-spacing="0">dashed line = Group 2026 target of RoTE &gt; 12%</text><circle cx="264.9" cy="109.2" r="33.9" fill="#00AEEF" opacity="0.72"/><circle cx="264.9" cy="109.2" r="33.9" fill="none" stroke="#00AEEF" stroke-width="1.2"/><text x="304.8" y="112.7" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Barclays UK</text><circle cx="117.8" cy="124.9" r="16.5" fill="#0F6FB5" opacity="0.72"/><circle cx="117.8" cy="124.9" r="16.5" fill="none" stroke="#0F6FB5" stroke-width="1.2"/><text x="140.3" y="128.4" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">UK Corporate Bank</text><circle cx="71.9" cy="60.3" r="13.5" fill="#00B39A" opacity="0.72"/><circle cx="71.9" cy="60.3" r="13.5" fill="none" stroke="#00B39A" stroke-width="1.2"/><text x="91.3" y="63.8" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Private Bank &amp; Wealth</text><circle cx="540.2" cy="197.4" r="41.5" fill="#16375C" opacity="0.72"/><circle cx="540.2" cy="197.4" r="41.5" fill="none" stroke="#16375C" stroke-width="1.2"/><text x="587.7" y="200.9" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Investment Bank</text><circle cx="120.0" cy="193.9" r="22.0" fill="#EF9B20" opacity="0.72"/><circle cx="120.0" cy="193.9" r="22.0" fill="none" stroke="#EF9B20" stroke-width="1.2"/><text x="148.0" y="197.4" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">US Consumer Bank</text><text x="52.0" y="323.0" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#5B6B7F" text-anchor="start" font-weight="700" letter-spacing="0">Capital consumed  →  risk weighted assets (£bn)</text><text x="598.0" y="323.0" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">bubble size = income</text></g></svg>
+
+<div class="key"><span class="lab">The answer to "what makes the most money?"</span>
+<p><strong>In absolute pounds: the Investment Bank</strong>, and it is not close — £13.1bn of
+income and £4.6bn of profit.</p>
+<p><strong>Per pound of shareholder capital: the Private Bank</strong>, at 26.3%, followed by
+Barclays UK at 20.7% and the UK Corporate Bank at 18.9%.</p>
+<p><strong>And that gap is the strategy.</strong> Everything Barclays has announced since
+February 2024 — the RWA reallocation, the Tesco acquisition, the American Airlines exit, the
+wealth-manager hiring — is an attempt to close the distance between those two rankings without
+giving up the scale and prestige that the first one buys.</p></div>
+
+<div class="warn"><span class="lab">Where Head Office fits, because people get caught out by this</span>
+<p>Head Office is not a division; it is where group-level items that belong to no business are
+parked — legacy litigation and conduct provisions, treasury items, and the cost of central
+functions. It ran a <strong>£748m pre-tax loss</strong> in FY2025 on £12.3bn of RWAs. That is
+why the five divisions' profits sum to £9,887m but the Group reports £9,139m. If you quote
+divisional profits, know why they over-add.</p></div>
+</section>
+
+<section class="pb">
+<h2><span class="num">PART FIVE</span>Strategy: the plan, and what replaces it</h2>
+<p class="sub">In February 2024 Barclays did something unusual for a bank: it published a specific, numbered, three-year promise and invited the market to mark it. The plan was branded "Simpler, Better, More Balanced".</p>
+
+<h3>What the plan actually committed to</h3>
+<ul>
+<li><strong>Simpler</strong> — reorganise into five transparently reported divisions, so no
+business can hide inside a bigger one; exit or shrink activities that do not clear their cost
+of capital.</li>
+<li><strong>Better</strong> — cut cost:income through efficiency rather than
+revenue growth alone, and improve returns in the two laggards, the Investment Bank and the
+US Consumer Bank.</li>
+<li><strong>More Balanced</strong> — the central trade: <strong>reduce the Investment Bank's
+share of group RWAs from 58% in 2023 towards about 50% by 2026</strong>, by holding its
+capital flat while deploying roughly <strong>£30bn of additional RWAs into the three UK
+businesses</strong>.</li>
+</ul>
+
+<h3>Has it worked?</h3>
+<svg class="chart" viewBox="0 0 720 281" width="100%" preserveAspectRatio="xMidYMid meet" role="img"><text x="0.0" y="14.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">The turnaround, in one line</text><text x="0.0" y="33.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Group RoTE. The 2026 target now looks conservative; management has already pointed past it to 2028.</text><g transform="translate(0,41)"><line x1="44" y1="192.0" x2="698" y2="192.0" stroke="#DCE3EA" stroke-width="0.8"/><text x="37.0" y="195.5" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">0%</text><line x1="44" y1="162.7" x2="698" y2="162.7" stroke="#DCE3EA" stroke-width="0.8"/><text x="37.0" y="166.2" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">3%</text><line x1="44" y1="133.3" x2="698" y2="133.3" stroke="#DCE3EA" stroke-width="0.8"/><text x="37.0" y="136.8" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">6%</text><line x1="44" y1="104.0" x2="698" y2="104.0" stroke="#DCE3EA" stroke-width="0.8"/><text x="37.0" y="107.5" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">9%</text><line x1="44" y1="74.7" x2="698" y2="74.7" stroke="#DCE3EA" stroke-width="0.8"/><text x="37.0" y="78.2" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">12%</text><line x1="44" y1="45.3" x2="698" y2="45.3" stroke="#DCE3EA" stroke-width="0.8"/><text x="37.0" y="48.8" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">15%</text><line x1="44" y1="16.0" x2="698" y2="16.0" stroke="#DCE3EA" stroke-width="0.8"/><text x="37.0" y="19.5" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#5B6B7F" text-anchor="end" font-weight="400" letter-spacing="0">18%</text><path d="M98.5,104.0 L207.5,89.3 L316.5,81.5 L425.5,47.3 L534.5,74.7 L643.5,55.1" fill="none" stroke="#00AEEF" stroke-width="2.4"/><circle cx="98.5" cy="104.0" r="6" fill="#00AEEF" stroke="#00AEEF" stroke-width="2.4"/><text x="98.5" y="91.0" font-family="Helvetica, Arial, sans-serif" font-size="10.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">9.0%</text><text x="98.5" y="209.0" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">2023</text><text x="98.5" y="222.0" font-family="Helvetica, Arial, sans-serif" font-size="8.8" fill="#5B6B7F" text-anchor="middle" font-weight="400" letter-spacing="0">before the plan</text><circle cx="207.5" cy="89.3" r="6" fill="#00AEEF" stroke="#00AEEF" stroke-width="2.4"/><text x="207.5" y="76.3" font-family="Helvetica, Arial, sans-serif" font-size="10.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">10.5%</text><text x="207.5" y="209.0" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">2024</text><text x="207.5" y="222.0" font-family="Helvetica, Arial, sans-serif" font-size="8.8" fill="#5B6B7F" text-anchor="middle" font-weight="400" letter-spacing="0">year 1 delivered</text><circle cx="316.5" cy="81.5" r="6" fill="#00AEEF" stroke="#00AEEF" stroke-width="2.4"/><text x="316.5" y="68.5" font-family="Helvetica, Arial, sans-serif" font-size="10.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">11.3%</text><text x="316.5" y="209.0" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">2025</text><text x="316.5" y="222.0" font-family="Helvetica, Arial, sans-serif" font-size="8.8" fill="#5B6B7F" text-anchor="middle" font-weight="400" letter-spacing="0">year 2 delivered</text><circle cx="425.5" cy="47.3" r="6" fill="#00AEEF" stroke="#00AEEF" stroke-width="2.4"/><text x="425.5" y="34.3" font-family="Helvetica, Arial, sans-serif" font-size="10.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">14.8%</text><text x="425.5" y="209.0" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">H1 2026</text><text x="425.5" y="222.0" font-family="Helvetica, Arial, sans-serif" font-size="8.8" fill="#5B6B7F" text-anchor="middle" font-weight="400" letter-spacing="0">running ahead</text><circle cx="534.5" cy="74.7" r="6" fill="#ffffff" stroke="#00AEEF" stroke-width="2.4"/><text x="534.5" y="61.7" font-family="Helvetica, Arial, sans-serif" font-size="10.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">12.0%</text><text x="534.5" y="209.0" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">2026 target</text><text x="534.5" y="222.0" font-family="Helvetica, Arial, sans-serif" font-size="8.8" fill="#5B6B7F" text-anchor="middle" font-weight="400" letter-spacing="0">&gt; 12%</text><circle cx="643.5" cy="55.1" r="6" fill="#ffffff" stroke="#00AEEF" stroke-width="2.4"/><text x="643.5" y="42.1" font-family="Helvetica, Arial, sans-serif" font-size="10.6" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">14.0%</text><text x="643.5" y="209.0" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#0B1F35" text-anchor="middle" font-weight="700" letter-spacing="0">2028 target</text><text x="643.5" y="222.0" font-family="Helvetica, Arial, sans-serif" font-size="8.8" fill="#5B6B7F" text-anchor="middle" font-weight="400" letter-spacing="0">&gt; 14%</text><text x="44.0" y="238.0" font-family="Helvetica, Arial, sans-serif" font-size="8.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Hollow markers are targets, not results.</text></g></svg>
+<table>
+<caption>The promise against the delivery.</caption>
+<thead><tr><th style="width:34%">Commitment</th><th style="width:33%">Target</th><th style="width:33%">Where it stands</th></tr></thead>
+<tbody>
+<tr><td>Group RoTE 2024</td><td>&gt;10%</td><td class="pos">10.5% — met</td></tr>
+<tr><td>Group RoTE 2026</td><td>&gt;12%</td><td class="pos">14.8% in H1 2026 — running ahead</td></tr>
+<tr><td>Capital returned 2024–26</td><td>≥£10bn</td><td class="pos">£3.0bn (2024) + £3.7bn (2025) + £2.3bn in H1 2026 alone</td></tr>
+<tr><td>RWAs deployed into UK businesses</td><td>~£30bn by 2026</td><td class="pos">£20bn deployed since 2024; £18bn reached by Sept 2025</td></tr>
+<tr><td>Investment Bank RWAs</td><td>Held broadly flat</td><td class="pos">Flat for a fourth consecutive year</td></tr>
+<tr><td>Cost:income 2026</td><td>High 50s%</td><td class="pos">61% FY2025 → 54% in Q2 2026</td></tr>
+<tr><td>2026 Group income</td><td>~£31.5bn (raised from £31bn at Q2)</td><td class="pos">£16.5bn in H1</td></tr>
+</tbody>
+</table>
+
+<h3>The new plan: 2026–2028</h3>
+<p>With the first plan effectively delivered a year early, Barclays used its February 2026
+results to reset the bar:</p>
+<div class="kpis">
+  <div class="kpi"><b>&gt;14%</b><span>Group RoTE<br>by 2028</span></div>
+  <div class="kpi"><b>Low 50s%</b><span>cost:income<br>by 2028</span></div>
+  <div class="kpi"><b>&gt;£15bn</b><span>capital returned<br>2026–2028</span></div>
+  <div class="kpi"><b>&gt;£2bn</b><span>gross efficiency<br>savings 2026–28</span></div>
+  <div class="kpi"><b>£2bn</b><span>planned 2026<br>dividend</span></div>
+</div>
+<p>The second plan has a different character from the first. The first was about
+<em>rebalancing</em>; the second is about <em>efficiency and technology</em>. Venkatakrishnan
+framed the shift on the Q2 2026 call as a move to an "all-weather return profile", with
+businesses <q>revolving around technology</q> and an aim to <q>build standardised foundations,
+use modernised approaches and based on harmonised systems and processes</q>. Around £350m of
+gross efficiency savings were banked in H1 2026 against the &gt;£2bn three-year goal.</p>
+<div class="say"><span class="lab">Use this on the day</span>
+<p>Most candidates will say "Barclays is doing well". A sharper framing:
+<q>The 2024–26 plan was about rebalancing capital towards the UK, and you've largely delivered
+it. The 2026–28 plan reads much more like an efficiency and technology story. Does that change
+what you're looking for in the people you hire?</q> That question demonstrates you have read
+two strategy documents, not one press release.</p></div>
+</section>
+
+<section class="pb">
+<h2><span class="num">PART SIX</span>Acquisitions and disposals, explained</h2>
+<p class="sub">Not a list. For each deal: what was bought, what was actually paid, the mechanism, and — the part that matters — what problem Barclays was solving.</p>
+
+<div class="key"><span class="lab">A useful thing to know before you cite a filing</span>
+<p>Barclays does not file a 10-K. A 10-K is the annual report of a <em>US domestic</em>
+issuer. Barclays is a UK company with a secondary NYSE listing, so it files a
+<strong>Form 20-F</strong> annually with the SEC, plus <strong>Form 6-K</strong> for interim
+results and material announcements — alongside its UK Annual Report and quarterly Results
+Announcements. The figures in this report are drawn from those. Getting the filing name right
+is a small thing that signals you actually went to the source.</p></div>
+
+<h3>1988–1997 · BZW: the first attempt, and the lesson</h3>
+<p><strong>What happened:</strong> after the 1986 "Big Bang" deregulation of the London Stock
+Exchange, Barclays bought the stockbroker de Zoete &amp; Bevan and the jobbing firm Wedd
+Durlacher, merging them with Barclays Merchant Bank to create Barclays de Zoete Wedd.</p>
+<p><strong>Why:</strong> Big Bang abolished the separation between brokers and market-makers
+and let banks own both. Every UK clearing bank raced to assemble an integrated securities
+firm before the Americans arrived.</p>
+<p><strong>What Barclays did, and why it matters:</strong> BZW never achieved the scale to
+compete in advisory and equities, and in 1997 Barclays sold those businesses to CSFB while
+<strong>keeping the fixed-income and debt operation</strong>, renaming it Barclays Capital.
+That decision — retreat from equities, double down on debt — set the firm's DNA for the next
+twenty-five years. It is why FICC and Debt Capital Markets are still Barclays' deepest
+strengths, and why the current push into equities (22% to 32% of markets income since 2023) is
+being described internally as a genuine strategic rebalancing rather than an incremental one.</p>
+
+<h3>2008 · Lehman Brothers North America: the defining act</h3>
+<table>
+<thead><tr><th style="width:22%">Element</th><th>Detail</th></tr></thead>
+<tbody>
+<tr><td>Price</td><td><strong>$1.75bn total</strong> — $250m for the North American investment banking and capital markets business, ~$1.5bn for the New York headquarters and two data centres</td></tr>
+<tr><td>Structure</td><td>Purchase of assets out of Chapter 11 bankruptcy, approved by the US Bankruptcy Court for the Southern District of New York on 19 September 2008</td></tr>
+<tr><td>What was excluded</td><td>The holding company's debts and the toxic real-estate portfolio — left behind in the estate</td></tr>
+<tr><td>Jobs preserved</td><td>An estimated 8,000–10,000</td></tr>
+</tbody>
+</table>
+<p><strong>Why Barclays did it:</strong> it had spent twenty years trying and failing to build
+a US investment bank organically. Lehman's collapse offered the entire American franchise —
+bankers, client relationships, trading infrastructure, a Manhattan headquarters — at a
+distressed price, with the liabilities legally stripped out.</p>
+<p><strong>What Barclays specifically did well:</strong> it had walked away days earlier from
+buying Lehman <em>whole</em>, because the UK regulator would not guarantee the trading book.
+When the firm entered bankruptcy, the same assets became available without the liabilities.
+Barclays did not buy a bank; it bought the parts of a bank it wanted, at the one moment the
+law allowed the rest to be discarded. That is the transaction to describe if anyone asks you
+about a deal — it is the cleanest example in modern banking of structuring around a problem
+rather than paying to absorb it.</p>
+<p><strong>The cost:</strong> Barclays inherited a US-heavy, capital-hungry investment bank at
+exactly the moment global regulators began demanding far more capital against trading assets.
+Every subsequent strategic debate at Barclays — including the current one — is downstream of
+September 2008.</p>
+
+<h3>2016–2017 · The Absa sell-down: what Barclays chose <em>not</em> to be</h3>
+<p><strong>What happened:</strong> Barclays announced in March 2016 that it would divest its
+62.3% stake in Barclays Africa Group. It placed 33.7% in 2017 at R132 per share, raising
+approximately R37.7bn, and cut its holding to 14.9% by the end of that year, exiting fully
+thereafter.</p>
+<p><strong>Why:</strong> post-crisis regulation made majority stakes in large foreign banks
+expensive to hold — Barclays had to carry capital against the whole of Absa's balance sheet
+while owning only part of its profits. Under then-CEO Jes Staley the firm chose to become a
+<strong>transatlantic bank with two home markets</strong> rather than a diversified global one.</p>
+<p><strong>Why this matters to you:</strong> disposals reveal strategy more honestly than
+acquisitions. Barclays gave up genuine geographic diversification to concentrate capital in the
+UK and US. That is the choice you are being asked to buy into if you join.</p>
+
+<h3>2023 · Kensington Mortgage Company — buying a capability</h3>
+<table>
+<thead><tr><th style="width:22%">Element</th><th>Detail</th></tr></thead>
+<tbody>
+<tr><td>Announced / completed</td><td>24 June 2022 / 1 March 2023</td></tr>
+<tr><td>Consideration</td><td><strong>£2.4bn total</strong> — comprising a £2.2bn mortgage portfolio plus the operating company</td></tr>
+<tr><td>Seller</td><td>Funds managed by Blackstone Tactical Opportunities and Sixth Street</td></tr>
+<tr><td>What was acquired</td><td>A specialist lender in Maidenhead, ~600 staff, proprietary underwriting technology and data analytics</td></tr>
+</tbody>
+</table>
+<p><strong>The strategic logic:</strong> Barclays was already excellent at prime mortgages —
+salaried borrowers, clean credit files, thin margins, fiercely competitive. Kensington lends
+to the customers mainstream models reject: the self-employed, people with multiple or variable
+incomes, complex circumstances. Those loans carry higher margins <em>because underwriting them
+is harder</em>.</p>
+<p><strong>What Barclays specifically bought:</strong> not the £2.2bn loan book — that could
+have been bought from anyone. It bought the <strong>underwriting engine and the broker
+distribution</strong>: the technology, data and human judgement to price complex income safely,
+plus a business that also services mortgages for third parties. This is buy-versus-build in its
+purest form. Barclays could have spent five years building a specialist underwriting capability
+and might still have got it wrong; instead it bought a proven one and pointed a much larger
+balance sheet at it.</p>
+
+<h3>2024 · Tesco Bank — buying distribution</h3>
+<table>
+<thead><tr><th style="width:22%">Element</th><th>Detail</th></tr></thead>
+<tbody>
+<tr><td>Announced / completed</td><td>February 2024 / November 2024</td></tr>
+<tr><td>Price</td><td><strong>~£600m</strong> (~$775m) for ~£1bn of tangible net assets</td></tr>
+<tr><td>Assets acquired</td><td>£4.2bn credit card receivables · £4.2bn gross unsecured personal loans · £6.8bn customer deposits · operating infrastructure · ~2,800 colleagues</td></tr>
+<tr><td>The other half of the deal</td><td>A <strong>ten-year exclusive strategic partnership</strong> with Tesco Stores Ltd to market and distribute financial products under the Tesco brand, with Clubcard integration retained</td></tr>
+<tr><td>What Tesco kept</td><td>Insurance, gift cards, travel money, ATMs</td></tr>
+<tr><td>Immediate effect</td><td>~£300m pre-tax gain booked in Q4 2024</td></tr>
+</tbody>
+</table>
+<p><strong>The strategic logic, and the part most people miss:</strong> the balance sheet was
+not the point. Barclays paid roughly £600m for about £1bn of net assets — the assets alone made
+the arithmetic work. <strong>The real asset was the ten-year exclusive licence to sell
+financial products to the customers of Britain's largest retailer.</strong></p>
+<p>Customer acquisition is the single largest cost in retail banking. Tesco has around 20
+million Clubcard households and knows what they buy every week. The partnership gives Barclays
+a distribution channel for unsecured lending and deposits that it could not build at any price
+— and it does so inside the ring-fenced bank, where returns are high and capital treatment is
+favourable. Read against the strategy, this is the £30bn UK RWA redeployment made concrete: a
+deliberate move of capital and effort from the volatile investment bank towards higher-return,
+higher-certainty UK consumer lending.</p>
+<p><strong>The honest counterpoint:</strong> when the deal was announced in February 2024, some
+analysts questioned whether spending on acquisitions was consistent with a promise to return
+£10bn to shareholders. Barclays has since done both. But that tension — grow or return capital —
+is the live debate about Barclays today, and it resurfaced in February 2026 when the size of
+the new £15bn distribution pledge prompted commentary about whether the firm still has M&amp;A
+ambitions.</p>
+
+<h3>2025–2026 · The American recycling trade</h3>
+<p>Three transactions inside eighteen months, which only make sense read together as a single
+manoeuvre: <strong>free up capital from low-return card lending, redeploy it into
+higher-return consumer lending, and keep the fee income either way.</strong></p>
+<div class="cards">
+  <div class="card uscb"><h5>Sale — American Airlines co-brand portfolio</h5>
+  <p><strong>Completed Q1/Q2 2026.</strong> Barclays exited the AAdvantage co-brand receivables,
+  releasing approximately <strong>£5bn of RWAs</strong> and booking a gain of roughly
+  <strong>£225m</strong>.</p>
+  <p><em>Why:</em> co-brand economics with the largest airline partners are brutal — the partner
+  captures much of the value, and the issuer holds the credit risk and the capital. Exiting
+  freed a large block of capital in a division that needed it more elsewhere.</p></div>
+
+  <div class="card uscb"><h5>Sale — ~$1.1bn of receivables to Blackstone</h5>
+  <p>Barclays sold the receivables while <strong>retaining servicing of the accounts</strong>.</p>
+  <p><em>Why:</em> this is the classic capital-light manoeuvre. The loans leave the balance
+  sheet, the RWAs disappear, but Barclays keeps the customer relationship and the servicing fee.
+  Risk transferred, revenue retained.</p></div>
+
+  <div class="card uscb"><h5>Purchase — Best Egg, $800m</h5>
+  <p>Announced October 2025, <strong>completed 1 May 2026</strong>, by Barclays Bank Delaware.
+  Best Egg is a direct-to-consumer prime personal-loan platform founded in 2013 that has
+  originated over <strong>$40bn of loans to more than two million customers</strong>. It consumed
+  roughly 16bps of Group CET1.</p>
+  <p><em>Why:</em> Barclays had no scaled direct-to-consumer unsecured lending platform in the US.
+  Personal loans are large, prime-quality, and diversify a business that was almost entirely
+  co-brand cards. It buys origination technology and a proven risk model, not just a loan book —
+  the same logic as Kensington, on the other side of the Atlantic.</p></div>
+
+  <div class="card uscb"><h5>The net effect</h5>
+  <p>Barclays sequenced the deals so the American Airlines sale completed <em>before</em> the
+  Best Egg purchase — capital out, then capital in. The combined estimated impact was around
+  <strong>+6bps to the Group CET1 ratio</strong> in Q2 2026.</p>
+  <p><em>What it tells you:</em> this is a management team that thinks in RWAs first and revenue
+  second. That is a meaningful cultural fact about Barclays in 2026.</p></div>
+</div>
+</section>
+
+<section class="pb">
+<h2><span class="num">PART SEVEN</span>The relationship businesses — how deals actually get won</h2>
+<p class="sub">You asked specifically about the private banking and relationship side. This is the part of banking that is least visible from outside and most important to how careers work inside.</p>
+
+<h3>The flywheel, and why banks tolerate low-margin businesses</h3>
+<p>An investment bank does not win an M&amp;A mandate by having the best pitchbook. It wins
+because it has been in the room for years, doing lower-margin, less glamorous work. The
+sequence looks like this, and every division in Barclays sits somewhere on it:</p>
+<ol>
+<li><strong>Transaction banking gets you in the door.</strong> The International Corporate Bank
+(£1,937m of income) runs a multinational's payments, cash and trade finance. Low margin,
+extremely sticky, and it means Barclays speaks to the treasurer every week.</li>
+<li><strong>Lending buys you credibility.</strong> Corporate lending on its own is a poor
+return for the capital consumed. Banks do it anyway, because a company remembers who lent to it
+when it needed money.</li>
+<li><strong>Risk management deepens it.</strong> FX and interest-rate hedging via Global Markets
+is genuinely useful, recurring, and technical enough to build trust.</li>
+<li><strong>Debt capital markets is the first fee event.</strong> The relationship converts into
+a bond mandate — the largest of Barclays' three fee pools at £1,510m.</li>
+<li><strong>Advisory is the payoff.</strong> When the company finally buys something, the banks
+that have done steps 1–4 are on the ticket. £676m of advisory income sits on top of everything
+beneath it.</li>
+</ol>
+<div class="key"><span class="lab">Why this matters for choosing a division</span>
+<p>This is the strongest argument for joining Barclays' <strong>International Corporate Bank or
+UK Corporate Bank</strong> rather than assuming M&amp;A is the only serious job. Those divisions
+own the relationship that everything else monetises. It is also why Barclays keeps the ICB
+inside the Investment Bank rather than the UK ring-fence — the flywheel only works if the
+transaction bankers and the dealmakers share a client list.</p></div>
+
+<h3>What this looks like in 2026: two concrete examples</h3>
+<h4>Persistent Systems / Nagarro SE — the full-service play</h4>
+<p><strong>What happened:</strong> Barclays acted as <strong>sole mandated lead arranger,
+bookrunner and underwriter</strong> on a term bridge facility of up to <strong>€1.4bn</strong>
+supporting Persistent Systems' voluntary public takeover offer for Nagarro SE, a
+Frankfurt-listed digital engineering firm valued at approximately €1.27bn enterprise value.
+The offer was announced on 26 June 2026. It is one of the largest overseas acquisitions ever
+attempted by an Indian IT services company.</p>
+<p><strong>What Barclays specifically did:</strong> "sole" is the word that matters. Barclays
+underwrote the entire bridge alone rather than syndicating the risk to a club of banks. That
+means it committed its own balance sheet to guarantee the buyer could pay, before any
+permanent financing existed. For a cross-border deal — an Indian acquirer, a German target, a
+euro facility — that requires the bank to be simultaneously credible in three jurisdictions.
+<strong>This is the transatlantic-plus-emerging-markets franchise being used as a competitive
+weapon: Barclays wins mandates a pure-advisory boutique cannot touch, because boutiques have no
+balance sheet to underwrite with.</strong></p>
+
+<h4>Financial institutions M&amp;A — a genuine number-one position</h4>
+<p><strong>What happened:</strong> Barclays ranked <strong>first by deal value among financial
+services M&amp;A advisers in H1 2026</strong>, on deals worth $37.3bn. Half of the deals it
+advised on were billion-dollar-plus, including two mega-deals above $10bn. It also topped the
+Q1 2026 financial-services adviser rankings, and led power-sector M&amp;A alongside Goldman
+Sachs in H1 2026.</p>
+<p><strong>Why this is more interesting than it sounds:</strong> Barclays is a Tier 2 bank in
+overall global league tables — below JPMorgan, Goldman and Morgan Stanley. But league tables
+are won <em>sector by sector</em>. Barclays is not trying to beat Goldman everywhere; it is
+trying to be unambiguously top-three in the sectors where it has genuine depth — financial
+institutions, power and utilities, industrials, technology, and leveraged finance. If you want
+to work on the biggest deals, the group you join matters more than the bank you join.</p>
+
+<h3>The Private Bank's version of the same flywheel</h3>
+<p>Private banking runs an identical logic on a personal scale, and Barclays has a structural
+advantage almost no pure private bank possesses:</p>
+<ul>
+<li><strong>The referral pipeline is internal.</strong> Barclays UK's Premier tier feeds
+mass-affluent clients upward into the Private Bank as their wealth grows. Removing custody fees
+on direct investing and offering no-upfront-fee advice to Premier clients is explicitly designed
+to capture people <em>before</em> a competitor does — Venkatakrishnan's ambition to
+<q>own the entirety of the customer</q>.</li>
+<li><strong>The entrepreneur handoff is the crown jewel.</strong> When a founder banked by the
+UK Corporate Bank sells their company — often advised by Barclays' own investment bank — a
+large sum of cash appears. The Private Bank is in the room at the moment of liquidity. No
+standalone wealth manager can engineer that.</li>
+<li><strong>The lending is different.</strong> Private-bank lending is secured against
+portfolios, property and sometimes unlisted holdings, structured individually. It carries
+almost no credit loss — the division ran a small impairment <em>release</em> of £8m in FY2025 —
+which is why 26.3% RoTE is achievable on £8.0bn of RWAs.</li>
+</ul>
+<p>The trade-off is honest and worth naming: a 73% cost:income ratio, and £1,380m of income
+that took £994m of costs to produce. Growth here means hiring expensive people — up to 100 new
+wealth managers are embedded in 2026 cost guidance — and betting that digital delivery lets the
+advice scale faster than the headcount.</p>
+
+<div class="say"><span class="lab">Use this on the day</span>
+<p>The speed-networking session will have people from all five divisions. A question that works
+on any of them, and shows you understand the flywheel:
+<q>Where does your business sit in the client relationship — are you the first product a client
+buys, or the last? And who do you rely on internally to bring you the introduction?</q>
+It invites a genuine answer about how Barclays works internally, which is exactly what you
+cannot get from a website.</p></div>
+</section>
+
+<section class="pb">
+<h2><span class="num">PART EIGHT</span>Competitors — and what makes Barclays <em>Barclays</em></h2>
+<p class="sub">Barclays has no single competitor. It has a different competitive set in every division, and that is precisely the point.</p>
+
+<h3>Who Barclays competes with, division by division</h3>
+<table>
+<caption>The competitive map. Note that almost no firm appears in every row — that is the differentiation, stated as a table.</caption>
+<thead><tr><th style="width:24%">Division</th><th style="width:44%">Direct competitors</th><th style="width:32%">Barclays' position</th></tr></thead>
+<tbody>
+<tr><td><strong>Barclays UK</strong></td>
+<td>Lloyds Banking Group, NatWest, HSBC UK, Santander UK, Nationwide, plus digital challengers Monzo, Starling and Revolut</td>
+<td>A top-four incumbent, but not the leader. Lloyds is larger in UK retail; Nationwide is a mutual with a structurally lower cost of capital.</td></tr>
+<tr><td><strong>UK Corporate Bank</strong></td>
+<td>Lloyds, NatWest, HSBC UK, Santander Corporate</td>
+<td>Genuinely strong — relationships with roughly one in four UK corporates, and named UK Best Trade Finance Bank in 2026.</td></tr>
+<tr><td><strong>Private Bank &amp; Wealth</strong></td>
+<td>UBS, Julius Baer, Coutts (NatWest), HSBC Global Private Banking, JPMorgan Private Bank, Rathbones, St James's Place</td>
+<td>Sub-scale versus UBS globally, but with an internal referral engine from Premier and the Corporate Bank that pure-play rivals lack.</td></tr>
+<tr><td><strong>Investment Bank</strong></td>
+<td>JPMorgan, Goldman Sachs, Morgan Stanley, Bank of America, Citi; in Europe, Deutsche Bank, UBS, BNP Paribas, SocGen; in advisory, Evercore, Lazard, Centerview, Houlihan Lokey, Rothschild</td>
+<td>The only UK-headquartered bulge bracket. Tier 2 globally; top-three in selected sectors and in leveraged finance and DCM.</td></tr>
+<tr><td><strong>US Consumer Bank</strong></td>
+<td>Synchrony, Bread Financial, Capital One, Citi Retail Services, American Express, Chase co-brand</td>
+<td>A significant co-brand issuer, but sub-scale versus Synchrony and Capital One — hence the reshaping.</td></tr>
+</tbody>
+</table>
+
+<svg class="chart" viewBox="0 0 720 214" width="100%" preserveAspectRatio="xMidYMid meet" role="img"><text x="0.0" y="14.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Barclays vs its UK-listed peers — return on tangible equity, FY2025</text><text x="0.0" y="33.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Lloyds does not report a directly comparable statutory RoTE on the same basis and is excluded; it guides to &gt;16% for 2026. Barclays</text><text x="0.0" y="46.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">was the laggard on FY2025 — and is closing the gap fast.</text><g transform="translate(0,54)"><rect x="200" y="6" width="415.7" height="16" rx="2" fill="#9AA6B4"/><text x="190.0" y="18.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">NatWest</text><text x="623.7" y="18.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">19.2%</text><rect x="200" y="36" width="318.3" height="16" rx="2" fill="#9AA6B4"/><text x="190.0" y="48.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">Standard Chartered</text><text x="526.3" y="48.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">14.7%</text><rect x="200" y="66" width="287.9" height="16" rx="2" fill="#9AA6B4"/><text x="190.0" y="78.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">HSBC</text><text x="495.9" y="78.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">13.3%</text><rect x="200" y="96" width="244.6" height="16" rx="2" fill="#00AEEF"/><text x="190.0" y="108.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">Barclays</text><text x="452.6" y="108.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">11.3%</text><rect x="200" y="126" width="320.4" height="16" rx="2" fill="#00B39A"/><text x="190.0" y="138.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="end" font-weight="400" letter-spacing="0">— Barclays H1 2026 run-rate</text><text x="528.4" y="138.5" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">14.8%</text></g></svg>
+
+<table>
+<caption>How Barclays compares on the numbers — FY2025 results, reported currency.</caption>
+<thead><tr><th>Bank</th><th class="n">Income / revenue</th><th class="n">Pre-tax profit</th><th class="n">RoTE / ROTCE</th><th>Shape of the business</th></tr></thead>
+<tbody>
+<tr><td><strong>Barclays</strong></td><td class="n">£29.1bn</td><td class="n">£9.1bn</td><td class="n">11.3%</td><td>UK retail + global investment bank + US cards</td></tr>
+<tr><td>NatWest</td><td class="n">£16.4bn</td><td class="n">£7.7bn</td><td class="n">19.2%</td><td>Almost entirely UK, retail and commercial</td></tr>
+<tr><td>Lloyds</td><td class="n">—</td><td class="n">£6.7bn</td><td class="n">guides &gt;16% for 2026</td><td>Purely UK; no investment bank at all</td></tr>
+<tr><td>HSBC</td><td class="n">—</td><td class="n">$29.9bn</td><td class="n">13.3%</td><td>Asia-weighted global; huge transaction bank</td></tr>
+<tr><td>Standard Chartered</td><td class="n">$20.9bn</td><td class="n">$7.9bn*</td><td class="n">14.7%</td><td>Emerging markets, trade and corporates</td></tr>
+<tr><td>JPMorgan</td><td class="n">—</td><td class="n">net income $57.0bn</td><td class="n">ROE 17%</td><td>Everything, everywhere, at greater scale</td></tr>
+<tr><td>Goldman Sachs</td><td class="n">$58.3bn</td><td class="n">IB fees $9.34bn</td><td class="n">—</td><td>Institutional; thin consumer presence</td></tr>
+<tr><td>Morgan Stanley</td><td class="n">$70.6bn</td><td class="n">net income $16.9bn</td><td class="n">ROTCE 21.6%</td><td>Investment bank + very large wealth manager</td></tr>
+</tbody>
+</table>
+<p class="footnote">*Standard Chartered figure is underlying profit before tax. Metrics are not perfectly comparable across jurisdictions and reporting bases; use them for shape, not for precision. Barclays' H1 2026 RoTE of 14.8% closes most of the gap to NatWest and Standard Chartered.</p>
+
+<h3>So what actually makes Barclays different?</h3>
+<p>Three candidate answers get given at insight days. Two of them are wrong.</p>
+<p><strong>Wrong answer one: "it's the oldest."</strong> True but commercially irrelevant.
+Age is heritage, not advantage.</p>
+<p><strong>Wrong answer two: "it's a universal bank."</strong> So are HSBC, JPMorgan, Citi,
+BNP Paribas and Santander. Universality is a category, not a differentiator.</p>
+<p><strong>The real answer: Barclays occupies a position no other firm on earth occupies.</strong>
+It is the <em>only</em> institution that is simultaneously:</p>
+<ul>
+<li>a top-tier <strong>UK high-street bank</strong> with 20m+ retail customers and a ring-fenced deposit base;</li>
+<li>a significant <strong>US consumer credit business</strong> with its own American banking licence; and</li>
+<li>a <strong>bulge-bracket investment bank</strong> with genuine market-making scale on Wall Street.</li>
+</ul>
+<p>Test it against every rival. Lloyds and NatWest have the UK retail bank but no investment
+bank and no US business. Goldman Sachs and Morgan Stanley have the Wall Street franchise but
+nothing resembling a British high street. HSBC and Standard Chartered are weighted to Asia and
+emerging markets, not the US. Deutsche Bank has the European investment bank but abandoned
+equities in 2019 and has no meaningful retail presence outside Germany. JPMorgan and Bank of
+America have the US consumer and the investment bank — but not a UK ring-fenced retail bank.
+<strong>The overlap set is empty. Barclays is a category of one.</strong></p>
+
+<div class="key"><span class="lab">Why the combination is genuinely valuable</span>
+<p><strong>Counter-cyclicality.</strong> The two halves fail at different times. Investment
+banking income collapses when markets freeze; retail deposits and structural-hedge income are
+at their most valuable precisely then. In 2025, Global Markets grew income 15% <em>because</em>
+markets were volatile, while Barclays UK grew NII 15% <em>because</em> rates had risen. Two
+engines, opposite sensitivities, one income statement. Management's language for this is an
+"all-weather return profile", and the deliberate diversification of income is exactly what they
+credit for the reduced seasonality in results.</p>
+<p><strong>Sterling and the City.</strong> Barclays is the natural home bank for a British
+company that also needs a New York bond market. It is a primary dealer in gilts and US
+Treasuries. That is a small club.</p></div>
+
+<div class="warn"><span class="lab">And why the combination is also the risk — state this, it shows judgement</span>
+<p>The same structure that provides diversification also creates the drag. The ring-fence stops
+cheap UK deposits funding the trading floor. The investment bank consumes 55% of group capital
+for a return that only cleared 10% in FY2025. And investors have historically applied a
+conglomerate discount — Barclays trades on a 2026 P/E under 10 and around or below tangible
+book value, well below US peers, despite an average analyst target of 575p and a "Moderate Buy"
+consensus across 17 analysts.</p>
+<p>The bear case is that Barclays is subscale in every single business it competes in: smaller
+than Lloyds in UK retail, smaller than Synchrony in US cards, smaller than UBS in wealth,
+smaller than JPMorgan in everything. The bull case is that the <em>portfolio</em> is worth more
+than the parts because the parts fail at different times — and the H1 2026 RoTE of 14.8%, up
+from 9% in 2023, is the strongest evidence yet for the bulls.</p></div>
+</section>
+
+<section class="pb">
+<h2><span class="num">PART NINE</span>Clients: who they are, and why these ones</h2>
+<p class="sub">A bank's client list is a strategy document. Barclays serves roughly 48 million customers across five tiers, and each tier is targeted for a specific economic reason.</p>
+
+<svg class="chart" viewBox="0 0 720 341" width="100%" preserveAspectRatio="xMidYMid meet" role="img"><text x="0.0" y="14.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#0B1F35" text-anchor="start" font-weight="700" letter-spacing="0">Who Barclays sells to</text><text x="0.0" y="33.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Roughly 48 million customers, from a sovereign treasury to a current account.</text><g transform="translate(0,41)"><polygon points="202.0,0.0 262.0,0.0 302.4,52.0 161.6,52.0" fill="#16375C" opacity="0.9"/><text x="232.0" y="30.0" font-family="Helvetica, Arial, sans-serif" font-size="10.4" fill="#ffffff" text-anchor="middle" font-weight="700" letter-spacing="0">Governments, central banks, sovereign funds</text><text x="318.4" y="30.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">Gilt and bond issuance, FX, reserves — Investment Bank</text><polygon points="161.6,56.0 302.4,56.0 342.8,108.0 121.2,108.0" fill="#16375C" opacity="0.9"/><text x="232.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="10.4" fill="#ffffff" text-anchor="middle" font-weight="700" letter-spacing="0">Large corporates &amp; financial institutions</text><text x="358.8" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">M&amp;A, debt/equity raising, hedging, cash management</text><polygon points="121.2,112.0 342.8,112.0 383.2,164.0 80.8,164.0" fill="#0F6FB5" opacity="0.9"/><text x="232.0" y="142.0" font-family="Helvetica, Arial, sans-serif" font-size="10.4" fill="#ffffff" text-anchor="middle" font-weight="700" letter-spacing="0">UK mid-cap and SME businesses</text><text x="399.2" y="142.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">~1 in 4 UK corporates — UK Corporate Bank</text><polygon points="80.8,168.0 383.2,168.0 423.6,220.0 40.4,220.0" fill="#00B39A" opacity="0.9"/><text x="232.0" y="198.0" font-family="Helvetica, Arial, sans-serif" font-size="10.4" fill="#ffffff" text-anchor="middle" font-weight="700" letter-spacing="0">High-net-worth individuals and families</text><text x="439.6" y="198.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">£3m+ investable — Private Bank &amp; Wealth</text><polygon points="40.4,224.0 423.6,224.0 464.0,276.0 0.0,276.0" fill="#00AEEF" opacity="0.9"/><text x="232.0" y="254.0" font-family="Helvetica, Arial, sans-serif" font-size="10.4" fill="#ffffff" text-anchor="middle" font-weight="700" letter-spacing="0">Mass-affluent and everyday consumers</text><text x="480.0" y="254.0" font-family="Helvetica, Arial, sans-serif" font-size="9.8" fill="#5B6B7F" text-anchor="start" font-weight="400" letter-spacing="0">~20m UK customers + ~10m US cardholders</text></g></svg>
+
+<table>
+<caption>Client segments, what they are sold, and — the important column — why Barclays wants them.</caption>
+<thead><tr><th style="width:20%">Client type</th><th style="width:16%">Served by</th><th style="width:30%">What they buy</th><th style="width:34%">Why Barclays targets them</th></tr></thead>
+<tbody>
+<tr><td><strong>Everyday UK consumers</strong><br>~20m</td><td>Barclays UK</td>
+<td>Current accounts, savings, mortgages, Barclaycard, personal loans</td>
+<td><strong>Deposits.</strong> Individually unprofitable, collectively the cheapest funding in the group and the raw material for the structural hedge. Also the top of the wealth funnel.</td></tr>
+<tr><td><strong>Mass-affluent / Premier</strong></td><td>Barclays UK → PB&amp;WM</td>
+<td>Premier banking, investments, advice, larger mortgages</td>
+<td><strong>The bridge.</strong> Higher balances, more products each, and the pool from which Private Bank clients are recruited. Hence free custody and no-upfront-fee advice — capture them early.</td></tr>
+<tr><td><strong>US cardholders</strong><br>via partner brands</td><td>US Consumer Bank</td>
+<td>Co-brand and private-label cards, instalment loans, savings and CDs, personal loans (Best Egg)</td>
+<td><strong>Yield.</strong> US card lending earns far more than UK mortgages. Costs are low (45% cost:income) because the partner does the marketing. The price is £1,521m of impairment.</td></tr>
+<tr><td><strong>UK SMEs and mid-caps</strong><br>~1 in 4 UK corporates</td><td>UK Corporate Bank</td>
+<td>Lending, cash management, payments, trade finance, FX and rate hedging, asset finance</td>
+<td><strong>Sticky cheap deposits plus fees.</strong> £88.7bn of deposits against £30.0bn of loans. Switching a corporate's payment infrastructure is painful, so relationships last decades.</td></tr>
+<tr><td><strong>High-net-worth individuals and families</strong><br>~£3m+ investable</td><td>Private Bank &amp; Wealth</td>
+<td>Discretionary and advisory portfolios, structured lending, trusts, succession planning, private markets access</td>
+<td><strong>The best returns in the group.</strong> Fee income on assets, negligible credit losses, and only £8.0bn of RWAs. Often the same people who own the corporate-bank clients.</td></tr>
+<tr><td><strong>Large corporates and multinationals</strong></td><td>Investment Bank (ICB)</td>
+<td>Global cash management, trade finance, corporate lending, hedging</td>
+<td><strong>The door-opener.</strong> Low margin, high stickiness, weekly contact with the treasurer — the foundation the fee businesses are built on.</td></tr>
+<tr><td><strong>Financial institutions and asset managers</strong></td><td>Investment Bank</td>
+<td>Market-making across FICC and equities, prime brokerage, financing, research, execution</td>
+<td><strong>Volume.</strong> These clients trade constantly. Spread income scales with flow, and prime financing is a stable, balance-sheet-backed annuity.</td></tr>
+<tr><td><strong>Governments, central banks, sovereign funds</strong></td><td>Investment Bank</td>
+<td>Sovereign bond issuance and distribution, FX, reserve management</td>
+<td><strong>Franchise and information.</strong> Primary-dealer status is a licence to see the flow of the entire market — commercially valuable and reputationally decisive.</td></tr>
+<tr><td><strong>Private equity sponsors</strong></td><td>Investment Bank</td>
+<td>Leveraged finance, acquisition financing, M&amp;A advisory, IPO exits</td>
+<td><strong>Repeat business.</strong> A sponsor does several deals a year, every year. Barclays' leveraged-finance strength makes it a natural counterparty — as the €1.4bn Persistent/Nagarro underwrite shows.</td></tr>
+</tbody>
+</table>
+</section>
+
+<section class="pb">
+<h2><span class="num">PART TEN</span>The output: what Barclays literally sells</h2>
+<p class="sub">You asked what the firm actually produces. Banks make no physical thing — the product is a contract, a price, or a piece of judgement. Here is the full catalogue.</p>
+
+<div class="cards">
+<div class="card buk"><h5>Deposit products</h5>
+<p>Current accounts, instant-access and fixed-term savings, ISAs, US online savings accounts and
+CDs, corporate operating accounts, private-bank cash management.</p>
+<p><strong>What is really sold:</strong> safety, liquidity and access — in exchange for the right
+to use the money. This is the raw material for everything else.</p></div>
+
+<div class="card buk"><h5>Credit products</h5>
+<p>Residential and buy-to-let mortgages, specialist mortgages (Kensington), personal loans,
+UK and US credit cards, overdrafts, SME and corporate lending, leveraged loans, structured
+lending against portfolios, trade and supply-chain finance.</p>
+<p><strong>What is really sold:</strong> a price for risk. The product <em>is</em> the
+underwriting judgement — which is why Barclays bought Kensington and Best Egg for their models,
+not their books.</p></div>
+
+<div class="card ib"><h5>Liquidity and prices</h5>
+<p>Two-way quotes in government and corporate bonds, interest-rate and credit derivatives, FX,
+commodities, cash equities and equity derivatives; prime brokerage and securities financing for
+hedge funds; execution and clearing.</p>
+<p><strong>What is really sold:</strong> immediacy. A client who wants to trade £200m of bonds
+right now pays a spread for the certainty of doing it now, at a known price.</p></div>
+
+<div class="card ib"><h5>Advice and access to capital</h5>
+<p>M&amp;A advisory, takeover defence, IPOs and follow-on equity issues, convertibles, investment-grade
+and high-yield bond issuance, leveraged buyout financing, ratings advisory, underwriting
+commitments and bridge facilities.</p>
+<p><strong>What is really sold:</strong> judgement plus distribution — and, critically,
+<em>balance sheet</em>. The ability to underwrite a €1.4bn bridge alone is a product a boutique
+cannot offer.</p></div>
+
+<div class="card ukcb"><h5>Payments and transaction banking</h5>
+<p>Domestic and cross-border payments and clearing in GBP, EUR, INR and 100+ currencies; merchant
+acquiring; liquidity and cash-pooling structures; the Barclays iPortal trade and working-capital
+platform; escrow and custody.</p>
+<p><strong>What is really sold:</strong> plumbing. Unglamorous, deeply embedded, and almost never
+switched — which is why it earns fee income year after year.</p></div>
+
+<div class="card pbwm"><h5>Investment management and planning</h5>
+<p>Discretionary and advisory portfolio management, direct investing platforms, access to private
+markets and institutional funds, trusts and fiduciary services, succession and estate planning,
+philanthropy advice, and research and market outlooks.</p>
+<p><strong>What is really sold:</strong> a relationship plus a framework for decisions. Priced as
+a percentage of assets, roughly 0.50%–1.45%.</p></div>
+
+<div class="card ib"><h5>Risk transfer</h5>
+<p>Interest-rate swaps, FX forwards and options, commodity hedges, credit protection, structured
+solutions for corporates and institutions.</p>
+<p><strong>What is really sold:</strong> certainty. A manufacturer buying an FX forward is not
+speculating — it is converting an unknowable future cost into a known one.</p></div>
+
+<div class="card uscb"><h5>Brand-partnered distribution</h5>
+<p>Co-brand and private-label credit card programmes for Frontier Airlines, the Gap group, AARP,
+cruise lines and others; the ten-year exclusive to sell financial products under the Tesco brand
+in the UK.</p>
+<p><strong>What is really sold:</strong> Barclays' balance sheet and risk expertise, wrapped in
+someone else's customer relationship. The partner supplies the customers; Barclays supplies the
+capital and the underwriting; both share the economics.</p></div>
+</div>
+</section>
+
+<section class="pb">
+<h2><span class="num">PART ELEVEN</span>What the market actually thinks</h2>
+<p class="sub">Four different audiences, four different verdicts: management, analysts, the press, and the people who work there. They do not agree, and the disagreement is the interesting part.</p>
+
+<h3>What management says — the Q2 2026 earnings call</h3>
+<p>CEO C.S. Venkatakrishnan's framing on 28 July 2026 was consistent and worth quoting
+accurately, because repeating a CEO's own language back is disproportionately effective:</p>
+<div class="quote">On the destination: an <q>all-weather return profile</q> — the goal being income that
+does not swing with the cycle.<span class="src">C.S. Venkatakrishnan, Q2 2026 results call</span></div>
+<div class="quote">On how they get there: <q>Our businesses are now revolving around technology, and our
+aim is to build standardised foundations, use modernised approaches and based on harmonised
+systems and processes.</q><span class="src">Q2 2026 results call</span></div>
+<div class="quote">On the retail strategy behind free custody and fee-free Premier advice: a play to
+<q>own the entirety of the customer</q>.<span class="src">Q2 2026 results call</span></div>
+<p>The substantive claim underneath the language: <strong>equities now account for roughly 32%
+of markets income versus 22% in 2023</strong>, which management credits for a stronger stable
+income base and less seasonal variation. That is a specific, checkable claim about
+diversification — not a slogan.</p>
+
+<h3>What analysts say — and why the shares fell on a beat</h3>
+<p>The Q2 2026 result is a genuinely instructive case study, and mentioning it demonstrates you
+read past the headline. Barclays <strong>beat on revenue, raised guidance to ~£31.5bn, posted
+16.1% quarterly RoTE and announced a £1bn buyback — and the shares fell.</strong> Analysts
+looked past the headline profit at four things:</p>
+<ul>
+<li><strong>Costs came in about 3% higher than expected</strong>, driven by the Investment Bank —
+plus roughly £300m of flagged structural cost actions and £100–150m from a change to the bonus
+mix in H2. Those could absorb much of the benefit of the upgraded income guidance.</li>
+<li><strong>Net interest income excluding the IB and Head Office missed consensus by about 2%</strong>,
+with shortfalls at Barclays UK and the US Consumer Bank — the two divisions the strategy is
+supposed to be leaning on.</li>
+<li><strong>FICC grew just 1% year-on-year</strong>, trailing US rivals. The historic core of the
+franchise was the weakest line in an otherwise strong quarter.</li>
+<li><strong>Earnings quality</strong> — how much of the revenue strength was reaching
+shareholders, given the portfolio-sale gain flattering the US Consumer Bank.</li>
+</ul>
+<p>The broader sell-side position remains constructive: <strong>17 analysts, a consensus
+"Moderate Buy", an average 12-month target of 575p</strong>, ranging from 510p at Citi to 655p
+at Goldman Sachs. Consensus 2026 EPS of around 53p puts Barclays on a P/E under 10 — cheap
+against US peers, and the valuation argument rests on whether that discount is deserved.</p>
+<p>Not everyone agrees: at least one analyst downgraded to Hold after Q2 on
+"unexpected costs and revenue headwinds". Being able to name both sides is worth more than
+enthusiasm.</p>
+
+<h3>What the press says</h3>
+<p>Financial press coverage in 2026 has been notably split between the numbers (good) and the
+investment bank's management (contested).</p>
+<ul>
+<li><strong>The leadership reset.</strong> In August 2026 Barclays named Adeel Khan — the
+existing global markets head — and Mike Joo, hired from Bank of America, as co-CEOs of the
+Investment Bank from February 2027, with Khan running markets from London and Joo running
+investment banking from New York. The FT reported this as a retreat from one of
+Venkatakrishnan's most prominent management experiments: a four-person leadership team
+installed less than three years earlier, criticised internally for spreading decision-making
+too widely and weakening accountability, and marked by tension between co-heads Cathal Deasy
+and Taylor Wright over strategy.</li>
+<li><strong>The banker attrition problem.</strong> Reporting notes that between 2023 and 2024
+Barclays lost around <strong>25% of its M&amp;A managing directors, and nearly 40% in the
+US</strong>. Investment banking fees have largely stagnated against 2018 levels — though 2026
+started far more strongly, with advisory fees up 67% to £443m and ECM up 65% to £249m in H1.</li>
+<li><strong>The share price.</strong> Barclays was one of the standout FTSE 100 stories of 2025,
+rising about <strong>65%</strong> — behind Lloyds (+75.8%) but ahead of NatWest (+56%).</li>
+<li><strong>Capital returns and speculation.</strong> Bloomberg framed the February 2026
+&gt;£15bn distribution pledge as raising the prospect of M&amp;A — i.e. the market reading a large
+payout commitment as a signal about how Barclays intends to use, or not use, its capital.</li>
+</ul>
+
+<h3>What practitioners say — industry forums</h3>
+<div class="warn"><span class="lab">A note on this section</span>
+<p>Reddit blocks automated access, so nothing here is drawn from Reddit. The forum material
+below comes from Wall Street Oasis threads and from employer-review aggregators (Glassdoor,
+Indeed, Breakroom). Treat all of it as anonymous, self-selected and unverifiable — useful for
+the <em>texture</em> of opinion, not for facts. Do not repeat it as though it were established.</p></div>
+<p>The Wall Street Oasis consensus on Barclays is reasonably consistent across threads:</p>
+<ul>
+<li><strong>Positioning:</strong> a solid bulge bracket, generally placed in Tier 2 — below
+JPMorgan, Goldman and Morgan Stanley, but a real BB rather than a middle-market firm. A recurring
+thread title is literally "Is Barclays underrated?"</li>
+<li><strong>Culture:</strong> repeatedly described as good relative to peer bulge brackets, and
+"collaborative"; posters note Barclays has been competitive on base pay.</li>
+<li><strong>Group matters more than the bank.</strong> This is the strongest and most consistent
+theme. Power, FIG, Industrials, Real Estate, and LevFin/DCM in EMEA are the groups posters
+single out; exits are described as "as good as the rest of the bulge bracket" from strong
+groups and materially weaker from others.</li>
+<li><strong>Deal flow:</strong> viewed as having taken share from European competitors that
+scaled back their investment banks.</li>
+</ul>
+<p>On employee sentiment more broadly, Barclays holds roughly <strong>4 out of 5 on Glassdoor
+across more than 22,000 reviews, with about 78% saying they would recommend it</strong>, and has
+been voted onto Glassdoor's Best Places to Work lists including in Tech. The recurring criticisms
+are the ones you would expect at any large bank: pressure on targets, limited flexibility in
+some frontline roles, and a gap between management vision and frontline experience.</p>
+
+<div class="say"><span class="lab">How to use this without sounding like you read a forum</span>
+<p>Never cite Wall Street Oasis at an insight day. But the <em>insight</em> underneath it is
+genuinely valuable and entirely sayable:
+<q>My sense is that at a bank of Barclays' size the group you sit in shapes the experience more
+than the firm does. How different does the day-to-day feel between, say, Global Markets and the
+Corporate Bank?</q> That is the forum consensus, laundered into a good question.</p></div>
+</section>
+
+<section class="pb">
+<h2><span class="num">PART TWELVE</span>Navigating 2026: the four live issues</h2>
+<p class="sub">What Barclays is dealing with right now. Knowing these makes you current rather than well-briefed on last year.</p>
+
+<h3>1 · The rate cycle turning — and why earnings keep rising anyway</h3>
+<p>The intuitive worry is that falling central bank rates crush bank margins. Barclays' answer is
+the structural hedge: the rolling reinvestment programme keeps pushing income up as pre-2020
+tranches mature into higher yields. Hence the confidence to <em>raise</em> 2026 NII guidance
+(ex-IB and Head Office) to above £13.7bn at Q2, and to guide Barclays UK NII to £8.1–8.3bn. The
+counter-risk is real though: NII excluding the IB missed consensus by 2% in Q2, with Barclays UK
+and the US Consumer Bank both softer than expected. The tailwind is powerful but it is not
+infinite, and management is visibly pivoting the story towards fees and efficiency before it runs out.</p>
+
+<h3>2 · Motor finance redress — the UK's live conduct issue</h3>
+<p>Following the Supreme Court's judgment in <em>Johnson v FirstRand</em> and related cases, the
+FCA confirmed on 30 March 2026 an industry-wide compensation scheme for motor finance customers
+affected by unfair commission arrangements between 6 April 2007 and 1 November 2024. The FCA
+estimates the total industry bill at around <strong>£9.1bn</strong> — £7.5bn of redress plus
+£1.6bn of other costs — with an average payment around £830 per agreement and the majority of
+claims settled by end-2027.</p>
+<div class="key"><span class="lab">Why this is a competitive advantage for Barclays, not just a cost</span>
+<p>Barclays' provision stands at around <strong>£430m</strong>, having been raised by £105m in
+Q1 2026 from £325m, and originally £90m at end-2024 across Barclays and its Clydesdale Financial
+Services subsidiary. Compare that with <strong>Lloyds at £1.95bn</strong>. Barclays simply never
+built a large motor finance book. In an industry-wide conduct event, the bank with the smallest
+exposure gains relative ground. If someone asks what you think of UK banking risk right now,
+this is a precise, current, differentiated answer.</p></div>
+
+<h3>3 · Reshaping the Investment Bank's leadership and its US franchise</h3>
+<p>The Khan/Joo appointment from February 2027 consolidates a four-person leadership structure
+into two, explicitly to sharpen accountability. It follows a period in which Barclays lost around
+a quarter of its M&amp;A managing directors — nearly 40% in the US — and in which fees stagnated
+against 2018 levels. The rebuild is showing early results: advisory fees up 67% and ECM up 65% in
+H1 2026, Q2 investment banking fees up 30% in dollar terms, and a number-one ranking by value in
+financial services M&amp;A for H1 2026. But FICC growing just 1% while US rivals did better is a
+genuine open question about whether the historic core is keeping pace.</p>
+
+<h3>4 · Capital returns versus growth</h3>
+<p>Barclays has committed to more than £15bn of distributions between 2026 and 2028, including a
+£2bn dividend for 2026, and returned £2.3bn in H1 2026 alone (£0.8bn dividend, £1.5bn buybacks).
+Buybacks have been running steadily through 2026 — over 36 million shares repurchased and
+cancelled by August. With the stock around or below tangible book value, buying back shares is
+mathematically attractive: every share cancelled below book value increases book value per
+remaining share.</p>
+<p>The strategic tension is genuine and worth understanding: <strong>every pound returned to
+shareholders is a pound not invested in growth</strong>. Barclays has been doing both — Tesco,
+Kensington and Best Egg were all bought during a period of heavy distributions — but the market
+reads a large payout pledge as a statement of intent about future M&amp;A appetite.</p>
+</section>
+
+<section class="pb">
+<h2><span class="num">PART THIRTEEN</span>Choosing a division — and what to say on 14 September</h2>
+<p class="sub">The Insight Day flags four areas: Investment Banking, Global Markets, Private Banking &amp; Wealth Management, and Corporate Banking. Here is what each is actually like, and the honest case for and against.</p>
+
+<div class="cards">
+<div class="card ib"><h5>Investment Banking (Advisory / ECM / DCM)</h5>
+<p><strong>The work:</strong> financial modelling, valuation, pitch materials, due diligence,
+running processes. In DCM and leveraged finance, structuring and pricing debt.</p>
+<p><strong>The economics you should know:</strong> £2,464m of banking fees in FY2025 — Advisory
+£676m, DCM £1,510m, ECM £278m. Note that <strong>DCM is more than twice Advisory</strong>. If you
+want the biggest fee pool at Barclays specifically, it is debt, not M&amp;A.</p>
+<p><strong>Case for:</strong> steepest learning curve in finance; strongest exit options; Barclays
+is #1 by value in financial-services M&amp;A in H1 2026 and rebuilding hard.</p>
+<p><strong>Case against:</strong> the hours are real, and Barclays' fee franchise is still
+recovering from heavy MD attrition. Group choice matters enormously.</p></div>
+
+<div class="card ib"><h5>Global Markets (FICC / Equities)</h5>
+<p><strong>The work:</strong> pricing risk in real time, market-making, structuring, sales
+coverage of institutional clients. Decisions in seconds, not weeks.</p>
+<p><strong>The economics:</strong> £8,654m in FY2025 — <strong>the single largest revenue pool in
+the entire group</strong>. FICC £5,429m, Equities £3,225m. Equities is the growth story: from 22%
+to ~32% of markets income since 2023, up 45% year-on-year in Q2 2026.</p>
+<p><strong>Case for:</strong> this is Barclays' deepest institutional strength, the direct
+inheritance of Barclays Capital, and where the firm genuinely competes with the Americans. It also
+performs well when markets are difficult, which is a good hedge on your own career.</p>
+<p><strong>Case against:</strong> FICC grew just 1% year-on-year in Q2 2026, trailing US peers.
+The core is under competitive pressure even as equities thrives.</p></div>
+
+<div class="card pbwm"><h5>Private Banking &amp; Wealth Management</h5>
+<p><strong>The work:</strong> long-horizon relationships with wealthy individuals and families;
+portfolio construction, structured lending, succession and trust planning.</p>
+<p><strong>The economics:</strong> £1,380m of income, 26.3% RoTE — <strong>the highest-returning
+division in the group</strong> — on just £8.0bn of RWAs. Up to 100 new wealth managers are funded
+in 2026 cost guidance, so it is actively hiring.</p>
+<p><strong>Case for:</strong> the smallest division but the best returns, with real strategic
+priority and an internal referral engine from Premier and the Corporate Bank that standalone
+wealth managers cannot match.</p>
+<p><strong>Case against:</strong> 73% cost:income — the division is expensive to run, and progress
+is measured in years of relationship-building, not quarters.</p></div>
+
+<div class="card ukcb"><h5>Corporate Banking (UK and International)</h5>
+<p><strong>The work:</strong> covering companies end-to-end — lending, cash management, payments,
+trade finance, hedging. Understanding how businesses actually work.</p>
+<p><strong>The economics:</strong> UK Corporate Bank £2,064m of income, RoTE 18.9% rising to 20.6%
+in H1 2026, relationships with ~1 in 4 UK corporates. International Corporate Bank adds £1,937m
+inside the Investment Bank.</p>
+<p><strong>Case for:</strong> the most underrated division. It funds the group (£88.7bn deposits
+vs £30.0bn loans), it opens the doors the Investment Bank walks through, and it delivers
+near-20% returns on modest capital. Better hours than the IB with genuine client ownership.</p>
+<p><strong>Case against:</strong> lower external prestige and narrower exit options into private
+equity. If your goal is a buy-side seat in three years, this is the harder route.</p></div>
+</div>
+
+<h3>How to choose honestly</h3>
+<p>Map your answer to what you actually want, not to what sounds most impressive:</p>
+<ul>
+<li><strong>Want to be judged on daily decisions under pressure?</strong> Global Markets.</li>
+<li><strong>Want depth on a handful of transactions over months?</strong> Investment Banking.</li>
+<li><strong>Want to own relationships and see the whole of a business?</strong> Corporate Banking.</li>
+<li><strong>Want long-horizon relationships and the best returns in the firm?</strong> Private Bank.</li>
+</ul>
+<p>The applications themselves open in early September 2026 for 2027 entry, with deadlines
+between 30 November and 31 January depending on division — technology typically closing
+mid-November, Markets and Banking often open into late January. Programmes include Spring
+Weeks, nine-week summer internships, and the two-year rotational graduate scheme. Assume
+single-digit acceptance rates and apply early; several divisions assess on a rolling basis.</p>
+
+<h3>Ten numbers worth memorising</h3>
+<table>
+<thead><tr><th style="width:56%">Fact</th><th style="width:44%">Figure</th></tr></thead>
+<tbody>
+<tr><td>FY2025 Group income and pre-tax profit</td><td><strong>£29.1bn</strong> and <strong>£9.1bn</strong></td></tr>
+<tr><td>FY2025 Group RoTE, and H1 2026</td><td><strong>11.3%</strong> → <strong>14.8%</strong></td></tr>
+<tr><td>The two targets</td><td><strong>&gt;12% RoTE in 2026, &gt;14% in 2028</strong></td></tr>
+<tr><td>Investment Bank share of income vs share of capital</td><td><strong>45% of income, 55% of RWAs</strong></td></tr>
+<tr><td>Highest-returning division</td><td><strong>Private Bank &amp; Wealth, 26.3%</strong></td></tr>
+<tr><td>Largest single revenue pool</td><td><strong>Global Markets, £8.65bn</strong></td></tr>
+<tr><td>The UK reallocation</td><td><strong>~£30bn of RWAs into UK businesses by 2026; £20bn done</strong></td></tr>
+<tr><td>Capital returns pledged 2026–28</td><td><strong>&gt;£15bn</strong></td></tr>
+<tr><td>The Tesco deal</td><td><strong>£600m, plus a 10-year exclusive brand partnership</strong></td></tr>
+<tr><td>Founded</td><td><strong>1690, Lombard Street</strong></td></tr>
+</tbody>
+</table>
+
+<h3>Questions worth asking in the speed-networking session</h3>
+<p>Avoid anything answerable from the website. These are drawn from the analysis in this report
+and each one signals a specific piece of understanding:</p>
+<ol>
+<li><q>The three UK businesses all cleared 20% RoTE in H1 while the Investment Bank reached 16%.
+Does that change how capital gets argued over internally?</q> <em>— shows you understand RWA allocation.</em></li>
+<li><q>Equities has gone from about 22% to 32% of markets income since 2023. What had to change
+operationally to make that happen?</q> <em>— shows you listened to the earnings call.</em></li>
+<li><q>The Tesco partnership is a ten-year exclusive. How is a distribution partnership like that
+actually run day-to-day?</q> <em>— shows you read past the purchase price.</em></li>
+<li><q>Ring-fencing means the investment bank can't draw on UK retail deposits. How much does that
+funding difference shape what your desk can compete for?</q> <em>— very few students know this.</em></li>
+<li><q>The 2026–28 plan reads much more like an efficiency and technology story than the
+rebalancing story of 2024–26. Is that visible in your team yet?</q> <em>— shows you read both plans.</em></li>
+<li><q>Where does your business sit in the client relationship — first product bought, or last?</q>
+<em>— shows you understand the flywheel.</em></li>
+</ol>
+
+<div class="say"><span class="lab">The one-paragraph answer to "why Barclays?"</span>
+<p><q>Barclays is the only bank that is at once a UK high-street lender with twenty million
+customers, a top-tier US card issuer, and a bulge-bracket investment bank — no other firm holds
+all three. That combination is why income held up through 2025 when markets were volatile and
+rates were moving in opposite directions for the two halves of the business. It's also why the
+last three years have been so interesting: the plan was explicitly to move capital out of the
+investment bank and into the UK, and it's worked — group RoTE has gone from about 9% in 2023 to
+14.8% in the first half of 2026, against a target of 12%. I want to join a firm mid-turnaround
+rather than one that's finished, because that's where you learn how decisions actually get made.</q></p></div>
+
+<div class="warn"><span class="lab">Two things to get right, and one to avoid</span>
+<p><strong>Get right:</strong> Barclays files a <strong>20-F</strong>, not a 10-K. And its
+financial year is the calendar year, so "FY2025" means the twelve months to 31 December 2025.</p>
+<p><strong>Avoid:</strong> claiming Barclays is a "top three global investment bank". It is not,
+and everyone in the room knows it. Say it is the only UK-headquartered bulge bracket, and that it
+is top-tier in specific sectors — financial institutions, power, leveraged finance and DCM. That
+is both true and more impressive, because it shows you know how league tables work.</p></div>
+</section>
+
+<section class="pb">
+<h2><span class="num">PART FOURTEEN</span>Sources and method</h2>
+<p class="sub">Every number in this report is traceable. Where sources conflict, the primary filing wins.</p>
+
+<h3>How this was put together</h3>
+<p><strong>Primary financial data</strong> — the FY2025 divisional table, the H1 2026 divisional
+table and the Investment Bank sub-line breakdowns — comes from Barclays PLC's own Results
+Announcements as filed with the SEC on Form 6-K and published via RNS. Those figures cross-foot:
+the divisional income lines sum to the £29,140m Group total for FY2025 and to £16,501m for H1
+2026, and the divisional profits reconcile to Group profit before tax once the Head Office loss
+is deducted. Where a secondary source disagreed with a filing, the filing was used.</p>
+<p><strong>Strategy, targets and management commentary</strong> come from the February 2024
+Investor Update, the FY2025 and Q2 2026 results materials, and the Q2 2026 earnings call.</p>
+<p><strong>Transaction detail</strong> comes from Barclays and counterparty press releases and
+contemporaneous trade-press reporting, cross-checked for price and date.</p>
+<p><strong>Opinion and sentiment</strong> is clearly separated from fact throughout. Two
+limitations are worth stating plainly: <strong>Reddit could not be accessed</strong> — the site
+blocks automated retrieval — so no Reddit opinion appears here despite being requested; and Wall
+Street Oasis and Glassdoor material is anonymous and self-selected, so it is reported as texture,
+not evidence. Some Barclays-hosted PDFs also returned access errors, so the equivalent figures
+were taken from the SEC-filed versions of the same documents.</p>
+
+<h3>Sources</h3>
+<div class="src-list">
+<div><strong>Barclays primary filings and materials</strong></div>
+<div>· Barclays PLC 2025 Results Announcement (RNS, via Investegate) — FY2025 divisional tables</div>
+<div>· Barclays PLC Form 6-K, H1 2026 results (SEC, filed July 2026) — H1 2026 divisional tables</div>
+<div>· Barclays PLC Form 6-K, Q1 2026 results (SEC, filed 28 April 2026) — Q1 metrics, motor finance provision, American Airlines and Best Egg detail</div>
+<div>· Barclays PLC Annual Report 2025; Barclays PLC Form 20-F FY2025</div>
+<div>· Barclays Investor Update, 20 February 2024 — "Simpler, Better, More Balanced"</div>
+<div>· Barclays Q2 2026 Results Presentation, Fixed Income Presentation and Management Speech, 28 July 2026</div>
+<div>· Barclays Private Bank &amp; Wealth Management Deep Dive, 10 December 2024</div>
+<div>· Barclays US Consumer Bank Investor Update, 20 February 2024</div>
+<div>· Barclays press releases: Tesco completion (Nov 2024); Best Egg acquisition (Oct 2025) and completion (May 2026); Kensington acquisition (June 2022)</div>
+<div>· Barclays Group Structure and Ring Fencing Explained, home.barclays</div>
+<div>· Barclays archive: Lombard Street, Quakers, Barclaycard, BZW</div>
+
+<div>&nbsp;</div>
+<div><strong>Earnings calls and analyst commentary</strong></div>
+<div>· Barclays Q2 2026 earnings call transcripts — Motley Fool, Seeking Alpha, Investing.com</div>
+<div>· Barclays Q4/FY2025 earnings call transcript — Investing.com</div>
+<div>· "Barclays H1 2026 slides: RoTE hits 16.1% as income guidance rises" — Investing.com</div>
+<div>· "Barclays falls as analysts look beyond headline profit beat" — Proactive Investors</div>
+<div>· "Barclays: Unexpected Costs &amp; Revenue Headwinds — Downgrade To Hold" — Seeking Alpha</div>
+<div>· Barclays consensus estimates and price targets — Investing.com UK; TipRanks</div>
+
+<div>&nbsp;</div>
+<div><strong>Press and market reporting</strong></div>
+<div>· Financial Times reporting on Barclays investment bank leadership and MD attrition, 2026</div>
+<div>· Bloomberg, "Barclays Taps Khan, BofA's Joo as New Investment Bank Heads", 17 August 2026</div>
+<div>· Bloomberg, "Barclays Payout Plans Raise Prospect of M&amp;A as Profit Beats", 10 February 2026</div>
+<div>· City AM, on UK bank share performance in 2025</div>
+<div>· RTÉ, "Barclays' 2025 profit up 12%, raises performance targets", 10 February 2026</div>
+<div>· Reuters / Business Standard on the Absa sell-down; Bloomberg on the Lehman purchase</div>
+<div>· SEC press releases 2008-206 and 2008-215 on the Lehman transaction</div>
+<div>· Banking Dive, FinTech Futures, PR Newswire — Best Egg</div>
+<div>· Mortgage Introducer, Financial Reporter, Blackstone press release — Kensington</div>
+<div>· Retail Banker International, City AM, Insider Media — Tesco Bank</div>
+<div>· Private Banker International / Yahoo Finance — H1 2026 financial services M&amp;A adviser rankings</div>
+<div>· A&amp;O Shearman — Persistent Systems / Nagarro €1.4bn financing</div>
+
+<div>&nbsp;</div>
+<div><strong>Peers, regulation and context</strong></div>
+<div>· HSBC Holdings plc Annual Results 2025, 25 February 2026</div>
+<div>· NatWest Group plc Annual Results 2025, 13 February 2026</div>
+<div>· Standard Chartered PLC Full Year 2025 results</div>
+<div>· Lloyds Banking Group FY2025 results reporting</div>
+<div>· JPMorgan Chase 4Q25 earnings release; Morgan Stanley Form 8-K 4Q25; Goldman Sachs 2025 results reporting</div>
+<div>· FCA Policy Statement PS26/3, Motor Finance Consumer Redress Scheme, March 2026; FCA confirmation statement, 30 March 2026</div>
+<div>· Bank of England, list of ring-fenced bodies; Pinsent Masons on Barclays' ring-fencing approval</div>
+
+<div>&nbsp;</div>
+<div><strong>Opinion, sentiment and careers (treat as indicative only)</strong></div>
+<div>· Wall Street Oasis forum threads on Barclays culture, groups, comp and exits</div>
+<div>· Glassdoor, Indeed and Breakroom employer reviews</div>
+<div>· Barclays Careers — graduate programmes and early careers pages; GraduatesFirst; Bright Network</div>
+</div>
+
+<p class="footnote">Compiled 23 August 2026 for the Barclays Insight Day &times; SEO London, 14 September 2026.
+Financial figures are as reported by the companies concerned and are not adjusted for
+comparability across accounting standards or currencies. Nothing in this document is investment
+advice. Forum and employer-review material is anonymous, self-selected and unverified.</p>
+</section>
+</body></html>
