@@ -1,0 +1,1066 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Last Impression — A Complete Guide to Your Pictet Asset Management Final Internship Presentation</title>
+<style>
+  @page {
+    size: A4;
+    margin: 18mm 16mm 16mm 16mm;
+    @bottom-center { content: counter(page); }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Charter", "Georgia", "Times New Roman", serif;
+    font-size: 10.2pt;
+    line-height: 1.52;
+    color: #16202e;
+    margin: 0;
+  }
+  h1, h2, h3, h4, .ui { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+  /* ---------- Cover ---------- */
+  .cover {
+    height: 252mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    break-after: page;
+  }
+  .cover-top { border-top: 3px solid #0d2745; padding-top: 10mm; }
+  .eyebrow {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 8.5pt; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #8a6a2f; font-weight: 600;
+  }
+  .cover h1 {
+    font-family: "Charter","Georgia",serif;
+    font-size: 34pt; line-height: 1.1; margin: 8mm 0 6mm 0; font-weight: 400; color: #0d2745;
+    letter-spacing: -0.01em;
+  }
+  .cover .sub { font-size: 12pt; color: #40506a; max-width: 130mm; line-height: 1.5; }
+  .cover-meta {
+    border-top: 1px solid #c9d2de; padding-top: 5mm;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 8.5pt; color: #5b6a80;
+    display: flex; justify-content: space-between;
+  }
+  .rule-gold { height: 4px; background: #b08d43; width: 46mm; margin: 0 0 0 0; }
+
+  /* ---------- Structure ---------- */
+  .part { break-before: page; }
+  .part-head { border-bottom: 2px solid #0d2745; padding-bottom: 3mm; margin-bottom: 6mm; }
+  .part-num {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 8.5pt; letter-spacing: 0.2em; text-transform: uppercase; color: #b08d43; font-weight: 700;
+  }
+  h1.part-title { font-family: "Charter","Georgia",serif; font-size: 21pt; font-weight: 400; color: #0d2745; margin: 2mm 0 0 0; line-height: 1.15; }
+  h2 { font-size: 12.5pt; color: #0d2745; margin: 7mm 0 2.5mm 0; font-weight: 700; letter-spacing: -0.005em; break-after: avoid; }
+  h3 { font-size: 10.5pt; color: #23405f; margin: 5mm 0 1.5mm 0; font-weight: 700; break-after: avoid; }
+  h4 { font-size: 9.5pt; color: #3b4d66; margin: 4mm 0 1mm 0; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; break-after: avoid; }
+  p { margin: 0 0 3mm 0; }
+  ul, ol { margin: 0 0 3.5mm 0; padding-left: 5.5mm; }
+  li { margin-bottom: 1.6mm; }
+  strong { color: #0d2745; }
+  em { color: #34465e; }
+  a { color: #23405f; }
+
+  .lede { font-size: 11pt; color: #35485f; line-height: 1.55; margin-bottom: 5mm; }
+
+  /* ---------- Components ---------- */
+  .box {
+    border: 1px solid #d5dde7; background: #f7f9fb;
+    padding: 4mm 5mm; margin: 4mm 0; break-inside: avoid;
+  }
+  .box.gold { border-left: 3px solid #b08d43; background: #fbf8f2; }
+  .box.navy { border-left: 3px solid #0d2745; background: #f4f7fa; }
+  .box.warn { border-left: 3px solid #9a3b3b; background: #fbf5f5; }
+  .box h4 { margin-top: 0; }
+  .box p:last-child, .box ul:last-child, .box ol:last-child { margin-bottom: 0; }
+
+  .pull {
+    font-family: "Charter","Georgia",serif; font-size: 12.5pt; line-height: 1.42;
+    color: #0d2745; border-left: 3px solid #b08d43; padding: 1mm 0 1mm 5mm;
+    margin: 5mm 0; break-inside: avoid;
+  }
+
+  table { width: 100%; border-collapse: collapse; margin: 4mm 0; font-size: 8.8pt; break-inside: avoid; }
+  table.long { break-inside: auto; }
+  table.long tr { break-inside: avoid; }
+  th {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 7.8pt;
+    text-transform: uppercase; letter-spacing: 0.07em; text-align: left;
+    background: #0d2745; color: #fff; padding: 2.2mm 2.5mm; font-weight: 600; vertical-align: bottom;
+  }
+  td { padding: 2.2mm 2.5mm; border-bottom: 1px solid #dde4ec; vertical-align: top; }
+  tr:nth-child(even) td { background: #f7f9fb; }
+  td.tick { color: #2f6b45; font-weight: 700; }
+  td.cross { color: #9a3b3b; font-weight: 700; }
+
+  .two-col { display: flex; gap: 5mm; margin: 4mm 0; break-inside: avoid; }
+  .two-col > div { flex: 1; border: 1px solid #d5dde7; padding: 3.5mm 4mm; }
+  .col-good { border-top: 3px solid #2f6b45 !important; background: #f5faf6; }
+  .col-bad  { border-top: 3px solid #9a3b3b !important; background: #fbf6f6; }
+  .col-good h4 { color: #2f6b45; }
+  .col-bad h4 { color: #9a3b3b; }
+
+  .timeline { margin: 4mm 0; }
+  .timeline-row { display: flex; gap: 4mm; padding: 2.2mm 0; border-bottom: 1px solid #e3e9f0; break-inside: avoid; }
+  .timeline-row .t {
+    flex: 0 0 26mm; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 8.2pt; font-weight: 700; color: #b08d43; letter-spacing: 0.04em; padding-top: 0.4mm;
+  }
+  .timeline-row .c { flex: 1; }
+  .timeline-row .c strong { display: block; font-size: 9.5pt; }
+
+  .toc { margin-top: 6mm; }
+  .toc-row {
+    display: flex; align-items: baseline; gap: 3mm; padding: 2.2mm 0;
+    border-bottom: 1px solid #e3e9f0; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 9.5pt;
+  }
+  .toc-row .n { flex: 0 0 12mm; color: #b08d43; font-weight: 700; font-size: 8.5pt; letter-spacing: 0.06em; }
+  .toc-row .t { flex: 1; color: #0d2745; font-weight: 600; }
+  .toc-row .d { flex: 0 0 78mm; color: #6b7a8f; font-weight: 400; font-size: 8.5pt; }
+
+  .worksheet { border: 1px solid #b9c5d4; margin: 4mm 0; break-inside: avoid; }
+  .worksheet .wh {
+    background: #0d2745; color: #fff; padding: 2.5mm 4mm;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 9pt; font-weight: 600;
+  }
+  .worksheet .wb { padding: 4mm; }
+  .fill { border-bottom: 1px dotted #97a6b8; display: block; height: 6mm; margin: 2mm 0; }
+  .fill-lbl { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 8pt; color: #5b6a80; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  .kicker { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 8pt; text-transform: uppercase; letter-spacing: 0.14em; color: #b08d43; font-weight: 700; margin-bottom: 1.5mm; }
+
+  .checklist { list-style: none; padding-left: 0; }
+  .checklist li { padding-left: 7mm; position: relative; margin-bottom: 2mm; }
+  .checklist li:before {
+    content: ""; position: absolute; left: 0; top: 0.9mm;
+    width: 3.6mm; height: 3.6mm; border: 1.2px solid #6b7a8f;
+  }
+
+  .num-callout { display: flex; gap: 4mm; margin: 3mm 0; break-inside: avoid; }
+  .num-callout .n {
+    flex: 0 0 9mm; height: 9mm; border-radius: 50%; background: #0d2745; color: #fff;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 10pt; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .num-callout .c { flex: 1; padding-top: 0.8mm; }
+  .num-callout .c strong { display: block; margin-bottom: 0.8mm; }
+
+  .footnote { font-size: 8.2pt; color: #6b7a8f; }
+  .src { font-size: 8.4pt; line-height: 1.45; margin-bottom: 2mm; word-wrap: break-word; }
+  .avoid { break-inside: avoid; }
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<section class="cover">
+  <div class="cover-top">
+    <div class="rule-gold"></div>
+    <div class="eyebrow" style="margin-top:6mm;">Practical Guide &nbsp;·&nbsp; Summer Internship 2026</div>
+    <h1>The Last<br>Impression</h1>
+    <p class="sub">How to design, write, rehearse and deliver your final presentation at Pictet Asset Management — audience analysis, the reflective-versus-informative balance, structure, humour that actually works in a Swiss private bank, and the Q&amp;A where the real decision gets made.</p>
+  </div>
+  <div>
+    <div class="box gold" style="margin-bottom:8mm;">
+      <h4>The one-paragraph version</h4>
+      <p>Your final presentation is not a report on what you did. It is a <strong>demonstration of judgement</strong> — the last piece of evidence your team gets before they form a lasting view of you. Build it around one clear message, lead with the answer rather than the journey, spend roughly two-thirds of your time on substance and one-third on insight and reflection, keep reflection <em>evidenced and useful to them</em> rather than emotional, use humour two or three times only and always aimed at yourself or at a shared experience, and prepare harder for the Q&amp;A than for the script. Then close on gratitude that is specific enough that only you could have written it.</p>
+    </div>
+    <div class="cover-meta">
+      <span>Prepared for Janak Chohan</span>
+      <span>August 2026</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTENTS ============ -->
+<section>
+  <div class="part-head">
+    <div class="part-num">Contents</div>
+    <h1 class="part-title">What is in this guide</h1>
+  </div>
+  <p class="lede">Ten parts and seven worksheets. Parts 1–3 are the thinking. Parts 4–6 are the building. Parts 7–9 are the performing. Part 10 is the schedule. Work through it in order the first time; after that, use the appendices as fill-in tools.</p>
+  <div class="toc">
+    <div class="toc-row"><span class="n">Part 1</span><span class="t">What this presentation actually is</span><span class="d">The unwritten brief, and what is really being assessed</span></div>
+    <div class="toc-row"><span class="n">Part 2</span><span class="t">Analysing your audience</span><span class="d">A three-input framework, a persona map, and the Pictet cultural overlay</span></div>
+    <div class="toc-row"><span class="n">Part 3</span><span class="t">The reflective / informative dial</span><span class="d">How much of each, and how to reflect without sounding like a diary</span></div>
+    <div class="toc-row"><span class="n">Part 4</span><span class="t">Structure and storyline</span><span class="d">SCQA, the Pyramid Principle, and a slide-by-slide running order</span></div>
+    <div class="toc-row"><span class="n">Part 5</span><span class="t">Content that lands in asset management</span><span class="d">Evidence standards, charts, honesty about limitations</span></div>
+    <div class="toc-row"><span class="n">Part 6</span><span class="t">Humour, engineered</span><span class="d">Five safe mechanisms, twelve worked examples, and the red list</span></div>
+    <div class="toc-row"><span class="n">Part 7</span><span class="t">Delivery and rehearsal</span><span class="d">The three-pass rehearsal protocol and the nerves plan</span></div>
+    <div class="toc-row"><span class="n">Part 8</span><span class="t">The Q&amp;A</span><span class="d">Where the impression is actually made — and twenty questions to expect</span></div>
+    <div class="toc-row"><span class="n">Part 9</span><span class="t">Engineering the last impression</span><span class="d">Peak-end, the close, the ask, and the follow-up</span></div>
+    <div class="toc-row"><span class="n">Part 10</span><span class="t">The fourteen-day countdown</span><span class="d">What to do on each day, ending with the morning of</span></div>
+    <div class="toc-row"><span class="n">Appendix</span><span class="t">Worksheets A–G</span><span class="d">Fill-in tools: audience grid, storyline skeleton, humour bank, Q&amp;A grid, scorecards</span></div>
+    <div class="toc-row"><span class="n">Sources</span><span class="t">Research base</span><span class="d">Everything this guide draws on, with links</span></div>
+  </div>
+
+  <div class="box navy" style="margin-top:8mm;">
+    <h4>A note on what I could and could not verify</h4>
+    <p>Pictet publishes very little about the internal format of internship presentations — the public careers pages describe the programmes but not the end-of-internship assessment. Everything in this guide that is Pictet-specific is therefore drawn from the firm's <em>publicly stated values and culture</em> (independence, long-term thinking, partnership, responsibility, entrepreneurial spirit; a 220-year-old partnership headquartered in Geneva, owned and managed by seven Managing Partners) and applied as a register and tone recommendation. The rest is drawn from general research on business presentations, consulting communication structure, humour at work, and internship-to-offer conversion. <strong>Before you build anything, ask your manager the five questions in Part 2 — they will beat any general advice, including mine.</strong></p>
+  </div>
+</section>
+
+<!-- ============ PART 1 ============ -->
+<section class="part">
+  <div class="part-head">
+    <div class="part-num">Part One</div>
+    <h1 class="part-title">What this presentation actually is</h1>
+  </div>
+
+  <p class="lede">Almost every intern answers the wrong brief. They hear "present your summer" and produce a chronological account of what they did. The people in the room are running a different evaluation entirely, and if you answer their question instead of the literal one, you are immediately in the top quartile.</p>
+
+  <h2>The literal brief versus the real brief</h2>
+  <p>The literal brief is: <em>tell us about your internship</em>. The real brief has three parts, and only one of them is about the work.</p>
+
+  <div class="num-callout"><div class="n">1</div><div class="c"><strong>Can this person think?</strong> Given an ambiguous problem and imperfect data, did they define it sensibly, choose a method, know the limits of that method, and reach a defensible conclusion? This is the single largest weight. In asset management, judgement under uncertainty <em>is</em> the job.</div></div>
+  <div class="num-callout"><div class="n">2</div><div class="c"><strong>Can this person communicate?</strong> Can they take twelve weeks of messy work and compress it into fifteen minutes that a busy portfolio manager can absorb? Can they answer a hard question without waffling or bluffing? The final presentation is often the last thing senior people see before a return-offer view is formed, and it is read as a demonstration of your ability to distil complex analysis into a clear recommendation — not as a summary of your work.</div></div>
+  <div class="num-callout"><div class="n">3</div><div class="c"><strong>Do I want this person in the seat next to me for three years?</strong> Warmth, credit-sharing, curiosity, low ego, the ability to say "I got that wrong and here is what I did about it". This is where reflection and humour earn their place — not as decoration, but as the evidence for this third question.</div></div>
+
+  <div class="pull">A presentation that only answers question one reads as competent but cold. A presentation that only answers question three reads as likeable but light. You need all three, in that order of weight.</div>
+
+  <h2>Why the ending disproportionately matters</h2>
+  <p>Human memory of an experience is not an average of its moments. Kahneman's <strong>peak–end rule</strong> holds that people judge an experience largely by its most intense moment and by how it ended, rather than by the sum of every moment. Your twelve weeks are the experience; this presentation is the end. It is genuinely disproportionate in how much it will shape the story your team tells about you after you leave — including in the conversation you are not in the room for.</p>
+  <p>This cuts both ways. It means a strong close can buffer a wobbly middle. It also means that ending on a flat "…so, yeah, that's it, any questions?" undoes real work. Part 9 is entirely about engineering this.</p>
+
+  <h2>The five failure modes</h2>
+  <table class="long">
+    <tr><th style="width:32%">Failure mode</th><th>What it looks like</th><th style="width:30%">The fix</th></tr>
+    <tr><td><strong>The travelogue</strong></td><td>Chronological. "In week one I was given access to Bloomberg. In week two I started pulling data…" The audience is doing the work of extracting the point.</td><td>Lead with the answer. Structure by argument, not by calendar.</td></tr>
+    <tr><td><strong>The data dump</strong></td><td>Every regression, every tab of the model, every chart you built. Effort displayed as a substitute for insight.</td><td>Three charts in the main deck; the rest into an appendix you can jump to in Q&amp;A.</td></tr>
+    <tr><td><strong>The big reveal</strong></td><td>Saving your findings for the final presentation so it lands as a surprise. Senior people dislike surprises, and you lose the buy-in you would have got from showing work in progress.</td><td>Pre-wire. Walk your key slides past your manager and one other stakeholder a week early.</td></tr>
+    <tr><td><strong>The gratitude essay</strong></td><td>Fifteen minutes of how much you learned and grew, with the actual analysis compressed into two slides.</td><td>Reflection is the seasoning, not the meal. See Part 3 for the ratio.</td></tr>
+    <tr><td><strong>The overclaim</strong></td><td>Presenting a fragile backtest or a small-sample result as a finding. One good question exposes it and the whole deck loses credibility.</td><td>State limitations before they are asked. Confidence about what you know; precision about what you do not.</td></tr>
+  </table>
+
+  <div class="box warn">
+    <h4>The one thing that most reliably sinks a final presentation</h4>
+    <p>Not nerves. Not slide design. It is <strong>being unable to defend a number on your own slide</strong>. If a chart is in your deck, you must know where every input came from, what the sample period is, what it excludes, and what would change your conclusion. Delete anything you cannot defend — an unclaimed slide is far cheaper than an undefendable one.</p>
+  </div>
+</section>
+
+<!-- ============ PART 2 ============ -->
+<section class="part">
+  <div class="part-head">
+    <div class="part-num">Part Two</div>
+    <h1 class="part-title">Analysing your audience</h1>
+  </div>
+
+  <p class="lede">You asked whether you need to do audience analysis. You do — but not as an academic exercise. Done properly it takes about forty minutes and it determines your level of detail, your jargon, your examples, your humour, and which three of your findings survive the cut. It is the highest-return forty minutes of the whole process.</p>
+
+  <h2>The three-input framework</h2>
+  <p>The most usable framework for a business audience asks three things before you write a single slide.</p>
+
+  <h3>Input 1 — Where are they coming from?</h3>
+  <ul>
+    <li><strong>Seniority.</strong> The more senior, the more they want the conclusion first and the detail on demand. A Managing Partner or Head of Desk wants the answer in ninety seconds. An analyst peer wants the method.</li>
+    <li><strong>Function and domain.</strong> A quant researcher, a product specialist, a client-facing sales person and an HR programme manager will each hear a different presentation. Which jargon is free, and which needs a one-line gloss?</li>
+    <li><strong>Existing knowledge.</strong> How much do they already know about <em>your specific project</em>? Anything they already know is context you can compress; anything they do not is where your value is.</li>
+  </ul>
+
+  <h3>Input 2 — What do they want to know?</h3>
+  <ul>
+    <li>What are their overarching goals this quarter? Your project connects to one of them — find out which.</li>
+    <li>What are the <strong>top three questions</strong> they will want answered? Write them down. If your deck does not answer all three by the end, restructure it.</li>
+    <li>What is the concern underneath? For a desk taking on an intern project, it is usually some version of "is this actually usable, or is it a summer exercise we now have to maintain?"</li>
+  </ul>
+
+  <h3>Input 3 — Logistics and format</h3>
+  <ul>
+    <li>How long, really? Ask for the split between presenting and Q&amp;A. A "20-minute slot" is often 12 + 8.</li>
+    <li>Slides, a one-page memo, a screen-share, or a whiteboard? In asset management, a slide-doc (slides dense enough to read afterwards) frequently beats a sparse TED-style deck, because it survives being forwarded.</li>
+    <li>In person, remote, or hybrid? Hybrid is the hardest and needs its own rehearsal — see Part 7.</li>
+    <li>Is there a house template? Use it. This is not the moment for personal brand design.</li>
+  </ul>
+
+  <h2>Your Pictet audience, mapped</h2>
+  <p>Your audience is "my team", but a team is never one audience. Map it. Below is a typical composition for an asset-management desk; adapt the names and delete rows that do not apply.</p>
+
+  <table class="long">
+    <tr><th style="width:19%">Who</th><th style="width:22%">What they already know</th><th style="width:24%">What they actually want</th><th style="width:19%">What bores them</th><th style="width:16%">Their likely question</th></tr>
+    <tr><td><strong>Your line manager</strong></td><td>Nearly everything. They have seen the working files.</td><td>To see you land it well in front of their peers. Your presentation reflects on them.</td><td>Anything they briefed you on. Re-explaining the project scope.</td><td>None — they will lob you a friendly one to open the room up.</td></tr>
+    <tr><td><strong>Head of team / senior PM</strong></td><td>The desk's strategy; possibly one line about your project.</td><td>The conclusion, its reliability, and whether it changes anything they do.</td><td>Method for method's sake. Long build-ups.</td><td>"What would you do with this if you had another three months?"</td></tr>
+    <tr><td><strong>Analyst / associate peers</strong></td><td>The tools, the data sources, the daily reality.</td><td>The method. Did you do it properly? Is the code / model reusable?</td><td>Being talked down to on basics.</td><td>"How did you handle [the known messy bit of that dataset]?"</td></tr>
+    <tr><td><strong>Colleagues who helped you</strong></td><td>Their own slice, deeply.</td><td>To be credited, accurately and by name.</td><td>Hearing their contribution described as yours.</td><td>Rarely a hard one — but they notice omissions.</td></tr>
+    <tr><td><strong>Adjacent function</strong> (risk, product, client teams)</td><td>Little about your project; a lot about constraints.</td><td>Implications for them. Any risk or compliance edge.</td><td>Deep technical detail.</td><td>"How would this work in practice given [constraint]?"</td></tr>
+    <tr><td><strong>HR / graduate programme</strong></td><td>The programme, not the content.</td><td>Evidence of development, self-awareness, and fit.</td><td>Nothing — but they weight the reflective section far more than anyone else in the room.</td><td>"What was the hardest part, and what did you learn?"</td></tr>
+  </table>
+
+  <div class="box gold">
+    <h4>The single most useful move: ask</h4>
+    <p>Send your manager a short message a fortnight out. Something close to:</p>
+    <p><em>"I'm putting the final presentation together. Five quick questions so I aim it right: (1) Who's likely to be in the room? (2) How long, and how much of that is Q&amp;A? (3) Is there a house template or format you'd like me to use? (4) Is there anything specific you or the team want me to cover? (5) Would it be helpful if I walked you through the key slides a week beforehand?"</em></p>
+    <p>This costs nothing, gets you better information than any framework, and signals exactly the planning behaviour that senior people look for. Question five is the important one — it is how you pre-wire.</p>
+  </div>
+
+  <h2>Handling a mixed-knowledge room</h2>
+  <p>You will have quants and non-quants, people who know your project and people who have never heard of it. The classic error is to pitch at the average and bore everyone. Three techniques work:</p>
+  <ol>
+    <li><strong>Anchor on the decision-maker.</strong> Pitch the main storyline at the most senior person whose view matters, and serve everyone else through the appendix and the Q&amp;A.</li>
+    <li><strong>Use an analogy or a concrete human story once.</strong> A single well-chosen analogy carries the non-specialists over a technical passage without slowing the specialists down. One is enough; three is patronising.</li>
+    <li><strong>Signpost the depth.</strong> "I'll spend thirty seconds on method — there's a full walkthrough in the appendix if anyone wants it." Specialists relax because they know it exists; generalists relax because they know it is coming to an end.</li>
+  </ol>
+
+  <h2>The Pictet cultural overlay</h2>
+  <p>Register matters as much as content, and Pictet's register is distinctive. The Group's stated principles have been constant for two centuries: <strong>independence, long-term thinking, partnership, responsibility and entrepreneurial spirit</strong>. It is a Geneva-headquartered partnership, owned and managed by a small number of Managing Partners — only 47 individuals have ever held the role since 1805 — with around 5,000 people across roughly 30 offices. That ownership structure is not trivia; it explains the house style.</p>
+
+  <table>
+    <tr><th style="width:26%">Pictet principle</th><th style="width:37%">What it implies for your presentation</th><th style="width:37%">What it implies you should avoid</th></tr>
+    <tr><td><strong>Long-term thinking</strong></td><td>Frame findings on a multi-year horizon. Say what would still be true in three years.</td><td>Short-horizon results dressed up as signal. Chasing a punchy number.</td></tr>
+    <tr><td><strong>Independence</strong></td><td>Show you formed your own view and can defend it, including where it differs from the consensus you read.</td><td>Simply repeating the house view back at the house.</td></tr>
+    <tr><td><strong>Partnership</strong></td><td>Credit people by name and by specific contribution. Use "we" where it is true.</td><td>Sole-hero framing. "I built…" for something three people built.</td></tr>
+    <tr><td><strong>Responsibility</strong></td><td>Be explicit about limitations, data quality, and where your conclusion could be wrong.</td><td>Overclaiming. Any hint of a sales pitch on your own work.</td></tr>
+    <tr><td><strong>Entrepreneurial spirit</strong></td><td>Include one thing you did that was not asked for, and one concrete "here is what I would do next".</td><td>Pure task completion with no independent initiative shown.</td></tr>
+  </table>
+
+  <div class="box navy">
+    <h4>Tone calibration: understated confidence</h4>
+    <p>Swiss private banking culture rewards <em>quiet competence</em> over enthusiasm. Practically: fewer superlatives, more numbers. Say "the effect is around 40 basis points over the period, though the sample is short" rather than "the results were really exciting". Understatement reads as confidence in this room; enthusiasm without evidence reads as inexperience. This is the single biggest register difference between a US tech-style intern deck and one that will land at Pictet.</p>
+  </div>
+</section>
+
+<!-- ============ PART 3 ============ -->
+<section class="part">
+  <div class="part-head">
+    <div class="part-num">Part Three</div>
+    <h1 class="part-title">The reflective / informative dial</h1>
+  </div>
+
+  <p class="lede">This is your core question, so here is a direct answer: <strong>default to roughly 70% informative, 30% reflective</strong> — and make the reflective 30% do work, rather than express feelings. Then adjust the dial using the diagnostic below.</p>
+
+  <h2>The default split</h2>
+  <table>
+    <tr><th style="width:30%">Section</th><th style="width:14%">Share of time</th><th>What it delivers</th></tr>
+    <tr><td><strong>Answer &amp; context</strong></td><td>15%</td><td>The one message, and just enough situation for it to make sense.</td></tr>
+    <tr><td><strong>Substance: what you found</strong></td><td>45%</td><td>Method in brief, evidence, findings. The core of your credibility.</td></tr>
+    <tr><td><strong>Implication: so what</strong></td><td>15%</td><td>What the team should do or think differently. Where judgement shows.</td></tr>
+    <tr><td><strong>Reflection &amp; learning</strong></td><td>15%</td><td>What you learned, evidenced. What you would do differently. This is the humanising section.</td></tr>
+    <tr><td><strong>Thanks &amp; close</strong></td><td>10%</td><td>Specific credit, forward look, strong final line.</td></tr>
+  </table>
+
+  <h2>Adjust the dial with this diagnostic</h2>
+  <p>Score each statement 0 (disagree) to 2 (strongly agree). Add them up.</p>
+  <ul>
+    <li>My internship had one clear, defined project with a deliverable. &nbsp;<span class="footnote">(0–2)</span></li>
+    <li>The audience includes senior people who did not supervise me day to day. &nbsp;<span class="footnote">(0–2)</span></li>
+    <li>My output will actually be used or built on after I leave. &nbsp;<span class="footnote">(0–2)</span></li>
+    <li>The team explicitly asked for findings/results rather than "your experience". &nbsp;<span class="footnote">(0–2)</span></li>
+    <li>My work involved data, models, or a concrete recommendation. &nbsp;<span class="footnote">(0–2)</span></li>
+  </ul>
+  <table>
+    <tr><th style="width:14%">Score</th><th style="width:26%">Your split</th><th>Read</th></tr>
+    <tr><td><strong>8–10</strong></td><td>80 informative / 20 reflective</td><td>Project-led. This is essentially a work presentation with a human ending. Reflection = two slides, four minutes.</td></tr>
+    <tr><td><strong>5–7</strong></td><td>70 / 30 — the default</td><td>Hybrid. Substance leads, but the learning arc is a genuine part of the story.</td></tr>
+    <tr><td><strong>2–4</strong></td><td>55 / 45</td><td>Rotational or exposure-led internship. You have breadth rather than one deliverable — structure around themes learned, each evidenced by concrete work.</td></tr>
+    <tr><td><strong>0–1</strong></td><td>40 / 60</td><td>Genuinely experience-focused. Rare in AM. Confirm this is what they want before committing.</td></tr>
+  </table>
+
+  <h2>How to reflect without sounding like a diary</h2>
+  <p>Reflection fails when it is <em>about you</em> and succeeds when it is <em>useful to them</em>. The test is simple: after each reflective sentence, ask "what does the listener now do differently, believe differently, or know about how I work?" If the answer is nothing, cut it.</p>
+
+  <h3>Use Gibbs privately, STAR-L publicly</h3>
+  <p>Two frameworks, two different jobs.</p>
+  <ul>
+    <li><strong>Gibbs' Reflective Cycle</strong> (description → feelings → evaluation → analysis → conclusion → action plan) is an excellent <em>private preparation tool</em>. Run two or three of your summer's key episodes through all six stages in a notebook. It surfaces the real insight. But never present the six stages on a slide — the "feelings" stage in particular does not belong in a client-facing register.</li>
+    <li><strong>STAR-L</strong> (Situation, Task, Action, Result, <em>Learning</em>) is the <em>public form</em>. It is compact, it is evidence-first, and the "L" is the only overtly reflective beat. Each reflective point in your deck should be tellable as a 45-second STAR-L story.</li>
+  </ul>
+
+  <div class="two-col">
+    <div class="col-bad">
+      <h4>Reflection that reads as a diary</h4>
+      <p>"This internship has been an incredible journey. I've grown so much as a person and learned the importance of teamwork and communication. Everyone here has been so welcoming and I'm really grateful for the experience."</p>
+      <p class="footnote" style="margin-top:2mm;">Nothing here could not have been written before the internship began. It is unfalsifiable, generic, and gives the audience no new information about you.</p>
+    </div>
+    <div class="col-good">
+      <h4>Reflection that reads as judgement</h4>
+      <p>"In week three I spent four days rebuilding a dataset that Sofia already had cleaned in a shared folder. That cost me about a fifth of the project. The lesson I actually took wasn't 'ask more questions' — it was that on this desk, the twenty-minute conversation before you start is the cheapest thing you will ever do. I ran the second workstream that way and it took half the time."</p>
+      <p class="footnote" style="margin-top:2mm;">Specific, quantified, self-aware without self-flagellation, and it ends on evidence that the learning changed behaviour. It also credits a colleague.</p>
+    </div>
+  </div>
+
+  <h3>The three reflective points worth making</h3>
+  <p>You need three, no more. Choose one from each category:</p>
+  <div class="num-callout"><div class="n">1</div><div class="c"><strong>A technical or method learning.</strong> Something concrete about the craft — a data pitfall, a modelling choice you would make differently, a tool you now understand properly. Proves you can learn the job.</div></div>
+  <div class="num-callout"><div class="n">2</div><div class="c"><strong>A working-style learning.</strong> How this team actually operates and how you adapted — the pre-wiring habit, the way decisions get made here, how to package something for a PM's five minutes. Proves you can learn the <em>organisation</em>, which is what separates a good intern from a good future colleague.</div></div>
+  <div class="num-callout"><div class="n">3</div><div class="c"><strong>An honest miss.</strong> One thing that did not go well, stated plainly, with what you did about it. This is the highest-risk and highest-return item in the entire deck. It is the single most credible thing you can say, because almost nobody does it.</div></div>
+
+  <div class="box warn">
+    <h4>How to admit a mistake safely</h4>
+    <p>The formula: <strong>state it plainly → do not over-apologise → say what you changed → show the evidence it worked.</strong> One sentence each. Then move on immediately — do not linger, do not repeat it later.</p>
+    <p>Choose a miss that is real but not disqualifying. A method error you caught and corrected: good. A judgement error about how to work: good. Anything touching client data, compliance, or a control breach: not for this room — that conversation, if it is needed, happens privately with your manager, not on a slide.</p>
+  </div>
+
+  <div class="pull">Gratitude is the close of any successful final intern presentation — but generic gratitude is worth nothing. "Thank you all for a great summer" is noise. "Thank you to Marc, who let me sit in on the Tuesday allocation meeting eight weeks running and explained afterwards why the decision went the way it did" is a gift, and everyone in the room registers it.</div>
+</section>
+
+<!-- ============ PART 4 ============ -->
+<section class="part">
+  <div class="part-head">
+    <div class="part-num">Part Four</div>
+    <h1 class="part-title">Structure and storyline</h1>
+  </div>
+
+  <p class="lede">Structure is where most of the perceived intelligence in a presentation comes from. Two tools do almost all the work: SCQA to set up the problem, and the Pyramid Principle to organise everything under it. Both come from Barbara Minto's work at McKinsey in the 1970s and both are now the default grammar of business communication.</p>
+
+  <h2>SCQA — the opening, in four beats</h2>
+  <p>Your first ninety seconds should follow this shape. It takes about forty-five seconds to say out loud.</p>
+  <table>
+    <tr><th style="width:16%">Beat</th><th style="width:38%">What it does</th><th>Worked example (adapt to your project)</th></tr>
+    <tr><td><strong>Situation</strong></td><td>Something the audience already knows and agrees with. Establishes common ground and costs you nothing.</td><td>"The desk screens roughly 400 names a quarter, and the first-pass filter has been unchanged for three years."</td></tr>
+    <tr><td><strong>Complication</strong></td><td>What changed, what is wrong, or what is at stake. This is what makes the room lean in.</td><td>"Since the universe expanded in January, that filter is now discarding about 15% of names that would have passed on fundamentals."</td></tr>
+    <tr><td><strong>Question</strong></td><td>The question that naturally arises. Usually implicit — you rarely need to say it aloud.</td><td>"So: can the filter be re-specified without adding false positives?"</td></tr>
+    <tr><td><strong>Answer</strong></td><td>Your recommendation. The top of the pyramid. <strong>You say this in minute one, not minute twelve.</strong></td><td>"Yes — a two-factor version cuts the false negatives by about two-thirds with no increase in noise. That's what I want to show you today."</td></tr>
+  </table>
+
+  <div class="box gold">
+    <h4>Leading with the answer feels wrong. Do it anyway.</h4>
+    <p>Every instinct from academic writing says build to the conclusion. Business audiences are the opposite: Minto's central point was <em>start with the answer</em>. A senior person who hears your conclusion at the start spends the rest of the talk testing it, which is engagement. A senior person who does not hear it spends the rest of the talk wondering where this is going, which is impatience. The one exception is if your finding is genuinely counter-intuitive or unwelcome — then give thirty seconds of setup so it does not sound flippant.</p>
+  </div>
+
+  <h2>The Pyramid Principle — organising the middle</h2>
+  <p>One governing message at the top. Beneath it, three supporting arguments (three is the number that holds in working memory). Beneath each of those, the evidence. Every level answers the question raised by the level above it, and each set of supports should be <em>mutually exclusive and collectively exhaustive</em> — no overlap, no gap.</p>
+  <p>Practically, this means before you open PowerPoint you should be able to write this on one side of paper:</p>
+  <div class="worksheet">
+    <div class="wh">The one-page storyline test</div>
+    <div class="wb">
+      <p class="fill-lbl">Governing message (one sentence, contains a verb and a number)</p>
+      <span class="fill"></span>
+      <p class="fill-lbl" style="margin-top:3mm;">Because 1</p><span class="fill"></span>
+      <p class="fill-lbl">Because 2</p><span class="fill"></span>
+      <p class="fill-lbl">Because 3</p><span class="fill"></span>
+      <p class="fill-lbl" style="margin-top:3mm;">Therefore, the team should …</p><span class="fill"></span>
+      <p class="footnote" style="margin-top:2mm;">If you cannot fill this in, you do not yet have a presentation — you have material. Do not build slides until this page is complete.</p>
+    </div>
+  </div>
+
+  <h2>The running order</h2>
+  <p>Below is a twenty-minute slot assumed as roughly 13 minutes presenting and 7 minutes Q&amp;A. Timings are the discipline; if a section runs long in rehearsal, cut content rather than speeding up.</p>
+
+  <div class="timeline">
+    <div class="timeline-row"><div class="t">0:00 – 0:30</div><div class="c"><strong>Slide 1 — Title</strong>Your name, project title written as a <em>finding</em> rather than a topic, the desk, the date. Say your opening line from memory, word for word.</div></div>
+    <div class="timeline-row"><div class="t">0:30 – 1:30</div><div class="c"><strong>Slide 2 — The answer (SCQA)</strong>Situation, complication, and your headline conclusion. One slide, minimal text, one number. This is the most important slide in the deck.</div></div>
+    <div class="timeline-row"><div class="t">1:30 – 2:15</div><div class="c"><strong>Slide 3 — Roadmap</strong>Three supporting arguments as three lines. Tells the room the shape of the next ten minutes so nobody is lost. Also your safety net: if you blank, look here.</div></div>
+    <div class="timeline-row"><div class="t">2:15 – 3:15</div><div class="c"><strong>Slide 4 — Approach, briefly</strong>Data, method, period, scope, in sixty seconds. Explicitly signpost the appendix for detail. Resist the urge to justify your effort here.</div></div>
+    <div class="timeline-row"><div class="t">3:15 – 8:45</div><div class="c"><strong>Slides 5–9 — The three arguments</strong>Roughly two minutes each, one chart each, one action title each. Argument 1 should be your strongest — do not save it.</div></div>
+    <div class="timeline-row"><div class="t">8:45 – 9:45</div><div class="c"><strong>Slide 10 — Limitations</strong>Volunteer them. Three bullets: what the analysis does not cover, what would change the conclusion, what you would want more of. This slide buys you enormous credibility and defuses half the Q&amp;A.</div></div>
+    <div class="timeline-row"><div class="t">9:45 – 11:00</div><div class="c"><strong>Slide 11 — So what / next steps</strong>What the team could do with this. Two or three concrete, costed-in-effort options — "a day's work", "a fortnight". Being realistic about effort is a maturity signal.</div></div>
+    <div class="timeline-row"><div class="t">11:00 – 12:15</div><div class="c"><strong>Slide 12 — What I learned</strong>Your three reflective points, STAR-L compressed. Include the honest miss. This is where the humour usually sits most naturally.</div></div>
+    <div class="timeline-row"><div class="t">12:15 – 13:00</div><div class="c"><strong>Slide 13 — Thank you, specifically</strong>Named credit. Forward-looking final line, delivered from memory. Then stop talking and let the silence sit for a beat before inviting questions.</div></div>
+    <div class="timeline-row"><div class="t">13:00 – 20:00</div><div class="c"><strong>Q&amp;A — with appendix ready</strong>Appendix slides numbered and listed on a contents page so you can jump straight to one. Part 8 covers this in full.</div></div>
+  </div>
+
+  <h3>Adapting the length</h3>
+  <table>
+    <tr><th style="width:16%">Slot</th><th>What to do</th></tr>
+    <tr><td><strong>5 minutes</strong></td><td>Slides 1, 2, one argument, limitations in a sentence, thanks. Five slides total. Your one message plus one piece of evidence plus one thank-you. Nothing else survives.</td></tr>
+    <tr><td><strong>10 minutes</strong></td><td>Drop to two arguments, compress method to a sentence, keep limitations, one reflective point instead of three.</td></tr>
+    <tr><td><strong>20 minutes</strong></td><td>The running order above, as written.</td></tr>
+    <tr><td><strong>30 minutes</strong></td><td>Do <em>not</em> add a fourth argument. Add depth to the existing three, add a worked example the room can follow, and expand the "so what" into a genuine discussion — invite input rather than filling the time.</td></tr>
+  </table>
+
+  <h2>Slide craft: three rules that do most of the work</h2>
+
+  <h3>1. Action titles, not labels</h3>
+  <p>Every slide title should state the takeaway, not describe the contents. This is the highest-leverage change you can make to any deck, and it is what distinguishes a consulting-grade slide from a student one.</p>
+  <div class="two-col">
+    <div class="col-bad"><h4>Label title</h4><p>"Regional revenue mix by product line"</p><p>"Backtest results"</p><p>"Data cleaning process"</p><p class="footnote" style="margin-top:2mm;">Describes the chart. Leaves the audience to work out why it matters.</p></div>
+    <div class="col-good"><h4>Action title</h4><p>"Product 2 drives half of revenue, but the largest markets have room for Product 3"</p><p>"The signal survives transaction costs above 8bps, but not above 15bps"</p><p>"Two-thirds of the discarded names failed on a single stale field"</p><p class="footnote" style="margin-top:2mm;">States the insight. A reader could skim your titles alone and get the whole argument.</p></div>
+  </div>
+  <p><strong>The skim test:</strong> read only your slide titles, in order. Do they tell the complete story, in a logical sequence, with a conclusion? If yes, your structure is sound. If not, no amount of chart polish will save it.</p>
+
+  <h3>2. One message per slide</h3>
+  <p>If a slide has two points, it is two slides. If you find yourself saying "and also on this slide…", you have found a split. Keep each slide to one idea and one visual.</p>
+
+  <h3>3. The appendix is a credibility weapon</h3>
+  <p>Everything you cut goes into an appendix behind the thank-you slide: full method, sensitivity tables, the charts that did not make the cut, your code structure, the data dictionary. Put a numbered contents page at the front of it. Then, in Q&amp;A, when someone asks about your assumptions and you say <em>"page 24"</em> and land on exactly the right slide, you have communicated more about your rigour than any sentence could. Keep the main deck to around 12–15 slides and let the appendix run as long as it needs.</p>
+
+  <div class="box navy">
+    <h4>Pre-wiring: the move that separates the top decile</h4>
+    <p>A week before, walk your manager and one other stakeholder through your three key slides. Ask: "does this land? is anything here going to surprise someone in a bad way?" Two things happen. First, you fix problems while fixing is cheap. Second, on the day, two people in the room already agree with you — and an audience with allies in it behaves completely differently from a cold one. Interns who save everything for a "big reveal" lose both benefits and often get blindsided by a question a colleague could have warned them about.</p>
+  </div>
+</section>
+
+<!-- ============ PART 5 ============ -->
+<section class="part">
+  <div class="part-head">
+    <div class="part-num">Part Five</div>
+    <h1 class="part-title">Content that lands in asset management</h1>
+  </div>
+
+  <p class="lede">Asset management audiences have a specific epistemics: they are professionally sceptical, they have seen hundreds of backtests, and they instinctively look for what has been left out. Meet them on that ground and you will be taken seriously regardless of your level.</p>
+
+  <h2>Quantify everything you can</h2>
+  <p>Vague claims are invisible; numbers are memorable. Convert every statement of effort or outcome into a figure, even a rough one.</p>
+  <table>
+    <tr><th style="width:50%">Instead of</th><th>Say</th></tr>
+    <tr><td>"I automated part of the reporting process."</td><td>"The monthly pack took about six hours of manual work; it now takes twenty minutes and the reconciliation step is automatic."</td></tr>
+    <tr><td>"I looked at a lot of funds."</td><td>"I built a comparable set of 240 funds across four categories, using a 2016–2026 window that includes two drawdowns."</td></tr>
+    <tr><td>"The results were positive."</td><td>"The effect is about 40 basis points annualised, with a t-statistic of 1.9 — suggestive, not conclusive, on a ten-year sample."</td></tr>
+    <tr><td>"It could be useful for the team."</td><td>"If the desk adopted this at the screening stage, it's roughly half a day of setup and it would have surfaced four names last quarter that were filtered out."</td></tr>
+  </table>
+
+  <h2>Evidence standards for this room</h2>
+  <ul>
+    <li><strong>Always state the sample period and why.</strong> "2016–2026, chosen to include both 2020 and 2022" tells the audience you thought about regime dependence.</li>
+    <li><strong>Say what is excluded and why.</strong> Survivorship, currency, dead share classes, missing data. Naming your exclusions pre-empts the sharpest question in the room.</li>
+    <li><strong>Give the comparison.</strong> A number with no benchmark, prior period, or peer comparison is not evidence. Use consistent formatting to show whether a metric beat, met, or missed expectations.</li>
+    <li><strong>Distinguish "I found" from "I think".</strong> Be explicit about which claims are results and which are your interpretation. Senior people care about this distinction far more than juniors expect.</li>
+    <li><strong>Never present a result you have not tried to break.</strong> Show one robustness check, even a crude one. "It holds if I drop 2020; it weakens materially if I drop the largest ten names."</li>
+  </ul>
+
+  <h2>Charts</h2>
+  <p>Three charts in the main deck. Each earns its place by carrying one argument.</p>
+  <ul>
+    <li><strong>Test alternatives until the message is obvious.</strong> If the audience needs more than five seconds to see the point, change the chart type, not the explanation.</li>
+    <li><strong>Label directly on the chart</strong> rather than using a legend they have to decode. Highlight the one series that matters and grey the rest.</li>
+    <li><strong>Axes always labelled, units always stated.</strong> A missing unit is the first thing a PM will spot.</li>
+    <li><strong>Use the house colour palette</strong> if there is one. Do not introduce a new visual language in your last week.</li>
+    <li><strong>No 3D, no dual axes unless unavoidable, no pie chart with more than three slices.</strong></li>
+  </ul>
+
+  <h2>The credibility of volunteering limitations</h2>
+  <p>Counter-intuitively, the limitations slide makes you look <em>more</em> capable, not less. It demonstrates that you know the boundaries of your own analysis, which is precisely the skill that separates someone you can trust with real work from someone you have to check. It also transfers the frame: instead of the room hunting for the flaw, you and the room are jointly examining a known flaw. Structure it as three bullets:</p>
+  <ol>
+    <li><strong>What this does not cover.</strong> "This is European large-cap only; I would not extend it to small-cap without re-testing."</li>
+    <li><strong>What would change the conclusion.</strong> "If turnover costs are above 15bps in practice, the effect disappears."</li>
+    <li><strong>What I would want more of.</strong> "A longer sample, and the internal execution cost data I didn't have access to."</li>
+  </ol>
+
+  <div class="box warn">
+    <h4>Things not to do in an asset-management setting</h4>
+    <ul>
+      <li>Do not present a backtest without transaction costs and expect it to survive. Someone will ask within thirty seconds.</li>
+      <li>Do not extrapolate a short sample into a claim about a strategy. Say "over this period" every single time.</li>
+      <li>Do not use client names, client data, or holdings-level detail unless you have explicitly checked it is appropriate for the room. When in doubt, anonymise.</li>
+      <li>Do not compare your result to a benchmark you have not defined.</li>
+      <li>Do not editorialise on the firm's positioning or a live investment view. You are an intern presenting an analysis, not a strategist issuing a call — the register that lands is "here is what I found", not "here is what the firm should think".</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ PART 6 ============ -->
+<section class="part">
+  <div class="part-head">
+    <div class="part-num">Part Six</div>
+    <h1 class="part-title">Humour, engineered</h1>
+  </div>
+
+  <p class="lede">You asked specifically about humour. It is worth doing — teams communicate better and rate people more highly when humour is present, and a room that has laughed once is a room that is listening. But it is also the highest-variance element of the whole presentation, and in a Swiss private bank the downside of a misfire is larger than the upside of a good one. So do not improvise it. Engineer it.</p>
+
+  <h2>The four rules that make humour safe</h2>
+  <div class="num-callout"><div class="n">1</div><div class="c"><strong>Relevance over jokes.</strong> Humour for its own sake is rarely welcome in a business setting. Every funny moment must have a touchstone in your material or in a shared experience of the room. A joke that could have been told at any presentation should not be told at this one.</div></div>
+  <div class="num-callout"><div class="n">2</div><div class="c"><strong>Aim at yourself, at the situation, or at nothing.</strong> Never at a person, a team, a competitor, a client, or a nationality. In a partnership culture built on collegiality, a joke at someone's expense costs you far more than it earns — and remember your audience includes people you have not met.</div></div>
+  <div class="num-callout"><div class="n">3</div><div class="c"><strong>Two or three beats, maximum.</strong> Overdoing it makes you read as less serious, which is the exact opposite of what this presentation needs to achieve. Three well-placed moments across thirteen minutes is plenty. Self-deprecation specifically should appear <em>once or twice at most</em> — beyond that it stops being charming and starts undermining your credibility as the expert in the room.</div></div>
+  <div class="num-callout"><div class="n">4</div><div class="c"><strong>Land it and move on.</strong> Never explain a joke, never acknowledge that it did not land, never say "anyway…" apologetically. Deliver, pause a beat, continue as if it were a normal sentence. If nobody laughs, nobody but you will notice.</div></div>
+
+  <div class="pull">The best time to deliver a serious point is immediately after the audience laughs. Laughter releases tension, and a relaxed audience retains what comes next. So place your most important sentence right after your best line — the humour is the setup, not the payload.</div>
+
+  <h2>Know which kind of funny you are</h2>
+  <p>Aaker and Bagdonas, who teach humour at Stanford's business school, describe four styles. Most people are naturally one or two. Playing against your own type is where misfires come from.</p>
+  <table>
+    <tr><th style="width:16%">Style</th><th style="width:34%">Character</th><th>How to use it here</th></tr>
+    <tr><td><strong>The Stand-Up</strong></td><td>Bold, natural entertainer, unafraid to ruffle feathers.</td><td>Your instinct is to go bigger. Deliberately dial down by 30%. Your natural register is riskier than this room wants — but your timing is an asset, so use it on one well-chosen line rather than five.</td></tr>
+    <tr><td><strong>The Sweetheart</strong></td><td>Earnest, understated, lightens the mood gently.</td><td>Perfect fit for this setting. Your warm, low-key observations will land better than anything sharper. Lean into the honest, human moment.</td></tr>
+    <tr><td><strong>The Sniper</strong></td><td>Edgy, sarcastic, master of the unexpected dig.</td><td>The riskiest style in a formal, multicultural, hierarchical room. Sarcasm reads as negativity to a meaningful share of any audience and travels badly across cultures. Convert your instinct into dry understatement about <em>yourself</em>, and cut everything aimed outward.</td></tr>
+    <tr><td><strong>The Magnet</strong></td><td>Expressive, charismatic, unafraid to be a bit silly.</td><td>Your energy is the asset, not the content of the jokes. Use warmth and delivery; keep the actual material understated so the contrast does the work.</td></tr>
+  </table>
+
+  <h2>The five mechanisms that work in this exact setting</h2>
+
+  <h3>Mechanism 1 — The callback</h3>
+  <p>The single safest and most effective device. Reference a shared, specific experience from the summer — the thing everyone in that room lived through. It is funny because it is <em>true</em> and because it signals membership. Ask a colleague what the desk's running joke is; if there is a well-known frustration (a system that is always slow, a recurring meeting, a data source everyone distrusts), that is your material.</p>
+  <p class="footnote"><strong>Structure:</strong> mention it early, almost in passing. Then bring it back once near the end. The second reference gets a bigger laugh than the first, because you have built it.</p>
+
+  <h3>Mechanism 2 — The honest struggle</h3>
+  <p>Self-deprecation about a specific, low-stakes early failure. Not "I'm terrible at Excel" (vague, and it undersells you) but a concrete moment. It is funny because everyone in the room has done something similar, and it makes your later competence more credible by contrast.</p>
+
+  <h3>Mechanism 3 — The visual beat</h3>
+  <p>One image or one honest chart that gets the laugh instead of you. A chart of "hours spent versus lines of code deleted". A photograph of your first-day whiteboard next to the final one. The advantage is that you do not have to <em>perform</em> — you show it, wait, and let it work. A funny image creates a reaction before you say anything.</p>
+
+  <h3>Mechanism 4 — The dry understatement</h3>
+  <p>The house style of finance humour, and the most culturally appropriate register here. A precise, deadpan sentence about something that was in fact painful. "The data arrived in seventeen spreadsheets, which I'm told is an improvement." Understatement is safe because it never punches at anyone and it flatters the audience's intelligence for spotting it.</p>
+
+  <h3>Mechanism 5 — The off-the-cuff remark</h3>
+  <p>Arguably the best form of presentation humour, because it feels spontaneous and lets your real personality through — a light reference to something immediate and shared: the weather, the room, a technical problem that just happened, the fact that everyone is here on a Friday afternoon. It cannot be scripted, but it can be <em>prepared for</em>: go in having decided that if the projector misbehaves or someone's coffee spills, you will make one light remark rather than freezing. This is also your recovery tool if something goes wrong.</p>
+
+  <h2>Twelve worked examples, calibrated for this room</h2>
+  <p>These are patterns, not scripts. Adapt them to your actual summer — a borrowed line always sounds borrowed.</p>
+  <table class="long">
+    <tr><th style="width:6%">#</th><th style="width:20%">Where</th><th style="width:44%">The beat</th><th>Why it works</th></tr>
+    <tr><td>1</td><td>Opening, after your name</td><td>"Twelve weeks ago I thought a basis point was a rounding error. I've since been corrected, at some length, by [colleague]."</td><td>Self-deprecating, credits a colleague, establishes you have learned something concrete. Very low risk.</td></tr>
+    <tr><td>2</td><td>Method slide</td><td>"The methodology section is one slide. The appendix has eleven. I've been advised this reflects growth."</td><td>Dry, self-aware about a real intern tendency, and it doubles as signposting the appendix.</td></tr>
+    <tr><td>3</td><td>Data slide</td><td>"The dataset arrived in a format I can only describe as 'creative'. Four days of my life are commemorated on page 27."</td><td>Universal analyst experience. Everyone in the room has lived it. Also quietly conveys real effort.</td></tr>
+    <tr><td>4</td><td>Any chart</td><td>"This is version fourteen of this chart. Versions one through thirteen are why I now understand the house style guide."</td><td>Deferential to the firm's standards without being sycophantic; a genuine shared experience.</td></tr>
+    <tr><td>5</td><td>Limitations slide</td><td>"Three things this doesn't do. I'd rather tell you now than find out in the next seven minutes."</td><td>Acknowledges the Q&amp;A dynamic openly. Confident, not defensive. Almost always gets a laugh from the senior people.</td></tr>
+    <tr><td>6</td><td>Learning slide</td><td>"My biggest learning is that the twenty-minute conversation before you start is cheaper than the four days after. I have empirical evidence."</td><td>The joke and the substance are the same sentence. This is the ideal form.</td></tr>
+    <tr><td>7</td><td>Learning slide</td><td>"I learned that 'send me something short' means one page. I have learned this several times."</td><td>Repetition as the punchline. Self-deprecating about a real, recognisable junior habit.</td></tr>
+    <tr><td>8</td><td>Visual, early</td><td>Photo of your week-one whiteboard: chaotic. Next to it, the final one-line conclusion. No caption.</td><td>Pure visual beat. You say nothing, the contrast does everything, and it sets up the whole arc of the talk.</td></tr>
+    <tr><td>9</td><td>Callback, near close</td><td>Return to whatever you set up in the opening: "…which, I'm pleased to report, is now measured in basis points."</td><td>Callbacks reliably outperform new material. The audience gets the small pleasure of having been paying attention.</td></tr>
+    <tr><td>10</td><td>Next steps</td><td>"Option three is the ambitious one. I'd estimate two weeks. Which, based on my track record this summer, means three."</td><td>Self-aware about estimation — a genuinely respected admission in any analytical team.</td></tr>
+    <tr><td>11</td><td>Thanks</td><td>"Thank you to [name], who answered roughly four hundred questions this summer, and to [name], who answered the ones I was too embarrassed to ask [name]."</td><td>Warm, specific, credits two people, and the structure of the sentence carries the humour rather than a punchline.</td></tr>
+    <tr><td>12</td><td>Q&amp;A, if stuck</td><td>"That's a better question than anything in my appendix. Can I come back to you on it properly by tomorrow?"</td><td>Turns an "I don't know" into a graceful moment. Flatters the questioner honestly and commits to a follow-up.</td></tr>
+  </table>
+
+  <h2>The red list</h2>
+  <div class="box warn">
+    <p><strong>Do not, under any circumstances:</strong></p>
+    <ul>
+      <li>Make a joke about a colleague, another team, another office, or a competitor — including affectionately. You do not know who is in the room or who it gets repeated to.</li>
+      <li>Joke about performance, losses, clients, or anything that could be read as commentary on the firm's business.</li>
+      <li>Use humour touching nationality, language, accents, gender, age, or Swiss/British cultural stereotypes. In a firm operating across some 30 offices, this is a guaranteed loss.</li>
+      <li>Use memes or internet-native humour unless the team's own communication style already does. It reads as a register mismatch.</li>
+      <li>Joke about being unpaid, underworked, bored, or about the hours. It reads as ingratitude however lightly meant.</li>
+      <li>Make a joke about wanting the job. The forward-looking ask (Part 9) should be sincere, not comic.</li>
+      <li>Open with a generic joke unconnected to your content. In a formal setting, humour that is not anchored to the moment is the most likely of all to fall flat.</li>
+      <li>Do a "things I learned" meme-format list. It undercuts the reflective section, which is the part doing real work for you.</li>
+    </ul>
+  </div>
+
+  <h2>The cold-room contingency</h2>
+  <p>Decide now what you will do if the first beat gets nothing. The answer is: <strong>nothing</strong>. Continue at the same pace, with the same expression, into your next sentence. Do not repeat it, do not explain it, do not apologise. Then <em>drop the remaining beats</em> and deliver the rest straight. A serious presentation delivered well is a completely acceptable outcome; a presenter visibly chasing a laugh is not.</p>
+  <p>Conversely, if the first beat lands well, you may take slightly more room on the second — but still stop at three.</p>
+
+  <div class="box gold">
+    <h4>The overriding principle</h4>
+    <p>Be yourself — your funny self or your serious self. Authenticity strengthens your credibility more than a few laughs will. If you are not naturally a funny presenter, do not manufacture it. Warmth, specificity and genuine enthusiasm for the work make just as strong a last impression, and they carry none of the risk. Humour is an amplifier of a good presentation, never a substitute for one.</p>
+  </div>
+</section>
+
+<!-- ============ PART 7 ============ -->
+<section class="part">
+  <div class="part-head">
+    <div class="part-num">Part Seven</div>
+    <h1 class="part-title">Delivery and rehearsal</h1>
+  </div>
+
+  <p class="lede">Content decides whether you are respected; delivery decides whether you are remembered. The good news is that delivery is almost entirely a function of rehearsal, and rehearsal is the one variable fully under your control.</p>
+
+  <h2>The three-pass rehearsal protocol</h2>
+  <p>Rehearse at least three times, and give each pass a different job. Doing three passes of the same undifferentiated run-through is much less effective.</p>
+
+  <div class="timeline">
+    <div class="timeline-row"><div class="t">Pass 1 — Content</div><div class="c"><strong>Out loud, alone, no audience, no timer.</strong>The goal is to find out what does not survive being spoken. Sentences that read well often collapse aloud. Fix the language, cut the clauses, replace anything you stumble over twice. Expect this pass to be uncomfortable — it is meant to be.</div></div>
+    <div class="timeline-row"><div class="t">Pass 2 — Timing</div><div class="c"><strong>Out loud, with a timer, timing each section separately.</strong>Note the time at each section boundary. If you are over, <em>cut content</em> — never plan to speak faster. Deliberately set your pace 10–20% slower than feels natural, because your internal clock becomes unreliable under adrenaline and almost everyone speeds up on the day.</div></div>
+    <div class="timeline-row"><div class="t">Pass 3 — Performance</div><div class="c"><strong>In front of one real person, ideally in the actual room.</strong>Now add eye contact, movement, pauses, and vocal variety. Ask your listener for exactly three things: what was the main message, which part lost them, and which part landed hardest. Do not ask "was it good?" — you will get a useless answer.</div></div>
+    <div class="timeline-row"><div class="t">Pass 4 — Optional</div><div class="c"><strong>Record yourself once and watch it.</strong>Unpleasant, and worth it. You will spot filler words, a repeated hand movement, or a habit of looking at the screen instead of the room. Recording and reviewing is one of the most reliable ways to improve.</div></div>
+  </div>
+
+  <h2>Memorise exactly two things</h2>
+  <p>Do not memorise the whole talk — it sounds recited and it collapses catastrophically if you lose your place. Memorise, word for word:</p>
+  <ul>
+    <li><strong>Your first 30 seconds.</strong> Anxiety peaks in the opening seconds, and this is where bad habits appear. Having the opening automatic — words, breath, first gesture — gets you past the spike on autopilot and buys you the composure to do the rest naturally.</li>
+    <li><strong>Your last 3 sentences.</strong> By the end you will be tired and relieved, which is when endings go mushy. A memorised close means you finish on a clean, deliberate line rather than trailing off. Given the peak–end rule, these three sentences are worth more per word than anything else you will say.</li>
+  </ul>
+
+  <h2>The nerves plan</h2>
+  <p>Nerves are not a problem to be eliminated; they are arousal, and arousal improves performance up to a point. The plan is to keep them in the useful range.</p>
+  <table>
+    <tr><th style="width:22%">When</th><th>What to do</th></tr>
+    <tr><td><strong>Night before</strong></td><td>One full run-through, then stop. Late cramming degrades delivery more than it improves content. Lay out what you need. Sleep matters more than one extra rehearsal.</td></tr>
+    <tr><td><strong>90 minutes before</strong></td><td>Eat something. Do not drink a third coffee — caffeine and adrenaline compound badly. Re-read only your one-page storyline, not the whole deck.</td></tr>
+    <tr><td><strong>10 minutes before</strong></td><td>A 90-second physical warm-up somewhere private: hum for thirty seconds, run a tongue-twister twice, roll your lips, roll your shoulders. This warms the voice and, more usefully, gives the nervous energy somewhere to go.</td></tr>
+    <tr><td><strong>60 seconds before</strong></td><td>Slow exhale — longer out than in, four or five times. Then say your memorised first line silently in your head once.</td></tr>
+    <tr><td><strong>First 30 seconds</strong></td><td>Stand still. Feet planted. Deliver the memorised opening. Do not touch the clicker, do not look at the screen. After that, your body settles on its own.</td></tr>
+  </table>
+
+  <h2>Mechanics worth getting right</h2>
+  <ul>
+    <li><strong>Look at people, not at the screen.</strong> The screen is for them, not for you. Use the laptop in front of you if you need a prompt; never present with your back or profile to the room.</li>
+    <li><strong>Pause instead of filling.</strong> A two-second silence feels like ten to you and like nothing to them. It is also the single most effective way to emphasise a point — and it eliminates "um".</li>
+    <li><strong>Land your titles.</strong> When you change slide, say the action title's message as your first sentence, then elaborate. This synchronises what they read and what they hear.</li>
+    <li><strong>Do not read your slides.</strong> If a slide is fully readable, the room will read it faster than you can say it and then stop listening. Say the thing the slide does not say.</li>
+    <li><strong>Handle the clicker deliberately.</strong> Advance the slide, pause, then speak. Clicking mid-sentence makes everything feel rushed.</li>
+    <li><strong>Hybrid rooms need one extra rehearsal.</strong> Test the screen share, decide who watches the chat, and make an explicit point of addressing remote participants by name at least once — "Anna, I know you looked at this in June, shout if I've got it wrong". Remote attendees who are never addressed disengage within four minutes.</li>
+  </ul>
+
+  <div class="box navy">
+    <h4>Contingency: assume the technology will fail</h4>
+    <p>Email the deck as a PDF to yourself and to your manager the evening before. Bring it on a USB stick. Know your talk well enough to give an abbreviated version with no slides at all — if you can deliver five coherent minutes with a dead projector, that is a story your team will tell about you for years, and in a positive way.</p>
+  </div>
+</section>
+
+<!-- ============ PART 8 ============ -->
+<section class="part">
+  <div class="part-head">
+    <div class="part-num">Part Eight</div>
+    <h1 class="part-title">The Q&amp;A — where it is actually decided</h1>
+  </div>
+
+  <p class="lede">Prepared remarks show you can prepare. The Q&amp;A shows you can think. More portfolio managers win during Q&amp;A than during prepared comments, and the same is true of interns — at senior levels, difficult questions are often where decisions actually get made. Budget your preparation accordingly: I would spend a third of your total prep time here.</p>
+
+  <h2>Preparation: write the hard questions down</h2>
+  <p>While you are still building the deck, keep a running list of every question someone could ask. Aim for fifteen. Work out the answer to each one. Two things happen: you become unshakeable in the room, and the exercise itself shows you where your analysis is genuinely weak — which is worth doing before the presentation rather than during it.</p>
+  <p>For each of your fifteen, decide: <em>does this deserve an appendix slide?</em> The five or six that do become your appendix. That is how appendices should be built — from anticipated questions, not from leftover material.</p>
+
+  <h2>The answer format</h2>
+  <p>Use a consistent four-beat structure. It keeps you concise under pressure and it sounds considered.</p>
+  <div class="num-callout"><div class="n">P</div><div class="c"><strong>Point.</strong> Answer the actual question in one sentence, first. "Yes — but only above a certain cost threshold."</div></div>
+  <div class="num-callout"><div class="n">R</div><div class="c"><strong>Reason.</strong> Why. One sentence. "Because the effect is concentrated in the smaller names, where spreads are wider."</div></div>
+  <div class="num-callout"><div class="n">E</div><div class="c"><strong>Evidence.</strong> The number, the chart, the appendix page. "At 8bps it holds; at 15bps it's gone — page 24."</div></div>
+  <div class="num-callout"><div class="n">P</div><div class="c"><strong>Point, restated.</strong> Close the loop in five words. "So: viable, with a cost caveat." Then <strong>stop talking.</strong></div></div>
+  <p>The most common Q&amp;A error is not a wrong answer — it is a correct answer that continues for ninety seconds after it was complete. Answer, then stop. If they want more, they will ask.</p>
+
+  <h2>Mechanics</h2>
+  <ul>
+    <li><strong>Listen to the whole question.</strong> Do not start formulating at word four. Let them finish, then take a beat — a one-second pause before answering reads as thoughtful, not slow.</li>
+    <li><strong>Repeat or paraphrase it</strong> if the room is large, if it was rambling, or if you need thinking time. "So the question is whether this survives transaction costs — yes?" This also confirms you understood it, which prevents you answering the wrong question confidently.</li>
+    <li><strong>Answer to the room, not only to the asker.</strong> Begin your answer looking at them, then open out to everyone.</li>
+    <li><strong>Stay warm on a hostile question.</strong> Occasionally a question is a challenge rather than an enquiry. Treat it as genuine regardless. Respond calmly and politely; the room is watching your composure at least as much as your answer.</li>
+  </ul>
+
+  <h2>How to say "I don't know" well</h2>
+  <p>You will not know something. This is expected of an intern and is not a mark against you. <em>Bluffing is.</em> An experienced person can tell instantly, and it invalidates everything else you said. Better to say "I don't know, but let me look it up and send you a note" than to invent an answer.</p>
+  <p>Three graceful forms:</p>
+  <table>
+    <tr><th style="width:30%">Situation</th><th>What to say</th></tr>
+    <tr><td>You genuinely don't know</td><td>"I don't know — I didn't test that. It's a good question and I'd want to check before answering. Can I come back to you by tomorrow?" <em>Then actually do it.</em></td></tr>
+    <tr><td>You don't have the number to hand</td><td>"I don't have that figure with me, but I can get it to you by end of day tomorrow. Directionally, I'd expect it to…" — give the direction, flag it as an estimate.</td></tr>
+    <tr><td>It's outside your scope</td><td>"That's outside what I looked at. What I <em>can</em> tell you is…" — bridge to the adjacent thing you do know. Use this once; used repeatedly it reads as evasion.</td></tr>
+  </table>
+  <div class="box gold">
+    <p>The follow-up is not optional. If you promise a note, send it within 24 hours, keep it to one paragraph, and copy your manager. This single habit does more for your professional reputation than any slide in the deck — it demonstrates that things you say you will do, get done.</p>
+  </div>
+
+  <h2>Twenty questions to prepare for</h2>
+  <table class="long">
+    <tr><th style="width:5%">#</th><th style="width:47%">Question</th><th>What they are really testing</th></tr>
+    <tr><td>1</td><td>"If you had another three months, what would you do?"</td><td>Vision and prioritisation. Have a genuine, specific answer — this is asked constantly.</td></tr>
+    <tr><td>2</td><td>"What surprised you most in the data?"</td><td>Whether you were engaged or executing instructions.</td></tr>
+    <tr><td>3</td><td>"What would make you change your conclusion?"</td><td>Intellectual honesty. The best possible question for you — you already have this on your limitations slide.</td></tr>
+    <tr><td>4</td><td>"How sensitive is this to [key assumption]?"</td><td>Rigour. Have the sensitivity in the appendix.</td></tr>
+    <tr><td>5</td><td>"Does this hold out of sample / in a different period?"</td><td>Whether you understand overfitting.</td></tr>
+    <tr><td>6</td><td>"What's the transaction cost assumption?"</td><td>Practical realism. Near-certain in any signal or strategy work.</td></tr>
+    <tr><td>7</td><td>"Where did the data come from and how clean is it?"</td><td>Whether you inspected your inputs or trusted them.</td></tr>
+    <tr><td>8</td><td>"Has anyone tried this before here?"</td><td>Whether you did your internal homework. Ask around <em>before</em> the day so you can answer.</td></tr>
+    <tr><td>9</td><td>"What did you find that contradicted what you expected?"</td><td>Independence of mind.</td></tr>
+    <tr><td>10</td><td>"How long would it take to put this into production?"</td><td>Effort realism. Give a range and state what it depends on.</td></tr>
+    <tr><td>11</td><td>"Who would own this after you leave?"</td><td>Whether you thought about handover. Have a documented answer.</td></tr>
+    <tr><td>12</td><td>"What's the one thing you'd tell next year's intern?"</td><td>Reflection, asked informally. Have a real answer, not a platitude.</td></tr>
+    <tr><td>13</td><td>"What was the hardest part?"</td><td>Self-awareness. Almost always asked by HR or the programme lead.</td></tr>
+    <tr><td>14</td><td>"What would you have done differently?"</td><td>Same. Your honest-miss story is the answer.</td></tr>
+    <tr><td>15</td><td>"Why this method rather than [alternative]?"</td><td>Whether you chose deliberately or defaulted. Know one alternative and why you rejected it.</td></tr>
+    <tr><td>16</td><td>"How does this compare to what the benchmark / peers do?"</td><td>Context awareness.</td></tr>
+    <tr><td>17</td><td>"Is there a risk or compliance angle here?"</td><td>Whether you think like someone in a regulated firm. Even "I checked with X and there isn't one" is a strong answer.</td></tr>
+    <tr><td>18</td><td>"Could you explain [technical bit] simply?"</td><td>Communication. Rehearse a 30-second plain-English version of your hardest concept.</td></tr>
+    <tr><td>19</td><td>"What did you enjoy most?"</td><td>Fit and motivation. Be specific and truthful — vagueness here is read as indifference.</td></tr>
+    <tr><td>20</td><td>"Is this something you'd want to keep working on?"</td><td>The soft version of "do you want to come back". Have a warm, direct answer ready.</td></tr>
+  </table>
+</section>
+
+<!-- ============ PART 9 ============ -->
+<section class="part">
+  <div class="part-head">
+    <div class="part-num">Part Nine</div>
+    <h1 class="part-title">Engineering the last impression</h1>
+  </div>
+
+  <p class="lede">Because memory weights the peak and the end so heavily, the final ninety seconds are worth engineering deliberately. Most interns spend three hours on chart formatting and thirty seconds on how they will stop talking. Invert that.</p>
+
+  <h2>Build a peak, then build an end</h2>
+  <p><strong>The peak</strong> is your single most striking moment. Choose it consciously. It is usually one of: the counter-intuitive finding, the before-and-after visual, the honest miss told well, or the specific thank-you. Place it deliberately and give it room — slow down, pause before and after, let it sit. A peak that is rushed is not a peak.</p>
+  <p><strong>The end</strong> is a fixed four-move sequence. Total time: about sixty seconds. Memorised.</p>
+
+  <div class="num-callout"><div class="n">1</div><div class="c"><strong>Restate the one message.</strong> One sentence, the same one from slide 2. "So — the filter can be re-specified, it cuts false negatives by two-thirds, and it's about half a day of work to try." Repetition of the governing message is not redundant; it is what makes it stick.</div></div>
+  <div class="num-callout"><div class="n">2</div><div class="c"><strong>Thank people by name, specifically.</strong> Three to five people, each with the specific thing they did. Not a list of names on a slide read aloud — a sentence each. This is the warmest moment of the talk and it is where the room decides how they feel about you.</div></div>
+  <div class="num-callout"><div class="n">3</div><div class="c"><strong>Look forward.</strong> One sentence that makes clear you would like to continue. Sincere, brief, unpushy. "I've genuinely enjoyed this and I'd like to keep working on it — so I hope this isn't the last version of this slide." Then stop; do not elaborate on it.</div></div>
+  <div class="num-callout"><div class="n">4</div><div class="c"><strong>The final line, then silence.</strong> Deliver it, hold eye contact, and pause for a full beat before "I'm happy to take questions." That deliberate pause is what makes an ending feel like an ending rather than a fade-out.</div></div>
+
+  <div class="box gold">
+    <h4>Signalling that you want to come back</h4>
+    <p>Making your interest explicit is one of the more consistently useful things an intern can do — a team that knows you want to stay starts thinking of you as a candidate rather than as a summer visitor. But the register matters enormously in a partnership culture. Do it <strong>once</strong>, in the close, in one sentence, sincerely. Do not repeat it, do not make it the theme, do not turn the last slide into a pitch. And follow it up privately with your manager afterwards, which is the conversation where it actually counts.</p>
+  </div>
+
+  <h2>Endings that work, and endings that do not</h2>
+  <div class="two-col">
+    <div class="col-bad">
+      <h4>Weak closes</h4>
+      <ul style="margin-bottom:0">
+        <li>"…so, yeah. That's everything. Questions?"</li>
+        <li>A "Thank You" slide in 80-point type, read aloud.</li>
+        <li>Trailing into an apology: "Sorry, I know I went a bit over."</li>
+        <li>A summary of the summer week by week.</li>
+        <li>An inspirational quote from someone famous.</li>
+        <li>Ending on the limitations slide.</li>
+      </ul>
+    </div>
+    <div class="col-good">
+      <h4>Strong closes</h4>
+      <ul style="margin-bottom:0">
+        <li>The one message, restated in plainer words than the first time.</li>
+        <li>Named, specific thanks — the single highest-warmth move available.</li>
+        <li>A callback to your opening line, closing the loop.</li>
+        <li>The one concrete thing you would want the team to do on Monday.</li>
+        <li>A short, sincere forward-looking sentence.</li>
+        <li>A deliberate, held pause before inviting questions.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>After the room empties</h2>
+  <ul>
+    <li><strong>Within one hour:</strong> write down every question you were asked. This is your own record of where the analysis was weak and it is useful for years.</li>
+    <li><strong>Within 24 hours:</strong> send the promised follow-ups. One paragraph each, manager copied. Nothing builds a reputation faster.</li>
+    <li><strong>Within 24 hours:</strong> email the deck as a PDF to whoever should have it, with a two-line summary in the body of the email so it is useful without being opened. Include the appendix. Name the file properly — <span class="footnote">2026-08_ProjectName_Summary_JChohan.pdf</span> — because in six months someone will search for it.</li>
+    <li><strong>Within 48 hours:</strong> write a genuine, short thank-you to the two or three people who gave you the most time. Not a group email. Individually.</li>
+    <li><strong>Before your last day:</strong> a proper handover document — where the files are, what the code does, what is unfinished, what you would do next. This is the artefact that keeps your work alive after you leave, and teams remember the interns whose work they could still use in November.</li>
+  </ul>
+</section>
+
+<!-- ============ PART 10 ============ -->
+<section class="part">
+  <div class="part-head">
+    <div class="part-num">Part Ten</div>
+    <h1 class="part-title">The fourteen-day countdown</h1>
+  </div>
+  <p class="lede">A plan that front-loads the thinking and leaves the last three days for rehearsal rather than building. The single most common cause of a mediocre final presentation is finishing the deck the night before. Aim to have it substantially complete a week early so there is time to absorb feedback and course-correct.</p>
+
+  <div class="timeline">
+    <div class="timeline-row"><div class="t">Day −14</div><div class="c"><strong>Ask the five questions.</strong>Message your manager (Part 2). Find out audience, length, Q&amp;A split, format, and offer a preview session. Book the preview in the calendar now.</div></div>
+    <div class="timeline-row"><div class="t">Day −13</div><div class="c"><strong>Audience grid.</strong>Fill in Worksheet A. Twenty minutes. Decide who the anchor decision-maker is.</div></div>
+    <div class="timeline-row"><div class="t">Day −12</div><div class="c"><strong>The one-page storyline.</strong>Governing message, three supports, therefore. No slides yet. Show it to a peer and ask them to say it back to you.</div></div>
+    <div class="timeline-row"><div class="t">Day −11</div><div class="c"><strong>Run Gibbs privately.</strong>Take three episodes from the summer through the six stages in a notebook. Extract your three reflective points and your honest miss.</div></div>
+    <div class="timeline-row"><div class="t">Day −10</div><div class="c"><strong>Choose the three charts.</strong>One per argument. Build them properly, in the house palette, with action titles written before the chart is drawn.</div></div>
+    <div class="timeline-row"><div class="t">Day −9 to −8</div><div class="c"><strong>Build the main deck.</strong>Twelve to fifteen slides. Action titles first, content second. Run the skim test on titles alone.</div></div>
+    <div class="timeline-row"><div class="t">Day −7</div><div class="c"><strong>Build the appendix and the question list.</strong>Write out fifteen hard questions. Five or six become appendix slides. Number them and add a contents page.</div></div>
+    <div class="timeline-row"><div class="t">Day −6</div><div class="c"><strong>Pre-wire.</strong>Walk your manager through the three key slides. Ask: does this land, and will anything here surprise someone badly? Take notes; do not defend.</div></div>
+    <div class="timeline-row"><div class="t">Day −5</div><div class="c"><strong>Act on feedback. Deck complete.</strong>From here you edit; you do not build. Write the humour bank (Worksheet C) and pick your three beats.</div></div>
+    <div class="timeline-row"><div class="t">Day −4</div><div class="c"><strong>Rehearsal pass 1 — content.</strong>Out loud, alone. Cut anything that does not survive being spoken.</div></div>
+    <div class="timeline-row"><div class="t">Day −3</div><div class="c"><strong>Rehearsal pass 2 — timing.</strong>Timed by section. Cut to fit. Memorise the opening 30 seconds and the closing three sentences.</div></div>
+    <div class="timeline-row"><div class="t">Day −2</div><div class="c"><strong>Rehearsal pass 3 — in front of a person.</strong>Ideally in the actual room, with the actual screen. Then run a mock Q&amp;A: have them ask you six from your list, including two you dread.</div></div>
+    <div class="timeline-row"><div class="t">Day −1</div><div class="c"><strong>One clean run, then stop.</strong>Export the PDF, email it to yourself and your manager, put it on a USB stick. Check the room and the cable. Then leave it alone and sleep.</div></div>
+    <div class="timeline-row"><div class="t">Day 0, morning</div><div class="c"><strong>Read the storyline page only.</strong>Not the deck. Eat. Warm up for 90 seconds. Arrive early enough to test the screen without an audience watching you do it.</div></div>
+    <div class="timeline-row"><div class="t">Day 0, after</div><div class="c"><strong>Write down every question asked.</strong>Then send the follow-ups you promised, within 24 hours.</div></div>
+  </div>
+
+  <div class="box navy">
+    <h4>If you have less than fourteen days</h4>
+    <p>Compress, but preserve three things in this order of priority: (1) the one-page storyline, (2) the pre-wire conversation with your manager, (3) at least two rehearsals out loud. Skip the polish before you skip any of those. A plain deck with a clear argument, rehearsed twice, beats a beautiful deck delivered cold every single time.</p>
+  </div>
+</section>
+
+<!-- ============ APPENDICES ============ -->
+<section class="part">
+  <div class="part-head">
+    <div class="part-num">Appendix</div>
+    <h1 class="part-title">Worksheets</h1>
+  </div>
+  <p class="lede">Seven fill-in tools. Print these pages, or copy them into a document. They are deliberately constrained — the constraint is what forces the decisions.</p>
+
+  <h2>Worksheet A — Audience grid</h2>
+  <p class="footnote">One row per person or group who will be in the room. Complete before writing a single slide.</p>
+  <table class="long">
+    <tr><th style="width:18%">Who (name / role)</th><th style="width:20%">Already knows</th><th style="width:22%">Wants to know</th><th style="width:20%">Will be bored by</th><th style="width:20%">Likely question</th></tr>
+    <tr><td style="height:12mm">&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+    <tr><td style="height:12mm">&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+    <tr><td style="height:12mm">&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+    <tr><td style="height:12mm">&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+    <tr><td style="height:12mm">&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+    <tr><td style="height:12mm">&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+  </table>
+  <div class="worksheet">
+    <div class="wh">Anchor decision</div>
+    <div class="wb">
+      <p class="fill-lbl">The one person I am pitching the main storyline at</p><span class="fill"></span>
+      <p class="fill-lbl">The top three questions the room wants answered</p><span class="fill"></span><span class="fill"></span><span class="fill"></span>
+      <p class="fill-lbl">Jargon I must gloss in one line</p><span class="fill"></span>
+      <p class="fill-lbl">Length / presenting vs Q&amp;A split / format confirmed by</p><span class="fill"></span>
+    </div>
+  </div>
+
+  <h2>Worksheet B — Storyline skeleton</h2>
+  <div class="worksheet">
+    <div class="wh">Complete this before opening PowerPoint</div>
+    <div class="wb">
+      <p class="fill-lbl">Situation (something they already know and agree with)</p><span class="fill"></span>
+      <p class="fill-lbl">Complication (what changed / what is at stake)</p><span class="fill"></span>
+      <p class="fill-lbl">Question (usually implicit)</p><span class="fill"></span>
+      <p class="fill-lbl">Answer — the governing message. One sentence, with a verb and a number.</p><span class="fill"></span><span class="fill"></span>
+      <p class="fill-lbl" style="margin-top:3mm">Support 1 (strongest — goes first)</p><span class="fill"></span>
+      <p class="fill-lbl">Support 2</p><span class="fill"></span>
+      <p class="fill-lbl">Support 3</p><span class="fill"></span>
+      <p class="fill-lbl" style="margin-top:3mm">Three limitations I will volunteer</p><span class="fill"></span><span class="fill"></span><span class="fill"></span>
+      <p class="fill-lbl" style="margin-top:3mm">Therefore, the team should… (2–3 options, each with an effort estimate)</p><span class="fill"></span><span class="fill"></span>
+    </div>
+  </div>
+
+  <h2>Worksheet C — Reflection and humour bank</h2>
+  <div class="worksheet">
+    <div class="wh">Three reflective points, three humour beats</div>
+    <div class="wb">
+      <p class="fill-lbl">Reflective point 1 — technical / method learning (STAR-L, 45 seconds)</p><span class="fill"></span><span class="fill"></span>
+      <p class="fill-lbl">Reflective point 2 — working-style / organisational learning</p><span class="fill"></span><span class="fill"></span>
+      <p class="fill-lbl">Reflective point 3 — the honest miss (state → change → evidence)</p><span class="fill"></span><span class="fill"></span>
+      <p class="fill-lbl" style="margin-top:3mm">Humour beat 1 (where in the deck / the line / why it is true)</p><span class="fill"></span>
+      <p class="fill-lbl">Humour beat 2</p><span class="fill"></span>
+      <p class="fill-lbl">Humour beat 3 — ideally a callback to beat 1</p><span class="fill"></span>
+      <p class="footnote" style="margin-top:2mm;">Check each against the red list in Part 6: aimed at myself or the situation, never a person; relevant to the material; two or three total, no more.</p>
+    </div>
+  </div>
+
+  <h2>Worksheet D — Question preparation grid</h2>
+  <p class="footnote">Fifteen rows. Fill in the answer for every one. Tick the column on the right for the five or six that deserve an appendix slide.</p>
+  <table class="long">
+    <tr><th style="width:5%">#</th><th style="width:38%">Question I might be asked</th><th style="width:45%">My answer, in the Point–Reason–Evidence–Point form</th><th style="width:12%">Appendix slide?</th></tr>
+    <tr><td>1</td><td style="height:9mm">&nbsp;</td><td></td><td></td></tr>
+    <tr><td>2</td><td style="height:9mm">&nbsp;</td><td></td><td></td></tr>
+    <tr><td>3</td><td style="height:9mm">&nbsp;</td><td></td><td></td></tr>
+    <tr><td>4</td><td style="height:9mm">&nbsp;</td><td></td><td></td></tr>
+    <tr><td>5</td><td style="height:9mm">&nbsp;</td><td></td><td></td></tr>
+    <tr><td>6</td><td style="height:9mm">&nbsp;</td><td></td><td></td></tr>
+    <tr><td>7</td><td style="height:9mm">&nbsp;</td><td></td><td></td></tr>
+    <tr><td>8</td><td style="height:9mm">&nbsp;</td><td></td><td></td></tr>
+    <tr><td>9</td><td style="height:9mm">&nbsp;</td><td></td><td></td></tr>
+    <tr><td>10</td><td style="height:9mm">&nbsp;</td><td></td><td></td></tr>
+    <tr><td>11</td><td style="height:9mm">&nbsp;</td><td></td><td></td></tr>
+    <tr><td>12</td><td style="height:9mm">&nbsp;</td><td></td><td></td></tr>
+    <tr><td>13</td><td style="height:9mm">&nbsp;</td><td></td><td></td></tr>
+    <tr><td>14</td><td style="height:9mm">&nbsp;</td><td></td><td></td></tr>
+    <tr><td>15</td><td style="height:9mm">&nbsp;</td><td></td><td></td></tr>
+  </table>
+
+  <h2>Worksheet E — Dry-run scorecard</h2>
+  <p class="footnote">Give this to whoever watches your rehearsal. Ask them to complete it before saying anything out loud.</p>
+  <div class="worksheet">
+    <div class="wh">For the person watching the rehearsal</div>
+    <div class="wb">
+      <p class="fill-lbl">In one sentence, what was the main message?</p><span class="fill"></span>
+      <p class="fill-lbl">Where did you lose the thread, or stop listening?</p><span class="fill"></span>
+      <p class="fill-lbl">Which moment landed hardest?</p><span class="fill"></span>
+      <p class="fill-lbl">What is the first question you would ask?</p><span class="fill"></span>
+      <p class="fill-lbl">What did I say that you did not believe, or wanted evidence for?</p><span class="fill"></span>
+      <p class="fill-lbl">Anything in the delivery that distracted you (pace, filler words, a habit)?</p><span class="fill"></span>
+      <p class="fill-lbl">If you had to cut two minutes, what would go?</p><span class="fill"></span>
+    </div>
+  </div>
+
+  <h2>Worksheet F — Final 24-hour checklist</h2>
+  <div class="two-col">
+    <div>
+      <h4>Content</h4>
+      <ul class="checklist">
+        <li>Skim test passed: titles alone tell the story</li>
+        <li>Every number on every slide is defensible</li>
+        <li>Sample period and exclusions stated</li>
+        <li>Limitations slide present and honest</li>
+        <li>"So what" is concrete, with effort estimates</li>
+        <li>Three reflective points, including one honest miss</li>
+        <li>Thanks are by name and specific</li>
+        <li>No client data or holdings detail that shouldn't be there</li>
+        <li>Appendix numbered with a contents page</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Delivery &amp; logistics</h4>
+      <ul class="checklist">
+        <li>Opening 30 seconds memorised verbatim</li>
+        <li>Closing 3 sentences memorised verbatim</li>
+        <li>Timed and inside the slot with 10% to spare</li>
+        <li>Fifteen questions prepared and answered</li>
+        <li>Humour: max three beats, all on the safe list</li>
+        <li>PDF emailed to self and manager</li>
+        <li>USB stick prepared</li>
+        <li>Room, screen and cable tested</li>
+        <li>Remote participants' names known, if hybrid</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Worksheet G — The five questions to send your manager</h2>
+  <div class="worksheet">
+    <div class="wh">Copy, adapt, send — fourteen days out</div>
+    <div class="wb">
+      <p style="font-style:italic;margin-bottom:0;">Hi [name] — I'm starting on the final presentation. Five quick things so I aim it right:</p>
+      <ol style="font-style:italic;margin-top:2mm;">
+        <li>Who's likely to be in the room?</li>
+        <li>How long do I have, and roughly how much of that should be Q&amp;A?</li>
+        <li>Is there a house template or format you'd like me to use?</li>
+        <li>Is there anything specific you or the team would like me to cover — or deliberately not cover?</li>
+        <li>Would it be useful if I walked you through the three key slides a week beforehand, so there are no surprises on the day?</li>
+      </ol>
+      <p style="font-style:italic;margin-bottom:0;">Thanks — [you]</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOURCES ============ -->
+<section class="part">
+  <div class="part-head">
+    <div class="part-num">Sources</div>
+    <h1 class="part-title">Research base</h1>
+  </div>
+  <p class="lede">Everything this guide draws on. Where a claim in the text is attributed ("research shows…", "Minto's central point was…"), it comes from one of these.</p>
+
+  <h4>Internship and final presentations</h4>
+  <p class="src">Timothy Calkins, <em>4 Pieces of Presentation Advice for Summer Interns</em>, Inc. — inc.com/timothy-calkins/4-pieces-of-presentation-advice-for-summer-interns</p>
+  <p class="src">Jonathan Butturini, <em>The Final Presentation: Tips for interns</em>, Medium — medium.com/@butturinij/the-final-presentation-35e7c04e9bdb</p>
+  <p class="src"><em>How To Ace Your Summer Internship Final Presentations</em>, InsideIIM — insideiim.com/ace-final-presentations-summer-internship</p>
+  <p class="src"><em>Make a Great End of Internship Presentation</em>, Envato Tuts+ — business.tutsplus.com/tutorials/make-great-end-of-internship-presentation--cms-41958</p>
+  <p class="src">Kimberly Whitler, <em>Mistakes Interns Make And How To Avoid Them</em>, Forbes — forbes.com/sites/kimberlywhitler/2018/03/03/mistakes-summer-interns-mistake-and-how-to-avoid-them/</p>
+  <p class="src"><em>4 common intern mistakes that hurt your chance at a return offer</em>, CNBC — cnbc.com/2023/05/17/intern-mistakes-that-hurt-return-offer-chances.html</p>
+  <p class="src"><em>Convert Consulting Internship Into Return Offer</em>, Road to Offer — roadtooffer.com/blog/consulting-internship-return-offer-guide</p>
+
+  <h4>Structure and storyline</h4>
+  <p class="src">Barbara Minto, <em>The Pyramid Principle</em> — summarised at ModelThinkers, <em>Minto Pyramid &amp; SCQA</em> — modelthinkers.com/mental-model/minto-pyramid-scqa</p>
+  <p class="src"><em>Business paper using the Minto approach</em>, Monash University Student Academic Success — monash.edu/student-academic-success/excel-at-writing/how-to-write/business-paper-using-the-minto-approach</p>
+  <p class="src"><em>SCQA Framework Explained: Situation, Complication, Question, Answer</em> — antonov.com.au/scqa-framework</p>
+  <p class="src"><em>The Pyramid Principle: How Consultants Structure Arguments That Win</em>, Deckary — deckary.com/blog/pyramid-principle-consulting</p>
+
+  <h4>Slides, charts and financial presentation</h4>
+  <p class="src"><em>How to Write Slide Action Titles Like McKinsey (With Examples)</em>, Slideworks — slideworks.io/resources/how-to-write-action-titles-like-mckinsey</p>
+  <p class="src"><em>Slide Title Best Practices: Stop Writing 'Overview'</em>, Winning Presentations — winningpresentations.com/slide-title-best-practices/</p>
+  <p class="src"><em>How to tell a better data story one slide at a time</em>, think-cell — think-cell.com/en/resources/content-hub/how-to-tell-a-better-data-story-one-slide-at-a-time</p>
+  <p class="src"><em>Financial presentation design: Best practices for impactful reports</em>, Slidor — slidor.agency/blog/financial-presentation-design-best-practices-for-impactful-reports</p>
+  <p class="src"><em>Consulting Slide Standards: Rules McKinsey, BCG &amp; Bain Follow</em>, Deckary — deckary.com/blog/consulting-slide-standards</p>
+
+  <h4>Audience analysis</h4>
+  <p class="src"><em>A framework to analyse your audience for a big presentation</em>, Story Rules — storyrules.com/a-framework-to-analyse-your-audience-for-a-big-presentation/</p>
+  <p class="src"><em>How to Use Audience Analysis to Shape Your Speech</em>, Moxie Institute — moxieinstitute.com/how-to-use-audience-analysis/</p>
+  <p class="src"><em>Tailoring Presentations for Business Audiences</em>, InkPPT — inkppt.com/guides/presentation-design-training/business-presentation-mastery/tailoring-presentations-for-business-audiences/</p>
+  <p class="src"><em>Know Your Audience Before Creating a Presentation</em>, Prezent — prezent.ai/blog/how-to-know-your-audience-better-before-creating-a-presentation</p>
+
+  <h4>Presenting in investment management</h4>
+  <p class="src"><em>10 Portfolio Manager Presentation Tips to Wow Investment Boards</em>, Seismic — seismic.com/blog/post/10-portfolio-manager-presentation-tips-to-wow-investment-boards/</p>
+  <p class="src"><em>Presentation Tips For Portfolio Managers</em>, Poised — poised.com/blog/presentation-tips-for-portfolio-managers</p>
+  <p class="src"><em>Engaging senior stakeholders: challenges in portfolio management</em>, Association for Project Management — apm.org.uk/blog/engaging-senior-stakeholders-challenges-in-portfolio-management/</p>
+
+  <h4>Humour</h4>
+  <p class="src">Jennifer Aaker &amp; Naomi Bagdonas, <em>Humor, Seriously</em> (Stanford GSB) — gsb.stanford.edu/faculty-research/books/humor-seriously; class takeaways at gsb.stanford.edu/insights/class-takeaways-humor-serious-business</p>
+  <p class="src">Jay Sullivan, <em>How To Use Humor Effectively In A Presentation</em>, Forbes — forbes.com/sites/jaysullivan/2025/08/25/how-to-use-humor-effectively-in-a-presentation/</p>
+  <p class="src"><em>How To Use Humour In Professional Presentations</em>, Simply Amazing Training — simplyamazingtraining.co.uk/blog/using-humour-professional-presentations</p>
+  <p class="src"><em>7 Guideposts for Using Humor in Your Business Presentation</em>, Julie Hansen — juliehansen.live/7-guideposts-for-using-humor-in-your-business-presentation/</p>
+  <p class="src"><em>Presentation Humor: When To Use It</em>, Effective Presentations — effectivepresentations.com/use-humor-in-presentations/</p>
+  <p class="src"><em>How to Make a Presentation More Humorous</em>, Envato Tuts+ — business.tutsplus.com/tutorials/how-to-make-a-presentation-humorous--cms-35130</p>
+
+  <h4>Reflection frameworks</h4>
+  <p class="src">Graham Gibbs, <em>Reflective Cycle</em> (1988) — University of Edinburgh Reflection Toolkit, reflection.ed.ac.uk/reflectors-toolkit/reflecting-on-experience/gibbs-reflective-cycle</p>
+  <p class="src"><em>Gibbs Reflective Cycle</em>, Simply Psychology — simplypsychology.org/gibbs-reflective-cycle.html</p>
+  <p class="src"><em>Reflection Prompts and Frameworks</em> (STAR model), University of Waterloo Centre for Teaching Excellence — uwaterloo.ca/centre-for-teaching-excellence/</p>
+
+  <h4>Delivery, rehearsal and Q&amp;A</h4>
+  <p class="src"><em>Five rehearsal techniques that will transform your next talk</em>, Naked Audience — nakedaudience.co.nz/post/five-rehearsal-techniques-that-will-transform-your-next-talk</p>
+  <p class="src"><em>22 Ways to Calm Your Nerves Before a Speech or Presentation</em>, Janice Tomich — janicetomich.com/tips-presentation-nerves/</p>
+  <p class="src"><em>Handling the Q&amp;A Session With Confidence</em>, Toastmasters International — toastmasters.org/magazine/magazine-issues/2021/mar/handling-the-qanda-session-with-confidence</p>
+  <p class="src"><em>Handle Difficult Questions in Presentations: 6 Bridges</em>, Winning Presentations — winningpresentations.com/handle-difficult-questions-presentation/</p>
+  <p class="src"><em>Handling Audience Questions</em>, Sheridan College Library &amp; Learning Services — sheridancollege.libguides.com/presentationskills/delivering-your-presentation/handling-audience-questions</p>
+
+  <h4>Memory and the peak–end rule</h4>
+  <p class="src"><em>Peak-end rule</em>, The Decision Lab — thedecisionlab.com/biases/peak-end-rule</p>
+  <p class="src"><em>Peak End Rule: shape lasting memories</em>, Learning Loop — learningloop.io/plays/psychology/peak-end-rule</p>
+
+  <h4>Pictet</h4>
+  <p class="src"><em>About Pictet, an independent investment partnership</em> — pictet.com/us/en/about</p>
+  <p class="src"><em>Responsible employer</em>, The Pictet Group — group.pictet/responsible-vision/responsible-employer</p>
+  <p class="src"><em>Join one of our internship programmes</em>, The Pictet Group — pictet.com/us/en/careers/intership-programmes</p>
+  <p class="src"><em>Taking a long-term approach, always on the same side as clients</em>, Pictet — pictet.com/sg/en/corporate-news/taking-a-long-term-approach-always-on-the-same-side-as-clients</p>
+
+  <div class="box navy" style="margin-top:8mm;">
+    <h4>Final note</h4>
+    <p>Almost everything in this guide is a default, and defaults exist to be overridden by better information. If your manager tells you the team wants forty minutes on the model and no reflection at all, do that. The one piece of advice that survives every context is the one in Part 2: <strong>ask.</strong> Then over-prepare the Q&amp;A, and finish on something only you could have said.</p>
+  </div>
+</section>
+
+</body>
+</html>
