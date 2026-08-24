@@ -1,0 +1,1112 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><style>
+@page {
+  size: A4; margin: 22mm 20mm 20mm 20mm;
+  @bottom-center { content: counter(page); font-family: Georgia, serif; font-size: 9pt; color: #555; }
+  @top-right { content: string(runhead); font-family: Georgia, serif; font-size: 8.5pt; color: #777; font-style: italic; }
+}
+@page :first { @top-right { content: none; } @bottom-center { content: none; } }
+@page titlepage { @top-right { content: none; } @bottom-center { content: none; } }
+html { font-family: Georgia, 'Times New Roman', serif; font-size: 10.5pt; line-height: 1.5; color: #1a1a1a; }
+body { margin: 0; }
+.titlepage { page: titlepage; break-after: page; text-align: left; padding-top: 30mm; }
+.titlepage h1 { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 30pt; line-height: 1.15; color: #0f4c5c; margin: 0 0 10mm 0; border: none; }
+.titlepage .subtitle { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 13pt; color: #356b78; font-weight: 400; line-height: 1.4; margin-bottom: 14mm; }
+.titlepage .meta { font-size: 10pt; color: #555; border-top: 2px solid #0f4c5c; padding-top: 6mm; }
+h1.chaptertitle, h1.parttitle { string-set: runhead content(); font-family: 'Helvetica Neue', Arial, sans-serif; color: #0f4c5c; font-size: 20pt; break-before: page; padding-bottom: 3mm; border-bottom: 2px solid #0f4c5c; margin: 0 0 6mm 0; }
+.partdiv { break-before: page; padding-top: 60mm; text-align: center; }
+h1.parttitle { border: none; font-size: 26pt; break-before: avoid; }
+h2 { font-family: 'Helvetica Neue', Arial, sans-serif; color: #12606f; font-size: 13.5pt; margin-top: 7mm; margin-bottom: 2mm; break-after: avoid; }
+h3 { font-family: 'Helvetica Neue', Arial, sans-serif; color: #2a2a2a; font-size: 11.5pt; margin-top: 5mm; margin-bottom: 1.5mm; break-after: avoid; }
+p { margin: 0 0 2.4mm 0; text-align: justify; }
+a { color: #0f4c5c; text-decoration: none; }
+strong { color: #111; }
+code { font-family: 'DejaVu Sans Mono', monospace; font-size: 8.6pt; background: #eef5f7; padding: 0 2px; border-radius: 2px; word-break: break-word; }
+blockquote { background: #f2f8f9; border-left: 3px solid #3d8fa0; margin: 4mm 0; padding: 3mm 4mm; break-inside: avoid; font-size: 10pt; }
+blockquote h3 { margin-top: 0; color: #0f4c5c; }
+blockquote p { text-align: left; }
+table { border-collapse: collapse; width: 100%; margin: 3mm 0; font-size: 8.6pt; line-height: 1.35; table-layout: fixed; }
+th, td { border: 0.5pt solid #b6cfd5; padding: 1.4mm 2mm; text-align: left; vertical-align: top; word-wrap: break-word; overflow-wrap: anywhere; }
+th { background: #0f4c5c; color: #fff; font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: 600; font-size: 8.4pt; }
+tr:nth-child(even) td { background: #f5fafb; }
+thead { display: table-header-group; }
+tr { break-inside: avoid; }
+ul, ol { margin: 1mm 0 3mm 0; padding-left: 6mm; }
+li { margin-bottom: 1.2mm; text-align: justify; }
+hr { border: none; border-top: 0.5pt solid #ccc; margin: 5mm 0; }
+.toc { break-before: page; }
+.toc ul { list-style: none; padding-left: 0; }
+.toc li { margin-bottom: 1.6mm; }
+.toc a { display: block; }
+.toc a::after { content: target-counter(attr(href), page); float: right; color: #555; font-variant-numeric: tabular-nums; }
+.toc-part a { font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: 700; color: #0f4c5c; margin-top: 4mm; font-size: 11pt; }
+.toc-ch a { padding-left: 5mm; font-size: 10pt; }
+.chapter, .frontmatter { break-before: page; }
+</style></head><body><section class="titlepage"><h1>SHL and the Barclays Online Assessment</h1><div class="subtitle">The firm, the full product catalogue, how every test is scored, what the integrity systems detect — and exactly what it takes to pass at Barclays</div><div class="meta">Version 1.0 &nbsp;·&nbsp; Generated 1 August 2026<br>Companion volume to <i>The Definitive Guide to UK Finance Early-Careers Online Assessments</i> and <i>The Aon (cut-e) Assessment Deep-Dive</i></div></section><section class="toc" id="toc"><h1 class="chaptertitle">Contents</h1><ul><li class="toc-part"><a href="#part-part-i-the-firm-and-the-system">Part I — The Firm and the System</a></li><li class="toc-ch"><a href="#ch-01-the-firm">Chapter 1 — The Firm: Who SHL Are and Why a Bank Buys Them</a></li><li class="toc-ch"><a href="#ch-02-product-catalogue">Chapter 2 — The Complete Product Catalogue, and How It Interlocks</a></li><li class="toc-part"><a href="#part-part-ii-the-assessments-in-detail">Part II — The Assessments in Detail</a></li><li class="toc-ch"><a href="#ch-03-cognitive-tests">Chapter 3 — The Cognitive Tests: Verify, Question by Question</a></li><li class="toc-ch"><a href="#ch-04-opq-personality">Chapter 4 — The OPQ: SHL&#x27;s Personality Questionnaire, in Full</a></li><li class="toc-ch"><a href="#ch-05-sjt-video-coding">Chapter 5 — Situational Judgement, Video Interviews and Coding</a></li><li class="toc-part"><a href="#part-part-iii-scoring-thresholds-and-integrity">Part III — Scoring, Thresholds and Integrity</a></li><li class="toc-ch"><a href="#ch-06-how-scoring-works">Chapter 6 — How SHL Scoring Actually Works</a></li><li class="toc-ch"><a href="#ch-07-how-good-is-good-enough">Chapter 7 — How Well Do You Actually Need to Do?</a></li><li class="toc-ch"><a href="#ch-08-integrity">Chapter 8 — The Integrity Architecture: What SHL Detects</a></li><li class="toc-part"><a href="#part-part-iv-barclays">Part IV — Barclays</a></li><li class="toc-ch"><a href="#ch-09-barclays-process">Chapter 9 — The Barclays Process: What Actually Happens</a></li><li class="toc-ch"><a href="#ch-10-barclays-by-role">Chapter 10 — Does It Depend on the Role? Yes — in Three Ways</a></li><li class="toc-ch"><a href="#ch-11-barclays-playbook">Chapter 11 — The Barclays Playbook</a></li><li class="toc-ch"><a href="#ch-12-confidence-register">Chapter 12 — Confidence Register and Residual Gaps</a></li></ul></section><section class="frontmatter" id="frontmatter"><h3 id="the-firm-the-full-product-catalogue-how-every-test-is-scored-what-the-integrity-systems-detect-and-exactly-what-it-takes-to-pass-at-barclays">The firm, the full product catalogue, how every test is scored, what the integrity systems detect — and exactly what it takes to pass at Barclays</h3>
+<hr />
+<p><strong>Version 1.0</strong> · Generated <strong>1 August 2026</strong></p>
+<p>A companion volume to <em>The Definitive Guide to UK Finance Early-Careers Online Assessments</em> (which covers thirteen providers) and <em>The Aon (cut-e) Assessment Deep-Dive</em>. This report goes deep on one publisher — <strong>SHL</strong>, the oldest and most-deployed name in occupational assessment — and then applies all of it to one employer: <strong>Barclays</strong>.</p>
+<hr />
+<h2 id="why-this-report-exists">Why this report exists</h2>
+<p>Assessment publishers operate on <strong>information asymmetry</strong>. The employer knows which instruments it bought, which norm group it selected, and where it set the bar. The vendor knows the scoring algorithm, the item bank and the integrity telemetry. <strong>The candidate knows none of it</strong> — and is told, in effect, to turn up and be measured. That asymmetry is not accidental: some of it protects test security (a defensible interest), but much of it simply survives because nobody assembles the public record.</p>
+<p>This report assembles the public record for SHL, and then does the harder thing: applies it to a named employer. It answers the questions candidates actually ask and vendors rarely address —</p>
+<ul>
+<li><strong>What is SHL, and why would a bank like Barclays buy it</strong> rather than a rival?</li>
+<li><strong>What is every product in the catalogue</strong>, and how do they link into one hiring system?</li>
+<li><strong>What are the actual questions</strong>, format by format?</li>
+<li><strong>How is each instrument scored</strong> — raw to scaled to normed, and who decides the threshold?</li>
+<li><strong>How well do I have to do to pass — and does it depend on the role I applied for?</strong></li>
+<li><strong>What do the anti-cheating systems detect</strong>, how are flags actioned, and how do honest candidates avoid tripping them?</li>
+<li><strong>What, concretely, do I do to pass the Barclays online assessment?</strong></li>
+</ul>
+<h2 id="how-to-read-the-evidence-tags">How to read the evidence tags</h2>
+<p>Every substantive claim carries a label saying how much to trust it. This is the discipline that separates this report from the confidently-wrong content that dominates search results for these terms.</p>
+<ul>
+<li><strong><code>[EMPLOYER]</code></strong> — Barclays' own official statement (careers pages, published process descriptions). The gold standard for what Barclays actually does.</li>
+<li><strong><code>[VENDOR]</code></strong> — SHL's own claim, not independently verified. Authoritative about <em>what they sell</em>; still marketing.</li>
+<li><strong><code>[VENDOR-manual]</code></strong> — extracted from SHL's own technical documentation. The strongest vendor evidence: psychometrics as they describe them to professionals, not to buyers.</li>
+<li><strong><code>[INDEPENDENT]</code></strong> — peer-reviewed research, regulators, or independent journalism.</li>
+<li><strong><code>[CANDIDATE, n=X]</code></strong> — candidate testimony, with a count of independent agreeing reports. Real-world but anecdotal; <code>n=1</code> is a single account.</li>
+<li><strong><code>[PREP-VENDOR]</code></strong> — a commercial practice-test seller. Often accurate on <em>format</em>, but structurally motivated to make tests sound harder, and routinely states confidential cut-scores as fact. Corroborated before use.</li>
+<li><strong><code>[INFERRED]</code></strong> — my reasoning from psychometric first principles, with the reasoning shown so you can check it.</li>
+<li><strong><code>[UNKNOWN]</code></strong> — not publicly available. The report says <em>why</em> and gives the best proxy rather than inventing a figure.</li>
+</ul>
+<p><strong>The standing promise: no number in this report is invented.</strong> Cut-scores, pass rates and norm data are almost universally confidential. Where a figure would be a guess, you will see <code>[UNKNOWN]</code> and a reasoned range — and every one of them is collected in the Confidence Register (Chapter 12), so you know exactly which parts to trust least.</p>
+<h2 id="a-note-on-volatility-and-on-the-barclays-vendor-question">A note on volatility, and on the Barclays vendor question</h2>
+<p>Bank recruitment processes <strong>change every cycle</strong>, and vendor contracts churn. This report states the position as of <strong>1 August 2026</strong> and dates its claims accordingly. One specific caution is flagged up front because it shapes Part IV: the public record on <strong>which vendor supplies Barclays' online assessment is contested</strong> — different sources, and different years, point to different providers. Chapter 9 resolves what can be resolved from dated evidence and is explicit about what remains uncertain, rather than picking the tidier answer.</p>
+<p><strong>Verify against your own invitation email.</strong> It names the tool, the deadline and the rules — it is the single most authoritative document about <em>your</em> assessment, and it outranks every guide, including this one.</p>
+<h2 id="ethical-boundary">Ethical boundary</h2>
+<p>This report is about <strong>understanding and legitimate preparation</strong>. It does not reproduce live test items, answer keys or leaked question banks — those are copyrighted, they rotate, and relying on them is the fastest route to being flagged. The integrity chapters are written for <strong>false-positive avoidance and informed compliance</strong>, not evasion. Nothing here helps you cheat; a great deal of it helps you stop losing marks you should be winning.</p></section><section class="partdiv" id="part-part-i-the-firm-and-the-system"><h1 class="parttitle">Part I — The Firm and the System</h1></section><section class="chapter" id="ch-01-the-firm"><h1 class="chaptertitle">Chapter 1 — The Firm: Who SHL Are and Why a Bank Buys Them</h1><h2 id="origins-and-ownership">Origins and ownership</h2>
+<p>SHL was founded in <strong>1977</strong> as <strong>Saville &amp; Holdsworth Ltd</strong> by two British occupational psychologists, <strong>Peter Saville</strong> and <strong>Roger Holdsworth</strong>. <code>[VENDOR/INDEPENDENT]</code> It is the oldest name in the modern assessment industry, and almost every practice in this field — norm groups, competency frameworks, technical manuals — traces to work done at SHL or by people who left it.</p>
+<p>One piece of lineage is worth knowing because it causes real candidate confusion. <strong>Both founders eventually left and founded competitors.</strong> Peter Saville founded <strong>Saville Assessment</strong> (the Wave personality questionnaire, the Swift aptitude range); Roger Holdsworth founded <strong>Talent Q</strong> — the adaptive, per-item-clock instruments now owned by Korn Ferry and used by, among others, Citi and UBS (covered in the companion guide, Chapter 13). If you are applying across banks, you may sit tests from all three houses. <strong>They are different companies with different scoring conventions</strong>, and importing habits from one to another is a genuine way to lose marks.</p>
+<p>The ownership chain matters less to you than to SHL's strategy, but it explains the product churn you will encounter:</p>
+<table>
+<thead>
+<tr>
+<th>Period</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1977 – mid-2000s</td>
+<td>Founder-led; SHL Group plc, LSE-listed</td>
+</tr>
+<tr>
+<td>mid-2000s – 2012</td>
+<td>HgCapital (take-private)</td>
+</tr>
+<tr>
+<td>2012</td>
+<td><strong>CEB</strong> acquires SHL</td>
+</tr>
+<tr>
+<td>2017</td>
+<td><strong>Gartner</strong> acquires CEB (~$2.6bn); SHL transfers with it</td>
+</tr>
+<tr>
+<td><strong>Feb 2018 – present</strong></td>
+<td><strong>Exponent Private Equity</strong> (London), bought from Gartner for <strong>US$400m</strong></td>
+</tr>
+</tbody>
+</table>
+<p><code>[VENDOR + INDEPENDENT — Exponent portfolio page; Mergr deal record, 6 Feb 2018]</code></p>
+<p>As of August 2026 Exponent still lists SHL as a live holding — an <strong>8+ year hold</strong>, long for mid-market private equity, which typically exits in three to six years. <code>[VENDOR]</code> The analytical read (mine, not SHL's): a firm under sustained exit pressure invests hard in platform modernisation and new AI-flavoured products to lift its multiple — which is exactly the pattern visible in SHL's 2023–2026 releases. <code>[INFERRED — no announced sale process found; do not treat as fact]</code></p>
+<p>SHL has also grown by acquisition in ways that shaped its catalogue: it took its Japanese licensee private, and it bought <strong>Aspiring Minds</strong> (the Indian assessment firm behind the AMCAT battery, automated coding evaluation, and the <strong>SVAR</strong> spoken-English engine). <code>[INDEPENDENT]</code> Most of SHL's coding, technical and language-evaluation range descends from that deal.</p>
+<h2 id="scale">Scale</h2>
+<p>SHL's own figures: assessments available in <strong>40+ languages</strong>, supporting <strong>150 countries</strong>, with customers including <strong>80% of the FTSE 100</strong> and <strong>over half the Fortune Global 500</strong>. It describes itself as "the largest provider of psychometric and cognitive talent assessment for business globally." <code>[VENDOR — marketing claims; no independent market-share study located]</code> Its platform offers access to <strong>"more than 1,000"</strong> assessments through a single login. <code>[VENDOR — treat the round number as marketing]</code></p>
+<p>One number this report deliberately does <strong>not</strong> give you is candidates assessed per year. Figures in the tens of millions circulate widely; none was confirmable on any SHL page. <code>[UNKNOWN — do not cite one]</code></p>
+<h2 id="the-expertise-what-shl-is-actually-good-at">The expertise: what SHL is actually good at</h2>
+<p>Three things genuinely differentiate SHL from newer entrants, and all three are why a risk-averse bank buys it.</p>
+<p><strong>1. The validation and norming infrastructure.</strong> SHL publishes <strong>technical manuals</strong> per instrument, holds <strong>BPS (British Psychological Society) test reviews</strong> on its flagship products, and maintains roughly <strong>70 comparison (norm) groups</strong> in the Verify range alone — test type × job level × industry. <code>[VENDOR-manual]</code> For a bank's legal and HR functions, that library <em>is</em> the product: it means the firm can point to published evidence that the test predicts performance and does not unfairly disadvantage a protected group. That matters enormously when a rejected candidate alleges discrimination under the Equality Act 2010.</p>
+<p><strong>2. Genuine peer-reviewed research.</strong> SHL's <strong>Universal Competency Framework</strong> rests on Bartram's <em>"The Great Eight competencies"</em> (2005), published in the <em>Journal of Applied Psychology</em>. <code>[INDEPENDENT — a real JAP publication, though authored by an SHL researcher]</code> Very few assessment vendors have a genuinely cited academic paper underpinning their core model.</p>
+<p><strong>3. Unusual methodological honesty — which is itself a sales weapon.</strong> SHL publicly argues that <strong>vendor validity claims across the industry are often exaggerated</strong>, and states that it has "historically taken a conservative approach" to correcting validity coefficients, with <strong>corrections for range restriction typically not conducted</strong> — because concurrent validation designs make those corrections unreliable. <code>[VENDOR-PRIMARY — SHL blog, 2022]</code> It even publishes a buyer's guide to interpreting validity coefficients, warning that the relationship between assessment scores and job performance "is often overestimated."</p>
+<p>This is a real differentiator. Most competitors quote <em>corrected</em> — that is, inflated — validity figures. It also gave SHL a convenient position when the <strong>2022 Sackett et al. re-analysis</strong> revised corrected cognitive-ability validity down from ~0.51 toward ~0.31: SHL's stated view is that the finding is "unlikely to impact our own validation study results," precisely because it was reporting largely uncorrected numbers already. <code>[VENDOR-PRIMARY]</code> Defensible — and convenient. <code>[INFERRED]</code></p>
+<p>Note the flip side, honestly: <strong>no specific published SHL criterion-validity coefficient could be obtained</strong> for this report, and <strong>no SHL bias audit or NYC Local Law 144 posting was found.</strong> <code>[UNKNOWN — LL144 audits are typically posted by the employer, not the vendor, so absence is not evidence of absence]</code></p>
+<h2 id="why-a-bank-chooses-shl-the-procurement-logic">Why a bank chooses SHL — the procurement logic</h2>
+<p>Assessment procurement is not a psychometric decision; it is a risk, integration and volume decision. SHL wins on five axes that matter to a bank:</p>
+<p><strong>Legal defensibility.</strong> The technical manuals, BPS reviews and norm library give the bank an evidence trail. A standardised, validated instrument is defensible against a discrimination claim in a way a partner's judgement is not.</p>
+<p><strong>Volume economics.</strong> A London graduate programme can receive tens of thousands of applications for a few hundred seats. SHL's platform sifts at near-zero marginal cost per candidate.</p>
+<p><strong>Integration.</strong> SHL integrates with <strong>over 80 applicant-tracking systems</strong> — including Workday, Oracle, iCIMS, Cornerstone, SmartRecruiters, SAP — with results and candidate communications flowing directly into the ATS. <code>[VENDOR]</code> For a bank already running Workday, this is often the decisive factor: it eliminates manual handoffs across a funnel processing thousands of people.</p>
+<p><strong>One construct language across every stage.</strong> This is the deepest reason, developed in Chapter 2: because everything maps to the Universal Competency Framework, a bank can measure the <em>same competencies</em> through an aptitude test, a personality questionnaire, an interview scorecard and an assessment-centre exercise — and aggregate them. No single test can do that; a system can.</p>
+<p><strong>Switching costs.</strong> SHL runs a <strong>certification business</strong> training client-side HR staff in OPQ and Verify interpretation. <code>[VENDOR]</code> Once a bank's recruiters are professionally credentialed in SHL's instruments specifically, moving to a rival means retraining the team. <code>[INFERRED]</code></p>
+<h2 id="what-this-means-for-you">What this means for you</h2>
+<p>Two practical implications follow from all of the above.</p>
+<p>First, <strong>SHL supplies the metric; the employer owns the decision.</strong> As Chapter 6 shows from SHL's own sample reports, an SHL ability report contains <strong>no pass mark, no cut-score and no hire recommendation</strong> — just scores, descriptors and speed/accuracy statistics. Every threshold you will ever face is set by the bank, not by SHL. When you ask "what score do I need for SHL?", the question is malformed: there is no such thing.</p>
+<p>Second, <strong>product names churn.</strong> SHL renames, re-bundles and sunsets constantly, and much of the prep material you'll find online describes products that are legacy or gone. Chapter 2 maps what is actually current, and flags what the prep industry still gets wrong.</p></section><section class="chapter" id="ch-02-product-catalogue"><h1 class="chaptertitle">Chapter 2 — The Complete Product Catalogue, and How It Interlocks</h1><p>SHL sells <strong>a system, not tests</strong> — and understanding the system is what lets you predict what a bank will send you and why. This chapter maps the whole catalogue, then explains the five mechanisms that bind it together.</p>
+<blockquote>
+<p><strong>A warning about prep material.</strong> SHL renames and retires products constantly. A product described on a prep site but absent from shl.com is <em>probably legacy</em>; a name in SHL's release notes but not on its marketing pages is <em>probably new</em>. The most common candidate-facing error in circulation: prep vendors still describing the <strong>legacy 30-question Verify G+ as if it were current</strong>, when the live product is the <strong>24-question adaptive Verify Interactive G+</strong>. <code>[PREP-VENDOR error, identified by cross-check]</code></p>
+</blockquote>
+<h2 id="the-catalogue">The catalogue</h2>
+<p>SHL's own taxonomy runs to six assessment categories plus video, platform and services. Its <strong>"Featured Products"</strong> — what it sells hardest — are: <strong>OPQ · Global Skills Assessment · Job-Focused Assessments · Motivational Questionnaire · Situational Judgment Tests · SHL Verify · SHL 360.</strong> <code>[VENDOR]</code></p>
+<h3 id="cognitive-the-verify-family">Cognitive — the Verify family</h3>
+<table>
+<thead>
+<tr>
+<th>Product</th>
+<th>What it is</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SHL Verify</strong></td>
+<td>Umbrella cognitive brand — "potential to learn, adapt and perform"</td>
+<td>Current <code>[VENDOR]</code></td>
+</tr>
+<tr>
+<td><strong>Verify Interactive</strong></td>
+<td>The current gamified/drag-and-drop range: Numerical Calculation, Inductive, Deductive, Verbal</td>
+<td><strong>Current</strong> — Numerical Calculation named in SHL's Oct 2025 release notes <code>[VENDOR-PRIMARY]</code></td>
+</tr>
+<tr>
+<td><strong>Verify Interactive G+</strong></td>
+<td>Adaptive composite of the Interactive subtests (~24 items / 36 min)</td>
+<td>Current <code>[VENDOR]</code></td>
+</tr>
+<tr>
+<td><strong>Verify G+ (legacy)</strong></td>
+<td>Button-click composite, ~30 items / 36 min</td>
+<td><strong>Legacy</strong> — still described as current by prep vendors <code>[flagged error]</code></td>
+</tr>
+<tr>
+<td>Standalone Verbal Reasoning</td>
+<td>Separate verbal test</td>
+<td>Likely legacy/standalone <code>[INFERRED]</code></td>
+</tr>
+<tr>
+<td>Checking / clerical / mechanical</td>
+<td>Historic range</td>
+<td>Absent from current SHL pages <code>[UNKNOWN — probably legacy]</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="personality-and-motivation">Personality and motivation</h3>
+<ul>
+<li><strong>OPQ32</strong> (current form <strong>OPQ32r</strong>) — 32 workplace traits; SHL calls it one of the most-used personality tests in the world. Full mechanics in Chapter 4. <code>[VENDOR]</code></li>
+<li><strong>MQ — Motivational Questionnaire</strong> — what energises and de-motivates someone at work; ~20 minutes. <code>[VENDOR name; timing PREP-VENDOR]</code></li>
+<li><strong>RemoteWorkQ</strong> — remote-work behavioural tendencies across three areas (Work Relationships, Work Habits, Self-Development &amp; Well-Being); ~10 minutes, with its own manager report. Now derived from OPQ. <code>[VENDOR]</code></li>
+<li><strong>ADEPT-15</strong> — the 15-facet adaptive instrument previously recorded as SHL-licensed. <strong>It did not appear on any current SHL page</strong> in this research pass. <code>[UNKNOWN — possibly retired, renamed or region-specific; do not assume you'll meet it]</code></li>
+</ul>
+<h3 id="behavioural-and-situational">Behavioural and situational</h3>
+<ul>
+<li><strong>Situational Judgment Tests (SJT)</strong> — interactive work scenarios, customisable per employer, with competency weightings configured per client.</li>
+<li><strong>Global Skills Assessment (GSA)</strong> — a featured behavioural product. Notably, SHL ships <strong>both a "relative" (norm-referenced) and an "absolute" (criterion-referenced) development report from the same data</strong> — an analytically important admission that the same performance can be presented two entirely different ways. <code>[VENDOR-PRIMARY — Oct 2025 release notes]</code></li>
+<li><strong>Job-Focused Assessments (JFA)</strong> — pre-packaged, role-specific batteries predicting "candidate readiness and fit."</li>
+<li><strong>Realistic Job Previews</strong> — scenario previews that double as self-selection tools.</li>
+</ul>
+<h3 id="the-universal-competency-framework-the-keystone">The Universal Competency Framework — the keystone</h3>
+<p>The <strong>UCF</strong> is a three-tier model: <strong>8 general competency factors → 20 competency dimensions → 96 component skills.</strong> <code>[VENDOR]</code> The eight factors are SHL's "Great Eight," derived from the Bartram (2005) <em>Journal of Applied Psychology</em> paper. SHL defines competencies deliberately as "sets of behaviors that are instrumental in the delivery of desired results" — <strong>behavioural, not technical knowledge</strong>.</p>
+<p>Critically, SHL doesn't just use the UCF internally: it <strong>ships</strong> it to clients as questionnaire items, <strong>behavioural anchors</strong>, <strong>interview questions</strong> and <strong>assessment-centre exercises</strong>. <code>[VENDOR]</code> That is the mechanism explored below.</p>
+<p>SHL also markets <strong>APTA™</strong>, a tool claiming to measure all 96 UCF components in 15 minutes. <code>[VENDOR]</code> ⚠️ Ninety-six constructs in a quarter of an hour is an extraordinary claim; treat it as marketing pending a technical manual.</p>
+<h3 id="skills-simulations-and-technical">Skills, simulations and technical</h3>
+<p>Coding simulations ("AI-powered coding challenges"), technical skills tests (~15 min), business skills (Microsoft Office/computer literacy), call-centre simulations, and AI-scored <strong>language evaluation</strong> — the last almost certainly powered by <strong>SVAR</strong>, the spoken-English engine inherited from Aspiring Minds and confirmed live in SHL's 2025 release notes. <code>[VENDOR + VENDOR-PRIMARY; the SVAR link is INFERRED]</code></p>
+<h3 id="video-and-interview">Video and interview</h3>
+<ul>
+<li><strong>Smart Interview On Demand (SIOD)</strong> — asynchronous recorded video, optional AI scoring. Confirmed live. <code>[VENDOR-PRIMARY]</code></li>
+<li><strong>Smart Interview Live</strong> and <strong>Smart Interview Live Coding</strong> — real-time interviews, the latter with an in-browser compiler (50+ languages per prep sources).</li>
+<li><strong>Smart Interview Professional (SIP)</strong> — explicitly called <strong>"SHL's flagship interview product"</strong> in the Oct 2025 release notes, and the focus of most 2025 development: SSO for interviewers, self-scheduling, an interviewer-analytics dashboard, a configurable skill framework (Category → Topic → Subtopic), <strong>AI skill recommendations generated from an uploaded job description</strong>, and O*NET job mapping. <code>[VENDOR-PRIMARY]</code></li>
+<li><strong>AI Screener (SIA)</strong> — a distinct asynchronously-scored product named alongside SVAR and SIOD. Details <code>[UNKNOWN]</code>; appears new.</li>
+</ul>
+<p><strong>One finding here is genuinely important for Chapter 8:</strong> SIP captures <strong>candidate snapshots at 120-second intervals during interviews, displayed on the report</strong> — and it is <strong>configurable per company</strong>. <code>[VENDOR-PRIMARY]</code> This is rare <em>first-party</em> confirmation of image-based monitoring inside an SHL product, and it confirms that monitoring is an employer choice rather than a universal default.</p>
+<h3 id="assessment-centres-360-and-platform">Assessment centres, 360 and platform</h3>
+<p><strong>Virtual Assessment and Development Centers (VADC)</strong> — a full product and an outsourced service. <strong>SHL 360</strong> — multi-rater feedback. And the platform estate, revealed by SHL's own release-note matrix: <strong>TalentCentral · TalentCentral+ · 360/MFS · SHL Apps · Insights</strong>. <code>[VENDOR-PRIMARY]</code></p>
+<p><strong>TalentCentral+ is where all 2025 feature work landed; classic TalentCentral received only content and localisation updates.</strong> The strong inference is that <strong>classic TalentCentral is being sunset in favour of TC+.</strong> <code>[INFERRED — well-supported by the release-note pattern; not stated by SHL]</code></p>
+<h2 id="how-it-interlocks-five-mechanisms">How it interlocks — five mechanisms</h2>
+<p><strong>1. The UCF is the connective tissue.</strong> Because SHL ships the same competency model as questionnaire items, behavioural anchors, interview questions <em>and</em> assessment-centre exercises, an OPQ scale, an SJT scenario, an interviewer's scorecard rating and an AC observation can all be expressed <strong>on the same competency axis</strong>. That is what lets a bank aggregate radically different measurement methods into one profile — and it is the thing the bank is actually buying. No single test can do it.</p>
+<p><strong>2. Job-Focused Assessments are the packaged composite.</strong> JFAs are the retail form of the system: define the role's requirement in UCF terms, measure the candidate on the same terms, score the <em>distance</em>. It is competency-profile matching, not test-passing. <code>[VENDOR framing]</code></p>
+<p><strong>3. Scoring is relative by design.</strong> SHL's platform ranks candidates not on absolute score but on performance <strong>relative to past test-takers</strong> — which is why the employer's choice of comparison group is load-bearing in every result (Chapters 6–7). The GSA's dual relative/absolute reports show SHL is fully aware of the distinction and sells both views. <code>[PREP-VENDOR + VENDOR-PRIMARY]</code></p>
+<p><strong>4. Compensatory within an instrument; multi-hurdle across the funnel.</strong> Verify G+ combines sub-abilities into a composite, and the UCF rolls 96 skills into 20 dimensions into 8 factors — each level a weighted aggregation, i.e. compensatory. But <strong>across</strong> the funnel the products are sequenced as gates in an ATS-integrated workflow: sift assessment → verification test → SJT/JFA → Smart Interview → assessment centre. The <strong>verification test is a pure hurdle</strong> (Verified / Not Verified, not a score). Which model any given employer uses, and where, is <strong>configured by the employer</strong> — there is no universal SHL rule. <code>[INFERRED, consistent across sources]</code></p>
+<p><strong>5. Scores are becoming portable — the Smart Assessment Workflow.</strong> This is the clearest evidence of system thinking, and it is new. From <strong>14 August 2025</strong>, if a candidate has completed SVAR, Smart Interview On Demand or AI Screener and is <strong>re-invited within a defined window (e.g. 30 days)</strong>, those assessments show as already complete and <strong>the prior scores are copied into the new attempt</strong> for the recruiter. Synchronously-scored assessments have prior <em>responses</em> copied and re-scored; asynchronously-scored ones have the <em>score</em> copied directly. Manually-evaluated scores are never reused, and proctoring data does not carry over. <code>[VENDOR-PRIMARY — Oct 2025 release notes, TalentCentral+ only]</code></p>
+<p><strong>What that means for you:</strong> within a single employer, an SHL result can <strong>follow you across applications</strong>. SHL is building a candidate record, not a series of isolated tests. If you apply to two programmes at the same bank inside the window, assume your earlier result travels with you.</p>
+<h2 id="what-youll-actually-meet-in-a-banking-funnel">What you'll actually meet in a banking funnel</h2>
+<p>Of that vast catalogue, a UK finance early-careers candidate realistically encounters: a <strong>Verify Interactive cognitive assessment</strong>, a <strong>behavioural/personality instrument</strong> (OPQ-derived or an SJT/strengths measure), sometimes a <strong>video interview</strong> (Smart Interview On Demand), and — for technology and quant streams — a <strong>coding assessment</strong>. Everything else in the catalogue is sold to the same client for other populations: 360 feedback for managers, VADC for experienced hires, MQ and RemoteWorkQ for development. Knowing the shape of the whole system helps you read your invitation email accurately; it does not mean you will sit all of it.</p></section><section class="partdiv" id="part-part-ii-the-assessments-in-detail"><h1 class="parttitle">Part II — The Assessments in Detail</h1></section><section class="chapter" id="ch-03-cognitive-tests"><h1 class="chaptertitle">Chapter 3 — The Cognitive Tests: Verify, Question by Question</h1><blockquote>
+<h3 id="at-a-glance-the-verify-range">⚡ At a glance — the Verify range</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>What it measures</strong></td>
+<td>General mental ability ("g") — the strongest single predictor of job performance in the IO-psychology literature, though revised downward in recent years (Chapter 6)</td>
+</tr>
+<tr>
+<td><strong>Current product</strong></td>
+<td><strong>Verify Interactive G+</strong> — ~<strong>24 adaptive items / 36 minutes</strong>, producing Numerical, Inductive and Deductive sub-abilities</td>
+</tr>
+<tr>
+<td><strong>Legacy product</strong></td>
+<td><strong>Verify G+</strong> — ~<strong>30 items / 36 minutes</strong>, roughly 10 numerical + 10 inductive + 10 deductive</td>
+</tr>
+<tr>
+<td><strong>Clock</strong></td>
+<td><strong>Whole-test, not per-item</strong> — you manage the budget across all questions (this is the opposite of Korn Ferry's per-item clocks, and it changes strategy)</td>
+</tr>
+<tr>
+<td><strong>Marking</strong></td>
+<td><strong>No documented negative marking</strong> — an unanswered item scores the same as a wrong one, so <strong>never leave a blank</strong> (the opposite of Aon)</td>
+</tr>
+<tr>
+<td><strong>Reliability</strong></td>
+<td><strong>0.77–0.84</strong> internal consistency, from SHL's own technical manual <code>[VENDOR-manual]</code></td>
+</tr>
+<tr>
+<td><strong>Item delivery</strong></td>
+<td><strong>Randomised item bank</strong> — each candidate's test is assembled from a large pool; no two candidates sit identical items</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<hr />
+<h2 id="what-you-are-actually-being-asked">What you are actually being asked</h2>
+<p>The Verify range is not a maths test or a vocabulary test. It is a <strong>reasoning</strong> test that uses numbers, patterns and rules as the raw material. Every item is solvable from what is on the screen; nothing requires outside knowledge, and nothing requires memorised formulas beyond arithmetic you already have. Understanding that framing is worth several marks on its own, because the commonest failure mode is candidates trying to <em>recall</em> rather than <em>derive</em>.</p>
+<p>There are two generations in circulation, and you should know which you are sitting because the strategy differs slightly. The <strong>legacy Verify G+</strong> is a fixed-ish form of roughly <strong>30 questions in 36 minutes</strong>, split about evenly across numerical, inductive and deductive reasoning. The <strong>current Verify Interactive G+</strong> is shorter and adaptive — about <strong>24 questions in 36 minutes</strong> — and uses drag-and-drop and other interactive item formats rather than plain multiple choice. <code>[PREP-VENDOR — multiple agreeing sources]</code> Both report sub-scores for the three reasoning types plus an overall "g" estimate.</p>
+<h2 id="the-three-question-types-in-detail">The three question types, in detail</h2>
+<h3 id="numerical-reasoning-data-interpretation-under-time-pressure">Numerical reasoning — data interpretation under time pressure</h3>
+<p><strong>What an item looks like.</strong> A table, chart or small dashboard of figures — often financial or commercial in flavour — followed by a question requiring you to extract the right values and perform one or two operations. Typical operations: percentage change, share of total, ratio, rate conversion, simple projection.</p>
+<p><strong>The three patterns that cover most items.</strong> Internalise these until they are reflexes, because at roughly a minute an item you cannot afford to re-derive them:</p>
+<ol>
+<li><strong>Percentage change</strong> = (new − old) / old. Its relatives are where candidates lose marks: <em>percentage of</em> (part/whole), <em>percentage-point difference</em> (a change in two percentages, not a percentage change), and <em>reverse percentage</em> (a figure is £120 after a 20% rise → divide by 1.2, not multiply by 0.8).</li>
+<li><strong>Two-step extraction.</strong> The answer is a ratio or difference between two cells you must first <em>locate</em> — often across different rows, columns or years. <strong>Locate before you calculate</strong>; the arithmetic is trivial, the finding is where the time goes.</li>
+<li><strong>Unit and scale traps.</strong> The table is in thousands or millions; a rate is annual but the question is quarterly; two columns use different currencies. Read the axis labels, column headers and footnotes <em>first</em>.</li>
+</ol>
+<p><strong>The distractor logic.</strong> Wrong answer options are not random — they are constructed from plausible wrong routes: the right operation on the wrong cells, the wrong operation on the right cells, or the correct answer at the wrong scale. This means <strong>an answer "appearing in the options" is no confirmation you're right</strong>, and it means that if your figure matches an option exactly you should still sanity-check the units.</p>
+<p><strong>Calculator and paper.</strong> SHL's numerical items generally permit a calculator and rough paper because they test reasoning, not arithmetic — but the <em>employer</em> can override this, and the interactive formats are increasingly built so a calculator helps less than you'd expect. Confirm in writing; never assume. <code>[INFERRED; documented per deployment — treat as [UNKNOWN] until confirmed]</code></p>
+<h3 id="inductive-reasoning-finding-the-hidden-rule">Inductive reasoning — finding the hidden rule</h3>
+<p><strong>What an item looks like.</strong> A sequence or set of abstract figures governed by a rule you must infer, then apply — either to continue the sequence, complete a matrix, or identify the odd one out.</p>
+<p><strong>The method that works.</strong> Do not stare at the whole item hoping for a gestalt. Run a <strong>dimension checklist</strong>, one at a time: <strong>shape, number, size, shading/colour, position, orientation/rotation</strong>. Most items encode <strong>two simultaneous rules</strong> — a shape rotates <em>and</em> a count increments — and the classic failure is spotting one rule, finding an option that satisfies it, and moving on. If exactly one option satisfies your rule, check it satisfies the <em>second</em> dimension too.</p>
+<p><strong>Odd-one-out is a different mental operation.</strong> You are not finding a pattern in the target; you are finding the rule the <em>other</em> items share and identifying the breaker. Candidates routinely conflate the two and lose easy marks.</p>
+<h3 id="deductive-reasoning-reasoning-validly-from-given-rules">Deductive reasoning — reasoning validly from given rules</h3>
+<p><strong>What an item looks like.</strong> A set of premises, constraints or rules — sometimes verbal, sometimes a seating/ordering puzzle, sometimes conditional logic — from which exactly one conclusion follows.</p>
+<p><strong>The method.</strong> <strong>Externalise the logic</strong>: sketch the ordering, draw the if-then arrows, tabulate the constraints. Holding four constraints in working memory while evaluating five options is how errors happen. Then test each option against <em>every</em> constraint, not just the one that first seems relevant.</p>
+<p><strong>The conditional trap.</strong> "If A then B" implies "if not B then not A" (the contrapositive — valid, and the most commonly missed inference). It does <strong>not</strong> imply "if B then A" (the converse — invalid, and the most commonly <em>committed</em> error). If you learn one piece of formal logic before an SHL test, learn this pair.</p>
+<p><strong>Verbal items and "cannot say."</strong> Where SHL uses verbal-critical items, the discipline is strict entailment: <strong>"cannot say" is correct whenever the passage does not entail the statement</strong>, even when the statement is obviously true in the real world. Answer only from what is on the screen.</p>
+<h2 id="the-adaptive-layer-and-why-harder-means-better">The adaptive layer — and why harder means better</h2>
+<p>The Interactive range delivers items adaptively using item-response theory: answering correctly pushes the next item harder and worth more; answering wrongly eases it. Three consequences follow.</p>
+<p><strong>First, your raw count is not comparable to anyone else's.</strong> Two candidates with the same number correct can receive very different scores if they climbed different difficulty ladders. The model estimates an underlying ability level (a "theta") from both <em>how many</em> and <em>how hard</em>.</p>
+<p><strong>Second, difficulty rising is a success signal, not a failure signal.</strong> Candidates who don't know this read the ramp as evidence they're failing and panic in the last third — a wholly self-inflicted wound.</p>
+<p><strong>Third, early items matter more.</strong> Because early answers steer your difficulty path, a careless slip at item three costs more than the same slip at item twenty. <strong>Start deliberately</strong>, then find your rhythm.</p>
+<h2 id="pacing-the-whole-test-clock">Pacing: the whole-test clock</h2>
+<p>SHL's clock covers the whole test, which makes pacing a resource-allocation problem rather than a series of independent sprints. On a 24-item/36-minute test that is <strong>~90 seconds per item</strong>; on a 30-item/36-minute test, <strong>~72 seconds</strong>. Practical rules:</p>
+<ul>
+<li><strong>Set a per-item budget and hold it.</strong> Rescuing one hard item for three minutes costs you two later items — a guaranteed net loss.</li>
+<li><strong>Never leave a blank.</strong> There is no evidence of negative marking on Verify, so an unanswered item and a wrong item score identically: guess a reasoned option and move. (This is the exact opposite of the Aon rule — see the Aon report — and importing the wrong habit between vendors is a real and avoidable way to lose marks.)</li>
+<li><strong>Bank the easy marks first</strong> where navigation permits; on the adaptive version you generally cannot go back, so commit and move.</li>
+<li><strong>Leave a small buffer.</strong> Finishing with two minutes spare and every item attempted beats finishing perfectly on twenty items and blank on four.</li>
+</ul>
+<h2 id="the-practice-items-always-do-them">The practice items — always do them</h2>
+<p>Every SHL delivery offers untimed practice items before the clock starts. <strong>Do them every single time, even if you've sat the test before.</strong> They are the only rehearsal of the exact interface you will face, and on the Interactive range the drag-and-drop mechanics are genuinely fiddly the first time. Losing thirty seconds on test day to work out a control is a pure, avoidable loss. SHL also hosts free practice materials on its candidate site (shldirect.com) — the closest available match to the real thing. <code>[VENDOR]</code></p>
+<h2 id="what-good-preparation-actually-looks-like">What good preparation actually looks like</h2>
+<p>Not "do a hundred practice tests." The productive sequence is: sit one full timed test cold to find your weakest construct and your pacing gap; drill that construct in short daily sets with an <strong>error log</strong> recording <em>why</em> each miss happened (misread the question / wrong quantity / units / arithmetic slip / ran out of time); re-test under full conditions weekly. Errors cluster, and the cluster is your syllabus. The six-week programme in the companion guide (Chapter 6.5) operationalises this in detail.</p></section><section class="chapter" id="ch-04-opq-personality"><h1 class="chaptertitle">Chapter 4 — The OPQ: SHL&#x27;s Personality Questionnaire, in Full</h1><blockquote>
+<h3 id="at-a-glance-opq32r-the-current-standard">⚡ At a glance — OPQ32r (the current standard)</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Format</strong></td>
+<td><strong>104 blocks of three statements.</strong> In each block you pick the one <strong>most like you</strong> and the one <strong>least like you</strong> — equivalently, "most of the three, then most of the remaining two"</td>
+</tr>
+<tr>
+<td><strong>Length</strong></td>
+<td><strong>Untimed</strong>, but <strong>pacing is monitored</strong>; most candidates finish in <strong>25–35 minutes</strong></td>
+</tr>
+<tr>
+<td><strong>Measures</strong></td>
+<td><strong>32 workplace-relevant traits</strong> across Relationships with People, Thinking Style, and Feelings &amp; Emotions</td>
+</tr>
+<tr>
+<td><strong>Scoring</strong></td>
+<td><strong>Thurstonian item-response theory</strong> — your rankings become ~312 pairwise comparisons, producing <strong>normative</strong> (candidate-comparable) trait estimates</td>
+</tr>
+<tr>
+<td><strong>Integrity checks</strong></td>
+<td>A <strong>consistency indicator</strong>; the forced-choice design itself defeats "fake good"; the normative OPQ32n variant adds an explicit <strong>Social Desirability scale</strong></td>
+</tr>
+<tr>
+<td><strong>Right answers?</strong></td>
+<td><strong>None.</strong> There is no pass mark — your profile is compared against a role profile the employer defined</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<hr />
+<h2 id="the-three-generations-know-which-you-are-sitting">The three generations — know which you are sitting</h2>
+<ul>
+<li><strong>OPQ32i</strong> <em>(legacy)</em> — blocks of <strong>four</strong> statements, most/least. This is what older prep material describes, and why you'll see "blocks of four" in guides that haven't been updated.</li>
+<li><strong>OPQ32r</strong> <em>(current standard)</em> — blocks of <strong>three</strong>, 104 of them. SHL derived it from OPQ32i by removing one statement per block: faster, less cognitively taxing, and with <strong>equal or better validity</strong> thanks to the IRT scoring model. <code>[INDEPENDENT — OPQ32r development literature]</code></li>
+<li><strong>OPQ32n</strong> <em>(normative variant)</em> — you rate each statement independently on a scale rather than ranking them. Longer (45–60 minutes) and includes an explicit <strong>Social Desirability scale</strong>. Less common in graduate hiring.</li>
+</ul>
+<p>If your test presents <strong>three statements and asks for most/least like you</strong>, you are sitting the OPQ32r. That is the version this chapter is built around.</p>
+<h2 id="what-the-questions-look-like">What the questions look like</h2>
+<p>Each block presents three short self-descriptive statements, and — critically — <strong>they are matched for desirability</strong>. You will not be asked to choose between "I work hard" and "I am lazy." You will be asked to choose between things like:</p>
+<blockquote>
+<p><em>I enjoy persuading others to my point of view</em> · <em>I pay close attention to detail</em> · <em>I stay calm when plans change</em></p>
+</blockquote>
+<p>All three are attractive. All three describe traits an employer might want. That is the entire design: <strong>you cannot inflate every trait at once, because every choice to elevate one is a choice to suppress another.</strong> Across 104 blocks, the pattern of your trade-offs — not any individual answer — is the measurement.</p>
+<p>The statements load onto SHL's <strong>32 traits</strong>, grouped into three domains: <strong>Relationships with People</strong> (persuasive, controlling, outspoken, socially confident, democratic, caring…), <strong>Thinking Style</strong> (data rational, evaluative, conceptual, innovative, forward thinking, detail conscious, conscientious…), and <strong>Feelings and Emotions</strong> (relaxed, worrying, tough minded, optimistic, competitive, achieving, decisive…). You are never told which trait a statement measures — and, importantly, <strong>you often cannot reliably tell</strong>, which matters for strategy below.</p>
+<h2 id="how-the-ranking-becomes-a-score-thurstonian-irt">How the ranking becomes a score — Thurstonian IRT</h2>
+<p>This is the part almost no prep site explains, and it is the key to answering well.</p>
+<p>When you rank three statements, you have implicitly made <strong>three pairwise judgements</strong>: most &gt; middle, most &gt; least, and middle &gt; least. Across 104 blocks, that is roughly <strong>312 pairwise comparisons</strong>. A <strong>Thurstonian item-response model</strong> takes all of them and triangulates where you sit on each of the 32 traits. <code>[INDEPENDENT — the Brown &amp; Maydeu-Olivares Thurstonian-IRT work underpinning OPQ32r]</code></p>
+<p>The crucial consequence: because each trait appears in <strong>many blocks, paired against different competing traits</strong>, the model can recover <strong>normative scores</strong> — genuinely comparable between candidates — from a purely comparative task. Older forced-choice tests were "ipsative": they could only tell you which of <em>your own</em> traits was strongest, not how you compared to anyone else. The OPQ32r is not, and this is why it can legitimately be used for selection.</p>
+<p>For you, one structural fact matters most: <strong>every trait is tested repeatedly, in shifting company.</strong> A drive-loaded statement meets sociability in one block, composure in another, detail-focus in a third. Your answers are cross-checked against each other automatically, by design.</p>
+<h2 id="is-it-timed-the-pacing-question">Is it timed? The pacing question</h2>
+<p>The questionnaire is <strong>untimed</strong> — but <strong>response pacing is recorded</strong>, and SHL's guidance is to answer thoughtfully but briskly. Candidates report in-test prompts when answering unusually slowly or unusually quickly. <code>[PREP-VENDOR + CANDIDATE, n=1]</code></p>
+<p>The two tails signal different problems:</p>
+<ul>
+<li><strong>Too fast</strong> pattern-matches to careless or random responding — which also degrades your consistency indicator, since coherent trade-offs require actually reading the statements.</li>
+<li><strong>Too slow</strong> signals over-deliberation. SHL's own guidance notes that over-thought responding produces a <strong>flatter, less differentiated profile</strong> — which is worse for you, because a flat profile gives the employer nothing to match against their role model.</li>
+</ul>
+<p>The target is a <strong>steady conversational rhythm of roughly 10–20 seconds per block</strong>: read all three statements, first-instinct the "most," take the easier binary on the remaining two, move on.</p>
+<h2 id="the-strategy-an-authentic-role-calibrated-hierarchy">The strategy: an authentic, role-calibrated hierarchy</h2>
+<p>The most common candidate question is whether to decide in advance which traits to prioritise and then hold that ordering consistently. <strong>Mechanically, yes — that is exactly right.</strong> But with one amendment that decides whether it works or backfires.</p>
+<p><strong>Why the hierarchy approach is mechanically correct.</strong> Because each trait is re-tested across many blocks in different combinations, the profile that scores cleanly is one expressing a <strong>stable underlying ordering</strong>. If drive genuinely sits above sociability for you, it should beat sociability in <em>every</em> block where they meet. A pre-decided hierarchy gives you an instant tiebreaker for the hard desirable-versus-desirable blocks, which does two things at once: it makes your ~312 comparisons <strong>cohere</strong> (precisely what the consistency indicator measures), and it keeps you <strong>decisive</strong> (protecting your pacing).</p>
+<p><strong>The amendment: the hierarchy must be your real one, calibrated to the role — not an invented ideal.</strong> Build it by taking the employer's published competency language (drive/achievement, analytical rigour, conscientiousness/detail, resilience/composure, teamwork, influence) and honestly ranking <strong>which of those you actually have most of</strong>. That is a different exercise from ranking what you think they want most.</p>
+<p>An invented hierarchy fails for three compounding reasons:</p>
+<ol>
+<li><strong>You cannot reliably classify the statements.</strong> Is "I get things finished" conscientiousness, drive, or achievement orientation? Across 104 engineered trade-offs you will misclassify a meaningful number — and each misclassification pushes your fabricated ordering off course, producing exactly the incoherence the model flags. Your <em>authentic</em> preferences, by contrast, express themselves consistently for free, without you having to identify what anything measures.</li>
+<li><strong>You are optimising against an invisible target.</strong> The employer's role profile weights traits in ways you cannot see — and "more of every good thing" is not what these profiles look like. A profile that is maximal on everything is not an ideal candidate; it is an implausible one.</li>
+<li><strong>The profile follows you into the room.</strong> At many firms your OPQ report seeds the interviewers' probe areas. A profile claiming high detail-consciousness invites detail questions; if it was fabricated, you meet them cold.</li>
+</ol>
+<p><strong>The elegant design point:</strong> the prepared-authentic candidate is <em>naturally</em> fast and consistent, while the fabricating candidate is <em>structurally</em> slow and incoherent. Honesty is not just the ethical strategy here — it is the fast one.</p>
+<h2 id="the-playbook">The playbook</h2>
+<ol>
+<li><strong>Before the test (20 minutes).</strong> Read the employer's competency framework. Write down your genuine <strong>top-5 trait ordering in their vocabulary</strong>, and recall one real example of each. This anchors your confidence in the ranking and doubles as interview preparation, since the same profile follows you.</li>
+<li><strong>In-test.</strong> First instinct on "most"; quick binary on the remaining two. When a block is hard because <strong>both remaining statements are true of you</strong>, apply your hierarchy as the tiebreaker. When a block is hard because <strong>neither is like you</strong>, pick the least-unlike and move — the model handles it across 104 blocks.</li>
+<li><strong>Never.</strong> Don't mid-block strategise about what a statement measures. Don't reverse an earlier trade-off because a block "feels" like it wants something different. Don't race a clock that isn't running.</li>
+<li><strong>Avoid the mid-point trap.</strong> On any rating-style variant (OPQ32n), clustering everything in the middle reads as evasive and produces the flat profile that helps nobody — least of all you.</li>
+<li><strong>Afterwards.</strong> Note what you presented. If you reach interview, your profile is in the room with you.</li>
+</ol>
+<h2 id="what-the-employer-receives">What the employer receives</h2>
+<p>A <strong>profile across the 32 traits</strong>, typically expressed in <strong>stens</strong> (a 1–10 standardised scale) against a chosen norm group, often accompanied by competency-mapped narrative reports and — where the employer has configured one — a <strong>fit indication against a role profile</strong>. There is no pass mark in the instrument itself; the interpretation, and any threshold, belong to the employer (Chapters 6 and 7). Some SHL reports also generate <strong>suggested interview probes</strong> from your profile — which is precisely why authenticity pays downstream.</p>
+<h2 id="adjustments">Adjustments</h2>
+<p>The OPQ is untimed, so extra-time adjustments are less relevant than on the cognitive tests — but if a condition affects reading, processing or sustained concentration across 104 blocks, that is a legitimate basis for requesting an adjustment. Request it <strong>in writing, in advance, through the employer</strong>, under the Equality Act 2010; the companion guide's Chapter 6.7 carries the template.</p></section><section class="chapter" id="ch-05-sjt-video-coding"><h1 class="chaptertitle">Chapter 5 — Situational Judgement, Video Interviews and Coding</h1><p>Beyond cognitive ability and personality, SHL sells three further instrument families that a finance applicant may meet: <strong>situational judgement tests</strong>, the <strong>Smart Interview</strong> video range, and <strong>coding/technical assessments</strong>. Each is scored on entirely different logic from the Verify tests, and each rewards different preparation.</p>
+<h2 id="situational-judgement-tests">Situational judgement tests</h2>
+<p><strong>What they are.</strong> Short workplace scenarios followed by candidate response options, which you either <strong>rate for effectiveness</strong> or <strong>rank</strong>, or where you pick the <strong>most and least effective</strong> action. SHL builds SJTs against its <strong>Universal Competency Framework</strong> and, for larger clients, writes scenarios keyed to the employer's own competencies and values (Chapter 2).</p>
+<p><strong>How they're scored.</strong> Not norm-referenced in the cognitive sense but <strong>keyed</strong>: subject-matter experts at the employer (and/or SHL's IO psychologists) define which responses are effective, and your choices are scored against that key, usually producing competency sub-scores. There is no universal "right answer" — the key encodes <em>that employer's</em> view of good judgement, which is why the same answer can score differently at two firms.</p>
+<p><strong>The independent evidence, honestly.</strong> SJTs add only modest incremental validity over cognitive ability and personality — meta-analytic estimates put the increment at roughly <strong>ΔR ≈ 0.03–0.08</strong> — and they are <strong>transparent and coachable</strong>: candidates can often identify the intended answer, and coaching measurably lifts scores. <code>[INDEPENDENT — SJT review literature]</code> That is <em>good news for a prepared candidate</em>: unlike a cognitive test, the SJT genuinely rewards research.</p>
+<p><strong>How to score well.</strong>
+- <strong>Read the employer's published values and competencies first.</strong> This is the single highest-leverage step, because the key is derived from them.
+- <strong>The reliable keying pattern:</strong> responses showing <strong>ownership, direct constructive communication, and proportionate escalation</strong> key high. <strong>Avoidance, blame-shifting, and reflexive escalation to a manager as a first move</strong> key low. So does unilateral action that bypasses people who should be involved.
+- <strong>Answer both poles</strong> when asked for most <em>and</em> least effective — they are separately scored decisions, and candidates routinely answer only the first.
+- <strong>Stay consistent across scenarios.</strong> SJT and behavioural instruments run consistency checks; answering one scenario as a diplomat and the next as a steamroller reads as incoherent judgement.
+- <strong>Answer as the professional the firm describes, not as your unfiltered self and not cynically.</strong> The middle path — your genuine judgement, calibrated to their stated framework — is both honest and highest-scoring.</p>
+<h2 id="smart-interview-the-video-range">Smart Interview — the video range</h2>
+<p>SHL's video products come in three flavours:</p>
+<ul>
+<li><strong>Smart Interview On Demand</strong> — asynchronous, one-way recorded video. You receive preset questions (drawn from SHL's bank or written by the employer) and record answers in your own time. This is the one most graduate candidates meet.</li>
+<li><strong>Smart Interview Live</strong> — a real-time, structured video interview with a human interviewer, run through SHL's platform.</li>
+<li><strong>Smart Interview Live Coding</strong> — a live interview with an integrated compiler for technical roles.</li>
+</ul>
+<p><strong>How On Demand is scored.</strong> Employer-configured: responses may be <strong>human-reviewed</strong> by recruiters, <strong>AI-scored</strong>, or both. SHL has offered optional AI scoring of spoken content and — historically — facial expression, voice tonality and body language. <code>[VENDOR]</code> <strong>Facial and paralinguistic scoring is contentious across the whole industry</strong>: the dominant video vendor, HireVue, publicly abandoned facial analysis in 2021 after its own data scientist reported that non-verbal signals contributed only about <strong>0.25%</strong> of predictive power relative to answer content. SHL's <em>current</em> documented stance on facial/emotion analysis is something this report flags for direct confirmation with the employer rather than asserting. <code>[UNKNOWN — verify with employer; see Chapter 12]</code></p>
+<p>The practical implication is unchanged either way: <strong>content is overwhelmingly what is scored</strong>, so preparation should go into substance, not performance.</p>
+<p><strong>How to perform well.</strong> Full method in the companion guide (Chapter 8 there and 6.4); the essentials:
+- <strong>Structure every answer</strong> with STAR (Situation, Task, Action, Result) or CARL (Context, Action, Result, Learning).
+- <strong>Lead with a headline sentence</strong> that answers the question directly, then tell the story — reviewers skim and transcript scoring weights early content.
+- <strong>Prepare 6–8 competency stories</strong> (teamwork, leadership, resilience, a failure and what you learned, commercial awareness, "why this firm/division"); most questions are recombinations of these.
+- <strong>Fill most of the answer window</strong> with substance — a 30-second answer to a two-minute window scores what it deserves.
+- <strong>Do the practice questions</strong>, front-light your face, put the camera at eye level, look into the lens, and if you fumble without a re-record, reset in a phrase and continue.</p>
+<h2 id="coding-and-technical-assessments">Coding and technical assessments</h2>
+<p>For technology, quant and some operations streams, SHL offers <strong>coding assessments</strong> and <strong>Smart Interview Live Coding</strong> (a real-time compiler environment supporting one-to-one, panel and group formats). <code>[VENDOR]</code> These are auto-scored on correctness — typically against hidden test cases — often with efficiency (time/space complexity) weighted, and with anti-plagiarism checks standard.</p>
+<p><strong>How to perform well.</strong> Read all constraints before writing; produce the straightforward correct solution <em>before</em> optimising; test the boundary cases the hidden tests target (empty input, maximum size, negatives, duplicates); manage the clock across questions rather than perfecting one. And never paste from external sources — similarity detection is routine on coding platforms, and it is one of the few places where a genuine integrity flag is easy to earn.</p>
+<h2 id="which-of-these-will-barclays-send-you">Which of these will Barclays send you?</h2>
+<p>That depends on programme and division — the subject of Part IV. As a general orientation: SJT-style content and video interviewing are common across banking early-careers funnels; coding assessments appear for technology and quantitative streams and essentially never for front-office IBD. Chapter 9 sets out what is documented about the Barclays funnel specifically, and Chapter 10 covers how it varies by role.</p></section><section class="partdiv" id="part-part-iii-scoring-thresholds-and-integrity"><h1 class="parttitle">Part III — Scoring, Thresholds and Integrity</h1></section><section class="chapter" id="ch-06-how-scoring-works"><h1 class="chaptertitle">Chapter 6 — How SHL Scoring Actually Works</h1><p>Almost everything candidates believe about SHL scoring is wrong in the same direction: they imagine a mark out of 100 and a pass line. Neither exists. This chapter sets out the real pipeline, using SHL's own sample reports — which are publicly downloadable from SHL's support domain and were text-extracted for this report.</p>
+<h2 id="the-pipeline">The pipeline</h2>
+<pre><code>item responses → IRT ability estimate (theta, weighted by item difficulty)
+              → norm lookup against an employer-chosen Comparison Group
+              → Percentile + T-score + Sten (+ A–E band on candidate reports)
+</code></pre>
+<p>Each step discards a different intuition. Let's take them in turn.</p>
+<h2 id="fact-1-your-raw-number-correct-is-not-your-score">Fact 1: your raw number correct is <em>not</em> your score</h2>
+<p>SHL states this outright in its own employer-facing report <code>[VENDOR — Verify Ability Test Report v2.0, verbatim]</code>:</p>
+<blockquote>
+<p>"…because each candidate receives a different set of items, there is not a direct correlation between Hit rate/Accuracy and the Percentile, T or Sten score achieved; <strong>an individual with a lower hit rate may achieve a higher percentile score and vice-versa.</strong>"</p>
+</blockquote>
+<p>This is the single most important scoring fact in the report. Because items are drawn from a randomised bank with IRT-calibrated difficulty parameters, <strong>getting fewer, harder items right can outrank getting more, easier items right.</strong> Candidates who leave a test thinking "I got about 22 out of 30, so that's 73%" are reasoning about a quantity that does not determine their result.</p>
+<h2 id="fact-2-the-employer-sees-your-speed-and-your-accuracy-separately">Fact 2: the employer sees your speed and your accuracy separately</h2>
+<p>The same report defines three distinct reported quantities <code>[VENDOR, verbatim]</code>:</p>
+<ul>
+<li><strong>Number Attempted</strong> — "the number of questions the candidate has seen during the test. The total may include questions that the candidate has not provided a response to."</li>
+<li><strong>Work rate</strong> — "a measure of how far the candidate has got through the test… the number attempted divided by the total number of questions."</li>
+<li><strong>Hit rate</strong> — "a measure of accuracy… the number of questions the candidate has answered correctly divided by the total number of questions attempted."</li>
+</ul>
+<p>So the recruiter sees a <strong>speed dimension and an accuracy dimension alongside the normed score.</strong> A candidate who answered few but got them right shows high hit rate, low work rate; the reverse pattern is equally visible. This is why the pacing advice in Chapter 3 matters beyond the score itself: your <em>profile of behaviour</em> is on the page, not just your outcome.</p>
+<h2 id="fact-3-the-comparison-group-decides-what-your-percentile-means">Fact 3: the comparison group decides what your percentile means</h2>
+<p>Your score is normed against a <strong>comparison group the employer selects</strong>. SHL maintains roughly <strong>70</strong> of them across the Verify range (test type × job level × industry). <code>[VENDOR-manual]</code> The sample report carries an explicit "Assessment Methodology" table pairing each subtest with its group — and the real examples are revealing:</p>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Comparison Group</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Graduate/University Numerical Reasoning UKE</td>
+<td><strong>General Population 2006</strong></td>
+</tr>
+<tr>
+<td>Graduate/University Inductive Reasoning UKE</td>
+<td><strong>General Population 2007</strong></td>
+</tr>
+<tr>
+<td>Verify – Operational Checking UKE</td>
+<td><strong>General Population 2009</strong></td>
+</tr>
+</tbody>
+</table>
+<p><code>[VENDOR — verbatim from the sample report]</code></p>
+<p>Three things follow, and each is genuinely useful:</p>
+<ol>
+<li><strong>Norm groups are frozen, year-stamped standardisation samples</strong> — not rolling averages of current applicants. A report issued years later was still norming against a 2006 sample.</li>
+<li><strong>Test difficulty level and comparison group are independent axes.</strong> A <em>Graduate-level</em> test can be normed against a <em>General Population</em> group — which flatters graduate candidates relative to being normed against other graduates.</li>
+<li><strong>Language/locale is a third axis</strong> (the "UKE" suffix = UK English).</li>
+</ol>
+<p><strong>Why this matters more than your performance.</strong> The same answers can produce a materially different percentile depending on the group chosen. Against a General Population norm, a strong graduate looks exceptional; against a Finance Graduates norm, the same performance is unremarkable, because everyone in that reference pool is already numerically strong. <strong>You are almost never told which group was used.</strong> When a prep site tells you "banks want the 80th percentile," it is quoting a number whose meaning is undefined without naming the group.</p>
+<h2 id="fact-4-the-shl-report-contains-no-pass-mark-and-no-recommendation">Fact 4: the SHL report contains no pass mark, and no recommendation</h2>
+<p>This was verified directly against SHL's sample reports: the employer-facing Verify Ability Test Report shows percentile, T-score, sten, level, comparison group, a narrative interpretation sentence, work rate and hit rate — <strong>and no cut-score, no pass/fail line, and no hire/no-hire verdict.</strong> <code>[VENDOR — absence observed across the full report]</code></p>
+<p>SHL's own framing is that the score "should be used as part of a broader evaluation," and it gates interpretation behind trained users: "The use of these tests is limited to those people who have received the necessary training in their use and interpretation." <code>[VENDOR, verbatim]</code></p>
+<p><strong>The threshold is 100% the employer's decision.</strong> SHL supplies a measurement; the bank decides what to do with it. Chapter 7 takes this apart properly.</p>
+<p>One further disclosure from the report deserves flagging, because it affects how you should read any feedback you're given <code>[VENDOR, verbatim]</code>:</p>
+<blockquote>
+<p>"This report has been generated electronically - <strong>the user of the software can make amendments and additions to the text of the report.</strong> SHL Global Management Limited and its associated companies cannot guarantee that the contents of this report are the unchanged output of the computer system."</p>
+</blockquote>
+<p>In other words, anything an employer shows you may not be SHL's unaltered output.</p>
+<h2 id="fact-5-what-you-see-is-deliberately-coarser">Fact 5: what <em>you</em> see is deliberately coarser</h2>
+<p>SHL ships a <strong>separate candidate-facing report</strong>, and it shows less. In the sample: a <strong>grade letter on an A–E five-band scale</strong> rendered as a segmented bar, a narrative sentence ("your verbal reasoning ability is well below average when compared to the comparison group"), and developmental tips — but <strong>no numeric percentile, no T-score and no sten.</strong> <code>[VENDOR — Verify Candidate Report sample]</code></p>
+<p>Two corrections follow. First, the widely-repeated prep-vendor claim that SHL uses an <strong>A–D</strong> band scale is <strong>wrong</strong> for this report: SHL's own candidate report uses <strong>A–E, five bands.</strong> <code>[VENDOR overrides PREP-VENDOR]</code> Second, the percentile boundaries for those bands are <strong>not printed anywhere in the report</strong> — the commonly-cited 10/20/40/20/10 split is a plausible convention but <strong>is not confirmed by any SHL source.</strong> <code>[UNKNOWN — do not rely on it]</code></p>
+<p>The candidate report also states something practically useful: <strong>"test results remain valid for about 12 to 18 months."</strong> <code>[VENDOR, verbatim]</code> That is the nearest thing to an SHL-sanctioned score shelf-life, and it bears directly on retake questions (below).</p>
+<p>Finally, the candidate report's own construct definitions are worth internalising because they tell you what is <em>not</em> being tested:</p>
+<ul>
+<li><strong>Verbal reasoning</strong> — "emphasises understanding, using and evaluating verbal information <strong>rather than language usage, spelling or grammar</strong>."</li>
+<li><strong>Numerical reasoning</strong> — "the emphasis is on <strong>understanding and evaluating data rather than on computation</strong>."</li>
+<li><strong>Inductive reasoning</strong> — "work with incomplete information and create solutions to novel problems from first principles."</li>
+</ul>
+<h2 id="retakes-and-score-reuse">Retakes and score reuse</h2>
+<p><strong>Retake policy is set by the employer, not SHL</strong> — there is no retake rule anywhere in SHL's reports. <code>[PREP-VENDOR consistent; corroborated by absence]</code> Most graduate schemes allow no retake within a cycle, with cooling-off periods of six to twelve months commonly reported. <code>[PREP-VENDOR]</code></p>
+<p>Two SHL-sourced facts refine this. The <strong>12–18 month validity window</strong> is SHL's own statement on how long a result stands. And the <strong>Smart Assessment Workflow</strong> (Chapter 2) means that, for certain products within a single client, <strong>prior scores are copied into a new attempt</strong> if you re-apply within a defined window — so a result can follow you across applications at the same employer. <code>[VENDOR-PRIMARY]</code></p>
+<p>One structural point worth knowing: because item banks are randomised and scoring is IRT-based, <strong>an immediate retake would not present the same test anyway.</strong> Retake restrictions exist for practice-effect fairness and applicant-pool policy, not to protect item exposure from you individually. <code>[INFERRED]</code></p></section><section class="chapter" id="ch-07-how-good-is-good-enough"><h1 class="chaptertitle">Chapter 7 — How Well Do You Actually Need to Do?</h1><p>This is the question every candidate asks and no vendor answers. This chapter gives you the honest answer, which has three parts: <strong>why there is no single number</strong>, <strong>what the real filtering architectures are</strong>, and <strong>what to actually aim for</strong> given that uncertainty.</p>
+<h2 id="why-there-is-no-such-thing-as-the-shl-pass-mark">Why there is no such thing as "the SHL pass mark"</h2>
+<p>Three independently sufficient reasons:</p>
+<p><strong>1. SHL doesn't set one.</strong> Verified directly from SHL's own sample reports (Chapter 6): there is <strong>no cut-score, no pass mark and no recommendation</strong> anywhere in the output. SHL sells a measurement. <code>[VENDOR — absence observed]</code></p>
+<p><strong>2. The score is relative, not absolute.</strong> A percentile is a rank against a comparison group the <em>employer</em> chose, from roughly 70 available. The identical performance yields a different percentile against General Population than against Finance Graduates. A threshold expressed as a percentile is meaningless without naming the group — and you are not told the group. <code>[VENDOR-manual + INFERRED]</code></p>
+<p><strong>3. Under the most common architecture, the threshold isn't fixed even for one employer.</strong> See below.</p>
+<h2 id="the-two-filtering-architectures">The two filtering architectures</h2>
+<p>Employers run one of two models, and which one you face changes what "good enough" means. <code>[PREP-VENDOR for the taxonomy; structurally standard — INFERRED]</code></p>
+<p><strong>Absolute cut-score.</strong> The employer sets a line — say the 70th percentile against a named group — and everyone above it progresses regardless of margin. Predictable, and stable across the cycle. Clearing it by a mile buys you nothing extra at this stage.</p>
+<p><strong>Rank / top-down sift.</strong> The employer takes the top N% of the actual applicant pool, sized to headcount. Here <strong>there is no fixed cut-score at all</strong>: the effective bar floats with how strong the pool is and how many seats remain. The same score can pass one year and fail the next — which is precisely why prep vendors say cut-offs "vary by year and applicant pool," and why they are structurally unable to give you a reliable number.</p>
+<p>The rank model is the more common one at competitive graduate schemes, and it has a corollary that matters enormously in UK finance: <strong>because most schemes recruit on a rolling basis, the bar effectively rises as seats fill.</strong> A score that clears comfortably in October may not clear in February against a shrinking number of places. <strong>Timing is part of your threshold.</strong></p>
+<h2 id="what-the-numbers-in-circulation-are-actually-worth">What the numbers in circulation are actually worth</h2>
+<p>Prep vendors publish confident tables. Here is the honest status of every one of them: <strong>they are estimates, self-disclaimed by the sources themselves, unconfirmed by SHL or by any employer, and they disagree with each other.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Circulating claim</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"Competitive graduate employers: 70th–85th percentile"</td>
+<td><code>[PREP-VENDOR ESTIMATE]</code></td>
+</tr>
+<tr>
+<td>"Finance/consulting: 75th–80th or above"</td>
+<td><code>[PREP-VENDOR ESTIMATE]</code></td>
+</tr>
+<tr>
+<td>"Elite finance: top 10–15%"</td>
+<td><code>[PREP-VENDOR ESTIMATE]</code></td>
+</tr>
+<tr>
+<td>"Most other graduate roles: 65th–70th competitive"</td>
+<td><code>[PREP-VENDOR ESTIMATE]</code></td>
+</tr>
+<tr>
+<td>Bulge-bracket IB ~75th–90th</td>
+<td><code>[PREP-VENDOR ESTIMATE — two sources disagreed, hence the range]</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>No SHL or employer publication confirms any of these.</strong> They are the market's collective guess, and they are not worthless — the <em>direction</em> is consistent and plausible — but treating any single figure as a target is false precision.</p>
+<p><strong>Pass rates are worse.</strong> No published SHL or employer pass-rate figure exists for any stage. <code>[UNKNOWN]</code> The only defensible statement is arithmetic, not empirical: <strong>if</strong> an employer sets a 75th-percentile cut against a graduate norm group <strong>and</strong> its applicant pool resembles that norm group, then roughly 25% pass by construction. That is a property of norm-referencing, not an observed rate — and real applicant pools to competitive schemes are usually <em>stronger</em> than the norm group, which pushes the pass fraction up. <code>[INFERRED — arithmetic only]</code></p>
+<h2 id="so-what-should-you-actually-aim-for">So what should you actually aim for?</h2>
+<p>Given genuine uncertainty, the right strategy is one that is <strong>robust to the unknowns</strong>. Three principles:</p>
+<p><strong>1. Aim comfortably above the plausible band, not at it.</strong> The estimates cluster around the 70th–85th percentile for competitive graduate finance. Because you don't know the comparison group, and because measurement has real error (below), targeting "about the 75th" is fragile. Target performance that would clear the <em>top</em> of the plausible band against a <em>demanding</em> group. In practice that means: prepare until your timed practice performance is consistently strong, not just occasionally adequate.</p>
+<p><strong>2. Respect the standard error — your score is a range, not a point.</strong> Verify's reliability is <strong>0.77–0.84</strong>. <code>[VENDOR-manual]</code> A reliability around 0.8 means roughly a fifth of score variance is measurement noise, and the standard error of measurement (SEM = √(1−reliability) × SD) implies your observed score would wobble if you re-sat with different items. The gap between the 68th and 74th percentile is quite possibly noise. <strong>You cannot control the noise; you can only lift your true ability far enough that the noise can't drop you below a plausible cut.</strong> This is the strongest argument against fine-tuning toward a specific number.</p>
+<p><strong>3. Diminishing returns are real — know when to stop.</strong> Under an absolute cut-score, everything above the line is wasted effort at this stage. Under a rank sift, higher is genuinely better — but the marginal return on your twentieth practice test is far below your fifth, and (per the rolling-deadline logic above) <strong>the time cost of over-preparing can exceed the score benefit.</strong> If you are ready, apply.</p>
+<h2 id="where-the-online-assessment-actually-sits-in-the-funnel">Where the online assessment actually sits in the funnel</h2>
+<p>The most useful reframing: for competitive UK banking programmes, <strong>the online assessment is usually a screen-out gate rather than the tournament that decides you.</strong> The CV/application screen ahead of it and the assessment centre behind it typically remove more people. The online test filters <em>unprepared</em> applicants more than it discriminates among strong ones — which is exactly why a modest amount of well-targeted preparation moves you from "at risk" to "clears comfortably," and why a further month of grinding moves you very little.</p>
+<p><code>[INFERRED — sector-level analysis, consistent with the companion guide's Chapter 6.8; no employer-published conversion data exists to confirm it for any specific bank]</code></p>
+<p><strong>Allocate accordingly:</strong> get the online stage comfortably clear with efficient, targeted practice, then move the bulk of your effort to the two ends of the funnel — application quality up front, interview and assessment-centre performance behind.</p>
+<h2 id="does-it-depend-on-the-role">Does it depend on the role?</h2>
+<p>Yes — in three distinct ways, developed for Barclays specifically in Chapter 10:</p>
+<ul>
+<li><strong>Different instruments.</strong> Technical and quantitative streams typically add a coding or technical assessment that other streams never see.</li>
+<li><strong>Different comparison groups and role profiles.</strong> The employer can norm against a different group and match against a different competency profile per role family — so the same score is read differently.</li>
+<li><strong>Different competition.</strong> Under a rank sift, the effective bar is set by <em>who else applied to that programme</em>. A stream with fifty applicants per seat has a materially different threshold from one with five hundred, even inside the same bank and the same test.</li>
+</ul>
+<p>The practical implication: <strong>"what score do I need?" has no answer without naming the employer, the programme, the norm group and the year</strong> — and only the first two are ever visible to you.</p>
+<h2 id="the-one-lever-you-do-have">The one lever you do have</h2>
+<p>After you sit an assessment, <strong>UK GDPR Article 15</strong> gives you the right to request your own data from the employer — including your <strong>scores, the comparison group applied, and any threshold outcome</strong>. It costs nothing, must be answered within a month, and is the only mechanism that converts any of this from estimate to fact for your own case. The template is in the companion guide, Chapter 6.7. If you have been rejected at this stage before, this is the highest-value action available to you.</p></section><section class="chapter" id="ch-08-integrity"><h1 class="chaptertitle">Chapter 8 — The Integrity Architecture: What SHL Detects</h1><p>SHL's anti-cheating stack has changed substantially since 2023, and most published candidate guidance describes the old version. This chapter is built from <strong>SHL's own release notes</strong> — public, unauthenticated PDFs on its support domain — which document the current architecture by name and function.</p>
+<p>The headline: SHL has moved from a purely <strong>psychometric</strong> integrity model (catch inflated scores statistically) to a layered model that adds <strong>behavioural surveillance</strong> (image, audio, browser telemetry) rolled up into a single flag called the <strong>Proctoring Index</strong>. Both layers matter, and the honest news for an anxious candidate is at the end.</p>
+<h2 id="layer-1-design-security-randomised-item-banks">Layer 1 — Design security: randomised item banks</h2>
+<p>Every candidate receives a <strong>different set of items</strong> drawn from an IRT-calibrated bank, with difficulty parameters placing different item sets on a common scale. SHL states this explicitly as the reason hit rate ≠ percentile (Chapter 6). <code>[VENDOR-manual + VENDOR sample report]</code></p>
+<p>Consequence: <strong>leaked question banks and shared answers are worthless.</strong> There is no fixed form to leak, and your friend's "question 7" is not your question 7. Item-exposure caps, bank sizes and rotation schedules are not published. <code>[UNKNOWN]</code></p>
+<h2 id="layer-2-the-verification-test-the-classic-model-and-a-significant-finding">Layer 2 — The verification test (the classic model — and a significant finding)</h2>
+<p>The long-standing SHL model was: sit the test <strong>unsupervised</strong>, then optionally sit a shorter <strong>supervised verification test</strong> with different items but matched difficulty. A <strong>Confidence Indicator</strong> compares the two scores; a statistically improbable gap returns <strong>"Not Verified"</strong> rather than a number. It was validated by Monte Carlo simulation — 10,000 simulated candidates, cheating modelled as a <strong>+2 standard-deviation</strong> score inflation. <code>[VENDOR-manual — quantified, primary]</code></p>
+<p>Crucially, <strong>SHL's own manual frames "Not Verified" as requiring investigation, not conviction</strong>, listing innocent causes: distractions, not attempting all items, physical or psychological state on the day, and whether the candidate had used the free practice materials. <code>[VENDOR-manual]</code> It also notes that telling candidates up front that verification will be used <strong>reduces cheating</strong> — deterrence by disclosure is part of the design.</p>
+<p>Every employer-facing Verify Ability Test Report still carries the printed recommendation <code>[VENDOR, verbatim]</code>:</p>
+<blockquote>
+<p>"If these tests were unsupervised, there is a small possibility that these scores do not represent their actual level of ability. <strong>A Verification Test is recommended to verify these scores.</strong>"</p>
+</blockquote>
+<p><strong>The significant finding:</strong> the verification test appears to be <strong>absent from the current Verify Interactive report's "How to verify a result" table.</strong> <code>[VENDOR — comparison of the two report generations]</code> The inference is that SHL has <strong>dropped the verification-test backstop for its current Interactive range</strong>, replacing it with the proctoring stack below. <code>[INFERRED — not stated by SHL; flagged as an open question in Chapter 12]</code> If correct, it is a meaningful shift: from catching inflated scores <em>statistically after the fact</em> to watching candidates <em>during the test</em>.</p>
+<h2 id="layer-3-the-proctoring-stack-current-and-documented-by-name">Layer 3 — The proctoring stack (current, and documented by name)</h2>
+<p>SHL's release notes document a <strong>proctoring feature menu</strong>, enabled at company level. Confirmed features:</p>
+<table>
+<thead>
+<tr>
+<th>Signal</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Periodic image capture</strong> (candidate snapshots at intervals)</td>
+<td>✅ <code>[VENDOR]</code></td>
+</tr>
+<tr>
+<td><strong>Browser off-focus</strong> — captured as <strong>% of assessment time</strong> spent toggling away, not merely a switch count</td>
+<td>✅ <code>[VENDOR]</code></td>
+</tr>
+<tr>
+<td><strong>Multi-face detection</strong> — snapshot if more than one person is in frame</td>
+<td>✅ <code>[VENDOR]</code></td>
+</tr>
+<tr>
+<td><strong>Copy-paste attempt count</strong></td>
+<td>✅ <code>[VENDOR]</code></td>
+</tr>
+<tr>
+<td><strong>Print-screen count</strong></td>
+<td>✅ <code>[VENDOR]</code></td>
+</tr>
+<tr>
+<td><strong>Periodic audio snippets + Multiple Voice Detection (AI)</strong> — detects "whether someone is <strong>prompting/helping the candidate through verbal cues</strong>"</td>
+<td>✅ <code>[VENDOR — July 2023 release]</code></td>
+</tr>
+<tr>
+<td><strong>Face Match (AI biometric)</strong> — matches an <strong>ID-card image capture</strong> against in-test snapshots</td>
+<td>✅ <code>[VENDOR]</code></td>
+</tr>
+<tr>
+<td><strong>Advanced plagiarism detection</strong> — "automatic pattern matching across candidate responses and internet content"</td>
+<td>✅ <code>[VENDOR]</code> — applies to constructed-response/text items</td>
+</tr>
+<tr>
+<td><strong>Snapshot capture at 120-second intervals during interviews</strong> (Smart Interview Professional)</td>
+<td>✅ <code>[VENDOR-PRIMARY — Oct 2025 release notes]</code></td>
+</tr>
+</tbody>
+</table>
+<p>Two critical qualifications, both from SHL's own documentation:</p>
+<p><strong>It is OFF by default.</strong> "These features are switched <strong>OFF by default</strong> until the client requests to enable them," and the Proctoring Index specifically "will have to be requested to be switched on by a company… actioned by their SHL account manager." <code>[VENDOR, verbatim]</code> <strong>Most high-volume graduate sifts run unproctored.</strong> The prep-industry habit of describing full webcam surveillance as standard SHL practice is wrong.</p>
+<p><strong>It runs invisibly.</strong> "On candidate experience there are <strong>no visible changes</strong> while Audio and Video proctoring are background functions." <code>[VENDOR, verbatim]</code> SHL surfaces no in-test indicator, which means <strong>whether you are told depends entirely on the employer's invitation email and consent notice</strong> — not on SHL. Given that the stack includes <strong>biometric face matching and audio capture</strong>, that is a live UK GDPR question, and SHL's consent-capture mechanics are undocumented. <code>[UNKNOWN]</code></p>
+<h2 id="layer-4-the-proctoring-index-the-flag-employers-actually-see">Layer 4 — The Proctoring Index: the flag employers actually see</h2>
+<p>Introduced July 2025, this is the aggregation layer, and SHL's own description is the most important sentence in this chapter <code>[VENDOR, verbatim]</code>:</p>
+<blockquote>
+<p>"Proctoring index is the flag that conveys the <strong>likelihood of a candidate exhibiting suspicious behavior or using unfair means</strong>. <strong>The recruiter is expected to use this information and manually review further to take a final decision.</strong>"</p>
+</blockquote>
+<p>Mechanics:
+- Threshold breaches across the enabled features roll up into an index, originally <strong>High/Medium/Low</strong>, moving to <strong>High/Low</strong> in the July 2025 release.
+- Clients may choose <em>which subset</em> of features feeds the index — but, verbatim: "<strong>While the features can be selected, the individual feature thresholds cannot be altered/customised.</strong> These are set &amp; maintained based on studies that ensure consistency, accuracy, and correctness."
+- The index is distributed into <strong>candidate reports (a dedicated proctoring section), project listings, Excel exports, and pushed back to the ATS</strong>. Recruiters can manually review captured audio/video snippets with timestamps.</p>
+<p><strong>The thresholds themselves are not published.</strong> <code>[UNKNOWN — SHL says they exist and are study-derived; no numbers, no study]</code> Nor is any false-positive rate.</p>
+<h2 id="what-this-means-for-an-honest-candidate">What this means for an honest candidate</h2>
+<p>Read the architecture carefully and it is <strong>less hostile than it looks</strong>:</p>
+<ul>
+<li><strong>Most graduate sifts are unproctored.</strong> Proctoring is opt-in, per company, off by default.</li>
+<li><strong>The index is explicitly triage, not verdict.</strong> SHL states the recruiter "is expected to… manually review further to take a final decision." A flag routes you to a human, it does not auto-reject you.</li>
+<li><strong>The historic backstop was designed with innocence in mind</strong> — SHL's manual lists mundane explanations for a failed verification and instructs investigation rather than conviction.</li>
+</ul>
+<p>The genuine risks are therefore mundane and avoidable rather than sinister — and, notably, the two most common honest-candidate flags map to things you can simply not do: <strong>browser off-focus</strong> (measured as a percentage of test time, so notifications and tab-checking accumulate) and <strong>copy-paste attempts</strong> (counted, even innocent ones).</p>
+<p><strong>The clean-sitting checklist:</strong>
+- Close every other application and tab <strong>before</strong> launching; disable notifications; disconnect a second monitor.
+- Don't copy or paste anything, including your own working.
+- Sit alone, front-lit, face in frame, in one uninterrupted window on a stable connection.
+- If proctoring is on you may not be told in-test — so <strong>ask the recruiter in writing beforehand</strong> whether the assessment is proctored, and whether ID capture is required. That answer also tells you what consent you're giving.
+- Request adjustments in writing, in advance, through the employer.</p>
+<h2 id="ai-era-cheating-shls-stated-position">AI-era cheating: SHL's stated position</h2>
+<p>SHL published its own study of ChatGPT against its portfolio in 2023. Its stated findings <code>[VENDOR]</code>: <strong>personality and competency-based assessments were "not susceptible to inflated scores"</strong>, as were simulations and assessment-centre exercises; <strong>constructed-response and text-based ability tests were measurably impacted</strong>. SHL also markets an AI-text classifier claiming to detect "at least <strong>7x more</strong> candidates using ChatGPT."</p>
+<p>Two honest caveats. First, <strong>the 7x figure is scoped narrowly</strong>: it is versus SHL's <em>own prior</em> textual pattern-matching baseline — <strong>not versus competitors, and not an absolute detection rate.</strong> <code>[VENDOR, precisely scoped]</code> Do not restate it as "SHL catches 7x more cheats." Second, the study is <strong>from 2023, tested ChatGPT as it then was, and is SHL's own research on its own products.</strong> Multimodal frontier models handle image-based items far better than the 2023 baseline, so the "interactive formats are safe" conclusion is <strong>dated and vendor-interested.</strong> No updated SHL study was located. <code>[UNKNOWN]</code></p>
+<p>A structural observation worth more than either claim: the <strong>verification-test design never needed to detect AI at all.</strong> It detects <em>any</em> unexplained score inflation — proxy, collusion, leaked items, or LLM — because it compares your unsupervised score to a supervised one. That is why score-comparison designs are more robust than content forensics, and why its apparent removal from the Interactive range (Layer 2) is a genuinely consequential change.</p></section><section class="partdiv" id="part-part-iv-barclays"><h1 class="parttitle">Part IV — Barclays</h1></section><section class="chapter" id="ch-09-barclays-process"><h1 class="chaptertitle">Chapter 9 — The Barclays Process: What Actually Happens</h1><blockquote>
+<h3 id="at-a-glance-barclays-early-careers">⚡ At a glance — Barclays early careers</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Official stages</strong></td>
+<td><strong>Three</strong>: Application → <strong>Initial Assessments</strong> → Assessment Centre <code>[EMPLOYER]</code></td>
+</tr>
+<tr>
+<td><strong>The online stage</strong></td>
+<td><strong>"Two short interactive assessments"</strong> — one on how you'd <em>perform</em>, one on your <em>ways of working</em>. Completable on <strong>mobile or tablet</strong> <code>[EMPLOYER]</code></td>
+</tr>
+<tr>
+<td><strong>Vendor</strong></td>
+<td><strong>Barclays names none.</strong> Best dated third-party evidence points to <strong>SHL</strong> (possibly with Cappfinity for the values element). The pymetrics attribution appears stale <code>[see below]</code></td>
+</tr>
+<tr>
+<td><strong>Technical roles</strong></td>
+<td>Get an <strong>additional technical skills assessment</strong> — confirmed by Barclays itself <code>[EMPLOYER]</code></td>
+</tr>
+<tr>
+<td><strong>Total assessment time</strong></td>
+<td>~<strong>60–90 minutes</strong> across the stages <code>[PREP-VENDOR]</code></td>
+</tr>
+<tr>
+<td><strong>Assessment centre</strong></td>
+<td><strong>"Two or three stages"</strong>, in person <em>or</em> virtual, including a <strong>motivational interview with a member of the leadership team</strong> <code>[EMPLOYER]</code></td>
+</tr>
+<tr>
+<td><strong>Timeline</strong></td>
+<td>~<strong>4–8 weeks</strong> end to end; results ~<strong>1–2 weeks</strong> after the assessment centre <code>[PREP-VENDOR]</code></td>
+</tr>
+<tr>
+<td><strong>Thresholds</strong></td>
+<td><strong>None published.</strong> Barclays: outcomes "vary based on role and competition"</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<hr />
+<h2 id="the-official-process-in-barclays-own-words">The official process, in Barclays' own words</h2>
+<p>Barclays publishes its early-careers process on its careers site, and it is worth reading exactly as written because it is shorter than most guides suggest. <code>[EMPLOYER — search.jobs.barclays/internship-graduate-application, accessed 2026-08-01]</code></p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>What Barclays says</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Your Application</strong></td>
+<td>Application form on the careers site, with "hints and tips" resources offered.</td>
+</tr>
+<tr>
+<td><strong>2. Initial Assessments</strong></td>
+<td><em>"Two short interactive assessments, which will tell us how you might perform in the workplace, and your typical or preferred ways of working."</em> Completable on <strong>mobile phone or tablet</strong>. <strong>Technical programmes (e.g. Explorer Developer) get an additional technical skills assessment.</strong></td>
+</tr>
+<tr>
+<td><strong>3. Assessment Centre</strong></td>
+<td>In person <strong>or virtual</strong>. Comprises <em>"two or three stages, including a motivational interview with a member of the leadership team."</em> Assessors evaluate "relevant strengths, behaviours, and technical skills required for specific roles."</td>
+</tr>
+</tbody>
+</table>
+<p>The programmes Barclays runs: <strong>Internships</strong> (summer <em>and</em> off-cycle), <strong>Graduate</strong> programmes (with <strong>Explorer</strong> and <strong>Expert</strong> pathways), the <strong>Discovery Programme</strong> (Barclays' insight/spring-week equivalent, for students within two years of graduating), and <strong>Apprenticeships</strong>. <code>[EMPLOYER]</code></p>
+<h3 id="the-discrepancy-worth-knowing-about">The discrepancy worth knowing about</h3>
+<p><strong>Barclays' official three-stage list does not include a standalone video interview.</strong> Prep vendors near-universally insert a one-way video interview as a fourth stage, and one 2026/27 guide does confirm a video stage exists without naming its vendor. <code>[PREP-VENDOR]</code></p>
+<p>This is unresolved, and it matters for planning. <code>[UNKNOWN]</code> The most likely readings are that a video component sits <em>inside</em> what Barclays calls the assessment centre ("two or three stages"), or that it appears for some programmes and not others. <strong>Plan for the possibility of a video interview, and treat your invitation email as authoritative.</strong></p>
+<h2 id="what-the-two-interactive-assessments-actually-are">What the two interactive assessments actually are</h2>
+<p>Barclays' own phrasing decomposes neatly: <strong>"how you might perform in the workplace"</strong> = an ability/cognitive measure; <strong>"your typical or preferred ways of working"</strong> = a behavioural/personality/working-style measure. One of each. <code>[EMPLOYER + INFERRED]</code></p>
+<p>A current prep-vendor guide (2026/27 cycle) fills in the component detail, listing across the online stages: <strong>Numerical Reasoning, Verbal Reasoning, Logical Reasoning, a Values and Mindset assessment, and a Personality assessment</strong>, plus a <strong>coding/computer-science assessment for technical roles</strong> — branded, it says, as <strong>"Business Insight Stage 1" and "Business Insight Stage 2"</strong>, totalling <strong>60–90 minutes</strong>. <code>[PREP-VENDOR — GraduatesFirst, accessed 2026-08-01]</code></p>
+<p><strong>Reconcile these carefully.</strong> Barclays says <em>two</em> assessments; the prep vendor lists <em>five components</em>. The most plausible reading is that the prep vendor is enumerating <strong>constructs across the whole funnel</strong>, not five standalone tests at stage two — with the reasoning constructs bundled into one interactive cognitive measure and the values/mindset/personality constructs bundled into the second. <code>[INFERRED]</code> Do not expect five separate tests; do expect both reasoning and working-style content.</p>
+<h2 id="the-vendor-question-resolved-as-far-as-the-evidence-allows">The vendor question — resolved as far as the evidence allows</h2>
+<p>Existing research on Barclays pointed two ways: <strong>SHL</strong> and <strong>pymetrics</strong>. Here is the honest resolution.</p>
+<table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Evidence</th>
+<th>Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Barclays names <strong>no vendor at all</strong></td>
+<td><code>[EMPLOYER]</code> careers page, accessed 2026-08-01</td>
+<td><strong>Decisive on what is <em>confirmed</em></strong></td>
+</tr>
+<tr>
+<td>"Typically delivered via <strong>SHL or Cappfinity</strong>"</td>
+<td><code>[PREP-VENDOR]</code> — GraduatesFirst 2026/27 guide, current cycle</td>
+<td>Strongest dated third-party attribution</td>
+</tr>
+<tr>
+<td>SHL listed as Barclays' vendor (cognitive + personality + "mindset")</td>
+<td><code>[PREP-VENDOR]</code> — carried in earlier project research</td>
+<td>Consistent with the above</td>
+</tr>
+<tr>
+<td><strong>pymetrics</strong> as Barclays' vendor</td>
+<td><code>[PREP-VENDOR]</code> — single/weak; pymetrics was absorbed into <strong>Harver in 2022</strong>; no dated 2025–26 source found</td>
+<td><strong>Weak — likely stale or a generic-list artefact</strong></td>
+</tr>
+</tbody>
+</table>
+<p>There is also a suggestive linguistic hint. Barclays' own copy says <strong>"two short <em>interactive</em> assessments"</strong> completable on <strong>mobile or tablet</strong> — and SHL's current cognitive line is literally branded <strong>Verify Interactive</strong>, is explicitly mobile-capable, and uses interactive drag-and-drop item formats. <code>[INFERRED — suggestive, not proof]</code></p>
+<p><strong>The honest verdict: the best-evidenced current attribution is SHL, possibly alongside Cappfinity for the values/strengths element. The pymetrics attribution appears outdated. But Barclays confirms nothing, so this cannot be stated as fact.</strong> Your invitation email will name the tool — that is the only authoritative source for <em>your</em> assessment, and it outranks this report.</p>
+<p><strong>Practically, does it matter?</strong> Less than you'd think, with one important exception. The reasoning constructs (numerical, verbal, logical) and a working-style questionnaire are prepared for in much the same way whoever supplies them. The exception is <strong>guessing policy</strong>, which differs sharply between vendors: SHL has no negative marking (never leave a blank), while Aon/cut-e deducts for wrong answers (eliminate-then-commit, or leave blank). If your invitation names Aon, switch strategies — see the companion Aon report.</p>
+<h2 id="selection-criteria-barclays-states-publicly">Selection criteria Barclays states publicly</h2>
+<p>Barclays says candidates must "share the same key attributes and <strong>Values</strong> as Barclays colleagues throughout our business," and its assessors evaluate "relevant <strong>strengths, behaviours</strong>, and technical skills required for specific roles." <code>[EMPLOYER]</code></p>
+<p>That language — values, strengths, behaviours — is exactly what a values/mindset assessment and a competency-keyed assessment centre are built to measure. <strong>Read Barclays' published Values and behaviours before you sit the second assessment</strong>; Chapter 11 turns this into a concrete preparation step.</p>
+<h2 id="two-policies-you-should-know-about">Two policies you should know about</h2>
+<p><strong>AI tools are banned in interviews.</strong> Barclays states: <em>"Third-party AI tools are not permitted during your Barclays interview"</em> — explicitly including transcription bots and meeting assistants — and breach means the <strong>interview is terminated and the application withdrawn</strong>. <code>[EMPLOYER]</code> This is a recent (2025-era) addition and it is unusually explicit. Take it literally: no note-taking bots, no meeting assistants running in the background, nothing joining your video call but you.</p>
+<p><strong>Adjustments are actively invited.</strong> Barclays states it welcomes candidates requiring adjustments and <strong>encourages disclosure at application stage</strong>, naming <strong>extra time on assessments</strong> and <strong>offline alternatives to online assessments</strong> among available accommodations, and stating that disclosed information is kept confidential. <code>[EMPLOYER]</code> The named "offline alternative" is notable — it is a meaningful option if online proctored testing is a barrier for you. Barclays does not publish a request deadline or a named adjustments contact; a resourcing helpdesk is referenced. <code>[UNKNOWN]</code> <strong>Disclose early — the duty to adjust bites once the employer knows.</strong></p>
+<h2 id="where-the-biggest-cut-happens">Where the biggest cut happens</h2>
+<p><strong>Unknown for Barclays specifically</strong>, and no one should tell you otherwise. Barclays publishes no pass rates; a prep vendor explicitly notes that "Barclays does not publicly share pass rates, as <strong>outcomes vary based on role and competition</strong>" — itself a useful hint that a <strong>rank/top-down sift</strong> is in play rather than a fixed line (Chapter 7). <code>[PREP-VENDOR]</code></p>
+<p>What can be said, as sector-level inference rather than Barclays fact: for competitive UK banking programmes the <strong>application/CV screen and the assessment centre typically cut harder than the online stage</strong>, which functions as a screen-out gate. And because Barclays runs <strong>rolling</strong> recruitment — including explicitly off-cycle internships — <strong>applying early is part of your threshold.</strong> <code>[INFERRED]</code></p></section><section class="chapter" id="ch-10-barclays-by-role"><h1 class="chaptertitle">Chapter 10 — Does It Depend on the Role? Yes — in Three Ways</h1><p>You asked directly whether requirements vary by the role you apply to. The answer is <strong>yes</strong>, and it varies along three distinct axes that are worth separating, because only one of them is about the test itself.</p>
+<h2 id="axis-1-different-instruments-confirmed-by-barclays">Axis 1 — Different instruments (confirmed by Barclays)</h2>
+<p>This one is not inference. <strong>Barclays states explicitly that technical programmes get an additional assessment</strong>: candidates for technical routes such as <strong>Explorer Developer</strong> sit a <strong>technical skills assessment</strong> on top of the two interactive assessments everyone takes. <code>[EMPLOYER]</code> A prep-vendor guide corroborates a <strong>coding / computer-science assessment</strong> for those programmes. <code>[PREP-VENDOR]</code></p>
+<p>Barclays also says its assessment centre "comprises <strong>two or three stages</strong>" and that assessors evaluate "relevant strengths, behaviours, and <strong>technical skills required for specific roles</strong>" — so the <strong>assessment-centre content is role-tailored too</strong>, not just the online stage. <code>[EMPLOYER]</code></p>
+<p>Evidence of how different a technical pipeline can look comes from Barclays' campus technology hiring, where candidates report assessments of roughly <strong>15 multiple-choice questions plus 2 coding problems</strong>, or <strong>~30 pseudo-code MCQs plus 2 coding questions</strong> (one easy, one moderate), covering Java, C++, SQL and data-structures/algorithms, with the consistent warning that "time is very less." <code>[CANDIDATE, n≈4 — but note: these reports are from Indian campus tech hiring, 2020–22, a materially different pipeline from UK early careers; use them as evidence that technical streams face a coding-heavy assessment, not as a description of the UK graduate process]</code></p>
+<p><strong>What is <em>not</em> evidenced:</strong> any dated source differentiating <strong>Investment Bank vs Barclays UK/retail vs Markets vs Private Bank</strong> at the online stage for UK early careers. Barclays' official page implies a <strong>common core</strong> (the two interactive assessments) with <strong>technical add-ons where relevant</strong>. <code>[UNKNOWN]</code> Do not assume division-level differences beyond the technical/non-technical split — and be sceptical of any guide that asserts them without a source.</p>
+<table>
+<thead>
+<tr>
+<th>Programme / stream</th>
+<th>Online stage</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Discovery Programme (insight)</td>
+<td>Two interactive assessments</td>
+<td>Barclays' spring-week equivalent</td>
+</tr>
+<tr>
+<td>Summer Internship</td>
+<td>Two interactive assessments</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Off-cycle Internship</strong></td>
+<td>Two interactive assessments</td>
+<td>Rolling applications — timing matters most here</td>
+</tr>
+<tr>
+<td>Graduate — Explorer / Expert pathways</td>
+<td>Two interactive assessments</td>
+<td>Structurally distinct tracks <code>[EMPLOYER]</code></td>
+</tr>
+<tr>
+<td><strong>Technical (e.g. Explorer Developer)</strong></td>
+<td>Two interactive assessments <strong>+ technical skills assessment</strong></td>
+<td><strong>Confirmed by Barclays</strong> <code>[EMPLOYER]</code></td>
+</tr>
+<tr>
+<td>Apprenticeships</td>
+<td><code>[UNKNOWN]</code> — not separately documented</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="axis-2-different-yardsticks-for-the-same-test">Axis 2 — Different yardsticks for the same test</h2>
+<p>Even where two candidates sit the <em>identical</em> instrument, the result can be read differently, because the employer configures two things per role:</p>
+<p><strong>The comparison group.</strong> SHL offers roughly 70 norm groups (Chapter 6), and the employer chooses. A quantitative role might be normed against a more numerically able reference population than a generalist one — which means the same raw performance yields a <em>lower</em> percentile. You are never told which group was used.</p>
+<p><strong>The role profile.</strong> Under a competency-matching architecture (Chapter 2), your behavioural/values profile is compared against a <strong>role-specific success profile</strong>. This is why the working-style assessment has no universal "right" answers: a profile that fits a client-facing markets role may not fit a controls or technology role, and vice versa. Barclays' own language — assessors evaluate "relevant strengths, behaviours… <strong>required for specific roles</strong>" — is precisely this. <code>[EMPLOYER]</code></p>
+<p><strong>The practical upshot:</strong> the same performance can pass for one Barclays programme and fall short for another, with no inconsistency in the system. That is the design, not a bug.</p>
+<h2 id="axis-3-different-competition-usually-the-biggest-factor">Axis 3 — Different competition (usually the biggest factor)</h2>
+<p>This is the axis candidates most underestimate. Under a <strong>rank/top-down sift</strong> — which the evidence suggests is in play, since Barclays states outcomes "vary based on role and competition" — <strong>the effective bar is set by who else applied to that programme.</strong> <code>[PREP-VENDOR quoting Barclays' position; INFERRED]</code></p>
+<p>A stream with fifty applicants per seat and a stream with five hundred per seat have materially different thresholds <em>even running the identical test in the same bank in the same week</em>. Front-office and brand-name programmes attract the heaviest volume; technical, operations and some regional programmes attract less. Nothing about your score changes — the line moves.</p>
+<p>And because Barclays recruits on a <strong>rolling basis</strong> (explicitly so for off-cycle internships), <strong>the line also moves through the cycle</strong> as seats fill. Applying in the first weeks of an intake is, in a real sense, part of clearing the threshold.</p>
+<h2 id="so-how-should-this-change-what-you-do">So how should this change what you do?</h2>
+<ol>
+<li><strong>Find out which programme's process you're actually in.</strong> Your invitation email names the assessments. If it includes a technical assessment, budget preparation time for it separately — coding preparation does not transfer from numerical-reasoning practice.</li>
+<li><strong>Don't chase a percentile target.</strong> Since the yardstick (comparison group) and the bar (competition) both vary invisibly by role, aiming at a specific number is false precision. Aim to be <em>comfortably</em> strong (Chapter 7).</li>
+<li><strong>Research the specific role's competencies, not "Barclays" generically.</strong> The working-style assessment and the assessment centre are matched against a role profile. The published Values are the common floor; the role's own competency language is the differentiator.</li>
+<li><strong>Apply early</strong>, especially for off-cycle. Under a rolling rank sift, timing is a threshold variable you control completely — unlike the comparison group or the applicant pool.</li>
+<li><strong>If you're weighing which programme to target</strong>, understand that the <em>same</em> preparation converts at different rates across streams. That is not a reason to apply somewhere you don't want to work — but it is a reason to be realistic about the volume you're competing against, and to make sure the application quality (the biggest cut, per Chapter 7) matches the competitiveness of the stream.</li>
+</ol></section><section class="chapter" id="ch-11-barclays-playbook"><h1 class="chaptertitle">Chapter 11 — The Barclays Playbook</h1><p>Everything in this report, converted into what you actually do. This assumes a UK early-careers application (Discovery, internship, off-cycle or graduate).</p>
+<h2 id="t-minus-3-weeks-establish-the-facts-dont-guess-them">T-minus 3 weeks — establish the facts, don't guess them</h2>
+<p><strong>1. Apply early — this is a threshold variable, not a scheduling preference.</strong> Barclays recruits on a rolling basis. Under a rank sift the bar rises as seats fill (Chapter 7). If you are ready in week three of preparation, apply in week three. Do not spend a month polishing toward a marginally better score while the pool you're competing into shrinks.</p>
+<p><strong>2. Read Barclays' published Values and behaviours.</strong> Barclays states candidates must "share the same key attributes and <strong>Values</strong> as Barclays colleagues," and its assessors evaluate "relevant <strong>strengths, behaviours</strong>, and technical skills." <code>[EMPLOYER]</code> This language is the key to the working-style assessment <em>and</em> the assessment centre. Print them; map two genuine examples from your own experience onto each.</p>
+<p><strong>3. Request adjustments now if you need them.</strong> Barclays <strong>encourages disclosure at application stage</strong> and names <strong>extra time</strong> and <strong>offline alternatives to online assessments</strong> as available. <code>[EMPLOYER]</code> Do it in writing, early — the duty to adjust attaches once the employer knows. There is no published deadline, which is a reason to be early, not late.</p>
+<p><strong>4. When the invitation arrives, read it as the authoritative document it is.</strong> It names the assessments, the vendor, the deadline and the rules — outranking every guide including this one. Specifically establish: <strong>which tests</strong>, <strong>whether proctored</strong>, <strong>whether ID capture is required</strong>, and <strong>whether a calculator and paper are permitted</strong>. If anything is unstated, <strong>ask the recruiter in writing.</strong> That email is also your record if anything goes wrong later.</p>
+<h2 id="t-minus-2-weeks-targeted-preparation">T-minus 2 weeks — targeted preparation</h2>
+<p><strong>5. Diagnose before you drill.</strong> Sit one full timed reasoning test cold. Score it. Identify your weakest construct <em>and</em> your pacing gap (did you finish?). That is your syllabus — not a generic hundred-test grind.</p>
+<p><strong>6. Drill the reasoning constructs to reflex</strong> (full technique in Chapter 3):
+- <strong>Numerical:</strong> the three patterns — percentage change, two-step extraction, unit/scale traps. Locate before you calculate.
+- <strong>Verbal:</strong> strict entailment; "cannot say" whenever the passage doesn't support the statement, however plausible.
+- <strong>Logical/inductive:</strong> run the dimension checklist (shape, number, size, shading, position, orientation); expect <strong>two simultaneous rules</strong>.</p>
+<p><strong>7. Keep an error log by <em>cause</em></strong> — misread the question / wrong quantity / units / arithmetic slip / ran out of time. Errors cluster; the cluster is your revision plan. This is worth more than doubling your practice volume.</p>
+<p><strong>8. Prepare the working-style assessment properly — it is not a throwaway.</strong> Decide, in Barclays' own vocabulary, your genuine <strong>top-5 trait ordering</strong> with one real example each. If the format is a forced-choice questionnaire (most/least like you), Chapter 4's method applies directly: <strong>an authentic, role-calibrated hierarchy used as your tiebreaker, held consistently, answered decisively at 10–20 seconds per block.</strong> Do not fabricate a profile: you cannot reliably classify what each statement measures, the consistency checks catch incoherence, and the profile follows you into the interview.</p>
+<p><strong>9. If you're on a technical programme, prepare the coding assessment separately.</strong> It does not overlap with reasoning practice. Drill data structures and algorithms, language-specific MCQs, and — per candidate reports — <strong>work fast</strong>, because time pressure is the consistent complaint. <code>[CANDIDATE]</code></p>
+<h2 id="t-minus-2-days-logistics">T-minus 2 days — logistics</h2>
+<p><strong>10. Simulate once, in the real environment.</strong> Your actual laptop, your actual room, at the time of day you'll sit it. This surfaces set-up problems while they're still fixable.</p>
+<p><strong>11. Set up for a clean sitting</strong> (Chapter 8 — the two commonest honest-candidate flags are browser off-focus, measured as a <em>percentage of test time</em>, and copy-paste attempts, which are <em>counted</em>):
+- Close every other application and browser tab <strong>before</strong> launching.
+- Disable notifications; disconnect any second monitor.
+- <strong>Don't copy or paste anything</strong>, including your own working.
+- Sit alone, front-lit, face in frame, stable connection, one uninterrupted window.
+- Calculator and paper only if the invitation confirmed them.</p>
+<h2 id="on-the-day-in-test-decision-rules">On the day — in-test decision rules</h2>
+<p><strong>12. Do the practice items every time.</strong> They are the only rehearsal of the exact interface, and the interactive formats are fiddly on first contact.</p>
+<p><strong>13. Pace to the whole-test clock</strong>, not per item (SHL-style delivery). Set a per-item budget and hold it; rescuing one hard item for three minutes costs you two later ones.</p>
+<p><strong>14. Never leave a blank — <em>if</em> it's an SHL-style test.</strong> SHL has no documented negative marking, so an unanswered item scores the same as a wrong one: reasoned guess, move on. <strong>But check your invitation</strong>: if the vendor turns out to be <strong>Aon/cut-e</strong>, the rule inverts completely (wrong answers are deducted — eliminate-then-commit, or leave blank). Importing the wrong vendor's habit is a genuine, avoidable way to lose marks.</p>
+<p><strong>15. On adaptive tests, rising difficulty means you're winning.</strong> Don't read the ramp as failure. And start deliberately — early items steer your difficulty path, so an early careless slip costs more than a late one.</p>
+<p><strong>16. On the working-style assessment</strong>: first instinct on "most like you," quick binary on the rest, hierarchy as tiebreaker, steady rhythm. Don't strategise mid-block; don't cluster at the mid-point.</p>
+<h2 id="assessment-centre-and-beyond">Assessment centre and beyond</h2>
+<p><strong>17. Expect "two or three stages" including a motivational interview with a member of the leadership team.</strong> <code>[EMPLOYER]</code> Prepare a genuine, specific answer to <em>why Barclays, why this programme, why now</em> — motivational interviews reward specificity about the firm and the role, and this one is conducted by someone senior enough to notice its absence.</p>
+<p><strong>18. Take the AI-tools ban literally.</strong> Barclays states third-party AI tools — <strong>explicitly including transcription bots and meeting assistants</strong> — are not permitted during interviews, and that breach means the interview is terminated and the application withdrawn. <code>[EMPLOYER]</code> Check nothing is running in the background of your video calls. This is the single clearest, most avoidable disqualification risk in the entire Barclays process.</p>
+<p><strong>19. Carry your profile consistently.</strong> Your working-style results may seed interviewer probes. The version of you the questionnaire described should be the version that turns up.</p>
+<h2 id="afterwards">Afterwards</h2>
+<p><strong>20. Debrief immediately</strong> — what the assessments actually were, timings, whether proctoring was mentioned, what surprised you. This is your intelligence for next cycle, and this market's information asymmetry is exactly what those notes erode.</p>
+<p><strong>21. If rejected, use the one lever you have.</strong> Under <strong>UK GDPR Article 15</strong>, request from Barclays your <strong>scores, the comparison group applied, any threshold outcome</strong>, and any proctoring/integrity data held. It is free, must be answered within a month, and converts guesswork into fact for your own case. Template in the companion guide, Chapter 6.7. If a disability-related adjustment was needed and not in place, that is also the strongest basis for asking for reconsideration.</p>
+<h2 id="the-five-things-that-matter-most">The five things that matter most</h2>
+<p>If you remember nothing else from this report:</p>
+<ol>
+<li><strong>Apply early.</strong> Rolling recruitment means timing is part of the threshold.</li>
+<li><strong>The application/CV screen and the assessment centre usually cut harder than the online test.</strong> Weight your effort to the ends of the funnel.</li>
+<li><strong>Clear the online stage comfortably, then stop optimising it.</strong> Your score is a range, not a point, and there are diminishing returns past "comfortably clear."</li>
+<li><strong>Don't fake the working-style assessment.</strong> Authentic-and-consistent outperforms fabricated-and-incoherent, and the profile follows you into the room.</li>
+<li><strong>Read the invitation email and confirm the rules in writing.</strong> Vendor, proctoring, calculator, deadline. It is the only document that describes <em>your</em> assessment, and it decides which guessing strategy is correct.</li>
+</ol></section><section class="chapter" id="ch-12-confidence-register"><h1 class="chaptertitle">Chapter 12 — Confidence Register and Residual Gaps</h1><p>The promise of this report is labelled honesty. This chapter separates what is solidly established from what remains unknown, so you know exactly which parts to lean on — and how each gap could be closed.</p>
+<h2 id="established-at-high-confidence-primary-sourced">Established at high confidence (primary-sourced)</h2>
+<table>
+<thead>
+<tr>
+<th>Finding</th>
+<th>Basis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hit rate ≠ percentile</strong> — "an individual with a lower hit rate may achieve a higher percentile score and vice-versa"</td>
+<td><code>[VENDOR]</code> verbatim, Verify Ability Test Report sample</td>
+</tr>
+<tr>
+<td>SHL reports contain <strong>no cut-score, no pass mark, no hire recommendation</strong> — the threshold is entirely the employer's</td>
+<td><code>[VENDOR]</code> absence observed across full report</td>
+</tr>
+<tr>
+<td>Employer sees <strong>Number Attempted / Work rate / Hit rate</strong> alongside the normed score</td>
+<td><code>[VENDOR]</code> verbatim definitions</td>
+</tr>
+<tr>
+<td>Comparison groups are <strong>year-stamped frozen samples</strong>, employer-chosen; ~70 in the Verify range; test level and norm group are <strong>independent axes</strong></td>
+<td><code>[VENDOR]</code> sample report + technical manual</td>
+</tr>
+<tr>
+<td>Candidate report uses <strong>A–E five bands</strong> (prep-vendor "A–D" is wrong); shows no numeric percentile</td>
+<td><code>[VENDOR]</code> candidate report sample</td>
+</tr>
+<tr>
+<td><strong>"Test results remain valid for about 12 to 18 months"</strong></td>
+<td><code>[VENDOR]</code> verbatim, candidate report</td>
+</tr>
+<tr>
+<td>Clients <strong>can edit report text</strong> — output shown to you may not be SHL's unaltered result</td>
+<td><code>[VENDOR]</code> verbatim</td>
+</tr>
+<tr>
+<td>Verify reliability <strong>0.77–0.84</strong>; theta → T-scores (50/10) and stens (5.5/2)</td>
+<td><code>[VENDOR-manual]</code></td>
+</tr>
+<tr>
+<td><strong>OPQ32r</strong> = 104 blocks of three, most/least, Thurstonian IRT → normative scores; pacing monitored though untimed</td>
+<td><code>[INDEPENDENT]</code> + <code>[VENDOR]</code></td>
+</tr>
+<tr>
+<td>Verification test + <strong>Confidence Indicator</strong>, Monte Carlo validated (10,000 candidates, cheating = +2SD); "Not Verified" = investigate, not convict</td>
+<td><code>[VENDOR-manual]</code></td>
+</tr>
+<tr>
+<td><strong>Proctoring is OFF by default</strong>, opt-in per company via account manager</td>
+<td><code>[VENDOR]</code> verbatim, release notes</td>
+</tr>
+<tr>
+<td><strong>Proctoring Index</strong> (High/Med/Low → High/Low) = "likelihood… the recruiter is expected to… manually review further to take a final decision"; <strong>thresholds not client-alterable</strong> and <strong>not published</strong></td>
+<td><code>[VENDOR]</code> verbatim, July 2025 release</td>
+</tr>
+<tr>
+<td>Proctoring features confirmed by name: image capture, <strong>browser off-focus as % of time</strong>, multi-face, copy-paste count, print-screen count, <strong>audio snippets + Multiple Voice Detection</strong>, <strong>Face Match vs ID card</strong>, plagiarism pattern-matching</td>
+<td><code>[VENDOR]</code> release notes</td>
+</tr>
+<tr>
+<td>Audio/video proctoring runs with <strong>"no visible changes"</strong> to the candidate</td>
+<td><code>[VENDOR]</code> verbatim</td>
+</tr>
+<tr>
+<td><strong>Smart Interview Professional captures snapshots at 120-second intervals</strong>, company-configurable</td>
+<td><code>[VENDOR-PRIMARY]</code> Oct 2025 release notes</td>
+</tr>
+<tr>
+<td><strong>Smart Assessment Workflow</strong>: prior scores copied into re-invitations within a window (SVAR/SIOD/AI Screener) — scores can follow you at one employer</td>
+<td><code>[VENDOR-PRIMARY]</code></td>
+</tr>
+<tr>
+<td>SHL owned by <strong>Exponent Private Equity</strong>, bought from Gartner <strong>Feb 2018, US$400m</strong>; still held Aug 2026</td>
+<td><code>[VENDOR + INDEPENDENT]</code></td>
+</tr>
+<tr>
+<td><strong>UCF</strong> = 8 factors / 20 dimensions / 96 skills, shipped as items, anchors, interview questions <em>and</em> AC exercises</td>
+<td><code>[VENDOR]</code></td>
+</tr>
+<tr>
+<td>SHL states it <strong>does not correct for range restriction</strong> — unusually conservative validity reporting</td>
+<td><code>[VENDOR-PRIMARY]</code> blog</td>
+</tr>
+<tr>
+<td><strong>Barclays: three official stages</strong>; "two short interactive assessments"; mobile-completable; <strong>technical programmes get an additional technical assessment</strong>; AC is "two or three stages" incl. leadership motivational interview</td>
+<td><code>[EMPLOYER]</code> careers page</td>
+</tr>
+<tr>
+<td><strong>Barclays bans third-party AI tools in interviews</strong> (incl. transcription bots); breach = application withdrawn</td>
+<td><code>[EMPLOYER]</code></td>
+</tr>
+<tr>
+<td><strong>Barclays adjustments</strong>: extra time and <strong>offline alternatives</strong>, disclosure encouraged at application</td>
+<td><code>[EMPLOYER]</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="the-register-of-unknowns-and-estimates">The register of unknowns and estimates</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Status</th>
+<th>Why / what's missing</th>
+<th>How to close</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Barclays' actual assessment vendor</strong></td>
+<td><strong>Contested</strong></td>
+<td>Barclays names none. Best dated evidence: "SHL or Cappfinity" <code>[PREP-VENDOR]</code>; pymetrics attribution weak/stale</td>
+<td><strong>Your invitation email</strong> — it names the tool</td>
+</tr>
+<tr>
+<td><strong>What the two interactive assessments literally are</strong> (product names, item counts, individual timings)</td>
+<td><code>[UNKNOWN]</code></td>
+<td>Barclays describes function, not product</td>
+<td>Invitation email; current-cycle candidate reports</td>
+</tr>
+<tr>
+<td><strong>Whether a standalone video interview is a formal Barclays stage</strong></td>
+<td><strong>Unresolved</strong></td>
+<td>Official 3-stage list omits it; prep vendors insert it</td>
+<td>Ask the recruiter; check invitation</td>
+</tr>
+<tr>
+<td><strong>Any Barclays threshold, cut-score or pass rate</strong></td>
+<td><code>[UNKNOWN]</code></td>
+<td>None published; Barclays' position is that outcomes "vary by role and competition"</td>
+<td><strong>DSAR after sitting</strong> (your score + comparison group)</td>
+</tr>
+<tr>
+<td><strong>Division-level differences</strong> (IB vs retail vs Markets vs Private Bank) at the online stage</td>
+<td><code>[UNKNOWN]</code></td>
+<td>No dated source; only the technical/non-technical split is confirmed</td>
+<td>Current-cycle candidate reports per division</td>
+</tr>
+<tr>
+<td><strong>UK candidate testimony 2025–26</strong> for Barclays</td>
+<td><strong>Thin</strong></td>
+<td>Forums not retrievable this pass; available testimony is Indian campus tech hiring, 2020–22, different pipeline</td>
+<td>Manual browsing of TSR/Reddit/WSO current threads</td>
+</tr>
+<tr>
+<td><strong>All percentile cut-off figures</strong> (70th–85th etc.)</td>
+<td><strong>Estimates only</strong></td>
+<td>Prep-vendor, self-disclaimed, mutually inconsistent, never employer-confirmed</td>
+<td>Nothing public will confirm these</td>
+</tr>
+<tr>
+<td><strong>A–E band → percentile boundaries</strong></td>
+<td><code>[UNKNOWN]</code></td>
+<td>SHL prints the band, not the cut points; the 10/20/40/20/10 split is convention, <strong>not verified</strong></td>
+<td>SHL client documentation</td>
+</tr>
+<tr>
+<td><strong>The ~70 comparison-group catalogue</strong></td>
+<td><code>[UNKNOWN]</code></td>
+<td>No published list; "Finance Graduates" etc. are prep-vendor-only</td>
+<td>Client portal / Verify User Guide</td>
+</tr>
+<tr>
+<td><strong>SHL's cut-score guidance to employers</strong></td>
+<td><code>[UNKNOWN]</code></td>
+<td>Not on the open web; appears client-portal-only</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Whether the verification test survives in current Verify Interactive</strong></td>
+<td><strong>Open, significant</strong></td>
+<td>Absent from the Interactive report's "how to verify a result" table — inferred discontinued</td>
+<td>SHL product documentation</td>
+</tr>
+<tr>
+<td><strong>Proctoring Index thresholds &amp; false-positive rate</strong></td>
+<td><code>[UNKNOWN]</code></td>
+<td>SHL says study-derived and not client-alterable; publishes no numbers and no study</td>
+<td><strong>Highest-value remaining integrity unknown</strong></td>
+</tr>
+<tr>
+<td><strong>Whether candidates are told of a flag</strong></td>
+<td><code>[UNKNOWN]</code></td>
+<td>Proctoring is invisible in-test; no SHL statement on notification; consent is pushed to the employer</td>
+<td>Ask the recruiter pre-test; DSAR post-test</td>
+</tr>
+<tr>
+<td><strong>SHL's consent/GDPR mechanics for biometric Face Match and audio capture</strong></td>
+<td><code>[UNKNOWN]</code></td>
+<td>Live UK GDPR question given biometric processing</td>
+<td>Employer's privacy notice</td>
+</tr>
+<tr>
+<td><strong>SHL bias audit / NYC LL144 posting</strong></td>
+<td><code>[UNKNOWN]</code></td>
+<td>None found — but LL144 audits are posted by <em>employers</em>, so absence isn't evidence of absence</td>
+<td>Employer careers pages</td>
+</tr>
+<tr>
+<td><strong>SHL's 7x AI-detection claim</strong></td>
+<td><strong>Narrowly scoped</strong></td>
+<td>7x is versus <strong>SHL's own prior baseline</strong>, not competitors, and not an absolute detection rate</td>
+<td>— (do not restate loosely)</td>
+</tr>
+<tr>
+<td><strong>SHL's ChatGPT study currency</strong></td>
+<td><strong>Dated</strong></td>
+<td>2023 study, on 2023 ChatGPT, by SHL on SHL's own products; no 2024–26 update found</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>ADEPT-15 / Mobilize current status</strong></td>
+<td><code>[UNKNOWN]</code></td>
+<td>Absent from all current SHL pages fetched</td>
+<td>Direct product-catalogue access (public index now redirects)</td>
+</tr>
+<tr>
+<td><strong>Current SHL CEO; candidates assessed per year</strong></td>
+<td><code>[UNKNOWN]</code></td>
+<td>Not confirmable; <strong>no figure cited in this report</strong></td>
+<td>Company filings</td>
+</tr>
+</tbody>
+</table>
+<h2 id="closing-note-the-shape-of-the-asymmetry">Closing note — the shape of the asymmetry</h2>
+<p>Laid out this way, the information asymmetry has a specific and useful shape.</p>
+<p><strong>What is genuinely secret is parameters</strong>: cut-scores, comparison-group assignments, Proctoring Index thresholds, role profiles, band boundaries, applicant-pool strength. These are withheld deliberately and no amount of research recovers them.</p>
+<p><strong>What is knowable — and now known — is structure</strong>: how the scoring pipeline works, why raw score isn't the score, what the norm group does to your percentile, which filtering architectures exist and what each implies, what the integrity stack actually monitors and that it is off by default, what Barclays officially requires, and where the real cuts fall.</p>
+<p><strong>Structure is what preparation runs on.</strong> Every piece of actionable advice in Chapter 11 follows from structure, not parameters — which is why it remains valid despite the unknowns.</p>
+<p>And the parameter gaps close by exactly one route that belongs to you: <strong>a subject-access request after you sit</strong>, which can legally compel your score, your comparison group and your threshold outcome from the employer. It is free, it takes a month, and it is the single most effective act of information-asymmetry reduction available to any candidate reading this.</p>
+<hr />
+<p><em>Full source lists with URLs and access dates are in the research files committed alongside this report (<code>research/40-barclays-process.md</code>, <code>41-shl-catalogue.md</code>, <code>42-shl-scoring-integrity.md</code>, and <code>01-shl.md</code>). The companion guide covers twelve other providers; the companion Aon report covers the Aon/cut-e catalogue in the same depth as this one covers SHL.</em></p></section></body></html>
