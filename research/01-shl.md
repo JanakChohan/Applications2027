@@ -69,6 +69,13 @@
 - Statistical answer-pattern anomaly flags. [PREP-VENDOR]
 - Recruiter sees an **integrity report** alongside scores; single accidental tab-switch treated holistically, patterns are the problem. [PREP-VENDOR: careertestprep — reasonable]
 
+## OPQ32r DEEP-DIVE — VERIFIED 2026-08-01 (second pass, user-prompted)
+- **Current standard = OPQ32r**: **104 blocks of THREE statements** (not the OPQ32i's four); untimed, most complete 25–35 min; pick MOST + LEAST like you (= fully ranks the triplet; some deployments phrase as most-of-3 then most-of-remaining-2 — identical operation). [INDEPENDENT — OPQ32r development literature (Brown & Maydeu-Olivares Thurstonian IRT; OPQ32r Technical Manual at Kent Academic Repository kar.kent.ac.uk/44780/); PREP-VENDOR consistent: wikijob, prepclubs, graduatesfirst]
+- **Scoring = Thurstonian IRT**: each ranked triplet → 3 pairwise comparisons; ~312 comparisons across the test → **NORMATIVE trait estimates** (not classic ipsative). OPQ32r derived from OPQ32i by dropping one statement/block — quicker, less cognitively complex, equal-or-better validity. [INDEPENDENT — ResearchGate "Doing Less but Getting More"]
+- **Consistency scale** applies to i/r formats; faking flags profiles. [PREP-VENDOR consistent]
+- **Pacing monitored though untimed**: SHL guidance = thoughtful but brisk; over-deliberation → flatter profile; candidate reports in-test prompts for unusually slow/fast responding. [PREP-VENDOR + CANDIDATE n=1 (project user's first-person report, 2026-08)]
+- Strategy conclusion written into chapter §1.7 deep-dive: role-calibrated AUTHENTIC trait hierarchy as tiebreaker + steady 10–20s/block rhythm; fake hierarchies structurally collapse (can't classify statement loadings reliably across 104 engineered trade-offs).
+
 ## Personality — OPQ32 / faking (5.7 / 6.4)
 - **OPQ32i**: forced-choice, choose most/least like you from blocks of 4; ~**104 forced-choice items** → 32 traits. Ipsative-style, designed to reduce social-desirability distortion. [PREP-VENDOR multiple agreeing: careertestprep/opq32, jobtestprep, graduatesfirst]
 - **OPQ32n** (normative) includes a **Social Desirability scale** flagging faking. [PREP-VENDOR]
