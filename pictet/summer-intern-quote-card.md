@@ -295,6 +295,155 @@ sentence could have been said by an intern at any firm in the City, it isn't fin
 
 ---
 
+## 5b. Your two angles: the 220-year-old firm, and the AI work
+
+These are the same observation from opposite ends. **The AI work is your evidence. The
+entrepreneurial mindset is your conclusion.** A quote that only asserts the conclusion is a
+brochure line; a quote that only describes the tooling is a CV bullet. Fused, they beat everything
+in section 5 — nobody else in the corpus has either.
+
+They carry opposite risks, and you should know which is which.
+
+### Angle A — two centuries old, and not set in its ways
+
+> **The risk here is ventriloquism, and it is severe.** Pictet's own innovation page is headed
+> *"Timeless values. Unconventional thinking."* The old-firm-that-innovates observation **is already
+> their marketing line**, and *entrepreneurial spirit* is a stated corporate value. Say it back to
+> them unattached and you have written their copy for them. The only thing that rescues this angle
+> is a concrete detail of something that actually changed — which is what Angle B gives you.
+
+**I. Long horizon → appetite for risk** *(29 words — strongest of A)*
+> "I'd assumed history made an organisation cautious. What I've learned is that knowing you'll still
+> be here in fifty years is what makes it safe to try something new."
+
+*Doesn't just note the paradox — explains it. The long horizon is the cause of the risk appetite,
+not a counterweight to it. Demonstrates long-term thinking and entrepreneurial spirit in one breath
+without using either phrase.*
+
+**J. Survived every fashion** *(31 words)*
+> "A firm that has been around since 1805 has already survived every fashion. I've learned that
+> being genuinely open to a new idea and being careful with it are not opposites."
+
+*"Already survived every fashion" is the most quotable phrase in the set. Risk: implies a view on
+which ideas are fashions — keep it unspecific.*
+
+**K. Single sentence, Pictet length** *(24 words)*
+> "The thing I didn't expect from a 220-year-old institution was how often someone asked me whether
+> there was a better way of doing it."
+
+*Shortest option available and the closest in length to Pictet's own published quotes. If Comms
+wants something that fits the card at large type, this is it.*
+
+**L. Who actually listened** *(32 words)*
+> "Two centuries of history turned out to be a reason to experiment, not a reason not to. The people
+> most willing to hear a new idea were usually the most senior."
+
+*The second sentence is the most flattering thing you can say about a partnership without
+complimenting anyone.*
+
+### Angle B — the AI work
+
+> **Your genuine differentiator, and the one Comms will scrutinise hardest.** An AI quote on a
+> private bank's public channel is read by Risk as well as Comms, so the framing does the work:
+> **make it about judgement and people, never about speed or headcount.** Never name a tool, model
+> or vendor. Never imply client data went near anything. Never suggest a control was removed.
+> "I made the team faster" invites questions; "I learned what shouldn't be automated" gets approved
+> on sight — and reads better anyway.
+
+**M. Adoption, not automation** *(30 words — strongest of B)*
+> "Automating a task is the easy half. Earning enough trust that someone actually uses what you
+> built is the part I hadn't thought about, and the part I'll take with me."
+
+*About people, not technology, which is why it survives on a card. The most credible thing an intern
+can say about building tools inside an institution. Zero compliance surface.*
+
+**N. First draft vs. the thinking** *(31 words — strongest of B)*
+> "I spent the summer finding places where a machine could do the first draft and a person still had
+> to do the thinking. The judgement was never the part worth automating."
+
+*Says "enhance, not replace" without going near that exhausted phrase. "Never the part worth
+automating" is the line a caption would pull out.*
+
+**O. Changed nothing about how they decide** *(33 words)*
+> "The most useful thing I built this summer saved my team a few hours a week and changed nothing
+> about how they made decisions. That's the line I've learned to look for."
+
+*Understatement doing heavy lifting. "Changed nothing about how they made decisions" is exactly what
+a risk function wants to hear from someone who touched a workflow.*
+
+**P. Knowing what to leave alone** *(35 words)*
+> "I came in assuming the value I could add was technical. The hard part of building something useful
+> isn't the building — it's understanding the work well enough to know what to leave alone."
+
+*Expectation-inverted shape plus the AI substance, and it flatters the team's expertise rather than
+your own.*
+
+**Q. What someone will stop checking** *(30 words — sharp, higher risk)*
+> "The question was never what a model can do — it was what someone is willing to stop checking.
+> Most of my summer went on the second question."
+
+*Sharpest observation on the page and the most likely to get engagement. Risk: "stop checking" can be
+misread as loosening controls. Soften to "willing to rely on" if your manager is cautious.*
+
+### Angle C — fused, and the best of the three
+
+**R. Careful ≠ closed** *(29 words — lead with this)*
+> "The oldest organisation I've worked in was also the one most open to me changing how something was
+> done. I've learned not to mistake being careful for being closed."
+
+*Both angles in twenty-nine words, at Pictet's own quote length, closing on a genuine lesson rather
+than praise. Quotable, generous, and true of the firm without naming a single value.*
+
+**S. What it should be allowed to touch** *(32 words — lead with this)*
+> "I spent the summer building tools inside a firm founded in 1805. The useful question was never what
+> the technology could do — it was what it should be allowed to touch."
+
+*The 1805 / new-tools juxtaposition makes the entrepreneurial point silently, then the second sentence
+lands the judgement point. "Allowed to touch" is governance-friendly: thoughtful to Risk, confident to
+everyone else.*
+
+**T. Expectation inverted, with the detail** *(28 words)*
+> "I'd assumed a firm with two centuries behind it would be the last place to change how something was
+> done. I spent the summer doing exactly that."
+
+*Cleanest expectation→reality shape available, and the flat second sentence is the whole joke.
+Deliberately vague about what changed — if Comms wants specificity, that belongs in the caption.*
+
+**U. Both prompts, both angles** *(32 words — fallback)*
+> "Professionally, I've learned to build things that make a team faster without changing how it
+> decides. Personally, I've learned that a 220-year-old firm can be the easiest place to suggest
+> something new."
+
+*Almost impossible to reject. Also the least memorable of the fused set.*
+
+### The AI vocabulary trap
+
+This vocabulary aged badly and fast. Every phrase below is what a chief executive says on an earnings
+call, which is exactly why it cannot appear next to your face:
+
+> enhance not replace · augment not replace · AI-powered · leveraged AI · unlocked efficiencies ·
+> human in the loop · game-changer · cutting-edge · transformative · supercharged ·
+> the future of finance · disrupt · seamless · robust
+
+**"Enhance, not replace" in particular.** It is the right *idea* — it is also now the single
+most-used sentence in corporate AI communication. Keep the thought, discard the words: M, N, O and S
+all say it without saying it.
+
+### One real fork: do you use the word "AI" at all?
+
+None of the fused drafts contain it. That is a decision, not an oversight.
+
+| Say "AI" | Don't say it |
+|---|---|
+| Comms may actively want it — highest-engagement word on LinkedIn, and "220-year-old private bank lets intern rebuild a workflow with AI" is a genuinely good post for them | Routes past a slower approval path, won't date, and describing the work ("the first draft", "the tools I built") is more concrete and better writing than the label |
+| The most distinctive thing about your summer, and the reason this card would outperform the rest of the series | In 2029 "I used AI" reads like "I used Excel". The judgement point ages well; the tool label doesn't |
+
+**How to have both:** send a quote that doesn't use the word, and tell Isabel in the email that the
+work behind it was building AI tooling for the team — so she can put that in the **caption**, where
+Comms controls the framing. You get the distinctiveness without spending your thirty words on a label.
+
+---
+
 ## 6. What to send Isabel
 
 Send **one preferred quote plus one alternative** — not five. Three or more signals you can't
