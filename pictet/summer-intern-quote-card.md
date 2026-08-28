@@ -385,6 +385,44 @@ your own.*
 *Sharpest observation on the page and the most likely to get engagement. Risk: "stop checking" can be
 misread as loosening controls. Soften to "willing to rely on" if your manager is cautious.*
 
+
+### Sixteen more on the AI angle
+
+All under forty words, none naming a tool, model or vendor, none claiming an impact figure.
+Strongest first.
+
+> "I've learned that new technology doesn't reduce the amount of judgement a job needs. It just moves it somewhere less obvious." *(21)*
+>
+> "A tool that saves ten minutes and is trusted beats one that saves an hour and isn't. That's the most useful thing I've learned this summer." *(26)*
+>
+> "I arrived wanting to build something impressive. I've learned that the useful version is always smaller, more boring, and actually gets used." *(22)*
+>
+> "Before I could automate a single step, I had to sit with the person who did it and understand why it existed. That turned out to be the whole job." *(30)*
+>
+> "I've learned that the limit isn't what the technology understands — it's how well I understand the work I'm pointing it at." *(22)*
+>
+> "The tools I built are the least interesting thing I made this summer. What I actually learned was how a team decides something is finished." *(25)*
+>
+> "The best thing I built this summer took a tedious hour out of someone's week. I've learned that unglamorous problems are usually the ones worth solving." *(26)*
+>
+> "I've learned to be suspicious of anything that makes a task effortless. The friction in a process is often where the thinking happens." *(23)*
+>
+> "The useful question isn't whether something can be automated — it's who still has to be accountable for it. That took me a summer to work out." *(27)*
+>
+> "Getting a good answer out of a machine needs the same thing as getting one out of a person: a precise question. That's the skill I'll take with me." *(29)*
+>
+> "The first version of everything I built was wrong in a way only someone who does the job every day could spot. I've learned to show my work early." *(29)*
+>
+> "The moment something I built started saving time, my job changed from writing it to earning the confidence to let it run. The second part took far longer." *(28)*
+>
+> "Every hour I gave back to my team went into something a machine couldn't do. That's the only measure of this work I care about." *(25)*
+>
+> "The hardest part of introducing a new way of working isn't the technology. It's explaining it to someone who has done the job well for twenty years." *(28)*
+>
+> "You can only speed something up once you understand why every slow part of it is there. Most of my summer went on that question, not on the building." *(29)*
+>
+> "I came in thinking the value was in what I could build. It turned out to be in what I could ask — and in knowing which answers still needed a person." *(32)*
+
 ### Angle C — fused, and the best of the three
 
 **R. Careful ≠ closed** *(29 words — lead with this)*
