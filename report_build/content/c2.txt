@@ -1,0 +1,50 @@
+#|3|Bonds, explained from scratch|Part 1 continued. PIMCO is a bond house first. This section is the minimum you need.
+##|3.1|What a bond is
+P|A bond is a loan you can trade. A government or company needs money, so it borrows from investors and issues a certificate promising to pay interest periodically and return the original sum on a fixed date. Unlike a bank loan, that certificate can then be bought and sold.
+P|Four terms define any bond:
+B|**Issuer** — who owes the money. The UK government, Apple, a Brazilian utility, or a pool of thousands of mortgage borrowers.
+B|**Coupon** — the interest paid, expressed as a percentage of the original face value. A 5% coupon on a £1,000 bond pays £50 a year.
+B|**Maturity** — the date the original sum is repaid. Could be three months or thirty years.
+B|**Yield** — the return you actually earn if you buy at today's price and hold to maturity. This is not the same as the coupon, and the difference is the key to everything.
+##|3.2|The see-saw: price and yield move in opposite directions
+P|This is the single most important mechanic in fixed income, and it is not intuitive until you see it once.
+P|Suppose you own a bond paying a 5% coupon, bought at its face value of £1,000. Now suppose newly issued bonds start paying 7%, because interest rates have risen. Your 5% bond is now inferior. Nobody will pay £1,000 for it when £1,000 buys a 7% bond instead. So the price of your bond must fall until its effective return matches 7%.
+P|Nothing about your bond changed. The issuer still pays £50 a year and still repays £1,000 at maturity. But its market price fell, because the alternatives improved. **When yields rise, bond prices fall. When yields fall, bond prices rise.** Always, mechanically, without exception.
+FIG|fig06_bond_mechanics.png|
+##|3.3|Duration, credit spread and default risk
+###|Duration — how sensitive a bond is to rates
+P|**Duration** measures how much a bond's price moves when yields change. It is quoted in years, and the rule of thumb is simple: price change is roughly minus duration multiplied by the change in yield. A bond with a duration of 6 will fall about 6% if yields rise by 1%. A bond with a duration of 20 will fall about 20%.
+P|Duration is roughly related to how long you must wait for your money, which is why long-dated bonds are far more volatile than short-dated ones. Managing duration — deciding whether to hold more or less interest-rate sensitivity than the benchmark — is one of the main levers a bond portfolio manager pulls. For reference, PIMCO's Income Fund had an effective duration of **6.14 years** as of 30 June 2026.
+###|Credit spread — the extra yield for taking risk
+P|A government that prints its own currency is very unlikely to fail to pay. A leveraged company might. So investors demand extra yield to lend to riskier borrowers, and that extra yield is the **credit spread** — the difference between a corporate bond's yield and that of a comparable government bond.
+P|Spreads widen when investors get nervous and narrow when they are confident. Because a wider spread means a lower price, a portfolio manager who correctly anticipates spread moves makes money independently of what interest rates do. Rates and spreads are the two dials.
+###|Default risk and credit ratings
+P|**Default** is failure to pay. **Credit ratings** are agencies' opinions on how likely that is, on a scale from AAA down. The critical dividing line is between **investment grade** — BBB− and above, considered relatively safe — and **high yield**, also called junk, at BB+ and below. Many institutions are forbidden by their own rules from holding high yield, which creates forced selling when a bond is downgraded across that line and, therefore, opportunity for managers who can hold through it.
+##|3.4|The sectors PIMCO operates in
+P|"Fixed income" is not one market. It is a dozen loosely related markets with different drivers, and PIMCO runs specialist desks across all of them.
+TBL|Table 3.1  The main fixed income sectors and what drives each|17,40,26,17|Sector;;What it is;;What mainly drives it;;PIMCO share of third-party AUM
+R|**Government / rates**;;Debt issued by sovereign states — gilts, US Treasuries, Bunds. The benchmark risk-free asset in each currency.;;Central bank policy, inflation, government borrowing needs;;Embedded across Core, Global, Long Duration
+R|**Investment grade credit**;;Bonds issued by financially sound companies.;;Credit spreads, corporate earnings, issuance volume;;Part of Credit (15%)
+R|**High yield**;;Bonds from riskier, more indebted companies. Higher coupons, real default risk.;;Default rates, economic growth, risk appetite;;Part of Credit (15%)
+R|**Securitised / mortgage-backed**;;Thousands of individual loans — mostly mortgages — pooled and sliced into tranches with different risk levels.;;House prices, prepayment behaviour, consumer credit health;;Securitized 4%, plus much of Income
+R|**Emerging markets**;;Debt of developing-country governments and companies, in local or hard currency.;;Currency moves, commodity prices, politics;;4%
+R|**Municipals**;;US state and local government debt. Tax-advantaged for US investors.;;US tax policy, local government finances;;4%
+R|**Private credit**;;Loans negotiated directly with borrowers, never traded on a public market. Illiquid, higher-yielding.;;Deal sourcing, underwriting skill, ability to lock up capital;;Within Alternatives — see Section 7.6
+FIG|fig02_aum_strategy.png|
+KEY|Securitised and mortgage credit deserve special attention. PIMCO's dominance here is not accidental — it built the analytical capability to price pools of individual home loans after the 2008 financial crisis, when almost nobody else would touch them. PIMCO states it has "deployed over $230B across residential mortgages, other consumer and commercial/non-consumer sectors since the Global Financial Crisis". This is the firm's deepest genuine moat, and it is why the Income Fund can generate yield that plain corporate-bond funds cannot.
+
+#|4|Active versus passive, and why PIMCO's existence depends on it|Part 1 concluded
+##|4.1|The two philosophies
+P|A **passive** fund tries to match an index. It buys everything in the index in the right proportions and makes no judgements. Because this requires almost no human input, it is extremely cheap — often 3 to 7 basis points, sometimes less.
+P|An **active** fund employs people to decide what to buy, aiming to beat the index. Those people cost money, so active funds charge far more — typically 25 to 100 basis points in fixed income. The entire proposition is that the extra return exceeds the extra fee.
+##|4.2|Why this is an existential question for PIMCO
+P|In equities, the passive argument has largely been won. Index funds and exchange-traded funds overtook actively managed funds in the United States in 2024, and by October 2025 passive assets stood at roughly $19.1 trillion against $16.2 trillion active. Most active equity managers do not beat their benchmark after fees over long periods.
+WARN|That $19.1tn / $16.2tn split is a widely repeated figure originating with Morningstar research, retrieved here via secondary aggregators rather than the primary study. The direction of travel is not in doubt; treat the precise figures as indicative and check Morningstar's own publication before quoting them.
+P|PIMCO is a large, expensive, active manager. If the passive argument wins in bonds as decisively as it won in equities, PIMCO's economics deteriorate structurally. Its defence rests on an argument that bond markets are genuinely different, and the argument is stronger than it first sounds:
+B|**Bond indices are badly built.** A stock index weights companies by size, so you own more of the most valuable firms. A bond index weights issuers by how much debt they have issued — so a passive bond fund mechanically lends most to whoever borrows most. That is a strange thing to want.
+B|**Huge parts of the market are not in the index.** Many securitised instruments, private placements and non-benchmark sectors sit outside standard indices entirely. An active manager can own them; a passive fund cannot.
+B|**Many participants are not trying to make money.** Central banks buy bonds to set monetary policy. Insurers and banks buy to satisfy regulatory capital rules. Pension funds buy to match liabilities. These are price-insensitive, non-profit-maximising buyers, and their presence creates persistent mispricings that a profit-seeking manager can harvest. PIMCO calls this **structural alpha** — return earned from the structure of the market rather than from forecasting it.
+B|**Bonds are traded over the counter.** There is no single exchange. Scale and dealer relationships give large managers genuinely better access and pricing, which is not true in equities.
+P|PIMCO's own headline claim is that **92% of its assets outperformed their benchmarks after fees over the three years to 30 June 2026**.
+WARN|Read that claim carefully. PIMCO's own footnote defines it as portfolios with at least a three-year history measured against their primary benchmark, and explicitly warns that absolute-return portfolios measured against cash-like benchmarks can distort the figure in either direction. It is also a point-in-time measure over one favourable three-year window, and it is asset-weighted, so a handful of very large successful funds can carry it. This is a genuine achievement and a marketing statistic at the same time. Both are true.
+KEY|Everything about how PIMCO is organised — the firm-wide house view, the forums, the team-based Investment Committee, the enormous investment in analytics — is a machine built to justify an active fee. If you understand that, you understand why an intern in almost any seat at PIMCO ends up working on something that ultimately supports that justification.
