@@ -39,9 +39,9 @@ function signature(item) {
  * @param {number} [opts.maxTriesPerItem]
  * @returns {{seed, tier, dataset, items}}
  */
-export function generateSession({ seed, tier = 'intermediate', count = 18, typeWeights, maxTriesPerItem = 40 }) {
+export function generateSession({ seed, tier = 'intermediate', count = 18, typeWeights, theme = null, maxTriesPerItem = 40 }) {
   const rng = makeRng(`session:${seed}:${tier}:${count}`);
-  const dataset = generateDataset(seed, tier);
+  const dataset = generateDataset(seed, tier, theme);
   const weights = typeWeights || DEFAULT_TYPE_WEIGHTS;
   const weightList = ITEM_TYPES.filter((t) => (weights[t] || 0) > 0)
     .map((t) => ({ value: t, weight: weights[t] }));

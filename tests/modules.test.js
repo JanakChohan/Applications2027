@@ -68,6 +68,31 @@ describe('lst: valid Latin square, "?" uniquely forced', () => {
   });
 });
 
+describe('tabhunt: answers derive from verified numerical items', () => {
+  it('required tab ids are real tabs; NONE iff nothing locatable; sources verify', async () => {
+    const { verifyItem: numVerify } = await import('../src/verify/verifier.js');
+    const tabhunt = (await import('../src/modules/tabhunt/index.js')).default;
+    for (let s = 0; s < 8; s++) {
+      const session = tabhunt.generate({ seed: `tht-${s}`, tier: TIERS[s % 3], count: 15 });
+      const tabIds = new Set(session.context.tabs.map((t) => t.id));
+      for (const item of session.items) {
+        expect(numVerify(session.dataset, item.sourceItem).ok).toBe(true);
+        for (const id of item.requiredIds) expect(tabIds.has(id)).toBe(true);
+        const locatable = (item.sourceItem.requiredCells || [])
+          .some((c) => c.tab || c.m === 'revenueTotal');
+        expect(item.answer === 'NONE').toBe(!locatable);
+        if (item.answer !== 'NONE') expect(item.answer).toBe([...item.requiredIds].sort().join('+'));
+      }
+    }
+  });
+  it('forcing a flavour forces the theme', async () => {
+    const { generateDataset } = await import('../src/generators/dataset.js');
+    expect(generateDataset('f1', 'intermediate', 'balance-sheet').meta.domain).toBe('balance-sheet');
+    expect(['income-statement', 'balance-sheet', 'cash-flow'])
+      .toContain(generateDataset('f2', 'intermediate', 'finance').meta.domain);
+  });
+});
+
 describe('cls: examples coloured by the rule, target correct', () => {
   it('pipeline invariant', () => {
     for (let s = 0; s < 12; s++) {

@@ -25,8 +25,21 @@ export default {
     { key: 'adaptive', label: 'Adaptive drill', count: 15, time: 0, timed: false, allowBack: true, adaptive: true, desc: 'No clock · more of your weakest categories' },
   ],
 
-  generate({ seed, tier = 'intermediate', count = 18, typeWeights }) {
+  // Sector flavours the launcher can force (guaranteed terminology + matching charts).
+  flavors: [
+    { key: '', label: 'Any sector' },
+    { key: 'finance', label: 'Finance (mixed statements)' },
+    { key: 'income-statement', label: 'Income statement' },
+    { key: 'balance-sheet', label: 'Balance sheet' },
+    { key: 'cash-flow', label: 'Cash flow' },
+    { key: 'retail', label: 'Retail' },
+    { key: 'manufacturing', label: 'Manufacturing' },
+    { key: 'bank', label: 'Banking (divisional)' },
+  ],
+
+  generate({ seed, tier = 'intermediate', count = 18, typeWeights, flavor = null }) {
     const opts = { seed, tier, count };
+    if (flavor) opts.theme = flavor;
     if (typeWeights) opts.typeWeights = typeWeights;
     const session = generateSession(opts);
     for (const it of session.items) {

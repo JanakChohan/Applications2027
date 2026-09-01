@@ -29,7 +29,7 @@ const app = document.getElementById('app');
 let state = {
   screen: 'home',
   moduleId: 'numerical',
-  tier: null,
+  tier: null, flavor: '',
   options: { wrongTabPenalty: true, allowBack: true },
   session: null, answers: [], current: 0, activeTab: 0,
   timer: null, deadline: 0, enterTs: 0, expired: false, mode: null,
@@ -76,6 +76,9 @@ function renderHome() {
       <label class="chk">Difficulty
         <select data-tier>${m.tiers.map((t) => `<option value="${t}"${t === state.tier ? ' selected' : ''}>${t}</option>`).join('')}</select>
       </label>
+      ${m.flavors ? `<label class="chk">Sector
+        <select data-flavor>${m.flavors.map((f) => `<option value="${f.key}"${f.key === (state.flavor || '') ? ' selected' : ''}>${esc(f.label)}</option>`).join('')}</select>
+      </label>` : ''}
       ${m.usesTabs ? `<label class="chk"><input type="checkbox" data-opt="wrongTabPenalty"${state.options.wrongTabPenalty ? ' checked' : ''}/> Wrong-tab penalty</label>` : ''}
       <label class="chk"><input type="checkbox" data-opt="allowBack"${state.options.allowBack ? ' checked' : ''}/> Allow going back</label>
     </div>
@@ -151,6 +154,7 @@ function startSession(modeKey) {
   const mode = m.modes.find((x) => x.key === modeKey);
   const seed = `${Date.now()}-${Math.floor(performance.now())}`;
   let opts = { seed, tier: state.tier, count: mode.count };
+  if (m.flavors && state.flavor) opts.flavor = state.flavor;
   if (mode.adaptive && m.adaptive) opts = { ...opts, ...m.adaptive(load()) };
   const session = m.generate(opts);
   if (!session.items.length) { alert('Could not generate items — try another difficulty.'); return; }
@@ -426,6 +430,8 @@ function wire() {
     app.querySelectorAll('[data-drillmod]').forEach((el) => (el.onclick = () => startAdaptive(el.dataset.drillmod)));
     const tierSel = app.querySelector('[data-tier]');
     if (tierSel) tierSel.onchange = () => { state.tier = tierSel.value; };
+    const flavSel = app.querySelector('[data-flavor]');
+    if (flavSel) flavSel.onchange = () => { state.flavor = flavSel.value; };
     app.querySelectorAll('[data-opt]').forEach((el) => (el.onchange = () => { state.options[el.dataset.opt] = el.checked; }));
   }
 

@@ -163,12 +163,22 @@ const TIER = {
 /**
  * Generate a full dataset for one session.
  * @param {string|number} seed
- * @param {'medium'|'intermediate'|'hard'} tier
+ * @param {'beginner'|'intermediate'|'advanced'} tier
+ * @param {string|null} themeKey  force a sector flavour ('income-statement',
+ *        'balance-sheet', 'cash-flow', 'retail', …), 'finance' for a random
+ *        financial-statement flavour, or null/undefined for any theme.
  */
-export function generateDataset(seed, tier = 'intermediate') {
+export function generateDataset(seed, tier = 'intermediate', themeKey = null) {
   const rng = makeRng(`ds:${seed}:${tier}`);
   const cfg = TIER[tier] || TIER.intermediate;
-  const theme = rng.pick(THEMES);
+  let theme;
+  if (themeKey === 'finance') {
+    theme = THEMES.find((t) => t.key === rng.pick(['income-statement', 'balance-sheet', 'cash-flow']));
+  } else if (themeKey) {
+    theme = THEMES.find((t) => t.key === themeKey) || rng.pick(THEMES);
+  } else {
+    theme = rng.pick(THEMES);
+  }
 
   // -- entities: choose the visible set + one globally-latent entity ----------
   const pool = rng.shuffle(theme.entities.slice());

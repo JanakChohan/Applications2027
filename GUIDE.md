@@ -124,6 +124,19 @@ Some employers frame the data as **income statements, balance sheets, and cash f
 - Step 5: 2.3 > 2.0 → **True.**
 - Step 6: correct tabs used (both revenue and costs), quantity matches ("gross profit", not "revenue"), not over-inferring. Answer **True.**
 
+## Multi-tab questions — which tab should be showing when you answer?
+
+Some items need figures from **two** tabs (profit = revenue − costs; per-head = revenue ÷ headcount; a share % × the total captioned on the mix tab). The workflow:
+
+1. **Identify both figures first** (step 1 of the drill names them). Don't start reading until you know everything you need.
+2. **Open tab A, read the figure, write it on paper.** Paper is your second screen — never try to hold both numbers in your head under the clock.
+3. **Switch to tab B, read the second figure, compute.**
+4. **Answer while tab B is still showing.** The wrong-tab report says answering with an *unrelated* tab up can cost points; ending on the tab of the **last figure you used** means a genuinely required tab is on screen. Never flick to a third, unrelated tab before clicking.
+
+The trainer scores this the same way: on a multi-tab item, submitting from **either** required tab is fine; submitting from an unrelated tab is flagged (and penalised in strict mode). One caveat for honesty: the wrong-tab penalty is a consistent multi-vendor report, not confirmed in Aon's own documents — but the habit costs you nothing, so build it.
+
+**Drill it directly:** the **Tab Finder** module shows a statement and marks you *only* on selecting the right tab(s) — including two-tab items and "no tab shows this" traps — at ~9 seconds each. It's the fastest way to build the tab map reflex that step 0 of the drill relies on.
+
 ---
 ---
 

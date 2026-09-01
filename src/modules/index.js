@@ -7,9 +7,10 @@
 //     adaptive?(storeData) -> partial generate opts }
 import numerical from './numerical/index.js';
 import verbal from './verbal/index.js';
+import tabhunt from './tabhunt/index.js';
 import ix from './ix/index.js';
 import lst from './lst/index.js';
 import cls from './cls/index.js';
 
-export const MODULES = [numerical, verbal, ix, lst, cls];
+export const MODULES = [numerical, tabhunt, verbal, ix, lst, cls];
 export const moduleById = Object.fromEntries(MODULES.map((m) => [m.id, m]));
