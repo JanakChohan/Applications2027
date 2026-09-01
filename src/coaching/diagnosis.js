@@ -127,7 +127,8 @@ export function diagnose(item, ans) {
   if (traps.includes('pct_vs_pp')) return withMeta('pct_vs_pp_confusion');
   if (traps.includes('unit')) return withMeta('unit_error');
   if (ans.timeMs != null && ans.timeMs < PANIC_MS) return withMeta('panicked_guess');
-  if (traps.includes('pct_change') || item.type === 'arithmetic' || item.type === 'multi_tab') {
+  if (traps.includes('pct_change') || traps.includes('multi_step')
+    || ['arithmetic', 'multi_tab', 'average', 'ratio', 'combined_share', 'growth_compare'].includes(item.type)) {
     return withMeta('arithmetic_slip');
   }
   if (item.type === 'lookup' || item.type === 'rank' || item.type === 'trend') return withMeta('misread_data');

@@ -10,11 +10,28 @@ import { generateDataset } from './dataset.js';
 import { generateItem, ITEM_TYPES } from './items.js';
 import { verifyItem } from '../verify/verifier.js';
 
-// Default relative frequency of each item type in a mixed session.
-export const DEFAULT_TYPE_WEIGHTS = {
-  lookup: 3, arithmetic: 3, pct_change: 2, pct_points: 2, share: 2,
-  multi_tab: 2, trend: 2, rank: 2, insufficient: 2,
+// Relative frequency of each item type, by tier. Beginner leans on reading
+// skills (lookups, trends); advanced leans hard on the multi-step types the
+// real test uses to separate candidates (two %-changes, ratios, averages,
+// combined shares) and rarely hands out a one-glance lookup.
+export const TYPE_WEIGHTS_BY_TIER = {
+  beginner: {
+    lookup: 4, arithmetic: 3, pct_change: 1, pct_points: 1, share: 1,
+    multi_tab: 1, trend: 2, rank: 2, insufficient: 2,
+  },
+  intermediate: {
+    lookup: 2, arithmetic: 3, pct_change: 2, pct_points: 2, share: 2,
+    multi_tab: 2, trend: 2, rank: 2, insufficient: 2,
+    growth_compare: 2, average: 1, ratio: 1, combined_share: 1,
+  },
+  advanced: {
+    lookup: 1, arithmetic: 2, pct_change: 3, pct_points: 2, share: 2,
+    multi_tab: 3, trend: 1, rank: 1, insufficient: 2,
+    growth_compare: 3, average: 2, ratio: 3, combined_share: 2,
+  },
 };
+// Back-compat default (used when no tier-specific table applies).
+export const DEFAULT_TYPE_WEIGHTS = TYPE_WEIGHTS_BY_TIER.intermediate;
 
 // Target answer distribution. The real test isn't perfectly balanced, but for
 // training we keep all three well represented so Cannot Say gets practised.
@@ -42,7 +59,7 @@ function signature(item) {
 export function generateSession({ seed, tier = 'intermediate', count = 18, typeWeights, theme = null, maxTriesPerItem = 40 }) {
   const rng = makeRng(`session:${seed}:${tier}:${count}`);
   const dataset = generateDataset(seed, tier, theme);
-  const weights = typeWeights || DEFAULT_TYPE_WEIGHTS;
+  const weights = typeWeights || TYPE_WEIGHTS_BY_TIER[tier] || DEFAULT_TYPE_WEIGHTS;
   const weightList = ITEM_TYPES.filter((t) => (weights[t] || 0) > 0)
     .map((t) => ({ value: t, weight: weights[t] }));
 

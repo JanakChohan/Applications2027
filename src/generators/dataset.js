@@ -34,7 +34,7 @@ const THEMES = [
   {
     key: 'retail',
     entityLabel: 'Region',
-    entities: ['North', 'South', 'East', 'West', 'Central', 'Northeast', 'Southwest'],
+    entities: ['North', 'South', 'East', 'West', 'Central', 'Northeast', 'Southwest', 'Midlands', 'Coastal', 'Highlands'],
     periodLabel: 'FY',
     currency: { symbol: '$', word: 'dollars' },
     titles: {
@@ -47,7 +47,7 @@ const THEMES = [
   {
     key: 'manufacturing',
     entityLabel: 'Plant',
-    entities: ['Aveley', 'Bremen', 'Cortez', 'Delft', 'Esbjerg', 'Faro', 'Genoa'],
+    entities: ['Aveley', 'Bremen', 'Cortez', 'Delft', 'Esbjerg', 'Faro', 'Genoa', 'Halle', 'Izmir', 'Jena'],
     periodLabel: 'Year',
     currency: { symbol: '€', word: 'euros' },
     titles: {
@@ -60,7 +60,7 @@ const THEMES = [
   {
     key: 'saas',
     entityLabel: 'Product',
-    entities: ['Atlas', 'Beacon', 'Cobalt', 'Drift', 'Ember', 'Flux', 'Grove'],
+    entities: ['Atlas', 'Beacon', 'Cobalt', 'Drift', 'Ember', 'Flux', 'Grove', 'Harbor', 'Ion', 'Junction'],
     periodLabel: 'FY',
     currency: { symbol: '$', word: 'dollars' },
     titles: {
@@ -73,7 +73,7 @@ const THEMES = [
   {
     key: 'bank',
     entityLabel: 'Division',
-    entities: ['Retail', 'Commercial', 'Markets', 'Wealth', 'Treasury', 'Digital', 'Cards'],
+    entities: ['Retail', 'Commercial', 'Markets', 'Wealth', 'Treasury', 'Digital', 'Cards', 'Payments', 'Leasing', 'Custody'],
     periodLabel: 'FY',
     currency: { symbol: '£', word: 'pounds' },
     titles: {
@@ -87,7 +87,7 @@ const THEMES = [
   {
     key: 'income-statement',
     entityLabel: 'Segment',
-    entities: ['Retail', 'Wholesale', 'Online', 'Licensing', 'Services', 'Exports', 'Franchise'],
+    entities: ['Retail', 'Wholesale', 'Online', 'Licensing', 'Services', 'Exports', 'Franchise', 'Aftermarket', 'Subscriptions', 'Consumer'],
     periodLabel: 'FY',
     currency: { symbol: '$', word: 'dollars' },
     titles: {
@@ -101,7 +101,7 @@ const THEMES = [
   {
     key: 'balance-sheet',
     entityLabel: 'Division',
-    entities: ['Retail Bank', 'Corporate', 'Markets', 'Wealth', 'Insurance', 'Cards', 'Treasury'],
+    entities: ['Retail Bank', 'Corporate', 'Markets', 'Wealth', 'Insurance', 'Cards', 'Treasury', 'Asset Management', 'Private Bank', 'Leasing'],
     periodLabel: 'FY',
     currency: { symbol: '£', word: 'pounds' },
     titles: {
@@ -115,7 +115,7 @@ const THEMES = [
   {
     key: 'cash-flow',
     entityLabel: 'Segment',
-    entities: ['Manufacturing', 'Distribution', 'Retail', 'Digital', 'Logistics', 'Services', 'Property'],
+    entities: ['Manufacturing', 'Distribution', 'Retail', 'Digital', 'Logistics', 'Services', 'Property', 'Healthcare', 'Energy', 'Consumer'],
     periodLabel: 'FY',
     currency: { symbol: '$', word: 'dollars' },
     titles: {
@@ -155,9 +155,21 @@ const CHART_OPTIONS = {
 // Tier tuning: harder tiers use bigger unit gaps and more entities/periods to
 // juggle. Difficulty of the *reasoning* is applied in items.js.
 const TIER = {
-  beginner: { entities: 3, periods: 3, latentBefore: 2, latentAfter: 0 },
-  intermediate: { entities: 4, periods: 4, latentBefore: 3, latentAfter: 1 },
-  advanced: { entities: 5, periods: 5, latentBefore: 3, latentAfter: 1 },
+  beginner: {
+    entities: 3, periods: 3, latentBefore: 2, latentAfter: 0,
+    level: [20, 90], growth: [-0.06, 0.14], noise: 0.05,
+  },
+  intermediate: {
+    entities: 4, periods: 4, latentBefore: 3, latentAfter: 1,
+    level: [20, 90], growth: [-0.06, 0.14], noise: 0.05,
+  },
+  // Advanced worlds are deliberately CLOSE: entities start in a narrow band and
+  // drift with similar growth, so ranks, growth comparisons and shares become
+  // near-misses you must compute rather than eyeball — like the real test.
+  advanced: {
+    entities: 5, periods: 5, latentBefore: 3, latentAfter: 1,
+    level: [35, 72], growth: [-0.04, 0.10], noise: 0.04,
+  },
 };
 
 /**
@@ -223,10 +235,10 @@ export function generateDataset(seed, tier = 'intermediate', themeKey = null) {
 
   // Revenue: each entity has a level and a growth path across ALL world periods.
   for (const e of allEntities) {
-    let level = rng.range(20, 90) * (bigScale >= 1e6 ? 1e6 : 1e5); // base money
-    const growth = rng.range(-0.06, 0.14);
+    let level = rng.range(cfg.level[0], cfg.level[1]) * (bigScale >= 1e6 ? 1e6 : 1e5); // base money
+    const growth = rng.range(cfg.growth[0], cfg.growth[1]);
     for (const p of worldPeriods) {
-      level = Math.max(1e5, level * (1 + growth + rng.range(-0.05, 0.05)));
+      level = Math.max(1e5, level * (1 + growth + rng.range(-cfg.noise, cfg.noise)));
       setV('revenue', e, p, roundMoney(level, units.revenue));
     }
   }

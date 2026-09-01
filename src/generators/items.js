@@ -20,7 +20,7 @@
 // -----------------------------------------------------------------------------
 
 import {
-  cell, num, sub, div, pctChange, pctPoints, shareOf, evalClaim, LABEL,
+  cell, num, sub, div, sum, pctChange, pctPoints, shareOf, evalClaim, LABEL,
 } from './claim.js';
 import { money, count as fmtCount, percent as fmtPct, group, formatValue } from './format.js';
 
@@ -70,11 +70,32 @@ function niceValue(base, unit) {
   const step = mag / (unit.kind === 'currency' && unit.scale >= 1e6 ? 10 : 2);
   return Math.round(d / step) * step * unit.scale;
 }
+function stepOf(base, unit) {
+  const d = base / unit.scale;
+  const mag = Math.pow(10, Math.floor(Math.log10(Math.abs(d) || 1)));
+  return (mag / (unit.kind === 'currency' && unit.scale >= 1e6 ? 10 : 2)) * unit.scale;
+}
 
-/** A threshold near `base` on a chosen side, as clean display units. */
-function threshold(rng, base, unit, wantAbove) {
-  const factor = wantAbove ? rng.pick([1.06, 1.12, 1.2]) : rng.pick([0.8, 0.88, 0.94]);
-  return niceValue(base * factor, unit);
+// How far a threshold sits from the true value, by tier. Beginner thresholds are
+// wide enough to eyeball; ADVANCED thresholds are deliberate near-misses (a few
+// percent off) so estimation fails and you must actually compute — that is what
+// the real advanced items feel like under the ~20s/item clock.
+const MARGIN = {
+  beginner: { above: [1.15, 1.25, 1.4], below: [0.6, 0.75, 0.85], pct: [0.5, 0.7, 1.4, 1.7] },
+  intermediate: { above: [1.06, 1.12, 1.2], below: [0.8, 0.88, 0.94], pct: [0.6, 0.85, 1.15, 1.4] },
+  advanced: { above: [1.025, 1.045, 1.08], below: [0.92, 0.955, 0.975], pct: [0.85, 0.93, 1.08, 1.15] },
+};
+const marginOf = (tier) => MARGIN[tier] || MARGIN.intermediate;
+
+/** A threshold near `base` on a chosen side, as clean display units, never equal to the rounded actual. */
+function threshold(rng, base, unit, wantAbove, tier = 'intermediate') {
+  const m = marginOf(tier);
+  const factor = wantAbove ? rng.pick(m.above) : rng.pick(m.below);
+  let t = niceValue(base * factor, unit);
+  // On tight margins rounding can land exactly on the actual value — nudge one
+  // display step to the wanted side so "exceeded X" is never a coin-flip on ties.
+  if (t === niceValue(base, unit)) t += (wantAbove ? 1 : -1) * stepOf(base, unit);
+  return t;
 }
 
 function pickVisibleEntity(rng, dataset) { return rng.pick(dataset.entitiesVisible); }
@@ -97,6 +118,14 @@ function verb(op) {
   return op === '>' ? 'exceeded' : op === '<' ? 'was less than'
     : op === '>=' ? 'was at least' : op === '<=' ? 'was at most' : 'was';
 }
+function verbAlt(rng, op) {
+  if (op === '>') return rng.pick(['exceeded', 'was greater than', 'was above', 'was more than']);
+  if (op === '<') return rng.pick(['was less than', 'was below', 'did not reach', 'stayed under']);
+  return verb(op);
+}
+
+/** Pick one phrasing template — same claim, varied English, so items never read canned. */
+function phrase(rng, variants) { return rng.pick(variants); }
 
 // Assemble a finished item from parts (computes the label independently-of-intent).
 function finalize(dataset, { type, traps, claim, text, tier, narrative }) {
@@ -198,7 +227,8 @@ function genLookup(dataset, rng, tier, aim) {
   // Occasionally an exact-equality "close but not exact" item.
   if (aim !== LABEL.CANNOT_SAY && unit.kind === 'currency' && rng.chance(0.25)) {
     const wrong = rng.chance(0.5);
-    const tgt = wrong ? niceValue(actual * rng.pick([1.03, 0.97]), unit) : actual;
+    const nudge = tier === 'advanced' ? rng.pick([1.015, 0.985]) : rng.pick([1.03, 0.97]);
+    const tgt = wrong ? niceValue(actual * nudge, unit) : actual;
     traps.push('exactness');
     const claim = { kind: 'cmp', lhs: cell(metric, e, p), op: '==', rhs: num(tgt) };
     return finalize(dataset, {
@@ -210,12 +240,17 @@ function genLookup(dataset, rng, tier, aim) {
 
   const op = rng.pick(['>', '<']);
   const wantAbove = op === '<'; // threshold above actual makes "<" true, ">" false, etc.
-  const tgt = threshold(rng, actual, unit, wantAbove);
+  const tgt = threshold(rng, actual, unit, wantAbove, tier);
   const claim = { kind: 'cmp', lhs: cell(metric, e, p), op, rhs: num(tgt) };
+  const title = dataset.theme.titles[metricRole(metric)];
+  const val = phraseValue(dataset, metric, tgt, { forceWord });
   return finalize(dataset, {
     type: 'lookup', traps, tier, claim,
-    text: `${dataset.theme.titles[metricRole(metric)]} for ${e} in ${p} ${verb(op)} ` +
-      `${phraseValue(dataset, metric, tgt, { forceWord })}.`,
+    text: phrase(rng, [
+      `${title} for ${e} in ${p} ${verbAlt(rng, op)} ${val}.`,
+      `In ${p}, ${title.toLowerCase()} recorded for ${e} ${verbAlt(rng, op)} ${val}.`,
+      `${e} reported ${title.toLowerCase()} ${op === '>' ? 'of more than' : 'of less than'} ${val} in ${p}.`,
+    ]),
   });
 }
 
@@ -229,15 +264,19 @@ function genArithmetic(dataset, rng, tier, aim) {
   const v2 = dataset.resolveWorld({ m: metric, e, p: p2 });
   const diff = Math.abs(v2 - v1);
   const rising = v2 >= v1;
-  const tgt = threshold(rng, diff || unit.scale, unit, rng.chance());
+  const tgt = threshold(rng, diff || unit.scale, unit, rng.chance(), tier);
   const lhs = rising ? sub(cell(metric, e, p2), cell(metric, e, p1))
     : sub(cell(metric, e, p1), cell(metric, e, p2));
   const claim = { kind: 'cmp', lhs, op: '>', rhs: num(tgt) };
   const dir = rising ? 'increased' : 'decreased';
+  const title = dataset.theme.titles[metricRole(metric)];
   return finalize(dataset, {
     type: 'arithmetic', traps: [], tier, claim,
-    text: `${dataset.theme.titles[metricRole(metric)]} for ${e} ${dir} by more than ` +
-      `${phraseValue(dataset, metric, tgt)} between ${p1} and ${p2}.`,
+    text: phrase(rng, [
+      `${title} for ${e} ${dir} by more than ${phraseValue(dataset, metric, tgt)} between ${p1} and ${p2}.`,
+      `Between ${p1} and ${p2}, ${e}'s ${title.toLowerCase()} ${rising ? 'rose' : 'fell'} by more than ${phraseValue(dataset, metric, tgt)}.`,
+      `The ${rising ? 'increase' : 'decrease'} in ${title.toLowerCase()} for ${e} from ${p1} to ${p2} was greater than ${phraseValue(dataset, metric, tgt)}.`,
+    ]),
     narrative: [
       `Compute the change: |${p2} − ${p1}| = ${formatValue(unit, diff)}.`,
       `Compare with the stated ${formatValue(unit, tgt)}.`,
@@ -253,15 +292,18 @@ function genPctChange(dataset, rng, tier, aim) {
   const v1 = dataset.resolveWorld({ m: metric, e, p: p1 });
   const v2 = dataset.resolveWorld({ m: metric, e, p: p2 });
   const pc = ((v2 - v1) / v1) * 100;
-  const tgtPct = Math.round(Math.abs(pc) * rng.pick([0.6, 0.85, 1.15, 1.4]));
+  const tgtPct = Math.max(1, Math.round(Math.abs(pc) * rng.pick(marginOf(tier).pct)));
   const op = rng.pick(['>', '<']);
   // Keep the rhs sign consistent with the direction the wording describes.
   const rhsPct = op === '>' ? tgtPct : -tgtPct;
   const claim = { kind: 'cmp', lhs: pctChange(cell(metric, e, p1), cell(metric, e, p2)), op, rhs: num(rhsPct) };
+  const title = dataset.theme.titles[metricRole(metric)];
   return finalize(dataset, {
     type: 'pct_change', traps: ['pct_change'], tier, claim,
-    text: `${dataset.theme.titles[metricRole(metric)]} for ${e} ${op === '>' ? 'rose by more than' : 'fell by more than'} ` +
-      `${tgtPct}% between ${p1} and ${p2}.`,
+    text: phrase(rng, [
+      `${title} for ${e} ${op === '>' ? 'rose by more than' : 'fell by more than'} ${tgtPct}% between ${p1} and ${p2}.`,
+      `Between ${p1} and ${p2}, ${e}'s ${title.toLowerCase()} ${op === '>' ? 'grew by over' : 'declined by over'} ${tgtPct}%.`,
+    ]),
     narrative: [
       `Percentage change = (new − old) ÷ old × 100 = ` +
       `(${formatValue(dataset.units[metric], v2)} − ${formatValue(dataset.units[metric], v1)}) ÷ ` +
@@ -281,8 +323,9 @@ function genPctPoints(dataset, rng, tier, aim) {
   const pointsChange = m2 - m1;
   const asPoints = rng.chance(0.5); // half phrased as points, half as relative %
   const title = dataset.theme.titles.margin;
+  const ppMul = tier === 'advanced' ? [0.8, 1.2] : [0.6, 1.3];
   if (asPoints) {
-    const tgt = Math.max(1, Math.round(Math.abs(pointsChange) * rng.pick([0.6, 1.3])));
+    const tgt = Math.max(1, Math.round(Math.abs(pointsChange) * rng.pick(ppMul)));
     const claim = {
       kind: 'cmp',
       lhs: pointsChange >= 0 ? pctPoints(cell(metric, e, p2), cell(metric, e, p1))
@@ -302,7 +345,7 @@ function genPctPoints(dataset, rng, tier, aim) {
   }
   // relative-% wording about a percent metric — tests pp/% confusion
   const rel = ((m2 - m1) / m1) * 100;
-  const tgt = Math.round(Math.abs(rel) * rng.pick([0.6, 1.3]));
+  const tgt = Math.max(1, Math.round(Math.abs(rel) * rng.pick(ppMul)));
   const claim = {
     kind: 'cmp', lhs: pctChange(cell(metric, e, p1), cell(metric, e, p2)),
     op: '>', rhs: num(rel >= 0 ? tgt : -tgt),
@@ -329,7 +372,8 @@ function genShare(dataset, rng, tier, aim) {
   const rev = dataset.resolveWorld({ m: 'revenue', e, p });
   const tot = dataset.resolveWorld({ m: 'revenueTotal', e: '__ALL__', p });
   const sh = (rev / tot) * 100;
-  const tgt = Math.round(sh * rng.pick([0.7, 1.3]));
+  const shMul = tier === 'advanced' ? [0.88, 0.94, 1.07, 1.13] : [0.7, 1.3];
+  const tgt = Math.max(1, Math.round(sh * rng.pick(shMul)));
   const op = rng.pick(['>', '<']);
   const claim = {
     kind: 'cmp',
@@ -338,8 +382,10 @@ function genShare(dataset, rng, tier, aim) {
   };
   return finalize(dataset, {
     type: 'share', traps: ['share', 'multi_tab'], tier, claim,
-    text: `${e} accounted for ${op === '>' ? 'more than' : 'less than'} ${tgt}% of total ` +
-      `${TITLES_LOWER(dataset, 'revenue')} in ${p}.`,
+    text: phrase(rng, [
+      `${e} accounted for ${op === '>' ? 'more than' : 'less than'} ${tgt}% of total ${TITLES_LOWER(dataset, 'revenue')} in ${p}.`,
+      `In ${p}, ${op === '>' ? 'over' : 'under'} ${tgt}% of the company's total ${TITLES_LOWER(dataset, 'revenue')} came from ${e}.`,
+    ]),
     narrative: [
       `Share = ${e}'s ${TITLES_LOWER(dataset, 'revenue')} ÷ company total × 100.`,
     ],
@@ -356,7 +402,8 @@ function genMultiTab(dataset, rng, tier, aim) {
     const cost = dataset.resolveWorld({ m: 'costs', e, p });
     const profit = rev - cost;
     const unit = dataset.units.revenue;
-    const tgt = niceValue(Math.abs(profit) * rng.pick([0.7, 1.25]), unit);
+    const pMul = tier === 'advanced' ? [0.93, 0.96, 1.05, 1.08] : [0.7, 1.25];
+    const tgt = niceValue(Math.abs(profit) * rng.pick(pMul), unit);
     const diffName = dataset.meta.diffLabel; // operating profit / gross profit / net assets / free cash flow
     const claim = { kind: 'cmp', lhs: sub(cell('revenue', e, p), cell('costs', e, p)), op: '>', rhs: num(tgt) };
     return finalize(dataset, {
@@ -375,7 +422,8 @@ function genMultiTab(dataset, rng, tier, aim) {
   const heads = dataset.resolveWorld({ m: 'headcount', e, p });
   const rph = rev / heads;
   const unit = { kind: 'currency', symbol: dataset.units.revenue.symbol, scale: 1e3, decimals: 0, word: 'thousand', label: 'per head' };
-  const tgt = niceValue(rph * rng.pick([0.75, 1.25]), unit);
+  const rphMul = tier === 'advanced' ? [0.92, 0.96, 1.05, 1.09] : [0.75, 1.25];
+  const tgt = niceValue(rph * rng.pick(rphMul), unit);
   const claim = { kind: 'cmp', lhs: div(cell('revenue', e, p), cell('headcount', e, p)), op: '>', rhs: num(tgt) };
   return finalize(dataset, {
     type: 'multi_tab', traps: ['multi_tab', 'ratio'], tier, claim,
@@ -413,15 +461,18 @@ function genRank(dataset, rng, tier, aim) {
   const p = aim === LABEL.CANNOT_SAY && rng.chance(0.5)
     ? rng.pick(dataset.periodLatentBefore.concat(dataset.periodLatentAfter).concat([latestPeriod(dataset)]))
     : latestPeriod(dataset);
-  const metric = 'revenue';
+  const metric = rng.pick(['revenue', 'revenue', 'costs', 'headcount', 'margin']);
   const target = aim === LABEL.CANNOT_SAY && rng.chance(0.5) ? dataset.entityLatent : pickVisibleEntity(rng, dataset);
   const sel = rng.pick(['max', 'min']);
   const among = dataset.entitiesVisible.map((e) => ({ m: metric, e, p }));
   const claim = { kind: 'rank', among, target: { m: metric, e: target, p }, sel };
+  const titleLower = dataset.theme.titles[metricRole(metric)].toLowerCase();
   return finalize(dataset, {
     type: 'rank', traps: ['rank'], tier, claim,
-    text: `${target} had the ${sel === 'max' ? 'highest' : 'lowest'} ` +
-      `${TITLES_LOWER(dataset, 'revenue')} of all ${dataset.meta.entityLabel.toLowerCase()}s in ${p}.`,
+    text: phrase(rng, [
+      `${target} had the ${sel === 'max' ? 'highest' : 'lowest'} ${titleLower} of all ${dataset.meta.entityLabel.toLowerCase()}s in ${p}.`,
+      `Of all the ${dataset.meta.entityLabel.toLowerCase()}s, ${target} recorded the ${sel === 'max' ? 'greatest' : 'smallest'} ${titleLower} in ${p}.`,
+    ]),
     narrative: [`Compare all ${dataset.meta.entityLabel.toLowerCase()}s for ${p} and find the ${sel === 'max' ? 'largest' : 'smallest'}.`],
   });
 }
@@ -469,6 +520,148 @@ function genInsufficient(dataset, rng, tier) {
   });
 }
 
+// -----------------------------------------------------------------------------
+// harder multi-step types (weighted towards intermediate/advanced sessions)
+// -----------------------------------------------------------------------------
+
+// 10. GROWTH COMPARISON — which entity grew faster in % terms (two full
+// percentage-change computations, then a comparison — a real advanced staple).
+function genGrowthCompare(dataset, rng, tier, aim) {
+  const metric = rng.pick(['revenue', 'costs']);
+  const [eA, eB] = rng.sample(dataset.entitiesVisible, 2);
+  const [p1, p2] = orderedPeriods(dataset, rng, aim);
+  const unit = dataset.units[metric];
+  const a1 = dataset.resolveWorld({ m: metric, e: eA, p: p1 });
+  const a2 = dataset.resolveWorld({ m: metric, e: eA, p: p2 });
+  const b1 = dataset.resolveWorld({ m: metric, e: eB, p: p1 });
+  const b2 = dataset.resolveWorld({ m: metric, e: eB, p: p2 });
+  const pcA = ((a2 - a1) / a1) * 100;
+  const pcB = ((b2 - b1) / b1) * 100;
+  const claim = {
+    kind: 'cmp',
+    lhs: pctChange(cell(metric, eA, p1), cell(metric, eA, p2)),
+    op: '>',
+    rhs: pctChange(cell(metric, eB, p1), cell(metric, eB, p2)),
+  };
+  const titleLower = dataset.theme.titles[metricRole(metric)].toLowerCase();
+  const bothFell = pcA < 0 && pcB < 0;
+  const text = bothFell
+    ? `Between ${p1} and ${p2}, ${titleLower} fell by a smaller percentage at ${eA} than at ${eB}.`
+    : phrase(rng, [
+      `Between ${p1} and ${p2}, ${titleLower} grew by a greater percentage at ${eA} than at ${eB}.`,
+      `${titleLower.charAt(0).toUpperCase() + titleLower.slice(1)} for ${eA} rose faster in percentage terms than for ${eB} between ${p1} and ${p2}.`,
+    ]);
+  return finalize(dataset, {
+    type: 'growth_compare', traps: ['pct_change', 'multi_step'], tier, claim,
+    text,
+    narrative: [
+      `${eA}: (${formatValue(unit, a2)} − ${formatValue(unit, a1)}) ÷ ${formatValue(unit, a1)} × 100 = ${pcA.toFixed(1)}%.`,
+      `${eB}: (${formatValue(unit, b2)} − ${formatValue(unit, b1)}) ÷ ${formatValue(unit, b1)} × 100 = ${pcB.toFixed(1)}%.`,
+      `Compare the two percentage changes — the larger absolute figures do NOT decide it.`,
+    ],
+  });
+}
+
+// 11. AVERAGE — mean over the shown periods vs a near-miss threshold.
+function genAverage(dataset, rng, tier, aim) {
+  const metric = rng.pick(['revenue', 'costs', 'headcount']);
+  const e = pickVisibleEntity(rng, dataset);
+  const unit = dataset.units[metric];
+  const span = aim === LABEL.CANNOT_SAY && dataset.periodLatentBefore.length
+    ? [dataset.periodLatentBefore[dataset.periodLatentBefore.length - 1], ...dataset.periodsVisible]
+    : dataset.periodsVisible;
+  const refs = span.map((p) => ({ m: metric, e, p }));
+  const vals = refs.map((r) => dataset.resolveWorld(r));
+  const avg = vals.reduce((s, v) => s + v, 0) / vals.length;
+  const op = rng.pick(['>', '<']);
+  const tgt = threshold(rng, avg, unit, op === '<', tier);
+  const claim = { kind: 'cmp', lhs: div(sum(refs), num(refs.length)), op, rhs: num(tgt) };
+  const titleLower = dataset.theme.titles[metricRole(metric)].toLowerCase();
+  return finalize(dataset, {
+    type: 'average', traps: ['multi_step'], tier, claim,
+    text: phrase(rng, [
+      `Average ${titleLower} for ${e} across ${span[0]} to ${span[span.length - 1]} ${verbAlt(rng, op)} ${phraseValue(dataset, metric, tgt)}.`,
+      `Across ${span[0]}–${span[span.length - 1]}, ${e}'s ${titleLower} averaged ${op === '>' ? 'more' : 'less'} than ${phraseValue(dataset, metric, tgt)} per period.`,
+    ]),
+    narrative: [
+      `Sum the ${span.length} periods, then divide by ${span.length}: average = ${formatValue(unit, avg)}.`,
+      `A shortcut under time pressure: compare the threshold × ${span.length} against the running total.`,
+    ],
+  });
+}
+
+// 12. RATIO — one figure as a multiple or percentage of another (cross-tab).
+function genRatio(dataset, rng, tier, aim) {
+  const e = pickVisibleEntity(rng, dataset);
+  const p = latestOrLatent(dataset, rng, aim);
+  const rev = dataset.resolveWorld({ m: 'revenue', e, p });
+  const cost = dataset.resolveWorld({ m: 'costs', e, p });
+  const revLower = TITLES_LOWER(dataset, 'revenue');
+  const costLower = TITLES_LOWER(dataset, 'costs');
+  if (rng.chance(0.5)) {
+    // costs as a % of revenue (cost-to-income style)
+    const pctActual = (cost / rev) * 100;
+    const mul = tier === 'advanced' ? [0.92, 0.96, 1.05, 1.09] : [0.75, 1.25];
+    const tgt = Math.max(1, Math.round(pctActual * rng.pick(mul)));
+    const op = rng.pick(['>', '<']);
+    const claim = { kind: 'cmp', lhs: shareOf(cell('costs', e, p), cell('revenue', e, p)), op, rhs: num(tgt) };
+    return finalize(dataset, {
+      type: 'ratio', traps: ['ratio', 'multi_tab'], tier, claim,
+      text: `In ${p}, ${costLower} for ${e} amounted to ${op === '>' ? 'more' : 'less'} than ${tgt}% of its ${revLower}.`,
+      narrative: [
+        `Ratio = ${costLower} ÷ ${revLower} × 100 = ${formatValue(dataset.units.costs, cost)} ÷ ${formatValue(dataset.units.revenue, rev)} × 100 = ${pctActual.toFixed(1)}%.`,
+        `The two figures sit on DIFFERENT tabs and may use different units — convert before dividing.`,
+      ],
+    });
+  }
+  // revenue as a multiple of costs
+  const ratio = rev / cost;
+  const mul = tier === 'advanced' ? [0.93, 0.97, 1.04, 1.08] : [0.8, 1.2];
+  const tgt = Math.max(0.1, +(ratio * rng.pick(mul)).toFixed(1));
+  const op = rng.pick(['>', '<']);
+  const claim = { kind: 'cmp', lhs: div(cell('revenue', e, p), cell('costs', e, p)), op, rhs: num(tgt) };
+  return finalize(dataset, {
+    type: 'ratio', traps: ['ratio', 'multi_tab'], tier, claim,
+    text: `In ${p}, ${revLower} for ${e} was ${op === '>' ? 'more' : 'less'} than ${tgt} times its ${costLower}.`,
+    narrative: [
+      `Multiple = ${revLower} ÷ ${costLower} = ${formatValue(dataset.units.revenue, rev)} ÷ ${formatValue(dataset.units.costs, cost)} = ${ratio.toFixed(2)}×.`,
+    ],
+  });
+}
+
+// 13. COMBINED SHARE — two entities together vs the company total (three
+// figures, two tabs, one near-miss threshold).
+function genCombinedShare(dataset, rng, tier, aim) {
+  const [eA, eB] = rng.sample(dataset.entitiesVisible, 2);
+  const p = aim === LABEL.CANNOT_SAY
+    ? rng.pick(dataset.periodsVisible.slice(0, -1).concat(dataset.periodLatentBefore))
+    : latestPeriod(dataset);
+  const revA = dataset.resolveWorld({ m: 'revenue', e: eA, p });
+  const revB = dataset.resolveWorld({ m: 'revenue', e: eB, p });
+  const tot = dataset.resolveWorld({ m: 'revenueTotal', e: '__ALL__', p });
+  const sh = ((revA + revB) / tot) * 100;
+  const mul = tier === 'advanced' ? [0.9, 0.95, 1.05, 1.1] : [0.75, 1.25];
+  const tgt = Math.max(1, Math.min(99, Math.round(sh * rng.pick(mul))));
+  const op = rng.pick(['>', '<']);
+  const claim = {
+    kind: 'cmp',
+    lhs: shareOf(sum([{ m: 'revenue', e: eA, p }, { m: 'revenue', e: eB, p }]), cell('revenueTotal', '__ALL__', p)),
+    op, rhs: num(tgt),
+  };
+  const revLower = TITLES_LOWER(dataset, 'revenue');
+  return finalize(dataset, {
+    type: 'combined_share', traps: ['share', 'multi_step'], tier, claim,
+    text: phrase(rng, [
+      `${eA} and ${eB} together accounted for ${op === '>' ? 'more' : 'less'} than ${tgt}% of total ${revLower} in ${p}.`,
+      `In ${p}, ${op === '>' ? 'over' : 'under'} ${tgt}% of the company's total ${revLower} came from ${eA} and ${eB} combined.`,
+    ]),
+    narrative: [
+      `Add the two: ${formatValue(dataset.units.revenue, revA)} + ${formatValue(dataset.units.revenue, revB)} = ${formatValue(dataset.units.revenue, revA + revB)}.`,
+      `Divide by the company total (share-tab caption) and × 100 = ${sh.toFixed(1)}%.`,
+    ],
+  });
+}
+
 // ---- period helpers ---------------------------------------------------------
 
 function latestOrLatent(dataset, rng, aim) {
@@ -506,6 +699,10 @@ export const GENERATORS = {
   trend: genTrend,
   rank: genRank,
   insufficient: genInsufficient,
+  growth_compare: genGrowthCompare,
+  average: genAverage,
+  ratio: genRatio,
+  combined_share: genCombinedShare,
 };
 
 export const ITEM_TYPES = Object.keys(GENERATORS);

@@ -181,8 +181,32 @@ function startTimer(seconds) {
       el.classList.toggle('warn', remaining <= 60 && remaining > 20);
       el.classList.toggle('crit', remaining <= 20);
     }
+    updatePace(remaining);
     if (remaining <= 0) { state.expired = true; finish(); }
   }, 250);
+}
+
+// Live pacing pressure: where you SHOULD be by now vs where you are, plus the
+// seconds-per-task budget your remaining time actually allows. The real test is
+// lost on pace, not knowledge — this keeps the clock in your face the whole way.
+function updatePace(remaining) {
+  const el = document.querySelector('[data-pace]');
+  if (!el || !state.mode || !state.mode.timed || !state.session) return;
+  const total = state.mode.time;
+  const count = state.session.items.length;
+  const elapsed = Math.max(0, total - remaining);
+  const target = Math.min(count, Math.floor((elapsed / total) * count) + 1);
+  const onQ = state.current + 1;
+  const unanswered = state.answers.filter((a) => a.given == null).length;
+  const perTask = unanswered > 0 ? Math.max(0, remaining) / unanswered : 0;
+  const behind = target - onQ;
+  el.textContent = behind >= 2
+    ? `⏱ behind pace — target Q${target} · ${perTask.toFixed(0)}s/task left`
+    : behind <= -2
+      ? `ahead of pace · ${perTask.toFixed(0)}s/task left`
+      : `on pace · target Q${target} · ${perTask.toFixed(0)}s/task left`;
+  el.classList.toggle('behind', behind >= 2);
+  el.classList.toggle('ahead', behind <= -2);
 }
 
 function renderTest() {
@@ -191,7 +215,7 @@ function renderTest() {
   const item = session.items[current];
   const given = state.answers[current].given;
   const right = state.mode.timed
-    ? `<span class="timer">${fmtTime(Math.round((state.deadline - Date.now()) / 1000))}</span>`
+    ? `<span class="pacechip" data-pace></span><span class="timer">${fmtTime(Math.round((state.deadline - Date.now()) / 1000))}</span>`
     : '<span class="muted">untimed</span>';
 
   // display area
@@ -212,9 +236,11 @@ function renderTest() {
     `<div class="pdot${state.answers[i].given != null ? ' answered' : ''}${i === current ? ' current' : ''}" data-goto="${i}">${i + 1}</div>`).join('');
 
   const calcBtn = m.id === 'numerical' ? '<button class="btn secondary calc-toggle" data-calc>🖩 Calculator</button>' : '';
-  const tip = m.usesTabs
-    ? 'Confirm the correct tab is showing before you answer — the wrong tab up can cost points. Blanks score 0; wrong answers −1, so skip rather than guess blindly.'
-    : 'Blanks score 0; wrong answers score −1. If you can’t reason it out, skip rather than guess blindly.';
+  const tip = state.mode.exam
+    ? 'Exam simulation: answering moves you straight on and there is no going back. Decide, click, move — Skip anything not cracked in ~30s. Blanks 0, wrong −1.'
+    : m.usesTabs
+      ? 'Confirm the correct tab is showing before you answer — the wrong tab up can cost points. Blanks score 0; wrong answers −1, so skip rather than guess blindly.'
+      : 'Blanks score 0; wrong answers score −1. If you can’t reason it out, skip rather than guess blindly.';
 
   return `${topbar(`<span class="muted">Question ${current + 1} / ${session.items.length}</span>${right}`)}
   <div class="panel">
@@ -238,6 +264,13 @@ function selectAnswer(token) {
   const a = state.answers[state.current];
   a.given = token;
   a.submittedTab = m.usesTabs ? state.session.context.tabs[state.activeTab].id : null;
+  // Exam simulation: answering commits you — auto-advance, no going back. This
+  // is the real test's rhythm: decide, click, move on.
+  if (state.mode && state.mode.exam && state.current < state.session.items.length - 1) {
+    render();
+    setTimeout(() => { if (state.screen === 'test') goTo(state.current + 1); }, 160);
+    return;
+  }
   render();
 }
 function accrueTime() {

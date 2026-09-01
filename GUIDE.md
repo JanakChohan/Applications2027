@@ -113,6 +113,12 @@ Some employers frame the data as **income statements, balance sheets, and cash f
 - **Trend / direction** — check every consecutive step; "every period" fails on one exception.
 - **Rank / comparison** — scan all entities for the named period; for "largest growth" compare **%**, not raw size.
 - **Insufficient data** — the answer is Cannot Say; identify exactly which figure is missing (period/entity/quantity) so you can say it with confidence.
+- **Growth comparison** ("A grew faster than B") — TWO full %-change computations, then compare the percentages. Never decide from the raw sizes: the bigger entity often grows slower. Write both %s down before comparing.
+- **Average over periods** — shortcut under time pressure: threshold × number of periods vs the running sum. Adding then comparing totals is one division cheaper than computing the mean.
+- **Ratio / multiple** ("costs were more than 40% of revenue", "revenue was 2.3× costs") — both figures usually sit on DIFFERENT tabs with different units. Convert to the same unit first, then divide. Near-miss thresholds mean you must actually compute, not eyeball.
+- **Combined share** ("A and B together > 45% of total") — add the two entity figures first, then divide by the captioned total. Three numbers, two tabs — write them down.
+
+**On thresholds at advanced level:** the stated figure sits only a few percent from the true value on purpose. Estimation that works at beginner level ("looks about 60") will get you killed here — this mirrors the real test, where the statement is engineered so that only the actual calculation separates True from False.
 
 ## A full worked example
 
@@ -139,6 +145,14 @@ The trainer scores this the same way: on a multi-tab item, submitting from **eit
 
 ---
 ---
+
+## Training under real pressure — the Exam simulation mode
+
+The real test is lost on **pace**, not knowledge. The trainer's *Exam simulation* mode reproduces the pressure exactly: 37 tasks, 12:00, forward-only (answering commits you and moves you straight on), with a live pace chip showing where you should be and how many seconds per task your remaining time allows.
+
+- Train the rhythm: **decide → click → move**. If an item isn't cracked in ~30 seconds, Skip — a blank is 0, a panicked guess is −1.
+- The pace chip going red means you're 2+ questions behind the clock. Don't speed up your arithmetic (that's where errors come from) — get more ruthless about skipping.
+- Do your learning in Untimed and Adaptive drills; do at least 2–3 Exam simulations per week in the final fortnight so the pressure feels normal on the day. Sit them in one uninterrupted block, calculator and paper ready, exactly as you will on the real test.
 
 # MODULE 2 — scales verbal
 

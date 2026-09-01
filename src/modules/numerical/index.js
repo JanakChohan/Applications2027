@@ -18,6 +18,7 @@ export default {
   usesTabs: true,
   answerKind: 'tfc',
   modes: [
+    { key: 'exam', label: 'Exam simulation', count: 37, time: 720, timed: true, allowBack: false, exam: true, desc: '37 tasks · 12:00 · forward-only, auto-advance, live pace tracking — full test pressure' },
     { key: 'full', label: 'Full mock', count: 37, time: 720, timed: true, allowBack: true, desc: '37 tasks · 12:00 · the real long form (~20s/item)' },
     { key: 'short', label: 'Short mock', count: 18, time: 360, timed: true, allowBack: true, desc: '18 tasks · 6:00 · the real short form' },
     { key: 'remembered', label: 'As remembered', count: 18, time: 720, timed: true, allowBack: true, nonstandard: true, desc: '18 tasks · 12:00 · gentler (your recollection)' },

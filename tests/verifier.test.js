@@ -105,3 +105,33 @@ describe('dataset shape', () => {
     }
   });
 });
+
+describe('harder multi-step types (growth_compare, average, ratio, combined_share)', () => {
+  const NEW_TYPES = ['growth_compare', 'average', 'ratio', 'combined_share'];
+  it('every item of each new type verifies, across tiers and seeds', () => {
+    for (const type of NEW_TYPES) {
+      let n = 0;
+      for (let s = 0; s < 6; s++) {
+        const session = generateSession({
+          seed: `new-${type}-${s}`, tier: ['intermediate', 'advanced'][s % 2], count: 10,
+          typeWeights: { [type]: 1, insufficient: 0 },
+        });
+        for (const item of session.items) {
+          const v = verifyItem(session.dataset, item);
+          expect(v.ok, `${type}: "${item.text}" → ${v.reason}`).toBe(true);
+          if (item.type === type) n++;
+        }
+      }
+      expect(n, `expected some ${type} items`).toBeGreaterThan(20);
+    }
+  });
+
+  it('advanced sessions actually contain multi-step types', () => {
+    const types = new Set();
+    for (let s = 0; s < 6; s++) {
+      const session = generateSession({ seed: `adv-mix-${s}`, tier: 'advanced', count: 20 });
+      session.items.forEach((i) => types.add(i.type));
+    }
+    expect(NEW_TYPES.filter((t) => types.has(t)).length).toBeGreaterThanOrEqual(3);
+  });
+});
