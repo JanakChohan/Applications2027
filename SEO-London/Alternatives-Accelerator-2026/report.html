@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SEO London Alternatives Accelerator — Briefing</title>
+<style>
+  @page { size: A4; margin: 16mm 15mm 18mm 15mm; }
+  @page :first { margin: 0; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size: 10.2pt; line-height: 1.52; color: #14181f; margin: 0;
+  }
+  h1, h2, h3, h4, .ui { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+  /* ---------- cover ---------- */
+  .cover {
+    height: 297mm; padding: 26mm 22mm 20mm 22mm; background: #0f1c2e; color: #fff;
+    display: flex; flex-direction: column; page-break-after: always; position: relative;
+  }
+  .cover .kicker { font-size: 9pt; letter-spacing: .22em; text-transform: uppercase; color: #7fb2e8; margin-bottom: 8mm; }
+  .cover h1 { font-size: 34pt; line-height: 1.1; margin: 0 0 6mm 0; font-weight: 700; letter-spacing: -.5pt; }
+  .cover .sub { font-size: 13pt; color: #c7d6e6; line-height: 1.45; max-width: 130mm; font-family: Georgia, serif; }
+  .cover .rule { height: 3px; width: 40mm; background: #e8a33d; margin: 9mm 0; }
+  .cover .meta { margin-top: auto; font-size: 9.5pt; color: #9fb4cc; font-family: Helvetica, Arial, sans-serif; line-height: 1.8; }
+  .cover .meta strong { color: #fff; font-weight: 600; }
+  .cover .urgent {
+    background: #e8a33d; color: #1a1000; padding: 5mm 6mm; border-radius: 2px;
+    font-family: Helvetica, Arial, sans-serif; font-size: 10pt; line-height: 1.5; margin-top: 8mm;
+  }
+  .cover .urgent b { display: block; font-size: 11pt; margin-bottom: 1.5mm; letter-spacing: .02em; }
+
+  /* ---------- structure ---------- */
+  h2 {
+    font-size: 15.5pt; color: #0f1c2e; margin: 0 0 4mm 0; padding-bottom: 2.5mm;
+    border-bottom: 2px solid #0f1c2e; letter-spacing: -.2pt;
+  }
+  h2 .num { color: #b8863b; font-weight: 700; margin-right: 3mm; }
+  h3 { font-size: 11.5pt; color: #0f1c2e; margin: 6mm 0 2mm 0; }
+  h4 { font-size: 10pt; color: #34495e; margin: 4mm 0 1.5mm 0; text-transform: uppercase; letter-spacing: .08em; }
+  section { page-break-before: always; }
+  section.cont { page-break-before: auto; }
+  p { margin: 0 0 3mm 0; }
+  ul, ol { margin: 0 0 3mm 0; padding-left: 5mm; }
+  li { margin-bottom: 1.6mm; }
+  strong { color: #0a1420; }
+  em.t { font-style: normal; background: #fdf2dc; padding: 0 1mm; }
+  a { color: #1a4d80; text-decoration: none; }
+
+  /* ---------- components ---------- */
+  .lede { font-size: 11.4pt; line-height: 1.5; color: #2c3e50; border-left: 3px solid #b8863b; padding-left: 5mm; margin-bottom: 6mm; }
+  .box { background: #f4f6f9; border: 1px solid #dce3ea; border-radius: 2px; padding: 4mm 5mm; margin: 4mm 0; page-break-inside: avoid; }
+  .box.gold { background: #fdf7ea; border-color: #e5cf9e; }
+  .box.dark { background: #0f1c2e; color: #dbe6f0; border: none; }
+  .box.dark strong, .box.dark h4 { color: #f0c674; }
+  .box h4 { margin-top: 0; }
+  .box p:last-child, .box ul:last-child { margin-bottom: 0; }
+
+  table { width: 100%; border-collapse: collapse; margin: 3mm 0 5mm 0; font-size: 9.3pt; page-break-inside: avoid; }
+  th { background: #0f1c2e; color: #fff; text-align: left; padding: 2.2mm 2.5mm; font-family: Helvetica, Arial, sans-serif; font-size: 8.5pt; text-transform: uppercase; letter-spacing: .05em; font-weight: 600; }
+  td { padding: 2.2mm 2.5mm; border-bottom: 1px solid #e2e8ee; vertical-align: top; }
+  tr:nth-child(even) td { background: #f7f9fb; }
+  td.k { font-weight: 700; color: #0f1c2e; width: 26%; }
+
+  .card { border: 1px solid #d8e0e8; border-left: 4px solid #1a4d80; border-radius: 2px; padding: 3.5mm 4.5mm; margin-bottom: 3.5mm; page-break-inside: avoid; }
+  .card h3 { margin: 0 0 1.5mm 0; font-size: 11pt; }
+  .card .tag { font-family: Helvetica, Arial, sans-serif; font-size: 7.8pt; text-transform: uppercase; letter-spacing: .08em; color: #6b7c8f; display: block; margin-bottom: 1mm; }
+  .card p { margin-bottom: 2mm; }
+  .card p:last-child { margin-bottom: 0; }
+  .card.fit { border-left-color: #b8863b; background: #fdfaf3; }
+
+  .decode { border: 1px solid #d8e0e8; border-radius: 2px; margin-bottom: 5mm; page-break-inside: avoid; }
+  .decode .hd { background: #eef2f6; padding: 2.5mm 4mm; font-family: Helvetica, Arial, sans-serif; font-weight: 700; font-size: 10.5pt; color: #0f1c2e; border-bottom: 1px solid #d8e0e8; }
+  .decode .bd { padding: 3.5mm 4mm; }
+  .decode .bd p:last-child { margin-bottom: 0; }
+  .decode .say { background: #f4f6f9; border-top: 1px solid #e2e8ee; padding: 3mm 4mm; font-size: 9.4pt; }
+  .decode .say b { font-family: Helvetica, Arial, sans-serif; font-size: 8.2pt; text-transform: uppercase; letter-spacing: .08em; color: #6b7c8f; display: block; margin-bottom: 1mm; }
+
+  .answer { border: 1.5px solid #0f1c2e; border-radius: 2px; padding: 4mm 5mm; margin: 3mm 0 2mm 0; background: #fff; font-size: 10.2pt; page-break-inside: avoid; }
+  .answer p { margin-bottom: 2.5mm; }
+  .count { font-family: Helvetica, Arial, sans-serif; font-size: 8.5pt; color: #6b7c8f; text-align: right; margin-top: 1mm; }
+  .glossary dt { font-weight: 700; color: #0f1c2e; font-family: Helvetica, Arial, sans-serif; font-size: 9.5pt; margin-top: 2.5mm; }
+  .glossary dd { margin: 0.5mm 0 0 0; font-size: 9.6pt; }
+  .src { font-size: 8.6pt; line-height: 1.45; color: #4a5866; }
+  .src li { margin-bottom: 1.2mm; }
+  .two { column-count: 2; column-gap: 7mm; }
+  .two > * { break-inside: avoid; }
+  .toc li { margin-bottom: 2mm; font-family: Helvetica, Arial, sans-serif; font-size: 10pt; }
+  .toc b { color: #b8863b; }
+  .warn { border-left: 4px solid #c0392b; background: #fdf1ef; padding: 3.5mm 4.5mm; margin: 4mm 0; page-break-inside: avoid; }
+  .warn h4 { color: #a5342a; margin-top: 0; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="kicker">Application Briefing &middot; Prepared 3 September 2026</div>
+  <h1>The SEO&nbsp;London<br>Alternatives<br>Accelerator</h1>
+  <div class="rule"></div>
+  <div class="sub">What the programme actually is, what every line of the agenda means, why an asset&nbsp;management client-side background is an advantage rather than a gap, and what to write in the two application boxes.</div>
+  <div class="urgent">
+    <b>Time-critical</b>
+    The published Alternatives deadline was 2 September. Zahra has asked you to submit by lunchtime today, 3 September. The programme itself runs Tue 8, Wed 9 and Thu 10 September — five days from now. Check those three dates against your diary before you apply.
+  </div>
+  <div class="meta">
+    Prepared for <strong>Janak Chohan</strong><br>
+    Subject: SEO London Accelerator Programmes — Alternatives (1st preference)<br>
+    Assumes no prior knowledge of the alternatives industry
+  </div>
+</div>
+
+<section class="cont">
+<h2><span class="num">00</span>How to use this document</h2>
+<p class="lede">You said you cannot answer the application questions until you understand what you are applying to. That is the right instinct. This report is built backwards from that problem: sections 1&ndash;3 tell you what the thing is, sections 4&ndash;6 decode the agenda line by line, section 7 gives you the industry context that makes you sound informed, and section 8 hands you draft answers you can edit and submit.</p>
+
+<h3>Read in this order if you are short on time</h3>
+<ol class="toc">
+  <li><b>15 minutes:</b> Section 1 (what this is), Section 5 (the agenda decoded), Section 8 (draft answers). That is enough to submit today.</li>
+  <li><b>45 minutes:</b> Add Section 3 (alternatives from zero) and Section 7 (commercial awareness). That is enough to hold a conversation on the day.</li>
+  <li><b>Before 8 September:</b> Everything, plus the glossary in Section 10.</li>
+</ol>
+
+<div class="box">
+<h4>Contents</h4>
+<ul class="toc" style="margin-bottom:0">
+<li><b>01</b> &nbsp;What you are actually applying to</li>
+<li><b>02</b> &nbsp;Eligibility: are you in, and what to do about the grey area</li>
+<li><b>03</b> &nbsp;Alternatives from zero: how the industry makes money</li>
+<li><b>04</b> &nbsp;The asset classes, one at a time</li>
+<li><b>05</b> &nbsp;The agenda decoded, bullet by bullet</li>
+<li><b>06</b> &nbsp;What the programme unlocks, and where people go next</li>
+<li><b>07</b> &nbsp;Commercial awareness: the six things being argued about right now</li>
+<li><b>08</b> &nbsp;The two application questions, with drafts</li>
+<li><b>09</b> &nbsp;The five days before, and the week after</li>
+<li><b>10</b> &nbsp;Glossary and sources</li>
+</ul>
+</div>
+
+<div class="warn">
+<h4>One honest caveat</h4>
+<p>SEO London does not publish a detailed public page for this specific September 2026 Accelerator. Everything describing <em>the programme itself</em> in this report comes from the text you were sent plus SEO London's own published pages on the Alternative Investments Programme, Academies and sponsors. Everything describing <em>the industry</em> is sourced and dated in Section 10. Where I am inferring rather than quoting, I say so.</p>
+</div>
+</section>
+
+<section>
+<h2><span class="num">01</span>What you are actually applying to</h2>
+
+<p class="lede">SEO London is a UK charity that gets people from under-represented and lower socio-economic backgrounds into competitive City careers. It is not a jobs board. It runs a ladder of programmes, and firms hire off that ladder.</p>
+
+<h3>The ladder</h3>
+<p>SEO London's student offering is stacked, and each rung feeds the next. Understanding where the Accelerator sits is the single most useful thing you can know before writing your application.</p>
+
+<table>
+<tr><th style="width:22%">Rung</th><th>What it is</th><th style="width:26%">Who it is for</th></tr>
+<tr><td class="k">Empower / Ignite</td><td>School-age outreach, Years 11&ndash;13</td><td>School students</td></tr>
+<tr><td class="k">Spring Into / Spring Weeks</td><td>First-year insight weeks, including dedicated Alternatives and Real Estate spring weeks run in person</td><td>First years</td></tr>
+<tr><td class="k">Academies</td><td>20+ hours of industry training across Finance, Consulting, Law, Real Estate and Insurance. Technical content plus application workshops</td><td>Penultimate years, pre-internship</td></tr>
+<tr><td class="k" style="background:#fdf7ea">Accelerator &larr; you</td><td>Short, intensive, post-internship. Assumes you have already done an internship and are now converting that into a full-time or off-cycle offer in a specific sector</td><td>Final years and 2026/27 graduates who have already interned</td></tr>
+<tr><td class="k">SEO Careers / off-cycles</td><td>Referrals and invitations to apply at sponsor firms</td><td>Programme participants</td></tr>
+<tr><td class="k">Associate Pathway (AIP)</td><td>The route into private markets for people already working as analysts in banking, research or consulting</td><td>1st&ndash;3rd year analysts</td></tr>
+<tr><td class="k">Connect</td><td>Alumni network, "The Diverse Talent Club", unlocked after 20+ hours of programming or an SEO-sourced internship</td><td>Alumni</td></tr>
+</table>
+
+<div class="box gold">
+<h4>The thing to notice</h4>
+<p>The Accelerator is the <strong>conversion rung</strong>. Academies teach you the industry; the Accelerator assumes you already know roughly what you want and exists to make you competitive for the specific applications you are about to submit. That is exactly why the eligibility bar includes a completed internship of six weeks or more, and why the agenda is weighted towards interview technique and modelling rather than "what is finance".</p>
+<p>Your application should therefore not read like "I want to learn about the industry." It should read like "<strong>I have a specific gap between where I am and the applications I am about to make, and these three sessions close it.</strong>"</p>
+</div>
+
+<h3>Where the Alternatives Accelerator sits inside AIP</h3>
+<p>The Alternatives strand is run by SEO London's <strong>Alternative Investments Programme (AIP)</strong>, which is a much bigger machine than a three-day course. AIP launched in February 2021, built with a group of private equity and asset management firms, and runs ten workstreams. The ones that matter to you:</p>
+<ul>
+  <li><strong>Careers and undergraduate support</strong> — the workstream your Accelerator sits in. Training, then invitations to apply for internships and graduate roles at sponsor firms.</li>
+  <li><strong>Associate Pathway</strong> — the next rung up, aimed at people two or three years into banking or consulting who want to move into private markets. Worth knowing it exists, because it is the natural continuation of your relationship with SEO after graduation.</li>
+  <li><strong>AICON</strong> — AIP's annual conference. A genuine networking event with the industry in the room.</li>
+  <li><strong>LP Advisory Council</strong> — AIP convenes the investors who allocate to funds, not just the funds. This is the part that makes SEO unusual, and it is directly relevant to you (see Section 5, non-investment roles).</li>
+</ul>
+<p>SEO London's published sponsor list includes alternatives and real assets names such as <strong>Blackstone, Silver Lake, Temasek, AnaCap, RBC BlueBay, Westbrook Partners, QuadReal, CBRE and BNP Paribas Real Estate</strong>. The AIP page describes participants receiving invitations to apply for roles at private equity, private credit, infrastructure, real estate and hedge fund firms. That, in practice, is the commercial value of the programme: you are being put in front of firms whose graduate pipelines are small, unadvertised and heavily referral-driven.</p>
+
+<div class="box dark">
+<h4>Say it in one sentence</h4>
+<p>The Alternatives Accelerator is a three-day, mostly virtual, technically-weighted conversion programme run by SEO London's Alternative Investments Programme, designed to take people who have already done one finance internship and make them competitive for off-cycle and graduate roles at private equity, private credit, infrastructure, real estate and hedge fund firms.</p>
+</div>
+</section>
+
+<section>
+<h2><span class="num">02</span>Eligibility, and the one grey area in your case</h2>
+
+<table>
+<tr><th style="width:30%">Requirement</th><th>Stated</th><th style="width:22%">You</th></tr>
+<tr><td class="k">Study stage</td><td>Final year undergraduate or Master's student, or penultimate year <em>if</em> on a four-year course</td><td>Check this yourself</td></tr>
+<tr><td class="k">Internship</td><td>Minimum one internship of 6+ weeks in Investment Banking, Consulting <em>or</em> Alternatives. Spring Weeks explicitly do not count</td><td>Pictet Asset Management, Global Client Group — see below</td></tr>
+<tr><td class="k">Deadline</td><td>Published as 2 September for Alternatives; 9 September for the other two strands</td><td>Zahra has asked for today, lunchtime</td></tr>
+<tr><td class="k">Selection</td><td>CV plus written application. Rolling basis</td><td>Two written questions</td></tr>
+<tr><td class="k">Attendance</td><td>One programme only. You state a preference and may be placed on your second choice</td><td>Alternatives 1st, Consulting 2nd</td></tr>
+</table>
+
+<div class="warn">
+<h4>The grey area, stated plainly</h4>
+<p>Pictet Asset Management is a traditional asset manager. The Global Client Group is client-facing distribution and servicing. On a strict reading, that is neither investment banking, nor consulting, nor alternatives.</p>
+<p><strong>Why this is almost certainly fine.</strong> Zahra spoke to you, knows your background, and emailed you personally with the link and an instruction to apply by lunchtime today. That is an invitation, not a cold application. Recruiters do not chase people they intend to screen out on a technicality.</p>
+<p><strong>What to do about it.</strong> Do not hide it, do not apologise for it, and do not pretend the Pictet role was something it was not. Frame it as the buy-side, investor-facing half of the industry — because that is genuinely what it is, and Section 5 shows you it maps onto a real and fast-growing set of alternatives roles. One clean sentence, no defensiveness. If you want belt and braces, reply to Zahra's email when you submit and say in one line that your internship was in asset management distribution rather than IB, and you wanted to flag it rather than have it be a surprise. That reads as integrity, and it costs you nothing.</p>
+</div>
+
+<h3>Your second preference</h3>
+<p>You can only attend one programme, but you are asked to rank. Look at the other two:</p>
+<ul>
+<li><strong>Real Estate</strong> requires that you took part in the <em>2025 Real Estate Academy</em> and have a real estate internship. If you did not, this is not available to you, and it also carries a phone interview round.</li>
+<li><strong>Consulting</strong> requires a 2026 or 2027 graduation and "one previous Consulting or <strong>corporate related</strong> internship". That wording is deliberately broad, and Pictet clears it. It is a single afternoon, in person at the Shard on Tuesday 15 September, 12:30&ndash;17:15, covering firm differentiation (Bain, OC&amp;C, L.E.K., FTI) and interview stages.</li>
+</ul>
+<p><strong>Recommendation:</strong> Alternatives first, Consulting second. Naming Consulting as a credible second choice, in one clause, signals you read the brief and are being realistic. It costs you about 60 characters and it makes the whole answer look considered.</p>
+</section>
+
+<section>
+<h2><span class="num">03</span>Alternatives from zero: how the industry actually makes money</h2>
+<p class="lede">This section assumes you know nothing beyond your Pictet experience. If you understand the six ideas below, you will follow every session on the day and you will not be the person nodding blankly.</p>
+
+<h3>1. What "alternative" means</h3>
+<p>Alternative simply means <strong>not public stocks, bonds or cash</strong>. It is defined by what it is not. It is not a statement about risk, and it is not exotic. At Pictet you were on the traditional side: funds that buy listed securities, priced daily, that a client can buy and sell more or less at will. Alternatives are the other side: assets bought and held privately, valued quarterly by estimate rather than by a live market price, and locked up for years.</p>
+<p>The industry has gone from roughly $7.2 trillion of assets in 2014 to over $20 trillion today. Private equity alone went from $744bn in 2004 to $9.7 trillion by December 2024. This is not a niche any more; it is where a very large share of the industry's fee income and hiring now sits.</p>
+
+<h3>2. GP and LP: the two sides of every conversation</h3>
+<p>Every fund has two sides, and almost every piece of jargon you will hear on the day refers to one of them.</p>
+<table>
+<tr><th style="width:16%">Term</th><th>Who they are</th><th>What they want</th></tr>
+<tr><td class="k">LP<br><span style="font-weight:400;font-size:8.5pt">Limited Partner</span></td><td>The investors who supply the money: pension funds, insurers, sovereign wealth funds, endowments, foundations, family offices, and increasingly private wealth clients</td><td>Returns above what public markets give them, diversification, and — critically right now — their cash back on time</td></tr>
+<tr><td class="k">GP<br><span style="font-weight:400;font-size:8.5pt">General Partner</span></td><td>The firm itself: Blackstone, KKR, Ares, EQT, Permira. The people who raise the fund and invest it</td><td>To raise the next, larger fund, which requires having returned cash on the last one</td></tr>
+</table>
+<div class="box">
+<p><strong>The Pictet bridge.</strong> Your Global Client Group work — onboarding, servicing, relationship building — is <em class="t">the LP-facing function</em>. In an alternatives firm that same function is called Investor Relations, Client Solutions or Capital Formation, it is more technical, it is more commercially prized, and it is currently one of the fastest-hiring parts of the industry. You already have a year of the hardest-to-teach part of it: dealing with actual institutional clients. Hold that thought until Section 5.</p>
+</div>
+
+<h3>3. The fund lifecycle: why nothing happens quickly</h3>
+<p>A closed-end private fund runs about ten to twelve years, in four phases:</p>
+<ol>
+<li><strong>Fundraise (1&ndash;2 years).</strong> The GP goes to LPs and asks for <em>commitments</em>. An LP commits, say, £50m. Crucially they do not hand it over. It sits with them until called.</li>
+<li><strong>Investment period (roughly 5 years).</strong> The GP finds deals and issues <strong>capital calls</strong> — "send £8m in ten working days." Committed-but-not-yet-called money across the industry is called <strong>dry powder</strong>.</li>
+<li><strong>Hold and value creation (3&ndash;7 years per asset).</strong> The GP owns and improves the business or asset.</li>
+<li><strong>Exit and distribution.</strong> The GP sells, returns capital to LPs, and keeps a share of the profit. Then it goes back to step one with a bigger fund.</li>
+</ol>
+
+<h3>4. How the GP gets paid, and why it drives everything</h3>
+<ul>
+<li><strong>Management fee</strong> — roughly 1.5&ndash;2% a year, historically on committed capital rather than invested capital. This pays salaries and rent. It is predictable and it is the reason firms want ever-larger funds.</li>
+<li><strong>Carried interest ("carry")</strong> — typically <strong>20% of profits</strong>, but only above a <strong>hurdle</strong> (also called the preferred return, usually 8% a year to LPs first). This is where real wealth is made and it is why the industry is obsessed with exits.</li>
+</ul>
+<p>You will hear "two and twenty". That is the shorthand for the model. Fee pressure on the "two" is a live commercial issue, covered in Section 7.</p>
+
+<h3>5. The five metrics you must not confuse</h3>
+<table>
+<tr><th style="width:16%">Metric</th><th style="width:34%">What it measures</th><th>The catch</th></tr>
+<tr><td class="k">IRR</td><td>Annualised percentage return, sensitive to <em>timing</em></td><td>Can be flattered by borrowing at the fund level to delay capital calls, or by an early quick win. A high IRR does not mean anyone got paid</td></tr>
+<tr><td class="k">MOIC</td><td>Multiple on invested capital. 2.0x means you doubled the money</td><td>Ignores time completely. 2.0x in three years and 2.0x in twelve years are not the same investment</td></tr>
+<tr><td class="k">TVPI</td><td>Total value to paid-in. Cash returned <em>plus</em> the estimated value of what is still held, over cash put in</td><td>The "plus estimated value" half is the GP's own mark, not a market price</td></tr>
+<tr><td class="k">DPI</td><td>Distributions to paid-in. Cash actually returned, over cash put in. Real money in an LP's bank account</td><td>Nothing. This is the honest one, and it is why DPI is currently the most watched number in the industry</td></tr>
+<tr><td class="k">J-curve</td><td>The shape of returns over a fund's life: negative early, positive later</td><td>Fees are charged from day one while value takes years to appear, so early performance always looks bad</td></tr>
+</table>
+<div class="box gold">
+<p>If you say one technical thing on the day, make it this: <strong>"DPI has become more important than IRR."</strong> It is true, it is current, and it demonstrates you understand that the industry's present problem is liquidity rather than performance. Section 7 gives you the numbers behind it.</p>
+</div>
+
+<h3>6. Where returns come from in a buyout</h3>
+<p>Three levers, and only three. Every case study answer you ever give will use this frame:</p>
+<ul>
+<li><strong>Earnings growth</strong> — grow the company's EBITDA. Revenue growth, margin improvement, bolt-on acquisitions. This is the only lever that is unambiguously value creation, and it is the one that impresses interviewers.</li>
+<li><strong>Debt paydown</strong> — the company's own cash flow repays the borrowing, so the equity slice grows even if nothing else changes.</li>
+<li><strong>Multiple expansion</strong> — sell at a higher multiple of earnings than you paid. Partly skill, largely market conditions. Interviewers are sceptical of cases that rely on it.</li>
+</ul>
+</section>
+
+<section>
+<h2><span class="num">04</span>The asset classes, one at a time</h2>
+<p class="lede">Session one of the programme is called "Asset Class Discovery". This is that session, in advance. For each one: what it is, what a junior person actually does all day, and who the recognisable firms are.</p>
+
+<div class="card">
+<span class="tag">Private equity &middot; buyout &middot; the default meaning of "PE"</span>
+<h3>Leveraged buyouts</h3>
+<p><strong>What it is.</strong> Buy control of an established, cash-generative company using a mix of borrowed money and fund equity. Own it for three to seven years, make it bigger and better, sell it. The debt is borrowed against the company itself, not the fund, which is what makes returns on the equity slice large in both directions.</p>
+<p><strong>What a junior does.</strong> Screening companies against an investment thesis, building LBO models, reading commercial due diligence from consultants, writing investment committee memos, sitting on calls with lawyers and bankers, and monitoring portfolio companies once owned.</p>
+<p><strong>Firms.</strong> Blackstone, KKR, Apollo, Carlyle, TPG, Bain Capital, Advent, CVC, EQT, Permira, Cinven, Hg, Bridgepoint, Silver Lake.</p>
+</div>
+
+<div class="card">
+<span class="tag">Private equity &middot; minority</span>
+<h3>Growth equity and venture capital</h3>
+<p><strong>Growth equity</strong> buys minority stakes in companies that are already growing fast and often already profitable. Little or no debt, so returns come almost entirely from the business getting bigger. <strong>Venture capital</strong> is the earlier, riskier version: most investments fail, and the fund's return is carried by one or two outliers. This is called the power law, and it makes VC a fundamentally different job to buyout — more judgement about people and markets, much less modelling.</p>
+<p><strong>Firms.</strong> General Atlantic, Summit, TA Associates, Insight (growth); Index, Balderton, Accel, Atomico (venture).</p>
+</div>
+
+<div class="card">
+<span class="tag">Private credit &middot; the fastest-growing corner</span>
+<h3>Direct lending and private credit</h3>
+<p><strong>What it is.</strong> Lending money directly to companies rather than buying their equity. Banks retreated from mid-market leveraged lending after the financial crisis and after regulation made it expensive; funds moved in. You earn a spread over a floating base rate, plus fees. You do not get the upside if the company triples in value, but you get paid first if it fails.</p>
+<p><strong>Why it matters right now.</strong> This asset class has grown to over $2 trillion and it is currently having its first proper stress test. See Section 7 — it is the single richest source of commercial awareness material available to you.</p>
+<p><strong>What a junior does.</strong> Credit analysis, downside cases, covenant modelling ("at what point does this company breach its terms?"), documentation review, monitoring borrowers.</p>
+<p><strong>Firms.</strong> Ares, Blue Owl, HPS, Blackstone Credit, Golub, Arcmont, Park Square, Barings, Pemberton.</p>
+</div>
+
+<div class="card">
+<span class="tag">Real assets</span>
+<h3>Infrastructure</h3>
+<p><strong>What it is.</strong> Physical assets that society needs and that produce long, predictable, often inflation-linked cash flows: airports, toll roads, water and energy networks, fibre, renewables, and increasingly data centres. Target returns are lower than buyout — roughly 8&ndash;12% for "core" and 12&ndash;18% for "value-add" — but the cash flows are far more certain, which is why pension funds and insurers love it.</p>
+<p><strong>What a junior does.</strong> Long-dated cash flow models rather than LBO models, regulatory and concession analysis, energy price forecasting, and a lot of work on how the asset is financed.</p>
+<p><strong>Firms.</strong> Brookfield, Macquarie Asset Management, Global Infrastructure Partners (now BlackRock), Antin, KKR Infrastructure, EQT Infrastructure.</p>
+</div>
+
+<div class="card">
+<span class="tag">Real assets</span>
+<h3>Real estate</h3>
+<p><strong>What it is.</strong> Property, in both equity and debt form, sorted along a risk spectrum: <em>core</em> (fully let, prime, low return), <em>core-plus</em>, <em>value-add</em> (refurbish and re-let), <em>opportunistic</em> (development, distress). Logistics and data centres have been the structural winners; offices the structural question mark.</p>
+<p><strong>Firms.</strong> Blackstone Real Estate (the largest owner of commercial property in the world), Brookfield, Westbrook Partners, QuadReal, MARK Capital Management, plus advisers like CBRE. Several of these are SEO London sponsors.</p>
+</div>
+
+<div class="card">
+<span class="tag">Public markets, alternative strategy</span>
+<h3>Hedge funds</h3>
+<p><strong>What it is.</strong> The odd one out. Hedge funds trade <em>public</em> securities, so the assets are not private at all; what makes them alternative is the strategy and the structure — the ability to short, to use leverage and derivatives, and to charge performance fees. Broad families: long/short equity, global macro, credit, event-driven, quantitative, and <strong>multi-strategy "pod shops"</strong> where many small teams run tightly risk-limited books under one roof.</p>
+<p><strong>What a junior does.</strong> Depends entirely on the strategy. At a pod shop: deep single-name research, earnings models, and living inside a strict risk framework where losing money quickly ends the seat.</p>
+<p><strong>Firms.</strong> Millennium, Citadel, Point72, Balyasny, Marshall Wace, Man Group, Brevan Howard.</p>
+</div>
+
+<div class="card">
+<span class="tag">The plumbing &middot; increasingly where the growth is</span>
+<h3>Secondaries, fund-of-funds and GP stakes</h3>
+<p><strong>Secondaries</strong> buy existing positions in private funds from LPs who want out early, usually at a discount, and increasingly buy assets from GPs directly through <strong>continuation vehicles</strong>. Because the fund is already several years old when you buy it, you skip most of the J-curve and see cash back sooner. This is now a record-sized market and one of the most interesting places to work; see Section 7. <strong>GP stakes</strong> funds buy minority equity in the management companies themselves — you are buying the fee stream rather than the deals.</p>
+<p><strong>Firms.</strong> Ardian, Lexington, Coller, Blackstone Strategic Partners, HarbourVest (secondaries); Blue Owl's GP Strategic Capital and Petershill (GP stakes).</p>
+</div>
+
+<div class="box dark">
+<h4>How to talk about asset classes without faking expertise</h4>
+<p>Nobody expects you to have a view on infrastructure valuation five days from now. What signals genuine interest is being able to say <strong>why the differences exist</strong>: that private credit is paid first and capped on the upside while buyout equity is paid last and uncapped; that infrastructure accepts a lower return in exchange for certainty; that secondaries exist because the ten-year lock-up does not suit every investor. Structural understanding beats memorised firm names every time.</p>
+</div>
+</section>
+
+<section>
+<h2><span class="num">05</span>The agenda decoded, bullet by bullet</h2>
+<p class="lede">Six hours of virtual content on Tuesday, then two three-hour evening sessions. Here is what each line on that agenda almost certainly means, and what you should get out of it.</p>
+
+<h4>Tuesday 8 September, 09:30&ndash;16:00, virtual</h4>
+
+<div class="decode">
+<div class="hd">"Asset Class Discovery"</div>
+<div class="bd">
+<p><strong>What it is.</strong> A guided tour of the categories in Section 4 above, almost certainly delivered by practitioners from each one rather than by SEO staff. The purpose is to stop you doing what most candidates do, which is apply to "private equity" as though it were one job.</p>
+<p><strong>Why it matters to you specifically.</strong> It is the difference between writing "I am interested in alternatives" and writing "I am interested in private credit and infrastructure because I want an investor-facing role where the cash flows are contractual and the client conversation is about income rather than exits." One of those gets read twice.</p>
+</div>
+<div class="say"><b>Get out of it</b> A shortlist of two asset classes you will actually target, and the reason why. Ask each speaker: "what does your first year look like, hour by hour?" — it produces far better answers than "what do you look for in a candidate?"</div>
+</div>
+
+<div class="decode">
+<div class="hd">"Non-investment roles overview"</div>
+<div class="bd">
+<p><strong>What it is.</strong> The session covering everything at an alternatives firm that is not deal execution. Typically: Investor Relations, Capital Formation, Product and Fund Structuring, Portfolio Operations, Fund Finance, Valuations, Compliance and Sustainability.</p>
+<p><strong>This is your session.</strong> Read the mapping below carefully, because it is the strongest single argument in your application.</p>
+</div>
+<div class="say"><b>Get out of it</b> Names. Ask specifically whether their IR and capital formation teams take graduates directly or only lateral hires from distribution, and what they would want to see on a CV. That is a question only someone with your background would think to ask, and it will be remembered.</div>
+</div>
+
+<div class="card fit">
+<span class="tag">The Pictet mapping</span>
+<h3>Your internship, translated into alternatives job titles</h3>
+<table style="margin-bottom:0">
+<tr><th style="width:40%">What you did at Pictet GCG</th><th>What it is called in alternatives</th></tr>
+<tr><td>Servicing existing institutional clients, handling queries, reporting</td><td><strong>Investor Relations</strong> — quarterly reporting to LPs, capital call and distribution notices, LP queries, annual general meetings</td></tr>
+<tr><td>Onboarding new clients, documentation, account set-up</td><td><strong>Fund Operations / Investor Onboarding</strong> — subscription documents, KYC and AML on institutional investors, side letters</td></tr>
+<tr><td>Building and maintaining client relationships, supporting sales</td><td><strong>Capital Formation / Fundraising</strong> — the team that raises the next fund from pensions, insurers, sovereign wealth funds and family offices. Genuinely one of the most commercially valued functions at a GP, because without it there is no fund</td></tr>
+<tr><td>Understanding how products are sold to different client types</td><td><strong>Product &amp; Wealth Solutions</strong> — building the evergreen and semi-liquid vehicles that bring private markets to wealth and retail investors. The fastest-growing area in the whole industry right now (Section 7)</td></tr>
+</table>
+</div>
+
+<div class="decode">
+<div class="hd">"Case Study interview prep"</div>
+<div class="bd">
+<p><strong>What it is.</strong> Training for the assessment that decides most alternatives hires. It comes in three formats:</p>
+<ul>
+<li><strong>Paper LBO.</strong> Delivered cold, verbally, no Excel. You are given round numbers and asked to reach a return. Ten to fifteen minutes. Tests whether the mechanics are actually in your head.</li>
+<li><strong>Modelling test.</strong> One to three hours in Excel, building an LBO from a blank sheet or a template.</li>
+<li><strong>Take-home case.</strong> You get an information memorandum on a company, anywhere from two hours to seven days, and produce a recommendation — invest or pass — with a model behind it, then defend it.</li>
+</ul>
+<p><strong>What is actually being tested.</strong> Not arithmetic. Interviewers want to know whether you can <em>take a position and defend it</em>. The commonest failure is a candidate who builds a beautiful model and then refuses to say whether they would buy the company. The second commonest is a candidate whose case rests entirely on selling at a higher multiple than they paid.</p>
+</div>
+<div class="say"><b>Get out of it</b> The structure of a good answer, and one worked example you can rebuild from memory. See the paper LBO below — take it into the session so you are following rather than starting from zero.</div>
+</div>
+
+<div class="box">
+<h4>A paper LBO, worked, so the session is not your first exposure</h4>
+<p><strong>The prompt.</strong> "We buy a business with £100m of EBITDA at 10x, funded half with debt. EBITDA grows 5% a year. The company pays down £150m of debt over five years. We exit at the same 10x. What is the return?"</p>
+<ol style="margin-bottom:2mm">
+<li><strong>Entry.</strong> £100m &times; 10 = <strong>£1,000m</strong> enterprise value. Funded with £500m debt and <strong>£500m equity</strong>.</li>
+<li><strong>Grow.</strong> £100m growing 5% for five years &rarr; <strong>£128m</strong> EBITDA.</li>
+<li><strong>Delever.</strong> £500m debt less £150m repaid = <strong>£350m</strong> net debt at exit.</li>
+<li><strong>Exit.</strong> £128m &times; 10 = <strong>£1,280m</strong> enterprise value. Equity = £1,280m &minus; £350m = <strong>£930m</strong>.</li>
+<li><strong>Return.</strong> £930m / £500m = <strong>1.86x</strong> over five years, which is roughly a <strong>13% IRR</strong>.</li>
+</ol>
+<p><strong>Learn these four conversions</strong> so you never need a calculator: over five years, 2.0x &asymp; 15%, 2.5x &asymp; 20%, 3.0x &asymp; 25%. Over three years, 2.0x &asymp; 26%.</p>
+<p><strong>Then add the judgement.</strong> "At 13% this deal does not clear a typical 20% target on those assumptions, so the case has to come from somewhere else — faster earnings growth, bolt-on acquisitions, or buying below 10x. I would not underwrite multiple expansion." <em class="t">That last sentence is what gets you hired.</em></p>
+</div>
+
+<h4>Wednesday 9 and Thursday 10 September, 16:00&ndash;19:00, virtual</h4>
+
+<div class="decode">
+<div class="hd">"Wall Street Prep Training"</div>
+<div class="bd">
+<p><strong>Who they are.</strong> Wall Street Prep is the financial modelling training provider used by a large share of investment banks and private equity firms for their own new-joiner training. SEO London already uses them on the Real Estate Academy. Getting their instruction free is a real, cash-value benefit; their private equity and LBO material is a paid certification product.</p>
+<p><strong>What six hours will cover.</strong> The agenda does not specify, but for a two-evening PE-focused block the standard content is: Excel discipline and shortcuts, the three financial statements and how they link, then the LBO build itself — sources and uses, the debt schedule, and the returns calculation. Their flagship course is taught around a real transaction, the buyout of BMC by Bain Capital and Golden Gate Capital, and is deliberately hands-on rather than demonstration-led.</p>
+<p><strong>The blunt warning in Zahra's email.</strong> "It will be technical heavy so please bear this in mind." Take that literally. Six hours of live modelling with no Excel background is punishing. See Section 9 for what to do in the five days beforehand.</p>
+</div>
+<div class="say"><b>Get out of it</b> Not a certificate. A model you can rebuild from a blank workbook within a week of the session, and keyboard fluency. Follow-along competence decays in days; rebuilt-from-scratch competence lasts.</div>
+</div>
+
+<div class="decode">
+<div class="hd">"Women in Alternatives Series" — bonus, Alternatives strand only</div>
+<div class="bd">
+<p>A women-only network and expert-led training strand attached exclusively to this Accelerator, in the same family as SEO London's HerCapital programme. Noted here for completeness so you know what the line means; it is access-restricted, so treat it as a feature of the programme rather than something to reference in your application.</p>
+</div>
+</div>
+
+<div class="warn">
+<h4>Two logistical things to check before you submit</h4>
+<p><strong>The Tuesday is a full working day</strong>, 09:30 to 16:00, and the two evening sessions run to 19:00. If you have lectures, work or anything else on 8&ndash;10 September, resolve it now — the second application question asks you directly how you will manage exactly this, so you need a real answer rather than an aspiration.</p>
+<p><strong>The dates overlap the deadline.</strong> The programme starts on 8 September while the general Accelerator deadline is 9 September. That is what the material says; it is not a typo you need to resolve, it just means the Alternatives strand ran on an earlier timetable, which is why its own deadline was 2 September.</p>
+</div>
+</section>
+
+<section>
+<h2><span class="num">06</span>What the programme unlocks</h2>
+<p class="lede">The three days are the visible part. The reason people chase these places is what sits behind them.</p>
+
+<h3>The four real benefits, in order of value</h3>
+<ol>
+<li><strong>Access to a hiring channel that is not advertised.</strong> Alternatives firms hire in very small numbers and rely heavily on referral and on partnerships like AIP. SEO London's AIP page is explicit that participants get invitations to apply for roles at private equity, private credit, infrastructure, real estate and hedge fund firms. Those invitations are the product.</li>
+<li><strong>A technical floor you cannot easily build alone.</strong> Wall Street Prep instruction plus structured case study coaching is the exact content that a first-year banking analyst gets on the job, and that most students never get before their first interview.</li>
+<li><strong>Named contacts.</strong> Speakers, SEO staff who now know your name, and a cohort of people applying to the same roles who will be your peer network for the next decade. Zahra is already one of these; the programme turns one contact into a dozen.</li>
+<li><strong>Continuing status inside SEO.</strong> Programme hours count towards the alumni network, and the AIP Associate Pathway is there for you in two or three years' time if you go into banking or consulting first, which is by far the most common route into private equity.</li>
+</ol>
+
+<h3>The honest version of where people go next</h3>
+<p>SEO London does not publish destination statistics for this specific Accelerator, so treat what follows as how the industry works rather than as a promise about this programme.</p>
+<table>
+<tr><th style="width:28%">Route</th><th>What it looks like</th></tr>
+<tr><td class="k">Direct graduate entry</td><td>Rare but real, and growing. Blackstone, KKR, Ares, Brookfield, Macquarie and most large European GPs now run analyst programmes. Class sizes are tiny — often single figures in London — which is precisely why a referral channel matters</td></tr>
+<tr><td class="k">Off-cycle internships</td><td>The most realistic near-term target for a final-year student, and the reason this programme is scheduled in September. Three to six months, often converting to full-time</td></tr>
+<tr><td class="k">Two years in banking or consulting first</td><td>Still the majority path into buyout investing. You do an analyst stint, then move across. AIP's Associate Pathway is built for exactly this transition</td></tr>
+<tr><td class="k">Investor-facing and product roles</td><td>Far more open to non-banking backgrounds, hiring hard, and where your Pictet experience is an asset rather than a handicap. Career progression runs to IR Director, Head of Capital Formation, and in some firms to Partner</td></tr>
+<tr><td class="k">Adjacent</td><td>Fund administration, placement agents, LP-side roles at pensions, insurers, endowments and consultants, and data providers. Underrated, and often better graduate training than a small GP</td></tr>
+</table>
+</section>
+
+<section>
+<h2><span class="num">07</span>Commercial awareness: the six arguments happening right now</h2>
+<p class="lede">You asked how this connects to what is in the financial press. It connects tightly. Below are the six live debates in alternatives as of September 2026, each with the numbers, and each with a line on how you would actually use it. Verify anything you plan to quote in an interview — figures move.</p>
+
+<div class="card">
+<span class="tag">01 &middot; the defining problem</span>
+<h3>The liquidity drought: nobody is getting their money back</h3>
+<p>Private equity funds have been unable to sell their companies at the pace they promised. Annual distributions to investors have been stuck at <strong>8&ndash;10% of net asset value for three years, against a historical norm of about 20%</strong>. The IPO window has not properly reopened, strategic buyers are selective, and sponsor-to-sponsor deals face valuation scepticism. Global exit volume fell again in Q1 2026.</p>
+<p><strong>The consequence.</strong> LPs cannot fund new commitments because their existing ones have not paid out. Fundraising slows. <strong>DPI has replaced IRR as the number LPs care about</strong>, because you cannot spend an unrealised mark.</p>
+<p><strong>Use it:</strong> this is the context for everything else on this list. If someone asks what is happening in the industry, start here.</p>
+</div>
+
+<div class="card">
+<span class="tag">02 &middot; the response</span>
+<h3>Secondaries and continuation vehicles as the release valve</h3>
+<p>If you cannot sell a company, you engineer liquidity another way. The secondaries market hit a second consecutive record, with <strong>$226bn of volume, up more than 34% year on year</strong>. Continuation vehicles — where a manager sells an asset from an old fund into a new one it also runs, so investors who want cash get it and those who want to stay can — have become the primary liquidity tool, now including second-generation vehicles on assets already moved once.</p>
+<p><strong>The critique, which is the interesting half.</strong> There is an obvious conflict of interest when a manager is both buyer and seller and sets the price. And the exit backlog is far too large to clear through secondaries alone; restoring distributions properly needs real M&amp;A and a functioning IPO market.</p>
+<p><strong>Use it:</strong> a strong answer to "tell me something you find interesting about private markets." It shows you can hold both the innovation and the objection.</p>
+</div>
+
+<div class="card">
+<span class="tag">03 &middot; the stress test</span>
+<h3>Private credit meets its first real test</h3>
+<p>Private credit has passed <strong>$2 trillion</strong> and has grown up entirely during a benign period. That period has ended.</p>
+<ul>
+<li>The <strong>First Brands</strong> and <strong>Tricolor</strong> collapses in late 2025 rattled the market. Both were fraud-driven, direct private credit exposure was modest, and the losses landed largely on banks — UBS disclosed over $500m of exposure to First Brands and Jefferies flagged $715m of questionable receivables after allegations that the same assets had been pledged more than once.</li>
+<li>Fitch reported a <strong>6.0% default rate in April 2026</strong>. Deutsche Bank disclosed <strong>$30bn</strong> of private credit exposure in March 2026 and warned about indirect risk through interconnected portfolios.</li>
+<li>By early 2026, some semi-liquid funds faced redemption requests and moved to limit withdrawals.</li>
+</ul>
+<p><strong>The honest read:</strong> these were idiosyncratic frauds rather than proof of systemic rot, but they exposed how little visibility anyone has into valuations, leverage and the bank-to-fund linkages.</p>
+<p><strong>Use it:</strong> the best available answer to "what worries you about this industry?" Balanced, specific, and it shows you read beyond the marketing.</p>
+</div>
+
+<div class="card fit">
+<span class="tag">04 &middot; your theme</span>
+<h3>Retailisation: private markets meet the wealth channel</h3>
+<p>Institutions are tapped out, so managers are going to individuals. Assets in US private equity interval and tender-offer funds passed <strong>$99bn by Q2 2026</strong>. In the UK, <strong>Long-Term Asset Funds reached &pound;7.3bn</strong> and became eligible to be held inside stocks and shares ISAs from <strong>April 2026</strong>, which is expected to widen demand substantially. The FCA has named private markets a supervisory priority for the next 18 to 24 months.</p>
+<p><strong>The tension.</strong> These are illiquid assets inside structures that promise periodic liquidity. That works until everyone wants out at once, which is precisely what some funds began seeing in early 2026.</p>
+<p><strong>Use it:</strong> this is <em class="t">your</em> theme. It is the exact point where your Pictet distribution and client-servicing experience becomes commercially relevant, because building and servicing these vehicles is a distribution problem as much as an investment one. If you get one substantive conversation on the day, have it about this.</p>
+</div>
+
+<div class="card">
+<span class="tag">05 &middot; where the money is going</span>
+<h3>Private capital is financing the AI build-out</h3>
+<p>Individual AI data centre campuses now cost more than any single bank wants to lend, and private capital has filled the gap. Private credit has already deployed an estimated <strong>$200&ndash;250bn</strong> into data centres, with Blue Owl, Blackstone, Apollo, Brookfield and KKR dominant. Meta sold an 80% stake in its Hyperion project to Blue Owl in a joint venture that then issued <strong>$27.3bn of debt, the largest single US investment-grade bond ever</strong>, at roughly 90% leverage. Morgan Stanley has suggested private credit could supply a further <strong>$800bn</strong> over two years.</p>
+<p><strong>The question being asked.</strong> Is this infrastructure, with contracted long-term cash flows, or concentrated corporate credit risk dressed as infrastructure? The tenant quality is excellent; the concentration in a handful of hyperscaler counterparties, and the leverage, are not obviously conservative.</p>
+<p><strong>Use it:</strong> the most current thing on this list, and it sits at the intersection of infrastructure, private credit and real estate, so it works whoever you are talking to.</p>
+</div>
+
+<div class="card">
+<span class="tag">06 &middot; the business model</span>
+<h3>The managers themselves are changing shape</h3>
+<p>Fee pressure on core buyout, consolidation into a small number of multi-asset platforms, insurance and annuity money becoming a permanent capital base, and GP stakes funds buying pieces of the managers themselves. The strategic question for every large firm is whether to be a specialist or a supermarket, and the answer increasingly determines what the graduate job looks like.</p>
+<p><strong>Use it:</strong> good for "why this firm rather than that one", where the honest answer is usually about what kind of business the firm is trying to become.</p>
+</div>
+</section>
+
+<section>
+<h2><span class="num">08</span>The two application questions</h2>
+<p class="lede">Both drafts are below, inside the limits, written to sound like a person rather than a template. Edit anything that is not true of you. Anything in square brackets needs your input before you submit.</p>
+
+<h3>Question 1 &mdash; 500 characters</h3>
+<p><em>"Why are you interested in attending the Accelerator? What do you want to achieve from attending? (You can only attend 1 programme, however we ask for your preference as you may be chosen for your 2nd choice)"</em></p>
+
+<div class="box">
+<h4>What this question is really asking</h4>
+<p>In 500 characters they want three things: a reason that is specific to <em>you</em>, an outcome that is <em>measurable</em>, and your <em>preference order</em>. Do not spend characters praising the programme. Do not write "I am passionate about alternatives". Name the gap and name what closes it.</p>
+</div>
+
+<div class="answer">
+<p>My Pictet internship put me on the client side of asset management: onboarding institutional investors, servicing them and building the relationship. That was the buy-side, but only public markets. I want the alternatives equivalent, and three things: fluency across asset classes so I target the right one, an LBO I can build unaided after the Wall Street Prep sessions, and case study technique for the off-cycles I am applying to this autumn. First choice Alternatives, second Consulting.</p>
+</div>
+<div class="count">491 / 500 characters</div>
+
+<div class="box gold">
+<h4>Why this version works</h4>
+<ul style="margin-bottom:0">
+<li>It opens with a fact only you can write, not a sentiment anyone could.</li>
+<li>"That was the buy-side, but only public markets" does the eligibility work quietly — it acknowledges the difference without apologising for it.</li>
+<li>Three named outcomes, each tied to a named session on their agenda. It proves you read it.</li>
+<li>"the off-cycles I am applying to this autumn" makes it urgent and real rather than aspirational.</li>
+<li>Preference stated in seven words at the end, exactly as asked.</li>
+</ul>
+</div>
+
+<h3>Question 2 &mdash; 300 words / 1,500 characters</h3>
+<p><em>"How will you make the most of this programme while balancing your other commitments? Please refer to specific aspects of the agenda for your preferred programme and provide examples of managing a busy workload."</em></p>
+
+<div class="box">
+<h4>What this question is really asking</h4>
+<p>This is an attendance-risk question. They have been let down by people who accepted a place and then dropped out mid-session, which is exactly the complaint you can find from students who lost their place for missing sessions. They want evidence you will turn up to all three days. It is also an instruction-following test: they explicitly ask for <em>specific agenda items</em> and <em>examples</em>. Give them both, visibly.</p>
+<p><strong>Note the trap in the limits.</strong> They say 300 words maximum <em>and</em> 1,500 characters. Three hundred words of normal English is closer to 1,800 characters, so <strong>the character limit is the one that actually binds</strong>. Write to roughly 1,400 and you are safe on both.</p>
+</div>
+
+<div class="answer">
+<p>I have blocked out all three dates already. Tuesday is a full day and the Wednesday and Thursday sessions run to 19:00, so I am treating them as fixed and moving other work around them rather than the reverse.</p>
+<p>Before: I will arrive knowing fund structures and able to run a paper LBO, so the Wall Street Prep sessions are practice rather than first exposure. Zahra flagged the technical weighting and I would rather prepare than catch up.</p>
+<p>During: from Asset Class Discovery I want to narrow to two asset classes and be able to say why. The non-investment roles session matters most to me, because my Pictet work in the Global Client Group was investor-facing and I want to understand how that maps to investor relations and capital formation at a fund.</p>
+<p>After: I will rebuild the LBO from a blank sheet within a week, since following along and building unaided are different skills, and apply the case study framework to live off-cycle applications.</p>
+<p>On workload, at Pictet I ran live client queries alongside onboarding deadlines and reporting cycles. That meant triaging by deadline rather than by whatever had just landed, and flagging early when something would slip. I used the same discipline through my final year alongside applications. Three days is a small fixed cost against a return I will still be using in two years, so I am protecting them and absorbing the disruption elsewhere.</p>
+</div>
+<div class="count">1,396 / 1,500 characters &middot; 238 / 300 words</div>
+
+<div class="box gold">
+<h4>Why this version works, and what to change</h4>
+<ul>
+<li><strong>Before / During / After</strong> is the structure. It answers "how will you make the most of it" literally, and it is visibly different from the paragraph of adjectives most people will submit.</li>
+<li>Three agenda items are named explicitly: Wall Street Prep, Asset Class Discovery, non-investment roles. That is the instruction, followed.</li>
+<li>The workload example is concrete and unglamorous, which is what makes it believable. "Triaging by deadline rather than by whatever had just landed" is a real behaviour, not a claim about being organised.</li>
+<li><strong>Change this:</strong> replace "my final year alongside applications" with whatever is actually true — a dissertation, a part-time job, a society role, exams. Name the real thing.</li>
+<li><strong>Consider adding</strong>, if you have room and it is true, one sentence on what you did at Pictet that had a named outcome. Volume, client numbers, a process you improved. Anything countable lifts the whole answer.</li>
+</ul>
+</div>
+
+<div class="warn">
+<h4>Before you press submit</h4>
+<ul style="margin-bottom:0">
+<li>Read both answers aloud. If a sentence is hard to say, rewrite it.</li>
+<li>Check your CV is the current version and that the Pictet dates show a placement of six weeks or more.</li>
+<li>Paste into the form and confirm the character counter agrees with the counts above; some forms count spaces and line breaks differently.</li>
+<li>Reply to Zahra's email once submitted: one line to confirm, one line flagging that your internship was asset management distribution rather than IB, one line confirming you are free on 8&ndash;10 September.</li>
+</ul>
+</div>
+</section>
+
+<section>
+<h2><span class="num">09</span>The five days before, and the week after</h2>
+
+<h3>3&ndash;7 September: closing the technical gap</h3>
+<p>Zahra's warning was specific. Six hours of live modelling is unforgiving if Excel is unfamiliar. This is a realistic plan, roughly six hours total, and it will put you ahead of most of the room.</p>
+<table>
+<tr><th style="width:18%">When</th><th style="width:30%">Do</th><th>Why</th></tr>
+<tr><td class="k">Today</td><td>Submit the application. Reply to Zahra</td><td>Deadline is lunchtime</td></tr>
+<tr><td class="k">Thu 4 Sep<br>90 min</td><td>Re-read Sections 3 and 4 of this report. Write out the fund lifecycle and the five metrics from memory</td><td>Vocabulary is what makes day one followable</td></tr>
+<tr><td class="k">Fri 5 Sep<br>90 min</td><td>Do the paper LBO in Section 5 three times from a blank page. Then change the inputs: 8x entry, 12x entry, no debt paydown. Watch what moves</td><td>Builds the intuition the case study session assumes</td></tr>
+<tr><td class="k">Sat 6 Sep<br>2 hrs</td><td>Excel drills. Navigation without a mouse, absolute versus relative references, INDEX/MATCH, a simple three-year revenue build with growth assumptions in labelled input cells</td><td>Mechanical fluency, so the Wall Street Prep sessions are about concepts rather than keystrokes</td></tr>
+<tr><td class="k">Sun 7 Sep<br>60 min</td><td>Read Section 7. Pick two themes and write four sentences on each in your own words. Check whether any joining materials or pre-work arrived</td><td>Gives you something to say when someone asks what you have been following</td></tr>
+</table>
+
+<div class="box">
+<h4>Questions worth asking on the day</h4>
+<p>Prepared questions are the cheapest way to be memorable. These are chosen because they are specific and hard to ask by accident:</p>
+<ul style="margin-bottom:0">
+<li>"What does the first year in your seat actually look like, hour by hour?"</li>
+<li>"Do your investor relations and capital formation teams hire graduates directly, or only laterally from distribution?"</li>
+<li>"How much of your team's time now goes to the wealth and evergreen channel compared with two years ago?"</li>
+<li>"When you look at a candidate's case study, what separates a pass from a good one?"</li>
+<li>"What did you not know when you started that you wish someone had told you?"</li>
+</ul>
+</div>
+
+<h3>The week after, which is where the value is actually captured</h3>
+<ol>
+<li><strong>Rebuild the model from a blank workbook within seven days.</strong> Following along is not learning. This one habit is the difference between having attended a course and having a skill.</li>
+<li><strong>Connect with every speaker on LinkedIn within 48 hours</strong>, with a one-line note referencing something they actually said. After that they will not remember you.</li>
+<li><strong>Convert it immediately.</strong> Have two or three off-cycle or graduate applications ready to submit in the week after, so the case study framework gets used while it is fresh.</li>
+<li><strong>Stay in the SEO system.</strong> Programme hours count towards the alumni network, AICON is worth attending, and the Associate Pathway is your route back in if you go into banking or consulting first.</li>
+</ol>
+</section>
+
+<section>
+<h2><span class="num">10</span>Glossary and sources</h2>
+
+<h3>Glossary</h3>
+<div class="two glossary">
+<dl>
+<dt>Alternatives</dt><dd>Anything that is not public equities, bonds or cash. Defined by exclusion.</dd>
+<dt>GP / General Partner</dt><dd>The investment firm that raises and manages the fund.</dd>
+<dt>LP / Limited Partner</dt><dd>The investor in the fund: pensions, insurers, sovereign wealth funds, endowments, family offices, wealth clients.</dd>
+<dt>Commitment</dt><dd>The amount an LP promises to a fund, drawn down over time rather than paid upfront.</dd>
+<dt>Capital call / drawdown</dt><dd>The GP demanding part of that commitment, usually at ten days' notice.</dd>
+<dt>Dry powder</dt><dd>Money committed to funds but not yet invested.</dd>
+<dt>Carried interest</dt><dd>The GP's share of profits, typically 20% above a hurdle.</dd>
+<dt>Hurdle / preferred return</dt><dd>The return LPs receive before the GP earns carry. Usually 8% a year.</dd>
+<dt>LBO</dt><dd>Leveraged buyout. Acquiring a company using significant borrowed money secured against that company.</dd>
+<dt>EBITDA</dt><dd>Earnings before interest, tax, depreciation and amortisation. The rough proxy for operating cash generation that almost all deal pricing is quoted against.</dd>
+<dt>Entry / exit multiple</dt><dd>Enterprise value divided by EBITDA, at purchase and at sale.</dd>
+<dt>Sources and uses</dt><dd>The table showing where the money for a deal comes from and what it pays for. The first thing you build in an LBO model.</dd>
+<dt>Unitranche</dt><dd>A single blended loan replacing separate senior and junior tranches. A staple of private credit.</dd>
+<dt>PIK</dt><dd>Payment in kind. Interest added to the loan balance instead of paid in cash. Watched closely as a stress signal.</dd>
+<dt>Covenant</dt><dd>A condition in a loan agreement that, if breached, hands the lender control.</dd>
+<dt>IRR</dt><dd>Annualised return, sensitive to timing.</dd>
+<dt>MOIC</dt><dd>Multiple on invested capital. Ignores time.</dd>
+<dt>TVPI</dt><dd>Cash returned plus current estimated value, over cash invested.</dd>
+<dt>DPI</dt><dd>Cash actually returned over cash invested. The metric of the moment.</dd>
+<dt>J-curve</dt><dd>Early negative returns caused by fees preceding value creation.</dd>
+<dt>Continuation vehicle</dt><dd>A new fund a GP raises to buy an asset out of its own older fund, giving existing investors the choice of cash or continued exposure.</dd>
+<dt>Secondaries</dt><dd>Buying and selling existing stakes in private funds.</dd>
+<dt>Evergreen / semi-liquid</dt><dd>Open-ended private markets funds offering periodic redemptions, aimed at wealth and retail investors.</dd>
+<dt>LTAF</dt><dd>Long-Term Asset Fund. The UK's FCA-authorised open-ended structure for illiquid assets, ISA-eligible since April 2026.</dd>
+<dt>DDQ</dt><dd>Due diligence questionnaire. The document LPs send GPs before investing. Investor relations lives on these.</dd>
+<dt>Pod shop</dt><dd>A multi-strategy hedge fund of many small, independently risk-limited teams.</dd>
+<dt>AIP</dt><dd>SEO London's Alternative Investments Programme.</dd>
+</dl>
+</div>
+
+<h3>Sources</h3>
+<p style="font-size:9.3pt">Accessed 3 September 2026. Programme facts come from the material you were sent plus SEO London's own pages; industry facts are cited below and should be re-checked before you quote a figure in an interview.</p>
+<ol class="src">
+<li>SEO London — Alternative Investments Programme. https://www.seo-london.org/aip</li>
+<li>SEO London — Programmes and Industries. https://www.seo-london.org/programmes-industries</li>
+<li>SEO London — Academies. https://www.seo-london.org/academies</li>
+<li>SEO London — Our Sponsors. https://www.seo-london.org/our-sponsors</li>
+<li>SEO London — Spring Into Programmes; HerCapital. https://www.seo-london.org/spring-into-programmes</li>
+<li>Permira — SEO launches programme to promote diversity in EMEA alternative investment. https://www.permira.com/news-and-insights/announcements/</li>
+<li>Wall Street Prep — Private Equity &amp; LBO Modeling course. https://www.wallstreetprep.com/self-study-programs/private-equity-masterclass/</li>
+<li>BlackRock — Alternative asset classes education; 2026 Private Markets Outlook.</li>
+<li>J.P. Morgan Asset Management — "Know your Alternatives: Real Estate, Private Equity, Private Credit, Infrastructure".</li>
+<li>Allianz / Allianz Trade — "Private equity in transition: from distribution drought to selective recovery", February 2026. (Distributions at 8&ndash;10% of NAV vs 20% norm; DPI over IRR.)</li>
+<li>S&amp;P Global Market Intelligence — "Global private equity exit volume declines in Q1 2026", April 2026.</li>
+<li>Private Markets Insights — "The Liquidity Drought Forces a Reset", midyear review 2026. (Secondaries volume $226bn, +34%.)</li>
+<li>With Intelligence — Private Credit Outlook 2026 and Private Equity Outlook 2026.</li>
+<li>Cambridge Associates — "Do the recent bankruptcies of First Brands and Tricolor suggest trouble ahead in private credit?"</li>
+<li>Forbes — "Rising private credit defaults are testing banks and insurers", May 2026. (Fitch 6.0% default rate, April 2026.)</li>
+<li>Federal Reserve Bank of New York, Liberty Street Economics — "Stress and Strain from NBFIs to Banks", May 2026.</li>
+<li>Business Standard / TNW — Meta and Blue Owl Hyperion joint venture and $27.3bn bond; Blue Owl Stack $5.9bn financing.</li>
+<li>Adams Street Partners — "Private Markets Go Mainstream: 2026 Advisor Outlook". (Interval and tender-offer fund assets above $99bn.)</li>
+<li>Alternative Credit Investor — "LTAFs gain ground as retail access to private markets widens", April 2026. (&pound;7.3bn; ISA eligibility.)</li>
+<li>McDermott — "UK FCA continues to focus on private market funds", 2026.</li>
+<li>Mergers &amp; Inquisitions; Growth Equity Interview Guide — private equity case study and interview formats.</li>
+<li>PER — guide to a career in investor relations; Growth Equity Interview Guide — private equity investor relations.</li>
+</ol>
+
+<div class="box dark" style="margin-top:6mm">
+<h4>The single sentence to hold on to</h4>
+<p>You are not applying to learn what private equity is. You are applying because you have already worked with institutional investors on the traditional side, you want to do that on the alternatives side where the industry is actually growing, and three days of asset class grounding, non-investment role exposure and Wall Street Prep modelling is the fastest way to be credible when you apply this autumn.</p>
+</div>
+</section>
+
+</body>
+</html>
