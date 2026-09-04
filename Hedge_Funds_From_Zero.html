@@ -1,0 +1,1002 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Hedge Funds from Zero</title>
+<style>
+:root{
+  --navy:#0B2545; --navy2:#13315C; --ink:#1F2933; --muted:#5B6B7C; --line:#D5DCE5;
+  --paper:#FFFFFF; --wash:#F3F6FA; --wash2:#E9EEF5;
+  --warm:#D97742; --warm-l:#FBEEE6;
+  --teal:#1B998B; --teal-l:#E3F4F1;
+  --amber:#E9B949; --amber-l:#FCF5E0;
+  --red:#B23A48; --red-l:#F8E4E7;
+  --grey:#8A96A3; --grey-l:#EFF2F5;
+  --p0:#0B2545; --p1:#1B998B; --p2:#D97742; --p3:#5E548E; --p4:#2E6F95; --p5:#9C6644; --p6:#B23A48; --p7:#E9B949; --p8:#3A7D44; --p9:#6C757D; --p10:#0B2545; --p11:#0B2545; --p12:#0B2545;
+}
+@page { size: A4; margin: 20mm 16mm 18mm 16mm; }
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;color:var(--ink);font-size:10.4pt;line-height:1.45;background:var(--paper)}
+h1,h2,h3,h4{font-family:Georgia,"Times New Roman",serif;color:var(--navy);margin:0 0 6pt 0;line-height:1.2;font-weight:normal}
+h1{font-size:26pt;margin-bottom:10pt}
+h2{font-size:16pt;margin-top:16pt;padding-bottom:4pt;border-bottom:2px solid var(--line);break-after:avoid}
+h3{font-size:12.5pt;margin-top:12pt;break-after:avoid}
+h4{font-size:10.8pt;margin-top:9pt;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:bold;color:var(--navy2);break-after:avoid}
+p{margin:0 0 6pt 0}
+ul,ol{margin:0 0 6pt 0;padding-left:18pt}
+li{margin-bottom:2.5pt}
+strong{color:var(--navy)}
+a{color:var(--navy2);text-decoration:none}
+small,.small{font-size:8.5pt;color:var(--muted)}
+.muted{color:var(--muted)}
+.section{break-before:page}
+.section-band{background:var(--pc,var(--navy));color:#fff;padding:14pt 16pt;margin:0 0 12pt 0;border-radius:4pt}
+.section-band .kicker{font-size:9pt;letter-spacing:2px;text-transform:uppercase;opacity:.85}
+.section-band h1{color:#fff;margin:2pt 0 4pt 0;font-size:22pt}
+.section-band .lede{font-size:10.5pt;opacity:.95;margin:0}
+.tag{display:inline-block;font-size:7.5pt;font-weight:bold;letter-spacing:.5px;padding:1pt 5pt;border-radius:3pt;vertical-align:middle;font-family:Helvetica,Arial,sans-serif}
+.tag.c{background:#DDF1EC;color:#0E6B5F}
+.tag.r{background:#E4ECF7;color:#1F4E8C}
+.tag.i{background:#FCEBD9;color:#8A4B12}
+.tag.u{background:#EDEFF2;color:#5B6B7C}
+.src{font-size:7.8pt;color:var(--navy2);font-family:Helvetica,Arial,sans-serif;font-weight:bold}
+.box{border-left:4pt solid var(--navy);background:var(--wash);padding:7pt 10pt;margin:8pt 0;border-radius:0 4pt 4pt 0;break-inside:avoid}
+.box .lbl{font-family:Helvetica,Arial,sans-serif;font-size:7.8pt;font-weight:bold;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:2pt}
+.box p:last-child,.box ul:last-child{margin-bottom:0}
+.box.term{border-color:var(--navy);background:var(--wash)}
+.box.term .lbl{color:var(--navy)}
+.box.say{border-color:var(--teal);background:var(--teal-l)}
+.box.say .lbl{color:#0E6B5F}
+.box.dont{border-color:var(--red);background:var(--red-l)}
+.box.dont .lbl{color:var(--red)}
+.box.opinion{border-color:var(--amber);background:var(--amber-l)}
+.box.opinion .lbl{color:#8A6A10}
+.box.unc{border-color:var(--grey);border-style:dashed;background:var(--grey-l)}
+.box.unc .lbl{color:var(--muted)}
+.box.warm{border-color:var(--warm);background:var(--warm-l)}
+.box.warm .lbl{color:#8A4B12}
+.fig{margin:10pt 0 12pt 0;break-inside:avoid}
+.fig svg{width:100%;height:auto;display:block}
+.fig .cap{font-size:8.3pt;color:var(--muted);margin-top:4pt;border-top:1px solid var(--line);padding-top:3pt}
+.fig .cap b{color:var(--navy)}
+.fullpage{break-before:page}
+table{border-collapse:collapse;width:100%;font-size:8.8pt;margin:6pt 0 10pt 0}
+th{background:var(--navy);color:#fff;text-align:left;padding:4pt 5pt;font-weight:bold;font-family:Helvetica,Arial,sans-serif;font-size:8.3pt}
+td{padding:3.5pt 5pt;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:var(--wash)}
+table.src-table{font-size:7.6pt}
+table.src-table td{padding:2.5pt 4pt}
+table.src-table a{word-break:break-all}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12pt}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10pt}
+.card{border:1px solid var(--line);border-radius:4pt;padding:7pt 9pt;background:#fff;break-inside:avoid}
+.card h4{margin-top:0}
+.gloss dt{font-weight:bold;color:var(--navy);margin-top:5pt;font-family:Helvetica,Arial,sans-serif;font-size:9.4pt}
+.gloss dd{margin:0 0 2pt 0;font-size:9.4pt}
+.qa{border:1px solid var(--line);border-radius:4pt;padding:6pt 9pt;margin:6pt 0;break-inside:avoid}
+.qa .q{font-weight:bold;color:var(--navy);font-family:Georgia,serif;font-size:10.6pt}
+.qa .t{font-size:9.2pt}
+.qa .t b{color:var(--muted);font-family:Helvetica,Arial,sans-serif;font-size:8pt;text-transform:uppercase;letter-spacing:.5px}
+.num{font-family:Georgia,serif;font-size:20pt;color:var(--warm);line-height:1}
+.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:8pt;margin:8pt 0}
+.kpi .k{border-top:3px solid var(--warm);padding:5pt 6pt;background:var(--wash)}
+.kpi .k .v{font-family:Georgia,serif;font-size:16pt;color:var(--navy)}
+.kpi .k .l{font-size:8pt;color:var(--muted)}
+.cover{height:257mm;position:relative;background:var(--navy);color:#fff;padding:26mm 20mm;border-radius:6pt;break-after:page}
+.cover .k{letter-spacing:3px;text-transform:uppercase;font-size:9.5pt;opacity:.8}
+.cover h1{color:#fff;font-size:34pt;margin:12pt 0 8pt 0;line-height:1.1}
+.cover .sub{font-size:14pt;opacity:.92;font-family:Georgia,serif}
+.cover .meta{position:absolute;bottom:22mm;left:20mm;right:20mm;font-size:9.5pt;line-height:1.6;opacity:.9}
+.cover .stripe{position:absolute;top:0;left:0;right:0;height:8pt;background:linear-gradient(90deg,var(--warm) 0 33%,var(--teal) 33% 66%,var(--amber) 66% 100%);border-radius:6pt 6pt 0 0}
+.toc{columns:1}
+.toc .row{display:flex;justify-content:space-between;border-bottom:1px dotted var(--line);padding:3pt 0;font-size:10pt}
+.toc .row.l2{padding-left:16pt;font-size:9pt;color:var(--muted)}
+.toc .row .pg{font-family:Georgia,serif;color:var(--navy)}
+.toc .row .pc{display:inline-block;width:9pt;height:9pt;border-radius:2pt;margin-right:6pt;vertical-align:-1pt}
+.emergency{border:2px solid var(--warm);border-radius:5pt;padding:9pt 12pt;background:var(--warm-l)}
+.emergency h3{margin-top:0;color:#8A4B12}
+.stepper{display:flex;gap:6pt;margin:8pt 0}
+.stepper .s{flex:1;background:var(--wash);border-top:3px solid var(--navy);padding:5pt 6pt;font-size:8.6pt}
+.stepper .s b{display:block;color:var(--navy)}
+.legend{font-size:8.3pt;color:var(--muted)}
+.legend span{display:inline-block;margin-right:10pt}
+.legend i{display:inline-block;width:10pt;height:10pt;vertical-align:-1.5pt;margin-right:3pt;border-radius:2pt}
+.nobreak{break-inside:avoid}
+.pagebreak{break-before:page}
+.checklist li{list-style:none;margin-left:-14pt}
+.checklist li:before{content:"\2610\00a0";color:var(--navy)}
+.footnote{font-size:8pt;color:var(--muted)}
+.hl{background:#FFF4CC}
+.verbatim{font-family:Georgia,serif;font-style:italic;color:var(--navy2);border-left:3px solid var(--amber);padding-left:8pt;margin:6pt 0}
+</style>
+</head>
+<body>
+<!-- anchor marker style -->
+<style>.pm{font-size:1px;color:#fff;line-height:0;position:absolute}</style>
+<div class="cover">
+<div class="stripe"></div>
+<div class="k">Companion to the Millennium interview guide</div>
+<h1>Hedge Funds<br>from Zero</h1>
+<div class="sub">What a hedge fund is, how it differs from every other kind of investor, and what is happening to the industry right now. Built for someone with no finance background who wants to talk about it well.</div>
+<div class="meta">
+<b>Prepared:</b> 4 September 2026<br>
+<b>Scope:</b> the industry, not any single fund's trades. Millennium appears only as a worked example.<br>
+<b>Sources:</b> every non-obvious claim carries a marker [Sxx] resolved in Part 5. Numbering is shared with the main interview guide so the two can be read together. Claims are tagged Confirmed, Reported (single credible source, usually a press estimate) or Inferred (the author's reasoning).<br>
+<b>How to read it:</b> Part 1 in one sitting, then Part 2 for the news. Part 3 gives you the words to use. Part 4 is the glossary.
+</div>
+</div>
+
+<div class="section"><span class="pm">@@toc@@</span>
+<h1>Contents</h1>
+<div class="toc">
+<div class="row"><span><i class="pc" style="background:#0B2545"></i>Part 1. What a hedge fund is, from zero</span><span class="pg">2</span></div>
+<div class="row l2"><span>A fund; the buy-side family; hedge fund versus asset manager; where the name comes from; how one is built; the types; single versus multi-manager; the words; the ecosystem</span><span class="pg">2</span></div>
+<div class="row"><span><i class="pc" style="background:#B23A48"></i>Part 2. What is happening to hedge funds right now</span><span class="pg">8</span></div>
+<div class="row l2"><span>The dashboard; money; trust and fees; talent; leverage and regulators; geopolitics and shocks; performance; the shake-out; technology; geography</span><span class="pg">8</span></div>
+<div class="row"><span><i class="pc" style="background:#1B998B"></i>Part 3. How to talk about it</span><span class="pg">14</span></div>
+<div class="row"><span><i class="pc" style="background:#0B2545"></i>Part 4. Glossary</span><span class="pg">16</span></div>
+<div class="row"><span><i class="pc" style="background:#0B2545"></i>Part 5. Sources</span><span class="pg">18</span></div>
+</div>
+<h3 style="margin-top:16pt">Figures</h3>
+<div class="toc">
+<div class="row l2"><span>1. The buy-side family tree</span><span class="pg">3</span></div>
+<div class="row l2"><span>2. Hedge fund versus asset manager, side by side</span><span class="pg">4</span></div>
+<div class="row l2"><span>3. Where the name comes from: a worked hedge</span><span class="pg">5</span></div>
+<div class="row l2"><span>4. How a hedge fund is built</span><span class="pg">5</span></div>
+<div class="row l2"><span>5. The strategy map</span><span class="pg">6</span></div>
+<div class="row l2"><span>6. Single-manager versus multi-manager</span><span class="pg">7</span></div>
+<div class="row l2"><span>7. The ecosystem around a hedge fund</span><span class="pg">8</span></div>
+<div class="row l2"><span>8. The 2026 dashboard: nine forces</span><span class="pg">9</span></div>
+<div class="row l2"><span>9. Industry capital and where new money goes</span><span class="pg">10</span></div>
+<div class="row l2"><span>10. What investors keep after fees</span><span class="pg">11</span></div>
+<div class="row l2"><span>11. Leverage: the numbers regulators are watching</span><span class="pg">12</span></div>
+<div class="row l2"><span>12. 2026 shock timeline</span><span class="pg">12</span></div>
+<div class="row l2"><span>13. Who won and who lost, 2025 and 2026</span><span class="pg">13</span></div>
+<div class="row l2"><span>14. Three ways to explain a hedge fund</span><span class="pg">15</span></div>
+</div>
+<div class="legend" style="margin-top:14pt"><b>Tags:</b> <span class="tag c">Confirmed</span> primary source or two credible outlets &nbsp; <span class="tag r">Reported</span> single credible source &nbsp; <span class="tag i">Inferred</span> author's reasoning &nbsp; <span class="src">[S12]</span> source marker, Part 5.</div>
+</div>
+
+<!-- ============================ PART 1 ============================ -->
+<div class="section" style="--pc:#0B2545"><span class="pm">@@p1@@</span>
+<div class="section-band"><div class="kicker">Part 1</div><h1>What a hedge fund is, from zero</h1><p class="lede">Start with what a fund is, then place hedge funds in the family of investors, then take the machine apart.</p></div>
+
+<h2>1.1 Start with a fund</h2>
+<p>A <b>fund</b> is a pot of money pooled from many investors and run by a professional manager. Investors put money in, the manager buys things with it (shares, bonds, currencies, buildings, loans), and investors own a slice of whatever the pot is worth. The manager charges a fee. That is all any fund is. What differs is <i>who</i> is allowed to invest, <i>what</i> the manager may buy, <i>how</i> the manager is paid, and <i>how quickly</i> investors can get their money back. Every type of investor on the "buy side" is a variation on those four dials.</p>
+<div class="box term"><div class="lbl">Key term: buy side and sell side</div><p>The <b>buy side</b> is everyone who invests money: pension funds, asset managers, hedge funds, private equity. The <b>sell side</b> is the investment banks and brokers who sell them services: trading, research, financing, and introductions to companies <span class="src">[S176a]</span>. Millennium is buy side. Goldman Sachs is sell side.</p></div>
+
+<h2>1.2 The buy-side family</h2>
+<div class="fig">
+<svg viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:11.5px;fill:#1F2933}.h{font-size:16px;font-weight:bold;fill:#0B2545}.s{font-size:10.5px;fill:#5B6B7C}.w{fill:#fff;font-size:12.5px;font-weight:bold}.ws{fill:#fff;font-size:10.5px}.k{font-size:11.5px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="26" class="h">The buy-side family: everyone who invests other people's money</text>
+<text x="20" y="44" class="s">Read left to right from "most ordinary" to "most specialised". The four dials under each box are the things that actually differ.</text>
+<!-- top: owners of capital -->
+<rect x="20" y="62" width="960" height="46" rx="6" fill="#0B2545"/>
+<text x="35" y="82" class="w">THE OWNERS OF THE MONEY ("asset owners" or "allocators")</text>
+<text x="35" y="100" class="ws">Pension funds, insurers, sovereign wealth funds, university endowments, charities, family offices, and ordinary savers. They hand money to the managers below.</text>
+<g stroke="#5B6B7C" stroke-width="2"><line x1="500" y1="108" x2="500" y2="128"/><line x1="110" y1="128" x2="890" y2="128"/><line x1="110" y1="128" x2="110" y2="145"/><line x1="305" y1="128" x2="305" y2="145"/><line x1="500" y1="128" x2="500" y2="145"/><line x1="695" y1="128" x2="695" y2="145"/><line x1="890" y1="128" x2="890" y2="145"/></g>
+<!-- 5 boxes -->
+<g>
+<rect x="20" y="145" width="180" height="300" rx="6" fill="#2E6F95"/>
+<text x="30" y="167" class="w">Long-only asset manager</text>
+<text x="30" y="184" class="ws">BlackRock, Fidelity, Vanguard,</text><text x="30" y="198" class="ws">Schroders, Man Group (partly)</text>
+<text x="30" y="222" class="ws" font-weight="bold">Who invests: anyone, incl. retail</text>
+<text x="30" y="240" class="ws" font-weight="bold">What it buys: shares and bonds,</text><text x="30" y="254" class="ws">owned outright ("long only")</text>
+<text x="30" y="276" class="ws" font-weight="bold">Goal: beat an index (relative)</text>
+<text x="30" y="298" class="ws" font-weight="bold">Fee: small % of assets</text>
+<text x="30" y="320" class="ws" font-weight="bold">Exit: daily, usually</text>
+<text x="30" y="345" class="ws">Falls when markets fall. Judged</text><text x="30" y="359" class="ws">on whether it fell less than</text><text x="30" y="373" class="ws">the index. Huge scale, thin fees.</text>
+<text x="30" y="400" class="ws" font-style="italic">Man Group runs $253.6bn and</text><text x="30" y="414" class="ws" font-style="italic">is listed in London [S145r]</text>
+
+<rect x="215" y="145" width="180" height="300" rx="6" fill="#D97742"/>
+<text x="225" y="167" class="w">Hedge fund</text>
+<text x="225" y="184" class="ws">Millennium, Citadel, Point72,</text><text x="225" y="198" class="ws">Bridgewater, TCI, Brevan Howard</text>
+<text x="225" y="222" class="ws" font-weight="bold">Who invests: institutions and</text><text x="225" y="236" class="ws">the wealthy only</text>
+<text x="225" y="258" class="ws" font-weight="bold">What it buys: anything, long</text><text x="225" y="272" class="ws">AND short, with borrowed money</text>
+<text x="225" y="294" class="ws" font-weight="bold">Goal: make money in any market</text><text x="225" y="308" class="ws">("absolute return")</text>
+<text x="225" y="330" class="ws" font-weight="bold">Fee: % of assets + % of profits</text>
+<text x="225" y="352" class="ws" font-weight="bold">Exit: quarterly to years</text>
+<text x="225" y="377" class="ws">Lightly regulated on what it may</text><text x="225" y="391" class="ws">do, because its investors are</text><text x="225" y="405" class="ws">assumed to look after themselves.</text>
+<text x="225" y="428" class="ws" font-style="italic">Industry: $5.6tn [S150c]</text>
+
+<rect x="410" y="145" width="180" height="300" rx="6" fill="#5E548E"/>
+<text x="420" y="167" class="w">Private equity</text>
+<text x="420" y="184" class="ws">Blackstone, KKR, CVC, Apollo</text>
+<text x="420" y="222" class="ws" font-weight="bold">Who invests: institutions</text>
+<text x="420" y="244" class="ws" font-weight="bold">What it buys: whole companies,</text><text x="420" y="258" class="ws">mostly private, with a lot of debt</text>
+<text x="420" y="280" class="ws" font-weight="bold">Goal: sell each company for</text><text x="420" y="294" class="ws">more, 3 to 7 years later</text>
+<text x="420" y="316" class="ws" font-weight="bold">Fee: "2 and 20" on committed money</text>
+<text x="420" y="338" class="ws" font-weight="bold">Exit: 10-year fund life</text>
+<text x="420" y="363" class="ws">Illiquid. You cannot sell a whole</text><text x="420" y="377" class="ws">company on a Tuesday. Returns</text><text x="420" y="391" class="ws">arrive years later [S140b].</text>
+
+<rect x="605" y="145" width="180" height="300" rx="6" fill="#1B998B"/>
+<text x="615" y="167" class="w">Private credit / venture</text>
+<text x="615" y="184" class="ws">Ares, Blue Owl (credit);</text><text x="615" y="198" class="ws">Sequoia, a16z (venture)</text>
+<text x="615" y="222" class="ws" font-weight="bold">Who invests: institutions</text>
+<text x="615" y="244" class="ws" font-weight="bold">What it buys: loans to</text><text x="615" y="258" class="ws">companies (credit) or stakes in</text><text x="615" y="272" class="ws">start-ups (venture)</text>
+<text x="615" y="294" class="ws" font-weight="bold">Goal: interest income, or a</text><text x="615" y="308" class="ws">few huge wins</text>
+<text x="615" y="330" class="ws" font-weight="bold">Fee: 1 to 2% + share of profit</text>
+<text x="615" y="352" class="ws" font-weight="bold">Exit: years</text>
+<text x="615" y="377" class="ws">Private credit is $1.5 to 2tn and</text><text x="615" y="391" class="ws">"untested" in a downturn,</text><text x="615" y="405" class="ws">says the FSB [S243].</text>
+
+<rect x="800" y="145" width="180" height="300" rx="6" fill="#8A96A3"/>
+<text x="810" y="167" class="w">Passive / index fund</text>
+<text x="810" y="184" class="ws">Vanguard, iShares, ETFs</text>
+<text x="810" y="222" class="ws" font-weight="bold">Who invests: anyone</text>
+<text x="810" y="244" class="ws" font-weight="bold">What it buys: every share in</text><text x="810" y="258" class="ws">an index, automatically</text>
+<text x="810" y="280" class="ws" font-weight="bold">Goal: match the index exactly</text>
+<text x="810" y="302" class="ws" font-weight="bold">Fee: tiny (hundredths of a %)</text>
+<text x="810" y="324" class="ws" font-weight="bold">Exit: any second, on exchange</text>
+<text x="810" y="349" class="ws">No manager judgement at all.</text><text x="810" y="363" class="ws">The cheap default that every</text><text x="810" y="377" class="ws">active manager is measured</text><text x="810" y="391" class="ws">against.</text>
+</g>
+<!-- bottom axis -->
+<line x1="20" y1="470" x2="980" y2="470" stroke="#0B2545" stroke-width="3"/>
+<polygon points="980,470 968,464 968,476" fill="#0B2545"/>
+<text x="20" y="490" class="k">Simpler, cheaper, more liquid, open to everyone</text>
+<text x="640" y="490" class="k">More complex, dearer, less liquid, institutions only</text>
+<rect x="20" y="510" width="960" height="78" rx="6" fill="#FBEEE6" stroke="#D97742"/>
+<text x="35" y="532" class="k">THE ONE-LINE DIFFERENCE</text>
+<text x="35" y="551" class="t">An asset manager tries to beat the market and falls when it falls. A hedge fund tries to make money whether the market rises or falls,</text>
+<text x="35" y="568" class="t">using tools ordinary funds may not use: short selling, borrowed money, derivatives. It is allowed to because its investors are professionals.</text>
+</svg>
+<span class="pm">@@f1@@</span><div class="cap"><b>Figure 1.</b> The buy-side family. Definitions from the SEC investor bulletin <span class="src">[S151]</span>, the Aurum primer <span class="src">[S175]</span> and careers explainers <span class="src">[S140b][S176a]</span>; figures from HFR <span class="src">[S150c]</span>, Man Group results <span class="src">[S145r]</span> and the FSB <span class="src">[S243]</span>. Firm names are illustrative examples.</div></div>
+
+<h2>1.3 Hedge fund versus asset manager: the ten differences</h2>
+<p>People use "asset manager" to mean the big, traditional, long-only investment houses. The regulator's definition of a hedge fund shows the contrast: "Hedge funds pool investors' money and invest the money in an effort to make a positive return. Hedge funds typically have more flexible investment strategies than, for example, mutual funds. Many hedge funds seek to profit in all kinds of markets by using leverage (in other words, borrowing to increase investment exposure as well as risk), short-selling and other speculative investment practices that are not often used by mutual funds" <span class="src">[S151]</span> <span class="tag c">Confirmed</span>.</p>
+<div class="fig">
+<svg viewBox="0 0 1000 560" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:11.5px;fill:#1F2933}.h{font-size:16px;font-weight:bold;fill:#0B2545}.s{font-size:10.5px;fill:#5B6B7C}.w{fill:#fff;font-size:12.5px;font-weight:bold}.ws{fill:#fff;font-size:11px}.k{font-size:11.5px;font-weight:bold;fill:#0B2545}.r{font-size:11px;fill:#1F2933}</style>
+<text x="20" y="26" class="h">Ten dials: long-only asset manager versus hedge fund</text>
+<rect x="20" y="45" width="200" height="30" rx="4" fill="#0B2545"/><text x="30" y="65" class="w">Dial</text>
+<rect x="230" y="45" width="370" height="30" rx="4" fill="#2E6F95"/><text x="240" y="65" class="w">Long-only asset manager</text>
+<rect x="610" y="45" width="370" height="30" rx="4" fill="#D97742"/><text x="620" y="65" class="w">Hedge fund</text>
+<g class="r">
+<rect x="20" y="82" width="960" height="44" fill="#F3F6FA"/><text x="30" y="100" class="k">1. Whose money</text><text x="240" y="100">Anyone: retail savers, pensions, ISAs</text><text x="620" y="100">Institutions and wealthy individuals only; "accredited"</text><text x="620" y="116">investors assumed able to bear losses [S151]</text>
+<rect x="20" y="130" width="960" height="44" fill="#fff"/><text x="30" y="148" class="k">2. The goal</text><text x="240" y="148">Relative: beat an index (the FTSE 100, the S&amp;P 500)</text><text x="240" y="164">"Down 8% when the index fell 12%" is a good year</text><text x="620" y="148">Absolute: positive return in any market</text><text x="620" y="164">"Up 8% when the index rose 19%" can still be the plan</text>
+<rect x="20" y="178" width="960" height="44" fill="#F3F6FA"/><text x="30" y="196" class="k">3. Direction</text><text x="240" y="196">Long only: owns things, profits if they rise</text><text x="620" y="196">Long and short: also borrows and sells things it expects</text><text x="620" y="212">to fall, so it can profit both ways [S175]</text>
+<rect x="20" y="226" width="960" height="44" fill="#fff"/><text x="30" y="244" class="k">4. Borrowed money</text><text x="240" y="244">Little or none</text><text x="620" y="244">Often several times its capital; market-neutral funds</text><text x="620" y="260">"may be managed with gross exposures in excess of 400%" [S175]</text>
+<rect x="20" y="274" width="960" height="44" fill="#F3F6FA"/><text x="30" y="292" class="k">5. Fees</text><text x="240" y="292">A small percentage of assets, often under 1%</text><text x="240" y="308">Index funds: hundredths of a percent</text><text x="620" y="292">Percentage of assets plus a share of profits; average</text><text x="620" y="308">1.32% and 15.78% in 2026 [S150d]; platforms pass costs through</text>
+<rect x="20" y="322" width="960" height="44" fill="#fff"/><text x="30" y="340" class="k">6. Getting money out</text><text x="240" y="340">Daily, usually</text><text x="620" y="340">Monthly, quarterly or yearly, often after a lock-up of</text><text x="620" y="356">a year or more [S151]; some take five years to exit fully</text>
+<rect x="20" y="370" width="960" height="44" fill="#F3F6FA"/><text x="30" y="388" class="k">7. Rules on what it may buy</text><text x="240" y="388">Tight: diversification limits, no leverage, public disclosure</text><text x="620" y="388">Loose on strategy, strict on conduct and on who may invest</text>
+<rect x="20" y="418" width="960" height="44" fill="#fff"/><text x="30" y="436" class="k">8. Transparency</text><text x="240" y="436">Daily prices, full holdings, public reports</text><text x="620" y="436">Private. Investors get letters; the public gets press estimates</text><text x="620" y="452">and delayed US filings</text>
+<rect x="20" y="466" width="960" height="44" fill="#F3F6FA"/><text x="30" y="484" class="k">9. Size and scale</text><text x="240" y="484">Enormous: trillions at the biggest houses</text><text x="620" y="484">Whole industry $5.6tn [S150c]; largest firms $50 to 90bn</text>
+<rect x="20" y="514" width="960" height="44" fill="#fff"/><text x="30" y="532" class="k">10. How people are paid</text><text x="240" y="532">Salary and bonus; steadier</text><text x="620" y="532">Tied to profit; a PM keeps a share of what their book makes</text><text x="620" y="548">and can be dismissed after a small loss [S140c]</text>
+</g>
+</svg>
+<span class="pm">@@f2@@</span><div class="cap"><b>Figure 2.</b> Ten dials. Definitions from the SEC <span class="src">[S151]</span> and Aurum <span class="src">[S175]</span>; fee averages from HFR <span class="src">[S150d]</span>; pay from a careers explainer <span class="src">[S140c]</span>. Long-only figures are generic descriptions, not sourced numbers.</div></div>
+<div class="box say"><div class="lbl">Say this when someone asks "what is a hedge fund?"</div><p>"A fund for professional investors that tries to make money whether markets go up or down. It can bet against things, borrow to make bets bigger, and charges a share of the profits. An ordinary fund just buys shares and hopes to beat the index."</p></div>
+
+<h2>1.4 Where the name comes from: the hedge</h2>
+<p>To <b>hedge</b> is to protect yourself against a loss. The first hedge fund, set up by Alfred Winslow Jones in 1949 <span class="src">[S175]</span>, bought shares it liked and simultaneously sold short shares it disliked, so that if the whole market fell, the losses on the longs were offset by gains on the shorts. What was left was the manager's skill at picking which companies would do better than which. Most hedge funds today still do some version of this.</p>
+<div class="fig">
+<svg viewBox="0 0 1000 470" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:11.5px;fill:#1F2933}.h{font-size:16px;font-weight:bold;fill:#0B2545}.s{font-size:10.5px;fill:#5B6B7C}.w{fill:#fff;font-size:12.5px;font-weight:bold}.ws{fill:#fff;font-size:11px}.k{font-size:11.5px;font-weight:bold;fill:#0B2545}.n{font-size:20px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="26" class="h">A worked hedge: £100 long Supermarket A, £100 short Supermarket B</text>
+<text x="20" y="44" class="s">You think A is better run than B. You do not know whether the whole grocery sector will rise or fall. Illustrative numbers.</text>
+<!-- setup -->
+<rect x="20" y="60" width="300" height="120" rx="6" fill="#F3F6FA" stroke="#0B2545"/>
+<text x="30" y="82" class="k">THE POSITION</text>
+<text x="30" y="102" class="t">LONG: buy £100 of A. Profit if A rises.</text>
+<text x="30" y="120" class="t">SHORT: borrow £100 of B's shares from a</text><text x="30" y="136" class="t">bank, sell them for £100. Later buy them</text><text x="30" y="152" class="t">back and return them. Profit if B falls.</text>
+<text x="30" y="172" class="s">Net exposure to the market: £100 - £100 = 0</text>
+<!-- three scenarios -->
+<g>
+<rect x="340" y="60" width="205" height="120" rx="6" fill="#E3F4F1" stroke="#1B998B"/>
+<text x="350" y="82" class="k">SECTOR RISES 10%</text>
+<text x="350" y="102" class="t">A up 15% (better run): +£15</text>
+<text x="350" y="120" class="t">B up 5%: you owe £5: -£5</text>
+<line x1="350" y1="130" x2="535" y2="130" stroke="#1B998B"/>
+<text x="350" y="152" class="n" fill="#0E6B5F">+£10</text>
+<text x="420" y="148" class="t">Market gain cancelled,</text><text x="420" y="162" class="t">skill kept</text>
+
+<rect x="560" y="60" width="205" height="120" rx="6" fill="#FCF5E0" stroke="#E9B949"/>
+<text x="570" y="82" class="k">SECTOR FALLS 10%</text>
+<text x="570" y="102" class="t">A down 5%: -£5</text>
+<text x="570" y="120" class="t">B down 15%: buy back cheap: +£15</text>
+<line x1="570" y1="130" x2="755" y2="130" stroke="#E9B949"/>
+<text x="570" y="152" class="n" fill="#8A6A10">+£10</text>
+<text x="640" y="148" class="t">Same answer.</text><text x="640" y="162" class="t">That is the hedge.</text>
+
+<rect x="780" y="60" width="200" height="120" rx="6" fill="#F8E4E7" stroke="#B23A48"/>
+<text x="790" y="82" class="k">YOU WERE WRONG</text>
+<text x="790" y="102" class="t">A up 5%: +£5</text>
+<text x="790" y="120" class="t">B up 15%: -£15</text>
+<line x1="790" y1="130" x2="970" y2="130" stroke="#B23A48"/>
+<text x="790" y="152" class="n" fill="#B23A48">-£10</text>
+<text x="850" y="148" class="t">The market did</text><text x="850" y="162" class="t">not save you</text>
+</g>
+<!-- leverage panel -->
+<rect x="20" y="200" width="960" height="120" rx="6" fill="#F3F6FA" stroke="#0B2545"/>
+<text x="30" y="222" class="k">WHY HEDGE FUNDS BORROW: THE SAME TRADE WITH LEVERAGE</text>
+<text x="30" y="244" class="t">A £10 gain on £100 of capital is 10%. But the bank that lent you B's shares will also lend you money. Run the same pairing four times over</text>
+<text x="30" y="262" class="t">on the same £100 of capital (£400 long, £400 short: "400% gross, 0% net") and the £10 becomes £40, a 40% return. Or a 40% loss.</text>
+<text x="30" y="286" class="t">This is why a market-neutral book "typically necessitates the use of leverage" to earn an attractive return [S175], and why regulators watch</text>
+<text x="30" y="304" class="t">hedge fund borrowing closely (Part 2.5). The market risk is hedged away; the leverage risk is not.</text>
+<!-- glossary strip -->
+<g>
+<rect x="20" y="340" width="230" height="110" rx="6" fill="#0B2545"/><text x="30" y="362" class="w">Long</text><text x="30" y="382" class="ws">Own it. Profit if it rises.</text>
+<rect x="265" y="340" width="230" height="110" rx="6" fill="#0B2545"/><text x="275" y="362" class="w">Short</text><text x="275" y="382" class="ws">Borrow it, sell it, buy it back</text><text x="275" y="397" class="ws">later. Profit if it falls. Pay a</text><text x="275" y="412" class="ws">borrowing fee meanwhile.</text>
+<rect x="510" y="340" width="230" height="110" rx="6" fill="#0B2545"/><text x="520" y="362" class="w">Net exposure</text><text x="520" y="382" class="ws">Longs minus shorts. How much you</text><text x="520" y="397" class="ws">move with the market. Zero here.</text><text x="520" y="412" class="ws">"Market neutral" = near zero [S175]</text>
+<rect x="755" y="340" width="225" height="110" rx="6" fill="#0B2545"/><text x="765" y="362" class="w">Gross exposure</text><text x="765" y="382" class="ws">Longs plus shorts. How much money</text><text x="765" y="397" class="ws">is at work. 200% here; 400% with</text><text x="765" y="412" class="ws">leverage. The risk that remains.</text>
+</g>
+</svg>
+<span class="pm">@@f3@@</span><div class="cap"><b>Figure 3.</b> A worked hedge. Illustrative numbers; definitions of net and gross exposure and market neutrality from Aurum's primer <span class="src">[S175]</span> and CFI <span class="src">[S176b]</span>.</div></div>
+<div class="box dont"><div class="lbl">Don't say this</div><p>"Hedge funds are risky because they gamble on the market." The classic hedge fund takes <i>less</i> market risk than an index fund. Its risks are different: leverage, crowding (everyone in the same trade), and being wrong about which company is better. Saying that precisely is the single fastest way to sound like you understand the industry.</p></div>
+
+<h2>1.5 How a hedge fund is built</h2>
+<div class="fig">
+<svg viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:11.5px;fill:#1F2933}.h{font-size:16px;font-weight:bold;fill:#0B2545}.s{font-size:10.5px;fill:#5B6B7C}.w{fill:#fff;font-size:12.5px;font-weight:bold}.ws{fill:#fff;font-size:10.5px}.k{font-size:11.5px;font-weight:bold;fill:#0B2545}</style>
+<defs><marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#5B6B7C"/></marker></defs>
+<text x="20" y="26" class="h">The machine: who is who around a hedge fund</text>
+<!-- investors -->
+<rect x="20" y="50" width="280" height="90" rx="6" fill="#0B2545"/>
+<text x="30" y="72" class="w">INVESTORS = "limited partners" (LPs)</text>
+<text x="30" y="92" class="ws">Pensions, sovereign funds, endowments, family</text><text x="30" y="106" class="ws">offices. Liability limited to what they put in.</text><text x="30" y="126" class="ws">Millennium: 57% are non-US [S70]</text>
+<!-- fund -->
+<rect x="360" y="50" width="280" height="90" rx="6" fill="#5E548E"/>
+<text x="370" y="72" class="w">THE FUND (a legal vehicle)</text>
+<text x="370" y="92" class="ws">Often an offshore "feeder" (Cayman Islands) into a</text><text x="370" y="106" class="ws">"master" fund. Holds the assets. Owned by the LPs.</text><text x="370" y="126" class="ws">e.g. Millennium International Ltd, formed 1997 [S114]</text>
+<!-- manager -->
+<rect x="700" y="50" width="280" height="90" rx="6" fill="#D97742"/>
+<text x="710" y="72" class="w">THE MANAGER = "general partner" (GP)</text>
+<text x="710" y="92" class="ws">The firm with the name on the door. Runs the</text><text x="710" y="106" class="ws">money, sets strategy, takes the fees, employs</text><text x="710" y="120" class="ws">everyone. e.g. Millennium Management LLC</text>
+<g stroke="#5B6B7C" stroke-width="2.5" marker-end="url(#ah)"><line x1="300" y1="95" x2="358" y2="95"/><line x1="640" y1="95" x2="698" y2="95"/></g>
+<text x="305" y="88" class="s">capital</text><text x="645" y="88" class="s">fees</text>
+<!-- fees back -->
+<path d="M980,140 C990,220 20,220 30,140" fill="none" stroke="#1B998B" stroke-width="2" stroke-dasharray="6,5" marker-end="url(#ah)"/>
+<text x="400" y="205" class="s">net returns flow back to investors (dashed)</text>
+<!-- service providers -->
+<text x="20" y="250" class="k">THE PEOPLE THE MANAGER PAYS TO MAKE IT WORK</text>
+<g>
+<rect x="20" y="262" width="230" height="130" rx="6" fill="#2E6F95"/>
+<text x="30" y="284" class="w">Prime broker (a bank)</text>
+<text x="30" y="304" class="ws">Lends cash and shares (so the</text><text x="30" y="318" class="ws">fund can borrow and short), holds</text><text x="30" y="332" class="ws">the assets, settles trades [S176c].</text><text x="30" y="352" class="ws">The source of leverage. Platforms</text><text x="30" y="366" class="ws">use "three to five plus" of them [S175]</text>
+<rect x="265" y="262" width="230" height="130" rx="6" fill="#2E6F95"/>
+<text x="275" y="284" class="w">Administrator</text>
+<text x="275" y="304" class="ws">Independent firm that values the</text><text x="275" y="318" class="ws">fund each month, keeps the investor</text><text x="275" y="332" class="ws">register, processes money in and out.</text><text x="275" y="352" class="ws">Exists so investors do not have to</text><text x="275" y="366" class="ws">take the manager's word for it [S151]</text>
+<rect x="510" y="262" width="230" height="130" rx="6" fill="#2E6F95"/>
+<text x="520" y="284" class="w">Sell-side banks and brokers</text>
+<text x="520" y="304" class="ws">Execute trades, publish research,</text><text x="520" y="318" class="ws">arrange meetings with company</text><text x="520" y="332" class="ws">management (corporate access).</text><text x="520" y="352" class="ws">Paid by commissions and, since</text><text x="520" y="366" class="ws">2018, explicit research fees [S181]</text>
+<rect x="755" y="262" width="225" height="130" rx="6" fill="#2E6F95"/>
+<text x="765" y="284" class="w">Auditor, lawyers, regulators</text>
+<text x="765" y="304" class="ws">Auditor checks the accounts. Lawyers</text><text x="765" y="318" class="ws">write the offering memorandum.</text><text x="765" y="332" class="ws">Regulators (SEC in the US, FCA in</text><text x="765" y="346" class="ws">the UK) register the manager and</text><text x="765" y="360" class="ws">police conduct, not strategy.</text>
+</g>
+<!-- inside the manager -->
+<text x="20" y="425" class="k">INSIDE THE MANAGER</text>
+<g>
+<rect x="20" y="437" width="180" height="70" rx="5" fill="#0B2545"/><text x="30" y="458" class="ws" font-weight="bold">Investing seats</text><text x="30" y="474" class="ws">Portfolio managers (PMs),</text><text x="30" y="488" class="ws">analysts, traders</text>
+<rect x="215" y="437" width="180" height="70" rx="5" fill="#13315C"/><text x="225" y="458" class="ws" font-weight="bold">Risk</text><text x="225" y="474" class="ws">Sets and polices limits;</text><text x="225" y="488" class="ws">can cut a PM's capital</text>
+<rect x="410" y="437" width="180" height="70" rx="5" fill="#13315C"/><text x="420" y="458" class="ws" font-weight="bold">Investor relations</text><text x="420" y="474" class="ws">Raises money from LPs,</text><text x="420" y="488" class="ws">writes the letters</text>
+<rect x="605" y="437" width="180" height="70" rx="5" fill="#13315C"/><text x="615" y="458" class="ws" font-weight="bold">Operations, compliance, tech</text><text x="615" y="474" class="ws">Settle trades, police MNPI,</text><text x="615" y="488" class="ws">build the systems</text>
+<rect x="800" y="437" width="180" height="70" rx="5" fill="#D97742"/><text x="810" y="458" class="ws" font-weight="bold">Platform services</text><text x="810" y="474" class="ws">Data, research tools, corporate</text><text x="810" y="488" class="ws">access (your seat)</text>
+</g>
+</svg>
+<span class="pm">@@f4@@</span><div class="cap"><b>Figure 4.</b> The machine. Roles from the SEC bulletin <span class="src">[S151]</span>, CFI on prime brokerage <span class="src">[S176c]</span>, Aurum <span class="src">[S175]</span>; Millennium examples from its SEC filing <span class="src">[S70]</span> and fund database <span class="src">[S114]</span>.</div></div>
+<div class="box term"><div class="lbl">Key term: LP and GP</div><p>A hedge fund is usually a limited partnership. The investors are <b>limited partners (LPs)</b>: they supply the money and can lose only what they put in. The manager is the <b>general partner (GP)</b>: it runs the fund and takes the fees <span class="src">[S151]</span>. When people say "Millennium", they usually mean the GP, the firm; the fund itself is a separate legal thing the firm manages.</p></div>
+
+<h2>1.6 The types of hedge fund</h2>
+<p>"Hedge fund" covers very different businesses. The industry data provider HFR groups the $5.15tn of end-2025 capital into four families: equity hedge ($1.57tn), event-driven ($1.45tn), relative value ($1.35tn) and macro ($787bn) <span class="src">[S150a]</span> <span class="tag c">Confirmed</span>. In plain English:</p>
+<div class="fig">
+<svg viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:11px;fill:#1F2933}.h{font-size:16px;font-weight:bold;fill:#0B2545}.s{font-size:10.5px;fill:#5B6B7C}.w{fill:#fff;font-size:12.5px;font-weight:bold}.ws{fill:#fff;font-size:10.5px}.k{font-size:11.5px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="26" class="h">The strategy map: what hedge funds actually do</text>
+<text x="20" y="44" class="s">Horizontal: what they bet on. Vertical: how the decision is made. Box size does not indicate assets. HFR family sizes at end-2025 in brackets [S150a].</text>
+<!-- axes -->
+<text x="20" y="80" class="k">HUMAN JUDGEMENT</text>
+<text x="20" y="480" class="k">COMPUTER-DRIVEN ("systematic", "quant")</text>
+<line x1="150" y1="90" x2="150" y2="470" stroke="#D5DCE5" stroke-width="2"/>
+<g>
+<rect x="170" y="90" width="195" height="150" rx="6" fill="#2E6F95"/>
+<text x="180" y="112" class="w">Equity long/short</text>
+<text x="180" y="130" class="ws">Buy good companies, short bad</text><text x="180" y="144" class="ws">ones. The original. "Close to</text><text x="180" y="158" class="ws">20% of industry assets" [S175].</text><text x="180" y="176" class="ws">Family: equity hedge ($1.57tn)</text><text x="180" y="196" class="ws" font-style="italic">Biggest consumer of company</text><text x="180" y="210" class="ws" font-style="italic">meetings. Where corporate</text><text x="180" y="224" class="ws" font-style="italic">access lives.</text>
+
+<rect x="380" y="90" width="195" height="150" rx="6" fill="#5E548E"/>
+<text x="390" y="112" class="w">Event-driven</text>
+<text x="390" y="130" class="ws">Bet on corporate events: mergers,</text><text x="390" y="144" class="ws">bankruptcies, spin-offs, activism.</text><text x="390" y="158" class="ws">TCI (activist, London) made a</text><text x="390" y="172" class="ws">record $18.9bn for investors in</text><text x="390" y="186" class="ws">2025 [S135].</text><text x="390" y="204" class="ws">Family: event-driven ($1.45tn)</text>
+
+<rect x="590" y="90" width="195" height="150" rx="6" fill="#9C6644"/>
+<text x="600" y="112" class="w">Global macro</text>
+<text x="600" y="130" class="ws">Bet on countries: interest rates,</text><text x="600" y="144" class="ws">currencies, bonds, commodities.</text><text x="600" y="158" class="ws">Brevan Howard, Bridgewater</text><text x="600" y="172" class="ws">(Pure Alpha II +34% in 2025</text><text x="600" y="186" class="ws">[S127]). Volatile years.</text><text x="600" y="204" class="ws">Family: macro ($787bn)</text>
+
+<rect x="800" y="90" width="180" height="150" rx="6" fill="#B23A48"/>
+<text x="810" y="112" class="w">Credit / distressed</text>
+<text x="810" y="130" class="ws">Buy and short bonds and loans;</text><text x="810" y="144" class="ws">lend to companies others</text><text x="810" y="158" class="ws">will not. Increasingly overlaps</text><text x="810" y="172" class="ws">with private credit [S173a].</text>
+
+<rect x="170" y="255" width="195" height="100" rx="6" fill="#1B998B"/>
+<text x="180" y="277" class="w">Relative value / arbitrage</text>
+<text x="180" y="295" class="ws">Exploit small price gaps between</text><text x="180" y="309" class="ws">related things (a bond and its</text><text x="180" y="323" class="ws">future; two share classes). Tiny</text><text x="180" y="337" class="ws">edges, big leverage. ($1.35tn)</text>
+
+<rect x="380" y="255" width="405" height="100" rx="6" fill="#0B2545"/>
+<text x="390" y="277" class="w">Multi-strategy / multi-manager ("pod shop")</text>
+<text x="390" y="295" class="ws">Not a strategy but a structure: one firm runs many of the boxes on this map at once,</text><text x="390" y="309" class="ws">through hundreds of independent teams under central risk limits. Millennium, Citadel,</text><text x="390" y="323" class="ws">Point72, Balyasny. About $428bn across 57 platforms, growing 16% in 2025 [S158].</text><text x="390" y="341" class="ws">Cuts across all four HFR families.</text>
+
+<rect x="800" y="255" width="180" height="100" rx="6" fill="#8A96A3"/>
+<text x="810" y="277" class="w">Activist</text>
+<text x="810" y="295" class="ws">Buy a stake, then push the</text><text x="810" y="309" class="ws">company to change (board,</text><text x="810" y="323" class="ws">strategy, sale). A sub-type</text><text x="810" y="337" class="ws">of event-driven.</text>
+
+<rect x="170" y="370" width="300" height="95" rx="6" fill="#3A7D44"/>
+<text x="180" y="392" class="w">Quant / systematic / statistical arbitrage</text>
+<text x="180" y="410" class="ws">Models trade thousands of positions on data patterns.</text><text x="180" y="424" class="ws">D.E. Shaw, Two Sigma, Renaissance, QRT (London,</text><text x="180" y="438" class="ws">~$38-42bn, ~30% in 2025 [S145o]). Outperformed</text><text x="180" y="452" class="ws">stock-pickers in the March 2025 shock [S163].</text>
+
+<rect x="485" y="370" width="300" height="95" rx="6" fill="#3A7D44"/>
+<text x="495" y="392" class="w">Trend-following / CTAs</text>
+<text x="495" y="410" class="ws">Follow price trends in futures across markets.</text><text x="495" y="424" class="ws">Do well in long moves, badly in choppy markets.</text><text x="495" y="438" class="ws">In 2026 CTAs "outpaced discretionary global macro"</text><text x="495" y="452" class="ws">for the first time since 2022 [S162].</text>
+
+<rect x="800" y="370" width="180" height="95" rx="6" fill="#E9B949"/>
+<text x="810" y="392" class="w" fill="#1F2933">Thematic / concentrated</text>
+<text x="810" y="410" class="ws" fill="#1F2933">One big idea, few positions,</text><text x="810" y="424" class="ws" fill="#1F2933">heavy leverage. Highest highs</text><text x="810" y="438" class="ws" fill="#1F2933">and the 2026 blow-up (Part</text><text x="810" y="452" class="ws" fill="#1F2933">2.6) [S238].</text>
+</g>
+</svg>
+<span class="pm">@@f5@@</span><div class="cap"><b>Figure 5.</b> The strategy map. Family sizes from HFR at end-2025 <span class="src">[S150a]</span>; other figures as marked. Placement on the axes is the author's simplification.</div></div>
+
+<h2>1.7 Single-manager versus multi-manager</h2>
+<p>The biggest structural split in the industry today is not strategy but organisation. A <b>single-manager</b> fund has one house view: a founder or CIO decides, analysts feed ideas up. A <b>multi-manager platform</b> has no house view: it gives capital to dozens or hundreds of independent teams, each hedged and each cut if it loses more than a set amount, and its return is the sum of many small uncorrelated bets. Aurum's description: platforms run "anywhere from a handful to over a hundred independent 'pods', each with its own portfolio manager and analysts, running tightly hedged books under a firm-wide risk framework", with the result of "far higher leverage (gross exposure of typically 400 to 600%), higher turnover levels, and lower realised portfolio volatility" <span class="src">[S175]</span> <span class="tag c">Confirmed</span>.</p>
+<div class="fig"><svg viewBox="0 0 1000 560" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:14px;fill:#1F2933}.h{font-size:17px;font-weight:bold;fill:#0B2545}.s{font-size:12px;fill:#5B6B7C}.w{fill:#fff;font-size:14px;font-weight:bold}.ws{fill:#fff;font-size:12px}</style>
+<defs><marker id="a2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#5B6B7C"/></marker></defs>
+<!-- left: single manager -->
+<text x="40" y="30" class="h">A. Single-manager hedge fund</text>
+<text x="40" y="50" class="s">e.g. a classic "star investor" fund</text>
+<rect x="150" y="70" width="180" height="60" rx="8" fill="#0B2545"/>
+<text x="165" y="96" class="w">Founder / CIO</text>
+<text x="165" y="116" class="ws">One house view</text>
+<g stroke="#5B6B7C" stroke-width="2" marker-end="url(#a2)">
+<line x1="240" y1="130" x2="110" y2="190"/><line x1="240" y1="130" x2="240" y2="190"/><line x1="240" y1="130" x2="370" y2="190"/>
+</g>
+<rect x="50" y="195" width="120" height="50" rx="6" fill="#2E6F95"/><text x="62" y="225" class="ws">Analyst team</text>
+<rect x="180" y="195" width="120" height="50" rx="6" fill="#2E6F95"/><text x="192" y="225" class="ws">Analyst team</text>
+<rect x="310" y="195" width="120" height="50" rx="6" fill="#2E6F95"/><text x="322" y="225" class="ws">Analyst team</text>
+<rect x="150" y="270" width="180" height="50" rx="6" fill="#5E548E"/><text x="165" y="300" class="ws" font-weight="bold">One portfolio</text>
+<text x="40" y="360" class="t">• Returns depend on one person's judgement</text>
+<text x="40" y="382" class="t">• Concentrated bets, higher volatility</text>
+<text x="40" y="404" class="t">• Analysts feed ideas UP to the CIO</text>
+<text x="40" y="426" class="t">• Fees usually "2 and 20": 2% of assets plus</text>
+<text x="40" y="446" class="t">   20% of profits; manager pays its own costs</text>
+<text x="40" y="468" class="t">• Corporate access: a few people, one client</text>
+<text x="40" y="490" class="t">   (the CIO), so brokers can serve it easily</text>
+
+<!-- divider -->
+<line x1="500" y1="20" x2="500" y2="540" stroke="#D5DCE5" stroke-width="2" stroke-dasharray="6,6"/>
+
+<!-- right: multi-manager -->
+<text x="530" y="30" class="h">B. Multi-manager platform ("pod shop")</text>
+<text x="530" y="50" class="s">Millennium, Citadel, Point72, Balyasny, ExodusPoint...</text>
+<rect x="600" y="70" width="300" height="60" rx="8" fill="#0B2545"/>
+<text x="615" y="94" class="w">Central platform</text>
+<text x="615" y="114" class="ws">Risk limits, capital allocation, shared services. No house view.</text>
+<g stroke="#5B6B7C" stroke-width="2" marker-end="url(#a2)">
+<line x1="750" y1="130" x2="570" y2="190"/><line x1="750" y1="130" x2="660" y2="190"/><line x1="750" y1="130" x2="750" y2="190"/><line x1="750" y1="130" x2="840" y2="190"/><line x1="750" y1="130" x2="930" y2="190"/>
+</g>
+<g fill="#1B998B"><rect x="530" y="195" width="80" height="60" rx="6"/><rect x="620" y="195" width="80" height="60" rx="6"/><rect x="710" y="195" width="80" height="60" rx="6"/><rect x="800" y="195" width="80" height="60" rx="6"/><rect x="890" y="195" width="80" height="60" rx="6"/></g>
+<g class="ws"><text x="540" y="220">Pod 1</text><text x="540" y="240">PM + team</text><text x="630" y="220">Pod 2</text><text x="630" y="240">PM + team</text><text x="720" y="220">Pod 3</text><text x="720" y="240">PM + team</text><text x="810" y="220">Pod 4</text><text x="810" y="240">PM + team</text><text x="900" y="220">...Pod N</text><text x="900" y="240">hundreds</text></g>
+<g fill="#5E548E"><rect x="530" y="270" width="80" height="40" rx="6"/><rect x="620" y="270" width="80" height="40" rx="6"/><rect x="710" y="270" width="80" height="40" rx="6"/><rect x="800" y="270" width="80" height="40" rx="6"/><rect x="890" y="270" width="80" height="40" rx="6"/></g>
+<g class="ws"><text x="540" y="295">Own book</text><text x="630" y="295">Own book</text><text x="720" y="295">Own book</text><text x="810" y="295">Own book</text><text x="900" y="295">Own book</text></g>
+<text x="530" y="360" class="t">• Returns = the sum of many independent, uncorrelated bets</text>
+<text x="530" y="382" class="t">• Each PM has a hard loss limit; breach it and capital is cut</text>
+<text x="530" y="404" class="t">• Low volatility, steady returns, rarely a spectacular year</text>
+<text x="530" y="426" class="t">• Costs "passed through" to investors, plus a performance fee</text>
+<text x="530" y="448" class="t">• PMs paid only on their own pod's profit (see netting risk)</text>
+<text x="530" y="470" class="t">• Corporate access: hundreds of internal clients with different</text>
+<text x="530" y="490" class="t">   coverage and no obligation to engage. Needs an in-house team,</text>
+<text x="530" y="510" class="t">   a portal, and data on who used what. That is this job.</text>
+</svg>
+<span class="pm">@@f6@@</span><div class="cap"><b>Figure 6.</b> Single-manager versus multi-manager. Structural description from Aurum <span class="src">[S175]</span>; corporate access implications inferred.</div></div>
+<div class="box term"><div class="lbl">Key term: pass-through fees</div><p>Traditional funds charge "2 and 20": 2% of assets a year plus 20% of profits, and the manager pays its own costs out of the 2%. Multi-manager platforms instead bill investors for their actual costs, mostly the pay of the trading teams, with no cap, plus a performance fee. Bloomberg's analysis of regulatory filings found these pass-through expenses "typically range from 3% to 10% of net assets" <span class="src">[S156]</span> <span class="tag r">Reported</span>. Investors accept it when the net return after everything is good and steady. This is the fee debate in Part 2.3.</p></div>
+
+<h2>1.8 The words you need</h2>
+<div class="two">
+<div>
+<p><b>AUM</b> (assets under management): the total investor money a firm runs. The standard size measure. For private firms it is a press estimate that moves monthly.</p>
+<p><b>Alpha and beta.</b> Beta is return from simply being exposed to the market. Alpha is return from skill on top. Investors "are understandably reluctant to pay high fees for beta" <span class="src">[S175]</span>. Index funds sell beta cheaply; hedge funds sell alpha dearly.</p>
+<p><b>Sharpe ratio.</b> Return above cash divided by how much the return bounces around. Return per unit of risk. Above 1 is good; multi-manager platforms target 2 or more and care about this far more than raw return.</p>
+<p><b>Drawdown.</b> The fall from a peak to a trough. Platforms enforce "drawdown triggers" on each team <span class="src">[S175]</span>; press reports Millennium halves a PM's capital at a 5% loss and removes them at 7.5% <span class="src">[S104][S113]</span> <span class="tag r">Reported, two outlets</span>.</p>
+<p><b>Volatility.</b> How much returns swing. Multi-strategy funds run volatility about four times lower than world equities and a beta of about 0.24 <span class="src">[S172]</span>.</p>
+</div>
+<div>
+<p><b>High-water mark.</b> Performance fees are charged only on gains above the fund's previous peak, so investors never pay twice for recovering a loss <span class="src">[S176d]</span>.</p>
+<p><b>Hurdle.</b> A minimum return before performance fees apply. A "cash hurdle" means only returns above what cash pays are charged for. Texas Teachers' Joel Hinkhouse: "If you are a hedge fund and return 5.25%, you have not made us alpha. So, you should not take a carry for that" <span class="src">[S167a]</span>.</p>
+<p><b>Lock-up, gate, redemption.</b> Funds "typically limit opportunities to redeem" to monthly, quarterly or yearly and "often impose a 'lock-up' period of one year or more" <span class="src">[S151]</span>. A gate caps how much can leave per period. Millennium's main share class allows 5% a quarter, so full exit takes five years <span class="src">[S111]</span>.</p>
+<p><b>Netting risk.</b> On a platform, investors pay winning teams' share of profit even in a year when losing teams drag the total down. Investors "assume the 'netting risk' of underperforming PMs" <span class="src">[S175]</span>.</p>
+<p><b>De-grossing.</b> Cutting both longs and shorts at once because risk limits bite. When many funds do it together, prices gap. See Part 2.6.</p>
+</div>
+</div>
+
+<h2>1.9 The ecosystem around a hedge fund</h2>
+<div class="fig">
+<svg viewBox="0 0 1000 470" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:11px;fill:#1F2933}.h{font-size:16px;font-weight:bold;fill:#0B2545}.s{font-size:10.5px;fill:#5B6B7C}.w{fill:#fff;font-size:12.5px;font-weight:bold}.ws{fill:#fff;font-size:10.5px}.k{font-size:11.5px;font-weight:bold;fill:#0B2545}</style>
+<defs><marker id="ae" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#5B6B7C"/></marker></defs>
+<text x="20" y="26" class="h">The ecosystem: who pays whom, and who watches</text>
+<!-- centre -->
+<rect x="380" y="190" width="240" height="90" rx="8" fill="#D97742"/>
+<text x="395" y="215" class="w">THE HEDGE FUND</text>
+<text x="395" y="235" class="ws">Takes capital, borrows, trades,</text><text x="395" y="249" class="ws">pays for services, returns profit</text><text x="395" y="268" class="ws">less fees</text>
+<!-- allocators left -->
+<rect x="20" y="180" width="260" height="110" rx="8" fill="#0B2545"/>
+<text x="30" y="203" class="w">ALLOCATORS (the money)</text>
+<text x="30" y="222" class="ws">Pensions, sovereign funds, endowments,</text><text x="30" y="236" class="ws">family offices, funds of funds, wealth</text><text x="30" y="250" class="ws">platforms. Advised by consultants</text><text x="30" y="264" class="ws">(Meketa, NEPC, Cambridge) [S167a].</text><text x="30" y="282" class="ws">Barclays surveys 340+ of them [S171]</text>
+<line x1="280" y1="222" x2="378" y2="222" stroke="#5B6B7C" stroke-width="2.5" marker-end="url(#ae)"/><text x="292" y="215" class="s">capital in</text>
+<line x1="378" y1="258" x2="282" y2="258" stroke="#1B998B" stroke-width="2.5" marker-end="url(#ae)"/><text x="292" y="275" class="s">net returns out</text>
+<!-- sell side right -->
+<rect x="720" y="180" width="260" height="110" rx="8" fill="#2E6F95"/>
+<text x="730" y="203" class="w">SELL SIDE (the banks)</text>
+<text x="730" y="222" class="ws">Prime brokerage (leverage, custody),</text><text x="730" y="236" class="ws">trading, research, corporate access.</text><text x="730" y="250" class="ws">Goldman serves ~60% of the 150 largest</text><text x="730" y="264" class="ws">funds [S139c]. In stress, banks favour</text><text x="730" y="282" class="ws">"larger and preferred clients" [S154d]</text>
+<line x1="620" y1="222" x2="718" y2="222" stroke="#5B6B7C" stroke-width="2.5" marker-end="url(#ae)"/><text x="632" y="215" class="s">commissions, financing</text>
+<line x1="718" y1="258" x2="622" y2="258" stroke="#1B998B" stroke-width="2.5" marker-end="url(#ae)"/><text x="632" y="275" class="s">balance sheet, access</text>
+<!-- companies top -->
+<rect x="380" y="50" width="240" height="80" rx="8" fill="#5E548E"/>
+<text x="395" y="73" class="w">LISTED COMPANIES</text>
+<text x="395" y="92" class="ws">What most hedge funds trade. Their IR</text><text x="395" y="106" class="ws">teams meet investors. Fewer of them</text><text x="395" y="120" class="ws">in London each year (Part 2.10) [S254]</text>
+<line x1="500" y1="130" x2="500" y2="188" stroke="#5B6B7C" stroke-width="2.5" marker-end="url(#ae)"/><text x="510" y="165" class="s">information, meetings</text>
+<!-- regulators bottom -->
+<rect x="20" y="330" width="960" height="120" rx="8" fill="#F3F6FA" stroke="#B23A48" stroke-width="2"/>
+<text x="35" y="353" class="k" fill="#B23A48">THE WATCHERS</text>
+<text x="35" y="373" class="t"><tspan font-weight="bold">Conduct regulators:</tspan> SEC (US) and FCA (UK) register managers, police insider dealing and market abuse, and set rules on how research and access are paid for [S181].</text>
+<text x="35" y="391" class="t"><tspan font-weight="bold">Stability watchers:</tspan> Bank of England, Federal Reserve, IMF and the Financial Stability Board (FSB) study whether hedge fund borrowing could destabilise markets [S152][S153][S154b].</text>
+<text x="35" y="409" class="t"><tspan font-weight="bold">Data providers and press:</tspan> HFR, With Intelligence, Preqin count the money; Bloomberg, FT, Reuters, Business Insider report returns from "people familiar" because funds are private.</text>
+<text x="35" y="433" class="s">In 2026 the watchers matter more than usual: the Bank of England's July report names hedge fund equity leverage as a risk and is running a second system-wide stress exercise [S240].</text>
+<line x1="500" y1="280" x2="500" y2="328" stroke="#B23A48" stroke-width="2" stroke-dasharray="5,4"/>
+</svg>
+<span class="pm">@@f7@@</span><div class="cap"><b>Figure 7.</b> The ecosystem. Bank penetration from a consultancy citing OFR data <span class="src">[S139c]</span>; the Bank of England stress exercise <span class="src">[S154d][S240]</span>; consultants and allocator surveys <span class="src">[S167a][S171]</span>.</div></div>
+</div>
+
+<!-- ============================ PART 2 ============================ -->
+<div class="section" style="--pc:#B23A48"><span class="pm">@@p2@@</span>
+<div class="section-band"><div class="kicker">Part 2</div><h1>What is happening to hedge funds right now</h1><p class="lede">Nine forces, as of 4 September 2026, drawn from industry reports (HFR, Barclays, BNP Paribas, With Intelligence, Goldman Sachs as reported), regulator publications (Bank of England, Federal Reserve, IMF, FSB) and the trade press. The short answer to "is it fundraising, trust, or war?" is: fundraising is strong but narrow; trust is contested on fees; war and shocks tested the model twice this year and it mostly held.</p></div>
+
+<h2>2.1 The dashboard</h2>
+<div class="fig">
+<svg viewBox="0 0 1000 640" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:11px;fill:#1F2933}.h{font-size:16px;font-weight:bold;fill:#0B2545}.s{font-size:10.5px;fill:#5B6B7C}.w{fill:#fff;font-size:12.5px;font-weight:bold}.ws{fill:#fff;font-size:10.5px}.k{font-size:12px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="26" class="h">Nine forces on hedge funds, September 2026</text>
+<text x="20" y="44" class="s">Colour = the author's read of the direction for the industry as a whole. Green: tailwind. Amber: contested. Red: headwind or risk. Every number is dated and sourced below.</text>
+<g>
+<!-- row 1 -->
+<rect x="20" y="60" width="305" height="170" rx="6" fill="#E3F4F1" stroke="#1B998B" stroke-width="2"/>
+<circle cx="40" cy="80" r="8" fill="#1B998B"/><text x="55" y="85" class="k">1. Money is flowing in</text>
+<text x="30" y="106" class="t">Record $5.6tn of industry capital at June 2026, the</text><text x="30" y="121" class="t">"largest increase in history" in one quarter [S150c].</text>
+<text x="30" y="136" class="t">Every major strategy raised money in the first half of</text><text x="30" y="151" class="t">2026, "a first in five years" [S221]. 64% of allocators</text><text x="30" y="166" class="t">plan to add exposure [S172].</text>
+<text x="30" y="188" class="t" font-weight="bold">But: $39bn of $44.5bn in Q1 went to firms over</text><text x="30" y="203" class="t" font-weight="bold">$5bn [S150b]. The middle gets little.</text>
+<text x="30" y="222" class="s">Fundraising is not the problem. Concentration is.</text>
+
+<rect x="347" y="60" width="305" height="170" rx="6" fill="#FCF5E0" stroke="#E9B949" stroke-width="2"/>
+<circle cx="367" cy="80" r="8" fill="#E9B949"/><text x="382" y="85" class="k">2. Trust: the fee fight</text>
+<text x="357" y="106" class="t">Investors kept roughly 41 to 59 cents of each gross</text><text x="357" y="121" class="t">dollar at multi-strategy funds [S157]. Balyasny 2023:</text><text x="357" y="136" class="t">15.2% gross, 2.8% net [S156]. Citadel's three main</text><text x="357" y="151" class="t">funds charged $12.5bn of pass-through in under three</text><text x="357" y="166" class="t">years [S156].</text>
+<text x="357" y="188" class="t" font-weight="bold">Response: 60+ asset owners demand cash hurdles;</text><text x="357" y="203" class="t" font-weight="bold">~75% of Texas Teachers' managers agreed [S167a][S157]</text>
+<text x="357" y="222" class="s">"All I care about are net returns", one allocator [S160a]</text>
+
+<rect x="674" y="60" width="306" height="170" rx="6" fill="#FCF5E0" stroke="#E9B949" stroke-width="2"/>
+<circle cx="694" cy="80" r="8" fill="#E9B949"/><text x="709" y="85" class="k">3. Talent: the biggest cost</text>
+<text x="684" y="106" class="t">Star PM packages in the "tens of millions", some</text><text x="684" y="121" class="t">"exceeding $100 million" [S234]. Rivals "intercept"</text><text x="684" y="136" class="t">PMs during garden leave; one "never worked a day"</text><text x="684" y="151" class="t">at the firm that hired him [S160a].</text>
+<text x="684" y="173" class="t" font-weight="bold">2026: lawsuits. Schonfeld sues a PM ($11m);</text><text x="684" y="188" class="t" font-weight="bold">Millennium sues another ($2.5m) [S232][S233].</text>
+<text x="684" y="210" class="s">Investors pay for this through pass-through. Firms now</text><text x="684" y="224" class="s">build intern pipelines to grow rather than buy [S168].</text>
+
+<!-- row 2 -->
+<rect x="20" y="250" width="305" height="170" rx="6" fill="#F8E4E7" stroke="#B23A48" stroke-width="2"/>
+<circle cx="40" cy="270" r="8" fill="#B23A48"/><text x="55" y="275" class="k">4. Leverage: regulators circling</text>
+<text x="30" y="296" class="t">Hedge fund exposure to rates and bonds "more than</text><text x="30" y="311" class="t">doubled" to over $18tn; top 10 funds hold over a third</text><text x="30" y="326" class="t">of all gross exposure [S152]. BoE: hedge fund equity</text><text x="30" y="341" class="t">borrowing up ~40% in a year; gilt repo borrowing fell</text><text x="30" y="356" class="t">~40% in five weeks after the Iran strikes [S240][S241].</text>
+<text x="30" y="378" class="t" font-weight="bold">Tools being discussed: minimum repo margins,</text><text x="30" y="393" class="t" font-weight="bold">central clearing, bank balance-sheet limits [S153][S154c]</text>
+<text x="30" y="412" class="s">Not a ban. A squeeze through the banks.</text>
+
+<rect x="347" y="250" width="305" height="170" rx="6" fill="#F8E4E7" stroke="#B23A48" stroke-width="2"/>
+<circle cx="367" cy="270" r="8" fill="#B23A48"/><text x="382" y="275" class="k">5. War and shocks</text>
+<text x="357" y="296" class="t">US and Israeli strikes on Iran from 28 Feb 2026; oil</text><text x="357" y="311" class="t">spiked; S&amp;P 500 fell 4.6% in Q1, worst since 2022</text><text x="357" y="326" class="t">[S225]. Balyasny -4.3% and ExodusPoint -4.5% in</text><text x="357" y="341" class="t">March [S225]. Inflation returned; ECB hiked in June,</text><text x="357" y="356" class="t">BoE and Fed have members voting to hike [S247][S246][S244].</text>
+<text x="357" y="378" class="t" font-weight="bold">July: the AI trade reversed; a $20-45bn fund was</text><text x="357" y="393" class="t" font-weight="bold">forced to sell its whole book [S238].</text>
+<text x="357" y="412" class="s">Two stress tests in one year. Most platforms survived.</text>
+
+<rect x="674" y="250" width="306" height="170" rx="6" fill="#FCF5E0" stroke="#E9B949" stroke-width="2"/>
+<circle cx="694" cy="270" r="8" fill="#E9B949"/><text x="709" y="275" class="k">6. Performance versus the index</text>
+<text x="684" y="296" class="t">2025 was the industry's best year since 2009: +12.5%</text><text x="684" y="311" class="t">average [S150a]. But in 2026 the S&amp;P 500 is up ~19%</text><text x="684" y="326" class="t">[S249] while Millennium is +8.2%, Citadel +12.1%,</text><text x="684" y="341" class="t">Balyasny +0.5% to August [S220].</text>
+<text x="684" y="363" class="t" font-weight="bold">"Most of the funds remain behind the US equity</text><text x="684" y="378" class="t" font-weight="bold">market this year" [S220].</text>
+<text x="684" y="400" class="s">Low volatility working as designed, or fees eating</text><text x="684" y="414" class="s">alpha? Both sides argue this. Part 3.</text>
+
+<!-- row 3 -->
+<rect x="20" y="440" width="305" height="180" rx="6" fill="#FCF5E0" stroke="#E9B949" stroke-width="2"/>
+<circle cx="40" cy="460" r="8" fill="#E9B949"/><text x="55" y="465" class="k">7. The shake-out</text>
+<text x="30" y="486" class="t">Eisler (London, ~$3.5bn) wound down after -14.3%,</text><text x="30" y="501" class="t">losses "stemmed from pass-through expenses" [S161].</text><text x="30" y="516" class="t">Atlantic Wolf, Taproot, Eminence, AB Arya closed in</text><text x="30" y="531" class="t">2026 [S162]. Liquidations rose to 129 in Q1 [S150d].</text>
+<text x="30" y="553" class="t" font-weight="bold">Meanwhile Millennium seeks a record ~$20bn</text><text x="30" y="568" class="t" font-weight="bold">[S221]; Citadel returned $5bn [S165]; Jain Global</text><text x="30" y="583" class="t" font-weight="bold">gave back ~$6bn to become a Millennium pod [S228]</text>
+<text x="30" y="604" class="s">Big get bigger; mid-tier cannot carry platform costs.</text>
+
+<rect x="347" y="440" width="305" height="180" rx="6" fill="#E3F4F1" stroke="#1B998B" stroke-width="2"/>
+<circle cx="367" cy="460" r="8" fill="#1B998B"/><text x="382" y="465" class="k">8. Technology and AI</text>
+<text x="357" y="486" class="t">55% of investors surveyed use AI in the investment</text><text x="357" y="501" class="t">process; quant multi-strategy is the most wanted</text><text x="357" y="516" class="t">strategy [S171][S139b]. Quant funds gained 4% in</text><text x="357" y="531" class="t">March 2025 while stock-pickers lost 2.4% [S163].</text>
+<text x="357" y="553" class="t" font-weight="bold">Millennium: an AI lab (June) and a joint project</text><text x="357" y="568" class="t" font-weight="bold">with Anthropic on a "digital risk analyst" [S99][S117].</text>
+<text x="357" y="590" class="s">Barrier: 69% of large managers say broker data</text><text x="357" y="604" class="s">licensing blocks AI use [S209].</text>
+
+<rect x="674" y="440" width="306" height="180" rx="6" fill="#FCF5E0" stroke="#E9B949" stroke-width="2"/>
+<circle cx="694" cy="460" r="8" fill="#E9B949"/><text x="709" y="465" class="k">9. Geography: London versus the Gulf</text>
+<text x="684" y="486" class="t">London remains Europe's hub and Millennium's largest</text><text x="684" y="501" class="t">non-US office, with senior equities leadership</text><text x="684" y="516" class="t">relocated there [S231]. But zero income tax pulls PMs</text><text x="684" y="531" class="t">to Dubai and Abu Dhabi [S236]; Brevan Howard's Abu</text><text x="684" y="546" class="t">Dhabi office grew from 5 to 150 people [S145m].</text>
+<text x="684" y="568" class="t" font-weight="bold">Firms kept Gulf offices open through the Iran</text><text x="684" y="583" class="t" font-weight="bold">missile attacks in March [S235].</text>
+<text x="684" y="604" class="s">London's listed market keeps shrinking (2.10).</text>
+</g>
+</svg>
+<span class="pm">@@f8@@</span><div class="cap"><b>Figure 8.</b> The 2026 dashboard. Colours are the author's judgement; every figure is sourced as marked and detailed in 2.2 to 2.10. As of 4 September 2026.</div></div>
+
+<h2>2.2 Money: fundraising is strong, and narrow</h2>
+<p>If you only remember one thing: hedge funds are not short of money in 2026. HFR's industry capital series reads $5.15tn at the end of 2025, $5.22tn at the end of March 2026 and a record $5.6tn at the end of June, after a quarterly rise of about $409bn, "the largest increase in history", and "15 consecutive quarters" of growth <span class="src">[S150a][S150b][S150c]</span> <span class="tag c">Confirmed</span>. HFR's president: "The current environment is unequivocally the strongest for hedge fund capital growth since industry inception" <span class="src">[S150c]</span>. Reuters reports that "every major hedge fund strategy brought in fresh capital during the first half, a first in five years" <span class="src">[S221]</span>. Barclays' survey of 340-plus investors found net interest at its highest since 2018, and 43% expecting to be net allocators in the second half <span class="src">[S171][S139b]</span> <span class="tag r">Reported</span>.</p>
+<div class="fig">
+<svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:11px;fill:#1F2933}.h{font-size:15px;font-weight:bold;fill:#0B2545}.s{font-size:10px;fill:#5B6B7C}.ax{font-size:10.5px;fill:#5B6B7C}.v{font-size:12px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">Left: global hedge fund capital (HFR, $tn). Right: where Q1 2026 net inflows went ($bn)</text>
+<!-- left chart -->
+<g>
+<line x1="60" y1="320" x2="480" y2="320" stroke="#5B6B7C"/><line x1="60" y1="60" x2="60" y2="320" stroke="#5B6B7C"/>
+<text x="25" y="324" class="ax">4.5</text><text x="25" y="240" class="ax">5.0</text><text x="25" y="155" class="ax">5.5</text><text x="25" y="70" class="ax">6.0</text>
+<g stroke="#E9EEF5"><line x1="60" y1="235" x2="480" y2="235"/><line x1="60" y1="150" x2="480" y2="150"/><line x1="60" y1="65" x2="480" y2="65"/></g>
+<!-- points: 5.15 end-25, 5.22 Q1 26, 5.6 Q2 26 ; scale: y = 320 - (v-4.5)*170 -->
+<polyline points="160,209.5 300,197.6 440,133" fill="none" stroke="#D97742" stroke-width="4"/>
+<circle cx="160" cy="209.5" r="7" fill="#D97742"/><circle cx="300" cy="197.6" r="7" fill="#D97742"/><circle cx="440" cy="133" r="7" fill="#D97742"/>
+<text x="130" y="195" class="v">$5.15tn</text><text x="270" y="183" class="v">$5.22tn</text><text x="410" y="118" class="v">$5.6tn</text>
+<text x="130" y="340" class="ax">Dec 2025</text><text x="270" y="340" class="ax">Mar 2026</text><text x="410" y="340" class="ax">Jun 2026</text>
+<text x="60" y="365" class="s">HFR press releases 22 Jan, 23 Apr, 23 Jul 2026 [S150a][S150b][S150c]. 2025 net inflows $115.8bn, strongest since 2007.</text>
+</g>
+<!-- right chart -->
+<g>
+<text x="560" y="70" class="t" font-weight="bold">Q1 2026 net inflows: $44.5bn total</text>
+<rect x="560" y="90" width="390" height="34" fill="#0B2545"/><text x="570" y="113" fill="#fff" font-size="12" font-weight="bold">To firms managing over $5bn: $39.0bn (88%)</text>
+<rect x="560" y="134" width="55" height="34" fill="#8A96A3"/><text x="625" y="157" class="t">Everyone else: $5.5bn</text>
+<text x="560" y="200" class="t">In Q2 2026 the $5bn-plus cohort again took the</text><text x="560" y="216" class="t">"overwhelming majority" of new capital [S150c].</text>
+<text x="560" y="245" class="t" font-weight="bold">Read it with the closures in 2.8:</text>
+<text x="560" y="262" class="t">the industry is growing and consolidating at once.</text>
+<text x="560" y="290" class="s">With Intelligence counts inflows differently (about $59bn</text><text x="560" y="304" class="s">over six quarters to mid-2026) [S162]. Different universes;</text><text x="560" y="318" class="s">say "depending on the data provider" if you quote either.</text>
+<text x="560" y="365" class="s">HFR 23 Apr 2026 [S150b].</text>
+</g>
+</svg>
+<span class="pm">@@f9@@</span><div class="cap"><b>Figure 9.</b> Industry capital and where new money goes. HFR <span class="src">[S150a][S150b][S150c]</span>; With Intelligence for the alternative count <span class="src">[S162]</span>.</div></div>
+<p><b>Who is giving.</b> Family offices and private banks are "leading renewed enthusiasm" <span class="src">[S171]</span>; named 2026 allocations include CalSTRS narrowing a $4bn underweight, Virginia's retirement system deploying $1.3bn, and North Carolina putting $500m with Balyasny <span class="src">[S162]</span>. More than one in five allocation intentions in the first half targeted multi-strategy funds <span class="src">[S162]</span>. <b>What they want.</b> Low correlation to equities, net returns above cash, and increasingly separately managed accounts for transparency: about a quarter of investors now use them <span class="src">[S171][S172]</span>.</p>
+<div class="box unc"><div class="lbl">Source uncertain</div><p>Inflow figures vary by an order of magnitude between providers because they count different fund universes. The direction (positive, concentrated in the largest firms) is consistent across HFR, With Intelligence and Barclays. The exact totals are not.</p></div>
+
+<h2>2.3 Trust: the fee fight</h2>
+<p>"Trust" in 2026 is mostly about money, not scandal. The issue is how much of what a fund earns reaches the investor. Multi-manager platforms pass their costs through, and those costs are large: Balyasny's main fund made 15.2% gross in 2023 and 2.8% net, after $768m of pass-through of which 87% was pay; ExodusPoint made 11% gross with 8.4% of pass-through; Citadel's three largest funds charged $12.5bn of pass-through between 2022 and September 2024, $11bn of it compensation <span class="src">[S156]</span> <span class="tag r">Reported (Bloomberg analysis of SEC filings)</span>. BNP Paribas data, as reported, suggests investors kept about 41 cents of each gross dollar at multi-strategy funds in 2023, down from 54 cents in 2021, though a second report quotes the same series differently, so use a range <span class="src">[S157]</span>.</p>
+<div class="fig">
+<svg viewBox="0 0 1000 330" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:11px;fill:#1F2933}.h{font-size:15px;font-weight:bold;fill:#0B2545}.s{font-size:10px;fill:#5B6B7C}.v{font-size:12px;font-weight:bold;fill:#fff}.k{font-size:11.5px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">Of each $1 a multi-strategy fund earned before costs, how much did the investor keep?</text>
+<!-- 2021 bar -->
+<text x="20" y="70" class="k">2021</text>
+<rect x="80" y="52" width="432" height="30" fill="#1B998B"/><text x="90" y="72" class="v">Investor keeps 54c</text>
+<rect x="512" y="52" width="368" height="30" fill="#D97742"/><text x="522" y="72" class="v">Costs and fees 46c</text>
+<!-- 2023 bar -->
+<text x="20" y="120" class="k">2023</text>
+<rect x="80" y="102" width="328" height="30" fill="#1B998B"/><text x="90" y="122" class="v">Investor keeps 41c</text>
+<rect x="408" y="102" width="472" height="30" fill="#D97742"/><text x="418" y="122" class="v">Costs and fees 59c</text>
+<text x="80" y="152" class="s">BNP Paribas data via Hedgeweek, 22 Aug 2025 [S157]. A Feb 2025 report quotes 59c retained in 2023; treat the series as a range of roughly 40 to 60c.</text>
+<!-- Balyasny example -->
+<text x="20" y="195" class="k">One fund, one year (Balyasny Atlas Enhanced, 2023) [S156]</text>
+<rect x="80" y="205" width="608" height="26" fill="#8A96A3"/><text x="90" y="223" class="v">Gross return 15.2%</text>
+<rect x="80" y="237" width="112" height="26" fill="#1B998B"/><text x="90" y="255" class="v">Net 2.8%</text>
+<text x="200" y="255" class="t">$768m of pass-through costs, 87% of it employee pay</text>
+<!-- response -->
+<rect x="20" y="280" width="960" height="40" rx="5" fill="#FCF5E0" stroke="#E9B949"/>
+<text x="30" y="298" class="t"><tspan font-weight="bold">The pushback:</tspan> a coalition of 60-plus asset owners led by Texas Teachers demands performance fees only above a cash hurdle; about three-quarters of its</text>
+<text x="30" y="313" class="t">managers agreed [S167a][S157]. ExodusPoint added a Treasury-linked fee class [S166]. LCH: fees have consumed 48% of the industry's gross gains since inception [S134].</text>
+</svg>
+<span class="pm">@@f10@@</span><div class="cap"><b>Figure 10.</b> What investors keep. BNP Paribas via Hedgeweek <span class="src">[S157]</span>; Bloomberg via Hedgeweek <span class="src">[S156]</span>; Texas Teachers coalition <span class="src">[S167a]</span>; LCH Investments <span class="src">[S134]</span>. All press estimates; no fund publishes these figures.</div></div>
+<p>The defence is simple and, so far, winning: net returns after everything have been good. HFR's average fund made 12.5% in 2025, the best year since 2009 <span class="src">[S150a]</span>; multi-strategy funds run a beta to equities of about 0.24 <span class="src">[S172]</span>; and capacity at the best firms is rationed, so investors queue. Texas Tech's Clinton Huff: "Everyone brings up the fees, but all I care about are net returns" <span class="src">[S160a]</span>. The counter-evidence is the mid-tier: at Eisler, "the bulk of the losses stemmed from pass-through expenses, including staff compensation and operational costs charged directly to investors, rather than trading performance" <span class="src">[S161]</span> <span class="tag r">Reported</span>. Transparency is the other trust lever: about 25% of investors now use separately managed accounts, which let them see positions, and half of funds offer them <span class="src">[S171]</span>.</p>
+<div class="box opinion"><div class="lbl">Your opinion goes here</div><p>Is pass-through fair? One view: fair while net returns beat what the investor could get elsewhere for the same volatility, and only then. The other: investors bear netting risk and fund the talent war, so hurdles are the minimum. Pick one and say what would change your mind.</p></div>
+
+<h2>2.4 Talent: the industry's biggest cost</h2>
+<p>Because platforms pay each team on its own profit and pass the bill to investors, the price of portfolio managers has become the central economic fact of the model. Reported examples: Point72 hired one PM with a package of "tens of millions" over five years after competition from Citadel, Millennium and Balyasny; Millennium hired a PM who had generated $250m in 2024 on a "multimillion-dollar guaranteed deal"; another, hired by Millennium from Citadel, was "intercepted by Balyasny before sit-out period ended" and "Never worked a day at Millennium" <span class="src">[S160a]</span> <span class="tag r">Reported (WSJ via Hedgeweek)</span>. Steve Cohen: "We're seeing a lot of firms competing for great talent, no different than baseball" <span class="src">[S160a]</span>. By 2026 "Top managers are now commanding guaranteed nine-figure payouts and multi-year contracts" <span class="src">[S160b]</span>, and the fights have gone to court: Schonfeld sued a PM who reversed a move for $11m; Millennium is seeking about $2.5m from a Hong Kong PM who abandoned an offer <span class="src">[S232][S233]</span>.</p>
+<p>The response is to grow talent rather than buy it. Citadel's COO: "You can't only hire from the outside. You need to develop even more talent internally now" <span class="src">[S168]</span>. Millennium took 190 interns in 2025 from about 50,000 applications and launched an investing internship for 2027 <span class="src">[S271][S168]</span>. That is why structured internship programmes, including the one you applied to, exist.</p>
+
+<h2>2.5 Leverage: why central banks are watching</h2>
+<div class="fig">
+<svg viewBox="0 0 1000 360" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:11px;fill:#1F2933}.h{font-size:15px;font-weight:bold;fill:#0B2545}.s{font-size:10px;fill:#5B6B7C}.n{font-size:22px;font-weight:bold;fill:#B23A48}.k{font-size:11.5px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">The leverage numbers regulators keep quoting</text>
+<g>
+<rect x="20" y="45" width="230" height="130" rx="6" fill="#F8E4E7" stroke="#B23A48"/>
+<text x="30" y="80" class="n">&gt;$18tn</text><text x="30" y="100" class="t">Hedge funds' gross exposure to</text><text x="30" y="114" class="t">rate derivatives and government</text><text x="30" y="128" class="t">bonds in 2025, from under $9tn</text><text x="30" y="142" class="t">in 2020</text><text x="30" y="165" class="s">IMF GFSR, Apr 2026 [S152]</text>
+<rect x="265" y="45" width="230" height="130" rx="6" fill="#F8E4E7" stroke="#B23A48"/>
+<text x="275" y="80" class="n">&gt;1/3</text><text x="275" y="100" class="t">Share of all hedge fund gross</text><text x="275" y="114" class="t">exposure held by the top 10</text><text x="275" y="128" class="t">funds, up from 20% a decade</text><text x="275" y="142" class="t">ago</text><text x="275" y="165" class="s">IMF GFSR, Apr 2026 [S152]</text>
+<rect x="510" y="45" width="230" height="130" rx="6" fill="#F8E4E7" stroke="#B23A48"/>
+<text x="520" y="80" class="n">$830bn</text><text x="520" y="100" class="t">The US Treasury "basis trade"</text><text x="520" y="114" class="t">(buy the bond, sell the future,</text><text x="520" y="128" class="t">borrow to do it), top 50 funds</text><text x="520" y="142" class="t">hold ~90%</text><text x="520" y="165" class="s">Fed FEDS Note, Jun 2026 [S155a]</text>
+<rect x="755" y="45" width="225" height="130" rx="6" fill="#F8E4E7" stroke="#B23A48"/>
+<text x="765" y="80" class="n">~£100bn</text><text x="765" y="100" class="t">Hedge fund borrowing in the</text><text x="765" y="114" class="t">UK gilt repo market, over 90%</text><text x="765" y="128" class="t">from "a small number" of funds,</text><text x="765" y="142" class="t">often at zero haircut</text><text x="765" y="165" class="s">BoE FSR, Dec 2025 [S154a]</text>
+</g>
+<rect x="20" y="195" width="960" height="150" rx="6" fill="#F3F6FA" stroke="#0B2545"/>
+<text x="30" y="217" class="k">WHAT THEY SAY, AND WHAT THEY MIGHT DO</text>
+<text x="30" y="238" class="t"><tspan font-weight="bold">Bank of England, July 2026:</tspan> "There has been a substantial rise in hedge fund leverage in equity markets, creating risks, including via the prime brokers which</text>
+<text x="30" y="253" class="t">facilitate this activity." Equity prime-brokerage balances up about 40% in a year; hedge fund deleveraging "amplified" gilt moves after the Iran strikes [S240][S241].</text>
+<text x="30" y="273" class="t"><tspan font-weight="bold">Federal Reserve, June 2026:</tspan> "the combination of large scale, high concentration, and elevated leverage creates the potential for systemic stress" [S155a].</text>
+<text x="30" y="293" class="t"><tspan font-weight="bold">FSB, July 2025:</tspan> toolkit of minimum haircuts, central clearing and concentration add-ons, but "Entity-level leverage measures are less common for entities</text>
+<text x="30" y="308" class="t">with multiple, complex strategies, such as hedge funds" [S153]. <tspan font-weight="bold">BoE discussion paper:</tspan> minimum margins on gilt repo [S154c].</text>
+<text x="30" y="333" class="s">Plain-English read: no one is proposing to cap hedge fund leverage directly. The squeeze comes through the banks that lend to them, which favours the biggest, best-connected funds.</text>
+</svg>
+<span class="pm">@@f11@@</span><div class="cap"><b>Figure 11.</b> Leverage numbers. IMF <span class="src">[S152]</span>; Federal Reserve <span class="src">[S155a]</span>; Bank of England <span class="src">[S154a][S154b][S154c][S240][S241]</span>; FSB <span class="src">[S153]</span>. All primary regulator documents.</div></div>
+<div class="box term"><div class="lbl">Key term: repo and haircut</div><p>A <b>repo</b> (repurchase agreement) is selling a bond and agreeing to buy it back later at a slightly higher price: economically a secured loan with the bond as collateral. The <b>haircut</b> is the safety cushion the lender demands. The BoE and FSB both note hedge fund repo is often done at "zero or near-zero" haircuts <span class="src">[S153][S154a]</span>, which is why a proposal for minimum haircuts is a real constraint.</p></div>
+
+<h2>2.6 War and shocks: the two stress tests of 2026</h2>
+<div class="fig">
+<svg viewBox="0 0 1000 420" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:10.8px;fill:#1F2933}.h{font-size:15px;font-weight:bold;fill:#0B2545}.s{font-size:10px;fill:#5B6B7C}.w{fill:#fff;font-size:11.5px;font-weight:bold}.ws{fill:#fff;font-size:10.3px}.k{font-size:11.5px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">2026 so far: what hit the industry and when</text>
+<line x1="40" y1="200" x2="980" y2="200" stroke="#0B2545" stroke-width="4"/>
+<g>
+<circle cx="90" cy="200" r="8" fill="#B23A48"/><text x="55" y="225" class="k">28 Feb</text>
+<rect x="30" y="50" width="170" height="120" rx="5" fill="#B23A48"/><text x="38" y="70" class="w">Iran strikes</text><text x="38" y="88" class="ws">US and Israeli strikes; Hormuz</text><text x="38" y="102" class="ws">disrupted; oil up sharply.</text><text x="38" y="116" class="ws">Rates and macro books hit.</text><text x="38" y="130" class="ws">S&amp;P 500 -4.6% in Q1, worst</text><text x="38" y="144" class="ws">since 2022 [S225][S240]</text>
+<line x1="90" y1="170" x2="90" y2="192" stroke="#B23A48" stroke-width="2"/>
+
+<circle cx="280" cy="200" r="8" fill="#B23A48"/><text x="250" y="225" class="k">March</text>
+<rect x="215" y="235" width="170" height="130" rx="5" fill="#F8E4E7" stroke="#B23A48"/><text x="223" y="255" class="k">De-grossing</text><text x="223" y="273" class="t">Balyasny -4.3%, ExodusPoint</text><text x="223" y="287" class="t">-4.5%, Dymon -4.3% in March</text><text x="223" y="301" class="t">[S225]. Hedge funds cut gilt</text><text x="223" y="315" class="t">repo borrowing ~40% in five</text><text x="223" y="329" class="t">weeks, amplifying yield moves</text><text x="223" y="343" class="t">[S241]. Firms kept Dubai open</text><text x="223" y="357" class="t">through missile attacks [S235].</text>
+<line x1="280" y1="208" x2="280" y2="233" stroke="#B23A48" stroke-width="2"/>
+
+<circle cx="470" cy="200" r="8" fill="#E9B949"/><text x="445" y="225" class="k">June</text>
+<rect x="385" y="50" width="170" height="120" rx="5" fill="#E9B949"/><text x="393" y="70" class="w" fill="#1F2933">Inflation returns</text><text x="393" y="88" class="ws" fill="#1F2933">ECB hikes to 2.25%: "The war in</text><text x="393" y="102" class="ws" fill="#1F2933">the Middle East is generating</text><text x="393" y="116" class="ws" fill="#1F2933">inflation pressures" [S247]. A</text><text x="393" y="130" class="ws" fill="#1F2933">US-Iran memorandum brings oil</text><text x="393" y="144" class="ws" fill="#1F2933">back near pre-war levels [S240].</text><text x="393" y="158" class="ws" fill="#1F2933">Markets rally hard in Q2 [S222].</text>
+<line x1="470" y1="170" x2="470" y2="192" stroke="#E9B949" stroke-width="2"/>
+
+<circle cx="660" cy="200" r="8" fill="#B23A48"/><text x="640" y="225" class="k">July</text>
+<rect x="580" y="235" width="180" height="130" rx="5" fill="#F8E4E7" stroke="#B23A48"/><text x="588" y="255" class="k">The AI reversal</text><text x="588" y="273" class="t">AI and semiconductor stocks fall.</text><text x="588" y="287" class="t">Situational Awareness, a two-</text><text x="588" y="301" class="t">year-old fund of $20-45bn at ~4x</text><text x="588" y="315" class="t">leverage, hits margin calls and</text><text x="588" y="329" class="t">sells its whole public book to</text><text x="588" y="343" class="t">Citadel on 30 July [S238].</text><text x="588" y="357" class="t">Millennium -2.1% in July [S223].</text>
+<line x1="660" y1="208" x2="660" y2="233" stroke="#B23A48" stroke-width="2"/>
+
+<circle cx="850" cy="200" r="8" fill="#1B998B"/><text x="815" y="225" class="k">Aug to Sep</text>
+<rect x="765" y="50" width="215" height="120" rx="5" fill="#1B998B"/><text x="773" y="70" class="w">Calm, and central-bank week</text><text x="773" y="88" class="ws">VIX at a 2026 low of about 14; S&amp;P</text><text x="773" y="102" class="ws">500 up ~19% year to date [S250][S249].</text><text x="773" y="116" class="ws">BoE at 3.75% with three votes to hike,</text><text x="773" y="130" class="ws">decision 17 Sep; Fed 3.50-3.75%, three</text><text x="773" y="144" class="ws">dissents, meets 15-16 Sep [S246][S244].</text><text x="773" y="158" class="ws">Multi-strats flat in August [S220].</text>
+<line x1="850" y1="170" x2="850" y2="192" stroke="#1B998B" stroke-width="2"/>
+</g>
+<rect x="30" y="380" width="950" height="32" rx="5" fill="#F3F6FA" stroke="#0B2545"/>
+<text x="40" y="400" class="t" font-size="10.3"><tspan font-weight="bold">The lesson of both shocks:</tspan> the danger is not being wrong about a company; it is many funds in the same trade with borrowed money, all cutting at once. "It died of leverage" [S238].</text>
+</svg>
+<span class="pm">@@f12@@</span><div class="cap"><b>Figure 12.</b> 2026 shock timeline. Sources as marked: Hedgeweek round-ups <span class="src">[S225][S223][S220]</span>, Bank of England <span class="src">[S240][S241]</span>, ECB <span class="src">[S247]</span>, Fed and BoE decisions <span class="src">[S244][S246]</span>, FinanceFeeds compilation <span class="src">[S238]</span>, data vendors <span class="src">[S249][S250]</span>. The Situational Awareness figures are a secondary compilation with wide ranges.</div></div>
+<div class="box term"><div class="lbl">Key term: crowding</div><p>Many funds holding the same positions. Harmless until a shock, when everyone tries to sell the same thing to the same buyers at once. The IMF says financial stress "has become more correlated with hedge fund losses since 2020" <span class="src">[S152]</span>. Crowding is why platforms value information their rivals do not have, which is one reason in-house corporate access desks exist.</p></div>
+
+<h2>2.7 Performance: who won and who lost</h2>
+<div class="fig">
+<svg viewBox="0 0 1000 430" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:11px;fill:#1F2933}.h{font-size:15px;font-weight:bold;fill:#0B2545}.s{font-size:10px;fill:#5B6B7C}.ax{font-size:10.5px;fill:#5B6B7C}.lb{font-size:10.5px;fill:#1F2933}.v{font-size:10.5px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">Reported returns: 2025 full year (left) and 2026 to end-August or end-June (right)</text>
+<text x="20" y="42" class="s">All figures are press estimates from unnamed sources; firms declined comment. Bars in orange are multi-manager platforms; grey are other types; navy is the S&amp;P 500.</text>
+<!-- left panel: 2025 -->
+<g>
+<text x="20" y="70" class="v">2025 [S127][S145l]</text>
+<line x1="150" y1="80" x2="150" y2="380" stroke="#D5DCE5"/>
+<!-- scale: 10px per % ; x0=150 -->
+<text x="20" y="100" class="lb">Bridgewater Pure Alpha II</text><rect x="150" y="90" width="340" height="14" fill="#8A96A3"/><text x="495" y="101" class="v">+34%</text>
+<text x="20" y="122" class="lb">ExodusPoint</text><rect x="150" y="112" width="180" height="14" fill="#D97742"/><text x="335" y="123" class="v">+18.0%</text>
+<text x="20" y="144" class="lb">Point72</text><rect x="150" y="134" width="175" height="14" fill="#D97742"/><text x="330" y="145" class="v">+17.5%</text>
+<text x="20" y="166" class="lb">Balyasny</text><rect x="150" y="156" width="167" height="14" fill="#D97742"/><text x="322" y="167" class="v">+16.7%</text>
+<text x="20" y="188" class="lb">S&amp;P 500</text><rect x="150" y="178" width="165" height="14" fill="#0B2545"/><text x="320" y="189" class="v">+16.5%</text>
+<text x="20" y="210" class="lb">Schonfeld (SP)</text><rect x="150" y="200" width="125" height="14" fill="#D97742"/><text x="280" y="211" class="v">+12.5%</text>
+<text x="20" y="232" class="lb">Marshall Wace</text><rect x="150" y="222" width="116" height="14" fill="#8A96A3"/><text x="271" y="233" class="v">+11.6%</text>
+<text x="20" y="254" class="lb">Millennium</text><rect x="150" y="244" width="105" height="14" fill="#D97742"/><text x="260" y="255" class="v">+10.5%</text>
+<text x="20" y="276" class="lb">Citadel Wellington</text><rect x="150" y="266" width="102" height="14" fill="#D97742"/><text x="257" y="277" class="v">+10.2%</text>
+<text x="20" y="298" class="lb">Verition</text><rect x="150" y="288" width="75" height="14" fill="#D97742"/><text x="230" y="299" class="v">+7.5%</text>
+<text x="20" y="320" class="lb">Jain Global</text><rect x="150" y="310" width="37" height="14" fill="#D97742"/><text x="192" y="321" class="v">+3.7%</text>
+<text x="20" y="342" class="lb">Brevan Howard Master</text><rect x="150" y="332" width="8" height="14" fill="#8A96A3"/><text x="163" y="343" class="v">+0.8%</text>
+<text x="20" y="364" class="lb">Eisler (closed)</text><rect x="7" y="354" width="143" height="14" fill="#B23A48"/><text x="20" y="365" fill="#fff" font-size="10.5" font-weight="bold">-14.3%</text>
+</g>
+<!-- right panel: 2026 YTD -->
+<g>
+<text x="540" y="70" class="v">2026 year to date [S220][S222]</text>
+<line x1="670" y1="80" x2="670" y2="380" stroke="#D5DCE5"/>
+<text x="540" y="100" class="lb">S&amp;P 500 (4 Sep)</text><rect x="670" y="90" width="192" height="14" fill="#0B2545"/><text x="867" y="101" class="v">+19.2%</text>
+<text x="540" y="122" class="lb">Point72 (to Jun)</text><rect x="670" y="112" width="145" height="14" fill="#D97742"/><text x="820" y="123" class="v">+14.5%</text>
+<text x="540" y="144" class="lb">Citadel (to Aug)</text><rect x="670" y="134" width="121" height="14" fill="#D97742"/><text x="796" y="145" class="v">+12.1%</text>
+<text x="540" y="166" class="lb">Schonfeld (to Jun)</text><rect x="670" y="156" width="84" height="14" fill="#D97742"/><text x="759" y="167" class="v">+8.4%</text>
+<text x="540" y="188" class="lb">Millennium (to Aug)</text><rect x="670" y="178" width="82" height="14" fill="#D97742"/><text x="757" y="189" class="v">+8.2%</text>
+<text x="540" y="210" class="lb">Man 1783 (to Jun)</text><rect x="670" y="200" width="79" height="14" fill="#8A96A3"/><text x="754" y="211" class="v">+7.9%</text>
+<text x="540" y="232" class="lb">Verition (to Jun)</text><rect x="670" y="222" width="56" height="14" fill="#D97742"/><text x="731" y="233" class="v">+5.6%</text>
+<text x="540" y="254" class="lb">ExodusPoint (to Aug)</text><rect x="670" y="244" width="49" height="14" fill="#D97742"/><text x="724" y="255" class="v">+4.9%</text>
+<text x="540" y="276" class="lb">Jain Global (to Jun)</text><rect x="670" y="266" width="39" height="14" fill="#D97742"/><text x="714" y="277" class="v">+3.9%</text>
+<text x="540" y="298" class="lb">Balyasny (to Aug)</text><rect x="670" y="288" width="5" height="14" fill="#D97742"/><text x="680" y="299" class="v">+0.5%</text>
+<text x="540" y="320" class="lb">Walleye (to Jun)</text><rect x="670" y="310" width="4" height="14" fill="#D97742"/><text x="679" y="321" class="v">+0.4%</text>
+<text x="540" y="360" class="s">Dates differ: use the label. Millennium was +10.5% at</text><text x="540" y="374" class="s">end-June, -2.1% in July, flat in August [S222][S223][S220].</text>
+</g>
+<text x="20" y="410" class="s">Sources: Bloomberg via Fortune, 2 Jan 2026 [S127]; Hedgeweek on Brevan Howard [S145l] and Eisler [S161]; Business Insider via Yahoo, 1 Jul 2026 [S222]; Hedgeweek 4 Sep 2026 [S220]; Trading Economics [S249].</text>
+</svg>
+<span class="pm">@@f13@@</span><div class="cap"><b>Figure 13.</b> Who won and lost. Every bar is a press estimate; dates as labelled. Sources <span class="src">[S127][S145l][S161][S222][S220][S249]</span>.</div></div>
+<p>Three readings of this chart, all defensible. First: 2025 was excellent for almost everyone and the industry's best year since 2009 <span class="src">[S150a]</span>. Second: in 2026 the big platforms are doing what they promise, positive returns with a fraction of the market's swings, in a year when the market itself is the winner; "Most of the funds remain behind the US equity market this year" <span class="src">[S220]</span>. Third: dispersion is enormous. Point72 at +14.5% and Balyasny at +0.5% are the same business model. Which teams you have, and how much crowded AI exposure they carried into July, decided the year.</p>
+
+<h2>2.8 The shake-out: the middle disappears</h2>
+<p>The model is not dying; the number of firms that can afford it is shrinking. Multi-manager AUM hit a record $428bn across 57 platforms, up 16% in 2025 after a pause in 2023 and 2024 <span class="src">[S158]</span> <span class="tag r">Reported (Goldman Sachs data via secondary sources)</span>. At the same time Eisler wound down after -14.3% <span class="src">[S161]</span>; Atlantic Wolf ($3bn), Taproot, Eminence ($8bn) and AB Arya closed in 2026 <span class="src">[S162]</span>; liquidations jumped to 129 in the first quarter <span class="src">[S150d]</span>. Even a record launch struggled: Jain Global raised $5.3bn in 2024, made about $1.8bn of gross trading profit but only 3.7% net in 2025, and in April 2026 agreed to return about $6bn of outside money and run Millennium's capital alone <span class="src">[S143][S229]</span> <span class="tag r">Reported</span>. The top two took opposite paths to the same capacity problem: Citadel returned about $5bn of 2025 profits and shrank to about $67bn <span class="src">[S165]</span>; Millennium is raising a record ~$20bn while already at about $92bn <span class="src">[S221]</span>. LCH Investments' Rick Sopher on the top firms: they "have periodically either closed to new subscriptions or returned capital, recognising that carefully controlling asset growth is a good basis for generating significant gains" <span class="src">[S134]</span>.</p>
+
+<h2>2.9 Technology and AI</h2>
+<p>Barclays finds 55% of investors have put AI into their investment process and 75% into non-investment workflows; discretionary managers are "embedding quantitative tools to expand coverage capacity without proportional headcount" <span class="src">[S171]</span>. Quant multi-strategy is the most wanted strategy among allocators <span class="src">[S139b]</span>. Systematic funds have handled shocks better: up 4% in March 2025 while stock-pickers lost 2.4% <span class="src">[S163]</span>; trend-followers "outpaced discretionary global macro" in 2026 for the first time since 2022 <span class="src">[S162]</span>. Millennium announced an AI lab in June and an Anthropic co-development of a "digital risk analyst" in August, with its CIO stressing "keeping human judgment at the center" <span class="src">[S99][S117]</span>. The friction: 69% of large managers say broker data licensing blocks AI use <span class="src">[S209]</span>.</p>
+
+<h2>2.10 Geography: London and the Gulf</h2>
+<p>London is Europe's hedge fund capital and Millennium's largest office outside the US, with a co-head of global equities relocated there and a senior equities recruiter hired from Schonfeld in May 2026 <span class="src">[S231]</span>. Two pressures work against it. First, tax: "a $20m buyout is tax-free in Dubai" against roughly $9m of UK tax, per an eFinancialCareers analysis, and one manager says "This is why the UK government is talking about imposing an exit tax" <span class="src">[S236]</span> <span class="tag r">Reported, anonymous</span>. Brevan Howard's Abu Dhabi office grew from 5 people in 2023 to 150 by late 2025 <span class="src">[S145m]</span>; funds kept Gulf offices open through March's missile attacks <span class="src">[S235]</span>. Second, the shrinking listed market: 23 London IPOs in 2025 and 7 in the first half of 2026, recovering from a near-dead 2024 but small, while CRH, Smurfit Westrock and Flutter all moved to New York-only listings in 2026 <span class="src">[S254][S255]</span>. Fewer listed companies means fewer things for equity hedge funds to trade in London and scarcer meetings with their management.</p>
+</div>
+
+<!-- ============================ PART 3 ============================ -->
+<div class="section" style="--pc:#1B998B"><span class="pm">@@p3@@</span>
+<div class="section-band"><div class="kicker">Part 3</div><h1>How to talk about it</h1><p class="lede">Three lengths of explanation, ten lines you can use, five traps, and the opinions worth forming.</p></div>
+<div class="fig">
+<svg viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:11.3px;fill:#1F2933}.h{font-size:15px;font-weight:bold;fill:#0B2545}.w{fill:#fff;font-size:12.5px;font-weight:bold}.k{font-size:11.5px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">Three ways to explain a hedge fund, by how long you have</text>
+<rect x="20" y="40" width="960" height="30" rx="5" fill="#1B998B"/><text x="30" y="60" class="w">30 SECONDS (a friend at dinner)</text>
+<rect x="20" y="70" width="960" height="70" rx="0" fill="#E3F4F1"/>
+<text x="30" y="92" class="t">"A hedge fund is an investment fund for big institutions, like pension funds, that tries to make money whether markets go up or down. It can bet</text>
+<text x="30" y="108" class="t">against companies as well as for them, and it borrows to make its bets bigger. The manager keeps a share of the profits. Millennium is one of the</text>
+<text x="30" y="124" class="t">largest: about $92bn, run through hundreds of small independent trading teams."</text>
+
+<rect x="20" y="155" width="960" height="30" rx="5" fill="#0B2545"/><text x="30" y="175" class="w">60 SECONDS (a recruiter)</text>
+<rect x="20" y="185" width="960" height="120" fill="#F3F6FA"/>
+<text x="30" y="207" class="t">"The difference from an ordinary fund is the goal. An asset manager tries to beat an index and falls when the market falls. A hedge fund targets</text>
+<text x="30" y="223" class="t">an absolute return: it hedges out the market by owning some things and shorting others, then adds leverage to make the remaining edge worth</text>
+<text x="30" y="239" class="t">having. Investors are institutions who accept less liquidity and higher fees for returns that don't move with equities. The industry is a record</text>
+<text x="30" y="255" class="t">$5.6tn and the money is concentrating in a handful of multi-manager platforms, Millennium, Citadel, Point72, that run hundreds of teams under</text>
+<text x="30" y="271" class="t">strict loss limits. The live debates are fees, because platforms pass their costs to investors, and leverage, because central banks are watching</text>
+<text x="30" y="287" class="t">how much these funds borrow."</text>
+
+<rect x="20" y="320" width="960" height="30" rx="5" fill="#D97742"/><text x="30" y="340" class="w">3 MINUTES (an interviewer): add these four layers</text>
+<rect x="20" y="350" width="960" height="160" fill="#FBEEE6"/>
+<text x="30" y="372" class="k">1. Structure.</text><text x="120" y="372" class="t">LPs, GP, prime broker, administrator. Single-manager versus multi-manager. Pass-through fees and netting risk.</text>
+<text x="30" y="396" class="k">2. Numbers.</text><text x="120" y="396" class="t">$5.6tn industry; $428bn across 57 platforms; 2025 the best year since 2009 at +12.5%; investors keep 40 to 60c per gross dollar at platforms.</text>
+<text x="30" y="420" class="k">3. This year.</text><text x="120" y="420" class="t">Iran shock and March de-grossing; July AI reversal and a $20bn+ fund forced to sell; platforms up 0.5 to 14.5% against an S&amp;P 500 up ~19%;</text>
+<text x="120" y="436" class="t">record fundraising for the biggest, closures for the middle; BoE and Fed naming leverage as a risk.</text>
+<text x="30" y="460" class="k">4. A view.</text><text x="120" y="460" class="t">"The model has not peaked, but the number of firms that can afford it has. The constraint on the winners will come through prime-broker</text>
+<text x="120" y="476" class="t">balance sheets and repo haircuts rather than a leverage cap, and through allocators demanding cash hurdles. Both favour the largest platforms."</text>
+<text x="30" y="500" class="t" font-style="italic">Then name the thing that would change your mind: a year in which the top platforms return less than cash after fees.</text>
+</svg>
+<span class="pm">@@f14@@</span><div class="cap"><b>Figure 14.</b> Three lengths of explanation. Figures as sourced in Parts 1 and 2 <span class="src">[S150a][S150c][S158][S157][S220][S225][S238][S240]</span>.</div></div>
+
+<h2>3.1 Ten lines you can use</h2>
+<ol>
+<li>"The classic hedge fund takes less market risk than an index fund. Its risks are leverage and crowding, not the market."</li>
+<li>"Absolute return versus relative return is the real difference. Everything else follows from it."</li>
+<li>"Hedge funds are lightly regulated on what they may buy and heavily regulated on conduct, because their investors are professionals."</li>
+<li>"The industry is at a record $5.6tn, and almost all the new money is going to firms over $5bn."</li>
+<li>"Multi-manager platforms are about 8% of hedge fund assets but a far bigger share of market activity, because they run four to six times leverage."</li>
+<li>"Pass-through means investors pay the fund's actual costs. That is fine while net returns are good, which is why the fee fight is really an argument about performance."</li>
+<li>"2026 had two stress tests: the Iran shock in March and the AI reversal in July. Both were leverage-and-crowding events, and the big platforms mostly absorbed them."</li>
+<li>"Citadel gave money back and Millennium is raising a record amount. Two answers to the same capacity problem."</li>
+<li>"Regulators are not proposing to cap hedge fund leverage. They are squeezing it through the banks that lend to hedge funds, which favours the biggest funds."</li>
+<li>"Eisler is the cautionary tale: a $3 to 4bn platform whose losses came from costs, not trades."</li>
+</ol>
+
+<h2>3.2 Five traps</h2>
+<ul>
+<li><b>Quoting a private firm's numbers as fact.</b> Say "press estimates" or "its own website says". Millennium's AUM moved from about $70bn to $92bn in under two years across different sources.</li>
+<li><b>"Hedge funds beat the market."</b> They do not aim to. In 2026 almost none did. Explain what they do aim for.</li>
+<li><b>"MiFID II banned bundled research."</b> It required separate payment; the UK and EU have since partly reversed that. If you raise regulation, get the dates right (Part 5 of the main guide).</li>
+<li><b>Treating all hedge funds as one thing.</b> Bridgewater (+34% in 2025) and Brevan Howard (+0.8%) are both macro funds. Name the type.</li>
+<li><b>Using "edge" carelessly.</b> Near a listed company, "edge" sounds like inside information. Say "differentiated view" or "better analysis".</li>
+</ul>
+
+<h2>3.3 Opinions worth forming</h2>
+<div class="box opinion"><div class="lbl">Your opinion goes here</div><p><b>Has the multi-manager model peaked?</b> For: outflows in 2024, investors keeping 41c, closures. Against: record AUM, +16% growth, top firms oversubscribed. A defensible middle: "peaked for the mid-tier, not the top." <b>Is the industry good for markets?</b> For: liquidity, price discovery, absorbing Treasury issuance (Cayman funds bought 37% of net issuance since 2022 <span class="src">[S155b]</span>). Against: crowded, leveraged unwinds amplify shocks, as the BoE found <span class="src">[S154b]</span>. <b>Should London worry?</b> For: tax, listings, Gulf competition. Against: Millennium and others are building out London equities now. Pick sides, and say what evidence would move you.</p></div>
+</div>
+
+<!-- ============================ PART 4 ============================ -->
+<div class="section" style="--pc:#0B2545"><span class="pm">@@p4@@</span>
+<div class="section-band"><div class="kicker">Part 4</div><h1>Glossary</h1><p class="lede">Every term used above, in plain English.</p></div>
+<div class="two">
+<div><dl class="gloss">
+<dt>Absolute return</dt><dd>Aiming for a positive return regardless of what markets do. The hedge fund goal.</dd>
+<dt>Accredited investor</dt><dd>Someone with enough income or assets to be allowed into a hedge fund. The law assumes they can bear losses.</dd>
+<dt>Activist</dt><dd>A fund that buys a stake then pushes the company to change.</dd>
+<dt>Allocator</dt><dd>An institution deciding where to invest large pools: pension fund, endowment, sovereign fund. Hedge funds' customers.</dd>
+<dt>Alpha</dt><dd>Return from skill, above what the market gave you.</dd>
+<dt>AUM</dt><dd>Assets under management. The investor money a firm runs.</dd>
+<dt>Basis trade</dt><dd>Buying a government bond and selling its future, with borrowed money, to capture a tiny price gap. Huge in size, watched by the Fed.</dd>
+<dt>Beta</dt><dd>Return from simply being exposed to the market.</dd>
+<dt>Buy side</dt><dd>Firms that invest money. Sell side: firms that sell them services.</dd>
+<dt>Cash hurdle</dt><dd>Performance fees charged only on returns above what cash pays.</dd>
+<dt>CTA / trend follower</dt><dd>A computer-driven fund that follows price trends in futures.</dd>
+<dt>Crowding</dt><dd>Many funds in the same trade. Dangerous in a shock.</dd>
+<dt>De-grossing</dt><dd>Cutting longs and shorts together to reduce risk, usually under pressure.</dd>
+<dt>Drawdown</dt><dd>The fall from a peak to a trough in value.</dd>
+<dt>Event-driven</dt><dd>Betting on corporate events: mergers, bankruptcies, spin-offs.</dd>
+<dt>Feeder and master fund</dt><dd>Investors put money into a feeder (often in the Cayman Islands), which invests in a master fund that holds the positions.</dd>
+<dt>FSB</dt><dd>Financial Stability Board, the international body coordinating regulators on systemic risk.</dd>
+<dt>Gate</dt><dd>A cap on how much money can leave a fund per period.</dd>
+<dt>GP / LP</dt><dd>General partner (the manager) and limited partners (the investors).</dd>
+<dt>Gross exposure</dt><dd>Longs plus shorts. How much money is at work. A measure of leverage.</dd>
+<dt>Haircut</dt><dd>The safety cushion a lender demands against collateral in a repo.</dd>
+<dt>Hedge</dt><dd>A position taken to offset a risk. Short B to hedge long A.</dd>
+<dt>High-water mark</dt><dd>Performance fees only on gains above the previous peak.</dd>
+</dl></div>
+<div><dl class="gloss">
+<dt>Leverage</dt><dd>Borrowing, or derivatives, to hold more than your capital. Amplifies gains and losses.</dd>
+<dt>Lock-up</dt><dd>A period during which investors cannot withdraw.</dd>
+<dt>Long / short</dt><dd>Own it and profit if it rises / borrow and sell it and profit if it falls.</dd>
+<dt>Long-only</dt><dd>A manager that only buys. Most traditional asset managers.</dd>
+<dt>Macro</dt><dd>Betting on countries: rates, currencies, bonds, commodities.</dd>
+<dt>Market neutral</dt><dd>Net exposure near zero, so the market's moves roughly cancel out.</dd>
+<dt>Multi-manager / multi-strategy / pod shop / platform</dt><dd>One firm running many independent teams under central risk limits.</dd>
+<dt>Net exposure</dt><dd>Longs minus shorts. How much you move with the market.</dd>
+<dt>Netting risk</dt><dd>Investors pay winning teams even when losing teams drag the total down.</dd>
+<dt>Pass-through</dt><dd>Investors pay the fund's actual operating costs plus a performance fee, instead of a fixed management fee.</dd>
+<dt>Performance fee / carry</dt><dd>The manager's share of profits, often 20%.</dd>
+<dt>PM</dt><dd>Portfolio manager. Runs a book, paid on its profit.</dd>
+<dt>Pod</dt><dd>A PM plus analysts, running an independent book inside a platform.</dd>
+<dt>Prime broker</dt><dd>A bank that lends a fund cash and securities, holds its assets and clears its trades. The source of leverage.</dd>
+<dt>Quant / systematic</dt><dd>Trading decided by models and data rather than human judgement.</dd>
+<dt>Relative return</dt><dd>Aiming to beat an index. The asset-manager goal.</dd>
+<dt>Relative value / arbitrage</dt><dd>Exploiting small price gaps between related instruments, usually with leverage.</dd>
+<dt>Repo</dt><dd>Selling a bond and agreeing to buy it back: a secured loan.</dd>
+<dt>Sharpe ratio</dt><dd>Return above cash per unit of volatility. Return per unit of risk.</dd>
+<dt>SMA</dt><dd>Separately managed account: an investor's own account run by the manager, giving full sight of positions.</dd>
+<dt>2 and 20</dt><dd>2% of assets plus 20% of profits. The classic fee; averages are now lower.</dd>
+<dt>Volatility</dt><dd>How much returns swing. Lower is calmer.</dd>
+</dl></div>
+</div>
+</div>
+<div class="section" style="--pc:#0B2545"><span class="pm">@@p5@@</span>
+<div class="section-band"><div class="kicker">Part 5</div><h1>Sources</h1><p class="lede">Every [Sxx] marker above resolves here. IDs are shared with the main interview guide. All sources accessed 4 September 2026. "Fetched" means the full text was read; "Snippet" means only a search excerpt was seen; "Paywalled" means the headline was recorded and nothing was inferred from unread text.</p></div>
+<table class="src-table"><tr><th style="width:5%">ID</th><th style="width:13%">Outlet</th><th style="width:26%">Title</th><th style="width:8%">Date</th><th style="width:30%">URL</th><th style="width:8%">Status</th><th style="width:10%">Confidence</th></tr>
+<tr><td class="src">[S12]</td><td>ICR</td><td>Evolving Strategies for Corporate Access: Your 2025 Playbook (Christopher Melito)</td><td>2024-12-18</td><td><a href="https://icrinc.com/news-resources/strategies-for-corporate-access-2025/">https://icrinc.com/news-resources/strategies-for-corporate-access-2025/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S70]</td><td>SEC / IAPD</td><td>Form ADV, Millennium Management LLC, CRD 158117, Other-Than-Annual Amendment</td><td>filed 25 Aug 2026</td><td><a href="https://adviserinfo.sec.gov/firm/summary/158117">https://adviserinfo.sec.gov/firm/summary/158117</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S99]</td><td>Hedgeweek</td><td>Millennium builds AI lab as hedge fund steps up technology drive; Millennium gets its AI Mann</td><td>29 Jun 2026; 11 Oct 2023</td><td><a href="https://www.hedgeweek.com/millennium-builds-ai-lab-as-hedge-fund-steps-up-technology-drive/">https://www.hedgeweek.com/millennium-builds-ai-lab-as-hedge-fund-steps-up-technology-drive...</a><br><a href="https://www.hedgeweek.com/millennium-gets-its-ai-mann/">https://www.hedgeweek.com/millennium-gets-its-ai-mann/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S104]</td><td>Net Interest (Marc Rubinstein)</td><td>Peak Pod</td><td>15 Sep 2023</td><td><a href="https://www.netinterest.co/p/peak-pod">https://www.netinterest.co/p/peak-pod</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S111]</td><td>Wall Street Journal (Juliet Chung), PDF copy hosted by Duke University</td><td>Stalwart Hedge Funds to Test Clients With New Terms</td><td>31 Oct 2018</td><td><a href="https://public.econ.duke.edu/~boller/Econ.471-571.F18/Hedge_Fund_Terms_WSJ_103118.pdf">https://public.econ.duke.edu/~boller/Econ.471-571.F18/Hedge_Fund_Terms_WSJ_103118.pdf</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S113]</td><td>Business Insider via AOL</td><td>The strategy a $69 billion hedge fund uses to make sure it never loses money in the stock market</td><td>2 Oct 2024</td><td><a href="https://www.aol.com/strategy-69-billion-hedge-fund-193733084.html">https://www.aol.com/strategy-69-billion-hedge-fund-193733084.html</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S114]</td><td>abcquant.com (third-party fund database)</td><td>Millennium International, Ltd. performance and drawdown report (monthly data 2017–Feb 2024)</td><td>undated (data to Feb 202</td><td><a href="https://www.abcquant.com/reports/Millennium_hedge_fund.pdf">https://www.abcquant.com/reports/Millennium_hedge_fund.pdf</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S117]</td><td>Millennium (mlp.com) press release</td><td>Millennium and Anthropic to Co-Develop AI-Powered Digital Risk Analyst</td><td>Aug 2026</td><td><a href="https://www.mlp.com/millennium-and-anthropic-to-co-develop-ai-powered-digital-risk-analyst/">https://www.mlp.com/millennium-and-anthropic-to-co-develop-ai-powered-digital-risk-analyst...</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S127]</td><td>Bloomberg via Fortune</td><td>Bridgewater, D.E. Shaw among top hedge fund gainers of 2025 (full table)</td><td>2 Jan 2026</td><td><a href="https://fortune.com/2026/01/02/top-hedge-fund-performers-2025-bridgewater-de-shaw-citadel-millennium/">https://fortune.com/2026/01/02/top-hedge-fund-performers-2025-bridgewater-de-shaw-citadel-...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S134]</td><td>Hedge Fund Alpha</td><td>Top 20 Hedge Funds Earn Close To $100 Billion In Profits In 2024 (LCH Investments)</td><td>19 Jan 2025</td><td><a href="https://hedgefundalpha.com/news/great-money-managers-of-2024-lch-investments/">https://hedgefundalpha.com/news/great-money-managers-of-2024-lch-investments/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S135]</td><td>Hedge Fund Alpha</td><td>Top 20 Hedge Funds Earn $115B In 2025; TCI Is Leader With $19B Profit (LCH Investments)</td><td>18 Jan 2026</td><td><a href="https://hedgefundalpha.com/news/top-20-hedge-funds-earn-115b-in-2025/">https://hedgefundalpha.com/news/top-20-hedge-funds-earn-115b-in-2025/</a></td><td>Fetched</td><td><span class="tag u">Snippet/Paywalled</span></td></tr>
+<tr><td class="src">[S139b]</td><td>Barclays Investment Bank</td><td>H2 2026 Hedge Fund Outlook</td><td>29 Jul 2026</td><td><a href="https://www.ib.barclays/our-insights/3-point-perspective/2H-2026-hedge-fund-outlook.html">https://www.ib.barclays/our-insights/3-point-perspective/2H-2026-hedge-fund-outlook.html</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S139c]</td><td>Bayes Group</td><td>The Funding Stack Problem: prime broker concentration and multi-strategy due diligence</td><td>15 Apr 2026</td><td><a href="https://www.bayes-group.com/insights/prime-broker-concentration-multistrat-due-diligence">https://www.bayes-group.com/insights/prime-broker-concentration-multistrat-due-diligence</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S140b]</td><td>Mergers &amp; Inquisitions</td><td>Hedge Funds vs Private Equity</td><td>updated 2019+</td><td><a href="https://mergersandinquisitions.com/hedge-fund-vs-private-equity/">https://mergersandinquisitions.com/hedge-fund-vs-private-equity/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S140c]</td><td>hedgefundinterview.com</td><td>Multi-Manager Hedge Funds: How the Pod Model Works</td><td>30 May 2026</td><td><a href="https://hedgefundinterview.com/multi-manager-hedge-funds">https://hedgefundinterview.com/multi-manager-hedge-funds</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S143]</td><td>Business Insider via Yahoo Finance (Saacks &amp; Morrell)</td><td>Jain Global to return billions to investors in a surprise deal with Millennium</td><td>27 Apr 2026</td><td><a href="https://finance.yahoo.com/markets/stocks/articles/jain-global-striking-deal-return-144508464.html">https://finance.yahoo.com/markets/stocks/articles/jain-global-striking-deal-return-1445084...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S145l]</td><td>Disruption Banking</td><td>How Brevan Howard Fell Behind in the Macro Surge of 2025</td><td>30 Jan 2026</td><td><a href="https://www.disruptionbanking.com/2026/01/30/how-brevan-howard-fell-behind-in-the-macro-surge-of-2025/">https://www.disruptionbanking.com/2026/01/30/how-brevan-howard-fell-behind-in-the-macro-su...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S145m]</td><td>Hedgeweek</td><td>Brevan Howard expands Abu Dhabi headcount to 150 as demand for UAE hub accelerates</td><td>9 Dec 2025</td><td><a href="https://www.hedgeweek.com/brevan-howard-expands-abu-dhabi-headcount-to-150-as-demand-for-uae-hub-accelerates/">https://www.hedgeweek.com/brevan-howard-expands-abu-dhabi-headcount-to-150-as-demand-for-u...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S145o]</td><td>Disruption Banking</td><td>From $23B to $38B AUM + 30% Returns: QRT&#x27;s 2025 Quant Takeover</td><td>7 Feb 2026</td><td><a href="https://www.disruptionbanking.com/2026/02/07/from-23b-to-38b-aum-30-returns-qrts-2025-quant-takeover/">https://www.disruptionbanking.com/2026/02/07/from-23b-to-38b-aum-30-returns-qrts-2025-quan...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S145r]</td><td>Investing.com</td><td>Man Group H1 2026 slides: record AUM, 105% EPS growth on diversification</td><td>28 Jul 2026</td><td><a href="https://www.investing.com/news/company-news/man-group-h1-2026-slides-record-aum-105-eps-growth-on-diversification-93CH-4815710">https://www.investing.com/news/company-news/man-group-h1-2026-slides-record-aum-105-eps-gr...</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S150a]</td><td>HFR</td><td>Global Hedge Fund Industry Capital Surges Past Historic $5 Trillion Milestone</td><td>22 Jan 2026</td><td><a href="https://www.hfr.com/media/market-commentary/global-hedge-fund-industry-capital-surges-past-historic-5-trillion-milestone/">https://www.hfr.com/media/market-commentary/global-hedge-fund-industry-capital-surges-past...</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S150b]</td><td>HFR</td><td>Investor Inflows Drive Global Hedge Fund Industry Capital to New Record as Geopolitical Risks Surge</td><td>23 Apr 2026</td><td><a href="https://www.hfr.com/media/market-commentary/investor-inflows-drive-global-hedge-fund-industry-capital-to-new-record-as-geopolitical-risks-surge/">https://www.hfr.com/media/market-commentary/investor-inflows-drive-global-hedge-fund-indus...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S150c]</td><td>HedgeNordic (reporting HFR)</td><td>Global Hedge Fund Assets Hit Record $5.6 Trillion</td><td>23 Jul 2026</td><td><a href="https://hedgenordic.com/2026/07/global-hedge-fund-assets-hit-record-5-6-trillion/">https://hedgenordic.com/2026/07/global-hedge-fund-assets-hit-record-5-6-trillion/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S150d]</td><td>Hedgeweek (reporting HFR)</td><td>Hedge fund launches and closures both climb in volatile start to 2026, HFR says</td><td>15 Jul 2026</td><td><a href="https://www.hedgeweek.com/hedge-fund-launches-and-closures-both-climb-in-volatile-start-to-2026-hfr-says/">https://www.hedgeweek.com/hedge-fund-launches-and-closures-both-climb-in-volatile-start-to...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S151]</td><td>SEC Office of Investor Education and Advocacy</td><td>Investor Bulletin: Hedge Funds (PDF)</td><td>undated</td><td><a href="https://www.sec.gov/investor/alerts/ib_hedgefunds.pdf">https://www.sec.gov/investor/alerts/ib_hedgefunds.pdf</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S152]</td><td>IMF</td><td>Global Financial Stability Report, April 2026, Chapter 1 (local imf.txt)</td><td>Apr 2026</td><td><a href="https://www.imf.org/en/Publications/GFSR">https://www.imf.org/en/Publications/GFSR</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S153]</td><td>FSB</td><td>Leverage in Nonbank Financial Intermediation: Final report (local fsb.txt)</td><td>9 Jul 2025</td><td><a href="https://www.fsb.org/">https://www.fsb.org/</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S154a]</td><td>Bank of England</td><td>Financial Stability Report – December 2025</td><td>Dec 2025</td><td><a href="https://www.bankofengland.co.uk/financial-stability-report/2025/december-2025">https://www.bankofengland.co.uk/financial-stability-report/2025/december-2025</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S154b]</td><td>Bank of England</td><td>Financial Stability Report – July 2026</td><td>7 Jul 2026</td><td><a href="https://www.bankofengland.co.uk/financial-stability-report/2026/july-2026">https://www.bankofengland.co.uk/financial-stability-report/2026/july-2026</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S154c]</td><td>Bank of England</td><td>Discussion paper: Enhancing the resilience of the gilt repo market</td><td>4 Sep 2025</td><td><a href="https://www.bankofengland.co.uk/paper/2025/discussion-paper/enhancing-the-resilience-of-the-gilt-repo-market">https://www.bankofengland.co.uk/paper/2025/discussion-paper/enhancing-the-resilience-of-th...</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S154d]</td><td>Bank of England</td><td>The Bank of England&#x27;s system-wide exploratory scenario exercise final report (PDF)</td><td>29 Nov 2024</td><td><a href="https://www.bankofengland.co.uk/-/media/boe/files/financial-stability/system-wide-exploratory-scenario/boe-swes-final-report.pdf">https://www.bankofengland.co.uk/-/media/boe/files/financial-stability/system-wide-explorat...</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S155a]</td><td>Federal Reserve Board (FEDS Notes, P. Monin)</td><td>Decomposing Hedge Funds&#x27; U.S. Treasury Exposures</td><td>22 Jun 2026</td><td><a href="https://www.federalreserve.gov/econres/notes/feds-notes/decomposing-hedge-funds-u-s-treasury-exposures-20260622.html">https://www.federalreserve.gov/econres/notes/feds-notes/decomposing-hedge-funds-u-s-treasu...</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S155b]</td><td>Federal Reserve Board (FEDS Notes)</td><td>The Cross-Border Trail of the Treasury Basis Trade</td><td>15 Oct 2025</td><td><a href="https://www.federalreserve.gov/econres/notes/feds-notes/the-cross-border-trail-of-the-treasury-basis-trade-20251015.html">https://www.federalreserve.gov/econres/notes/feds-notes/the-cross-border-trail-of-the-trea...</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S156]</td><td>Hedgeweek (reporting Bloomberg)</td><td>Hedge funds charging billions in &#x27;no limit&#x27; passthrough fees</td><td>12 Feb 2025</td><td><a href="https://www.hedgeweek.com/hedge-funds-charging-billions-in-no-limit-passthrough-fees/">https://www.hedgeweek.com/hedge-funds-charging-billions-in-no-limit-passthrough-fees/</a></td><td>Fetched</td><td><span class="tag u">Snippet/Paywalled</span></td></tr>
+<tr><td class="src">[S157]</td><td>Hedgeweek</td><td>Investors push back on multi-strategy hedge fund fee structures</td><td>22 Aug 2025</td><td><a href="https://www.hedgeweek.com/investors-push-back-on-multi-strategy-hedge-fund-fee-structures/">https://www.hedgeweek.com/investors-push-back-on-multi-strategy-hedge-fund-fee-structures/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S158]</td><td>Goldman Sachs Prime Insights (&quot;Multiplier Effect&quot;) as reported by Hedg</td><td>2025 (H2)</td><td>https://hedgefundalpha.c</td><td>Accessed 2026-09-04</td><td>Snippet</td><td><span class="tag u">Snippet/Paywalled</span></td></tr>
+<tr><td class="src">[S160a]</td><td>Hedgeweek (reporting WSJ)</td><td>Multi-manager hedge funds escalate talent war &#x27;arms race&#x27; with nine-figure pay packages</td><td>17 Jun 2025</td><td><a href="https://www.hedgeweek.com/multi-manager-hedge-funds-escalate-talent-war-arms-race-with-nine-figure-pay-packages/">https://www.hedgeweek.com/multi-manager-hedge-funds-escalate-talent-war-arms-race-with-nin...</a></td><td>Fetched</td><td><span class="tag u">Snippet/Paywalled</span></td></tr>
+<tr><td class="src">[S160b]</td><td>Hedgeweek (reporting Business Insider)</td><td>Hedge funds wage multi-billion-dollar talent war</td><td>7 Jan 2026</td><td><a href="https://www.hedgeweek.com/hedge-funds-wage-multi-billion-dollar-talent-war/">https://www.hedgeweek.com/hedge-funds-wage-multi-billion-dollar-talent-war/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S161]</td><td>Hedgeweek</td><td>Eisler Capital ends 2025 down 14.3% as multi-strategy hedge fund winds down</td><td>9 Jan 2026</td><td><a href="https://www.hedgeweek.com/eisler-capital-ends-2025-down-14-3-as-multi-strategy-hedge-fund-winds-down/">https://www.hedgeweek.com/eisler-capital-ends-2025-down-14-3-as-multi-strategy-hedge-fund-...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S162]</td><td>With Intelligence</td><td>Hedge Fund Trends 2026: Demand Strengthens as Capital Returns</td><td>1 Sep 2026</td><td><a href="https://www.withintelligence.com/insights/hedge-fund-trends-2026/">https://www.withintelligence.com/insights/hedge-fund-trends-2026/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S163]</td><td>Hedgeweek (citing Reuters/UBS)</td><td>Hedge fund winners and losers in March selloff</td><td>4 Apr 2025</td><td><a href="https://www.hedgeweek.com/hedge-fund-winners-and-losers-in-march-selloff/">https://www.hedgeweek.com/hedge-fund-winners-and-losers-in-march-selloff/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S165]</td><td>Hedgeweek (reporting CNBC/Bloomberg)</td><td>Citadel to return $5bn of profits to investors</td><td>24 Dec 2025</td><td><a href="https://www.hedgeweek.com/citadel-to-return-5bn-of-profits-to-investors/">https://www.hedgeweek.com/citadel-to-return-5bn-of-profits-to-investors/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S166]</td><td>Hedgeweek (reporting Business Insider)</td><td>ExodusPoint adopts cash hurdle</td><td>12 Sep 2024</td><td><a href="https://www.hedgeweek.com/exoduspoint-adopts-cash-hurdle/">https://www.hedgeweek.com/exoduspoint-adopts-cash-hurdle/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S167a]</td><td>Hedgeweek</td><td>Texas Teachers gains allies in push for hedge fund fee reform</td><td>25 Jul 2024</td><td><a href="https://www.hedgeweek.com/texas-teachers-gains-allies-in-push-for-hedge-fund-fee-reform/">https://www.hedgeweek.com/texas-teachers-gains-allies-in-push-for-hedge-fund-fee-reform/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S168]</td><td>Business Insider via AOL</td><td>How hedge funds became a bright spot in a nasty job market</td><td>24 Feb 2026</td><td><a href="https://www.aol.com/articles/hedge-funds-became-bright-spot-090701777.html">https://www.aol.com/articles/hedge-funds-became-bright-spot-090701777.html</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S171]</td><td>Barclays Investment Bank</td><td>2026 Hedge Fund Outlook</td><td>5 Feb 2026</td><td><a href="https://www.ib.barclays/our-insights/3-point-perspective/hedge-fund-outlook-2026.html">https://www.ib.barclays/our-insights/3-point-perspective/hedge-fund-outlook-2026.html</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S172]</td><td>SS&amp;C Advent (citing BNP Paribas 2026 outlook, Goldman Sachs)</td><td>Multi-Manager Funds Hit Their Stride as Allocators Double Down</td><td>17 Apr 2026</td><td><a href="https://www.advent.com/news-and-insights/blog/multi-manager-funds-hit-their-stride-as-allocators-double-down/">https://www.advent.com/news-and-insights/blog/multi-manager-funds-hit-their-stride-as-allo...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S173a]</td><td>Hedgeweek (reporting Bloomberg)</td><td>Millennium targets $5bn for new private markets fund</td><td>31 Oct 2025</td><td><a href="https://www.hedgeweek.com/millennium-targets-5bn-for-new-private-markets-fund/">https://www.hedgeweek.com/millennium-targets-5bn-for-new-private-markets-fund/</a></td><td>Fetched</td><td><span class="tag u">Snippet/Paywalled</span></td></tr>
+<tr><td class="src">[S175]</td><td>Aurum Fund Management</td><td>Edge with hedge: primer for equity long/short funds (PDF)</td><td>30 Sep 2025</td><td><a href="https://www.aurum.com/wp-content/uploads/250930-Equity-long-short-funds-primer.pdf">https://www.aurum.com/wp-content/uploads/250930-Equity-long-short-funds-primer.pdf</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S176a]</td><td>Corporate Finance Institute</td><td>Buy-Side vs Sell-Side</td><td>undated</td><td><a href="https://corporatefinanceinstitute.com/resources/career/buy-side-vs-sell-side/">https://corporatefinanceinstitute.com/resources/career/buy-side-vs-sell-side/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S176b]</td><td>Corporate Finance Institute</td><td>Net Exposure</td><td>undated</td><td><a href="https://corporatefinanceinstitute.com/resources/wealth-management/net-exposure/">https://corporatefinanceinstitute.com/resources/wealth-management/net-exposure/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S176c]</td><td>Corporate Finance Institute</td><td>Prime Brokerage</td><td>undated</td><td><a href="https://corporatefinanceinstitute.com/resources/wealth-management/prime-brokerage/">https://corporatefinanceinstitute.com/resources/wealth-management/prime-brokerage/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S176d]</td><td>Corporate Finance Institute</td><td>High-Water Mark</td><td>undated</td><td><a href="https://corporatefinanceinstitute.com/resources/wealth-management/high-water-mark/">https://corporatefinanceinstitute.com/resources/wealth-management/high-water-mark/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S181]</td><td>FCA</td><td>PS24/9 Payment Optionality for Investment Research</td><td>July 2024</td><td><a href="https://www.fca.org.uk/publication/policy/ps24-9.pdf">https://www.fca.org.uk/publication/policy/ps24-9.pdf</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S209]</td><td>Traders Magazine</td><td>Buy-Side AI Adoption Hindered by Broker Research Licensing Restrictions</td><td>16 Jul 2026</td><td><a href="https://www.tradersmagazine.com/xtra/buy-side-ai-adoption-hindered-by-broker-research-licensing-restrictions/">https://www.tradersmagazine.com/xtra/buy-side-ai-adoption-hindered-by-broker-research-lice...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S220]</td><td>Hedgeweek (citing Business Insider)</td><td>Citadel, Millennium and peers post muted August returns</td><td>2026-09-04</td><td><a href="https://www.hedgeweek.com/citadel-millennium-and-peers-post-muted-august-returns/">https://www.hedgeweek.com/citadel-millennium-and-peers-post-muted-august-returns/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S221]</td><td>Reuters via KFGO syndication (Sen, Biswas)</td><td>Hedge fund Millennium looks to raise record $20 billion in new capital, source says</td><td>2026-07-29</td><td><a href="https://kfgo.com/2026/07/29/hedge-fund-millennium-looks-to-raise-record-20-billion-in-new-capital-source-says/">https://kfgo.com/2026/07/29/hedge-fund-millennium-looks-to-raise-record-20-billion-in-new-...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S222]</td><td>Business Insider via Yahoo Finance UK (Bradley Saacks)</td><td>Hedge fund scorecard: the best-performing multistrat firms halfway through 2026</td><td>2026-07-01 (updated 07-0</td><td><a href="https://uk.finance.yahoo.com/news/hedge-fund-scorecard-best-performing-171802465.html">https://uk.finance.yahoo.com/news/hedge-fund-scorecard-best-performing-171802465.html</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S223]</td><td>Hedgeweek (citing Bloomberg)</td><td>Millennium slips 2.1% in July as AI sell-off weighs on multi-strat hedge funds</td><td>2026-08-04</td><td><a href="https://www.hedgeweek.com/millennium-slips-2-1-in-july-as-ai-sell-off-weighs-on-multi-strat-hedge-funds/">https://www.hedgeweek.com/millennium-slips-2-1-in-july-as-ai-sell-off-weighs-on-multi-stra...</a></td><td>Fetched</td><td><span class="tag u">Snippet/Paywalled</span></td></tr>
+<tr><td class="src">[S225]</td><td>Hedgeweek (citing Business Insider)</td><td>Big name hedge funds struggle in choppy Q1 markets</td><td>2026-04-02</td><td><a href="https://www.hedgeweek.com/big-name-hedge-funds-struggle-in-choppy-q1-markets/">https://www.hedgeweek.com/big-name-hedge-funds-struggle-in-choppy-q1-markets/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S228]</td><td>Hedgeweek (citing Bloomberg)</td><td>Jain Global to return external capital and shift to exclusive Millennium mandate</td><td>2026-04-27</td><td><a href="https://www.hedgeweek.com/jain-global-to-return-external-capital-and-shift-to-exclusive-millennium-mandate4/">https://www.hedgeweek.com/jain-global-to-return-external-capital-and-shift-to-exclusive-mi...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S229]</td><td>Hedgeweek (citing Bloomberg)</td><td>Jain Global made $1.8bn before switching to Millennium capital</td><td>2026-09-02</td><td><a href="https://www.hedgeweek.com/jain-global-made-1-8bn-before-switching-to-millennium-capital/">https://www.hedgeweek.com/jain-global-made-1-8bn-before-switching-to-millennium-capital/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S231]</td><td>eFinancialCareers (Sarah Butcher)</td><td>Hedge fund Millennium hired hedge fund Schonfeld&#x27;s top equities recruiter in London</td><td>2026-05-12</td><td><a href="https://www.efinancialcareers.com/news/hedge-fund-millennium-hired-hedge-fund-schonfeld-s-top-equities-recruiter-in-london">https://www.efinancialcareers.com/news/hedge-fund-millennium-hired-hedge-fund-schonfeld-s-...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S232]</td><td>Hedgeweek (citing Bloomberg)</td><td>Schonfeld sues Millennium PM over alleged $11m &#x27;gazumping&#x27; breach</td><td>2026-04-23</td><td><a href="https://www.hedgeweek.com/schonfeld-sues-millennium-pm-over-alleged-11m-gazumping-breach/">https://www.hedgeweek.com/schonfeld-sues-millennium-pm-over-alleged-11m-gazumping-breach/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S233]</td><td>Hedgeweek (citing Bloomberg)</td><td>Millennium seeks $2.5m from Dymon PM over abandoned move</td><td>2026-08-28</td><td><a href="https://www.hedgeweek.com/millennium-seeks-2-5m-from-dymon-pm-over-abandoned-move/">https://www.hedgeweek.com/millennium-seeks-2-5m-from-dymon-pm-over-abandoned-move/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S234]</td><td>Hedgeweek (citing Bloomberg)</td><td>Hedge fund hiring wars escalate as &quot;interception trades&quot; drive record pay packages</td><td>2026-04-20</td><td><a href="https://www.hedgeweek.com/hedge-fund-hiring-wars-escalate-as-interception-trades-drive-record-pay-packages/">https://www.hedgeweek.com/hedge-fund-hiring-wars-escalate-as-interception-trades-drive-rec...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S235]</td><td>Hedgeweek (citing Bloomberg)</td><td>Hedge funds back Dubai and Abu Dhabi despite regional conflict</td><td>2026-03-26</td><td><a href="https://www.hedgeweek.com/hedge-funds-back-dubai-and-abu-dhabi-despite-regional-conflict/">https://www.hedgeweek.com/hedge-funds-back-dubai-and-abu-dhabi-despite-regional-conflict/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S236]</td><td>eFinancialCareers (Sarah Butcher)</td><td>The ultimate post-bonus trade is still leaving for a hedge fund in the UAE</td><td>2026-02-20</td><td><a href="https://www.efinancialcareers.com/news/the-ultimate-post-bonus-trade-is-still-leaving-for-a-hedge-fund-in-the-uae">https://www.efinancialcareers.com/news/the-ultimate-post-bonus-trade-is-still-leaving-for-...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S238]</td><td>FinanceFeeds (compiling CNBC, FT, Bloomberg, SpotGamma)</td><td>Leopold Aschenbrenner: $225M to $20B to a 6-day margin call</td><td>2026-07-31 (upd. 08-04)</td><td><a href="https://financefeeds.com/leopold-aschenbrenner-225m-to-20-billion-6-day-margin-call-citadel/">https://financefeeds.com/leopold-aschenbrenner-225m-to-20-billion-6-day-margin-call-citade...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S240]</td><td>Bank of England</td><td>Financial Stability Report – July 2026</td><td>2026-07-07</td><td><a href="https://www.bankofengland.co.uk/financial-stability-report/2026/july-2026">https://www.bankofengland.co.uk/financial-stability-report/2026/july-2026</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S241]</td><td>Bank of England (Andrew Bailey)</td><td>Financial Stability Report press conference opening remarks, 7 July 2026</td><td>2026-07-07</td><td><a href="https://www.bankofengland.co.uk/-/media/boe/files/financial-stability-report/2026/opening-remarks-july-2026.pdf">https://www.bankofengland.co.uk/-/media/boe/files/financial-stability-report/2026/opening-...</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S243]</td><td>Financial Stability Board</td><td>Report on Vulnerabilities in Private Credit</td><td>2026-05-06</td><td><a href="https://www.fsb.org/uploads/P060526.pdf">https://www.fsb.org/uploads/P060526.pdf</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S244]</td><td>Federal Reserve</td><td>FOMC statement</td><td>2026-07-29</td><td><a href="https://www.federalreserve.gov/newsevents/pressreleases/monetary20260729a.htm">https://www.federalreserve.gov/newsevents/pressreleases/monetary20260729a.htm</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S246]</td><td>Bank of England</td><td>Monetary Policy Summary and minutes, July 2026</td><td>2026-07-30</td><td><a href="https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/july-2026">https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/july-2026</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S247]</td><td>European Central Bank</td><td>Monetary policy decisions, 11 June 2026</td><td>2026-06-11</td><td><a href="https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp260611~4d41bd5e83.en.html">https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp260611~4d41bd5e83.en.html</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S249]</td><td>Trading Economics</td><td>United States Stock Market (S&amp;P 500)</td><td>2026-09-04</td><td><a href="https://tradingeconomics.com/united-states/stock-market">https://tradingeconomics.com/united-states/stock-market</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S250]</td><td>Yahoo Finance (Chart of the Day)</td><td>Wall Street&#x27;s summer calm is colliding with the year&#x27;s most volatile stretch</td><td>2026-08-30</td><td><a href="https://finance.yahoo.com/markets/article/wall-streets-summer-calm-is-colliding-with-the-years-most-volatile-stretch-chart-of-the-day-114901053.html">https://finance.yahoo.com/markets/article/wall-streets-summer-calm-is-colliding-with-the-y...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S254]</td><td>EY UK</td><td>UK IPO market recovery gains momentum in 2026 (IPO Eye H1 2026)</td><td>2026-07-08</td><td><a href="https://www.ey.com/en_uk/newsroom/2026/07/uk-ipo-market-recovery-2026">https://www.ey.com/en_uk/newsroom/2026/07/uk-ipo-market-recovery-2026</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S255]</td><td>EY UK</td><td>London IPO market rebounds in Q4 2025 (IPO Eye Q4 2025)</td><td>2026-01-06</td><td><a href="https://www.ey.com/en_uk/newsroom/2026/01/ipo-eye-q4-2025-london-stock-exchange">https://www.ey.com/en_uk/newsroom/2026/01/ipo-eye-q4-2025-london-stock-exchange</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S271]</td><td>eFinancialCareers (Sarah Butcher)</td><td>Hedge fund Millennium is welcoming 190 interns this summer</td><td>2025-04-23</td><td><a href="https://www.efinancialcareers.com/news/millennium-internships-hedge-fund">https://www.efinancialcareers.com/news/millennium-internships-hedge-fund</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+</table></div>
+</body></html>

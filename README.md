@@ -4,6 +4,7 @@ Interview preparation research pack for the 2027 Corporate Access Services Inter
 
 - `Millennium_Corporate_Access_Interview_Guide.pdf` (74 pages) and the source `.html` it was rendered from (Chromium via Playwright; re-render with `page.pdf({format:'A4', printBackground:true})`).
 - `Cheat_Sheet.pdf` (2 pages) and its `.html`.
+- `Hedge_Funds_From_Zero.pdf` (25 pages) and its `.html`: what a hedge fund is versus other buy-side firms, and the nine forces acting on the industry as of September 2026. Shares the source numbering of the main guide.
 - `Question_Bank.md`: 52 questions with scaffolds and 10 questions to ask.
 - `Reading_List.md`: every source found, grouped by theme, with a one-line reason to read it.
 
