@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>The Desk and the 350 Pods</title>
+<style>
+:root{
+  --navy:#0B2545; --navy2:#13315C; --ink:#1F2933; --muted:#5B6B7C; --line:#D5DCE5;
+  --paper:#FFFFFF; --wash:#F3F6FA; --wash2:#E9EEF5;
+  --warm:#D97742; --warm-l:#FBEEE6;
+  --teal:#1B998B; --teal-l:#E3F4F1;
+  --amber:#E9B949; --amber-l:#FCF5E0;
+  --red:#B23A48; --red-l:#F8E4E7;
+  --grey:#8A96A3; --grey-l:#EFF2F5;
+  --p0:#0B2545; --p1:#1B998B; --p2:#D97742; --p3:#5E548E; --p4:#2E6F95; --p5:#9C6644; --p6:#B23A48; --p7:#E9B949; --p8:#3A7D44; --p9:#6C757D; --p10:#0B2545; --p11:#0B2545; --p12:#0B2545;
+}
+@page { size: A4; margin: 20mm 16mm 18mm 16mm; }
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;color:var(--ink);font-size:10.4pt;line-height:1.45;background:var(--paper)}
+h1,h2,h3,h4{font-family:Georgia,"Times New Roman",serif;color:var(--navy);margin:0 0 6pt 0;line-height:1.2;font-weight:normal}
+h1{font-size:26pt;margin-bottom:10pt}
+h2{font-size:16pt;margin-top:16pt;padding-bottom:4pt;border-bottom:2px solid var(--line);break-after:avoid}
+h3{font-size:12.5pt;margin-top:12pt;break-after:avoid}
+h4{font-size:10.8pt;margin-top:9pt;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:bold;color:var(--navy2);break-after:avoid}
+p{margin:0 0 6pt 0}
+ul,ol{margin:0 0 6pt 0;padding-left:18pt}
+li{margin-bottom:2.5pt}
+strong{color:var(--navy)}
+a{color:var(--navy2);text-decoration:none}
+small,.small{font-size:8.5pt;color:var(--muted)}
+.muted{color:var(--muted)}
+.section{break-before:page}
+.section-band{background:var(--pc,var(--navy));color:#fff;padding:14pt 16pt;margin:0 0 12pt 0;border-radius:4pt}
+.section-band .kicker{font-size:9pt;letter-spacing:2px;text-transform:uppercase;opacity:.85}
+.section-band h1{color:#fff;margin:2pt 0 4pt 0;font-size:22pt}
+.section-band .lede{font-size:10.5pt;opacity:.95;margin:0}
+.tag{display:inline-block;font-size:7.5pt;font-weight:bold;letter-spacing:.5px;padding:1pt 5pt;border-radius:3pt;vertical-align:middle;font-family:Helvetica,Arial,sans-serif}
+.tag.c{background:#DDF1EC;color:#0E6B5F}
+.tag.r{background:#E4ECF7;color:#1F4E8C}
+.tag.i{background:#FCEBD9;color:#8A4B12}
+.tag.u{background:#EDEFF2;color:#5B6B7C}
+.src{font-size:7.8pt;color:var(--navy2);font-family:Helvetica,Arial,sans-serif;font-weight:bold}
+.box{border-left:4pt solid var(--navy);background:var(--wash);padding:7pt 10pt;margin:8pt 0;border-radius:0 4pt 4pt 0;break-inside:avoid}
+.box .lbl{font-family:Helvetica,Arial,sans-serif;font-size:7.8pt;font-weight:bold;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:2pt}
+.box p:last-child,.box ul:last-child{margin-bottom:0}
+.box.term{border-color:var(--navy);background:var(--wash)}
+.box.term .lbl{color:var(--navy)}
+.box.say{border-color:var(--teal);background:var(--teal-l)}
+.box.say .lbl{color:#0E6B5F}
+.box.dont{border-color:var(--red);background:var(--red-l)}
+.box.dont .lbl{color:var(--red)}
+.box.opinion{border-color:var(--amber);background:var(--amber-l)}
+.box.opinion .lbl{color:#8A6A10}
+.box.unc{border-color:var(--grey);border-style:dashed;background:var(--grey-l)}
+.box.unc .lbl{color:var(--muted)}
+.box.warm{border-color:var(--warm);background:var(--warm-l)}
+.box.warm .lbl{color:#8A4B12}
+.fig{margin:10pt 0 12pt 0;break-inside:avoid}
+.fig svg{width:100%;height:auto;display:block}
+.fig .cap{font-size:8.3pt;color:var(--muted);margin-top:4pt;border-top:1px solid var(--line);padding-top:3pt}
+.fig .cap b{color:var(--navy)}
+.fullpage{break-before:page}
+table{border-collapse:collapse;width:100%;font-size:8.8pt;margin:6pt 0 10pt 0}
+th{background:var(--navy);color:#fff;text-align:left;padding:4pt 5pt;font-weight:bold;font-family:Helvetica,Arial,sans-serif;font-size:8.3pt}
+td{padding:3.5pt 5pt;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:var(--wash)}
+table.src-table{font-size:7.6pt}
+table.src-table td{padding:2.5pt 4pt}
+table.src-table a{word-break:break-all}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12pt}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10pt}
+.card{border:1px solid var(--line);border-radius:4pt;padding:7pt 9pt;background:#fff;break-inside:avoid}
+.card h4{margin-top:0}
+.gloss dt{font-weight:bold;color:var(--navy);margin-top:5pt;font-family:Helvetica,Arial,sans-serif;font-size:9.4pt}
+.gloss dd{margin:0 0 2pt 0;font-size:9.4pt}
+.qa{border:1px solid var(--line);border-radius:4pt;padding:6pt 9pt;margin:6pt 0;break-inside:avoid}
+.qa .q{font-weight:bold;color:var(--navy);font-family:Georgia,serif;font-size:10.6pt}
+.qa .t{font-size:9.2pt}
+.qa .t b{color:var(--muted);font-family:Helvetica,Arial,sans-serif;font-size:8pt;text-transform:uppercase;letter-spacing:.5px}
+.num{font-family:Georgia,serif;font-size:20pt;color:var(--warm);line-height:1}
+.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:8pt;margin:8pt 0}
+.kpi .k{border-top:3px solid var(--warm);padding:5pt 6pt;background:var(--wash)}
+.kpi .k .v{font-family:Georgia,serif;font-size:16pt;color:var(--navy)}
+.kpi .k .l{font-size:8pt;color:var(--muted)}
+.cover{height:257mm;position:relative;background:var(--navy);color:#fff;padding:26mm 20mm;border-radius:6pt;break-after:page}
+.cover .k{letter-spacing:3px;text-transform:uppercase;font-size:9.5pt;opacity:.8}
+.cover h1{color:#fff;font-size:34pt;margin:12pt 0 8pt 0;line-height:1.1}
+.cover .sub{font-size:14pt;opacity:.92;font-family:Georgia,serif}
+.cover .meta{position:absolute;bottom:22mm;left:20mm;right:20mm;font-size:9.5pt;line-height:1.6;opacity:.9}
+.cover .stripe{position:absolute;top:0;left:0;right:0;height:8pt;background:linear-gradient(90deg,var(--warm) 0 33%,var(--teal) 33% 66%,var(--amber) 66% 100%);border-radius:6pt 6pt 0 0}
+.toc{columns:1}
+.toc .row{display:flex;justify-content:space-between;border-bottom:1px dotted var(--line);padding:3pt 0;font-size:10pt}
+.toc .row.l2{padding-left:16pt;font-size:9pt;color:var(--muted)}
+.toc .row .pg{font-family:Georgia,serif;color:var(--navy)}
+.toc .row .pc{display:inline-block;width:9pt;height:9pt;border-radius:2pt;margin-right:6pt;vertical-align:-1pt}
+.emergency{border:2px solid var(--warm);border-radius:5pt;padding:9pt 12pt;background:var(--warm-l)}
+.emergency h3{margin-top:0;color:#8A4B12}
+.stepper{display:flex;gap:6pt;margin:8pt 0}
+.stepper .s{flex:1;background:var(--wash);border-top:3px solid var(--navy);padding:5pt 6pt;font-size:8.6pt}
+.stepper .s b{display:block;color:var(--navy)}
+.legend{font-size:8.3pt;color:var(--muted)}
+.legend span{display:inline-block;margin-right:10pt}
+.legend i{display:inline-block;width:10pt;height:10pt;vertical-align:-1.5pt;margin-right:3pt;border-radius:2pt}
+.nobreak{break-inside:avoid}
+.pagebreak{break-before:page}
+.checklist li{list-style:none;margin-left:-14pt}
+.checklist li:before{content:"\2610\00a0";color:var(--navy)}
+.footnote{font-size:8pt;color:var(--muted)}
+.hl{background:#FFF4CC}
+.verbatim{font-family:Georgia,serif;font-style:italic;color:var(--navy2);border-left:3px solid var(--amber);padding-left:8pt;margin:6pt 0}
+</style>
+</head>
+<body>
+<!-- anchor marker style -->
+<style>.pm{font-size:1px;color:#fff;line-height:0;position:absolute}.section>.pm,.fullpage>.pm{position:static;display:block;height:3px;line-height:3px;font-size:2px;margin:0;padding:0}</style>
+<div class="cover">
+<div class="stripe"></div>
+<div class="k">Companion to the Millennium interview guide</div>
+<h1>The Desk and the 350 Pods</h1>
+<div class="sub">What the 350-plus investment teams are, which of them are your clients, how one Corporate Access Services desk spans all of them, how the team is split up and walled off from everything around it, and why the firm built it that way.</div>
+<div class="meta">
+<b>Prepared:</b> 4 September 2026, for Round 1 on 7 September.<br>
+<b>What this is:</b> the answer to three questions. What are the pods, concretely? How does an intern on the EMEA Corporate Access Services desk touch hundreds of independent teams at once? And where are the walls between the desk and the pods, between the pods and each other, between the desk and the banks, and between the desk and its own sibling teams?<br>
+<b>Honesty note:</b> Millennium does not publish a list of pods, a headcount for the desk, or its internal rules. Pod-level numbers are reported industry norms; desk-level process comes from Millennium's own job postings, which are unusually specific. Every claim is tagged Confirmed, Reported or Inferred. Where the author is reasoning rather than quoting, the text says so.<br>
+<b>Sources:</b> markers [Sxx] resolve in Part 7; numbering is shared with the main guide.
+</div>
+</div>
+
+<div class="section"><span class="pm">@@toc@@</span>
+<h1>Contents</h1>
+<div class="toc">
+<div class="row"><span><i class="pc" style="background:#0B2545"></i>Part 1. What a pod is, and what 350 of them look like</span><span class="pg">3</span></div>
+<div class="row"><span><i class="pc" style="background:#1B998B"></i>Part 2. Which pods are your clients</span><span class="pg">5</span></div>
+<div class="row"><span><i class="pc" style="background:#D97742"></i>Part 3. How one desk spans hundreds of teams</span><span class="pg">7</span></div>
+<div class="row l2"><span>The hub; the two channels; the three regional desks; the life of a request; conference collisions; the broker vote</span><span class="pg">7</span></div>
+<div class="row"><span><i class="pc" style="background:#B23A48"></i>Part 4. The six walls: how the team is separated, and why</span><span class="pg">10</span></div>
+<div class="row"><span><i class="pc" style="background:#5E548E"></i>Part 5. Why it is built this way, and what it means for you</span><span class="pg">13</span></div>
+<div class="row"><span><i class="pc" style="background:#13315C"></i>Part 6. The desk and the pods on one page; glossary</span><span class="pg">15</span></div>
+<div class="row"><span><i class="pc" style="background:#0B2545"></i>Part 7. Sources</span><span class="pg">17</span></div>
+</div>
+<h3 style="margin-top:16pt">Figures</h3>
+<div class="toc">
+<div class="row l2"><span>1. 350-plus franchises on shared rails</span><span class="pg">4</span></div>
+<div class="row l2"><span>2. Anatomy of one pod, and what it draws from the centre</span><span class="pg">5</span></div>
+<div class="row l2"><span>3. Why a hub: the tangle without a desk, the wheel with one</span><span class="pg">7</span></div>
+<div class="row l2"><span>4. The life of a meeting request, across pods</span><span class="pg">8</span></div>
+<div class="row l2"><span>5. A conference collision: ten pods, one CFO, four slots</span><span class="pg">9</span></div>
+<div class="row l2"><span>6. The six walls around the desk</span><span class="pg">11</span></div>
+<div class="row l2"><span>7. Meetings, money and information: what flows where</span><span class="pg">13</span></div>
+<div class="row l2"><span>8. The desk and the pods on one page</span><span class="pg">15</span></div>
+</div>
+<div class="legend" style="margin-top:14pt"><b>Tags:</b> <span class="tag c">Confirmed</span> primary source or two credible outlets &nbsp; <span class="tag r">Reported</span> single credible source &nbsp; <span class="tag i">Inferred</span> author's reasoning &nbsp; <span class="src">[S12]</span> source marker, Part 7.</div>
+</div>
+
+<!-- ================= PART 1 ================= -->
+<div class="section" style="--pc:#0B2545"><span class="pm">@@p1@@</span>
+<div class="section-band"><div class="kicker">Part 1</div><h1>What a pod is, and what 350 of them look like</h1><p class="lede">"350 pods" is the most quoted fact about Millennium and the least explained. Start with one pod, then multiply.</p></div>
+
+<h2>1.1 One pod</h2>
+<p>A pod is one portfolio manager (PM) and a small team, usually analysts, running one slice of Millennium's capital under one strategy. Millennium's own phrase is "investment teams", and its recruiting page says they are "empowered to build and grow their businesses" and "pursue independent investment strategies, managing the process and team while leveraging Millennium's platform and expertise" <span class="src">[S77]</span> <span class="tag c">Confirmed</span>. An insider told eFinancialCareers what that feels like: "At Millennium it's almost like you're operating your own mini hedge fund" <span class="src">[S304]</span> <span class="tag r">Reported</span>.</p>
+<p>The reported norms for a fundamental equity pod: capital "often $100-200m" for many teams and far more for the established ones <span class="src">[S313]</span>; leverage of four to eight times allocated capital, net market exposure kept within roughly plus or minus 20%, and caps on sector, size, momentum, value and quality exposures <span class="src">[S311][S313]</span> <span class="tag r">Reported (secondary)</span>. The pod keeps a reported 15 to 20% of its own profit and pays its own expenses, including analysts, out of that share <span class="src">[S104]</span> <span class="tag r">Reported</span>. A PM who loses 5% of allocated capital has it cut in half; 7.5% cumulative usually ends the seat <span class="src">[S104][S113]</span> <span class="tag c">Confirmed, two outlets, unofficial</span>.</p>
+<div class="box term"><div class="lbl">Key term: idiosyncratic risk, and why a pod wants meetings</div><p>The limits above strip out every "factor" a pod could ride: the market, a sector, a style. What is left is <b>idiosyncratic</b> risk, the part of a stock's move that is specific to that one company. That is the only thing a pod is paid for. A management meeting is one of the few legitimate sources of company-specific understanding, which is why a pod's analysts, covering "dozens of companies each" in a multi-manager corporate access head's words <span class="src">[S10]</span>, are heavy consumers of access.</p></div>
+
+<h2>1.2 Multiply by 350</h2>
+<p>Millennium's website says "350+ Investment Teams" <span class="src">[S71]</span> <span class="tag c">Confirmed (firm's own)</span>. Press had "330+" in 2025 <span class="src">[S101][S116]</span> and "265 PM teams" in 2020 <span class="src">[S92][S104]</span>, so the count has grown by roughly a third in six years <span class="tag i">Inferred</span>. The teams sit in six named strategy groups: Fundamental Equity, Equity Arbitrage, Fixed Income, Commodities, Quantitative Strategies and Credit <span class="src">[S74]</span> <span class="tag c">Confirmed</span>, under global heads for equities (co-heads Michael Chung and Pete Santoro), commodities, credit, quantitative strategies and fixed income <span class="src">[S75]</span>. Millennium does not publish how many teams sit in each group.</p>
+<div class="kpi">
+<div class="k"><div class="v">350+</div><div class="l">investment teams, firm's website, live 4 Sep 2026 <span class="src">[S71]</span></div></div>
+<div class="k"><div class="v">6,670</div><div class="l">employees in the SEC filing of 25 Aug 2026, of whom 3,055 in advisory roles <span class="src">[S123]</span></div></div>
+<div class="k"><div class="v">5,796</div><div class="l">US-listed long positions in the 30 Jun 2026 13F, worth $276bn gross <span class="src">[S86]</span></div></div>
+<div class="k"><div class="v">1,123</div><div class="l">average 2024 employees at the UK employing company <span class="src">[S98]</span></div></div>
+</div>
+<p>Two of those numbers matter for the desk. First, 3,055 advisory staff across 350-plus teams is a mean of under nine people a team, which is consistent with pods being small <span class="tag i">Inferred</span>. Second, 5,796 separate US long positions in one quarterly filing, before any European or Asian names, shows how many companies the platform has a live interest in at once <span class="tag i">Inferred</span>. Every one of those names is a potential meeting request.</p>
+
+<div class="fig">
+<svg viewBox="0 0 1000 540" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:10.8px;fill:#1F2933}.h{font-size:15px;font-weight:bold;fill:#0B2545}.s{font-size:9.6px;fill:#5B6B7C}.w{fill:#fff;font-size:11px;font-weight:bold}.ws{fill:#fff;font-size:10px}.k{font-size:11px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">350-plus franchises on shared rails (schematic: the split by strategy group is not published)</text>
+<!-- six columns of pods -->
+<g id="cols">
+<text x="30" y="58" class="k">Fundamental Equity</text><text x="30" y="72" class="s">the desk's core clients</text>
+<text x="200" y="58" class="k">Equity Arbitrage</text><text x="200" y="72" class="s">some fundamental users</text>
+<text x="370" y="58" class="k">Quantitative</text><text x="370" y="72" class="s">systematic; rare users</text>
+<text x="540" y="58" class="k">Fixed Income</text><text x="540" y="72" class="s">rates, macro, mortgages</text>
+<text x="710" y="58" class="k">Credit</text><text x="710" y="72" class="s">issuer meetings, own channels</text>
+<text x="880" y="58" class="k">Commodities</text><text x="880" y="72" class="s">energy, metals, ags</text>
+</g>
+<g>
+<!-- fundamental equity: 5x8 teal -->
+<g fill="#1B998B">
+<rect x="30" y="84" width="24" height="24" rx="3"/><rect x="60" y="84" width="24" height="24" rx="3"/><rect x="90" y="84" width="24" height="24" rx="3"/><rect x="120" y="84" width="24" height="24" rx="3"/><rect x="150" y="84" width="24" height="24" rx="3"/>
+<rect x="30" y="114" width="24" height="24" rx="3"/><rect x="60" y="114" width="24" height="24" rx="3"/><rect x="90" y="114" width="24" height="24" rx="3"/><rect x="120" y="114" width="24" height="24" rx="3"/><rect x="150" y="114" width="24" height="24" rx="3"/>
+<rect x="30" y="144" width="24" height="24" rx="3"/><rect x="60" y="144" width="24" height="24" rx="3"/><rect x="90" y="144" width="24" height="24" rx="3"/><rect x="120" y="144" width="24" height="24" rx="3"/><rect x="150" y="144" width="24" height="24" rx="3"/>
+<rect x="30" y="174" width="24" height="24" rx="3"/><rect x="60" y="174" width="24" height="24" rx="3"/><rect x="90" y="174" width="24" height="24" rx="3"/><rect x="120" y="174" width="24" height="24" rx="3"/><rect x="150" y="174" width="24" height="24" rx="3"/>
+<rect x="30" y="204" width="24" height="24" rx="3"/><rect x="60" y="204" width="24" height="24" rx="3"/><rect x="90" y="204" width="24" height="24" rx="3"/><rect x="120" y="204" width="24" height="24" rx="3"/><rect x="150" y="204" width="24" height="24" rx="3"/>
+<rect x="30" y="234" width="24" height="24" rx="3"/><rect x="60" y="234" width="24" height="24" rx="3"/><rect x="90" y="234" width="24" height="24" rx="3"/><rect x="120" y="234" width="24" height="24" rx="3"/><rect x="150" y="234" width="24" height="24" rx="3"/>
+</g>
+<!-- big pods drawn larger -->
+<rect x="30" y="264" width="54" height="40" rx="3" fill="#0E6B5F"/><text x="34" y="281" class="ws">Passaic-</text><text x="34" y="295" class="ws">type pod</text>
+<rect x="90" y="264" width="84" height="40" rx="3" fill="#0E6B5F"/><text x="96" y="281" class="ws">captive firm</text><text x="96" y="295" class="ws">(Jain, Albar)</text>
+<!-- equity arb: teal-light -->
+<g fill="#8FD3C9">
+<rect x="200" y="84" width="24" height="24" rx="3"/><rect x="230" y="84" width="24" height="24" rx="3"/><rect x="260" y="84" width="24" height="24" rx="3"/><rect x="290" y="84" width="24" height="24" rx="3"/>
+<rect x="200" y="114" width="24" height="24" rx="3"/><rect x="230" y="114" width="24" height="24" rx="3"/><rect x="260" y="114" width="24" height="24" rx="3"/><rect x="290" y="114" width="24" height="24" rx="3"/>
+<rect x="200" y="144" width="24" height="24" rx="3"/><rect x="230" y="144" width="24" height="24" rx="3"/><rect x="260" y="144" width="24" height="24" rx="3"/><rect x="290" y="144" width="24" height="24" rx="3"/>
+<rect x="200" y="174" width="24" height="24" rx="3"/><rect x="230" y="174" width="24" height="24" rx="3"/><rect x="260" y="174" width="24" height="24" rx="3"/>
+</g>
+<!-- quant: grey -->
+<g fill="#C5CDD6">
+<rect x="370" y="84" width="24" height="24" rx="3"/><rect x="400" y="84" width="24" height="24" rx="3"/><rect x="430" y="84" width="24" height="24" rx="3"/><rect x="460" y="84" width="24" height="24" rx="3"/>
+<rect x="370" y="114" width="24" height="24" rx="3"/><rect x="400" y="114" width="24" height="24" rx="3"/><rect x="430" y="114" width="24" height="24" rx="3"/><rect x="460" y="114" width="24" height="24" rx="3"/>
+<rect x="370" y="144" width="24" height="24" rx="3"/><rect x="400" y="144" width="24" height="24" rx="3"/><rect x="430" y="144" width="24" height="24" rx="3"/>
+</g>
+<rect x="370" y="174" width="114" height="40" rx="3" fill="#8A96A3"/><text x="376" y="191" class="ws">WorldQuant JV</text><text x="376" y="205" class="ws">on Millennium rails</text>
+<!-- fixed income -->
+<g fill="#C5CDD6">
+<rect x="540" y="84" width="24" height="24" rx="3"/><rect x="570" y="84" width="24" height="24" rx="3"/><rect x="600" y="84" width="24" height="24" rx="3"/><rect x="630" y="84" width="24" height="24" rx="3"/>
+<rect x="540" y="114" width="24" height="24" rx="3"/><rect x="570" y="114" width="24" height="24" rx="3"/><rect x="600" y="114" width="24" height="24" rx="3"/><rect x="630" y="114" width="24" height="24" rx="3"/>
+<rect x="540" y="144" width="24" height="24" rx="3"/><rect x="570" y="144" width="24" height="24" rx="3"/><rect x="600" y="144" width="24" height="24" rx="3"/>
+<rect x="540" y="174" width="24" height="24" rx="3"/><rect x="570" y="174" width="24" height="24" rx="3"/>
+</g>
+<!-- credit -->
+<g fill="#C5CDD6">
+<rect x="710" y="84" width="24" height="24" rx="3"/><rect x="740" y="84" width="24" height="24" rx="3"/><rect x="770" y="84" width="24" height="24" rx="3"/><rect x="800" y="84" width="24" height="24" rx="3"/>
+<rect x="710" y="114" width="24" height="24" rx="3"/><rect x="740" y="114" width="24" height="24" rx="3"/><rect x="770" y="114" width="24" height="24" rx="3"/>
+<rect x="710" y="144" width="24" height="24" rx="3"/><rect x="740" y="144" width="24" height="24" rx="3"/>
+</g>
+<!-- commodities -->
+<g fill="#C5CDD6">
+<rect x="880" y="84" width="24" height="24" rx="3"/><rect x="910" y="84" width="24" height="24" rx="3"/><rect x="940" y="84" width="24" height="24" rx="3"/>
+<rect x="880" y="114" width="24" height="24" rx="3"/><rect x="910" y="114" width="24" height="24" rx="3"/><rect x="940" y="114" width="24" height="24" rx="3"/>
+<rect x="880" y="144" width="24" height="24" rx="3"/><rect x="910" y="144" width="24" height="24" rx="3"/>
+</g>
+</g>
+<text x="200" y="230" class="s">Each square is a franchise: its own PM, analysts, book, limits and P&amp;L.</text>
+<text x="200" y="244" class="s">Squares are not counts. Millennium does not disclose the number of teams per group.</text>
+<text x="200" y="264" class="s">Growth: 265 teams (2020) [S92][S104]; 320-330+ (2025) [S83][S101]; 350+ (2026) [S71].</text>
+<text x="200" y="278" class="s">Also on the rails: 25+ external managers run via managed accounts [S89], and captive firms such as Jain Global and Albar [S102][S110].</text>
+<!-- rails -->
+<line x1="30" y1="318" x2="970" y2="318" stroke="#0B2545" stroke-width="3"/>
+<text x="30" y="340" class="k">SHARED RAILS (the centre; "Core" teams in Millennium's postings [S50])</text>
+<g>
+<rect x="30" y="350" width="150" height="70" rx="5" fill="#0B2545"/><text x="38" y="370" class="w">Risk</text><text x="38" y="386" class="ws">limits per pod; cuts;</text><text x="38" y="400" class="ws">factor and crowding</text><text x="38" y="414" class="ws">checks [S318][S319]</text>
+<rect x="190" y="350" width="150" height="70" rx="5" fill="#0B2545"/><text x="198" y="370" class="w">Treasury</text><text x="198" y="386" class="ws">capital, leverage,</text><text x="198" y="400" class="ws">financing, netting</text><text x="198" y="414" class="ws">[S321][S322]</text>
+<rect x="350" y="350" width="300" height="70" rx="5" fill="#D97742"/><text x="358" y="370" class="w">Execution Services, incl. Platform Solutions (PSEM)</text><text x="358" y="386" class="ws">trading and counterparties; and "access, data, research,</text><text x="358" y="400" class="ws">and technology" for investment professionals [S42]:</text><text x="358" y="414" class="ws">Corporate Access Services sits here [S40][S42]</text>
+<rect x="660" y="350" width="150" height="70" rx="5" fill="#0B2545"/><text x="668" y="370" class="w">Technology and data</text><text x="668" y="386" class="ws">1,800+ technologists;</text><text x="668" y="400" class="ws">AI lab; research tools</text><text x="668" y="414" class="ws">[S78][S326][S50]</text>
+<rect x="820" y="350" width="150" height="70" rx="5" fill="#0B2545"/><text x="828" y="370" class="w">Compliance, legal, ops</text><text x="828" y="386" class="ws">restricted lists, market-</text><text x="828" y="400" class="ws">abuse surveillance,</text><text x="828" y="414" class="ws">meeting logs [S318][S302]</text>
+</g>
+<rect x="30" y="435" width="940" height="60" rx="5" fill="#FBEEE6" stroke="#D97742"/>
+<text x="42" y="454" class="k">READ IT THIS WAY</text>
+<text x="42" y="470" class="t">The pods compete with each other for capital and do not share ideas. The rails are the only thing they have in common. A Corporate Access desk is a rail: it serves every</text>
+<text x="42" y="485" class="t">franchise equally, is paid by none of them individually, and is the one place where the demand of 350 independent businesses for the same companies becomes visible.</text>
+<text x="30" y="520" class="s">Strategy groups and heads from mlp.com [S74][S75]. Pod norms are reported, not disclosed [S311][S313]. Which groups use corporate access most is the author's inference from what corporate access is for.</text>
+</svg>
+<span class="pm">@@f1@@</span><div class="cap"><b>Figure 1.</b> The platform as franchises on shared rails. Group names and Core-team language are Millennium's own <span class="src">[S74][S50][S42]</span>; the number of squares per group is illustrative, because the split is not published.</div></div>
+
+<h2>1.3 The pods do not talk to each other, by design</h2>
+<p>This is the single most important fact for understanding the desk. Capital at the centre is a fixed budget at any moment; more for one pod means less for another, so allocation "is a zero-sum game", producing "internal incentives that look nothing like the collegial, team-oriented culture described in recruiting materials" <span class="src">[S313]</span> <span class="tag r">Reported (secondary)</span>. Headhunters describe the platforms as "not identikit places" where "your experience will vary considerably according to the pod" <span class="src">[S304]</span>. Citadel is described as running "with far greater collaboration across investment teams than Millennium's decentralised pod model" <span class="src">[S304][S306]</span> <span class="tag r">Reported</span>. The centre's risk function even watches for pods that have drifted into the same trade: "cross-pod correlation monitoring" and "factor crowding surveillance" are how practitioners describe it <span class="src">[S313]</span>, and Millennium's own credit risk posting asks candidates to assess where positioning is "crowded" <span class="src">[S319]</span> <span class="tag c">Confirmed</span>.</p>
+<p>The consequence for you: two pods that both want to see the same chief financial officer are two separate clients with separate, confidential reasons. The desk sees both. Neither pod should learn about the other from the desk <span class="tag i">Inferred</span>.</p>
+</div>
+
+<!-- ================= PART 2 ================= -->
+<div class="section" style="--pc:#1B998B"><span class="pm">@@p2@@</span>
+<div class="section-band"><div class="kicker">Part 2</div><h1>Which pods are your clients</h1><p class="lede">Not all 350. The desk exists for the teams whose edge is company-specific, and mostly for the ones in Europe.</p></div>
+
+<h2>2.1 The fundamental-equity slice</h2>
+<p>Corporate access is the arranging of meetings between investors and the management or investor-relations teams of listed companies. The teams that need that are the ones doing "fundamental research on companies both as generalists and as specialists", Millennium's description of its Fundamental Equity group <span class="src">[S74]</span> <span class="tag c">Confirmed</span>. Some Equity Arbitrage teams, whose strategies are described as "systematic and fundamental", will also use it; quantitative, macro and commodity teams generally will not, and credit teams tend to meet issuers through their own bank channels <span class="tag i">Inferred from what each group trades</span>. Millennium's job postings describe the desk's clients simply as "Millennium Investment Professionals" and "Portfolio Managers and Analysts" <span class="src">[S40][S42]</span>, without narrowing by group, so treat the slice as the natural user base, not a formal rule.</p>
+<p>How many teams is that in London? Not published. One dated data point: the Net Interest newsletter counted "8-9 teams focused on financial stocks in London alone" in 2023 <span class="src">[S104]</span> <span class="tag r">Reported</span>. Financials is one sector of roughly ten. If other sectors are staffed at anything like that depth, the London desk's client base is dozens of pods, each with several analysts, before counting Americas and Asia teams that fly in for European events <span class="tag i">Inferred</span>. The UK employing company averaged 1,123 employees in 2024, up from 972 in 2023 and 765 in 2022 <span class="src">[S98][S97]</span> <span class="tag r">Reported</span>, and the firm has leased all 175,000 square feet of 50 Berkeley Street for its European headquarters <span class="src">[S63]</span> <span class="tag c">Confirmed</span>. The client base is growing.</p>
+
+<div class="fig">
+<svg viewBox="0 0 1000 470" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:10.8px;fill:#1F2933}.h{font-size:15px;font-weight:bold;fill:#0B2545}.s{font-size:9.6px;fill:#5B6B7C}.w{fill:#fff;font-size:11px;font-weight:bold}.ws{fill:#fff;font-size:10px}.k{font-size:11px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">Anatomy of one fundamental equity pod, and what it draws from the centre (reported norms)</text>
+<!-- pod box -->
+<rect x="20" y="45" width="430" height="300" rx="8" fill="#E3F4F1" stroke="#1B998B" stroke-width="2"/>
+<text x="34" y="68" class="k">THE POD: a franchise</text>
+<circle cx="70" cy="110" r="20" fill="#0E6B5F"/><text x="58" y="114" class="ws">PM</text>
+<text x="100" y="100" class="t">Portfolio manager. Owns the book, the limits,</text><text x="100" y="114" class="t">the hiring and the P&amp;L. Paid ~15-20% of profit [S104].</text>
+<g fill="#1B998B"><circle cx="52" cy="165" r="13"/><circle cx="84" cy="165" r="13"/><circle cx="116" cy="165" r="13"/><circle cx="148" cy="165" r="13"/></g>
+<text x="175" y="160" class="t">Analysts, paid by the pod out of its share [S104].</text><text x="175" y="174" class="t">Each covers "dozens of companies" [S10].</text>
+<rect x="34" y="195" width="400" height="60" rx="5" fill="#fff" stroke="#1B998B"/>
+<text x="42" y="212" class="k">THE BOOK</text>
+<text x="42" y="227" class="t">Capital "often $100-200m" [S313]; 4-8x gross [S311]; net within +/-20% [S311][S313].</text>
+<text x="42" y="241" class="t">Long some companies, short others in the sector: market and sector cancel out.</text>
+<rect x="34" y="265" width="400" height="66" rx="5" fill="#F8E4E7" stroke="#B23A48"/>
+<text x="42" y="282" class="k" fill="#B23A48">THE CLOCK</text>
+<text x="42" y="297" class="t">-5% from peak: capital halved; -7.5%: seat usually ends [S104][S113]. Losses carry</text>
+<text x="42" y="311" class="t">forward before any performance pay [S305]. The pod must be right, soon, and often.</text>
+<text x="42" y="325" class="s">Hence hedge-fund teams need "shorter feedback loops" than long-only investors [S11].</text>
+<!-- arrows from centre -->
+<g stroke="#0B2545" stroke-width="2" fill="none"><path d="M470 110 L455 110"/><path d="M470 160 L455 160"/><path d="M470 210 L455 210"/><path d="M470 260 L455 260"/><path d="M470 310 L455 310"/></g>
+<g fill="#0B2545"><path d="M455 106 L447 110 L455 114 Z"/><path d="M455 156 L447 160 L455 164 Z"/><path d="M455 206 L447 210 L455 214 Z"/><path d="M455 256 L447 260 L455 264 Z"/><path d="M455 306 L447 310 L455 314 Z"/></g>
+<text x="480" y="60" class="k">WHAT THE CENTRE SUPPLIES (the pod owns none of this)</text>
+<g>
+<rect x="480" y="90" width="500" height="38" rx="5" fill="#0B2545"/><text x="490" y="106" class="w">Capital and leverage</text><text x="490" y="120" class="ws">allocated and re-sized by the centre; financed on the firm's balance sheet [S318][S321]</text>
+<rect x="480" y="140" width="500" height="38" rx="5" fill="#0B2545"/><text x="490" y="156" class="w">The cage</text><text x="490" y="170" class="ws">limits on concentration, liquidity, gap risk, factors and drawdown, set and monitored centrally [S319]</text>
+<rect x="480" y="190" width="500" height="38" rx="5" fill="#0B2545"/><text x="490" y="206" class="w">Execution, data, research tools, technology</text><text x="490" y="220" class="ws">"access, data, research, and technology" for investment professionals: the PSEM remit [S42]</text>
+<rect x="480" y="240" width="500" height="38" rx="5" fill="#D97742"/><text x="490" y="256" class="w">Corporate access</text><text x="490" y="270" class="ws">broker-sourced meetings via the desk; originated meetings via Sector Specialists [S40][S42][S47]</text>
+<rect x="480" y="290" width="500" height="38" rx="5" fill="#0B2545"/><text x="490" y="306" class="w">Compliance and the meeting log</text><text x="490" y="320" class="ws">restricted lists, surveillance, records of who met whom and when [S318][S20][S22]</text>
+</g>
+<!-- big pods exception -->
+<rect x="20" y="360" width="960" height="60" rx="5" fill="#FBEEE6" stroke="#D97742"/>
+<text x="32" y="379" class="k">THE EXCEPTION: BIG PODS BUY THEIR OWN</text>
+<text x="32" y="395" class="t">Passaic Capital, "a multi-strategy, multi-manager investment group within Millennium" with "more than 60 professionals", hires its own corporate access lead to run "a corporate access</text>
+<text x="32" y="409" class="t">strategy aligned with the investment team's research priorities" and advise on broker votes [S44]; Misura Capital hires a corporate access and research coordinator [S45]. They still use the central desk.</text>
+<text x="20" y="440" class="s">Pod economics and limits are reported industry norms [S104][S311][S313], not Millennium disclosures. Centre functions are from Millennium's own postings [S318][S319][S321][S42].</text>
+<text x="20" y="453" class="s">Passaic and Misura from Millennium postings [S44][S45].</text>
+</svg>
+<span class="pm">@@f2@@</span><div class="cap"><b>Figure 2.</b> One pod and its dependence on the centre. Corporate access is one of five things the pod cannot make for itself; big pods add their own layer on top <span class="src">[S44][S45]</span>.</div></div>
+
+<h2>2.2 The London and EMEA scope</h2>
+<p>The London intern posting is explicit that duties are "primarily across EMEA": "delivering a high level of client service to Portfolio Managers and Analysts ... primarily across EMEA" and coordinating meetings "in EMEA" <span class="src">[S40]</span> <span class="tag c">Confirmed</span>. But the Tokyo posting adds the rule that makes this a global job: each regional desk serves its own region's investment professionals "primarily" while being "inclusive of investment professionals globally" who attend that region's events <span class="src">[S43]</span> <span class="tag c">Confirmed</span>. A New York pod that wants a European company at a London conference is the London desk's client for that meeting. The Hong Kong twin of your posting is the same text with "APAC" in place of "EMEA" <span class="src">[S41]</span>.</p>
+<h2>2.3 What a pod wants from a meeting, and how it differs from a long-only fund</h2>
+<p>Your clients are not typical investors, and the companies and brokers know it. A multi-manager corporate access head, summarised by the IR adviser ICR, wants engagement "across multiple levels (IR, CFOs, division heads), not just CEO conversations", wants "cameras on during virtual meetings", and plans engagement "through carefully coordinated quarterly plans" <span class="src">[S10]</span> <span class="tag c">Confirmed quotes</span>. The same adviser contrasts long-only investors, who need "one or two substantive annual one-on-one meetings", with hedge funds that "require more frequent engagement" and "shorter feedback loops focused on price discovery and risk management" <span class="src">[S11]</span> <span class="tag r">Reported</span>.</p>
+<table>
+<tr><th style="width:24%">Dimension</th><th style="width:38%">A Millennium pod</th><th>A long-only fund</th></tr>
+<tr><td>Why it meets</td><td>Company-specific edge inside a hedged, factor-neutral book; the clock is running <span class="src">[S311][S104]</span></td><td>Long-horizon conviction on a few holdings <span class="src">[S11]</span></td></tr>
+<tr><td>How often</td><td>Frequent, short feedback loops; results season matters <span class="src">[S11]</span></td><td>One or two substantive meetings a year <span class="src">[S11]</span></td></tr>
+<tr><td>Whom it wants</td><td>IR, CFO, divisional heads, not only the CEO <span class="src">[S10]</span></td><td>CEO and CFO, strategy-led</td></tr>
+<tr><td>How many companies</td><td>"Dozens" per analyst, so selectivity is essential <span class="src">[S10]</span></td><td>Fewer, deeper</td></tr>
+<tr><td>Reputation to manage</td><td>Historic "negative perception" of hedge funds among corporates; teams were built partly to fix it <span class="src">[S9]</span></td><td>Generally welcomed by IR</td></tr>
+<tr><td>What that means for the desk</td><td>Volume, speed, multi-level access, and service standards that protect the firm's name with IR teams <span class="tag i">Inferred</span></td><td></td></tr>
+</table>
+<div class="box say"><div class="lbl">Say this in the interview</div><p>"I understand the desk's clients are the fundamental teams, mostly EMEA-based but including anyone globally who attends a European event. What I find interesting is that they are hundreds of separate businesses rather than one investment team, so the desk is really an internal service provider with a very large, very independent client base."</p></div>
+</div>
+
+<!-- ================= PART 3 ================= -->
+<div class="section" style="--pc:#D97742"><span class="pm">@@p3@@</span>
+<div class="section-band"><div class="kicker">Part 3</div><h1>How one desk spans hundreds of teams</h1><p class="lede">The desk is a hub. Everything it does is a way of turning hundreds of separate, confidential wish-lists into one firm-sized voice to the outside world, and then handing the results back out.</p></div>
+
+<h2>3.1 The hub</h2>
+<p>Millennium's own words for the desk's function: it "helps to centralize the access provided by sell-side brokers on behalf of our Portfolio Managers ('PMs') and Analysts", while "the firm's sectorized Sector Specialist Origination team arranges direct access on behalf of the firm" <span class="src">[S42]</span> <span class="tag c">Confirmed</span>. The intern posting adds the purpose: "to increase the quantity and quality of their industry meetings" <span class="src">[S40]</span>. The word to notice is <b>centralize</b>. Without a desk, each of the fundamental pods would deal with every broker and every company on its own.</p>
+
+<div class="fig">
+<svg viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:10.8px;fill:#1F2933}.h{font-size:15px;font-weight:bold;fill:#0B2545}.s{font-size:9.6px;fill:#5B6B7C}.w{fill:#fff;font-size:11px;font-weight:bold}.ws{fill:#fff;font-size:10px}.k{font-size:11px;font-weight:bold;fill:#0B2545}.lb{font-size:9.5px;fill:#1F2933}</style>
+<text x="20" y="24" class="h">Why a hub: the tangle without a desk, the wheel with one</text>
+<!-- LEFT: tangle -->
+<text x="30" y="55" class="k">WITHOUT A DESK</text>
+<text x="30" y="70" class="s">every pod deals with every broker and company</text>
+<g fill="#1B998B"><rect x="40" y="90" width="60" height="22" rx="3"/><rect x="40" y="130" width="60" height="22" rx="3"/><rect x="40" y="170" width="60" height="22" rx="3"/><rect x="40" y="210" width="60" height="22" rx="3"/><rect x="40" y="250" width="60" height="22" rx="3"/><rect x="40" y="290" width="60" height="22" rx="3"/></g>
+<g class="ws" fill="#fff"><text x="52" y="105" class="ws">Pod 1</text><text x="52" y="145" class="ws">Pod 2</text><text x="52" y="185" class="ws">Pod 3</text><text x="52" y="225" class="ws">Pod 4</text><text x="52" y="265" class="ws">Pod 5</text><text x="52" y="305" class="ws">Pod 6</text></g>
+<g fill="#13315C"><rect x="360" y="90" width="80" height="22" rx="3"/><rect x="360" y="150" width="80" height="22" rx="3"/><rect x="360" y="210" width="80" height="22" rx="3"/><rect x="360" y="270" width="80" height="22" rx="3"/></g>
+<g fill="#fff"><text x="368" y="105" class="ws">Broker A</text><text x="368" y="165" class="ws">Broker B</text><text x="368" y="225" class="ws">Broker C</text><text x="368" y="285" class="ws">Company IR</text></g>
+<g stroke="#8A96A3" stroke-width="1" opacity=".7">
+<line x1="100" y1="101" x2="360" y2="101"/><line x1="100" y1="101" x2="360" y2="161"/><line x1="100" y1="101" x2="360" y2="221"/><line x1="100" y1="101" x2="360" y2="281"/>
+<line x1="100" y1="141" x2="360" y2="101"/><line x1="100" y1="141" x2="360" y2="161"/><line x1="100" y1="141" x2="360" y2="221"/><line x1="100" y1="141" x2="360" y2="281"/>
+<line x1="100" y1="181" x2="360" y2="101"/><line x1="100" y1="181" x2="360" y2="161"/><line x1="100" y1="181" x2="360" y2="221"/><line x1="100" y1="181" x2="360" y2="281"/>
+<line x1="100" y1="221" x2="360" y2="101"/><line x1="100" y1="221" x2="360" y2="161"/><line x1="100" y1="221" x2="360" y2="221"/><line x1="100" y1="221" x2="360" y2="281"/>
+<line x1="100" y1="261" x2="360" y2="101"/><line x1="100" y1="261" x2="360" y2="161"/><line x1="100" y1="261" x2="360" y2="221"/><line x1="100" y1="261" x2="360" y2="281"/>
+<line x1="100" y1="301" x2="360" y2="101"/><line x1="100" y1="301" x2="360" y2="161"/><line x1="100" y1="301" x2="360" y2="221"/><line x1="100" y1="301" x2="360" y2="281"/>
+</g>
+<text x="40" y="340" class="t">Six pods, four counterparties: 24 relationships.</text>
+<text x="40" y="354" class="t">Dozens of pods, dozens of brokers: thousands.</text>
+<text x="40" y="374" class="s">Problems: the same CFO asked for six times; no</text><text x="40" y="387" class="s">firm-level priority; no record of who met whom;</text><text x="40" y="400" class="s">no way to prove how access was paid for; pods</text><text x="40" y="413" class="s">learning about each other's interest via the broker.</text>
+<!-- RIGHT: hub -->
+<text x="530" y="55" class="k">WITH A DESK</text>
+<text x="530" y="70" class="s">one voice out, one allocation back</text>
+<g fill="#1B998B"><rect x="530" y="90" width="60" height="22" rx="3"/><rect x="530" y="130" width="60" height="22" rx="3"/><rect x="530" y="170" width="60" height="22" rx="3"/><rect x="530" y="210" width="60" height="22" rx="3"/><rect x="530" y="250" width="60" height="22" rx="3"/><rect x="530" y="290" width="60" height="22" rx="3"/></g>
+<g fill="#fff"><text x="542" y="105" class="ws">Pod 1</text><text x="542" y="145" class="ws">Pod 2</text><text x="542" y="185" class="ws">Pod 3</text><text x="542" y="225" class="ws">Pod 4</text><text x="542" y="265" class="ws">Pod 5</text><text x="542" y="305" class="ws">Pod 6</text></g>
+<rect x="660" y="140" width="150" height="120" rx="8" fill="#D97742"/>
+<text x="672" y="162" class="w">CORPORATE ACCESS</text><text x="672" y="176" class="w">SERVICES (EMEA)</text>
+<text x="672" y="196" class="ws">portal + calendar</text><text x="672" y="210" class="ws">ranked requests</text><text x="672" y="224" class="ws">allocation back to pods</text><text x="672" y="238" class="ws">meeting log, consumption</text><text x="672" y="252" class="ws">broker vote</text>
+<g stroke="#8A96A3" stroke-width="1.5"><line x1="590" y1="101" x2="660" y2="160"/><line x1="590" y1="141" x2="660" y2="180"/><line x1="590" y1="181" x2="660" y2="200"/><line x1="590" y1="221" x2="660" y2="210"/><line x1="590" y1="261" x2="660" y2="225"/><line x1="590" y1="301" x2="660" y2="245"/></g>
+<g fill="#13315C"><rect x="880" y="90" width="90" height="22" rx="3"/><rect x="880" y="150" width="90" height="22" rx="3"/><rect x="880" y="210" width="90" height="22" rx="3"/></g>
+<rect x="880" y="270" width="90" height="22" rx="3" fill="#5E548E"/>
+<g fill="#fff"><text x="888" y="105" class="ws">Broker A</text><text x="888" y="165" class="ws">Broker B</text><text x="888" y="225" class="ws">Broker C</text><text x="888" y="285" class="ws">Company IR</text></g>
+<g stroke="#0B2545" stroke-width="2"><line x1="810" y1="170" x2="880" y2="101"/><line x1="810" y1="190" x2="880" y2="161"/><line x1="810" y1="210" x2="880" y2="221"/></g>
+<line x1="810" y1="240" x2="880" y2="281" stroke="#5E548E" stroke-width="2" stroke-dasharray="5 3"/>
+<text x="820" y="300" class="s" fill="#5E548E">via Sector Specialist</text><text x="820" y="312" class="s" fill="#5E548E">Origination [S42][S47]</text>
+<text x="530" y="340" class="t">Six pods, four counterparties: 10 relationships,</text>
+<text x="530" y="354" class="t">and the desk holds all the information.</text>
+<text x="530" y="374" class="s">Gains: one prioritised list per broker [S28]; one</text><text x="530" y="387" class="s">firm-level negotiation for scarce slots [S30]; one</text><text x="530" y="400" class="s">log for compliance and the broker vote [S39][S22];</text><text x="530" y="413" class="s">pods never see each other's requests.</text>
+<rect x="30" y="432" width="940" height="52" rx="5" fill="#E3F4F1" stroke="#1B998B"/>
+<text x="42" y="450" class="k" fill="#0E6B5F">THE JOB, IN ONE LINE</text>
+<text x="42" y="466" class="t">"Our job isn't to replace brokers. It's to optimize how we consume corporate access." (a multi-manager corporate access head, via ICR [S10]). The desk is the firm's</text>
+<text x="42" y="480" class="t">single point of consumption: it aggregates demand, negotiates once, allocates fairly, records everything, and pays for it in a way the regulator can audit.</text>
+<text x="30" y="505" class="s">Schematic. Relationship counts are arithmetic, not data. Desk functions from Millennium postings [S40][S42][S43]. Sell-side allocation mechanics from WeConvene [S28][S30].</text>
+</svg>
+<span class="pm">@@f3@@</span><div class="cap"><b>Figure 3.</b> The hub. Millennium's own verb is "centralize" <span class="src">[S42]</span>; the tangle on the left is what centralising replaces.</div></div>
+
+<h2>3.2 The two channels</h2>
+<p>Meetings reach the pods through two channels, and the desk owns one of them. The intern posting names both: access "both sell-side broker sourced, and Millennium originated" <span class="src">[S40]</span> <span class="tag c">Confirmed</span>.</p>
+<ul>
+<li><b>Broker-sourced.</b> Banks host conferences, roadshows and one-on-ones with the companies they cover. The desk "centralize[s] the access provided by sell-side brokers" <span class="src">[S42]</span>: it collects the pods' requests, submits them, allocates what comes back, and runs the semi-annual broker vote that tells the firm which brokers earned their keep <span class="src">[S43]</span>.</li>
+<li><b>Millennium-originated.</b> The firm's own Sector Specialist Origination team "fosters relationships and strengthens Millennium's engagement with the management and investor relations teams of public companies" and arranges "in-house meetings, company visits, conferences and conference calls" directly, without a bank <span class="src">[S47]</span> <span class="tag c">Confirmed</span>. Origination is sectorised (a US Healthcare originator, an EMEA Consumer originator) <span class="src">[S46][S68]</span>, because IR relationships are built by sector. The desk supports this channel with logistics and with "reports around company marketing calendars/earnings/quiet periods to help strategize Millennium Originated Access" <span class="src">[S42]</span>.</li>
+</ul>
+<p>Why two channels? Because since 2014 in the UK a bank's corporate access has been a discrete, separately paid service <span class="src">[S2]</span>, so paying a bank to intermediate a meeting that a large company would happily take directly is wasted budget <span class="src">[S2][S13]</span>; and because big funds have "the clout to get the attention of many large caps" on their own <span class="src">[S9]</span> <span class="tag r">Reported</span>. Origination matters most for small and mid caps, where brokers have withdrawn coverage since MiFID II <span class="src">[S34]</span> <span class="tag i">Inferred</span>.</p>
+
+<h2>3.3 The three regional desks</h2>
+<p>Corporate Access Services runs as three regional desks, Americas (New York), EMEA (London) and APAC (Hong Kong and Tokyo), each serving "primarily" its own region's investment professionals but "for the benefit of all Millennium IPs" <span class="src">[S43][S40][S41]</span> <span class="tag c">Confirmed</span>. Postings refer to "the Corporate Access heads" in the plural <span class="src">[S42]</span>; the one visible senior title is Head of Corporate Access Services, International <span class="src">[S54]</span> <span class="tag u">Aggregator</span>. The team's size is not published. Counting named individuals on public aggregators and correcting for their coverage gives a working estimate of 15 to 30 people globally and 3 to 6 in London plus an intern <span class="src">[S53][S54][S68]</span> <span class="tag i">Inferred, low-medium confidence</span>. Small desk, enormous client base: that ratio is the whole shape of the job.</p>
+
+<h2>3.4 The life of a request</h2>
+<p>Every duty in your posting is one step in a single loop. Here it is end to end, with the sentence from the posting that each step comes from.</p>
+<div class="fig">
+<svg viewBox="0 0 1000 330" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:10.4px;fill:#1F2933}.h{font-size:15px;font-weight:bold;fill:#0B2545}.s{font-size:9.4px;fill:#5B6B7C}.w{fill:#fff;font-size:10.5px;font-weight:bold}.ws{fill:#fff;font-size:9.6px}.k{font-size:11px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">The life of a meeting request, across pods</text>
+<g>
+<rect x="20" y="50" width="225" height="92" rx="6" fill="#13315C"/><text x="30" y="70" class="w">1. Supply appears</text><text x="30" y="86" class="ws">A broker publishes a conference or</text><text x="30" y="100" class="ws">roadshow calendar. Booking opens</text><text x="30" y="114" class="ws">"four to six weeks before the event"</text><text x="30" y="128" class="ws">and fills fast [S30].</text>
+<rect x="265" y="50" width="225" height="92" rx="6" fill="#D97742"/><text x="275" y="70" class="w">2. Internal sales</text><text x="275" y="86" class="ws">Desk loads it into "the internal</text><text x="275" y="100" class="ws">proprietary Corporate Access portal"</text><text x="275" y="114" class="ws">and "support[s] internal sales and</text><text x="275" y="128" class="ws">target marketing" to the pods [S40].</text>
+<rect x="510" y="50" width="225" height="92" rx="6" fill="#1B998B"/><text x="520" y="70" class="w">3. Pods request</text><text x="520" y="86" class="ws">Each pod submits its own ranked</text><text x="520" y="100" class="ws">requests, privately. Requests are</text><text x="520" y="114" class="ws">tagged with team, relevance and</text><text x="520" y="128" class="ws">prior coverage [S28].</text>
+<rect x="755" y="50" width="225" height="92" rx="6" fill="#D97742"/><text x="765" y="70" class="w">4. One list out</text><text x="765" y="86" class="ws">Desk consolidates into one</text><text x="765" y="100" class="ws">prioritised firm list per broker and</text><text x="765" y="114" class="ws">handles "a high volume of company</text><text x="765" y="128" class="ws">meeting requests" [S40].</text>
+</g>
+<g fill="#0B2545"><path d="M245 96 L262 96 L256 90 M262 96 L256 102" fill="none" stroke="#0B2545" stroke-width="2"/><path d="M490 96 L507 96 L501 90 M507 96 L501 102" fill="none" stroke="#0B2545" stroke-width="2"/><path d="M735 96 L752 96 L746 90 M752 96 L746 102" fill="none" stroke="#0B2545" stroke-width="2"/></g>
+<path d="M867 142 L867 160 L132 160 L132 178" fill="none" stroke="#0B2545" stroke-width="2"/><path d="M126 172 L132 180 L138 172" fill="none" stroke="#0B2545" stroke-width="2"/>
+<g>
+<rect x="20" y="182" width="225" height="92" rx="6" fill="#13315C"/><text x="30" y="202" class="w">5. Broker allocates</text><text x="30" y="218" class="ws">The bank decides who gets its</text><text x="30" y="232" class="ws">scarce one-on-one slots, weighing</text><text x="30" y="246" class="ws">commission relationships and fit</text><text x="30" y="260" class="ws">with the company [S30].</text>
+<rect x="265" y="182" width="225" height="92" rx="6" fill="#D97742"/><text x="275" y="202" class="w">6. Allocation back</text><text x="275" y="218" class="ws">Desk hands won slots to pods and</text><text x="275" y="232" class="ws">manages "allocations" and the</text><text x="275" y="246" class="ws">disappointed [S40]; "scheduling,</text><text x="275" y="260" class="ws">confirmation/cancellation" [S43].</text>
+<rect x="510" y="182" width="225" height="92" rx="6" fill="#D97742"/><text x="520" y="202" class="w">7. The meeting</text><text x="520" y="218" class="ws">"booking and confirming rooms and</text><text x="520" y="232" class="ws">attendees" [S40]; attendance is</text><text x="520" y="246" class="ws">logged: who, which pod, which</text><text x="520" y="260" class="ws">broker, which company [S39][S22].</text>
+<rect x="755" y="182" width="225" height="92" rx="6" fill="#0B2545"/><text x="765" y="202" class="w">8. Consumption and the vote</text><text x="765" y="218" class="ws">"consumption reports for strategy</text><text x="765" y="232" class="ws">sessions with PMs" [S40]; the</text><text x="765" y="246" class="ws">"semi-annual Corporate Access</text><text x="765" y="260" class="ws">Broker Vote" scores brokers [S43].</text>
+</g>
+<g stroke="#0B2545" stroke-width="2" fill="none"><path d="M245 228 L262 228 L256 222 M262 228 L256 234"/><path d="M490 228 L507 228 L501 222 M507 228 L501 234"/><path d="M735 228 L752 228 L746 222 M752 228 L746 234"/></g>
+<text x="20" y="298" class="s">Orange steps are the desk's; navy are the broker's or the centre's; teal is the pod's. Step 8 feeds step 1: brokers that score well get more of the firm's business, and the firm can prove how access was paid for [S2][S16].</text>
+<text x="20" y="312" class="s">Reconstructed from the London intern posting [S40], the Tokyo associate posting [S43], and buy-side workflow descriptions [S28][S30][S39]. The order is the author's.</text>
+</svg>
+<span class="pm">@@f4@@</span><div class="cap"><b>Figure 4.</b> The loop. Each orange box is a sentence from Millennium's own postings <span class="src">[S40][S43]</span>; the broker-side mechanics are from a scheduling vendor's guide <span class="src">[S30]</span>.</div></div>
+
+<h2>3.5 Conference collisions: the daily conflict</h2>
+<p>Hundreds of pods, each with analysts covering dozens of names, means the same company is often wanted by many teams at once <span class="tag i">Inferred</span>. A multi-manager corporate access head says his fund receives "1,000+ headquarters meeting invitations annually", that "with analysts covering dozens of companies each, selectivity is essential", and that engagement is planned "through carefully coordinated quarterly plans rather than ad hoc conference attendance" <span class="src">[S10]</span> <span class="tag c">Confirmed quote</span>. Conferences now carry the load: an IR adviser reports "up to 80% of investor access now happens through conferences" for many companies, with virtual meetings down to 13% of activity <span class="src">[S12]</span> <span class="tag r">Reported, unsourced figures</span>.</p>
+
+<div class="fig">
+<svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:10.4px;fill:#1F2933}.h{font-size:15px;font-weight:bold;fill:#0B2545}.s{font-size:9.4px;fill:#5B6B7C}.w{fill:#fff;font-size:10.5px;font-weight:bold}.ws{fill:#fff;font-size:9.6px}.k{font-size:11px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">A conference collision: ten pods want one CFO; the broker gives the firm four slots (illustrative)</text>
+<text x="30" y="55" class="k">TEN PODS ASK</text>
+<g fill="#1B998B"><rect x="30" y="65" width="165" height="20" rx="3"/><rect x="30" y="90" width="165" height="20" rx="3"/><rect x="30" y="115" width="165" height="20" rx="3"/><rect x="30" y="140" width="165" height="20" rx="3"/><rect x="30" y="165" width="165" height="20" rx="3"/></g>
+<g fill="#8FD3C9"><rect x="30" y="190" width="165" height="20" rx="3"/><rect x="30" y="215" width="165" height="20" rx="3"/><rect x="30" y="240" width="165" height="20" rx="3"/><rect x="30" y="265" width="165" height="20" rx="3"/><rect x="30" y="290" width="165" height="20" rx="3"/></g>
+<g fill="#fff"><text x="38" y="79" class="ws">Pod A: big long, 3 yrs covered</text><text x="38" y="104" class="ws">Pod B: short; needs the CFO</text><text x="38" y="129" class="ws">Pod C: new PM, first meeting</text><text x="38" y="154" class="ws">Pod D: big position, met last qtr</text><text x="38" y="179" class="ws">Pod E: specialist, always asks</text></g>
+<g fill="#1F2933"><text x="38" y="204" class="ws" fill="#1F2933">Pod F: watch-list only</text><text x="38" y="229" class="ws" fill="#1F2933">Pod G: no position, curious</text><text x="38" y="254" class="ws" fill="#1F2933">Pod H: NY team, flying in</text><text x="38" y="279" class="ws" fill="#1F2933">Pod I: asked late</text><text x="38" y="304" class="ws" fill="#1F2933">Pod J: met the CEO last month</text></g>
+<!-- funnel -->
+<path d="M205 65 L400 140 L400 235 L205 310 Z" fill="#FBEEE6" stroke="#D97742"/>
+<text x="230" y="170" class="k" fill="#8A4B12">THE DESK RANKS</text>
+<text x="230" y="188" class="s">by relevance of coverage,</text><text x="230" y="201" class="s">position, prior engagement</text><text x="230" y="214" class="s">and PM priority (inferred;</text><text x="230" y="227" class="s">criteria not published)</text>
+<!-- slots -->
+<text x="420" y="55" class="k">FOUR SLOTS WON</text>
+<g fill="#D97742"><rect x="420" y="65" width="200" height="34" rx="4"/><rect x="420" y="107" width="200" height="34" rx="4"/><rect x="420" y="149" width="200" height="34" rx="4"/><rect x="420" y="191" width="200" height="34" rx="4"/></g>
+<g fill="#fff"><text x="430" y="79" class="w">Slot 1: 09:00 1x1</text><text x="430" y="93" class="ws">Pod A</text><text x="430" y="121" class="w">Slot 2: 09:30 1x1</text><text x="430" y="135" class="ws">Pod B</text><text x="430" y="163" class="w">Slot 3: 10:00 small group</text><text x="430" y="177" class="ws">Pods C, D, E together</text><text x="430" y="205" class="w">Slot 4: 14:00 1x1</text><text x="430" y="219" class="ws">Pod H (NY team, in London)</text></g>
+<text x="420" y="255" class="k">THE OTHER SIX</text>
+<rect x="420" y="265" width="200" height="60" rx="4" fill="#EDEFF2" stroke="#8A96A3"/>
+<text x="428" y="282" class="s">group lunch or fireside slot;</text><text x="428" y="295" class="s">IR call arranged directly via</text><text x="428" y="308" class="s">origination; or next conference.</text><text x="428" y="321" class="s">Nobody is told who got the 1x1s.</text>
+<!-- why panel -->
+<rect x="650" y="50" width="330" height="275" rx="6" fill="#E9EEF5" stroke="#8A96A3"/>
+<text x="662" y="72" class="k">WHY THIS IS THE JOB</text>
+<text x="662" y="92" class="t">The broker allocates to the firm, weighing</text><text x="662" y="106" class="t">commission relationships and fit [S30]; the</text><text x="662" y="120" class="t">desk allocates within the firm. The pods</text><text x="662" y="134" class="t">cannot do it themselves: they compete for</text><text x="662" y="148" class="t">capital and do not share information [S313].</text>
+<text x="662" y="170" class="t">Group meetings with "multiple levels (IR,</text><text x="662" y="184" class="t">CFOs, division heads)" are how a fund</text><text x="662" y="198" class="t">stretches scarce access [S10].</text>
+<text x="662" y="220" class="t">Every allocation is recorded: it feeds the</text><text x="662" y="234" class="t">consumption report and the broker vote, and</text><text x="662" y="248" class="t">it is the compliance record of who was in</text><text x="662" y="262" class="t">the room [S40][S43][S22].</text>
+<text x="662" y="284" class="s">Bankers "process inbound requests" from</text><text x="662" y="297" class="s">hundreds of clients; a firm that sends one</text><text x="662" y="310" class="s">clean, ranked list gets served first [S28][S30].</text>
+<text x="20" y="350" class="s">Illustrative. Pod labels are invented to show the kinds of reasons that compete; Millennium's ranking criteria are not published. The mechanics of broker-side allocation and ranked requests are from WeConvene [S28][S30];</text>
+<text x="20" y="364" class="s">the multi-level engagement and selectivity points are a multi-manager corporate access head via ICR [S10]; the zero-sum, non-sharing nature of pods is from a secondary explainer [S313].</text>
+</svg>
+<span class="pm">@@f5@@</span><div class="cap"><b>Figure 5.</b> Allocation is where the desk's judgement lives. The posting calls it "a high volume of company meeting requests and allocations" <span class="src">[S40]</span>; the criteria are inferred.</div></div>
+
+<h2>3.6 The other four things the desk does across all pods</h2>
+<ul>
+<li><b>Onboarding.</b> "Onboard new investment professionals; educating those new to the firm on Millennium's corporate access offering, process, and tools" <span class="src">[S43]</span>. With 160 PMs hired in 2024 alone <span class="src">[S168]</span> and turnover of 15 to 20% a year <span class="src">[S104]</span> <span class="tag r">Reported</span>, the desk is permanently teaching new franchises how the rail works <span class="tag i">Inferred</span>.</li>
+<li><b>Internal marketing.</b> "Support internal sales and target marketing efforts" <span class="src">[S40]</span>: knowing which pods cover what, and pushing the right upcoming event to the right team before the broker's booking window closes <span class="tag i">Inferred from [S40][S28][S30]</span>. Point72's equivalent posting spells it out as "developing expertise on Point72 discretionary investment teams and their corporate access needs" <span class="src">[S27]</span> <span class="tag r">Reported</span>.</li>
+<li><b>Consumption reporting.</b> "Corporate Access consumption reports for strategy sessions with Portfolio Managers and Analysts" <span class="src">[S40]</span>. Industry-wide, one-on-one company meetings are the single most tracked service in broker votes (82% of respondents in a Greenwich survey) <span class="src">[S39]</span> <span class="tag r">Reported</span>. The report tells each pod what it used and tells the firm which brokers delivered.</li>
+<li><b>Calendar intelligence.</b> "Reports around company marketing calendars/earnings/quiet periods" <span class="src">[S42]</span>, because meetings near results are both less useful and more dangerous under market-abuse rules (Part 4).</li>
+</ul>
+</div>
+
+<!-- ================= PART 4 ================= -->
+<div class="section" style="--pc:#B23A48"><span class="pm">@@p4@@</span>
+<div class="section-band"><div class="kicker">Part 4</div><h1>The six walls: how the team is separated, and why</h1><p class="lede">"Separate" means two different things here: how the team is divided up inside, and what it is walled off from. This part does both, and gives a reason for every wall.</p></div>
+
+<h2>4.1 How the team is divided inside</h2>
+<table>
+<tr><th style="width:18%">Split</th><th style="width:42%">What it looks like</th><th>Why</th></tr>
+<tr><td>By region</td><td>Americas, EMEA, APAC desks; each serves its own region "primarily" and everyone globally who attends its events <span class="src">[S43][S40]</span> <span class="tag c">Confirmed</span></td><td>Companies and conferences are local; time zones; the London desk needs London broker relationships <span class="tag i">Inferred</span></td></tr>
+<tr><td>By channel</td><td>Corporate Access Services (broker-sourced) versus Sector Specialist Origination (direct) <span class="src">[S42][S47]</span> <span class="tag c">Confirmed</span></td><td>Different counterparties (banks versus IR teams), different skills (service and allocation versus sector relationships), different pay rules (Part 4.3) <span class="tag i">Inferred</span></td></tr>
+<tr><td>By event type</td><td>Conferences; one-on-ones and IR calls; non-deal roadshows; site and factory visits; in-house meetings <span class="src">[S40][S43][S49]</span> <span class="tag c">Confirmed</span></td><td>Each has its own logistics and compliance profile; conferences carry the volume <span class="src">[S12]</span></td></tr>
+<tr><td>By sector (origination only)</td><td>Originators are sectorised: healthcare, consumer and so on <span class="src">[S46][S68]</span>; the service desk itself does not appear to be sector-split <span class="tag i">Inferred</span></td><td>IR relationships are built by sector; a service desk serves all sectors' pods and cannot afford silos of its own <span class="tag i">Inferred</span></td></tr>
+<tr><td>By seniority</td><td>Intern, Coordinator, Associate, Senior Associate, regional head, "Corporate Access heads", Head of Corporate Access Services International <span class="src">[S42][S53][S54]</span> <span class="tag i">Inferred from titles</span></td><td>Standard service-desk ladder; interns do the loop's mechanical steps (rooms, portal, requests, reports) <span class="src">[S40]</span></td></tr>
+</table>
+
+<h2>4.2 The six walls</h2>
+<div class="fig">
+<svg viewBox="0 0 1000 640" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:10.4px;fill:#1F2933}.h{font-size:15px;font-weight:bold;fill:#0B2545}.s{font-size:9.4px;fill:#5B6B7C}.w{fill:#fff;font-size:10.8px;font-weight:bold}.ws{fill:#fff;font-size:9.8px}.k{font-size:11px;font-weight:bold;fill:#0B2545}.wall{stroke:#B23A48;stroke-width:4;stroke-dasharray:8 5}</style>
+<text x="20" y="24" class="h">The six walls around the desk: what crosses each one, and why it exists</text>
+<!-- centre -->
+<rect x="375" y="255" width="250" height="130" rx="10" fill="#D97742"/>
+<text x="390" y="280" class="w">CORPORATE ACCESS SERVICES</text><text x="390" y="295" class="w">EMEA desk, London</text>
+<text x="390" y="315" class="ws">Execution Services / PSEM [S40][S42]</text>
+<text x="390" y="329" class="ws">a "Core" team, not an investment team [S50]</text>
+<text x="390" y="343" class="ws">serves all fundamental pods; paid by none</text>
+<text x="390" y="357" class="ws">holds every pod's requests and the log</text>
+<text x="390" y="371" class="ws">est. 3-6 people plus intern (inferred)</text>
+<!-- 1 pods (top) -->
+<rect x="300" y="40" width="400" height="120" rx="8" fill="#E3F4F1" stroke="#1B998B" stroke-width="2"/>
+<text x="312" y="60" class="k" fill="#0E6B5F">WALL 1: THE PODS (your clients)</text>
+<text x="312" y="78" class="t">Crosses: requests in, allocations and meetings out, consumption reports.</text>
+<text x="312" y="92" class="t">Does not cross: the desk is not on any pod's P&amp;L, holds no positions,</text>
+<text x="312" y="106" class="t">and does not push views. Pods "empowered to build ... their businesses" [S77].</text>
+<text x="312" y="124" class="s">Why: a rail must be neutral. If the desk favoured a pod, or was paid by one,</text>
+<text x="312" y="137" class="s">allocation would stop being trusted by the other 349 (inferred).</text>
+<line x1="500" y1="160" x2="500" y2="255" class="wall"/>
+<!-- 2 pod vs pod (top-left) -->
+<rect x="20" y="170" width="300" height="118" rx="8" fill="#F8E4E7" stroke="#B23A48"/>
+<text x="32" y="190" class="k" fill="#B23A48">WALL 2: POD FROM POD</text>
+<text x="32" y="208" class="t">Crosses: nothing, through the desk. Pod A's</text><text x="32" y="222" class="t">request, position and reasoning stay invisible</text><text x="32" y="236" class="t">to Pod B, even when both get the same slot.</text>
+<text x="32" y="254" class="s">Why: capital is zero-sum [S313]; pods compete;</text><text x="32" y="267" class="s">the centre watches for crowding [S313][S319].</text><text x="32" y="280" class="s">The desk must not become the leak (inferred).</text>
+<line x1="320" y1="240" x2="375" y2="285" class="wall"/>
+<!-- 3 sell side (right) -->
+<rect x="700" y="120" width="280" height="130" rx="8" fill="#E9EEF5" stroke="#13315C"/>
+<text x="712" y="140" class="k">WALL 3: THE SELL-SIDE (brokers)</text>
+<text x="712" y="158" class="t">Crosses: calendars and slots in; one ranked</text><text x="712" y="172" class="t">list out; the semi-annual broker vote [S43].</text>
+<text x="712" y="190" class="s">Why: since 2 Jun 2014 UK funds may not buy</text><text x="712" y="203" class="s">access with dealing commission [S2]; since</text><text x="712" y="216" class="s">2018 it is a separately priced service, not</text><text x="712" y="229" class="s">research [S13][S16]. The desk is where the</text><text x="712" y="242" class="s">firm proves it pays properly.</text>
+<line x1="700" y1="230" x2="625" y2="280" class="wall"/>
+<!-- 4 origination (right-bottom) -->
+<rect x="700" y="290" width="280" height="120" rx="8" fill="#EBE7F3" stroke="#5E548E"/>
+<text x="712" y="310" class="k" fill="#5E548E">WALL 4: SECTOR SPECIALIST ORIGINATION</text>
+<text x="712" y="328" class="t">Crosses: joint execution of originated events;</text><text x="712" y="342" class="t">calendar and quiet-period intel [S42][S47].</text>
+<text x="712" y="360" class="s">Why separate: origination is sectorised and</text><text x="712" y="373" class="s">relationship-led with IR teams; the desk is</text><text x="712" y="386" class="s">cross-sector and service-led with banks.</text><text x="712" y="399" class="s">Siblings inside Platform Solutions [S48].</text>
+<line x1="700" y1="340" x2="625" y2="330" class="wall" stroke-dasharray="2 4"/>
+<!-- 5 compliance (bottom) -->
+<rect x="300" y="450" width="400" height="120" rx="8" fill="#FBEEE6" stroke="#D97742"/>
+<text x="312" y="470" class="k" fill="#8A4B12">WALL 5: COMPLIANCE</text>
+<text x="312" y="488" class="t">Crosses: the meeting log; restricted-list checks; quiet-period flags;</text>
+<text x="312" y="502" class="t">escalation when a meeting might carry inside information.</text>
+<text x="312" y="520" class="s">Why separate: the FCA praised firms with a contact point "independent of</text>
+<text x="312" y="533" class="s">the fund managers" for approaches [S20] and wants "gatekeeper" arrangements</text>
+<text x="312" y="546" class="s">[S23]; Millennium's oversight committee dates from 2005 [S302]. The desk</text>
+<text x="312" y="559" class="s">records; compliance decides (inferred from the sources).</text>
+<line x1="500" y1="385" x2="500" y2="450" class="wall"/>
+<!-- 6 name confusion (bottom-left) -->
+<rect x="20" y="305" width="300" height="130" rx="8" fill="#EDEFF2" stroke="#8A96A3"/>
+<text x="32" y="325" class="k" fill="#5B6B7C">WALL 6: THE LOOKALIKES</text>
+<text x="32" y="343" class="t">Business Development: sources and selects</text><text x="32" y="357" class="t">new PMs [S58]. Capital Development /</text><text x="32" y="371" class="t">investor relations: raises money from</text><text x="32" y="385" class="t">investors [S58]. Neither is corporate access.</text>
+<text x="32" y="403" class="s">Why it matters: candidates confuse them.</text><text x="32" y="416" class="s">Corporate access faces companies; BD faces</text><text x="32" y="429" class="s">PMs; Capital Development faces investors.</text>
+<line x1="320" y1="360" x2="375" y2="350" class="wall" stroke-dasharray="2 4"/>
+<text x="20" y="600" class="s">Dashed red lines are walls (information or money should not cross except as stated); dotted lines are sibling boundaries inside the same organisation. Team placement from Millennium postings [S40][S42][S48][S50];</text>
+<text x="20" y="614" class="s">regulation from the FCA and ESMA [S2][S13][S16][S20][S23]; pod behaviour from secondary explainers [S313]; the "why" lines are the author's reasoning unless a source is marked.</text>
+<text x="20" y="632" class="s">Team size is an estimate from public aggregators [S53][S54][S68], not a Millennium figure.</text>
+</svg>
+<span class="pm">@@f6@@</span><div class="cap"><b>Figure 6.</b> The six walls. Millennium confirms the desk's placement and function <span class="src">[S40][S42][S50]</span>; the regulators supply the reason for walls 3 and 5 <span class="src">[S2][S16][S20][S23]</span>; walls 1, 2 and 4 are inferred from how the platform model works.</div></div>
+
+<h2>4.3 Each wall, in more depth</h2>
+<h4>Wall 1: the desk is not an investment seat</h4>
+<p>The desk sits in Execution Services and in the Platform Solutions Execution Management initiative, which resources "Millennium investment professionals globally across access, data, research, and technology" <span class="src">[S42]</span> <span class="tag c">Confirmed</span>. A London posting for a business manager lists "Millennium Core teams, including Business Development, Corporate Access, Equity Research Tools, AI" as partners to the investment business <span class="src">[S50]</span> <span class="tag c">Confirmed</span>. Core means shared infrastructure. Its "clients" are internal: the posting's own phrase is "client service to Portfolio Managers and Analysts" <span class="src">[S40]</span>. The senior line runs through the Global Head of Execution Services, Owain Self <span class="src">[S58]</span>, and in London through the Head of Execution Services EMEA <span class="src">[S57]</span> <span class="tag u">Aggregator</span>, under the CEO EMEA, Martin Pabari, who is "responsible for daily oversight and management of the region" <span class="src">[S58]</span> <span class="tag c">Confirmed</span>. It does not run through any PM. That is the wall: the desk's pay, reporting line and success metric (meeting quantity and quality, consumption) are independent of any one pod's P&amp;L <span class="tag i">Inferred</span>.</p>
+
+<h4>Wall 2: pods from each other, through the desk</h4>
+<p>No Millennium source describes the desk's confidentiality rules, so this is inference from three confirmed facts: pods compete for a fixed capital budget <span class="src">[S313]</span>; the centre monitors cross-pod correlation and crowding <span class="src">[S313][S319]</span>; and headhunters describe a firm where "you're operating your own mini hedge fund" <span class="src">[S304]</span>. A desk that told Pod B that Pod A had asked for the same CFO would be handing over information about Pod A's research agenda, and possibly its position. The Point72 equivalent posting stresses working "closely with the firm's investment and Compliance professionals" <span class="src">[S66]</span> <span class="tag r">Reported</span>. Treat every request as confidential to the pod that made it <span class="tag i">Inferred</span>.</p>
+
+<h4>Wall 3: the sell-side, and the money</h4>
+<p>This wall is regulatory and it is the reason the modern desk exists. On 2 June 2014 the FCA's PS14/7 banned UK managers from paying for corporate access with dealing commission, calling it a discrete service that is not research <span class="src">[S2]</span> <span class="tag c">Confirmed, primary</span>. MiFID II (3 January 2018) then separated research payments from execution across Europe, and ESMA's 2017 Q&amp;A said a firm "can also treat corporate access as a commercial service and pay for it appropriately from its own resources" <span class="src">[S13]</span>. The FCA's 2019 review found research budgets down 20 to 30% and flagged "one firm's improper use of research payment accounts for these services" <span class="src">[S16]</span> <span class="tag c">Confirmed</span>. Only access to companies under £200m market cap may be accepted free as a minor non-monetary benefit <span class="src">[S15]</span>. So the firm must be able to show what access it received, from whom, and how it was paid. A central desk with one log and one broker vote is how it shows that <span class="tag i">Inferred</span>. Millennium's New York role "advise[s] on broker votes, commission allocation, and research budgets" <span class="src">[S25]</span> <span class="tag c">Confirmed</span>.</p>
+
+<h4>Wall 4: the desk and origination are siblings, not one team</h4>
+<p>Both sit inside Platform Solutions with Content Solutions and Broker Relations <span class="src">[S48]</span> <span class="tag c">Confirmed</span>. The Sector Specialist interns "work collaboratively with Millennium's Sector Specialist &amp; Corporate Access Teams globally to centralize and execute originated corporate access activity" <span class="src">[S47]</span>, so the boundary is porous by design. Why not merge them? Because originators are hired by sector with 5-plus years' experience and paid accordingly (New York healthcare origination: $160,000 to $250,000 base) <span class="src">[S46]</span>, and their asset is a relationship with a company's IR team; the service desk's asset is process and broker relationships across every sector <span class="tag i">Inferred</span>. Point72 runs the same two-part structure, with originators "planning a high-quality pipeline of originated corporate access across specific sectors" <span class="src">[S27]</span> <span class="tag r">Reported</span>.</p>
+
+<h4>Wall 5: compliance decides, the desk records</h4>
+<p>Under UK Market Abuse Regulation, inside information received in a meeting binds whoever received it; the FCA has "opened numerous enquiries into suspected unlawful disclosures by issuers' senior executives in analyst briefings" <span class="src">[S21]</span>, and its Primary Market Bulletin 52 says private issuer-shareholder communications count as "dissemination" and recommends issuers avoid calls in closed periods <span class="src">[S22]</span> <span class="tag c">Confirmed, primary</span>. The cautionary case is Greenlight in 2012: a broker-arranged call in which a CEO disclosed a coming equity raise cost the fund and its founder over £7m in fines, and refusing to be wall-crossed was no defence <span class="src">[S19]</span> <span class="tag c">Confirmed</span>. The FCA's good-practice examples include avoiding investee meetings in close periods and having a contact point "independent of the fund managers" <span class="src">[S20]</span>. Hence the desk's calendar work on "earnings/quiet periods" <span class="src">[S42]</span> and its meeting log; and hence the wall: the desk knows every meeting, but compliance owns the restricted list and the decision <span class="tag i">Inferred</span>. Millennium's compliance function is the descendant of the oversight committee imposed after the 2005 settlement <span class="src">[S302]</span>.</p>
+
+<h4>Wall 6: the lookalikes</h4>
+<p>Business Development at Millennium means recruiting PMs: its EMEA head is "responsible for overseeing a team based in London, who source and select new portfolio managers and investment professionals" <span class="src">[S58]</span> <span class="tag c">Confirmed</span>. Capital Development means raising money from investors <span class="src">[S58]</span>. Corporate Access faces listed companies on behalf of the pods. Three "relationship" functions, three different counterparties, and confusing them in an interview is an easy way to look unprepared.</p>
+</div>
+
+<!-- ================= PART 5 ================= -->
+<div class="section" style="--pc:#5E548E"><span class="pm">@@p5@@</span>
+<div class="section-band"><div class="kicker">Part 5</div><h1>Why it is built this way, and what it means for you</h1><p class="lede">Three forces explain the design: the economics of hundreds of small businesses, the regulation of how access is paid for, and the platform model itself.</p></div>
+
+<h2>5.1 Three reasons for the design</h2>
+<div class="three">
+<div class="card"><h4>1. Economics of scale</h4><p>Pods are small and numerous; each cannot afford its own broker relationships, conference desk and compliance record. One desk turns hundreds of thin demands into one thick relationship with each bank and company, which is what earns priority in a slot allocation that banks decide on "commission relationships and fit" <span class="src">[S30]</span>. Big pods that can afford their own layer (Passaic, Misura) still sit on top of the central rail <span class="src">[S44][S45]</span>.</p></div>
+<div class="card"><h4>2. Regulation of payment</h4><p>Since 2014 in the UK and 2018 in Europe, access is a discrete, separately paid service <span class="src">[S2][S13]</span>. Every meeting must be attributable and provably not bought with commission or subsidised by research money <span class="src">[S16]</span>. That requires one log, one vote and one budget owner. A pod-by-pod arrangement could not be audited <span class="tag i">Inferred</span>.</p></div>
+<div class="card"><h4>3. The platform model</h4><p>The centre's philosophy is to supply everything except the trade idea: capital, limits, financing, execution, data and access <span class="src">[S42][S318][S321]</span>. The cage strips out factors so the only thing a pod is paid for is being right about companies, and access is the raw material for that. A centralised desk is the model applied to meetings <span class="tag i">Inferred</span>.</p></div>
+</div>
+
+<div class="fig">
+<svg viewBox="0 0 1000 395" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:10.4px;fill:#1F2933}.h{font-size:15px;font-weight:bold;fill:#0B2545}.s{font-size:9.4px;fill:#5B6B7C}.w{fill:#fff;font-size:10.8px;font-weight:bold}.ws{fill:#fff;font-size:9.8px}.k{font-size:11px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">Meetings, money and information: what flows where</text>
+<!-- lanes -->
+<g>
+<rect x="20" y="60" width="180" height="70" rx="6" fill="#5E548E"/><text x="30" y="82" class="w">LISTED COMPANIES</text><text x="30" y="98" class="ws">management and IR teams</text><text x="30" y="112" class="ws">want the right investors,</text><text x="30" y="126" class="ws">not 30 conferences a year [S10]</text>
+<rect x="280" y="60" width="180" height="70" rx="6" fill="#13315C"/><text x="290" y="82" class="w">BROKERS</text><text x="290" y="98" class="ws">host conferences, NDRs,</text><text x="290" y="112" class="ws">1x1s; allocate scarce slots</text><text x="290" y="126" class="ws">[S30]</text>
+<rect x="540" y="60" width="180" height="70" rx="6" fill="#D97742"/><text x="550" y="82" class="w">THE DESK</text><text x="550" y="98" class="ws">one list out, allocation back,</text><text x="550" y="112" class="ws">log, consumption, vote</text><text x="550" y="126" class="ws">[S40][S43]</text>
+<rect x="800" y="60" width="180" height="70" rx="6" fill="#1B998B"/><text x="810" y="82" class="w">THE PODS</text><text x="810" y="98" class="ws">hundreds of independent</text><text x="810" y="112" class="ws">clients; confidential requests</text><text x="810" y="126" class="ws">[S77][S313]</text>
+</g>
+<!-- meetings flow -->
+<text x="20" y="165" class="k" fill="#5E548E">MEETINGS</text>
+<g stroke="#5E548E" stroke-width="3" fill="none"><path d="M200 175 L275 175"/><path d="M460 175 L535 175"/><path d="M720 175 L795 175"/></g>
+<g fill="#5E548E"><path d="M275 170 L283 175 L275 180 Z"/><path d="M535 170 L543 175 L535 180 Z"/><path d="M795 170 L803 175 L795 180 Z"/></g>
+<path d="M200 192 C 380 245, 560 245, 795 192" fill="none" stroke="#5E548E" stroke-width="2" stroke-dasharray="6 4"/><path d="M795 187 L803 192 L795 197 Z" fill="#5E548E"/>
+<text x="290" y="249" class="s" fill="#5E548E">originated channel: direct, via Sector Specialists [S42][S47]</text>
+<!-- money flow -->
+<text x="20" y="280" class="k" fill="#B23A48">MONEY</text>
+<g stroke="#B23A48" stroke-width="3" fill="none"><path d="M535 290 L465 290"/></g><path d="M465 285 L457 290 L465 295 Z" fill="#B23A48"/>
+<text x="290" y="308" class="s">paid separately for access, from the firm's own</text><text x="290" y="321" class="s">resources, never with dealing commission [S2][S13]</text>
+<g stroke="#B23A48" stroke-width="3" fill="none"><path d="M795 290 L725 290"/></g><path d="M725 285 L717 290 L725 295 Z" fill="#B23A48"/>
+<text x="740" y="308" class="s">costs pass through to</text><text x="740" y="321" class="s">investors [S104][S87]</text>
+<text x="30" y="308" class="s">companies pay nothing; they</text><text x="30" y="321" class="s">choose whom to meet [S30]</text>
+<!-- information flow -->
+<text x="20" y="352" class="k" fill="#0B2545">INFORMATION</text>
+<g stroke="#0B2545" stroke-width="2" fill="none"><path d="M535 362 L465 362"/><path d="M720 362 L795 362"/><path d="M630 130 L630 362"/></g>
+<g fill="#0B2545"><path d="M465 357 L457 362 L465 367 Z"/><path d="M795 357 L803 362 L795 367 Z"/></g>
+<text x="290" y="379" class="s">broker vote: which banks earned their share [S43][S39]</text>
+<text x="740" y="379" class="s">consumption report per pod [S40]</text>
+<text x="640" y="250" class="s" fill="#0B2545">to compliance:</text><text x="640" y="263" class="s" fill="#0B2545">the meeting log</text><text x="640" y="276" class="s" fill="#0B2545">[S20][S22]</text>
+</svg>
+<span class="pm">@@f7@@</span><div class="cap"><b>Figure 7.</b> Three flows through one desk. Meetings move left to right; money moves right to left and stops at the broker; information moves both ways and down to compliance. Payment rules from the FCA and ESMA <span class="src">[S2][S13]</span>.</div></div>
+
+<h2>5.2 What it means for an intern</h2>
+<ul>
+<li><b>Neutrality is the product.</b> The desk is trusted by hundreds of competing franchises only because it favours none. Treat every pod the same and every request as confidential <span class="tag i">Inferred</span>.</li>
+<li><b>Know the client map.</b> "Internal sales and target marketing" <span class="src">[S40]</span> means knowing which pods cover which sectors and names, so the right event reaches the right team before the booking window closes <span class="src">[S30]</span>.</li>
+<li><b>The log is not admin.</b> Rooms, attendees and the portal are the firm's compliance record and its evidence for the broker vote and for how access was paid <span class="src">[S20][S22][S16][S39]</span>.</li>
+<li><b>Scale is the trend.</b> Teams grew from 265 to 350-plus in six years <span class="src">[S92][S71]</span>, 160 PMs were hired in 2024 <span class="src">[S168]</span>, and whole external firms are joining the rails <span class="src">[S102][S110]</span>. The desk's client base grows faster than the desk does <span class="tag i">Inferred</span>.</li>
+</ul>
+<div class="box say"><div class="lbl">Say this, in your own words, when they ask what the team does</div><p>"As I understand it, the desk is the firm's single point of consumption for corporate access. The pods are hundreds of separate businesses that compete for capital and don't share ideas, so they can't coordinate meetings themselves. The desk turns their confidential requests into one prioritised list per broker, allocates what comes back, keeps the log that compliance and the broker vote rely on, and pays for access in the way the FCA requires since 2014. Origination is the sibling team that goes direct to companies by sector. That's why it sits in Execution Services rather than in any investment team."</p></div>
+<div class="box dont"><div class="lbl">Don't</div><p>Do not claim to know the London desk's size, its ranking criteria or its systems; say they are not public and that you have inferred the shape from the postings. Do not confuse Business Development (recruits PMs) or Capital Development (raises money) with Corporate Access. Do not name individual PMs or pods.</p></div>
+
+<h2>5.3 Questions this lets you ask</h2>
+<div class="qa"><div class="q">"How much of EMEA demand now comes through originated versus broker channels, and is the mix moving?"</div><div class="t"><b>Why it works</b> Shows you know the two channels <span class="src">[S40][S42]</span> and that origination matters more where broker coverage has thinned <span class="src">[S34]</span>.</div></div>
+<div class="qa"><div class="q">"When ten teams want the same one-on-one, what does the allocation actually turn on?"</div><div class="t"><b>Why it works</b> It is the daily conflict the posting hints at with "requests and allocations" <span class="src">[S40]</span>; you are asking about process, not people.</div></div>
+<div class="qa"><div class="q">"What does a good consumption report look like, and what does a PM strategy session decide from it?"</div><div class="t"><b>Why it works</b> Straight from the posting <span class="src">[S40]</span>; it shows you see the data as the product, not the meetings.</div></div>
+<div class="qa"><div class="q">"How does the desk work with pods that have their own corporate access lead?"</div><div class="t"><b>Why it works</b> Shows you found the Passaic posting <span class="src">[S44]</span> and understand the central-versus-embedded layering. Ask it generically; do not name the pod.</div></div>
+</div>
+
+<!-- ================= PART 6 ================= -->
+<div class="section" style="--pc:#13315C"><span class="pm">@@p6@@</span>
+<div class="section-band"><div class="kicker">Part 6</div><h1>The desk and the pods on one page; glossary</h1><p class="lede">Read top to bottom. Solid boxes are Millennium's own words or primary records; the rest is reported industry practice and the author's synthesis, marked.</p></div>
+<div class="fig">
+<svg viewBox="0 0 1000 760" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:10.4px;fill:#1F2933}.h{font-size:15px;font-weight:bold;fill:#0B2545}.s{font-size:9.4px;fill:#5B6B7C}.w{fill:#fff;font-size:11px;font-weight:bold}.ws{fill:#fff;font-size:10px}.k{font-size:11px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">The desk and the pods on one page</text>
+<rect x="20" y="40" width="960" height="70" rx="6" fill="#1B998B"/>
+<text x="32" y="60" class="w">THE PODS: 350+ investment teams [S71], each "operating your own mini hedge fund" [S304]</text>
+<text x="32" y="76" class="ws">PM plus analysts; capital often $100-200m, 4-8x gross, net within +/-20%, cut at -5%, out at -7.5% [S104][S311][S313]. Paid only for company-specific calls. Compete for a fixed</text>
+<text x="32" y="90" class="ws">capital budget; do not share ideas [S313]. Grew from 265 (2020) to 350+ (2026) [S92][S71]. Your clients are the fundamental teams, mostly EMEA, plus anyone globally attending European events [S40][S43].</text>
+<path d="M500 110 L500 128" stroke="#0B2545" stroke-width="2"/><path d="M494 122 L500 130 L506 122" fill="none" stroke="#0B2545" stroke-width="2"/>
+<rect x="20" y="132" width="960" height="96" rx="6" fill="#D97742"/>
+<text x="32" y="152" class="w">THE DESK: Corporate Access Services, EMEA, an arm of Execution Services inside PSEM [S40][S42]</text>
+<text x="32" y="168" class="ws">Purpose: "centralize the access provided by sell-side brokers" and "increase the quantity and quality of their industry meetings" [S42][S40]. Loop: broker calendar in; internal sales via the portal;</text>
+<text x="32" y="182" class="ws">confidential ranked requests from pods; one list per broker; allocation back; rooms and attendees; the log; consumption reports; the semi-annual broker vote; onboarding new PMs [S40][S43].</text>
+<text x="32" y="196" class="ws">Three regional desks (Americas, EMEA, APAC) [S43]. Sibling: Sector Specialist Origination goes direct to companies by sector [S42][S47]. Big pods add their own layer (Passaic, Misura) [S44][S45].</text>
+<text x="32" y="216" class="ws" style="opacity:.9">Size: not published; estimated 15-30 globally, 3-6 in London plus an intern, from public aggregators (inferred) [S53][S54][S68].</text>
+<path d="M500 228 L500 246" stroke="#0B2545" stroke-width="2"/><path d="M494 240 L500 248 L506 240" fill="none" stroke="#0B2545" stroke-width="2"/>
+<g>
+<rect x="20" y="250" width="470" height="150" rx="6" fill="#E9EEF5" stroke="#13315C"/>
+<text x="32" y="270" class="k">HOW THE TEAM IS SPLIT INSIDE</text>
+<text x="32" y="288" class="t">By region: three desks, each "primarily" its own PMs, all IPs welcome [S43].</text>
+<text x="32" y="303" class="t">By channel: broker-sourced (the desk) versus originated (Sector Specialists) [S42].</text>
+<text x="32" y="318" class="t">By event: conferences, 1x1s and IR calls, NDRs, site visits, in-house [S40][S43][S49].</text>
+<text x="32" y="333" class="t">By sector: origination only; the service desk serves every sector's pods [S46][S68].</text>
+<text x="32" y="348" class="t">By seniority: intern, coordinator, associate, senior associate, heads [S42][S53].</text>
+<text x="32" y="370" class="s">Why: companies and conferences are local; IR relationships are sectoral;</text><text x="32" y="383" class="s">a service desk cannot afford silos of its own (inferred).</text>
+<rect x="510" y="250" width="470" height="150" rx="6" fill="#F8E4E7" stroke="#B23A48"/>
+<text x="522" y="270" class="k" fill="#B23A48">THE SIX WALLS</text>
+<text x="522" y="288" class="t">1. Pods: the desk is Core, not investing; on nobody's P&amp;L [S50][S40].</text>
+<text x="522" y="303" class="t">2. Pod from pod: requests stay confidential; capital is zero-sum [S313].</text>
+<text x="522" y="318" class="t">3. Brokers: access paid separately since 2014/2018; one log, one vote [S2][S13][S16].</text>
+<text x="522" y="333" class="t">4. Origination: sibling, sectorised, relationship-led [S47][S48].</text>
+<text x="522" y="348" class="t">5. Compliance: independent gatekeeper; the desk records, compliance decides [S20][S23].</text>
+<text x="522" y="363" class="t">6. Lookalikes: Business Development recruits PMs; Capital Development raises money [S58].</text>
+<text x="522" y="383" class="s">Walls 1, 2, 4 are inferred from the model; 3 and 5 are regulatory; 6 is naming.</text>
+</g>
+<path d="M500 400 L500 418" stroke="#0B2545" stroke-width="2"/><path d="M494 412 L500 420 L506 412" fill="none" stroke="#0B2545" stroke-width="2"/>
+<rect x="20" y="422" width="960" height="110" rx="6" fill="#E3F4F1" stroke="#1B998B"/>
+<text x="32" y="442" class="k" fill="#0E6B5F">WHY IT IS BUILT THIS WAY</text>
+<text x="32" y="460" class="t"><tspan font-weight="bold">Economics:</tspan> hundreds of small franchises cannot each run broker relationships, a conference desk and a compliance record; one desk turns thin demands into one thick relationship that</text>
+<text x="32" y="474" class="t">banks prioritise [S30]. <tspan font-weight="bold">Regulation:</tspan> the FCA (PS14/7, 2 Jun 2014) and MiFID II (3 Jan 2018) made access a discrete, separately paid service that must be attributable [S2][S13][S16]; MAR makes every</text>
+<text x="32" y="488" class="t">meeting a potential inside-information event that must be logged and, when needed, escalated [S21][S22][S20]. <tspan font-weight="bold">The model:</tspan> the centre supplies everything but the idea, and strips out every factor</text>
+<text x="32" y="502" class="t">so the pod is paid only for being right about companies [S318][S319]; access is the raw material for that, so it is centralised like capital, risk and execution (inferred).</text>
+<text x="32" y="522" class="s">"Our job isn't to replace brokers. It's to optimize how we consume corporate access." (multi-manager corporate access head via ICR [S10])</text>
+<path d="M500 532 L500 550" stroke="#0B2545" stroke-width="2"/><path d="M494 544 L500 552 L506 544" fill="none" stroke="#0B2545" stroke-width="2"/>
+<rect x="20" y="554" width="960" height="120" rx="6" fill="#FBEEE6" stroke="#D97742"/>
+<text x="32" y="574" class="k" fill="#8A4B12">WHAT AN INTERN ACTUALLY DOES IN THE LOOP (from the posting, in order) [S40]</text>
+<text x="32" y="592" class="t">Update the portal and market upcoming events to the pods; collect and process a high volume of requests and allocations for conferences; book and confirm rooms and attendees for EMEA</text>
+<text x="32" y="606" class="t">meetings; build and maintain relationships with brokers; prepare consumption reports for PM strategy sessions; support the broker vote and onboarding [S43]. Every step touches many pods at once.</text>
+<text x="32" y="626" class="t"><tspan font-weight="bold">The rules of the seat (inferred):</tspan> favour no pod; tell no pod about another; log everything; flag anything near a results date or that sounds like inside information; treat brokers as partners you also score.</text>
+<text x="32" y="646" class="s">Calendar context: booking windows open four to six weeks before an event and fill quickly [S30]; up to 80% of investor access at many companies now happens at conferences [S12]; a large fund gets 1,000+ HQ</text>
+<text x="32" y="659" class="s">invitations a year [S10].</text>
+<rect x="20" y="690" width="960" height="52" rx="6" fill="#0B2545"/>
+<text x="32" y="710" class="w">THE ONE-LINE ANSWER TO "HOW DOES YOUR ROLE SPAN THE PODS?"</text>
+<text x="32" y="728" class="ws">"The desk is the only place where the demand of hundreds of independent, competing teams for the same companies becomes visible; it turns that into one voice to the market and one fair allocation back."</text>
+</svg>
+<span class="pm">@@f8@@</span><div class="cap"><b>Figure 8.</b> The desk and the pods on one page. Sources as marked; synthesis is the author's.</div></div>
+
+<h2>Glossary</h2>
+<dl class="gloss">
+<dt>Pod / investment team</dt><dd>One PM and a small team running one slice of the firm's capital under their own strategy and limits. Millennium says "350+" <span class="src">[S71]</span>.</dd>
+<dt>Corporate access</dt><dd>Arranging meetings between investors and the management or investor-relations teams of listed companies: conferences, one-on-ones, non-deal roadshows, site visits, IR calls.</dd>
+<dt>Broker-sourced versus originated</dt><dd>Meetings arranged by a bank, versus meetings the firm arranges directly with the company <span class="src">[S40][S42]</span>.</dd>
+<dt>Sell-side</dt><dd>Banks and brokers. They host most conferences and allocate scarce one-on-one slots among their clients <span class="src">[S30]</span>.</dd>
+<dt>PSEM / Platform Solutions</dt><dd>Platform Solutions Execution Management, the Execution Services initiative that resources investment professionals "across access, data, research, and technology" <span class="src">[S42]</span>. Siblings: Sector Specialists, Corporate Access, Broker Relations, Content Solutions <span class="src">[S48]</span>.</dd>
+<dt>Core team</dt><dd>Millennium's label for shared, non-investing functions such as Business Development, Corporate Access, Equity Research Tools and AI <span class="src">[S50]</span>.</dd>
+<dt>Allocation</dt><dd>Two meanings. At the centre, giving capital to pods. On the desk, giving won meeting slots to pods <span class="src">[S40]</span>.</dd>
+<dt>Consumption report</dt><dd>A record of which PMs and analysts attended which meetings, from which broker; used in PM strategy sessions and in the broker vote <span class="src">[S40][S39]</span>.</dd>
+<dt>Broker vote</dt><dd>The buy-side's periodic scoring of brokers' services, which drives how the firm rewards them; at Millennium it is semi-annual for corporate access <span class="src">[S43][S39]</span>.</dd>
+<dt>Idiosyncratic risk</dt><dd>The part of a stock's return specific to that company after market, sector and style factors are removed. The only risk a pod is paid to take.</dd>
+<dt>MNPI / inside information</dt><dd>Material non-public information. Receiving it in a meeting restricts what the recipient may trade; under UK MAR it applies to anyone who receives it <span class="src">[S21]</span>.</dd>
+<dt>Quiet period / close period</dt><dd>The weeks before results when companies limit what they say; meetings then are less useful and riskier <span class="src">[S22][S20]</span>.</dd>
+<dt>PS14/7</dt><dd>The FCA policy statement of May 2014 that, from 2 June 2014, stopped UK managers paying for corporate access with dealing commission <span class="src">[S2]</span>.</dd>
+<dt>Unbundling / MiFID II</dt><dd>The 2018 European rules separating payment for research from payment for execution; corporate access is treated as neither, and paid for separately <span class="src">[S13][S16]</span>.</dd>
+</dl>
+</div>
+<div class="section" style="--pc:#0B2545"><span class="pm">@@p7@@</span>
+<div class="section-band"><div class="kicker">Part 7</div><h1>Sources</h1><p class="lede">Every [Sxx] marker above resolves here. IDs are shared with the main interview guide. All sources accessed 4 September 2026. "Fetched" means the full text was read; "Snippet" means only a search excerpt was seen; "Paywalled" means the headline was recorded and nothing was inferred from unread text.</p></div>
+<table class="src-table"><tr><th style="width:5%">ID</th><th style="width:13%">Outlet</th><th style="width:26%">Title</th><th style="width:8%">Date</th><th style="width:30%">URL</th><th style="width:8%">Status</th><th style="width:10%">Confidence</th></tr>
+<tr><td class="src">[S2]</td><td>FCA</td><td>PS14/7 Changes to the use of dealing commission rules: feedback to CP13/17 and final rules</td><td>2014-05-08</td><td><a href="https://www.fca.org.uk/publication/policy/ps14-07.pdf">https://www.fca.org.uk/publication/policy/ps14-07.pdf</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S9]</td><td>IR Impact (IR Magazine)</td><td>Hedge funds move into corporate access… for love (Brad Allen)</td><td>2016-06-01</td><td><a href="https://www.ir-impact.com/2016/06/hedge-funds-move-corporate-access-love/">https://www.ir-impact.com/2016/06/hedge-funds-move-corporate-access-love/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S10]</td><td>ICR</td><td>Practical Lessons on Corporate Access from a Leading Multi-Manager Hedge Fund (Christopher Melito)</td><td>2025-05-07</td><td><a href="https://icrinc.com/news-resources/practical-lessons-on-corporate-access/">https://icrinc.com/news-resources/practical-lessons-on-corporate-access/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S11]</td><td>ICR</td><td>Corporate Access Is a Strategy, Not a Schedule (Christopher Melito)</td><td>2026-01-28</td><td><a href="https://icrinc.com/news-resources/corporate-access-rethinking-2026-strategy/">https://icrinc.com/news-resources/corporate-access-rethinking-2026-strategy/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S12]</td><td>ICR</td><td>Evolving Strategies for Corporate Access: Your 2025 Playbook (Christopher Melito)</td><td>2024-12-18</td><td><a href="https://icrinc.com/news-resources/strategies-for-corporate-access-2025/">https://icrinc.com/news-resources/strategies-for-corporate-access-2025/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S13]</td><td>ESMA</td><td>Q&amp;A ESMA_QA_1795 &quot;Corporate access&quot; (MiFID II investor protection Q&amp;As, ESMA35-43-349, ch.7 Q7)</td><td>2017-04-04</td><td><a href="https://www.esma.europa.eu/publications-data/questions-answers/1795">https://www.esma.europa.eu/publications-data/questions-answers/1795</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S15]</td><td>FCA Handbook</td><td>COBS 2.3A Inducements (COBS 2.3A.19R(5)(k))</td><td>current</td><td><a href="https://handbook.fca.org.uk/handbook/cobs2/cobs2s7">https://handbook.fca.org.uk/handbook/cobs2/cobs2s7</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S16]</td><td>FCA</td><td>Implementing MiFID II – multi-firm review of research unbundling reforms</td><td>2019-09-19 (updated 2025</td><td><a href="https://www.fca.org.uk/publications/multi-firm-reviews/implementing-mifid-ii-multi-firm-review-research-unbundling-reforms">https://www.fca.org.uk/publications/multi-firm-reviews/implementing-mifid-ii-multi-firm-re...</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S19]</td><td>Jones Day</td><td>FSA&#x27;s Fine of David Einhorn and Greenlight Capital for Insider Trading Violation</td><td>2012-02</td><td><a href="https://www.jonesday.com/en/insights/2012/02/fsas-fine-of-david-einhorn-and-greenlight-capital-for-insider-trading-violation">https://www.jonesday.com/en/insights/2012/02/fsas-fine-of-david-einhorn-and-greenlight-cap...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S20]</td><td>Osborne Clarke</td><td>Wall-crossings and inside information: good practice, poor practice from the FCA (on TR15/1)</td><td>2015-03-02</td><td><a href="https://www.osborneclarke.com/insights/wall-crossings-and-inside-information-good-practice-poor-practice-from-the-fca">https://www.osborneclarke.com/insights/wall-crossings-and-inside-information-good-practice...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S21]</td><td>FCA</td><td>Primary Market Bulletin 42</td><td>2022-12</td><td><a href="https://www.fca.org.uk/publications/newsletters/primary-market-bulletin-42">https://www.fca.org.uk/publications/newsletters/primary-market-bulletin-42</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S22]</td><td>FCA</td><td>Primary Market Bulletin 52</td><td>2024-11-15</td><td><a href="https://www.fca.org.uk/publications/newsletters/primary-market-bulletin-52">https://www.fca.org.uk/publications/newsletters/primary-market-bulletin-52</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S23]</td><td>FCA</td><td>Market Watch 75</td><td>2023-10-31</td><td><a href="https://www.fca.org.uk/publications/newsletters/market-watch-75">https://www.fca.org.uk/publications/newsletters/market-watch-75</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S25]</td><td>Millennium (career.mlp.com)</td><td>Corporate Access — New York, REQ-29227 (job posting, JSON API)</td><td>live 2026-09-04</td><td><a href="https://career.mlp.com/careers/job/755956091198">https://career.mlp.com/careers/job/755956091198</a><br><a href="https://career.mlp.com/api/apply/v2/jobs/755956091198?domain=mlp.com">https://career.mlp.com/api/apply/v2/jobs/755956091198?domain=mlp.com</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S27]</td><td>Point72 via LinkedIn/Built In</td><td>Corporate Access Analyst / Associate, New York (job posting)</td><td>undated</td><td><a href="https://www.linkedin.com/jobs/view/corporate-access-analyst-at-point72-3409571861">https://www.linkedin.com/jobs/view/corporate-access-analyst-at-point72-3409571861</a></td><td>Snippet</td><td><span class="tag u">Snippet/Paywalled</span></td></tr>
+<tr><td class="src">[S28]</td><td>WeConvene</td><td>Buy-Side Workflow: How Portfolio Managers Use Corporate Access Platforms to Source Ideas</td><td>2026-06-09</td><td><a href="https://weconvene.com/buy-side-corporate-access-workflow-portfolio-managers-2026/">https://weconvene.com/buy-side-corporate-access-workflow-portfolio-managers-2026/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S30]</td><td>WeConvene</td><td>Sell-Side Conference Scheduling: The IR Planning Guide for 2026</td><td>2026-03-14</td><td><a href="https://weconvene.com/sell-side-conference-scheduling/">https://weconvene.com/sell-side-conference-scheduling/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S34]</td><td>FH St. Pölten / Embera Partners with DIRK, CIRA, SIX, Vienna SE</td><td>Investor Engagement: Corporate Access Research Report (Germany &amp; Austria)</td><td>2025-05</td><td><a href="https://www.dirk.org/wp-content/uploads/2025/05/Corporate-Access-Research-Report.pdf">https://www.dirk.org/wp-content/uploads/2025/05/Corporate-Access-Research-Report.pdf</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S39]</td><td>Moody&#x27;s Analytics Knowledge Services (now Acuity KP)</td><td>Broker Votes System — A Strategic Product for Investment Research Firms (whitepaper)</td><td>c.2019</td><td><a href="https://www.acuitykp.com/wp-content/uploads/2019/03/Broker-Votes-System_-Investment-Research-Firms.pdf">https://www.acuitykp.com/wp-content/uploads/2019/03/Broker-Votes-System_-Investment-Resear...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S40]</td><td>Millennium careers (campusjobs.mlp.com, Eightfold API)</td><td>2027 Corporate Access Services Intern, London — REQ-30183</td><td>created 2026-07-27</td><td><a href="https://campusjobs.mlp.com/careers/job/755957778817-2027-corporate-access-services-intern-london-london-london-united-kingdom?domain=mlp.com">https://campusjobs.mlp.com/careers/job/755957778817-2027-corporate-access-services-intern-...</a><br><a href="https://campusjobs.mlp.com/api/apply/v2/jobs/755957778817?domain=mlp.com">https://campusjobs.mlp.com/api/apply/v2/jobs/755957778817?domain=mlp.com</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S41]</td><td>Millennium careers</td><td>2027 Corporate Access Services Intern, Hong Kong (id 755957778820)</td><td>created 2026-07-27</td><td><a href="https://campusjobs.mlp.com/api/apply/v2/jobs/755957778820?domain=mlp.com">https://campusjobs.mlp.com/api/apply/v2/jobs/755957778820?domain=mlp.com</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S42]</td><td>Millennium careers (career.mlp.com)</td><td>Corporate Access Associate, New York (id 755954883013)</td><td>created 2026-03-03, upda</td><td><a href="https://career.mlp.com/careers/job/755954883013-corporate-access-associate-new-york-new-york-united-states-of-america">https://career.mlp.com/careers/job/755954883013-corporate-access-associate-new-york-new-yo...</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S43]</td><td>Millennium careers</td><td>Corporate Access Services Associate, Tokyo (id 755954333811)</td><td>created 2026-02-05</td><td><a href="https://career.mlp.com/api/apply/v2/jobs/755954333811?domain=mlp.com">https://career.mlp.com/api/apply/v2/jobs/755954333811?domain=mlp.com</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S44]</td><td>Millennium careers</td><td>Corporate Access (Passaic Capital), New York — REQ-29227</td><td>created 2026-05-07</td><td><a href="https://career.mlp.com/careers/job/755956091198-corporate-access-new-york-new-york-united-states-of-america?domain=mlp.com">https://career.mlp.com/careers/job/755956091198-corporate-access-new-york-new-york-united-...</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S45]</td><td>Millennium careers</td><td>Corporate Access &amp; Research Coordinator (Misura Capital), New York (id 755956501587)</td><td>created 2026-06-05, upda</td><td><a href="https://career.mlp.com/api/apply/v2/jobs/755956501587?domain=mlp.com">https://career.mlp.com/api/apply/v2/jobs/755956501587?domain=mlp.com</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S46]</td><td>Millennium careers</td><td>US Healthcare Origination Associate, New York (id 755954039448)</td><td>created 2026-01-30</td><td><a href="https://career.mlp.com/api/apply/v2/jobs/755954039448?domain=mlp.com">https://career.mlp.com/api/apply/v2/jobs/755954039448?domain=mlp.com</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S47]</td><td>Millennium careers</td><td>2027 Sector Specialist Intern, London (id 755957819772)</td><td>created 2026-07-28</td><td><a href="https://campusjobs.mlp.com/api/apply/v2/jobs/755957819772?domain=mlp.com">https://campusjobs.mlp.com/api/apply/v2/jobs/755957819772?domain=mlp.com</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S48]</td><td>Millennium careers</td><td>2027 Data &amp; Research Strategy (Content Solutions) Intern, London (id 755957778834)</td><td>created 2026-07-27</td><td><a href="https://campusjobs.mlp.com/api/apply/v2/jobs/755957778834?domain=mlp.com">https://campusjobs.mlp.com/api/apply/v2/jobs/755957778834?domain=mlp.com</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S49]</td><td>Millennium careers</td><td>Corporate Access Intern, Tokyo — REQ-26203 (id 755944889484)</td><td>created 2025-08-07</td><td><a href="https://campusjobs.mlp.com/careers/job/755944889484-corporate-access-intern-tokyo-tokyo-tokyo-japan?domain=mlp.com&amp;microsite=campus-site">https://campusjobs.mlp.com/careers/job/755944889484-corporate-access-intern-tokyo-tokyo-to...</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S50]</td><td>Millennium careers</td><td>Business Manager – Equities – Analyst Engagement, London (id 755956240066)</td><td>created 2026-05-20</td><td><a href="https://career.mlp.com/api/apply/v2/jobs/755956240066?domain=mlp.com">https://career.mlp.com/api/apply/v2/jobs/755956240066?domain=mlp.com</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S53]</td><td>TheOrg</td><td>Millennium Management – Corporate Access team (9 people) and member profiles (a Ferrarese, b Brennan, c Sinclair, d Rosato, e Coats Campbell, f DuPilka, g Na, h</td><td>undated</td><td><a href="https://theorg.com/org/millennium-management/teams/corporate-access">https://theorg.com/org/millennium-management/teams/corporate-access</a></td><td>Fetched</td><td><span class="tag i">Low</span></td></tr>
+<tr><td class="src">[S54]</td><td>TheOrg</td><td>Oliver Harvey – Associate, Corporate Access at Millennium Management</td><td>undated</td><td><a href="https://theorg.com/org/millennium-management/org-chart/oliver-harvey">https://theorg.com/org/millennium-management/org-chart/oliver-harvey</a></td><td>Fetched</td><td><span class="tag i">Low</span></td></tr>
+<tr><td class="src">[S57]</td><td>TheOrg</td><td>a: Execution Services team (15 people); b: Daniel Mallinson – Head of Execution Services EMEA; c: Owain Self page</td><td>undated</td><td><a href="https://theorg.com/org/millennium-management/teams/execution-services">https://theorg.com/org/millennium-management/teams/execution-services</a></td><td>Fetched</td><td><span class="tag i">Low</span></td></tr>
+<tr><td class="src">[S58]</td><td>Millennium (mlp.com)</td><td>a: Leadership Team page; b: Owain Self bio; c: Martin Pabari bio; d: Steve Keller bio; e: Philip Berlinski bio; f: Global Presence page; g: Ajay Nagpal bio; h: </td><td>undated</td><td><a href="https://www.mlp.com/people/leadership/">https://www.mlp.com/people/leadership/</a><br><a href="https://www.mlp.com/people/leadership/owain-self/">https://www.mlp.com/people/leadership/owain-self/</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S63]</td><td>Evening Standard (via Yahoo Finance NZ) and Hedgeweek</td><td>a: Hedge fund Millennium returns to Mayfair base for European HQ; b: Millennium moves European HQ to ex-Mayfair base</td><td>2023-12-18 / 2023-12-19</td><td><a href="https://nz.finance.yahoo.com/news/hedge-fund-millennium-returns-mayfair-144348903.html">https://nz.finance.yahoo.com/news/hedge-fund-millennium-returns-mayfair-144348903.html</a><br><a href="https://www.hedgeweek.com/millennium-moves-european-hq-to-ex-mayfair-base/">https://www.hedgeweek.com/millennium-moves-european-hq-to-ex-mayfair-base/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S66]</td><td>Point72 (Greenhouse API / careers site) ; LinkedIn snippets; TheOrg Ci</td><td>a: Corporate Access, off-cycle internship (6 months) – Japanese speaking, Hong Kong (job 8603979002); b: careers.point72.com categories + LinkedIn job snippets </td><td>a: 2026-08-21</td><td><a href="https://boards-api.greenhouse.io/v1/boards/point72/jobs/8603979002?content=true">https://boards-api.greenhouse.io/v1/boards/point72/jobs/8603979002?content=true</a><br><a href="https://careers.point72.com/">https://careers.point72.com/</a></td><td>Fetched</td><td><span class="tag u">Snippet/Paywalled</span></td></tr>
+<tr><td class="src">[S68]</td><td>LinkedIn / RocketReach / SignalHire search snippets</td><td>a: Bailey Fanning – Corporate Access Associate – Millennium (NYC); b: Tom Treacy LinkedIn + SignalHire/Wiza; c: Katherine Hayes – Greater London (snippet: Corpo</td><td>undated</td><td><a href="https://www.linkedin.com/in/bailey-fanning-104165153/">https://www.linkedin.com/in/bailey-fanning-104165153/</a><br><a href="https://www.linkedin.com/in/tom-treacy-24616515/">https://www.linkedin.com/in/tom-treacy-24616515/</a></td><td>Snippet</td><td><span class="tag u">Snippet/Paywalled</span></td></tr>
+<tr><td class="src">[S71]</td><td>Millennium (mlp.com)</td><td>Homepage</td><td>undated (live)</td><td><a href="https://www.mlp.com/">https://www.mlp.com/</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S74]</td><td>Millennium (mlp.com)</td><td>Approach and Strategies</td><td>undated (live)</td><td><a href="https://www.mlp.com/approach/">https://www.mlp.com/approach/</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S75]</td><td>Millennium (mlp.com)</td><td>Leadership</td><td>undated (live)</td><td><a href="https://www.mlp.com/people/leadership/">https://www.mlp.com/people/leadership/</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S77]</td><td>Millennium (mlp.com)</td><td>Investment Professionals</td><td>undated (live)</td><td><a href="https://www.mlp.com/people/investment-professionals/">https://www.mlp.com/people/investment-professionals/</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S78]</td><td>Millennium (mlp.com)</td><td>Careers; People/Technology; Disclosures</td><td>undated (live)</td><td><a href="https://www.mlp.com/careers/">https://www.mlp.com/careers/</a><br><a href="https://www.mlp.com/people/technology/">https://www.mlp.com/people/technology/</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S83]</td><td>Hedgeweek (citing FT)</td><td>Millennium in talks over minority stake sale at $14bn valuation</td><td>17 Jun 2025</td><td><a href="https://www.hedgeweek.com/millennium-in-talks-over-minority-stake-sale-at-14bn-valuation/">https://www.hedgeweek.com/millennium-in-talks-over-minority-stake-sale-at-14bn-valuation/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S86]</td><td>13f.info (SEC EDGAR data)</td><td>Millennium Management LLC 13F filings</td><td>Q2 2026 filed 14 Aug 202</td><td><a href="https://13f.info/manager/0001273087-millennium-management-llc">https://13f.info/manager/0001273087-millennium-management-llc</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S87]</td><td>Hedgeweek (citing Bloomberg)</td><td>Millennium to charge fees even if fund loses money</td><td>9 Mar 2023</td><td><a href="https://www.hedgeweek.com/millennium-charge-fees-even-if-fund-loses-money/">https://www.hedgeweek.com/millennium-charge-fees-even-if-fund-loses-money/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S89]</td><td>With Intelligence</td><td>Top multi-strats back at least 100 managers</td><td>9 Jun 2025</td><td><a href="https://www.withintelligence.com/insights/top-multi-strats-back-at-least-100-managers/">https://www.withintelligence.com/insights/top-multi-strats-back-at-least-100-managers/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S92]</td><td>Wikipedia</td><td>Millennium Management; Israel Englander</td><td>live</td><td><a href="https://en.wikipedia.org/wiki/Millennium_Management">https://en.wikipedia.org/wiki/Millennium_Management</a><br><a href="https://en.wikipedia.org/wiki/Israel_Englander">https://en.wikipedia.org/wiki/Israel_Englander</a></td><td>Fetched</td><td><span class="tag i">Low</span></td></tr>
+<tr><td class="src">[S97]</td><td>Hedgeweek</td><td>Millennium&#x27;s average London pay drops below £1m for the first time</td><td>8 Oct 2024</td><td><a href="https://www.hedgeweek.com/millenniums-average-london-pay-drops-below-1m-for-the-first-time/">https://www.hedgeweek.com/millenniums-average-london-pay-drops-below-1m-for-the-first-time...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S98]</td><td>eFinancialCareers</td><td>Hedge fund Millennium&#x27;s London employees are earning less, again</td><td>26 Sep 2025</td><td><a href="https://www.efinancialcareers-gulf.com/news/millennium-hedge-fund-pay-london">https://www.efinancialcareers-gulf.com/news/millennium-hedge-fund-pay-london</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S101]</td><td>Business Insider via Yahoo Finance</td><td>Hedge funds&#x27; 2025 report card (6 Jan 2026); Millennium has hired two heavy-hitter PMs for its credit-trading business (30 May 2025)</td><td>6 Jan 2026; 30 May 2025</td><td><a href="https://finance.yahoo.com/news/2025-returns-hedge-funds-rolling-234728986.html">https://finance.yahoo.com/news/2025-returns-hedge-funds-rolling-234728986.html</a><br><a href="https://finance.yahoo.com/news/millennium-hired-two-heavy-hitter-025245795.html">https://finance.yahoo.com/news/millennium-hired-two-heavy-hitter-025245795.html</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S102]</td><td>Bloomberg Law</td><td>Jain&#x27;s Millennium Homecoming Shows Multistrats Challenges</td><td>28 Apr 2026</td><td><a href="https://news.bloomberglaw.com/daily-labor-report/jain-global-to-return-cash-exclusively-manage-millennium-money">https://news.bloomberglaw.com/daily-labor-report/jain-global-to-return-cash-exclusively-ma...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S104]</td><td>Net Interest (Marc Rubinstein)</td><td>Peak Pod</td><td>15 Sep 2023</td><td><a href="https://www.netinterest.co/p/peak-pod">https://www.netinterest.co/p/peak-pod</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S110]</td><td>Hedgeweek (citing Bloomberg)</td><td>Albar to run Millennium money after returning outside cash</td><td>7 Aug 2026</td><td><a href="https://www.hedgeweek.com/albar-to-run-millennium-money-after-returning-outside-cash/">https://www.hedgeweek.com/albar-to-run-millennium-money-after-returning-outside-cash/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S113]</td><td>Business Insider via AOL</td><td>The strategy a $69 billion hedge fund uses to make sure it never loses money in the stock market</td><td>2 Oct 2024</td><td><a href="https://www.aol.com/strategy-69-billion-hedge-fund-193733084.html">https://www.aol.com/strategy-69-billion-hedge-fund-193733084.html</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S116]</td><td>Private Banker International (citing Reuters, FT, Bloomberg)</td><td>Jain Global to return investor cash and run money only for Millennium (28 Apr 2026); Millennium Management divests 15% stake to investor group (4 Nov 2025)</td><td>28 Apr 2026; 4 Nov 2025</td><td><a href="https://www.privatebankerinternational.com/news/jain-global-return-investor-cash/">https://www.privatebankerinternational.com/news/jain-global-return-investor-cash/</a><br><a href="https://www.privatebankerinternational.com/news/millennium-divests-stake-to-investors/">https://www.privatebankerinternational.com/news/millennium-divests-stake-to-investors/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S123]</td><td>SEC IAPD</td><td>Form ADV, Millennium Management LLC, CRD 158117, Other-Than-Annual Amendment</td><td>25 Aug 2026</td><td><a href="https://adviserinfo.sec.gov/firm/summary/158117">https://adviserinfo.sec.gov/firm/summary/158117</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S168]</td><td>Business Insider via AOL</td><td>How hedge funds became a bright spot in a nasty job market</td><td>24 Feb 2026</td><td><a href="https://www.aol.com/articles/hedge-funds-became-bright-spot-090701777.html">https://www.aol.com/articles/hedge-funds-became-bright-spot-090701777.html</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S302]</td><td>US Securities and Exchange Commission</td><td>Press release 2005-170: SEC Charges Millennium Partners, L.P., Israel Englander, and Others for Engaging in Fraudulent Market Timing Scheme</td><td>1 Dec 2005</td><td><a href="https://www.sec.gov/news/press/2005-170.htm">https://www.sec.gov/news/press/2005-170.htm</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S304]</td><td>eFinancialCareers (Sarah Butcher)</td><td>Citadel, Millennium, or...? Life at the big multistrategy hedge funds</td><td>20 Oct 2023</td><td><a href="https://www.efinancialcareers-canada.com/news/2023/10/citadel-millennium-hedge-funds">https://www.efinancialcareers-canada.com/news/2023/10/citadel-millennium-hedge-funds</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S305]</td><td>eFinancialCareers (Sarah Butcher)</td><td>Hedge fund Millennium spells out why zombie portfolio managers exist</td><td>30 Sep 2024</td><td><a href="https://www.efinancialcareers.com/news/millennium-hedge-fund-jobs">https://www.efinancialcareers.com/news/millennium-hedge-fund-jobs</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S306]</td><td>Rupak Ghose (Substack)</td><td>Citadel is from Mars and Millennium is from Venus, Part II</td><td>13 Jul 2026</td><td><a href="https://rupakghose.substack.com/p/citadel-is-from-mars-and-millennium-ef6">https://rupakghose.substack.com/p/citadel-is-from-mars-and-millennium-ef6</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S311]</td><td>hedgefundinterview.com</td><td>Pod Shop Risk Limits: Drawdown Stop-Outs Explained</td><td>2026</td><td><a href="https://hedgefundinterview.com/pod-shop-risk-limits">https://hedgefundinterview.com/pod-shop-risk-limits</a></td><td>Fetched</td><td><span class="tag i">Low</span></td></tr>
+<tr><td class="src">[S313]</td><td>Quant Enthusiasts / Young and Calculated (Substack)</td><td>How Multi-Manager Hedge Funds Actually Work Internally</td><td>2026</td><td><a href="https://youngandcalculated.substack.com/p/how-multi-manager-hedge-funds-actually">https://youngandcalculated.substack.com/p/how-multi-manager-hedge-funds-actually</a></td><td>Fetched</td><td><span class="tag u">Snippet/Paywalled</span></td></tr>
+<tr><td class="src">[S318]</td><td>Millennium careers (career.mlp.com API)</td><td>Enterprise Risk Researcher, Bangalore (job 755953927634)</td><td>created Jan 2026</td><td><a href="https://career.mlp.com/careers/job/755953927634">https://career.mlp.com/careers/job/755953927634</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S319]</td><td>Millennium careers</td><td>Risk Manager - Credit, London (job 755955668184)</td><td>created Apr 2026</td><td><a href="https://career.mlp.com/careers/job/755955668184">https://career.mlp.com/careers/job/755955668184</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S321]</td><td>Millennium careers</td><td>Quantitative Researcher - Treasury, New York (job 755957819771)</td><td>created Jul 2026</td><td><a href="https://career.mlp.com/careers/job/755957819771">https://career.mlp.com/careers/job/755957819771</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S322]</td><td>Millennium careers</td><td>Fixed Income Business Manager, GFI Secured Financing Business Activities, New York (job 755957773854)</td><td>created Jul 2026</td><td><a href="https://career.mlp.com/careers/job/755957773854">https://career.mlp.com/careers/job/755957773854</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S326]</td><td>Millennium (mlp.com)</td><td>Q&amp;A with Vlad Torgovnik: Millennium&#x27;s AI Lab</td><td>2026</td><td><a href="https://www.mlp.com/life-at-millennium/qa-with-vlad-torgovnik-millenniums-ai-lab/">https://www.mlp.com/life-at-millennium/qa-with-vlad-torgovnik-millenniums-ai-lab/</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+</table></div>
+</body></html>
