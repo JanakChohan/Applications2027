@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Under Pressure</title>
+<style>
+:root{
+  --navy:#0B2545; --navy2:#13315C; --ink:#1F2933; --muted:#5B6B7C; --line:#D5DCE5;
+  --paper:#FFFFFF; --wash:#F3F6FA; --wash2:#E9EEF5;
+  --warm:#D97742; --warm-l:#FBEEE6;
+  --teal:#1B998B; --teal-l:#E3F4F1;
+  --amber:#E9B949; --amber-l:#FCF5E0;
+  --red:#B23A48; --red-l:#F8E4E7;
+  --grey:#8A96A3; --grey-l:#EFF2F5;
+  --p0:#0B2545; --p1:#1B998B; --p2:#D97742; --p3:#5E548E; --p4:#2E6F95; --p5:#9C6644; --p6:#B23A48; --p7:#E9B949; --p8:#3A7D44; --p9:#6C757D; --p10:#0B2545; --p11:#0B2545; --p12:#0B2545;
+}
+@page { size: A4; margin: 20mm 16mm 18mm 16mm; }
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;color:var(--ink);font-size:10.4pt;line-height:1.45;background:var(--paper)}
+h1,h2,h3,h4{font-family:Georgia,"Times New Roman",serif;color:var(--navy);margin:0 0 6pt 0;line-height:1.2;font-weight:normal}
+h1{font-size:26pt;margin-bottom:10pt}
+h2{font-size:16pt;margin-top:16pt;padding-bottom:4pt;border-bottom:2px solid var(--line);break-after:avoid}
+h3{font-size:12.5pt;margin-top:12pt;break-after:avoid}
+h4{font-size:10.8pt;margin-top:9pt;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:bold;color:var(--navy2);break-after:avoid}
+p{margin:0 0 6pt 0}
+ul,ol{margin:0 0 6pt 0;padding-left:18pt}
+li{margin-bottom:2.5pt}
+strong{color:var(--navy)}
+a{color:var(--navy2);text-decoration:none}
+small,.small{font-size:8.5pt;color:var(--muted)}
+.muted{color:var(--muted)}
+.section{break-before:page}
+.section-band{background:var(--pc,var(--navy));color:#fff;padding:14pt 16pt;margin:0 0 12pt 0;border-radius:4pt}
+.section-band .kicker{font-size:9pt;letter-spacing:2px;text-transform:uppercase;opacity:.85}
+.section-band h1{color:#fff;margin:2pt 0 4pt 0;font-size:22pt}
+.section-band .lede{font-size:10.5pt;opacity:.95;margin:0}
+.tag{display:inline-block;font-size:7.5pt;font-weight:bold;letter-spacing:.5px;padding:1pt 5pt;border-radius:3pt;vertical-align:middle;font-family:Helvetica,Arial,sans-serif}
+.tag.c{background:#DDF1EC;color:#0E6B5F}
+.tag.r{background:#E4ECF7;color:#1F4E8C}
+.tag.i{background:#FCEBD9;color:#8A4B12}
+.tag.u{background:#EDEFF2;color:#5B6B7C}
+.src{font-size:7.8pt;color:var(--navy2);font-family:Helvetica,Arial,sans-serif;font-weight:bold}
+.box{border-left:4pt solid var(--navy);background:var(--wash);padding:7pt 10pt;margin:8pt 0;border-radius:0 4pt 4pt 0;break-inside:avoid}
+.box .lbl{font-family:Helvetica,Arial,sans-serif;font-size:7.8pt;font-weight:bold;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:2pt}
+.box p:last-child,.box ul:last-child{margin-bottom:0}
+.box.term{border-color:var(--navy);background:var(--wash)}
+.box.term .lbl{color:var(--navy)}
+.box.say{border-color:var(--teal);background:var(--teal-l)}
+.box.say .lbl{color:#0E6B5F}
+.box.dont{border-color:var(--red);background:var(--red-l)}
+.box.dont .lbl{color:var(--red)}
+.box.opinion{border-color:var(--amber);background:var(--amber-l)}
+.box.opinion .lbl{color:#8A6A10}
+.box.unc{border-color:var(--grey);border-style:dashed;background:var(--grey-l)}
+.box.unc .lbl{color:var(--muted)}
+.box.warm{border-color:var(--warm);background:var(--warm-l)}
+.box.warm .lbl{color:#8A4B12}
+.fig{margin:10pt 0 12pt 0;break-inside:avoid}
+.fig svg{width:100%;height:auto;display:block}
+.fig .cap{font-size:8.3pt;color:var(--muted);margin-top:4pt;border-top:1px solid var(--line);padding-top:3pt}
+.fig .cap b{color:var(--navy)}
+.fullpage{break-before:page}
+table{border-collapse:collapse;width:100%;font-size:8.8pt;margin:6pt 0 10pt 0}
+th{background:var(--navy);color:#fff;text-align:left;padding:4pt 5pt;font-weight:bold;font-family:Helvetica,Arial,sans-serif;font-size:8.3pt}
+td{padding:3.5pt 5pt;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:var(--wash)}
+table.src-table{font-size:7.6pt}
+table.src-table td{padding:2.5pt 4pt}
+table.src-table a{word-break:break-all}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12pt}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10pt}
+.card{border:1px solid var(--line);border-radius:4pt;padding:7pt 9pt;background:#fff;break-inside:avoid}
+.card h4{margin-top:0}
+.gloss dt{font-weight:bold;color:var(--navy);margin-top:5pt;font-family:Helvetica,Arial,sans-serif;font-size:9.4pt}
+.gloss dd{margin:0 0 2pt 0;font-size:9.4pt}
+.qa{border:1px solid var(--line);border-radius:4pt;padding:6pt 9pt;margin:6pt 0;break-inside:avoid}
+.qa .q{font-weight:bold;color:var(--navy);font-family:Georgia,serif;font-size:10.6pt}
+.qa .t{font-size:9.2pt}
+.qa .t b{color:var(--muted);font-family:Helvetica,Arial,sans-serif;font-size:8pt;text-transform:uppercase;letter-spacing:.5px}
+.num{font-family:Georgia,serif;font-size:20pt;color:var(--warm);line-height:1}
+.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:8pt;margin:8pt 0}
+.kpi .k{border-top:3px solid var(--warm);padding:5pt 6pt;background:var(--wash)}
+.kpi .k .v{font-family:Georgia,serif;font-size:16pt;color:var(--navy)}
+.kpi .k .l{font-size:8pt;color:var(--muted)}
+.cover{height:257mm;position:relative;background:var(--navy);color:#fff;padding:26mm 20mm;border-radius:6pt;break-after:page}
+.cover .k{letter-spacing:3px;text-transform:uppercase;font-size:9.5pt;opacity:.8}
+.cover h1{color:#fff;font-size:34pt;margin:12pt 0 8pt 0;line-height:1.1}
+.cover .sub{font-size:14pt;opacity:.92;font-family:Georgia,serif}
+.cover .meta{position:absolute;bottom:22mm;left:20mm;right:20mm;font-size:9.5pt;line-height:1.6;opacity:.9}
+.cover .stripe{position:absolute;top:0;left:0;right:0;height:8pt;background:linear-gradient(90deg,var(--warm) 0 33%,var(--teal) 33% 66%,var(--amber) 66% 100%);border-radius:6pt 6pt 0 0}
+.toc{columns:1}
+.toc .row{display:flex;justify-content:space-between;border-bottom:1px dotted var(--line);padding:3pt 0;font-size:10pt}
+.toc .row.l2{padding-left:16pt;font-size:9pt;color:var(--muted)}
+.toc .row .pg{font-family:Georgia,serif;color:var(--navy)}
+.toc .row .pc{display:inline-block;width:9pt;height:9pt;border-radius:2pt;margin-right:6pt;vertical-align:-1pt}
+.emergency{border:2px solid var(--warm);border-radius:5pt;padding:9pt 12pt;background:var(--warm-l)}
+.emergency h3{margin-top:0;color:#8A4B12}
+.stepper{display:flex;gap:6pt;margin:8pt 0}
+.stepper .s{flex:1;background:var(--wash);border-top:3px solid var(--navy);padding:5pt 6pt;font-size:8.6pt}
+.stepper .s b{display:block;color:var(--navy)}
+.legend{font-size:8.3pt;color:var(--muted)}
+.legend span{display:inline-block;margin-right:10pt}
+.legend i{display:inline-block;width:10pt;height:10pt;vertical-align:-1.5pt;margin-right:3pt;border-radius:2pt}
+.nobreak{break-inside:avoid}
+.pagebreak{break-before:page}
+.checklist li{list-style:none;margin-left:-14pt}
+.checklist li:before{content:"\2610\00a0";color:var(--navy)}
+.footnote{font-size:8pt;color:var(--muted)}
+.hl{background:#FFF4CC}
+.verbatim{font-family:Georgia,serif;font-style:italic;color:var(--navy2);border-left:3px solid var(--amber);padding-left:8pt;margin:6pt 0}
+
+.sc{border:1px solid var(--line);border-radius:6pt;margin:8pt 0;break-inside:avoid;overflow:hidden;background:#fff}
+.sc .hd{padding:6pt 10pt;color:#fff;font-family:Helvetica,Arial,sans-serif;font-weight:bold;font-size:10.5pt;display:flex;justify-content:space-between;align-items:center}
+.sc.lv-e .hd{background:#1B998B}.sc.lv-m .hd{background:#D48F1F}.sc.lv-h .hd{background:#B23A48}
+.sc .diff{font-size:7.8pt;padding:1pt 7pt;border-radius:8pt;background:rgba(255,255,255,.28);letter-spacing:.5px;text-transform:uppercase}
+.sc .bd{padding:7pt 10pt;font-size:9.5pt}
+.sc .row{display:grid;grid-template-columns:96pt 1fr;gap:7pt;margin-bottom:4pt}
+.sc .lab{font-family:Helvetica,Arial,sans-serif;font-size:7.8pt;font-weight:bold;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);padding-top:2pt}
+.sc .sayb{background:var(--teal-l);border-left:3pt solid var(--teal);padding:4pt 7pt;border-radius:0 3pt 3pt 0}
+.sc .whyb{background:var(--wash);padding:4pt 7pt;border-radius:3pt}
+.sc .trapb{background:var(--red-l);padding:4pt 7pt;border-radius:3pt}
+.sc .twistb{background:var(--amber-l);padding:4pt 7pt;border-radius:3pt}
+.sc p{margin:0}
+.jd{background:var(--wash);border-left:4pt solid var(--navy);padding:6pt 10pt;margin:6pt 0 8pt 0;font-family:Georgia,serif;font-style:italic;color:var(--navy2);font-size:10pt}
+.pill{display:inline-block;padding:1pt 7pt;border-radius:9pt;font-size:8pt;font-weight:bold;font-family:Helvetica,Arial,sans-serif;color:#fff;vertical-align:middle}
+.pill.g{background:#1B998B}.pill.a{background:#D48F1F}.pill.r{background:#B23A48}.pill.n{background:#0B2545}
+</style>
+</head>
+<body>
+<!-- anchor marker style -->
+<style>.pm{font-size:1px;color:#fff;line-height:0;position:absolute}.section>.pm,.fullpage>.pm{position:static;display:block;height:3px;line-height:3px;font-size:2px;margin:0;padding:0}</style>
+<div class="cover">
+<div class="stripe"></div>
+<div class="k">Companion to the Millennium interview guide</div>
+<h1>Under Pressure</h1>
+<div class="sub">The scenario playbook. One scenario for every line of the job description, easy to hard, with what to say and why. Then the composure set: two PMs shouting, a PM asking you to break a rule, a CFO saying too much. Then how they will grill the CV, and a two-page cheat sheet.</div>
+<div class="meta">
+<b>Prepared:</b> 5 September 2026, for Round 1 on Monday 7 September, 10:00 to 10:30, Webex, two interviewers.<br>
+<b>What this is:</b> a short, to-the-point guide to holding your frame when the interviewers are trying to break it. Read Part 1 twice. Read the scenario cards once and say the answers out loud. Sleep with the cheat sheet.<br>
+<b>How to use the answers:</b> they are scaffolds, not scripts. The interviewers want to hear your thinking in your words. Every card gives you the shape of a good answer and the reason it is good, so that when they twist the scenario you can rebuild the answer rather than recite it.<br>
+<b>Sources:</b> the job description is quoted verbatim [S40]; other facts carry [Sxx] markers resolved in Part 6, shared with the main guide.
+</div>
+</div>
+
+<div class="section"><span class="pm">@@toc@@</span>
+<h1>Contents</h1>
+<div class="toc">
+<div class="row"><span><i class="pc" style="background:#0B2545"></i>Part 1. How they test you, and how to hold your frame</span><span class="pg">3</span></div>
+<div class="row"><span><i class="pc" style="background:#1B998B"></i>Part 2. The scenario ladder: three scenarios for each line of the job description</span><span class="pg">5</span></div>
+<div class="row"><span><i class="pc" style="background:#B23A48"></i>Part 3. Under fire: the composure set</span><span class="pg">17</span></div>
+<div class="row"><span><i class="pc" style="background:#5E548E"></i>Part 4. The CV grill</span><span class="pg">21</span></div>
+<div class="row"><span><i class="pc" style="background:#D97742"></i>Part 5. Cheat sheet</span><span class="pg">22</span></div>
+<div class="row"><span><i class="pc" style="background:#0B2545"></i>Part 6. Sources</span><span class="pg">23</span></div>
+</div>
+<h3 style="margin-top:16pt">Figures</h3>
+<div class="toc">
+<div class="row l2"><span>1. The four-step protocol: how to answer any scenario</span><span class="pg">3</span></div>
+<div class="row l2"><span>2. What wins when things collide: the priority order</span><span class="pg">4</span></div>
+<div class="row l2"><span>3. Eight ways they break a frame, and the counter to each</span><span class="pg">4</span></div>
+<div class="row l2"><span>4. The scenario ladder: eight bullets, three rungs each</span><span class="pg">5</span></div>
+<div class="row l2"><span>5. Two PMs, one slot: the decision tree</span><span class="pg">18</span></div>
+<div class="row l2"><span>6. Something sounds like inside information: the flow</span><span class="pg">19</span></div>
+<div class="row l2"><span>7. The cheat sheet, on one page</span><span class="pg">22</span></div>
+</div>
+<div class="legend" style="margin-top:14pt"><b>Card colours:</b> <span class="pill g">Easy</span> warm-up, tests basic understanding &nbsp; <span class="pill a">Medium</span> tests judgement and prioritisation &nbsp; <span class="pill r">Hard</span> tests composure, ethics and frame under pressure.</div>
+</div>
+
+<!-- ================= PART 1 ================= -->
+<div class="section" style="--pc:#0B2545"><span class="pm">@@p1@@</span>
+<div class="section-band"><div class="kicker">Part 1</div><h1>How they test you, and how to hold your frame</h1><p class="lede">A scenario interview is not a knowledge test. It is a test of whether your thinking stays orderly when someone is pushing on it. Order beats brilliance. Here is the order.</p></div>
+
+<h2>1.1 What "breaking your frame" means</h2>
+<p>Your frame is the set of priorities you reason from. The interviewers will invent a situation, watch you reason, then change the situation, interrupt, disagree or go silent to see whether your priorities hold or whether you start agreeing with whoever is loudest. A candidate whose frame breaks says different things under pressure than they said thirty seconds earlier. A candidate whose frame holds gives the same priorities in a different situation, calmly, and says what they do not know. The job description asks for exactly this: "a strong sense of prioritization and urgency" and the ability "to prioritize and execute in a fast-paced, changing environment" <span class="src">[S40]</span>.</p>
+<p>Two things make frame-holding easier than it sounds. First, a corporate access desk has a natural order of priorities that you can learn in a minute (Figure 2). Second, almost every scenario can be answered with the same four steps (Figure 1). If you use the same steps every time, you cannot be pushed off them, because you are not improvising a structure, only filling one in.</p>
+
+<div class="fig">
+<svg viewBox="0 0 1000 380" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:10.6px;fill:#1F2933}.h{font-size:15px;font-weight:bold;fill:#0B2545}.s{font-size:9.5px;fill:#5B6B7C}.w{fill:#fff;font-size:12px;font-weight:bold}.ws{fill:#fff;font-size:10px}.k{font-size:11px;font-weight:bold;fill:#0B2545}.big{fill:#fff;font-size:26px;font-weight:bold}</style>
+<text x="20" y="24" class="h">The four-step protocol: how to answer any scenario, in this order, every time</text>
+<g>
+<rect x="20" y="50" width="225" height="230" rx="10" fill="#0B2545"/>
+<text x="36" y="86" class="big">1</text><text x="70" y="86" class="w">STEADY</text>
+<text x="36" y="112" class="ws">Breathe out. Repeat the situation back</text><text x="36" y="126" class="ws">in one sentence. Ask one clarifying</text><text x="36" y="140" class="ws">question if it changes the answer.</text>
+<text x="36" y="166" class="ws" font-weight="bold">Say:</text><text x="36" y="180" class="ws">"So the situation is X, and the</text><text x="36" y="194" class="ws">constraint is Y. Can I check one</text><text x="36" y="208" class="ws">thing: is Z the case?"</text>
+<text x="36" y="236" class="ws" style="opacity:.85">Buys 10 seconds. Shows you listen.</text><text x="36" y="250" class="ws" style="opacity:.85">Stops you answering the wrong</text><text x="36" y="264" class="ws" style="opacity:.85">question.</text>
+<rect x="265" y="50" width="225" height="230" rx="10" fill="#13315C"/>
+<text x="281" y="86" class="big">2</text><text x="315" y="86" class="w">SORT</text>
+<text x="281" y="112" class="ws">Name the priority that decides it.</text><text x="281" y="126" class="ws">Compliance and the firm's name first;</text><text x="281" y="140" class="ws">fair service to every team second;</text><text x="281" y="154" class="ws">process third; speed last.</text>
+<text x="281" y="180" class="ws" font-weight="bold">Say:</text><text x="281" y="194" class="ws">"The thing that decides this is..."</text><text x="281" y="208" class="ws">"What I can't do is..."</text><text x="281" y="222" class="ws">"What I'd separate is A from B."</text>
+<text x="281" y="250" class="ws" style="opacity:.85">This is the frame. If they push,</text><text x="281" y="264" class="ws" style="opacity:.85">come back here.</text>
+<rect x="510" y="50" width="225" height="230" rx="10" fill="#1B998B"/>
+<text x="526" y="86" class="big">3</text><text x="560" y="86" class="w">ACT</text>
+<text x="526" y="112" class="ws">Two or three concrete steps, in order,</text><text x="526" y="126" class="ws">with who you tell and when. Take the</text><text x="526" y="140" class="ws">reversible step now; escalate the</text><text x="526" y="154" class="ws">irreversible one.</text>
+<text x="526" y="180" class="ws" font-weight="bold">Say:</text><text x="526" y="194" class="ws">"First I'd... Then I'd... and I'd let</text><text x="526" y="208" class="ws">[my associate / compliance / the PM]</text><text x="526" y="222" class="ws">know by [time]."</text>
+<text x="526" y="250" class="ws" style="opacity:.85">Specific beats clever. An intern who</text><text x="526" y="264" class="ws" style="opacity:.85">knows when to escalate is the hire.</text>
+<rect x="755" y="50" width="225" height="230" rx="10" fill="#D97742"/>
+<text x="771" y="86" class="big">4</text><text x="805" y="86" class="w">CLOSE</text>
+<text x="771" y="112" class="ws">One sentence on what you'd do so it</text><text x="771" y="126" class="ws">does not happen again, or what you'd</text><text x="771" y="140" class="ws">check afterwards. Then stop talking.</text>
+<text x="771" y="166" class="ws" font-weight="bold">Say:</text><text x="771" y="180" class="ws">"And afterwards I'd log it / add a</text><text x="771" y="194" class="ws">check / ask how the team usually</text><text x="771" y="208" class="ws">handles this."</text>
+<text x="771" y="236" class="ws" style="opacity:.85">Stopping is a frame move. Rambling</text><text x="771" y="250" class="ws" style="opacity:.85">after a good answer is how</text><text x="771" y="264" class="ws" style="opacity:.85">candidates talk themselves out of it.</text>
+</g>
+<rect x="20" y="296" width="960" height="58" rx="6" fill="#E9EEF5" stroke="#8A96A3"/>
+<text x="32" y="316" class="k">WHEN THEY TWIST THE SCENARIO</text>
+<text x="32" y="333" class="t">Go back to step 1. Repeat the new fact. Then step 2: does it change the priority that decides it? Usually no. Say so: "That changes the timing but not the order: I still can't share Team A's request with Team B."</text>
+<text x="32" y="347" class="t">If it does change the priority, say that too. Changing your action because a fact changed is judgement. Changing your priorities because someone frowned is a broken frame.</text>
+<text x="20" y="372" class="s">Timing: a full answer is 45 to 75 seconds. Two interviewers in 30 minutes will not tolerate three-minute answers.</text>
+</svg>
+<span class="pm">@@f1@@</span><div class="cap"><b>Figure 1.</b> The four-step protocol. Same shape every time; only the content changes.</div></div>
+
+<h2>1.2 What wins when things collide</h2>
+<p>Every hard scenario is a collision between two good things: a PM's urgency against a rule, one team's request against another's, speed against accuracy. You need a fixed order for which wins. This is the order a corporate access desk actually runs on, and you can state it out loud in the interview.</p>
+
+<div class="fig">
+<svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:10.6px;fill:#1F2933}.h{font-size:15px;font-weight:bold;fill:#0B2545}.s{font-size:9.5px;fill:#5B6B7C}.w{fill:#fff;font-size:12px;font-weight:bold}.ws{fill:#fff;font-size:10px}.k{font-size:11px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">What wins when things collide: the priority order</text>
+<!-- pyramid as stacked bars -->
+<g>
+<rect x="340" y="50" width="320" height="64" rx="6" fill="#B23A48"/>
+<text x="352" y="72" class="w">1. THE RULES AND THE FIRM'S NAME</text>
+<text x="352" y="88" class="ws">Inside information, restricted names, how access is paid for,</text>
+<text x="352" y="102" class="ws">confidentiality between teams. Never traded for speed. Escalate.</text>
+<rect x="280" y="122" width="440" height="64" rx="6" fill="#D97742"/>
+<text x="292" y="144" class="w">2. FAIR SERVICE TO EVERY TEAM</text>
+<text x="292" y="160" class="ws">350+ teams are separate clients [S71]. Allocate by a rule you could explain to the</text>
+<text x="292" y="174" class="ws">team that lost. Never favour the loudest. Never tell Team B what Team A asked.</text>
+<rect x="220" y="194" width="560" height="64" rx="6" fill="#1B998B"/>
+<text x="232" y="216" class="w">3. THE PROCESS AND THE RECORD</text>
+<text x="232" y="232" class="ws">The portal, the log, the confirmations, the consumption data [S40]. It is the compliance</text>
+<text x="232" y="246" class="ws">record and the broker-vote evidence. A fix that skips the record is not a fix.</text>
+<rect x="160" y="266" width="680" height="64" rx="6" fill="#0B2545"/>
+<text x="172" y="288" class="w">4. SPEED AND CONVENIENCE</text>
+<text x="172" y="304" class="ws">Matters a great deal ("urgency" is in the job description [S40]), but only inside the three above.</text>
+<text x="172" y="318" class="ws">When speed conflicts with any of them, speed loses, and you say so calmly.</text>
+</g>
+<text x="20" y="80" class="k">HOW TO USE IT</text>
+<text x="20" y="98" class="t">Find the highest</text><text x="20" y="112" class="t">level the scenario</text><text x="20" y="126" class="t">touches. That level</text><text x="20" y="140" class="t">decides. Everything</text><text x="20" y="154" class="t">below it is how you</text><text x="20" y="168" class="t">do it well.</text>
+<text x="20" y="196" class="s">Why this order: the FCA</text><text x="20" y="209" class="s">banned buying access with</text><text x="20" y="222" class="s">commission in 2014 [S2];</text><text x="20" y="235" class="s">MAR binds anyone who</text><text x="20" y="248" class="s">receives inside information</text><text x="20" y="261" class="s">[S21]; pods compete for</text><text x="20" y="274" class="s">capital and do not share</text><text x="20" y="287" class="s">[S313]; the log feeds the</text><text x="20" y="300" class="s">broker vote [S43][S39].</text>
+<rect x="20" y="346" width="960" height="40" rx="5" fill="#FBEEE6" stroke="#D97742"/>
+<text x="32" y="364" class="k">THE SENTENCE THAT HOLDS EVERY FRAME</text>
+<text x="32" y="379" class="t">"I'd want to be fast for the PM, but the thing that decides this is [level]. So I'd [action], and I'd tell [person] straight away so the PM isn't waiting on me without knowing why."</text>
+</svg>
+<span class="pm">@@f2@@</span><div class="cap"><b>Figure 2.</b> The priority order. The interviewers are testing whether you have one and whether it survives pressure; state it and stay on it.</div></div>
+
+<h2>1.3 Eight ways they break a frame, and the counter to each</h2>
+<div class="fig">
+<svg viewBox="0 0 1000 470" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:10.2px;fill:#1F2933}.h{font-size:15px;font-weight:bold;fill:#0B2545}.s{font-size:9.4px;fill:#5B6B7C}.w{fill:#fff;font-size:10.5px;font-weight:bold}.ws{fill:#fff;font-size:9.8px}.k{font-size:11px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">Eight ways they break a frame, and the counter to each</text>
+<g>
+<rect x="20" y="42" width="470" height="96" rx="6" fill="#F8E4E7" stroke="#B23A48"/><text x="30" y="60" class="k" fill="#B23A48">1. THE INTERRUPTION</text><text x="30" y="76" class="t">They cut you off mid-answer with a new fact or "no, that wouldn't work".</text><text x="30" y="96" class="k" fill="#0E6B5F">Counter</text><text x="90" y="96" class="t">Stop. Don't finish the old sentence. "OK, so now X as well."</text><text x="30" y="110" class="t">Restate, re-sort, continue. Never talk over them; never apologise for being cut off.</text><text x="30" y="128" class="s">They are checking whether you listen or perform.</text>
+<rect x="510" y="42" width="470" height="96" rx="6" fill="#F8E4E7" stroke="#B23A48"/><text x="520" y="60" class="k" fill="#B23A48">2. THE FLAT CONTRADICTION</text><text x="520" y="76" class="t">"That's wrong." "A PM would never accept that." Said with a straight face.</text><text x="520" y="96" class="k" fill="#0E6B5F">Counter</text><text x="580" y="96" class="t">Ask what they'd expect, then hold or update on the merits.</text><text x="520" y="110" class="t">"Help me see it: which part wouldn't work?" If your priority still stands, say so.</text><text x="520" y="128" class="s">Folding instantly is the fail. So is arguing. Curiosity is the pass.</text>
+<rect x="20" y="150" width="470" height="96" rx="6" fill="#F8E4E7" stroke="#B23A48"/><text x="30" y="168" class="k" fill="#B23A48">3. THE SILENCE</text><text x="30" y="184" class="t">You finish. They say nothing and look at you.</text><text x="30" y="204" class="k" fill="#0E6B5F">Counter</text><text x="90" y="204" class="t">Let it sit for two seconds. Then: "Is there a part you'd like me to go</text><text x="30" y="218" class="t">deeper on?" Do not fill the silence with a weaker second answer.</text><text x="30" y="236" class="s">The silence is bait for rambling. Your first answer was the answer.</text>
+<rect x="510" y="150" width="470" height="96" rx="6" fill="#F8E4E7" stroke="#B23A48"/><text x="520" y="168" class="k" fill="#B23A48">4. THE ESCALATION</text><text x="520" y="184" class="t">"The PM is now shouting. He says he'll go to your head of desk." Pressure rises each turn.</text><text x="520" y="204" class="k" fill="#0E6B5F">Counter</text><text x="580" y="204" class="t">Slow down as they speed up. Lower your voice slightly. "I understand</text><text x="520" y="218" class="t">it's urgent. Here's what I can do right now, and here's who I'm bringing in."</text><text x="520" y="236" class="s">They want to see whether your tempo is yours or theirs.</text>
+<rect x="20" y="258" width="470" height="96" rx="6" fill="#F8E4E7" stroke="#B23A48"/><text x="30" y="276" class="k" fill="#B23A48">5. THE AUTHORITY SQUEEZE</text><text x="30" y="292" class="t">"He's a senior PM and you're an intern. Who are you to say no?"</text><text x="30" y="312" class="k" fill="#0E6B5F">Counter</text><text x="90" y="312" class="t">Agree with the premise, keep the rule. "You're right, it isn't my call.</text><text x="30" y="326" class="t">That's why I'd take it to [associate / compliance] now rather than decide it myself."</text><text x="30" y="344" class="s">Escalating is not weakness. Deciding above your level is the fail.</text>
+<rect x="510" y="258" width="470" height="96" rx="6" fill="#F8E4E7" stroke="#B23A48"/><text x="520" y="276" class="k" fill="#B23A48">6. THE FALSE CHOICE</text><text x="520" y="292" class="t">"So you'd rather upset the PM than bend one small rule?"</text><text x="520" y="312" class="k" fill="#0E6B5F">Counter</text><text x="580" y="312" class="t">Refuse the binary, offer the third path. "I'd do neither. I'd get the PM</text><text x="520" y="326" class="t">the nearest thing I can within the rule, today, and explain why."</text><text x="520" y="344" class="s">There is almost always a third path: a group slot, a call, a later date, an escalation.</text>
+<rect x="20" y="366" width="470" height="90" rx="6" fill="#F8E4E7" stroke="#B23A48"/><text x="30" y="384" class="k" fill="#B23A48">7. THE KNOWLEDGE TRAP</text><text x="30" y="400" class="t">"What's the desk's allocation policy?" Something you cannot know.</text><text x="30" y="420" class="k" fill="#0E6B5F">Counter</text><text x="90" y="420" class="t">"I don't know the desk's policy; it isn't public. Here's how I'd</text><text x="30" y="434" class="t">reason about it, and I'd check the actual rule on day one." Never invent.</text><text x="30" y="450" class="s">Guessing is how frames break. "I don't know, here's my reasoning" is strength.</text>
+<rect x="510" y="366" width="470" height="90" rx="6" fill="#F8E4E7" stroke="#B23A48"/><text x="520" y="384" class="k" fill="#B23A48">8. THE INVITATION TO BADMOUTH</text><text x="520" y="400" class="t">"Brokers are useless, right?" "PMs are impossible to work with?"</text><text x="520" y="420" class="k" fill="#0E6B5F">Counter</text><text x="580" y="420" class="t">Decline warmly. "They're the counterparties the desk depends on;</text><text x="520" y="434" class="t">my job would be to make them easy to work with, both ways."</text><text x="520" y="450" class="s">You are being tested for discretion. The desk holds everyone's secrets.</text>
+</g>
+</svg>
+<span class="pm">@@f3@@</span><div class="cap"><b>Figure 3.</b> Eight tactics, eight counters. Notice that every counter is the same move: repeat, re-sort, act, stop.</div></div>
+
+<div class="box term"><div class="lbl">How to stay calm, physically</div><p><b>Before you speak:</b> breathe out slowly, not in. Exhaling drops your heart rate; inhaling raises it. <b>While they push:</b> slow your speech by 10%, drop your pitch slightly, keep your hands still and visible. <b>If you lose the thread:</b> say "Let me take that in order" and go to step 1. <b>If you make a mistake:</b> "Actually, I'd correct that:" and give the correction. Self-correction under pressure is one of the strongest signals you can send. <b>Keep a pen and paper</b> off camera; write the scenario's two or three facts as they give them; look up when you answer.</p></div>
+</div>
+
+<!-- ================= PART 2 ================= -->
+<div class="section" style="--pc:#1B998B"><span class="pm">@@p2@@</span>
+<div class="section-band"><div class="kicker">Part 2</div><h1>The scenario ladder</h1><p class="lede">Eight lines in the job description, three scenarios each, easy to hard. Every card: the setup, the trap, what to say, why it works, and the twist they will add.</p></div>
+
+<div class="fig">
+<svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:10px;fill:#1F2933}.h{font-size:15px;font-weight:bold;fill:#0B2545}.s{font-size:9.4px;fill:#5B6B7C}.w{fill:#fff;font-size:10px;font-weight:bold}.ws{fill:#fff;font-size:9.4px}.k{font-size:10.5px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">The scenario ladder: eight bullets from the job description, three rungs each</text>
+<g>
+<text x="20" y="62" class="k">Bullet</text><text x="440" y="62" class="k" fill="#0E6B5F">Easy</text><text x="620" y="62" class="k" fill="#8A4B12">Medium</text><text x="800" y="62" class="k" fill="#B23A48">Hard</text>
+<line x1="20" y1="68" x2="980" y2="68" stroke="#8A96A3"/>
+<g>
+<text x="20" y="90" class="t">A. Client service to PMs and analysts, with urgency</text><rect x="430" y="78" width="170" height="18" rx="3" fill="#1B998B"/><text x="436" y="91" class="ws">Late request, tight day</text><rect x="610" y="78" width="170" height="18" rx="3" fill="#D48F1F"/><text x="616" y="91" class="ws">Three PMs, one hour</text><rect x="790" y="78" width="190" height="18" rx="3" fill="#B23A48"/><text x="796" y="91" class="ws">PM blames you in front of team</text>
+<text x="20" y="116" class="t">B. Internal sales and target marketing</text><rect x="430" y="104" width="170" height="18" rx="3" fill="#1B998B"/><text x="436" y="117" class="ws">Market a conference</text><rect x="610" y="104" width="170" height="18" rx="3" fill="#D48F1F"/><text x="616" y="117" class="ws">Nobody replies</text><rect x="790" y="104" width="190" height="18" rx="3" fill="#B23A48"/><text x="796" y="117" class="ws">PM: "who else is going?"</text>
+<text x="20" y="142" class="t">C. Communication channels and streamlined processes</text><rect x="430" y="130" width="170" height="18" rx="3" fill="#1B998B"/><text x="436" y="143" class="ws">Inbox chaos</text><rect x="610" y="130" width="170" height="18" rx="3" fill="#D48F1F"/><text x="616" y="143" class="ws">Broker ignores the process</text><rect x="790" y="130" width="190" height="18" rx="3" fill="#B23A48"/><text x="796" y="143" class="ws">Your fix broke something</text>
+<text x="20" y="168" class="t">D. The proprietary portal</text><rect x="430" y="156" width="170" height="18" rx="3" fill="#1B998B"/><text x="436" y="169" class="ws">Stale calendar</text><rect x="610" y="156" width="170" height="18" rx="3" fill="#D48F1F"/><text x="616" y="169" class="ws">Data error before a session</text><rect x="790" y="156" width="190" height="18" rx="3" fill="#B23A48"/><text x="796" y="169" class="ws">PM wants another team's data</text>
+<text x="20" y="194" class="t">E. Booking, confirming, invites</text><rect x="430" y="182" width="170" height="18" rx="3" fill="#1B998B"/><text x="436" y="195" class="ws">Room double-booked</text><rect x="610" y="182" width="170" height="18" rx="3" fill="#D48F1F"/><text x="616" y="195" class="ws">CFO lands, PM is missing</text><rect x="790" y="182" width="190" height="18" rx="3" fill="#B23A48"/><text x="796" y="195" class="ws">You double-booked a CEO</text>
+<text x="20" y="220" class="t">F. Conference requests and allocations</text><rect x="430" y="208" width="170" height="18" rx="3" fill="#1B998B"/><text x="436" y="221" class="ws">400 requests, 60 slots</text><rect x="610" y="208" width="170" height="18" rx="3" fill="#D48F1F"/><text x="616" y="221" class="ws">Ten teams, one CFO</text><rect x="790" y="208" width="190" height="18" rx="3" fill="#B23A48"/><text x="796" y="221" class="ws">Two PMs shouting (Part 3)</text>
+<text x="20" y="246" class="t">G. Relationships with brokers</text><rect x="430" y="234" width="170" height="18" rx="3" fill="#1B998B"/><text x="436" y="247" class="ws">First call with a broker</text><rect x="610" y="234" width="170" height="18" rx="3" fill="#D48F1F"/><text x="616" y="247" class="ws">Broker asks who wants it</text><rect x="790" y="234" width="190" height="18" rx="3" fill="#B23A48"/><text x="796" y="247" class="ws">Broker offers a favour</text>
+<text x="20" y="272" class="t">H. Consumption reports for PM strategy sessions</text><rect x="430" y="260" width="170" height="18" rx="3" fill="#1B998B"/><text x="436" y="273" class="ws">What goes in it</text><rect x="610" y="260" width="170" height="18" rx="3" fill="#D48F1F"/><text x="616" y="273" class="ws">The numbers don't reconcile</text><rect x="790" y="260" width="190" height="18" rx="3" fill="#B23A48"/><text x="796" y="273" class="ws">PM disputes the report</text>
+</g>
+</g>
+<text x="20" y="294" class="s">Bullets A to H are the eight lines under "What You'll Do" in the London posting [S40]. The hardest version of F is the centrepiece of Part 3.</text>
+</svg>
+<span class="pm">@@f4@@</span><div class="cap"><b>Figure 4.</b> The ladder. Twenty-four scenarios; the same four-step answer shape for all of them.</div></div>
+
+<!-- A -->
+<h2>A. Client service, with urgency</h2>
+<div class="jd">"Support the Corporate Access team in delivering a high level of client service to Portfolio Managers and Analysts, with a strong sense of prioritization and urgency, primarily across EMEA." <span class="src">[S40]</span></div>
+<div class="sc lv-e"><div class="hd"><span>A1. An analyst emails at 16:50 asking for a call with a company's IR team "this week"</span><span class="diff">Easy</span></div><div class="bd">
+<div class="row"><div class="lab">The trap</div><div class="trapb">Promising the meeting. You do not control the company's diary, and a promise you cannot keep is worse than a clear "here's what I'll do".</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"I'd reply within the hour so they know it's in hand, and ask two things: what they want to cover and whether a group call would do if a one-on-one isn't available. Then I'd check whether a broker already has that company on a calendar this week, and if not route it to the sector specialist for an originated request. I'd tell the analyst what I'd found by end of day, even if the answer is 'not this week, but here are the options'."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">Acknowledge fast, qualify the request, use both channels (broker-sourced and originated are the two the desk runs <span class="src">[S40][S42]</span>), and close the loop with the client at a stated time. Urgency is shown by the reply time, not by promising outcomes.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"The analyst says the PM needs it before results on Thursday." Companies restrict what they say close to results <span class="src">[S22]</span>. Say so: "I'd flag that IR may be in a quiet period, so I'd offer the call for after results as the realistic option and tell the PM today."</div></div>
+</div></div>
+<div class="sc lv-m"><div class="hd"><span>A2. Three PMs message you in the same hour: a room for tomorrow, a conference request that closes tonight, and a "quick" data pull</span><span class="diff">Medium</span></div><div class="bd">
+<div class="row"><div class="lab">The trap</div><div class="trapb">Doing them in the order they arrived, or by seniority of the PM. Also: not telling anyone they are waiting.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"I'd sort by deadline and reversibility. The conference request closes tonight and can't be reopened, so that's first. The room for tomorrow is second: it takes five minutes and a delay costs a meeting. The data pull is third, and I'd message that PM straight away with a time I'll have it, so they're not chasing. If all three genuinely couldn't be done, I'd tell my associate which one I was going to drop and why, before dropping it."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">It shows a rule (deadline, then reversibility, then effort), it communicates to the person who is waiting, and it escalates a real conflict rather than silently failing. This is the "prioritization and urgency" line of the job description made concrete <span class="src">[S40]</span>.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"The data pull PM is the most senior person on the floor." Hold: "Seniority matters for how I communicate, not for the order. I'd still do the closing deadline first, and I'd call rather than message that PM so they hear it from me."</div></div>
+</div></div>
+<div class="sc lv-h"><div class="hd"><span>A3. A PM says, in front of his analysts, that "corporate access got us nothing this quarter"</span><span class="diff">Hard</span></div><div class="bd">
+<div class="row"><div class="lab">The trap</div><div class="trapb">Defending yourself, or agreeing. Both are about you. The PM's complaint is about his coverage.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"I wouldn't argue it in the room. I'd say 'Understood, let me come back with what we did and didn't get you', and then pull the team's consumption data: meetings attended, requests made, requests we couldn't fill and why. I'd bring that to him one-to-one, ask what he actually wanted that quarter, and turn it into a plan for the next one. If the data showed we had failed, I'd say so."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">The consumption report exists exactly for this conversation; the posting calls it a report "for strategy sessions with Portfolio Managers and Analysts" <span class="src">[S40]</span>. You take the heat, move the discussion to facts, and treat the PM as a client with a legitimate grievance rather than an opponent. Not defending yourself is the frame.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"The data shows his team made two requests all quarter." Do not gloat. "Then the conversation is about how we market events to his team, not about what we failed to deliver. I'd ask what would make him request more."</div></div>
+</div></div>
+
+<!-- B -->
+<h2>B. Internal sales and target marketing</h2>
+<div class="jd">"Support internal sales and target marketing efforts." <span class="src">[S40]</span></div>
+<div class="sc lv-e"><div class="hd"><span>B1. A broker sends a European healthcare conference agenda with 80 companies. What do you do with it?</span><span class="diff">Easy</span></div><div class="bd">
+<div class="row"><div class="lab">The trap</div><div class="trapb">Forwarding it to everyone. That is noise, and noise trains PMs to ignore the desk.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"I'd load it into the portal first, so it's on the forward calendar. Then I'd target: which teams cover healthcare, which of the 80 companies are names they hold or have asked about before, and I'd send those teams a short note with the relevant companies pulled out and the request deadline. Booking opens weeks ahead and fills fast, so the deadline is the headline."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">"Target marketing" means knowing which team wants what and pushing the right event to the right desk before the window closes. Conference booking typically opens four to six weeks out and slots fill quickly <span class="src">[S30]</span>. Relevance and deadline are the two things a PM needs from you.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"How do you know which teams cover healthcare?" "From the portal's history of requests and attendance, and from asking my associate. I'd build that map in my first two weeks; it's the whole basis of the job."</div></div>
+</div></div>
+<div class="sc lv-m"><div class="hd"><span>B2. You marketed an event to twelve teams and nobody replied. The deadline is tomorrow.</span><span class="diff">Medium</span></div><div class="bd">
+<div class="row"><div class="lab">The trap</div><div class="trapb">Sending the same email again, louder. Or assuming they are not interested.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"Silence usually means the email didn't land, not that nobody cares. I'd call or message the two or three teams most likely to want it, with one line: 'X and Y are presenting, slots close tomorrow at noon, do you want me to put in a request?' I'd make it a yes/no question. Then I'd note who was reached so the associate knows what's been done before the deadline."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">Changing channel and reducing the ask to a binary is basic internal sales. A multi-manager corporate access head describes engagement as planned "through carefully coordinated quarterly plans rather than ad hoc conference attendance" <span class="src">[S10]</span>; your job is to make the ad hoc easy when it comes.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"One PM says 'stop spamming me'." "I'd apologise once, ask how he'd like to hear about events, and record the preference. A PM telling you how to reach him is a gift."</div></div>
+</div></div>
+<div class="sc lv-h"><div class="hd"><span>B3. A PM asks, casually, "who else on the floor is going to the meeting with that CFO?"</span><span class="diff">Hard</span></div><div class="bd">
+<div class="row"><div class="lab">The trap</div><div class="trapb">Answering. It sounds harmless. It is another team's research agenda and possibly its position.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"I'd keep it light but not answer: 'I can't share other teams' requests, but I can tell you the format is a small group and I'll make sure you get a slot.' If he pushed, I'd say it's the same rule that protects his own requests. I wouldn't make it a lecture."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">Teams compete for capital and do not share ideas <span class="src">[S313]</span>; the desk sees every team's demand and must not become the leak. The rule applies symmetrically, which is why you can state it without sounding pious. This is the single most likely "small" trap in the interview.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"He says 'I only want to know if it's a long or a short'." Same answer, warmer. "That's exactly the thing I can't share. Happy to get you in the room, though."</div></div>
+</div></div>
+
+<!-- C -->
+<h2>C. Communication channels and streamlined processes</h2>
+<div class="jd">"Implement internal and external communication channels and help streamline processes for sell-side broker-sourced and Millennium-originated Corporate Access events." <span class="src">[S40]</span></div>
+<div class="sc lv-e"><div class="hd"><span>C1. The shared corporate access inbox has 200 unread emails on Monday morning</span><span class="diff">Easy</span></div><div class="bd">
+<div class="row"><div class="lab">The trap</div><div class="trapb">Starting at the top and reading in order.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"I'd triage in three passes. First, anything with a deadline today or a confirmation for today's meetings. Second, broker calendars and new events, which go into the portal. Third, everything else. I'd use simple rules or folders so the same sorting happens automatically next Monday, and I'd tell my associate the first-pass items by 9:30."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">The posting says interns will be "handling various databases and email correspondence" and "working to increase efficiencies" <span class="src">[S40]</span>. Triage by deadline plus a repeatable rule is the whole answer.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"An email from a company's IR team says the CFO can do 15:00 today." That is a first-pass item: confirm receipt to IR within minutes, then find the requesting team. IR teams remember who replies quickly.</div></div>
+</div></div>
+<div class="sc lv-m"><div class="hd"><span>C2. A broker keeps sending requests to a PM directly instead of through the desk</span><span class="diff">Medium</span></div><div class="bd">
+<div class="row"><div class="lab">The trap</div><div class="trapb">Telling the PM off, or letting it slide because "the PM got his meeting".</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"The problem isn't the PM, it's that the meeting won't be in the record. I'd call the broker, thank them for the access and ask them to copy the desk so we can log attendance and give them credit in the broker vote; framing it as in their interest works better than as a rule. Then I'd tell the PM I'd picked it up and ask him to forward anything similar so it counts."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">The record matters for compliance and for the broker vote, which decides how the firm rewards brokers <span class="src">[S43][S39]</span>. You fix the process by aligning incentives, not by policing.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"The broker says the PM asked them to keep it off the desk." Now it is a level-1 question. "I'd stop, not confront anyone, and tell my associate the same day. That's not an intern's call."</div></div>
+</div></div>
+<div class="sc lv-h"><div class="hd"><span>C3. You changed the request template to make it faster. A week later a request was missed because a field you removed mattered.</span><span class="diff">Hard</span></div><div class="bd">
+<div class="row"><div class="lab">The trap</div><div class="trapb">Explaining why the change was reasonable. It was, and that is not the point.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"First the PM: I'd tell them what was missed and what I'm doing to recover it, today. Then the fix: restore the field. Then my associate: what happened, that it was my change, and what I'd do differently, which is test a change on one week's requests before rolling it out and ask who else relies on the field. I'd rather own it in one sentence than have it come out later."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">Order: client, fix, disclosure, prevention. A senior Millennium risk leader on what he had to learn: "how to handle being wrong and respond with perspective" <span class="src">[S384]</span>. Owning a mistake fast is a frame move; explaining it away is a break.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"Your associate is annoyed and says you shouldn't have touched it." "Fair. I'd ask what the process is for proposing changes and use it next time. I'd still want to keep improving the process; I'd just do it with the team, not to the team."</div></div>
+</div></div>
+
+<!-- D -->
+<h2>D. The proprietary portal</h2>
+<div class="jd">"Update and maintain the internal proprietary Corporate Access portal to manage forward-looking event marketing and requests." <span class="src">[S40]</span></div>
+<div class="sc lv-e"><div class="hd"><span>D1. You notice the portal shows a conference on the wrong date</span><span class="diff">Easy</span></div><div class="bd">
+<div class="row"><div class="lab">The trap</div><div class="trapb">Fixing it silently. If requests were made against the wrong date, someone is about to miss something.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"I'd check the source, the broker's invitation, to be sure which is right. Fix the date. Then check who had requested or been marketed the event and tell them the corrected date, because a wrong date in a PM's diary is a missed meeting. Then I'd look at whether other entries from the same broker file are wrong too."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">Verify, fix, notify the affected, check for the pattern. The portal is the desk's single source of truth for "forward-looking event marketing and requests" <span class="src">[S40]</span>; a wrong entry propagates.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"It turns out the broker moved the date and didn't tell us." "Then I'd ask the broker for a confirmation email whenever a date changes, and I'd add a weekly check of upcoming events against broker calendars."</div></div>
+</div></div>
+<div class="sc lv-m"><div class="hd"><span>D2. Two hours before a PM strategy session you find the meeting counts in the report are wrong</span><span class="diff">Medium</span></div><div class="bd">
+<div class="row"><div class="lab">The trap</div><div class="trapb">Sending it anyway and hoping nobody checks. Or hiding for two hours trying to fix everything.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"Tell my associate immediately, with what's wrong and my best estimate of how long a fix takes. Then find the cause: usually duplicates, a date filter or attendance not logged. If I can fix it in time, I re-run it and reconcile totals against the raw data before it goes anywhere. If not, we send the report with the affected numbers clearly marked and a corrected version after. A wrong number in front of a PM is worse than a late one."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">Disclose first, then fix, then reconcile. The job asks for "strong attention to detail" and the ability to "manipulate data" <span class="src">[S40]</span>; the mature version of both is knowing a number is wrong before the client does.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"The associate says just send it, the PM won't notice." Hold politely: "I'd rather mark the two numbers I'm not sure of. If he does notice, the whole report loses credibility, and it's the desk's name on it."</div></div>
+</div></div>
+<div class="sc lv-h"><div class="hd"><span>D3. A PM asks you to export another team's meeting history from the portal "to see what good coverage looks like"</span><span class="diff">Hard</span></div><div class="bd">
+<div class="row"><div class="lab">The trap</div><div class="trapb">It sounds like a learning request. It is another team's research trail.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"I'd say I can't share another team's data, but I can do something better: show him his own team's coverage against an anonymised benchmark, like average meetings per analyst across the fundamental teams, if the desk produces one, or build him a plan from the sector calendar. If he insisted on the specific team, I'd take it to my associate rather than refuse on my own authority."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">Same principle as B3: the centre aggregates everything and attributes nothing across the wall. Offering an aggregate or a plan gives the PM what he actually needs. Escalating a persistent request is right; an intern should not be the one arguing with a PM about data rights.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"He says the other PM is his friend and wouldn't mind." "Then the other PM can send it to him directly. It still shouldn't come from the desk."</div></div>
+</div></div>
+
+<!-- E -->
+<h2>E. Booking, confirming, invites</h2>
+<div class="jd">"Coordinate meetings by booking and confirming rooms and attendees, managing meeting requests from Portfolio Managers and Analysts, and sending calendar invites for Corporate Access meetings and events in EMEA." <span class="src">[S40]</span></div>
+<div class="sc lv-e"><div class="hd"><span>E1. Ten minutes before a management meeting, the room you booked is occupied</span><span class="diff">Easy</span></div><div class="bd">
+<div class="row"><div class="lab">The trap</div><div class="trapb">Arguing with the people in the room, or panicking in front of the visiting company.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"Find another room first, argue later. I'd grab the nearest free room or ask reception, update the attendees with one message, and meet the company at reception myself so they never see the scramble. Afterwards I'd find out why the clash happened and confirm rooms the morning of every meeting from then on."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">The company's experience is the firm's reputation with that IR team; Millennium's Tokyo posting describes the team as "a bridge, creating direct dialogue between companies and our investment teams" <span class="src">[S49]</span>. Solve, communicate, protect the guest, then prevent.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"There are no free rooms." "Then a video link from the PM's desk, and I'd tell the PM before the company arrives so he chooses, not me."</div></div>
+</div></div>
+<div class="sc lv-m"><div class="hd"><span>E2. The CFO has arrived. The PM who requested the meeting is not answering</span><span class="diff">Medium</span></div><div class="bd">
+<div class="row"><div class="lab">The trap</div><div class="trapb">Leaving the CFO alone while you hunt, or letting the meeting collapse.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"Host first: coffee, small talk, a colleague from the desk if I have to leave. In parallel, message and call the PM and his analysts; an analyst can start the meeting. If after five minutes nobody is coming, I'd ask my associate whether another team that had requested the company could take the slot, and I'd be honest with the CFO that we're rearranging attendees. What I wouldn't do is leave a CFO in a room with no one."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">You protect the relationship with the company, use the team hierarchy (analysts can attend), and only reallocate through the associate, because giving a slot to another team is an allocation decision, not a logistics one.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"The PM turns up 20 minutes late and is angry the meeting started without him." "I'd take it privately, explain the choice and ask how he'd want it handled next time. I wouldn't apologise for keeping the CFO's time respected."</div></div>
+</div></div>
+<div class="sc lv-h"><div class="hd"><span>E3. You double-booked a CEO: two teams both think they have the 10:00 one-on-one</span><span class="diff">Hard</span></div><div class="bd">
+<div class="row"><div class="lab">The trap</div><div class="trapb">Choosing between the teams yourself. And hiding it until 9:55.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"The moment I see it, I tell my associate: my error, two teams, one slot, here are the options. Options: ask the company for a second slot or a small-group format; offer one team a call later; or have the associate decide who keeps it under whatever rule the desk uses. I'd deliver the bad news to the team that loses myself, with the alternative already arranged, and I'd fix the checking step that let it happen."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">Disclose fast, generate options, escalate the allocation, own the message, prevent. The allocation is a level-2 decision and an intern taking it alone would be the real error. This scenario tests whether you hide mistakes; every platform's culture punishes hiding more than erring.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"Both PMs say they were first." "Then the record decides, not the argument. I'd pull the request timestamps from the portal and give them to my associate. That's what the log is for."</div></div>
+</div></div>
+
+<!-- F -->
+<h2>F. Conference requests and allocations</h2>
+<div class="jd">"Proactively support conference attendance strategy by helping facilitate a high volume of company meeting requests and allocations through efficient and reliable processes." <span class="src">[S40]</span></div>
+<div class="sc lv-e"><div class="hd"><span>F1. A broker conference: 400 requests from 12 teams, and the broker gives the firm 60 one-on-one slots</span><span class="diff">Easy</span></div><div class="bd">
+<div class="row"><div class="lab">The trap</div><div class="trapb">Describing it as an email problem. It is a data and rules problem.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"One sheet, one row per request: team, requester, company, their priority rank, reason, last time they met the company, and whether a group meeting would do. Then rank at firm level using the desk's criteria, submit one prioritised list to the broker, and when the 60 come back allocate them and offer group slots, calls or the next conference to the rest. Every step in the portal so it's the record."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">Brokers allocate to firms that send clean, ranked lists; requests carry "portfolio team, AUM relevance, and prior coverage" so allocators have context <span class="src">[S28]</span>. You have described the desk's core process without pretending to know its private criteria.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"What criteria would you rank on?" "I don't know the desk's; I'd expect relevance of coverage, existing position or research interest, whether they've met the company recently, and the PM's own ranking. I'd want to learn the actual rule before touching a real allocation."</div></div>
+</div></div>
+<div class="sc lv-m"><div class="hd"><span>F2. Ten teams want the same CFO. The broker gives us four slots.</span><span class="diff">Medium</span></div><div class="bd">
+<div class="row"><div class="lab">The trap</div><div class="trapb">First-come-first-served, or giving it to whoever complains. Both are rules you could not defend to the losers.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"Apply the desk's ranking and stretch the supply: ask the broker for a small-group slot as well as one-on-ones, so three or four teams share one; ask the company's IR for a follow-up call for the rest; and tell every team that missed out what they're getting instead, before they hear it from someone else. Nobody is told who got the one-on-ones."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">Multi-manager desks stretch access with "multiple levels (IR, CFOs, division heads)" and group formats <span class="src">[S10]</span>. Fairness is a rule you could explain to the loser; confidentiality is not telling the loser who won. This is the medium version of the Part 3 centrepiece.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"One team says its position is ten times bigger than anyone else's." "That may well be a factor in the ranking, and I'd pass it to whoever ranks. It isn't something I'd act on alone, and I wouldn't confirm or deny anyone else's position."</div></div>
+</div></div>
+<div class="sc lv-h"><div class="hd"><span>F3. The two PMs are now shouting at you</span><span class="diff">Hard</span></div><div class="bd">
+<div class="row"><div class="lab">Go to</div><div class="whyb">Part 3, scenario P1, with the decision tree in Figure 5. It is the hardest thing they can throw at you and it deserves its own page.</div></div>
+</div></div>
+
+<!-- G -->
+<h2>G. Relationships with brokers</h2>
+<div class="jd">"Build and maintain relationships with brokers to support smooth and effective communication." <span class="src">[S40]</span></div>
+<div class="sc lv-e"><div class="hd"><span>G1. Your first call with a broker's corporate access desk. What do you want from it?</span><span class="diff">Easy</span></div><div class="bd">
+<div class="row"><div class="lab">The trap</div><div class="trapb">Treating them as a supplier to be squeezed, or as a friend to be pleased.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"Three things. How they want requests: format, deadlines, one list or many. What's coming: their conference calendar for the next quarter so I can market early. And how they see us: what makes Millennium easy or hard to work with. I'd come out of it with their process written down and a standing time to catch up."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">Broker desks handle hundreds of clients; the firm that is easiest to serve gets served first <span class="src">[S28][S30]</span>. You are building a working relationship, not a social one, and you are gathering the calendar that drives everything else.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"They ask what Millennium's total budget with them is." "Not something I'd know or share; I'd say the broker vote is where that's decided and I'd pass any commercial question to my associate."</div></div>
+</div></div>
+<div class="sc lv-m"><div class="hd"><span>G2. A broker asks which of your teams wants the meeting, "so we can prioritise the right people"</span><span class="diff">Medium</span></div><div class="bd">
+<div class="row"><div class="lab">The trap</div><div class="trapb">Naming the team or the PM. The desk exists so that the firm speaks with one voice.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"I'd give them what helps them without exposing the team: the number of teams interested, the sector, the format we'd accept, and that this is a firm priority. That's what they need to allocate. Which PM it is stays inside. If they push, I'd say the desk submits on behalf of the firm and that's how every request comes."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">The desk "centralize[s] the access provided by sell-side brokers on behalf of our Portfolio Managers" <span class="src">[S42]</span>. One voice out is the point; leaking which pod wants a company tells the market something about that pod.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"The broker says other firms tell them." "That's their choice. Ours is to aggregate. I'd keep it friendly and move on to what they can do for us."</div></div>
+</div></div>
+<div class="sc lv-h"><div class="hd"><span>G3. A broker offers you two tickets to a sold-out event "as a thank you for being so responsive"</span><span class="diff">Hard</span></div><div class="bd">
+<div class="row"><div class="lab">The trap</div><div class="trapb">Accepting because it is small, or refusing rudely and damaging the relationship.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"Thank them warmly and say I'd need to check it with compliance first, because gifts from brokers are exactly the thing the rules are strict about. Then actually check, and follow whatever the policy says. I'd tell my associate it was offered regardless of the outcome. The relationship survives a polite 'I have to clear that'; it doesn't survive a policy breach."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">Inducements from brokers are regulated in the UK <span class="src">[S15]</span>; the firm's compliance runs due diligence on "sell-side experts" and a gifts perimeter is standard <span class="src">[S389]</span>. Warm plus firm is the frame. Disclosing the offer even if declined shows you understand why the rule exists.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"It's only £60 of value." "Then compliance will probably say yes in ten seconds. It's still their call, not mine."</div></div>
+</div></div>
+
+<!-- H -->
+<h2>H. Consumption reports for PM strategy sessions</h2>
+<div class="jd">"Assist with preparing Corporate Access consumption reports for strategy sessions with Portfolio Managers and Analysts." <span class="src">[S40]</span></div>
+<div class="sc lv-e"><div class="hd"><span>H1. What is a consumption report and what goes in it?</span><span class="diff">Easy</span></div><div class="bd">
+<div class="row"><div class="lab">The trap</div><div class="trapb">"A list of meetings." It is a decision tool.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"A record of what a team used: meetings attended by company, sector, format and broker; requests made and not filled and why; and how that compares with the team's coverage. It's used two ways: with the PM, to plan next quarter and fix gaps; and by the desk, to score brokers in the semi-annual vote and to show the firm what access it paid for."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">Industry-wide, one-on-one company meetings are the most tracked item in broker votes <span class="src">[S39]</span>; Millennium's desk runs a "semi-annual Corporate Access Broker Vote" <span class="src">[S43]</span>. You have shown the report is both client service and compliance record.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"Why does the firm need to prove what access it paid for?" "Because since 2014 UK managers can't pay for access with dealing commission, and under MiFID II it's a separately paid service, so there has to be a record of what was received and how it was paid for" <span class="src">[S2][S13]</span>.</div></div>
+</div></div>
+<div class="sc lv-m"><div class="hd"><span>H2. The report says a team attended 40 meetings; the broker's records say 55</span><span class="diff">Medium</span></div><div class="bd">
+<div class="row"><div class="lab">The trap</div><div class="trapb">Picking one number. Both are probably partly right.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"Reconcile line by line before the session. The usual causes: meetings the broker arranged directly with the PM that never hit our log; group meetings counted per attendee by one side and per meeting by the other; cancellations. I'd list the 15 differences, classify them, fix the log where we missed something, and tell the associate which broker relationship has a leak in it. Then the process fix: brokers copy the desk on every confirmation."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">You treat the discrepancy as information about the process, not as an embarrassment. Every unlogged meeting is a compliance gap and a broker-vote error at once.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"You have 30 minutes." "Then I reconcile the largest differences, mark the rest as unreconciled on the report, and finish after the session. Marked uncertainty is fine; hidden uncertainty is not."</div></div>
+</div></div>
+<div class="sc lv-h"><div class="hd"><span>H3. In the strategy session the PM says your report is wrong and his team met far more companies</span><span class="diff">Hard</span></div><div class="bd">
+<div class="row"><div class="lab">The trap</div><div class="trapb">Defending the report in the room, or caving and agreeing it is wrong without evidence.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"'You may well be right; the report only shows what reached the desk. Can you give me two examples and I'll trace them today?' Then I'd trace them. If they were meetings arranged around the desk, the conversation becomes how we capture them, which helps him in the broker vote too. If the report was wrong, I'd correct it and say so to everyone who saw it."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">Neither defend nor cave: ask for the specific, commit to a time, and turn the dispute into a process improvement. The PM keeps face, the record gets better, and you have shown you can be challenged by a senior person without wobbling.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"He says 'this is why corporate access is useless'." Back to A3. Don't defend the desk; get the data and come back one-to-one.</div></div>
+</div></div>
+</div>
+
+<!-- ================= PART 3 ================= -->
+<div class="section" style="--pc:#B23A48"><span class="pm">@@p3@@</span>
+<div class="section-band"><div class="kicker">Part 3</div><h1>Under fire: the composure set</h1><p class="lede">Five scenarios designed to break you. In each, the pressure is the point and the answer is the same four steps at a slower tempo. Two decision trees you can draw from memory.</p></div>
+
+<div class="sc lv-h"><div class="hd"><span>P1. Two PMs are shouting at you over the same one-on-one slot, five minutes before it starts</span><span class="diff">Hard</span></div><div class="bd">
+<div class="row"><div class="lab">What they test</div><div class="whyb">Tempo, hierarchy, confidentiality, and whether you decide above your level under pressure.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"I'd slow down, not speed up. Same volume, lower pitch. 'I hear you both. Give me two minutes and I'll come back with an answer.' Then three things at once: check the record for who was confirmed; ask the company's IR or the broker if the slot can take two attendees or a second slot after; and get my associate on the phone, because who keeps a contested slot is the desk's decision, not mine. I'd come back with the answer and an alternative for whoever doesn't get it, delivered to each PM separately. I would not say to either of them what the other one wanted or why."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">You control tempo, you buy time honestly, you use the record (the portal exists for this <span class="src">[S40]</span>), you stretch the supply (small groups are how desks stretch access <span class="src">[S10]</span>), you escalate the allocation, and you protect the wall between teams <span class="src">[S313]</span>. Two shouting PMs are a normal Tuesday on a platform where teams compete for everything; the desk is the calm part.</div></div>
+<div class="row"><div class="lab">The twists, in order</div><div class="twistb">"Your associate isn't answering." Then the record decides: "I'd go with the confirmed booking and offer the other PM the first alternative I've secured, and tell the associate what I did the moment they're back." <br>"The PM who loses says he'll make sure you don't get a return offer." Do not react to it. "I'd say I understand he's frustrated, and that I'll get him the best alternative I can. I'd mention the comment to my associate afterwards, factually, and leave it there."<br>"The winner asks why the other guy wanted it." Same answer as B3: warm, no.</div></div>
+</div></div>
+
+<div class="fig">
+<svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:10.2px;fill:#1F2933}.h{font-size:15px;font-weight:bold;fill:#0B2545}.s{font-size:9.4px;fill:#5B6B7C}.w{fill:#fff;font-size:10.5px;font-weight:bold}.ws{fill:#fff;font-size:9.8px}.k{font-size:11px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">Two PMs, one slot: the decision tree</text>
+<rect x="380" y="42" width="240" height="46" rx="6" fill="#B23A48"/><text x="392" y="61" class="w">Two PMs, one slot, five minutes</text><text x="392" y="77" class="ws">Slow down. "Two minutes and I'll come back."</text>
+<line x1="500" y1="88" x2="500" y2="108" stroke="#0B2545" stroke-width="2"/>
+<rect x="330" y="108" width="340" height="40" rx="6" fill="#0B2545"/><text x="342" y="126" class="w">What does the record say?</text><text x="342" y="140" class="ws">Portal: who was confirmed, when requested, by whom.</text>
+<g stroke="#0B2545" stroke-width="2" fill="none"><path d="M500 148 L500 165 L200 165 L200 185"/><path d="M500 165 L800 165 L800 185"/></g>
+<rect x="60" y="185" width="280" height="56" rx="6" fill="#1B998B"/><text x="72" y="203" class="w">One team was confirmed</text><text x="72" y="218" class="ws">That team keeps it. Tell the other privately with</text><text x="72" y="232" class="ws">an alternative already in hand.</text>
+<rect x="660" y="185" width="280" height="56" rx="6" fill="#D97742"/><text x="672" y="203" class="w">Both have a claim, or it's my error</text><text x="672" y="218" class="ws">Escalate to the associate now. Not my call.</text><text x="672" y="232" class="ws">Meanwhile, stretch the supply.</text>
+<g stroke="#0B2545" stroke-width="2" fill="none"><path d="M200 241 L200 262"/><path d="M800 241 L800 262"/></g>
+<rect x="60" y="262" width="280" height="62" rx="6" fill="#E9EEF5" stroke="#13315C"/><text x="72" y="280" class="k">Stretch the supply anyway</text><text x="72" y="295" class="t">Ask IR or the broker: second slot? small group?</text><text x="72" y="309" class="t">follow-up call? Offer the loser the best of these.</text>
+<rect x="660" y="262" width="280" height="62" rx="6" fill="#E9EEF5" stroke="#13315C"/><text x="672" y="280" class="k">If the associate is unreachable</text><text x="672" y="295" class="t">The confirmed booking stands; secure the first</text><text x="672" y="309" class="t">alternative; tell the associate the moment they're back.</text>
+<rect x="270" y="340" width="460" height="46" rx="6" fill="#F8E4E7" stroke="#B23A48"/><text x="282" y="358" class="k" fill="#B23A48">NEVER, AT ANY BRANCH</text><text x="282" y="373" class="t">Tell either PM what the other asked for or why. Decide the allocation alone.</text>
+<text x="20" y="396" class="s">Author's reconstruction from the posting's duties [S40], reported allocation practice [S10][S28] and the non-sharing nature of pods [S313]. The desk's actual rule is not public; say so if asked.</text>
+</svg>
+<span class="pm">@@f5@@</span><div class="cap"><b>Figure 5.</b> Two PMs, one slot. Record first, escalate the contested call, stretch the supply, protect the wall.</div></div>
+
+<div class="sc lv-h"><div class="hd"><span>P2. A PM tells you to send a request straight to a company's IR team "and don't bother compliance, it's just a call"</span><span class="diff">Hard</span></div><div class="bd">
+<div class="row"><div class="lab">What they test</div><div class="whyb">Whether level 1 of your priority order survives a direct instruction from a senior person.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"I'd do the request, because setting up a call with IR is normal, and I'd log it the way every request is logged, because that's not optional and it protects him as much as the firm. I wouldn't announce that I was 'going to compliance'; the log is the process. If he explicitly told me not to record it, I'd stop and tell my associate the same hour. I'd be polite about it and I wouldn't argue with him on the floor."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">You separate the legitimate request (a call with IR) from the illegitimate instruction (skip the record). The record is why the FCA and the firm can show access was handled properly <span class="src">[S2][S22]</span>; a control room runs the restricted list and wall-crossings and the log is how it knows what happened <span class="src">[S389]</span>. Refusing to be told to skip it, while still serving the PM, is the frame.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"He says everyone does it." "Then it'll be easy for my associate to confirm that. I'd still log it."</div></div>
+</div></div>
+
+<div class="sc lv-h"><div class="hd"><span>P3. You are in the room taking notes. The CFO says "we'll be announcing something on the debt side next week that the market will like"</span><span class="diff">Hard</span></div><div class="bd">
+<div class="row"><div class="lab">What they test</div><div class="whyb">Whether you recognise possible inside information and know that it is not your call to judge it.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"I wouldn't react in the room; that's not my meeting to run. Straight after, I'd tell my associate exactly what was said, word for word, who was present, and the time, and let compliance decide whether it's inside information and whether the name needs restricting. I wouldn't discuss it with anyone else, and I wouldn't decide myself that it was fine because it was vague."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">The Greenlight case: a CEO on a broker-arranged call said the company was at an advanced stage toward an equity raise; the fund traded and was fined over £7m, and "conceptual" vagueness was no defence <span class="src">[S19]</span>. The FCA's good practice is an initial contact point "independent of the fund managers" <span class="src">[S20]</span>. The desk's meeting log is how the firm proves who heard what and when <span class="src">[S22]</span>. Escalate fast, precisely, and only upward.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"The PM says it's fine, it's public knowledge." "It may be. Compliance can confirm that in minutes, and then nobody has a problem. If I stay quiet and it wasn't, everyone in the room has one."</div></div>
+</div></div>
+
+<div class="fig">
+<svg viewBox="0 0 1000 330" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:10.2px;fill:#1F2933}.h{font-size:15px;font-weight:bold;fill:#0B2545}.s{font-size:9.4px;fill:#5B6B7C}.w{fill:#fff;font-size:10.5px;font-weight:bold}.ws{fill:#fff;font-size:9.8px}.k{font-size:11px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">Something sounds like inside information: the flow</text>
+<g>
+<rect x="20" y="50" width="180" height="70" rx="6" fill="#B23A48"/><text x="30" y="70" class="w">1. Notice</text><text x="30" y="86" class="ws">Precise, not yet public,</text><text x="30" y="100" class="ws">could move the price?</text><text x="30" y="114" class="ws">Or just unsure? Either counts.</text>
+<rect x="225" y="50" width="180" height="70" rx="6" fill="#0B2545"/><text x="235" y="70" class="w">2. Don't react</text><text x="235" y="86" class="ws">Don't ask a follow-up, don't</text><text x="235" y="100" class="ws">signal, don't whisper to the</text><text x="235" y="114" class="ws">PM. Keep taking notes.</text>
+<rect x="430" y="50" width="180" height="70" rx="6" fill="#0B2545"/><text x="440" y="70" class="w">3. Record</text><text x="440" y="86" class="ws">Exact words, who was in the</text><text x="440" y="100" class="ws">room, the time. Accuracy</text><text x="440" y="114" class="ws">matters more than speed here.</text>
+<rect x="635" y="50" width="180" height="70" rx="6" fill="#D97742"/><text x="645" y="70" class="w">4. Escalate upward only</text><text x="645" y="86" class="ws">Associate, then compliance,</text><text x="645" y="100" class="ws">within the hour. Not the PM's</text><text x="645" y="114" class="ws">call, not yours.</text>
+<rect x="840" y="50" width="140" height="70" rx="6" fill="#1B998B"/><text x="850" y="70" class="w">5. Stop</text><text x="850" y="86" class="ws">Say nothing to</text><text x="850" y="100" class="ws">anyone else. Let</text><text x="850" y="114" class="ws">the process run.</text>
+<g stroke="#0B2545" stroke-width="2" fill="none"><path d="M200 85 L222 85"/><path d="M405 85 L427 85"/><path d="M610 85 L632 85"/><path d="M815 85 L837 85"/></g>
+</g>
+<rect x="20" y="140" width="470" height="120" rx="6" fill="#E9EEF5" stroke="#8A96A3"/>
+<text x="32" y="160" class="k">WHY THE DESK IS THE NATURAL GATEKEEPER</text>
+<text x="32" y="178" class="t">The desk is in more company meetings than anyone and is independent of</text><text x="32" y="192" class="t">the fund managers, which is exactly what the FCA praised as good</text><text x="32" y="206" class="t">practice for handling approaches [S20][S23]. Its log is the firm's evidence</text><text x="32" y="220" class="t">of who heard what and when [S22]. Millennium's control room runs the</text><text x="32" y="234" class="t">restricted list and wall-crossings [S389]. You are the front of that chain.</text>
+<rect x="510" y="140" width="470" height="120" rx="6" fill="#F8E4E7" stroke="#B23A48"/>
+<text x="522" y="160" class="k" fill="#B23A48">THE CASE TO HAVE IN YOUR HEAD</text>
+<text x="522" y="178" class="t">Greenlight, 2012: on a broker-arranged call, a CEO said the company was at</text><text x="522" y="192" class="t">"an advanced stage" toward an equity raise. The fund sold its stake. Fines of</text><text x="522" y="206" class="t">over £7m; declining to be wall-crossed was no defence; the regulator said</text><text x="522" y="220" class="t">"reasonable investors are expected to interpret comments made to them in an</text><text x="522" y="234" class="t">appropriate manner" [S19]. Vague does not mean safe.</text>
+<rect x="20" y="276" width="960" height="36" rx="5" fill="#FBEEE6" stroke="#D97742"/>
+<text x="32" y="294" class="k">THE LINE</text><text x="90" y="294" class="t">"It's not my job to decide whether it was inside information. It's my job to make sure the people whose job it is know within the hour, with the exact words."</text>
+<text x="20" y="326" class="s">Definitions: inside information under UK MAR is precise, non-public and price-sensitive [S21]. Steps are the author's synthesis of FCA good practice [S20][S23] and the firm's compliance postings [S389].</text>
+</svg>
+<span class="pm">@@f6@@</span><div class="cap"><b>Figure 6.</b> The inside-information flow. Notice, don't react, record, escalate upward, stop.</div></div>
+
+<div class="sc lv-h"><div class="hd"><span>P4. An interviewer says: "Honestly, this is an admin job. Why would someone with your background want it?"</span><span class="diff">Hard</span></div><div class="bd">
+<div class="row"><div class="lab">What they test</div><div class="whyb">Whether you are defensive about the seat, and whether you understand what it actually is.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"Part of it is admin, and I'd want to be very good at that part, because the record is the compliance evidence and the broker-vote evidence. But the seat is the one place where the demand of hundreds of independent teams for the same companies becomes visible, and someone has to turn that into one voice to the market and a fair allocation back. That's a judgement job wearing an admin job's clothes. I'd rather learn the firm from the desk that touches every team than from one team."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">You agree with the true part, reframe the rest with the mechanism, and end on why it suits you. No defensiveness, no grandiosity. The reframe is drawn from the earlier guides: the desk centralises access for the firm <span class="src">[S42]</span> and its record feeds compliance and the vote <span class="src">[S43][S22]</span>.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"So you think you're too good for the admin?" "No. I think the admin is where the trust is earned. Nobody lets an intern near the allocation until the rooms, the invites and the log are perfect."</div></div>
+</div></div>
+
+<div class="sc lv-h"><div class="hd"><span>P5. "It's 18:30, a conference deadline is 19:00, your associate has gone home, and a PM's request has a field you don't understand."</span><span class="diff">Hard</span></div><div class="bd">
+<div class="row"><div class="lab">What they test</div><div class="whyb">Judgement with incomplete information, and whether you know the difference between reversible and irreversible.</div></div>
+<div class="row"><div class="lab">Say</div><div class="sayb">"Submit the request with everything I'm sure of, flag the uncertain field to the broker as 'to confirm', and message the PM and my associate saying exactly what I submitted and what I wasn't sure of. Missing the deadline is irreversible; a field I can correct tomorrow is not. What I wouldn't do is guess the field silently or let the deadline pass waiting for an answer."</div></div>
+<div class="row"><div class="lab">Why it works</div><div class="whyb">Take the reversible step, flag the assumption, tell everyone what you did. Booking windows fill fast and are not reopened <span class="src">[S30]</span>. "I'd wait for full information" is the answer that fails.</div></div>
+<div class="row"><div class="lab">The twist</div><div class="twistb">"The field was 'confidential: do not submit'." "Then the flag saved it: the broker would have seen 'to confirm', not the content. And I'd learn what that field means the next morning. If I had submitted content I shouldn't have, I'd tell the associate first thing, not wait to be asked."</div></div>
+</div></div>
+</div>
+
+<!-- ================= PART 4 ================= -->
+<div class="section" style="--pc:#5E548E"><span class="pm">@@p4@@</span>
+<div class="section-band"><div class="kicker">Part 4</div><h1>The CV grill</h1><p class="lede">They will pick at your CV to see whether you know your own story and whether you inflate it. Same rule: the frame is honesty plus structure.</p></div>
+<h2>4.1 How a CV grill works</h2>
+<p>They choose one line and go three levels deep: what did you do, what exactly was your part, what would you do differently. Then they look for a gap between the bullet and the answers. A candidate who wrote "led a team" and then describes attending meetings has broken their own frame. The defence is to know, for every line, the concrete thing you did, one number, one difficulty, and one honest limitation.</p>
+<table>
+<tr><th style="width:34%">The attack</th><th>The frame-holding answer</th></tr>
+<tr><td>"Walk me through this line. What did <i>you</i> do, not the team?"</td><td>Name your specific task in one sentence, then one number, then one thing that went wrong and what you did. Never say "we" when the question was "you".</td></tr>
+<tr><td>"You have no finance experience. Why should we believe you understand this?"</td><td>Agree, then show the work: "I don't have it. So I read the firm's postings, the FCA's 2014 rules on corporate access and how the platform model works, and I can tell you what the desk does and why it sits where it does." Then one sentence of it.</td></tr>
+<tr><td>"Why this and not investment banking or consulting?"</td><td>A reason that is specific to the seat: touching every team, the allocation judgement, being at the centre of a platform. Never "I couldn't get IB" and never criticise the alternative.</td></tr>
+<tr><td>"This society role looks inflated."</td><td>"You're right that the title sounds bigger than the job. What I actually did was X, which was about Y hours a week. The useful part for this role was Z." Deflating your own CV calmly is a strong signal.</td></tr>
+<tr><td>"What's your biggest weakness?" then "That's not a real weakness."</td><td>Give a real one that is not disqualifying (over-preparing, slow to delegate, uncomfortable with silence), one example, one thing you are doing about it. If they push, hold it; do not swap to a fake one.</td></tr>
+<tr><td>"Tell me something you failed at." then "Whose fault was it?"</td><td>Own the part that was yours, even if not all of it was. "Mostly mine: I assumed X and didn't check." Blaming is a frame break.</td></tr>
+<tr><td>"Why did you leave / stop / switch?"</td><td>One neutral sentence, forward-looking. Never a story about a bad boss.</td></tr>
+<tr><td>"What do you actually know about Millennium?"</td><td>Three mechanisms, not adjectives: 350-plus independent teams and why they are kept apart; a centre bigger than the investment side; capital investors cannot pull quickly. Then stop. (See the Why Millennium guide.)</td></tr>
+</table>
+<div class="box warm"><div class="lbl">Prepare this tonight, for every line on your CV</div><p><b>Did:</b> the one concrete thing you personally did. <b>Number:</b> one figure (people, hours, money, count). <b>Hard part:</b> one difficulty and how you handled it. <b>Honest limit:</b> one thing you would do better. Four lines per bullet, on one page. If a bullet cannot produce four lines, expect it to be the one they attack, and soften it in your telling before they do.</p></div>
+<div class="box dont"><div class="lbl">Don't</div><p>Do not upgrade any claim in the room. Do not guess dates or numbers you are not sure of; say "roughly" and give the range. Do not fill silence with a second, weaker version of your answer. Do not badmouth a previous employer, society, university or colleague, however invited.</p></div>
+</div>
+
+<!-- ================= PART 5 ================= -->
+<div class="section" style="--pc:#D97742"><span class="pm">@@p5@@</span>
+<div class="section-band"><div class="kicker">Part 5</div><h1>Cheat sheet</h1><p class="lede">One page to read on the morning. Then close the laptop and breathe out.</p></div>
+<div class="fig">
+<svg viewBox="0 0 1000 760" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>.t{font-size:10.4px;fill:#1F2933}.h{font-size:15px;font-weight:bold;fill:#0B2545}.s{font-size:9.4px;fill:#5B6B7C}.w{fill:#fff;font-size:11px;font-weight:bold}.ws{fill:#fff;font-size:10px}.k{font-size:11px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">The cheat sheet, on one page</text>
+<!-- protocol strip -->
+<g>
+<rect x="20" y="40" width="230" height="60" rx="6" fill="#0B2545"/><text x="32" y="60" class="w">1. STEADY</text><text x="32" y="76" class="ws">Breathe out. Repeat the situation back.</text><text x="32" y="90" class="ws">One clarifying question if it matters.</text>
+<rect x="263" y="40" width="230" height="60" rx="6" fill="#13315C"/><text x="275" y="60" class="w">2. SORT</text><text x="275" y="76" class="ws">Name the priority that decides it.</text><text x="275" y="90" class="ws">"What I can't do is..."</text>
+<rect x="506" y="40" width="230" height="60" rx="6" fill="#1B998B"/><text x="518" y="60" class="w">3. ACT</text><text x="518" y="76" class="ws">Two or three steps, who you tell, when.</text><text x="518" y="90" class="ws">Reversible now; escalate the irreversible.</text>
+<rect x="749" y="40" width="231" height="60" rx="6" fill="#D97742"/><text x="761" y="60" class="w">4. CLOSE</text><text x="761" y="76" class="ws">One sentence on prevention or follow-up.</text><text x="761" y="90" class="ws">Then stop talking.</text>
+</g>
+<!-- priorities -->
+<rect x="20" y="112" width="470" height="130" rx="6" fill="#F8E4E7" stroke="#B23A48"/>
+<text x="32" y="132" class="k" fill="#B23A48">WHAT WINS WHEN THINGS COLLIDE</text>
+<text x="32" y="152" class="t"><tspan font-weight="bold">1.</tspan> Rules and the firm's name: inside info, restricted names, how access is paid, confidentiality.</text>
+<text x="32" y="168" class="t"><tspan font-weight="bold">2.</tspan> Fair service to every team: a rule you could explain to the loser; never tell B what A asked.</text>
+<text x="32" y="184" class="t"><tspan font-weight="bold">3.</tspan> The process and the record: portal, log, confirmations, consumption data.</text>
+<text x="32" y="200" class="t"><tspan font-weight="bold">4.</tspan> Speed. Real, but only inside 1 to 3.</text>
+<text x="32" y="226" class="s">"I'd want to be fast for the PM, but the thing that decides this is [level], so I'd [action] and tell [person] now."</text>
+<!-- the never list -->
+<rect x="510" y="112" width="470" height="130" rx="6" fill="#0B2545"/>
+<text x="522" y="132" class="w">NEVER, WHATEVER THE PRESSURE</text>
+<text x="522" y="152" class="ws">Tell one team what another asked for, holds, or thinks.</text>
+<text x="522" y="168" class="ws">Decide a contested allocation alone. Escalate it.</text>
+<text x="522" y="184" class="ws">Skip the record because someone senior said so.</text>
+<text x="522" y="200" class="ws">Judge for yourself whether something was inside information.</text>
+<text x="522" y="216" class="ws">Guess a fact you don't know. "I don't know; here's my reasoning."</text>
+<text x="522" y="232" class="ws">Badmouth a PM, a broker, a company or a past employer.</text>
+<!-- eight tactics -->
+<rect x="20" y="254" width="960" height="118" rx="6" fill="#E9EEF5" stroke="#8A96A3"/>
+<text x="32" y="274" class="k">WHEN THEY PUSH</text>
+<text x="32" y="292" class="t"><tspan font-weight="bold">Interrupted:</tspan> stop, restate the new fact, re-sort. &nbsp; <tspan font-weight="bold">Contradicted:</tspan> "Which part wouldn't work?" then hold or update on merits. &nbsp; <tspan font-weight="bold">Silence:</tspan> two seconds, then "want me to go deeper on any part?"</text>
+<text x="32" y="308" class="t"><tspan font-weight="bold">Escalated:</tspan> slow down, lower pitch, "here's what I can do now and who I'm bringing in." &nbsp; <tspan font-weight="bold">"Who are you to say no?":</tspan> "You're right, it isn't my call; that's why I'd take it to..."</text>
+<text x="32" y="324" class="t"><tspan font-weight="bold">False choice:</tspan> "I'd do neither: [third path]." &nbsp; <tspan font-weight="bold">Knowledge trap:</tspan> "Not public; here's how I'd reason, and I'd check the rule day one." &nbsp; <tspan font-weight="bold">Badmouth bait:</tspan> decline warmly.</text>
+<text x="32" y="348" class="t"><tspan font-weight="bold">Twisted scenario:</tspan> "That changes the timing but not the order." Changing action for a new fact is judgement; changing priorities for a frown is a broken frame.</text>
+<text x="32" y="364" class="s">Body: exhale before speaking; speak 10% slower than them; hands still; pen and paper off camera; correct yourself out loud if you slip.</text>
+<!-- lines to have ready -->
+<rect x="20" y="384" width="470" height="180" rx="6" fill="#E3F4F1" stroke="#1B998B"/>
+<text x="32" y="404" class="k" fill="#0E6B5F">LINES TO HAVE READY</text>
+<text x="32" y="422" class="t">"The desk is the firm's single point of consumption for corporate access."</text>
+<text x="32" y="438" class="t">"Hundreds of independent clients, one neutral desk. The neutrality is the product."</text>
+<text x="32" y="454" class="t">"The record isn't admin: it's the compliance evidence and the broker-vote evidence."</text>
+<text x="32" y="470" class="t">"Since 2014 UK managers can't pay for access with commission; it's paid separately."</text>
+<text x="32" y="486" class="t">"Booking windows open four to six weeks out and fill fast; the deadline is the headline."</text>
+<text x="32" y="502" class="t">"Group formats and multiple levels of management are how a desk stretches scarce access."</text>
+<text x="32" y="518" class="t">"Not my job to decide if it was inside information; my job is that compliance knows within the hour."</text>
+<text x="32" y="534" class="t">"I'd own it in one sentence rather than have it come out later."</text>
+<text x="32" y="552" class="s">Sources: [S42][S40][S43][S2][S30][S10][S20]. Say them in your words.</text>
+<!-- numbers -->
+<rect x="510" y="384" width="470" height="180" rx="6" fill="#FBEEE6" stroke="#D97742"/>
+<text x="522" y="404" class="k" fill="#8A4B12">NUMBERS, IF THEY COME UP (say "roughly")</text>
+<text x="522" y="422" class="t">350+ investment teams; 6,670 staff, about 54% not investing [S71][S392].</text>
+<text x="522" y="438" class="t">~$92bn; 5% a quarter withdrawals since 2018; callable commitments since 2024 [S382][S364].</text>
+<text x="522" y="454" class="t">One down year since 1989 (2008, about -3%) [S377]. 2025 +10.5%; 2026 to Aug +8.2% [S127][S130].</text>
+<text x="522" y="470" class="t">Three regional desks: Americas, EMEA, APAC; two channels: broker-sourced, originated [S43][S40].</text>
+<text x="522" y="486" class="t">Semi-annual broker vote; one-on-ones are the most tracked item in votes (82%) [S43][S39].</text>
+<text x="522" y="502" class="t">PS14/7: 2 June 2014. MiFID II: 3 January 2018. Greenlight fine 2012: over £7m [S2][S13][S19].</text>
+<text x="522" y="518" class="t">Interview: Monday 7 Sep, 10:00-10:30 BST, Webex, two interviewers, Round 1.</text>
+<text x="522" y="552" class="s">Don't volunteer numbers. Have them for when asked.</text>
+<!-- the close -->
+<rect x="20" y="576" width="960" height="100" rx="6" fill="#0B2545"/>
+<text x="32" y="596" class="w">IF YOU ONLY REMEMBER ONE THING</text>
+<text x="32" y="616" class="ws">They are not testing whether you know the answer. They are testing whether your thinking stays in order when they push. Same four steps, same priority order, same tempo, every</text>
+<text x="32" y="630" class="ws">scenario. Say what you don't know. Escalate what isn't yours to decide. Never leak across teams. Own mistakes in one sentence. Then stop talking.</text>
+<text x="32" y="656" class="ws" style="opacity:.9">Your question at the end (pick one): how the desk handles ten teams wanting the same one-on-one; whether external managers such as Jain Global are served</text>
+<text x="32" y="670" class="ws" style="opacity:.9">on the same footing as internal teams; what a good consumption report actually decides.</text>
+<text x="20" y="700" class="s">Everything on this page is a scaffold. The interviewers will hear whether it is yours. Rehearse out loud twice, then put it away.</text>
+</svg>
+<span class="pm">@@f7@@</span><div class="cap"><b>Figure 7.</b> The cheat sheet. Print it; read it once on Monday morning.</div></div>
+</div>
+<div class="section" style="--pc:#0B2545"><span class="pm">@@p6@@</span>
+<div class="section-band"><div class="kicker">Part 6</div><h1>Sources</h1><p class="lede">Every [Sxx] marker above resolves here. IDs are shared with the main interview guide. All sources accessed 4 or 5 September 2026. "Fetched" means the full text was read; "Snippet" means only a search excerpt was seen; "Paywalled" means the headline was recorded and nothing was inferred from unread text.</p></div>
+<table class="src-table"><tr><th style="width:5%">ID</th><th style="width:13%">Outlet</th><th style="width:26%">Title</th><th style="width:8%">Date</th><th style="width:30%">URL</th><th style="width:8%">Status</th><th style="width:10%">Confidence</th></tr>
+<tr><td class="src">[S2]</td><td>FCA</td><td>PS14/7 Changes to the use of dealing commission rules: feedback to CP13/17 and final rules</td><td>2014-05-08</td><td><a href="https://www.fca.org.uk/publication/policy/ps14-07.pdf">https://www.fca.org.uk/publication/policy/ps14-07.pdf</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S10]</td><td>ICR</td><td>Practical Lessons on Corporate Access from a Leading Multi-Manager Hedge Fund (Christopher Melito)</td><td>2025-05-07</td><td><a href="https://icrinc.com/news-resources/practical-lessons-on-corporate-access/">https://icrinc.com/news-resources/practical-lessons-on-corporate-access/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S13]</td><td>ESMA</td><td>Q&amp;A ESMA_QA_1795 &quot;Corporate access&quot; (MiFID II investor protection Q&amp;As, ESMA35-43-349, ch.7 Q7)</td><td>2017-04-04</td><td><a href="https://www.esma.europa.eu/publications-data/questions-answers/1795">https://www.esma.europa.eu/publications-data/questions-answers/1795</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S15]</td><td>FCA Handbook</td><td>COBS 2.3A Inducements (COBS 2.3A.19R(5)(k))</td><td>current</td><td><a href="https://handbook.fca.org.uk/handbook/cobs2/cobs2s7">https://handbook.fca.org.uk/handbook/cobs2/cobs2s7</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S19]</td><td>Jones Day</td><td>FSA&#x27;s Fine of David Einhorn and Greenlight Capital for Insider Trading Violation</td><td>2012-02</td><td><a href="https://www.jonesday.com/en/insights/2012/02/fsas-fine-of-david-einhorn-and-greenlight-capital-for-insider-trading-violation">https://www.jonesday.com/en/insights/2012/02/fsas-fine-of-david-einhorn-and-greenlight-cap...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S20]</td><td>Osborne Clarke</td><td>Wall-crossings and inside information: good practice, poor practice from the FCA (on TR15/1)</td><td>2015-03-02</td><td><a href="https://www.osborneclarke.com/insights/wall-crossings-and-inside-information-good-practice-poor-practice-from-the-fca">https://www.osborneclarke.com/insights/wall-crossings-and-inside-information-good-practice...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S21]</td><td>FCA</td><td>Primary Market Bulletin 42</td><td>2022-12</td><td><a href="https://www.fca.org.uk/publications/newsletters/primary-market-bulletin-42">https://www.fca.org.uk/publications/newsletters/primary-market-bulletin-42</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S22]</td><td>FCA</td><td>Primary Market Bulletin 52</td><td>2024-11-15</td><td><a href="https://www.fca.org.uk/publications/newsletters/primary-market-bulletin-52">https://www.fca.org.uk/publications/newsletters/primary-market-bulletin-52</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S23]</td><td>FCA</td><td>Market Watch 75</td><td>2023-10-31</td><td><a href="https://www.fca.org.uk/publications/newsletters/market-watch-75">https://www.fca.org.uk/publications/newsletters/market-watch-75</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S28]</td><td>WeConvene</td><td>Buy-Side Workflow: How Portfolio Managers Use Corporate Access Platforms to Source Ideas</td><td>2026-06-09</td><td><a href="https://weconvene.com/buy-side-corporate-access-workflow-portfolio-managers-2026/">https://weconvene.com/buy-side-corporate-access-workflow-portfolio-managers-2026/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S30]</td><td>WeConvene</td><td>Sell-Side Conference Scheduling: The IR Planning Guide for 2026</td><td>2026-03-14</td><td><a href="https://weconvene.com/sell-side-conference-scheduling/">https://weconvene.com/sell-side-conference-scheduling/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S39]</td><td>Moody&#x27;s Analytics Knowledge Services (now Acuity KP)</td><td>Broker Votes System — A Strategic Product for Investment Research Firms (whitepaper)</td><td>c.2019</td><td><a href="https://www.acuitykp.com/wp-content/uploads/2019/03/Broker-Votes-System_-Investment-Research-Firms.pdf">https://www.acuitykp.com/wp-content/uploads/2019/03/Broker-Votes-System_-Investment-Resear...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S40]</td><td>Millennium careers (campusjobs.mlp.com, Eightfold API)</td><td>2027 Corporate Access Services Intern, London — REQ-30183</td><td>created 2026-07-27</td><td><a href="https://campusjobs.mlp.com/careers/job/755957778817-2027-corporate-access-services-intern-london-london-london-united-kingdom?domain=mlp.com">https://campusjobs.mlp.com/careers/job/755957778817-2027-corporate-access-services-intern-...</a><br><a href="https://campusjobs.mlp.com/api/apply/v2/jobs/755957778817?domain=mlp.com">https://campusjobs.mlp.com/api/apply/v2/jobs/755957778817?domain=mlp.com</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S42]</td><td>Millennium careers (career.mlp.com)</td><td>Corporate Access Associate, New York (id 755954883013)</td><td>created 2026-03-03, upda</td><td><a href="https://career.mlp.com/careers/job/755954883013-corporate-access-associate-new-york-new-york-united-states-of-america">https://career.mlp.com/careers/job/755954883013-corporate-access-associate-new-york-new-yo...</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S43]</td><td>Millennium careers</td><td>Corporate Access Services Associate, Tokyo (id 755954333811)</td><td>created 2026-02-05</td><td><a href="https://career.mlp.com/api/apply/v2/jobs/755954333811?domain=mlp.com">https://career.mlp.com/api/apply/v2/jobs/755954333811?domain=mlp.com</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S49]</td><td>Millennium careers</td><td>Corporate Access Intern, Tokyo — REQ-26203 (id 755944889484)</td><td>created 2025-08-07</td><td><a href="https://campusjobs.mlp.com/careers/job/755944889484-corporate-access-intern-tokyo-tokyo-tokyo-japan?domain=mlp.com&amp;microsite=campus-site">https://campusjobs.mlp.com/careers/job/755944889484-corporate-access-intern-tokyo-tokyo-to...</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S71]</td><td>Millennium (mlp.com)</td><td>Homepage</td><td>undated (live)</td><td><a href="https://www.mlp.com/">https://www.mlp.com/</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S127]</td><td>Bloomberg via Fortune</td><td>Bridgewater, D.E. Shaw among top hedge fund gainers of 2025 (full table)</td><td>2 Jan 2026</td><td><a href="https://fortune.com/2026/01/02/top-hedge-fund-performers-2025-bridgewater-de-shaw-citadel-millennium/">https://fortune.com/2026/01/02/top-hedge-fund-performers-2025-bridgewater-de-shaw-citadel-...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S130]</td><td>Hedgeweek</td><td>Citadel, Millennium and peers post muted August returns</td><td>4 Sep 2026</td><td><a href="https://www.hedgeweek.com/citadel-millennium-and-peers-post-muted-august-returns/">https://www.hedgeweek.com/citadel-millennium-and-peers-post-muted-august-returns/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S313]</td><td>Quant Enthusiasts / Young and Calculated (Substack)</td><td>How Multi-Manager Hedge Funds Actually Work Internally</td><td>2026</td><td><a href="https://youngandcalculated.substack.com/p/how-multi-manager-hedge-funds-actually">https://youngandcalculated.substack.com/p/how-multi-manager-hedge-funds-actually</a></td><td>Fetched</td><td><span class="tag u">Snippet/Paywalled</span></td></tr>
+<tr><td class="src">[S364]</td><td>Hedgeweek (citing Bloomberg)</td><td>Millennium targeting up to $10bn in long-term capital</td><td>16 Sep 2024</td><td><a href="https://www.hedgeweek.com/millennium-targeting-up-to-10bn-in-long-term-capital/">https://www.hedgeweek.com/millennium-targeting-up-to-10bn-in-long-term-capital/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S377]</td><td>A Letter a Day (Kevin Gee, Substack)</td><td>Letter #233: Izzy Englander (2009) — transcription of Nov 2009 Absolute Return Symposium keynote</td><td>undated (newsletter c. 2</td><td><a href="https://aletteraday.substack.com/p/letter-233-izzy-englander-2009">https://aletteraday.substack.com/p/letter-233-izzy-englander-2009</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S382]</td><td>Millennium (mlp.com)</td><td>Homepage; Approach; People/Core Infrastructure; People/Technology; Global Presence</td><td>undated (live)</td><td><a href="https://www.mlp.com/">https://www.mlp.com/</a><br><a href="https://www.mlp.com/approach/">https://www.mlp.com/approach/</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S384]</td><td>Millennium (mlp.com)</td><td>mChats with Scott Rofey</td><td>June 2026</td><td><a href="https://www.mlp.com/life-at-millennium/mchats-with-scott-rofey/">https://www.mlp.com/life-at-millennium/mchats-with-scott-rofey/</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S389]</td><td>Millennium careers API</td><td>Postings: Compliance Officer, NY (755956288612); Compliance Analyst, London (755956350279); Compliance Analyst, Dublin (755954401503); Compliance Analyst – Cont</td><td>live Sep 2026</td><td><a href="https://career.mlp.com/api/apply/v2/jobs/{id}?domain=mlp.com">https://career.mlp.com/api/apply/v2/jobs/{id}?domain=mlp.com</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+<tr><td class="src">[S392]</td><td>SEC IAPD</td><td>Form ADV Part 1A, Millennium Management LLC (CRD 158117, SEC 801-73884), other-than-annual amendment: Item 1.F (81 offices), Item 5.A/B (6,670 / 3,055), Item 5.</td><td>25 Aug 2026</td><td><a href="https://adviserinfo.sec.gov/firm/summary/158117">https://adviserinfo.sec.gov/firm/summary/158117</a></td><td>Fetched</td><td><span class="tag c">Primary/Confirmed</span></td></tr>
+</table></div>
+</body></html>
