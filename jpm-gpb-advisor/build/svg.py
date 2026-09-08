@@ -28,6 +28,7 @@ class D:
     def box(self, x, y, w, h, title, body=None, fill=NAVY, stroke=None, tfill=WHITE, bfill=WHITE, tsize=11.5, bsize=9, r=6, dash=False, tweight="bold"):
         st = f' stroke="{stroke}" stroke-width="1.4"' if stroke else ''
         if dash: st += ' stroke-dasharray="5,4"'
+        if fill in (WHITE, BG, LBLUE) and bfill == WHITE: bfill = GREY
         self.parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{r}" fill="{fill}"{st}/>')
         tl = self._wrap(title, tsize, w-14, bold=(tweight=="bold"))
         bl = self._wrap(body, bsize, w-14) if body else []
