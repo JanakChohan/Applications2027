@@ -1,0 +1,1903 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ritlecitinib (Litfulo) — A Complete Personal Guide</title>
+<style>
+:root{
+  --ink:#14140f; --ink-2:#3d3d36; --ink-3:#6b6b61; --ink-4:#96968b;
+  --rule:#dcdcd4; --rule-2:#ecece6;
+  --surface:#ffffff; --surface-2:#faf9f5; --surface-3:#f3f2ec;
+  --blue:#2a78d6; --blue-d:#104281; --blue-m:#256abf; --blue-l:#86b6ef; --blue-xl:#cde2fb;
+  --orange:#eb6834; --aqua:#1baf7a; --green:#008300; --amber:#eda100; --red:#e34948; --violet:#4a3aa7;
+}
+@page{ size:A4; margin:16mm 15mm 16mm 15mm; }
+*{box-sizing:border-box;}
+html{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+body{
+  margin:0; background:var(--surface); color:var(--ink);
+  font-family:"Helvetica Neue",Helvetica,Arial,"Segoe UI",system-ui,sans-serif;
+  font-size:10.1pt; line-height:1.58; -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{ line-height:1.2; margin:0; font-weight:700; letter-spacing:-0.012em; }
+p{margin:0 0 0.72em;}
+strong{font-weight:700;}
+em{font-style:italic;}
+a{color:var(--blue-m); text-decoration:none; word-break:break-word;}
+
+/* ---------- page / section scaffolding ---------- */
+.page{ page-break-before:always; }
+.page:first-of-type{ page-break-before:auto; }
+.nobreak, .callout, .keyfact, .plain-en, .card, .g2, .g3, figure, table, .steps > li, .toc{ page-break-inside:avoid; }
+h3, h4, .fig-title, caption{ page-break-after:avoid; }
+h3{ page-break-inside:avoid; }
+.g2, .g3{ page-break-inside:auto; }
+
+/* ---------- cover ---------- */
+.cover{ padding-top:14mm; }
+.cover-rule{ height:5px; background:var(--blue); width:64px; border-radius:3px; margin-bottom:14mm;}
+.cover .kicker{ font-size:8.6pt; letter-spacing:0.19em; text-transform:uppercase; color:var(--ink-3); font-weight:700; margin-bottom:7mm;}
+.cover h1{ font-size:33pt; line-height:1.06; letter-spacing:-0.03em; margin-bottom:5mm;}
+.cover h1 .light{ font-weight:300; color:var(--ink-2); display:block; font-size:23pt; letter-spacing:-0.02em; margin-top:3mm;}
+.cover .sub{ font-size:11.4pt; color:var(--ink-2); max-width:135mm; line-height:1.5; margin-bottom:12mm;}
+.cover-meta{ border-top:1px solid var(--rule); padding-top:5mm; display:grid; grid-template-columns:repeat(2,1fr); gap:5mm 9mm; max-width:150mm;}
+.cover-meta div{font-size:9.1pt;}
+.cover-meta dt{ color:var(--ink-4); font-size:7.9pt; letter-spacing:0.11em; text-transform:uppercase; font-weight:700; margin-bottom:1.2mm;}
+.cover-meta dd{ margin:0; color:var(--ink); font-weight:500;}
+
+/* ---------- headings ---------- */
+.sec-num{ font-size:8.4pt; letter-spacing:0.2em; text-transform:uppercase; color:var(--blue); font-weight:700; margin-bottom:3mm;}
+h2.sec{ font-size:21pt; letter-spacing:-0.025em; margin-bottom:3.5mm; }
+h2.sec + .lede{ font-size:11pt; color:var(--ink-2); line-height:1.52; max-width:150mm; margin-bottom:8mm; padding-bottom:6mm; border-bottom:1px solid var(--rule);}
+h3{ font-size:12.6pt; margin:8mm 0 3mm; letter-spacing:-0.018em;}
+h3:first-child{margin-top:0;}
+h4{ font-size:10.3pt; margin:6mm 0 2mm; color:var(--ink); }
+.eyebrow{ font-size:8pt; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-3); font-weight:700; margin-bottom:2.5mm;}
+
+/* ---------- text furniture ---------- */
+ul,ol{ margin:0 0 0.8em; padding-left:5.2mm; }
+li{ margin-bottom:0.36em; padding-left:1mm; }
+li::marker{ color:var(--ink-4); }
+.tight li{margin-bottom:0.16em;}
+.plain{ list-style:none; padding-left:0; }
+
+.callout{ border-left:3px solid var(--blue); background:var(--surface-2); padding:4.5mm 5mm; margin:5mm 0; border-radius:0 4px 4px 0;}
+.callout .lbl{ font-size:8pt; letter-spacing:0.14em; text-transform:uppercase; font-weight:700; color:var(--blue-m); margin-bottom:1.8mm;}
+.callout p:last-child{margin-bottom:0;}
+.callout.warn{ border-left-color:var(--amber); }
+.callout.warn .lbl{ color:#8a5f00; }
+.callout.stop{ border-left-color:var(--red); }
+.callout.stop .lbl{ color:#a8302f; }
+.callout.good{ border-left-color:var(--green); }
+.callout.good .lbl{ color:#00610a; }
+.callout.you{ border-left-color:var(--violet); background:#f6f5fd; }
+.callout.you .lbl{ color:var(--violet); }
+
+.keyfact{ background:var(--surface-3); border-radius:5px; padding:4.5mm 5mm; margin:5mm 0;}
+.keyfact p:last-child{margin-bottom:0;}
+
+.plain-en{ background:#f2f8ff; border:1px solid #d5e6fa; border-radius:5px; padding:4mm 4.5mm; margin:4mm 0; }
+.plain-en .lbl{ font-size:8pt; letter-spacing:0.13em; text-transform:uppercase; font-weight:700; color:var(--blue-m); margin-bottom:1.6mm;}
+.plain-en p:last-child{margin-bottom:0;}
+
+/* ---------- tables ---------- */
+table{ width:100%; border-collapse:collapse; margin:4mm 0 5mm; font-size:8.9pt; page-break-inside:avoid;}
+caption{ text-align:left; font-size:8.6pt; color:var(--ink-3); margin-bottom:2mm; font-weight:600;}
+th{ text-align:left; font-weight:700; font-size:7.9pt; letter-spacing:0.07em; text-transform:uppercase; color:var(--ink-3);
+    border-bottom:1.5px solid var(--ink); padding:0 2.6mm 1.8mm 0; vertical-align:bottom;}
+td{ padding:2.1mm 2.6mm 2.1mm 0; border-bottom:1px solid var(--rule-2); vertical-align:top; }
+tr:last-child td{border-bottom:1px solid var(--rule);}
+td.num,th.num{ text-align:right; padding-right:2.6mm; font-variant-numeric:tabular-nums;}
+.t-hl{ background:#f2f8ff; }
+tbody tr.grp td{ background:var(--surface-3); font-weight:700; font-size:8.1pt; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-2); padding-top:2.4mm; padding-bottom:2.4mm;}
+.footnote{ font-size:8.1pt; color:var(--ink-3); line-height:1.45; margin-top:-2mm; }
+
+/* ---------- figures ---------- */
+figure{ margin:6mm 0; page-break-inside:avoid; }
+figcaption{ font-size:8.4pt; color:var(--ink-3); line-height:1.45; margin-top:2.5mm; padding-top:2mm; border-top:1px solid var(--rule-2);}
+figcaption b{color:var(--ink-2);}
+svg{ display:block; width:100%; height:auto; }
+.fig-title{ font-size:9.4pt; font-weight:700; margin-bottom:2.5mm; letter-spacing:-0.005em;}
+
+/* ---------- grids ---------- */
+.g2{ display:grid; grid-template-columns:1fr 1fr; gap:5mm; }
+.g3{ display:grid; grid-template-columns:repeat(3,1fr); gap:4mm; }
+.card{ border:1px solid var(--rule); border-radius:5px; padding:4mm 4.2mm; }
+.card h4{ margin:0 0 1.8mm; font-size:9.6pt;}
+.card p{ font-size:8.9pt; margin-bottom:0.5em; }
+.card p:last-child{margin-bottom:0;}
+
+.stat{ text-align:left; }
+.stat .v{ font-size:23pt; font-weight:700; letter-spacing:-0.03em; line-height:1; color:var(--blue-d); font-variant-numeric:tabular-nums;}
+.stat .l{ font-size:8.3pt; color:var(--ink-3); line-height:1.35; margin-top:2mm;}
+.stat.o .v{color:var(--orange);} .stat.g .v{color:var(--green);}
+
+/* ---------- checklist ---------- */
+.check{ list-style:none; padding-left:0; }
+.check li{ position:relative; padding-left:7mm; margin-bottom:2.2mm; }
+.check li:before{ content:""; position:absolute; left:0; top:1.1mm; width:3.6mm; height:3.6mm; border:1.4px solid var(--ink-3); border-radius:2px;}
+
+.steps{ counter-reset:s; list-style:none; padding-left:0;}
+.steps > li{ counter-increment:s; position:relative; padding-left:8.5mm; margin-bottom:3.4mm;}
+.steps > li:before{ content:counter(s); position:absolute; left:0; top:0.2mm; width:5.6mm; height:5.6mm; background:var(--blue); color:#fff;
+  border-radius:50%; font-size:8pt; font-weight:700; display:flex; align-items:center; justify-content:center; }
+
+/* ---------- misc ---------- */
+.pill{ display:inline-block; font-size:7.6pt; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;
+  padding:0.9mm 2.2mm; border-radius:3px; vertical-align:0.4mm;}
+.pill.g{background:#e3f4e3;color:#00610a;} .pill.a{background:#fdf0d4;color:#7d5300;}
+.pill.r{background:#fbe4e4;color:#a8302f;} .pill.b{background:#e2eefb;color:var(--blue-d);}
+.toc{ list-style:none; padding-left:0; }
+.toc li{ display:flex; gap:4mm; padding:2.4mm 0; border-bottom:1px solid var(--rule-2); font-size:9.8pt; }
+.toc .n{ color:var(--blue); font-weight:700; min-width:9mm; font-variant-numeric:tabular-nums;}
+.toc .t{flex:1; font-weight:600;}
+.toc .d{ color:var(--ink-3); font-size:8.6pt; flex:1.35; font-weight:400;}
+.refs{ font-size:8.4pt; line-height:1.45; }
+.refs li{ margin-bottom:2.4mm; }
+.gloss dt{ font-weight:700; font-size:9.3pt; margin-top:3.2mm; }
+.gloss dd{ margin:0.6mm 0 0; font-size:9.1pt; color:var(--ink-2); }
+.enddash{ height:3px; width:44px; background:var(--ink); border-radius:2px; margin:9mm 0 0; }
+</style>
+</head>
+<body>
+<!-- ============ COVER ============ -->
+<section class="page cover">
+  <div class="cover-rule"></div>
+  <div class="kicker">Personal medicines briefing &middot; Prepared 2026</div>
+  <h1>Ritlecitinib<span class="light">(Litfulo&reg;) 50&nbsp;mg for alopecia areata — everything, explained from scratch</span></h1>
+  <p class="sub">A complete, plain-English deep dive into the drug you have just started: how it works inside a hair follicle, what every trial actually found, what the real risks are in numbers rather than adjectives, how it interacts with the oral minoxidil you already take, and exactly what you can do over the next twelve months to give yourself the best possible chance of regrowth.</p>
+  <dl class="cover-meta">
+    <div><dt>Written for</dt><dd>A 21-year-old man, 68&nbsp;kg, UK-based</dd></div>
+    <div><dt>Assumed knowledge</dt><dd>None. Every term is defined.</dd></div>
+    <div><dt>Condition</dt><dd>Relapsing–remitting alopecia areata, ~4 years</dd></div>
+    <div><dt>Current other treatment</dt><dd>Low-dose oral minoxidil</dd></div>
+    <div><dt>Evidence base</dt><dd>ALLEGRO trial programme, FDA &amp; UK labels, NICE&nbsp;TA958, BAD guidance, real-world studies</dd></div>
+    <div><dt>Sections</dt><dd>12, plus glossary and full reference list</dd></div>
+  </dl>
+
+  <div class="callout stop" style="margin-top:14mm;">
+    <div class="lbl">Please read this bit</div>
+    <p>This report is <strong>education, not a prescription</strong>. It is assembled from published trial data and official product information so that you can walk into your dermatology appointments already understanding the science and ask sharper questions. It cannot see your blood results, your scalp, or your notes. <strong>Every decision — including anything about your minoxidil — belongs to you and your dermatologist together.</strong> Nothing here should be used to start, stop, or change a dose on your own.</p>
+  </div>
+</section>
+
+<!-- ============ CONTENTS ============ -->
+<section class="page">
+  <div class="sec-num">Contents</div>
+  <h2 class="sec">What is in this report</h2>
+  <p class="lede">Sections 1–3 explain the biology. Sections 4–6 are the evidence and your personal odds. Sections 7–9 are safety and practicalities. Sections 10–12 are the action plan and reference material. If you only read two sections, make them §6 and §10.</p>
+  <ul class="toc">
+    <li><span class="n">1</span><span class="t">How hair actually grows</span><span class="d">The three-phase cycle, and why hair loss is almost never permanent damage</span></li>
+    <li><span class="n">2</span><span class="t">What alopecia areata is doing to you</span><span class="d">Immune privilege, the cells attacking your follicles, and why it cycles on and off</span></li>
+    <li><span class="n">3</span><span class="t">How ritlecitinib works</span><span class="d">JAK-STAT signalling, the two targets it blocks, and why it is different from other JAK inhibitors</span></li>
+    <li><span class="n">4</span><span class="t">Measuring hair loss: the SALT score</span><span class="d">The number your dermatologist writes down and what the trial thresholds mean</span></li>
+    <li><span class="n">5</span><span class="t">The evidence, trial by trial</span><span class="d">ALLEGRO 2b/3, ALLEGRO-LT, three-year data, real-world studies, eyebrows, lashes and nails</span></li>
+    <li><span class="n">6</span><span class="t">Your personal odds</span><span class="d">What the predictors of response say about a 21-year-old man with patchy relapsing disease</span></li>
+    <li><span class="n">7</span><span class="t">Side effects, in numbers</span><span class="d">Common, uncommon and rare — plus what that frightening boxed warning actually refers to</span></li>
+    <li><span class="n">8</span><span class="t">Monitoring, tests and the UK pathway</span><span class="d">NICE, the week-36 decision, blood tests, TB screening and vaccinations</span></li>
+    <li><span class="n">9</span><span class="t">Oral minoxidil: keep it or stop it?</span><span class="d">Two completely different mechanisms, the combination evidence, and the case for continuing</span></li>
+    <li><span class="n">10</span><span class="t">Maximising your chances</span><span class="d">Eighteen things within your control, ranked by how much they matter</span></li>
+    <li><span class="n">11</span><span class="t">Questions to ask your dermatologist</span><span class="d">A printable list for your next appointment</span></li>
+    <li><span class="n">12</span><span class="t">Glossary and references</span><span class="d">Every term defined; every claim sourced</span></li>
+  </ul>
+
+  <h3>The whole report in ten sentences</h3>
+  <div class="keyfact">
+    <ol class="tight" style="margin-bottom:0;">
+      <li>Alopecia areata is your own immune system mistakenly attacking your hair follicles — the follicles are switched off, not destroyed, which is why regrowth stays possible even after years.</li>
+      <li>The attack runs on a self-reinforcing loop between two chemical messengers, interferon-gamma and interleukin-15.</li>
+      <li>Ritlecitinib cuts that loop in two places at once: it permanently disables an enzyme called JAK3, and a second family of enzymes called TEC kinases.</li>
+      <li>In the main trial, 23% of people reached "20% or less scalp hair loss" by week 24 — and 43% by week 48. The drug keeps working the longer you take it.</li>
+      <li>By three years, around 65% of people still on treatment had reached that target, and about 31% had a completely full head of hair.</li>
+      <li>Roughly one in ten responders only responded <em>after</em> a full year — so the biggest mistake you can make is quitting early.</li>
+      <li>The most common side effects are headache, diarrhoea, acne and a mild rash. Serious events are rare: about 1 shingles case per 100 people per year of treatment.</li>
+      <li>The scary boxed warning on the label comes from a different drug in older, sicker patients; your personal cardiovascular risk profile is close to the floor.</li>
+      <li>Oral minoxidil works by a completely separate route — it grows hair, it does not calm immunity — so it complements rather than duplicates ritlecitinib, and there is no reason found in the evidence to stop it unless your dermatologist advises otherwise.</li>
+      <li>Your NHS decision point is <strong>week 36</strong>: that is when your dermatologist formally reviews whether it is working, so plan the whole first nine months around getting a clean, well-documented answer.</li>
+    </ol>
+  </div>
+</section>
+<!-- ============ SECTION 1 ============ -->
+<section class="page">
+  <div class="sec-num">Section 1</div>
+  <h2 class="sec">How hair actually grows</h2>
+  <p class="lede">Before you can understand what has gone wrong, you need one picture in your head: a hair follicle is not a static tube that pushes hair out forever. It is a small organ that runs on a repeating three-phase cycle, and it is the <em>cycle</em> — not the follicle — that alopecia areata attacks.</p>
+
+  <p>You have roughly 100,000 hair follicles on your scalp. Each one behaves independently, which is why you do not moult all at once. At any given moment about 85–90% of them are actively growing, around 1% are shutting down, and the rest are resting. A follicle that has finished a cycle does not die; it waits, then starts again. That single fact is the reason people who have had alopecia areata for a decade can still regrow a full head of hair.</p>
+
+  <figure>
+    <div class="fig-title">Figure 1.1 — The hair cycle: growth, shutdown, rest, restart</div>
+    <svg viewBox="0 0 700 326" role="img" aria-label="Diagram of the four stages of the hair growth cycle">
+      <defs>
+        <marker id="ar1" markerWidth="9" markerHeight="9" refX="7" refY="3.2" orient="auto">
+          <path d="M0,0 L7,3.2 L0,6.4 Z" fill="#96968b"/>
+        </marker>
+      </defs>
+      <!-- skin band -->
+      <rect x="0" y="46" width="700" height="15" fill="#f3f2ec"/>
+      <line x1="0" y1="61" x2="700" y2="61" stroke="#dcdcd4" stroke-width="1"/>
+      <text x="4" y="42" font-family="Helvetica,Arial" font-size="9" fill="#96968b" font-weight="700" letter-spacing="1">SCALP SURFACE</text>
+
+      <g font-family="Helvetica,Arial">
+      <!-- 1 ANAGEN -->
+      <g transform="translate(30,0)">
+        <line x1="45" y1="8" x2="45" y2="61" stroke="#14140f" stroke-width="4" stroke-linecap="round"/>
+        <path d="M45,61 L45,160" stroke="#3d3d36" stroke-width="7" stroke-linecap="round"/>
+        <ellipse cx="45" cy="176" rx="21" ry="20" fill="#2a78d6"/>
+        <ellipse cx="45" cy="182" rx="9" ry="8" fill="#cde2fb"/>
+        <circle cx="45" cy="139" r="5.5" fill="#eb6834"/>
+        <text x="58" y="142" font-size="8.4" fill="#6b6b61">bulge (stem cells)</text>
+        <text x="45" y="222" font-size="11" font-weight="700" text-anchor="middle" fill="#14140f">1. ANAGEN</text>
+        <text x="45" y="236" font-size="9" text-anchor="middle" fill="#2a78d6" font-weight="700">Growing</text>
+        <text x="45" y="252" font-size="8.4" text-anchor="middle" fill="#6b6b61">2–7 years</text>
+        <text x="45" y="264" font-size="8.4" text-anchor="middle" fill="#6b6b61">~85–90% of hairs</text>
+        <text x="45" y="280" font-size="8.2" text-anchor="middle" fill="#96968b">Bulb is deep, dark,</text>
+        <text x="45" y="290" font-size="8.2" text-anchor="middle" fill="#96968b">busy and vulnerable</text>
+      </g>
+      <path d="M115,120 L160,120" stroke="#96968b" stroke-width="1.4" marker-end="url(#ar1)"/>
+
+      <!-- 2 CATAGEN -->
+      <g transform="translate(175,0)">
+        <line x1="45" y1="8" x2="45" y2="61" stroke="#14140f" stroke-width="4" stroke-linecap="round"/>
+        <path d="M45,61 L45,124" stroke="#3d3d36" stroke-width="7" stroke-linecap="round"/>
+        <path d="M45,124 L45,152" stroke="#c9c8bf" stroke-width="2.5" stroke-dasharray="3 3"/>
+        <ellipse cx="45" cy="124" rx="12" ry="11" fill="#96968b"/>
+        <circle cx="45" cy="139" r="5.5" fill="#eb6834" opacity="0.35"/>
+        <text x="45" y="222" font-size="11" font-weight="700" text-anchor="middle" fill="#14140f">2. CATAGEN</text>
+        <text x="45" y="236" font-size="9" text-anchor="middle" fill="#6b6b61" font-weight="700">Shutting down</text>
+        <text x="45" y="252" font-size="8.4" text-anchor="middle" fill="#6b6b61">2–3 weeks</text>
+        <text x="45" y="264" font-size="8.4" text-anchor="middle" fill="#6b6b61">~1% of hairs</text>
+        <text x="45" y="280" font-size="8.2" text-anchor="middle" fill="#96968b">Bulb shrinks and</text>
+        <text x="45" y="290" font-size="8.2" text-anchor="middle" fill="#96968b">retracts upwards</text>
+      </g>
+      <path d="M260,120 L305,120" stroke="#96968b" stroke-width="1.4" marker-end="url(#ar1)"/>
+
+      <!-- 3 TELOGEN -->
+      <g transform="translate(320,0)">
+        <line x1="45" y1="8" x2="45" y2="61" stroke="#14140f" stroke-width="4" stroke-linecap="round"/>
+        <path d="M45,61 L45,104" stroke="#3d3d36" stroke-width="7" stroke-linecap="round"/>
+        <ellipse cx="45" cy="106" rx="10" ry="9" fill="#c9c8bf"/>
+        <circle cx="45" cy="139" r="5.5" fill="#eb6834"/>
+        <text x="45" y="222" font-size="11" font-weight="700" text-anchor="middle" fill="#14140f">3. TELOGEN</text>
+        <text x="45" y="236" font-size="9" text-anchor="middle" fill="#6b6b61" font-weight="700">Resting</text>
+        <text x="45" y="252" font-size="8.4" text-anchor="middle" fill="#6b6b61">2–4 months</text>
+        <text x="45" y="264" font-size="8.4" text-anchor="middle" fill="#6b6b61">~10% of hairs</text>
+        <text x="45" y="280" font-size="8.2" text-anchor="middle" fill="#96968b">Hair sits loose,</text>
+        <text x="45" y="290" font-size="8.2" text-anchor="middle" fill="#96968b">waiting to be shed</text>
+      </g>
+      <path d="M405,120 L450,120" stroke="#96968b" stroke-width="1.4" marker-end="url(#ar1)"/>
+
+      <!-- 4 NEW ANAGEN -->
+      <g transform="translate(465,0)">
+        <line x1="45" y1="20" x2="45" y2="61" stroke="#96968b" stroke-width="3.4" stroke-linecap="round" stroke-dasharray="4 3"/>
+        <path d="M45,61 L45,150" stroke="#1baf7a" stroke-width="6" stroke-linecap="round"/>
+        <ellipse cx="45" cy="168" rx="19" ry="18" fill="#1baf7a"/>
+        <ellipse cx="45" cy="173" rx="8" ry="7" fill="#e2f6ee"/>
+        <circle cx="45" cy="139" r="5.5" fill="#eb6834"/>
+        <text x="45" y="222" font-size="11" font-weight="700" text-anchor="middle" fill="#14140f">4. NEW ANAGEN</text>
+        <text x="45" y="236" font-size="9" text-anchor="middle" fill="#1baf7a" font-weight="700">Restart</text>
+        <text x="45" y="252" font-size="8.4" text-anchor="middle" fill="#6b6b61">Old hair sheds</text>
+        <text x="45" y="264" font-size="8.4" text-anchor="middle" fill="#6b6b61">New one pushes up</text>
+        <text x="45" y="280" font-size="8.2" text-anchor="middle" fill="#96968b">Stem cells rebuild</text>
+        <text x="45" y="290" font-size="8.2" text-anchor="middle" fill="#96968b">the whole bulb</text>
+      </g>
+      <path d="M598,302 L92,302" fill="none" stroke="#1baf7a" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ar1)"/>
+      <text x="350" y="318" font-size="8.6" fill="#1baf7a" font-weight="700" text-anchor="middle">the cycle repeats — a follicle can restart 10–30 times in a lifetime</text>
+      </g>
+    </svg>
+    <figcaption><b>The key idea:</b> the orange dot is the "bulge" — a reservoir of stem cells sitting high up in the follicle. Alopecia areata attacks the deep, active bulb (blue) during anagen, but it <b>does not destroy the bulge</b>. That is the entire biological reason a drug can bring your hair back years later. Contrast this with scarring alopecias, where the stem cells are destroyed and regrowth is genuinely impossible.</figcaption>
+  </figure>
+
+  <div class="plain-en">
+    <div class="lbl">In plain English</div>
+    <p>Think of each follicle as a factory on a long production run. It builds hair for years, then shuts down for a service, rests, and reopens. Alopecia areata does not burn the factory down — it repeatedly forces an <em>emergency shutdown</em> mid-run. Stop the thing forcing the shutdowns and the factory reopens on its own.</p>
+  </div>
+
+  <h3>Two words you will hear constantly</h3>
+  <div class="g2">
+    <div class="card">
+      <h4>Vellus hair</h4>
+      <p>The fine, short, pale, almost invisible hair — "peach fuzz". When regrowth starts, this is what appears <strong>first</strong>. It is a very good sign and it is easy to miss unless you look in bright light at a low angle.</p>
+    </div>
+    <div class="card">
+      <h4>Terminal hair</h4>
+      <p>Thick, long, pigmented, normal scalp hair. Vellus hair matures into terminal hair over weeks to months as the follicle regains full size. The SALT score your dermatologist records only really moves once this happens.</p>
+    </div>
+  </div>
+  <p style="margin-top:4mm;">This vellus-then-terminal sequence is why <strong>months 2–4 can feel like nothing is happening while a great deal is happening</strong>. Regrowth may also come back white or grey at first, because the pigment-making cells take longer to switch back on than the hair-making cells. It usually re-pigments over subsequent cycles.</p>
+</section>
+<!-- ============ SECTION 2 ============ -->
+<section class="page">
+  <div class="sec-num">Section 2</div>
+  <h2 class="sec">What alopecia areata is doing to you</h2>
+  <p class="lede">Alopecia areata is an autoimmune disease: your immune system has misidentified part of your own hair follicle as foreign and is attacking it. Understanding <em>how</em> that attack sustains itself is the key to understanding why ritlecitinib is aimed where it is aimed.</p>
+
+  <h3>Step one: your follicles have a security system, and it fails</h3>
+  <p>The growing part of a hair follicle is one of a handful of places in the human body with <strong>immune privilege</strong> — a protected zone the immune system is deliberately kept out of. (The others include the eye, the brain and the testes.) The follicle maintains this in two ways: it hides its identity badges, and it puts out chemical "stand down" signals.</p>
+
+  <table>
+    <caption>How a healthy follicle keeps the immune system out</caption>
+    <thead><tr><th style="width:38%">Mechanism</th><th>What it actually does</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Very low MHC class&nbsp;I and&nbsp;II</strong></td><td>MHC molecules are the "identity badges" every cell wears so immune cells can inspect them. The anagen bulb wears almost none — so patrolling T-cells have nothing to inspect and walk past.</td></tr>
+      <tr><td><strong>Immunosuppressive signals</strong></td><td>The follicle actively secretes calming molecules — MIF, TGF-&beta;1 and &beta;2, and &alpha;-MSH (from POMC) — that switch off nearby immune cells.</td></tr>
+      <tr><td><strong>CD200 "do not attack" flag</strong></td><td>A surface protein that directly tells immune cells to stand down.</td></tr>
+    </tbody>
+  </table>
+
+  <p>Something — and in most people we genuinely do not know what: a viral illness, a period of severe stress, another autoimmune flare, or simply a genetically pre-loaded system tipping over — causes this privilege to <strong>collapse</strong>. The follicle starts displaying MHC badges. Immune cells that had been ignoring it for 21 years suddenly see a target.</p>
+
+  <figure>
+    <div class="fig-title">Figure 2.1 — Immune privilege: protected versus exposed</div>
+    <svg viewBox="0 0 700 250" role="img" aria-label="Comparison of a protected hair follicle and one under immune attack">
+      <g font-family="Helvetica,Arial">
+      <!-- LEFT: protected -->
+      <g transform="translate(0,0)">
+        <rect x="0" y="0" width="330" height="250" rx="6" fill="#f5fbf8"/>
+        <text x="16" y="22" font-size="9" font-weight="700" fill="#008300" letter-spacing="1.1">HEALTHY — PRIVILEGE INTACT</text>
+        <ellipse cx="140" cy="150" rx="46" ry="52" fill="none" stroke="#1baf7a" stroke-width="1.6" stroke-dasharray="4 4"/>
+        <text x="140" y="88" font-size="8.2" fill="#1baf7a" text-anchor="middle" font-weight="700">protected zone</text>
+        <path d="M140,40 L140,110" stroke="#3d3d36" stroke-width="6" stroke-linecap="round"/>
+        <ellipse cx="140" cy="152" rx="26" ry="25" fill="#1baf7a"/>
+        <ellipse cx="140" cy="158" rx="11" ry="10" fill="#e2f6ee"/>
+        <text x="140" y="215" font-size="8.6" fill="#3d3d36" text-anchor="middle">No badges displayed.</text>
+        <text x="140" y="228" font-size="8.6" fill="#3d3d36" text-anchor="middle">Calming signals sent out.</text>
+        <text x="140" y="241" font-size="8.6" fill="#3d3d36" text-anchor="middle">Hair grows for years.</text>
+        <!-- passing T cells -->
+        <g fill="#96968b">
+          <circle cx="248" cy="112" r="8"/><circle cx="272" cy="160" r="8"/><circle cx="243" cy="196" r="8"/>
+        </g>
+        <text x="258" y="88" font-size="8" fill="#6b6b61" text-anchor="middle">T-cells</text>
+        <text x="258" y="98" font-size="8" fill="#6b6b61" text-anchor="middle">pass by</text>
+      </g>
+      <!-- RIGHT: attacked -->
+      <g transform="translate(370,0)">
+        <rect x="0" y="0" width="330" height="250" rx="6" fill="#fdf5f2"/>
+        <text x="16" y="22" font-size="9" font-weight="700" fill="#c0421a" letter-spacing="1.1">ALOPECIA AREATA — PRIVILEGE COLLAPSED</text>
+        <ellipse cx="150" cy="150" rx="46" ry="52" fill="none" stroke="#eb6834" stroke-width="1.4" stroke-dasharray="2 5" opacity="0.55"/>
+        <path d="M150,40 L150,110" stroke="#96968b" stroke-width="4" stroke-linecap="round" stroke-dasharray="6 4"/>
+        <ellipse cx="150" cy="152" rx="26" ry="25" fill="#eb6834"/>
+        <ellipse cx="150" cy="158" rx="11" ry="10" fill="#fde5da"/>
+        <!-- badges -->
+        <g fill="#14140f">
+          <rect x="124" y="128" width="6" height="6" rx="1"/><rect x="167" y="132" width="6" height="6" rx="1"/>
+          <rect x="140" y="120" width="6" height="6" rx="1"/><rect x="158" y="170" width="6" height="6" rx="1"/>
+          <rect x="128" y="170" width="6" height="6" rx="1"/>
+        </g>
+        <text x="150" y="105" font-size="8.2" fill="#c0421a" text-anchor="middle" font-weight="700">MHC badges now visible</text>
+        <!-- swarm -->
+        <g fill="#e34948">
+          <circle cx="92" cy="130" r="8"/><circle cx="86" cy="168" r="8"/><circle cx="108" cy="196" r="8"/>
+          <circle cx="212" cy="128" r="8"/><circle cx="220" cy="168" r="8"/><circle cx="196" cy="198" r="8"/>
+          <circle cx="150" cy="212" r="8"/>
+        </g>
+        <text x="150" y="235" font-size="8.6" fill="#3d3d36" text-anchor="middle">CD8+ T-cells swarm the bulb — pathologists call it</text>
+        <text x="150" y="247" font-size="8.6" fill="#3d3d36" text-anchor="middle">the "swarm of bees". The follicle is forced to shut down.</text>
+      </g>
+      </g>
+    </svg>
+    <figcaption>Under the microscope this swarm around the follicle bulb is the classic diagnostic finding in alopecia areata. Crucially, the swarm sits around the <b>bulb</b>, low down — not around the stem-cell bulge higher up. The follicle is switched off, not killed.</figcaption>
+  </figure>
+
+  <h3>Step two: the loop that keeps it going</h3>
+  <p>This is the single most important diagram in the report, because it is exactly where your new medicine intervenes. The attack is not a one-off event — it is a <strong>self-feeding loop</strong> between two chemical messengers (cytokines):</p>
+  <ul>
+    <li><strong>Interferon-gamma (IFN-&gamma;)</strong> — released by the attacking T-cells. It is the signal that forces the follicle to display MHC badges in the first place.</li>
+    <li><strong>Interleukin-15 (IL-15)</strong> — released by the follicle cells <em>in response to</em> IFN-&gamma;. IL-15 is food and fuel for the very T-cells attacking it.</li>
+  </ul>
+  <p>So: T-cells make IFN-&gamma; &rarr; the follicle responds by making IL-15 &rarr; IL-15 feeds the T-cells &rarr; they make more IFN-&gamma;. Once this wheel is turning it sustains itself indefinitely. The follicle is, in effect, being tricked into paying for its own attackers.</p>
+
+  <figure>
+    <div class="fig-title">Figure 2.2 — The self-feeding loop, and the two doors ritlecitinib closes</div>
+    <svg viewBox="0 0 700 348" role="img" aria-label="Circular diagram of the interferon gamma and interleukin 15 feedback loop">
+      <defs>
+        <marker id="ar2" markerWidth="10" markerHeight="10" refX="8" refY="3.4" orient="auto">
+          <path d="M0,0 L7.5,3.4 L0,6.8 Z" fill="#eb6834"/>
+        </marker>
+      </defs>
+      <g font-family="Helvetica,Arial">
+      <!-- boxes -->
+      <g>
+        <rect x="248" y="10" width="204" height="52" rx="6" fill="#fdf5f2" stroke="#eb6834" stroke-width="1.3"/>
+        <text x="350" y="31" font-size="10" font-weight="700" text-anchor="middle" fill="#14140f">CD8+ NKG2D+ T-cell</text>
+        <text x="350" y="46" font-size="8.4" text-anchor="middle" fill="#6b6b61">the attacking immune cell</text>
+      </g>
+      <g>
+        <rect x="500" y="130" width="190" height="66" rx="6" fill="#fdf5f2" stroke="#eb6834" stroke-width="1.3"/>
+        <text x="595" y="152" font-size="10" font-weight="700" text-anchor="middle" fill="#14140f">Releases IFN-&gamma;</text>
+        <text x="595" y="167" font-size="8.4" text-anchor="middle" fill="#6b6b61">forces MHC badges onto</text>
+        <text x="595" y="179" font-size="8.4" text-anchor="middle" fill="#6b6b61">the follicle; damages it</text>
+      </g>
+      <g>
+        <rect x="248" y="268" width="204" height="62" rx="6" fill="#fdf5f2" stroke="#eb6834" stroke-width="1.3"/>
+        <text x="350" y="290" font-size="10" font-weight="700" text-anchor="middle" fill="#14140f">Follicle makes IL-15</text>
+        <text x="350" y="305" font-size="8.4" text-anchor="middle" fill="#6b6b61">under stress it produces the</text>
+        <text x="350" y="317" font-size="8.4" text-anchor="middle" fill="#6b6b61">very fuel its attackers need</text>
+      </g>
+      <g>
+        <rect x="12" y="130" width="190" height="66" rx="6" fill="#fdf5f2" stroke="#eb6834" stroke-width="1.3"/>
+        <text x="107" y="152" font-size="10" font-weight="700" text-anchor="middle" fill="#14140f">IL-15 feeds T-cells</text>
+        <text x="107" y="167" font-size="8.4" text-anchor="middle" fill="#6b6b61">they survive, multiply</text>
+        <text x="107" y="179" font-size="8.4" text-anchor="middle" fill="#6b6b61">and grow more aggressive</text>
+      </g>
+      <!-- arrows -->
+      <path d="M456,44 C520,54 560,86 578,124" fill="none" stroke="#eb6834" stroke-width="2" marker-end="url(#ar2)"/>
+      <path d="M580,200 C556,244 500,272 456,286" fill="none" stroke="#eb6834" stroke-width="2" marker-end="url(#ar2)"/>
+      <path d="M244,290 C196,278 140,246 118,202" fill="none" stroke="#eb6834" stroke-width="2" marker-end="url(#ar2)"/>
+      <path d="M120,126 C140,86 182,54 244,44" fill="none" stroke="#eb6834" stroke-width="2" marker-end="url(#ar2)"/>
+      <!-- centre -->
+      <circle cx="350" cy="168" r="66" fill="#faf9f5" stroke="#dcdcd4" stroke-width="1"/>
+      <text x="350" y="158" font-size="11" font-weight="700" text-anchor="middle" fill="#14140f">THE LOOP</text>
+      <text x="350" y="176" font-size="8.4" text-anchor="middle" fill="#6b6b61">self-sustaining;</text>
+      <text x="350" y="188" font-size="8.4" text-anchor="middle" fill="#6b6b61">needs no new trigger</text>
+      <!-- interventions -->
+      <g>
+        <path d="M107,228 L107,206" stroke="#2a78d6" stroke-width="2.4"/>
+        <line x1="86" y1="202" x2="128" y2="202" stroke="#2a78d6" stroke-width="3.6" stroke-linecap="round"/>
+        <rect x="8" y="228" width="198" height="54" rx="5" fill="#2a78d6"/>
+        <text x="107" y="246" font-size="9" font-weight="700" text-anchor="middle" fill="#ffffff">RITLECITINIB CUT #1</text>
+        <text x="107" y="260" font-size="8.2" text-anchor="middle" fill="#cde2fb">blocks JAK3, so IL-15 can no</text>
+        <text x="107" y="273" font-size="8.2" text-anchor="middle" fill="#cde2fb">longer be heard by the T-cell</text>
+      </g>
+      <g>
+        <path d="M593,234 L593,208" stroke="#2a78d6" stroke-width="2.4"/>
+        <line x1="572" y1="204" x2="614" y2="204" stroke="#2a78d6" stroke-width="3.6" stroke-linecap="round"/>
+        <rect x="494" y="234" width="198" height="54" rx="5" fill="#2a78d6"/>
+        <text x="593" y="252" font-size="9" font-weight="700" text-anchor="middle" fill="#ffffff">RITLECITINIB CUT #2</text>
+        <text x="593" y="266" font-size="8.2" text-anchor="middle" fill="#cde2fb">blocks TEC kinases, so the</text>
+        <text x="593" y="279" font-size="8.2" text-anchor="middle" fill="#cde2fb">T-cell&#39;s trigger is disabled</text>
+      </g>
+      </g>
+    </svg>
+    <figcaption><b>Why two cuts matter:</b> one blockade starves the attacking cells of their fuel supply; the other disables their firing mechanism. Ritlecitinib is unusual among hair-loss drugs in doing both — that is its whole design rationale, explained fully in Section&nbsp;3.</figcaption>
+  </figure>
+
+  <div class="plain-en">
+    <div class="lbl">In plain English</div>
+    <p>Imagine a fire that keeps itself alight because the burning building keeps producing its own fuel. Removing the original spark (whatever triggered your first patch four years ago) achieves nothing now — the fire has moved on from needing it. You have to interrupt the fuel supply. That is what your medicine does.</p>
+  </div>
+
+  <h3>Why yours comes back: the relapsing–remitting pattern</h3>
+  <p>You have described a pattern that will be immediately familiar to any hair specialist: patches appear, regrow, and then a larger episode follows. This is the natural history of the disease, and it happens for a reason worth understanding.</p>
+  <p>Alopecia areata has a <strong>tissue memory</strong>. Some of the T-cells recruited during a flare do not disappear when the flare settles; they become <em>resident memory T-cells</em> that stay parked in the scalp skin. They are quiet, but they are primed. When conditions shift — an infection, a stress load, a change in your other immune activity — those resident cells can reactivate quickly and locally, which is why relapses often begin near where previous patches were and can escalate faster than the first episode did.</p>
+  <p>This has a direct practical implication that you should carry into every conversation with your dermatologist:</p>
+  <div class="callout">
+    <div class="lbl">The single most important consequence</div>
+    <p>Ritlecitinib <strong>suppresses</strong> the attack; it does not delete the memory cells. If you stop the drug, the loop can restart. In the published data, regrown hair is typically lost after discontinuation, and UK guidance explicitly advises counselling patients before they start that <strong>this is likely to be a long-term, possibly life-long treatment</strong>. That is not a reason to avoid it. It is a reason to plan for it, and to not treat month 12 as a finish line.</p>
+  </div>
+
+  <h3>Where your family history fits</h3>
+  <p>You mentioned a family history of autoimmune conditions. That is entirely consistent and worth being explicit about: alopecia areata is strongly heritable, and the genes involved are shared with other autoimmune diseases — in particular those governing how T-cells recognise targets (HLA region), how they are regulated (CTLA4, IL2/IL21), and the NKG2D ligand system that sits at the heart of Figure 2.2.</p>
+  <p>Practically, this means two things:</p>
+  <ul>
+    <li><strong>It is not your fault and it is not something you caused.</strong> Diet, stress and lifestyle can modulate an autoimmune disease; they do not create the underlying genetic predisposition.</li>
+    <li><strong>It is worth screening for the conditions that travel with it</strong>, because they are more common in people with alopecia areata and their families. Ask specifically about thyroid function (autoimmune thyroid disease is the classic companion), coeliac serology, vitamin B12, and a note in your record about vitiligo and type 1 diabetes. These are cheap tests and Section 10 explains why they matter for regrowth as well as general health.</li>
+  </ul>
+
+  <h3>Other things this disease does that nobody warns you about</h3>
+  <div class="g3">
+    <div class="card"><h4>Nails</h4><p>Fine pitting, ridging or roughness of the nail plate affects a meaningful minority. It reflects the same inflammation and — usefully — it tends to improve alongside the scalp on treatment.</p></div>
+    <div class="card"><h4>Eyebrows &amp; lashes</h4><p>Often affected, often the most distressing part, and often the slowest to recover. Trials measure these separately for good reason. See §5.</p></div>
+    <div class="card"><h4>Body hair</h4><p>Beard, chest and limb hair can be involved. Beard involvement in men is common and sometimes precedes scalp change.</p></div>
+  </div>
+  <p style="margin-top:4mm;">There is also a well-documented psychological load that men in particular tend to under-report. In a UK mixed-methods survey, over half of men with alopecia described depleted confidence, and wellbeing scores sat below matched population norms — yet help-seeking was strikingly low. If that resonates, treat it as a clinical finding rather than a character flaw; §10 and §11 both address it, and under UK guidance the psychological impact is a formally recognised part of how severity is defined.</p>
+</section>
+<!-- ============ SECTION 3 ============ -->
+<section class="page">
+  <div class="sec-num">Section 3</div>
+  <h2 class="sec">How ritlecitinib works</h2>
+  <p class="lede">Ritlecitinib is a "kinase inhibitor". To understand what that means you need one more piece of biology — how a cell hears a message from outside — and then the drug's design becomes genuinely simple and rather elegant.</p>
+
+  <h3>How a cell hears a message: the JAK-STAT relay</h3>
+  <p>Cytokines like IL-15 are messages. But a message is useless unless it gets from the outside of a cell to the DNA in its nucleus, where the cell decides what to do. That journey is a four-step relay:</p>
+
+  <figure>
+    <div class="fig-title">Figure 3.1 — The JAK-STAT relay, and where ritlecitinib cuts it</div>
+    <svg viewBox="0 0 700 300" role="img" aria-label="Diagram of JAK-STAT signalling inside an immune cell">
+      <defs>
+        <marker id="ar3" markerWidth="9" markerHeight="9" refX="7" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 Z" fill="#3d3d36"/></marker>
+      </defs>
+      <g font-family="Helvetica,Arial">
+      <!-- cell -->
+      <rect x="20" y="52" width="660" height="230" rx="14" fill="#faf9f5" stroke="#dcdcd4" stroke-width="1.4"/>
+      <text x="34" y="74" font-size="8.4" fill="#96968b" font-weight="700" letter-spacing="1">INSIDE THE IMMUNE CELL</text>
+      <!-- membrane -->
+      <rect x="20" y="52" width="660" height="9" rx="4" fill="#dcdcd4"/>
+
+      <!-- 1 cytokine -->
+      <g>
+        <circle cx="150" cy="26" r="14" fill="#eb6834"/>
+        <text x="150" y="30" font-size="8.4" fill="#fff" text-anchor="middle" font-weight="700">IL-15</text>
+        <text x="150" y="12" font-size="8.4" fill="#6b6b61" text-anchor="middle">1. the message arrives</text>
+        <path d="M150,42 L150,50" stroke="#3d3d36" stroke-width="1.6" marker-end="url(#ar3)"/>
+      </g>
+      <!-- receptor -->
+      <rect x="130" y="46" width="12" height="46" rx="4" fill="#96968b"/>
+      <rect x="158" y="46" width="12" height="46" rx="4" fill="#96968b"/>
+      <text x="196" y="72" font-size="8.4" fill="#6b6b61">2. docks on the receptor</text>
+
+      <!-- JAKs -->
+      <g>
+        <circle cx="136" cy="108" r="17" fill="#96968b"/>
+        <text x="136" y="112" font-size="8" fill="#fff" text-anchor="middle" font-weight="700">JAK1</text>
+        <circle cx="182" cy="108" r="17" fill="#2a78d6"/>
+        <text x="182" y="112" font-size="8" fill="#fff" text-anchor="middle" font-weight="700">JAK3</text>
+        <text x="220" y="106" font-size="8.4" fill="#6b6b61">3. a pair of JAK enzymes switch on</text>
+        <text x="220" y="118" font-size="8.4" fill="#6b6b61">and pass the signal inward</text>
+      </g>
+      <!-- block -->
+      <g>
+        <line x1="164" y1="90" x2="200" y2="126" stroke="#e34948" stroke-width="4" stroke-linecap="round"/>
+        <line x1="200" y1="90" x2="164" y2="126" stroke="#e34948" stroke-width="4" stroke-linecap="round"/>
+        <rect x="128" y="150" width="150" height="34" rx="5" fill="#2a78d6"/>
+        <text x="203" y="164" font-size="8.6" fill="#fff" text-anchor="middle" font-weight="700">RITLECITINIB BINDS HERE</text>
+        <text x="203" y="177" font-size="8" fill="#cde2fb" text-anchor="middle">permanently, to JAK3 only</text>
+        <path d="M203,150 L189,132" stroke="#2a78d6" stroke-width="2"/>
+      </g>
+
+      <!-- STAT -->
+      <g opacity="0.35">
+        <rect x="360" y="96" width="74" height="26" rx="5" fill="#96968b"/>
+        <text x="397" y="113" font-size="8.6" fill="#fff" text-anchor="middle" font-weight="700">STAT</text>
+        <path d="M300,109 L354,109" stroke="#3d3d36" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#ar3)"/>
+        <text x="397" y="88" font-size="8.4" fill="#6b6b61" text-anchor="middle">4. STAT messenger</text>
+      </g>
+      <!-- nucleus -->
+      <g opacity="0.35">
+        <ellipse cx="570" cy="168" rx="86" ry="66" fill="#ecece6" stroke="#c9c8bf" stroke-width="1.3"/>
+        <text x="570" y="160" font-size="9.4" fill="#3d3d36" text-anchor="middle" font-weight="700">NUCLEUS (DNA)</text>
+        <text x="570" y="176" font-size="8.2" fill="#6b6b61" text-anchor="middle">"survive, multiply,</text>
+        <text x="570" y="188" font-size="8.2" fill="#6b6b61" text-anchor="middle">release IFN-&gamma;"</text>
+        <path d="M440,116 C480,124 490,140 486,156" stroke="#3d3d36" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#ar3)"/>
+      </g>
+      <rect x="452" y="238" width="212" height="32" rx="5" fill="#e3f4e3"/>
+      <text x="558" y="252" font-size="8.8" fill="#00610a" text-anchor="middle" font-weight="700">Signal never arrives.</text>
+      <text x="558" y="264" font-size="8.4" fill="#00610a" text-anchor="middle">The order to attack is never given.</text>
+      </g>
+    </svg>
+    <figcaption>The faded parts of the diagram are what <b>stops happening</b> on treatment. Blocking one enzyme early in the relay silences the entire downstream instruction — which is why a small daily tablet can change the behaviour of an entire immune population.</figcaption>
+  </figure>
+
+  <div class="plain-en">
+    <div class="lbl">In plain English</div>
+    <p>A JAK is a relay operator sitting just inside the cell wall. Ritlecitinib walks up to one specific operator — JAK3 — and superglues its hands together. The phone still rings; nobody can answer it.</p>
+  </div>
+
+  <h3>Why "JAK3 only" is the clever part</h3>
+  <p>There are four JAK enzymes in humans: JAK1, JAK2, JAK3 and TYK2. They work in pairs, and different pairs carry different messages. This matters enormously for side effects:</p>
+  <table>
+    <thead><tr><th style="width:16%">Enzyme</th><th style="width:42%">Messages it carries</th><th>What happens if you block it</th></tr></thead>
+    <tbody>
+      <tr><td><strong>JAK1</strong></td><td>Very broad — inflammation, interferons, many interleukins</td><td>Powerful anti-inflammatory effect, but broad immune suppression</td></tr>
+      <tr><td><strong>JAK2</strong></td><td>Erythropoietin (red blood cells), thrombopoietin (platelets), growth hormone</td><td>Anaemia, low platelets, raised cholesterol — the classic JAK-inhibitor blood problems</td></tr>
+      <tr class="t-hl"><td><strong>JAK3</strong></td><td><strong>Only</strong> the six "common gamma chain" cytokines: IL-2, IL-4, IL-7, IL-9, <strong>IL-15</strong>, IL-21 — all of which are lymphocyte (T, B, NK cell) signals</td><td>Targeted effect on the exact cells driving alopecia areata. No effect on red cells or platelets via this route.</td></tr>
+      <tr><td><strong>TYK2</strong></td><td>IL-12, IL-23, type I interferons</td><td>Relevant in psoriasis; not a main driver here</td></tr>
+    </tbody>
+  </table>
+  <p>JAK3 is the narrowest of the four. It appears essentially only in immune cells, and it only ever partners with JAK1 on that one family of receptors. Blocking it is therefore a scalpel rather than a sledgehammer — and, critically, <strong>IL-15 is on that list</strong>. IL-15 is the fuel line in Figure 2.2.</p>
+
+  <figure>
+    <div class="fig-title">Figure 3.2 — What ritlecitinib blocks, compared with the other approved option</div>
+    <svg viewBox="0 0 700 210" role="img" aria-label="Comparison of targets blocked by ritlecitinib and baricitinib">
+      <g font-family="Helvetica,Arial">
+      <text x="150" y="16" font-size="9.4" font-weight="700" fill="#14140f" text-anchor="middle">RITLECITINIB (Litfulo)</text>
+      <text x="150" y="30" font-size="8.2" fill="#6b6b61" text-anchor="middle">JAK3 + TEC family</text>
+      <text x="520" y="16" font-size="9.4" font-weight="700" fill="#14140f" text-anchor="middle">BARICITINIB (Olumiant)</text>
+      <text x="520" y="30" font-size="8.2" fill="#6b6b61" text-anchor="middle">JAK1 + JAK2 — the other UK-approved drug</text>
+      <line x1="335" y1="8" x2="335" y2="200" stroke="#dcdcd4" stroke-width="1"/>
+
+      <g font-size="8.8">
+      <!-- left rows -->
+      <g transform="translate(24,44)">
+        <g><rect x="0" y="0" width="252" height="22" rx="3" fill="#f3f2ec"/><text x="8" y="15" fill="#6b6b61">JAK1</text><text x="244" y="15" text-anchor="end" fill="#96968b" font-weight="700">not blocked</text></g>
+        <g transform="translate(0,26)"><rect x="0" y="0" width="252" height="22" rx="3" fill="#f3f2ec"/><text x="8" y="15" fill="#6b6b61">JAK2</text><text x="244" y="15" text-anchor="end" fill="#96968b" font-weight="700">not blocked</text></g>
+        <g transform="translate(0,52)"><rect x="0" y="0" width="252" height="22" rx="3" fill="#2a78d6"/><text x="8" y="15" fill="#fff" font-weight="700">JAK3</text><text x="244" y="15" text-anchor="end" fill="#cde2fb" font-weight="700">BLOCKED</text></g>
+        <g transform="translate(0,78)"><rect x="0" y="0" width="252" height="22" rx="3" fill="#f3f2ec"/><text x="8" y="15" fill="#6b6b61">TYK2</text><text x="244" y="15" text-anchor="end" fill="#96968b" font-weight="700">not blocked</text></g>
+        <g transform="translate(0,104)"><rect x="0" y="0" width="252" height="22" rx="3" fill="#2a78d6"/><text x="8" y="15" fill="#fff" font-weight="700">TEC family — BTK, BMX, ITK, RLK, TEC</text></g>
+        <g transform="translate(0,130)"><text x="8" y="12" fill="#256abf" font-size="8.2">A second, separate target family that JAK</text><text x="8" y="23" fill="#256abf" font-size="8.2">inhibitors normally leave alone.</text></g>
+      </g>
+      <!-- right rows -->
+      <g transform="translate(394,44)">
+        <g><rect x="0" y="0" width="252" height="22" rx="3" fill="#96968b"/><text x="8" y="15" fill="#fff" font-weight="700">JAK1</text><text x="244" y="15" text-anchor="end" fill="#ecece6" font-weight="700">BLOCKED</text></g>
+        <g transform="translate(0,26)"><rect x="0" y="0" width="252" height="22" rx="3" fill="#96968b"/><text x="8" y="15" fill="#fff" font-weight="700">JAK2</text><text x="244" y="15" text-anchor="end" fill="#ecece6" font-weight="700">BLOCKED</text></g>
+        <g transform="translate(0,52)"><rect x="0" y="0" width="252" height="22" rx="3" fill="#f3f2ec"/><text x="8" y="15" fill="#6b6b61">JAK3</text><text x="244" y="15" text-anchor="end" fill="#96968b" font-weight="700">not blocked</text></g>
+        <g transform="translate(0,78)"><rect x="0" y="0" width="252" height="22" rx="3" fill="#f3f2ec"/><text x="8" y="15" fill="#6b6b61">TYK2</text><text x="244" y="15" text-anchor="end" fill="#96968b" font-weight="700">not blocked</text></g>
+        <g transform="translate(0,104)"><rect x="0" y="0" width="252" height="22" rx="3" fill="#f3f2ec"/><text x="8" y="15" fill="#6b6b61">TEC family</text><text x="244" y="15" text-anchor="end" fill="#96968b" font-weight="700">not blocked</text></g>
+        <g transform="translate(0,130)"><text x="8" y="12" fill="#6b6b61" font-size="8.2">Because JAK2 is blocked, anaemia and</text><text x="8" y="23" fill="#6b6b61" font-size="8.2">lipid changes are more prominent.</text></g>
+      </g>
+      </g>
+      </g>
+    </svg>
+    <figcaption>Neither drug is simply "better" — they are different tools. Ritlecitinib's narrower JAK profile means it avoids the JAK2-driven blood and lipid effects, and it is the only one of the two licensed down to age 12. If ritlecitinib does not work for you, switching to a JAK1/2 inhibitor is a recognised next step, and real-world data show switching can succeed.</figcaption>
+  </figure>
+
+  <h3>The second target: TEC kinases</h3>
+  <p>This is what makes ritlecitinib genuinely unusual. As well as JAK3, it irreversibly blocks a second family of five enzymes — <strong>BTK, BMX, ITK, RLK/TXK and TEC</strong>. These sit on a completely different signalling pathway.</p>
+  <p>The most relevant of these is <strong>ITK</strong>, which sits directly downstream of the T-cell receptor — the part of the T-cell that physically recognises a target and decides to fire. Blocking ITK dampens T-cell activation itself. The TEC family is also involved in the cytotoxic (killing) machinery of natural killer cells.</p>
+
+  <div class="g2">
+    <div class="card" style="border-color:#2a78d6;">
+      <h4 style="color:#2a78d6;">Cut #1 — JAK3</h4>
+      <p><strong>Starves the attack.</strong> IL-15 and IL-2 can no longer reach the T-cells that are attacking your follicles. Fewer are recruited, fewer survive, fewer multiply.</p>
+      <p style="color:#6b6b61;font-size:8.4pt;">Analogy: cutting the enemy's supply lines.</p>
+    </div>
+    <div class="card" style="border-color:#2a78d6;">
+      <h4 style="color:#2a78d6;">Cut #2 — TEC / ITK</h4>
+      <p><strong>Disarms the attack.</strong> The T-cells that are already in your scalp — including those resident memory cells from §2 — have their activation and killing machinery turned down.</p>
+      <p style="color:#6b6b61;font-size:8.4pt;">Analogy: jamming their triggers.</p>
+    </div>
+  </div>
+
+  <h3>"Irreversible" and "covalent" — why those words are good news</h3>
+  <p>Most drugs bind their target loosely and let go; keeping the effect going means keeping a high drug level in the blood at all times. Ritlecitinib does something different. It forms a <strong>permanent chemical bond</strong> with a single sulphur atom — a cysteine residue numbered 909 — in JAK3's structure. That specific cysteine is not present in JAK1, JAK2 or TYK2, which is precisely why the drug can be so selective.</p>
+  <p>Two practical consequences:</p>
+  <ul>
+    <li><strong>The effect outlasts the drug.</strong> Ritlecitinib is cleared from your bloodstream quite quickly, but the JAK3 enzymes it has disabled stay disabled until the cell manufactures fresh ones. This is why once-daily dosing works despite a short half-life, and why a single missed dose is not a catastrophe.</li>
+    <li><strong>It is not a "level in the blood" drug.</strong> You do not need to obsess about taking it at exactly the same minute each day. Consistency matters for habit, not pharmacology.</li>
+  </ul>
+
+  <h3>What this looks like in your scalp, week by week</h3>
+  <figure>
+    <div class="fig-title">Figure 3.3 — Expected biological timeline (individual results vary widely)</div>
+    <svg viewBox="0 0 700 218" role="img" aria-label="Timeline of expected changes from week 0 to month 36">
+      <g font-family="Helvetica,Arial">
+      <line x1="40" y1="60" x2="672" y2="60" stroke="#dcdcd4" stroke-width="2"/>
+      <g font-size="8.4" fill="#6b6b61" text-anchor="middle">
+        <g><circle cx="60" cy="60" r="5.5" fill="#2a78d6"/><text x="60" y="48" font-weight="700" fill="#14140f">Week 0</text></g>
+        <g><circle cx="185" cy="60" r="5.5" fill="#2a78d6"/><text x="185" y="48" font-weight="700" fill="#14140f">Weeks 4–8</text></g>
+        <g><circle cx="320" cy="60" r="5.5" fill="#2a78d6"/><text x="320" y="48" font-weight="700" fill="#14140f">Weeks 8–16</text></g>
+        <g><circle cx="455" cy="60" r="5.5" fill="#2a78d6"/><text x="455" y="48" font-weight="700" fill="#14140f">Weeks 16–36</text></g>
+        <g><circle cx="590" cy="60" r="5.5" fill="#1baf7a"/><text x="590" y="48" font-weight="700" fill="#14140f">Months 9–36</text></g>
+      </g>
+      <g font-size="8.3" fill="#3d3d36">
+        <g transform="translate(14,78)">
+          <text x="46" y="10" text-anchor="middle" font-weight="700" fill="#256abf">Silent</text>
+          <foreignObject x="0" y="16" width="92" height="120"><div xmlns="http://www.w3.org/1999/xhtml" style="font:8.3px Helvetica,Arial;color:#3d3d36;line-height:1.4;text-align:center;">Immune signalling switches off within days. Nothing at all is visible. Do not read anything into this.</div></foreignObject>
+        </g>
+        <g transform="translate(139,78)">
+          <text x="46" y="10" text-anchor="middle" font-weight="700" fill="#256abf">Inflammation settles</text>
+          <foreignObject x="0" y="16" width="92" height="120"><div xmlns="http://www.w3.org/1999/xhtml" style="font:8.3px Helvetica,Arial;color:#3d3d36;line-height:1.4;text-align:center;">The swarm around the follicles disperses. Any active shedding usually stops. Still often nothing visible in the mirror.</div></foreignObject>
+        </g>
+        <g transform="translate(274,78)">
+          <text x="46" y="10" text-anchor="middle" font-weight="700" fill="#256abf">Vellus appears</text>
+          <foreignObject x="0" y="16" width="92" height="120"><div xmlns="http://www.w3.org/1999/xhtml" style="font:8.3px Helvetica,Arial;color:#3d3d36;line-height:1.4;text-align:center;">Follicles re-enter anagen. Fine, pale "peach fuzz" appears in patches. On trichoscopy, regrowing hairs jump dramatically.</div></foreignObject>
+        </g>
+        <g transform="translate(409,78)">
+          <text x="46" y="10" text-anchor="middle" font-weight="700" fill="#256abf">Terminal hair</text>
+          <foreignObject x="0" y="16" width="92" height="120"><div xmlns="http://www.w3.org/1999/xhtml" style="font:8.3px Helvetica,Arial;color:#3d3d36;line-height:1.4;text-align:center;">Vellus thickens and re-pigments. This is when the SALT score really moves. Most trial gains happen in this window.</div></foreignObject>
+        </g>
+        <g transform="translate(544,78)">
+          <text x="46" y="10" text-anchor="middle" font-weight="700" fill="#008300">Consolidation</text>
+          <foreignObject x="0" y="16" width="92" height="120"><div xmlns="http://www.w3.org/1999/xhtml" style="font:8.3px Helvetica,Arial;color:#3d3d36;line-height:1.4;text-align:center;">Density keeps building. Eyebrows and lashes typically lag the scalp. About 1 in 10 responders only cross the line after year one.</div></foreignObject>
+        </g>
+      </g>
+      <rect x="40" y="188" width="632" height="26" rx="4" fill="#fdf0d4"/>
+      <text x="356" y="205" font-size="8.8" fill="#7d5300" text-anchor="middle" font-weight="700">The most common reason people fail on this drug is stopping it during weeks 8–24, when it looks like nothing is working.</text>
+      </g>
+    </svg>
+    <figcaption>Note the shape of this: the drug's <b>biological</b> effect is nearly immediate, but the <b>visible</b> effect is limited by how fast hair physically grows — roughly 1&nbsp;cm per month. Even a perfect immunological response cannot show a full head of hair before about month 9.</figcaption>
+  </figure>
+
+  <div class="callout warn">
+    <div class="lbl">A note on the loading dose</div>
+    <p>You may read about a "200&nbsp;mg loading dose for 4 weeks" in the trial literature. Several ALLEGRO studies used that, but the <strong>licensed dose in the UK and US is simply 50&nbsp;mg once daily with no loading dose</strong>, because the trials showed the loading dose did not add meaningful benefit. If you have been prescribed plain 50&nbsp;mg daily, that is correct and current.</p>
+  </div>
+</section>
+<!-- ============ SECTION 4 ============ -->
+<section class="page">
+  <div class="sec-num">Section 4</div>
+  <h2 class="sec">Measuring hair loss: the SALT score</h2>
+  <p class="lede">Every trial result, every NHS funding decision and every review appointment revolves around one number. If you learn nothing else administrative, learn this one — it is the number that decides whether your treatment continues.</p>
+
+  <p><strong>SALT</strong> stands for <strong>S</strong>everity of <strong>Al</strong>opecia <strong>T</strong>ool. It is simply the percentage of your scalp with hair missing. SALT 0 means no loss at all. SALT 100 means a completely bare scalp. It is calculated by dividing the scalp into four regions, scoring the percentage loss in each, and weighting them by how much of your total scalp surface they represent.</p>
+
+  <figure>
+    <div class="fig-title">Figure 4.1 — How a SALT score is built</div>
+    <svg viewBox="0 0 700 232" role="img" aria-label="Diagram showing the four scalp regions used in SALT scoring and their weightings">
+      <g font-family="Helvetica,Arial">
+      <!-- head diagrams -->
+      <g transform="translate(20,14)">
+        <ellipse cx="80" cy="88" rx="62" ry="76" fill="#f3f2ec" stroke="#c9c8bf" stroke-width="1.2"/>
+        <path d="M18,88 A62,76 0 0,1 142,88 Z" fill="#2a78d6" opacity="0.85"/>
+        <text x="80" y="60" font-size="12" fill="#fff" text-anchor="middle" font-weight="700">40%</text>
+        <text x="80" y="76" font-size="8" fill="#cde2fb" text-anchor="middle">TOP (VERTEX)</text>
+        <path d="M18,88 A62,76 0 0,0 142,88 Z" fill="#96968b" opacity="0.35"/>
+        <text x="80" y="120" font-size="12" fill="#3d3d36" text-anchor="middle" font-weight="700">24%</text>
+        <text x="80" y="134" font-size="8" fill="#6b6b61" text-anchor="middle">BACK</text>
+        <text x="80" y="182" font-size="8.6" fill="#6b6b61" text-anchor="middle">viewed from above</text>
+      </g>
+      <g transform="translate(196,14)">
+        <ellipse cx="70" cy="88" rx="54" ry="72" fill="#f3f2ec" stroke="#c9c8bf" stroke-width="1.2"/>
+        <path d="M16,88 A54,72 0 0,1 124,88 Z" fill="#86b6ef"/>
+        <text x="70" y="70" font-size="12" fill="#104281" text-anchor="middle" font-weight="700">18%</text>
+        <text x="70" y="84" font-size="8" fill="#104281" text-anchor="middle">EACH SIDE</text>
+        <text x="70" y="182" font-size="8.6" fill="#6b6b61" text-anchor="middle">left and right, 18% each</text>
+      </g>
+      <!-- equation -->
+      <g transform="translate(352,20)">
+        <rect x="0" y="0" width="330" height="176" rx="6" fill="#faf9f5" stroke="#dcdcd4"/>
+        <text x="16" y="24" font-size="9" font-weight="700" fill="#14140f" letter-spacing="0.8">WORKED EXAMPLE</text>
+        <g font-size="8.9" fill="#3d3d36">
+          <text x="16" y="46">Top: 50% of it bare</text><text x="314" y="46" text-anchor="end" fill="#6b6b61">0.50 &times; 40 = <tspan font-weight="700" fill="#14140f">20.0</tspan></text>
+          <text x="16" y="66">Back: 25% bare</text><text x="314" y="66" text-anchor="end" fill="#6b6b61">0.25 &times; 24 = <tspan font-weight="700" fill="#14140f">6.0</tspan></text>
+          <text x="16" y="86">Left side: 10% bare</text><text x="314" y="86" text-anchor="end" fill="#6b6b61">0.10 &times; 18 = <tspan font-weight="700" fill="#14140f">1.8</tspan></text>
+          <text x="16" y="106">Right side: 10% bare</text><text x="314" y="106" text-anchor="end" fill="#6b6b61">0.10 &times; 18 = <tspan font-weight="700" fill="#14140f">1.8</tspan></text>
+        </g>
+        <line x1="16" y1="118" x2="314" y2="118" stroke="#c9c8bf"/>
+        <text x="16" y="140" font-size="10" font-weight="700" fill="#14140f">SALT score</text>
+        <text x="314" y="140" font-size="14" font-weight="700" fill="#2a78d6" text-anchor="end">29.6</text>
+        <text x="16" y="162" font-size="8.2" fill="#6b6b61">Roughly 30% of the scalp's hair is missing.</text>
+      </g>
+      <!-- scale -->
+      <g transform="translate(20,208)">
+        <rect x="0" y="0" width="662" height="14" rx="7" fill="#ecece6"/>
+        <rect x="0" y="0" width="132" height="14" rx="7" fill="#008300"/>
+        <rect x="132" y="0" width="199" height="14" fill="#eda100"/>
+        <rect x="331" y="0" width="331" height="14" rx="0" fill="#e34948"/>
+        <text x="66" y="10.5" font-size="7.6" fill="#fff" text-anchor="middle" font-weight="700">SALT 0–20 · limited</text>
+        <text x="231" y="10.5" font-size="7.6" fill="#3d2500" text-anchor="middle" font-weight="700">SALT 21–49 · moderate</text>
+        <text x="496" y="10.5" font-size="7.6" fill="#fff" text-anchor="middle" font-weight="700">SALT 50–100 · SEVERE (the NHS threshold)</text>
+      </g>
+      </g>
+    </svg>
+    <figcaption>The top of the head carries the heaviest weighting (40%), which is why patches on the crown move the number far more than patches at the sides. Ask your dermatologist for your <b>absolute SALT score</b> at every appointment and write it down — it is the single most useful thing you can track.</figcaption>
+  </figure>
+
+  <h3>The thresholds that matter</h3>
+  <table>
+    <thead><tr><th style="width:20%">Threshold</th><th style="width:30%">Means</th><th>Why it exists</th></tr></thead>
+    <tbody>
+      <tr class="t-hl"><td><strong>SALT &le; 20</strong></td><td>80% or more of your scalp hair is present</td><td><strong>The primary endpoint of every major trial and the UK continuation target.</strong> It is roughly the point at which hair loss stops being obvious to other people.</td></tr>
+      <tr><td><strong>SALT &le; 10</strong></td><td>90% or more present</td><td>A stricter secondary endpoint. Close to cosmetically normal.</td></tr>
+      <tr><td><strong>SALT = 0</strong></td><td>Complete regrowth</td><td>The best possible outcome, and achieved by a meaningful minority on long-term treatment.</td></tr>
+      <tr><td><strong>SALT &ge; 50</strong></td><td>Half or more of the scalp bare</td><td>The definition of <strong>severe</strong> alopecia areata, and the standard NHS funding threshold (see §8).</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Two related terms</h3>
+  <div class="g2">
+    <div class="card"><h4>Alopecia totalis (AT)</h4><p>Complete loss of scalp hair — SALT 100.</p></div>
+    <div class="card"><h4>Alopecia universalis (AU)</h4><p>Complete loss of scalp <em>and</em> all body hair, including eyebrows and lashes.</p></div>
+  </div>
+  <p style="margin-top:4mm;">These matter because response rates are meaningfully lower in AT/AU than in patchy disease. From what you have described — patches that enlarge and regrow — <strong>you are not in the AT/AU category</strong>, and that is genuinely good news for your odds. See §6.</p>
+</section>
+<!-- ============ SECTION 5 ============ -->
+<section class="page">
+  <div class="sec-num">Section 5</div>
+  <h2 class="sec">The evidence, trial by trial</h2>
+  <p class="lede">Ritlecitinib was tested in a programme called <strong>ALLEGRO</strong>. Below is every study that matters, what it found, and — just as importantly — what it did not answer. Numbers are for the licensed 50&nbsp;mg once-daily dose unless stated.</p>
+
+  <h3>The studies at a glance</h3>
+  <table>
+    <thead><tr><th style="width:20%">Study</th><th style="width:13%">Design</th><th style="width:9%" class="num">People</th><th>Who was in it, and what it tested</th></tr></thead>
+    <tbody>
+      <tr><td><strong>ALLEGRO-2a</strong></td><td>Phase 2a</td><td class="num">142</td><td>First proof that the drug works in humans with alopecia areata. Established the dose range.</td></tr>
+      <tr class="t-hl"><td><strong>ALLEGRO-2b/3</strong></td><td>Randomised, double-blind, placebo-controlled</td><td class="num">718</td><td><strong>The pivotal trial.</strong> Aged 12+ with at least 50% scalp hair loss. Five ritlecitinib doses versus dummy tablets for 24 weeks, then everyone on active drug to week 48. Median age 33; 63.6% female.</td></tr>
+      <tr><td><strong>ALLEGRO-LT</strong></td><td>Phase 3, open-label, long-term</td><td class="num">449 new<br>+ rollovers</td><td>The extension study. Aged 12+ with at least 25% loss. Followed for years — the source of all the 2- and 3-year data.</td></tr>
+      <tr><td><strong>Pooled 3-year analysis</strong></td><td>2b/3 + LT combined</td><td class="num">—</td><td>Long-term efficacy and durability of response.</td></tr>
+      <tr><td><strong>Integrated safety analysis</strong></td><td>Whole programme</td><td class="num">1,294</td><td>2,092 patient-years of exposure. The best available picture of real risk.</td></tr>
+      <tr><td><strong>Real-world studies</strong></td><td>Observational</td><td class="num">89–102</td><td>What happens in ordinary clinics rather than trials — including in people trials would have excluded.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Headline result 1: does it beat placebo?</h3>
+  <p>Yes, decisively. In ALLEGRO-2b/3 at week 24, <strong>23.0%</strong> of people on 50&nbsp;mg reached SALT&nbsp;&le;20, versus <strong>1.6%</strong> on placebo. For the stricter SALT&nbsp;&le;10 target it was 13.4% versus 1.5%.</p>
+  <div class="g3" style="margin:5mm 0 6mm;">
+    <div class="card stat"><div class="v">23.0%</div><div class="l">reached SALT &le;20 at week 24 on ritlecitinib 50&nbsp;mg</div></div>
+    <div class="card stat o"><div class="v">1.6%</div><div class="l">reached SALT &le;20 at week 24 on placebo</div></div>
+    <div class="card stat g"><div class="v">1 in 5</div><div class="l">roughly the number who benefit at 24 weeks who would not have done so anyway — but see the next chart before you judge the drug on this figure</div></div>
+  </div>
+  <p>Twenty-three percent sounds underwhelming. It is not, for two reasons. First, the trial deliberately enrolled the <em>hardest</em> population — everyone had lost at least half their scalp hair, and a large proportion had total loss. Second, and much more importantly, <strong>24 weeks is far too early to judge this drug</strong>.</p>
+
+  <h3>Headline result 2: it keeps working — and this is the crucial chart</h3>
+  <figure>
+    <div class="fig-title">Figure 5.1 — Proportion reaching SALT &le;20 (80% or more of scalp hair present)</div>
+    <svg viewBox="0 0 700 262" role="img" aria-label="Bar chart of SALT 20 response rates at different time points">
+      <g font-family="Helvetica,Arial">
+      <!-- gridlines -->
+      <g stroke="#ecece6" stroke-width="1">
+        <line x1="170" y1="30" x2="170" y2="226"/><line x1="292.5" y1="30" x2="292.5" y2="226"/>
+        <line x1="415" y1="30" x2="415" y2="226"/><line x1="537.5" y1="30" x2="537.5" y2="226"/><line x1="660" y1="30" x2="660" y2="226"/>
+      </g>
+      <g font-size="8" fill="#96968b" text-anchor="middle">
+        <text x="170" y="242">0%</text><text x="292.5" y="242">20%</text><text x="415" y="242">40%</text><text x="537.5" y="242">60%</text><text x="660" y="242">80%</text>
+      </g>
+      <line x1="170" y1="30" x2="170" y2="226" stroke="#96968b" stroke-width="1.4"/>
+      <g font-size="8.6" fill="#3d3d36" text-anchor="end">
+        <text x="162" y="53">Placebo, week 24</text>
+        <text x="162" y="85">Week 24</text>
+        <text x="162" y="117">Week 48</text>
+        <text x="162" y="149">Month 24</text>
+        <text x="162" y="181">Year 3 — observed</text>
+        <text x="162" y="213">Year 3 — conservative</text>
+      </g>
+      <g font-size="8" fill="#96968b" text-anchor="end">
+        <text x="162" y="63">ALLEGRO-2b/3</text><text x="162" y="95">ALLEGRO-2b/3</text><text x="162" y="127">ALLEGRO-2b/3</text>
+        <text x="162" y="159">ALLEGRO-LT</text><text x="162" y="191">pooled</text><text x="162" y="223">pooled, LOCF</text>
+      </g>
+      <!-- bars -->
+      <rect x="170" y="36" width="9.8" height="22" rx="4" fill="#96968b"/>
+      <text x="188" y="52" font-size="9.4" font-weight="700" fill="#6b6b61">1.6%</text>
+      <rect x="170" y="68" width="140.9" height="22" rx="4" fill="#2a78d6"/>
+      <text x="319" y="84" font-size="9.4" font-weight="700" fill="#104281">23.0%</text>
+      <rect x="170" y="100" width="263.4" height="22" rx="4" fill="#2a78d6"/>
+      <text x="442" y="116" font-size="9.4" font-weight="700" fill="#104281">43%</text>
+      <rect x="170" y="132" width="450.2" height="22" rx="4" fill="#2a78d6"/>
+      <text x="628" y="148" font-size="9.4" font-weight="700" fill="#104281">73.5%</text>
+      <rect x="170" y="164" width="398.7" height="22" rx="4" fill="#2a78d6"/>
+      <text x="577" y="180" font-size="9.4" font-weight="700" fill="#104281">65.1%</text>
+      <rect x="170" y="196" width="288.5" height="22" rx="4" fill="#86b6ef"/>
+      <text x="467" y="212" font-size="9.4" font-weight="700" fill="#256abf">47.1%</text>
+      <text x="170" y="18" font-size="8.4" fill="#6b6b61">Longer treatment &rarr; more people reach target. The gains do not plateau at 6 months.</text>
+      </g>
+    </svg>
+    <figcaption><b>Read this chart carefully.</b> The three later time points come from open-label follow-up in overlapping but not identical groups of people, so they are not a clean continuation of the first two bars — they cannot be. But the direction is unambiguous and consistent across every analysis: <b>response almost doubles between week 24 and week 48, and continues climbing for years.</b> "Observed" counts people still on treatment; "conservative" (statisticians call it LOCF) counts everyone who ever started, including those who dropped out, and is the pessimistic bound. The truth for any individual sits between them.</figcaption>
+  </figure>
+
+  <table>
+    <caption>Long-term outcomes at 3 years (pooled ALLEGRO-2b/3 and ALLEGRO-LT)</caption>
+    <thead><tr><th style="width:44%">Outcome</th><th class="num" style="width:28%">Observed</th><th class="num" style="width:28%">Conservative (LOCF)</th></tr></thead>
+    <tbody>
+      <tr class="t-hl"><td><strong>SALT &le;20</strong> — 80%+ of hair present</td><td class="num">65.1%</td><td class="num">47.1%</td></tr>
+      <tr><td><strong>SALT &le;10</strong> — 90%+ present</td><td class="num">52.3%</td><td class="num">36.7%</td></tr>
+      <tr><td><strong>SALT 0</strong> — complete regrowth</td><td class="num">31.2%</td><td class="num">22.5%</td></tr>
+    </tbody>
+  </table>
+  <p class="footnote">And durability is strong: of those who had reached SALT &le;20 at one year, roughly <strong>88–90% were still there at three years</strong>. Response, once achieved and maintained on treatment, tends to hold.</p>
+
+  <h3>Headline result 3: how much hair you have lost at the start matters enormously</h3>
+  <p>This is the most decision-relevant finding in the whole programme for someone in your position.</p>
+  <figure>
+    <div class="fig-title">Figure 5.2 — Reaching SALT &le;20 at month 24, split by how severe you were on day one (ALLEGRO-LT, observed)</div>
+    <svg viewBox="0 0 700 196" role="img" aria-label="Bar chart of response by baseline severity">
+      <g font-family="Helvetica,Arial">
+      <g stroke="#ecece6" stroke-width="1">
+        <line x1="180" y1="24" x2="180" y2="166"/><line x1="300" y1="24" x2="300" y2="166"/><line x1="420" y1="24" x2="420" y2="166"/><line x1="540" y1="24" x2="540" y2="166"/><line x1="660" y1="24" x2="660" y2="166"/>
+      </g>
+      <g font-size="8" fill="#96968b" text-anchor="middle"><text x="180" y="182">0%</text><text x="300" y="182">25%</text><text x="420" y="182">50%</text><text x="540" y="182">75%</text><text x="660" y="182">100%</text></g>
+      <line x1="180" y1="24" x2="180" y2="166" stroke="#96968b" stroke-width="1.4"/>
+      <g font-size="8.8" fill="#3d3d36" text-anchor="end" font-weight="600">
+        <text x="172" y="45">SALT 25–49 at start</text><text x="172" y="79">SALT 50–74 at start</text><text x="172" y="113">SALT 75–99 at start</text><text x="172" y="147">SALT 100 (total loss)</text>
+      </g>
+      <g font-size="7.8" fill="#96968b" text-anchor="end">
+        <text x="172" y="55">a quarter to half lost</text><text x="172" y="89">half to three-quarters</text><text x="172" y="123">nearly all lost</text><text x="172" y="157">alopecia totalis</text>
+      </g>
+      <rect x="180" y="30" width="454" height="26" rx="4" fill="#104281"/><text x="642" y="48" font-size="10" font-weight="700" fill="#104281">94.6%</text>
+      <rect x="180" y="64" width="401" height="26" rx="4" fill="#256abf"/><text x="589" y="82" font-size="10" font-weight="700" fill="#256abf">83.6%</text>
+      <rect x="180" y="98" width="360" height="26" rx="4" fill="#3987e5"/><text x="548" y="116" font-size="10" font-weight="700" fill="#256abf">75.0%</text>
+      <rect x="180" y="132" width="223" height="26" rx="4" fill="#86b6ef"/><text x="411" y="150" font-size="10" font-weight="700" fill="#256abf">46.5%</text>
+      </g>
+    </svg>
+    <figcaption>Nearly <b>19 in 20</b> people who started with a quarter to a half of their scalp affected reached the target by two years. Even with complete scalp loss, almost half did. The lesson is not "only the mild cases work" — it is that <b>starting sooner in a flare is better than starting later</b>.</figcaption>
+  </figure>
+
+  <h3>Headline result 4: response can arrive very late</h3>
+  <p>A detailed analysis of 191 people tracked their individual trajectories over two years and sorted them into six patterns. This is the most useful thing you can know before you start, because it tells you how long to hold your nerve.</p>
+  <figure>
+    <div class="fig-title">Figure 5.3 — Six patterns of response over 24 months (n = 191)</div>
+    <svg viewBox="0 0 700 240" role="img" aria-label="Bar chart of six response patterns">
+      <g font-family="Helvetica,Arial">
+      <text x="210" y="16" font-size="8.6" font-weight="700" fill="#2a78d6">REACHED SALT &le;20 — 45.5% in total</text>
+      <g stroke="#ecece6" stroke-width="1"><line x1="210" y1="22" x2="210" y2="216"/><line x1="347.5" y1="22" x2="347.5" y2="216"/><line x1="485" y1="22" x2="485" y2="216"/><line x1="622.5" y1="22" x2="622.5" y2="216"/></g>
+      <g font-size="8" fill="#96968b" text-anchor="middle"><text x="210" y="232">0%</text><text x="347.5" y="232">10%</text><text x="485" y="232">20%</text><text x="622.5" y="232">30%</text></g>
+      <line x1="210" y1="22" x2="210" y2="216" stroke="#96968b" stroke-width="1.4"/>
+      <g font-size="8.8" fill="#3d3d36" text-anchor="end" font-weight="600">
+        <text x="202" y="40">Early responder</text><text x="202" y="70">Middle responder</text><text x="202" y="100">Late responder</text>
+        <text x="202" y="142">Partial responder</text><text x="202" y="172">Relapser</text><text x="202" y="202">No response</text>
+      </g>
+      <g font-size="7.8" fill="#96968b" text-anchor="end">
+        <text x="202" y="50">crossed the line by week 24</text><text x="202" y="80">by month 12</text><text x="202" y="110">by month 24</text>
+        <text x="202" y="152">30%+ better, target not reached</text><text x="202" y="182">improved, then lost it</text><text x="202" y="212">never 30% better</text>
+      </g>
+      <rect x="210" y="26" width="252" height="22" rx="4" fill="#2a78d6"/><text x="470" y="42" font-size="9.4" font-weight="700" fill="#104281">18.3%</text>
+      <rect x="210" y="56" width="231" height="22" rx="4" fill="#2a78d6"/><text x="449" y="72" font-size="9.4" font-weight="700" fill="#104281">16.8%</text>
+      <rect x="210" y="86" width="144" height="22" rx="4" fill="#2a78d6"/><text x="362" y="102" font-size="9.4" font-weight="700" fill="#104281">10.5%</text>
+      <line x1="210" y1="120" x2="660" y2="120" stroke="#dcdcd4" stroke-dasharray="3 3"/>
+      <text x="210" y="134" font-size="8.6" font-weight="700" fill="#eb6834">DID NOT REACH SALT &le;20 — 54.5%</text>
+      <rect x="210" y="138" width="173" height="22" rx="4" fill="#eb6834"/><text x="391" y="154" font-size="9.4" font-weight="700" fill="#c0421a">12.6%</text>
+      <rect x="210" y="168" width="173" height="22" rx="4" fill="#eb6834"/><text x="391" y="184" font-size="9.4" font-weight="700" fill="#c0421a">12.6%</text>
+      <rect x="210" y="198" width="403" height="22" rx="4" fill="#eb6834"/><text x="621" y="214" font-size="9.4" font-weight="700" fill="#c0421a">29.3%</text>
+      </g>
+    </svg>
+    <figcaption>Note the third bar. <b>10.5% of people — more than one in ten — only reached the target after more than a year of continuous treatment.</b> Note also the "partial responder" group: 12.6% got substantially better without technically hitting SALT&nbsp;&le;20, which for many people is still a life-changing result. Of everyone who did respond, 93.1% held that response through month 24, and 46% of responders eventually reached a completely full scalp.</figcaption>
+  </figure>
+
+  <h3>Eyebrows, eyelashes and nails</h3>
+  <p>These are measured separately because they matter separately. In ALLEGRO-LT at month 24, among people who started with abnormal scores:</p>
+  <div class="g2">
+    <div class="card stat"><div class="v">60.8%</div><div class="l"><strong>Eyebrows</strong> — achieved a 2-grade improvement or a normal score by month 24</div></div>
+    <div class="card stat"><div class="v">65.7%</div><div class="l"><strong>Eyelashes</strong> — achieved a 2-grade improvement or a normal score by month 24</div></div>
+  </div>
+  <p style="margin-top:4mm;">The pattern mirrors the scalp: better if you started less severe (eyebrow response was 70.8% in the mildest group versus 49.5% in the total-loss group), and better with time. Importantly, a post-hoc analysis looked specifically at people who had <em>not</em> responded in brows or lashes by week 24 — and by week 48, 20–33% of them had improved eyebrows and 17–30% improved lashes. Again: late gains are real.</p>
+  <p>Real-world clinic data also report improvement in <strong>nail changes</strong> tracking alongside the scalp, which is what you would expect given they share the same underlying inflammation.</p>
+
+  <h3>What happened in the real world</h3>
+  <p>Trials enrol carefully selected people. Two observational studies give a useful reality check:</p>
+  <table>
+    <thead><tr><th style="width:30%">Study</th><th>Finding</th></tr></thead>
+    <tbody>
+      <tr><td><strong>24-week multicentre study</strong><br><span style="color:#6b6b61;font-size:8.2pt;">102 people, mean disease duration 8.9 years, mean starting SALT 86</span></td><td>40.2% reached SALT&nbsp;&le;20 by week 24 — <em>higher</em> than the trial. But split by age: 48.6% of adolescents versus <strong>21.9% of adults</strong>. Mean SALT fell from 86.2 to 40.8. Regrowing hairs on trichoscopy rose from 13.7% to 84.3% of patients. Quality-of-life scores improved progressively.</td></tr>
+      <tr><td><strong>89-person cohort</strong><br><span style="color:#6b6b61;font-size:8.2pt;">mean age 25.6</span></td><td>Response in lashes, brows and nails paralleled the scalp. The one independent predictor of a <em>slower</em> early response was having previously taken a different JAK inhibitor. No serious adverse events over the study period.</td></tr>
+    </tbody>
+  </table>
+  <div class="callout">
+    <div class="lbl">The honest read on that adult figure</div>
+    <p>21.9% of adults at 24 weeks is a sobering number, and you should know it. But that cohort had a mean disease duration of nearly nine years and a mean starting SALT of 86 — considerably more entrenched disease than yours sounds. It also stops at 24 weeks, which Figures 5.1 and 5.3 show is roughly the halfway point of the response curve. Treat it as a floor, not a forecast.</p>
+  </div>
+
+  <h3>What the evidence does <em>not</em> tell us</h3>
+  <ul>
+    <li><strong>Whether combining ritlecitinib with oral minoxidil is better than ritlecitinib alone.</strong> No randomised trial has tested it. §9 covers what we do know.</li>
+    <li><strong>How to safely come off it.</strong> There is no established tapering protocol. Real-world data on the related drug baricitinib found that everyone who stopped relapsed, at an average of about 15 weeks, and that halving the dose led to relapse in half of patients at an average of 24 weeks.</li>
+    <li><strong>Very long-term safety beyond about five to six years.</strong> Data now extend to roughly 5–6 years with no new signals, but this is a genuinely new drug.</li>
+    <li><strong>Whether it works better started early in a flare.</strong> Strongly suggested by the severity and duration findings, but never tested head-to-head.</li>
+    <li><strong>Much about men specifically.</strong> Nearly two-thirds of the pivotal trial were women, and male sex was associated with poorer response — but no trial was designed to answer why, or by how much. See §6.</li>
+  </ul>
+</section>
+<!-- ============ SECTION 6 ============ -->
+<section class="page">
+  <div class="sec-num">Section 6</div>
+  <h2 class="sec">Your personal odds</h2>
+  <p class="lede">Researchers have repeatedly analysed which characteristics predict who responds. Here is every published predictor, mapped honestly against what you have told me about yourself — including the ones that do not go your way.</p>
+
+  <div class="callout stop">
+    <div class="lbl">Before you read the scorecard</div>
+    <p>Predictors describe <strong>averages across large groups</strong>. They cannot tell you what will happen to you. People with every unfavourable factor regrow completely, and people with every favourable factor do not respond at all. Use this to calibrate patience and expectations — not to predict your future.</p>
+  </div>
+
+  <figure>
+    <div class="fig-title">Figure 6.1 — Your profile against the published predictors of response</div>
+    <svg viewBox="0 0 700 372" role="img" aria-label="Scorecard of response predictors for this patient">
+      <g font-family="Helvetica,Arial">
+      <line x1="0" y1="22" x2="700" y2="22" stroke="#14140f" stroke-width="1.4"/>
+      <g font-size="7.8" fill="#6b6b61" font-weight="700" letter-spacing="0.6">
+        <text x="0" y="16">PREDICTOR</text><text x="248" y="16">WHAT THE EVIDENCE SAYS</text><text x="560" y="16">YOU</text>
+      </g>
+      <g font-size="8.6">
+        <!-- row template -->
+        <g transform="translate(0,22)">
+          <rect x="0" y="0" width="700" height="42" fill="#f5fbf8"/>
+          <text x="0" y="18" font-weight="700" fill="#14140f">Age</text>
+          <text x="0" y="32" font-size="7.9" fill="#6b6b61">You are 21</text>
+          <foreignObject x="248" y="6" width="300" height="34"><div xmlns="http://www.w3.org/1999/xhtml" style="font:8.3px Helvetica,Arial;color:#3d3d36;line-height:1.35">Younger age is one of the strongest predictors. A 21-year increase in age cut the odds of response by 63.6%. Adolescents outperform adults in every dataset.</div></foreignObject>
+          <rect x="560" y="12" width="86" height="18" rx="9" fill="#008300"/><text x="603" y="25" font-size="7.8" fill="#fff" text-anchor="middle" font-weight="700">STRONGLY FOR</text>
+        </g>
+        <g transform="translate(0,66)">
+          <rect x="0" y="0" width="700" height="42" fill="#fdf5f2"/>
+          <text x="0" y="18" font-weight="700" fill="#14140f">Sex</text>
+          <text x="0" y="32" font-size="7.9" fill="#6b6b61">Male</text>
+          <foreignObject x="248" y="6" width="300" height="34"><div xmlns="http://www.w3.org/1999/xhtml" style="font:8.3px Helvetica,Arial;color:#3d3d36;line-height:1.35">Female sex was independently associated with response in multiple analyses. Early responders in one study were 91.4% female. The reason is not understood.</div></foreignObject>
+          <rect x="560" y="12" width="86" height="18" rx="9" fill="#eb6834"/><text x="603" y="25" font-size="7.8" fill="#fff" text-anchor="middle" font-weight="700">AGAINST</text>
+        </g>
+        <g transform="translate(0,110)">
+          <rect x="0" y="0" width="700" height="42" fill="#f5fbf8"/>
+          <text x="0" y="18" font-weight="700" fill="#14140f">Extent of loss</text>
+          <text x="0" y="32" font-size="7.9" fill="#6b6b61">Patches, not total loss</text>
+          <foreignObject x="248" y="6" width="300" height="34"><div xmlns="http://www.w3.org/1999/xhtml" style="font:8.3px Helvetica,Arial;color:#3d3d36;line-height:1.35">The single biggest driver. 94.6% response at 2 years if starting SALT was 25–49, versus 46.5% at SALT 100. Threshold for early response: SALT &le;60.</div></foreignObject>
+          <rect x="560" y="12" width="86" height="18" rx="9" fill="#008300"/><text x="603" y="25" font-size="7.8" fill="#fff" text-anchor="middle" font-weight="700">LIKELY FOR</text>
+        </g>
+        <g transform="translate(0,154)">
+          <rect x="0" y="0" width="700" height="42" fill="#f5fbf8"/>
+          <text x="0" y="18" font-weight="700" fill="#14140f">Not AT / AU</text>
+          <text x="0" y="32" font-size="7.9" fill="#6b6b61">You still have hair</text>
+          <foreignObject x="248" y="6" width="300" height="34"><div xmlns="http://www.w3.org/1999/xhtml" style="font:8.3px Helvetica,Arial;color:#3d3d36;line-height:1.35">Alopecia totalis/universalis and the ophiasis pattern made up 53.3% of non-responders versus 42.9% of responders. Only 14.3% of early responders had AT/AU.</div></foreignObject>
+          <rect x="560" y="12" width="86" height="18" rx="9" fill="#008300"/><text x="603" y="25" font-size="7.8" fill="#fff" text-anchor="middle" font-weight="700">FOR</text>
+        </g>
+        <g transform="translate(0,198)">
+          <rect x="0" y="0" width="700" height="42" fill="#faf9f5"/>
+          <text x="0" y="18" font-weight="700" fill="#14140f">Disease duration</text>
+          <text x="0" y="32" font-size="7.9" fill="#6b6b61">~4 years, on and off</text>
+          <foreignObject x="248" y="6" width="300" height="34"><div xmlns="http://www.w3.org/1999/xhtml" style="font:8.3px Helvetica,Arial;color:#3d3d36;line-height:1.35">Every extra 3 years of significant loss cut response odds by 46.5%; &le;7 years predicts early response. What counts is duration of the <tspan font-style="italic">current</tspan> episode, not since your first patch.</div></foreignObject>
+          <rect x="560" y="12" width="86" height="18" rx="9" fill="#eda100"/><text x="603" y="25" font-size="7.8" fill="#3d2500" text-anchor="middle" font-weight="700">NEUTRAL / FOR</text>
+        </g>
+        <g transform="translate(0,242)">
+          <rect x="0" y="0" width="700" height="42" fill="#f5fbf8"/>
+          <text x="0" y="18" font-weight="700" fill="#14140f">Prior JAK inhibitor</text>
+          <text x="0" y="32" font-size="7.9" fill="#6b6b61">None — you are treatment-naïve</text>
+          <foreignObject x="248" y="6" width="300" height="34"><div xmlns="http://www.w3.org/1999/xhtml" style="font:8.3px Helvetica,Arial;color:#3d3d36;line-height:1.35">Previous exposure to another JAK inhibitor was the one independent predictor of a slower early response in real-world data. You have a clean slate.</div></foreignObject>
+          <rect x="560" y="12" width="86" height="18" rx="9" fill="#008300"/><text x="603" y="25" font-size="7.8" fill="#fff" text-anchor="middle" font-weight="700">FOR</text>
+        </g>
+        <g transform="translate(0,286)">
+          <rect x="0" y="0" width="700" height="42" fill="#faf9f5"/>
+          <text x="0" y="18" font-weight="700" fill="#14140f">Ethnicity</text>
+          <text x="0" y="32" font-size="7.9" fill="#6b6b61">Indian / Gujarati heritage</text>
+          <foreignObject x="248" y="6" width="300" height="34"><div xmlns="http://www.w3.org/1999/xhtml" style="font:8.3px Helvetica,Arial;color:#3d3d36;line-height:1.35">One analysis linked White race to response, but the pivotal trial was 70.7% White so non-White groups were small. A dedicated Asian subgroup analysis found broadly comparable efficacy. Treat this as unproven, not adverse.</div></foreignObject>
+          <rect x="560" y="12" width="86" height="18" rx="9" fill="#96968b"/><text x="603" y="25" font-size="7.8" fill="#fff" text-anchor="middle" font-weight="700">UNCLEAR</text>
+        </g>
+        <g transform="translate(0,330)">
+          <rect x="0" y="0" width="700" height="42" fill="#faf9f5"/>
+          <text x="0" y="18" font-weight="700" fill="#14140f">Other autoimmunity</text>
+          <text x="0" y="32" font-size="7.9" fill="#6b6b61">Family history present</text>
+          <foreignObject x="248" y="6" width="300" height="34"><div xmlns="http://www.w3.org/1999/xhtml" style="font:8.3px Helvetica,Arial;color:#3d3d36;line-height:1.35">Reassuringly, atopic conditions and autoimmune thyroid disease were <tspan font-weight="700">not</tspan> associated with worse response. Family history of autoimmunity is not a strike against you.</div></foreignObject>
+          <rect x="560" y="12" width="86" height="18" rx="9" fill="#96968b"/><text x="603" y="25" font-size="7.8" fill="#fff" text-anchor="middle" font-weight="700">NEUTRAL</text>
+        </g>
+      </g>
+      </g>
+    </svg>
+    <figcaption>Five factors in your favour, one against, two unclear. The one against — being male — is real and worth knowing, but it is a modest statistical association from observational analysis, not a mechanism, and it is outweighed in these models by age and extent of loss, both of which favour you.</figcaption>
+  </figure>
+
+  <h3>So what should you actually expect?</h3>
+  <p>Nobody can give you a personal percentage, and anyone who does is guessing. But here is a defensible way to frame it.</p>
+  <p>You share the profile of the group the trials called <strong>early-to-middle responders</strong>: young, JAK-naïve, patchy rather than total loss, and a relatively short current episode. Those characteristics track with the upper part of the response distribution. Working against that, you are male and an adult rather than an adolescent, and adult real-world 24-week figures are more modest than the headline.</p>
+  <div class="keyfact">
+    <p style="margin-bottom:2mm;"><strong>A reasonable, honest expectation:</strong></p>
+    <ul class="tight" style="margin-bottom:0;">
+      <li><strong>By week 12:</strong> quite possibly no visible change, or fine vellus hair in the patches. Any active shedding should have stopped. This is a normal, on-track result.</li>
+      <li><strong>By week 24:</strong> somewhere between "clearly filling in" and "modest but definite regrowth". Roughly a quarter of trial participants had already hit the SALT&nbsp;&le;20 target here; your profile suggests you sit at or above that average.</li>
+      <li><strong>By week 36 — the NHS review point:</strong> the great majority of people who will eventually respond show <em>some</em> terminal regrowth by now. This is the number that matters administratively.</li>
+      <li><strong>By month 12–24:</strong> this is where most of the gains land. Across the pooled data roughly two-thirds of people still on treatment reached the target, and around a third eventually reached a fully covered scalp.</li>
+      <li><strong>Eyebrows and lashes:</strong> expect these to lag the scalp by weeks to months if they are involved.</li>
+    </ul>
+  </div>
+
+  <h3>The three things that would most change these odds — all of them yours to control</h3>
+  <ol class="steps">
+    <li><strong>Not stopping.</strong> More than one in ten responders crossed the line only after a year. Every month of continuous treatment measurably increases your cumulative chance. This is by far the biggest lever you hold.</li>
+    <li><strong>Not letting a gap open up.</strong> Breaks under six weeks are unlikely to cost you hair; beyond that the risk of losing regrowth rises with the length of the gap. Repeat prescriptions ordered early, not on the last tablet.</li>
+    <li><strong>Getting an accurate, documented SALT score at every visit.</strong> Your continuation past week 36 depends on demonstrable regrowth. Undocumented improvement is, administratively, no improvement. §10 explains exactly how to photograph this.</li>
+  </ol>
+
+  <h3>If it does not work</h3>
+  <p>You should know the ladder ahead of time, because knowing there is one takes a lot of pressure off the next nine months:</p>
+  <ul>
+    <li><strong>Extend before abandoning.</strong> UK guidance explicitly allows a further three months beyond week 36 if there is terminal regrowth but the SALT&nbsp;&le;20 target has not been met.</li>
+    <li><strong>Switch JAK inhibitor.</strong> Baricitinib (JAK1/2) works through an overlapping but different mechanism, and published series show switching between JAK inhibitors can succeed after failure on the first.</li>
+    <li><strong>Adjunct therapies.</strong> Intralesional or topical corticosteroids for stubborn individual patches, and continued oral minoxidil, are commonly used alongside.</li>
+    <li><strong>Newer agents.</strong> Deuruxolitinib and others are progressing; the pipeline in this field is unusually active right now.</li>
+  </ul>
+</section>
+<!-- ============ SECTION 7 ============ -->
+<section class="page">
+  <div class="sec-num">Section 7</div>
+  <h2 class="sec">Side effects, in numbers</h2>
+  <p class="lede">This is the section most people read first and understand least, because drug labels are written for lawyers and regulators rather than patients. Here is the complete picture, with the frightening parts put in their proper context — and the genuinely important parts flagged clearly.</p>
+
+  <h3>Level 1: the common, mostly minor things</h3>
+  <p>These come from the 24-week placebo-controlled phase of ALLEGRO-2b/3 — the cleanest comparison available, because it is the only period where an identical group was taking dummy tablets. The column that matters is the <em>difference</em> between the two.</p>
+  <table>
+    <caption>Adverse reactions over 24 weeks — ritlecitinib 50&nbsp;mg (n=130) versus placebo (n=213)</caption>
+    <thead><tr><th style="width:34%">Effect</th><th class="num" style="width:17%">Ritlecitinib</th><th class="num" style="width:15%">Placebo</th><th>What it means for you</th></tr></thead>
+    <tbody>
+      <tr><td>Headache</td><td class="num">10.8%</td><td class="num">8.5%</td><td>Barely above placebo. Usually early and settles. Ordinary painkillers are fine.</td></tr>
+      <tr class="t-hl"><td>Diarrhoea</td><td class="num">10.0%</td><td class="num">3.8%</td><td>The clearest real effect. Usually mild and improves after the first weeks. Take with food if it bothers you.</td></tr>
+      <tr><td>Acne</td><td class="num">6.2%</td><td class="num">4.7%</td><td>Reported at 11.1% in some analyses. Worth knowing at 21 — treatable with standard topicals; tell your dermatologist rather than stopping the drug.</td></tr>
+      <tr class="t-hl"><td>Rash</td><td class="num">5.4%</td><td class="num">0.9%</td><td>A genuine signal. Usually mild. A severe or spreading rash needs same-day advice.</td></tr>
+      <tr><td>Urticaria (hives)</td><td class="num">4.6%</td><td class="num">1.4%</td><td>Itchy welts. Antihistamines usually manage it. Report it.</td></tr>
+      <tr><td>Folliculitis</td><td class="num">3.1%</td><td class="num">1.9%</td><td>Small spots around hair follicles. Can be confused with regrowth — it is not.</td></tr>
+      <tr><td>Fever</td><td class="num">3.1%</td><td class="num">0%</td><td>Low but real. Any fever on an immune-modifying drug deserves a phone call.</td></tr>
+      <tr><td>Eczema flare</td><td class="num">2.3%</td><td class="num">0.5%</td><td>Relevant if you have any atopic history.</td></tr>
+      <tr><td>Dizziness</td><td class="num">2.3%</td><td class="num">1.4%</td><td>Minimal difference from placebo. Note this overlaps with a known minoxidil effect — see §9.</td></tr>
+      <tr><td>Raised CPK (muscle enzyme)</td><td class="num">1.5%</td><td class="num">0%</td><td>A blood-test finding, usually with no symptoms. <strong>Directly relevant to you as an athlete</strong> — see below.</td></tr>
+      <tr><td>Shingles (herpes zoster)</td><td class="num">1.5%</td><td class="num">0%</td><td>The most important of the infections. Covered in detail below.</td></tr>
+      <tr><td>Mouth ulcers / stomatitis</td><td class="num">1.5%</td><td class="num">0%</td><td>Usually minor and self-limiting.</td></tr>
+      <tr><td>Lower red cell count</td><td class="num">1.5%</td><td class="num">0%</td><td>Small and generally not clinically meaningful; picked up on routine bloods.</td></tr>
+    </tbody>
+  </table>
+  <p class="footnote">Overall, across the whole programme, 84.5% of people reported <em>some</em> adverse event — but so did 69.5% of people taking placebo, which tells you how much of that figure is simply "things that happen to people over months". Serious adverse events occurred in 4.4%, and 6.0% stopped the drug permanently because of a side effect.</p>
+
+  <h3>Level 2: the serious but uncommon things</h3>
+  <p>These figures come from the integrated safety analysis: <strong>1,294 people, 2,092 patient-years of exposure</strong> — meaning roughly two thousand person-years of real observation. Rates are expressed per 100 patient-years, which reads as "out of 100 people treated for one year".</p>
+  <table>
+    <caption>Serious events across the whole ALLEGRO programme</caption>
+    <thead><tr><th style="width:32%">Event</th><th class="num" style="width:17%">Per 100 people<br>per year</th><th class="num" style="width:17%">Restated per<br>1,000 people</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr class="t-hl"><td><strong>Shingles</strong></td><td class="num">0.92</td><td class="num">~9</td><td>The commonest event of concern with any JAK inhibitor. Usually a painful band of blistering rash on one side of the body. Very treatable if caught early.</td></tr>
+      <tr><td><strong>Serious infection</strong></td><td class="num">0.64</td><td class="num">~6</td><td>Meaning hospital-level. In trials these were mostly appendicitis, COVID-19 and sepsis — a mix that suggests ordinary bad luck as much as immunosuppression.</td></tr>
+      <tr><td><strong>Cancer (excluding skin)</strong></td><td class="num">0.32</td><td class="num">~3</td><td>Low, and the label notes a higher lymphoma and lung-cancer rate seen with a <em>different</em> JAK inhibitor in a much older population.</td></tr>
+      <tr><td><strong>Non-melanoma skin cancer</strong></td><td class="num">0.14</td><td class="num">~1</td><td>Periodic skin checks are recommended. Also a good reason to protect an exposed scalp from sun.</td></tr>
+      <tr><td><strong>Major cardiac event</strong></td><td class="num">0.14</td><td class="num">~1</td><td>Heart attack, stroke or cardiovascular death. See the boxed-warning discussion below — this matters much less for you than the label implies.</td></tr>
+      <tr><td><strong>Opportunistic infection</strong></td><td class="num">0.05</td><td class="num">~0.5</td><td>Infections that only take hold when immunity is suppressed. Extremely rare here.</td></tr>
+      <tr><td><strong>Blood clot (venous)</strong></td><td class="num">0.05</td><td class="num">~0.5</td><td>Pulmonary embolism was reported in a single person across the entire programme.</td></tr>
+      <tr><td><strong>Death</strong></td><td class="num">0.09</td><td class="num">~1</td><td>Two deaths across 2,092 patient-years, neither judged related to the drug.</td></tr>
+    </tbody>
+  </table>
+
+  <figure>
+    <div class="fig-title">Figure 7.1 — Put another way: 100 people take ritlecitinib for one year</div>
+    <svg viewBox="0 0 700 300" role="img" aria-label="Icon array of 100 people showing approximately one case of shingles per year">
+      <g font-family="Helvetica,Arial">
+      <circle cx="20" cy="42" r="8.4" fill="#eda100"/>
+      <circle cx="50" cy="42" r="8.4" fill="#dcdcd4"/>
+      <circle cx="80" cy="42" r="8.4" fill="#dcdcd4"/>
+      <circle cx="110" cy="42" r="8.4" fill="#dcdcd4"/>
+      <circle cx="140" cy="42" r="8.4" fill="#dcdcd4"/>
+      <circle cx="170" cy="42" r="8.4" fill="#dcdcd4"/>
+      <circle cx="200" cy="42" r="8.4" fill="#dcdcd4"/>
+      <circle cx="230" cy="42" r="8.4" fill="#dcdcd4"/>
+      <circle cx="260" cy="42" r="8.4" fill="#dcdcd4"/>
+      <circle cx="290" cy="42" r="8.4" fill="#dcdcd4"/>
+      <circle cx="20" cy="66" r="8.4" fill="#dcdcd4"/>
+      <circle cx="50" cy="66" r="8.4" fill="#dcdcd4"/>
+      <circle cx="80" cy="66" r="8.4" fill="#dcdcd4"/>
+      <circle cx="110" cy="66" r="8.4" fill="#dcdcd4"/>
+      <circle cx="140" cy="66" r="8.4" fill="#dcdcd4"/>
+      <circle cx="170" cy="66" r="8.4" fill="#dcdcd4"/>
+      <circle cx="200" cy="66" r="8.4" fill="#dcdcd4"/>
+      <circle cx="230" cy="66" r="8.4" fill="#dcdcd4"/>
+      <circle cx="260" cy="66" r="8.4" fill="#dcdcd4"/>
+      <circle cx="290" cy="66" r="8.4" fill="#dcdcd4"/>
+      <circle cx="20" cy="90" r="8.4" fill="#dcdcd4"/>
+      <circle cx="50" cy="90" r="8.4" fill="#dcdcd4"/>
+      <circle cx="80" cy="90" r="8.4" fill="#dcdcd4"/>
+      <circle cx="110" cy="90" r="8.4" fill="#dcdcd4"/>
+      <circle cx="140" cy="90" r="8.4" fill="#dcdcd4"/>
+      <circle cx="170" cy="90" r="8.4" fill="#dcdcd4"/>
+      <circle cx="200" cy="90" r="8.4" fill="#dcdcd4"/>
+      <circle cx="230" cy="90" r="8.4" fill="#dcdcd4"/>
+      <circle cx="260" cy="90" r="8.4" fill="#dcdcd4"/>
+      <circle cx="290" cy="90" r="8.4" fill="#dcdcd4"/>
+      <circle cx="20" cy="114" r="8.4" fill="#dcdcd4"/>
+      <circle cx="50" cy="114" r="8.4" fill="#dcdcd4"/>
+      <circle cx="80" cy="114" r="8.4" fill="#dcdcd4"/>
+      <circle cx="110" cy="114" r="8.4" fill="#dcdcd4"/>
+      <circle cx="140" cy="114" r="8.4" fill="#dcdcd4"/>
+      <circle cx="170" cy="114" r="8.4" fill="#dcdcd4"/>
+      <circle cx="200" cy="114" r="8.4" fill="#dcdcd4"/>
+      <circle cx="230" cy="114" r="8.4" fill="#dcdcd4"/>
+      <circle cx="260" cy="114" r="8.4" fill="#dcdcd4"/>
+      <circle cx="290" cy="114" r="8.4" fill="#dcdcd4"/>
+      <circle cx="20" cy="138" r="8.4" fill="#dcdcd4"/>
+      <circle cx="50" cy="138" r="8.4" fill="#dcdcd4"/>
+      <circle cx="80" cy="138" r="8.4" fill="#dcdcd4"/>
+      <circle cx="110" cy="138" r="8.4" fill="#dcdcd4"/>
+      <circle cx="140" cy="138" r="8.4" fill="#dcdcd4"/>
+      <circle cx="170" cy="138" r="8.4" fill="#dcdcd4"/>
+      <circle cx="200" cy="138" r="8.4" fill="#dcdcd4"/>
+      <circle cx="230" cy="138" r="8.4" fill="#dcdcd4"/>
+      <circle cx="260" cy="138" r="8.4" fill="#dcdcd4"/>
+      <circle cx="290" cy="138" r="8.4" fill="#dcdcd4"/>
+      <circle cx="20" cy="162" r="8.4" fill="#dcdcd4"/>
+      <circle cx="50" cy="162" r="8.4" fill="#dcdcd4"/>
+      <circle cx="80" cy="162" r="8.4" fill="#dcdcd4"/>
+      <circle cx="110" cy="162" r="8.4" fill="#dcdcd4"/>
+      <circle cx="140" cy="162" r="8.4" fill="#dcdcd4"/>
+      <circle cx="170" cy="162" r="8.4" fill="#dcdcd4"/>
+      <circle cx="200" cy="162" r="8.4" fill="#dcdcd4"/>
+      <circle cx="230" cy="162" r="8.4" fill="#dcdcd4"/>
+      <circle cx="260" cy="162" r="8.4" fill="#dcdcd4"/>
+      <circle cx="290" cy="162" r="8.4" fill="#dcdcd4"/>
+      <circle cx="20" cy="186" r="8.4" fill="#dcdcd4"/>
+      <circle cx="50" cy="186" r="8.4" fill="#dcdcd4"/>
+      <circle cx="80" cy="186" r="8.4" fill="#dcdcd4"/>
+      <circle cx="110" cy="186" r="8.4" fill="#dcdcd4"/>
+      <circle cx="140" cy="186" r="8.4" fill="#dcdcd4"/>
+      <circle cx="170" cy="186" r="8.4" fill="#dcdcd4"/>
+      <circle cx="200" cy="186" r="8.4" fill="#dcdcd4"/>
+      <circle cx="230" cy="186" r="8.4" fill="#dcdcd4"/>
+      <circle cx="260" cy="186" r="8.4" fill="#dcdcd4"/>
+      <circle cx="290" cy="186" r="8.4" fill="#dcdcd4"/>
+      <circle cx="20" cy="210" r="8.4" fill="#dcdcd4"/>
+      <circle cx="50" cy="210" r="8.4" fill="#dcdcd4"/>
+      <circle cx="80" cy="210" r="8.4" fill="#dcdcd4"/>
+      <circle cx="110" cy="210" r="8.4" fill="#dcdcd4"/>
+      <circle cx="140" cy="210" r="8.4" fill="#dcdcd4"/>
+      <circle cx="170" cy="210" r="8.4" fill="#dcdcd4"/>
+      <circle cx="200" cy="210" r="8.4" fill="#dcdcd4"/>
+      <circle cx="230" cy="210" r="8.4" fill="#dcdcd4"/>
+      <circle cx="260" cy="210" r="8.4" fill="#dcdcd4"/>
+      <circle cx="290" cy="210" r="8.4" fill="#dcdcd4"/>
+      <circle cx="20" cy="234" r="8.4" fill="#dcdcd4"/>
+      <circle cx="50" cy="234" r="8.4" fill="#dcdcd4"/>
+      <circle cx="80" cy="234" r="8.4" fill="#dcdcd4"/>
+      <circle cx="110" cy="234" r="8.4" fill="#dcdcd4"/>
+      <circle cx="140" cy="234" r="8.4" fill="#dcdcd4"/>
+      <circle cx="170" cy="234" r="8.4" fill="#dcdcd4"/>
+      <circle cx="200" cy="234" r="8.4" fill="#dcdcd4"/>
+      <circle cx="230" cy="234" r="8.4" fill="#dcdcd4"/>
+      <circle cx="260" cy="234" r="8.4" fill="#dcdcd4"/>
+      <circle cx="290" cy="234" r="8.4" fill="#dcdcd4"/>
+      <circle cx="20" cy="258" r="8.4" fill="#dcdcd4"/>
+      <circle cx="50" cy="258" r="8.4" fill="#dcdcd4"/>
+      <circle cx="80" cy="258" r="8.4" fill="#dcdcd4"/>
+      <circle cx="110" cy="258" r="8.4" fill="#dcdcd4"/>
+      <circle cx="140" cy="258" r="8.4" fill="#dcdcd4"/>
+      <circle cx="170" cy="258" r="8.4" fill="#dcdcd4"/>
+      <circle cx="200" cy="258" r="8.4" fill="#dcdcd4"/>
+      <circle cx="230" cy="258" r="8.4" fill="#dcdcd4"/>
+      <circle cx="260" cy="258" r="8.4" fill="#dcdcd4"/>
+      <circle cx="290" cy="258" r="8.4" fill="#dcdcd4"/>
+      <g transform="translate(330,30)">
+        <circle cx="10" cy="10" r="8.4" fill="#eda100"/>
+        <text x="28" y="14" font-size="9.6" font-weight="700" fill="#14140f">~1 person develops shingles</text>
+        <text x="28" y="28" font-size="8.4" fill="#6b6b61">The single most likely serious event. Treatable, and</text>
+        <text x="28" y="40" font-size="8.4" fill="#6b6b61">largely preventable with vaccination beforehand (§8).</text>
+        <circle cx="10" cy="72" r="8.4" fill="#dcdcd4"/>
+        <text x="28" y="76" font-size="9.6" font-weight="700" fill="#14140f">99 do not</text>
+        <text x="28" y="90" font-size="8.4" fill="#6b6b61">Every other serious event in the table above happens</text>
+        <text x="28" y="102" font-size="8.4" fill="#6b6b61">in fewer than 1 in 100 people per year — most in</text>
+        <text x="28" y="114" font-size="8.4" fill="#6b6b61">fewer than 1 in 500.</text>
+        <rect x="0" y="134" width="352" height="76" rx="5" fill="#f2f8ff"/>
+        <text x="14" y="152" font-size="8.6" font-weight="700" fill="#256abf">Worth holding in mind</text>
+        <foreignObject x="14" y="158" width="324" height="50"><div xmlns="http://www.w3.org/1999/xhtml" style="font:8.3px Helvetica,Arial;color:#3d3d36;line-height:1.4">These rates come from a trial population with a median age of 33, including people considerably older and less healthy than you. Your personal baseline risk for the cardiovascular and clotting events sits well below the group average.</div></foreignObject>
+      </g>
+      </g>
+    </svg>
+    <figcaption>Icon arrays like this are the format shown, in research on risk communication, to be least often misunderstood. Each dot is one person treated for one year.</figcaption>
+  </figure>
+
+  <h3>Level 3: that alarming boxed warning</h3>
+  <p>Your patient information leaflet carries a black-bordered warning listing <strong>serious infections, mortality, malignancy, major adverse cardiovascular events and thrombosis</strong>. It is genuinely frightening to read. Here is what it actually is.</p>
+  <p>In 2021 a large safety trial called <strong>ORAL Surveillance</strong> compared a different JAK inhibitor (tofacitinib) against older drugs in people with <strong>rheumatoid arthritis who were aged 50 or over and had at least one cardiovascular risk factor</strong>. It found higher rates of cardiac events, cancers and death in the JAK inhibitor group. Regulators responded by applying a <em>class-wide</em> warning to every drug in the family — including ones not yet studied in those populations, in different diseases, at different doses.</p>
+  <div class="callout">
+    <div class="lbl">What this means for you specifically</div>
+    <p>The warning on your leaflet is <strong>extrapolated, not observed</strong>. It describes a population you could hardly be less similar to. You are 21, not 50+. You do not smoke. You do not drink. You are lean, active and have no cardiovascular risk factors. You have alopecia areata, not rheumatoid arthritis — a disease that does not itself carry the inflammatory cardiovascular burden RA does. And ritlecitinib's own observed rate of major cardiac events across 2,092 patient-years was 0.14 per 100 patient-years.</p>
+    <p style="margin-bottom:0;">This is not a reason to dismiss the warning. It is a reason to understand that it is a <strong>ceiling estimate for the worst-case population</strong>, and that your position is close to the floor.</p>
+  </div>
+
+  <h3>Blood tests: what changes, and what your team watches</h3>
+  <table>
+    <thead><tr><th style="width:24%">What is measured</th><th style="width:36%">What ritlecitinib does to it</th><th>The action thresholds</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Lymphocytes</strong><br><span style="font-size:8pt;color:#6b6b61;">infection-fighting white cells</span></td><td>Can fall modestly. A drop below 500/mm&sup3; occurred in <strong>one person</strong> across the entire programme.</td><td>Treatment is not started if below 500/mm&sup3;; interrupted if it falls below that on treatment, restarted once recovered.</td></tr>
+      <tr><td><strong>Platelets</strong><br><span style="font-size:8pt;color:#6b6b61;">clotting cells</span></td><td>A small dip, with the maximum effect reached within about 4 weeks, then recovery.</td><td>Not started if below 100,000/mm&sup3;; permanently stopped if below 50,000/mm&sup3;.</td></tr>
+      <tr><td><strong>Liver enzymes (ALT/AST)</strong></td><td>Rises above 3&times; normal in around 0.6–0.9%. Occasional larger rises seen.</td><td>Checked at baseline and routinely. A rise triggers investigation, and the drug is paused if drug-induced liver injury is suspected.</td></tr>
+      <tr class="t-hl"><td><strong>CPK</strong><br><span style="font-size:8pt;color:#6b6b61;">a muscle enzyme</span></td><td>Rises in about 1.5%. Usually transient, usually without symptoms, and in the trials none required stopping the drug.</td><td>Investigated if markedly raised or accompanied by muscle pain or dark urine.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout you">
+    <div class="lbl">Personal note — you train hard, so read this one</div>
+    <p><strong>Intense exercise raises CPK on its own</strong>, often substantially, and it can stay elevated for several days after heavy resistance training or a hard run. Ritlecitinib also nudges CPK up. If you have bloods taken 24 hours after a heavy leg session, you can produce a dramatic-looking result that has nothing to do with the drug — and risk an unnecessary investigation, or worse, an unnecessary interruption of a treatment that is working.</p>
+    <p style="margin-bottom:0;"><strong>Practical fix:</strong> avoid heavy or unaccustomed training for <strong>48–72 hours before any blood test</strong>, and tell whoever takes the sample that you train seriously and when you last trained. Ask for it to be written on the request form. This one sentence can save you a lot of trouble.</p>
+  </div>
+
+  <h3>Interactions you should actually know about</h3>
+  <table>
+    <thead><tr><th style="width:26%">With</th><th>What happens</th></tr></thead>
+    <tbody>
+      <tr class="t-hl"><td><strong>Caffeine</strong></td><td>Ritlecitinib blocks the liver enzyme (CYP1A2) that clears caffeine, raising caffeine exposure roughly <strong>2.7-fold</strong>. One coffee now behaves closer to three. If you use pre-workout supplements, energy drinks or strong coffee, expect jitteriness, a racing heart and disrupted sleep unless you cut down. This is one of the most practically important and least-discussed facts about this drug.</td></tr>
+      <tr><td><strong>Other medicines cleared by CYP3A</strong></td><td>Ritlecitinib raises their levels — it nearly tripled exposure to a test sedative. Tell any prescriber you are on it, including dentists.</td></tr>
+      <tr><td><strong>Rifampicin and similar strong enzyme inducers</strong></td><td>Cut ritlecitinib levels by around 56%. Not recommended together.</td></tr>
+      <tr><td><strong>Strong CYP3A inhibitors (e.g. itraconazole)</strong></td><td>Only raise ritlecitinib by about 15%. No dose change needed — a reassuring finding.</td></tr>
+      <tr><td><strong>Other immune drugs</strong></td><td>Not to be combined with other JAK inhibitors, biologic immunomodulators, ciclosporin or potent immunosuppressants.</td></tr>
+      <tr><td><strong>Oral contraceptives</strong></td><td>No clinically significant interaction (relevant for a partner’s counselling, not yours).</td></tr>
+      <tr><td><strong>Oral minoxidil</strong></td><td>No documented pharmacological interaction. See §9 in full.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Fertility — a question men rarely ask and often worry about</h3>
+  <div class="callout good">
+    <div class="lbl">Reassuring</div>
+    <p>In animal studies, ritlecitinib showed <strong>no effect on male fertility</strong> at doses up to 14 times the maximum human exposure, and <strong>no effect on sperm count, production rate, motility or morphology at any dose tested</strong>. Human data specific to ritlecitinib are limited, but the broader JAK-inhibitor class has been reassuring in men — controlled studies of tofacitinib and filgotinib found no measurable impact on sperm parameters or sex hormones. There is no requirement for men to avoid conceiving on this drug. (The pregnancy warnings on the label apply to women taking it, who need effective contraception during treatment and for one month afterwards.)</p>
+  </div>
+
+  <h3>Call someone the same day if you get</h3>
+  <div class="g2">
+    <div class="card" style="border-color:#e34948;">
+      <h4 style="color:#a8302f;">Urgent</h4>
+      <ul class="tight" style="margin-bottom:0;font-size:8.9pt;">
+        <li>A painful, blistering rash in a band on one side of your body or face — <strong>possible shingles; antivirals work best within 72 hours</strong></li>
+        <li>Fever, shaking chills, or feeling systemically unwell</li>
+        <li>A persistent cough, night sweats or unexplained weight loss (possible TB)</li>
+        <li>Severe muscle pain with dark or cola-coloured urine</li>
+        <li>Sudden breathlessness, chest pain, or a hot swollen calf</li>
+        <li>Yellowing of the eyes or skin</li>
+        <li>Widespread rash, facial swelling or difficulty breathing</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Mention at your next appointment</h4>
+      <ul class="tight" style="margin-bottom:0;font-size:8.9pt;">
+        <li>Acne that is bothering you — it is treatable, and not a reason to stop</li>
+        <li>Diarrhoea persisting beyond the first few weeks</li>
+        <li>Recurrent cold sores or mouth ulcers</li>
+        <li>Any new mole or changing skin lesion</li>
+        <li>Persistent headaches or dizziness</li>
+        <li>Unusual fatigue</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<!-- ============ SECTION 8 ============ -->
+<section class="page">
+  <div class="sec-num">Section 8</div>
+  <h2 class="sec">Monitoring, tests and the UK pathway</h2>
+  <p class="lede">Because you are in the UK, your treatment runs on a defined national framework — NICE Technology Appraisal <strong>TA958</strong>, plus supplementary professional guidance from the British Association of Dermatologists and the British Hair and Nail Society. Knowing this framework is genuinely useful: it tells you what has to be documented and when.</p>
+
+  <h3>How you qualify</h3>
+  <p>NICE recommends ritlecitinib for <strong>severe</strong> alopecia areata in people aged 12 and over. The Scottish Medicines Consortium has accepted it for NHS Scotland. It must be started by a consultant dermatologist, and approval runs through the Blueteq system.</p>
+  <p>"Severe" is defined in one of two ways:</p>
+  <div class="g2">
+    <div class="card"><h4>Route 1 — extent</h4><p>An absolute SALT score of <strong>50 or more</strong> — at least half the scalp affected.</p></div>
+    <div class="card"><h4>Route 2 — extent plus impact</h4><p>SALT <strong>21–49</strong> plus at least one additional factor:</p>
+      <ul class="tight" style="font-size:8.6pt;margin-bottom:0;">
+        <li>negative impact on psychological functioning</li>
+        <li>noticeable eyebrow or eyelash involvement</li>
+        <li>inadequate response after at least 6 months of other treatment</li>
+        <li>a diffuse positive hair pull test indicating rapidly progressive disease</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:4mm;">
+    <div class="lbl">A point in your favour</div>
+    <p>UK guidance explicitly states that <strong>disease duration should not be used to restrict access</strong> to ritlecitinib — the committee noted that people excluded from trials on duration grounds have nonetheless regrown hair in practice. Your four-year history is not a barrier.</p>
+  </div>
+
+  <h3>The week 36 decision — plan your whole year around this</h3>
+  <p>This is the formal review point. It is not a suggestion; it is how continuation is decided.</p>
+  <figure>
+    <div class="fig-title">Figure 8.1 — What happens at your week 36 review</div>
+    <svg viewBox="0 0 700 268" role="img" aria-label="Decision tree for the week 36 treatment review">
+      <defs><marker id="ar4" markerWidth="9" markerHeight="9" refX="7" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 Z" fill="#96968b"/></marker></defs>
+      <g font-family="Helvetica,Arial">
+      <rect x="238" y="6" width="224" height="46" rx="6" fill="#2a78d6"/>
+      <text x="350" y="27" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">WEEK 36 REVIEW</text>
+      <text x="350" y="43" font-size="8.4" fill="#cde2fb" text-anchor="middle">absolute SALT score recorded</text>
+      <path d="M350,52 L350,72" stroke="#96968b" stroke-width="1.6"/>
+      <path d="M110,72 L590,72" stroke="#96968b" stroke-width="1.6"/>
+      <path d="M110,72 L110,92" stroke="#96968b" stroke-width="1.6" marker-end="url(#ar4)"/>
+      <path d="M350,72 L350,92" stroke="#96968b" stroke-width="1.6" marker-end="url(#ar4)"/>
+      <path d="M590,72 L590,92" stroke="#96968b" stroke-width="1.6" marker-end="url(#ar4)"/>
+
+      <g>
+        <rect x="14" y="96" width="192" height="58" rx="5" fill="#e3f4e3" stroke="#008300" stroke-width="1.2"/>
+        <text x="110" y="116" font-size="9.6" font-weight="700" fill="#00610a" text-anchor="middle">SALT &le; 20</text>
+        <text x="110" y="132" font-size="8.4" fill="#3d3d36" text-anchor="middle">Target reached</text>
+        <text x="110" y="145" font-size="8.4" fill="#3d3d36" text-anchor="middle">80%+ of hair present</text>
+        <path d="M110,154 L110,178" stroke="#96968b" stroke-width="1.4" marker-end="url(#ar4)"/>
+        <rect x="14" y="182" width="192" height="56" rx="5" fill="#f5fbf8"/>
+        <text x="110" y="202" font-size="9.4" font-weight="700" fill="#008300" text-anchor="middle">CONTINUE</text>
+        <foreignObject x="22" y="208" width="176" height="30"><div xmlns="http://www.w3.org/1999/xhtml" style="font:8.2px Helvetica,Arial;color:#3d3d36;line-height:1.35;text-align:center">Treatment carries on. Expect this to be long-term.</div></foreignObject>
+      </g>
+
+      <g>
+        <rect x="254" y="96" width="192" height="58" rx="5" fill="#fdf0d4" stroke="#eda100" stroke-width="1.2"/>
+        <text x="350" y="112" font-size="9.6" font-weight="700" fill="#7d5300" text-anchor="middle">Some terminal regrowth,</text>
+        <text x="350" y="126" font-size="9.6" font-weight="700" fill="#7d5300" text-anchor="middle">but SALT still &gt; 20</text>
+        <text x="350" y="143" font-size="8.4" fill="#3d3d36" text-anchor="middle">Real, visible, thick new hair</text>
+        <path d="M350,154 L350,178" stroke="#96968b" stroke-width="1.4" marker-end="url(#ar4)"/>
+        <rect x="254" y="182" width="192" height="56" rx="5" fill="#fefaf0"/>
+        <text x="350" y="202" font-size="9.4" font-weight="700" fill="#7d5300" text-anchor="middle">EXTEND 3 MONTHS</text>
+        <foreignObject x="262" y="208" width="176" height="34"><div xmlns="http://www.w3.org/1999/xhtml" style="font:8.2px Helvetica,Arial;color:#3d3d36;line-height:1.35;text-align:center">Reassessed at ~week 48. If SALT is still above 20 then, treatment is stopped.</div></foreignObject>
+      </g>
+
+      <g>
+        <rect x="494" y="96" width="192" height="58" rx="5" fill="#fbe4e4" stroke="#e34948" stroke-width="1.2"/>
+        <text x="590" y="120" font-size="9.6" font-weight="700" fill="#a8302f" text-anchor="middle">No response at all</text>
+        <text x="590" y="138" font-size="8.4" fill="#3d3d36" text-anchor="middle">No terminal regrowth anywhere</text>
+        <path d="M590,154 L590,178" stroke="#96968b" stroke-width="1.4" marker-end="url(#ar4)"/>
+        <rect x="494" y="182" width="192" height="56" rx="5" fill="#fdf5f5"/>
+        <text x="590" y="202" font-size="9.4" font-weight="700" fill="#a8302f" text-anchor="middle">STOP</text>
+        <foreignObject x="502" y="208" width="176" height="34"><div xmlns="http://www.w3.org/1999/xhtml" style="font:8.2px Helvetica,Arial;color:#3d3d36;line-height:1.35;text-align:center">Discuss alternatives — switching JAK inhibitor is a recognised next step (§6).</div></foreignObject>
+      </g>
+      <rect x="14" y="248" width="672" height="18" rx="4" fill="#f2f8ff"/>
+      <text x="350" y="261" font-size="8.5" fill="#256abf" text-anchor="middle" font-weight="700">Note: if you qualified via the SALT 21–49 route, continuation is judged on the specific parameters you and your consultant agreed at the start.</text>
+      </g>
+    </svg>
+    <figcaption>The middle branch is why <b>documented evidence of terminal regrowth</b> matters so much. "It feels a bit better" is not evidence. Photographs and a recorded SALT score are. This is the single strongest practical argument for the photography protocol in §10.</figcaption>
+  </figure>
+
+  <h3>Before you start (or as soon as possible if you already have)</h3>
+  <table>
+    <thead><tr><th style="width:30%">Test or action</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr class="t-hl"><td><strong>Latent TB screening (IGRA blood test)</strong></td><td>Mandatory before any JAK inhibitor. Ritlecitinib must not be given in active TB, and latent TB must be treated first. <strong>This one is particularly important for you</strong> — see the note below.</td></tr>
+      <tr><td><strong>Full blood count</strong> — lymphocytes and platelets</td><td>Treatment is not started if lymphocytes are below 500/mm&sup3; or platelets below 100,000/mm&sup3;.</td></tr>
+      <tr><td><strong>Liver function tests</strong></td><td>Baseline for comparison. You do not drink, which makes any future abnormality much easier to interpret.</td></tr>
+      <tr><td><strong>Hepatitis B and C, HIV screening</strong></td><td>Standard before immune-modifying therapy.</td></tr>
+      <tr><td><strong>Vaccination review</strong></td><td>All live vaccines must be given <em>before</em> starting — they are not permitted during treatment. See below.</td></tr>
+      <tr><td><strong>Baseline photographs and SALT score</strong></td><td>Your evidence base for the week 36 decision. Get this on record.</td></tr>
+      <tr><td><strong>Pre-existing skin lesion / mole check</strong></td><td>Periodic skin examination is recommended on treatment; a baseline makes changes obvious.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout you">
+    <div class="lbl">Personal note — TB screening matters more in your case</div>
+    <p>Your father was born in Kenya and your mother in Zimbabwe, and your heritage is Indian. All three are regions with substantially higher tuberculosis prevalence than the UK-born population. In UK screening programmes, IGRA positivity among people born in high-incidence countries has run around <strong>20–32%</strong>, and TB notification rates in people born outside the UK are roughly <strong>14 times</strong> those in UK-born people.</p>
+    <p style="margin-bottom:0;">You were born in the UK, which lowers your own risk considerably — but household exposure in childhood is a recognised route, so this is not a formality for you. <strong>Make sure an IGRA has actually been done and the result documented.</strong> If it is positive, that does not mean you cannot have ritlecitinib: it means you take a course of preventive TB treatment first. Ask explicitly rather than assuming it was covered.</p>
+  </div>
+
+  <h3>Vaccinations — do this properly, it is your best lever on the main risk</h3>
+  <p>The most likely serious adverse event on this drug is shingles, and shingles is substantially preventable.</p>
+  <div class="callout good">
+    <div class="lbl">A recent change in your favour</div>
+    <p>Since <strong>1 September 2025</strong>, all severely immunosuppressed people aged <strong>18 and over</strong> became eligible for the Shingrix vaccine on the NHS, with no upper age limit — previously it was restricted to those aged 50+. People about to start an immunosuppressant (JAK inhibitors are explicitly named in this category) should be vaccinated <strong>as soon as possible, ideally at least 14 days before starting</strong>. It is two doses, given 8 weeks to 6 months apart in immunosuppressed people.</p>
+    <p style="margin-bottom:0;"><strong>Action:</strong> ask your dermatologist and GP about Shingrix specifically, by name, and mention that you are on ritlecitinib. At 21 this will not be offered automatically — you will almost certainly have to ask. If you have already started the drug, ask anyway; Shingrix is not a live vaccine, so it can still be given during treatment.</p>
+  </div>
+  <table>
+    <thead><tr><th style="width:32%">Vaccine</th><th style="width:20%">On ritlecitinib?</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Shingrix (shingles)</td><td><span class="pill g">Yes — not live</span></td><td>The priority. Two doses.</td></tr>
+      <tr><td>Annual flu (injected)</td><td><span class="pill g">Yes — not live</span></td><td>Every autumn. The nasal spray version <em>is</em> live — take the injection.</td></tr>
+      <tr><td>COVID-19</td><td><span class="pill g">Yes</span></td><td>Keep up to date.</td></tr>
+      <tr><td>Pneumococcal</td><td><span class="pill g">Yes</span></td><td>Worth discussing with your GP.</td></tr>
+      <tr><td>MMR, varicella (chickenpox), yellow fever, oral typhoid, BCG</td><td><span class="pill r">No — live</span></td><td>Must be given before starting, or the treatment paused under specialist advice. <strong>Relevant if you travel</strong> — check any travel vaccination requirements well in advance.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Ongoing monitoring</h3>
+  <figure>
+    <div class="fig-title">Figure 8.2 — Your monitoring calendar</div>
+    <svg viewBox="0 0 700 148" role="img" aria-label="Timeline of monitoring appointments and tests">
+      <g font-family="Helvetica,Arial">
+      <line x1="46" y1="52" x2="668" y2="52" stroke="#dcdcd4" stroke-width="2.4"/>
+      <g text-anchor="middle">
+        <g><circle cx="66" cy="52" r="7" fill="#2a78d6"/><text x="66" y="38" font-size="8.8" font-weight="700" fill="#14140f">Baseline</text>
+          <foreignObject x="16" y="62" width="100" height="70"><div xmlns="http://www.w3.org/1999/xhtml" style="font:8.1px Helvetica,Arial;color:#3d3d36;line-height:1.35;text-align:center">TB screen, FBC, LFTs, viral screen, vaccines, photos, SALT</div></foreignObject></g>
+        <g><circle cx="216" cy="52" r="7" fill="#2a78d6"/><text x="216" y="38" font-size="8.8" font-weight="700" fill="#14140f">Week 4</text>
+          <foreignObject x="166" y="62" width="100" height="70"><div xmlns="http://www.w3.org/1999/xhtml" style="font:8.1px Helvetica,Arial;color:#3d3d36;line-height:1.35;text-align:center"><b>Do not skip.</b> Lymphocytes and platelets repeated — the one mandated check</div></foreignObject></g>
+        <g><circle cx="366" cy="52" r="7" fill="#2a78d6"/><text x="366" y="38" font-size="8.8" font-weight="700" fill="#14140f">Weeks 12–24</text>
+          <foreignObject x="316" y="62" width="100" height="70"><div xmlns="http://www.w3.org/1999/xhtml" style="font:8.1px Helvetica,Arial;color:#3d3d36;line-height:1.35;text-align:center">Routine bloods and clinical review per your unit's protocol</div></foreignObject></g>
+        <g><circle cx="516" cy="52" r="8.5" fill="#eb6834"/><text x="516" y="38" font-size="8.8" font-weight="700" fill="#c0421a">WEEK 36</text>
+          <foreignObject x="466" y="62" width="100" height="70"><div xmlns="http://www.w3.org/1999/xhtml" style="font:8.1px Helvetica,Arial;color:#c0421a;line-height:1.35;text-align:center"><b>The decision point.</b> SALT recorded; continuation decided</div></foreignObject></g>
+        <g><circle cx="648" cy="52" r="7" fill="#1baf7a"/><text x="648" y="38" font-size="8.8" font-weight="700" fill="#14140f">Ongoing</text>
+          <foreignObject x="598" y="62" width="100" height="70"><div xmlns="http://www.w3.org/1999/xhtml" style="font:8.1px Helvetica,Arial;color:#3d3d36;line-height:1.35;text-align:center">Routine bloods, annual skin check, annual flu jab</div></foreignObject></g>
+      </g>
+      </g>
+    </svg>
+    <figcaption>The formally mandated blood monitoring is lighter than for many immune drugs: lymphocytes and platelets before starting and at week 4, then "according to routine patient management" — which in practice means your dermatology unit's local protocol, commonly every 3 months initially, then every 6–12 months.</figcaption>
+  </figure>
+
+  <h3>Practical odds and ends</h3>
+  <ul>
+    <li><strong>Missed a dose?</strong> Take it as soon as you remember, unless it is within 8 hours of the next one — then just skip it. Do not double up.</li>
+    <li><strong>Need to pause it</strong> (an infection, surgery, a positive TB test)? A break of <strong>under 6 weeks</strong> is unlikely to cause meaningful loss of regrowth. Beyond 6 weeks the risk rises with the length of the gap.</li>
+    <li><strong>Capsules are swallowed whole</strong> — not crushed, split or chewed. With or without food.</li>
+    <li><strong>Wigs.</strong> UK guidance explicitly states that NHS wig provision should continue during the regrowth period. You are not expected to choose between them.</li>
+    <li><strong>The GRASS-UK registry.</strong> Dermatology departments are encouraged to enter patients into this real-world pharmacovigilance register. Worth asking about — it costs you nothing and improves the evidence base for everyone.</li>
+  </ul>
+</section>
+<!-- ============ SECTION 9 ============ -->
+<section class="page">
+  <div class="sec-num">Section 9</div>
+  <h2 class="sec">Oral minoxidil: keep it or stop it?</h2>
+  <p class="lede">You asked whether the two work together, and whether you should stop the minoxidil. This is a genuinely good question, and the short answer is: they do two completely different jobs, the theoretical case for combining them is strong, the trial evidence is thin, and there is no pharmacological reason found in the literature to stop — but the decision is your dermatologist's to confirm.</p>
+
+  <h3>They are not the same kind of drug at all</h3>
+  <p>This is the crux of it. Ritlecitinib is an <strong>immune</strong> drug: it stops something bad from happening. Minoxidil is a <strong>growth</strong> drug: it makes something good happen faster. Neither substitutes for the other.</p>
+
+  <figure>
+    <div class="fig-title">Figure 9.1 — Two different jobs on the same follicle</div>
+    <svg viewBox="0 0 700 268" role="img" aria-label="Comparison of how ritlecitinib and minoxidil act on a hair follicle">
+      <g font-family="Helvetica,Arial">
+      <!-- left -->
+      <rect x="0" y="0" width="336" height="230" rx="6" fill="#f2f8ff"/>
+      <text x="20" y="24" font-size="10.4" font-weight="700" fill="#104281">RITLECITINIB</text>
+      <text x="20" y="38" font-size="8.4" fill="#256abf" font-weight="700" letter-spacing="0.8">TAKES THE BRAKE OFF</text>
+      <g font-size="8.5" fill="#3d3d36">
+        <text x="20" y="62">Target</text><text x="150" y="62" font-weight="700" fill="#14140f">Your immune system</text>
+        <text x="20" y="82">Acts on</text><text x="150" y="82" font-weight="700" fill="#14140f">JAK3 + TEC kinases</text>
+        <text x="20" y="102">Result</text><text x="150" y="102" font-weight="700" fill="#14140f">Attack on follicle stops</text>
+        <text x="20" y="122">Does it grow hair?</text><text x="150" y="122" font-weight="700" fill="#a8302f">No — not directly</text>
+        <text x="20" y="142">What it does</text>
+      </g>
+      <foreignObject x="150" y="130" width="170" height="60"><div xmlns="http://www.w3.org/1999/xhtml" style="font:8.4px Helvetica,Arial;color:#3d3d36;line-height:1.4">Removes the thing that has been forcing your follicles to shut down, so they are free to restart at their own natural pace.</div></foreignObject>
+      <rect x="20" y="192" width="296" height="26" rx="4" fill="#2a78d6"/>
+      <text x="168" y="209" font-size="8.8" fill="#fff" text-anchor="middle" font-weight="700">Treats the CAUSE</text>
+
+      <!-- right -->
+      <rect x="364" y="0" width="336" height="230" rx="6" fill="#f5fbf8"/>
+      <text x="384" y="24" font-size="10.4" font-weight="700" fill="#00610a">ORAL MINOXIDIL</text>
+      <text x="384" y="38" font-size="8.4" fill="#008300" font-weight="700" letter-spacing="0.8">PRESSES THE ACCELERATOR</text>
+      <g font-size="8.5" fill="#3d3d36">
+        <text x="384" y="62">Target</text><text x="514" y="62" font-weight="700" fill="#14140f">The follicle itself</text>
+        <text x="384" y="82">Acts on</text><text x="514" y="82" font-weight="700" fill="#14140f">Potassium channels</text>
+        <text x="384" y="102">Result</text><text x="514" y="102" font-weight="700" fill="#14140f">Longer growth phase</text>
+        <text x="384" y="122">Does it calm immunity?</text><text x="514" y="122" font-weight="700" fill="#a8302f">No — not at all</text>
+        <text x="384" y="142">What it does</text>
+      </g>
+      <foreignObject x="514" y="130" width="170" height="60"><div xmlns="http://www.w3.org/1999/xhtml" style="font:8.4px Helvetica,Arial;color:#3d3d36;line-height:1.4">Shortens the resting phase, prolongs the growing phase, widens blood vessels around the follicle and helps fine vellus hair mature into thick terminal hair.</div></foreignObject>
+      <rect x="384" y="192" width="296" height="26" rx="4" fill="#1baf7a"/>
+      <text x="532" y="209" font-size="8.8" fill="#fff" text-anchor="middle" font-weight="700">Improves the RECOVERY</text>
+
+      <rect x="130" y="240" width="440" height="26" rx="5" fill="#faf9f5" stroke="#dcdcd4"/>
+      <text x="350" y="257" font-size="9" text-anchor="middle" fill="#14140f" font-weight="700">Complementary, not duplicated — different pathways, no overlap in mechanism</text>
+      </g>
+    </svg>
+    <figcaption>Minoxidil is a prodrug: it is converted in the follicle by an enzyme (sulphotransferase) into minoxidil sulphate, which opens ATP-sensitive potassium channels in the dermal papilla. This widens local blood vessels, and separately activates the Wnt/&beta;-catenin and VEGF pathways that drive follicles into and through the growth phase.</figcaption>
+  </figure>
+
+  <div class="plain-en">
+    <div class="lbl">In plain English</div>
+    <p>Your follicles are like a car with someone standing on the brake. Ritlecitinib gets that person off the brake. Minoxidil presses the accelerator. Doing both moves you faster than doing either — but pressing the accelerator alone, while someone is still on the brake, achieves very little. That last point is probably why minoxidil alone has never been enough for you.</p>
+  </div>
+
+  <h3>What the evidence actually shows about minoxidil in alopecia areata</h3>
+  <ul>
+    <li><strong>As a solo treatment for alopecia areata, it is weak.</strong> Systematic reviews and scoping reviews find case series and observational benefit, but randomised trial data in alopecia areata specifically remain limited. This is entirely expected given the mechanism — it does nothing about the autoimmune attack.</li>
+    <li><strong>Expert consensus does list alopecia areata</strong> among the conditions where low-dose oral minoxidil may be beneficial, alongside androgenetic alopecia, telogen effluvium, lichen planopilaris and chemotherapy-induced alopecia.</li>
+    <li><strong>Typical dosing for men</strong> in international Delphi consensus is 2.5&nbsp;mg/day as a starting point, with a usual range of 1.25–5&nbsp;mg/day.</li>
+  </ul>
+
+  <h3>What the evidence shows about combining it with a JAK inhibitor</h3>
+  <p>A 2026 systematic review in the <em>International Journal of Dermatology</em> looked specifically at combining low-dose oral minoxidil with immunomodulators — including JAK inhibitors — in alopecia areata. The literature's working hypothesis is that low-dose oral minoxidil may have an <strong>additive effect</strong> alongside a JAK inhibitor and <strong>may reduce the need to escalate the JAK inhibitor dose</strong>. Supporting this, a published series combining tofacitinib with oral minoxidil in 12 people with severe alopecia areata reported that 8 achieved at least 75% scalp regrowth.</p>
+  <div class="callout warn">
+    <div class="lbl">Be honest about the strength of this evidence</div>
+    <p>There is <strong>no randomised trial</strong> of ritlecitinib plus oral minoxidil versus ritlecitinib alone. The combination evidence is small, observational, and mostly involves different JAK inhibitors. Anyone who tells you the combination is definitely better is going beyond what has been shown. What can be said fairly is: the mechanisms are complementary, the observational signal is favourable, and no safety interaction has been identified.</p>
+  </div>
+
+  <h3>So — continue or stop?</h3>
+  <p>Here is the case each way, laid out honestly. The decision is your dermatologist's, but you should walk into that conversation with the arguments.</p>
+  <div class="g2">
+    <div class="card" style="border-color:#008300;">
+      <h4 style="color:#00610a;">Reasons to continue</h4>
+      <ul class="tight" style="font-size:8.8pt;margin-bottom:0;">
+        <li><strong>Different mechanism</strong> — no duplication, no redundancy.</li>
+        <li><strong>No documented drug interaction</strong> with ritlecitinib. Minoxidil is not a significant player in the CYP enzyme interactions listed for ritlecitinib.</li>
+        <li><strong>Plausible additive benefit</strong>, supported by systematic review and case series.</li>
+        <li><strong>Stopping risks a shed.</strong> Minoxidil-dependent hair can be lost when it is withdrawn, typically over 2–3 months. Losing hair right at the point you are trying to demonstrate regrowth before week 36 would be a genuinely bad outcome.</li>
+        <li><strong>It may accelerate the visible result</strong> by helping vellus hair mature into terminal hair faster — which is exactly what the week 36 assessment measures.</li>
+        <li>You are already established on it and tolerating it.</li>
+      </ul>
+    </div>
+    <div class="card" style="border-color:#eb6834;">
+      <h4 style="color:#c0421a;">Reasons a clinician might stop it</h4>
+      <ul class="tight" style="font-size:8.8pt;margin-bottom:0;">
+        <li><strong>Attribution.</strong> With two drugs running, you cannot tell which one produced the result. Some clinicians prefer a clean read on the new drug.</li>
+        <li><strong>Overlapping side effects.</strong> Both can cause headache and dizziness; if either becomes a problem, it is unclear which to blame.</li>
+        <li><strong>Unwanted hair.</strong> Minoxidil causes hypertrichosis in roughly 15–19% of people — hair growth on the face, arms and back. If ritlecitinib works well on your scalp, you may find you no longer want that trade-off.</li>
+        <li><strong>Fewer drugs is simpler</strong>, and if ritlecitinib alone achieves SALT 0, minoxidil is arguably redundant.</li>
+        <li>Any individual cardiovascular concern, fluid retention or palpitations.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:5mm;">
+    <div class="lbl">A reasonable position to take into the conversation</div>
+    <p>On the balance of what is published, there is a stronger case for <strong>continuing</strong> the oral minoxidil through at least the week 36 assessment than for stopping it now. The mechanisms are complementary, the safety signal for the combination is unremarkable, and the downside of a withdrawal shed lands at precisely the wrong moment in your NHS pathway. If you and your dermatologist later want a clean read on the ritlecitinib alone, the logical time to consider reducing or stopping minoxidil is <em>after</em> you have a stable, documented response — not before it.</p>
+    <p style="margin-bottom:0;"><strong>The rule that matters more than the decision itself: change one thing at a time.</strong> If you stop the minoxidil in the same month you start the ritlecitinib and something changes, you will never know which caused it.</p>
+  </div>
+
+  <h3>Minoxidil safety, since you are taking both</h3>
+  <table>
+    <caption>Low-dose oral minoxidil — reported adverse effects</caption>
+    <thead><tr><th style="width:38%">Effect</th><th class="num" style="width:16%">Frequency</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr class="t-hl"><td><strong>Hypertrichosis</strong> — extra body/facial hair</td><td class="num">15–19%</td><td>By far the commonest. Usually on the face, forearms and upper back. Dose-related and reverses if stopped.</td></tr>
+      <tr><td>Any systemic effect</td><td class="num">~9%</td><td>Overall figure from a large multicentre series.</td></tr>
+      <tr><td>Lightheadedness</td><td class="num">3.1%</td><td>Usually early. Stand up slowly; ensure adequate salt and fluid, especially around training.</td></tr>
+      <tr><td>Fluid retention / ankle swelling</td><td class="num">2.6%</td><td>Tell your prescriber if it persists.</td></tr>
+      <tr><td>Fast heart rate</td><td class="num">0.8%</td><td>Usually mild and transient. <strong>Note the caffeine interaction in §7</strong> — ritlecitinib nearly tripling your caffeine exposure could plausibly unmask palpitations you did not have before.</td></tr>
+      <tr><td>Malaise</td><td class="num">0.8%</td><td>—</td></tr>
+      <tr><td>Headache</td><td class="num">0.5%</td><td>Overlaps with ritlecitinib's commonest effect.</td></tr>
+      <tr><td>Pericardial effusion (fluid around the heart)</td><td class="num">very rare</td><td>Occurs at 3–5% at the much higher blood-pressure doses, but is <strong>extremely rare at hair-loss doses</strong>, and reported cases have often involved compounding errors producing an excessive dose. Guidance is to stay at the lowest effective dose, generally 5&nbsp;mg/day or less.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout you">
+    <div class="lbl">Personal note — the caffeine point is worth acting on</div>
+    <p>You are on a drug that speeds the heart slightly (minoxidil), and a drug that nearly triples your caffeine levels (ritlecitinib). Those two stack. If you use pre-workout, energy drinks or several coffees a day, <strong>halve your caffeine intake for the first month</strong> and see how you feel. If you get palpitations, look at caffeine before you blame either medicine.</p>
+  </div>
+
+  <h3>Three questions to put to your dermatologist about this</h3>
+  <ol class="steps">
+    <li>"I'm on oral minoxidil at [your dose] mg. Do you want me to continue it alongside ritlecitinib, and if so through what point?"</li>
+    <li>"If we do continue both, is there anything you want monitored differently — blood pressure, heart rate, ankle swelling?"</li>
+    <li>"If ritlecitinib gets me to a good response, what's your plan for the minoxidil after that — keep, reduce, or stop?"</li>
+  </ol>
+</section>
+<!-- ============ SECTION 10 ============ -->
+<section class="page">
+  <div class="sec-num">Section 10</div>
+  <h2 class="sec">Maximising your chances</h2>
+  <p class="lede">Everything below is within your control. They are ranked by how much difference they actually make — which is not the same as how much attention they usually get. The first three are worth more than everything else on this list combined.</p>
+
+  <h3><span class="pill b">Tier 1</span> &nbsp;The things that genuinely change outcomes</h3>
+  <ol class="steps">
+    <li><strong>Take it every single day, and do not stop early.</strong> This is the whole game. Over 27% of trial responders reached target only after week 24, and 10.5% only after a full year. Every additional month of continuous treatment adds to your cumulative chance. The most common way people fail this drug is quitting during the silent months. Set a daily phone alarm and pair the tablet with something you already do without fail — brushing your teeth, or your morning protein shake.</li>
+    <li><strong>Never let the prescription run out.</strong> Breaks under six weeks are unlikely to cost you regrowth; longer gaps increasingly are. Order repeats when you have two weeks left, not two days. Keep a small buffer supply if your clinic allows it. If you travel, take more than you need and keep it in hand luggage.</li>
+    <li><strong>Build the evidence for your week 36 review from day one.</strong> Continuation depends on <em>documented</em> regrowth. Do the photography protocol below, every four weeks, without fail, and ask for an absolute SALT score to be recorded at every clinic visit. Bring your photos to the review. This costs you ten minutes a month and protects your access to a treatment that may need a year to work.</li>
+  </ol>
+
+  <figure>
+    <div class="fig-title">Figure 10.1 — The photography protocol: five shots, same way, every four weeks</div>
+    <svg viewBox="0 0 700 206" role="img" aria-label="Diagram showing five standard photograph angles for tracking hair regrowth">
+      <g font-family="Helvetica,Arial">
+      <g transform="translate(10,8)">
+        <rect x="0" y="0" width="124" height="100" rx="5" fill="#faf9f5" stroke="#dcdcd4"/>
+        <circle cx="62" cy="52" r="36" fill="#c9c8bf"/>
+        <circle cx="62" cy="48" r="21" fill="#2a78d6"/>
+        <path d="M62,10 L62,24" stroke="#96968b" stroke-width="1.4" marker-end="url(#camA)"/>
+        <text x="62" y="126" font-size="9" font-weight="700" text-anchor="middle" fill="#14140f">1. Top down</text>
+        <text x="62" y="139" font-size="8" text-anchor="middle" fill="#6b6b61">crown / vertex</text>
+      </g>
+      <g transform="translate(148,8)">
+        <rect x="0" y="0" width="124" height="100" rx="5" fill="#faf9f5" stroke="#dcdcd4"/>
+        <ellipse cx="62" cy="54" rx="28" ry="36" fill="#c9c8bf"/>
+        <path d="M34,48 A28,36 0 0,1 90,48 Z" fill="#2a78d6"/>
+        <circle cx="52" cy="60" r="2.6" fill="#faf9f5"/><circle cx="72" cy="60" r="2.6" fill="#faf9f5"/>
+        <text x="62" y="126" font-size="9" font-weight="700" text-anchor="middle" fill="#14140f">2. Front</text>
+        <text x="62" y="139" font-size="8" text-anchor="middle" fill="#6b6b61">hairline, brows, lashes</text>
+      </g>
+      <g transform="translate(286,8)">
+        <rect x="0" y="0" width="124" height="100" rx="5" fill="#faf9f5" stroke="#dcdcd4"/>
+        <ellipse cx="62" cy="54" rx="26" ry="35" fill="#c9c8bf"/>
+        <path d="M62,19 A26,35 0 0,0 62,89 Z" fill="#2a78d6"/>
+        <path d="M22,54 L34,54" stroke="#96968b" stroke-width="1.4" marker-end="url(#camA)"/>
+        <text x="62" y="126" font-size="9" font-weight="700" text-anchor="middle" fill="#14140f">3. Left side</text>
+        <text x="62" y="139" font-size="8" text-anchor="middle" fill="#6b6b61">ear to ear</text>
+      </g>
+      <g transform="translate(424,8)">
+        <rect x="0" y="0" width="124" height="100" rx="5" fill="#faf9f5" stroke="#dcdcd4"/>
+        <ellipse cx="62" cy="54" rx="26" ry="35" fill="#c9c8bf"/>
+        <path d="M62,19 A26,35 0 0,1 62,89 Z" fill="#2a78d6"/>
+        <path d="M102,54 L90,54" stroke="#96968b" stroke-width="1.4" marker-end="url(#camA)"/>
+        <text x="62" y="126" font-size="9" font-weight="700" text-anchor="middle" fill="#14140f">4. Right side</text>
+        <text x="62" y="139" font-size="8" text-anchor="middle" fill="#6b6b61">ear to ear</text>
+      </g>
+      <g transform="translate(562,8)">
+        <rect x="0" y="0" width="124" height="100" rx="5" fill="#faf9f5" stroke="#dcdcd4"/>
+        <ellipse cx="62" cy="54" rx="28" ry="36" fill="#c9c8bf"/>
+        <path d="M34,58 A28,36 0 0,0 90,58 Z" fill="#2a78d6"/>
+        <text x="62" y="126" font-size="9" font-weight="700" text-anchor="middle" fill="#14140f">5. Back</text>
+        <text x="62" y="139" font-size="8" text-anchor="middle" fill="#6b6b61">occiput / nape</text>
+      </g>
+      <defs><marker id="camA" markerWidth="8" markerHeight="8" refX="6" refY="2.8" orient="auto"><path d="M0,0 L6,2.8 L0,5.6 Z" fill="#96968b"/></marker></defs>
+      <rect x="10" y="158" width="676" height="42" rx="5" fill="#f2f8ff"/>
+      <text x="24" y="174" font-size="8.6" font-weight="700" fill="#256abf">THE RULES THAT MAKE PHOTOS USABLE</text>
+      <foreignObject x="24" y="178" width="652" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="font:8.3px Helvetica,Arial;color:#3d3d36;line-height:1.4">Same room, same light (daylight near a window beats a bathroom bulb), dry hair, same parting, no flash, same phone, no filters or "beauty" mode. Include a close-up of your worst patch with a ruler or coin beside it for scale. Name each file with the date. Take one extra shot at a low, raking angle — that is the only way to see fine vellus regrowth.</div></foreignObject>
+      </g>
+    </svg>
+    <figcaption>Do this the day you start, then on the same date each month. Regrowth is invisible day-to-day and dramatic in a four-month comparison. This is also the best defence against your own pessimism during months 2–4.</figcaption>
+  </figure>
+
+  <h3><span class="pill b">Tier 2</span> &nbsp;Removing the obstacles</h3>
+  <ol class="steps" start="4" style="counter-reset:s 3;">
+    <li><strong>Get the deficiency screen done and correct anything abnormal.</strong> None of these cure alopecia areata — be clear about that. But a follicle attempting to rebuild itself is doing an unusually demanding manufacturing job, and running it short of raw materials will limit what your regrowth can achieve. Ask for: <strong>ferritin</strong> (iron stores — aim well clear of the bottom of the range), <strong>vitamin D</strong>, <strong>thyroid function</strong>, <strong>vitamin B12 and folate</strong>, <strong>zinc</strong>, and <strong>coeliac serology</strong>. Vitamin D deficiency is documented in around half of people with alopecia areata, and low zinc is one of the most consistent findings across studies.</li>
+    <li><strong>Vitamin D deserves a specific mention for you.</strong> Deficiency is very common among South Asian people living in the UK — darker skin synthesises less vitamin D from limited British sunlight. The UK guidance for everyone is 10 micrograms (400 IU) daily through autumn and winter; people at higher risk are often advised to take it year-round. Get the level measured rather than guessing, and let your GP set the dose.</li>
+    <li><strong>Sort the vaccinations</strong> — Shingrix in particular (§8). This is the single most effective thing you can do about the most likely serious risk of this drug.</li>
+    <li><strong>Protect the CPK reading.</strong> No heavy or unaccustomed training in the 48–72 hours before a blood test, and tell the phlebotomist you train seriously (§7).</li>
+    <li><strong>Protect an exposed scalp from the sun.</strong> Skin that has not seen daylight in years burns easily, periodic skin checks are recommended on this drug, and non-melanoma skin cancer is on the monitoring list. A hat or a daily SPF on bare patches is cheap insurance.</li>
+    <li><strong>Tell every prescriber you see</strong> — GP, dentist, pharmacist, walk-in centre — that you take ritlecitinib. It interacts with CYP3A-cleared drugs and it changes how infections should be assessed.</li>
+  </ol>
+
+  <h3><span class="pill b">Tier 3</span> &nbsp;Genuinely useful, but not magic</h3>
+  <ol class="steps" start="10" style="counter-reset:s 9;">
+    <li><strong>Eat enough protein.</strong> Hair is almost entirely keratin — a protein. At 68&nbsp;kg and training hard, a reasonable target is roughly <strong>1.2–1.6&nbsp;g of protein per kg per day, so about 82–110&nbsp;g</strong>. If you follow a vegetarian Gujarati diet, this is very achievable — dal, chickpeas, paneer, yoghurt, soya, eggs if you eat them — but it does need attention rather than assumption, and vegetarian diets also warrant a closer eye on iron, B12 and zinc, all three of which matter for hair.</li>
+    <li><strong>Do not crash-diet or run a large calorie deficit</strong> while trying to regrow hair. Energy restriction pushes follicles into the resting phase — this is the mechanism behind telogen effluvium. Given you are lean and active already, eat at maintenance or above for the next year.</li>
+    <li><strong>Sleep 7–9 hours.</strong> Sleep is when immune regulation is recalibrated. The evidence linking sleep specifically to alopecia areata outcomes is thin, but the general immune evidence is not, and there is no downside.</li>
+    <li><strong>Take the stress side seriously.</strong> Stress is a recognised trigger and aggravator in genetically predisposed people, and the relationship runs both ways — hair loss drives distress, distress may drive hair loss. Whatever form it takes for you — training, prayer, therapy, time away from mirrors — treat it as part of the treatment plan rather than a soft extra.</li>
+    <li><strong>Handle new hair gently.</strong> New vellus and early terminal hair is fragile. Avoid harsh brushing, tight styling, hot tools and chemical treatments on regrowing areas for the first several months.</li>
+    <li><strong>Keep training.</strong> Nothing about ritlecitinib requires you to stop exercising. Stay hydrated, keep salt intake sensible (relevant given minoxidil's fluid effects), and remember the pre-blood-test rule.</li>
+  </ol>
+
+  <h3><span class="pill r">Tier 4</span> &nbsp;What not to do</h3>
+  <ol class="steps" start="16" style="counter-reset:s 15;">
+    <li><strong>Do not take high-dose biotin supplements.</strong> This is a genuinely important and widely unknown point: high-dose biotin — present in most "hair, skin and nails" supplements — <strong>interferes with many laboratory immunoassays</strong>, including thyroid tests and cardiac troponin. It can produce falsely abnormal results that trigger unnecessary investigation, and in the case of troponin it can mask a real problem. There is also no good evidence it helps hair in people who are not biotin-deficient, which is almost everyone. If you take it, stop, or at minimum tell any lab before a blood test.</li>
+    <li><strong>Be sceptical of "immune-boosting" supplements.</strong> You are deliberately taking a drug to calm one arm of your immune system. Products marketed as immune stimulants are, at best, unproven and at worst working against your treatment. Tell your dermatologist about anything you take, including Ayurvedic and herbal preparations — some have genuine pharmacological activity and CYP interactions.</li>
+    <li><strong>Do not change two things at once</strong> — especially the minoxidil (§9). And do not stop the ritlecitinib because month three looks like nothing. Month three looking like nothing is the expected result.</li>
+  </ol>
+
+  <h3>Your first eight weeks — a checklist</h3>
+  <div class="g2">
+    <div>
+      <h4>Administrative</h4>
+      <ul class="check">
+        <li>Confirm an IGRA (TB) test has been done and see the result</li>
+        <li>Confirm baseline FBC, LFTs and viral screen are on record</li>
+        <li>Book the <strong>week 4 blood test</strong> now, do not wait to be chased</li>
+        <li>Ask your GP about the Shingrix vaccine, by name</li>
+        <li>Check your flu and COVID vaccinations are up to date</li>
+        <li>Ask for your baseline absolute SALT score in writing</li>
+        <li>Ask when your week 36 review will be and put it in your calendar</li>
+        <li>Ask whether your unit enters patients into the GRASS-UK registry</li>
+        <li>Set up repeat prescriptions with a two-week buffer</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Personal</h4>
+      <ul class="check">
+        <li>Take your five baseline photographs today</li>
+        <li>Set a recurring monthly photo reminder</li>
+        <li>Set a daily tablet alarm</li>
+        <li>Halve your caffeine for the first month and see how you feel</li>
+        <li>Request the deficiency screen: ferritin, vitamin D, TFTs, B12, folate, zinc, coeliac</li>
+        <li>Work out your protein intake for one typical day and check it against 82–110&nbsp;g</li>
+        <li>Stop any high-dose biotin supplement</li>
+        <li>Put SPF or a hat on any bare scalp</li>
+        <li>Look up Alopecia UK (alopecia.org.uk) — peer support, and they run the patient side of the UK guidance</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>A tracker worth keeping</h3>
+  <p>Print this or copy it into your notes app. Fill it in on the same date each month. Bring it to every appointment.</p>
+  <table>
+    <thead><tr><th style="width:13%">Date</th><th style="width:11%">Month</th><th style="width:13%">SALT score</th><th style="width:20%">Photos taken?</th><th style="width:22%">New regrowth noticed</th><th>Side effects / notes</th></tr></thead>
+    <tbody>
+      <tr><td style="height:9mm;">&nbsp;</td><td>Baseline</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td style="height:9mm;">&nbsp;</td><td>Month 1</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td style="height:9mm;">&nbsp;</td><td>Month 2</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td style="height:9mm;">&nbsp;</td><td>Month 3</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td style="height:9mm;">&nbsp;</td><td>Month 4</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td style="height:9mm;">&nbsp;</td><td>Month 5</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td style="height:9mm;">&nbsp;</td><td>Month 6</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td style="height:9mm;">&nbsp;</td><td>Month 7</td><td></td><td></td><td></td><td></td></tr>
+      <tr class="t-hl"><td style="height:9mm;">&nbsp;</td><td><strong>Month 8–9<br>(week 36)</strong></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td style="height:9mm;">&nbsp;</td><td>Month 10</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td style="height:9mm;">&nbsp;</td><td>Month 11</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td style="height:9mm;">&nbsp;</td><td>Month 12</td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+</section>
+<!-- ============ SECTION 11 ============ -->
+<section class="page">
+  <div class="sec-num">Section 11</div>
+  <h2 class="sec">Questions to ask your dermatologist</h2>
+  <p class="lede">Appointments are short and it is easy to leave having asked none of the things you meant to. Take this page with you. The starred questions are the ones that most change what happens next.</p>
+
+  <h3>About where you stand right now</h3>
+  <ul class="check">
+    <li><strong>&#9733; What is my absolute SALT score today?</strong> Please can it be written in my notes and told to me at every visit.</li>
+    <li>Which route did I qualify under — SALT 50+, or SALT 21–49 with additional factors? (This changes how continuation is judged at week 36.)</li>
+    <li>Roughly how long has this current episode of significant loss been going on, in your assessment?</li>
+    <li>Do I have any features you would consider harder to treat — an ophiasis band, nail involvement, eyebrow or eyelash loss?</li>
+    <li>Is my eyebrow and eyelash status being scored separately?</li>
+  </ul>
+
+  <h3>About the treatment plan</h3>
+  <ul class="check">
+    <li><strong>&#9733; When exactly is my week 36 review, and what will you be looking for?</strong></li>
+    <li><strong>&#9733; If I have clear terminal regrowth at week 36 but I'm not yet at SALT &le;20, will you extend for the additional three months?</strong></li>
+    <li>What is the plan if ritlecitinib doesn't work — would you consider baricitinib, and on what timescale?</li>
+    <li>Would you add anything for individual stubborn patches, such as intralesional steroid injections?</li>
+    <li>How long do you expect me to stay on this if it works? Is this a life-long treatment in your view?</li>
+    <li>What would happen to my hair if I ever had to stop?</li>
+  </ul>
+
+  <h3>About the oral minoxidil <span style="font-weight:400;color:#6b6b61;font-size:9pt;">(see §9)</span></h3>
+  <ul class="check">
+    <li><strong>&#9733; Do you want me to continue the oral minoxidil alongside ritlecitinib, and through what point?</strong></li>
+    <li>Is my current minoxidil dose the right one now that I'm also on ritlecitinib?</li>
+    <li>Do you want my blood pressure, heart rate or ankle swelling monitored differently?</li>
+    <li>If I get a good response, what's the plan for the minoxidil afterwards?</li>
+  </ul>
+
+  <h3>About safety and monitoring</h3>
+  <ul class="check">
+    <li><strong>&#9733; Has my latent TB test (IGRA) been done, and what was the result?</strong></li>
+    <li><strong>&#9733; Can I have the Shingrix shingles vaccine? I understand eligibility now extends to immunosuppressed adults from age 18.</strong></li>
+    <li>What is this unit's blood monitoring schedule after the week 4 test?</li>
+    <li>I train intensively — should I avoid heavy exercise before blood tests because of CPK? Can that be noted on my request forms?</li>
+    <li>Are there any live vaccines I should have had first, and does this affect any travel plans?</li>
+    <li>What symptoms should make me contact you urgently rather than waiting?</li>
+    <li>Who do I contact out of hours if I develop a rash that might be shingles?</li>
+  </ul>
+
+  <h3>About the wider picture</h3>
+  <ul class="check">
+    <li>Given my family history of autoimmune conditions, should I be screened for thyroid disease, coeliac disease or anything else?</li>
+    <li>Can I have ferritin, vitamin D, B12, folate and zinc checked?</li>
+    <li>Does this unit enter patients into the GRASS-UK registry?</li>
+    <li>Is there a psychological support pathway attached to this clinic, and can I be referred?</li>
+    <li>Am I still entitled to NHS wig provision while I'm regrowing?</li>
+  </ul>
+
+  <div class="callout">
+    <div class="lbl">One more thing worth saying out loud</div>
+    <p>If the hair loss has affected your mood, confidence, social life, work or study, <strong>say so explicitly</strong>. It is not a complaint or a distraction from the "real" medicine. Under UK guidance the psychological impact of alopecia areata is a formally recognised component of how severity is defined, and it can be part of what justifies your treatment. Men consistently under-report this, and the research is clear that they suffer for it.</p>
+  </div>
+</section>
+<!-- ============ SECTION 12 ============ -->
+<section class="page">
+  <div class="sec-num">Section 12</div>
+  <h2 class="sec">Glossary</h2>
+  <p class="lede">Every term used in this report, in alphabetical order. If a doctor uses a word you do not know, it is very likely here — and if it is not, ask them to define it. That is a reasonable request, not an imposition.</p>
+  <div class="g2">
+    <div>
+      <dl class="gloss">
+        <dt>Alopecia areata</dt><dd>Autoimmune hair loss in which the immune system attacks hair follicles, typically causing round patches. The follicles survive.</dd>
+        <dt>Alopecia totalis (AT)</dt><dd>Complete loss of scalp hair.</dd>
+        <dt>Alopecia universalis (AU)</dt><dd>Complete loss of scalp and all body hair including brows and lashes.</dd>
+        <dt>ALT / AST</dt><dd>Liver enzymes measured on a blood test. Raised levels can indicate liver irritation.</dd>
+        <dt>Anagen</dt><dd>The active growing phase of a hair follicle, lasting 2–7 years.</dd>
+        <dt>Autoimmune</dt><dd>The immune system mistakenly attacking part of your own body.</dd>
+        <dt>Blueteq</dt><dd>The NHS system through which approval for high-cost drugs like ritlecitinib is registered.</dd>
+        <dt>Boxed warning</dt><dd>The most serious warning a regulator can place on a drug label, shown in a black box.</dd>
+        <dt>Catagen</dt><dd>The brief transitional phase where a follicle shuts down, lasting 2–3 weeks.</dd>
+        <dt>CD8+ T-cell</dt><dd>A type of white blood cell that kills target cells. The main aggressor in alopecia areata.</dd>
+        <dt>Covalent</dt><dd>A permanent chemical bond. Ritlecitinib bonds covalently to JAK3, which is why its effect outlasts its presence in the blood.</dd>
+        <dt>CPK (creatine phosphokinase)</dt><dd>A muscle enzyme measured on blood tests. Rises after exercise and, mildly, on JAK inhibitors.</dd>
+        <dt>CYP1A2 / CYP3A</dt><dd>Liver enzymes that break down drugs. Ritlecitinib inhibits both, which is why it raises caffeine levels.</dd>
+        <dt>Cytokine</dt><dd>A chemical messenger used by immune cells to communicate. IFN-&gamma; and IL-15 are cytokines.</dd>
+        <dt>Dermal papilla</dt><dd>The cluster of cells at the base of a follicle that directs hair growth. Minoxidil's main target.</dd>
+        <dt>Exclamation-mark hair</dt><dd>A short broken hair, narrower at the base — a classic sign of active alopecia areata.</dd>
+        <dt>Hypertrichosis</dt><dd>Excess hair growth in unwanted places. The commonest minoxidil side effect.</dd>
+        <dt>IGRA</dt><dd>Interferon-gamma release assay — the blood test for latent tuberculosis.</dd>
+        <dt>Immune privilege</dt><dd>A protected zone the immune system is normally kept out of. Its collapse causes alopecia areata.</dd>
+        <dt>Interferon-gamma (IFN-&gamma;)</dt><dd>The cytokine released by attacking T-cells that strips the follicle's protection.</dd>
+        <dt>Interleukin-15 (IL-15)</dt><dd>The cytokine the follicle produces under attack, which feeds its own attackers. Ritlecitinib blocks its signal.</dd>
+      </dl>
+    </div>
+    <div>
+      <dl class="gloss">
+        <dt>JAK (Janus kinase)</dt><dd>A family of four enzymes (JAK1, JAK2, JAK3, TYK2) that relay cytokine messages into a cell.</dd>
+        <dt>Kinase</dt><dd>An enzyme that switches other proteins on or off. A "kinase inhibitor" blocks one.</dd>
+        <dt>Latent TB</dt><dd>Dormant tuberculosis infection with no symptoms. Must be treated before starting a JAK inhibitor.</dd>
+        <dt>LDOM</dt><dd>Low-dose oral minoxidil.</dd>
+        <dt>LOCF</dt><dd>"Last observation carried forward" — a conservative statistical method that counts people who dropped out, giving a pessimistic estimate.</dd>
+        <dt>Lymphocyte</dt><dd>A white blood cell (T, B or NK cell). Monitored on this drug.</dd>
+        <dt>MACE</dt><dd>Major adverse cardiovascular event — heart attack, stroke, or cardiovascular death.</dd>
+        <dt>MHC</dt><dd>Molecules that display a cell's internal "identity badges" for immune inspection. Healthy follicles hide theirs.</dd>
+        <dt>NKG2D</dt><dd>A receptor on aggressive T-cells that recognises stressed cells. Central to the attack in alopecia areata.</dd>
+        <dt>NMSC</dt><dd>Non-melanoma skin cancer — basal cell and squamous cell carcinoma.</dd>
+        <dt>Observed analysis</dt><dd>Results counting only people still in the study — an optimistic estimate. The opposite of LOCF.</dd>
+        <dt>Ophiasis</dt><dd>A band-like pattern of loss around the sides and back of the scalp. Harder to treat.</dd>
+        <dt>Patient-year</dt><dd>One person treated for one year. 100 people for 6 months = 50 patient-years. Used to express risk fairly.</dd>
+        <dt>PGI-C</dt><dd>Patient Global Impression of Change — the patient's own rating of whether they are better.</dd>
+        <dt>Prodrug</dt><dd>An inactive drug converted into its active form inside the body. Minoxidil is one.</dd>
+        <dt>SALT score</dt><dd>Severity of Alopecia Tool — the percentage of scalp with hair missing, 0 to 100.</dd>
+        <dt>SmPC</dt><dd>Summary of Product Characteristics — the official UK prescribing document.</dd>
+        <dt>STAT</dt><dd>The messenger protein that carries a signal from a JAK into the cell nucleus.</dd>
+        <dt>TEC family kinases</dt><dd>BTK, BMX, ITK, RLK and TEC — a second enzyme family ritlecitinib blocks, controlling T-cell activation.</dd>
+        <dt>Telogen</dt><dd>The resting phase of the hair cycle, lasting 2–4 months.</dd>
+        <dt>Telogen effluvium</dt><dd>Diffuse shedding when many follicles enter rest at once — from illness, stress or under-eating. Different from alopecia areata.</dd>
+        <dt>Terminal hair</dt><dd>Thick, pigmented, normal scalp hair.</dd>
+        <dt>Trichoscopy</dt><dd>Examining the scalp with a magnifying dermatoscope. Detects regrowth long before you can see it.</dd>
+        <dt>Vellus hair</dt><dd>Fine, pale "peach fuzz". The first sign of regrowth.</dd>
+        <dt>VTE</dt><dd>Venous thromboembolism — a blood clot in a vein.</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="page">
+  <h2 class="sec">References and further reading</h2>
+  <p class="lede">Every factual claim in this report traces to one of the sources below. They are grouped by what they cover, so you can go to primary sources yourself — and take them to appointments if you want to.</p>
+
+  <h4>Official prescribing and regulatory documents</h4>
+  <ol class="refs">
+    <li>US FDA Prescribing Information, LITFULO (ritlecitinib), 2026 revision. <a href="https://www.accessdata.fda.gov/drugsatfda_docs/label/2026/215830s001lbl.pdf">accessdata.fda.gov/drugsatfda_docs/label/2026/215830s001lbl.pdf</a></li>
+    <li>DailyMed — LITFULO (ritlecitinib) capsule, full label. <a href="https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=6b2f9446-fb23-4741-b73a-5a2f993733c3">dailymed.nlm.nih.gov</a></li>
+    <li>UK Summary of Product Characteristics, Litfulo 50&nbsp;mg hard capsules, electronic Medicines Compendium. <a href="https://www.medicines.org.uk/emc/product/15257">medicines.org.uk/emc/product/15257</a></li>
+    <li>NICE Technology Appraisal TA958: <em>Ritlecitinib for treating severe alopecia areata in people 12 years and over</em>, 2024. <a href="https://www.nice.org.uk/guidance/ta958">nice.org.uk/guidance/ta958</a></li>
+    <li>British Association of Dermatologists / British Hair and Nail Society. <em>Ritlecitinib for alopecia areata — professional guidance supplementary to NICE TA958</em>, v1, July 2024. <a href="https://cdn.bad.org.uk/uploads/2024/07/01005430/Ritlecitinib-for-alopecia-areata-supplementary-guidance-26.06.24.pdf">cdn.bad.org.uk</a></li>
+    <li>Pfizer Medical — LITFULO nonclinical toxicology (fertility data). <a href="https://www.pfizermedical.com/litfulo/nonclinical-toxicology">pfizermedical.com/litfulo/nonclinical-toxicology</a></li>
+  </ol>
+
+  <h4>The ALLEGRO trial programme</h4>
+  <ol class="refs" start="7">
+    <li>King B, et al. Efficacy and safety of ritlecitinib in adults and adolescents with alopecia areata: a randomised, double-blind, multicentre, phase 2b–3 trial. <em>The Lancet</em> 2023;401:1518–29. (ALLEGRO-2b/3, the pivotal trial.)</li>
+    <li>Tziotzios C, et al. Long-term safety and efficacy of ritlecitinib in adults and adolescents with alopecia areata and at least 25% scalp hair loss: ALLEGRO-LT phase 3 open-label study. <em>JEADV</em> 2025. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12105460/">pmc.ncbi.nlm.nih.gov/articles/PMC12105460</a></li>
+    <li>Long-term efficacy and safety of ritlecitinib: 3-year results from ALLEGRO-2b/3 and ALLEGRO-LT. <em>American Journal of Clinical Dermatology</em> 2026. <a href="https://pubmed.ncbi.nlm.nih.gov/41917311/">pubmed.ncbi.nlm.nih.gov/41917311</a></li>
+    <li>Patterns of clinical response in patients with alopecia areata treated with ritlecitinib in the ALLEGRO clinical development programme. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12105426/">pmc.ncbi.nlm.nih.gov/articles/PMC12105426</a></li>
+    <li>Sustained hair regrowth with continued ritlecitinib treatment through week 48 in patients with or without early target responses: post hoc analysis. <em>JAAD</em>. <a href="https://www.jaad.org/article/S0190-9622(24)03006-8/fulltext">jaad.org</a></li>
+    <li>Efficacy and safety of ritlecitinib in adolescent and adult patients with alopecia totalis and alopecia universalis. <a href="https://pubmed.ncbi.nlm.nih.gov/39328096/">pubmed.ncbi.nlm.nih.gov/39328096</a></li>
+    <li>Efficacy and safety of ritlecitinib in Asian patients with alopecia areata: ALLEGRO phase 2b/3 subgroup analysis. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11975179/">pmc.ncbi.nlm.nih.gov/articles/PMC11975179</a></li>
+    <li>Integrated safety analysis of ritlecitinib from the ALLEGRO clinical trial programme (n=1,294; 2,092 patient-years). <em>Am J Clin Dermatol</em> 2024. <a href="https://link.springer.com/article/10.1007/s40257-024-00846-3">link.springer.com</a> — and published correction, <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13375704/">PMC13375704</a></li>
+  </ol>
+
+  <h4>Real-world evidence and predictors of response</h4>
+  <ol class="refs" start="15">
+    <li>Ritlecitinib for severe alopecia areata: a 24-week multicentre real-world study (n=102). <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13171691/">pmc.ncbi.nlm.nih.gov/articles/PMC13171691</a></li>
+    <li>Huang, et al. Real-world efficacy of ritlecitinib across anatomical sites: potential rapid response predictors. <em>JAAD</em> 2025. <a href="https://pubmed.ncbi.nlm.nih.gov/40669542/">pubmed.ncbi.nlm.nih.gov/40669542</a></li>
+    <li>Hayashi, et al. Real-world outcomes of baricitinib and ritlecitinib in refractory alopecia areata: response predictors and relapse after discontinuation or dose reduction. <em>J Dermatol</em> 2026. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13150673/">pmc.ncbi.nlm.nih.gov/articles/PMC13150673</a></li>
+    <li>Defining a therapeutic window of opportunity in alopecia areata: predictors of early response to baricitinib. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12565575/">pmc.ncbi.nlm.nih.gov/articles/PMC12565575</a></li>
+    <li>Predictors and management of inadequate response to JAK inhibitors in alopecia areata. <em>Am J Clin Dermatol</em>. <a href="https://link.springer.com/article/10.1007/s40257-024-00884-x">link.springer.com</a></li>
+  </ol>
+
+  <h4>Minoxidil</h4>
+  <ol class="refs" start="20">
+    <li>McMullen E, et al. Combined low-dose oral minoxidil and immunomodulator efficacy and safety in alopecia areata: a systematic review. <em>Int J Dermatol</em> 2026;65(4):918–920. <a href="https://onlinelibrary.wiley.com/doi/10.1111/ijd.70194">doi.org/10.1111/ijd.70194</a></li>
+    <li>Low-dose oral minoxidil for alopecia: a comprehensive review. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10806356/">pmc.ncbi.nlm.nih.gov/articles/PMC10806356</a></li>
+    <li>Oral minoxidil for alopecia treatment: risks, benefits, and recommendations. <em>Am J Clin Dermatol</em> 2025. <a href="https://link.springer.com/article/10.1007/s40257-025-00990-4">link.springer.com</a></li>
+    <li>Characterization and management of adverse events of low-dose oral minoxidil treatment for alopecia: a narrative review. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11942662/">ncbi.nlm.nih.gov/pmc/articles/PMC11942662</a></li>
+    <li>Gupta AK, et al. Low-dose oral minoxidil and associated adverse events: FDA Adverse Event Reporting System analysis with a focus on pericardial effusions. <em>J Cosmet Dermatol</em> 2025. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11743066/">ncbi.nlm.nih.gov/pmc/articles/PMC11743066</a></li>
+    <li>The role of minoxidil in treatment of alopecia areata: a systematic review and meta-analysis. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11676071/">ncbi.nlm.nih.gov/pmc/articles/PMC11676071</a></li>
+  </ol>
+
+  <h4>Disease biology, safety context and supportive care</h4>
+  <ol class="refs" start="26">
+    <li>From mechanisms to therapies: current advances in alopecia areata immunopathology. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12433866/">ncbi.nlm.nih.gov/pmc/articles/PMC12433866</a></li>
+    <li>An overview of JAK/STAT pathways and JAK inhibition in alopecia areata. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9470217/">ncbi.nlm.nih.gov/pmc/articles/PMC9470217</a></li>
+    <li>The role of hair follicle immune privilege collapse in alopecia areata: status and perspectives. <a href="https://pubmed.ncbi.nlm.nih.gov/24326544/">pubmed.ncbi.nlm.nih.gov/24326544</a></li>
+    <li>Adverse effects of Janus kinase inhibitors with relevance for daily practice in dermatology. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12435155/">pmc.ncbi.nlm.nih.gov/articles/PMC12435155</a></li>
+    <li>The psychosocial impact of alopecia in men: a mixed-methods survey study. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11442044/">ncbi.nlm.nih.gov/pmc/articles/PMC11442044</a></li>
+    <li>Association between serum trace element levels and alopecia areata: systematic review and meta-analysis. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11683520/">ncbi.nlm.nih.gov/pmc/articles/PMC11683520</a></li>
+    <li>Screening of immigrants in the UK for imported latent tuberculosis: multicentre cohort study. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3108102/">ncbi.nlm.nih.gov/pmc/articles/PMC3108102</a></li>
+    <li>UKHSA / NHS England. Shingles vaccination programme — extension of Shingrix eligibility to severely immunosuppressed adults aged 18+, September 2025. <a href="https://www.england.nhs.uk/long-read/general-practice-shingles-vaccination-programme-technical-guidance-2/">england.nhs.uk</a></li>
+  </ol>
+
+  <h4>Support</h4>
+  <ol class="refs" start="34">
+    <li><strong>Alopecia UK</strong> — the national charity. Peer support groups (online and in person), guidance on living with alopecia, a service directory for wigs and headwear, and research updates. <a href="https://www.alopecia.org.uk/">alopecia.org.uk</a></li>
+    <li><strong>Changing Faces</strong> — counselling and support for visible difference. <a href="https://www.changingfaces.org.uk/">changingfaces.org.uk</a></li>
+    <li><strong>Anxiety UK</strong> — <a href="https://www.anxietyuk.org.uk/">anxietyuk.org.uk</a> &nbsp;·&nbsp; <strong>Samaritans</strong> — <a href="https://www.samaritans.org/">samaritans.org</a>, free on 116 123</li>
+  </ol>
+
+  <div class="enddash"></div>
+  <p style="margin-top:6mm;font-size:9pt;color:#6b6b61;">Compiled from published literature and official product information current to September 2026. Trial results are reported as published; where a study is small, observational, or post-hoc, that is stated in the text. This document does not replace the advice of your dermatologist, GP or pharmacist, and no treatment decision should be made on the basis of it alone.</p>
+</section>
+</body>
+</html>
