@@ -57,9 +57,15 @@ From the masterclass I want to test that reading against people who do the work 
 
 **Registered funds:** regular counsel to 2,000+ mutual funds or their independent trustees; fund counsel to PIMCO on 22 closed-end funds.
 
+**Deal book (verified):** Hologic take-private $18.3bn (Blackstone/TPG, healthcare & FDA regulatory counsel, Oct 2025); Toshiba Memory/Kioxia ~$18bn (Bain-led consortium, 2018) and the Kioxia Tokyo IPO (18 Dec 2024, ~$5.2bn market cap, ~$800m raised); EQT/Nord Anglia Education $14.5bn; Madison Dearborn/NFP to Aon $13.4bn; New Mountain Capital $18bn of transactions incl. Smarter Technologies; Select Medical take-private $3.9bn (Welsh Carson, Mar 2026); Chiesi/KalVista ~$1.9bn; Gilgamesh/AbbVie up to $1.2bn; Partners Group co-lead in the EUR2bn Wireless Logic single-asset continuation vehicle; Bain/Domino's Pizza ~$1bn (1998). Law360 Private Equity Group of the Year 2025.
+
+**Bain Capital:** counsel since Bain's inception in 1984 — the origin of the firm's private equity practice. Bain's general counsel joined Ropes in 2022; EQT's joined the London office in 2026; a former Ropes London head left for Bain Capital.
+
 **Key deal:** EQT / Coller Capital — $3.2bn plus up to $500m earn-out, announced January 2026, closing Q3 2026. Largest secondaries manager acquisition on record; Coller runs ~$49bn and becomes "Coller EQT". Ropes advised EQT with Vinge; Kirkland & Ellis acted for Coller. The firm won The Lawyer's Private Capital Team of the Year for it in June 2026.
 
 **Europe strategy:** Paris and Milan launched within six months in 2025 — the first continental offices after fifteen years of London alone. Ten-lawyer funds and tax team from Linklaters and an eight-lawyer M&A/PE team from Latham into Paris; Cataldo Piccarreta from Latham as co-head of European PE transactions; Paul Dali, formerly GC of EQT, into London. Four European PE co-heads meet weekly in London.
+
+> **Do not use:** Fidelity as a historic client (unconfirmed — Putnam and Harvard are the documented ones); any comparison of Kioxia's ~$18bn purchase price to its ~$5.2bn IPO valuation (different measures — enterprise value vs day-one equity market cap); a single trainee pay or retention figure (sources disagree).
 
 > **Caution:** Ropes & Gray does not publish a practice-by-practice revenue split, and neither does any comparable firm. Sites quoting precise figures such as "45% private equity, 25% life sciences" are not sourced to the firm. Do not quote them.
 
@@ -74,16 +80,20 @@ From the masterclass I want to test that reading against people who do the work 
 
 ---
 
-## Full research dossier (17-page PDF)
+## Full research dossier (22-page PDF)
 
 `Ropes-and-Gray-Deep-Dive.pdf` — the complete deep dive, including the sections
 that carry the client-facing / relationship angle:
 
-- **p10 — What makes it stand out.** Six differentiators ranked by how few other firms could claim them, each with evidence and why it is hard to copy.
-- **p11 — The relationship business.** Why the firm's economics only work because it holds relationships rather than winning transactions, with a diagram contrasting the transactional and embedded adviser models.
-- **p12 — The evidence.** Four verifiable proofs of the relationship claim, so the point can be asserted and defended.
-- **p13 — Client-facing: a reality check.** What client contact honestly looks like by seat, and where relationship skill actually shows up first.
-- **p15 — Two drafted answers.** Version B (relationship-led, recommended) and Version A (asset-management-led).
+- **p8–10 — The deal book.** Headline buyouts and take-privates; healthcare and life sciences; funds, secondaries and asset management M&A.
+- **p11 — The Kioxia arc.** Toshiba Memory (~$18bn, 2018) through to the Kioxia IPO (Dec 2024) — the entire fee cycle on one asset, including a chip-market crash and a postponed listing.
+- **p12 — The Bain Capital story.** Counsel since Bain's 1984 inception; the origin of the firm's entire private equity practice, and two clients' general counsel hired into the firm.
+- **p21 — Background knowledge.** Three tiers: held and verified (safe to use), held but unconfirmed (use softened), and wrong or unsupported (never use).
+- **p14 — What makes it stand out.** Six differentiators ranked by how few other firms could claim them, each with evidence and why it is hard to copy.
+- **p15 — The relationship business.** Why the firm's economics only work because it holds relationships rather than winning transactions, with a diagram contrasting the transactional and embedded adviser models.
+- **p16 — The evidence.** Four verifiable proofs of the relationship claim, so the point can be asserted and defended.
+- **p17 — Client-facing: a reality check.** What client contact honestly looks like by seat, and where relationship skill actually shows up first.
+- **p19 — Two drafted answers.** Version B (relationship-led, recommended) and Version A (asset-management-led).
 
 Source HTML is kept alongside it as `Ropes-and-Gray-Deep-Dive.source.html`.
 
