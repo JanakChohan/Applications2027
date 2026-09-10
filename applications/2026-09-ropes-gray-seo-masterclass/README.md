@@ -74,7 +74,20 @@ From the masterclass I want to test that reading against people who do the work 
 
 ---
 
-## Full research dossier
+## Full research dossier (17-page PDF)
+
+`Ropes-and-Gray-Deep-Dive.pdf` — the complete deep dive, including the sections
+that carry the client-facing / relationship angle:
+
+- **p10 — What makes it stand out.** Six differentiators ranked by how few other firms could claim them, each with evidence and why it is hard to copy.
+- **p11 — The relationship business.** Why the firm's economics only work because it holds relationships rather than winning transactions, with a diagram contrasting the transactional and embedded adviser models.
+- **p12 — The evidence.** Four verifiable proofs of the relationship claim, so the point can be asserted and defended.
+- **p13 — Client-facing: a reality check.** What client contact honestly looks like by seat, and where relationship skill actually shows up first.
+- **p15 — Two drafted answers.** Version B (relationship-led, recommended) and Version A (asset-management-led).
+
+Source HTML is kept alongside it as `Ropes-and-Gray-Deep-Dive.source.html`.
+
+## Web version
 
 Structure, the private capital fee cycle, revenue division, specialisms, deal list, the asset management convergence argument and the strategy timeline — with diagrams:
 
