@@ -3,7 +3,7 @@
 Built 11 September 2026 from the master prompt template for JPMorgan Chase / J.P. Morgan Global Private Bank, 2027 Advisor Summer Internship Program, London (req 210773470).
 
 ## Deliverables
-- `JPMorgan_GPB_Advisor_Internship_Complete_Interview_Pack.pdf` (105 pages, 43 inline SVG figures, 16 parts, 376-row source table) and its `.html` source.
+- `JPMorgan_GPB_Advisor_Internship_Complete_Interview_Pack.pdf` (107 pages, 43 inline SVG figures, 16 parts, 376-row source table) and its `.html` source.
 - `Cheat_Sheet.pdf` (one page).
 - `Question_Bank.md` (45 questions with tests, structure, facts and traps, plus ten questions to ask).
 - `Reading_List.md` (20 recurring sources with a seven-week plan).
