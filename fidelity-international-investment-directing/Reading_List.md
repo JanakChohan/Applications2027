@@ -1,6 +1,10 @@
 # Reading list — Fidelity International, Investment Directing
 
 Companion to the full interview pack. Compiled 16 September 2026.
+
+> **Applications close Sunday 15 November 2026, 11:55pm GMT**, with two online assessments of about
+> 40 minutes each due by the same deadline. Assessment centres are in December and January. `[S403]`
+> Work backwards from that date: the daily routine below matters more than any single deep dive.
 Everything here is public. Source markers `[Sxx]` resolve to the source table in Part 15 of the PDF.
 
 ---

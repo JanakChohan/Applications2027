@@ -1,7 +1,10 @@
 # Question bank — Fidelity International, Investment Directing Summer Internship 2027
 
+**Applications close Sunday 15 November 2026, 11:55pm GMT.** Two online assessments of about 40 minutes
+each must be completed by then. Assessment centres are in December and January. Class of 2028. `[S403]`
+
 Forty-seven questions with scaffolds, plus ten questions to ask. Extracted from Part 9 of the full pack.
-Compiled 16 September 2026 from public sources. Source markers `[Sxx]` resolve to the source table in Part 15 of the PDF.
+Compiled 16 September 2026. Source markers `[Sxx]` resolve to the source table in Part 15 of the PDF.
 
 > These are scaffolds, not scripts. Fidelity's process is **strengths-based**, not competency-based `[S262]`,
 > which means it is specifically designed to catch rehearsal. Know the facts; do not memorise the sentences.
@@ -224,4 +227,4 @@ Not confirmed as a standard component for this stream [S268], but prepare one an
 10. "When compliance pushes back on a piece of material, what does that conversation usually look like? I'm curious whether it's a negotiation about wording or a harder line than that."
 
 ---
-*Generated as a companion to `Fidelity_International_Investment_Directing_Complete_Interview_Pack.pdf`.*
+*Companion to `Fidelity_International_Investment_Directing_Complete_Interview_Pack.pdf`.*

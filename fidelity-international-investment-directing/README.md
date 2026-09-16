@@ -1,6 +1,10 @@
 # Fidelity International — Investment Directing Summer Internship 2027
 
-Interview preparation pack. Compiled 16 September 2026 from public sources only.
+Interview preparation pack. Compiled 16 September 2026.
+
+> **Applications close Sunday 15 November 2026, 11:55pm GMT.** Two online assessments of about
+> 40 minutes each must be completed by the same deadline. Assessment centres December and January.
+> Open to the penultimate year, **Class of 2028**. Source: the verbatim posting, in `research/JD_VERBATIM.md`.
 
 ## Files
 
@@ -11,6 +15,7 @@ Interview preparation pack. Compiled 16 September 2026 from public sources only.
 | `Cheat_Sheet.pdf` | One page. Also Part 13 of the full pack. |
 | `Question_Bank.md` | 47 questions with scaffolds, plus 10 questions to ask. Mirrors Part 9. |
 | `Reading_List.md` | What to read, in what order, and a 20-minute daily routine. |
+| `research/JD_VERBATIM.md` | The authoritative job posting, supplied verbatim. Part 1 is decoded against it. |
 | `research/` | The ten raw workstream findings files, with their own source tables and gaps. |
 | `src/build/` | The HTML chunks and `render.py`, the two-pass renderer. |
 
@@ -40,3 +45,6 @@ change `CHROME` at the top if yours is elsewhere.
    "Fidelity" news online is about the Boston firm.
 2. **Anne Richards is not the chief executive.** That was true from December 2018 and is now out of
    date; most preparation material on the internet still says it. See Part 0.
+3. **It is Class of 2028, not 2027.** The programme runs in summer 2027; applicants are in their
+   penultimate year now and graduate in 2028. The first build of this pack had this wrong; the
+   verbatim posting corrected it.
