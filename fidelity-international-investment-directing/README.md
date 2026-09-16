@@ -6,7 +6,7 @@ Interview preparation pack. Compiled 16 September 2026 from public sources only.
 
 | File | What it is |
 |---|---|
-| `Fidelity_International_Investment_Directing_Complete_Interview_Pack.pdf` | The full pack. 86 pages, 17 parts, 33 diagrams, 118 sourced references. |
+| `Fidelity_International_Investment_Directing_Complete_Interview_Pack.pdf` | The full pack. 85 pages, 17 parts, 33 diagrams, 118 sourced references. |
 | `…_Complete_Interview_Pack.html` | The HTML source the PDF is rendered from. |
 | `Cheat_Sheet.pdf` | One page. Also Part 13 of the full pack. |
 | `Question_Bank.md` | 47 questions with scaffolds, plus 10 questions to ask. Mirrors Part 9. |
