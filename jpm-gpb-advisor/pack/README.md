@@ -15,3 +15,9 @@ Built 11 September 2026 from the master prompt template for JPMorgan Chase / J.P
 
 ## Inputs assumed
 No interview date, interviewer names, coordinator or insider intelligence were supplied; Part 0 of the pack states the assumptions. The stage is application and HireVue pending; the deadline is 1 November 2026 (rolling).
+
+## Commercial awareness brief: evergreen private credit (added 16 September 2026)
+
+- `Evergreen_Private_Credit_Brief.pdf` (15 pages, 11 of content plus sources): what evergreen / semi-liquid funds are from zero, the 5% rule, the Sept 2025 to Sept 2026 timeline, cases on Blue Owl, Partners Group and Blackstone, regulator and J.P. Morgan positions, the FT reading list, 71 sources, and the HireVue answer with timings and screen notes. Built by `evergreen.html.py` (diagrams in `diagrams3.py`, renderer `topdf_short.js`).
+- `HireVue_Evergreen_Answer.md`: the script on its own for editing and rehearsal.
+- Research notes: `../research/07_evergreen_mechanics_and_stress.md`, `08_partners_group_blue_owl_jpm.md`, `09_blackstone_and_landscape.md`.

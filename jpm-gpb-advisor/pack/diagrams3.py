@@ -115,3 +115,25 @@ def sources_of_cash():
         if i<5: d.arrow(x+w,55,x+128,55,color=GREY,width=1.6)
     d.text(390,108,"The order in which a manager pays redemptions. Each step to the right costs the remaining investors more.",size=8.5,fill=GREY,italic=True)
     return d.svg()
+
+def requests_chart(rows, cap=5.0, title="Q2 2026 redemption requests as % of fund NAV, against the 5% quarterly cap"):
+    """rows: list of (label, pct, paid_pct_or_None)"""
+    n=len(rows); L=250; R=60; T=48; rowh=24; w=780; h=T+n*rowh+40
+    d=D(w,h); pw=w-L-R; vmax=max(r[1] for r in rows)*1.08
+    d.text(12,20,title,size=11,fill=NAVY,anchor="start",weight="bold")
+    for i,(c,v,paid) in enumerate(rows):
+        y=T+i*rowh; bh=rowh-7; bl=pw*v/vmax
+        col = GREEN if v<=cap else RED
+        d.parts.append(f'<rect x="{L}" y="{y}" width="{bl}" height="{bh}" rx="3" fill="{col}" opacity="0.85"/>')
+        if paid is not None:
+            d.parts.append(f'<rect x="{L}" y="{y}" width="{pw*paid/vmax}" height="{bh}" rx="3" fill="{NAVY}"/>')
+        d.text(L-8,y+bh/2+3.5,c,size=8.6,fill=INK,anchor="end")
+        d.text(L+bl+6,y+bh/2+3.5,f"{v:g}%",size=8.3,fill=INK,anchor="start")
+    cx=L+pw*cap/vmax
+    d.line(cx,T-6,cx,T+n*rowh,color=GOLD,width=2,dash=True)
+    d.text(cx+4,T-10,"5% cap",size=8.5,fill=GOLD,anchor="start",weight="bold")
+    ly=h-12
+    d.parts.append(f'<rect x="{L}" y="{ly-9}" width="10" height="10" rx="2" fill="{NAVY}"/>'); d.text(L+14,ly,"paid (dark)",size=8,fill=GREY,anchor="start")
+    d.parts.append(f'<rect x="{L+90}" y="{ly-9}" width="10" height="10" rx="2" fill="{RED}" opacity="0.85"/>'); d.text(L+104,ly,"requested, above cap",size=8,fill=GREY,anchor="start")
+    d.parts.append(f'<rect x="{L+230}" y="{ly-9}" width="10" height="10" rx="2" fill="{GREEN}" opacity="0.85"/>'); d.text(L+244,ly,"requested, within cap (paid in full)",size=8,fill=GREY,anchor="start")
+    return d.svg()
