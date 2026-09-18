@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fidelity International — Application Questions — Research Pack</title>
+<style>
+:root{
+  --ink:#0B1B2E; --navy:#12314F; --navy2:#1E4670; --navy3:#4A73A0;
+  --accent:#B9602C;            /* warm accent */
+  --accent-soft:#F3E4D8;
+  --signal:#6D3A96;            /* opinion callouts */
+  --signal-soft:#EEE6F5;
+  --good:#1F6B4C; --good-soft:#E2F0E9;
+  --bad:#A32F2F;  --bad-soft:#F7E3E3;
+  --warn:#9A7415; --warn-soft:#F7EFD8;
+  --paper:#FFFFFF; --tint:#F6F3EE; --tint2:#EDE8E0;
+  --rule:#D9D2C7; --rule2:#BFB6A8;
+  --muted:#5D6B7A;
+  --serif:"Bitstream Charter","Charter","Liberation Serif",Georgia,serif;
+  --sans:"Liberation Sans","DejaVu Sans",Arial,sans-serif;
+  --mono:"Liberation Mono","DejaVu Sans Mono",monospace;
+}
+@page{ size:A4; margin:19mm 14mm 17mm 14mm; }
+*{box-sizing:border-box;}
+html{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+body{
+  font-family:var(--serif); font-size:9.6pt; line-height:1.48; color:var(--ink);
+  margin:0; background:var(--paper); text-rendering:optimizeLegibility;
+  hyphens:none;
+}
+p{margin:0 0 6.5pt 0; orphans:2; widows:2;}
+strong{font-weight:700;}
+em{font-style:italic;}
+a{color:var(--navy2); text-decoration:none; word-break:break-word;}
+
+/* ---------- headings ---------- */
+h1,h2,h3,h4,h5{font-family:var(--sans); color:var(--navy); margin:0; font-weight:700; break-after:avoid-page;}
+h2.part-title{font-size:24pt; line-height:1.08; letter-spacing:-.4pt; color:#fff; margin:0;}
+h3{font-size:13pt; margin:15pt 0 5pt 0; letter-spacing:-.15pt; padding-bottom:3pt;
+   border-bottom:1.6pt solid var(--accent); color:var(--navy);}
+h4{font-size:10.6pt; margin:11pt 0 4pt 0; color:var(--navy2); letter-spacing:-.05pt;}
+h5{font-size:9.3pt; margin:9pt 0 3pt 0; color:var(--accent); text-transform:uppercase;
+   letter-spacing:.7pt; font-weight:700;}
+h3+h4, h3+p{margin-top:5pt;}
+
+/* ---------- part opener ---------- */
+.part{break-before:page;}
+.part-band{background:var(--navy); color:#fff; padding:15pt 16pt 14pt 16pt; margin:0 0 12pt 0;
+  border-left:9pt solid var(--accent); break-inside:avoid; break-after:avoid-page;}
+.part-band .kicker{font-family:var(--sans); font-size:8pt; letter-spacing:2.6pt;
+  text-transform:uppercase; color:#F0C9AC; margin:0 0 5pt 0; font-weight:700;}
+.part-band .standfirst{font-family:var(--serif); font-size:9.8pt; color:#D5DFEA;
+  margin:7pt 0 0 0; max-width:150mm; line-height:1.4;}
+
+/* ---------- cover ---------- */
+.cover{height:259mm; display:flex; flex-direction:column; justify-content:space-between;
+  break-after:page; position:relative;}
+.cover-top{border-top:11pt solid var(--accent); padding-top:16pt;}
+.cover .eyebrow{font-family:var(--sans); font-size:8.5pt; letter-spacing:3.2pt;
+  text-transform:uppercase; color:var(--accent); font-weight:700;}
+.cover h1{font-size:37pt; line-height:1.03; letter-spacing:-1.1pt; margin:14pt 0 0 0; color:var(--navy);}
+.cover h1 span{display:block; color:var(--accent);}
+.cover .sub{font-size:13.5pt; color:var(--navy2); margin:12pt 0 0 0; font-family:var(--sans);
+  line-height:1.3; font-weight:400;}
+.cover-meta{border-top:1pt solid var(--rule); padding-top:10pt; font-family:var(--sans); font-size:8.4pt;
+  color:var(--muted); display:grid; grid-template-columns:repeat(3,1fr); gap:9pt;}
+.cover-meta b{display:block; color:var(--navy); font-size:8pt; text-transform:uppercase;
+  letter-spacing:1.1pt; margin-bottom:2.5pt;}
+.cover-rule{height:4pt; background:linear-gradient(90deg,var(--navy) 0 38%,var(--accent) 38% 70%,var(--signal) 70% 100%);}
+
+/* ---------- table of contents ---------- */
+.toc{break-after:page;}
+.toc-row{display:flex; align-items:baseline; font-family:var(--sans); font-size:9.2pt;
+  padding:3.1pt 0; border-bottom:.5pt dotted var(--rule2);}
+.toc-row .n{width:34pt; color:var(--accent); font-weight:700; flex:none;}
+.toc-row .t{flex:1; color:var(--navy);}
+.toc-row .p{width:26pt; text-align:right; color:var(--muted); font-variant-numeric:tabular-nums; flex:none;}
+.toc-row.sub{font-size:8.5pt; padding:2.1pt 0; border-bottom:none;}
+.toc-row.sub .n{width:34pt;}
+.toc-row.sub .t{color:var(--muted); padding-left:8pt;}
+
+/* ---------- callouts ---------- */
+.box{padding:8pt 10pt; margin:9pt 0; break-inside:avoid; border-radius:2pt; font-size:9.2pt;}
+.box .box-h{font-family:var(--sans); font-size:7.6pt; font-weight:700; letter-spacing:1.5pt;
+  text-transform:uppercase; margin:0 0 4pt 0; display:block;}
+.box p:last-child{margin-bottom:0;}
+.box ul{margin-bottom:0;}
+.kt   {background:var(--tint);        border-left:3.5pt solid var(--navy2);}
+.kt .box-h{color:var(--navy2);}
+.say  {background:var(--good-soft);   border-left:3.5pt solid var(--good);}
+.say .box-h{color:var(--good);}
+.say .line{font-style:italic; display:block; margin:0 0 4pt 0;}
+.dont {background:var(--bad-soft);    border-left:3.5pt solid var(--bad);}
+.dont .box-h{color:var(--bad);}
+.op   {background:var(--signal-soft); border-left:3.5pt solid var(--signal);}
+.op .box-h{color:var(--signal);}
+.unc  {background:var(--warn-soft);   border-left:3.5pt solid var(--warn);}
+.unc .box-h{color:var(--warn);}
+.note {background:var(--accent-soft); border-left:3.5pt solid var(--accent);}
+.note .box-h{color:var(--accent);}
+
+/* ---------- confidence + source markers ---------- */
+.src{font-family:var(--sans); font-size:6.6pt; vertical-align:super; color:var(--navy3);
+  font-weight:700; letter-spacing:.2pt;}
+.cf{font-family:var(--sans); font-size:6.5pt; padding:.6pt 3pt; border-radius:6pt;
+  vertical-align:.7pt; font-weight:700; letter-spacing:.3pt; white-space:nowrap;}
+.cf-c{background:var(--good-soft); color:var(--good);}
+.cf-r{background:var(--warn-soft); color:var(--warn);}
+.cf-i{background:var(--signal-soft); color:var(--signal);}
+
+/* ---------- tables ---------- */
+table{border-collapse:collapse; width:100%; font-family:var(--sans); font-size:7.9pt;
+  margin:8pt 0 9pt 0; break-inside:avoid;}
+table.long{break-inside:auto;}
+table.long tr{break-inside:avoid;}
+th{background:var(--navy); color:#fff; text-align:left; padding:4.2pt 5pt; font-weight:700;
+  font-size:7.5pt; letter-spacing:.3pt; vertical-align:bottom;}
+td{padding:3.8pt 5pt; border-bottom:.5pt solid var(--rule); vertical-align:top; line-height:1.34;}
+tbody tr:nth-child(even) td{background:var(--tint);}
+td.num{text-align:right; font-variant-numeric:tabular-nums;}
+caption{caption-side:bottom; text-align:left; font-family:var(--sans); font-size:6.9pt;
+  color:var(--muted); padding-top:3.5pt; line-height:1.35;}
+.tbl-note{font-family:var(--sans); font-size:6.9pt; color:var(--muted); margin:-5pt 0 9pt 0; line-height:1.35;}
+
+/* ---------- lists ---------- */
+ul,ol{margin:0 0 7pt 0; padding-left:13pt;}
+li{margin-bottom:3pt; line-height:1.44;}
+ul.tight li, ol.tight li{margin-bottom:1.5pt;}
+ul.none{list-style:none; padding-left:0;}
+.checklist{list-style:none; padding-left:0;}
+.checklist li{padding-left:15pt; position:relative; margin-bottom:3.5pt;}
+.checklist li:before{content:"☐"; position:absolute; left:0; color:var(--accent); font-size:10pt;}
+
+/* ---------- figures ---------- */
+figure{margin:11pt 0 12pt 0; break-inside:avoid; page-break-inside:avoid;}
+figure.fullpage{break-before:page; break-after:page; margin:0;}
+figure svg{display:block; width:100%; height:auto; max-width:100%;}
+figcaption{font-family:var(--sans); font-size:7pt; color:var(--muted); margin-top:4pt;
+  line-height:1.38; border-top:.5pt solid var(--rule); padding-top:3pt;}
+figcaption b{color:var(--navy); font-size:7.2pt;}
+.fig-num{font-family:var(--sans); font-size:7.4pt; font-weight:700; color:var(--accent);
+  letter-spacing:1.1pt; text-transform:uppercase; margin-bottom:3.5pt; display:block;}
+
+/* svg text defaults */
+svg text{font-family:"Liberation Sans",Arial,sans-serif; fill:var(--ink);}
+.s-ttl{font-size:11px; font-weight:700; fill:#12314F;}
+.s-lbl{font-size:9px; fill:#0B1B2E;}
+.s-sm {font-size:7.6px; fill:#5D6B7A;}
+.s-xs {font-size:6.6px; fill:#5D6B7A;}
+.s-w  {font-size:9px; fill:#FFFFFF; font-weight:700;}
+.s-wsm{font-size:7.4px; fill:#FFFFFF;}
+.s-num{font-size:13px; font-weight:700; fill:#12314F;}
+
+/* ---------- scenario cards ---------- */
+.card{border:1pt solid var(--rule2); border-top:4pt solid var(--navy); padding:8pt 10pt;
+  margin:9pt 0; break-inside:avoid; background:var(--paper);}
+.card.easy{border-top-color:var(--good);}
+.card.med {border-top-color:var(--warn);}
+.card.hard{border-top-color:var(--bad);}
+.card-h{font-family:var(--sans); font-size:9.4pt; font-weight:700; color:var(--navy); margin:0 0 4pt 0;
+  display:flex; justify-content:space-between; gap:8pt; align-items:baseline;}
+.tag{font-family:var(--sans); font-size:6.6pt; font-weight:700; letter-spacing:1.1pt;
+  text-transform:uppercase; padding:1.4pt 5pt; border-radius:7pt; flex:none;}
+.tag.easy{background:var(--good-soft); color:var(--good);}
+.tag.med {background:var(--warn-soft); color:var(--warn);}
+.tag.hard{background:var(--bad-soft);  color:var(--bad);}
+.card dl{margin:0; font-size:8.9pt;}
+.card dt{font-family:var(--sans); font-size:7.1pt; font-weight:700; letter-spacing:1pt;
+  text-transform:uppercase; color:var(--accent); margin-top:5pt;}
+.card dd{margin:1.5pt 0 0 0;}
+.card dd.script{font-style:italic; border-left:2pt solid var(--rule2); padding-left:7pt; color:#20344A;}
+
+/* ---------- misc ---------- */
+.lede{font-size:10.6pt; line-height:1.45; color:var(--navy2); font-family:var(--sans);
+  margin:0 0 10pt 0;}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:10pt; break-inside:avoid;}
+.grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:8pt; break-inside:avoid;}
+.stat{background:var(--tint); border-top:2.5pt solid var(--accent); padding:7pt 8pt;}
+.stat .v{font-family:var(--sans); font-size:15pt; font-weight:700; color:var(--navy); line-height:1;}
+.stat .k{font-family:var(--sans); font-size:7.2pt; color:var(--muted); margin-top:3pt; line-height:1.3;}
+.q{font-family:var(--sans); font-size:9.3pt; font-weight:700; color:var(--navy); margin:10pt 0 3pt 0;}
+.q .qn{color:var(--accent); margin-right:4pt;}
+.qmeta{font-size:8.9pt; margin:0 0 3pt 0;}
+.qmeta b{font-family:var(--sans); font-size:7.2pt; letter-spacing:.8pt; text-transform:uppercase;
+  color:var(--accent);}
+blockquote{margin:8pt 0; padding:6pt 0 6pt 11pt; border-left:3pt solid var(--navy3);
+  font-style:italic; color:#20344A; font-size:9.3pt; break-inside:avoid;}
+blockquote cite{display:block; font-style:normal; font-family:var(--sans); font-size:7.2pt;
+  color:var(--muted); margin-top:4pt;}
+hr{border:none; border-top:.5pt solid var(--rule); margin:12pt 0;}
+.marker{font-size:1pt; color:#FFFFFF; line-height:0;}
+.avoid{break-inside:avoid;}
+.newpage{break-before:page;}
+.sheet{break-before:page; break-after:page;}
+code{font-family:var(--mono); font-size:8.2pt; background:var(--tint2); padding:.5pt 2.5pt;}
+.glossary dt{font-family:var(--sans); font-weight:700; font-size:8.6pt; color:var(--navy); margin-top:5.5pt;}
+.glossary dd{margin:1pt 0 0 0; font-size:8.9pt;}
+.srctable td{font-size:6.9pt; padding:2.8pt 4pt; line-height:1.3;}
+.srctable th{font-size:6.9pt; padding:3.4pt 4pt;}
+.srctable td.u{font-family:var(--mono); font-size:5.9pt; word-break:break-all; color:var(--navy3);}
+
+/* ---- additions for the questions pack ---- */
+.chain{counter-reset:step; margin:10pt 0;}
+.chain .step{display:flex; gap:9pt; margin-bottom:7pt; break-inside:avoid;}
+.chain .step:before{counter-increment:step; content:counter(step);
+  font-family:var(--sans); font-size:9pt; font-weight:700; color:#fff; background:var(--navy);
+  min-width:17pt; height:17pt; border-radius:9pt; display:flex; align-items:center;
+  justify-content:center; flex:none;}
+.chain .step .body{flex:1;}
+.chain .step h5{margin:1pt 0 2pt 0;}
+.chain .step p{margin-bottom:0; font-size:9.3pt;}
+.chain.warm .step:before{background:var(--accent);}
+.verdict{font-family:var(--sans); font-size:7pt; font-weight:700; letter-spacing:.8pt;
+  text-transform:uppercase; padding:1.4pt 5pt; border-radius:7pt; white-space:nowrap;}
+.v-strong{background:var(--good-soft); color:var(--good);}
+.v-part  {background:var(--warn-soft); color:var(--warn);}
+.v-weak  {background:var(--bad-soft);  color:var(--bad);}
+.rank{font-family:var(--sans); font-size:14pt; font-weight:700; color:var(--accent); line-height:1;}
+.arch{border:1pt solid var(--rule2); border-left:4pt solid var(--navy2); padding:8pt 10pt; margin:9pt 0;
+  break-inside:avoid; background:var(--paper);}
+.arch h4{margin-top:0;}
+.arch ol{margin-bottom:0; font-size:9.2pt;}
+.arch .wc{font-family:var(--sans); font-size:7pt; color:var(--muted); float:right;}
+</style>
+</head>
+<body>
+<section class="cover">
+  <div class="cover-top">
+    <p class="eyebrow">Research pack &nbsp;·&nbsp; not a draft answer</p>
+    <h1>The two<br>application<span>questions</span></h1>
+    <p class="sub">Fidelity International &nbsp;·&nbsp; Investment Directing Summer Internship 2027<br>
+    What they are testing, which one carries more weight, and everything you need to know<br>
+    to write answers that are entirely your own.</p>
+  </div>
+
+  <svg viewBox="0 0 560 250" style="width:100%;height:auto;margin:0;">
+    <defs><marker id="cv2-ar" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 z" fill="#B9602C"/></marker></defs>
+
+    <rect x="0" y="16" width="266" height="96" rx="3" fill="#12314F"/>
+    <text x="12" y="38" class="s-w">QUESTION 1 &nbsp;·&nbsp; 200 words</text>
+    <text x="12" y="57" class="s-wsm" fill="#A9BED4">A theme or news story, why it matters to</text>
+    <text x="12" y="69" class="s-wsm" fill="#A9BED4">an investor, and how you would explain it</text>
+    <text x="12" y="81" class="s-wsm" fill="#A9BED4">to a client with no financial background.</text>
+    <text x="12" y="101" class="s-wsm" fill="#F0C9AC">Tests two things at once. This is the job.</text>
+
+    <rect x="294" y="16" width="266" height="96" rx="3" fill="#1E4670"/>
+    <text x="306" y="38" class="s-w">QUESTION 2 &nbsp;·&nbsp; 150 words</text>
+    <text x="306" y="57" class="s-wsm" fill="#A9BED4">One million pounds. Short term and long</text>
+    <text x="306" y="69" class="s-wsm" fill="#A9BED4">term. At least one asset class. The asset</text>
+    <text x="306" y="81" class="s-wsm" fill="#A9BED4">allocation appropriate to each horizon.</text>
+    <text x="306" y="101" class="s-wsm" fill="#F0C9AC">Tests one thing. Almost everyone passes it.</text>
+
+    <line x1="133" y1="116" x2="133" y2="142" stroke="#B9602C" stroke-width="1.5" marker-end="url(#cv2-ar)"/>
+    <line x1="427" y1="116" x2="427" y2="142" stroke="#B9602C" stroke-width="1.5" marker-end="url(#cv2-ar)"/>
+
+    <rect x="0" y="146" width="266" height="52" rx="3" fill="#B9602C"/>
+    <text x="133" y="167" class="s-w" text-anchor="middle">Where you WIN the application</text>
+    <text x="133" y="185" class="s-wsm" text-anchor="middle" fill="#F6E0D0">Higher ceiling. Harder to fake. More words given.</text>
+
+    <rect x="294" y="146" width="266" height="52" rx="3" fill="#F3E4D8" stroke="#B9602C"/>
+    <text x="427" y="167" class="s-lbl" text-anchor="middle" fill="#B9602C">Where you LOSE it</text>
+    <text x="427" y="185" class="s-sm" text-anchor="middle">Lower ceiling, but a weak answer is disqualifying.</text>
+
+    <text x="280" y="222" class="s-sm" text-anchor="middle">No firm publishes the weighting of individual application questions. The split above is this pack's reasoning</text>
+    <text x="280" y="236" class="s-sm" text-anchor="middle">from the job description's own wording, not a fact. Part 1 shows the working.</text>
+  </svg>
+
+  <div>
+    <div class="cover-rule"></div>
+    <div class="cover-meta" style="margin-top:9pt;">
+      <div><b>What this is</b>Research, structure and evidence. It deliberately contains no drafted answer in your voice, because you asked for none and because your own words are the point.</div>
+      <div><b>Deadline</b>Sunday 15 November 2026, 11:55pm GMT, including two online assessments of about 40 minutes each.</div>
+      <div><b>Compiled</b>18 September 2026 from public sources. Every non-obvious claim carries a source marker and a confidence tag.</div>
+    </div>
+  </div>
+</section>
+<section class="toc">
+  <div class="part-band" style="margin-bottom:14pt;">
+    <p class="kicker">Contents</p>
+    <h2 class="part-title">What is in here</h2>
+    <p class="standfirst">Part 1 answers your question about what these are testing and which matters more.
+    Part 2 is the private credit story, researched properly. Part 3 is the million pounds. Neither contains
+    a drafted answer.</p>
+  </div>
+
+  <div class="toc-row"><span class="n">1</span><span class="t">The two questions, decoded</span><span class="p">3</span></div>
+  <div class="toc-row sub"><span class="n">1.1</span><span class="t">What each question is actually testing</span><span class="p">3</span></div>
+  <div class="toc-row sub"><span class="n">1.2</span><span class="t">Weighting: which one matters more, and why</span><span class="p">4</span></div>
+  <div class="toc-row sub"><span class="n">1.3</span><span class="t">How these answers get used later</span><span class="p">5</span></div>
+
+  <div class="toc-row"><span class="n">2</span><span class="t">Question 1: the private credit redemption story</span><span class="p">7</span></div>
+  <div class="toc-row sub"><span class="n">2.1</span><span class="t">What actually happened, with the numbers</span><span class="p">7</span></div>
+  <div class="toc-row sub"><span class="n">2.2</span><span class="t">What an evergreen fund is, from zero</span><span class="p">9</span></div>
+  <div class="toc-row sub"><span class="n">2.3</span><span class="t">Why the structure strains: the liquidity mismatch</span><span class="p">11</span></div>
+  <div class="toc-row sub"><span class="n">2.4</span><span class="t">The AI link, and whether it holds up</span><span class="p">12</span></div>
+  <div class="toc-row sub"><span class="n">2.5</span><span class="t">Six explanations, weighed against each other</span><span class="p">14</span></div>
+  <div class="toc-row sub"><span class="n">2.6</span><span class="t">Why it matters to an investment manager</span><span class="p">15</span></div>
+  <div class="toc-row sub"><span class="n">2.7</span><span class="t">The Fidelity link, and the honest counter-case</span><span class="p">15</span></div>
+  <div class="toc-row sub"><span class="n">2.8</span><span class="t">Explaining it to someone with no finance background</span><span class="p">17</span></div>
+  <div class="toc-row sub"><span class="n">2.9</span><span class="t">Four ways to build the answer, and what to leave out</span><span class="p">18</span></div>
+
+  <div class="toc-row"><span class="n">3</span><span class="t">Question 2: the million pounds</span><span class="p">21</span></div>
+  <div class="toc-row sub"><span class="n">3.1</span><span class="t">What it is really testing, and the obvious answer</span><span class="p">21</span></div>
+  <div class="toc-row sub"><span class="n">3.2</span><span class="t">The environment right now, with real numbers</span><span class="p">21</span></div>
+  <div class="toc-row sub"><span class="n">3.3</span><span class="t">The frameworks a thoughtful person would use</span><span class="p">22</span></div>
+  <div class="toc-row sub"><span class="n">3.4</span><span class="t">Tax and wrappers: the facts, current</span><span class="p">23</span></div>
+  <div class="toc-row sub"><span class="n">3.5</span><span class="t">Seven angles, ranked by how few will use them</span><span class="p">24</span></div>
+  <div class="toc-row sub"><span class="n">3.6</span><span class="t">The traps</span><span class="p">24</span></div>
+  <div class="toc-row sub"><span class="n">3.7</span><span class="t">Three ways to build the answer</span><span class="p">25</span></div>
+
+  <div class="toc-row"><span class="n">4</span><span class="t">Source table</span><span class="p">27</span></div>
+  <div class="toc-row"><span class="n">5</span><span class="t">Gaps, and what to check before you submit</span><span class="p">32</span></div>
+
+  <div class="box dont" style="margin-top:14pt;">
+    <span class="box-h">Why there is no drafted answer in this document</span>
+    <p>You asked for the research and not the prose, twice, and you were right to. Three reasons it matters here.
+    The process is <strong>strengths-based</strong>, which is designed to catch rehearsal. Your written answers are
+    likely to be <strong>read back to you at the assessment centre</strong>, where you will have to defend every claim
+    in them. And an answer assembled from someone else's sentences is detectable, increasingly screened for, and
+    would not survive the first follow-up question.</p>
+    <p>What this pack gives you instead: the facts, the causal chain, the counter-arguments, the numbers with their
+    sources, and several different <em>shapes</em> an answer could take. The sentences are yours.</p>
+  </div>
+</section>
+<section class="part">
+<span class="marker">@@ANCHOR:q1@@</span>
+<div class="part-band">
+  <p class="kicker">Part 1</p>
+  <h2 class="part-title">The two questions, decoded</h2>
+  <p class="standfirst">What each one is really testing, which carries more weight and why, and what happens to your
+  written answers after you submit them. Read this before you write a word.</p>
+</div>
+
+<span class="marker">@@ANCHOR:q1a@@</span>
+<h3>1.1 What each question is actually testing</h3>
+
+<p class="lede">Neither question is about the topic you choose. Both are about how you think, and Question 1 is also
+about whether you can be trusted in front of a client.</p>
+
+<h4>Question 1, in three parts</h4>
+<p>Read the question again slowly, because it has three clauses and most candidates answer only the first:</p>
+<blockquote>
+"Outline a theme, article or news story you learned about recently, <strong>why you think it is relevant to an Investor
+in the Investment Management Industry</strong> and <strong>how you would explain to a client without a financial
+background?</strong>"
+<cite>Fidelity International application form, Investment Directing Summer Internship 2027 <span class="src">[T260]</span></cite>
+</blockquote>
+<ul>
+  <li><strong>Clause one, the story.</strong> Table stakes. It shows you read something. Almost every applicant clears this.</li>
+  <li><strong>Clause two, relevance to an investor.</strong> This is the commercial awareness test. Note the precise
+  wording: relevant to <em>an investor in the investment management industry</em>, not "relevant to the world". You are
+  being asked to connect a news story to how money is managed, priced, sold or governed. A story about interest rates
+  that never reaches a portfolio or a client is only half an answer.</li>
+  <li><strong>Clause three, explaining it.</strong> This is the one that separates people, and it is the clause most
+  candidates treat as an afterthought. It is also, almost exactly, the job description of the role you are applying
+  to.</li>
+</ul>
+
+<div class="box note">
+  <span class="box-h">Why clause three is the whole role</span>
+  <p>The posting for this internship says the team has "a strong knowledge of markets and Fidelity's portfolio
+  strategies, <strong>combined with a capacity to communicate these in different formats, including through direct client
+  relationships</strong>"<span class="src">[T260]</span> <span class="cf cf-c">Confirmed</span>. It lists "reporting on
+  portfolios" and "generating marketing material to support sales activity" as duties.</p>
+  <p>Question 1 is that sentence turned into a test. The firm is not asking whether you can understand a news story. It
+  is asking whether you can take something complicated, keep it accurate, and make it land with someone who does not
+  share your vocabulary. That is what an Investment Director does every day.</p>
+</div>
+
+<h4>Question 2, in one part</h4>
+<blockquote>
+"Imagine you won 1 million GBP. How would you invest your winnings for (a) short term and (b) the long term. Investing in
+at least one asset class, talk about the asset allocation that would be appropriate for each time horizon."
+<cite>Fidelity International application form <span class="src">[T260]</span></cite>
+</blockquote>
+<p>This is a structured thinking test with a specific hinge: <strong>time horizon determines asset allocation</strong>.
+The question tells you the framework it wants you to use. It says "appropriate for each time horizon", which is an
+instruction, not a hint. An answer that does not make horizon the organising principle has not answered the question
+asked.</p>
+<p>Note also "at least one asset class". That is a floor, not a target, and it is a small kindness: you are not being
+asked to build a full portfolio in 150 words. You are being asked to show you understand <em>why</em> the allocation
+differs between the two horizons.</p>
+
+<h4>Mapping both questions to what they said they want</h4>
+<table>
+  <thead><tr><th style="width:34%">The posting asks for</th><th style="width:33%">Tested by Q1</th><th style="width:33%">Tested by Q2</th></tr></thead>
+  <tbody>
+    <tr><td>"analytical"</td><td>Weighing why a story matters</td><td><strong>Directly. The core of it.</strong></td></tr>
+    <tr><td>"a genuine curiosity and eagerness to learn about investment"</td><td><strong>Directly. Your choice of story is the evidence.</strong></td><td>Indirectly</td></tr>
+    <tr><td>"a lively interest in our work and our industry"</td><td><strong>Directly. "Our industry" is the phrase to notice.</strong></td><td>Weakly</td></tr>
+    <tr><td>"creative thinking"</td><td>In the explanation, and in the angle you choose</td><td><strong>In finding a non-obvious framing</strong></td></tr>
+    <tr><td>"attention to detail"</td><td>Getting the facts and figures right</td><td>Getting the numbers and tax facts right</td></tr>
+    <tr><td>"a capacity to communicate these in different formats"</td><td><strong>This is clause three. Only Q1 tests it.</strong></td><td>Not tested</td></tr>
+  </tbody>
+  <caption>Person-specification phrases quoted verbatim from the posting <span class="src">[T260]</span> <span class="cf cf-c">Confirmed</span>; the mapping is this pack's reasoning <span class="cf cf-i">Inferred</span>.</caption>
+</table>
+
+<span class="marker">@@ANCHOR:q1b@@</span>
+<h3>1.2 Weighting: which one matters more</h3>
+
+<div class="box unc">
+  <span class="box-h">Source uncertain — and it always will be</span>
+  <p>No firm publishes the weighting of individual application-form questions, and this research found none for Fidelity.
+  Anyone who tells you "Question 1 is worth 60%" has made it up. What follows is reasoning from the question design and
+  the job description, and it is marked as such.</p>
+</div>
+
+<figure>
+  <span class="fig-num">Figure 1 · where each question can win or lose you the application</span>
+  <svg viewBox="0 0 640 264" id="fig-weight">
+    <text x="0" y="12" class="s-ttl">Two different shapes of risk. Treat them differently.</text>
+    <line x1="60" y1="210" x2="620" y2="210" stroke="#BFB6A8" stroke-width="1"/>
+    <line x1="60" y1="34"  x2="60"  y2="210" stroke="#BFB6A8" stroke-width="1"/>
+    <text x="52" y="44"  class="s-sm" text-anchor="end">high</text>
+    <text x="52" y="206" class="s-sm" text-anchor="end">low</text>
+    <text x="14" y="130" class="s-sm" text-anchor="middle" transform="rotate(-90 14 130)">ceiling: how much it can win you</text>
+    <text x="340" y="232" class="s-sm" text-anchor="middle">floor: how much a weak answer costs you</text>
+
+    <circle cx="470" cy="70" r="30" fill="#B9602C" opacity=".92"/>
+    <text x="470" y="66" class="s-w" text-anchor="middle">Q1</text>
+    <text x="470" y="80" class="s-wsm" text-anchor="middle" fill="#F6E0D0">200 words</text>
+    <text x="470" y="118" class="s-sm" text-anchor="middle">High ceiling, high floor.</text>
+    <text x="470" y="131" class="s-sm" text-anchor="middle">Spend most of your time here.</text>
+
+    <circle cx="470" cy="172" r="24" fill="#1E4670" opacity=".92"/>
+    <text x="470" y="169" class="s-w" text-anchor="middle">Q2</text>
+    <text x="470" y="182" class="s-wsm" text-anchor="middle" fill="#A9BED4">150 words</text>
+    <text x="230" y="172" class="s-sm" text-anchor="middle">Lower ceiling, but the floor still bites:</text>
+    <text x="230" y="185" class="s-sm" text-anchor="middle">a muddled answer here is disqualifying.</text>
+
+    <rect x="80" y="40" width="300" height="60" rx="3" fill="#F6F3EE" stroke="#BFB6A8"/>
+    <text x="90" y="57" class="s-lbl" font-weight="700">The asymmetry worth acting on</text>
+    <text x="90" y="72" class="s-sm">Q1 is where you can be genuinely memorable, because the</text>
+    <text x="90" y="84" class="s-sm">range of possible answers is enormous. Q2 has a narrow band</text>
+    <text x="90" y="96" class="s-sm">of sensible answers, so nearly everyone lands in it.</text>
+
+    <text x="0" y="256" class="s-xs">Positions are this pack's judgement from the question design and the job description [T260]. Not a published weighting. [Inferred] Compiled 18 September 2026.</text>
+  </svg>
+  <figcaption><b>Figure 1.</b> The two questions' risk profiles. <span class="cf cf-i">Inferred</span>.</figcaption>
+</figure>
+
+<p>Four reasons to believe Question 1 carries more:</p>
+<ol>
+  <li><strong>It is given more words.</strong> 200 against 150. Word allocation is the cheapest signal a form designer
+  gives you about relative importance.</li>
+  <li><strong>It tests two competencies, not one.</strong> Commercial awareness and client communication. Question 2
+  tests structured reasoning alone.</li>
+  <li><strong>One of those two is the role itself.</strong> "A capacity to communicate these in different formats" is in
+  the team description<span class="src">[T260]</span>. Nothing in Question 2 maps to a duty line that directly.</li>
+  <li><strong>It is much harder to fake.</strong> Question 2 has a defensible answer that a diligent person can reason to
+  from first principles in an hour. Question 1 rewards someone who has actually been following something, and that is
+  visible in the specificity.</li>
+</ol>
+
+<div class="box say">
+  <span class="box-h">The practical consequence</span>
+  <p>If you have ten hours, spend seven on Question 1 and three on Question 2. But do not treat Question 2 as a
+  formality: because the band of sensible answers is narrow, a confused one stands out badly. The goal on Question 2 is
+  to be <em>clearly right and slightly more interesting than average</em>. The goal on Question 1 is to be the answer
+  the reader remembers at the end of the day.</p>
+</div>
+
+<span class="marker">@@ANCHOR:q1c@@</span>
+<h3>1.3 What happens to these answers afterwards</h3>
+<p>Two things, and both should change how you write.</p>
+<p><strong>First, they follow you to the assessment centre.</strong> Assessment centres for this programme run in
+December and January<span class="src">[T260]</span>. Assume an interviewer will have your form in front of them and will
+ask you to expand on whatever you wrote. That has a hard implication: <strong>do not put a single claim in your answer
+you cannot defend for two more minutes.</strong> If you cite a number, know its source and its date. If you name a firm,
+know what it does. The fastest way to lose a room is to have written something you cannot stand behind.</p>
+<p><strong>Second, the process is strengths-based.</strong> Fidelity's own materials describe a "strengths-based
+assessment process", and a recruiter is quoted saying the firm moved away from competency-based questions toward "core
+strengths that motivate someone"<span class="src">[T261]</span> <span class="cf cf-r">Reported</span>. A strengths
+process is looking for what genuinely engages you. An answer about a topic you picked because it sounded impressive
+reads differently from one about a topic you actually find interesting, and the difference shows up under follow-up
+questioning.</p>
+
+<div class="box op">
+  <span class="box-h">A test you can run on your own draft</span>
+  <p>When you have a draft of Question 1, ask yourself: <em>could I talk about this for five minutes without notes, and
+  would I enjoy it?</em> If the answer is no, change the topic, however clever the one you have chosen. The follow-up
+  question is where the marks actually are.</p>
+</div>
+
+<h3>1.4 Fidelity's own rules on using AI to write these answers</h3>
+<p class="lede">This research turned up something directly on point that you should read before you write anything:
+Fidelity International publishes a <strong>Candidates AI Code of Conduct</strong>.</p>
+
+<div class="box dont">
+  <span class="box-h">What it actually says</span>
+  <p>It does not ban AI. It draws three lines<span class="src">[T234]</span> <span class="cf cf-c">Confirmed, read directly from the firm's own careers site</span>:</p>
+  <table style="margin:5pt 0;">
+    <thead><tr><th style="width:26%">Category</th><th style="width:74%">Examples given</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Fine, no disclosure</strong></td><td>Improving grammar, spelling, tone and formatting. Structuring or tailoring a CV. Translation. Interview preparation. Accessibility tools.</td></tr>
+      <tr style="background:#F7EFD8"><td><strong>Allowed, but must be disclosed</strong></td><td>"Preparing written responses for non-timed tasks where originality, reasoning or reflection is assessed." <strong>That is precisely what these two questions are.</strong></td></tr>
+      <tr style="background:#F7E3E3"><td><strong>Prohibited</strong></td><td>"Submitting AI-generated content as your own where authenticity, judgement or personal capability is being assessed." Also real-time AI assistance during live interviews or assessments.</td></tr>
+    </tbody>
+  </table>
+  <p>Their stated reason, verbatim: <em>"We are interested in you – your judgement, experience, potential and values –
+  not your ability to outsource thinking to technology."</em> And the consequence: failure to follow the code "may result
+  in disqualification or withdrawal of an offer"<span class="src">[T234]</span>.</p>
+</div>
+
+<div class="box say">
+  <span class="box-h">What this means in practice, and why this pack is shaped the way it is</span>
+  <p>Using research to <em>inform</em> your thinking is ordinary preparation, the same as reading the Financial Times.
+  What their code targets is submitting reasoning that is not yours as though it were.</p>
+  <p>That is the reason this document contains no drafted answer, and it is a stronger reason than the one you gave when
+  you asked. The finished sentences need to be yours, on the firm's own stated rules. If you do use an AI tool to help
+  structure or draft substantive reasoning in the answer itself, their code says to disclose it. Read the page yourself
+  before you decide — it is on their careers site and takes two minutes.</p>
+</div>
+
+</section>
+<section class="part">
+<span class="marker">@@ANCHOR:q2@@</span>
+<div class="part-band">
+  <p class="kicker">Part 2 &nbsp;·&nbsp; Question 1</p>
+  <h2 class="part-title">The private credit<br>redemption story</h2>
+  <p class="standfirst">The story you picked, researched to primary sources. What happened, what an evergreen fund is,
+  why the structure strains, whether the AI explanation holds up, why it matters to an investment manager, and how it
+  connects to Fidelity. No drafted answer.</p>
+</div>
+
+<span class="marker">@@ANCHOR:q2a@@</span>
+<h3>2.1 What actually happened, with the numbers</h3>
+
+<p class="lede">Your instinct was right, and the detail is better than the headline. But three things in the popular
+version of this story are imprecise, and getting them right is most of what will make your answer stand out.</p>
+
+<h4>The events</h4>
+<p>Two Blue Owl funds are at the centre of it. Both are <strong>non-traded business development companies</strong>: US
+vehicles that lend to mid-sized private companies, sold largely through wealth and adviser channels, offering quarterly
+buybacks capped at 5% of value<span class="src">[T2][T57]</span>.</p>
+
+<table class="long">
+  <thead><tr>
+    <th style="width:22%">Fund and quarter</th><th style="width:19%">Requests received</th><th style="width:19%">Actually paid</th>
+    <th style="width:13%">Fill rate</th><th style="width:27%">Note</th>
+  </tr></thead>
+  <tbody>
+    <tr><td><strong>Blue Owl Credit Income Corp (OCIC)</strong><br>Q1 2026</td>
+        <td>21.9% of NAV<br>about $4.2bn</td><td>5% cap<br>about $988m</td><td>about 23%</td>
+        <td>The flagship credit fund.</td></tr>
+    <tr><td>OCIC, Q2 2026</td><td>18.8% of NAV<br>about $3.6bn</td><td>5% cap</td><td>about 27%</td>
+        <td>Eased slightly. Still nearly four times the cap.</td></tr>
+    <tr><td><strong>Blue Owl Technology Income Corp (OTIC)</strong><br>Q1 2026</td>
+        <td>40.7% of NAV<br>about $1.2bn</td><td>5% cap<br>about $179m</td><td>about 13%</td>
+        <td>The software-lending fund. Blue Owl's own July letter later restates this as 40.4% after a measurement-date change.</td></tr>
+    <tr><td>OTIC, Q2 2026</td><td>38.1% of NAV<br>about $1.1bn</td><td>5% cap</td><td>about 14%</td>
+        <td>The highest of any non-traded BDC tracked.</td></tr>
+  </tbody>
+  <caption>Figures from SEC filings, including 8-K exhibits, read directly <span class="src">[T1]–[T20]</span> <span class="cf cf-c">Confirmed</span>. "NAV" is net asset value, the fund's equity value.</caption>
+</table>
+
+<div class="box dont">
+  <span class="box-h">Three precision points — get these right and you are ahead of the press coverage</span>
+  <ol>
+    <li><strong>The AI quote belongs to one fund, not both.</strong> The phrase "heightened market concerns around AI-related
+    disruption to software companies" appears in exactly one filing: <strong>OTIC's 8-K exhibit dated 2 April
+    2026</strong><span class="src">[T3]</span> <span class="cf cf-c">Confirmed by direct EDGAR full-text search</span>.
+    The flagship credit fund's own letter gives a <em>different</em> explanation: "AI-related disruption, geopolitical
+    risks stemming from the Iran war, and broader negative sentiment"<span class="src">[T4]</span>. Press coverage
+    routinely blends the two. If you attribute the software-disruption line to the big fund, you have repeated an error
+    that a fixed-income person at Fidelity may well spot.</li>
+
+    <li><strong>"$36bn fund" is not the right number.</strong> The $36bn widely quoted for OCIC is <em>portfolio fair
+    value</em>, which includes borrowed money. The equity NAV that the 5% cap actually applies to is roughly
+    $19bn to $20bn<span class="src">[T1]</span> <span class="cf cf-i">Inferred from the disclosed $988m paid at a 5% cap</span>.
+    Safest phrasing: describe it as "Blue Owl's flagship private credit fund" rather than attaching a size you would then
+    have to defend.</li>
+
+    <li><strong>Requests received are not demand for cash.</strong> Because unmet requests are allocated pro-rata, it is
+    rational to ask for more than you want in order to receive the amount you actually need. Some portion of a 40%
+    request figure is strategic inflation, not 40% of investors wanting out<span class="cf cf-i">Inferred</span>.
+    Noticing this is a genuinely analytical observation and very few applicants will make it.</li>
+  </ol>
+</div>
+
+<h4>This is not one firm's problem</h4>
+<p>The single most important thing for your answer's "why it matters" clause: this is systemic within the product
+category, not idiosyncratic. Ratings agency data cited in trade coverage found that <strong>10 of 16 tracked non-traded
+business development companies breached their caps</strong>, with average requests of <strong>10.3% in Q2 2026</strong>
+against 5% caps<span class="src">[T21]</span> <span class="cf cf-r">Reported</span>. Funds run by Blackstone, Apollo,
+Ares, BlackRock with HPS, and Golub all exceeded their caps in the first half of 2026<span class="src">[T21]</span>.</p>
+
+<p>And it crossed the Atlantic and the asset class. <strong>Partners Group</strong> gated its Global Value fund, an $8.6bn
+evergreen <em>private equity</em> vehicle, on <strong>3 June 2026</strong>, after requests reached about 9.8% against a 5%
+cap<span class="src">[T22][T63]</span> <span class="cf cf-r">Reported</span>. Its shares fell sharply on the news, reported
+at around 17% intraday<span class="src">[T64]</span>.</p>
+
+<div class="box unc">
+  <span class="box-h">Be careful with the Partners Group comparison</span>
+  <p>It is a real event and worth citing, but it is <strong>smaller, later, and in a different asset class</strong> than
+  the Blue Owl episode: private equity rather than private credit, $8.6bn rather than $19bn-plus, 9.8% requests rather
+  than 40%. If you present the two as equivalent you overstate. If you present Partners Group as evidence the strain
+  <em>spread beyond US private credit</em>, you are on solid ground and making a sharper point.</p>
+</div>
+
+<h4>The precedent that tells you how this ends</h4>
+<p>Blackstone's real estate vehicle BREIT gated redemptions from <strong>November 2022 to September 2023</strong>, under a
+2% monthly and 5% quarterly cap, honouring more than $15bn over the episode before requests normalised and the gate came
+off<span class="src">[T23]</span> <span class="cf cf-c">Confirmed from a primary filing</span>.</p>
+<p>That matters for your answer because it supplies the honest conclusion: these episodes have historically resolved
+without the fund failing. The queue clears. What it costs is not usually investors' capital. It is trust, the growth of
+the product, and the share price of the manager.</p>
+
+<h4>What it cost the manager</h4>
+<div class="grid3">
+  <div class="stat"><div class="v">$25.02 → $7.95</div><div class="k">Blue Owl (NYSE: OWL) share price, January 2025 to an all-time low on 2 April 2026<span class="src">[T24]</span></div></div>
+  <div class="stat"><div class="v">~$10.00</div><div class="k">Where it traded on 18 September 2026. Partially recovered, far from whole<span class="src">[T24]</span></div></div>
+  <div class="stat"><div class="v">Negative</div><div class="k">Moody's cut OCIC's outlook around 8 April 2026, affirming Baa2<span class="src">[T25]</span></div></div>
+</div>
+<p>Two further details worth knowing because they show what happens to investors who cannot wait for the queue. In
+February 2026, Saba Capital and Cox Capital launched unsolicited mini-tender offers for three non-traded Blue Owl funds
+<strong>at discounts of 20% to 35%</strong><span class="src">[T26]</span> <span class="cf cf-r">Reported</span>. That is
+the price of immediate liquidity when the official exit is rationed, and it is the clearest possible evidence that the
+stated NAV and the price of getting out now are two different things. Short interest in the manager's own shares reached
+about 17.6% of free float<span class="src">[T27]</span>.</p>
+
+<figure>
+  <span class="fig-num">Figure 4 · the chronology</span>
+  <svg viewBox="0 0 640 262" id="fig-chrono">
+    <text x="0" y="12" class="s-ttl">Eighteen months, from record fundraising to rationed exits</text>
+    <line x1="84" y1="30" x2="84" y2="230" stroke="#BFB6A8" stroke-width="1.2"/>
+
+    <circle cx="84" cy="42" r="4" fill="#1F6B4C"/><text x="0" y="45" class="s-sm">Jan 2025</text>
+    <text x="96" y="40" class="s-lbl" font-weight="700">The peak</text>
+    <text x="96" y="52" class="s-sm">Blue Owl shares at $25.02. Evergreen private credit is the industry's growth story. [T24]</text>
+
+    <circle cx="84" cy="76" r="4" fill="#9A7415"/><text x="0" y="79" class="s-sm">Nov 2022–Sep 2023</text>
+    <text x="96" y="74" class="s-lbl" font-weight="700">The precedent, already on the record</text>
+    <text x="96" y="86" class="s-sm">Blackstone's BREIT gates for ten months, honours $15bn+, then normalises. [T23]</text>
+
+    <circle cx="84" cy="110" r="4" fill="#B9602C"/><text x="0" y="113" class="s-sm">Feb 2026</text>
+    <text x="96" y="108" class="s-lbl" font-weight="700">Opportunists arrive</text>
+    <text x="96" y="120" class="s-sm">Saba and Cox bid for three non-traded Blue Owl funds at 20–35% discounts to NAV. [T26]</text>
+
+    <circle cx="84" cy="144" r="5" fill="#A32F2F"/><text x="0" y="147" class="s-sm" font-weight="700">2 Apr 2026</text>
+    <text x="96" y="142" class="s-lbl" font-weight="700" fill="#A32F2F">The gate binds, and the reason is stated</text>
+    <text x="96" y="154" class="s-sm">OTIC discloses 40.7% requests against a 5% cap, citing "AI-related disruption to software companies". [T3]</text>
+    <text x="96" y="166" class="s-sm">OCIC discloses 21.9%. Blue Owl shares hit an all-time low of $7.95 the same day. [T24]</text>
+
+    <circle cx="84" cy="188" r="4" fill="#A32F2F"/><text x="0" y="191" class="s-sm">3 Jun 2026</text>
+    <text x="96" y="186" class="s-lbl" font-weight="700">It spreads, to Europe and to private equity</text>
+    <text x="96" y="198" class="s-sm">Partners Group gates its $8.6bn Global Value fund at 9.8% requests. Shares fall about 17% intraday. [T22][T64]</text>
+
+    <circle cx="84" cy="222" r="4" fill="#9A7415"/><text x="0" y="225" class="s-sm">Jul–Sep 2026</text>
+    <text x="96" y="220" class="s-lbl" font-weight="700">Easing, not resolved</text>
+    <text x="96" y="232" class="s-sm">Q2 requests fall to 18.8% and 38.1%. Still multiples of the cap. Q3 figures not yet published. [T1][T2]</text>
+
+    <text x="0" y="256" class="s-xs">Sources as marked; SEC filings read directly. Compiled 18 September 2026 — Q3 numbers were still pending at that date.</text>
+  </svg>
+  <figcaption><b>Figure 4.</b> The chronology. Mixed <span class="cf cf-c">Confirmed</span> and <span class="cf cf-r">Reported</span> as marked.</figcaption>
+</figure>
+
+<div class="box note">
+  <span class="box-h">What is not yet known, as at 18 September 2026</span>
+  <p>Q3 2026 figures were unpublished when this was compiled; Blue Owl's own repurchase window for Q3 was open through
+  30 September with pricing marked "to be determined"<span class="src">[T28]</span>. No UK or European LTAF has gated.
+  <strong>Check for Q3 numbers before you submit</strong>: if requests fell materially, the story has a different ending
+  and your answer should reflect it. If they rose, your answer gets stronger.</p>
+</div>
+</section>
+<span class="marker">@@ANCHOR:q2b@@</span>
+<h3>2.2 What an evergreen fund is, from zero</h3>
+
+<p class="lede">You cannot explain this story to anyone until you can explain the product in two sentences. The product
+is the story.</p>
+
+<p>For forty years, investing in private companies, private loans or property meant one structure: a
+<strong>closed-end drawdown fund</strong>. You commit money for roughly ten years. The manager calls it when it is
+needed and returns it when investments are sold. <strong>You cannot ask for it back.</strong> That structure matches the
+asset: if it takes years to sell a company, the fund should not promise to return your money next month.</p>
+
+<p>At the other extreme sits the ordinary <strong>open-ended fund</strong> most people own, the OEIC or unit trust in an
+ISA. You can sell any day, at that day's price, because the fund holds shares and bonds that trade every day.</p>
+
+<p>The <strong>evergreen fund</strong>, also called semi-liquid, was built to sit between them. It has no end date, it
+accepts new money continuously, and it lets you ask for some money back at set intervals, usually quarterly. That is
+what makes it sellable to wealthy individuals and, increasingly, to ordinary savers who were never going to sign up
+for a ten-year lock-up.</p>
+
+<div class="box kt">
+  <span class="box-h">Key term · the 5% quarterly cap</span>
+  <p>An evergreen fund does not promise to return everything you ask for. It promises to buy back a limited amount each
+  quarter, conventionally <strong>5% of the fund's total value</strong>. If more people ask than the cap allows, everyone
+  gets a <strong>pro-rata</strong> share: ask for £100,000 in a quarter where requests are four times the cap, and you
+  get roughly a quarter of it.</p>
+  <p>Where does 5% come from? For one narrow US category, registered "interval funds", it is regulatory: SEC Rule 23c-3
+  requires a repurchase offer between 5% and 25% each period<span class="src">[T57]</span> <span class="cf cf-c">Confirmed</span>.
+  For the non-traded business development companies at the centre of this story, and for most evergreen private funds,
+  <strong>5% is convention, not law</strong><span class="src">[T57][T58][T60]</span>. That distinction is worth knowing:
+  the number everyone quotes as a rule is mostly a habit.</p>
+</div>
+
+<figure>
+  <span class="fig-num">Figure 2 · three structures, one spectrum</span>
+  <svg viewBox="0 0 640 262" id="fig-structures">
+    <text x="0" y="12" class="s-ttl">The trade-off is always the same: how fast you can leave, against what the fund can own</text>
+
+    <rect x="0" y="28" width="200" height="120" rx="3" fill="#12314F"/>
+    <text x="10" y="47" class="s-w">Closed-end drawdown</text>
+    <text x="10" y="64" class="s-wsm" fill="#A9BED4">Roughly ten-year life</text>
+    <text x="10" y="76" class="s-wsm" fill="#A9BED4">Capital called when needed</text>
+    <text x="10" y="88" class="s-wsm" fill="#A9BED4">No redemptions at all</text>
+    <text x="10" y="108" class="s-wsm" fill="#FFFFFF">Can own the most illiquid</text>
+    <text x="10" y="120" class="s-wsm" fill="#FFFFFF">assets there are, safely,</text>
+    <text x="10" y="132" class="s-wsm" fill="#FFFFFF">because nobody can leave.</text>
+
+    <rect x="220" y="28" width="200" height="120" rx="3" fill="#B9602C"/>
+    <text x="230" y="47" class="s-w">Evergreen / semi-liquid</text>
+    <text x="230" y="64" class="s-wsm" fill="#F6E0D0">No end date</text>
+    <text x="230" y="76" class="s-wsm" fill="#F6E0D0">Continuous new money</text>
+    <text x="230" y="88" class="s-wsm" fill="#F6E0D0">Quarterly, capped exits</text>
+    <text x="230" y="108" class="s-wsm" fill="#FFFFFF">The compromise. Owns</text>
+    <text x="230" y="120" class="s-wsm" fill="#FFFFFF">illiquid assets while</text>
+    <text x="230" y="132" class="s-wsm" fill="#FFFFFF">promising partial liquidity.</text>
+
+    <rect x="440" y="28" width="200" height="120" rx="3" fill="#1E4670"/>
+    <text x="450" y="47" class="s-w">Daily-dealing OEIC</text>
+    <text x="450" y="64" class="s-wsm" fill="#A9BED4">Sell any working day</text>
+    <text x="450" y="76" class="s-wsm" fill="#A9BED4">Priced daily</text>
+    <text x="450" y="88" class="s-wsm" fill="#A9BED4">No cap in normal times</text>
+    <text x="450" y="108" class="s-wsm" fill="#FFFFFF">Must own assets that</text>
+    <text x="450" y="120" class="s-wsm" fill="#FFFFFF">trade daily, or it has a</text>
+    <text x="450" y="132" class="s-wsm" fill="#FFFFFF">Woodford problem.</text>
+
+    <rect x="0" y="162" width="640" height="46" rx="3" fill="#F7E3E3" stroke="#A32F2F"/>
+    <text x="8" y="179" class="s-lbl" fill="#A32F2F" font-weight="700">The middle box is the only one where the promise and the assets can come apart</text>
+    <text x="8" y="195" class="s-sm">The left box makes no liquidity promise. The right box owns liquid things. Only the evergreen structure promises something its assets may not be able to deliver on demand.</text>
+
+    <text x="0" y="228" class="s-sm">Why it was built anyway: private assets historically outperformed, and the only investors who could access them were those able to lock money up for a decade.</text>
+    <text x="0" y="242" class="s-sm">The evergreen fund was the industry's answer to "how do we sell this to everyone else?" That commercial motive is not sinister, but it is worth naming.</text>
+    <text x="0" y="258" class="s-xs">Structures and the 5%-25% Rule 23c-3 band per [T57]; conventions per [T57][T58][T60]. Comparison is the author's construction. Compiled 18 September 2026.</text>
+  </svg>
+  <figcaption><b>Figure 2.</b> The three structures. Facts <span class="cf cf-c">Confirmed</span>; the framing is the author's <span class="cf cf-i">Inferred</span>.</figcaption>
+</figure>
+
+<h4>Where the cash to pay leavers actually comes from</h4>
+<p>This is the part that makes the story click, and most coverage skips it. An evergreen fund meets redemptions from
+three places<span class="src">[T57][T60]</span>:</p>
+<ol>
+  <li>A <strong>liquidity sleeve</strong>: cash and easily sold liquid credit, deliberately held back. Partners Group's
+  affected fund reportedly held about 15% in cash plus about 15% in an undrawn credit
+  facility<span class="src">[T63][T66]</span> <span class="cf cf-r">Reported</span>.</li>
+  <li><strong>New money coming in.</strong> Subscriptions from new investors fund the exits of old ones.</li>
+  <li>Selling assets, which is the thing the structure exists to avoid doing in a hurry.</li>
+</ol>
+
+<div class="box note">
+  <span class="box-h">The sentence that explains the whole story</span>
+  <p>Point 2 is fine while money is flowing in, and becomes a problem the moment it stops. A fund that relies on new
+  subscriptions to pay departing investors works beautifully in a boom and strains precisely when sentiment turns, which
+  is exactly when people want out.</p>
+  <p>Be careful how you phrase this. It is <strong>not</strong> a Ponzi scheme: the fund owns real loans producing real
+  interest, and the cap exists specifically so the fund never has to pay leavers with money it does not have. But the
+  dependence on inflows is real, it is structural, and it is why redemption pressure and slowing fundraising tend to
+  arrive together. If you make this point, make it precisely. Overstating it is the single easiest way to look
+  unserious.</p>
+</div>
+
+<h4>The same idea in four jurisdictions</h4>
+<table>
+  <thead><tr><th style="width:20%">Vehicle</th><th style="width:12%">Where</th><th style="width:38%">Redemption terms</th><th style="width:30%">Who can hold it</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Non-traded BDC</strong><br>business development company</td><td>US</td>
+        <td>Quarterly tender, conventionally capped at 5% of NAV. <strong>Not a regulatory cap.</strong></td>
+        <td>Increasingly sold through wealth and adviser channels. <strong>This is where the story is happening.</strong></td></tr>
+    <tr><td>Interval fund</td><td>US</td><td>Repurchase offer of 5% to 25% per period, required by SEC Rule 23c-3<span class="src">[T57]</span></td><td>Registered, retail-accessible</td></tr>
+    <tr><td><strong>LTAF</strong><br>Long-Term Asset Fund</td><td>UK</td>
+        <td><strong>Minimum 90-day notice period. Dealing no more often than monthly.</strong> Both are regulatory floors<span class="src">[T56]</span> <span class="cf cf-c">Confirmed</span></td>
+        <td>Professional and DC pensions from 2021; broadened to retail, self-select DC and SIPPs by PS23/7 in June 2023<span class="src">[T51]</span></td></tr>
+    <tr><td>ELTIF / ELTIF 2.0</td><td>EU</td><td>Redeemable versions reference a 12-month minimum notice<span class="src">[T68]</span> <span class="cf cf-r">Reported</span></td><td>Retail-accessible after the 2.0 reform</td></tr>
+  </tbody>
+  <caption>The row that matters for a Fidelity answer is the LTAF. Note how much slower its regulatory floor is than the US convention.</caption>
+</table>
+
+<div class="box say">
+  <span class="box-h">The detail almost nobody will have</span>
+  <p>The UK's LTAF regime was created by FCA Policy Statement <strong>PS21/14</strong>, published <strong>25 October
+  2021</strong>, with rules in force <strong>15 November 2021</strong><span class="src">[T50]</span>. Retail, self-select
+  DC and SIPP access came later, through <strong>PS23/7</strong> on <strong>29 June 2023</strong>, which reclassified
+  LTAF units from a Non-Mass Market Investment to a Restricted Mass Market Investment, with risk warnings, an
+  appropriateness test, and a <strong>10% of net assets</strong> self-certification cap for unadvised retail
+  investors<span class="src">[T51]</span> <span class="cf cf-c">Confirmed</span>.</p>
+  <p>Knowing that the UK deliberately built a <em>slower</em> version of this product, and then deliberately opened it to
+  ordinary savers with safeguards attached, is the difference between describing a news story and understanding a policy
+  choice.</p>
+</div>
+
+<span class="marker">@@ANCHOR:q2c@@</span>
+<h3>2.3 Why the structure strains: the liquidity mismatch</h3>
+
+<p class="lede">One idea underneath everything: a fund that promises to return money faster than it can sell what it
+owns has created a race. Once investors realise there is a race, the race starts.</p>
+
+<div class="chain">
+  <div class="step"><div class="body"><h5>The fund values its assets using a model, not a market price</h5>
+  <p>Private loans do not trade on an exchange, so their value is an estimate, updated periodically. In calm conditions
+  that is reasonable. In deteriorating conditions the estimate lags reality.</p></div></div>
+
+  <div class="step"><div class="body"><h5>So the price paid to someone leaving may be too generous</h5>
+  <p>If the stated value has not caught up with what the assets would actually fetch, whoever leaves first is paid out at
+  the old, higher figure. The shortfall is absorbed by everyone who stays.</p></div></div>
+
+  <div class="step"><div class="body"><h5>Which creates a first-mover advantage</h5>
+  <p>The Bank of England's Financial Policy Committee states it plainly: "there is an advantage to investors who redeem
+  ahead of others, particularly in a stress"<span class="src">[T52]</span> <span class="cf cf-c">Confirmed</span>. You do
+  not need to think the manager is dishonest to want to be first. You only need to think other people might be.</p></div></div>
+
+  <div class="step"><div class="body"><h5>So rational investors submit requests early</h5>
+  <p>And because allocation is pro-rata, submitting a larger request than you need is also rational, which inflates the
+  headline request figure beyond genuine demand for cash. This matters when reading the numbers in 2.1.</p></div></div>
+
+  <div class="step"><div class="body"><h5>The gate comes down, which protects the fund and confirms the fear</h5>
+  <p>The cap stops forced selling at fire-sale prices, which genuinely protects everyone who stays. It also tells every
+  remaining investor that the queue is real. The protective mechanism and the panic trigger are the same event, viewed
+  from two sides<span class="cf cf-i">Inferred</span>.</p></div></div>
+</div>
+
+<figure>
+  <span class="fig-num">Figure 3 · what the cap actually does to a request</span>
+  <svg viewBox="0 0 640 250" id="fig-gate">
+    <text x="0" y="12" class="s-ttl">Using Blue Owl's flagship fund in the first quarter of 2026 as the worked example</text>
+
+    <text x="0" y="38" class="s-lbl" font-weight="700">Investors asked to withdraw</text>
+    <rect x="0" y="46" width="530" height="26" fill="#A32F2F"/>
+    <text x="265" y="63" class="s-w" text-anchor="middle">about 21.9% of the fund's value</text>
+
+    <text x="0" y="96" class="s-lbl" font-weight="700">The fund was obliged to pay</text>
+    <rect x="0" y="104" width="121" height="26" fill="#1F6B4C"/>
+    <text x="60" y="121" class="s-w" text-anchor="middle">5%</text>
+    <rect x="121" y="104" width="409" height="26" fill="#EDE8E0" stroke="#BFB6A8" stroke-dasharray="3 2"/>
+    <text x="325" y="121" class="s-lbl" text-anchor="middle">the rest joins the queue for next quarter</text>
+
+    <rect x="0" y="152" width="640" height="44" rx="3" fill="#F7E3E3" stroke="#A32F2F"/>
+    <text x="8" y="169" class="s-lbl" fill="#A32F2F" font-weight="700">The mechanism that makes this persistent rather than a one-quarter event</text>
+    <text x="8" y="185" class="s-sm">Unmet requests roll forward. If demand keeps exceeding 5% each quarter, a structural backlog builds that can take years to clear, even with no further bad news.</text>
+
+    <text x="0" y="218" class="s-sm">So "the fund honoured 5%" and "investors could not get their money" are both true statements about the same quarter. Which one you lead with is an editorial choice, and a revealing one.</text>
+    <text x="0" y="244" class="s-xs">Blue Owl figures per [T58], to be read alongside the verified quarter-by-quarter table in section 2.1. Diagram is the author's construction. Compiled 18 September 2026.</text>
+  </svg>
+  <figcaption><b>Figure 3.</b> How a capped redemption works. Figures <span class="cf cf-r">Reported</span>.</figcaption>
+</figure>
+
+<h4>The UK has been here before, twice</h4>
+<p>You have two domestic precedents, and using one of them shows you understand this is not a new problem.</p>
+<ul>
+  <li><strong>Woodford, June 2019.</strong> The LF Woodford Equity Income Fund suspended dealing on <strong>3 June
+  2019</strong>. The FCA later found that by then <strong>only 8% of the fund's investments could be sold within seven
+  days</strong>, against a promise of daily redemption. The fund had fallen from over £10.1bn in May 2017 to £3.6bn
+  immediately before suspension. Fines of nearly £46m were announced on 5 August 2025<span class="src">[T55]</span>
+  <span class="cf cf-c">Confirmed</span>.</li>
+  <li><strong>Property funds, 2016 and 2020.</strong> After the June 2016 referendum, major UK open-ended property funds
+  suspended within days. The FCA's own account of the resulting rules says it directly: "Funds which hold less liquid
+  assets can encounter liquidity difficulties if significant numbers of investors simultaneously try to withdraw their
+  money at short notice"<span class="src">[T61]</span> <span class="cf cf-c">Confirmed</span>. It happened again in March
+  2020 on valuation uncertainty.</li>
+</ul>
+
+<div class="box op">
+  <span class="box-h">The principle underneath all of it</span>
+  <p>From the joint FCA and Bank of England statement of 16 December 2019: a fund's redemption notice period should
+  match "the time needed to sell the required portion of a fund's assets without discounts" beyond those already in the
+  price<span class="src">[T53]</span> <span class="cf cf-c">Confirmed</span>.</p>
+  <p>In plainer words: <strong>a fund's exit terms should be built backwards from how long its assets actually take to
+  sell, not forwards from what would be easiest to sell to a customer.</strong> That single sentence is arguably the
+  whole of your Question 1 answer, and it is a regulator's sentence, not a journalist's.</p>
+</div>
+
+<h4>The counter-argument, which you should take seriously</h4>
+<p>There is a respectable case that none of this is a scandal, and two named people made it on the record during the
+2026 episodes:</p>
+<blockquote>
+"These funds are meant for long-term investing, and they limit redemptions accordingly. Those limits are not a sign of
+stress — they are a tool to protect investors."
+<cite>Eric J. Pan, President and Chief Executive, Investment Company Institute, opinion piece dated 27 April 2026 <span class="src">[T65]</span> <span class="cf cf-c">Confirmed</span></cite>
+</blockquote>
+<blockquote>
+"Evergreen fund gates are often misread as a red flag, but they are precisely the mechanism these structures were
+designed for: protecting long-term investors when short-term redemption demand temporarily outpaces liquidity."
+<cite>Nicolas Moura, PitchBook senior analyst for EMEA private capital, quoted around 5 June 2026 <span class="src">[T66]</span> <span class="cf cf-c">Confirmed</span></cite>
+</blockquote>
+<p>The strongest version of their case: the cap prevents fire-sales that would harm everyone remaining; the terms were
+in the prospectus before anyone invested; and pro-rata allocation is fairer than first-come-first-served.</p>
+<p>The honest reply is not that they are wrong. It is that <strong>disclosure in a prospectus is not the same as
+understanding</strong>. An investor can have been told about a 5% cap with pro-rata allocation and a 90-day notice
+period, and still not have grasped what that feels like when they need the money and cannot get it. That gap between
+what was disclosed and what was understood is, precisely, the thing the UK's Consumer Duty was written to close.</p>
+<span class="marker">@@ANCHOR:q2d@@</span>
+<h3>2.4 The AI link, and whether it holds up</h3>
+
+<p class="lede">This is where your answer can become something almost nobody else will write. The AI explanation is
+real, it is the company's own, and when you check it against the credit data it does not fully hold. That gap is the
+most interesting thing in the entire story.</p>
+
+<h4>The argument, as the market made it</h4>
+<div class="chain warm">
+  <div class="step"><div class="body"><h5>Software was considered close to the perfect borrower</h5>
+  <p>Recurring subscription revenue, high margins, little need for physical capital, customers who rarely leave. Private
+  credit funds lent heavily into software buyouts on exactly that reasoning<span class="src">[T100]</span>.</p></div></div>
+
+  <div class="step"><div class="body"><h5>AI threatens the specific thing that made it good credit</h5>
+  <p>If AI agents can reproduce what a software product does, then per-seat pricing, the ability to raise prices, and
+  customer stickiness all weaken at once. The argument was set out in Bain &amp; Company's 2025 work on whether agentic
+  AI disrupts software-as-a-service<span class="src">[T101]</span> <span class="cf cf-r">Reported</span>.</p></div></div>
+
+  <div class="step"><div class="body"><h5>Public markets repriced software violently</h5>
+  <p>Software's forward price-to-earnings multiple fell from roughly <strong>84 times in 2020-22 to 22.7 times by the
+  first quarter of 2026</strong>, below the S&amp;P 500 for the first time on record, with around <strong>$2 trillion</strong>
+  of software market value lost since January 2026<span class="src">[T102]</span> <span class="cf cf-r">Reported</span>.</p></div></div>
+
+  <div class="step"><div class="body"><h5>Investors in a fund lending to those same companies drew the obvious conclusion</h5>
+  <p>And tried to leave. Blue Owl's technology lending fund, the one most exposed to software borrowers, saw the highest
+  redemption requests of any non-traded BDC tracked<span class="src">[T21]</span>.</p></div></div>
+</div>
+
+<div class="box note">
+  <span class="box-h">The check that almost nobody will run</span>
+  <p>If AI were already damaging these borrowers, it should be visible in the credit data. It largely is not, at least
+  not yet.</p>
+  <ul class="tight">
+    <li>The Proskauer Private Credit Default Index moved from <strong>1.84% to 2.73% to 2.51%</strong> across the four
+    quarters to mid-2026<span class="src">[T103]</span> <span class="cf cf-r">Reported</span>. That is a modest, wobbling
+    series, not a credit event.</li>
+    <li>Payment-in-kind income, where a borrower pays interest with more debt rather than cash and which is the standard
+    early warning of strain, rose from <strong>5.9% of BDC income in 2023 to around 8% in 2026</strong><span class="src">[T104]</span>.
+    Elevated and worth watching. Not a crisis.</li>
+    <li>Software-specific default rates were reported as "relatively stable" in February 2026, during the
+    panic<span class="src">[T105]</span> <span class="cf cf-r">Reported</span>.</li>
+    <li>Blue Owl's own chief executive, Marc Lipschultz, pushed back publicly, noting the portfolio's software companies
+    had grown revenue around 40% and earnings around 50% since ChatGPT launched in November
+    2022<span class="src">[T106]</span> <span class="cf cf-r">Reported</span>.</li>
+  </ul>
+</div>
+
+<figure>
+  <span class="fig-num">Figure 5 · the gap between the fear and the data</span>
+  <svg viewBox="0 0 640 248" id="fig-gap">
+    <text x="0" y="12" class="s-ttl">Two things moved at very different speeds. That difference is the story.</text>
+
+    <text x="0" y="38" class="s-lbl" font-weight="700" fill="#A32F2F">What sentiment did</text>
+    <rect x="0" y="46" width="180" height="22" fill="#A32F2F"/><text x="8" y="61" class="s-wsm">Software forward P/E: 84x → 22.7x</text>
+    <rect x="188" y="46" width="150" height="22" fill="#A32F2F"/><text x="196" y="61" class="s-wsm">~$2trn market value lost</text>
+    <rect x="346" y="46" width="160" height="22" fill="#A32F2F"/><text x="354" y="61" class="s-wsm">OTIC requests: 40.7% of NAV</text>
+    <text x="514" y="61" class="s-sm">violent, fast</text>
+
+    <text x="0" y="98" class="s-lbl" font-weight="700" fill="#1F6B4C">What the credit data did</text>
+    <rect x="0" y="106" width="52" height="22" fill="#1F6B4C"/><text x="8" y="121" class="s-wsm">1.8→2.5%</text>
+    <text x="60" y="121" class="s-sm">private credit default index, four quarters to mid-2026</text>
+    <rect x="0" y="134" width="44" height="22" fill="#1F6B4C"/><text x="8" y="149" class="s-wsm">6→8%</text>
+    <text x="52" y="149" class="s-sm">PIK income share, 2023 to 2026. Elevated, not critical.</text>
+    <rect x="0" y="162" width="36" height="22" fill="#1F6B4C"/><text x="8" y="177" class="s-wsm">flat</text>
+    <text x="44" y="177" class="s-sm">software default rates, reported stable through the panic</text>
+    <text x="514" y="149" class="s-sm">gradual, small</text>
+
+    <rect x="0" y="196" width="640" height="38" rx="3" fill="#EEE6F5" stroke="#6D3A96"/>
+    <text x="8" y="213" class="s-lbl" fill="#6D3A96" font-weight="700">So what actually happened?</text>
+    <text x="8" y="228" class="s-sm">Investors did not run from realised credit losses. They ran from the fear of future ones, through a door built to fit 5% of them at a time.</text>
+
+    <text x="0" y="244" class="s-xs">Figures per [T102]-[T105], all Reported via trade and press coverage rather than primary index reports. Bar lengths are illustrative of relative magnitude, not to a common scale. Compiled 18 September 2026.</text>
+  </svg>
+  <figcaption><b>Figure 5.</b> Sentiment against fundamentals. <span class="cf cf-r">Reported</span> figures; the juxtaposition is the author's <span class="cf cf-i">Inferred</span>.</figcaption>
+</figure>
+
+<h4>The second AI exposure, which runs the other way</h4>
+<p>Worth knowing because it shows the exposure is not one-directional. Private credit is not only lending to companies
+<em>threatened</em> by AI. It is also financing the AI build-out itself. Morgan Stanley has projected private credit
+supplying around <strong>$800bn of a $1.5 trillion AI datacentre financing gap through 2028</strong><span class="src">[T107]</span>
+<span class="cf cf-r">Reported</span>.</p>
+<p>Regulators have noticed both. The Bank for International Settlements named an AI capital-expenditure bust and
+circular financing among its top global risks in its annual report of <strong>28 June 2026</strong><span class="src">[T108]</span>.
+The Bank of England's Financial Stability Report of <strong>July 2026</strong> named private credit, AI equity
+valuations and sovereign debt as the three main risks to UK financial stability<span class="src">[T109]</span>
+<span class="cf cf-r">Reported</span>.</p>
+
+<div class="box op">
+  <span class="box-h">The observation worth building an answer around</span>
+  <p>Private credit is exposed to AI from both ends at once: its software borrowers may be disrupted <em>by</em> AI, and
+  it is simultaneously one of the largest lenders <em>to</em> AI infrastructure. A candidate who notices that the same
+  asset class sits on both sides of the same theme is demonstrating something no reading list can supply.</p>
+</div>
+
+<span class="marker">@@ANCHOR:q2e@@</span>
+<h3>2.5 Six explanations, weighed</h3>
+<p>"Because of AI" is the headline. A good analyst holds several candidate explanations and says which they find most
+persuasive. Here are six, with a verdict on each.</p>
+
+<table class="long">
+  <thead><tr><th style="width:23%">Explanation</th><th style="width:47%">The evidence</th><th style="width:14%">Verdict</th><th style="width:16%">Why</th></tr></thead>
+  <tbody>
+    <tr><td><strong>1. Genuine AI-driven credit fear</strong></td>
+        <td>It is the firm's own stated reason, in an SEC filing<span class="src">[T3]</span>. Software multiples collapsed<span class="src">[T102]</span>. The most software-exposed fund had the highest requests.</td>
+        <td><span class="verdict v-part">Trigger, not cause</span></td>
+        <td>Explains the timing and which fund was worst hit. Does not explain the scale, given flat credit data.</td></tr>
+    <tr><td><strong>2. Disappointing returns versus liquid credit</strong></td>
+        <td>Yields compressed as money flooded into private credit. If the illiquidity premium shrinks, the reason to accept the lock-up shrinks with it.</td>
+        <td><span class="verdict v-part">Contributing</span></td>
+        <td>A slow, structural pressure. Rational, but does not produce a spike in one quarter.</td></tr>
+    <tr><td><strong>3. A wealth-channel investor base meeting a gate for the first time</strong></td>
+        <td>These funds were sold hard to advisers and private clients in 2023-25. Evergreen private credit assets still grew to <strong>$607bn</strong> by Q1 2026<span class="src">[T110]</span> even as Blue Owl gated.</td>
+        <td><span class="verdict v-strong">Strong</span></td>
+        <td>A large, new, retail-adjacent investor base that had never seen a cap bind is exactly the population that reacts hardest when one does.</td></tr>
+    <tr><td><strong>4. Rebalancing after gains elsewhere</strong></td>
+        <td>Investors taking profits in liquid markets and rebalancing. Plausible but under-evidenced.</td>
+        <td><span class="verdict v-weak">Weak</span></td>
+        <td>Would not concentrate so heavily in the most software-exposed fund.</td></tr>
+    <tr><td><strong>5. Contagion and the headline effect</strong></td>
+        <td>Jamie Dimon's "cockroaches" remark of 15 October 2025 primed distrust of private credit generally; Mohamed El-Erian returned to it in March 2026<span class="src">[T111][T112]</span>. Once gating is news, requests beget requests.</td>
+        <td><span class="verdict v-strong">Strong</span></td>
+        <td>The first-mover logic in 2.3 means the rational response to hearing about a gate is to join the queue immediately.</td></tr>
+    <tr><td><strong>6. Higher-for-longer rates</strong></td>
+        <td>The Fed raised to 3.75-4.00% on 16 September 2026; the Bank of England held at 3.75% the same week<span class="src">[T113]</span>. Cash and liquid credit pay well, with no lock-up.</td>
+        <td><span class="verdict v-part">Contributing</span></td>
+        <td>Raises the opportunity cost of being locked in. Background pressure rather than trigger.</td></tr>
+  </tbody>
+  <caption>Verdicts are this pack's judgement on the evidence assembled <span class="cf cf-i">Inferred</span>. You are not obliged to agree, and disagreeing with a reason is a better answer than agreeing without one.</caption>
+</table>
+
+<div class="box say">
+  <span class="box-h">The synthesis this research supports</span>
+  <p>The most defensible reading: <strong>AI fear was the trigger, but the structure was the amplifier.</strong> A
+  sentiment shock met a product that lets a limited number of people leave per quarter and allocates pro-rata, which
+  makes leaving early rational and asking for more than you need rational too. The redemption wave vastly outran the
+  actual deterioration in the loans.</p>
+  <p>That framing is stronger than "AI broke private credit" because it is more accurate, it survives the follow-up
+  question "but have the loans actually gone bad?", and it points at something an investment manager can act on: the
+  design of the product, not the direction of the market.</p>
+</div>
+<span class="marker">@@ANCHOR:q2f@@</span>
+<h3>2.6 Why it matters to an investment manager</h3>
+
+<p class="lede">This is the question's second clause, and the one most candidates skate over. "It's interesting" is not
+relevance. Relevance means: this changes how money gets managed, priced, sold or governed.</p>
+
+<p>Five answers, in rough order of how directly they bear on a firm like Fidelity International.</p>
+
+<div class="chain">
+  <div class="step"><div class="body"><h5>It is a test of a product the whole industry is betting on</h5>
+  <p>Semi-liquid vehicles are how private markets reach ordinary investors. Evergreen private credit assets reached
+  <strong>$607bn by the first quarter of 2026</strong><span class="src">[T110]</span>, and kept growing even while Blue
+  Owl was gating. Every major manager either has one of these products or wants one. This episode is the first real
+  stress test of the structure at scale.</p></div></div>
+
+  <div class="step"><div class="body"><h5>It is a repricing of the illiquidity premium</h5>
+  <p>Investors accept lock-ups because they expect to be paid for it. When that premium compresses, as it did while money
+  flooded into private credit, the lock-up starts to look like a cost rather than a trade. Mini-tender offers at
+  <strong>20% to 35% discounts</strong><span class="src">[T26]</span> put a market price on immediate liquidity, and it
+  was a punishing one.</p></div></div>
+
+  <div class="step"><div class="body"><h5>It is a valuation question, and regulators are already on it</h5>
+  <p>If assets are marked to model, the stated value and the achievable value can diverge. The FCA ran a review of
+  private market valuation practices, published <strong>5 March 2025</strong>, finding gaps in governance and in the
+  management of conflicts of interest<span class="src">[T141]</span> <span class="cf cf-c">Confirmed</span>. That review
+  predates this episode and reads differently after it.</p></div></div>
+
+  <div class="step"><div class="body"><h5>It is a distribution and suitability problem</h5>
+  <p>These products were sold hard into wealth and adviser channels. If a meaningful share of buyers did not understand
+  the exit terms, that is a conduct issue, not a market one. In the UK it would engage the Consumer Duty directly.</p></div></div>
+
+  <div class="step"><div class="body"><h5>It is now a named financial stability risk</h5>
+  <p>The Bank of England's Financial Stability Report of <strong>July 2026</strong> listed private credit alongside AI
+  equity valuations and sovereign debt as the three main risks to UK financial
+  stability<span class="src">[T109]</span> <span class="cf cf-r">Reported</span>. When a central bank names your asset
+  class, the regulatory direction of travel is set.</p></div></div>
+</div>
+
+<div class="box say">
+  <span class="box-h">The one-sentence version of relevance</span>
+  <p>The industry has spent five years building a bridge between illiquid assets and investors who want liquidity. This
+  is the first real load test of that bridge, and the result matters to every manager planning to walk more clients
+  across it.</p>
+</div>
+
+<span class="marker">@@ANCHOR:q2g@@</span>
+<h3>2.7 The Fidelity link, and the honest counter-case</h3>
+
+<p class="lede">You asked whether this connects to Fidelity. It does, directly, and the connection is better than a
+scare story, because the interesting part is how <em>different</em> Fidelity's version of the structure is.</p>
+
+<h4>What Fidelity International is actually doing</h4>
+<ul>
+  <li>It runs the <strong>Fidelity Diversified Private Assets LTAF</strong>, spanning private equity, private credit,
+  infrastructure, real estate and natural resources with a liquidity sleeve<span class="src">[T140]</span>.</li>
+  <li>It is being built into the <strong>£16.9bn FutureWise</strong> workplace pension default, reportedly toward around
+  15% in private markets over about three years<span class="src">[T262]</span> <span class="cf cf-r">Reported</span>.</li>
+  <li>Its audited UK accounts state that the investment business decided to "cease manufacturing of non-core private
+  asset classes in order to pivot resources to areas of unique strength... active ETFs and the distribution of
+  third-party capabilities for both private assets and select public market investments"<span class="src">[T142]</span>
+  <span class="cf cf-c">Confirmed, read from the filed Strategic Report</span>.</li>
+</ul>
+
+<div class="box unc">
+  <span class="box-h">Source uncertain — the LTAF authorisation date</span>
+  <p>This research found <strong>two dates</strong> for FCA authorisation of the Fidelity Diversified Private Assets
+  LTAF: <strong>6 August 2024</strong>, per two independent trade sources<span class="src">[T143]</span>, and August 2025
+  in other coverage<span class="src">[T262]</span>. They may describe different milestones, such as authorisation versus
+  launch or inclusion in the default. <strong>Do not cite a specific date</strong> unless you verify it yourself. Say
+  "Fidelity has an authorised LTAF" and you are safe.</p>
+</div>
+
+<h4>The nuance that makes this a strong answer rather than a cheap one</h4>
+<p>In May 2026 Fidelity announced a <strong>Private Markets Partner Network</strong> of around ten external managers
+feeding the LTAF: names reported include Ares, Crescent and Churchill in credit; CVC, Hg and Haveli in private equity;
+Stonepeak and DigitalBridge in infrastructure<span class="src">[T144]</span> <span class="cf cf-r">Reported</span>.</p>
+<p>Read that against the accounts quote above and the picture is consistent: <strong>Fidelity is largely selecting and
+packaging other managers' private assets, not originating the loans itself.</strong> That is a structurally different
+business from Blue Owl, which originates the credit it holds and distributes its own fund.</p>
+
+<figure>
+  <span class="fig-num">Figure 8 · two ways to put private assets in front of ordinary savers</span>
+  <svg viewBox="0 0 640 296" id="fig-twomodels">
+    <text x="0" y="12" class="s-ttl">Same broad idea, four structural differences that matter</text>
+
+    <rect x="0" y="26" width="310" height="28" rx="3" fill="#A32F2F"/>
+    <text x="155" y="45" class="s-w" text-anchor="middle">US non-traded BDC · Blue Owl</text>
+    <rect x="330" y="26" width="310" height="28" rx="3" fill="#1F6B4C"/>
+    <text x="485" y="45" class="s-w" text-anchor="middle">UK LTAF in a DC default · Fidelity</text>
+
+    <rect x="0" y="60" width="310" height="44" fill="#F7E3E3" stroke="#A32F2F"/>
+    <text x="8" y="76" class="s-sm" font-weight="700">Originates its own loans</text>
+    <text x="8" y="90" class="s-sm">Manufacturer and distributor of the same product.</text>
+    <rect x="330" y="60" width="310" height="44" fill="#E2F0E9" stroke="#1F6B4C"/>
+    <text x="338" y="76" class="s-sm" font-weight="700">Mostly selects other managers</text>
+    <text x="338" y="90" class="s-sm">Partner network of external GPs feeds the fund. [T144]</text>
+
+    <rect x="0" y="108" width="310" height="44" fill="#F7E3E3" stroke="#A32F2F"/>
+    <text x="8" y="124" class="s-sm" font-weight="700">Quarterly exit, 5% cap, by convention</text>
+    <text x="8" y="138" class="s-sm">No regulatory notice period.</text>
+    <rect x="330" y="108" width="310" height="44" fill="#E2F0E9" stroke="#1F6B4C"/>
+    <text x="338" y="124" class="s-sm" font-weight="700">Minimum 90-day notice, monthly dealing</text>
+    <text x="338" y="138" class="s-sm">Regulatory floors set by the FCA. [T56]</text>
+
+    <rect x="0" y="156" width="310" height="44" fill="#F7E3E3" stroke="#A32F2F"/>
+    <text x="8" y="172" class="s-sm" font-weight="700">Wealth-channel investors who chose it</text>
+    <text x="8" y="186" class="s-sm">Can decide to leave together, in a correlated rush.</text>
+    <rect x="330" y="156" width="310" height="44" fill="#E2F0E9" stroke="#1F6B4C"/>
+    <text x="338" y="172" class="s-sm" font-weight="700">DC default members who did not choose it</text>
+    <text x="338" y="186" class="s-sm">Steady monthly contributions in. Exits are gradual.</text>
+
+    <rect x="0" y="204" width="310" height="44" fill="#F7E3E3" stroke="#A32F2F"/>
+    <text x="8" y="220" class="s-sm" font-weight="700">The whole fund is the private asset</text>
+    <text x="8" y="234" class="s-sm">Concentrated exposure by design.</text>
+    <rect x="330" y="204" width="310" height="44" fill="#E2F0E9" stroke="#1F6B4C"/>
+    <text x="338" y="220" class="s-sm" font-weight="700">A slice of a diversified default</text>
+    <text x="338" y="234" class="s-sm">Reported target around 15% of the growth phase.</text>
+
+    <rect x="0" y="258" width="640" height="32" rx="3" fill="#EEE6F5" stroke="#6D3A96"/>
+    <text x="8" y="274" class="s-sm" fill="#6D3A96" font-weight="700">The mirror-image risk: DC members cannot rush for the exit, but they also never chose to be there.</text>
+    <text x="8" y="286" class="s-sm">Fidelity's structure is more robust to a run. Whether that makes it more or less demanding on communication is the genuinely open question.</text>
+  </svg>
+  <figcaption><b>Figure 8.</b> Structural comparison. Sources as marked; the four-way framing is the author's <span class="cf cf-i">Inferred</span>.</figcaption>
+</figure>
+
+<h4>The counter-case, stated properly</h4>
+<p>If you draw the Blue Owl parallel to Fidelity without these caveats, you are making a weaker argument than the
+evidence supports. Four reasons the UK DC structure is genuinely more robust:</p>
+<ol>
+  <li><strong>A 90-day minimum notice period is regulation, not convention</strong><span class="src">[T56]</span>. The US
+  vehicles had no such floor.</li>
+  <li><strong>The investor base behaves differently.</strong> Workplace pension contributions arrive monthly and
+  programmatically. Wealth-channel money can leave in a correlated rush when sentiment turns.</li>
+  <li><strong>The liquidity mismatch is absorbed at trustee and platform level</strong>, not passed to a member as an
+  on-demand promise<span class="src">[T145]</span>.</li>
+  <li><strong>It is a slice, not the whole.</strong> A minority allocation inside a diversified default is not the same
+  risk as a fund wholly invested in private credit.</li>
+</ol>
+<p>And the honest counter-counter-argument, which you should also hold: <strong>DC default members never opted in.</strong>
+Someone auto-enrolled at 22 who has never logged into their pension now owns illiquid assets through a structure they
+could not describe. That is not a scandal, and the regulator has explicitly chosen this direction through the Mansion
+House Accord<span class="src">[T262]</span>. But it does place the entire weight of the arrangement on the quality of
+the explanation given to people who are not reading it.</p>
+
+<div class="box say">
+  <span class="box-h">Which is exactly the job you are applying for</span>
+  <p>The FCA's PS23/7, in broadening retail access to LTAFs, deliberately rewrote the required risk warnings to
+  foreground <strong>liquidity risk ahead of investment risk</strong><span class="src">[T146]</span>
+  <span class="cf cf-r">Reported</span>. The regulator decided the thing people most need told is not "you might lose
+  money" but "you might not be able to get it out".</p>
+  <p>Somebody has to write that sentence, for a real product, in a way an ordinary saver actually takes in. In an
+  Investment Directing team, that somebody is in the room. If you want a reason why this story connects to this job, it
+  is that one, and it is a much better reason than "private credit is topical".</p>
+</div>
+
+<h4>The UK market context, for scale</h4>
+<p>The UK LTAF market grew from around <strong>£5bn in June 2025 to about £7.3bn by April 2026</strong>, across roughly
+25 funds, with providers including Schroders, Aviva, M&amp;G, LGIM, Scottish Widows and
+BlackRock<span class="src">[T147]</span> <span class="cf cf-r">Reported</span>. Small against the US vehicles at the
+centre of this story. Growing quickly, and by policy design.</p>
+<span class="marker">@@ANCHOR:q2h@@</span>
+<h3>2.8 Explaining it to someone with no finance background</h3>
+
+<p class="lede">Clause three, and the one that is actually the job. This section gives you the raw materials: the standard
+you are being measured against, the words to avoid, and several candidate analogies with an honest assessment of what
+each one gets wrong. Choosing between them is your job.</p>
+
+<h4>The standard, from the regulator</h4>
+<p>The FCA published "Consumer understanding: good practice and areas for improvement" in March
+2026<span class="src">[T237]</span> <span class="cf cf-c">Confirmed</span>. The underlying principle from the Consumer
+Duty is that communications must be likely to be understood by the people receiving them, and that firms should
+<em>test</em> that rather than assume it.</p>
+<p>The useful reframe for your answer: <strong>comprehension is the outcome being measured, not accuracy.</strong> An
+explanation can be perfectly true and still fail. That is a genuinely different standard from the one most university
+work is marked against, and saying so demonstrates you have understood what the job requires.</p>
+
+<h4>The words to cut</h4>
+<p>A specialist investment-writing source lists terms that reliably lose a non-financial reader<span class="src">[T239]</span>:
+<em>alpha, basis points, duration, drawdown, leverage, risk premium</em>. The most dangerous entry on the list is
+<strong>"correction"</strong>, because it sounds like ordinary English and means something specific and quite different
+to a general reader, who may hear "something wrong is being fixed".</p>
+<p>For this story specifically, the terms you would have to either avoid or immediately define are: <em>NAV, redemption,
+gate, liquidity, pro-rata, illiquidity premium, mark to model, BDC, evergreen</em>. That is a lot of vocabulary. Notice
+that the explanation clause is the hardest part of your chosen topic, which is a reason to choose it and a reason to
+plan it carefully.</p>
+
+<h4>Four candidate analogies, honestly assessed</h4>
+<p>Do not take one of these off the shelf. Read what each gets wrong, then build your own or adapt one deliberately.</p>
+
+<table class="long">
+  <thead><tr><th style="width:20%">Analogy</th><th style="width:34%">What it captures</th><th style="width:30%">What it gets wrong</th><th style="width:16%">Verdict</th></tr></thead>
+  <tbody>
+    <tr><td><strong>The house</strong><br>Your money is in a house, not a bank account</td>
+        <td>The core idea, and the best of the four: property is valuable but cannot be sold this afternoon at its full price. Value and access are different things.</td>
+        <td>Does not capture the queue, the cap, or why only some people get out.</td>
+        <td><span class="verdict v-strong">Strongest base</span></td></tr>
+    <tr><td><strong>The bank run</strong></td>
+        <td>The rush, the first-mover advantage, why it is rational to join a queue you expect others to join.</td>
+        <td><strong>Seriously misleading.</strong> A bank run implies insolvency and lost savings. These funds are not failing, and the cap exists precisely to prevent forced losses.</td>
+        <td><span class="verdict v-weak">Avoid</span></td></tr>
+    <tr><td><strong>The fixed-term savings account</strong></td>
+        <td>That agreeing to leave money untouched earns you more, and that early access is restricted by agreement.</td>
+        <td>Too benign. A fixed-term account has a known end date and a guaranteed sum. This has neither.</td>
+        <td><span class="verdict v-part">Partial</span></td></tr>
+    <tr><td><strong>The nightclub or theatre exit</strong><br>Only so many people through the door at once</td>
+        <td>The cap and the queue, vividly.</td>
+        <td>Implies danger and poor design. Also slightly flippant for a professional context.</td>
+        <td><span class="verdict v-part">Use with care</span></td></tr>
+  </tbody>
+  <caption>Assessments are this pack's judgement <span class="cf cf-i">Inferred</span>. The point of the table is the "what it gets wrong" column.</caption>
+</table>
+
+<div class="box dont">
+  <span class="box-h">The trap inside this clause</span>
+  <p>A good analogy makes an explanation land. A slightly-wrong analogy makes it <em>misleading</em>, which in this
+  industry is a regulatory problem rather than a stylistic one. The bank-run comparison is the obvious reach and it
+  implies something untrue: that investors are losing their savings. They are not. They are being made to wait.</p>
+  <p>If your explanation would cause a reader to believe something false, it has failed the fair, clear and not
+  misleading test even though every individual sentence is accurate. Demonstrating that you know the difference is worth
+  more than any analogy you could choose.</p>
+</div>
+
+<h4>The components of a plain-English explanation of this story</h4>
+<p>Assemble these in your own words and order. Each is a single idea, deliberately left as a bare component:</p>
+<ul class="tight">
+  <li>The fund owns loans to private companies. Those loans cannot be sold quickly.</li>
+  <li>Investors were told they could take out a limited amount each quarter. Roughly one pound in twenty.</li>
+  <li>Many more than that asked to leave at once.</li>
+  <li>So everyone got a share of what was available, and the rest of the request waits.</li>
+  <li>The limit is not a failure of the fund. It is the rule that stops the fund having to sell good assets cheaply.</li>
+  <li>But it does mean people who wanted their money could not have it.</li>
+  <li>What triggered it: worry that artificial intelligence could damage the software companies the fund lent to.</li>
+  <li>The twist: those loans have not actually gone bad yet. People moved on the fear, not the fact.</li>
+</ul>
+<p>Eight ideas. A 200-word answer cannot carry all eight <em>and</em> the story <em>and</em> the relevance. Deciding which
+three survive is the actual test.</p>
+
+<div class="box op">
+  <span class="box-h">A test you can run</span>
+  <p>Read your explanation to someone who does not work in finance, and afterwards ask them: "so what happened to the
+  investors' money?" If they say "they lost it", your explanation has failed, no matter how elegant it was. That is the
+  Consumer Duty's consumer understanding outcome, in a form you can actually run this week.</p>
+</div>
+
+<span class="marker">@@ANCHOR:q2i@@</span>
+<h3>2.9 Four ways to build the answer, and what to leave out</h3>
+
+<p>Structures only. The proportions are indicative and total 200 words.</p>
+
+<div class="arch">
+  <h4>A · Fear ran ahead of the facts <span class="wc">the distinctive one</span></h4>
+  <ol>
+    <li><strong>50 words.</strong> The story: the funds, the requests against the cap, the stated AI reason.</li>
+    <li><strong>45 words.</strong> The check: the credit data barely moved. Defaults, PIK, software default rates.</li>
+    <li><strong>45 words.</strong> The relevance: the structure amplified a sentiment shock. That is a product design lesson for anyone selling semi-liquid vehicles.</li>
+    <li><strong>60 words.</strong> The explanation, in plain English.</li>
+  </ol>
+  <p style="margin-top:5pt"><strong>Why it stands out:</strong> it contains an original analytical move rather than a summary. <strong>Cost:</strong> you must hold the credit figures accurately under questioning.</p>
+</div>
+
+<div class="arch">
+  <h4>B · The promise and the asset came apart <span class="wc">most elegant</span></h4>
+  <ol>
+    <li><strong>40 words.</strong> The story, compressed.</li>
+    <li><strong>55 words.</strong> The principle: exit terms should be built backwards from how long assets take to sell. Woodford as the UK precedent if you have room.</li>
+    <li><strong>45 words.</strong> The relevance: this is the industry's central design problem as private assets reach ordinary savers.</li>
+    <li><strong>60 words.</strong> The explanation.</li>
+  </ol>
+  <p style="margin-top:5pt"><strong>Why it works:</strong> it rests on a regulator's principle rather than a hot take, and travels to the UK naturally.</p>
+</div>
+
+<div class="arch">
+  <h4>C · The UK angle <span class="wc">most firm-relevant</span></h4>
+  <ol>
+    <li><strong>45 words.</strong> The US story, briefly.</li>
+    <li><strong>65 words.</strong> The UK contrast: LTAFs, the 90-day notice floor, private assets entering DC defaults by policy design.</li>
+    <li><strong>30 words.</strong> The relevance: the UK built a slower version deliberately, which is a bet that structure prevents this.</li>
+    <li><strong>60 words.</strong> The explanation.</li>
+  </ol>
+  <p style="margin-top:5pt"><strong>Why it works:</strong> closest to Fidelity's actual business. <strong>Watch:</strong> more facts to get right, and the LTAF date is contested — see 2.7.</p>
+</div>
+
+<div class="arch">
+  <h4>D · Liquidity is a promise, not a property <span class="wc">most conceptual</span></h4>
+  <ol>
+    <li><strong>40 words.</strong> The story as the illustration, not the subject.</li>
+    <li><strong>60 words.</strong> The idea: liquidity is not a feature of an asset, it is a promise made by a structure, and promises can be withdrawn precisely when they are most wanted.</li>
+    <li><strong>40 words.</strong> The relevance across products: property funds, LTAFs, daily-dealing funds holding less liquid assets.</li>
+    <li><strong>60 words.</strong> The explanation.</li>
+  </ol>
+  <p style="margin-top:5pt"><strong>Why it works:</strong> the most intellectually confident framing. <strong>Risk:</strong> can float free of the concrete. Anchor it with at least one hard number.</p>
+</div>
+
+<h4>What to leave out, whichever structure you choose</h4>
+<ul class="tight">
+  <li><strong>The full cast.</strong> Naming Blue Owl, Partners Group, Blackstone, BREIT, Woodford and the Bank of England in 200 words leaves no room to think. Two proper nouns is usually the limit.</li>
+  <li><strong>The $36bn figure.</strong> It is portfolio fair value, not the NAV the cap applies to. See 2.1.</li>
+  <li><strong>Attributing the software-disruption quote to the flagship fund.</strong> It belongs to the technology fund. See 2.1.</li>
+  <li><strong>Predictions.</strong> "This could be the next financial crisis" is unfalsifiable and reads as excitable. The BREIT precedent suggests these episodes resolve.</li>
+  <li><strong>The word "Ponzi".</strong> Even qualified. It is inaccurate here and it will define you.</li>
+  <li><strong>Every piece of vocabulary you do not have room to define.</strong></li>
+</ul>
+
+<div class="box say">
+  <span class="box-h">Two things to do before you submit</span>
+  <ol>
+    <li><strong>Check for Q3 2026 figures.</strong> Blue Owl's Q3 repurchase window closed 30 September 2026, after this
+    pack was compiled<span class="src">[T28]</span>. If requests fell sharply, your framing should acknowledge it. If they
+    rose, your answer gets stronger. Either way, an answer that stops at Q2 when Q3 is public looks like it was written
+    in advance and not checked.</li>
+    <li><strong>Decide what you would say if an interviewer said "so nothing actually went wrong, did it?"</strong>
+    Because on the credit data, that is a fair challenge, and the honest answer — that the loss was of liquidity and
+    trust rather than capital — is a better answer than a defensive one.</li>
+  </ol>
+</div>
+</section>
+<section class="part">
+<span class="marker">@@ANCHOR:q3@@</span>
+<div class="part-band">
+  <p class="kicker">Part 3 &nbsp;·&nbsp; Question 2</p>
+  <h2 class="part-title">The million pounds</h2>
+  <p class="standfirst">What the question is really asking, the numbers as they stand this week, the frameworks worth
+  using, and seven angles ranked by how few applicants will think of them. Still no drafted answer.</p>
+</div>
+
+<span class="marker">@@ANCHOR:q3a@@</span>
+<h3>3.1 What it is really testing, and the answer everyone else will give</h3>
+
+<p class="lede">You said you did not know how to approach this one. Here is the reframe: the question is not testing
+whether you can allocate a portfolio. It is testing whether you understand <em>why</em> horizon changes the answer.</p>
+
+<p>The obvious answer, which a large share of applicants will give in some form, is:</p>
+<blockquote>
+Short term: cash, a savings account or a money market fund. Long term: a diversified global equity fund, because
+equities beat cash over long periods.
+<cite>The baseline. It is not wrong. That is the problem with it.</cite>
+</blockquote>
+<p>That answer is correct, defensible and completely unmemorable. Since nearly everyone lands within a narrow band of
+sensible responses, the marginal value of being <em>right</em> is low and the marginal value of being <strong>right and
+interesting</strong> is high.</p>
+
+<div class="box note">
+  <span class="box-h">What the question's own wording tells you</span>
+  <p>"Talk about the asset allocation that would be <strong>appropriate for each time horizon</strong>." The word
+  "appropriate" is doing the work. You are being asked to justify a match between an asset and a horizon. The mechanism
+  behind that match, not the allocation itself, is the answer.</p>
+  <p>"Investing in <strong>at least one</strong> asset class" is a floor, not a target. You are not expected to build a
+  full portfolio in 150 words, and trying to will make you look superficial.</p>
+</div>
+
+<span class="marker">@@ANCHOR:q3b@@</span>
+<h3>3.2 The environment, as at 18 September 2026</h3>
+<p>One concrete, current number in an answer is worth more than three general principles. These are sourced and dated.
+<strong>Re-check anything you use</strong>, because these move.</p>
+
+<div class="grid3">
+  <div class="stat"><div class="v">3.75%</div><div class="k">Bank of England Bank Rate, held on a 6-3 vote at the decision of 16 September 2026<span class="src">[T180]</span> <span class="cf cf-c">Confirmed</span></div></div>
+  <div class="stat"><div class="v">3.1%</div><div class="k">UK CPI inflation, August 2026, published 16 September 2026. Above the 2% target<span class="src">[T181]</span> <span class="cf cf-c">Confirmed</span></div></div>
+  <div class="stat"><div class="v">~4.5–5.0%</div><div class="k">Best easy-access savings rates, mid-September 2026<span class="src">[T197]</span> <span class="cf cf-r">Reported</span></div></div>
+</div>
+
+<table>
+  <thead><tr><th style="width:36%">Instrument</th><th style="width:22%">Level</th><th style="width:42%">Why it matters to this question</th></tr></thead>
+  <tbody>
+    <tr><td>UK 2-year gilt yield</td><td>about 4.75%<span class="src">[T191]</span></td><td>The short-horizon alternative to a savings account, and government-backed.</td></tr>
+    <tr><td>UK 10-year gilt yield</td><td>about 5.31%<span class="src">[T191]</span></td><td>Multi-decade highs. Bonds are actually paying something again, which was not true for most of the last fifteen years.</td></tr>
+    <tr><td>UK 30-year gilt yield</td><td>about 5.76–5.93%<span class="src">[T191]</span></td><td>A global long-duration sell-off. Relevant if you want to say something about the long end.</td></tr>
+    <tr><td>FTSE 100</td><td>about 10,816<span class="src">[T192]</span></td><td>Record territory through 2026. Worth knowing if you mention UK equities.</td></tr>
+    <tr><td>Best 1-year fixed-rate bonds</td><td>about 4.92–5.00% AER<span class="src">[T198]</span></td><td>The realistic return on genuinely short-horizon money.</td></tr>
+  </tbody>
+  <caption>Rates and yields as at mid-September 2026. Market levels are <span class="cf cf-r">Reported</span> and move daily. Verify before submitting.</caption>
+</table>
+
+<div class="box say">
+  <span class="box-h">The observation this environment hands you free</span>
+  <p>With Bank Rate at 3.75% and CPI at 3.1%, cash currently earns a small <em>positive real return</em>. That is
+  historically unusual, and it makes the short-term leg of your answer easy to justify with a number rather than a
+  platitude. It also sets up the long-term leg: a roughly 1 percentage point real return will not do anything meaningful
+  over thirty years, which is precisely why the long horizon needs a different asset.</p>
+</div>
+
+<span class="marker">@@ANCHOR:q3c@@</span>
+<h3>3.3 The frameworks worth using</h3>
+
+<h4>Three things that are not the same, and are routinely confused</h4>
+<table>
+  <thead><tr><th style="width:22%">Concept</th><th style="width:44%">What it means</th><th style="width:34%">Why the distinction matters here</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Time horizon</strong></td><td>When you need the money.</td><td>The question's organising principle. It is an objective fact about the money.</td></tr>
+    <tr><td><strong>Risk tolerance</strong></td><td>How much volatility you can stomach emotionally.</td><td>A fact about the person. It does not change when the money is needed.</td></tr>
+    <tr><td><strong>Risk capacity</strong></td><td>How much loss you could absorb without damaging your plans.</td><td>The one most candidates never mention. With £1m and no liabilities, capacity is high even if tolerance is low.</td></tr>
+  </tbody>
+</table>
+<p>The trap is answering "I am young so I would take more risk" and applying that to the short-term money too. Youth does
+not change when you need cash next year.</p>
+
+<h4>The rigorous reason short horizons need safe assets</h4>
+<p>It is not "shares are risky". It is <strong>sequence-of-returns risk</strong>: over a short period, the order in which
+returns arrive dominates the average. If you need the money in eighteen months and the market falls 20% in month
+fourteen, the long-run average return is irrelevant to you. You have crystallised a loss because the clock, not the
+market, made the decision.</p>
+
+<h4>And why long horizons cannot sit in cash</h4>
+<p>Because inflation, not volatility, is the long-run risk. This is where the historical data earns its place:</p>
+
+<figure>
+  <span class="fig-num">Figure 6 · what each asset actually returned, after inflation</span>
+  <svg viewBox="0 0 640 224" id="fig-realreturns">
+    <text x="0" y="12" class="s-ttl">UK real returns, annualised over 114 years, per the Barclays Equity Gilt Study</text>
+    <line x1="120" y1="150" x2="620" y2="150" stroke="#BFB6A8" stroke-width="1"/>
+    <text x="112" y="154" class="s-sm" text-anchor="end">0%</text>
+    <line x1="120" y1="64" x2="620" y2="64" stroke="#EDE8E0"/><text x="112" y="68" class="s-sm" text-anchor="end">5%</text>
+
+    <rect x="160" y="62" width="90" height="88" fill="#B9602C"/>
+    <text x="205" y="56" class="s-num" text-anchor="middle">5.1%</text>
+    <text x="205" y="168" class="s-sm" text-anchor="middle" font-weight="700">UK shares</text>
+
+    <rect x="310" y="129" width="90" height="21" fill="#4A73A0"/>
+    <text x="355" y="123" class="s-num" text-anchor="middle">1.2%</text>
+    <text x="355" y="168" class="s-sm" text-anchor="middle" font-weight="700">Gilts</text>
+
+    <rect x="460" y="136" width="90" height="14" fill="#BFB6A8"/>
+    <text x="505" y="130" class="s-num" text-anchor="middle">0.8%</text>
+    <text x="505" y="168" class="s-sm" text-anchor="middle" font-weight="700">Cash</text>
+
+    <text x="0" y="192" class="s-sm">At 5.1% real, money doubles in purchasing power roughly every 14 years. At 0.8%, it takes about 87 years.</text>
+    <text x="0" y="206" class="s-sm">That single comparison is the entire argument for why a long horizon changes the asset, and it is one line.</text>
+    <text x="0" y="220" class="s-xs">Barclays Equity Gilt Study 114-year annualised real returns [T200, Reported via secondary summaries, not read from the primary study]. Doubling times are this pack's calculation. Compiled 18 September 2026.</text>
+  </svg>
+  <figcaption><b>Figure 6.</b> Real returns by asset class. <span class="cf cf-r">Reported</span> — see the caution in Part 5 before quoting these exact figures.</figcaption>
+</figure>
+
+<div class="box unc">
+  <span class="box-h">Source uncertain — handle these statistics carefully</span>
+  <p>The Barclays figures above, and the widely quoted probabilities of equities beating cash over 5 and 10 year holding
+  periods, come from secondary summaries rather than the primary study, and this research found <strong>two different
+  versions of the probability statistic</strong> that are not measuring the same thing (equities versus cash in one,
+  equities versus gilts in the other)<span class="src">[T200]</span>.</p>
+  <p><strong>Practical advice:</strong> use the real-return comparison, which is stable and widely reported. Avoid quoting
+  a precise probability like "91% of ten-year periods" unless you have checked the current study yourself, because it is
+  exactly the kind of number an interviewer might ask you to source.</p>
+</div>
+
+<span class="marker">@@ANCHOR:q3d@@</span>
+<h3>3.4 Tax and wrappers: the facts, current for 2026/27</h3>
+<p>You cannot invest £1m without hitting these limits immediately, and noticing that is itself a point.</p>
+<table class="long">
+  <thead><tr><th style="width:30%">Rule</th><th style="width:26%">2026/27</th><th style="width:44%">The consequence for £1m</th></tr></thead>
+  <tbody>
+    <tr><td><strong>ISA allowance</strong></td><td>£20,000 a year<span class="src">[T183]</span></td><td>You can shelter 2% of the windfall this year. The tax wrapper is not the answer to a £1m problem.</td></tr>
+    <tr><td>Cash ISA limit change</td><td>Cut to £12,000 for under-65s <strong>from April 2027</strong><span class="src">[T183]</span></td><td>A timing nuance. It does not bite this tax year. Getting that right shows care.</td></tr>
+    <tr><td><strong>Pension annual allowance</strong></td><td>£60,000, tapered to £10,000 above £260,000 adjusted income<span class="src">[T184]</span></td><td>The most tax-efficient home, and also capacity-limited.</td></tr>
+    <tr><td>Capital gains tax</td><td>£3,000 exempt amount; 18% and 24%<span class="src">[T185]</span></td><td>Most of a £1m portfolio sits outside any wrapper, so CGT is a live cost.</td></tr>
+    <tr><td>Dividend allowance</td><td>£500<span class="src">[T185]</span></td><td>Negligible against £1m. Income will be taxed.</td></tr>
+    <tr><td>Personal savings allowance</td><td>£1,000 / £500 / £0 by tax band<span class="src">[T185]</span></td><td>At 4.5% on £1m, interest of roughly £45,000 is almost entirely taxable.</td></tr>
+    <tr style="background:#F3E4D8"><td><strong>Gilts held directly</strong></td><td><strong>Exempt from capital gains tax</strong>, under section 115 TCGA 1992<span class="src">[T186]</span> <span class="cf cf-c">Confirmed</span></td><td><strong>The best technical point available in this question.</strong> A low-coupon gilt delivers most of its return as a tax-free capital gain rather than taxable income.</td></tr>
+    <tr style="background:#F3E4D8"><td><strong>FSCS deposit protection</strong></td><td><strong>£120,000</strong> per person per institution, raised from £85,000 on <strong>1 December 2025</strong><span class="src">[T182]</span> <span class="cf cf-c">Confirmed</span></td><td><strong>£1m in one bank leaves about £880,000 uninsured.</strong> "Put it in cash" is not automatically the safe answer.</td></tr>
+  </tbody>
+</table>
+
+<figure>
+  <span class="fig-num">Figure 7 · the hole in the obvious answer</span>
+  <svg viewBox="0 0 640 180" id="fig-fscs">
+    <text x="0" y="12" class="s-ttl">£1,000,000 in a single bank account, against what the compensation scheme actually covers</text>
+    <rect x="0" y="30" width="640" height="44" fill="#F7E3E3" stroke="#A32F2F"/>
+    <rect x="0" y="30" width="77" height="44" fill="#1F6B4C"/>
+    <text x="38" y="50" class="s-wsm" text-anchor="middle">£120k</text>
+    <text x="38" y="64" class="s-wsm" text-anchor="middle">covered</text>
+    <text x="358" y="57" class="s-lbl" text-anchor="middle" fill="#A32F2F">about £880,000 not covered by FSCS protection</text>
+
+    <rect x="0" y="92" width="640" height="52" rx="3" fill="#F6F3EE" stroke="#BFB6A8"/>
+    <text x="8" y="109" class="s-lbl" font-weight="700">The fixes, any one of which shows you spotted it</text>
+    <text x="8" y="125" class="s-sm">Spread across several authorised institutions · use a diversified money market fund · or hold short-dated gilts, which are a direct claim on the government and so</text>
+    <text x="8" y="137" class="s-sm">sit outside the FSCS limit question entirely, and are CGT-exempt as a bonus.</text>
+
+    <text x="0" y="162" class="s-sm">One precision point: FSCS "temporary high balance" cover of up to £1.4m for six months applies to specific life events such as a property sale or inheritance.</text>
+    <text x="0" y="174" class="s-xs">Do not assume prize winnings qualify. If you raise this, raise it carefully. [T182, Confirmed] Compiled 18 September 2026.</text>
+  </svg>
+  <figcaption><b>Figure 7.</b> The FSCS gap. <span class="cf cf-c">Confirmed</span>.</figcaption>
+</figure>
+
+<span class="marker">@@ANCHOR:q3e@@</span>
+<h3>3.5 Seven angles, ranked by how few applicants will use them</h3>
+<p>Pick <strong>one</strong>. In 150 words, one idea executed properly beats five name-checked.</p>
+
+<table class="long">
+  <thead><tr><th style="width:5%">#</th><th style="width:26%">The angle</th><th style="width:45%">What it says</th><th style="width:24%">Risk</th></tr></thead>
+  <tbody>
+    <tr><td><span class="rank">1</span></td><td><strong>The FSCS gap</strong></td>
+        <td>£1m in cash is not risk-free, because only £120,000 per institution is protected<span class="src">[T182]</span>. Solve it with spread deposits, a money market fund, or short-dated gilts.</td>
+        <td>Almost none. It is verifiable, numerical and correct.</td></tr>
+    <tr><td><span class="rank">2</span></td><td><strong>CGT-exempt gilts</strong></td>
+        <td>Short-dated gilts solve the safety, tax and FSCS problems in one instrument<span class="src">[T186]</span>.</td>
+        <td>Must get the mechanism right: the exemption is on the capital gain, not the coupon.</td></tr>
+    <tr><td><span class="rank">3</span></td><td><strong>Behaviour is the real risk</strong></td>
+        <td>A windfall is psychologically different from earned money, and the biggest determinant of the outcome is the investor's own conduct, not the equity/bond split.</td>
+        <td>The "roughly 70% dissipated within seven years" figure is widely repeated but weakly sourced<span class="src">[T205]</span>. Use the idea; be careful with the statistic.</td></tr>
+    <tr><td><span class="rank">4</span></td><td><strong>Purpose before horizon</strong></td>
+        <td>Ask what the money is for, and let each purpose imply its own horizon. This is how an institution thinks: liability first, allocation second.</td>
+        <td>Must still answer the question as asked. Do not reframe so hard you dodge it.</td></tr>
+    <tr><td><span class="rank">5</span></td><td><strong>A gilt or liquidity ladder</strong></td>
+        <td>Rather than one short-term bucket, stagger maturities at 3, 6, 12 and 24 months so cash arrives when needed and reinvestment risk is spread.</td>
+        <td>Needs a sentence on <em>why</em>, or it reads as jargon.</td></tr>
+    <tr><td><span class="rank">6</span></td><td><strong>Lump sum versus phasing in</strong></td>
+        <td>Vanguard's research concludes investing a lump sum immediately beats phasing in, in roughly 60-70% of historical periods, because markets rise more often than they fall<span class="src">[T187]</span>. Phasing is a deliberate trade of expected return for reduced regret.</td>
+        <td>Only works if you name it as a psychological trade-off rather than pure risk management.</td></tr>
+    <tr><td><span class="rank">7</span></td><td><strong>Real returns, not nominal</strong></td>
+        <td>"Safe" should mean preserving purchasing power. With CPI at 3.1%, a 4.5% deposit earns about 1.4% real before tax<span class="src">[T180][T181]</span>.</td>
+        <td>More candidates will use this than the others, but it is still better than the baseline.</td></tr>
+  </tbody>
+  <caption>Rankings are this pack's judgement of how rarely each will appear <span class="cf cf-i">Inferred</span>.</caption>
+</table>
+
+<span class="marker">@@ANCHOR:q3f@@</span>
+<h3>3.6 The traps</h3>
+<ul>
+  <li><strong>Confusing horizon with risk tolerance.</strong> "I am young so I would be aggressive" applied to money needed next year.</li>
+  <li><strong>Naming specific products or stocks.</strong> Asset classes and generic instrument types are the right register. Naming a fund or a share reads as tipping, not thinking.</li>
+  <li><strong>Ignoring tax entirely</strong> when the sum is large enough that tax is unavoidable.</li>
+  <li><strong>Treating "safe" as nominal.</strong> The single most common conceptual gap.</li>
+  <li><strong>Crypto as a throwaway.</strong> If it appears at all it needs a risk-budget framing, not a shrug.</li>
+  <li><strong>Being so generic anyone could have written it.</strong> The default failure mode.</li>
+</ul>
+
+<div class="box op">
+  <span class="box-h">The tension nobody tells you about — and what to do with it</span>
+  <p>You are applying to an <strong>active</strong> asset manager. The evidence-based answer to "where do I put money for
+  thirty years" is often a low-cost global index fund, and roughly 75% of active funds still trail passive over ten
+  years<span class="src">[T207]</span>. A flat "buy a tracker and do nothing" can read as slightly tone-deaf to the
+  reader, even though it is well supported.</p>
+  <p>Two honest ways through, and you should choose deliberately rather than stumble into one. Either be precise about
+  <em>where</em> active has the stronger evidential case, which is areas with more dispersion such as fixed income,
+  emerging markets and smaller companies, rather than US large-cap. Or state the low-cost case plainly and show you know
+  it is in tension with the firm you are writing to. <strong>Demonstrating that you have noticed the tension is worth
+  more than resolving it either way.</strong> Pretending it does not exist is the only losing option.</p>
+</div>
+
+<span class="marker">@@ANCHOR:q3g@@</span>
+<h3>3.7 Three ways to build the answer</h3>
+<p>Shapes, not sentences. Word counts are indicative and total 150.</p>
+
+<div class="arch">
+  <h4>A · The flaw-and-fix <span class="wc">strongest, highest risk</span></h4>
+  <ol>
+    <li><strong>25 words.</strong> Name the obvious answer and the problem with it: £1m of cash is not risk-free because of the FSCS limit.</li>
+    <li><strong>45 words.</strong> Your short-term solution and the mechanism: spread deposits, money market fund, or short-dated gilts, with the reason.</li>
+    <li><strong>55 words.</strong> The long-term leg, anchored on real returns: why 0.8% real does not compound and 5.1% does.</li>
+    <li><strong>25 words.</strong> The principle connecting them: the horizon decides the asset, and "safe" means different things at each end.</li>
+  </ol>
+  <p style="margin-top:5pt"><strong>Why it works:</strong> opens with something the reader has not seen that day. <strong>Why it is risky:</strong> you must get the FSCS numbers exactly right.</p>
+</div>
+
+<div class="arch">
+  <h4>B · Purpose first <span class="wc">safest of the three</span></h4>
+  <ol>
+    <li><strong>30 words.</strong> Reframe: the horizon follows from what the money is for. Name two purposes.</li>
+    <li><strong>50 words.</strong> Short-horizon money: capital certainty, because sequence-of-returns risk dominates over short periods. Name the asset class and the current rate.</li>
+    <li><strong>50 words.</strong> Long-horizon money: real growth, because inflation is the binding risk. Name the asset class and the real-return evidence.</li>
+    <li><strong>20 words.</strong> One sentence on tax or wrapper capacity to show you noticed £20,000 does not cover £1m.</li>
+  </ol>
+  <p style="margin-top:5pt"><strong>Why it works:</strong> it is how an institution actually thinks, and it answers the question as asked.</p>
+</div>
+
+<div class="arch">
+  <h4>C · One idea, fully developed <span class="wc">best if you have a genuine view</span></h4>
+  <ol>
+    <li><strong>20 words.</strong> State the allocation quickly, almost as a given.</li>
+    <li><strong>110 words.</strong> Spend nearly everything on <em>one</em> idea from 3.5, developed properly, with the mechanism and a number.</li>
+    <li><strong>20 words.</strong> Close on what it implies for how you think about risk.</li>
+  </ol>
+  <p style="margin-top:5pt"><strong>Why it works:</strong> depth is rarer than coverage and reads as conviction. <strong>Watch:</strong> you must still visibly answer both (a) and (b), or it looks like you dodged half the question.</p>
+</div>
+
+<div class="box dont">
+  <span class="box-h">Before you submit this one</span>
+  <p>Re-check Bank Rate, CPI and gilt yields on the day. The Bank of England's next decision after 16 September 2026 will
+  land before your 15 November deadline, and an answer quoting a stale rate is exactly the kind of avoidable error this
+  question is designed to surface.</p>
+</div>
+</section>
+<section class="part">
+<span class="marker">@@ANCHOR:q4@@</span>
+<div class="part-band"><p class="kicker">Part 4</p><h2 class="part-title">Source table</h2><p class="standfirst">Every marker used in this pack. 72 sources. FETCHED means the page was read in full. SNIPPET means only a search summary was seen. PAYWALLED means the content was not read and was not guessed at. Check the status of any source before you rely on its claim in a written answer.</p></div>
+<table class="long srctable"><thead><tr><th style="width:5%">ID</th><th style="width:15%">Outlet</th><th style="width:30%">Title</th><th style="width:10%">Published</th><th style="width:24%">URL</th><th style="width:8%">Status</th><th style="width:8%">Accessed</th></tr></thead><tbody>
+<tr><td><strong>T1</strong></td><td>Yahoo Finance</td><td>&quot;Blue Owl holds BDC withdrawals at 5% after redemption requests of 41%, 22%&quot;</td><td>2026-04-02 (approx)</td><td class="u">https://finance.yahoo.com/markets/stocks/articles/blue-owl-holds-bdc-withdrawals-150931334.html</td><td><span class="cf cf-r">SNIPPET</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T2</strong></td><td>CNBC</td><td>&quot;Blue Owl caps private credit funds redemptions at 5% after steep request levels&quot;</td><td>2026-04-02</td><td class="u">https://www.cnbc.com/2026/04/02/blue-owl-private-credit-funds-redemptions-requests.html</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T3</strong></td><td>AltsWire</td><td>&quot;Blue Owl&#x27;s OCIC Absorbs $988M in Q1 Redemptions as NAV Holds, Non-Accruals Stay Flat&quot;</td><td>2026-04</td><td class="u">https://altswire.com/blue-owls-ocic-absorbs-988m-in-q1-redemptions-as-nav-holds-non-accruals-stay-flat/</td><td><span class="cf cf-r">SNIPPET</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T4</strong></td><td>SEC EDGAR (Blue Owl Technology Income Corp.)</td><td>8-K Exhibit 99.1, &quot;OTIC April 2026 Shareholder Update&quot;</td><td>2026-04-02</td><td class="u">https://www.sec.gov/Archives/edgar/data/1869453/000119312526139035/d102817dex991.htm</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T20</strong></td><td>Bloomberg</td><td>&quot;Blackstone Private Credit Fund Again Caps Redemptions at 5%&quot;</td><td>2026-09-03</td><td class="u">https://www.bloomberg.com/news/articles/2026-09-03/blackstone-s-bcred-caps-redemptions-again-after-10-seek-to-exit</td><td><span class="cf cf-r">PAYWALLED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T21</strong></td><td>Bloomberg</td><td>&quot;Blackstone BCRED Joins Private Credit Funds Limiting Redemptions&quot;</td><td>2026-06-04</td><td class="u">https://www.bloomberg.com/news/articles/2026-06-04/blackstone-bcred-joins-private-credit-funds-limiting-redemptions</td><td><span class="cf cf-r">PAYWALLED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T22</strong></td><td>CNBC</td><td>&quot;Apollo curbs withdrawals after exit requests hit 17%, reigniting fears over private credit liquidity&quot;</td><td>2026-06-23</td><td class="u">https://www.cnbc.com/2026/06/23/apollo-private-credit-fund-withdrawals-redemptions.html</td><td><span class="cf cf-r">SNIPPET</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T23</strong></td><td>Bloomberg</td><td>&quot;Apollo (APO) Caps Private Credit Fund Withdrawals as Requests Hit 11%&quot;</td><td>2026-03-23</td><td class="u">https://www.bloomberg.com/news/articles/2026-03-23/apollo-caps-private-credit-fund-withdrawals-as-requests-hit-11</td><td><span class="cf cf-r">PAYWALLED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T24</strong></td><td>InvestmentNews</td><td>&quot;Apollo throttles withdrawals from $26B private credit fund after exit requests rise to 17%&quot;</td><td>2026-06</td><td class="u">https://www.investmentnews.com/alternatives/apollo-throttles-withdrawals-from-26b-private-credit-fund-after-exit-requests-rise-to-17/267119</td><td><span class="cf cf-r">SNIPPET</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T25</strong></td><td>Bloomberg</td><td>&quot;Ares Private Credit Fund Caps Redemptions After 14% Seek to Exit&quot;</td><td>2026-06-25</td><td class="u">https://www.bloomberg.com/news/articles/2026-06-25/ares-private-credit-fund-caps-redemptions-after-14-seek-to-exit</td><td><span class="cf cf-r">PAYWALLED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T26</strong></td><td>Bloomberg</td><td>&quot;Ares, Apollo Cap Private Credit Withdrawals as Exodus Grows&quot;</td><td>2026-03-24</td><td class="u">https://www.bloomberg.com/news/articles/2026-03-24/ares-limits-private-credit-fund-withdrawals-as-redemptions-surge</td><td><span class="cf cf-r">PAYWALLED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T27</strong></td><td>AltsWire</td><td>&quot;BlackRock&#x27;s HPS Corporate Lending Fund Limits Redemptions After Requests Exceed 5% Cap&quot;</td><td>2026-03</td><td class="u">https://altswire.com/blackrocks-hps-corporate-lending-fund-limits-redemptions-after-requests-exceed-5-cap/</td><td><span class="cf cf-r">SNIPPET</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T28</strong></td><td>AltsWire</td><td>&quot;HPS Corporate Lending Fund Sees Q2 Redemption Requests Jump to 13.3%&quot;</td><td>2026-06</td><td class="u">https://altswire.com/hps-corporate-lending-fund-sees-q2-redemption-requests-jump-to-13-3/</td><td><span class="cf cf-r">SNIPPET</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T50</strong></td><td>FCA</td><td>PS21/14: A new authorised fund regime for investing in long term assets</td><td>25 Oct 2021</td><td class="u">https://www.fca.org.uk/publications/policy-statements/ps21-14-new-authorised-fund-regime-investing-long-term-assets</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T51</strong></td><td>FCA</td><td>PS23/7: Broadening retail access to the long-term asset fund</td><td>29 June 2023</td><td class="u">https://www.fca.org.uk/publications/policy-statements/ps23-7-broadening-retail-access-long-term-asset-fund</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T52</strong></td><td>Bank of England</td><td>Liquidity management in UK open-ended funds</td><td>2021</td><td class="u">https://www.bankofengland.co.uk/report/2021/liquidity-management-in-uk-open-ended-funds</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T53</strong></td><td>Bank of England / FCA</td><td>Financial Conduct Authority and Bank of England statement on joint review of open-ended funds</td><td>16 Dec 2019</td><td class="u">https://www.bankofengland.co.uk/news/2019/december/open-ended-funds</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T55</strong></td><td>FCA</td><td>FCA issues fines of nearly £46m for failures managing the Woodford Equity Income Fund</td><td>5 Aug 2025</td><td class="u">https://www.fca.org.uk/news/press-releases/fca-fines-over-woodford-equity-income-fund</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T56</strong></td><td>Norton Rose Fulbright (law firm)</td><td>UK LTAFs: Playing the long game</td><td>undated (post-2023)</td><td class="u">https://www.nortonrosefulbright.com/en/knowledge/publications/caf2a027/uk-ltafs-playing-the-long-game</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T57</strong></td><td>ACA Global (compliance advisory)</td><td>Rule 23c-3 for Interval Funds: An Overview</td><td>undated</td><td class="u">https://www.acaglobal.com/industry-insights/overview-interval-funds-rule-23c-3/</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T58</strong></td><td>EveryCRSReport.com (hosting a Congressional Research Service</td><td>Private Credit Funds Redemption Restrictions: Market Context and Policy Issues (IN12674)</td><td>2026</td><td class="u">https://www.everycrsreport.com/reports/IN12674.html</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T60</strong></td><td>Moonfare</td><td>Inside an evergreen fund: Redemptions, gating and liquidity explained</td><td>undated</td><td class="u">https://www.moonfare.com/blog/inside-evergreen-fund</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T61</strong></td><td>FCA</td><td>FCA confirms new rules for certain open-ended funds investing in inherently illiquid assets (PS19/24)</td><td>30 Sept 2019</td><td class="u">https://www.fca.org.uk/news/press-releases/fca-confirms-new-rules-certain-open-ended-funds-investing-inherently-illiquid-assets</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T63</strong></td><td>Bloomberg</td><td>Partners Caps Evergreen Fund Redemptions as Requests Rise</td><td>3 June 2026</td><td class="u">https://www.bloomberg.com/news/articles/2026-06-03/partners-group-gates-evergreen-fund-as-redemption-requests-rise</td><td><span class="cf cf-r">PAYWALLED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T64</strong></td><td>CNBC</td><td>Partners Group warns it could cap more fund withdrawals after triggering private equity rout</td><td>4 June 2026</td><td class="u">https://www.cnbc.com/2026/06/04/partners-group-private-equity-fund-restrictions-investor-redemptions.html</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T65</strong></td><td>Investment Company Institute (Eric J. Pan)</td><td>Private Credit Funds Are Working Precisely As Designed To</td><td>27 April 2026</td><td class="u">https://www.ici.org/opinions/private-credit-funds-are-working-precisely-as-designed-to</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T66</strong></td><td>PitchBook (via Yahoo Finance syndication)</td><td>Misconceptions around Partners Group&#x27;s PE fund gate could slow evergreen fund launches</td><td>c. 5 June 2026</td><td class="u">https://finance.yahoo.com/markets/stocks/articles/misconceptions-around-partners-groups-pe-122414743.html</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T68</strong></td><td>Multiple law-firm commentaries (Dechert, BNP Paribas Securit</td><td>ELTIF 2.0 explainers (search-summarised, not fetched)</td><td>2024–2026</td><td class="u"></td><td><span class="cf cf-r">SNIPPET</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T100</strong></td><td>CNBC</td><td>Blue Owl caps private credit funds redemptions at 5% after steep request levels</td><td>2026-04-02</td><td class="u">https://www.cnbc.com/2026/04/02/blue-owl-private-credit-funds-redemptions-requests.html</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T101</strong></td><td>Semafor</td><td>Blue Owl credit funds face heavy redemption requests as private credit jitters persist</td><td>2026-04-02</td><td class="u">https://www.semafor.com/article/04/02/2026/blue-owl-credit-funds-face-heavy-redemption-requests-as-private-credit-jitters-persist</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T102</strong></td><td>The Globe and Mail (Reuters, Isla Binnie)</td><td>Blue Owl limits withdrawals from two funds after historic levels of redemption requests</td><td>2026-04-02</td><td class="u">https://www.theglobeandmail.com/business/article-blue-owl-tech-fund-ai-investors/</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T103</strong></td><td>tikr.com (blog)</td><td>Blue Owl Limits Fund Withdrawals Following Record Surge in Q1 Redemption Requests</td><td>2026-04</td><td class="u">https://www.tikr.com/blog/blue-owl-limits-fund-withdrawals-following-record-surge-in-q1-redemption-requests</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T104</strong></td><td>CNBC</td><td>Illiquid loans, investor demands: Blue Owl&#x27;s software lending triggers another quake in private credit</td><td>2026-02-20</td><td class="u">https://www.cnbc.com/2026/02/20/blue-owl-software-lending-private-credit-concerns.html</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T105</strong></td><td>Bloomberg</td><td>Blue Owl BDC Allows 17% Redemptions as Investors Storm Exit</td><td>2026-01-07</td><td class="u">https://www.bloomberg.com/news/articles/2026-01-07/blue-owl-bdc-allows-for-17-redemptions-as-investors-storm-exit</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T106</strong></td><td>Alternative Credit Investor</td><td>Blue Owl gates retail private credit fund amid redemption pressure</td><td>2026-02-19</td><td class="u">https://alternativecreditinvestor.com/2026/02/19/blue-owl-gates-retail-private-credit-fund-amid-redemption-pressure/</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T107</strong></td><td>Yahoo Finance</td><td>Blue Owl Sinks 68.2% From Peak as Redemptions Surge in Private Credit</td><td>2026-04</td><td class="u">https://finance.yahoo.com/markets/stocks/articles/blue-owl-sinks-68-2-165700127.html</td><td><span class="cf cf-r">SNIPPET</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T108</strong></td><td>Investing.com</td><td>Blue Owl Q1 2026 slides: AUM hits $315B, earnings beat amid stock decline</td><td>2026 (Q1 release)</td><td class="u">https://www.investing.com/news/company-news/blue-owl-q1-2026-slides-aum-hits-315b-earnings-beat-amid-stock-decline-93CH-4650694</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T109</strong></td><td>Investing.com (earnings call transcript search set)</td><td>Blue Owl Tech Finance / Blue Owl Capital Corp Q1 2026 earnings call transcripts (software exposure %)</td><td>2026 (Q1 release)</td><td class="u">https://www.investing.com/news/transcripts/earnings-call-transcript-blue-owl-tech-finance-q1-2026-misses-eps-expectations-93CH-4670486</td><td><span class="cf cf-r">SNIPPET</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T110</strong></td><td>Bain &amp; Company</td><td>Will Agentic AI Disrupt SaaS? Technology Report 2025</td><td>2025</td><td class="u">https://www.bain.com/insights/will-agentic-ai-disrupt-saas-technology-report-2025/</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T111</strong></td><td>Forbes (Peter Cohan)</td><td>SaaSpocalypse Now? AI Is Disrupting SaaS — But Not All Software Is Doomed</td><td>2026-02-06</td><td class="u">https://www.forbes.com/sites/petercohan/2026/02/06/saaspocalypse-now-ai-is-disrupting-saas---but-not-all-software-is-doomed/</td><td><span class="cf cf-r">SNIPPET</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T112</strong></td><td>SaaStr (Jason Lemkin)</td><td>The SaaS Rout of 2026 Is Even Worse Than You Think...</td><td>2026</td><td class="u">https://www.saastr.com/the-saas-rout-of-2026-is-even-worse-than-you-think-for-the-first-time-ever-software-now-trades-at-a-discount-to-the-s</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T113</strong></td><td>AllianceBernstein</td><td>Software&#x27;s Big Sell-Off: Structural Risk or Narrative Noise?</td><td>2026</td><td class="u">https://www.alliancebernstein.com/us/en-us/investments/insights/investment-insights/softwares-big-sell-off-structural-risk-or-narrative-nois</td><td><span class="cf cf-r">SNIPPET</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T140</strong></td><td>Pensions Age Magazine</td><td>&quot;Fidelity to integrate private assets through new LTAF&quot;</td><td>~Jan 2025 (undated on fetch)</td><td class="u">https://www.pensionsage.com/pa/fidelity-to-integrate-private-assets-in-new-LTAF.php</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T141</strong></td><td>Trustnet</td><td>&quot;Fidelity&#x27;s first LTAF receives FCA approval&quot;</td><td>~Aug 2024</td><td class="u">https://www.trustnet.com/news/13421892/fidelitys-first-ltaf-receives-fca-approval</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T142</strong></td><td>Investment Week</td><td>&quot;Fidelity International gets green light to launch private assets LTAF&quot;</td><td>6 Aug 2024</td><td class="u">https://www.investmentweek.co.uk/news/4343483/fidelity-international-green-light-launch-private-assets-ltaf</td><td><span class="cf cf-r">PAYWALLED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T143</strong></td><td>Fidelity International (professionals.fidelity.co.uk)</td><td>&quot;Fidelity Diversified Private Assets LTAF&quot; (Funds in Focus)</td><td>27 Jan 2025</td><td class="u">https://professionals.fidelity.co.uk/articles/funds-in-focus/2025-01-27-fidelity-diversified-private-assets-ltaf-1737982487730</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T144</strong></td><td>IPE</td><td>&quot;Fidelity FutureWise grows to £25bn amid UK DC private markets push&quot;</td><td>May 2026</td><td class="u">https://www.ipe.com/news/fidelity-futurewise-grows-to-25bn-amid-uk-dc-private-markets-push/10136888.article</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T145</strong></td><td>Alternative Credit Investor</td><td>&quot;Fidelity&#x27;s FutureWise unveils private markets partner network&quot;</td><td>22 May 2026</td><td class="u">https://alternativecreditinvestor.com/2026/05/22/fidelitys-futurewise-unveils-private-markets-partner-network/</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T146</strong></td><td>Pensions Age Magazine</td><td>&quot;Institutional and wealth sector investment drives LTAF AUM up to £7.3bn&quot;</td><td>~Apr 2026</td><td class="u">https://www.pensionsage.com/pa/Institutional-and-wealth-sector-investment-drives-FCA-approved-LTAF-AUM-up-to-7-3bn.php</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T147</strong></td><td>FIL Holdings (UK) Limited (Companies House filing, company n</td><td>Group of companies&#x27; accounts / Strategic Report for the year ended 31 December 2024</td><td>Filed 26 June 2025</td><td class="u">https://find-and-update.company-information.service.gov.uk/company/06737476/filing-history</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T180</strong></td><td>Bank of England</td><td>Bank rate maintained at 3.75% – September 2026 Monetary Policy Summary and Minutes</td><td>17 Sep 2026</td><td class="u">https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/september-2026</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T181</strong></td><td>Office for National Statistics</td><td>Consumer price inflation, UK: August 2026</td><td>16 Sep 2026</td><td class="u">https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/consumerpriceinflation/august2026</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T182</strong></td><td>FSCS</td><td>Deposit protection limit</td><td>current (updated for £120,00</td><td class="u">https://www.fscs.org.uk/what-we-cover/banks-building-societies-credit-unions/deposit-limit/</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T183</strong></td><td>HMRC / GOV.UK</td><td>Gilt-edged securities exempt from Capital Gains Tax</td><td>current guidance</td><td class="u">https://www.gov.uk/guidance/gilt-edged-securities-exempt-from-capital-gains-tax</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T184</strong></td><td>GOV.UK</td><td>ISA reform 2027: anti-circumvention rules factsheet</td><td>Autumn Budget 2025 factsheet</td><td class="u">https://www.gov.uk/government/publications/fiscal-events-2026-factsheets/isa-reform-2027-anti-circumvention-rules-factsheet</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T185</strong></td><td>NS&amp;I</td><td>Boost for Premium Bonds including around 308,000 extra tax-free prizes</td><td>2026 (Aug/Sep 2026 announcem</td><td class="u">https://www.nsandi.com/about-us/press-releases/2026/boost-for-premium-bonds-including-around-308k-extra-tax-free-prizes-plus-improved-rates-</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T186</strong></td><td>Barclays (home.barclays)</td><td>The missed opportunity of not investing (Equity Gilt Study insight)</td><td>Feb 2026</td><td class="u">https://home.barclays/insights/2026/02/The-Missed-Opportunity-Of-Not-Investing/</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T187</strong></td><td>Vanguard</td><td>How to invest a lump sum of money (cites Finlay &amp; Zorn 2023 paper)</td><td>page undated, cites 2023 res</td><td class="u">https://investor.vanguard.com/investor-resources-education/online-trading/dollar-cost-averaging-vs-lump-sum</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T191</strong></td><td>TradingEconomics</td><td>United Kingdom Government Bond Yield</td><td>data as of 18 Sep 2026</td><td class="u">https://tradingeconomics.com/united-kingdom/government-bond-yield</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T192</strong></td><td>MoneyWeek</td><td>Stocks beat cash and bonds over the long term</td><td>article dated 2019 in the un</td><td class="u">https://moneyweek.com/505257/stocks-beat-cash-and-bonds-over-the-long-term</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T197</strong></td><td>Moneyfacts / GoodMoneyGuide</td><td>Best easy-access savings accounts, September 2026</td><td>15-17 Sep 2026</td><td class="u">https://moneyfactscompare.co.uk/savings-accounts/easy-access-savings-accounts/ ; https://goodmoneyguide.com/savings/easy-access-savings-acco</td><td><span class="cf cf-r">SNIPPET</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T198</strong></td><td>Moneyfacts</td><td>Best 1 Year Fixed Rate Bonds</td><td>17 Sep 2026</td><td class="u">https://moneyfactscompare.co.uk/savings-accounts/1-year-fixed-rate-bonds/</td><td><span class="cf cf-r">SNIPPET</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T200</strong></td><td>MoneyHelper / Royal London Adviser</td><td>Tapered annual allowance explained 2026/27; Annual allowance and MPAA</td><td>current for 2026/27</td><td class="u">https://www.moneyhelper.org.uk/en/pensions-and-retirement/tax-and-pensions/tapered-annual-allowance ; https://adviser.royallondon.com/techni</td><td><span class="cf cf-r">SNIPPET</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T205</strong></td><td>Wikipedia / secondary financial blogs</td><td>Sudden wealth syndrome; lottery winners dissipating windfalls</td><td>undated / various 2026 blog </td><td class="u">https://en.wikipedia.org/wiki/Sudden_wealth_syndrome</td><td><span class="cf cf-r">SNIPPET</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T207</strong></td><td>MoneyWeek</td><td>Active funds vs passive: Is active management still relevant?</td><td>2026</td><td class="u">https://moneyweek.com/investments/active-versus-passive-funds</td><td><span class="cf cf-r">SNIPPET</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T234</strong></td><td>Fidelity Careers</td><td>Candidates AI Code of Conduct — Use of Artificial Intelligence (AI)</td><td>undated/live</td><td class="u">https://careers.fidelityinternational.com/working-here-overview/candidate-code-of-conduct-use-of-artificial-intelligence-ai/</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T237</strong></td><td>FCA</td><td>Consumer understanding: good practice and areas for improvement</td><td>2026 (referenced as March 20</td><td class="u">https://www.fca.org.uk/publications/good-and-poor-practice/consumer-understanding-good-practice-areas-improvement</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T239</strong></td><td>Investment Writing (Susan Weiner)</td><td>Words to avoid in investment communications with regular folks</td><td>undated</td><td class="u">https://www.investmentwriting.com/words-avoid-investment-communications/</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T244</strong></td><td>Institute of Student Employers (via secondary coverage)</td><td>Student Development Survey 2026 — AI misrepresentation concern</td><td>2026</td><td class="u"></td><td><span class="cf cf-r">SNIPPET</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T260</strong></td><td>Fidelity International</td><td>Investment Directing Summer Internship 2027, London. Full job posting, supplied verbatim by the candidate.</td><td>2026 cycle</td><td class="u">careers.fidelityinternational.com</td><td><span class="cf cf-c">VERBATIM</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T261</strong></td><td>Fidelity International</td><td>Careers site: hiring process, FAQs and early careers pages</td><td>accessed 2026</td><td class="u">careers.fidelityinternational.com</td><td><span class="cf cf-c">FETCHED</span></td><td>2026-09-18</td></tr>
+<tr><td><strong>T262</strong></td><td>This repository</td><td>Fidelity International interview pack, Parts 2 to 4 and its source table</td><td>2026-09-16</td><td class="u">fidelity-international-investment-directing/</td><td><span class="cf cf-i">DERIVED</span></td><td>2026-09-18</td></tr>
+</tbody><caption>All URLs accessed 18 September 2026.</caption></table>
+</section>
+<section class="part">
+<span class="marker">@@ANCHOR:q5@@</span>
+<div class="part-band">
+  <p class="kicker">Part 5</p>
+  <h2 class="part-title">Gaps, and what to check</h2>
+  <p class="standfirst">What this research could not establish, which claims are weaker than they look, and the specific
+  things to verify yourself before 15 November. Nothing here is padding.</p>
+</div>
+
+<h3>5.1 Claims that are weaker than they appear</h3>
+<table class="long">
+  <thead><tr><th style="width:26%">Claim</th><th style="width:44%">The problem with it</th><th style="width:30%">What to do</th></tr></thead>
+  <tbody>
+    <tr><td><strong>The LTAF authorisation date</strong></td>
+        <td>Two dates surfaced: 6 August 2024 from two trade sources<span class="src">[T143]</span>, and August 2025 elsewhere<span class="src">[T262]</span>. They may be different milestones. Unresolved.</td>
+        <td>Do not cite a date. Say "Fidelity has an authorised LTAF".</td></tr>
+    <tr><td><strong>The Barclays real-return and probability figures</strong></td>
+        <td>From secondary summaries, not the primary study. Two incompatible versions of the probability statistic exist, measuring different comparisons<span class="src">[T200]</span>.</td>
+        <td>Use the real-return comparison. Avoid quoting a precise probability.</td></tr>
+    <tr><td><strong>"About 70% of windfalls dissipated within seven years"</strong></td>
+        <td>Widely repeated, weakly sourced, no pinned primary study<span class="src">[T205]</span>.</td>
+        <td>Use the behavioural idea. Do not quote the number.</td></tr>
+    <tr><td><strong>Partners Group's 17% share price fall</strong></td>
+        <td>Reported via press summary, not verified against market data<span class="src">[T64]</span>.</td>
+        <td>Say "shares fell sharply" unless you check it.</td></tr>
+    <tr><td><strong>The software P/E and $2trn figures</strong></td>
+        <td>From a single industry commentary source<span class="src">[T102]</span>, not a primary index provider.</td>
+        <td>Attribute loosely, or use the credit-side figures instead, which are better sourced.</td></tr>
+    <tr><td><strong>Graduate AI-usage statistics</strong></td>
+        <td>Percentages on AI use in applications came from aggregated search summaries, not primary surveys<span class="src">[T244]</span>.</td>
+        <td>Not needed for either answer. Omit.</td></tr>
+    <tr><td><strong>The 2027 posting's person-spec wording</strong></td>
+        <td>Quoted from the text you supplied. The live posting could not be re-fetched to re-confirm it phrase by phrase<span class="src">[T260]</span>.</td>
+        <td>You have the original. You are the primary source here.</td></tr>
+  </tbody>
+</table>
+
+<h3>5.2 What could not be established at all</h3>
+<ul>
+  <li><strong>Q3 2026 redemption figures.</strong> Blue Owl's Q3 repurchase window was open through 30 September 2026 with pricing "to be determined"<span class="src">[T28]</span>. This is the single most important gap, because it may change the story's ending.</li>
+  <li><strong>Any Fidelity International house view on private credit or the AI credit question.</strong> The corporate website blocks automated access entirely. If Fidelity has published a view, it would be valuable and this research could not reach it.</li>
+  <li><strong>The LTAF's own documentation</strong> — factsheet, key information document, fees, minimum investment, exact notice period. Not reachable. The 90-day figure is the regulatory floor, not necessarily this fund's actual term.</li>
+  <li><strong>Any weighting or marking rubric</strong> for application questions, at Fidelity or any comparable firm. No credible figure exists publicly for how long a recruiter spends on an application either.</li>
+  <li><strong>A verified real-world example of good versus bad financial explanation.</strong> Sought and not found at a quality worth citing.</li>
+  <li><strong>Any UK or European LTAF gating event.</strong> None found, which is itself a useful finding: the UK structure has not been stress-tested in the way the US vehicles have.</li>
+</ul>
+
+<h3>5.3 Your pre-submission checklist</h3>
+<ol class="checklist">
+  <li>Check Blue Owl's Q3 2026 redemption figures, now published. Adjust your framing if they moved materially.</li>
+  <li>Re-read Fidelity's Candidates AI Code of Conduct and decide your own position on disclosure<span class="src">[T234]</span>.</li>
+  <li>Re-check Bank Rate, CPI and gilt yields on the day you submit. The Bank's next decision falls before the deadline.</li>
+  <li>Verify any figure you quote against the source table in Part 4, and note its status. Never quote a SNIPPET-sourced number as fact.</li>
+  <li>Read your Question 1 explanation aloud to someone outside finance and ask them what happened to the investors' money.</li>
+  <li>Confirm you can talk for five minutes about your chosen topic without notes, because you may have to in December.</li>
+  <li>Count the words. Both answers have hard limits.</li>
+</ol>
+
+<div class="box note">
+  <span class="box-h">One closing thought</span>
+  <p>The strongest thing in your Question 1 material is not the story. It is the fact that the redemption wave ran far
+  ahead of the actual credit deterioration. That observation is available to anyone who looks at both the fund filings
+  and the default data, and almost nobody does, because it requires checking whether the stated reason for an event is
+  supported by evidence.</p>
+  <p>That habit — taking a claim, including a claim made by a company about itself, and testing it against the data
+  before repeating it — is the thing this industry actually pays for. If your answer demonstrates it, the topic almost
+  does not matter.</p>
+</div>
+</section>
+</body>
+</html>

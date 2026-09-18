@@ -9,15 +9,15 @@ BUILD = pathlib.Path(__file__).parent
 OUT   = BUILD.parent / "out"
 OUT.mkdir(exist_ok=True)
 CHROME = "/opt/pw-browsers/chromium-1194/chrome-linux/chrome"
-NAME   = "Fidelity_International_Investment_Directing_Complete_Interview_Pack"
+NAME   = "Fidelity_Application_Questions_Research_Pack"
 
 HDR = ("<div style=\"font-family:Liberation Sans,Arial,sans-serif;font-size:6.5pt;color:#8A93A0;"
        "width:100%;padding:0 14mm;display:flex;justify-content:space-between;\">"
-       "<span>Fidelity International &nbsp;·&nbsp; Investment Directing Summer Internship 2027</span>"
-       "<span>Interview preparation pack</span></div>")
+       "<span>Fidelity International &nbsp;·&nbsp; Investment Directing 2027 &nbsp;·&nbsp; application questions</span>"
+       "<span>Research pack, not a draft answer</span></div>")
 FTR = ("<div style=\"font-family:Liberation Sans,Arial,sans-serif;font-size:6.5pt;color:#8A93A0;"
        "width:100%;padding:0 14mm;display:flex;justify-content:space-between;\">"
-       "<span>Compiled 16 September 2026 &nbsp;·&nbsp; public sources only</span>"
+       "<span>Compiled 18 September 2026 &nbsp;·&nbsp; public sources only</span>"
        "<span>Page <span class=\"pageNumber\"></span> of <span class=\"totalPages\"></span></span></div>")
 
 def assemble():
@@ -82,7 +82,7 @@ def audit(html_path):
               // getBBox() is pre-transform, so a rotated/translated element's box is not
               // comparable to the viewBox. Skip those and rely on the visual page check.
               if (t.hasAttribute('transform')) return;
-                            let bb; try{ bb = t.getBBox(); }catch(e){ return; }
+              let bb; try{ bb = t.getBBox(); }catch(e){ return; }
               const pad = 0.6;
               if (bb.x < vb.x - pad || bb.y < vb.y - pad ||
                   bb.x + bb.width  > vb.x + vb.width  + pad ||
