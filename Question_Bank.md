@@ -1,6 +1,6 @@
 # Question Bank: Millennium, 2027 Corporate Access Services Intern (London)
 
-Round 1: Monday 7 September 2026, 10:00 to 10:30 BST, Webex, with Katherine Hayes and Oliver Harvey (Millennium, London). Prepared 4 September 2026.
+Round 1: Monday 7 September 2026, 10:00 to 10:30 BST, Webex, with Katherine Hayes and Oliver Harvey (Millennium, London). Passed. Round 2: two one-hour interviews with Joe (team member) and Chris (Head of the Desk); see the Round 2 set at the end of this file. Prepared 4 September 2026, extended 19 September 2026. Source markers resolve in Part 15 of the Complete Interview Pack.
 
 How to use this file: these are scaffolds, not scripts. For each question you get (T) what is being tested, (S) a structure, (F) facts worth weaving in with source markers that resolve in the main guide's Part 11, and (X) traps. Fill the structure with your own experience. Rehearse out loud, 60 to 90 seconds per answer. Two interviewers in 30 minutes will not tolerate three-minute answers.
 
@@ -209,3 +209,131 @@ Talent Acquisition signals: introduces the process; same competency questions in
 Two-interviewer dynamics: one leads, one observes. Address the asker, bring the second in with eye contact at the end of each answer. If they say "ten minutes left", cut answers to 45 seconds and keep two questions for them.
 
 Webex: test it the day before (the browser version works if the app fails); camera at eye level; one page of notes off-camera; say their names on hand-over; if audio drops, say so calmly.
+
+---
+
+# Round 2 question set (added 19 September 2026)
+
+Round 1 (7 September, Katherine Hayes and Oliver Harvey) was passed. Round 2 is two separate one-hour interviews: Joe, a member of the team, and Chris, the Head of the Desk. Scheduling via Jessica Cresswell, Campus Recruiter. The set below is taken from Part 9, chapter 9D of the Complete Interview Pack; source markers resolve in its Part 15. Group E is the "saying no to a PM" set that Katherine named as the hardest part of the job.
+
+## R2.1 First, what a head of desk thinks about
+
+Senior questions come from the levers the head actually pulls. Know the five and you can place any question.
+
+## R2.2 Group A: the desk as a business (the questions only a head asks)
+
+A1. "If you ran this desk, would you push more meetings through brokers or originate more directly? Why?"
+**Testing** Lever 1. Whether you understand the two channels as an economic choice.**Scaffold** "It depends on the company. For large caps, IR teams will meet a firm of Millennium's size directly, and paying a bank to intermediate that is money the desk doesn't need to spend; the FCA has treated access as a separately priced service since 2014, so it's a visible cost. For small and mid caps, where broker coverage has thinned since MiFID II, the broker often still has the relationship and the conference is the only efficient way to see twenty of them in a day. So I'd originate large-cap and event-driven access and keep brokers for breadth, conferences and the names where they add the relationship. I'd want the consumption data to tell me where the mix actually is before changing it." [S2][S13][S34][S12]**Trap** Saying brokers are obsolete. The desk's job is to "centralize the access provided by sell-side brokers" [S42]; a head of desk lives on those relationships.
+
+A2. "How do you know a broker is worth what we pay them?"
+**Testing** Lever 2. The vote, the data, and whether you understand that payment for access is regulated.**Scaffold** "Three things. The consumption record: how many meetings each team actually took from that broker, in which sectors, and whether they were one-on-ones or group slots. The teams' own scores in the semi-annual broker vote, which is where PMs say which access was useful. And access quality that the numbers miss: did they get us the CFO or the IR associate, did they honour our ranked list. I'd put those together so the vote is informed by data rather than by whoever shouted loudest." [S43][S39]**Twist** "The rules changed in 2024. Does that alter how we pay brokers?" Know the answer: the FCA's PS24/9 gave UK managers the option to pay for research from joint payments with execution again, from 1 August 2024, but the FCA explicitly said corporate access remains out of scope of that optionality; it is still a separately paid service [S181]. So the vote for access stays a separate judgement from the research vote.
+
+A3. "What would you measure on this desk, and what would you do with the number?"
+**Testing** Lever 3. Whether you think of the record as a decision tool.**Scaffold** "Per team: requests made, filled, unfilled and why. Per broker: slots requested versus won, and the format we got. Per company: how many teams wanted it and how long since we last met them. Then two uses: with the PM, a quarterly plan that fixes the gaps; with the desk, an allocation and broker-vote conversation that is evidence-based. The number I'd most want is unfilled demand by company, because that is the origination pipeline." [S40][S28]**Trap** Proposing a dashboard with no decision attached to it.
+
+A4. "The firm hired 160 PMs last year and is bringing whole external firms onto the platform. How does a desk our size cope?"
+**Testing** Lever 4. Whether you understand the desk's scaling problem and have a process answer.**Scaffold** "By making onboarding and self-service the default. New teams get a standard introduction to the offering and the portal so they can request without being hand-held; the desk's time goes to allocation, brokers and origination, the parts that need judgement. For external managers, I'd want to know whether they sit on the same footing as internal teams, because that changes the allocation rule. And I'd want the data from lever three so the desk can show it is serving more teams per head, not just working harder." [S43][S168][S355][S356b]**Twist** "You've never onboarded anyone." "True. I'm describing the shape; the Tokyo posting says onboarding new investment professionals is part of the desk's job, so I'd learn the current version before suggesting changes."
+
+A5. "Where could a desk like ours get the firm into trouble?"
+**Testing** Lever 5. Whether you see the perimeter without being told.**Scaffold** "Four places. A meeting where management says too much and it isn't escalated; the Greenlight case is the one I keep in mind. Access paid for in a way that can't be shown to be separate from research or commission. A leak across teams: one pod learning what another asked for. And a broker or expert relationship that isn't inside compliance's due diligence. The common defence is the record: every meeting logged, every allocation traceable, and a habit of escalating fast." [S19][S2][S16][S389][S313]**Twist** "Which of those is most likely?" "The leak, because it is small and daily. The others are rare but catastrophic. I'd design the desk's habits around the daily one and its escalation around the rare ones."
+
+A6. "How would you start an origination relationship with a company that doesn't want to meet hedge funds?"
+**Testing** Lever 1, and whether you absorbed what Katherine told you.**Scaffold** "Katherine mentioned it takes years and runs from a coffee to a quarterly call, and that some sectors, luxury for instance, are historically reluctant. So I wouldn't start by asking for a CFO. I'd start with what the desk can offer the IR team: consistent, well-prepared attendees; feedback after meetings; no-surprise conduct; and the scale of a platform where one relationship serves many teams. First contact through a broker's conference, then an IR call, then a group meeting, and only then a one-on-one. The desk's reputation with IR teams is the asset; every meeting either builds it or spends it." [S47][S9][S34]**Twist** "Why would a luxury house care about Millennium?" "Because many of our teams hold or follow them, because a platform offers one well-run relationship instead of twenty, and because hedge funds are now a large share of their register whether they like it or not. But I'd expect it to take the years Katherine described."
+
+## R2.3 Group B: judgement and trade-offs
+
+B1. "Which is more valuable to a PM: a hundred more meetings a year, or ten better ones?"
+**Scaffold** "Ten better ones, for a fundamental pod. Analysts already cover dozens of names; the constraint isn't volume, it's whether the meeting moves the thesis. But 'better' is measurable: the right level of management, the right timing relative to results, and a company the team actually holds or is working on. So I'd rather the desk say no to low-value slots and spend the broker relationship on the ten." [S10][S11]**Trap** Picking one without saying how you'd tell the difference.
+
+B2. "A PM wants a meeting you think is a waste of the desk's time. What do you do?"
+**Scaffold** "Do it, and learn why he wants it. The desk's clients decide what is useful; my job is to make it easy and to notice the pattern. If a team consistently asks for meetings that don't feed anything, that shows up in the consumption data and it's a conversation for the associate or the head to have in a strategy session, not for me to have by slow-walking a request."**Trap** Judging the client's research.
+
+B3. "You have a small broker who gives us brilliant small-cap access and a big broker who gives us the CFOs at conferences. Budget only stretches to one. Which?"
+**Scaffold** "I'd challenge the premise gently first: access is paid separately and can be valued separately, so it is rarely one or the other. If forced, I'd look at unfilled demand: if our teams' unfilled requests are in small caps, the small broker is the one we cannot replace by originating, because large-cap CFOs will often meet us directly. If they're in large caps, the reverse. It's a data question with a strategy behind it." [S34][S2]
+
+B4. "What would you change on this desk after thirty days?"
+**Scaffold** "Honestly, nothing in the first thirty days; I'd be learning how the current process works and why. What I'd have by day thirty is a list: where requests get lost, which brokers copy us and which don't, and what the teams say they can't get. Then I'd propose one small change with the associate, test it on one conference, and measure it. The playbook mistake is changing the template on week one and finding out why the field mattered on week two."**Why it works** Senior people distrust interns with plans and trust interns with lists.
+
+B5. "Tell me something about corporate access you disagree with."
+**Scaffold** Have one real view. Options: "That virtual meetings are second best. For a quick model check with IR they are better, and the data says virtual has fallen to a small share of activity; I think that swung too far." [S12] Or: "That conferences are efficient. For the company they can be twenty half-useful meetings; for a fund with hundreds of teams they're the only way to scale, so the desk's job is to make our twenty count." Say it, defend it for two sentences, and concede the strongest counter.
+
+## R2.4 Group C: commercial awareness at a senior level
+
+C1. "What's happened in our world since you applied?"
+**Scaffold** Two firm items and one regulatory item, dated, from Part 5 of this guide. End with what it means for the desk. Do not recite five things; pick the ones that touch access.
+
+C2. "Does the FCA's move back toward bundled research payments matter to a corporate access desk?"
+**Scaffold** "Directly, less than people assume: the FCA kept corporate access out of the payment-optionality regime, so access is still bought as a separate service. Indirectly, yes: if more research is again paid through execution, brokers' economics with the buy side change, and a desk that scores brokers on access needs to keep that score separate from the research relationship. I'd want to understand how the desk's vote and the research vote are kept apart." [S181][S182]**Trap** Saying MiFID II was reversed. It was not; the UK added an option and the EU adjusted its rules through the Listing Act [S184][S199].
+
+C3. "Millennium is now taking on whole firms like Jain Global. Does that change anything for you?"
+**Scaffold** "It changes who the desk's clients are. Jain Global was 42 PMs across six strategies at launch and had its own way of doing things; if those teams now use Millennium's rails, the desk has clients that were a separate firm a year ago, with their own broker habits. I'd want to know whether they come through the central desk or keep their own arrangements, because that decides how the record stays complete." [S356b][S357h]
+
+## R2.5 Group D: you, at a senior level
+
+D1. "What did you learn from the first interview?"
+**Scaffold** One thing you understood better because of what they said, one answer you would improve, and how. Use the debrief grid. This question is a gift; it rewards honesty and shows you can take feedback, which is the trait the desk's head most wants in someone who will sit between PMs and brokers.
+
+D2. "Why this desk and not the Sector Specialist or the Data and Research Strategy internship?"
+**Scaffold** Know the siblings: Sector Specialists originate by sector and build IR relationships; Data and Research Strategy sits in Content Solutions [S47][S48]. "The service desk is the one seat that touches every team and both channels. Origination is one channel and one sector; content is one input. I want the hub first, and I'd hope to understand origination from inside it."
+
+D3. "How do you take being told you're wrong by someone senior?"
+**Scaffold** A real example, sixty seconds, with the correction you made and what you kept doing. Then the principle: "I'd rather be corrected in a sentence than be wrong for a week. The one thing I'd hold onto even if a PM disagreed is a compliance escalation; everything else I'd update on."
+
+D4. "Where do you want to be in three years, and does this seat get you there?"
+**Scaffold** Honest and specific. Either the desk itself (associate, then wider Platform Solutions: sector specialists, broker relations, content) or a route that starts here. Do not say "a PM seat"; it signals you see the desk as a waiting room. The desk's head is hiring for the desk.
+
+D5. "What would make you turn us down?"
+**Scaffold** Answer it straight and briefly; evasion reads as weakness. "A seat where I wasn't learning the business, or a culture where escalating a concern was punished. Nothing I've seen here suggests either. Otherwise I'd take this." Then stop.
+
+## R2.6 Group E: saying no to a PM (the desk's own hardest part)
+
+Katherine named this as the hardest part of the job. Expect Chris to spend real time on it, with twists. The move is always the same: acknowledge, apply the rule, attach the alternative, protect the other team, and stay in the relationship.
+
+E1. "A senior PM has just been told he didn't get the one seat at a conference. He is at your desk. Go."
+**Scaffold** "'I know this one matters for the book, and I'm sorry it went the way it did. One seat per firm on this one, and it went on [the criterion the desk uses]. Here's what I've already got you instead: a place in the group session and an IR call the week after. If you want the seat looked at again, I'll take it to [Chris] right now.' Then I stop talking. I don't tell him who got it or why they ranked higher, and I don't relitigate the rule with him."**Twists** "He says the rule is stupid." "He may have a point; I'd tell him I'll raise it with the head, and I'd still not change today's allocation myself." "He says he'll go over your head." "Please do; that's the right route, and I'll brief [Chris] first so he isn't surprised."
+
+E2. "How do you decide who gets the seat when three teams have an equal claim?"
+**Scaffold** "I don't know the desk's rule and I wouldn't decide it as an intern. I'd expect it to weigh relevance of coverage, position or live work in the name, when the team last met the company, and the PM's own ranking of his requests. When it's genuinely equal, the tie-breaker has to be something the losers would accept as fair: the record, not the loudest voice. And I'd try to break the scarcity before breaking the tie: ask the broker for a group slot or a second session."**Trap** Inventing a rule and defending it. Say you'd learn it.
+
+E3. "A PM you said no to last month now ignores your emails. What do you do?"
+**Scaffold** "Go and see him. Not about the no, about the next quarter: 'Conference season's coming; which names matter most to you so I can get ahead of the requests?' Bring his consumption data so he can see what the desk did deliver. Most PMs re-engage when the desk shows up with something useful. If he doesn't, I tell my associate; a silent client is a service problem, not a personal one."
+
+E4. "Would you ever say yes to a senior PM just because he is senior?"
+**Scaffold** "No, and he wouldn't respect the desk if I did; it would mean the rule bends for whoever pushes hardest, which makes every future no harder. Seniority changes how I communicate: in person, quickly, with the alternative in hand. It doesn't change the order." Hold this one if pushed; it is the frame.
+
+E5. "What did you mean in Round 1 about managing senior egos when you introduced AI at work?"
+**Scaffold** Have the specific story: who resisted, what they were protecting (time, status, a process they built), what you did (made it their idea, showed the time saved on their work first, never announced it as a replacement), and the result. Then the bridge: "It's the same skill as saying no to a PM: the person isn't the obstacle, the thing they're protecting is, and you can usually give them that another way."
+
+## R2.7 Group F: Joe's hour, the mechanics
+
+F1. "It's the middle of conference season. Walk me through your morning."
+**Scaffold** "Inbox first, in three passes: anything for today's meetings or deadlines; new broker calendars and confirmations into the portal; everything else. Colour-code by type so the second pass is mechanical. Then the shared diary: rooms and attendees for today confirmed, invites out for tomorrow. Then chase: which PMs haven't replied to request deadlines closing this week, by message first, then a call. Then whatever the associates need. I'd tell them what's in the first pass by half nine so nothing surprises them."**Why it works** It is Ollie's "organisation is half the job" made concrete, and it matches the posting's duties line by line [S40].
+
+F2. "How do you make sure a query doesn't get lost when there are hundreds of emails a day?"
+**Scaffold** "Every request gets a home the moment it arrives: a category, an owner, a deadline, and an entry in the portal or tracker. Nothing lives only in the inbox. I'd do a fifteen-minute sweep at the end of the day for anything without a next action. And I'd ask the team how they colour-code now and adopt it exactly; the system only works if everyone uses the same one." Tell your own email-system story here, briefly.
+
+F3. "What would you use AI for on this desk, and what wouldn't you?"
+**Scaffold** "Would: summarising broker calendars into the relevant names for each team; drafting the internal marketing note; first-pass classification of the inbox; reconciling meeting counts across broker and desk records. Wouldn't: anything that decides an allocation, anything that touches confidential team requests outside approved tools, anything sent to a PM or broker without a person reading it. The firm uses Claude across many teams; I'd want to learn what's approved before touching anything." [S386]
+
+F4. "Everyone is slammed and a broker's invite for tomorrow has a mistake in it. What do you do?"
+**Scaffold** "Fix the thing that breaks tomorrow first: call the broker, confirm the correct detail, re-issue the invite to attendees with one line saying what changed. Then note it so the desk's record is right. Then, if the same broker keeps doing it, that's a conversation for the associate. In season, jump in on what's in front of you and log it; don't wait to be asked."
+
+F5. "What do you think a new joiner gets wrong in the first two weeks?"
+**Scaffold** "Trying to change things before understanding why they are the way they are; promising PMs outcomes the desk doesn't control; and replying to everything instead of triaging. I'd rather be the intern who asks one more question than the one who sends one wrong email to a PM." Then ask Joe what she has actually seen.
+
+## R2.8 Questions to ask the people who run the desk
+
+"When you look at the desk's consumption data, what surprises you most about how teams actually use access?"
+Shows you see the data as the product; invites a real answer.
+
+"How has the balance between broker-sourced and originated access moved over the last two or three years in EMEA, and where do you want it?"
+Lever 1, asked as strategy.
+
+"With the firm adding teams and external managers at this pace, what does the desk have to do differently to keep service quality flat?"
+Lever 4; shows you understand the scaling problem.
+
+"What does a summer intern who you'd want back look like by August?"
+Asks for the standard directly. The firm's stated goal is to hire its analyst class from interns [S383].
+
+"Is there anything from my first conversation with Katherine and Oliver you'd like me to expand on?"
+Invites the note they are holding. Ask it near the end.

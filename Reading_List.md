@@ -1,4 +1,6 @@
-# Reading List: Millennium Corporate Access Services Intern (London), Round 1 on 7 September 2026
+# Reading List: Millennium Corporate Access Services Intern (London)
+
+Round 1 on 7 September 2026 (passed); Round 2 pending, two one-hour interviews. Source IDs match Part 15 of the Complete Interview Pack. Section 10 holds the 17 September additions.
 
 Every article, filing, regulator document and report found during research on 4 September 2026, grouped by theme, each with a one-line reason to read it. Paywalled items are listed with headline only; nothing was inferred from unread paywalled text. Source IDs in brackets match Part 11 of the main guide.
 
@@ -198,3 +200,38 @@ Priority for the weekend is marked with a star.
 - IR Magazine / IR Impact: the company side of corporate access.
 - Bank of England FSR and MPC; FCA policy statements and Market Watch; ESMA Listing Act pages; IMF GFSR.
 - EY IPO Eye; Trading Economics for levels with dates.
+
+## 10. Added 17 to 19 September: the Round 2 sweep
+
+What changed since 5 September (Millennium, the platform sector, regulation) and the public-professional check on the Round 2 interviewers. Read the three items in Part 7, chapter 7B of the Complete Interview Pack first: the $22bn closing on 1 October [S400], the August returns [S402], and the Odey Upper Tribunal decision [S413].
+
+- Bloomberg via Yahoo Finance, "Millennium Nears $100 Billion in New Era for Giant Hedge Funds (Parmar, Burton)" (2026-09-07). https://finance.yahoo.com/markets/stocks/articles/millennium-nears-100-billion-era-210034426.html [S400]. Fetched. Full syndication of paywalled Bloomberg feature (https://www.bloomberg.com/news/features/2026-09-07/millennium-nears-100-billion-as-izzy-englander-s-hedge-fund-passes-rivals); figures from unnamed sources
+- Hedgeweek, "Millennium closes in on $100bn AUM" (2026-09-08). https://www.hedgeweek.com/millennium-closes-in-on-100bn-aum/ [S401]. Fetched. Summary of Bloomberg; consistent with S400
+- Hedgeweek, "Citadel, Millennium and peers post muted August returns" (2026-09-04). https://www.hedgeweek.com/citadel-millennium-and-peers-post-muted-august-returns/ [S402]. Fetched. Cites unnamed persons; firms did not comment
+- Bloomberg, "Millennium Joining Rokos With Plans for First Greece Outpost" (2026-09-09). https://www.bloomberg.com/news/articles/2026-09-09/millennium-joining-rokos-with-plans-for-first-greek-outpost [S403]. Paywalled-Not-Read (Http 403). Headline only; content via S404/S405
+- ProtoThema English, "Athens emerges as a new hedge fund hub: After Chris Rokos, Izzy Englander's US-based Millennium is also heading to Greece" (2026-09-09). https://en.protothema.gr/2026/09/09/athens-emerges-as-a-new-hedge-fund-hub-after-chris-rokos-izzy-englanders-us-based-millennium-is-also-heading-to-greece/ [S404]. Fetched. Greek outlet relaying Bloomberg; PM name spelled "Raoul"
+- Hedgeweek, "Millennium and Verition explore Athens offices" (2026-09-10). https://www.hedgeweek.com/millennium-and-verition-explore-athens-offices/ [S405]. Fetched. Secondary; UK industry stats unattributed on page
+- Hedgeweek (citing FT), "Millennium explores Geneva tax deal" (2026-09-08). https://www.hedgeweek.com/millennium-explores-geneva-tax-deal/ [S406]. Fetched. FT original not read
+- Hedgeweek (citing Bloomberg), "Jain Global made $1.8bn before switching to Millennium capital" (2026-09-02). https://www.hedgeweek.com/jain-global-made-1-8bn-before-switching-to-millennium-capital/ [S407]. Fetched. Bloomberg 1 Sep original paywalled (403)
+- Hedgeweek (citing Bloomberg), "Millennium adds senior Japan stock trader" (2026-09-11). https://www.hedgeweek.com/millennium-adds-senior-japan-stock-trader/ [S408]. Fetched. Millennium declined comment
+- Companies House, "MILLENNIUM CAPITAL PARTNERS LLP — filing history and officers (OC312897)" (2026-09-15 (latest filing)). https://find-and-update.company-information.service.gov.uk/company/OC312897/filing-history [S409]. Fetched. Primary record
+- Hedgeweek, "Citadel taps Elliott veteran to lead combined international equities business" (2026-09-14). https://www.hedgeweek.com/citadel-taps-elliott-veteran-to-lead-combined-international-equities-business/ [S410]. Fetched. Includes Citadel statement
+- Hedgeweek (citing Reuters), "Citadel explores acquisition of US shale production assets" (2026-09-07). https://www.hedgeweek.com/citadel-explores-acquisition-of-us-shale-production-assets/ [S411]. Fetched. Citadel declined comment
+- Hedgeweek (citing Bloomberg), "ExodusPoint gives former BlueCrest trader more than $1bn for new macro pod" (2026-09-03). https://www.hedgeweek.com/exoduspoint-gives-former-bluecrest-trader-more-than-1bn-for-new-macro-pod/ [S412]. Fetched. Pre-window context
+- FCA, "Upper Tribunal upholds Crispin Odey ban (press release; FCA news index also scanned)" (2026-09-14). https://www.fca.org.uk/news/press-releases/upper-tribunal-upholds-crispin-odey-ban [S413]. Fetched. Primary regulator source
+- FCA, "Man pleads guilty to fraud and forgery offences relating to fake takeover approach" (2026-09-10). https://www.fca.org.uk/news/press-releases/man-pleads-guilty-fraud-and-forgery-offences-relating-fake-takeover-approach [S414]. Fetched. Primary
+- Sidley Austin, "UK/EU Investment Management Update (September 2026)" (2026-09-08). https://www.sidley.com/en/insights/newsupdates/2026/09/uk-eu-investment-management-update-september-2026 [S415]. Fetched. Law-firm roundup; dates cross-checkable on FCA/ESMA sites
+- ESMA, "News index; press release "Ongoing geopolitical and economic vulnerabilities masked by strong investor optimism" (TRV Risk Monitor 2/2026)" (2026-09-10). https://www.esma.europa.eu/press-news/esma-news [S416]. Fetched (Pdf Partly Unreadable). Primary; no research-rule items in window
+- FCA, "PS26/16: Changes to information flows for UK equity IPOs" (2026-08-05). https://www.fca.org.uk/publications/policy-statements/ps26-16-changes-information-flows-uk-equity-ipos [S417]. Fetched. Primary; pre-window background
+- Millennium campus careers API, "2027 Corporate Access Services Intern, London (REQ-30183, id 755957778817) + London listing + REQ-30221 searches" (posting timestamp 2026-07-27; checked 2026-09-17). https://campusjobs.mlp.com/api/apply/v2/jobs/755957778817?domain=mlp.com [S418]. Fetched. Primary; JSON saved at scratchpad/research/job_755957778817_0917.json and campus_api_london_0917.json
+- Hedgeweek, "Millennium seeks $2.5m from Dymon PM over abandoned move" (2026-08-28). https://www.hedgeweek.com/millennium-seeks-2-5m-from-dymon-pm-over-abandoned-move/ [S419]. Fetched. Pre-window context; Bloomberg 27 Aug original paywalled
+- TheOrg, "Millennium Management – Corporate Access team" (undated). https://theorg.com/org/millennium-management/teams/corporate-access [S420]. Fetched. Crowd-sourced, "Unverified"; 10 names, no Chris/Jo
+- TheOrg; LinkedIn snippet, "Gala Kanevsky – Co-Head of Corporate Access Services at Millennium Management" (undated). https://theorg.com/org/millennium-management/org-chart/gala-kanevsky [S421]. Snippet (Theorg Fetch Redirected). Aggregator; two snippets agree
+- TheOrg; SignalHire; Wiza, "Tom Treacy – Head of Corporate Access Services, International" (undated). https://theorg.com/org/millennium-management/org-chart/tom-treacy [S422]. Snippet (410 / 403 / Redirected). Aggregator
+- LinkedIn / TheOrg / Wiza snippets, "Name matches at Millennium: Chris Moran, Christopher Wurtz, Chris Long, Chris Sherfield, Chris Colliniates, Josephine Zinn, Joanna Hawthorne, others" (undated). https://theorg.com/org/millennium-management/org-chart/christopher-wurtz [S423]. Snippet. All excluded: no corporate access function
+- LinkedIn snippet, "Katherine Hayes – Greater London – Corporate Access Services Associate, Millennium" (undated). https://www.linkedin.com/in/katherine-hayes-02042375/ [S424]. Snippet. Consistency check only
+- RocketReach snippet, "Ann Crowley – Corporate Access Execution Senior Manager, Bernstein, London; prior Millennium, Jefferies, ABG Sundal Collier, Barclays" (undated). https://rocketreach.co/ann-crowley-email_102176830 [S425]. Snippet. Alumna, excluded
+- FCA Financial Services Register, "Millennium Capital Partners LLP, FRN 439327" (authorised 2006-02-20). https://register.fca.org.uk/s/firm?id=001b000000MfZ0FAAV [S426]. Snippet (Css Error / Http 401). Primary; certification staff not listed by design
+- eFinancialCareers, "Corporate Access Services Associate, London UK (Millennium)" (undated). https://www.efinancialcareers.co.uk/jobs-UK-London-Corporate_Access_Services_Associate.id23084387 [S427]. Snippet (Http 404). Names no manager
+- Millennium (mlp.com), "Chris Moran: Global Head of Operations and Middle Office" (undated). https://www.mlp.com/people/leadership/chris-moran/ [S428]. Snippet. Primary; excluded (wrong function)
+- IR Magazine / IR Society, ""Navigating buy-side corporate access in a new world" (Apr 2020); IR Society Annual Conference 24 Jun 2026" (2020 / 2026). https://www.irmagazine.com/events/ir-magazine-q4-navigating-the-buy-side-in-a-new-world [S429]. Snippet. No Millennium corporate access speaker found
