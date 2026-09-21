@@ -523,6 +523,12 @@ This attempt sets your profile at every pymetrics employer for the next 11 month
 - [ ] One sitting, no breaks mid-game.
 - [ ] **Finish all 12 games no matter how badly one goes.** More than two missing games and your entire session is discarded. A bad game is survivable; an incomplete session is not.
 
+**Day 3, part two — immediately start on the digital interview.** It typically arrives within 12 hours of finishing the games, sometimes 40 minutes, with a **2-day window**. Per candidate consensus this is the stage that actually decides things, so do not let it catch you cold:
+- [ ] Prepare **two recent Blackstone deals** with a view on each. This question comes up repeatedly.
+- [ ] Prepare a crisp "why this programme", a "greatest challenge you've overcome", and a view on **macro trends and alternative investments**.
+- [ ] Remember you get **unlimited practice on a test question** and **3 minutes to prepare before each real question** — and you can toggle off self-view and the timer if they rattle you.
+- [ ] If you are applying to several groups, note that some candidates report **one recording being reused across all of them**. Make it good once.
+
 ---
 
 ### Track B — your old results are being reused
@@ -547,7 +553,31 @@ What to do instead:
 - **iPREP** — simulations plus video explanations
 - GraduatesFirst — pairs pymetrics-style practice with HireVue prep, useful since Blackstone's video round follows; note it does not cover the full game set
 
-**YouTube:** iPREP's per-game tutorial series (e.g. "Pymetrics Faces Game — iPREP's Pymetrics Games Tutorials"), JobTestPrep walkthroughs, CareerVidz/Richard McMunn, Practice Aptitude Tests. Search each game by name plus "pymetrics" for real gameplay footage.
+**YouTube — verified videos, best first.**
+
+There is no genuine footage of a real Blackstone session (no practice mode, recording forbidden). The closest to watching someone actually play:
+- **Prepmatter, "Pymetrics Test: Full Game Reveal | Real-Life Simulation"** — https://www.youtube.com/watch?v=T_YIxoFKUts — end-to-end screen-recorded run of the whole battery. Start here.
+- **TechTalk with TDAfrica, "1-Hour Real Assessment: Pymetrics Games Test Practice"** — https://www.youtube.com/watch?v=Eg8eBVaHn7I — a candidate recording a full-length session.
+
+Full walkthroughs:
+- Prepmatter, "Complete Walkthrough & Tips (BCG, Bain, EY, Blackstone…)" — https://www.youtube.com/watch?v=BVdilU_xxl0
+- YOUinConsulting, "How to master the 12 Pymetrics games" (kept updated to 2026) — https://www.youtube.com/watch?v=mnIqTjN9f0E
+- JobTestPrep, "Pymetrics Games Assessment – Complete Guide [2026]" — https://www.youtube.com/watch?v=GpLYe662PfY
+- Hacking the Case Interview, "Step-By-Step Guide to All 12 Games" — https://www.youtube.com/watch?v=B7E6YD36bvU
+- How2Become / Richard McMunn, "How to Pass Pymetrics Games Tests" (Nov 2025) — https://www.youtube.com/watch?v=VA5lb1g1gqo
+
+Balloons specifically (highest-variance game, worth the extra time):
+- iPREP — https://www.youtube.com/watch?v=tjYSIVOcR8E
+- JobTestPrep short guide — https://www.youtube.com/watch?v=c63EpbO836o
+- Graduates First — https://www.youtube.com/watch?v=ZXJBvGqJ4BE
+
+Blackstone-specific (commercial, treat as funnels for paid packs):
+- Offer Tutor, "2025 Blackstone Pymetrics Games and Digital Video Interview Questions & Answers" — https://www.youtube.com/watch?v=V-nqIda_uMI
+- How2Become, "BLACKSTONE INTERVIEW Questions & Answers" — https://www.youtube.com/watch?v=-OXA5csZaIY — interview content, not game footage.
+
+Digital interview:
+- Voomer, "What is a Pymetrics interview?" — https://www.youtube.com/watch?v=Fvixn_neCw8
+- Voomer, "7 common Pymetrics questions" — https://www.youtube.com/watch?v=VQ55PVxMhV8
 
 **Generic but effective drills:** Human Benchmark (reaction time, number memory), PsyToolkit (flanker, IGT, BART, digit span — these are the *actual academic tasks* the games are built from, and they are free), any Tower of London / Towers of Hanoi app.
 
@@ -557,22 +587,24 @@ What to do instead:
 
 ## 6. The things that actually matter
 
-**Before you play:**
-1. **Establish whether you are getting a fresh attempt.** If your old profile is being reused, that is the whole story of this application, and your prep belongs on your replay date instead.
-2. **Never sit pymetrics casually again.** One play locks your profile across every platform employer for 330 days. If you did that once for a throwaway application, it may have been quietly costing you ever since.
+**Diagnose before you prepare:**
+1. **Work out which stage you have actually been failing at.** At Blackstone the games look near-automatic for US campus programmes — candidates report the video invite arriving within 12 hours, once within 40 minutes. If you completed games, got a video interview, then heard nothing, **the games were never your problem.** Put the effort into the digital interview and the CV.
+2. **Establish whether this is a fresh attempt or a replay.** Inside 330 days your old gameplay is simply re-scored and nothing you do changes it. If so, note your eligibility date and prepare for *that*.
+3. **Never sit pymetrics casually again.** One play locks your profile across every platform employer for eleven months.
 
-**During the games — the five highest-leverage moves:**
-3. **Balloons: deliberately pop one of each colour early.** Best single decision in the battery. Learn the mapping live; do not pre-load one.
-4. **Cards: explore all four decks for ~30 draws, then commit hard to the two net-positive ones.** Your score is the good-deck share of the **final 40 draws** — the back half is the part that counts.
-5. **Towers: sit still for 15–25 seconds before your first click.** First-move latency is separately scored, and fast-first-move plus high-move-count is the worst planning signature you can produce.
-6. **Easy or Hard: decide on expected value, not effort appetite** — Hard when `p × reward ≥ $2`. "EV-aligned choices" is a literal recorded metric.
-7. **Stop: after three or four reds in a row, consciously treat the next circle as a fresh decision.** False alarms cluster at the end of go-streaks, and the streak length is logged.
+**The five highest-leverage in-game moves:**
+4. **Balloons: pop one of each colour early, then let your pump counts visibly diverge by colour.** Identical pumping across colours demonstrates zero learning no matter how much you bank. And because the EV curve is flat near its peak, pumping ~45–55 on the safe colour instead of 64 costs you almost nothing while reading far less reckless.
+5. **Cards: sample every deck ~4–5 times, score decks on *net* not on headline gains, then commit ~50/40/10.** The trap is the big-payout deck with rare huge losses — most people fall for it, which is exactly why not falling for it is the signal.
+6. **Towers: sit still 15–25 seconds before your first click.** First-move latency is separately scored, and the move counter is cumulative across Undo and Reset, so you cannot tidy up a mess by resetting.
+7. **Easy or Hard: Easy below ~35% probability regardless of reward; Hard above ~75% with reward over $2; in between only at $3.20+.** And check you can genuinely hit 60 presses in 12 seconds.
+8. **Stop: after three or four reds in a row, consciously treat the next circle as a fresh decision.** False alarms cluster at the end of go-streaks, and streak length is logged.
 
-**And two on mindset:**
-8. **Finish all twelve games regardless.** More than two missing and the whole session is discarded.
-9. **Stop treating this as the thing that is rejecting you.** The average position recommends **58% of applicants**. Blackstone takes roughly 0.2–0.5% overall. The maths says the CV screen, the HireVue and the superday are where your candidacy is actually being decided — and a pymetrics rejection is weak evidence about you, because the same profile passes at one firm and fails at another depending on whose model it meets.
+**And on mindset:**
+9. **Finish all twelve games regardless.** More than two missing and the session is discarded; one or two missing gets you a dead-average imputed value.
+10. **Do not chase extremes.** Features are clipped several SDs out, so maximal play on any metric buys nothing past the bound — and the target is a profile, not a maximum.
+11. **Stop treating this as the thing rejecting you.** The average position recommends **58% of applicants**. Blackstone takes ~0.2–0.5% overall. Nobody in any forum thread reported an explicit "you failed the games" rejection — the observed failure mode is silence, which is consistent with the CV screen and later rounds doing the cutting.
 
-The one genuine strategic lever the data supports is **breadth**. Prepare properly for one clean attempt, then apply widely enough that no single correlated model can shut you out.
+The one strategic lever the data genuinely supports is **breadth**: prepare properly for one clean attempt, then apply widely enough that no single correlated model can shut you out.
 
 ## Sources
 
