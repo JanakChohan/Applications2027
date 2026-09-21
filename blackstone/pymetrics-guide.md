@@ -91,7 +91,20 @@ Note every dimension is a **spectrum with two named poles, not a "more is better
 
 ### What Blackstone specifically appears to weight
 
-Prep-vendor analysis and Blackstone's stated competencies point to **calibrated (not reckless) risk tolerance, decision quality under uncertainty, sustained attention and focus, and fast learning from feedback.** Reported divisional variation: Real Estate leans long-horizon planning, PE leans adaptability. pymetrics sits after CV screen and before HireVue as **volume triage** — reported context is ~57,000 applications for ~138 entry-level seats.
+**Blackstone uses the standard 12-game battery — no custom subset.** So prepare all twelve; there is no Blackstone-specific shortlist to hunt for.
+
+Prep-vendor analysis and Blackstone's stated competencies point to **calibrated (not reckless) risk tolerance, decision quality under uncertainty, sustained attention and focus, and fast learning from feedback.** Reported divisional variation: Real Estate leans long-horizon planning, PE leans adaptability. Reported context is ~57,000 applications for ~138 entry-level seats.
+
+### Where it sits, and what comes next
+
+The games arrive **within hours to a couple of days of applying** — which is why prep has to happen *before* you apply, not after the invite lands. Then:
+
+1. **pymetrics games** (your 3-day window)
+2. **One-way video interview** — roughly 3–5 questions in about 4 minutes, typically days later
+3. **First-round live interview** — around 2–3 weeks after the video
+4. **Superday** — in person for investing roles; one candidate reported five separate 30-minute interviews in a day
+
+Interviews are scored against **Blackstone's Leadership Framework: drive, judgment, inclusive leadership.** Worth knowing now, because the behavioural story you tell at stages 2–4 should be recognisably the same person the games described. That consistency is free to produce if your gameplay was honest, and hard to fake if it was not — which is another practical argument for playing straight.
 
 ### The finding that should change your application strategy
 
