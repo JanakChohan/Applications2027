@@ -91,11 +91,12 @@ Each entry: **mechanics → metric extracted → what good looks like → how to
 ---
 
 ### 3. Money Exchange #1 (Trust Game) — trust & reciprocity *(preference game)*
-- **Mechanics:** You hold **$10**. Send any amount to a partner; it **triples** in transit. Partner returns what they choose. You then rate the exchange's fairness (0–10). Multiple rounds in some versions.
-- **Metrics:** amount sent (trust), how you **update** after being reciprocated or exploited, and your fairness ratings.
-- **What is measured, honestly:** there is no correct amount. Sending $0 = zero trust. Sending $10 = maximum trust/risk. Guides converge on **sending roughly $3–$5** as a moderate-trust read; some recommend a straight half.
-- **Play:** Pick a position and be **internally consistent**. Send a moderate amount, and adjust *sensibly* to feedback — increase slightly when reciprocated, decrease when exploited. That pattern reads as trusting-but-adaptive, which is what a finance model tends to like.
-- **Kills you:** random amounts round to round with no logic, or fairness ratings that contradict your own behaviour.
+- **Mechanics:** **One round.** You hold **$10**, the partner holds $0. Send **$0–$10 in $1 increments**; it **triples** in transit. The (algorithmic) partner then returns a portion — reported default is a **seeded-random 30–70% of the tripled amount**. You then rate the exchange's fairness **0–10**.
+- **Metrics logged:** amount sent, tripled amount, partner return, both final balances, your fairness rating, **reaction times**, timestamped events. **No score is assigned** — money retained is explicitly not a test score.
+- **A quietly important bit of maths:** if the partner returns 30–70% of 3×, you get back **0.9× to 2.1×** what you sent, expected ≈ **1.5×**. Sending *more* is therefore expected-value-positive. So "send little" is not the safe play it feels like — it is simply a low-trust reading, and it also leaves money on the table.
+- **What is measured, honestly:** there is no correct amount. $0 = zero trust. $10 = maximum trust. Guides converge on a moderate-to-substantial send — **$5 (half) is the most commonly recommended anchor**, with $3–$5 the cautious band.
+- **Play:** Send around half. Then **rate fairness against what actually happened**, not against an imagined ideal — if they returned a lot, say it was fair; if they returned almost nothing, say it was not. The coherence between your send and your rating is the signal.
+- **Kills you:** sending $0 or $1 (reads as low trust and low risk tolerance simultaneously), or a fairness rating that contradicts the outcome you just saw.
 
 ---
 
@@ -108,8 +109,9 @@ Each entry: **mechanics → metric extracted → what good looks like → how to
 ---
 
 ### 5. Digits (Digit Span) — working memory
-- **Mechanics:** A digit sequence flashes; type it back in order. Correct → sequence grows by one. Incorrect → shrinks. **Ends after 3 errors.**
-- **Metrics:** maximum span reached, error pattern.
+- **Mechanics:** Starts at about **4 digits**, shown roughly **~900ms per digit**. Type them back in order. Correct → next sequence is **one digit longer**; incorrect → **one shorter**. It is a ±1 staircase that hunts your limit. **Ends after 3 *consecutive* errors — and a single correct answer resets the counter.**
+- **Metrics:** **max span**, correct-round count, **best streak**, submission latency, and error *type* (transpositions = you held the digits but lost the order; omissions = span exceeded).
+- **Because errors must be consecutive, one mistake is survivable.** Do not spiral after a miss — the next correct answer wipes the counter clean. Most people fail this game emotionally, not cognitively.
 - **Benchmarks:** average max is **8–9 digits**. **~11 digits ≈ top 20%.** Aim **10–12**. Note: **14–15 looks implausible and may flag manipulation** (i.e. writing it down).
 - **Play:**
   - **Chunk** in 3s and 4s: `729481635` → "729 · 481 · 635".
@@ -121,40 +123,45 @@ Each entry: **mechanics → metric extracted → what good looks like → how to
 ---
 
 ### 6. Easy or Hard (EEfRT — Effort Expenditure for Rewards Task) — effort allocation
-- **Mechanics:** ~2 minutes of rounds. Each round, ~5 seconds to choose:
-  - **Easy:** 5 spacebar presses in 3 seconds → **$1**
-  - **Hard:** 60 presses in 12 seconds → **$1.24–$4.30**
-  - Each round displays a **win probability** — in the academic task these are **12% / 50% / 88%**.
-- **Metrics:** proportion of hard choices, and critically **whether your choices track reward magnitude and probability** (reward sensitivity), plus completion rate on hard tasks.
-- **The actual maths — compute expected value per second:**
-  - Hard at $4.30 × 88% = $3.78 over 12s ≈ **$0.32/s** → take it.
-  - Easy at $1.00 × 88% = $0.88 over 3s ≈ **$0.29/s** → comparable.
-  - Hard at $1.50 × 12% = $0.18 over 12s ≈ **$0.015/s** → never.
-  - Easy at $1.00 × 12% = $0.12 over 3s = **$0.04/s** → still better than that hard task.
-- **Rule of thumb:** **At 88% take hard whenever the reward is meaningfully above ~$2. At 12% almost always take easy. At 50%, take hard only at the top of the reward range (~$3+).**
-- **Play:** Show *discriminating* effort. The trait being read is not "works hard" — it is "allocates effort where expected value justifies it."
-- **Kills you:** always choosing hard (reads as poor judgement/indiscriminate), always choosing easy (reads as low drive), or **choosing hard and failing to complete the 60 presses** — that is the worst outcome available.
+- **Mechanics:** Each round gives you **5 seconds to choose** (let it lapse and it **auto-selects Easy and logs that it was automatic** — avoid this):
+  - **Easy:** 5 spacebar presses in 3 seconds → **a guaranteed $1.00**
+  - **Hard:** **60 presses in 12 seconds** → **$1.24–$4.30**, paid only with the **displayed probability**
+  - Probabilities are shown each round. The parent academic task (EEfRT) uses **12% / 50% / 88%**; the pymetrics version may show whole percentages anywhere from ~10–90%. Format is either **12 fixed rounds** or a **2-minute cap**, depending on configuration.
+- **⚠️ The easy task is NOT probabilistic — it is a guaranteed $1.** Most online guides get this wrong and apply the probability to both options. Only the hard task is a gamble.
+- **Metrics — and this is the important one:** alongside rounds completed, dollars earned, decision reaction time, every keystroke and completion status, pymetrics records **"EV-aligned choices" — the percentage of your decisions that match expected-value logic.** Your rationality is being scored directly and explicitly. This is the most transparently optimisable game in the battery.
+- **The maths.** Hard's expected value is `p × reward`. Compare to Easy's guaranteed $1:
+  - **If your session is a fixed number of rounds** (time not binding), the rule is simply **take Hard when `p × reward > $1`.**
+    - $4.30 at 88% = **$3.78** → Hard, easily.
+    - $4.30 at 50% = **$2.15** → Hard.
+    - $4.30 at 12% = **$0.52** → Easy.
+    - $2.00 at 50% = **$1.00** → a coin flip; take Easy.
+    - $1.50 at 88% = **$1.32** → marginally Hard.
+  - **If your session is the 2-minute timed mode**, time is the scarce resource and the bar rises, because Hard eats 12s against Easy's 3s. Including the ~5s decision window, Easy earns ~$0.125/s; Hard needs roughly **`p × reward > $2.00–2.50`** to beat that. In practice: **take Hard only at high probability (~50%+) combined with a reward near the top of the range.**
+- **Safe universal heuristic if you are unsure which mode you are in:** **take Hard when `p × reward ≥ $2`, otherwise Easy.** That is EV-positive under fixed rounds and roughly correct under the timed cap.
+- **Quick mental shortcuts:** 88% ≈ "nearly all of it", 50% ≈ "half of it", 25% ≈ "a quarter of it". You do not need precision — you need the right side of $1–2.
+- **Play:** Show *discriminating* effort. The trait is not "works hard", it is "spends effort where the numbers justify it". Decide fast — decision latency is logged, and in timed mode dithering costs you rounds.
+- **Kills you:** always choosing Hard (indiscriminate, and in timed mode it tanks your earnings), always choosing Easy (low drive), letting the 5-second window lapse (logged as automatic), and worst of all **choosing Hard and failing to land 60 presses in 12 seconds**. That is 5 presses/second — practise it. If you cannot reliably hit it, your EV on every hard choice is lower than displayed.
 
 ---
 
 ### 7. Stop (Stop-Signal / Go-No-Go) — impulse control
-- **Mechanics:** ~2 minutes. **Press spacebar on red; do nothing on green.** Stimuli flash fast and the pace increases.
-- **Metrics:** commission errors (pressing on green — the key impulsivity measure), omission errors, reaction time, and consistency as pace rises.
-- **Good:** **Accuracy dominates speed here.** A slightly slower correct response beats a fast false alarm.
-- **Play:** Rest your finger *near* the spacebar, not on it. Build a tiny mental buffer — confirm colour, then press. Re-read which colour means press before starting; some versions invert it.
-- **Kills you:** getting into a rhythm and pressing on autopilot. Commission errors on green are the single loudest impulsivity signal in the battery.
+- **Mechanics:** roughly **80 circles over ~2 minutes**, arriving at about **one per second**. Default rule: **red = press spacebar, green = withhold.** At least one source reports the reverse mapping, so **read the instruction screen** — do not assume.
+- **Metrics:** hits, **misses** (failed to press on red), **correct inhibitions**, **false alarms** (pressed on green — the headline impulsivity measure), reaction time on correct presses, and — tellingly — **the length of the preceding "go" streak before each response**.
+- **The trap, and it is a designed one:** reds heavily outnumber greens, so you build a pressing habit. **False alarms cluster immediately after long runs of red.** pymetrics logs the go-streak length precisely because it wants to see whether your inhibition survives momentum.
+- **Play:** Rest your finger *near* the spacebar, not on it. **After three or four reds in a row, consciously flag the next circle as a fresh decision** rather than another press. Accuracy dominates speed here — a slightly slow correct response beats a fast false alarm every time.
+- **Kills you:** autopilot. Pressing on green is the single loudest impulsivity signal in the battery, and it happens to almost everyone at exactly the same moment — deep into a red streak.
 
 ---
 
 ### 8. Cards (Iowa Gambling Task) — learning from feedback under risk
-- **Mechanics:** Four decks, start with ~$2,000 (some versions $2,000, some differ). Draw repeatedly; each card gives a gain, sometimes with a loss attached. Usually untimed.
-- **The structure (from the IGT):** two decks are **advantageous** (small gains, smaller losses, **net positive ≈ +25 per draw**) and two are **disadvantageous** (big gains, bigger losses, **net ≈ −25**). Loss *frequency* also varies: one good and one bad deck have rare-but-large losses; the others have frequent-but-small losses. **The rare-large-loss bad deck is the classic trap** — it feels great for many draws before it punishes you.
-- **Metrics:** net score across blocks, and the **learning curve** — how fast you shift toward the good decks — plus reaction to losses.
-- **Play:**
-  - **Sample all four decks** roughly evenly for the first ~20–30 draws. Exploration is explicitly rewarded as "learning".
-  - Track **net** per deck, not gains. Keep a mental running total; a deck paying $100 that hits you for $350 is a losing deck.
-  - Then **commit hard** to the two net-positive decks for the remainder. The measured signal is the *shift*, so make the shift visible and decisive.
-  - Do not abandon a good deck after one bad card.
+- **Mechanics:** Four face-down decks in fixed positions. Start with **$2,000**, **80 draws total**. Usually untimed.
+- **The structure (from the IGT):** two decks are **advantageous** — **$50-scale gains**, penalties small enough to leave a positive long-run return. Two are **disadvantageous** — **$100-scale gains** with penalties large enough to make them net-losing (classic IGT: roughly **+25 vs. −25 net per draw**). Loss *frequency* varies independently: one good and one bad deck have rare-but-large losses; the others frequent-but-small. **The big-payout, rare-large-loss deck is the trap** — it feels excellent for many draws before it punishes you.
+- **THE KEY METRIC:** the headline score is the **percentage of draws from net-positive decks in your FINAL 40 choices.** Also logged: final balance, overall good-deck share, **number of decks explored**, reaction times.
+- **This gives you an explicit game plan, because the scoring splits the session in half:**
+  - **Draws 1–~30: explore all four decks** roughly evenly. Breadth of sampling is itself a measured variable, and you cannot identify the good decks without it. Early losses here cost you nothing that matters.
+  - **Draws ~40–80: commit almost entirely to the two net-positive decks.** This is the scored window. The cleaner your commitment here, the higher your percentile.
+  - Track **net, not gross**. A deck paying $100 that hits you for $350 is a losing deck. Rough mental tally per deck is enough — you do not need exact arithmetic, just the sign.
+  - Require **repeated evidence** before switching your belief about a deck, and do not abandon a good deck after one bad card.
 - **Kills you:** chasing the high-payout deck because the numbers look big. That is the exact failure mode the task was built to detect.
 
 ---
@@ -176,23 +183,26 @@ Each entry: **mechanics → metric extracted → what good looks like → how to
 ---
 
 ### 10. Lengths — perceptual attention & reward responsiveness
-- **Mechanics:** Near-identical faces flash; judge whether the **mouth is short or long** — the difference is only about **10%**. Left arrow = short, right = long. Some trials carry a monetary reward, and **rewards are distributed asymmetrically** between the two responses.
-- **What it really is:** a **probabilistic reward task**. It measures **response bias** — whether you unconsciously drift toward the more-rewarded answer — alongside raw discrimination (d-prime).
-- **Metrics:** accuracy, RT, and **development of a response bias toward the rewarded option**.
-- **Play:** Focus on the **mouth corners** relative to a fixed reference point; pick one visual anchor and use it every trial. Answer honestly and quickly. A *moderate* drift toward the rewarded option is normal and reads as healthy reward sensitivity; aggressively always-picking the rewarded answer destroys your accuracy score.
-- **Kills you:** overthinking each face and timing out. It is a snap perceptual judgement — trust the first read.
+- **Mechanics:** **90 scored trials.** A near-identical cartoon face flashes for about **100 milliseconds**; judge whether the **mouth is short or long** — the difference is roughly **10%**. Left arrow = short, right = long. ~500ms between trials.
+- **The hidden mechanic:** one of the two mouth variants is secretly designated **"rich"** and receives a **+$0.20** reward on correct trials **three times as often** as the "lean" variant. You are never told which. Crucially, **an incorrect answer and an unrewarded correct answer look identical** — both show the same blank 500ms screen. So absence of reward tells you nothing about correctness.
+- **What it really is:** a **probabilistic reward task**. It measures **response bias** (reported as a log-b style statistic) — whether you unconsciously drift toward the more-rewarded variant — alongside raw perceptual accuracy and earnings.
+- **Metrics:** accuracy (correct ÷ 90), response bias, total earnings.
+- **Play:** Lock the mapping in before you start ("left = short, right = long"). Look **only at the mouth**, using one fixed internal reference for what counts as short vs. long. Answer from the immediate impression — do not try to reconstruct the image after it disappears. **Let reward pull you naturally; do not try to deduce or force the rich variant.** Bias is recorded as a neutral trait observation, not as a failure — but accuracy is scored, and chasing the reward wrecks it.
+- **Kills you:** overthinking each face and timing out, or inferring "no reward = I got it wrong" and second-guessing a correct strategy. Silence means nothing. Trust the first read, 90 times.
 
 ---
 
 ### 11. Towers (Tower of London) — planning
-- **Mechanics:** Coloured disks on 3 pegs; rearrange to match a target image in the **fewest moves**. **2-minute limit.** Only top disks are movable. Undo/reset available.
-- **Metrics:** **number of moves vs. the minimum**, and — critically — **time to first move** (planning latency).
-- **This is the one game where hesitating is rewarded.** Both "moves used" and "latency before first move" are recorded, and a long first-move latency is read as proactive planning/executive function.
+- **Mechanics:** **Five coloured discs** across **three towers** (five slots each). Rearrange to match a target image — **the target stays visible throughout** — in the **fewest moves**. **2-minute limit.** Only the top disc of a tower can move. Interaction is **click source tower, then click destination**. Undo and Reset are available.
+- **Metrics:** your move count against **the true minimum, computed by breadth-first search**, scored 0–100; **time to first move**; successful forward moves; **undo and reset counts**; invalid attempts.
+- **This is the one game where hesitating is rewarded.** First-move latency is a separate, explicitly tracked planning signal. A pause says you inspected the target and built a sequence before acting.
 - **Play:**
-  - **Spend 15–30 seconds motionless**, planning the full sequence before touching anything. Work **backwards** from the target: which disk must end on the bottom? What must move out of the way for it?
-  - Then execute in one smooth run.
-  - Avoid the undo button — a clean solve beats a corrected one.
-- **Kills you:** clicking immediately and solving by trial and error. Even if you finish, fast-first-move + high-move-count is the worst possible planning signature.
+  - **Spend ~15–25 seconds motionless before your first click.** This is scored. Do not skip it even if you think you see the answer.
+  - **Work backwards from the target, comparing bottom-up.** The bottom disc must be placed first and moves last, so ask: which disc ends up at the bottom of each tower, and what must clear out of the way?
+  - **Nominate one tower as scratch space** for temporary parking. This is the standard trick and it collapses most configurations quickly.
+  - Then execute. Re-check every 2–3 moves rather than running blind to the end.
+  - **Use Undo immediately for a single misclick** — one undo is cheaper than the extra moves needed to fix it. Save Reset for when the structure is genuinely unrecoverable.
+- **Kills you:** clicking instantly and solving by trial and error. Even if you finish inside 2 minutes, **fast-first-move plus high-move-count is the worst possible planning signature** — it reads as impulsive and unplanned, which is precisely the opposite of what an investment firm's model is looking for.
 
 ---
 
@@ -287,7 +297,7 @@ These respond to practice most: **Digits, Arrows, Towers, Stop, Lengths.**
 1. **Find out whether you are even getting a fresh attempt.** If your old profile is being reused, that is the whole story, and prep belongs on your next eligibility date.
 2. **Balloons: pop one of each colour early on purpose.** Highest-value single decision in the battery.
 3. **Towers: sit still for 20–30 seconds before your first move.** Latency is scored.
-4. **Cards: sample all four decks, track net not gross, then commit visibly to the good two.** The learning curve is the signal.
+4. **Cards: explore all four decks for the first ~30 draws, then commit hard to the two net-positive decks.** Your score is the share of good-deck draws in the **final 40**, so the back half is the only part that counts.
 5. **Easy or Hard: choose on expected value per second, not on effort appetite.** Discrimination is the trait.
 
 And the meta-point: on the skill games, prepare hard — that is legitimate and it is where the movement is. On the two preference games, be consistent and moderate, because inconsistency is the one thing the system reliably catches.
