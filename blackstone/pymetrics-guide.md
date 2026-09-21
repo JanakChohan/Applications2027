@@ -30,36 +30,72 @@ One profile is reused across every pymetrics client (historically Bain, BCG, JPM
 
 ## 1. How you are actually scored
 
-There is **no pass mark and no single score**. The pipeline:
+Most prep content guesses at this. It does not need to be guessed: pymetrics' **source code was audited by Northeastern University researchers** in a peer-reviewed paper (FAccT '21), and a **2026 FAccT paper analysed 4,197,168 real pymetrics applications** across 1,746 positions and 156 employers. The mechanics are unusually well documented.
 
-1. Blackstone has ~50+ current high performers in the target role play the games.
-2. pymetrics averages their trait vectors → this becomes the **role model** ("ideal" profile).
-3. Your gameplay produces a vector across **~91 traits in 9 dimensions**.
-4. You are scored on **distance from that model**, then bias-tested (pymetrics de-biases against the EEOC four-fifths rule, and open-sourced its `audit-AI` tooling).
-5. Output to the recruiter is usually a **match/recommendation tier**, not a number.
+### The actual model
 
-### The 9 trait dimensions
-| Dimension | What it captures |
-|---|---|
-| Attention | Systematic/sustained vs. fast/loose |
-| Decision Making | Gut instinct vs. deliberate analysis |
-| Effort | How you allocate effort against reward and probability |
-| Emotion | Reading faces vs. reading context |
-| Fairness | How you judge fair/unfair outcomes |
-| Focus | Handling distraction, rule-switching, multitasking |
-| Generosity | Self-interest vs. resource sharing |
-| Learning | Updating from feedback and outcomes |
-| Risk Tolerance | Conservative vs. risk-seeking, and how calibrated |
+It is **not** a "personality match score". It is a **Support Vector Machine trained on ~64 gameplay features**.
 
-### Three consequences that most candidates miss
-- **Extremes are usually penalised.** Distance-from-centroid scoring means being maximally risk-seeking is as far from a balanced model as being maximally risk-averse. "Max out every game" is the wrong instinct.
+1. **In group:** gameplay from **50–100 high-performing incumbents** in the target role at the client, identified by a job analysis.
+2. **Out group:** a **random sample from pymetrics' database** approximating the general applicant pool.
+3. The SVM is trained to **discriminate the in group from the out group**. The model does not learn "what a good employee looks like" in the abstract — it learns **what separates Blackstone's high performers from a random person**. Which employees the client nominates is described in the research as "the primary way that the employer influences the classifier."
+4. **Bias group:** >10,000 held-out users with volunteered demographics, engineered to contain equal proportions of each EEOC protected group. Used **only** for evaluation, never training. pymetrics searches over feature permutations for "the most predictive, least biased permutation" — a model failing the **four-fifths rule** is not deployed at all.
+5. Output is a probability **p ∈ [0,1]**, thresholded into tiers.
+
+### What the threshold actually is
+
+- Internally: thresholded at **p = 0.5** → "recommend" / "do not recommend".
+- As presented to recruiters: **three tiers — Not Recommended / Recommended / Highly Recommended — at the 50th and 70th score percentiles** (customisable; some clients use five tiers or a red-amber-green display).
+
+**It is a relative percentile cut, not an absolute standard.** You are ranked against a distribution.
+
+### The number that should change how you feel about this
+
+From the 4.2M-application dataset: **on average 58.2% of applicants per position are recommended.** Only 41.8% are not.
+
+That is a far softer filter than candidates assume. pymetrics is very unlikely to be the main reason you are not getting Blackstone offers — the CV screen and the ~0.2–0.5% overall acceptance rate are doing most of the cutting. Which also means: **do not catastrophise this test.** It is a wide gate you are trying not to trip over, not a needle to thread.
+
+### Data cleaning — three rules with real consequences
+
+1. **More than two missing games = your session is marked incomplete and you are removed from analysis.** Finish everything. If a game glitches, complete the rest anyway.
+2. **Outlier clamping:** values outside psychometrically-set bounds (several SDs from the mean) are **rounded down to the min/max of the range — not rejected, and not flagged.** So an implausibly good score does not set off an alarm; it just silently stops helping you.
+3. **Median imputation:** missing feature values are filled with the population median.
+
+### The 9 trait dimensions (~91 traits)
+
+| Dimension | What it captures | The two poles |
+|---|---|---|
+| Attention | Reviewing information before acting | Methodical ↔ speed-focused |
+| Decision Making | Time and planning invested in decisions | Deliberative ↔ instinctive |
+| Effort | Effort as a function of reward size and probability | Hard-working ↔ outcome-driven |
+| Emotion | What you rely on to read others | Facial expression ↔ situational context |
+| Fairness | Reading situations as fair/unfair; response to inequity | Tolerant ↔ strongly reciprocal |
+| Focus | Speed of thought; managing change and distraction | Sustained ↔ flexible |
+| Generosity | Personal sacrifice for others' benefit | Self-interested ↔ altruistic |
+| Learning | Adaptation to feedback | Fast adapter ↔ steady |
+| Risk Tolerance | Calibration of risk against reward | Cautious ↔ risk-seeking |
+
+Note every dimension is a **spectrum with two named poles, not a "more is better" scale.** pymetrics has never published the full 91-trait list; any prep vendor claiming to have it is reconstructing.
+
+### Three consequences most candidates miss
+
+- **"Maximise everything" is the wrong instinct.** The target is a specific profile, not an extreme. Maximum risk tolerance is not better than moderate — for some roles it is worse.
 - **The 10 skill games do have better and worse play.** Attention, memory, learning and planning games have real performance metrics. Practice genuinely lifts these (one platform reports a **median +16% improvement between first and fifth practice attempt**).
-- **The 2 Money Exchange games genuinely have no right answer** — they are preference measures. Trying to fake them is where inconsistency shows up.
+- **The 2 Money Exchange games genuinely have no right answer.** They are preference measures and are explicitly not scored good/bad.
 
 ### What Blackstone specifically appears to weight
-Prep-vendor analysis and Blackstone's own stated competencies point to: **calibrated (not reckless) risk tolerance, decision quality under uncertainty, sustained attention and focus, and fast learning from feedback.** Reported divisional variation: Real Estate leans long-horizon planning; PE leans adaptability. Selectivity context: reported ~0.2–0.5% acceptance, ~57,000 applications for ~138 entry-level seats — pymetrics is a **volume triage gate** sitting after CV screen and before HireVue.
 
----
+Prep-vendor analysis and Blackstone's stated competencies point to **calibrated (not reckless) risk tolerance, decision quality under uncertainty, sustained attention and focus, and fast learning from feedback.** Reported divisional variation: Real Estate leans long-horizon planning, PE leans adaptability. pymetrics sits after CV screen and before HireVue as **volume triage** — reported context is ~57,000 applications for ~138 entry-level seats.
+
+### The finding that should change your application strategy
+
+The 2026 monoculture study found something important:
+
+- Of applicants who apply to ten pymetrics-mediated positions, **4% are rejected from all ten** — and rejections are **correlated across employers** far more than chance would predict, because **42 pymetrics models are shared across multiple companies**. A rejection under a shared model mechanically propagates.
+- But the same study ran the counterfactual: if every applicant were scored by *every* pymetrics model, **every single applicant would be recommended by at least one.** There is no such thing as a universally unemployable profile.
+- To get systemic rejection below 0.1%, applicants need roughly **25 applications** rather than 10.
+
+**Translation: if pymetrics keeps blocking you, the highest-return response is breadth, not profile optimisation.** Your profile is not bad; it is being repeatedly matched against a narrow, correlated set of models. Widen the net.
 
 ## 2. Game-by-game breakdown
 
@@ -68,11 +104,16 @@ Each entry: **mechanics → metric extracted → what good looks like → how to
 ---
 
 ### 1. Keypresses — motor speed & instruction-following
-- **Mechanics:** ~20 seconds. Press spacebar as fast as possible after "GO". Stop on cue. ~40 reps.
-- **Metrics:** tap rate, latency after GO, **presses after the stop cue**.
-- **Good:** high consistent rate, clean stop.
-- **Play:** Use index+middle finger alternating on the spacebar. Start the instant GO appears. **Stop dead** when told.
-- **Kills you:** pressing before GO or continuing after stop. That is logged as impulse-control failure, not enthusiasm. This game is nearly free marks — do not lose them on sloppiness.
+- **Mechanics:** A brief READY period, then **GO** — press the spacebar as fast as you can until the **STOP** cue. Reported durations vary (roughly 10–60 seconds; practice versions use ~15s). **The live tap counter is deliberately hidden** so you cannot pace yourself against it.
+- **Metrics:** total valid taps, **taps per second**, individual tap timestamps (so rhythm and consistency are visible), and **instruction-following — any press before GO or after STOP**.
+- **Good:** a high, *even* rate and a clean stop.
+- **Play:**
+  - Use your **dominant index finger**, compact even motion, and **let the key fully reset between taps** — mashing a partly-depressed key registers fewer presses than it feels like.
+  - **Establish your rhythm immediately** rather than starting slow and accelerating.
+  - **Watch the cue, not your hand.**
+  - Start from a neutral finger position — do not rest pressure on the key in anticipation.
+  - On STOP, **lift your finger clear of the key** as a deliberate act.
+- **Kills you:** pressing before GO or continuing after STOP. Both are logged, and neither reads as enthusiasm — they read as poor impulse control and poor instruction-following. This game is close to free marks; the only way to lose them is sloppiness at the edges.
 
 ---
 
@@ -101,10 +142,14 @@ Each entry: **mechanics → metric extracted → what good looks like → how to
 ---
 
 ### 4. Money Exchange #2 (Dictator / take-option) — generosity & fairness *(preference game)*
-- **Mechanics:** Two independent rounds. Both start with ~$5; one player gets a bonus $5. Round 1: choose how much to **give** ($0–$5). Round 2: you can **give or take**. Fairness rating after each.
-- **Metrics:** giving amount, whether you **take**, and consistency between the give-frame and take-frame (framing sensitivity).
-- **Play:** **Split to equality** — sending $2.50 leaves both on $7.50. Moderate-to-high generosity is the safer read; taking aggressively flags as a potential conflict source.
-- **Kills you:** being generous in round 1 and exploitative in round 2. That inconsistency across framings is precisely the signal the game is designed to catch.
+- **Mechanics:** Two rounds, **a different partner each time**, and the roles are **reversed between them**:
+  - **Round 1 — you are passive.** You and Partner 1 both start with **$5**; the *partner* receives an extra $5 and decides what to allocate to you. You then rate the fairness **0–10**.
+  - **Round 2 — you are the allocator.** You and Partner 2 both start with $5; **you** get the extra $5 and control a **give/take slider in $0.50 increments**: positive gives them up to $5, zero keeps everything as-is, **negative takes up to $5 away from their original $5**. Then you rate fairness again.
+- **Metrics:** both allocations, final balances, both fairness ratings, reaction times.
+- **The real question being asked:** you experience an allocation done *to* you, then immediately make one *yourself*. The interesting variable is **whether being treated badly in round 1 changes how you behave in round 2** — norm enforcement and reciprocity versus a stable disposition.
+- **Play:** **Splitting to equality is the clean anchor** — giving $2.50 leaves you both on $7.50. Moderate-to-positive generosity is the safer read. **Taking is the genuinely risky move**: it is the one action here that can flag as a conflict risk. Note the slider defaults to zero, which is *not* neutral in effect — it keeps the whole bonus for you.
+- **On "consistency":** do not mechanically engineer round 2 to mirror your round 1 rating. Role-dependent preferences — behaving differently as recipient and as allocator — are treated as **valid behavioural information, not as a contradiction**. Over-choreographing here substitutes a performance for a signal, and it is more likely to hurt than help.
+- **Kills you:** taking the maximum $5 from your partner, or rating an obviously lopsided split as perfectly fair.
 
 ---
 
@@ -112,13 +157,13 @@ Each entry: **mechanics → metric extracted → what good looks like → how to
 - **Mechanics:** Starts at about **4 digits**, shown roughly **~900ms per digit**. Type them back in order. Correct → next sequence is **one digit longer**; incorrect → **one shorter**. It is a ±1 staircase that hunts your limit. **Ends after 3 *consecutive* errors — and a single correct answer resets the counter.**
 - **Metrics:** **max span**, correct-round count, **best streak**, submission latency, and error *type* (transpositions = you held the digits but lost the order; omissions = span exceeded).
 - **Because errors must be consecutive, one mistake is survivable.** Do not spiral after a miss — the next correct answer wipes the counter clean. Most people fail this game emotionally, not cognitively.
-- **Benchmarks:** average max is **8–9 digits**. **~11 digits ≈ top 20%.** Aim **10–12**. Note: **14–15 looks implausible and may flag manipulation** (i.e. writing it down).
+- **Benchmarks:** average max is **8–9 digits**. **~11 digits ≈ top 20%.** Aim **10–12**. (Some prep sites warn that 14–15 "flags manipulation" — on the documented pipeline it would more likely just be **clamped to the top of the range**, so it would not help you either. Either way there is no upside in writing digits down, and it is explicitly prohibited.)
 - **Play:**
   - **Chunk** in 3s and 4s: `729481635` → "729 · 481 · 635".
   - **Subvocalise / say them aloud** — the phonological loop is the actual bottleneck.
   - Convert chunks to familiar numbers (years, ages, phone prefixes).
   - Type immediately; do not rehearse silently while the clock runs.
-- **Kills you:** writing digits down. It is explicitly prohibited, and an unnatural span is the one metric in this battery with an obvious implausibility ceiling.
+- **Kills you:** writing digits down — prohibited, and out-of-range values get clamped anyway. More realistically: giving up mentally after two misses, when a single correct answer would have reset the counter.
 
 ---
 
@@ -221,26 +266,57 @@ Each entry: **mechanics → metric extracted → what good looks like → how to
 
 ---
 
-## 3. Integrity, detection, and what actually happens if you try to game it
+## 3. Integrity, detection, and whether gaming it works
 
-You asked directly about cheating measures. Straight answer:
+You asked directly about cheating measures. Here is the honest picture, separating what is **documented** from what prep vendors **assert**.
 
-**There is no webcam proctoring and no live invigilation.** That is not the constraint. The constraints are statistical:
+### What actually exists
 
-| Control | What it catches |
+**On the pymetrics games themselves: essentially no proctoring.** No webcam monitoring, no live invigilation, no screen-share detection. This is not a gap in the research — the Northeastern auditors who read the source code treated scripted play as theoretically possible and practically hard, which implies no strong automated defence existed in the code they reviewed.
+
+**Harver launched an anti-fraud and proctoring suite in September 2025** — periodic photo capture for identity verification, copy-paste blocking, and **alerts to recruiters when candidates switch browser tabs, windows, or apps** — plus a fraud-detection layer using application method, **location**, and **whether a candidate submitted multiple applications**. Machine learning flags; a **human makes the final call**; flagged behaviour is logged on a Candidate Detail Page.
+
+**Important caveat:** Harver documents these against its **platform generally**. No public source confirms they apply to the pymetrics game battery. They may; it is not established.
+
+### The controls that are definitely real
+
+| Control | What it does |
 |---|---|
-| **Internal consistency checks** | Preference games measure the same constructs from different angles (give-frame vs. take-frame; trust amount vs. fairness rating). Contradictory patterns are detectable and are explicitly flagged as such by the vendor. |
-| **Implausibility ceilings** | A 14–15 digit span, superhuman reaction times, or perfect accuracy at maximum speed are outside human distributions. |
-| **Reaction-time floors** | Sub-human RTs indicate scripting or anticipation rather than response. |
-| **Timing from trial one** | Reaction-time games are scored **from the first trial**. Learning the controls during the live run costs you real signal — this is the argument for practising, not for cheating. |
-| **Cross-game coherence** | Your 91-trait vector has to hang together. A profile assembled from per-game "optimal" answers can land as an internally incoherent outlier, which is *further* from the centroid, not closer. |
-| **Downstream mismatch** | Blackstone's HireVue and superday come next. A profile you faked is a profile you then have to perform in a live interview. Vendors and coaches consistently flag this as where fakers fall over. |
+| **Outlier clamping** | Values several SDs outside each game's psychometric bounds are **rounded to the min/max — not rejected, not flagged.** An implausibly good result does not trip an alarm; it just silently stops counting. |
+| **>2 missing games = incomplete** | Your whole session is dropped from analysis. Finish every game. |
+| **The 330-day lock** | The strongest integrity control, and it is **structural, not technological**. There is no replay mechanism to defeat. |
+| **Millisecond timing** | Leaving the tab mid-trial corrupts your own reaction latencies whether or not anyone is alerted. |
+| **Within-game variance as a measured trait** | Traits like "processing consistency" are computed *from* your variance. Deliberately modulating your behaviour creates exactly the erratic signature you would want to avoid. |
 
-**The honest strategic verdict:** on the **10 skill games**, "gaming" and "playing well" are the same thing — practice, know the rules, execute cleanly. That is fully legitimate and it is where your gains are. On the **2 preference games**, there is no target to hit, faking is the detectable part, and a moderate consistent position is both the safest and the truest play. Attempting to reverse-engineer Blackstone's exact centroid is not possible from outside — the models are proprietary and role-specific — and over-correcting toward an imagined ideal is how people land further from it.
+Claims that pymetrics **flags** faked profiles are repeated confidently across prep sites but appear in **no pymetrics, Harver, or peer-reviewed source.** The defensible version is weaker but still decision-relevant: faking produces an **incoherent profile that is less likely to match the benchmark** — not that a fraud alarm sounds.
 
-**Also note:** senior bankers at some firms have pushed back on pymetrics and a few have dropped it (JPMorgan has reportedly retired theirs). Candidates on Wall Street Oasis report identical results passing one firm and failing another — because each firm's model differs. **A past rejection is not evidence that you are bad at this.** It may mean one firm's centroid, or a stale reused profile.
+### So — does faking work?
 
----
+The best evidence is a 2025 *Journal of Business and Psychology* study (171 participants, honest vs. faking-instructed conditions). Finding: people **could** distort their responses on a game-based assessment, but **the faking effect was significantly smaller than on a traditional questionnaire.** Game-based assessments are fakeable. They are just meaningfully harder to fake.
+
+The useful frame from that literature: faking needs **opportunity, ability and motivation**, and only one needs to fail. For pymetrics:
+- **Motivation** — high, obviously.
+- **Opportunity** — constrained. Games are millisecond-timed and many features derive from implicit behaviour and variance, not deliberate choices.
+- **Ability — this is the binding constraint.** To fake successfully you would need to know (a) which of ~91 traits Blackstone's SVM actually weights, (b) in which direction, and (c) how to produce that value through gameplay. **All three are hidden, and (a) and (b) differ per employer.** Two clients can want opposite profiles from the identical game.
+
+Add to that: the target is **similarity to a profile, not maximisation**; **two games have no correct answer**; and **64 features is far too many to steer simultaneously under time pressure.**
+
+### The honest strategic verdict
+
+On the **10 skill games**, "gaming it" and "playing well" are the same activity. Knowing the rules, having practised the interface, not fumbling the first trials — that is legitimate, it is what every prepared candidate does, and **it is where essentially all of your available gain sits.** Familiarity removes friction; it is not faking.
+
+On the **2 preference games**, there is no target to hit. Be moderate and coherent.
+
+Trying to reverse-engineer Blackstone's centroid from outside is not possible, and over-correcting toward an imagined ideal moves you *away* from a real one. The rational strategy is: **know the mechanics cold, play attentively and consistently, finish every game — and apply broadly**, because the 4.2M-application data says breadth is what defeats systemic rejection, not profile optimisation.
+
+### Finally, some perspective on your past rejections
+
+- The average position **recommends 58.2% of applicants.** Most people clear this gate.
+- Candidates on Wall Street Oasis consistently report **identical results passing one firm and failing another** — because every employer's model differs.
+- Some firms have dropped pymetrics after internal pushback; **JPMorgan has reportedly retired theirs.** BCG says the games are "never used as a filter to cut candidates on their own."
+- pymetrics has **never published its validity studies.** The auditors who reviewed the code explicitly urged them to, noted they did not investigate whether the games predict job performance at all, and listed it as an open question. One GBA study found test-retest reliability around r = 0.68 — meaning a meaningful share of any score is measurement noise.
+
+**A pymetrics rejection is weak evidence about you.** It is substantially evidence about which model you happened to be scored against — and possibly about a stale profile being reused.
 
 ## 4. Your 3-day plan
 
