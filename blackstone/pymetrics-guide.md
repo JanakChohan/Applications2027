@@ -10,7 +10,9 @@
 Two mechanics matter more than any game strategy:
 
 ### (a) The 330-day lockout
-pymetrics normally lets you **replay the real battery only once every ~330 days** (many candidates report it as 365). Within that window, an employer **re-scores your existing gameplay** rather than letting you replay.
+pymetrics lets you play the real battery **only once every 330 days**. This is not prep-site folklore — it is confirmed both by pymetrics' own support documentation and empirically in a 2026 peer-reviewed study of 4.2 million real pymetrics applications, which states that your gameplay features are **"stored and will be used again if the applicant applies to another pymetrics-mediated position within the next 330 days."** Twelve of the games are identical across every pymetrics position, which is what makes the reuse possible.
+
+Within that window, an employer **re-scores your existing gameplay against their model** rather than letting you replay.
 
 Your invite says this explicitly:
 
@@ -23,8 +25,12 @@ Your invite says this explicitly:
 2. If it says results already exist → email `support@pymetrics.com` **immediately** (you have 3 days), state that you want to know your last play date and whether you are eligible for a fresh attempt.
 3. If you are locked out, accept it for Blackstone, and put the prep below against the date you *become* eligible. Mark that date in your calendar now.
 
-### (b) Your result is portable
-One profile is reused across every pymetrics client (historically Bain, BCG, JPMorgan, Morgan Stanley, Citi, Blackstone). This cuts both ways: one good play helps everywhere; one bad play follows you for ~11 months. **Treat the next fresh attempt as a once-a-year event, not a casual afternoon.**
+### (b) Your result is portable — and this is the part that stings
+One profile is automatically reused across every employer on the platform (reported to include Bain, BCG, JPMorgan, Accenture, PwC, Unilever, Goldman Sachs, Blackstone). You do not replay; your stored behavioural data is frozen and re-scored.
+
+This cuts both ways: one good play helps everywhere for eleven months; one bad play follows you for eleven months. **The first pymetrics you ever sit silently determines your candidacy at every other platform employer for almost a year.** Sitting it casually for a low-priority application is a real, quantifiable cost — and if that is what happened to you at some point, it would explain a run of failures far better than anything about your ability.
+
+**Treat your next fresh attempt as a once-a-year event, not a casual afternoon.**
 
 ---
 
@@ -119,11 +125,12 @@ Each entry: **mechanics → metric extracted → what good looks like → how to
 
 ### 2. Balloons (BART — Balloon Analogue Risk Task) — risk calibration & learning
 - **Mechanics:** ~39 balloons, recurring in **three colours**. Each pump = **$0.05**. Pop = lose that balloon's pot. "Collect" banks it.
-- **The colour secret:** the colours have different burst distributions — commonly cited approximate first-pump pop odds: **orange ≈ 1/8 (bursts early), yellow ≈ 1/32 (medium), blue ≈ 1/128 (safe, goes long)**. Pop point is drawn per balloon; conditional risk rises with each safe pump.
+- **The colour mechanic — the single most important thing in this game:** the colours have **different, hidden burst distributions**. One colour bursts early, one is medium, one goes long. Commonly cited approximate first-pump pop odds are **1/8, 1/32 and 1/128** across the three colours. The pop point is drawn per balloon and conditional risk rises with each safe pump.
+- **⚠️ Do NOT memorise which colour is which.** Prep sources flatly contradict each other — one says orange is the fragile one and blue the safe one; another says red and yellow are the favourable colours and blue the weak one. Colour assignment is not reliably documented and may vary. **Walking in with a memorised mapping is worse than walking in with none**, because you will act on it confidently and wrongly. Learn the mapping live, in the first few balloons. The game is explicitly testing whether you *can*.
 - **Metrics:** total banked; **adjusted average pumps** (collected balloons only — the standard BART risk index); number popped; **per-colour differentiation**; pumping behaviour immediately after a pop (loss sensitivity).
 - **Good:** In the academic 1–128 version, the expected-value optimum is **~64 pumps**; typical humans pump ~28 (44% of optimal) — i.e. **most people are far too conservative.** Practical benchmarks cited for the pymetrics version: collect **~30–31 balloons** and around **$17–18**.
 - **Play:**
-  - **Deliberately pop one of each colour early** (balloons 1–3). The information is worth more than the ~$1 you lose. This is the single highest-ROI move in the whole battery.
+  - **Deliberately pop one of each colour early** (balloons 1–3) to find where each colour fails. The information is worth far more than the ~$1 you forgo. This is the single highest-ROI move in the whole battery — and because "learning from outcomes" is itself a scored trait, the exploration reads well even as it costs you money.
   - Then set a **per-colour pump policy** and hold it: high for blue, moderate for yellow, low for orange.
   - Sit a couple of pumps below the lowest pop you have seen for that colour, and creep up if you keep banking safely.
   - **Do not tilt after a pop.** Reverting to tiny pump counts after a burst reads as loss-aversion/poor emotional regulation; pump-count variance after losses is explicitly measured.
@@ -411,3 +418,16 @@ And the meta-point: on the skill games, prepare hard — that is legitimate and 
 - https://www.millisecond.com/library/effortexpenditureforrewardtask
 - https://journals.sagepub.com/doi/10.1177/2158244019856911 (Iowa Gambling Task review)
 - https://www.psytoolkit.org/experiment-library/igt.html
+
+**Primary / peer-reviewed (the authoritative sources on scoring and integrity):**
+- Wilson, Ghosh, Jiang, Mislove, Baker, Szary, Trindel, Polli (2021), *Building and Auditing Fair Algorithms: A Case Study in Candidate Screening*, FAccT '21 — the source-code audit — https://mislove.org/publications/Pymetrics-FAccT.pdf
+- Bommasani et al. (2026), *Algorithmic Monocultures in Hiring*, FAccT '26 — 4.2M applications — https://arxiv.org/pdf/2605.27371
+- *Game on, Faking off? Are Game-Based Assessments Less Susceptible to Faking?*, J. Business and Psychology (2025) — https://www.econstor.eu/bitstream/10419/333366/1/10869_2025_Article_10019.pdf
+- *Game-related assessments for personnel selection: A systematic review*, Frontiers in Psychology (2022) — https://pmc.ncbi.nlm.nih.gov/articles/PMC9554090/
+
+**Vendor / regulatory:**
+- https://harver.com/gamified-assessments/
+- https://harver.com/blog/hiring-integrity-anti-fraud-proctoring-harver/ (anti-fraud suite, Sept 2025)
+- https://harver.com/wp-content/uploads/2025/11/pymetrics-Soft-Skills-Platform-2025-Bias-Audit.pdf (BABL AI NYC LL144 bias audit, July 2025)
+- https://github.com/pymetrics/audit-ai (pymetrics' open-source fairness testing library)
+- https://pymetrics.zendesk.com/hc/en-us/articles/24084100889489-I-ve-previously-completed-the-games-can-I-play-again (official replay policy)
