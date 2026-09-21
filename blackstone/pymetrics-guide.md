@@ -225,7 +225,7 @@ Each entry: **mechanics → metric extracted → what good looks like → how to
   - Answer with Left/Right arrow keys. Rules switch randomly. Trials are **congruent** (all arrows same way) or **incongruent** (middle opposes sides).
 - **Metrics:** overall accuracy (the headline percentile), mean RT, **switch-trial accuracy vs. repeat-trial accuracy**, **incongruent accuracy**, and **RT switch cost**.
 - **Play:**
-  - Collapse it to **two rules, not three colours**: *"blue/black = middle, red = sides."* Drill that phrase until automatic.
+  - Collapse it to **two rules, not three colours**: *"blue/black = middle, red = sides."* Drill that phrase until automatic. **Unlike the balloon colours, this mapping is consistently reported across independent sources, so it is safe to memorise** — but still confirm it on the instruction screen.
   - **Look at the colour first**, then the arrows. Colour determines everything.
   - Silently label "middle" or "sides" before pressing.
   - Deliberately **slow down slightly on switch trials** and let repeat trials run fast. Accuracy is weighted more heavily than raw speed.
@@ -325,37 +325,65 @@ Trying to reverse-engineer Blackstone's centroid from outside is not possible, a
 
 **A pymetrics rejection is weak evidence about you.** It is substantially evidence about which model you happened to be scored against — and possibly about a stale profile being reused.
 
-## 4. Your 3-day plan
+## 4. Your plan — it branches
 
-### Day 0 — tonight (30 min, do this first)
-- [ ] Open the invite link. Determine: fresh play available, or existing results being reused?
-- [ ] If results are being reused → email `support@pymetrics.com` now, ask for last play date and replay eligibility.
-- [ ] If fresh play available → **do not play yet.** Close it. You have 3 days.
+Everything depends on the answer to one question, so resolve that first.
 
-### Day 1 — learn the rules cold (90 min)
-- [ ] Memorise per-game rules, especially **Arrows** ("blue/black = middle, red = sides") and **Stop** (which colour presses).
-- [ ] Internalise the **Cards** deck structure and the **Balloons** colour strategy.
-- [ ] Learn the **Faces** confusable pairs.
-- [ ] Do free practice sims (see resources below).
+### Step 1 — tonight, 15 minutes: find out if you are even getting a fresh attempt
 
-### Day 2 — drill the trainable games (90 min)
-These respond to practice most: **Digits, Arrows, Towers, Stop, Lengths.**
-- [ ] Digit span: practise chunking to a reliable 10–11.
-- [ ] Flanker/task-switching drills for Arrows.
-- [ ] Tower of London puzzles — practise *planning before moving*.
-- [ ] Reaction-time/go-no-go drills.
-- [ ] Rehearse the Easy-or-Hard EV rule until it is automatic.
+Open the invite link. It will either offer you the games, or tell you your existing results will be used.
 
-### Day 3 — play
-- [ ] **Laptop/desktop with a real keyboard.** Not phone (several games need fast spacebar/arrow input; mobile disadvantages you). Not tablet — explicitly unsupported.
-- [ ] Wired or strong Wi-Fi. Close every other tab and app. Notifications off, phone away.
-- [ ] Well-rested, mid-morning or whenever your reaction time is best. Not after a night out, not at 1am.
-- [ ] One coffee about 30 minutes before — helps RT games. Not three.
-- [ ] Warm up your hands: 2 minutes of typing before you start.
-- [ ] **Read every instruction screen fully.** Several games invert their rules between versions.
-- [ ] One sitting, no breaks mid-game.
+- **If it offers a fresh play → close it immediately. Do not play tonight.** You have 3 days. Go to Track A.
+- **If it says results already exist → go to Track B.**
+
+If it is ambiguous, email `support@pymetrics.com` today (you have 3 days, so do not sit on this): ask for **your last completion date** and **whether you are eligible to replay**. Also worth asking whether a session you believe glitched can be invalidated — candidates report mixed success, but it costs one email.
 
 ---
+
+### Track A — you have a fresh attempt (3 days)
+
+This attempt sets your profile at every pymetrics employer for the next 11 months. Treat it accordingly.
+
+**Day 1 — learn the rules cold (90 min).** Rules first, drilling second. Confusion on trial one is pure lost signal.
+- [ ] Memorise **Arrows**: "blue/black = middle, red = sides."
+- [ ] Memorise **Stop**: confirm which colour presses (check on the day — it can be inverted).
+- [ ] Internalise the **Cards** plan: explore ~30 draws, then commit — your score is the **final 40**.
+- [ ] Internalise the **Balloons** plan: pop one of each colour early, then set per-colour policies. **Do not pre-load a colour mapping.**
+- [ ] Internalise the **Easy or Hard** rule: take Hard when `p × reward ≥ $2`.
+- [ ] Internalise **Towers**: sit still 15–25 seconds before the first click.
+- [ ] Learn the **Faces** confusable pairs: anger/determination, fear/surprise, pain/sadness, hope/happiness.
+- [ ] Play through one free simulator run of all 12 games.
+
+**Day 2 — drill the trainable games (90 min).** These are where practice actually moves the number.
+- [ ] **Arrows** — flanker drills. Highest-volume game (135 trials), most drillable.
+- [ ] **Digits** — chunking practice to a reliable 10–11.
+- [ ] **Towers** — Tower of London puzzles, practising *plan-then-execute*.
+- [ ] **Stop** — go/no-go drills, specifically practising inhibition after long go-streaks.
+- [ ] **Easy or Hard** — check you can actually hit **60 spacebar presses in 12 seconds** (5/sec). If you cannot, every Hard choice is worth less than displayed.
+- [ ] **Lengths** — any quick perceptual discrimination drill.
+
+**Day 3 — play.**
+- [ ] **Laptop or desktop with a real keyboard.** Not a phone — several games need fast spacebar and arrow input and mobile disadvantages you. **Not a tablet — explicitly unsupported.**
+- [ ] Wired ethernet or strong Wi-Fi. Close every other tab and application.
+- [ ] Notifications off, phone in another room, door shut. A mid-game interruption on a millisecond-timed task is unrecoverable.
+- [ ] Well-rested, at whatever time of day your reaction time is genuinely best. Not after a night out. Not at 1am.
+- [ ] One coffee ~30 minutes before. Not three — jitter costs you on Stop and Lengths.
+- [ ] Warm up your hands: two minutes of typing.
+- [ ] **Read every instruction screen in full.** Several games vary their rules between versions, and the instruction screen is untimed.
+- [ ] One sitting, no breaks mid-game.
+- [ ] **Finish all 12 games no matter how badly one goes.** More than two missing games and your entire session is discarded. A bad game is survivable; an incomplete session is not.
+
+---
+
+### Track B — your old results are being reused
+
+Accept it for Blackstone. This application will be scored on gameplay you cannot change, and nothing in this guide alters that outcome. That is genuinely not your fault, and it is the most likely explanation for a run of failures that felt inexplicable.
+
+What to do instead:
+- [ ] **Find your replay eligibility date** (last completion + 330 days) and put it in your calendar with a reminder two weeks before.
+- [ ] **Do the Track A prep in the week before that date**, then replay immediately once eligible. That single replay resets your profile across every pymetrics employer at once — it is the highest-leverage two hours in your entire recruiting cycle.
+- [ ] **Keep applying to Blackstone and everyone else in the meantime.** Pymetrics is one input, the recommendation rate averages 58%, and some employers weight it lightly or have dropped it.
+- [ ] **Widen your application set now.** The 4.2M-application study is unambiguous: because models are correlated and some are shared across firms, breadth is what defeats systemic rejection. Ten applications leaves ~4% of people rejected everywhere; ~25 drives it below 0.1%. And every applicant in that dataset would have been recommended by *at least one* model. There is no profile that no employer wants — there are only too few draws.
 
 ## 5. Practice resources
 
@@ -371,21 +399,30 @@ These respond to practice most: **Digits, Arrows, Towers, Stop, Lengths.**
 
 **YouTube:** iPREP's per-game tutorial series (e.g. "Pymetrics Faces Game — iPREP's Pymetrics Games Tutorials"), JobTestPrep walkthroughs, CareerVidz/Richard McMunn, Practice Aptitude Tests. Search each game by name plus "pymetrics" for real gameplay footage.
 
-**Generic but effective drills:** Human Benchmark (reaction time, number memory), PsyToolkit (flanker, IGT, BART, digit span — the actual academic tasks), any Tower of London / Towers of Hanoi app.
+**Generic but effective drills:** Human Benchmark (reaction time, number memory), PsyToolkit (flanker, IGT, BART, digit span — these are the *actual academic tasks* the games are built from, and they are free), any Tower of London / Towers of Hanoi app.
+
+**Dedicated Arrows drill:** there is an Android app, *Pymetrics Practice: PyPractice*, built specifically for the Arrows/flanker game. Arrows is the most drillable game in the battery (135 trials, pure speed-accuracy under rule switching), so this is worth the time if you have an Android device.
 
 ---
 
-## 6. The five things that matter most
+## 6. The things that actually matter
 
-1. **Find out whether you are even getting a fresh attempt.** If your old profile is being reused, that is the whole story, and prep belongs on your next eligibility date.
-2. **Balloons: pop one of each colour early on purpose.** Highest-value single decision in the battery.
-3. **Towers: sit still for 20–30 seconds before your first move.** Latency is scored.
-4. **Cards: explore all four decks for the first ~30 draws, then commit hard to the two net-positive decks.** Your score is the share of good-deck draws in the **final 40**, so the back half is the only part that counts.
-5. **Easy or Hard: choose on expected value per second, not on effort appetite.** Discrimination is the trait.
+**Before you play:**
+1. **Establish whether you are getting a fresh attempt.** If your old profile is being reused, that is the whole story of this application, and your prep belongs on your replay date instead.
+2. **Never sit pymetrics casually again.** One play locks your profile across every platform employer for 330 days. If you did that once for a throwaway application, it may have been quietly costing you ever since.
 
-And the meta-point: on the skill games, prepare hard — that is legitimate and it is where the movement is. On the two preference games, be consistent and moderate, because inconsistency is the one thing the system reliably catches.
+**During the games — the five highest-leverage moves:**
+3. **Balloons: deliberately pop one of each colour early.** Best single decision in the battery. Learn the mapping live; do not pre-load one.
+4. **Cards: explore all four decks for ~30 draws, then commit hard to the two net-positive ones.** Your score is the good-deck share of the **final 40 draws** — the back half is the part that counts.
+5. **Towers: sit still for 15–25 seconds before your first click.** First-move latency is separately scored, and fast-first-move plus high-move-count is the worst planning signature you can produce.
+6. **Easy or Hard: decide on expected value, not effort appetite** — Hard when `p × reward ≥ $2`. "EV-aligned choices" is a literal recorded metric.
+7. **Stop: after three or four reds in a row, consciously treat the next circle as a fresh decision.** False alarms cluster at the end of go-streaks, and the streak length is logged.
 
----
+**And two on mindset:**
+8. **Finish all twelve games regardless.** More than two missing and the whole session is discarded.
+9. **Stop treating this as the thing that is rejecting you.** The average position recommends **58% of applicants**. Blackstone takes roughly 0.2–0.5% overall. The maths says the CV screen, the HireVue and the superday are where your candidacy is actually being decided — and a pymetrics rejection is weak evidence about you, because the same profile passes at one firm and fails at another depending on whose model it meets.
+
+The one genuine strategic lever the data supports is **breadth**. Prepare properly for one clean attempt, then apply widely enough that no single correlated model can shut you out.
 
 ## Sources
 
