@@ -1,0 +1,985 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Two Mechanisms: No House View and Pass-Through</title>
+<style>
+:root{
+  --navy:#0B2545; --navy2:#13315C; --ink:#1F2933; --muted:#5B6B7C; --line:#D5DCE5;
+  --paper:#FFFFFF; --wash:#F3F6FA; --wash2:#E9EEF5;
+  --warm:#D97742; --warm-l:#FBEEE6;
+  --teal:#1B998B; --teal-l:#E3F4F1;
+  --amber:#E9B949; --amber-l:#FCF5E0;
+  --red:#B23A48; --red-l:#F8E4E7;
+  --grey:#8A96A3; --grey-l:#EFF2F5;
+  --p0:#0B2545; --p1:#1B998B; --p2:#D97742; --p3:#5E548E; --p4:#2E6F95; --p5:#9C6644; --p6:#B23A48; --p7:#E9B949; --p8:#3A7D44; --p9:#6C757D; --p10:#0B2545; --p11:#0B2545; --p12:#0B2545;
+}
+@page { size: A4; margin: 20mm 16mm 18mm 16mm; }
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;color:var(--ink);font-size:10.4pt;line-height:1.45;background:var(--paper)}
+h1,h2,h3,h4{font-family:Georgia,"Times New Roman",serif;color:var(--navy);margin:0 0 6pt 0;line-height:1.2;font-weight:normal}
+h1{font-size:26pt;margin-bottom:10pt}
+h2{font-size:16pt;margin-top:16pt;padding-bottom:4pt;border-bottom:2px solid var(--line);break-after:avoid}
+h3{font-size:12.5pt;margin-top:12pt;break-after:avoid}
+h4{font-size:10.8pt;margin-top:9pt;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:bold;color:var(--navy2);break-after:avoid}
+p{margin:0 0 6pt 0}
+ul,ol{margin:0 0 6pt 0;padding-left:18pt}
+li{margin-bottom:2.5pt}
+strong{color:var(--navy)}
+a{color:var(--navy2);text-decoration:none}
+small,.small{font-size:8.5pt;color:var(--muted)}
+.muted{color:var(--muted)}
+.section{break-before:page}
+.section-band{background:var(--pc,var(--navy));color:#fff;padding:14pt 16pt;margin:0 0 12pt 0;border-radius:4pt}
+.section-band .kicker{font-size:9pt;letter-spacing:2px;text-transform:uppercase;opacity:.85}
+.section-band h1{color:#fff;margin:2pt 0 4pt 0;font-size:22pt}
+.section-band .lede{font-size:10.5pt;opacity:.95;margin:0}
+.tag{display:inline-block;font-size:7.5pt;font-weight:bold;letter-spacing:.5px;padding:1pt 5pt;border-radius:3pt;vertical-align:middle;font-family:Helvetica,Arial,sans-serif}
+.tag.c{background:#DDF1EC;color:#0E6B5F}
+.tag.r{background:#E4ECF7;color:#1F4E8C}
+.tag.i{background:#FCEBD9;color:#8A4B12}
+.tag.u{background:#EDEFF2;color:#5B6B7C}
+.src{font-size:7.8pt;color:var(--navy2);font-family:Helvetica,Arial,sans-serif;font-weight:bold}
+.box{border-left:4pt solid var(--navy);background:var(--wash);padding:7pt 10pt;margin:8pt 0;border-radius:0 4pt 4pt 0;break-inside:avoid}
+.box .lbl{font-family:Helvetica,Arial,sans-serif;font-size:7.8pt;font-weight:bold;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:2pt}
+.box p:last-child,.box ul:last-child{margin-bottom:0}
+.box.term{border-color:var(--navy);background:var(--wash)}
+.box.term .lbl{color:var(--navy)}
+.box.say{border-color:var(--teal);background:var(--teal-l)}
+.box.say .lbl{color:#0E6B5F}
+.box.dont{border-color:var(--red);background:var(--red-l)}
+.box.dont .lbl{color:var(--red)}
+.box.opinion{border-color:var(--amber);background:var(--amber-l)}
+.box.opinion .lbl{color:#8A6A10}
+.box.unc{border-color:var(--grey);border-style:dashed;background:var(--grey-l)}
+.box.unc .lbl{color:var(--muted)}
+.box.warm{border-color:var(--warm);background:var(--warm-l)}
+.box.warm .lbl{color:#8A4B12}
+.fig{margin:10pt 0 12pt 0;break-inside:avoid}
+.fig svg{width:100%;height:auto;display:block}
+.fig .cap{font-size:8.3pt;color:var(--muted);margin-top:4pt;border-top:1px solid var(--line);padding-top:3pt}
+.fig .cap b{color:var(--navy)}
+.fullpage{break-before:page}
+table{border-collapse:collapse;width:100%;font-size:8.8pt;margin:6pt 0 10pt 0}
+th{background:var(--navy);color:#fff;text-align:left;padding:4pt 5pt;font-weight:bold;font-family:Helvetica,Arial,sans-serif;font-size:8.3pt}
+td{padding:3.5pt 5pt;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:var(--wash)}
+table.src-table{font-size:7.6pt;table-layout:fixed}
+table.src-table td{overflow-wrap:anywhere}
+table.src-table .tag{white-space:nowrap;padding:0 3pt}
+table.src-table td.src{white-space:nowrap}
+table.src-table td{padding:2.5pt 4pt}
+table.src-table a{word-break:break-all}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12pt}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10pt}
+.card{border:1px solid var(--line);border-radius:4pt;padding:7pt 9pt;background:#fff;break-inside:avoid}
+.card h4{margin-top:0}
+.gloss dt{font-weight:bold;color:var(--navy);margin-top:5pt;font-family:Helvetica,Arial,sans-serif;font-size:9.4pt}
+.gloss dd{margin:0 0 2pt 0;font-size:9.4pt}
+.qa{border:1px solid var(--line);border-radius:4pt;padding:6pt 9pt;margin:6pt 0;break-inside:avoid}
+.qa .q{font-weight:bold;color:var(--navy);font-family:Georgia,serif;font-size:10.6pt}
+.qa .t{font-size:9.2pt}
+.qa .t b{color:var(--muted);font-family:Helvetica,Arial,sans-serif;font-size:8pt;text-transform:uppercase;letter-spacing:.5px}
+.num{font-family:Georgia,serif;font-size:20pt;color:var(--warm);line-height:1}
+.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:8pt;margin:8pt 0}
+.kpi .k{border-top:3px solid var(--warm);padding:5pt 6pt;background:var(--wash)}
+.kpi .k .v{font-family:Georgia,serif;font-size:16pt;color:var(--navy)}
+.kpi .k .l{font-size:8pt;color:var(--muted)}
+.cover{height:257mm;position:relative;background:var(--navy);color:#fff;padding:26mm 20mm;border-radius:6pt;break-after:page}
+.cover .k{letter-spacing:3px;text-transform:uppercase;font-size:9.5pt;opacity:.8}
+.cover h1{color:#fff;font-size:34pt;margin:12pt 0 8pt 0;line-height:1.1}
+.cover .sub{font-size:14pt;opacity:.92;font-family:Georgia,serif}
+.cover .meta{position:absolute;bottom:22mm;left:20mm;right:20mm;font-size:9.5pt;line-height:1.6;opacity:.9}
+.cover .stripe{position:absolute;top:0;left:0;right:0;height:8pt;background:linear-gradient(90deg,var(--warm) 0 33%,var(--teal) 33% 66%,var(--amber) 66% 100%);border-radius:6pt 6pt 0 0}
+.toc{columns:1}
+.toc .row{display:flex;justify-content:space-between;border-bottom:1px dotted var(--line);padding:3pt 0;font-size:10pt}
+.toc .row.l2{padding-left:16pt;font-size:9pt;color:var(--muted)}
+.toc .row .pg{font-family:Georgia,serif;color:var(--navy)}
+.toc .row .pc{display:inline-block;width:9pt;height:9pt;border-radius:2pt;margin-right:6pt;vertical-align:-1pt}
+.emergency{border:2px solid var(--warm);border-radius:5pt;padding:9pt 12pt;background:var(--warm-l)}
+.emergency h3{margin-top:0;color:#8A4B12}
+.stepper{display:flex;gap:6pt;margin:8pt 0}
+.stepper .s{flex:1;background:var(--wash);border-top:3px solid var(--navy);padding:5pt 6pt;font-size:8.6pt}
+.stepper .s b{display:block;color:var(--navy)}
+.legend{font-size:8.3pt;color:var(--muted)}
+.legend span{display:inline-block;margin-right:10pt}
+.legend i{display:inline-block;width:10pt;height:10pt;vertical-align:-1.5pt;margin-right:3pt;border-radius:2pt}
+.nobreak{break-inside:avoid}
+.pagebreak{break-before:page}
+.chapter{break-before:page}
+.chap{margin:0 0 10pt 0;padding:9pt 12pt;border-left:5pt solid var(--pc,var(--navy));background:var(--wash);border-radius:0 4pt 4pt 0}
+.chap .kicker{font-size:8.5pt;letter-spacing:2px;text-transform:uppercase;color:var(--pc,var(--navy));opacity:.9}
+.chap h1{font-size:17pt;margin:2pt 0 3pt 0;color:var(--navy)}
+.chap .lede{font-size:9.8pt;margin:0;color:var(--navy2)}
+.toc .row.l3{padding-left:28pt;font-size:8.6pt}
+.toc .row.l3 .pg{font-size:8.6pt}
+
+.checklist li{list-style:none;margin-left:-14pt}
+.checklist li:before{content:"\2610\00a0";color:var(--navy)}
+.footnote{font-size:8pt;color:var(--muted)}
+.hl{background:#FFF4CC}
+.verbatim{font-family:Georgia,serif;font-style:italic;color:var(--navy2);border-left:3px solid var(--amber);padding-left:8pt;margin:6pt 0}
+
+.sc{border:1px solid var(--line);border-radius:6pt;margin:8pt 0;break-inside:avoid;overflow:hidden;background:#fff}
+.sc .hd{padding:6pt 10pt;color:#fff;font-family:Helvetica,Arial,sans-serif;font-weight:bold;font-size:10.5pt;display:flex;justify-content:space-between;align-items:center}
+.sc.lv-e .hd{background:#1B998B}.sc.lv-m .hd{background:#D48F1F}.sc.lv-h .hd{background:#B23A48}
+.sc .diff{font-size:7.8pt;padding:1pt 7pt;border-radius:8pt;background:rgba(255,255,255,.28);letter-spacing:.5px;text-transform:uppercase}
+.sc .bd{padding:7pt 10pt;font-size:9.5pt}
+.sc .row{display:grid;grid-template-columns:96pt 1fr;gap:7pt;margin-bottom:4pt}
+.sc .lab{font-family:Helvetica,Arial,sans-serif;font-size:7.8pt;font-weight:bold;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);padding-top:2pt}
+.sc .sayb{background:var(--teal-l);border-left:3pt solid var(--teal);padding:4pt 7pt;border-radius:0 3pt 3pt 0}
+.sc .whyb{background:var(--wash);padding:4pt 7pt;border-radius:3pt}
+.sc .trapb{background:var(--red-l);padding:4pt 7pt;border-radius:3pt}
+.sc .twistb{background:var(--amber-l);padding:4pt 7pt;border-radius:3pt}
+.sc p{margin:0}
+.jd{background:var(--wash);border-left:4pt solid var(--navy);padding:6pt 10pt;margin:6pt 0 8pt 0;font-family:Georgia,serif;font-style:italic;color:var(--navy2);font-size:10pt}
+.pill{display:inline-block;padding:1pt 7pt;border-radius:9pt;font-size:8pt;font-weight:bold;font-family:Helvetica,Arial,sans-serif;color:#fff;vertical-align:middle}
+.pill.g{background:#1B998B}.pill.a{background:#D48F1F}.pill.r{background:#B23A48}.pill.n{background:#0B2545}
+</style>
+</head>
+<body>
+<!-- anchor marker style -->
+<style>.pm{font-size:1px;color:#fff;line-height:0;position:absolute}.section>.pm,.fullpage>.pm,.chapter>.pm,.chapterfirst>.pm{position:static;display:block;height:3px;line-height:3px;font-size:2px;margin:0;padding:0}</style>
+<div class="cover">
+<div class="stripe"></div>
+<div class="k">Companion to the Complete Interview Pack</div>
+<h1>Two Mechanisms</h1>
+<div class="sub">No house view, and pass-through. Millennium's business model from zero to expert: what each mechanism is, why the firm is built on it, what it does to the portfolio manager, the investor, the industry and the money, how rivals chose differently, and what it means for the relationships and trust a central desk lives on.</div>
+<div class="meta">
+<b>Prepared:</b> 26 September 2026, three days before Round 2.<br>
+<b>Why this document:</b> you said the two reasons you like Millennium are that it has no house view and that it runs a pass-through model, and that you want to understand both well enough to defend them under questioning. Part 0 gives the verdict on your two claims. Part 1 builds the foundations from zero. Parts 2 and 3 take each mechanism as deep as the public record allows. Part 4 shows how the two lock together and where they can break. Part 5 turns it into interview language, with the probes. Part 6 is the glossary.<br>
+<b>Honesty note:</b> Millennium is private. Its fee terms, expense ratios, pod limits and internal rules are known only through press reports, allocator research, one SEC filing and the firm's own site. Every figure is tagged and dated; nothing is presented as official that is not.<br>
+<b>Sources:</b> markers [Sxx] resolve in Part 7, shared with the Complete Interview Pack.
+</div>
+</div>
+
+<div class="section"><span class="pm">@@toc@@</span>
+<h1>Contents</h1>
+<div class="toc">
+<div class="row"><span><i class="pc" style="background:#0B2545"></i>Part 0. Your two claims, and the verdict</span><span class="pg">3</span></div>
+<div class="row"><span><i class="pc" style="background:#2E6F95"></i>Part 1. Foundations from zero: the assumptions you need before either mechanism makes sense</span><span class="pg">5</span></div>
+<div class="row"><span><i class="pc" style="background:#1B998B"></i>Part 2. No house view: what it is, why, and what it does to everyone</span><span class="pg">7</span></div>
+<div class="row l2"><span>Precisely what it means; what the centre still decides; the maths; the PM; the investor; the firm; the rivals; the costs; relationships and trust</span><span class="pg">7</span></div>
+<div class="row"><span><i class="pc" style="background:#D97742"></i>Part 3. Pass-through: what it is, why, and what it does to everyone</span><span class="pg">13</span></div>
+<div class="row l2"><span>Precisely what it means; the worked numbers; the history; why it exists; the PM; the investor; the firm and the centre; the rivals; the pushback; trust</span><span class="pg">13</span></div>
+<div class="row"><span><i class="pc" style="background:#5E548E"></i>Part 4. How the two mechanisms lock together, and where they break</span><span class="pg">20</span></div>
+<div class="row"><span><i class="pc" style="background:#B23A48"></i>Part 5. Saying it in the interview: the two claims, corrected, with the probes</span><span class="pg">22</span></div>
+<div class="row"><span><i class="pc" style="background:#8A96A3"></i>Part 6. Glossary</span><span class="pg">26</span></div>
+<div class="row"><span><i class="pc" style="background:#0B2545"></i>Part 7. Sources</span><span class="pg">27</span></div>
+</div>
+<h3 style="margin-top:16pt">Figures</h3>
+<div class="toc">
+<div class="row l2"><span>1. How a hedge fund is paid: the classic model, from zero</span><span class="pg">5</span></div>
+<div class="row l2"><span>2. Five words in one picture: alpha, beta, correlation, Sharpe, drawdown</span><span class="pg">6</span></div>
+<div class="row l2"><span>3. The spectrum of house view: from one mind to 350 minds</span><span class="pg">7</span></div>
+<div class="row l2"><span>4. What the centre decides, what the pod decides</span><span class="pg">8</span></div>
+<div class="row l2"><span>5. The diversification chart: firm Sharpe against number of pods, by correlation</span><span class="pg">9</span></div>
+<div class="row l2"><span>6. Netting: why independence has to be real</span><span class="pg">10</span></div>
+<div class="row l2"><span>7. The PM's franchise: from gross P&L to payout</span><span class="pg">10</span></div>
+<div class="row l2"><span>8. Independence is not immunity: the July 2026 unwind</span><span class="pg">12</span></div>
+<div class="row l2"><span>9. The trust map: what each party can and cannot demand of the others</span><span class="pg">12</span></div>
+<div class="row l2"><span>10. Two-and-twenty versus pass-through: the same 12% gross year, three ways</span><span class="pg">14</span></div>
+<div class="row l2"><span>11. Where the pass-through dollar goes</span><span class="pg">15</span></div>
+<div class="row l2"><span>12. What the investor keeps: the industry's drift</span><span class="pg">15</span></div>
+<div class="row l2"><span>13. Millennium's terms, dated</span><span class="pg">15</span></div>
+<div class="row l2"><span>14. What pass-through funds: the centre by the numbers</span><span class="pg">17</span></div>
+<div class="row l2"><span>15. The flywheel: how the two mechanisms feed each other</span><span class="pg">20</span></div>
+<div class="row l2"><span>16. Where it breaks: four failure modes</span><span class="pg">21</span></div>
+<div class="row l2"><span>17. Your two claims, corrected, on one page</span><span class="pg">22</span></div>
+</div>
+<div class="legend" style="margin-top:14pt">
+<b>Confidence tags:</b> <span class="tag c">Confirmed</span> primary source or two credible outlets &nbsp; <span class="tag r">Reported</span> single credible outlet or press estimate &nbsp; <span class="tag i">Inferred</span> the author's reasoning &nbsp; <span class="src">[S12]</span> source marker, see Part 7.
+</div>
+</div>
+
+<!-- ================= PART 0 ================= -->
+<div class="section" style="--pc:#0B2545"><span class="pm">@@p0@@</span>
+<div class="section-band"><div class="kicker">Part 0</div><h1>Your two claims, and the verdict</h1><p class="lede">You said two things. Both are broadly right. Both need a correction before you say them to a practitioner, and both become much stronger once the correction is in.</p></div>
+
+<h2>0.1 What you said</h2>
+<div class="two">
+<div class="box opinion"><div class="lbl">Claim one, as you put it</div><p>"I like it because there's no house view. I'm not biased on one strategy or pod, because all the pods are separate, and that's how they make money."</p></div>
+<div class="box opinion"><div class="lbl">Claim two, as you put it</div><p>"I like the pass-through model, as it'll allow us to really get the funding we need to build out our own proprietary systems, utilise AI, all of these things."</p></div>
+</div>
+
+<h2>0.2 The verdict on claim one</h2>
+<p><b>Right:</b> Millennium's centre does not pick securities or hold a market view; each of the 350-plus teams runs its own strategy under its own limits, and the firm's return is the sum of many independent bets rather than one person's judgement <span class="src">[S352][S351]</span>. That is why the return is smooth, and it is the single biggest structural difference from a fund like Bridgewater or Pershing Square, where one view drives everything. "That's how they make money" is also right, in a precise sense: the money is made from diversification, from the fact that hundreds of small, uncorrelated bets produce a return with far less risk than any one of them <span class="src">[S340][S347]</span>.</p>
+<p><b>The correction:</b> "no house view" is true about alpha and false about risk. The centre has a very strong house view about what a pod may look like: how much it may lose before its capital is halved, how much market and factor exposure it may carry, how big it may be, how it is financed <span class="src">[S104][S113][S350]</span>. Say "no house view on what to buy; a very strong house view on how much to risk". A practitioner will hear the difference at once, and it is the difference between a candidate who has read the homepage and one who understands the machine. Two further nuances: independence has costs (no idea flow, duplicated work, teams that crowd into the same trade anyway, as July 2026 showed <span class="src">[S223]</span>), and it is not unique to Millennium, though Millennium sits at the far end of the spectrum <span class="src">[S343]</span>.</p>
+
+<h2>0.3 The verdict on claim two</h2>
+<p><b>Right:</b> under pass-through, investors pay the firm's operating costs directly, on top of a performance fee, instead of a fixed management fee <span class="src">[S104][S87]</span>. That is what lets the platform pay winning teams in a year when the firm as a whole is flat, hire aggressively, and fund a centre that is more than half the firm: 54% of staff are outside investment functions, and the firm reports over 1,800 technologists <span class="src">[S392][S382]</span>. Englander's own framing is that the firm competes for talent "with technology companies as much as we do with financial services firms" <span class="src">[S376]</span>. So yes: pass-through is the funding mechanism for the platform, including its systems and its AI work.</p>
+<p><b>The correction:</b> most of the pass-through dollar is people, not systems. Where filings have been read, at one peer 87% of pass-through was compensation <span class="src">[S372]</span>. Technology is real and growing, but it is the minority. And the more important point is who pays: the investor, not the firm. So "pass-through funds our systems" is only half the sentence; the other half is "which is why every central function, including the desk I am interviewing for, has to prove it earns its place, because its cost lands on the investor's statement" <span class="src">[S366][S370]</span>. Say that, and you have turned a claim about money into a claim about accountability, which is what a head of desk cares about. Three further nuances: pass-through is now the industry norm at platforms (about 80% of multi-strategy firms use it <span class="src">[S372]</span>), so it does not by itself make Millennium stand out; investors are pushing back on it, and Millennium's answer has been a fee floor and longer lock-ups rather than a retreat <span class="src">[S87][S370][S400]</span>; and the model only works while net returns after all those costs beat what the investor could get elsewhere <span class="src">[S366]</span>.</p>
+
+<h2>0.4 The two claims, upgraded</h2>
+<div class="box say"><div class="lbl">Claim one, as you should say it</div><p>"Millennium has no house view on what to buy, and a very strong house view on how much to risk. Each of the 350-plus teams runs its own strategy behind information barriers; the centre allocates capital, sets loss and exposure limits, and picks no stocks. The return is the average of hundreds of independent bets, which is why it barely moves with the market and has had one losing year since 1989. The cost is that the teams do not share ideas and can still crowd into the same trade, which is exactly why a central desk that sees all of them has to be neutral and discreet."</p></div>
+<div class="box say"><div class="lbl">Claim two, as you should say it</div><p>"Millennium passes its operating costs through to investors on top of the performance fee, with a floor of one per cent or twenty per cent of gains since 2023. That is what funds a centre that is more than half the firm, the eighteen hundred technologists and the AI work, and lets the firm pay a winning team in a year the fund is flat. But the investor pays for it, and press estimates say they keep about half of gross returns. So the model only holds while net returns justify it, and every central cost, including a corporate access desk, has to be able to show what it delivered. I find that a healthy place to work: the accountability is built into the fee."</p></div>
+<p>The rest of this document is the evidence behind those two paragraphs, built from nothing.</p>
+</div>
+
+<!-- ================= PART 1 ================= -->
+<div class="section" style="--pc:#2E6F95"><span class="pm">@@p1@@</span>
+<div class="section-band"><div class="kicker">Part 1</div><h1>Foundations from zero: the assumptions you need before either mechanism makes sense</h1><p class="lede">Six ideas, each in plain English, each with the one number or picture that makes it stick. If you already have them, skim the figures and move to Part 2.</p></div>
+
+<h2>1.1 A fund, and how its manager is paid</h2>
+<p>A fund is a pool of money that investors hand to a manager, who invests it and charges for the service. A hedge fund is a private fund, open only to institutions and wealthy individuals, that may bet on prices falling as well as rising and may borrow to make its bets bigger <span class="src">[S151]</span>. The classic charge is "two and twenty": a <b>management fee</b> of about 2% of assets every year regardless of results, and a <b>performance fee</b> of 20% of any profit. The management fee pays the firm's costs: salaries, offices, data, technology. The performance fee is the reward. Over time the average has drifted below two and twenty, and the typical management fee at a large hedge fund is about 1.35% <span class="src">[S373]</span>.</p>
+<div class="fig">
+<svg id="svg1" viewBox="0 0 1000 330" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg1 .t{font-size:10px;fill:#1F2933}#svg1 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg1 .s{font-size:9px;fill:#5B6B7C}#svg1 .w{fill:#fff;font-size:10.5px;font-weight:bold}#svg1 .ws{fill:#fff;font-size:9.4px}#svg1 .k{font-size:11px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">How a hedge fund is paid: the classic "two and twenty", on $100 that earns 12% gross</text>
+<rect x="20" y="50" width="200" height="110" rx="8" fill="#0B2545"/><text x="32" y="72" class="w">THE INVESTOR</text><text x="32" y="92" class="ws">A pension fund, an endowment, a</text><text x="32" y="106" class="ws">sovereign fund, a wealthy family.</text><text x="32" y="124" class="ws">Puts in $100. Wants a return that</text><text x="32" y="138" class="ws">does not fall when markets fall.</text>
+<rect x="260" y="50" width="200" height="110" rx="8" fill="#1B998B"/><text x="272" y="72" class="w">THE FUND</text><text x="272" y="92" class="ws">The pool. Its manager buys and</text><text x="272" y="106" class="ws">sells securities, borrows, hedges.</text><text x="272" y="124" class="ws">Gross return this year: 12%,</text><text x="272" y="138" class="ws">so the $100 becomes $112.</text>
+<rect x="500" y="50" width="220" height="110" rx="8" fill="#D97742"/><text x="512" y="72" class="w">THE MANAGER'S CHARGE</text><text x="512" y="92" class="ws">Management fee: 2% of $100 = $2,</text><text x="512" y="106" class="ws">paid whatever happens. Covers costs.</text><text x="512" y="124" class="ws">Performance fee: 20% of the profit</text><text x="512" y="138" class="ws">after the fee, 20% x $10 = $2.</text>
+<rect x="760" y="50" width="220" height="110" rx="8" fill="#13315C"/><text x="772" y="72" class="w">WHAT THE INVESTOR KEEPS</text><text x="772" y="92" class="ws">$112 minus $2 minus $2 = $108.</text><text x="772" y="106" class="ws">Net return 8%; the manager took</text><text x="772" y="120" class="ws">a third of the gross. In a flat</text><text x="772" y="134" class="ws">year the manager still takes $2</text><text x="772" y="148" class="ws">and the investor is down 2%.</text>
+<g stroke="#5B6B7C" stroke-width="2" fill="none"><line x1="220" y1="105" x2="260" y2="105"/><line x1="460" y1="105" x2="500" y2="105"/><line x1="720" y1="105" x2="760" y2="105"/></g>
+<rect x="20" y="180" width="960" height="130" rx="6" fill="#F3F6FA" stroke="#D5DCE5"/>
+<text x="32" y="200" class="k">THREE THINGS TO NOTICE, BECAUSE PASS-THROUGH CHANGES ALL THREE</text>
+<text x="32" y="222" class="t">1. The management fee is a fixed price for the manager's costs. If the manager spends more than 2% running the firm, the manager eats the difference; if less, the manager pockets it. The firm has an incentive to keep costs down.</text>
+<text x="32" y="244" class="t">2. The firm's own income (fees) and its costs (people, technology) are separate lines. A firm that wants to pay traders more must find the money from its own fees.</text>
+<text x="32" y="266" class="t">3. The investor can see the whole price in two numbers. What they cannot see is what the money was spent on, and they do not need to.</text>
+<text x="32" y="294" class="s">Simplified: real funds compound fees quarterly, use hurdles and high-water marks, and charge at the share-class level. The arithmetic here is illustrative; the typical large-hedge-fund management fee of about 1.35% is from Goldman prime brokerage data as reported [S373].</text>
+</svg>
+<span class="pm">@@f1@@</span><div class="cap"><b>Figure 1.</b> The classic model. Definitions from the SEC's investor bulletin <span class="src">[S151]</span>; the 1.35% typical management fee as reported from Goldman Sachs data <span class="src">[S373]</span>. Part 3 replaces the orange box with pass-through and shows what changes.</div></div>
+
+<h2>1.2 A portfolio manager, a strategy, and a view</h2>
+<p>A <b>portfolio manager</b> (PM) is the person who decides what a book buys and sells. A <b>strategy</b> is the repeatable way they try to make money: buying European industrial companies whose margins will expand and shorting those whose margins will shrink; trading the gap between a bond and the future on it; trading how a stock moves around its results. A <b>view</b> is a belief about the world that shapes the book: rates will fall, AI capital spending will disappoint, the euro will weaken. A <b>house view</b> is one such belief held at the top of a firm and imposed on every book beneath it. At Bridgewater, the world's largest hedge fund for most of the last two decades, the flagship fund is built on the founder's economic framework; at Pershing Square, one investor's judgement on a dozen companies is the whole product. Neither is wrong; both are bets on one mind being right.</p>
+
+<h2>1.3 Five words: alpha, beta, correlation, Sharpe, drawdown</h2>
+<div class="fig">
+<svg id="svg2" viewBox="0 0 1000 380" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg2 .t{font-size:10px;fill:#1F2933}#svg2 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg2 .s{font-size:9px;fill:#5B6B7C}#svg2 .w{fill:#fff;font-size:10.5px;font-weight:bold}#svg2 .ws{fill:#fff;font-size:9.3px}#svg2 .k{font-size:11px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">Five words in one picture</text>
+<rect x="20" y="46" width="184" height="150" rx="6" fill="#0B2545"/><text x="30" y="66" class="w">BETA</text><text x="30" y="86" class="ws">The part of a return that comes</text><text x="30" y="100" class="ws">from the market moving. Own</text><text x="30" y="114" class="ws">the index, get the index. Free</text><text x="30" y="128" class="ws">and cheap; nobody pays a hedge</text><text x="30" y="142" class="ws">fund for it. A pod is usually</text><text x="30" y="156" class="ws">required to hold almost none:</text><text x="30" y="170" class="ws">longs and shorts cancel it [S350].</text>
+<rect x="214" y="46" width="184" height="150" rx="6" fill="#1B998B"/><text x="224" y="66" class="w">ALPHA</text><text x="224" y="86" class="ws">The part that comes from skill:</text><text x="224" y="100" class="ws">being right about this company</text><text x="224" y="114" class="ws">against that one, whatever the</text><text x="224" y="128" class="ws">market does. Scarce, expensive,</text><text x="224" y="142" class="ws">and the only thing a platform</text><text x="224" y="156" class="ws">sells. Each pod's job is to</text><text x="224" y="170" class="ws">produce it in its own patch.</text>
+<rect x="408" y="46" width="184" height="150" rx="6" fill="#D97742"/><text x="418" y="66" class="w">CORRELATION</text><text x="418" y="86" class="ws">How much two return streams</text><text x="418" y="100" class="ws">move together, from -1 to +1.</text><text x="418" y="114" class="ws">Zero means independent. The</text><text x="418" y="128" class="ws">whole value of many pods</text><text x="418" y="142" class="ws">depends on this number being</text><text x="418" y="156" class="ws">near zero between them [S347].</text><text x="418" y="170" class="ws">Figure 5 shows how much.</text>
+<rect x="602" y="46" width="184" height="150" rx="6" fill="#5E548E"/><text x="612" y="66" class="w">SHARPE RATIO</text><text x="612" y="86" class="ws">Return above cash, divided by</text><text x="612" y="100" class="ws">how much the return wobbles.</text><text x="612" y="114" class="ws">Above 1 is good for a fund;</text><text x="612" y="128" class="ws">a third-party estimate for</text><text x="612" y="142" class="ws">Millennium's flagship to 2022</text><text x="612" y="156" class="ws">was about 3.2 [S378], which is</text><text x="612" y="170" class="ws">why investors accept the price.</text>
+<rect x="796" y="46" width="184" height="150" rx="6" fill="#B23A48"/><text x="806" y="66" class="w">DRAWDOWN</text><text x="806" y="86" class="ws">A fall from a peak to a trough.</text><text x="806" y="100" class="ws">The flagship's worst on third-</text><text x="806" y="114" class="ws">party data was about 7% [S378];</text><text x="806" y="128" class="ws">the index has fallen by half</text><text x="806" y="142" class="ws">twice this century. A pod's</text><text x="806" y="156" class="ws">drawdown is what gets it cut:</text><text x="806" y="170" class="ws">reported 5% halved, 7.5% out.</text>
+<rect x="20" y="216" width="960" height="150" rx="6" fill="#F3F6FA" stroke="#D5DCE5"/>
+<text x="32" y="236" class="k">THE SENTENCE THAT CONNECTS THEM</text>
+<text x="32" y="258" class="t">A platform strips beta out of every pod, pays for alpha only, keeps the pods uncorrelated so the alpha adds up rather than cancels, measures the result as a Sharpe ratio, and</text>
+<text x="32" y="272" class="t">protects it with hard drawdown limits at the pod level. No house view is how it keeps the correlation low. Pass-through is how it pays for the alpha. Everything else is detail.</text>
+<text x="32" y="298" class="k">THE NUMBERS TO CARRY, WITH THEIR STATUS</text>
+<text x="32" y="318" class="t">About 14% a year since 1989 with one losing year (2008): press and the founder's own account [S111][S119]. Sharpe about 3.2 and worst drawdown about 7% to 2022: a third-party database, not the</text>
+<text x="32" y="332" class="t">firm [S378]. Pod limits of 5% and 7.5%: reported by two outlets, never published by the firm [S104][S113]. Say "reported" every time.</text>
+<text x="32" y="354" class="s">Beta-neutrality as a platform rule from the practitioner primer [S350]; the pod-shop stop-out description [S311]. Definitions are standard.</text>
+</svg>
+<span class="pm">@@f2@@</span><div class="cap"><b>Figure 2.</b> Five words. Numbers as tagged; the connecting sentence is the author's.</div></div>
+
+<h2>1.4 A pod, and what "350 of them" means</h2>
+<p>A <b>pod</b> is one PM and a few analysts running one strategy on a slice of the firm's capital, under limits the centre sets, paid a share of their own profit after their own costs <span class="src">[S351][S352]</span>. Millennium says it has more than 350 <span class="src">[S71]</span>. They do not share ideas or positions: a former head of enterprise risk describes pods as "a siloed group" that "don't communicate with other pods" <span class="src">[S351]</span>. The centre, everyone not in a pod, is about 54% of roughly 6,700 staff <span class="src">[S392]</span>: risk, technology, treasury, compliance, operations, and the service desks, including corporate access.</p>
+
+<h2>1.5 Why an investor pays for any of this</h2>
+<p>Pension funds and endowments have liabilities they must meet whatever markets do. What they want from a hedge fund is not the highest return but a return that does not fall when everything else falls, so that it protects the rest of their portfolio. A fund that made 14% a year with one small losing year in thirty-six is worth more to them than a fund that made 20% a year with three years of minus 30% <span class="src">[S111][S379]</span>. That preference is the whole demand side of this document: the platform sells consistency, and both mechanisms exist to produce it.</p>
+
+<h2>1.6 Two mechanisms, one sentence each</h2>
+<div class="two">
+<div class="box term"><div class="lbl">No house view</div><p>The centre does not decide what to buy. Hundreds of independent teams each decide for their own book, behind information barriers, and the firm's return is the sum of their independent bets.</p></div>
+<div class="box term"><div class="lbl">Pass-through</div><p>The fund charges its operating costs (mostly the teams' pay, plus technology, data and infrastructure) directly to investors, on top of a performance fee, instead of covering them from a fixed management fee.</p></div>
+</div>
+<p>They answer different questions: no house view is about <b>how the return is made</b>; pass-through is about <b>who pays for it</b>. Part 4 shows why choosing the first almost forces the second.</p>
+</div>
+
+<!-- ================= PART 2 ================= -->
+<div class="section" style="--pc:#1B998B"><span class="pm">@@p2@@</span>
+<div class="section-band"><div class="kicker">Part 2</div><h1>No house view: what it is, why, and what it does to everyone</h1><p class="lede">The claim is simple: the centre picks no securities and holds no market view. The consequences are not. This part takes the idea from its exact meaning, through the maths that makes it pay, to what it does to a PM, an investor, the firm, its rivals, and the trust between the centre and the teams.</p></div>
+
+<h2>2.1 Precisely what "no house view" means</h2>
+<p>Millennium's own words are "Independent decisions, collaborative culture, united mission", and it tells prospective PMs they will "pursue independent investment strategies, managing the process and team while leveraging Millennium's platform and expertise" <span class="src">[S352]</span> <span class="tag c">Confirmed</span>. Three things follow, and each is a testable statement rather than a slogan.</p>
+<ul>
+<li><b>The centre holds no positions of its own.</b> There is no central book expressing the firm's opinion about rates, sectors or the market. The firm's exposure is the sum of what the pods hold, hedged at the centre where the sum drifts from neutral <span class="src">[S316][S351]</span>.</li>
+<li><b>Each pod chooses its own strategy inside its mandate.</b> A European industrials long-short team decides which industrials; a rates team decides which curve trades. Nobody above them says "we are bullish on Europe this quarter".</li>
+<li><b>The pods do not talk to each other about positions.</b> A former head of enterprise risk: "In a pod, you typically have a siloed group... they don't communicate with other pods... Their payout is a percentage of their P&L after costs" <span class="src">[S351]</span> <span class="tag c">Confirmed</span>. An outside commentator calls Millennium "the most siloed and least internally collaborative of multimanager platforms" <span class="src">[S343]</span> <span class="tag r">Reported</span>. The firm's own word "collaborative" on its site describes the environment and the support functions, never PMs sharing trade ideas <span class="src">[S352]</span> <span class="tag i">Inferred</span>.</li>
+</ul>
+<div class="fig">
+<svg id="svg3" viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg3 .t{font-size:9.8px;fill:#1F2933}#svg3 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg3 .s{font-size:8.8px;fill:#5B6B7C}#svg3 .w{fill:#fff;font-size:10px;font-weight:bold}#svg3 .ws{fill:#fff;font-size:9px}#svg3 .k{font-size:10.5px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">The spectrum of house view: from one mind to 350 minds</text>
+<line x1="60" y1="70" x2="940" y2="70" stroke="#0B2545" stroke-width="4"/>
+<text x="60" y="56" class="k">ONE VIEW DRIVES EVERYTHING</text><text x="700" y="56" class="k">NO VIEW ABOVE THE TEAMS</text>
+<g>
+<circle cx="90" cy="70" r="8" fill="#B23A48"/><circle cx="250" cy="70" r="8" fill="#B23A48"/><circle cx="420" cy="70" r="8" fill="#D48F1F"/><circle cx="570" cy="70" r="8" fill="#D48F1F"/><circle cx="740" cy="70" r="8" fill="#1B998B"/><circle cx="910" cy="70" r="8" fill="#1B998B" stroke="#E9B949" stroke-width="3"/>
+</g>
+<rect x="20" y="96" width="140" height="150" rx="6" fill="#B23A48"/><text x="28" y="114" class="w">Single-manager,</text><text x="28" y="128" class="w">concentrated</text><text x="28" y="148" class="ws">Pershing Square: one</text><text x="28" y="162" class="ws">investor, a dozen</text><text x="28" y="176" class="ws">positions. Bridgewater</text><text x="28" y="190" class="ws">Pure Alpha: one</text><text x="28" y="204" class="ws">economic framework.</text><text x="28" y="224" class="ws">Return = one mind.</text>
+<rect x="180" y="96" width="140" height="150" rx="6" fill="#B23A48" opacity=".85"/><text x="188" y="114" class="w">Macro house</text><text x="188" y="148" class="ws">Brevan Howard: many</text><text x="188" y="162" class="ws">traders, but a shared</text><text x="188" y="176" class="ws">macro worldview and</text><text x="188" y="190" class="ws">a designated risk</text><text x="188" y="204" class="ws">manager per PM [S357d].</text>
+<rect x="350" y="96" width="140" height="150" rx="6" fill="#D48F1F"/><text x="358" y="114" class="w">Platform with</text><text x="358" y="128" class="w">shared ideas</text><text x="358" y="148" class="ws">Citadel: Griffin says</text><text x="358" y="162" class="ws">teams "share ideas and</text><text x="358" y="176" class="ws">compare notes" and</text><text x="358" y="190" class="ws">"Citadel has always</text><text x="358" y="204" class="ws">argued it is not a pod</text><text x="358" y="218" class="ws">shop" [S340][S342].</text>
+<rect x="500" y="96" width="140" height="150" rx="6" fill="#D48F1F" opacity=".85"/><text x="508" y="114" class="w">Platform with a</text><text x="508" y="128" class="w">founder's book</text><text x="508" y="148" class="ws">Point72: 200-plus</text><text x="508" y="162" class="ws">teams, an academy,</text><text x="508" y="176" class="ws">and the founder's own</text><text x="508" y="190" class="ws">historic book [S357a].</text>
+<rect x="670" y="96" width="140" height="150" rx="6" fill="#1B998B" opacity=".85"/><text x="678" y="114" class="w">Platform with</text><text x="678" y="128" class="w">collaboration</text><text x="678" y="148" class="ws">Balyasny: the founder</text><text x="678" y="162" class="ws">wants "lots of</text><text x="678" y="176" class="ws">different types of</text><text x="678" y="190" class="ws">risk-takers" but the</text><text x="678" y="204" class="ws">firm promotes idea</text><text x="678" y="218" class="ws">sharing [S340][S344].</text>
+<rect x="840" y="96" width="140" height="150" rx="6" fill="#1B998B" stroke="#E9B949" stroke-width="3"/><text x="848" y="114" class="w">Millennium</text><text x="848" y="148" class="ws">350-plus teams,</text><text x="848" y="162" class="ws">information barriers,</text><text x="848" y="176" class="ws">no central book, "most</text><text x="848" y="190" class="ws">siloed" [S343][S351]</text><text x="848" y="204" class="ws">[S352]. Return = the</text><text x="848" y="218" class="ws">average of 350 minds.</text>
+<rect x="20" y="266" width="960" height="120" rx="6" fill="#F3F6FA" stroke="#D5DCE5"/>
+<text x="32" y="286" class="k">WHAT MOVES ALONG THE LINE</text>
+<text x="32" y="306" class="t">Left to right: the return depends less on any one person being right; the correlation between the parts falls; the firm-level return gets smoother; and the firm gives up the upside of a</text>
+<text x="32" y="320" class="t">great call and the efficiency of shared research. Griffin's worry about "completely stand-alone teams": "what if we have two managers that cover tech in the same elevator... Are they going to</text>
+<text x="32" y="334" class="t">start to have more correlated trading?" [S340]. Millennium's answer is the barrier, not the elevator: pods are kept apart so their bets stay independent.</text>
+<text x="32" y="358" class="s">Placements are the author's reading of the cited sources; firms sit on a spectrum, not in boxes. Bridgewater and Pershing Square are placed from general knowledge of their published structures.</text>
+</svg>
+<span class="pm">@@f3@@</span><div class="cap"><b>Figure 3.</b> The spectrum. Millennium sits at the far end, on the evidence of its own language, a former risk head's description and outside commentary <span class="src">[S352][S351][S343]</span>; Citadel's and Balyasny's positions from their founders' public remarks <span class="src">[S340][S342][S344]</span>.</div></div>
+
+<h2>2.2 What the centre still decides: the strong house view on risk</h2>
+<p>"No house view" is about alpha. About risk, the centre has the strongest view in the industry. Reported, never published: lose 5% and the pod's capital is halved; lose about 7.5% and the pod is closed <span class="src">[S104][S113]</span> <span class="tag r">Reported by two outlets</span>. Pods are required to be close to market-neutral and factor-neutral, so that what they carry is stock-specific risk rather than a bet on the market or on a style <span class="src">[S350]</span>. The centre allocates capital, sizes and cuts teams, sets financing, and hedges the firm's aggregate exposure where the sum of the pods drifts <span class="src">[S316]</span>. Since 2022 an Office of the CIO has existed to oversee allocation, risk and strategy across the pods <span class="src">[S397]</span>; it is described as an allocation and oversight body, not a source of market views <span class="src">[S349d]</span> <span class="tag r">Reported</span>.</p>
+<div class="fig">
+<svg id="svg4" viewBox="0 0 1000 330" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg4 .t{font-size:9.8px;fill:#1F2933}#svg4 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg4 .s{font-size:8.8px;fill:#5B6B7C}#svg4 .w{fill:#fff;font-size:10.5px;font-weight:bold}#svg4 .ws{fill:#fff;font-size:9.3px}#svg4 .k{font-size:10.5px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">What the centre decides, what the pod decides</text>
+<rect x="20" y="46" width="470" height="230" rx="8" fill="#0B2545"/>
+<text x="32" y="68" class="w">THE CENTRE DECIDES (the house view on risk)</text>
+<text x="32" y="90" class="ws">Who gets capital, how much, and when it is halved or withdrawn: reported 5% and</text><text x="32" y="104" class="ws">7.5% loss limits [S104][S113]</text>
+<text x="32" y="122" class="ws">The cage: near-zero market beta, factor limits, size and concentration limits [S350]</text>
+<text x="32" y="140" class="ws">Financing, leverage and the balance sheet each pod runs on [S316]</text>
+<text x="32" y="158" class="ws">Hedging of the firm's aggregate exposure when the pods' sum drifts from neutral</text>
+<text x="32" y="176" class="ws">Loss carry-forward: a PM who loses must earn it back before any payout [S305]</text>
+<text x="32" y="194" class="ws">Which strategies and sectors the firm wants more or less of (the Office of the</text><text x="32" y="208" class="ws">CIO, since 2022) [S397][S349d]</text>
+<text x="32" y="226" class="ws">Compliance, information barriers, the shared services, the record</text>
+<text x="32" y="252" class="ws">Everything here is about how much and how, never about which stock.</text>
+<rect x="510" y="46" width="470" height="230" rx="8" fill="#1B998B"/>
+<text x="522" y="68" class="w">THE POD DECIDES (no house view on alpha)</text>
+<text x="522" y="90" class="ws">Which securities to own long and short, in what size, for how long</text>
+<text x="522" y="108" class="ws">Its own thesis on each name and its own research process</text>
+<text x="522" y="126" class="ws">Which companies to meet, and what to ask them (the desk's demand)</text>
+<text x="522" y="144" class="ws">Which data, research and tools to consume from the centre's menu</text>
+<text x="522" y="162" class="ws">Who to hire into the team, within the budget the pod's P&L carries</text>
+<text x="522" y="180" class="ws">When to take profit, when to cut, inside the centre's limits</text>
+<text x="522" y="204" class="ws">"Pursue independent investment strategies, managing the process and</text><text x="522" y="218" class="ws">team while leveraging Millennium's platform and expertise" [S352]</text>
+<text x="522" y="252" class="ws">Everything here is about which and why, inside the centre's how much.</text>
+<rect x="20" y="290" width="960" height="30" rx="4" fill="#F3F6FA" stroke="#D5DCE5"/>
+<text x="32" y="309" class="t"><tspan font-weight="bold">The sentence:</tspan> "No house view on what to buy; a very strong house view on how much to risk." The first half is why the return is uncorrelated; the second half is why it is survivable.</text>
+</svg>
+<span class="pm">@@f4@@</span><div class="cap"><b>Figure 4.</b> The division of decisions. Loss limits as reported <span class="src">[S104][S113]</span>; neutrality rules from the practitioner primer <span class="src">[S350]</span>; loss carry-forward from Millennium's own filing as quoted by eFinancialCareers <span class="src">[S305]</span>; the Office of the CIO as reported <span class="src">[S397][S349d]</span>.</div></div>
+
+<h2>2.3 Why: the maths that makes independence pay</h2>
+<p>Here is the whole argument in one formula, then in one picture. Take N pods with the same skill (the same Sharpe ratio, S) and the same average correlation with each other (ρ). The firm's Sharpe ratio is S multiplied by the square root of N divided by (1 + (N-1)ρ). If ρ is zero, the firm's Sharpe grows with the square root of N: ten independent pods give three times the Sharpe of one; a hundred give ten times <span class="src">[S347][S340]</span>. If ρ is not zero, the growth stops: the multiple can never exceed one over the square root of ρ, however many pods you add. At ρ of 0.1 the ceiling is about 3.2 times; at 0.5 it is about 1.4 times.</p>
+<div class="fig">
+<svg id="svg5" viewBox="0 0 1000 420" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg5 .t{font-size:9.8px;fill:#1F2933}#svg5 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg5 .s{font-size:8.8px;fill:#5B6B7C}#svg5 .k{font-size:10.5px;font-weight:bold;fill:#0B2545}#svg5 .ax{font-size:9.4px;fill:#5B6B7C}</style>
+<text x="20" y="24" class="h">Firm-level Sharpe as a multiple of one pod's Sharpe, against the number of pods, for five levels of correlation</text>
+<!-- axes: x categories at N=1,5,10,25,50,100,200,350 ; y 0..10 -->
+<g stroke="#D5DCE5" stroke-width="1">
+<line x1="90" y1="60" x2="90" y2="330"/><line x1="90" y1="330" x2="640" y2="330"/>
+<line x1="90" y1="276" x2="640" y2="276"/><line x1="90" y1="222" x2="640" y2="222"/><line x1="90" y1="168" x2="640" y2="168"/><line x1="90" y1="114" x2="640" y2="114"/><line x1="90" y1="60" x2="640" y2="60"/>
+</g>
+<g class="ax">
+<text x="60" y="334">0x</text><text x="60" y="280">2x</text><text x="60" y="226">4x</text><text x="60" y="172">6x</text><text x="60" y="118">8x</text><text x="56" y="64">10x</text>
+<text x="86" y="348">1</text><text x="160" y="348">5</text><text x="234" y="348">10</text><text x="308" y="348">25</text><text x="382" y="348">50</text><text x="456" y="348">100</text><text x="530" y="348">200</text><text x="604" y="348">350</text>
+<text x="300" y="366">Number of pods (N)</text>
+</g>
+<!-- y = 330 - 27*multiple ; x positions: 90,165,240,315,390,465,540,615 -->
+<!-- rho 0: 1,2.24,3.16,5,7.07,10 (then off chart) -->
+<polyline points="90,303 165,269.5 240,244.7 315,195 390,139 465,60" fill="none" stroke="#B23A48" stroke-width="2.5"/>
+<text x="470" y="56" class="k" fill="#B23A48">ρ = 0: keeps rising (14x at 200, 19x at 350)</text>
+<!-- rho .05: 1,2.04,2.63,3.37,3.81,4.10,4.27,4.36 -->
+<polyline points="90,303 165,274.9 240,259 315,239 390,227.1 465,219.3 540,214.7 615,212.3" fill="none" stroke="#D97742" stroke-width="2.5"/>
+<text x="648" y="215" class="k" fill="#D97742">ρ = 0.05 (ceiling 4.5x)</text>
+<!-- rho .1: 1,1.89,2.29,2.71,2.91,3.03,3.09,3.12 -->
+<polyline points="90,303 165,279 240,268.2 315,256.8 390,251.4 465,248.2 540,246.6 615,245.8" fill="none" stroke="#1B998B" stroke-width="2.5"/>
+<text x="648" y="248" class="k" fill="#1B998B">ρ = 0.1 (ceiling 3.2x)</text>
+<!-- rho .2: 1,1.67,1.89,2.08,2.15,2.19,2.21,2.22 -->
+<polyline points="90,303 165,284.9 240,279 315,273.8 390,272 465,270.9 540,270.3 615,270.1" fill="none" stroke="#5E548E" stroke-width="2.5"/>
+<text x="648" y="273" class="k" fill="#5E548E">ρ = 0.2 (ceiling 2.2x)</text>
+<!-- rho .5: 1,1.29,1.35,1.39,1.40,1.41,1.41,1.41 -->
+<polyline points="90,303 165,295.2 240,293.6 315,292.5 390,292.2 465,291.9 540,291.9 615,291.9" fill="none" stroke="#8A96A3" stroke-width="2.5"/>
+<text x="648" y="295" class="k" fill="#8A96A3">ρ = 0.5 (ceiling 1.4x)</text>
+<rect x="660" y="60" width="320" height="130" rx="6" fill="#0B2545"/>
+<text x="672" y="80" fill="#fff" font-size="10.5" font-weight="bold">READ IT LIKE THIS</text>
+<text x="672" y="100" fill="#fff" font-size="9.3">At ρ = 0.1, going from 50 pods to 350 pods raises the</text>
+<text x="672" y="114" fill="#fff" font-size="9.3">firm's Sharpe from 2.9x to 3.1x. Almost nothing.</text>
+<text x="672" y="134" fill="#fff" font-size="9.3">Cutting ρ from 0.1 to 0.05 at 350 pods raises it from</text>
+<text x="672" y="148" fill="#fff" font-size="9.3">3.1x to 4.4x. That is worth more than 300 extra pods.</text>
+<text x="672" y="168" fill="#fff" font-size="9.3">So the value of independence is not "more pods"; it is</text>
+<text x="672" y="182" fill="#fff" font-size="9.3">"lower correlation". A house view raises ρ for everyone.</text>
+<rect x="20" y="380" width="960" height="30" rx="4" fill="#F3F6FA" stroke="#D5DCE5"/>
+<text x="32" y="399" class="t">Formula: firm Sharpe = pod Sharpe x sqrt( N / (1 + (N-1)ρ) ), assuming equal skill, equal size and equal pairwise correlation. Values computed by the author; the logic is the standard one practitioners cite [S347][S340][S351].</text>
+</svg>
+<span class="pm">@@f5@@</span><div class="cap"><b>Figure 5.</b> The diversification chart. The same formula that makes a platform want many pods makes it want them uncorrelated far more. Computed by the author from the standard result; the practitioner sources give the logic and the "uncorrelated bets" framing <span class="src">[S347][S340][S351]</span>.</div></div>
+<p>Allocator research says the same thing with a sharper number: "Even a 10% correlation among PMs cuts overall Sharpe ratios by half once costs are considered", and "reducing correlation across risk takers is far more impactful than simply adding more PMs" <span class="src">[S520]</span> <span class="tag r">Reported, allocator model</span>.</p>
+<div class="box term"><div class="lbl">Why a house view raises correlation</div><p>If the centre says "we like European banks this quarter", every pod that listens tilts the same way, and their returns start to move together. That is a rise in ρ, and Figure 5 shows what a rise in ρ does: it caps the benefit of every other pod in the firm. The barrier between pods is not a cultural preference; it is the mechanism that keeps ρ low so that 350 teams are worth more than one. Griffin's "same elevator" worry is the same maths seen from the other side <span class="src">[S340]</span>.</p></div>
+<p>The maths also says something less comfortable. A former Millennium risk head puts it plainly: with "a large number of independent bets or quasi independent bets, you need to be able to scale your method to a large number of independent bets, which means that you are in some way a quant" <span class="src">[S351]</span>. The centre of a no-house-view firm is a statistical machine for measuring, limiting and combining bets, not a room of investors. That is why more than half the firm is the centre, and why so much of it is technology and risk <span class="src">[S392][S382]</span>.</p>
+
+<h2>2.4 Netting: why independence has to be real, not just claimed</h2>
+<div class="fig">
+<svg id="svg6" viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg6 .t{font-size:9.8px;fill:#1F2933}#svg6 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg6 .s{font-size:8.8px;fill:#5B6B7C}#svg6 .w{fill:#fff;font-size:10.5px;font-weight:bold}#svg6 .ws{fill:#fff;font-size:9.3px}#svg6 .k{font-size:10.5px;font-weight:bold;fill:#0B2545}#svg6 .n{font-family:Menlo,Consolas,monospace;font-size:9.6px;fill:#1F2933}</style>
+<text x="20" y="24" class="h">Netting: two pods of $1bn each, one year, three cases (illustrative; 20% payout to the PM)</text>
+<g font-size="9.4" font-weight="bold" fill="#fff">
+<rect x="20" y="40" width="200" height="24" fill="#0B2545"/><text x="28" y="56">Case</text>
+<rect x="220" y="40" width="130" height="24" fill="#0B2545"/><text x="228" y="56">Pod A P&L</text>
+<rect x="350" y="40" width="130" height="24" fill="#0B2545"/><text x="358" y="56">Pod B P&L</text>
+<rect x="480" y="40" width="130" height="24" fill="#0B2545"/><text x="488" y="56">Fund gross</text>
+<rect x="610" y="40" width="150" height="24" fill="#0B2545"/><text x="618" y="56">PM payouts (paid)</text>
+<rect x="760" y="40" width="220" height="24" fill="#0B2545"/><text x="768" y="56">Investor, before fund-level fees</text>
+</g>
+<g class="n">
+<rect x="20" y="64" width="960" height="24" fill="#F7F9FC"/><text x="28" y="80">1. Both win (correlated)</text><text x="228" y="80">+$100m</text><text x="358" y="80">+$100m</text><text x="488" y="80">+$200m</text><text x="618" y="80">$20m + $20m = $40m</text><text x="768" y="80">+$160m: pays 20% of gains, as expected</text>
+<rect x="20" y="88" width="960" height="24" fill="#fff"/><text x="28" y="104">2. One wins, one loses</text><text x="228" y="104">+$100m</text><text x="358" y="104">-$100m</text><text x="488" y="104">$0</text><text x="618" y="104">$20m + $0 = $20m</text><text x="768" y="104">-$20m: pays A; B refunds nothing</text>
+<rect x="20" y="112" width="960" height="24" fill="#F7F9FC"/><text x="28" y="128">3. Both lose (correlated)</text><text x="228" y="128">-$100m</text><text x="358" y="128">-$100m</text><text x="488" y="128">-$200m</text><text x="618" y="128">$0</text><text x="768" y="128">-$200m: no payouts; loss doubled</text>
+</g>
+<rect x="20" y="150" width="470" height="136" rx="6" fill="#B23A48"/>
+<text x="32" y="170" class="w">THE NETTING PROBLEM</text>
+<text x="32" y="190" class="ws">In case 2 the fund made nothing and the investor still paid $20m, one per cent of</text>
+<text x="32" y="204" class="ws">the $2bn, because winning PMs are paid on their own book and losing PMs do not</text>
+<text x="32" y="218" class="ws">refund. Under pass-through that cost lands on the investor, not the firm [S346][S347].</text>
+<text x="32" y="238" class="ws">Independence makes case 2 common: uncorrelated pods, by definition, win and lose</text>
+<text x="32" y="252" class="ws">at different times. Netting drag is the price of the diversification in Figure 5.</text>
+<text x="32" y="272" class="ws">The firm's answer: hard loss limits keep B's loss small, so drag stays small.</text>
+<rect x="510" y="150" width="470" height="136" rx="6" fill="#1B998B"/>
+<text x="522" y="170" class="w">WHY INDEPENDENCE MUST BE REAL</text>
+<text x="522" y="190" class="ws">If pods were secretly correlated, case 1 and case 3 would dominate: the investor</text>
+<text x="522" y="204" class="ws">would get a lumpier return and still pay netting drag in the mixed years. The fee</text>
+<text x="522" y="218" class="ws">is only earned if the uncorrelated return is genuine [S346].</text>
+<text x="522" y="238" class="ws">A subtle point: the firm's own incentive is not identical to the investor's. Less</text>
+<text x="522" y="252" class="ws">dispersion between pods means less netting risk for the business but a lower</text>
+<text x="522" y="266" class="ws">Sharpe for the investor [S346]. Independence is the firm choosing the investor's side.</text>
+</svg>
+<span class="pm">@@f6@@</span><div class="cap"><b>Figure 6.</b> Netting. Illustrative numbers; the mechanism and the incentive tension are as described by the correlation-trade essay and the netting-risk analysis <span class="src">[S346][S347]</span>. Net Interest's estimate is that, after pass-through and performance charges, "the investor gets about half of the return" <span class="src">[S104]</span>.</div></div>
+
+<h2>2.5 What it means for the PM: a franchise, not a job</h2>
+<p>A PM at a no-house-view platform is closer to a franchisee than an employee. They bring a strategy; the firm brings capital, financing, risk, technology, data, execution and services, and takes most of the profit. They are paid a share of their own P&L after their own costs, reported at 15 to 22% depending on the deal <span class="src">[S312][S351]</span> <span class="tag r">Reported</span>. They are sized up when they win and cut when they lose, by rule rather than by conversation. And they must earn back any loss before they are paid again: Millennium's own filing language, as quoted in the press, explains why "zombie" PMs exist, teams that are still on the platform but under water and unpaid until they recover <span class="src">[S305]</span> <span class="tag c">Confirmed as quoted</span>. Turnover is high by design: press estimates put PM turnover at 15 to 20% a year, with 130 hires and 50 departures in one year and three-year retention of about 55% <span class="src">[S340]</span> <span class="tag r">Reported</span>.</p>
+<div class="fig">
+<svg id="svg7" viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg7 .t{font-size:9.8px;fill:#1F2933}#svg7 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg7 .s{font-size:8.8px;fill:#5B6B7C}#svg7 .w{fill:#fff;font-size:10.5px;font-weight:bold}#svg7 .ws{fill:#fff;font-size:9.3px}#svg7 .k{font-size:10.5px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">The PM's franchise: one pod, one good year, from gross P&L to payout (illustrative)</text>
+<rect x="20" y="50" width="150" height="120" rx="6" fill="#0B2545"/><text x="30" y="70" class="w">Allocation</text><text x="30" y="90" class="ws">$1bn of the firm's</text><text x="30" y="104" class="ws">capital, with limits:</text><text x="30" y="118" class="ws">lose 5% and it is</text><text x="30" y="132" class="ws">$500m; lose 7.5%</text><text x="30" y="146" class="ws">and it is zero [S104]</text>
+<rect x="190" y="50" width="150" height="120" rx="6" fill="#1B998B"/><text x="200" y="70" class="w">Gross P&L</text><text x="200" y="90" class="ws">+$80m, 8% on the</text><text x="200" y="104" class="ws">allocation. Beta-</text><text x="200" y="118" class="ws">neutral, so this is</text><text x="200" y="132" class="ws">alpha, not the</text><text x="200" y="146" class="ws">market [S350]</text>
+<rect x="360" y="50" width="150" height="120" rx="6" fill="#D97742"/><text x="370" y="70" class="w">Pod costs</text><text x="370" y="90" class="ws">Analysts' pay, data,</text><text x="370" y="104" class="ws">technology and</text><text x="370" y="118" class="ws">services charged to</text><text x="370" y="132" class="ws">the pod: say $8m.</text><text x="370" y="146" class="ws">Net P&L $72m [S351]</text>
+<rect x="530" y="50" width="150" height="120" rx="6" fill="#5E548E"/><text x="540" y="70" class="w">Payout</text><text x="540" y="90" class="ws">Reported 15 to 22%</text><text x="540" y="104" class="ws">of net P&L [S312]:</text><text x="540" y="118" class="ws">at 18%, about $13m</text><text x="540" y="132" class="ws">to the PM team,</text><text x="540" y="146" class="ws">split as they choose</text>
+<rect x="700" y="50" width="280" height="120" rx="6" fill="#13315C"/><text x="710" y="70" class="w">To the fund</text><text x="710" y="90" class="ws">About $59m, which the fund's investors</text><text x="710" y="104" class="ws">receive after the firm's performance fee</text><text x="710" y="118" class="ws">(reported 20%) and their share of the</text><text x="710" y="132" class="ws">centre's costs through pass-through.</text><text x="710" y="146" class="ws">The PM's payout was itself passed through.</text>
+<g stroke="#5B6B7C" stroke-width="2" fill="none"><line x1="170" y1="110" x2="190" y2="110"/><line x1="340" y1="110" x2="360" y2="110"/><line x1="510" y1="110" x2="530" y2="110"/><line x1="680" y1="110" x2="700" y2="110"/></g>
+<rect x="20" y="190" width="960" height="96" rx="6" fill="#F3F6FA" stroke="#D5DCE5"/>
+<text x="32" y="210" class="k">THE BAD YEAR, AND WHAT INDEPENDENCE MEANS FOR THE PERSON</text>
+<text x="32" y="230" class="t">Lose 5%: capital halved, payout zero, and the loss is carried forward, so the team must make $50m back before it is paid again [S305]. Lose 7.5%: the pod is closed.</text>
+<text x="32" y="244" class="t">Nobody above the PM told them what to own, so nobody shares the blame; the flip side of "no house view" is that the PM owns every outcome. That is why PMs guard their</text>
+<text x="32" y="258" class="t">positions, their research and their meeting requests, and why a central desk that sees all of them must be trusted to tell nobody. The numbers are placeholders; the mechanics are sourced.</text>
+<text x="32" y="278" class="s">Payout range from a careers site and a former risk head's description [S312][S351]; loss limits as reported [S104][S113]; carry-forward from the firm's filing as quoted [S305].</text>
+</svg>
+<span class="pm">@@f7@@</span><div class="cap"><b>Figure 7.</b> The franchise. Every dollar in the picture is illustrative; every rule is sourced as tagged.</div></div>
+
+<h2>2.6 What it means for the investor</h2>
+<p>The investor is buying a return built from hundreds of small, hedged, independent bets, cut early when they go wrong. The record that results is the product: about 14% a year since 1989 with one losing year <span class="src">[S111][S119]</span>; on third-party data to 2022, a Sharpe ratio of about 3.2 and a worst drawdown of about 7% <span class="src">[S378]</span>. Allocator research describes the trade: investors "assume the netting risk of underperforming PMs, resulting in typically higher total expense ratios", in exchange for "alpha via diversification" <span class="src">[S379]</span>. What they give up is any chance of a spectacular year; in 2025 three rivals beat Millennium, and in 2026 to August it was up 8.2% against a market up more <span class="src">[S126][S402]</span>. What they get is that the losing years almost never come, which for a pension fund is worth the fee.</p>
+<div class="box say"><div class="lbl">Say this</div><p>"The product is not the return; it is the shape of the return. No house view is what gives it that shape: hundreds of uncorrelated bets, none big enough to hurt, cut by rule when they go wrong. A pension fund buys that because it cannot afford the years a single-manager fund gives you."</p></div>
+
+<h2>2.7 What it means for the firm</h2>
+<p>For the firm, no house view turns talent into raw material. Because no strategy is central, any strategy that produces uncorrelated alpha can be added, and any that stops producing it can be removed, without changing the firm's identity <span class="src">[S104]</span>. The number of teams grew from 265 in 2020 to over 350, with 160 PMs hired in a single year and 32 external managers running Millennium capital <span class="src">[S92][S71][S168][S355]</span>. It also means the firm's revenue depends on a population, not a person: a founder can step back, a co-CIO can retire, an Office of the CIO can be created, and the return does not change, because the return never came from the top <span class="src">[S397][S96]</span>. The cost is that the firm must be very good at the unglamorous things: measuring, limiting, hiring, cutting, and running the services that 350 teams cannot run for themselves. A former risk head's phrase for what the centre must be is "in some way a quant" <span class="src">[S351]</span>.</p>
+
+<h2>2.8 The rivals: how each chose differently, and why</h2>
+<table>
+<tr><th style="width:16%">Firm</th><th style="width:36%">Its choice on house view</th><th>What it buys, what it costs</th></tr>
+<tr><td>Citadel</td><td>Teams "share ideas and compare notes"; Griffin explicitly contrasts Citadel with firms that "run completely stand-alone teams"; "Citadel has always argued it is not a pod shop" <span class="src">[S340][S342]</span>. An analyst's July 2026 comparison: Citadel is "highly collaborative across investment teams with greater integration" with "no hard drawdown limits or stop losses" and about 3,300 staff; Millennium is "siloed, decentralized" with "hard fixed drawdown limits" and about 6,800 <span class="src">[S516]</span>. In September 2026 Citadel consolidated international equities under one head <span class="src">[S410]</span>.</td><td>Buys research efficiency and the ability to express firm-level themes; costs some correlation between teams. Over 2022 to 2024 its net return was reported at 22% a year against Millennium's 13% <span class="src">[S509]</span>, and it led again in 2026 to August <span class="src">[S402]</span>: the case for its choice.</td></tr>
+<tr><td>Point72</td><td>Over 200 investing teams and an academy, alongside the founder's own historic book <span class="src">[S357a]</span>.</td><td>A hybrid: platform diversification with a founder's judgement still in the building.</td></tr>
+<tr><td>Balyasny</td><td>Its founder wants "lots of different types of risk-takers, because you have less correlation" <span class="src">[S340]</span>, and the firm promotes collaboration: senior PMs help "on more thematic and macro views and sharing those" <span class="src">[S501]</span> <span class="src">[S344]</span>.</td><td>Trying to have both; its 2023 fund-level filings show the cost side of pass-through most starkly <span class="src">[S372]</span>.</td></tr>
+<tr><td>Brevan Howard</td><td>A macro house: many traders inside a shared worldview, each with a designated risk manager <span class="src">[S357d]</span>.</td><td>Big years when the macro view is right; correlated books when it is wrong.</td></tr>
+<tr><td>Bridgewater</td><td>The clean house-view case: one systematic macro process and one set of views in its flagship fund, which returned about 33% in 2025 <span class="src">[S503]</span>.</td><td>The upside of a house view being right, with the volatility that implies; the opposite product to Millennium's.</td></tr>
+<tr><td>Jain Global</td><td>Launched in 2024 as an "integrated" platform rather than a siloed one <span class="src">[S343]</span>; by 2026 it had returned outside capital and become exclusive to Millennium after strong gross but weak net results <span class="src">[S407][S228]</span>.</td><td>The recent test case: a platform that could not turn gross into net for outsiders now runs inside the most siloed one.</td></tr>
+<tr><td>Millennium</td><td>The far end: no central book, information barriers, "most siloed" <span class="src">[S343][S351][S352]</span>.</td><td>Buys the lowest correlation and the smoothest return; costs idea flow, duplicated work, and a heavy centre.</td></tr>
+</table>
+
+<h2>2.9 The costs of no house view, honestly</h2>
+<div class="fig">
+<svg id="svg8" viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg8 .t{font-size:9.8px;fill:#1F2933}#svg8 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg8 .s{font-size:8.8px;fill:#5B6B7C}#svg8 .w{fill:#fff;font-size:10.5px;font-weight:bold}#svg8 .ws{fill:#fff;font-size:9.3px}#svg8 .k{font-size:10.5px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">Independence is not immunity: July 2026</text>
+<rect x="20" y="46" width="470" height="150" rx="6" fill="#B23A48"/>
+<text x="32" y="66" class="w">WHAT HAPPENED</text>
+<text x="32" y="86" class="ws">July 2026: Millennium fell 2.1%, its worst month in some time, as the AI and</text>
+<text x="32" y="100" class="ws">semiconductor trade reversed and a leveraged fund was liquidated under margin</text>
+<text x="32" y="114" class="ws">calls; the year-to-date fell to 8.2% [S223]. Citadel, by contrast, had one of its</text>
+<text x="32" y="128" class="ws">best months in years, +5.9%, after buying the liquidated book [S525].</text>
+<text x="32" y="152" class="ws">Nobody at the centre told 350 teams to be long AI. Many of them were anyway,</text>
+<text x="32" y="166" class="ws">because the same evidence reaches independent minds at the same time.</text>
+<text x="32" y="184" class="ws">That is ρ rising without a house view: crowding.</text>
+<rect x="510" y="46" width="470" height="150" rx="6" fill="#0B2545"/>
+<text x="522" y="66" class="w">WHAT IT TEACHES</text>
+<text x="522" y="86" class="ws">1. No house view lowers correlation; it does not remove it. The centre's factor</text>
+<text x="522" y="100" class="ws">cage and aggregate hedging exist for exactly this [S316][S350].</text>
+<text x="522" y="118" class="ws">2. A firm that shares ideas can also exit together; a firm that does not can</text>
+<text x="522" y="132" class="ws">still enter together. Neither structure is immune.</text>
+<text x="522" y="150" class="ws">3. The desk sees the crowding first: when forty requests for the same three AI</text>
+<text x="522" y="164" class="ws">names arrive in a week, the demand data is a correlation signal the pods</text>
+<text x="522" y="178" class="ws">themselves cannot see. Whether the centre uses it that way is not public.</text>
+<rect x="20" y="212" width="960" height="76" rx="6" fill="#F3F6FA" stroke="#D5DCE5"/>
+<text x="32" y="232" class="k">THE OTHER COSTS</text>
+<text x="32" y="252" class="t">No idea flow (Griffin's critique [S340]); duplicated research across pods covering the same names; "zombie" teams under water and unpaid but still on the platform [S305]; netting drag in mixed</text>
+<text x="32" y="266" class="t">years (Figure 6); dispersion between platforms (H1 2026: Point72 14.5%, Millennium 10.5%, Citadel 5.7% [S511]); and a centre that must be large to limit 350 books, which is where pass-through comes in.</text>
+</svg>
+<span class="pm">@@f8@@</span><div class="cap"><b>Figure 8.</b> July 2026 as the honest counter-example. The month's numbers as reported <span class="src">[S223][S222]</span>; the crowding reading is the author's; the desk-as-signal point is an inference, flagged as such.</div></div>
+
+<h2>2.10 What it means for relationships and trust</h2>
+<p>This is the part that matters most for the seat you are interviewing for. No house view creates a specific pattern of trust inside the firm, and a central desk lives inside that pattern.</p>
+<div class="fig">
+<svg id="svg9" viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg9 .t{font-size:9.8px;fill:#1F2933}#svg9 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg9 .s{font-size:8.8px;fill:#5B6B7C}#svg9 .w{fill:#fff;font-size:10.5px;font-weight:bold}#svg9 .ws{fill:#fff;font-size:9.2px}#svg9 .k{font-size:10.5px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">The trust map: what each party can and cannot demand of the others</text>
+<rect x="20" y="50" width="290" height="190" rx="8" fill="#1B998B"/>
+<text x="32" y="72" class="w">THE PODS (350+)</text>
+<text x="32" y="92" class="ws">Own every outcome; paid on their own book;</text><text x="32" y="106" class="ws">compete with each other for capital and for</text><text x="32" y="120" class="ws">the same scarce meetings [S351][S305].</text>
+<text x="32" y="140" class="ws">Can demand of the centre: fair limits, fast</text><text x="32" y="154" class="ws">service, confidentiality, a rule they can predict.</text>
+<text x="32" y="174" class="ws">Cannot demand: a meeting the desk does not</text><text x="32" y="188" class="ws">control, a rule bent for seniority, another</text><text x="32" y="202" class="ws">pod's information.</text>
+<text x="32" y="226" class="ws">Owe the desk nothing; use it only if it is good.</text>
+<rect x="355" y="50" width="290" height="190" rx="8" fill="#0B2545"/>
+<text x="367" y="72" class="w">THE CENTRE (and the desk)</text>
+<text x="367" y="92" class="ws">Sees every pod; picks no stocks; paid from the</text><text x="367" y="106" class="ws">firm's economics, not any pod's P&L [S351].</text>
+<text x="367" y="126" class="ws">Can demand of the pods: compliance, the record,</text><text x="367" y="140" class="ws">respect for limits and for the allocation rule.</text>
+<text x="367" y="160" class="ws">Cannot demand: that pods share ideas, or that</text><text x="367" y="174" class="ws">they trust a service before it has earned it.</text>
+<text x="367" y="194" class="ws">Must be: neutral between pods, discreet across</text><text x="367" y="208" class="ws">them, and better than each pod doing it alone.</text>
+<text x="367" y="228" class="ws">The desk's currency is the record and the no with an alternative.</text>
+<rect x="690" y="50" width="290" height="190" rx="8" fill="#D97742"/>
+<text x="702" y="72" class="w">THE INVESTORS</text>
+<text x="702" y="92" class="ws">Pay the centre's costs and the pods' payouts</text><text x="702" y="106" class="ws">through pass-through; lock money for years</text><text x="702" y="120" class="ws">[S104][S400].</text>
+<text x="702" y="140" class="ws">Can demand of the firm: genuine independence</text><text x="702" y="154" class="ws">(so the fee is earned), hard limits, a net return</text><text x="702" y="168" class="ws">that beats cheaper structures [S366].</text>
+<text x="702" y="188" class="ws">Cannot demand: a market view, a star, or a</text><text x="702" y="202" class="ws">spectacular year.</text>
+<text x="702" y="226" class="ws">Trust the structure, not a person [S367].</text>
+<rect x="20" y="260" width="960" height="126" rx="6" fill="#F3F6FA" stroke="#D5DCE5"/>
+<text x="32" y="280" class="k">WHAT THIS MEANS FOR A CORPORATE ACCESS DESK, IN FOUR SENTENCES</text>
+<text x="32" y="300" class="t">Because there is no house view, the desk has no view either: it cannot favour a strategy, a sector or a PM, and every allocation must be explainable to the team that lost. Because pods own</text>
+<text x="32" y="314" class="t">their outcomes, they guard their information, so the desk's discretion is the condition of its existence: one leak between pods and the pooled request is dead. Because pods owe the desk</text>
+<text x="32" y="328" class="t">nothing, trust is earned in the noes, with the record behind them. And because the investor pays for the desk through pass-through, the desk must be able to show what it delivered,</text>
+<text x="32" y="342" class="t">which is the consumption report. Your Round 1 line, "trust is built in the noes, not the yeses", is the mechanism stated from the inside.</text>
+<text x="32" y="368" class="s">Basis: the pod description and payout mechanics [S351][S305]; pass-through and lock-ups [S104][S400]; the allocator's test for the fee [S366]; the stake sale as institutional trust [S367]. The four sentences are the author's synthesis.</text>
+</svg>
+<span class="pm">@@f9@@</span><div class="cap"><b>Figure 9.</b> The trust map. What no house view does to relationships is the desk's operating environment: neutral, discreet, earned, accountable.</div></div>
+</div>
+
+<!-- ================= PART 3 ================= -->
+<div class="section" style="--pc:#D97742"><span class="pm">@@p3@@</span>
+<div class="section-band"><div class="kicker">Part 3</div><h1>Pass-through: what it is, why, and what it does to everyone</h1><p class="lede">Pass-through is the money side of the same machine. It replaces the fixed management fee with the firm's actual costs, billed to the investor. This part gives the exact mechanics, the worked numbers, where the dollar goes, how Millennium's terms have moved, why the model exists, what it does to the PM, the investor, the firm and the rivals, and why it makes every central function accountable.</p></div>
+
+<h2>3.1 Precisely what pass-through means</h2>
+<p>Under the classic model (Figure 1), the manager charges a fixed percentage of assets and pays the firm's costs out of it. Under <b>pass-through</b>, the fund itself pays the firm's operating expenses, and those expenses are charged to investors on top of the performance fee <span class="src">[S104]</span>. The expenses include the pods' compensation (the PM payouts in Figure 7), analysts' pay, data, technology, offices, and an eligible list that at the big platforms grew by nearly 40% over seven years <span class="src">[S370][S371]</span> <span class="tag c">Confirmed</span>; a Goldman Sachs prime-brokerage report described the charged costs as "bonuses, deferred compensation, travel, client entertainment, office rents" <span class="src">[S494]</span>. Millennium's own regulatory filing carries the fingerprint: its Form ADV lists the adviser's compensation as "performance-based fees" and "other: reimbursement of expenses" <span class="src">[S529]</span> <span class="tag c">Confirmed, primary</span>; its brochure, as summarised by a third party, says the funds pay asset-based fees quarterly in advance and performance fees annually, without publishing rates <span class="src">[S528]</span>. The total is usually expressed as a percentage of the fund's net asset value, and the reported range has drifted up: Barclays in 2023 said the structure looked "more like 7-and-20" than 2-and-20 <span class="src">[S505]</span>; Hedgeweek in 2025 put top platforms at "up to 8% of assets annually" <span class="src">[S509]</span>; Goldman Sachs data put multi-manager fees "as high as 10% of assets" against a typical hedge fund management fee of about 1.35% <span class="src">[S373]</span>; and one analyst puts Millennium and Citadel "in the 10% range" with the industry average nearer 5% <span class="src">[S527]</span> <span class="tag r">All reported or estimated</span>. About 80% of multi-strategy firms use pass-through <span class="src">[S372]</span>.</p>
+<p>Millennium adds a floor. Since summer 2023 investors pay whichever is greater of about 1% of assets a year or 20% of gains, so a fee is paid even in a flat or losing year; if the 1% is charged, it must be recovered before performance fees are charged the following year. The firm's letter described the change as reflecting "current industry-standard approaches" <span class="src">[S87]</span> <span class="tag r">Reported from a Bloomberg-reported letter</span>. Millennium's own fund-level expense ratio has not been disclosed; the best public estimate is Net Interest's, that after pass-through and performance charges "the investor gets about half of the return" <span class="src">[S104]</span> <span class="tag r">Estimate</span>.</p>
+<div class="box term"><div class="lbl">Key terms</div><p><b>Net asset value (NAV):</b> what the fund is worth after everything is paid. <b>Expense ratio:</b> the year's pass-through costs as a share of NAV. <b>Gross return:</b> what the trading made before any charge. <b>Net return:</b> what the investor actually receives. <b>Fee floor:</b> a minimum charge that applies even if performance is poor. <b>Hurdle:</b> a return the fund must beat before a performance fee is charged; a "cash hurdle" means beating the interest rate on cash <span class="src">[S166]</span>.</p></div>
+
+<h2>3.2 The worked numbers: the same year, three ways</h2>
+<div class="fig">
+<svg id="svg10" viewBox="0 0 1000 380" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg10 .t{font-size:9.8px;fill:#1F2933}#svg10 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg10 .s{font-size:8.8px;fill:#5B6B7C}#svg10 .w{fill:#fff;font-size:10.5px;font-weight:bold}#svg10 .ws{fill:#fff;font-size:9.3px}#svg10 .k{font-size:10.5px;font-weight:bold;fill:#0B2545}#svg10 .ax{font-size:9.4px;fill:#5B6B7C}</style>
+<text x="20" y="24" class="h">A 12% gross year, three fee structures: what the investor keeps (an allocator's model, March 2026)</text>
+<!-- bars: gross 12; three structures -->
+<g>
+<rect x="60" y="60" width="150" height="240" fill="#F3F6FA" stroke="#D5DCE5"/>
+<text x="70" y="80" class="k">Gross return</text>
+<rect x="90" y="120" width="90" height="180" fill="#8A96A3"/><text x="105" y="112" class="k">12.0%</text>
+</g>
+<g>
+<rect x="240" y="60" width="220" height="240" fill="#F3F6FA" stroke="#D5DCE5"/>
+<text x="250" y="80" class="k">Two and twenty</text>
+<rect x="290" y="178.5" width="90" height="121.5" fill="#0B2545"/><text x="305" y="170" class="k">8.1% net</text>
+<text x="250" y="316" class="s">2% management + 20% of the rest</text>
+</g>
+<g>
+<rect x="490" y="60" width="220" height="240" fill="#F3F6FA" stroke="#D5DCE5"/>
+<text x="500" y="80" class="k">Pass-through, uncapped</text>
+<rect x="540" y="204" width="90" height="96" fill="#D97742"/><text x="555" y="196" class="k">6.4% net</text>
+<text x="500" y="316" class="s">~4% of NAV expenses + 20% of the rest</text>
+</g>
+<g>
+<rect x="740" y="60" width="220" height="240" fill="#F3F6FA" stroke="#D5DCE5"/>
+<text x="750" y="80" class="k">Pass-through, capped at 2%</text>
+<rect x="790" y="189" width="90" height="111" fill="#1B998B"/><text x="805" y="181" class="k">7.4% net</text>
+<text x="750" y="316" class="s">expenses capped + 20% of the rest</text>
+</g>
+<rect x="20" y="330" width="960" height="44" rx="6" fill="#0B2545"/>
+<text x="32" y="348" class="ws">Resonanz Capital's model, with its own assumptions (pass-through about 4% of NAV); it notes the average investor retains about $0.41 of each gross dollar at multi-strats, and warns: "A 1% management fee</text>
+<text x="32" y="362" class="ws">with uncapped pass-through is not cheaper than 2-and-20; it's just less visible until it isn't" [S366]. Its test for when pass-through is worth paying: when net outcomes "meaningfully exceed" 2/20 in mediocre and down years.</text>
+</svg>
+<span class="pm">@@f10@@</span><div class="cap"><b>Figure 10.</b> Three structures, one year. All numbers from the allocator's published model <span class="src">[S366]</span>; they are assumptions, not Millennium's terms. The point is the shape: in an ordinary year pass-through costs the investor more; the case for it rests on the years the classic fund would have lost money.</div></div>
+<table>
+<tr><th style="width:18%">Year type</th><th style="width:16%">Gross</th><th style="width:18%">Pass-through</th><th style="width:16%">Floor or fee</th><th style="width:14%">Net</th><th>What happened</th></tr>
+<tr><td>Strong</td><td>15%</td><td>7% (mid-point of the reported range; about 90% of it pay)</td><td>20% of the 8% left = 1.6%</td><td>6.4%</td><td>The investor keeps about 43 cents of each gross dollar, in line with the industry's 41 cents <span class="src">[S370]</span>.</td></tr>
+<tr><td>Flat</td><td>5%</td><td>7%</td><td>1% floor</td><td>-3%</td><td>No gross alpha, but the winning PMs inside the 7% were still paid: netting risk made visible.</td></tr>
+<tr><td>Down</td><td>-5%</td><td>6% (bonuses shrink; salaries, data and systems do not)</td><td>1% floor</td><td>-12%</td><td>Eisler Capital's 2025: a 14.3% loss of which the bulk "stemmed from pass-through expenses", after staff costs grew over 900% in five years <span class="src">[S510]</span>.</td></tr>
+</table>
+<p class="small">An illustrative model built from the reported ranges, not a Millennium disclosure. Millennium's only losing year since 1989 was 2008 <span class="src">[S498]</span>, so the third row describes a peer, not the firm.</p>
+<p>The evidence that the bill has been worth paying, so far: Barclays found pass-through funds returned 11.8% a year after fees over three years against 6.4% for non-pass-through peers <span class="src">[S506]</span>, and multi-managers 8.3% a year over five years against 5.5% for the industry <span class="src">[S505]</span>; a pension investment officer's line, as quoted: "Everyone brings up the fees, but all I care about are net returns" <span class="src">[S509]</span>.</p>
+<p>Read Figure 10 with Part 2 in mind. In a 12% year the classic fund wins on net return. Pass-through earns its keep in the other years: 2008, when the flagship lost about 3% while the market halved; 2020 and 2022, when it made money while most managers did not <span class="src">[S111][S119][S379]</span>. The investor is paying a higher bill for a return whose bad years are shallow. Whether that is a good trade is the whole fee debate, and the honest answer is "it has been, so far".</p>
+
+<h2>3.3 Where the pass-through dollar goes, and what the industry's drift shows</h2>
+<div class="fig">
+<svg id="svg11" viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg11 .t{font-size:9.8px;fill:#1F2933}#svg11 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg11 .s{font-size:8.8px;fill:#5B6B7C}#svg11 .w{fill:#fff;font-size:10.5px;font-weight:bold}#svg11 .ws{fill:#fff;font-size:9.3px}#svg11 .k{font-size:10.5px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">Where the pass-through dollar goes: what fund filings showed when Bloomberg read them (peers; Millennium does not file these)</text>
+<text x="20" y="56" class="k">Balyasny, Atlas Enhanced fund, 2023: $768m of pass-through</text>
+<rect x="20" y="64" width="835" height="26" fill="#D97742"/><text x="30" y="82" class="w">Compensation: 87%</text>
+<rect x="855" y="64" width="125" height="26" fill="#8A96A3"/><text x="862" y="82" class="ws">Other: 13%</text>
+<text x="20" y="108" class="s">Turned a 15.2% gross return into 2.8% net that year [S372].</text>
+<text x="20" y="136" class="k">Citadel, three largest funds, 2022 to September 2024: $12.5bn of pass-through</text>
+<rect x="20" y="144" width="845" height="26" fill="#D97742"/><text x="30" y="162" class="w">Compensation: about $11bn (88%)</text>
+<rect x="865" y="144" width="115" height="26" fill="#8A96A3"/><text x="872" y="162" class="ws">Other: ~12%</text>
+<text x="20" y="188" class="s">ExodusPoint, 2023: 8.4% of assets in pass-through against an 11% gross return [S372].</text>
+<rect x="20" y="206" width="960" height="84" rx="6" fill="#0B2545"/>
+<text x="32" y="226" class="w">WHAT THIS DOES TO YOUR SECOND CLAIM</text>
+<text x="32" y="246" class="ws">"Pass-through funds our proprietary systems and AI" is true, but the dollar is mostly people: the pods' payouts and the centre's salaries. Technology, data and infrastructure are the</text>
+<text x="32" y="260" class="ws">minority share, real and growing, and at Millennium that minority funds 1,800-plus technologists [S382]. Say "pass-through funds the platform, most of it talent, some of it systems", and you are</text>
+<text x="32" y="274" class="ws">accurate. Say "pass-through funds our systems", and a practitioner will hear a candidate who has not seen a fund's expense schedule.</text>
+</svg>
+<span class="pm">@@f11@@</span><div class="cap"><b>Figure 11.</b> Where the dollar goes, from peers' fund-level filings as read by Bloomberg and reported by Hedgeweek <span class="src">[S372]</span>. Millennium is named in that reporting but files no comparable fund-level expense disclosure, so no Millennium split exists.</div></div>
+<div class="fig">
+<svg id="svg12" viewBox="0 0 1000 250" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg12 .t{font-size:9.8px;fill:#1F2933}#svg12 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg12 .s{font-size:8.8px;fill:#5B6B7C}#svg12 .w{fill:#fff;font-size:10.5px;font-weight:bold}#svg12 .ws{fill:#fff;font-size:9.3px}#svg12 .k{font-size:10.5px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">What the investor keeps of each gross dollar at multi-strategy funds: the drift</text>
+<text x="20" y="60" class="k">2021</text>
+<rect x="70" y="46" width="540" height="24" fill="#1B998B"/><text x="80" y="63" class="w">Investor keeps 54 cents</text>
+<rect x="610" y="46" width="370" height="24" fill="#D97742"/><text x="620" y="63" class="ws">Firm and its people: 46 cents</text>
+<text x="20" y="100" class="k">2023</text>
+<rect x="70" y="86" width="410" height="24" fill="#1B998B"/><text x="80" y="103" class="w">Investor keeps 41 cents</text>
+<rect x="480" y="86" width="500" height="24" fill="#D97742"/><text x="490" y="103" class="ws">Firm and its people: 59 cents</text>
+<text x="20" y="130" class="s">BNP Paribas data reported by Bloomberg, August 2025; the same reporting found the list of pass-through-eligible expenses at major platforms grew nearly 40% in seven years [S370][S371].</text>
+<rect x="20" y="146" width="960" height="94" rx="6" fill="#F3F6FA" stroke="#D5DCE5"/>
+<text x="32" y="166" class="k">HOW TO READ IT WITHOUT OVERSTATING</text>
+<text x="32" y="186" class="t">These are industry averages, not Millennium's numbers, and 2023 was a weaker year for the group, which mechanically raises the fee share. The drift is real: more costs are eligible, and the</text>
+<text x="32" y="200" class="t">talent war raised the biggest cost. The pushback is real too: a coalition of US pensions led by Texas Teachers demanded better terms in 2024 [S371]; ExodusPoint adopted a cash hurdle [S166];</text>
+<text x="32" y="214" class="t">Citadel returned $5bn of profit rather than grow [S165]. Millennium's response was a floor, longer locks and a $22bn raise that still closed [S87][S400]. The market is voting with money, so far.</text>
+</svg>
+<span class="pm">@@f12@@</span><div class="cap"><b>Figure 12.</b> The drift and the pushback. Industry figures as reported <span class="src">[S370][S371]</span>; the pushback items as reported <span class="src">[S371][S166][S165]</span>; Millennium's responses as reported <span class="src">[S87][S400]</span>.</div></div>
+
+<h2>3.4 Millennium's terms, dated</h2>
+<div class="fig">
+<svg id="svg13" viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg13 .t{font-size:9.8px;fill:#1F2933}#svg13 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg13 .s{font-size:8.8px;fill:#5B6B7C}#svg13 .w{fill:#fff;font-size:10px;font-weight:bold}#svg13 .ws{fill:#fff;font-size:9px}#svg13 .k{font-size:10.5px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">Millennium's terms and capital, as reported, in order</text>
+<line x1="40" y1="70" x2="960" y2="70" stroke="#0B2545" stroke-width="3"/>
+<g>
+<circle cx="70" cy="70" r="6" fill="#8A96A3"/><circle cx="250" cy="70" r="6" fill="#D97742"/><circle cx="430" cy="70" r="6" fill="#D97742"/><circle cx="610" cy="70" r="6" fill="#1B998B"/><circle cx="790" cy="70" r="6" fill="#1B998B"/><circle cx="930" cy="70" r="6" fill="#0B2545"/>
+</g>
+<rect x="20" y="86" width="150" height="120" rx="6" fill="#8A96A3"/><text x="28" y="104" class="w">1989 onward</text><text x="28" y="122" class="ws">Founded with $35m;</text><text x="28" y="136" class="ws">pass-through of costs</text><text x="28" y="150" class="ws">plus a performance fee;</text><text x="28" y="164" class="ws">one losing year, 2008</text><text x="28" y="178" class="ws">[S76][S111][S119]</text>
+<rect x="190" y="86" width="150" height="120" rx="6" fill="#D97742"/><text x="198" y="104" class="w">Feb 2022 letter</text><text x="198" y="122" class="ws">"We now compete for</text><text x="198" y="136" class="ws">talent with technology</text><text x="198" y="150" class="ws">companies as much as</text><text x="198" y="164" class="ws">we do with financial</text><text x="198" y="178" class="ws">services firms" [S376]</text>
+<rect x="370" y="86" width="150" height="120" rx="6" fill="#D97742"/><text x="378" y="104" class="w">Feb to mid 2023</text><text x="378" y="122" class="ws">The floor: greater of</text><text x="378" y="136" class="ws">~1% of assets or 20%</text><text x="378" y="150" class="ws">of gains, on top of</text><text x="378" y="164" class="ws">pass-through; "industry-</text><text x="378" y="178" class="ws">standard" [S87]</text>
+<rect x="550" y="86" width="150" height="120" rx="6" fill="#1B998B"/><text x="558" y="104" class="w">Sep to Oct 2024</text><text x="558" y="122" class="ws">Raises $10bn of $20bn</text><text x="558" y="136" class="ws">offered, callable;</text><text x="558" y="150" class="ws">withdrawals 5% a</text><text x="558" y="164" class="ws">quarter, a five-year</text><text x="558" y="178" class="ws">exit [S95][S526]</text>
+<rect x="730" y="86" width="150" height="120" rx="6" fill="#1B998B"/><text x="738" y="104" class="w">Nov 2025</text><text x="738" y="122" class="ws">First outside stake:</text><text x="738" y="136" class="ws">15% for about $2bn at</text><text x="738" y="150" class="ws">a $14bn valuation, to</text><text x="738" y="164" class="ws">clients and Petershill</text><text x="738" y="178" class="ws">[S82][S115]</text>
+<rect x="895" y="86" width="90" height="120" rx="6" fill="#0B2545"/><text x="901" y="104" class="w">2026 raise</text><text x="901" y="122" class="ws">$20bn target,</text><text x="901" y="136" class="ws">$30bn+ demand;</text><text x="901" y="150" class="ws">five-year share</text><text x="901" y="164" class="ws">class [S499];</text><text x="901" y="178" class="ws">$22bn [S400]</text>
+<rect x="20" y="222" width="960" height="66" rx="6" fill="#F3F6FA" stroke="#D5DCE5"/>
+<text x="32" y="242" class="k">WHAT THE SEQUENCE SAYS</text>
+<text x="32" y="262" class="t">Every step since 2022 has made the terms firmer for the firm (a floor, longer locks, callable commitments) and every step has been oversubscribed. That is the market's verdict on the trade in</text>
+<text x="32" y="276" class="t">Figure 10: investors have accepted a higher, less visible bill for the shape of the return. The stake sale to long-time clients is the same verdict in ownership form [S367].</text>
+</svg>
+<span class="pm">@@f13@@</span><div class="cap"><b>Figure 13.</b> Millennium's terms, as reported and dated <span class="src">[S76][S111][S119][S376][S87][S95][S526][S82][S115][S498][S499][S400][S367]</span>. The firm has never published its fund terms; each box rests on the press report cited. The $22bn closing figure was read via a syndicated Bloomberg piece on 17 September <span class="src">[S400]</span>; the 25 September reports give the target and demand rather than a closing total <span class="src">[S499]</span>.</div></div>
+
+<h2>3.5 Why pass-through exists: the talent war, and the firm's own economics</h2>
+<p>Put Part 2 and Figure 7 together and the reason is almost forced. A no-house-view firm makes its money from hundreds of independent PMs. Each PM is paid a share of their own P&L, in the year they earn it, whether or not the firm as a whole made money. Under a fixed management fee, the firm would have to fund those payouts from a pool that does not grow when the fund is flat: in a mixed year, it could not pay the winners without losing money itself, and the winners would leave. Pass-through solves this by making the fund, and therefore the investor, pay each payout as it is earned <span class="src">[S104][S346]</span>. The payout formula, as a careers site states it: "Pod P&L, minus pod costs, times PM's negotiated payout % = bonus pool", with the reminder that "the costs of running a team are not a firm subsidy" <span class="src">[S491]</span>. A rival's own note gives the manager-side rationale for pass-through and locks together: "a more stable fee base, enabling firms to retain top talent and invest in infrastructure" <span class="src">[S522]</span>. It also lets the platform hire without a budget ceiling: 160 PMs in one year, 32 external managers, a centre of more than 3,600 people <span class="src">[S168][S355][S392]</span>. Englander's 2022 letter names the competitor: technology companies, for talent <span class="src">[S376]</span>.</p>
+<p>The firm's own income is then two things: the performance fee (reported 20%) and its ownership of a fifth of the fund itself, since the adviser and related persons own about 18% of the master fund <span class="src">[S360]</span>. That ownership matters for your argument: the firm eats a fifth of every pass-through dollar, which is the strongest alignment claim available, and a stronger one than "pass-through aligns incentives", which a sceptical allocator will not accept on its own <span class="src">[S366]</span>.</p>
+<div class="box say"><div class="lbl">Say this</div><p>"Pass-through follows from no house view. If your return is the sum of three hundred independent teams paid on their own books, you have to be able to pay a winning team in a year the firm is flat, or it leaves. A fixed management fee can't do that; billing the costs to the fund can. The check on it is that the firm owns about a fifth of the fund, so it pays a fifth of its own bill."</p></div>
+
+<h2>3.6 What it means for the PM</h2>
+<p>For the PM, pass-through is the reason the franchise deal can exist at all. Their payout is a contractual share of their own net P&L, not a bonus from a firm-wide pool decided at year end <span class="src">[S351][S312]</span>; the reported range is 10 to 20%, with top-quartile traders at about 24.5% of profits in 2025 by Goldman data <span class="src">[S491]</span>. Millennium's own brochure, as quoted in the press, says a PM's salary "is generally treated as an advance against their profits interest" and that losses "are carried forward and past losses must be made up before performance-based compensation becomes payable" <span class="src">[S508]</span> <span class="tag c">Confirmed as quoted</span>. Their costs, the analysts, the data, the technology and the services they draw from the centre, are charged to their book before the payout is calculated, so a PM is in effect running a small business whose expenses are visible to them line by line <span class="src">[S351]</span>. Two consequences follow for the desk. A PM who is charged for services will ask what they got; and a PM who is paid only on their own book has no reason to help another team get a meeting. Both are why the consumption report exists and why the desk's discretion between teams is absolute.</p>
+
+<h2>3.7 What it means for the investor: the bar, and the pushback</h2>
+<p>The investor's position is simple to state and hard to judge. They pay the pods' payouts and the centre's costs, plus a performance fee, plus a floor; they lock money for years; and press estimates say they keep about half of gross returns <span class="src">[S104][S87][S400]</span>. In exchange they get the shape of return described in Part 2. The fair test, from the allocator side, is whether net outcomes "meaningfully exceed" a classic 2-and-20 fund "in mediocre and down years" <span class="src">[S366]</span>. On the public record, they have: one losing year of about 3% since 1989, against an industry whose bad years run to double digits <span class="src">[S111][S119]</span>.</p>
+<p>The cost of diversification has a name and a number. Albourne's Ronan Cosgrave: "When there are performance fees involved, diversification is no longer a free lunch. The cost to diversify is called netting risk"; Albourne's simulations put it at about 1% a year <span class="src">[S519][S495]</span> <span class="tag r">Reported</span>. And the down-year case is not theoretical: Eisler Capital wound down in 2025 with most of its 14.3% loss attributed to pass-through expenses <span class="src">[S510]</span>.</p>
+<p>The pushback is also real and worth stating before an interviewer does. Investors kept 41 cents of each gross dollar at multi-strats in 2023, down from 54 in 2021 <span class="src">[S370]</span>; a coalition of pensions demanded better terms in 2024 <span class="src">[S371]</span>; ExodusPoint moved to a cash hurdle, with no performance fee unless returns beat three-month Treasury bills, made retroactive to the start of 2024 <span class="src">[S166][S493]</span>; Citadel returned capital rather than grow <span class="src">[S165]</span>; Brevan Howard cut its fees in 2025 after its all-in load rose <span class="src">[S522]</span>; multi-strategy funds saw more than $30bn of net outflows in the year to June 2024 <span class="src">[S494]</span>. A fund-services firm's 2026 summary: allocators "are not revolting against paying for performance" but "are objecting to writing a blank cheque", demanding expense caps and disclosure schedules <span class="src">[S518]</span> <span class="tag r">Opinion piece</span>. Millennium's answers were a floor rather than a cut, longer locks rather than shorter, and a raise that closed at $22bn with a five-year withdrawal restriction longer than peers' three to four <span class="src">[S87][S400]</span>. Wealthy individuals are reported at 30 to 40% of assets <span class="src">[S400]</span>, a client base that has historically been less fee-sensitive than pensions <span class="tag i">Inferred</span>.</p>
+<div class="box dont"><div class="lbl">Don't say</div><p>"Pass-through aligns the firm with investors" as a bare claim; an allocator hears the netting drag and the 41 cents. Say the alignment comes from ownership (18%) and from the record, and that the investor is right to watch the expense list. Do not quote a Millennium expense ratio; none is public.</p></div>
+
+<h2>3.8 What it means for the firm and the centre: your AI point, made accurately</h2>
+<div class="fig">
+<svg id="svg14" viewBox="0 0 1000 330" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg14 .t{font-size:9.8px;fill:#1F2933}#svg14 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg14 .s{font-size:8.8px;fill:#5B6B7C}#svg14 .w{fill:#fff;font-size:10.5px;font-weight:bold}#svg14 .ws{fill:#fff;font-size:9.3px}#svg14 .k{font-size:10.5px;font-weight:bold;fill:#0B2545}#svg14 .big{font-size:22px;font-weight:bold;fill:#fff}</style>
+<text x="20" y="24" class="h">What pass-through funds: the centre by the numbers</text>
+<rect x="20" y="46" width="225" height="120" rx="8" fill="#0B2545"/><text x="32" y="80" class="big">54%</text><text x="32" y="100" class="ws">of about 6,670 staff are outside</text><text x="32" y="114" class="ws">investment functions: 3,055 advisory,</text><text x="32" y="128" class="ws">about 3,615 centre (SEC filing,</text><text x="32" y="142" class="ws">Aug 2026) [S392]</text>
+<rect x="260" y="46" width="225" height="120" rx="8" fill="#13315C"/><text x="272" y="80" class="big">1,800+</text><text x="272" y="100" class="ws">technologists across nine hubs;</text><text x="272" y="114" class="ws">"900K+ daily data files ingested"</text><text x="272" y="128" class="ws">(firm's own site) [S382]; about</text><text x="272" y="142" class="ws">1,000 in early 2023 [S394]</text>
+<rect x="500" y="46" width="225" height="120" rx="8" fill="#1B998B"/><text x="512" y="80" class="big">Aug 2026</text><text x="512" y="100" class="ws">Partnership with Anthropic to</text><text x="512" y="114" class="ws">co-develop an AI risk analyst;</text><text x="512" y="128" class="ws">Claude used across 340-plus</text><text x="512" y="142" class="ws">teams; an AI lab [S386][S326]</text>
+<rect x="740" y="46" width="240" height="120" rx="8" fill="#D97742"/><text x="752" y="80" class="big">18%</text><text x="752" y="100" class="ws">of the master fund owned by the</text><text x="752" y="114" class="ws">adviser and related persons: the</text><text x="752" y="128" class="ws">firm pays about a fifth of its own</text><text x="752" y="142" class="ws">pass-through bill [S360]</text>
+<rect x="20" y="186" width="960" height="130" rx="6" fill="#F3F6FA" stroke="#D5DCE5"/>
+<text x="32" y="206" class="k">YOUR AI POINT, IN THE FORM THAT SURVIVES A PRACTITIONER</text>
+<text x="32" y="226" class="t">Right: pass-through is what allows a firm whose income is a share of gains to run a centre that is more than half of its people and to invest in systems and AI without a management-fee</text>
+<text x="32" y="240" class="t">ceiling; the risk-analyst work with Anthropic and the AI lab are what that looks like [S386][S326]. Long-dated capital (three to four years before deployment, then a five-year restriction)</text>
+<text x="32" y="254" class="t">is what makes multi-year technology investment sensible [S400].</text>
+<text x="32" y="274" class="t">Corrected: most of the dollar is people [S372]; the investor pays it; and Millennium does not publish what it spends on technology, so say "invests heavily", not a number.</text>
+<text x="32" y="294" class="t">Upgraded: because every central cost is an investor cost, each central function is accountable for its value. The desk's consumption report is that accountability made visible.</text>
+</svg>
+<span class="pm">@@f14@@</span><div class="cap"><b>Figure 14.</b> The centre by the numbers, from the SEC filing, the firm's site, the Anthropic announcement and the ownership disclosure <span class="src">[S392][S382][S394][S386][S326][S360]</span>.</div></div>
+
+<h2>3.9 The rivals: who charges what</h2>
+<table>
+<tr><th style="width:16%">Firm</th><th style="width:44%">Fee structure, as reported</th><th>What it says about the choice</th></tr>
+<tr><td>Millennium</td><td>Pass-through plus a reported 20% performance fee, with a floor of about 1% or 20% since 2023; no cash hurdle reported; five-year restriction on the 2026 raise <span class="src">[S87][S400]</span>.</td><td>Firmest terms in the group, and still oversubscribed. The record is the argument.</td></tr>
+<tr><td>Citadel</td><td>Pass-through; $12.5bn charged across its three largest funds from 2022 to September 2024, about $11bn of it compensation; returned $5bn of profit to investors in 2025 <span class="src">[S372][S165]</span>.</td><td>Chooses to cap its own size rather than its fees; the best 2025 and 2026 returns in the group.</td></tr>
+<tr><td>Point72</td><td>A partial pass-through, with many central costs inside a fixed fee until 2025, when it told clients it would shift costs the founder had covered onto them, "a few tenths of a percentage point of assets"; moving to a three-year exit from 2027 <span class="src">[S524][S525]</span>.</td><td>Converging on the full model as the founder steps back from funding it.</td></tr>
+<tr><td>Balyasny</td><td>Pass-through: $768m in 2023 on one fund, 87% compensation, 15.2% gross to 2.8% net <span class="src">[S372]</span>.</td><td>The clearest public example of pass-through in a weak year; the case the critics cite.</td></tr>
+<tr><td>ExodusPoint</td><td>Pass-through of 8.4% against 11% gross in 2023; adopted a cash hurdle for its performance fee <span class="src">[S372][S166]</span>.</td><td>The concession the pushback won.</td></tr>
+<tr><td>Brevan Howard</td><td>Pass-through on one fund from 2018 and a pass-through share class on the main fund from October 2022, "10% or more" plus performance fees; by April 2025 cutting performance fees to 20% for select clients and offering 1% management fees for five-year locks <span class="src">[S521][S522]</span>.</td><td>The firm that went furthest into pass-through and then partly back; the model is not a one-way street.</td></tr>
+<tr><td>Eisler Capital</td><td>Performance fee plus pass-through; wound down in 2025 with most of a 14.3% loss attributed to pass-through expenses after staff costs grew over 900% in five years <span class="src">[S510]</span>.</td><td>What the model looks like when the return stops and the costs do not.</td></tr>
+<tr><td>Jain Global</td><td>Pass-through of up to about 15% in 2025 on a small asset base; returned outside capital in 2026 and runs Millennium money only <span class="src">[S527][S512]</span>.</td><td>A start-up cannot spread a platform's costs; a $100bn firm can.</td></tr>
+<tr><td>Nickel Digital (a new pod shop)</td><td>Deliberately a fixed 2% management fee and no pass-through, with PMs "paid only if they generate positive returns for our LPs" <span class="src">[S496]</span>.</td><td>The counter-model exists, at small scale.</td></tr>
+<tr><td>Classic single-manager funds</td><td>Management fee (typically about 1.35% at large funds) plus 20% performance fee <span class="src">[S373]</span>; Barclays' "low expense" funds averaged 1% and 13% <span class="src">[S506]</span>.</td><td>Cheaper in a good year; no way to pay a team in a flat one.</td></tr>
+</table>
+<p>The comparison makes your second claim more precise: pass-through does not distinguish Millennium from its platform rivals, since about 80% of them use it <span class="src">[S372]</span>. What distinguishes Millennium is what it has been able to do with it: the longest lock, the firmest floor, the largest raise, and a record that has justified the bill for longer than anyone else's <span class="src">[S400][S111]</span>.</p>
+
+<h2>3.10 What it means for relationships and trust</h2>
+<p>Pass-through changes who the centre answers to. Under a fixed fee, a service desk is a cost the firm chooses to bear and can hide inside its margin. Under pass-through, the desk is a line on the investor's bill, and the investor's consultants read the eligible-expense list <span class="src">[S370][S366]</span>. That does three things to a corporate access desk. It must be able to show what it delivered, which is why the consumption report is a strategic document and not an admin one. It must be cheaper and better than 350 pods doing the work themselves, or its existence is a fee without a service. And it must treat the pods as clients who are, in the end, paying for it through their own book's charges, which is why the New York posting talks about monitoring "access quality, utilization, costs, and team feedback" <span class="src">[S25]</span>. Your Round 1 observation that the admin is the substance is, in fee terms, the observation that the record is what the investor is paying for.</p>
+<div class="box say"><div class="lbl">Say this</div><p>"Pass-through means the desk's cost lands on the investor's statement, not in the firm's margin. So the desk has to prove itself twice: to the PMs, who are charged for it and owe it nothing, and to the investors, whose consultants read the expense list. The consumption report is how it does both. I like that; it means the service has to be real."</p></div>
+</div>
+
+<!-- ================= PART 4 ================= -->
+<div class="section" style="--pc:#5E548E"><span class="pm">@@p4@@</span>
+<div class="section-band"><div class="kicker">Part 4</div><h1>How the two mechanisms lock together, and where they break</h1><p class="lede">No house view and pass-through are not two features on a list. Each makes the other necessary, and together they form a loop that has run for thirty-six years. Loops can also run backwards. This part draws the loop and names the four ways it can fail.</p></div>
+
+<h2>4.1 The flywheel</h2>
+<div class="fig">
+<svg id="svg15" viewBox="0 0 1000 470" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg15 .t{font-size:9.8px;fill:#1F2933}#svg15 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg15 .s{font-size:8.8px;fill:#5B6B7C}#svg15 .w{fill:#fff;font-size:10.5px;font-weight:bold}#svg15 .ws{fill:#fff;font-size:9.2px}#svg15 .k{font-size:10.5px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">The flywheel: how no house view and pass-through feed each other</text>
+<defs><marker id="fw" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0B2545"/></marker></defs>
+<!-- six boxes in a loop -->
+<rect x="380" y="46" width="240" height="70" rx="8" fill="#1B998B"/><text x="392" y="66" class="w">1. NO HOUSE VIEW</text><text x="392" y="84" class="ws">350+ independent teams, information</text><text x="392" y="98" class="ws">barriers, no central book [S352][S351]</text>
+<rect x="700" y="130" width="280" height="70" rx="8" fill="#1B998B"/><text x="712" y="150" class="w">2. LOW CORRELATION, HARD LIMITS</text><text x="712" y="168" class="ws">Beta-neutral pods, cut at reported 5% and</text><text x="712" y="182" class="ws">7.5%; firm Sharpe grows (Figure 5) [S350][S104]</text>
+<rect x="700" y="280" width="280" height="70" rx="8" fill="#0B2545"/><text x="712" y="300" class="w">3. A SMOOTH NET RETURN</text><text x="712" y="318" class="ws">~14% a year, one losing year since 1989;</text><text x="712" y="332" class="ws">worst drawdown ~7% [S111][S378]</text>
+<rect x="380" y="370" width="240" height="70" rx="8" fill="#D97742"/><text x="392" y="390" class="w">4. INVESTORS ACCEPT THE TERMS</text><text x="392" y="408" class="ws">Pass-through, a floor, five-year locks;</text><text x="392" y="422" class="ws">$22bn oversubscribed [S87][S400]</text>
+<rect x="20" y="280" width="280" height="70" rx="8" fill="#D97742"/><text x="32" y="300" class="w">5. PASS-THROUGH FUNDS THE PLATFORM</text><text x="32" y="318" class="ws">Winning teams paid in flat years; a centre</text><text x="32" y="332" class="ws">of 54%, 1,800+ technologists [S392][S382]</text>
+<rect x="20" y="130" width="280" height="70" rx="8" fill="#13315C"/><text x="32" y="150" class="w">6. TALENT COMES, AND IS REPLACEABLE</text><text x="32" y="168" class="ws">160 PMs hired in a year; 32 external managers;</text><text x="32" y="182" class="ws">turnover 15 to 20% by design [S168][S355][S340]</text>
+<g stroke="#0B2545" stroke-width="2.5" fill="none" marker-end="url(#fw)">
+<path d="M620 90 Q700 90 740 130"/>
+<path d="M840 200 L840 280"/>
+<path d="M700 330 Q660 400 620 405"/>
+<path d="M380 405 Q340 400 300 340"/>
+<path d="M160 280 L160 200"/>
+<path d="M300 150 Q340 90 380 85"/>
+</g>
+<text x="440" y="240" class="k" text-anchor="middle">Each step needs the last:</text>
+<text x="440" y="256" class="t" text-anchor="middle">no house view needs many teams, which needs pass-through to pay them,</text>
+<text x="440" y="270" class="t" text-anchor="middle">which needs investors to accept the bill, which needs the smooth return,</text>
+<text x="440" y="284" class="t" text-anchor="middle">which needs low correlation, which needs no house view.</text>
+<text x="20" y="462" class="s">Numbers as tagged in Parts 2 and 3. The loop is the author's synthesis; each link rests on the cited mechanism.</text>
+</svg>
+<span class="pm">@@f15@@</span><div class="cap"><b>Figure 15.</b> The flywheel. Read it clockwise from the top. The reason "why Millennium" is hard to answer with adjectives is that the answer is a loop, and a loop has no first word.</div></div>
+<div class="box say"><div class="lbl">The one-breath version</div><p>"Independence gives you low correlation; low correlation gives you a smooth return; a smooth return lets you charge pass-through and lock capital; pass-through lets you pay hundreds of teams and run a centre bigger than the investment side; that centre is what makes independence workable at scale. It has run for thirty-six years."</p></div>
+
+<h2>4.2 Where it breaks: four failure modes</h2>
+<div class="fig">
+<svg id="svg16" viewBox="0 0 1000 360" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg16 .t{font-size:9.8px;fill:#1F2933}#svg16 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg16 .s{font-size:8.8px;fill:#5B6B7C}#svg16 .w{fill:#fff;font-size:10.5px;font-weight:bold}#svg16 .ws{fill:#fff;font-size:9.2px}#svg16 .k{font-size:10.5px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">Where the loop can run backwards: four failure modes, and the firm's visible answer to each</text>
+<rect x="20" y="46" width="470" height="140" rx="8" fill="#B23A48"/>
+<text x="32" y="66" class="w">1. CORRELATION SPIKES (breaks link 1 to 2)</text>
+<text x="32" y="86" class="ws">Independent teams crowd into the same trade; ρ rises; the diversification in Figure 5</text>
+<text x="32" y="100" class="ws">evaporates for a month. July 2026: -2.1% on the AI unwind [S223]. March 2025: the</text>
+<text x="32" y="114" class="ws">platforms lost together in the sell-off [S163].</text>
+<text x="32" y="140" class="ws">Answer: the factor cage, aggregate hedging, and pod-level stop-outs that keep any one</text>
+<text x="32" y="154" class="ws">month shallow [S350][S316]. The record so far: worst drawdown about 7% [S378].</text>
+<rect x="510" y="46" width="470" height="140" rx="8" fill="#D48F1F"/>
+<text x="522" y="66" class="w">2. FEE FATIGUE (breaks link 3 to 4)</text>
+<text x="522" y="86" class="ws">Investors keep less of each gross dollar (54c to 41c across the industry); pensions</text>
+<text x="522" y="100" class="ws">organise; rivals concede cash hurdles [S370][S371][S166]. A run of ordinary years</text>
+<text x="522" y="114" class="ws">would make the Figure 10 arithmetic bite.</text>
+<text x="522" y="140" class="ws">Answer so far: a floor rather than a cut, longer locks, and a 2026 raise with $30bn-plus</text>
+<text x="522" y="154" class="ws">of demand [S87][S499]. The answer only holds while the down years stay shallow.</text>
+<rect x="20" y="200" width="470" height="140" rx="8" fill="#5E548E"/>
+<text x="32" y="220" class="w">3. TALENT COST INFLATION (breaks link 5 to 6)</text>
+<text x="32" y="240" class="ws">Pass-through removes the budget ceiling on hiring, so the price of PMs rises until the</text>
+<text x="32" y="254" class="ws">investor's net suffers; the expense list grew 40% in seven years [S370]. Eisler wound down</text>
+<text x="32" y="268" class="ws">in 2025 with most of its loss in pass-through costs [S510]; Balyasny netted 2.8% of 15.2% [S372].</text>
+<text x="32" y="294" class="ws">Answer: sizing and cutting by rule, loss carry-forward so losers are not paid twice</text>
+<text x="32" y="308" class="ws">[S305], and the firm's own 18% stake, which makes it pay a fifth of the bill [S360].</text>
+<rect x="510" y="200" width="470" height="140" rx="8" fill="#0B2545"/>
+<text x="522" y="220" class="w">4. SCALE OUTRUNS THE CENTRE (breaks link 6 to 1)</text>
+<text x="522" y="240" class="ws">More teams than the centre can measure, limit and serve; independence becomes</text>
+<text x="522" y="254" class="ws">unmanaged rather than uncorrelated. Teams grew from 265 to 350-plus; capital nears</text>
+<text x="522" y="268" class="ws">$100bn; external managers and Jain Global join [S92][S71][S400][S407].</text>
+<text x="522" y="294" class="ws">Answer: the Office of the CIO, an enterprise-risk function that is "in some way a</text>
+<text x="522" y="308" class="ws">quant", and service desks that scale by process [S397][S351]. This is the one the</text>
+<text x="522" y="322" class="ws">desk you are joining works on every day.</text>
+<text x="20" y="354" class="s">Failure modes are the author's framing; each rests on the cited events and mechanisms. None has yet broken the loop; each has been visible.</text>
+</svg>
+<span class="pm">@@f16@@</span><div class="cap"><b>Figure 16.</b> Four failure modes. The honest counter-case, in the same frame as the flywheel. A candidate who can name these is more credible than one who only names the strengths.</div></div>
+
+<h2>4.3 Why the firm is structured like this, in one paragraph</h2>
+<p>Because the founder's insight in 1989 was that a firm could sell consistency rather than genius, and consistency at scale requires two things no single-manager fund can offer: many independent bets, and a way to pay for them that does not depend on the firm having a good year. The first is no house view; the second is pass-through. Everything else about the structure, the centre that is more than half the firm, the loss limits, the factor cage, the information barriers, the service desks, the five-year locks, the stake sale to long-time clients, follows from having chosen those two <span class="src">[S104][S351][S367][S400]</span>. The pods exist because independent bets need independent owners. The centre exists because 350 independent owners need one measurer, one financier, one compliance function, and one desk that can see all of their demand for company meetings and turn it into one voice to the market.</p>
+</div>
+
+<!-- ================= PART 5 ================= -->
+<div class="section" style="--pc:#B23A48"><span class="pm">@@p5@@</span>
+<div class="section-band"><div class="kicker">Part 5</div><h1>Saying it in the interview: the two claims, corrected, with the probes</h1><p class="lede">Your two claims, in three lengths each, then the probes a practitioner will add and the answers, then fifteen questions on the business model that could arrive in a "more technical" round.</p></div>
+
+<div class="fig">
+<svg id="svg17" viewBox="0 0 1000 430" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg17 .t{font-size:9.8px;fill:#1F2933}#svg17 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg17 .s{font-size:8.8px;fill:#5B6B7C}#svg17 .w{fill:#fff;font-size:10.5px;font-weight:bold}#svg17 .ws{fill:#fff;font-size:9.2px}#svg17 .k{font-size:10.5px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">Your two claims, corrected, on one page</text>
+<rect x="20" y="46" width="470" height="170" rx="8" fill="#8A96A3"/>
+<text x="32" y="66" class="w">CLAIM ONE, AS SAID</text>
+<text x="32" y="86" class="ws">"No house view: I'm not biased on one strategy or pod,</text><text x="32" y="100" class="ws">because all the pods are separate, and that's how they</text><text x="32" y="114" class="ws">make money."</text>
+<text x="32" y="140" class="ws">What is right: the centre picks no securities; the return</text><text x="32" y="154" class="ws">is the sum of independent bets; that is the money.</text>
+<text x="32" y="176" class="ws">What is missing: the strong house view on risk; the</text><text x="32" y="190" class="ws">costs; the fact that crowding still happens.</text>
+<rect x="510" y="46" width="470" height="170" rx="8" fill="#1B998B"/>
+<text x="522" y="66" class="w">CLAIM ONE, CORRECTED</text>
+<text x="522" y="86" class="ws">"No house view on what to buy; a very strong house view on how</text><text x="522" y="100" class="ws">much to risk. The centre allocates, limits and hedges; it never</text><text x="522" y="114" class="ws">picks. The return is the average of 350 independent bets, which is</text><text x="522" y="128" class="ws">why it barely moves with the market and has had one losing year</text><text x="522" y="142" class="ws">since 1989. The price is no idea flow and the odd crowded month,</text><text x="522" y="156" class="ws">like July. For a central desk it means being neutral between teams</text><text x="522" y="170" class="ws">and discreet across them, because the pods own their outcomes</text><text x="522" y="184" class="ws">and guard their information."</text>
+<text x="522" y="206" class="ws">Sources if pressed: [S352][S351][S104][S223][S343]</text>
+<rect x="20" y="236" width="470" height="180" rx="8" fill="#8A96A3"/>
+<text x="32" y="256" class="w">CLAIM TWO, AS SAID</text>
+<text x="32" y="276" class="ws">"Pass-through allows us to get the funding we need to</text><text x="32" y="290" class="ws">build proprietary systems, utilise AI, all of these things."</text>
+<text x="32" y="316" class="ws">What is right: pass-through is what funds a centre that is</text><text x="32" y="330" class="ws">more than half the firm, including its technology.</text>
+<text x="32" y="352" class="ws">What is missing: most of the dollar is people; the investor</text><text x="32" y="366" class="ws">pays it; 80% of platforms do it; the pushback; and the</text><text x="32" y="380" class="ws">accountability it creates for every central function.</text>
+<rect x="510" y="236" width="470" height="180" rx="8" fill="#D97742"/>
+<text x="522" y="256" class="w">CLAIM TWO, CORRECTED</text>
+<text x="522" y="276" class="ws">"Millennium bills its operating costs to the fund on top of a</text><text x="522" y="290" class="ws">performance fee, with a floor since 2023. That follows from no</text><text x="522" y="304" class="ws">house view: you have to pay a winning team in a year the firm is</text><text x="522" y="318" class="ws">flat. It funds a centre that is more than half the firm, the 1,800</text><text x="522" y="332" class="ws">technologists and the AI work; most of the dollar is talent, some is</text><text x="522" y="346" class="ws">systems. The investor pays it and keeps about half of gross, so the</text><text x="522" y="360" class="ws">model only holds while the down years stay shallow, and every</text><text x="522" y="374" class="ws">central cost, including a corporate access desk, has to show what it</text><text x="522" y="388" class="ws">delivered. I find that a healthy place to work."</text>
+<text x="522" y="408" class="ws">Sources if pressed: [S104][S87][S392][S382][S372][S366][S360]</text>
+</svg>
+<span class="pm">@@f17@@</span><div class="cap"><b>Figure 17.</b> The two claims, corrected. Left is what you said; right is what to say.</div></div>
+
+<h2>5.1 Claim one in three lengths</h2>
+<div class="box say"><div class="lbl">Ten seconds</div><p>"No house view on what to buy; a strong house view on how much to risk. That's why the return is smooth."</p></div>
+<div class="box say"><div class="lbl">Thirty seconds</div><p>"The centre doesn't pick stocks or hold a market view. Three hundred and fifty teams each run their own strategy behind information barriers, and the centre allocates capital, sets loss and exposure limits, and hedges the aggregate. So the firm's return is the average of hundreds of independent bets rather than one person's call, and that's what gives it one losing year since 1989. The cost is that teams don't share ideas and can still crowd into the same trade, which is what July showed."</p></div>
+<div class="box say"><div class="lbl">Ninety seconds, if they ask why it matters for the desk</div><p>"Two things follow for a corporate access desk. First, the desk has no view either: it can't favour a sector or a PM, so every allocation has to be by a rule the losing team could accept. Second, because each team owns its own outcomes and is paid on its own book, teams guard their positions and their meeting requests; the desk is the only place that sees all of them, so its discretion is the condition of its existence. The maths behind independence is that the firm's Sharpe rises with the number of teams only if they stay uncorrelated; a house view would raise the correlation for everyone. So the barrier between pods isn't a cultural preference, it's the mechanism, and the desk works inside it."</p></div>
+
+<h2>5.2 Claim two in three lengths</h2>
+<div class="box say"><div class="lbl">Ten seconds</div><p>"Pass-through funds the platform: most of it talent, some of it systems, all of it paid by the investor, which is why every central function has to earn its place."</p></div>
+<div class="box say"><div class="lbl">Thirty seconds</div><p>"Instead of a fixed management fee, the fund pays the firm's operating costs directly, on top of a performance fee, with a floor of about one per cent or twenty per cent of gains since 2023. That's what lets the firm pay a winning team in a flat year and run a centre that's more than half the firm, including eighteen hundred technologists and the AI work. The investor pays for it and keeps about half of gross by press estimates, so it only holds while the down years stay shallow."</p></div>
+<div class="box say"><div class="lbl">Ninety seconds, if they ask whether investors are right to push back</div><p>"They're right to watch it. Across the industry investors kept 41 cents of each gross dollar in 2023, down from 54 two years earlier, and the eligible-expense list has grown. Pensions have organised, one rival added a cash hurdle, another returned capital. Millennium's answer has been a floor rather than a cut and longer locks rather than shorter, and the $22bn raise still closed, so investors are voting for the shape of the return. The fair test is the allocator's one: does the net beat a classic fund in mediocre and bad years? So far it has, with one losing year of about three per cent. The alignment I'd point to isn't the fee itself but that the firm owns about a fifth of the fund, so it pays a fifth of its own bill. And for the desk it means the consumption report isn't admin; it's the evidence the investor is paying for."</p></div>
+
+<h2>5.3 The probes, and the answers</h2>
+<table>
+<tr><th style="width:30%">Probe</th><th>Answer</th></tr>
+<tr><td>"If there's no house view, what does the Office of the CIO do?"</td><td>"Allocation, risk oversight and strategy across the pods: how much capital goes where, and which strategies the firm wants more of. It's a view on the portfolio of teams, not on any security. That's the house view on risk, not on alpha <span class="src">[S397][S349d]</span>."</td></tr>
+<tr><td>"Isn't 'no house view' just a nicer name for no accountability at the top?"</td><td>"The accountability at the top is for the limits and the allocation, and it shows up in the drawdown: about 7% at worst on third-party data. Somebody is very accountable for that number. What nobody at the top is accountable for is a stock call, because nobody makes one <span class="src">[S378]</span>."</td></tr>
+<tr><td>"Citadel shares ideas and has had better returns. Doesn't that prove the opposite?"</td><td>"It proves both structures can work. Citadel buys research efficiency and accepts some correlation; Millennium buys the lowest correlation and accepts duplicated work. In 2025 and 2026 Citadel's return has led; over thirty-six years Millennium's consistency has. The honest answer is that they are different products for the same investors <span class="src">[S340][S126][S402]</span>."</td></tr>
+<tr><td>"Pass-through: aren't investors just paying for your losing pods?"</td><td>"Partly, yes; that's netting risk, which Albourne puts at about 1% a year, and it is the price of genuine diversification <span class="src">[S519]</span>. The firm's answers are hard loss limits that keep any losing pod small, loss carry-forward so a losing PM isn't paid until they've earned it back, and the firm's own 18% stake in the fund <span class="src">[S346][S305][S360]</span>."</td></tr>
+<tr><td>"What is Millennium's expense ratio?"</td><td>"Not public. Industry figures put multi-manager pass-through as high as 10% of assets, and the best estimate for Millennium is Net Interest's, that investors keep about half of gross. I wouldn't quote a number the firm hasn't published <span class="src">[S373][S104]</span>."</td></tr>
+<tr><td>"So does pass-through fund the corporate access desk?"</td><td>"Yes, as part of the firm's operating costs, which is the point: the desk is on the investor's bill, so it has to be able to show what it delivered. That's what the consumption report is for."</td></tr>
+<tr><td>"What would make you worry about the model?"</td><td>"A run of ordinary years, because that's when pass-through arithmetic favours the classic fund; correlation between teams rising as the firm scales; and the talent price inflating faster than net returns. Each has an answer today, and each is visible: July's crowding, the fee pushback, the expense-list growth <span class="src">[S223][S370][S366]</span>."</td></tr>
+</table>
+
+<h2>5.4 Fifteen business-model questions for a technical round</h2>
+<table>
+<tr><th style="width:30%">Question</th><th>Answer in two sentences</th></tr>
+<tr><td>1. What does a multi-manager platform sell?</td><td>Consistency: a return built from many independent, hedged bets, cut early when wrong. Investors buy the shape of the return, not its size.</td></tr>
+<tr><td>2. What is a pod?</td><td>One PM and a small team running one strategy on a slice of capital, paid a share of their own net P&L, under the centre's limits <span class="src">[S351]</span>. Over 350 at Millennium <span class="src">[S71]</span>.</td></tr>
+<tr><td>3. Why does the return barely move with the market?</td><td>Because each pod is required to be near market-neutral and the centre hedges what drifts; what remains is stock-specific skill <span class="src">[S350][S316]</span>.</td></tr>
+<tr><td>4. Why does the firm want so many pods?</td><td>Diversification: uncorrelated bets add up as the square root of their number. But only if they stay uncorrelated, which is why they are kept apart <span class="src">[S347]</span>.</td></tr>
+<tr><td>5. What are the loss limits?</td><td>Reported, never published: capital halved at a 5% loss, the pod closed at about 7.5% <span class="src">[S104][S113]</span>. Say "reported".</td></tr>
+<tr><td>6. What is netting risk?</td><td>Investors pay winning pods' payouts while losing pods offset the gains, so a flat year still costs money. It is the price of diversification and the reason limits are tight <span class="src">[S346]</span>.</td></tr>
+<tr><td>7. What is pass-through?</td><td>The fund pays the firm's operating costs directly and bills investors, on top of a performance fee, instead of a fixed management fee <span class="src">[S104]</span>. About 80% of multi-strategy firms use it <span class="src">[S372]</span>.</td></tr>
+<tr><td>8. What changed in Millennium's fees in 2023?</td><td>A floor: the greater of about 1% of assets or 20% of gains, so a fee is paid even in a losing year, recoverable against later performance fees <span class="src">[S87]</span>.</td></tr>
+<tr><td>9. How much does the investor keep?</td><td>Not disclosed by Millennium; Net Interest estimates about half of gross; industry data show 41 cents per gross dollar in 2023 <span class="src">[S104][S370]</span>.</td></tr>
+<tr><td>10. How is a PM paid?</td><td>A reported 15 to 22% of their own net P&L, after their team's costs, with losses carried forward before any further payout <span class="src">[S312][S305]</span>.</td></tr>
+<tr><td>11. How does the firm make money?</td><td>A reported 20% performance fee on the fund, and its own 18% ownership of the fund <span class="src">[S360]</span>. Its costs are mostly passed through.</td></tr>
+<tr><td>12. Why did the firm sell a stake in 2025?</td><td>15% for about $2bn at a $14bn valuation, to long-time clients and a Goldman vehicle: a succession and institutionalisation move, not a cash one <span class="src">[S82][S367]</span>.</td></tr>
+<tr><td>13. What did the 2026 raise show?</td><td>A $20bn target with more than $30bn of demand and a five-year share class; a syndicated Bloomberg report put the close at $22bn on 1 October <span class="src">[S499][S400]</span>. Investors accepting firmer terms for the record.</td></tr>
+<tr><td>14. Where does a corporate access desk sit in this?</td><td>In the centre, as a pass-through cost, serving pods that owe it nothing; it exists because 350 independent teams cannot pool their own demand, and it must prove its value in the consumption record.</td></tr>
+<tr><td>15. What is the biggest risk to the model?</td><td>Correlation rising as the firm scales, or a run of ordinary years making the fee bite. Both are visible and neither has broken the loop yet <span class="src">[S223][S366]</span>.</td></tr>
+</table>
+</div>
+
+<!-- ================= PART 6 ================= -->
+<div class="section" style="--pc:#8A96A3"><span class="pm">@@p6@@</span>
+<div class="section-band"><div class="kicker">Part 6</div><h1>Glossary</h1><p class="lede">Every term used above, in plain English, in the order you are likely to need it.</p></div>
+<div class="two">
+<div>
+<dl class="gloss">
+<dt>Hedge fund</dt><dd>A private fund for institutions and wealthy individuals that can bet on prices falling as well as rising and can borrow to enlarge its bets.</dd>
+<dt>Management fee</dt><dd>A fixed annual charge, a percentage of assets, paid whatever the result; the classic way a manager covers its costs.</dd>
+<dt>Performance fee</dt><dd>A share of profits, classically 20%.</dd>
+<dt>Two and twenty</dt><dd>The classic fee pair: 2% management, 20% performance. Averages are now lower.</dd>
+<dt>Pass-through</dt><dd>The fund pays the firm's operating costs directly and bills investors, on top of the performance fee.</dd>
+<dt>Expense ratio, NAV</dt><dd>A year's pass-through costs as a share of the fund's net asset value, what it is worth after everything is paid.</dd>
+<dt>Fee floor</dt><dd>A minimum charge paid even in a poor year; at Millennium, the greater of about 1% of assets or 20% of gains since 2023.</dd>
+<dt>Hurdle, cash hurdle</dt><dd>A return the fund must beat before the performance fee applies; a cash hurdle means beating the interest rate on cash.</dd>
+<dt>Gross return, net return</dt><dd>What the trading made before any charge; what the investor actually receives.</dd>
+<dt>Lock-up</dt><dd>A period during which an investor cannot take money out; five years on the 2026 raise. A callable commitment is money promised and drawn down over time.</dd>
+<dt>Portfolio manager (PM)</dt><dd>The person who decides what a book buys and sells.</dd>
+<dt>Pod, team, franchise</dt><dd>One PM and a few analysts running their own strategy on a slice of capital under the centre's limits, paid on their own results.</dd>
+</dl>
+</div>
+<div>
+<dl class="gloss">
+<dt>House view</dt><dd>A belief about markets held at the top of a firm and imposed on the books beneath it. Millennium has none on securities; it has a strong one on risk.</dd>
+<dt>The centre</dt><dd>Everyone who is not in a pod: risk, technology, treasury, compliance, operations, service desks. About 54% of Millennium's staff.</dd>
+<dt>Office of the CIO</dt><dd>Millennium's body, since 2022, overseeing allocation, risk and strategy across pods; not a source of market views.</dd>
+<dt>Alpha, beta</dt><dd>Return from skill; return from the market moving. Pods are paid for alpha and required to carry little beta.</dd>
+<dt>Correlation (ρ)</dt><dd>How much two return streams move together, from -1 to +1. The value of many pods depends on it being near zero.</dd>
+<dt>Sharpe ratio</dt><dd>Return above cash divided by its volatility; a third-party estimate for the flagship to 2022 was about 3.2.</dd>
+<dt>Drawdown</dt><dd>A fall from peak to trough. Reported pod limits: capital halved at 5%, closed at about 7.5%.</dd>
+<dt>Factor cage, beta-neutral</dt><dd>The centre's rules that stop a pod's return being a bet on the market or on a style such as value or momentum.</dd>
+<dt>Netting risk</dt><dd>Investors pay winning pods' payouts while losing pods offset the gains; a flat year still costs money.</dd>
+<dt>Loss carry-forward</dt><dd>A PM who loses must earn the loss back before being paid again; the reason "zombie" PMs exist.</dd>
+<dt>Payout</dt><dd>The PM's contractual share of their own net P&L, reported at 15 to 22%.</dd>
+<dt>Information barrier</dt><dd>A rule that stops information moving between pods. Crowding is what still happens when independent teams see the same evidence.</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="section" style="--pc:#0B2545"><span class="pm">@@p7@@</span>
+<div class="section-band"><div class="kicker">Part 7</div><h1>Sources</h1><p class="lede">Every [Sxx] marker above resolves here. IDs are shared with the Complete Interview Pack and the earlier guides. Sources accessed between 4 and 26 September 2026 as recorded in each row. "Fetched" means the full text was read; "Snippet" means only a search excerpt was seen; "Paywalled" means the headline was recorded and nothing was inferred from unread text.</p></div>
+<table class="src-table"><tr><th style="width:7%">ID</th><th style="width:12%">Outlet</th><th style="width:26%">Title</th><th style="width:8%">Date</th><th style="width:29%">URL</th><th style="width:8%">Status</th><th style="width:10%">Conf.</th></tr>
+<tr><td class="src">[S12]</td><td>ICR</td><td>Evolving Strategies for Corporate Access: Your 2025 Playbook (Christopher Melito)</td><td>2024-12-18</td><td><a href="https://icrinc.com/news-resources/strategies-for-corporate-access-2025/">https://icrinc.com/news-resources/strategies-for-corporate-access-2025/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S25]</td><td>Millennium (career.mlp.com)</td><td>Corporate Access — New York, REQ-29227 (job posting, JSON API)</td><td>live 2026-09-04</td><td><a href="https://career.mlp.com/careers/job/755956091198">https://career.mlp.com/careers/job/755956091198</a><br><a href="https://career.mlp.com/api/apply/v2/jobs/755956091198?domain=mlp.com">https://career.mlp.com/api/apply/v2/jobs/755956091198?domain=mlp.com</a></td><td>Fetched</td><td><span class="tag c">Primary</span></td></tr>
+<tr><td class="src">[S71]</td><td>Millennium (mlp.com)</td><td>Homepage</td><td>undated (live)</td><td><a href="https://www.mlp.com/">https://www.mlp.com/</a></td><td>Fetched</td><td><span class="tag c">Primary</span></td></tr>
+<tr><td class="src">[S76]</td><td>Millennium (mlp.com)</td><td>Leadership bios: Israel Englander; Ajay Nagpal; Martin Pabari; Justin Gmelich; Mark Meskin</td><td>undated (live)</td><td><a href="https://www.mlp.com/people/leadership/israel-englander/">https://www.mlp.com/people/leadership/israel-englander/</a></td><td>Fetched</td><td><span class="tag c">Primary</span></td></tr>
+<tr><td class="src">[S82]</td><td>Hedgeweek</td><td>Millennium sells $2bn minority stake to diversify ownership</td><td>4 Nov 2025</td><td><a href="https://www.hedgeweek.com/millennium-sells-2bn-minority-stake-to-diversify-ownership/">https://www.hedgeweek.com/millennium-sells-2bn-minority-stake-to-diversify-ownership/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S87]</td><td>Hedgeweek (citing Bloomberg)</td><td>Millennium to charge fees even if fund loses money</td><td>9 Mar 2023</td><td><a href="https://www.hedgeweek.com/millennium-charge-fees-even-if-fund-loses-money/">https://www.hedgeweek.com/millennium-charge-fees-even-if-fund-loses-money/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S92]</td><td>Wikipedia</td><td>Millennium Management; Israel Englander</td><td>live</td><td><a href="https://en.wikipedia.org/wiki/Millennium_Management">https://en.wikipedia.org/wiki/Millennium_Management</a><br><a href="https://en.wikipedia.org/wiki/Israel_Englander">https://en.wikipedia.org/wiki/Israel_Englander</a></td><td>Fetched</td><td><span class="tag i">Low</span></td></tr>
+<tr><td class="src">[S95]</td><td>Hedgeweek (citing Bloomberg)</td><td>Millennium to stick with $10bn fundraising cap despite seeing $20bn in investor interest; Millennium targeting up to $10bn in long-term capital</td><td>23 Oct 2024; 16 Sep 2024</td><td><a href="https://www.hedgeweek.com/millennium-to-stick-with-10bn-fundraising-cap-despite-seeing-20bn-in-investor-interest/">https://www.hedgeweek.com/millennium-to-stick-with-10bn-fundraising-cap-despite-seeing-20b...</a><br><a href="https://www.hedgeweek.com/millennium-targeting-up-to-10bn-in-long-term-capital/">https://www.hedgeweek.com/millennium-targeting-up-to-10bn-in-long-term-capital/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S96]</td><td>Hedgeweek (citing Bloomberg)</td><td>Millennium co-CIO Paul Russo to retire at year-end</td><td>1 Jul 2026</td><td><a href="https://www.hedgeweek.com/millennium-co-cio-paul-russo-to-retire-at-year-end/">https://www.hedgeweek.com/millennium-co-cio-paul-russo-to-retire-at-year-end/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S104]</td><td>Net Interest (Marc Rubinstein)</td><td>Peak Pod</td><td>15 Sep 2023</td><td><a href="https://www.netinterest.co/p/peak-pod">https://www.netinterest.co/p/peak-pod</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S111]</td><td>Wall Street Journal (Juliet Chung), PDF copy hosted by Duke University</td><td>Stalwart Hedge Funds to Test Clients With New Terms</td><td>31 Oct 2018</td><td><a href="https://public.econ.duke.edu/~boller/Econ.471-571.F18/Hedge_Fund_Terms_WSJ_103118.pdf">https://public.econ.duke.edu/~boller/Econ.471-571.F18/Hedge_Fund_Terms_WSJ_103118.pdf</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S113]</td><td>Business Insider via AOL</td><td>The strategy a $69 billion hedge fund uses to make sure it never loses money in the stock market</td><td>2 Oct 2024</td><td><a href="https://www.aol.com/strategy-69-billion-hedge-fund-193733084.html">https://www.aol.com/strategy-69-billion-hedge-fund-193733084.html</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S115]</td><td>Business Insider via AOL</td><td>Izzy Englander&#x27;s Millennium sells a minority stake that values the hedge fund giant at $14 billion</td><td>3 Nov 2025</td><td><a href="https://www.aol.com/articles/izzy-englanders-millennium-sells-minority-133001581.html">https://www.aol.com/articles/izzy-englanders-millennium-sells-minority-133001581.html</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S119]</td><td>A Letter a Day (Kevin Gee), reproducing Englander&#x27;s Nov 2009 Absolute </td><td>Letter #233: Izzy Englander (2009)</td><td>5 Nov 2024 (speech Nov 2</td><td><a href="https://aletteraday.substack.com/p/letter-233-izzy-englander-2009">https://aletteraday.substack.com/p/letter-233-izzy-englander-2009</a></td><td>Fetched</td><td><span class="tag c">Primary</span></td></tr>
+<tr><td class="src">[S126]</td><td>Business Insider via Yahoo Finance</td><td>Hedge funds&#x27; 2025 report card: How Citadel, Point72, and Millennium stack up against smaller rivals</td><td>6 Jan 2026</td><td><a href="https://finance.yahoo.com/news/2025-returns-hedge-funds-rolling-234728986.html">https://finance.yahoo.com/news/2025-returns-hedge-funds-rolling-234728986.html</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S151]</td><td>SEC Office of Investor Education and Advocacy</td><td>Investor Bulletin: Hedge Funds (PDF)</td><td>undated</td><td><a href="https://www.sec.gov/investor/alerts/ib_hedgefunds.pdf">https://www.sec.gov/investor/alerts/ib_hedgefunds.pdf</a></td><td>Fetched</td><td><span class="tag c">Primary</span></td></tr>
+<tr><td class="src">[S163]</td><td>Hedgeweek (citing Reuters/UBS)</td><td>Hedge fund winners and losers in March selloff</td><td>4 Apr 2025</td><td><a href="https://www.hedgeweek.com/hedge-fund-winners-and-losers-in-march-selloff/">https://www.hedgeweek.com/hedge-fund-winners-and-losers-in-march-selloff/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S165]</td><td>Hedgeweek (reporting CNBC/Bloomberg)</td><td>Citadel to return $5bn of profits to investors</td><td>24 Dec 2025</td><td><a href="https://www.hedgeweek.com/citadel-to-return-5bn-of-profits-to-investors/">https://www.hedgeweek.com/citadel-to-return-5bn-of-profits-to-investors/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S166]</td><td>Hedgeweek (reporting Business Insider)</td><td>ExodusPoint adopts cash hurdle</td><td>12 Sep 2024</td><td><a href="https://www.hedgeweek.com/exoduspoint-adopts-cash-hurdle/">https://www.hedgeweek.com/exoduspoint-adopts-cash-hurdle/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S168]</td><td>Business Insider via AOL</td><td>How hedge funds became a bright spot in a nasty job market</td><td>24 Feb 2026</td><td><a href="https://www.aol.com/articles/hedge-funds-became-bright-spot-090701777.html">https://www.aol.com/articles/hedge-funds-became-bright-spot-090701777.html</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S222]</td><td>Business Insider via Yahoo Finance UK (Bradley Saacks)</td><td>Hedge fund scorecard: the best-performing multistrat firms halfway through 2026</td><td>2026-07-01 (updated 07-0</td><td><a href="https://uk.finance.yahoo.com/news/hedge-fund-scorecard-best-performing-171802465.html">https://uk.finance.yahoo.com/news/hedge-fund-scorecard-best-performing-171802465.html</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S223]</td><td>Hedgeweek (citing Bloomberg)</td><td>Millennium slips 2.1% in July as AI sell-off weighs on multi-strat hedge funds</td><td>2026-08-04</td><td><a href="https://www.hedgeweek.com/millennium-slips-2-1-in-july-as-ai-sell-off-weighs-on-multi-strat-hedge-funds/">https://www.hedgeweek.com/millennium-slips-2-1-in-july-as-ai-sell-off-weighs-on-multi-stra...</a></td><td>Fetched</td><td><span class="tag u">Snippet</span></td></tr>
+<tr><td class="src">[S228]</td><td>Hedgeweek (citing Bloomberg)</td><td>Jain Global to return external capital and shift to exclusive Millennium mandate</td><td>2026-04-27</td><td><a href="https://www.hedgeweek.com/jain-global-to-return-external-capital-and-shift-to-exclusive-millennium-mandate4/">https://www.hedgeweek.com/jain-global-to-return-external-capital-and-shift-to-exclusive-mi...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S305]</td><td>eFinancialCareers (Sarah Butcher)</td><td>Hedge fund Millennium spells out why zombie portfolio managers exist</td><td>30 Sep 2024</td><td><a href="https://www.efinancialcareers.com/news/millennium-hedge-fund-jobs">https://www.efinancialcareers.com/news/millennium-hedge-fund-jobs</a></td><td>Fetched</td><td><span class="tag c">Primary</span></td></tr>
+<tr><td class="src">[S311]</td><td>hedgefundinterview.com</td><td>Pod Shop Risk Limits: Drawdown Stop-Outs Explained</td><td>2026</td><td><a href="https://hedgefundinterview.com/pod-shop-risk-limits">https://hedgefundinterview.com/pod-shop-risk-limits</a></td><td>Fetched</td><td><span class="tag i">Low</span></td></tr>
+<tr><td class="src">[S312]</td><td>hedgefundinterview.com</td><td>Multi-Manager Hedge Funds: How the Pod Model Works</td><td>30 May 2026</td><td><a href="https://hedgefundinterview.com/multi-manager-hedge-funds">https://hedgefundinterview.com/multi-manager-hedge-funds</a></td><td>Fetched</td><td><span class="tag i">Low</span></td></tr>
+<tr><td class="src">[S316]</td><td>Flirting with Models podcast (Corey Hoffstein) with Giuseppe Paleologo</td><td>Multi-Manager Hedge Funds &amp; Thinking Deeply About Simple Things (S7E11)</td><td>2024</td><td><a href="https://videohighlight.com/v/yxqTervPZe8">https://videohighlight.com/v/yxqTervPZe8</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S326]</td><td>Millennium (mlp.com)</td><td>Q&amp;A with Vlad Torgovnik: Millennium&#x27;s AI Lab</td><td>2026</td><td><a href="https://www.mlp.com/life-at-millennium/qa-with-vlad-torgovnik-millenniums-ai-lab/">https://www.mlp.com/life-at-millennium/qa-with-vlad-torgovnik-millenniums-ai-lab/</a></td><td>Fetched</td><td><span class="tag c">Primary</span></td></tr>
+<tr><td class="src">[S340]</td><td>Net Interest (Marc Rubinstein)</td><td>Peak Pod</td><td>2023-09-15</td><td><a href="https://www.netinterest.co/p/peak-pod">https://www.netinterest.co/p/peak-pod</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S342]</td><td>Rupak Ghose Substack</td><td>Peak pod shop and Balyasny blues</td><td>2026 (spring; exact date</td><td><a href="https://rupakghose.substack.com/p/peak-pod-shop-and-balyasny-blues">https://rupakghose.substack.com/p/peak-pod-shop-and-balyasny-blues</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S343]</td><td>Rupak Ghose Substack</td><td>Jain and the House of Millennium</td><td>2026-04-30</td><td><a href="https://rupakghose.substack.com/p/jain-and-the-house-of-millennium">https://rupakghose.substack.com/p/jain-and-the-house-of-millennium</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S344]</td><td>Institutional Investor</td><td>Hedge Funds Have a Reputation for Ruthlessness. Dmitry Balyasny Took a Different Approach.</td><td>2025-09-16</td><td><a href="https://www.institutionalinvestor.com/article/hedge-funds-have-reputation-ruthlessness-dmitry-balyasny-took-different-approach">https://www.institutionalinvestor.com/article/hedge-funds-have-reputation-ruthlessness-dmi...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S346]</td><td>Moontower (Kris Abdelmessih)</td><td>Netting risk, &quot;The Hopeless&quot;, John Arnold and more</td><td>2025-06-19</td><td><a href="https://moontowermeta.com/netting-risk-the-hopeless-john-arnold-and-more/">https://moontowermeta.com/netting-risk-the-hopeless-john-arnold-and-more/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S347]</td><td>Market Updates Substack (Eli Nickoll)</td><td>The Correlation Trade: Hidden Incentives in Multi-Manager Hedge Funds?</td><td>2025-04-15</td><td><a href="https://marketupdates.substack.com/p/the-correlation-trade-hidden-incentives">https://marketupdates.substack.com/p/the-correlation-trade-hidden-incentives</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S349d]</td><td>HedgeCo.Net</td><td>Millennium Doubles Down in High-Profile Talent War: Talent as Infrastructure</td><td>2026-03-25</td><td><a href="https://www.hedgeco.net/news/03/2026/millenniums-high-profile-talent-raida-hedgeco-net-special-report.html">https://www.hedgeco.net/news/03/2026/millenniums-high-profile-talent-raida-hedgeco-net-spe...</a></td><td>Fetched</td><td><span class="tag i">Low</span></td></tr>
+<tr><td class="src">[S350]</td><td>Capital Gains / The Diff (Byrne Hobart)</td><td>Multi-Manager/Pod/Hedge Fund 101</td><td>2023-02-01</td><td><a href="https://capitalgains.thediff.co/p/multimanagerpodhedge-fund-101">https://capitalgains.thediff.co/p/multimanagerpodhedge-fund-101</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S351]</td><td>iHeart / Bloomberg Odd Lots</td><td>Giuseppe Paleologo on Quant Investing at Multi-Strat Hedge Funds</td><td>2025-06-21</td><td><a href="https://www.iheart.com/podcast/1308-odd-lots-30972803/episode/giuseppe-paleologo-on-quant-investing-at-282234388/">https://www.iheart.com/podcast/1308-odd-lots-30972803/episode/giuseppe-paleologo-on-quant-...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S352]</td><td>Millennium (mlp.com)</td><td>Approach and Strategies at Millennium (also fetched: /investment-professionals/)</td><td>undated (fetched 2026-09</td><td><a href="https://www.mlp.com/approach/">https://www.mlp.com/approach/</a></td><td>Fetched</td><td><span class="tag c">Primary</span></td></tr>
+<tr><td class="src">[S355]</td><td>With Intelligence</td><td>Multi-Strategy External Allocations 2026</td><td>2026-06-17</td><td><a href="https://www.withintelligence.com/insights/multi-strategy-external-allocations-2026/">https://www.withintelligence.com/insights/multi-strategy-external-allocations-2026/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S357a]</td><td>Point72 (point72.com)</td><td>Home page (also fetched: /what-we-do/)</td><td>fetched 2026-09-05; AUM </td><td><a href="https://point72.com/">https://point72.com/</a></td><td>Fetched</td><td><span class="tag c">Primary</span></td></tr>
+<tr><td class="src">[S357d]</td><td>Brevan Howard (brevanhoward.com)</td><td>About Us</td><td>fetched 2026-09-05</td><td><a href="https://www.brevanhoward.com/about-us/">https://www.brevanhoward.com/about-us/</a></td><td>Fetched</td><td><span class="tag c">Primary</span></td></tr>
+<tr><td class="src">[S360]</td><td>SEC IAPD (adviserinfo.sec.gov)</td><td>Form ADV, Millennium Management LLC, CRD 158117 — Other-Than-Annual Amendment (signed Martin Schwartz, CCO), Schedule D Section 7.B.(1) and Item 5</td><td>25 Aug 2026</td><td><a href="https://adviserinfo.sec.gov/firm/summary/158117">https://adviserinfo.sec.gov/firm/summary/158117</a></td><td>Fetched</td><td><span class="tag c">Primary</span></td></tr>
+<tr><td class="src">[S366]</td><td>Resonanz Capital (insights)</td><td>The Multi-Manager Pass-Through Audit: How to Underwrite the Real Fee Load</td><td>9 Mar 2026</td><td><a href="https://resonanzcapital.com/insights/the-multi-manager-pass-through-audit-how-to-underwrite-the-real-fee-load">https://resonanzcapital.com/insights/the-multi-manager-pass-through-audit-how-to-underwrit...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S367]</td><td>Yahoo Finance (syndicating Business Insider, Bradley Saacks)</td><td>Izzy Englander&#x27;s Millennium sells a minority stake that values the hedge fund giant at $14 billion</td><td>3 Nov 2025</td><td><a href="https://finance.yahoo.com/news/izzy-englanders-millennium-sells-minority-213001941.html">https://finance.yahoo.com/news/izzy-englanders-millennium-sells-minority-213001941.html</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S370]</td><td>Hedgeweek (citing Bloomberg / BNP Paribas data)</td><td>Investors push back on multi-strategy hedge fund fee structures</td><td>22 Aug 2025</td><td><a href="https://www.hedgeweek.com/investors-push-back-on-multi-strategy-hedge-fund-fee-structures/">https://www.hedgeweek.com/investors-push-back-on-multi-strategy-hedge-fund-fee-structures/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S371]</td><td>Financial Advisor magazine (republishing Bloomberg News)</td><td>Frustrated Hedge Fund Investors Push Back On Sky-High Fees</td><td>20 Aug 2025</td><td><a href="https://www.fa-mag.com/news/frustrated-hedge-fund-investors-push-back-on-sky-high-fees-83734.html">https://www.fa-mag.com/news/frustrated-hedge-fund-investors-push-back-on-sky-high-fees-837...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S372]</td><td>Hedgeweek (citing Bloomberg analysis of fund filings)</td><td>Hedge funds charging billions in &#x27;no limit&#x27; passthrough fees</td><td>12 Feb 2025</td><td><a href="https://www.hedgeweek.com/hedge-funds-charging-billions-in-no-limit-passthrough-fees/">https://www.hedgeweek.com/hedge-funds-charging-billions-in-no-limit-passthrough-fees/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S373]</td><td>Hedgeweek (citing FT report on Goldman Sachs prime brokerage data)</td><td>Multi-manager hedge funds see outflows as investor interest wanes, says Goldman</td><td>10 Sep 2024</td><td><a href="https://www.hedgeweek.com/multi-manager-hedge-funds-see-outflows-as-investor-interest-wanes-says-goldman/">https://www.hedgeweek.com/multi-manager-hedge-funds-see-outflows-as-investor-interest-wane...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S376]</td><td>eFinancialCareers</td><td>Hedge fund Millennium&#x27;s hiring revealed in investor letter</td><td>13 May 2022</td><td><a href="https://www.efinancialcareers.com/news/2022/05/millennium-hedge-fund-jobs">https://www.efinancialcareers.com/news/2022/05/millennium-hedge-fund-jobs</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S378]</td><td>ABC Quant (hedge fund database report)</td><td>Millennium International, Ltd. — Drawdown Analysis / Risk-Return Statistics</td><td>undated (data to c. Nov </td><td><a href="https://www.abcquant.com/reports/Millennium_hedge_fund.pdf">https://www.abcquant.com/reports/Millennium_hedge_fund.pdf</a></td><td>Fetched</td><td><span class="tag i">Low</span></td></tr>
+<tr><td class="src">[S379]</td><td>Aurum Fund Management</td><td>Edge with hedge: primer for equity long/short funds (PDF)</td><td>30 Sep 2025</td><td><a href="https://www.aurum.com/wp-content/uploads/250930-Equity-long-short-funds-primer.pdf">https://www.aurum.com/wp-content/uploads/250930-Equity-long-short-funds-primer.pdf</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S382]</td><td>Millennium (mlp.com)</td><td>Homepage; Approach; People/Core Infrastructure; People/Technology; Global Presence</td><td>undated (live)</td><td><a href="https://www.mlp.com/">https://www.mlp.com/</a><br><a href="https://www.mlp.com/approach/">https://www.mlp.com/approach/</a></td><td>Fetched</td><td><span class="tag c">Primary</span></td></tr>
+<tr><td class="src">[S386]</td><td>Millennium (mlp.com); The TRADE; Bloomberg via Yahoo Finance</td><td>Millennium and Anthropic to Co-Develop AI-Powered Digital Risk Analyst; Millennium rolls out AI-powered digital risk analyst; Millennium Partners With Anthropic</td><td>Aug 2026; 7 Aug 2026; 6 </td><td><a href="https://www.mlp.com/life-at-millennium/millennium-and-anthropic-to-co-develop-ai-powered-digital-risk-analyst/">https://www.mlp.com/life-at-millennium/millennium-and-anthropic-to-co-develop-ai-powered-d...</a><br><a href="https://www.thetradenews.com/millennium-rolls-out-ai-powered-digital-risk-analyst/">https://www.thetradenews.com/millennium-rolls-out-ai-powered-digital-risk-analyst/</a></td><td>Fetched</td><td><span class="tag c">Primary</span></td></tr>
+<tr><td class="src">[S392]</td><td>SEC IAPD</td><td>Form ADV Part 1A, Millennium Management LLC (CRD 158117, SEC 801-73884), other-than-annual amendment: Item 1.F (81 offices), Item 5.A/B (6,670 / 3,055), Item 5.</td><td>25 Aug 2026</td><td><a href="https://adviserinfo.sec.gov/firm/summary/158117">https://adviserinfo.sec.gov/firm/summary/158117</a></td><td>Fetched</td><td><span class="tag c">Primary</span></td></tr>
+<tr><td class="src">[S394]</td><td>eFinancialCareers</td><td>The top 10 technologists at Millennium in Miami (17 Apr 2023); Hedge fund Millennium hired the man who once ran HR tech for Goldman (24 Feb 2023); Major hedge f</td><td>2022–2023</td><td><a href="https://www.efinancialcareers.com/news/2023/04/millennium-miami-technology">https://www.efinancialcareers.com/news/2023/04/millennium-miami-technology</a><br><a href="https://www.efinancialcareers.com/news/2023/02/millennium-hedge-fund-people-analytics">https://www.efinancialcareers.com/news/2023/02/millennium-hedge-fund-people-analytics</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S397]</td><td>Private Banker International; MFA (Managed Funds Association)</td><td>Millennium Management co-CIO to step down amid reshuffle (9 Nov 2022); MFA Legal &amp; Compliance London 2023 agenda (speaker: Stephanie Shepard Cobb, Head of Compl</td><td>9 Nov 2022; 8 Nov 2023</td><td><a href="https://www.privatebankerinternational.com/news/millennium-management-co-cio-reshuffle/">https://www.privatebankerinternational.com/news/millennium-management-co-cio-reshuffle/</a><br><a href="https://www.mfaalts.org/event/mfa-legal-compliance-london-2023/agenda/">https://www.mfaalts.org/event/mfa-legal-compliance-london-2023/agenda/</a></td><td>Fetched</td><td><span class="tag c">Primary</span></td></tr>
+<tr><td class="src">[S400]</td><td>Bloomberg via Yahoo Finance</td><td>Millennium Nears $100 Billion in New Era for Giant Hedge Funds (Parmar, Burton)</td><td>2026-09-07</td><td><a href="https://finance.yahoo.com/markets/stocks/articles/millennium-nears-100-billion-era-210034426.html">https://finance.yahoo.com/markets/stocks/articles/millennium-nears-100-billion-era-2100344...</a></td><td>Fetched</td><td><span class="tag u">Snippet</span></td></tr>
+<tr><td class="src">[S402]</td><td>Hedgeweek</td><td>Citadel, Millennium and peers post muted August returns</td><td>2026-09-04</td><td><a href="https://www.hedgeweek.com/citadel-millennium-and-peers-post-muted-august-returns/">https://www.hedgeweek.com/citadel-millennium-and-peers-post-muted-august-returns/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S407]</td><td>Hedgeweek (citing Bloomberg)</td><td>Jain Global made $1.8bn before switching to Millennium capital</td><td>2026-09-02</td><td><a href="https://www.hedgeweek.com/jain-global-made-1-8bn-before-switching-to-millennium-capital/">https://www.hedgeweek.com/jain-global-made-1-8bn-before-switching-to-millennium-capital/</a></td><td>Fetched</td><td><span class="tag u">Snippet</span></td></tr>
+<tr><td class="src">[S410]</td><td>Hedgeweek</td><td>Citadel taps Elliott veteran to lead combined international equities business</td><td>2026-09-14</td><td><a href="https://www.hedgeweek.com/citadel-taps-elliott-veteran-to-lead-combined-international-equities-business/">https://www.hedgeweek.com/citadel-taps-elliott-veteran-to-lead-combined-international-equi...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S491]</td><td>hedgefundinterview.com</td><td>Pod Shop Compensation 2026: How Multi-Manager Pay Works</td><td>updated 17 Sep 2026</td><td><a href="https://hedgefundinterview.com/pod-shop-compensation">https://hedgefundinterview.com/pod-shop-compensation</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S493]</td><td>Hedgeweek</td><td>ExodusPoint adopts cash hurdle</td><td>12 Sep 2024</td><td><a href="https://www.hedgeweek.com/exoduspoint-adopts-cash-hurdle/">https://www.hedgeweek.com/exoduspoint-adopts-cash-hurdle/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S494]</td><td>eFinancialCareers</td><td>Morning Coffee: Goldman Sachs says multistrategy hedge funds are on the wane...</td><td>10 Sep 2024</td><td><a href="https://www.efinancialcareers.com/news/goldman-sachs-multistrategy-hedge-funds">https://www.efinancialcareers.com/news/goldman-sachs-multistrategy-hedge-funds</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S495]</td><td>Moontower (Kris Abdelmessih)</td><td>Netting risk, &quot;The Hopeless&quot;, John Arnold and more</td><td>19 Jun 2025</td><td><a href="https://moontowermeta.com/netting-risk-the-hopeless-john-arnold-and-more/">https://moontowermeta.com/netting-risk-the-hopeless-john-arnold-and-more/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S496]</td><td>The Hedge Fund Journal</td><td>A New Generation Pod Shop (Nickel Digital)</td><td>21 Apr 2026</td><td><a href="https://thehedgefundjournal.com/nickel-digital-multi-manager-strategy-pod-shop/">https://thehedgefundjournal.com/nickel-digital-multi-manager-strategy-pod-shop/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S498]</td><td>Hedgeweek (citing Bloomberg)</td><td>Millennium eyes record $20bn capital raise</td><td>30 Jul 2026</td><td><a href="https://www.hedgeweek.com/millennium-eyes-record-20bn-capital-raise/">https://www.hedgeweek.com/millennium-eyes-record-20bn-capital-raise/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S499]</td><td>Caproasia (citing Bloomberg)</td><td>...$20 Billion Target New Capital Raise Received Over $30 Billion Demand</td><td>26 Sep 2026</td><td><a href="https://www.caproasia.com/2026/09/26/united-states-97-billion-hedge-fund-millennium-management-20-billion-target-new-capital-raise-received-over-30-billion-demand/">https://www.caproasia.com/2026/09/26/united-states-97-billion-hedge-fund-millennium-manage...</a></td><td>Fetched</td><td><span class="tag u">Snippet</span></td></tr>
+<tr><td class="src">[S501]</td><td>Institutional Investor</td><td>Hedge Funds Have a Reputation for Ruthlessness. Dmitry Balyasny Took a Different Approach.</td><td>16 Sep 2025</td><td><a href="https://www.institutionalinvestor.com/article/hedge-funds-have-reputation-ruthlessness-dmitry-balyasny-took-different-approach">https://www.institutionalinvestor.com/article/hedge-funds-have-reputation-ruthlessness-dmi...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S503]</td><td>Market Updates (Substack)</td><td>The Correlation Trade: Hidden Incentives in Multi-Manager Hedge Funds?</td><td>15 Apr 2025</td><td><a href="https://marketupdates.substack.com/p/the-correlation-trade-hidden-incentives">https://marketupdates.substack.com/p/the-correlation-trade-hidden-incentives</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S505]</td><td>Hedgeweek (citing Reuters on a Barclays note)</td><td>Multi-manager returns come at a cost, says Barclays</td><td>9 Feb 2023</td><td><a href="https://www.hedgeweek.com/multi-manager-returns-come-cost-says-barclays/">https://www.hedgeweek.com/multi-manager-returns-come-cost-says-barclays/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S506]</td><td>MFA (Managed Funds Association)</td><td>Barclays Hedge Fund Analysis Finds that Pass-Through Expense Funds Outperform</td><td>31 Jul 2022</td><td><a href="https://www.mfaalts.org/industry-research/barclays-hedge-fund-analysis-finds-that-pass-through-expense-funds-outperform/">https://www.mfaalts.org/industry-research/barclays-hedge-fund-analysis-finds-that-pass-thr...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S508]</td><td>eFinancialCareers</td><td>Hedge fund Millennium spells out why zombie portfolio managers exist</td><td>30 Sep 2024</td><td><a href="https://www.efinancialcareers.com/news/millennium-hedge-fund-jobs">https://www.efinancialcareers.com/news/millennium-hedge-fund-jobs</a></td><td>Fetched</td><td><span class="tag c">Primary</span></td></tr>
+<tr><td class="src">[S509]</td><td>Hedgeweek</td><td>Multi-manager hedge funds escalate talent war &#x27;arms race&#x27; with nine-figure pay packages</td><td>17 Jun 2025</td><td><a href="https://www.hedgeweek.com/multi-manager-hedge-funds-escalate-talent-war-arms-race-with-nine-figure-pay-packages/">https://www.hedgeweek.com/multi-manager-hedge-funds-escalate-talent-war-arms-race-with-nin...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S510]</td><td>Investing.com (Reuters, Nell Mackenzie)</td><td>Analysis: Soaring fund manager pay cost Eisler Capital dear</td><td>13 Oct 2025</td><td><a href="https://www.investing.com/news/stock-market-news/soaring-fund-manager-pay-cost-eisler-capital-dear-4284410">https://www.investing.com/news/stock-market-news/soaring-fund-manager-pay-cost-eisler-capi...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S511]</td><td>Yahoo Finance UK (Business Insider)</td><td>Hedge fund scorecard: The best-performing multistrat firms halfway through 2026</td><td>9 Jul 2026</td><td><a href="https://uk.finance.yahoo.com/news/hedge-fund-scorecard-best-performing-171802465.html">https://uk.finance.yahoo.com/news/hedge-fund-scorecard-best-performing-171802465.html</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S512]</td><td>Private Banker International</td><td>Jain Global to return investor cash and run money only for Millennium</td><td>28 Apr 2026</td><td><a href="https://www.privatebankerinternational.com/news/jain-global-return-investor-cash/">https://www.privatebankerinternational.com/news/jain-global-return-investor-cash/</a></td><td>Fetched</td><td><span class="tag u">Snippet</span></td></tr>
+<tr><td class="src">[S516]</td><td>Rupak Ghose (Substack)</td><td>Citadel is from Mars and Millennium is from Venus – Part II</td><td>13 Jul 2026</td><td><a href="https://rupakghose.substack.com/p/citadel-is-from-mars-and-millennium-ef6">https://rupakghose.substack.com/p/citadel-is-from-mars-and-millennium-ef6</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S518]</td><td>CV5 Capital</td><td>Hedge Fund Pass-Through Fees: The 2026 Debate</td><td>Jul 2026</td><td><a href="https://www.cv5capital.io/insights/hedge-fund-pass-through-fees-debate">https://www.cv5capital.io/insights/hedge-fund-pass-through-fees-debate</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S519]</td><td>Albourne (news page on Bloomberg Odd Lots appearance)</td><td>Albourne Features in Bloomberg&#x27;s Odd Lots Podcast</td><td>29 May 2025</td><td><a href="https://www-us.albourne.com/albourne/individualnews/7514181">https://www-us.albourne.com/albourne/individualnews/7514181</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S520]</td><td>Resonanz Capital</td><td>How to Fine Tune Your Multi-Manager Hedge Fund</td><td>29 Sep 2025</td><td><a href="https://resonanzcapital.com/insights/how-to-fine-tune-your-multi-manager-hedge-fund">https://resonanzcapital.com/insights/how-to-fine-tune-your-multi-manager-hedge-fund</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S521]</td><td>Hedgeweek</td><td>Brevan Howard to launch new &quot;pass through&quot; fee share class for main strategy</td><td>27 Oct 2022</td><td><a href="https://www.hedgeweek.com/brevan-howard-launch-new-pass-through-fee-share-class-main-strategy/">https://www.hedgeweek.com/brevan-howard-launch-new-pass-through-fee-share-class-main-strat...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S522]</td><td>Hedgeweek</td><td>Brevan Howard adjusts fee structure to secure long-term capital commitments</td><td>3 Apr 2025</td><td><a href="https://www.hedgeweek.com/brevan-howard-adjusts-fee-structure-to-secure-long-term-capital-commitments/">https://www.hedgeweek.com/brevan-howard-adjusts-fee-structure-to-secure-long-term-capital-...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S524]</td><td>Hedgeweek</td><td>Point72 to return $5bn after strong 2024 gains</td><td>13 Jan 2025</td><td><a href="https://www.hedgeweek.com/point72-to-return-5bn-after-strong-2024-gains/">https://www.hedgeweek.com/point72-to-return-5bn-after-strong-2024-gains/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S525]</td><td>AOL (Business Insider)</td><td>Hedge fund scorecard: Citadel soars, while Millennium, Point72, and Asia funds slip in a chaotic July</td><td>5 Aug 2026</td><td><a href="https://www.aol.com/articles/hedge-fund-score-card-millennium-130835000.html">https://www.aol.com/articles/hedge-fund-score-card-millennium-130835000.html</a></td><td>Fetched</td><td><span class="tag u">Snippet</span></td></tr>
+<tr><td class="src">[S526]</td><td>Hedgeweek (citing Bloomberg)</td><td>Millennium targeting up to $10bn in long-term capital</td><td>16 Sep 2024</td><td><a href="https://www.hedgeweek.com/millennium-targeting-up-to-10bn-in-long-term-capital/">https://www.hedgeweek.com/millennium-targeting-up-to-10bn-in-long-term-capital/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S527]</td><td>Rupak Ghose (Substack)</td><td>Jain and the House of Millennium</td><td>30 Apr 2026</td><td><a href="https://rupakghose.substack.com/p/jain-and-the-house-of-millennium">https://rupakghose.substack.com/p/jain-and-the-house-of-millennium</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S528]</td><td>SmartAsset</td><td>Millennium Management Review (summary of Form ADV Part 2A)</td><td>updated 28 May 2025</td><td><a href="https://smartasset.com/financial-advisor/millennium-management-review">https://smartasset.com/financial-advisor/millennium-management-review</a></td><td>Fetched</td><td><span class="tag c">Primary</span></td></tr>
+<tr><td class="src">[S529]</td><td>SEC Form ADV Part 1, Millennium Management LLC (CRD 158117), Item 5.E</td><td>local file adv_raw.txt (downloaded 2026-09-04 from adviserinfo.sec.gov)</td><td>current filing</td><td><a href="https://adviserinfo.sec.gov/firm/summary/158117">https://adviserinfo.sec.gov/firm/summary/158117</a></td><td>Fetched</td><td><span class="tag c">Primary</span></td></tr>
+</table></div>
+</body></html>
