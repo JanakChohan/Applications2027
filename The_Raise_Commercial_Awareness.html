@@ -1,0 +1,766 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>The Raise: a commercial awareness guide</title>
+<style>
+:root{
+  --navy:#0B2545; --navy2:#13315C; --ink:#1F2933; --muted:#5B6B7C; --line:#D5DCE5;
+  --paper:#FFFFFF; --wash:#F3F6FA; --wash2:#E9EEF5;
+  --warm:#D97742; --warm-l:#FBEEE6;
+  --teal:#1B998B; --teal-l:#E3F4F1;
+  --amber:#E9B949; --amber-l:#FCF5E0;
+  --red:#B23A48; --red-l:#F8E4E7;
+  --grey:#8A96A3; --grey-l:#EFF2F5;
+  --p0:#0B2545; --p1:#1B998B; --p2:#D97742; --p3:#5E548E; --p4:#2E6F95; --p5:#9C6644; --p6:#B23A48; --p7:#E9B949; --p8:#3A7D44; --p9:#6C757D; --p10:#0B2545; --p11:#0B2545; --p12:#0B2545;
+}
+@page { size: A4; margin: 20mm 16mm 18mm 16mm; }
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;color:var(--ink);font-size:10.4pt;line-height:1.45;background:var(--paper)}
+h1,h2,h3,h4{font-family:Georgia,"Times New Roman",serif;color:var(--navy);margin:0 0 6pt 0;line-height:1.2;font-weight:normal}
+h1{font-size:26pt;margin-bottom:10pt}
+h2{font-size:16pt;margin-top:16pt;padding-bottom:4pt;border-bottom:2px solid var(--line);break-after:avoid}
+h3{font-size:12.5pt;margin-top:12pt;break-after:avoid}
+h4{font-size:10.8pt;margin-top:9pt;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:bold;color:var(--navy2);break-after:avoid}
+p{margin:0 0 6pt 0}
+ul,ol{margin:0 0 6pt 0;padding-left:18pt}
+li{margin-bottom:2.5pt}
+strong{color:var(--navy)}
+a{color:var(--navy2);text-decoration:none}
+small,.small{font-size:8.5pt;color:var(--muted)}
+.muted{color:var(--muted)}
+.section{break-before:page}
+.section-band{background:var(--pc,var(--navy));color:#fff;padding:14pt 16pt;margin:0 0 12pt 0;border-radius:4pt}
+.section-band .kicker{font-size:9pt;letter-spacing:2px;text-transform:uppercase;opacity:.85}
+.section-band h1{color:#fff;margin:2pt 0 4pt 0;font-size:22pt}
+.section-band .lede{font-size:10.5pt;opacity:.95;margin:0}
+.tag{display:inline-block;font-size:7.5pt;font-weight:bold;letter-spacing:.5px;padding:1pt 5pt;border-radius:3pt;vertical-align:middle;font-family:Helvetica,Arial,sans-serif}
+.tag.c{background:#DDF1EC;color:#0E6B5F}
+.tag.r{background:#E4ECF7;color:#1F4E8C}
+.tag.i{background:#FCEBD9;color:#8A4B12}
+.tag.u{background:#EDEFF2;color:#5B6B7C}
+.src{font-size:7.8pt;color:var(--navy2);font-family:Helvetica,Arial,sans-serif;font-weight:bold}
+.box{border-left:4pt solid var(--navy);background:var(--wash);padding:7pt 10pt;margin:8pt 0;border-radius:0 4pt 4pt 0;break-inside:avoid}
+.box .lbl{font-family:Helvetica,Arial,sans-serif;font-size:7.8pt;font-weight:bold;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:2pt}
+.box p:last-child,.box ul:last-child{margin-bottom:0}
+.box.term{border-color:var(--navy);background:var(--wash)}
+.box.term .lbl{color:var(--navy)}
+.box.say{border-color:var(--teal);background:var(--teal-l)}
+.box.say .lbl{color:#0E6B5F}
+.box.dont{border-color:var(--red);background:var(--red-l)}
+.box.dont .lbl{color:var(--red)}
+.box.opinion{border-color:var(--amber);background:var(--amber-l)}
+.box.opinion .lbl{color:#8A6A10}
+.box.unc{border-color:var(--grey);border-style:dashed;background:var(--grey-l)}
+.box.unc .lbl{color:var(--muted)}
+.box.warm{border-color:var(--warm);background:var(--warm-l)}
+.box.warm .lbl{color:#8A4B12}
+.fig{margin:10pt 0 12pt 0;break-inside:avoid}
+.fig svg{width:100%;height:auto;display:block}
+.fig .cap{font-size:8.3pt;color:var(--muted);margin-top:4pt;border-top:1px solid var(--line);padding-top:3pt}
+.fig .cap b{color:var(--navy)}
+.fullpage{break-before:page}
+table{border-collapse:collapse;width:100%;font-size:8.8pt;margin:6pt 0 10pt 0}
+th{background:var(--navy);color:#fff;text-align:left;padding:4pt 5pt;font-weight:bold;font-family:Helvetica,Arial,sans-serif;font-size:8.3pt}
+td{padding:3.5pt 5pt;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:var(--wash)}
+table.src-table{font-size:7.6pt;table-layout:fixed}
+table.src-table td{overflow-wrap:anywhere}
+table.src-table .tag{white-space:nowrap;padding:0 3pt}
+table.src-table td.src{white-space:nowrap}
+table.src-table td{padding:2.5pt 4pt}
+table.src-table a{word-break:break-all}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12pt}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10pt}
+.card{border:1px solid var(--line);border-radius:4pt;padding:7pt 9pt;background:#fff;break-inside:avoid}
+.card h4{margin-top:0}
+.gloss dt{font-weight:bold;color:var(--navy);margin-top:5pt;font-family:Helvetica,Arial,sans-serif;font-size:9.4pt}
+.gloss dd{margin:0 0 2pt 0;font-size:9.4pt}
+.qa{border:1px solid var(--line);border-radius:4pt;padding:6pt 9pt;margin:6pt 0;break-inside:avoid}
+.qa .q{font-weight:bold;color:var(--navy);font-family:Georgia,serif;font-size:10.6pt}
+.qa .t{font-size:9.2pt}
+.qa .t b{color:var(--muted);font-family:Helvetica,Arial,sans-serif;font-size:8pt;text-transform:uppercase;letter-spacing:.5px}
+.num{font-family:Georgia,serif;font-size:20pt;color:var(--warm);line-height:1}
+.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:8pt;margin:8pt 0}
+.kpi .k{border-top:3px solid var(--warm);padding:5pt 6pt;background:var(--wash)}
+.kpi .k .v{font-family:Georgia,serif;font-size:16pt;color:var(--navy)}
+.kpi .k .l{font-size:8pt;color:var(--muted)}
+.cover{height:257mm;position:relative;background:var(--navy);color:#fff;padding:26mm 20mm;border-radius:6pt;break-after:page}
+.cover .k{letter-spacing:3px;text-transform:uppercase;font-size:9.5pt;opacity:.8}
+.cover h1{color:#fff;font-size:34pt;margin:12pt 0 8pt 0;line-height:1.1}
+.cover .sub{font-size:14pt;opacity:.92;font-family:Georgia,serif}
+.cover .meta{position:absolute;bottom:22mm;left:20mm;right:20mm;font-size:9.5pt;line-height:1.6;opacity:.9}
+.cover .stripe{position:absolute;top:0;left:0;right:0;height:8pt;background:linear-gradient(90deg,var(--warm) 0 33%,var(--teal) 33% 66%,var(--amber) 66% 100%);border-radius:6pt 6pt 0 0}
+.toc{columns:1}
+.toc .row{display:flex;justify-content:space-between;border-bottom:1px dotted var(--line);padding:3pt 0;font-size:10pt}
+.toc .row.l2{padding-left:16pt;font-size:9pt;color:var(--muted)}
+.toc .row .pg{font-family:Georgia,serif;color:var(--navy)}
+.toc .row .pc{display:inline-block;width:9pt;height:9pt;border-radius:2pt;margin-right:6pt;vertical-align:-1pt}
+.emergency{border:2px solid var(--warm);border-radius:5pt;padding:9pt 12pt;background:var(--warm-l)}
+.emergency h3{margin-top:0;color:#8A4B12}
+.stepper{display:flex;gap:6pt;margin:8pt 0}
+.stepper .s{flex:1;background:var(--wash);border-top:3px solid var(--navy);padding:5pt 6pt;font-size:8.6pt}
+.stepper .s b{display:block;color:var(--navy)}
+.legend{font-size:8.3pt;color:var(--muted)}
+.legend span{display:inline-block;margin-right:10pt}
+.legend i{display:inline-block;width:10pt;height:10pt;vertical-align:-1.5pt;margin-right:3pt;border-radius:2pt}
+.nobreak{break-inside:avoid}
+.pagebreak{break-before:page}
+.chapter{break-before:page}
+.chap{margin:0 0 10pt 0;padding:9pt 12pt;border-left:5pt solid var(--pc,var(--navy));background:var(--wash);border-radius:0 4pt 4pt 0}
+.chap .kicker{font-size:8.5pt;letter-spacing:2px;text-transform:uppercase;color:var(--pc,var(--navy));opacity:.9}
+.chap h1{font-size:17pt;margin:2pt 0 3pt 0;color:var(--navy)}
+.chap .lede{font-size:9.8pt;margin:0;color:var(--navy2)}
+.toc .row.l3{padding-left:28pt;font-size:8.6pt}
+.toc .row.l3 .pg{font-size:8.6pt}
+
+.checklist li{list-style:none;margin-left:-14pt}
+.checklist li:before{content:"\2610\00a0";color:var(--navy)}
+.footnote{font-size:8pt;color:var(--muted)}
+.hl{background:#FFF4CC}
+.verbatim{font-family:Georgia,serif;font-style:italic;color:var(--navy2);border-left:3px solid var(--amber);padding-left:8pt;margin:6pt 0}
+
+.sc{border:1px solid var(--line);border-radius:6pt;margin:8pt 0;break-inside:avoid;overflow:hidden;background:#fff}
+.sc .hd{padding:6pt 10pt;color:#fff;font-family:Helvetica,Arial,sans-serif;font-weight:bold;font-size:10.5pt;display:flex;justify-content:space-between;align-items:center}
+.sc.lv-e .hd{background:#1B998B}.sc.lv-m .hd{background:#D48F1F}.sc.lv-h .hd{background:#B23A48}
+.sc .diff{font-size:7.8pt;padding:1pt 7pt;border-radius:8pt;background:rgba(255,255,255,.28);letter-spacing:.5px;text-transform:uppercase}
+.sc .bd{padding:7pt 10pt;font-size:9.5pt}
+.sc .row{display:grid;grid-template-columns:96pt 1fr;gap:7pt;margin-bottom:4pt}
+.sc .lab{font-family:Helvetica,Arial,sans-serif;font-size:7.8pt;font-weight:bold;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);padding-top:2pt}
+.sc .sayb{background:var(--teal-l);border-left:3pt solid var(--teal);padding:4pt 7pt;border-radius:0 3pt 3pt 0}
+.sc .whyb{background:var(--wash);padding:4pt 7pt;border-radius:3pt}
+.sc .trapb{background:var(--red-l);padding:4pt 7pt;border-radius:3pt}
+.sc .twistb{background:var(--amber-l);padding:4pt 7pt;border-radius:3pt}
+.sc p{margin:0}
+.jd{background:var(--wash);border-left:4pt solid var(--navy);padding:6pt 10pt;margin:6pt 0 8pt 0;font-family:Georgia,serif;font-style:italic;color:var(--navy2);font-size:10pt}
+.pill{display:inline-block;padding:1pt 7pt;border-radius:9pt;font-size:8pt;font-weight:bold;font-family:Helvetica,Arial,sans-serif;color:#fff;vertical-align:middle}
+.pill.g{background:#1B998B}.pill.a{background:#D48F1F}.pill.r{background:#B23A48}.pill.n{background:#0B2545}
+</style>
+</head>
+<body>
+<!-- anchor marker style -->
+<style>.pm{font-size:1px;color:#fff;line-height:0;position:absolute}.section>.pm,.fullpage>.pm,.chapter>.pm,.chapterfirst>.pm{position:static;display:block;height:3px;line-height:3px;font-size:2px;margin:0;padding:0}</style>
+<div class="cover">
+<div class="stripe"></div>
+<div class="k">Commercial awareness, from zero</div>
+<h1>The Raise</h1>
+<div class="sub">Millennium asked investors for a record $20 billion. They offered more than $30 billion. About $22 billion closes on 1 October 2026. What that means, why it is big, where it came from, what investors are buying, what other people think, and what it means for the firm, the industry, the corporate access desk and you.</div>
+<div class="meta">
+<b>Prepared:</b> Monday 28 September 2026, the day before Round 2.<br>
+<b>What this is:</b> a commercial-awareness guide that assumes no knowledge. Part 0 is the news on one page. Part 1 explains what "raising capital" even means for a hedge fund. Part 2 is exactly what happened, dated. Part 3 answers "is it big?" with comparisons. Part 4 is the history of Millennium's money since 1989. Part 5 is what investors see. Part 6 is what commentators and regulators say, bull and bear. Part 7 is what it means for the industry, the firm, the desk and you. Part 8 helps you form your own view. Part 9 is a glossary.<br>
+<b>Honesty note:</b> Millennium has not commented publicly on the raise; every number comes from Bloomberg's reporting and its syndications, Hedgeweek, HFR and the Bank of England, as cited. The Financial Times was not readable; where its coverage exists it is recorded by headline only. Charts use reported figures and say so.<br>
+<b>Sources:</b> markers [Sxx] resolve in Part 10, shared with the Complete Interview Pack.
+</div>
+</div>
+
+<div class="section"><span class="pm">@@toc@@</span>
+<h1>Contents</h1>
+<div class="toc">
+<div class="row"><span><i class="pc" style="background:#0B2545"></i>Part 0. The news on one page</span><span class="pg">3</span></div>
+<div class="row"><span><i class="pc" style="background:#2E6F95"></i>Part 1. From zero: what "raising capital" means for a hedge fund</span><span class="pg">5</span></div>
+<div class="row"><span><i class="pc" style="background:#1B998B"></i>Part 2. Exactly what happened, dated</span><span class="pg">7</span></div>
+<div class="row"><span><i class="pc" style="background:#D97742"></i>Part 3. Is it big? The comparisons</span><span class="pg">9</span></div>
+<div class="row"><span><i class="pc" style="background:#5E548E"></i>Part 4. The history of Millennium's money, 1989 to 2026</span><span class="pg">11</span></div>
+<div class="row"><span><i class="pc" style="background:#9C6644"></i>Part 5. What investors see: the values behind the queue</span><span class="pg">13</span></div>
+<div class="row"><span><i class="pc" style="background:#B23A48"></i>Part 6. What other people think: bull, bear and the regulators</span><span class="pg">15</span></div>
+<div class="row"><span><i class="pc" style="background:#3A7D44"></i>Part 7. What it means: the industry, the firm, the desk, you</span><span class="pg">17</span></div>
+<div class="row"><span><i class="pc" style="background:#E9B949"></i>Part 8. Forming your own opinion</span><span class="pg">19</span></div>
+<div class="row"><span><i class="pc" style="background:#8A96A3"></i>Part 9. Glossary</span><span class="pg">21</span></div>
+<div class="row"><span><i class="pc" style="background:#0B2545"></i>Part 10. Sources</span><span class="pg">22</span></div>
+</div>
+<h3 style="margin-top:16pt">Figures</h3>
+<div class="toc">
+<div class="row l2"><span>1. The news in three numbers: target, demand, accepted</span><span class="pg">3</span></div>
+<div class="row l2"><span>2. How money reaches a hedge fund, and what "committed" versus "called" means</span><span class="pg">6</span></div>
+<div class="row l2"><span>3. The timeline: June to October 2026</span><span class="pg">7</span></div>
+<div class="row l2"><span>4. The scale ladder: from $20 million to $5.6 trillion</span><span class="pg">9</span></div>
+<div class="row l2"><span>5. The biggest hedge funds by assets, September 2026</span><span class="pg">9</span></div>
+<div class="row l2"><span>6. Where new money went in early 2026: the concentration</span><span class="pg">10</span></div>
+<div class="row l2"><span>7. Millennium's assets, 1989 to 2026</span><span class="pg">11</span></div>
+<div class="row l2"><span>8. How long money is locked in: Millennium and its peers</span><span class="pg">12</span></div>
+<div class="row l2"><span>9. The value stack: what an investor is buying</span><span class="pg">13</span></div>
+<div class="row l2"><span>10. The opinion map: bull, bear, regulator</span><span class="pg">15</span></div>
+<div class="row l2"><span>11. From capital to company meetings: why the raise reaches the desk</span><span class="pg">18</span></div>
+<div class="row l2"><span>12. Three positions you could hold, with the evidence for and against</span><span class="pg">19</span></div>
+</div>
+<div class="legend" style="margin-top:14pt">
+<b>Confidence tags:</b> <span class="tag c">Confirmed</span> primary source or two credible outlets &nbsp; <span class="tag r">Reported</span> single credible outlet or press estimate &nbsp; <span class="tag i">Inferred</span> the author's reasoning &nbsp; <span class="src">[S12]</span> source marker, see Part 10.
+</div>
+</div>
+
+<!-- ================= PART 0 ================= -->
+<div class="section" style="--pc:#0B2545"><span class="pm">@@p0@@</span>
+<div class="section-band"><div class="kicker">Part 0</div><h1>The news on one page</h1><p class="lede">Billion, not million. Here is the story as it stands on 28 September, in the numbers that matter and in plain English.</p></div>
+
+<div class="fig">
+<svg id="svg1" viewBox="0 0 1000 330" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg1 .t{font-size:10px;fill:#1F2933}#svg1 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg1 .s{font-size:9px;fill:#5B6B7C}#svg1 .w{fill:#fff;font-size:10.5px;font-weight:bold}#svg1 .ws{fill:#fff;font-size:9.4px}#svg1 .k{font-size:11px;font-weight:bold;fill:#0B2545}#svg1 .big{font-size:26px;font-weight:bold;fill:#fff}</style>
+<text x="20" y="24" class="h">The news in three numbers (billions of US dollars)</text>
+<!-- bars: scale 30bn = 220px -->
+<g>
+<rect x="60" y="60" width="150" height="240" fill="#F3F6FA" stroke="#D5DCE5"/>
+<rect x="90" y="153.3" width="90" height="146.7" fill="#8A96A3"/><text x="100" y="145" class="k">$20bn</text>
+<text x="70" y="316" class="s">What Millennium asked for</text>
+<rect x="260" y="60" width="150" height="240" fill="#F3F6FA" stroke="#D5DCE5"/>
+<rect x="290" y="80" width="90" height="220" fill="#D97742"/><text x="296" y="72" class="k">over $30bn</text>
+<text x="270" y="316" class="s">What investors offered</text>
+<rect x="460" y="60" width="150" height="240" fill="#F3F6FA" stroke="#D5DCE5"/>
+<rect x="490" y="138.7" width="90" height="161.3" fill="#1B998B"/><text x="500" y="130" class="k">~$22bn</text>
+<text x="470" y="316" class="s">What closes on 1 October</text>
+</g>
+<rect x="640" y="60" width="340" height="240" rx="8" fill="#0B2545"/>
+<text x="652" y="82" class="w">IN PLAIN ENGLISH</text>
+<text x="652" y="104" class="ws">Millennium, a hedge fund that runs about $97bn of</text>
+<text x="652" y="118" class="ws">other people's money, asked its investors for a</text>
+<text x="652" y="132" class="ws">further $20bn, the largest amount any hedge fund</text>
+<text x="652" y="146" class="ws">has ever asked for at once. They offered more than</text>
+<text x="652" y="160" class="ws">$30bn. The firm will take about $22bn, and only</text>
+<text x="652" y="174" class="ws">about $2bn of that will actually be handed over on</text>
+<text x="652" y="188" class="ws">1 October; the rest is promised and can be drawn</text>
+<text x="652" y="202" class="ws">over the next four years. Investors who join agree</text>
+<text x="652" y="216" class="ws">not to take their money out for five years.</text>
+<text x="652" y="240" class="ws">Meanwhile several rivals are giving money back or</text>
+<text x="652" y="254" class="ws">refusing new money. That contrast is the story.</text>
+<text x="652" y="280" class="ws">Sources: Bloomberg via Hedgeweek and syndication [S530][S531][S533]</text>
+</svg>
+<span class="pm">@@f1@@</span><div class="cap"><b>Figure 1.</b> The news in three numbers. Target, demand and the expected close as reported by Bloomberg on 25 September and relayed by Hedgeweek on 28 September <span class="src">[S532][S530][S531]</span>; the $22bn and 1 October first appeared in Bloomberg's 7 September feature <span class="src">[S533][S400]</span>. Millennium declined to comment.</div></div>
+
+<table>
+<tr><th style="width:26%">The fact</th><th>The number, dated</th><th style="width:26%">Why it matters</th></tr>
+<tr><td>What was asked for</td><td>A record $20bn, in two tranches, announced 29 July 2026 <span class="src">[S498]</span>; a month earlier the reported target was "at least $10bn" <span class="src">[S548]</span>.</td><td>Nobody has asked for $20bn before. The 2024 raise took $10bn <span class="src">[S95]</span>.</td></tr>
+<tr><td>What was offered</td><td>"More than $30bn" of investor commitments, 25 September <span class="src">[S532][S530]</span>.</td><td>Demand exceeded even a record target by half.</td></tr>
+<tr><td>What will be taken</td><td>About $22bn, finalised on 1 October; about $2bn called in October, the rest drawn over up to four years <span class="src">[S533][S530]</span>.</td><td>The firm turned away roughly $8bn. It takes only what it can invest.</td></tr>
+<tr><td>The terms</td><td>A "drawdown" structure like private equity; investors in the new class must stay at least five years to exit fully, longer than peers' three to four <span class="src">[S530][S533]</span>.</td><td>The firm gains money it can plan around for years.</td></tr>
+<tr><td>What else is coming</td><td>A possible $3bn raise for less-liquid credit <span class="src">[S533]</span>; a $5bn private-markets fund announced in October 2025 <span class="src">[S541]</span>.</td><td>The firm is stretching beyond liquid trading.</td></tr>
+<tr><td>The firm behind it</td><td>About $97bn under management, more than double six years ago; over 360 trading teams plus external managers; about 14% a year since 1989 with one losing year <span class="src">[S533][S530]</span>.</td><td>Investors are buying that record.</td></tr>
+<tr><td>The contrast</td><td>Citadel returns profits every year; D.E. Shaw's two biggest funds are closed to new money; Point72 and D.E. Shaw are lengthening lock-ups <span class="src">[S533][S538][S537]</span>.</td><td>The industry's giants are rationing; Millennium is growing.</td></tr>
+</table>
+<div class="box say"><div class="lbl">If asked tomorrow: "What's in the news about Millennium?"</div><p>"The capital raise. The firm asked for a record $20bn and was offered more than $30bn; it's taking about $22bn on 1 October, with only $2bn called upfront and the rest drawn over four years, on a five-year lock. What I find interesting is the contrast: several rivals are returning money or closed, so investors are paying for scale and consistency in a structure that can absorb it. And for the desk it means more teams to serve, including the external managers now running Millennium capital."</p></div>
+</div>
+
+<!-- ================= PART 1 ================= -->
+<div class="section" style="--pc:#2E6F95"><span class="pm">@@p1@@</span>
+<div class="section-band"><div class="kicker">Part 1</div><h1>From zero: what "raising capital" means for a hedge fund</h1><p class="lede">Five ideas you need before any of the numbers make sense: what the money is, who gives it, what "assets under management" measures, why a fund would ever refuse money, and what a commitment is as opposed to cash.</p></div>
+
+<h2>1.1 The money is other people's, and the fund is paid to run it</h2>
+<p>A hedge fund does not invest its own money, or not mainly. It runs a pool of money that belongs to investors: pension funds, university endowments, sovereign wealth funds, insurance companies, and wealthy individuals, increasingly reached through private banks <span class="src">[S533][S371]</span>. The fund's job is to make that pool grow; its reward is a share of the gains, and at Millennium the investors also pay the firm's running costs (the pass-through model, covered in the Two Mechanisms guide) <span class="src">[S104]</span>. "Raising capital" means asking those investors to put more money into the pool.</p>
+<div class="box term"><div class="lbl">Key term: assets under management (AUM)</div><p>The total value of the money the firm runs for investors. It goes up when investors add money or the fund makes gains, and down when they withdraw or it loses. It is the standard measure of a fund's size. Millennium's is about $97bn as of September 2026 <span class="src">[S533]</span>. It is not the firm's revenue or profit, and it is not the firm's own money.</p></div>
+
+<h2>1.2 Why a fund would want more money, and why it might refuse it</h2>
+<p>More money means more fees and a bigger business. But a hedge fund's profits come from trades, and every trade has a size beyond which it stops working: buy too much of a share and you push the price up against yourself; hold too much and you cannot sell quickly. So there is a limit to how much money a strategy can run well, called its <b>capacity</b>. A fund that takes money beyond its capacity earns more fees and worse returns. That is why the best funds turn money away: Citadel gives its profits back to investors every year rather than growing; D.E. Shaw closed its two biggest funds to new money; Point72 returned billions in early 2025 <span class="src">[S533][S538][S524]</span>. A firm that can take $22bn without hurting returns is claiming its capacity is bigger than its rivals'. Whether that claim is right is the central question in Part 6.</p>
+
+<h2>1.3 Committed versus called: the private-equity trick</h2>
+<div class="fig">
+<svg id="svg2" viewBox="0 0 1000 360" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg2 .t{font-size:10px;fill:#1F2933}#svg2 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg2 .s{font-size:9px;fill:#5B6B7C}#svg2 .w{fill:#fff;font-size:10.5px;font-weight:bold}#svg2 .ws{fill:#fff;font-size:9.3px}#svg2 .k{font-size:11px;font-weight:bold;fill:#0B2545}#svg2 .ax{font-size:9.2px;fill:#5B6B7C}</style>
+<text x="20" y="24" class="h">How money reaches a hedge fund, and what "committed" versus "called" means</text>
+<rect x="20" y="46" width="200" height="90" rx="8" fill="#0B2545"/><text x="32" y="68" class="w">1. THE INVESTOR COMMITS</text><text x="32" y="88" class="ws">Signs up for, say, $500m. Agrees the</text><text x="32" y="102" class="ws">terms: fees, and a five-year exit.</text><text x="32" y="116" class="ws">No cash moves yet.</text>
+<rect x="240" y="46" width="200" height="90" rx="8" fill="#1B998B"/><text x="252" y="68" class="w">2. THE FIRM CALLS</text><text x="252" y="88" class="ws">When it has a team or strategy that can</text><text x="252" y="102" class="ws">use it, it asks for a slice. On 1 October,</text><text x="252" y="116" class="ws">about $2bn of the $22bn is called [S533].</text>
+<rect x="460" y="46" width="200" height="90" rx="8" fill="#D97742"/><text x="472" y="68" class="w">3. THE MONEY IS DEPLOYED</text><text x="472" y="88" class="ws">Allocated to pods and external managers</text><text x="472" y="102" class="ws">under the centre's limits. The rest can be</text><text x="472" y="116" class="ws">drawn over the following four years [S530].</text>
+<rect x="680" y="46" width="300" height="90" rx="8" fill="#5E548E"/><text x="692" y="68" class="w">4. THE INVESTOR WAITS</text><text x="692" y="88" class="ws">Cannot exit fully for at least five years in the</text><text x="692" y="102" class="ws">new share class, versus three to four at peers</text><text x="692" y="116" class="ws">[S533][S537]. Receives net returns along the way.</text>
+<g stroke="#5B6B7C" stroke-width="2" fill="none"><line x1="220" y1="91" x2="240" y2="91"/><line x1="440" y1="91" x2="460" y2="91"/><line x1="660" y1="91" x2="680" y2="91"/></g>
+<!-- deployment chart -->
+<text x="20" y="168" class="k">Illustrative deployment of $22bn of commitments (the firm has said only that $2bn is called in October and the rest may follow over four years)</text>
+<g stroke="#D5DCE5"><line x1="80" y1="190" x2="80" y2="330"/><line x1="80" y1="330" x2="700" y2="330"/></g>
+<g class="ax"><text x="40" y="334">0</text><text x="30" y="264">$11bn</text><text x="30" y="194">$22bn</text>
+<text x="80" y="346">Oct 2026</text><text x="220" y="346">2027</text><text x="360" y="346">2028</text><text x="500" y="346">2029</text><text x="640" y="346">2030</text></g>
+<rect x="80" y="190" width="620" height="140" fill="#F3F6FA"/>
+<polyline points="80,317 220,280 360,245 500,215 640,190 700,190" fill="none" stroke="#1B998B" stroke-width="3"/>
+<polyline points="80,190 700,190" fill="none" stroke="#D97742" stroke-width="2" stroke-dasharray="6,4"/>
+<text x="90" y="310" class="s">called: ~$2bn</text><text x="560" y="184" class="s" fill="#D97742">committed: ~$22bn</text>
+<rect x="720" y="180" width="260" height="150" rx="6" fill="#0B2545"/>
+<text x="732" y="200" class="w">WHY IT IS DONE THIS WAY</text>
+<text x="732" y="220" class="ws">Cash sitting uninvested earns the cash rate</text><text x="732" y="234" class="ws">and drags the return down. Calling money</text><text x="732" y="248" class="ws">only when a team can use it keeps the</text><text x="732" y="262" class="ws">firm's record clean and matches money to</text><text x="732" y="276" class="ws">capacity. The structure is borrowed from</text><text x="732" y="290" class="ws">private equity [S530]. Millennium used it</text><text x="732" y="304" class="ws">in 2024 too: commitments that did not</text><text x="732" y="318" class="ws">expire for three years [S526].</text>
+</svg>
+<span class="pm">@@f2@@</span><div class="cap"><b>Figure 2.</b> Commitments, calls and deployment. The mechanics as reported <span class="src">[S530][S533][S526]</span>; the deployment curve is illustrative, since the firm has published no schedule beyond the October call.</div></div>
+<div class="box term"><div class="lbl">Key terms: lock-up, gate, share class</div><p>A <b>lock-up</b> is a period during which an investor cannot withdraw. A <b>gate</b> limits how much can be withdrawn per quarter (5% a quarter means twenty quarters, or five years, to get everything out). A <b>share class</b> is a version of the fund with its own terms; Millennium has moved investors over years from a class that could be redeemed in a year to one that takes five <span class="src">[S536]</span>.</p></div>
+
+<h2>1.4 Twenty million or twenty billion?</h2>
+<p>Billion. Twenty million dollars would not register: Millennium was founded with $35 million in 1989, and it now runs nearly three thousand times that <span class="src">[S531][S533]</span>. Twenty billion is a fifth of the firm's current size, more than the entire assets of most hedge funds, and more than the whole hedge fund industry attracted in new money in some recent years. Part 3 gives the ladder.</p>
+</div>
+
+<!-- ================= PART 2 ================= -->
+<div class="section" style="--pc:#1B998B"><span class="pm">@@p2@@</span>
+<div class="section-band"><div class="kicker">Part 2</div><h1>Exactly what happened, dated</h1><p class="lede">The raise unfolded over four months. Each step was reported by Bloomberg first and relayed by others; Millennium said nothing on the record.</p></div>
+
+<div class="fig">
+<svg id="svg3" viewBox="0 0 1000 330" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg3 .t{font-size:10px;fill:#1F2933}#svg3 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg3 .s{font-size:9px;fill:#5B6B7C}#svg3 .w{fill:#fff;font-size:10px;font-weight:bold}#svg3 .ws{fill:#fff;font-size:9px}#svg3 .k{font-size:11px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">The timeline: June to October 2026</text>
+<line x1="40" y1="70" x2="960" y2="70" stroke="#0B2545" stroke-width="3"/>
+<g><circle cx="70" cy="70" r="6" fill="#8A96A3"/><circle cx="250" cy="70" r="6" fill="#1B998B"/><circle cx="430" cy="70" r="6" fill="#1B998B"/><circle cx="610" cy="70" r="6" fill="#D97742"/><circle cx="790" cy="70" r="6" fill="#D97742"/><circle cx="930" cy="70" r="6" fill="#0B2545"/></g>
+<rect x="20" y="86" width="150" height="130" rx="6" fill="#8A96A3"/><text x="28" y="104" class="w">30 June</text><text x="28" y="122" class="ws">Bloomberg: Millennium</text><text x="28" y="136" class="ws">targets "at least $10bn"</text><text x="28" y="150" class="ws">in new fundraising</text><text x="28" y="164" class="ws">[S548]</text>
+<rect x="190" y="86" width="150" height="130" rx="6" fill="#1B998B"/><text x="198" y="104" class="w">29 to 30 July</text><text x="198" y="122" class="ws">Target raised to a record</text><text x="198" y="136" class="ws">$20bn in two tranches;</text><text x="198" y="150" class="ws">AUM about $92bn; 340+</text><text x="198" y="164" class="ws">teams; led by president</text><text x="198" y="178" class="ws">Ajay Nagpal [S498]</text>
+<rect x="370" y="86" width="150" height="130" rx="6" fill="#1B998B"/><text x="378" y="104" class="w">7 to 8 September</text><text x="378" y="122" class="ws">Bloomberg feature: ~$97bn</text><text x="378" y="136" class="ws">AUM; $22bn to close on</text><text x="378" y="150" class="ws">1 October, $2bn called;</text><text x="378" y="164" class="ws">five-year restriction; $3bn</text><text x="378" y="178" class="ws">credit raise mooted [S533]</text>
+<rect x="550" y="86" width="150" height="130" rx="6" fill="#D97742"/><text x="558" y="104" class="w">24 to 25 September</text><text x="558" y="122" class="ws">Point72 extends its lock-up</text><text x="558" y="136" class="ws">to three years [S537].</text><text x="558" y="150" class="ws">Bloomberg: demand tops</text><text x="558" y="164" class="ws">$30bn against the $20bn</text><text x="558" y="178" class="ws">plan [S532]</text>
+<rect x="730" y="86" width="150" height="130" rx="6" fill="#D97742"/><text x="738" y="104" class="w">26 to 28 September</text><text x="738" y="122" class="ws">Syndications and</text><text x="738" y="136" class="ws">Hedgeweek confirm: ~$22bn</text><text x="738" y="150" class="ws">to be finalised, drawdown</text><text x="738" y="164" class="ws">structure, 360+ teams</text><text x="738" y="178" class="ws">[S531][S530]</text>
+<rect x="900" y="86" width="80" height="130" rx="6" fill="#0B2545"/><text x="906" y="104" class="w">1 Oct</text><text x="906" y="122" class="ws">Close.</text><text x="906" y="136" class="ws">~$2bn</text><text x="906" y="150" class="ws">called;</text><text x="906" y="164" class="ws">rest over</text><text x="906" y="178" class="ws">4 years</text>
+<rect x="20" y="232" width="960" height="86" rx="6" fill="#F3F6FA" stroke="#D5DCE5"/>
+<text x="32" y="252" class="k">AROUND IT, THE SAME MONTH</text>
+<text x="32" y="272" class="t">D.E. Shaw's four-year redemption terms take effect from January 2027 and its two largest funds are closed [S538]. A rates PM who had accepted a Point72 offer chose to return to Millennium instead [S547].</text>
+<text x="32" y="286" class="t">Millennium's president and EMEA chief executive met Greece's prime minister about an Athens office [S546]. The desk you are joining ran the September conference cluster while all of this happened.</text>
+<text x="32" y="306" class="s">Millennium did not comment on any of these reports. Dates are publication dates.</text>
+</svg>
+<span class="pm">@@f3@@</span><div class="cap"><b>Figure 3.</b> The timeline. Publication dates of the reports cited; the firm's own dates for the raise are not public beyond the 1 October close.</div></div>
+
+<h2>2.1 The terms, as far as they are known</h2>
+<table>
+<tr><th style="width:26%">Term</th><th>What was reported</th><th style="width:26%">Status</th></tr>
+<tr><td>Amount accepted</td><td>About $22bn of more than $30bn offered <span class="src">[S530][S532]</span>. The firm turned away roughly $8bn; a commentator puts the acceptance rate at about 73% <span class="src">[S535]</span>.</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td>Structure</td><td>A drawdown vehicle: investors commit, the firm draws "as it needs it"; about $2bn in October, the remainder over the following four years <span class="src">[S530][S533]</span>.</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td>Liquidity</td><td>Investors must remain invested at least five years to exit completely; peers are at three to four <span class="src">[S533][S499]</span>.</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td>Fees</td><td>Not reported for this class. The flagship's known terms are pass-through plus a performance fee with a floor of about 1% or 20% since 2023 <span class="src">[S87][S104]</span>.</td><td><span class="tag u">Not public</span></td></tr>
+<tr><td>Who invested</td><td>Not itemised. Bloomberg reports wealthy individuals at 30 to 40% of the firm's assets, reached through bank platforms and advisers, alongside institutions <span class="src">[S533]</span>.</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td>What it is for</td><td>Exposure to "more than 360 trading teams" and to external managers running Millennium capital; the firm is "exploring arrangements to replace some external capital with its own money" at those managers <span class="src">[S530]</span>. A separate $3bn credit raise is under consideration <span class="src">[S533]</span>.</td><td><span class="tag r">Reported</span></td></tr>
+</table>
+<div class="box dont"><div class="lbl">Don't say</div><p>"They raised $30bn." They were offered more than $30bn and are taking about $22bn. "They got $22bn in cash." About $2bn is called in October; the rest is promised. "Millennium announced." Millennium declined to comment; every figure is Bloomberg's reporting.</p></div>
+</div>
+
+<!-- ================= PART 3 ================= -->
+<div class="section" style="--pc:#D97742"><span class="pm">@@p3@@</span>
+<div class="section-band"><div class="kicker">Part 3</div><h1>Is it big? The comparisons</h1><p class="lede">Big compared with what? Three ladders: other raises, other firms, and the industry. On all three the answer is yes, with one caveat that matters.</p></div>
+
+<h2>3.1 Against other raises</h2>
+<div class="fig">
+<svg id="svg4" viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg4 .t{font-size:10px;fill:#1F2933}#svg4 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg4 .s{font-size:9px;fill:#5B6B7C}#svg4 .w{fill:#fff;font-size:10px;font-weight:bold}#svg4 .ws{fill:#fff;font-size:9.2px}#svg4 .k{font-size:10.5px;font-weight:bold;fill:#0B2545}#svg4 .lab{font-size:9.6px;fill:#1F2933}</style>
+<text x="20" y="24" class="h">The scale ladder: raises and launches, in billions of dollars (to scale)</text>
+<g>
+<text x="20" y="66" class="lab">Jain Global launch, 2024 (largest launch attempt of its year)</text><rect x="280" y="54" width="37" height="16" fill="#8A96A3"/><text x="322" y="66" class="k">$5.3bn [S357h]</text>
+<text x="20" y="96" class="lab">ExodusPoint launch, 2018 (largest hedge fund launch on record)</text><rect x="280" y="84" width="60" height="16" fill="#8A96A3"/><text x="345" y="96" class="k">$8.5bn [S543]</text>
+<text x="20" y="126" class="lab">Millennium raise accepted, 2024 (of $20bn offered)</text><rect x="280" y="114" width="70" height="16" fill="#5E548E"/><text x="355" y="126" class="k">$10bn [S95]</text>
+<text x="20" y="156" class="lab">Millennium raise accepted, 2026</text><rect x="280" y="144" width="154" height="16" fill="#1B998B"/><text x="439" y="156" class="k">~$22bn [S530]</text>
+<text x="20" y="186" class="lab">Millennium raise: demand, 2026</text><rect x="280" y="174" width="210" height="16" fill="#D97742"/><text x="495" y="186" class="k">over $30bn [S532]</text>
+<text x="20" y="216" class="lab">Whole hedge fund industry, net new money, Q1 2026</text><rect x="280" y="204" width="315" height="16" fill="#0B2545"/><text x="600" y="216" class="k">~$45bn [S542]</text>
+<text x="20" y="246" class="lab">Millennium's total assets, September 2026</text><rect x="280" y="234" width="679" height="16" fill="#13315C"/><text x="800" y="246" class="w">~$97bn [S533]</text>
+</g>
+<rect x="20" y="270" width="960" height="118" rx="6" fill="#F3F6FA" stroke="#D5DCE5"/>
+<text x="32" y="290" class="k">READ IT LIKE THIS</text>
+<text x="32" y="310" class="t">The largest hedge fund launch ever raised $8.5bn. Millennium's 2026 raise accepts more than twice that, and the demand behind it was three and a half times that. The amount accepted is about half</text>
+<text x="32" y="324" class="t">of what the entire industry, some ten thousand funds, took in net new money in the first quarter of 2026. Against the firm's own size, $22bn is a fifth of its assets, on top of $10bn raised two years ago.</text>
+<text x="32" y="344" class="t">The caveat: a commitment is not cash. Only about $2bn arrives in October [S533]. The industry's $45bn was money actually received. So on cash, the raise is large; on promises, it is unprecedented.</text>
+<text x="32" y="368" class="s">The industry figure is off the chart at this scale: total hedge fund assets were about $5.6 trillion at mid-2026 [S533][S542], nearly 60 times Millennium. Q1 inflow figure from HFR as relayed in search summaries; the HFR page itself was not readable today.</text>
+</svg>
+<span class="pm">@@f4@@</span><div class="cap"><b>Figure 4.</b> The scale ladder. Launch sizes from press-cited tertiary sources <span class="src">[S357h][S543]</span>; the 2024 raise as reported <span class="src">[S95]</span>; the 2026 figures from Bloomberg's reporting <span class="src">[S530][S532][S533]</span>; industry inflows from HFR releases <span class="src">[S542]</span>.</div></div>
+
+<h2>3.2 Against other firms</h2>
+<div class="fig">
+<svg id="svg5" viewBox="0 0 1000 340" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg5 .t{font-size:10px;fill:#1F2933}#svg5 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg5 .s{font-size:9px;fill:#5B6B7C}#svg5 .w{fill:#fff;font-size:10px;font-weight:bold}#svg5 .k{font-size:10.5px;font-weight:bold;fill:#0B2545}#svg5 .lab{font-size:9.8px;fill:#1F2933}</style>
+<text x="20" y="24" class="h">The biggest hedge funds by assets, as Bloomberg listed them on 7 September 2026 (billions of dollars, to scale)</text>
+<g>
+<text x="20" y="62" class="lab">AQR Capital Management</text><rect x="220" y="50" width="700" height="18" fill="#8A96A3"/><text x="230" y="63" class="w">$140bn+ (long-short tax-aware products gaining ~$1bn a week)</text>
+<text x="20" y="92" class="lab">Millennium</text><rect x="220" y="80" width="485" height="18" fill="#1B998B"/><text x="230" y="93" class="w">~$97bn, raising $22bn more</text>
+<text x="20" y="122" class="lab">D.E. Shaw</text><rect x="220" y="110" width="450" height="18" fill="#0B2545"/><text x="230" y="123" class="w">~$90bn; gained $40bn in 19 months; two largest funds closed to new money</text>
+<text x="20" y="152" class="lab">Two Sigma</text><rect x="220" y="140" width="400" height="18" fill="#13315C"/><text x="230" y="153" class="w">$80bn</text>
+<text x="20" y="182" class="lab">Citadel</text><rect x="220" y="170" width="385" height="18" fill="#D97742"/><text x="230" y="183" class="w">~$77bn; returns its annual profits to investors</text>
+<text x="20" y="212" class="lab">TCI Fund Management</text><rect x="220" y="200" width="385" height="18" fill="#5E548E"/><text x="230" y="213" class="w">$77bn; a concentrated fund of 15 to 20 stocks</text>
+<text x="20" y="242" class="lab">Point72; Balyasny</text><rect x="220" y="230" width="290" height="18" fill="#9C6644"/><text x="230" y="243" class="w">each under $60bn</text>
+<text x="20" y="272" class="lab">Bridgewater</text><rect x="220" y="260" width="200" height="18" fill="#B23A48" opacity=".7"/><text x="430" y="273" class="lab">cut its hedge fund capital "well below" $100bn after poor performance; no figure given</text>
+</g>
+<text x="20" y="306" class="s">All figures as given in the Bloomberg feature [S533]; approximate and dated 7 September 2026. Bloomberg says more firms than ever exceed $75bn. A careers-site ranking gives different, self-described approximate numbers (e.g. Man Group $175bn, Millennium $75bn) and is not used here [S539].</text>
+<text x="20" y="322" class="s">Bar lengths are proportional to the stated figure; "under $60bn" is drawn at $58bn and Bridgewater's bar is indicative only.</text>
+</svg>
+<span class="pm">@@f5@@</span><div class="cap"><b>Figure 5.</b> The giants, September 2026. From the Bloomberg feature as syndicated <span class="src">[S533]</span>. Millennium is second by assets and the only one of the multi-strategy platforms adding $20bn-plus; D.E. Shaw and Citadel are closed or returning.</div></div>
+
+<h2>3.3 Against the industry</h2>
+<p>The hedge fund industry has never been bigger. HFR, the standard data source, reported total capital passing $5 trillion for the first time in the first quarter of 2026 and above $5.6 trillion by mid-year, with the largest quarterly asset growth in its records; Bloomberg puts the rise since the end of 2024 at 25% <span class="src">[S542][S533]</span> <span class="tag r">Reported</span>. But the new money is not spread evenly.</p>
+<div class="fig">
+<svg id="svg6" viewBox="0 0 1000 250" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg6 .t{font-size:10px;fill:#1F2933}#svg6 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg6 .s{font-size:9px;fill:#5B6B7C}#svg6 .w{fill:#fff;font-size:10.5px;font-weight:bold}#svg6 .ws{fill:#fff;font-size:9.3px}#svg6 .k{font-size:10.5px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">Where new hedge fund money went in the first quarter of 2026 (HFR estimates, billions of dollars)</text>
+<text x="20" y="66" class="k">Firms over $5bn</text><rect x="180" y="52" width="702" height="22" fill="#0B2545"/><text x="190" y="68" class="w">$39.0bn of about $44.5bn: nearly nine dollars in ten</text>
+<text x="20" y="102" class="k">Firms $1bn to $5bn</text><rect x="180" y="88" width="72" height="22" fill="#D97742"/><text x="258" y="104" class="k">$4.0bn</text>
+<text x="20" y="138" class="k">Firms under $1bn</text><rect x="180" y="124" width="27" height="22" fill="#8A96A3"/><text x="213" y="140" class="k">$1.5bn</text>
+<rect x="20" y="160" width="960" height="80" rx="6" fill="#F3F6FA" stroke="#D5DCE5"/>
+<text x="32" y="180" class="k">WHAT IT SAYS</text>
+<text x="32" y="200" class="t">Investors are choosing size. The largest firms took almost all of the new money in early 2026 [S542], and With Intelligence's outlook says the largest platforms are "capacity constrained, and some giving back capital",</text>
+<text x="32" y="214" class="t">so that money is spilling to second- and third-tier managers [S544]. Millennium's raise is the extreme case of the first trend: one firm taking, in one close, roughly half of what the whole industry took in a quarter.</text>
+<text x="32" y="232" class="s">HFR figures via search summaries of its Q1 2026 release; the release page was not readable today [S542]. Bars to scale.</text>
+</svg>
+<span class="pm">@@f6@@</span><div class="cap"><b>Figure 6.</b> Concentration of new money. HFR's first-quarter 2026 estimates by firm size <span class="src">[S542]</span>, with the industry outlook's reading <span class="src">[S544]</span>.</div></div>
+<div class="box say"><div class="lbl">Say this</div><p>"It is big on every measure that matters. The largest hedge fund launch ever was $8.5bn; this accepts $22bn and turned away $8bn more. The whole industry took about $45bn of new money in the first quarter. And it comes while D.E. Shaw is closed and Citadel is handing profits back, so investors are not just choosing hedge funds, they are choosing the few that can still take money."</p></div>
+</div>
+
+<!-- ================= PART 4 ================= -->
+<div class="section" style="--pc:#5E548E"><span class="pm">@@p4@@</span>
+<div class="section-band"><div class="kicker">Part 4</div><h1>The history of Millennium's money, 1989 to 2026</h1><p class="lede">The raise is the latest move in a thirty-seven-year story: a small fund that grew, nearly shrank itself, then spent eight years turning short-term money into long-term money before asking for more of it.</p></div>
+
+<div class="fig">
+<svg id="svg7" viewBox="0 0 1000 420" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg7 .t{font-size:10px;fill:#1F2933}#svg7 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg7 .s{font-size:9px;fill:#5B6B7C}#svg7 .w{fill:#fff;font-size:10px;font-weight:bold}#svg7 .ws{fill:#fff;font-size:9px}#svg7 .k{font-size:10.5px;font-weight:bold;fill:#0B2545}#svg7 .ax{font-size:9.2px;fill:#5B6B7C}#svg7 .pt{font-size:9px;fill:#1F2933}</style>
+<text x="20" y="24" class="h">Millennium's assets under management, 1989 to 2026, as reported (billions of dollars)</text>
+<!-- axes: x 1989..2030 -> 80..940 ; y 0..140 -> 330..60 (140bn=270px => 1.93px/bn) -->
+<g stroke="#D5DCE5"><line x1="80" y1="60" x2="80" y2="330"/><line x1="80" y1="330" x2="940" y2="330"/><line x1="80" y1="233.5" x2="940" y2="233.5"/><line x1="80" y1="137" x2="940" y2="137"/><line x1="80" y1="60" x2="940" y2="60"/></g>
+<g class="ax"><text x="50" y="334">0</text><text x="42" y="237">$50bn</text><text x="36" y="141">$100bn</text><text x="36" y="64">$140bn</text>
+<text x="70" y="346">1989</text><text x="279" y="346">2000</text><text x="489" y="346">2010</text><text x="699" y="346">2020</text><text x="825" y="346">2026</text><text x="905" y="346">2030</text></g>
+<!-- x = 80 + (year-1989)*20.98 ; y = 330 - bn*1.93 -->
+<polyline points="80,330 541,305 646,262.5 709,233.5 730,236 772,218 814,195 856,169 866,152 868,143" fill="none" stroke="#1B998B" stroke-width="3"/>
+<polyline points="868,143 940,79" fill="none" stroke="#D97742" stroke-width="2.5" stroke-dasharray="6,4"/>
+<g fill="#0B2545">
+<circle cx="80" cy="330" r="4"/><circle cx="541" cy="305" r="4"/><circle cx="646" cy="262.5" r="4"/><circle cx="709" cy="233.5" r="4"/><circle cx="730" cy="236" r="4"/><circle cx="772" cy="218" r="4"/><circle cx="814" cy="195" r="4"/><circle cx="856" cy="169" r="4"/><circle cx="866" cy="152" r="4"/><circle cx="868" cy="143" r="5" fill="#D97742"/>
+</g>
+<g class="pt">
+<text x="86" y="322">1989: $35m founding capital [S531]</text>
+<text x="470" y="298">2011: ~$13bn [S540]</text>
+<text x="560" y="256">~2016: ~$35bn; returning</text><text x="560" y="268">capital discussed [S533][S534]</text>
+<text x="600" y="222">2019: ~$50bn [S540]</text>
+<text x="700" y="252">2020: ~$48bn [S533]</text>
+<text x="700" y="212">2022: $58bn [S536]</text>
+<text x="740" y="188">Nov 2024: $70bn [S531]</text>
+<text x="720" y="160">Jan 2026: $83.5bn [S101]</text>
+<text x="770" y="140">Jul 2026: $92bn [S498]</text>
+<text x="876" y="140">Sep 2026: ~$97bn [S533]</text>
+<text x="848" y="76" fill="#D97742">"could exceed $130bn</text><text x="848" y="88" fill="#D97742">within several years" [S534]</text>
+</g>
+<rect x="20" y="360" width="960" height="52" rx="6" fill="#F3F6FA" stroke="#D5DCE5"/>
+<text x="32" y="378" class="t">Points are press-reported figures on the dates given; the line between them is drawn straight and hides the years in between. The 2016 and 2020 points are derived from Bloomberg's "about $35bn a decade ago" and</text>
+<text x="32" y="392" class="t">"less than half six years ago" [S533][S534]. The dotted line is Bloomberg's own projection, conditional on 10%-plus returns and continued inflows [S534]. Millennium publishes no AUM history.</text>
+</svg>
+<span class="pm">@@f7@@</span><div class="cap"><b>Figure 7.</b> Thirty-seven years of assets, from press points <span class="src">[S531][S540][S533][S534][S536][S101][S498]</span>. Two-thirds of the growth has come since 2020.</div></div>
+
+<h2>4.1 The episodes</h2>
+<table>
+<tr><th style="width:16%">When</th><th style="width:44%">What happened</th><th>Why it matters for the 2026 raise</th></tr>
+<tr><td>1989</td><td>Founded by Israel Englander with $35m, of which $5m was his own and $2m from the Belzberg brothers <span class="src">[S531][S540]</span>.</td><td>The firm has always run other people's money; the founder's stake grew with it.</td></tr>
+<tr><td>2005</td><td>An SEC settlement of $180m over mutual-fund market timing <span class="src">[S302][S303]</span>.</td><td>The episode that, on the inside account, pushed the firm toward a compliance-heavy, process-driven centre.</td></tr>
+<tr><td>About 2016</td><td>After disappointing performance the firm managed about $35bn and Englander discussed returning capital <span class="src">[S533][S534]</span>.</td><td>The road not taken. The firm chose to fix its structure, not shrink.</td></tr>
+<tr><td>2018 to 2022</td><td>A four-year transition from money that could leave in a year to money that leaves at 5% a quarter: $15bn returned in 2021 and again in 2022 to investors who then re-invested on the longer terms <span class="src">[S536]</span>. In 2019 it raised $4.1bn after a two-year pause <span class="src">[S540]</span>.</td><td>The five-year class of 2026 is the end of this road: the firm now asks for long money from the start.</td></tr>
+<tr><td>2020</td><td>"One of its best years" <span class="src">[S533]</span>; strong returns changed the strategic direction from restraint to growth.</td><td>The record since is the sales document for every raise after.</td></tr>
+<tr><td>2023</td><td>A fee floor: investors pay about 1% of assets or 20% of gains, whichever is greater <span class="src">[S87]</span>.</td><td>Terms firmer for the firm; investors stayed.</td></tr>
+<tr><td>2024</td><td>Offered $10bn, saw $20bn of demand, took $10bn in callable commitments; existing investors limited to 5% withdrawals a quarter <span class="src">[S95][S526]</span>. The final $5bn was deployed by 2026 <span class="src">[S534]</span>.</td><td>The template for 2026: cap the intake below demand, draw it down slowly.</td></tr>
+<tr><td>Oct to Nov 2025</td><td>A $5bn private-markets fund announced, $2bn of it from the firm and its founder, overseen by the Office of the CIO <span class="src">[S541]</span>; a 15% stake sold for about $2bn at a $14bn valuation <span class="src">[S82]</span>.</td><td>Outside owners, and a first step beyond liquid trading.</td></tr>
+<tr><td>2026</td><td>Jain Global ($5bn) and Albar ($1.5bn) return outside money to run Millennium capital only <span class="src">[S533][S228]</span>; the $20bn raise draws $30bn; $22bn closes 1 October.</td><td>Capacity is being built by seeding other firms as well as by hiring teams.</td></tr>
+</table>
+
+<h2>4.2 How long the money stays: Millennium and its peers</h2>
+<div class="fig">
+<svg id="svg8" viewBox="0 0 1000 320" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg8 .t{font-size:10px;fill:#1F2933}#svg8 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg8 .s{font-size:9px;fill:#5B6B7C}#svg8 .w{fill:#fff;font-size:10px;font-weight:bold}#svg8 .k{font-size:10.5px;font-weight:bold;fill:#0B2545}#svg8 .lab{font-size:9.8px;fill:#1F2933}</style>
+<text x="20" y="24" class="h">Years to withdraw everything, by firm and by year (to scale)</text>
+<g>
+<text x="20" y="62" class="lab">Millennium, before 2018</text><rect x="260" y="50" width="130" height="18" fill="#8A96A3"/><text x="398" y="63" class="k">1 year [S536]</text>
+<text x="20" y="92" class="lab">Millennium, 2018 to 2022 transition</text><rect x="260" y="80" width="650" height="18" fill="#1B998B"/><text x="270" y="93" class="w">5 years: 5% a quarter; $15bn returned twice to investors who re-invested on these terms [S536]</text>
+<text x="20" y="122" class="lab">Millennium, 2024 and 2026 classes</text><rect x="260" y="110" width="650" height="18" fill="#0B2545"/><text x="270" y="123" class="w">5 years to exit completely; 2026 commitments drawn over up to 4 years first [S526][S533]</text>
+<text x="20" y="152" class="lab">D.E. Shaw Composite, from Jan 2027</text><rect x="260" y="140" width="520" height="18" fill="#5E548E"/><text x="270" y="153" class="w">4 years: 6.25% a quarter [S538]</text>
+<text x="20" y="182" class="lab">Point72, from 2027</text><rect x="260" y="170" width="390" height="18" fill="#D97742"/><text x="270" y="183" class="w">3 years: 8.33% a quarter, from a 25% annual gate [S537]</text>
+<text x="20" y="212" class="lab">D.E. Shaw Oculus, from Jan 2027</text><rect x="260" y="200" width="390" height="18" fill="#9C6644"/><text x="270" y="213" class="w">3 years: 8.3% a quarter [S538]</text>
+<text x="20" y="242" class="lab">Citadel</text><rect x="260" y="230" width="20" height="18" fill="#B23A48"/><text x="288" y="243" class="k">Returns each year's profits instead of growing [S533][S165]</text>
+</g>
+<rect x="20" y="262" width="960" height="50" rx="6" fill="#F3F6FA" stroke="#D5DCE5"/>
+<text x="32" y="280" class="t">Rokos "tripled exit durations for select clients"; Marshall Wace, Elliott and Verition have tightened terms too [S537][S538]. The rationale given: a buffer against forced selling in a crisis, and a stable base from which</text>
+<text x="32" y="294" class="t">to "aggressively recruit top trading talent and invest in sophisticated technological infrastructure" [S537]. Investors "have largely acquiesced" because the returns have been consistent [S537].</text>
+</svg>
+<span class="pm">@@f8@@</span><div class="cap"><b>Figure 8.</b> Lock-ups lengthening across the industry, with Millennium longest <span class="src">[S536][S526][S533][S538][S537][S165]</span>. Long money is what pays for a large centre; Part 7 connects that to the desk.</div></div>
+</div>
+
+<!-- ================= PART 5 ================= -->
+<div class="section" style="--pc:#9C6644"><span class="pm">@@p5@@</span>
+<div class="section-band"><div class="kicker">Part 5</div><h1>What investors see: the values behind the queue</h1><p class="lede">Thirty billion dollars does not queue for a slogan. It queues for a record, a structure and a distribution channel. Here is what each investor type is buying, and the price they have agreed to pay.</p></div>
+
+<div class="fig">
+<svg id="svg9" viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg9 .t{font-size:10px;fill:#1F2933}#svg9 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg9 .s{font-size:9px;fill:#5B6B7C}#svg9 .w{fill:#fff;font-size:10.5px;font-weight:bold}#svg9 .ws{fill:#fff;font-size:9.3px}#svg9 .k{font-size:10.5px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">The value stack: what an investor is buying, and what it costs</text>
+<rect x="20" y="46" width="620" height="54" rx="6" fill="#0B2545"/><text x="32" y="66" class="w">1. THE RECORD</text><text x="32" y="84" class="ws">About 14% a year since 1989; one losing year (2008, -3.5%); "regular monthly gains" of 1 to 2% [S533][S534]. A pension fund cannot afford the years single managers give you.</text>
+<rect x="20" y="108" width="620" height="54" rx="6" fill="#13315C"/><text x="32" y="128" class="w">2. THE STRUCTURE</text><text x="32" y="146" class="ws">360-plus independent teams under hard limits (reported: cut in half at a 5% loss, out at 7%); no house view; a centre that is more than half the firm [S533][S392].</text>
+<rect x="20" y="170" width="620" height="54" rx="6" fill="#1B998B"/><text x="32" y="190" class="w">3. CAPACITY THAT STILL EXISTS</text><text x="32" y="208" class="ws">Rivals are closed or returning money [S538][S533]. Millennium adds capacity by hiring teams and seeding external managers (Jain $5bn, Albar $1.5bn) [S533].</text>
+<rect x="20" y="232" width="620" height="54" rx="6" fill="#D97742"/><text x="32" y="252" class="w">4. INSTITUTIONAL DURABILITY</text><text x="32" y="270" class="ws">Outside owners since November 2025; an Office of the CIO; a founder aged 77 with a structure built to outlast him [S82][S541][S533].</text>
+<rect x="20" y="294" width="620" height="54" rx="6" fill="#5E548E"/><text x="32" y="314" class="w">5. DISTRIBUTION</text><text x="32" y="332" class="ws">"The largest firms have an advantage in being distributed by bank platforms and registered investment advisers to the everyday wealthy" (Wendy Li, Ivy Invest) [S533]. Wealthy individuals: 30 to 40% of assets.</text>
+<rect x="660" y="46" width="320" height="302" rx="6" fill="#B23A48"/>
+<text x="672" y="68" class="w">THE PRICE THEY HAVE AGREED</text>
+<text x="672" y="92" class="ws">Five years before they can leave completely,</text><text x="672" y="106" class="ws">longer than any peer [S533].</text>
+<text x="672" y="128" class="ws">Pass-through of the firm's costs plus a</text><text x="672" y="142" class="ws">performance fee, with a floor of about 1%</text><text x="672" y="156" class="ws">or 20% of gains since 2023 [S87][S104].</text>
+<text x="672" y="178" class="ws">Industry-wide, investors kept 41 cents of each</text><text x="672" y="192" class="ws">gross dollar at multi-strats in 2023 [S370].</text>
+<text x="672" y="214" class="ws">Commitments that the firm draws when it</text><text x="672" y="228" class="ws">chooses, over up to four years [S530].</text>
+<text x="672" y="250" class="ws">No market view, no star, no spectacular year:</text><text x="672" y="264" class="ws">8.2% for 2026 to August against an index up</text><text x="672" y="278" class="ws">more [S402].</text>
+<text x="672" y="304" class="ws">They queued anyway. That is the finding.</text>
+<text x="20" y="372" class="s">The stack is the author's synthesis of the reported reasons; each line rests on the source cited. The firm has published no investor letter for this raise.</text>
+</svg>
+<span class="pm">@@f9@@</span><div class="cap"><b>Figure 9.</b> The value stack. What the queue is buying, and the terms it accepted, from the reporting cited.</div></div>
+
+<h2>5.1 Who is in the queue</h2>
+<table>
+<tr><th style="width:24%">Investor type</th><th>What they want from Millennium</th><th style="width:30%">Evidence</th></tr>
+<tr><td>Pension funds and endowments</td><td>A return that does not fall when markets fall, to protect the rest of a portfolio that must pay pensions whatever happens. They are the loudest on fees and still allocate: a Texas Teachers-led coalition pushed for cash hurdles, and Texas Teachers plans to increase its hedge fund allocation <span class="src">[S371][S549]</span>.</td><td>Bloomberg's fee-pushback reporting names pensions and sovereign funds as the client base <span class="src">[S371]</span>.</td></tr>
+<tr><td>Sovereign wealth funds</td><td>Scale: an allocation that moves the needle for a fund of hundreds of billions must go to a manager that can absorb it.</td><td>Named in the same reporting <span class="src">[S371]</span>; Bloomberg's "new era for giant hedge funds" framing <span class="src">[S533]</span>.</td></tr>
+<tr><td>Wealthy individuals via private banks and advisers</td><td>Access to a famous, consistent fund through a platform they already use; less fee-sensitive than pensions.</td><td>30 to 40% of Millennium's assets; the distribution advantage of the largest firms <span class="src">[S533]</span>.</td></tr>
+<tr><td>The firm and its founder</td><td>Alignment: about 18% of the master fund is owned by the adviser and related persons; the founder put $2bn of his own and the firm's money into the private-markets fund <span class="src">[S360][S541]</span>.</td><td>SEC filing; Hedgeweek <span class="src">[S360][S541]</span>.</td></tr>
+</table>
+
+<h2>5.2 The values, in three words</h2>
+<div class="three">
+<div class="card"><h4>Consistency</h4><p>The product is the shape of the return, not its size. One losing year in thirty-seven, and that one shallow, is what a liability-driven investor pays for <span class="src">[S533][S111]</span>.</p></div>
+<div class="card"><h4>Capital stability</h4><p>Long money lets the firm hold positions through stress, pay teams in flat years and invest in a large centre; the firm has spent eight years converting short money to long <span class="src">[S536][S537]</span>. The 2026 raise asks for long money from day one.</p></div>
+<div class="card"><h4>Independence, held together</h4><p>Hundreds of independent teams under one risk framework: a return that is the average of many bets, not one mind. Investors are trusting the structure, not a person, which is why a 77-year-old founder is not the risk it would be elsewhere <span class="src">[S533][S352]</span>.</p></div>
+</div>
+<div class="box say"><div class="lbl">Say this</div><p>"Investors are buying three things: a thirty-seven-year record with one shallow losing year; a structure they trust more than any individual, which is why the founder's age is not the issue it would be at a single-manager fund; and capacity that still exists when rivals are closed. The price is a five-year lock and pass-through costs, and they paid it, which tells you how they weigh consistency against cost."</p></div>
+</div>
+
+<!-- ================= PART 6 ================= -->
+<div class="section" style="--pc:#B23A48"><span class="pm">@@p6@@</span>
+<div class="section-band"><div class="kicker">Part 6</div><h1>What other people think: bull, bear and the regulators</h1><p class="lede">The reporting is Bloomberg's; the opinions come from prime brokers, allocators, commentators and the Bank of England. The Financial Times could not be read for this guide, so its view is recorded as absent, not agreed with. Here is the argument, both ways.</p></div>
+
+<div class="fig">
+<svg id="svg10" viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg10 .t{font-size:9.8px;fill:#1F2933}#svg10 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg10 .s{font-size:8.8px;fill:#5B6B7C}#svg10 .w{fill:#fff;font-size:10.5px;font-weight:bold}#svg10 .ws{fill:#fff;font-size:9.2px}#svg10 .k{font-size:10.5px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">The opinion map: what the raise means, according to whom</text>
+<rect x="20" y="46" width="470" height="200" rx="8" fill="#1B998B"/>
+<text x="32" y="68" class="w">THE BULL CASE: A NEW ERA FOR GIANT HEDGE FUNDS</text>
+<text x="32" y="90" class="ws">Bloomberg's framing: the industry has moved from star managers who could not sustain</text><text x="32" y="104" class="ws">$20bn to firms of $75bn-plus built on process; more firms than ever exceed $75bn [S533].</text>
+<text x="32" y="124" class="ws">"Hedge funds used to be the Wild, Wild West, of shooting to the moon with less</text><text x="32" y="138" class="ws">transparent, highly concentrated bets" (Lindsay Costigan, TD Securities) [S533].</text>
+<text x="32" y="158" class="ws">Scale brings distribution: bank platforms and advisers sell the biggest names to the</text><text x="32" y="172" class="ws">"everyday wealthy" (Wendy Li, Ivy Invest) [S533].</text>
+<text x="32" y="192" class="ws">Discipline: the firm took $22bn of $30bn and calls only $2bn up front, matching money</text><text x="32" y="206" class="ws">to capacity rather than growing for its own sake [S535][S530].</text>
+<text x="32" y="226" class="ws">Capacity built by seeding: Jain $5bn, Albar $1.5bn, "dozens" of smaller firms [S533][S534].</text>
+<rect x="510" y="46" width="470" height="200" rx="8" fill="#B23A48"/>
+<text x="522" y="68" class="w">THE BEAR CASE: CAPITAL FASTER THAN TRADES</text>
+<text x="522" y="90" class="ws">"A hedge fund can attract capital faster than it can create good trades." A trade that</text><text x="522" y="104" class="ws">supports $500m of exposure degrades when scaled: it pushes prices, raises financing,</text><text x="522" y="118" class="ws">or leaves a position that cannot be exited quickly (LLMQuant commentary) [S535].</text>
+<text x="522" y="138" class="ws">Fees: allocators kept 41 cents per gross dollar in 2023; some now refuse managers unless</text><text x="522" y="152" class="ws">they can keep 60 to 70% of gross; H1 2025 was 2.2% [S370][S549].</text>
+<text x="522" y="172" class="ws">Opacity: at big quants or multistrats "it would be harder to pinpoint what might go</text><text x="522" y="186" class="ws">wrong until after the fact" (Wendy Li) [S533].</text>
+<text x="522" y="206" class="ws">History: Tiger and Soros found $20bn-plus impossible to sustain; Bridgewater has cut</text><text x="522" y="220" class="ws">its capital "well below" $100bn; Eisler wound down on costs [S533][S510].</text>
+<rect x="20" y="266" width="960" height="120" rx="8" fill="#0B2545"/>
+<text x="32" y="288" class="w">THE REGULATORS: LEVERAGE AND CONCENTRATION, NOT MILLENNIUM BY NAME</text>
+<text x="32" y="310" class="ws">Bank of England, July 2026: hedge funds' equity prime-brokerage balances are at record levels, up about 40% in a year; positions have become more concentrated in sectors such as</text>
+<text x="32" y="324" class="ws">semiconductors alongside the AI rally; and after the Middle East shock, moves in some bond markets, including gilts, "were amplified by hedge fund deleveraging" [S545][S240].</text>
+<text x="32" y="344" class="ws">The IMF's April 2026 stability report made related points on leverage in non-banks [S242]. Neither names Millennium; both describe the world its 360 teams trade in, with more</text>
+<text x="32" y="358" class="ws">capital and, for the July AI unwind, exactly the concentration the Bank described [S223].</text>
+<text x="32" y="378" class="ws">For a candidate: the regulators' question is not "is this firm safe" but "what happens when many large, leveraged, similar books deleverage at once".</text>
+<rect x="20" y="400" width="960" height="70" rx="6" fill="#F3F6FA" stroke="#D5DCE5"/>
+<text x="32" y="420" class="k">WHAT COULD NOT BE READ</text>
+<text x="32" y="440" class="t">The Financial Times' coverage and any Lex, Alphaville or Bloomberg Opinion column on the September raise were paywalled or not found; Bloomberg's 25 September news story itself was read only through</text>
+<text x="32" y="454" class="t">syndication [S532]. If an interviewer cites an FT view, say you saw the Bloomberg and Hedgeweek reporting and ask what the FT's angle was.</text>
+</svg>
+<span class="pm">@@f10@@</span><div class="cap"><b>Figure 10.</b> The opinion map. Quotes as read in the Bloomberg feature's syndication <span class="src">[S533]</span>; the capacity critique from an independent newsletter <span class="src">[S535]</span>; fee figures from earlier sweeps <span class="src">[S370][S549]</span>; the Bank of England's July report as summarised <span class="src">[S545][S240]</span>.</div></div>
+
+<h2>6.1 The three arguments, laid out fairly</h2>
+<table>
+<tr><th style="width:22%">Argument</th><th style="width:39%">For</th><th>Against</th></tr>
+<tr><td>Can $22bn more be invested well?</td><td>The firm calls only what teams can use, over four years; it turned away $8bn; it adds capacity by seeding external firms and hiring, 160 PMs in one year <span class="src">[S530][S533][S168]</span>. The 2024 raise was deployed <span class="src">[S534]</span>.</td><td>Trades do not scale without limit; the commentator's $500m example <span class="src">[S535]</span>. Jain Global made 34% gross but only about 8.4% net for outsiders before going captive <span class="src">[S407]</span>. Crowding showed in July <span class="src">[S223]</span>.</td></tr>
+<tr><td>Are investors paying too much?</td><td>Net returns have beaten classic structures in bad years; Barclays found pass-through funds ahead over three and five years <span class="src">[S506][S505]</span>. Investors keep queueing on firmer terms <span class="src">[S532]</span>.</td><td>41 cents per gross dollar; a pension coalition; rivals conceding hurdles; multi-strats had net outflows in 2024 <span class="src">[S370][S371][S493][S494]</span>.</td></tr>
+<tr><td>Is concentration dangerous?</td><td>Hard limits keep any one month shallow; the record's worst drawdown is about 7% <span class="src">[S378]</span>. The largest firms are the most institutional and transparent to their prime brokers <span class="src">[S533]</span>.</td><td>Leverage at record levels; similar books deleveraging together amplified gilt moves; "harder to pinpoint what might go wrong" <span class="src">[S545][S533]</span>.</td></tr>
+</table>
+<div class="box opinion"><div class="lbl">Where the honest middle is</div><p>Both cases are about the same fact: the raise is a bet that Millennium's capacity is larger than its rivals'. The bull says the structure (no house view, hard limits, seeding) makes that true. The bear says trades have physical limits that no structure removes. The evidence so far, the 2024 raise deployed and 8.2% in a year the platforms found hard, favours the bull, with July as the bear's exhibit. That is a defensible position for a candidate: "so far, yes; the test is the next mediocre year."</p></div>
+</div>
+
+<!-- ================= PART 7 ================= -->
+<div class="section" style="--pc:#3A7D44"><span class="pm">@@p7@@</span>
+<div class="section-band"><div class="kicker">Part 7</div><h1>What it means: the industry, the firm, the desk, you</h1><p class="lede">Four levels, from the whole industry down to the seat you are interviewing for. The last one is the one to be able to say in a sentence.</p></div>
+
+<h2>7.1 For the industry</h2>
+<ul>
+<li><b>Money goes to size.</b> Nearly nine in ten dollars of new money in early 2026 went to firms over $5bn <span class="src">[S542]</span>; the largest platforms are "capacity constrained", so the overflow benefits second- and third-tier managers <span class="src">[S544]</span>. Expect more seeding and more external allocations: over a hundred in two years, mostly through separately managed accounts <span class="src">[S544]</span>.</li>
+<li><b>Long money becomes the norm.</b> Millennium five years, D.E. Shaw four, Point72 three, Rokos tripled, Marshall Wace, Elliott and Verition tightening <span class="src">[S533][S538][S537]</span>. The hedge fund is becoming a private-equity-style commitment for its investors.</li>
+<li><b>Two answers to the capacity problem.</b> Citadel and D.E. Shaw ration; Millennium grows by adding teams and firms. The industry will watch whose net returns hold <span class="src">[S533][S165]</span>.</li>
+<li><b>Regulators' attention rises with the numbers.</b> Record leverage and concentration are on the Bank of England's list; large platforms are where both sit <span class="src">[S545]</span>.</li>
+</ul>
+
+<h2>7.2 For the firm</h2>
+<ul>
+<li><b>A path to $130bn.</b> Bloomberg's projection if returns stay above 10% and inflows continue <span class="src">[S534]</span>. More capital means more teams, more external managers, and a bigger centre to measure and serve them.</li>
+<li><b>New territory.</b> A $3bn less-liquid credit raise under consideration, a $5bn private-markets fund, an Athens office in discussion, Geneva expansion, senior hires in Tokyo <span class="src">[S533][S541][S546][S406][S408]</span>. The firm is stretching in asset class and geography at once.</li>
+<li><b>Institutionalisation.</b> Outside owners, an Office of the CIO overseeing the new fund, a president leading the raise, a founder of 77 <span class="src">[S82][S541][S498][S533]</span>. The raise is a vote that the structure outlasts its founder.</li>
+<li><b>The obligation.</b> Five-year money is a promise to be worth five years of fees. Every central function is now on a longer, larger bill.</li>
+</ul>
+
+<h2>7.3 For the corporate access desk</h2>
+<div class="fig">
+<svg id="svg11" viewBox="0 0 1000 380" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg11 .t{font-size:9.8px;fill:#1F2933}#svg11 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg11 .s{font-size:8.8px;fill:#5B6B7C}#svg11 .w{fill:#fff;font-size:10.5px;font-weight:bold}#svg11 .ws{fill:#fff;font-size:9.2px}#svg11 .k{font-size:10.5px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">From capital to company meetings: why the raise reaches the desk</text>
+<defs><marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#0B2545"/></marker></defs>
+<rect x="20" y="50" width="170" height="90" rx="8" fill="#D97742"/><text x="30" y="70" class="w">1. CAPITAL</text><text x="30" y="90" class="ws">$22bn committed;</text><text x="30" y="104" class="ws">$2bn called in October,</text><text x="30" y="118" class="ws">the rest over four</text><text x="30" y="132" class="ws">years [S530]</text>
+<rect x="222" y="50" width="170" height="90" rx="8" fill="#1B998B"/><text x="232" y="70" class="w">2. TEAMS</text><text x="232" y="90" class="ws">Allocated to 360-plus</text><text x="232" y="104" class="ws">pods and to external</text><text x="232" y="118" class="ws">managers (Jain, Albar,</text><text x="232" y="132" class="ws">others) [S533]</text>
+<rect x="424" y="50" width="170" height="90" rx="8" fill="#0B2545"/><text x="434" y="70" class="w">3. COVERAGE</text><text x="434" y="90" class="ws">Each team covers dozens</text><text x="434" y="104" class="ws">of companies; new teams</text><text x="434" y="118" class="ws">and new sectors (credit)</text><text x="434" y="132" class="ws">widen the list [S10]</text>
+<rect x="626" y="50" width="170" height="90" rx="8" fill="#5E548E"/><text x="636" y="70" class="w">4. DEMAND</text><text x="636" y="90" class="ws">More requests for the</text><text x="636" y="104" class="ws">same scarce meetings;</text><text x="636" y="118" class="ws">more pooling; more</text><text x="636" y="132" class="ws">noes with alternatives</text>
+<rect x="828" y="50" width="152" height="90" rx="8" fill="#B23A48"/><text x="838" y="70" class="w">5. THE DESK</text><text x="838" y="90" class="ws">Serves them all,</text><text x="838" y="104" class="ws">neutrally, with</text><text x="838" y="118" class="ws">one record and</text><text x="838" y="132" class="ws">one voice out</text>
+<g stroke="#0B2545" stroke-width="2.5" fill="none" marker-end="url(#ar)"><line x1="190" y1="95" x2="218" y2="95"/><line x1="392" y1="95" x2="420" y2="95"/><line x1="594" y1="95" x2="622" y2="95"/><line x1="796" y1="95" x2="824" y2="95"/></g>
+<rect x="20" y="160" width="470" height="200" rx="6" fill="#F3F6FA" stroke="#D5DCE5"/>
+<text x="32" y="180" class="k">FIVE CONSEQUENCES FOR THE SEAT</text>
+<text x="32" y="200" class="t">1. The client base grows faster than the desk. 265 teams in 2020, 360-plus now, more to come</text><text x="32" y="214" class="t">[S540][S530]. The desk's problem is scale: more requests per seat, more pooling.</text>
+<text x="32" y="232" class="t">2. New clients of a new kind. External managers running Millennium money (Jain's seven</text><text x="32" y="246" class="t">business lines; Albar) need access too, through a desk that must serve them as it serves pods.</text>
+<text x="32" y="264" class="t">3. Long money funds the centre. Five-year commitments make multi-year investment in the</text><text x="32" y="278" class="t">portal, the data and the desk's headcount sensible [S537].</text>
+<text x="32" y="296" class="t">4. New asset classes, new counterparties. A credit strategy means credit analysts wanting</text><text x="32" y="310" class="t">management and IR time too; private markets bring different access altogether [S533][S541].</text>
+<text x="32" y="328" class="t">5. Every desk is a pass-through cost on a bigger bill. The consumption report has to prove</text><text x="32" y="342" class="t">the desk earns its place to an investor base that is watching the expense list [S370].</text>
+<rect x="510" y="160" width="470" height="200" rx="6" fill="#0B2545"/>
+<text x="522" y="180" class="w">THE SENTENCE FOR THE INTERVIEW</text>
+<text x="522" y="202" class="ws">"For the desk, the raise means the client base keeps growing faster than the</text><text x="522" y="216" class="ws">desk: more teams, plus external managers who now need access through</text><text x="522" y="230" class="ws">Millennium, plus possibly credit. That makes the allocation problem harder and</text><text x="522" y="244" class="ws">the record more important, and it is a process and data problem, which is the</text><text x="522" y="258" class="ws">kind an intern can help with. The five-year money is also what makes investing</text><text x="522" y="272" class="ws">in the desk's tools worthwhile."</text>
+<text x="522" y="298" class="ws">Ask: "With the new capital, do external managers like Jain's teams come through</text><text x="522" y="312" class="ws">this desk for access, and does that change how allocation works?"</text>
+<text x="522" y="336" class="ws">Do not claim to know the desk's headcount plans; not public.</text>
+</svg>
+<span class="pm">@@f11@@</span><div class="cap"><b>Figure 11.</b> The chain from capital to the desk. Steps 1 and 2 from the reporting <span class="src">[S530][S533]</span>; steps 3 to 5 and the consequences are the author's inference from the desk's function <span class="src">[S40][S10]</span>.</div></div>
+
+<h2>7.4 For you, tomorrow</h2>
+<table>
+<tr><th style="width:34%">If they ask</th><th>Say</th></tr>
+<tr><td>"What's happening at Millennium at the moment?"</td><td>The Part 0 answer: record raise, $30bn demand, $22bn closing 1 October, $2bn called, five-year lock; rivals closed or returning; more teams for the desk to serve.</td></tr>
+<tr><td>"Is that a lot?"</td><td>"The largest hedge fund launch ever was $8.5bn; this accepts $22bn and turned away $8bn. The whole industry took about $45bn in the first quarter. Yes."</td></tr>
+<tr><td>"Why do investors give Millennium money when others are giving it back?"</td><td>"Consistency and capacity: a thirty-seven-year record with one shallow losing year, and a structure that adds teams and seeds external firms rather than rationing. They pay for it with a five-year lock and pass-through costs, and they queued anyway."</td></tr>
+<tr><td>"What's the risk?"</td><td>"That capital arrives faster than good trades. The firm's answer is to call only $2bn up front and draw the rest over four years as capacity appears. The test is the next mediocre year, and July showed the crowding risk is real."</td></tr>
+<tr><td>"What does it mean for this desk?"</td><td>The sentence in Figure 11.</td></tr>
+</table>
+<div class="box dont"><div class="lbl">Three traps</div><p>Saying "$30bn raised" (it was offered; $22bn is taken). Saying "Millennium announced" (it declined to comment; Bloomberg reported). Quoting the $130bn as a plan (it is a journalist's projection, conditional on returns).</p></div>
+</div>
+
+<!-- ================= PART 8 ================= -->
+<div class="section" style="--pc:#E9B949"><span class="pm">@@p8@@</span>
+<div class="section-band"><div class="kicker">Part 8</div><h1>Forming your own opinion</h1><p class="lede">An opinion you can defend has three parts: a claim, the evidence, and the limit of the evidence. Here are three positions you could take on the raise, built that way. Pick one, own it, and know its weak point.</p></div>
+
+<div class="fig">
+<svg id="svg12" viewBox="0 0 1000 440" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<style>#svg12 .t{font-size:9.8px;fill:#1F2933}#svg12 .h{font-size:15px;font-weight:bold;fill:#0B2545}#svg12 .s{font-size:8.8px;fill:#5B6B7C}#svg12 .w{fill:#fff;font-size:10.5px;font-weight:bold}#svg12 .ws{fill:#fff;font-size:9.2px}#svg12 .k{font-size:10.5px;font-weight:bold;fill:#0B2545}</style>
+<text x="20" y="24" class="h">Three positions you could hold, with the evidence for and against</text>
+<rect x="20" y="46" width="310" height="370" rx="8" fill="#1B998B"/>
+<text x="32" y="68" class="w">A. "IT IS A VERDICT ON THE</text><text x="32" y="84" class="w">STRUCTURE, NOT THE YEAR"</text>
+<text x="32" y="108" class="ws">Claim: investors offered $30bn in a year the</text><text x="32" y="122" class="ws">firm made 8.2% to August against a market up</text><text x="32" y="136" class="ws">more, so they are buying the structure's</text><text x="32" y="150" class="ws">consistency, not chasing returns.</text>
+<text x="32" y="174" class="ws">For: the record (one losing year); rivals closed;</text><text x="32" y="188" class="ws">terms firmer each raise and still oversubscribed</text><text x="32" y="202" class="ws">[S533][S402][S532][S87].</text>
+<text x="32" y="226" class="ws">Against: momentum and scale can drive</text><text x="32" y="240" class="ws">allocations as much as analysis; nine in ten</text><text x="32" y="254" class="ws">new dollars went to the biggest firms [S542].</text>
+<text x="32" y="278" class="ws">Limit: no investor has said on the record why</text><text x="32" y="292" class="ws">they committed to this raise.</text>
+<text x="32" y="316" class="ws">Line: "They bought the shape of the return in</text><text x="32" y="330" class="ws">a year the return itself was ordinary."</text>
+<rect x="345" y="46" width="310" height="370" rx="8" fill="#D97742"/>
+<text x="357" y="68" class="w">B. "CAPACITY IS THE REAL QUESTION,</text><text x="357" y="84" class="w">AND SEEDING IS THE ANSWER"</text>
+<text x="357" y="108" class="ws">Claim: the raise only works if the firm can find</text><text x="357" y="122" class="ws">enough independent trades; its answer is to</text><text x="357" y="136" class="ws">add teams and to seed other firms, calling</text><text x="357" y="150" class="ws">money only as capacity appears.</text>
+<text x="357" y="174" class="ws">For: $2bn called of $22bn; Jain $5bn and Albar</text><text x="357" y="188" class="ws">$1.5bn now exclusive; 160 PMs hired in a year;</text><text x="357" y="202" class="ws">the 2024 raise deployed [S530][S533][S168][S534].</text>
+<text x="357" y="226" class="ws">Against: Jain made 34% gross but 8.4% net for</text><text x="357" y="240" class="ws">outsiders; trades degrade at size; July's</text><text x="357" y="254" class="ws">crowding [S407][S535][S223].</text>
+<text x="357" y="278" class="ws">Limit: capacity is unobservable from outside;</text><text x="357" y="292" class="ws">only net returns over years will show it.</text>
+<text x="357" y="316" class="ws">Line: "The interesting number isn't $22bn, it's</text><text x="357" y="330" class="ws">$2bn: how little they called on day one."</text>
+<rect x="670" y="46" width="310" height="370" rx="8" fill="#0B2545"/>
+<text x="682" y="68" class="w">C. "LOCK-UPS AND PASS-THROUGH ARE</text><text x="682" y="84" class="w">THE PRICE OF CONSISTENCY, PAID KNOWINGLY"</text>
+<text x="682" y="108" class="ws">Claim: the industry's investors are choosing</text><text x="682" y="122" class="ws">five-year commitments and cost pass-through</text><text x="682" y="136" class="ws">with open eyes, because the alternative is</text><text x="682" y="150" class="ws">funds that cannot pay teams in flat years.</text>
+<text x="682" y="174" class="ws">For: Point72, D.E. Shaw, Rokos and others all</text><text x="682" y="188" class="ws">lengthening terms and investors "largely</text><text x="682" y="202" class="ws">acquiesced" [S537][S538]; Barclays' net-return</text><text x="682" y="216" class="ws">evidence [S506][S505].</text>
+<text x="682" y="240" class="ws">Against: 41 cents kept; pension coalition; a</text><text x="682" y="254" class="ws">cash hurdle conceded elsewhere; 2024 outflows</text><text x="682" y="268" class="ws">[S370][S371][S493][S494].</text>
+<text x="682" y="292" class="ws">Limit: "acquiesced" is a journalist's word;</text><text x="682" y="306" class="ws">the coalition is still active.</text>
+<text x="682" y="330" class="ws">Line: "Investors are not revolting against</text><text x="682" y="344" class="ws">paying for performance; they are objecting to</text><text x="682" y="358" class="ws">a blank cheque. Millennium's terms are firm</text><text x="682" y="372" class="ws">but not blank: capped intake, slow calls."</text>
+<text x="20" y="432" class="s">Choose one as your main view and hold the other two as things you can say if pushed. Position C's closing line adapts a fund-services firm's phrasing [S518].</text>
+</svg>
+<span class="pm">@@f12@@</span><div class="cap"><b>Figure 12.</b> Three defensible positions. Each has a claim, evidence for and against, and a stated limit; that structure is what makes an opinion survive a follow-up.</div></div>
+
+<h2>8.1 The method, for any news story</h2>
+<div class="stepper">
+<div class="s"><b>1. What happened, exactly</b>Numbers with dates and who reported them. Separate offered, accepted and called.</div>
+<div class="s"><b>2. Compared with what</b>Other raises, other firms, the industry. A number without a comparator is not awareness.</div>
+<div class="s"><b>3. Why now</b>The history that led here: eight years of lengthening terms, a strong 2020, rivals closing.</div>
+<div class="s"><b>4. Who wins, who pays</b>The firm gets long money; investors pay locks and costs; the desk gets more clients.</div>
+<div class="s"><b>5. Your claim and its limit</b>One sentence you believe, one sentence on what would change your mind.</div>
+</div>
+
+<h2>8.2 Five lines to carry into the room</h2>
+<ol>
+<li>"A record $20bn asked, more than $30bn offered, about $22bn taken on 1 October, with $2bn called and the rest drawn over four years on a five-year lock."</li>
+<li>"The largest hedge fund launch ever was $8.5bn; the industry took about $45bn in the whole first quarter. This is large by any measure."</li>
+<li>"It comes while Citadel returns profits and D.E. Shaw is closed. Investors are choosing the few firms that can still take money."</li>
+<li>"The risk is capital arriving faster than good trades; the firm's answer is slow calls and seeding external managers. July showed the crowding risk is real."</li>
+<li>"For the desk it means more teams and new kinds of client, so the allocation problem gets harder and the record matters more."</li>
+</ol>
+
+<h2>8.3 Five questions you could ask</h2>
+<ul>
+<li>"With the new capital, do external managers running Millennium money use this desk for access, and does that change the allocation rule?"</li>
+<li>"Has the growth in team numbers since 2020 changed how the desk pools requests, or is the process the same at 360 teams as at 265?"</li>
+<li>"When the firm adds a new strategy, such as credit, how early does the desk get involved in what those teams will need?"</li>
+<li>"Does longer-dated capital change how the centre invests in tools like the portal?"</li>
+<li>"How did the September conference cluster feel with the client base this size?"</li>
+</ul>
+<div class="box dont"><div class="lbl">Don't</div><p>Do not offer a view on whether the fees are fair unless asked; if asked, give position C with its limit. Do not speculate about the firm's plans for the money beyond what was reported. Do not name the relocating PM or the Athens office unless the interviewer raises geography.</p></div>
+</div>
+
+<!-- ================= PART 9 ================= -->
+<div class="section" style="--pc:#8A96A3"><span class="pm">@@p9@@</span>
+<div class="section-band"><div class="kicker">Part 9</div><h1>Glossary</h1><p class="lede">Every term used above, in plain English.</p></div>
+<div class="two">
+<div>
+<dl class="gloss">
+<dt>Assets under management (AUM)</dt><dd>The total value of the money a firm runs for investors. Millennium: about $97bn, September 2026.</dd>
+<dt>Capital raise</dt><dd>Asking investors to put more money into the fund.</dd>
+<dt>Commitment</dt><dd>A promise to invest a set amount when the firm asks for it; not cash yet.</dd>
+<dt>Capital call, drawdown</dt><dd>The firm asking for a slice of a commitment; a drawdown structure calls money over time, as private-equity funds do.</dd>
+<dt>Tranche</dt><dd>A slice of a raise, taken in stages.</dd>
+<dt>Oversubscribed</dt><dd>More money offered than the firm will take: $30bn offered against $20bn planned.</dd>
+<dt>Capacity</dt><dd>How much money a strategy can run before it stops working well; the reason funds turn money away.</dd>
+<dt>Lock-up</dt><dd>A period during which an investor cannot withdraw.</dd>
+<dt>Gate</dt><dd>A limit on how much can be withdrawn per period; 5% a quarter means five years to exit fully.</dd>
+<dt>Share class</dt><dd>A version of the fund with its own terms.</dd>
+<dt>Redemption</dt><dd>An investor taking money out.</dd>
+</dl>
+</div>
+<div>
+<dl class="gloss">
+<dt>Returning capital</dt><dd>A fund handing money back to investors, usually profits, to stay at a size it can invest well; Citadel does this yearly.</dd>
+<dt>Multi-strategy, multi-manager, platform</dt><dd>A fund made of many independent teams sharing one risk framework and one centre; Millennium, Citadel, Point72, Balyasny, D.E. Shaw's Composite.</dd>
+<dt>Seeding, external managers</dt><dd>Giving capital to a separate firm to run on the platform's behalf; Jain Global and Albar now run only Millennium money.</dd>
+<dt>Pass-through</dt><dd>The fund pays the firm's operating costs directly and bills investors, on top of a performance fee.</dd>
+<dt>Fee floor</dt><dd>A minimum charge even in a poor year; at Millennium about 1% of assets or 20% of gains since 2023.</dd>
+<dt>Cash hurdle</dt><dd>A performance fee charged only on returns above the cash rate; ExodusPoint adopted one in 2024.</dd>
+<dt>Prime broker</dt><dd>The bank that lends a hedge fund money and securities and holds its positions; where regulators see leverage.</dd>
+<dt>Leverage</dt><dd>Borrowing to make bets bigger than the fund's capital.</dd>
+<dt>Deleveraging</dt><dd>Cutting positions, often all at once, which can move markets.</dd>
+<dt>Concentration</dt><dd>Many funds holding similar positions, or new money flowing to a few firms; both were features of 2026.</dd>
+<dt>HFR</dt><dd>Hedge Fund Research, the standard source of industry size and flow data.</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="section" style="--pc:#0B2545"><span class="pm">@@p10@@</span>
+<div class="section-band"><div class="kicker">Part 10</div><h1>Sources</h1><p class="lede">Every [Sxx] marker above resolves here. IDs are shared with the Complete Interview Pack and the earlier guides. Sources accessed between 4 and 28 September 2026 as recorded in each row. "Fetched" means the full text was read; "Snippet" means only a search excerpt was seen; "Paywalled" means the headline was recorded and nothing was inferred from unread text.</p></div>
+<table class="src-table"><tr><th style="width:7%">ID</th><th style="width:12%">Outlet</th><th style="width:26%">Title</th><th style="width:8%">Date</th><th style="width:29%">URL</th><th style="width:8%">Status</th><th style="width:10%">Conf.</th></tr>
+<tr><td class="src">[S10]</td><td>ICR</td><td>Practical Lessons on Corporate Access from a Leading Multi-Manager Hedge Fund (Christopher Melito)</td><td>2025-05-07</td><td><a href="https://icrinc.com/news-resources/practical-lessons-on-corporate-access/">https://icrinc.com/news-resources/practical-lessons-on-corporate-access/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S12]</td><td>ICR</td><td>Evolving Strategies for Corporate Access: Your 2025 Playbook (Christopher Melito)</td><td>2024-12-18</td><td><a href="https://icrinc.com/news-resources/strategies-for-corporate-access-2025/">https://icrinc.com/news-resources/strategies-for-corporate-access-2025/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S40]</td><td>Millennium careers (campusjobs.mlp.com, Eightfold API)</td><td>2027 Corporate Access Services Intern, London — REQ-30183</td><td>created 2026-07-27</td><td><a href="https://campusjobs.mlp.com/careers/job/755957778817-2027-corporate-access-services-intern-london-london-london-united-kingdom?domain=mlp.com">https://campusjobs.mlp.com/careers/job/755957778817-2027-corporate-access-services-intern-...</a><br><a href="https://campusjobs.mlp.com/api/apply/v2/jobs/755957778817?domain=mlp.com">https://campusjobs.mlp.com/api/apply/v2/jobs/755957778817?domain=mlp.com</a></td><td>Fetched</td><td><span class="tag c">Primary</span></td></tr>
+<tr><td class="src">[S82]</td><td>Hedgeweek</td><td>Millennium sells $2bn minority stake to diversify ownership</td><td>4 Nov 2025</td><td><a href="https://www.hedgeweek.com/millennium-sells-2bn-minority-stake-to-diversify-ownership/">https://www.hedgeweek.com/millennium-sells-2bn-minority-stake-to-diversify-ownership/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S87]</td><td>Hedgeweek (citing Bloomberg)</td><td>Millennium to charge fees even if fund loses money</td><td>9 Mar 2023</td><td><a href="https://www.hedgeweek.com/millennium-charge-fees-even-if-fund-loses-money/">https://www.hedgeweek.com/millennium-charge-fees-even-if-fund-loses-money/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S95]</td><td>Hedgeweek (citing Bloomberg)</td><td>Millennium to stick with $10bn fundraising cap despite seeing $20bn in investor interest; Millennium targeting up to $10bn in long-term capital</td><td>23 Oct 2024; 16 Sep 2024</td><td><a href="https://www.hedgeweek.com/millennium-to-stick-with-10bn-fundraising-cap-despite-seeing-20bn-in-investor-interest/">https://www.hedgeweek.com/millennium-to-stick-with-10bn-fundraising-cap-despite-seeing-20b...</a><br><a href="https://www.hedgeweek.com/millennium-targeting-up-to-10bn-in-long-term-capital/">https://www.hedgeweek.com/millennium-targeting-up-to-10bn-in-long-term-capital/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S101]</td><td>Business Insider via Yahoo Finance</td><td>Hedge funds&#x27; 2025 report card (6 Jan 2026); Millennium has hired two heavy-hitter PMs for its credit-trading business (30 May 2025)</td><td>6 Jan 2026; 30 May 2025</td><td><a href="https://finance.yahoo.com/news/2025-returns-hedge-funds-rolling-234728986.html">https://finance.yahoo.com/news/2025-returns-hedge-funds-rolling-234728986.html</a><br><a href="https://finance.yahoo.com/news/millennium-hired-two-heavy-hitter-025245795.html">https://finance.yahoo.com/news/millennium-hired-two-heavy-hitter-025245795.html</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S104]</td><td>Net Interest (Marc Rubinstein)</td><td>Peak Pod</td><td>15 Sep 2023</td><td><a href="https://www.netinterest.co/p/peak-pod">https://www.netinterest.co/p/peak-pod</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S111]</td><td>Wall Street Journal (Juliet Chung), PDF copy hosted by Duke University</td><td>Stalwart Hedge Funds to Test Clients With New Terms</td><td>31 Oct 2018</td><td><a href="https://public.econ.duke.edu/~boller/Econ.471-571.F18/Hedge_Fund_Terms_WSJ_103118.pdf">https://public.econ.duke.edu/~boller/Econ.471-571.F18/Hedge_Fund_Terms_WSJ_103118.pdf</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S165]</td><td>Hedgeweek (reporting CNBC/Bloomberg)</td><td>Citadel to return $5bn of profits to investors</td><td>24 Dec 2025</td><td><a href="https://www.hedgeweek.com/citadel-to-return-5bn-of-profits-to-investors/">https://www.hedgeweek.com/citadel-to-return-5bn-of-profits-to-investors/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S168]</td><td>Business Insider via AOL</td><td>How hedge funds became a bright spot in a nasty job market</td><td>24 Feb 2026</td><td><a href="https://www.aol.com/articles/hedge-funds-became-bright-spot-090701777.html">https://www.aol.com/articles/hedge-funds-became-bright-spot-090701777.html</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S223]</td><td>Hedgeweek (citing Bloomberg)</td><td>Millennium slips 2.1% in July as AI sell-off weighs on multi-strat hedge funds</td><td>2026-08-04</td><td><a href="https://www.hedgeweek.com/millennium-slips-2-1-in-july-as-ai-sell-off-weighs-on-multi-strat-hedge-funds/">https://www.hedgeweek.com/millennium-slips-2-1-in-july-as-ai-sell-off-weighs-on-multi-stra...</a></td><td>Fetched</td><td><span class="tag u">Snippet</span></td></tr>
+<tr><td class="src">[S228]</td><td>Hedgeweek (citing Bloomberg)</td><td>Jain Global to return external capital and shift to exclusive Millennium mandate</td><td>2026-04-27</td><td><a href="https://www.hedgeweek.com/jain-global-to-return-external-capital-and-shift-to-exclusive-millennium-mandate4/">https://www.hedgeweek.com/jain-global-to-return-external-capital-and-shift-to-exclusive-mi...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S240]</td><td>Bank of England</td><td>Financial Stability Report – July 2026</td><td>2026-07-07</td><td><a href="https://www.bankofengland.co.uk/financial-stability-report/2026/july-2026">https://www.bankofengland.co.uk/financial-stability-report/2026/july-2026</a></td><td>Fetched</td><td><span class="tag c">Primary</span></td></tr>
+<tr><td class="src">[S242]</td><td>IMF</td><td>Global Financial Stability Report, April 2026, Chapter 1</td><td>2026-04-14</td><td><a href="https://www.imf.org/-/media/files/publications/gfsr/2026/april/english/ch1.pdf">https://www.imf.org/-/media/files/publications/gfsr/2026/april/english/ch1.pdf</a></td><td>Fetched</td><td><span class="tag c">Primary</span></td></tr>
+<tr><td class="src">[S302]</td><td>US Securities and Exchange Commission</td><td>Press release 2005-170: SEC Charges Millennium Partners, L.P., Israel Englander, and Others for Engaging in Fraudulent Market Timing Scheme</td><td>1 Dec 2005</td><td><a href="https://www.sec.gov/news/press/2005-170.htm">https://www.sec.gov/news/press/2005-170.htm</a></td><td>Fetched</td><td><span class="tag c">Primary</span></td></tr>
+<tr><td class="src">[S303]</td><td>CNN Money (Fortune)</td><td>Hedge fund Millennium Partners settles for $180 million</td><td>2 Dec 2005</td><td><a href="https://money.cnn.com/2005/12/01/markets/englander_fortune/">https://money.cnn.com/2005/12/01/markets/englander_fortune/</a></td><td>Snippet</td><td><span class="tag u">Snippet</span></td></tr>
+<tr><td class="src">[S352]</td><td>Millennium (mlp.com)</td><td>Approach and Strategies at Millennium (also fetched: /investment-professionals/)</td><td>undated (fetched 2026-09</td><td><a href="https://www.mlp.com/approach/">https://www.mlp.com/approach/</a></td><td>Fetched</td><td><span class="tag c">Primary</span></td></tr>
+<tr><td class="src">[S357h]</td><td>Wikipedia</td><td>Jain Global</td><td>fetched 2026-09-05</td><td><a href="https://en.wikipedia.org/wiki/Jain_Global">https://en.wikipedia.org/wiki/Jain_Global</a></td><td>Fetched</td><td><span class="tag i">Low</span></td></tr>
+<tr><td class="src">[S360]</td><td>SEC IAPD (adviserinfo.sec.gov)</td><td>Form ADV, Millennium Management LLC, CRD 158117 — Other-Than-Annual Amendment (signed Martin Schwartz, CCO), Schedule D Section 7.B.(1) and Item 5</td><td>25 Aug 2026</td><td><a href="https://adviserinfo.sec.gov/firm/summary/158117">https://adviserinfo.sec.gov/firm/summary/158117</a></td><td>Fetched</td><td><span class="tag c">Primary</span></td></tr>
+<tr><td class="src">[S370]</td><td>Hedgeweek (citing Bloomberg / BNP Paribas data)</td><td>Investors push back on multi-strategy hedge fund fee structures</td><td>22 Aug 2025</td><td><a href="https://www.hedgeweek.com/investors-push-back-on-multi-strategy-hedge-fund-fee-structures/">https://www.hedgeweek.com/investors-push-back-on-multi-strategy-hedge-fund-fee-structures/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S371]</td><td>Financial Advisor magazine (republishing Bloomberg News)</td><td>Frustrated Hedge Fund Investors Push Back On Sky-High Fees</td><td>20 Aug 2025</td><td><a href="https://www.fa-mag.com/news/frustrated-hedge-fund-investors-push-back-on-sky-high-fees-83734.html">https://www.fa-mag.com/news/frustrated-hedge-fund-investors-push-back-on-sky-high-fees-837...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S378]</td><td>ABC Quant (hedge fund database report)</td><td>Millennium International, Ltd. — Drawdown Analysis / Risk-Return Statistics</td><td>undated (data to c. Nov </td><td><a href="https://www.abcquant.com/reports/Millennium_hedge_fund.pdf">https://www.abcquant.com/reports/Millennium_hedge_fund.pdf</a></td><td>Fetched</td><td><span class="tag i">Low</span></td></tr>
+<tr><td class="src">[S392]</td><td>SEC IAPD</td><td>Form ADV Part 1A, Millennium Management LLC (CRD 158117, SEC 801-73884), other-than-annual amendment: Item 1.F (81 offices), Item 5.A/B (6,670 / 3,055), Item 5.</td><td>25 Aug 2026</td><td><a href="https://adviserinfo.sec.gov/firm/summary/158117">https://adviserinfo.sec.gov/firm/summary/158117</a></td><td>Fetched</td><td><span class="tag c">Primary</span></td></tr>
+<tr><td class="src">[S400]</td><td>Bloomberg via Yahoo Finance</td><td>Millennium Nears $100 Billion in New Era for Giant Hedge Funds (Parmar, Burton)</td><td>2026-09-07</td><td><a href="https://finance.yahoo.com/markets/stocks/articles/millennium-nears-100-billion-era-210034426.html">https://finance.yahoo.com/markets/stocks/articles/millennium-nears-100-billion-era-2100344...</a></td><td>Fetched</td><td><span class="tag u">Snippet</span></td></tr>
+<tr><td class="src">[S402]</td><td>Hedgeweek</td><td>Citadel, Millennium and peers post muted August returns</td><td>2026-09-04</td><td><a href="https://www.hedgeweek.com/citadel-millennium-and-peers-post-muted-august-returns/">https://www.hedgeweek.com/citadel-millennium-and-peers-post-muted-august-returns/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S406]</td><td>Hedgeweek (citing FT)</td><td>Millennium explores Geneva tax deal</td><td>2026-09-08</td><td><a href="https://www.hedgeweek.com/millennium-explores-geneva-tax-deal/">https://www.hedgeweek.com/millennium-explores-geneva-tax-deal/</a></td><td>Fetched</td><td><span class="tag u">Snippet</span></td></tr>
+<tr><td class="src">[S407]</td><td>Hedgeweek (citing Bloomberg)</td><td>Jain Global made $1.8bn before switching to Millennium capital</td><td>2026-09-02</td><td><a href="https://www.hedgeweek.com/jain-global-made-1-8bn-before-switching-to-millennium-capital/">https://www.hedgeweek.com/jain-global-made-1-8bn-before-switching-to-millennium-capital/</a></td><td>Fetched</td><td><span class="tag u">Snippet</span></td></tr>
+<tr><td class="src">[S408]</td><td>Hedgeweek (citing Bloomberg)</td><td>Millennium adds senior Japan stock trader</td><td>2026-09-11</td><td><a href="https://www.hedgeweek.com/millennium-adds-senior-japan-stock-trader/">https://www.hedgeweek.com/millennium-adds-senior-japan-stock-trader/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S493]</td><td>Hedgeweek</td><td>ExodusPoint adopts cash hurdle</td><td>12 Sep 2024</td><td><a href="https://www.hedgeweek.com/exoduspoint-adopts-cash-hurdle/">https://www.hedgeweek.com/exoduspoint-adopts-cash-hurdle/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S494]</td><td>eFinancialCareers</td><td>Morning Coffee: Goldman Sachs says multistrategy hedge funds are on the wane...</td><td>10 Sep 2024</td><td><a href="https://www.efinancialcareers.com/news/goldman-sachs-multistrategy-hedge-funds">https://www.efinancialcareers.com/news/goldman-sachs-multistrategy-hedge-funds</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S498]</td><td>Hedgeweek (citing Bloomberg)</td><td>Millennium eyes record $20bn capital raise</td><td>30 Jul 2026</td><td><a href="https://www.hedgeweek.com/millennium-eyes-record-20bn-capital-raise/">https://www.hedgeweek.com/millennium-eyes-record-20bn-capital-raise/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S499]</td><td>Caproasia (citing Bloomberg)</td><td>...$20 Billion Target New Capital Raise Received Over $30 Billion Demand</td><td>26 Sep 2026</td><td><a href="https://www.caproasia.com/2026/09/26/united-states-97-billion-hedge-fund-millennium-management-20-billion-target-new-capital-raise-received-over-30-billion-demand/">https://www.caproasia.com/2026/09/26/united-states-97-billion-hedge-fund-millennium-manage...</a></td><td>Fetched</td><td><span class="tag u">Snippet</span></td></tr>
+<tr><td class="src">[S505]</td><td>Hedgeweek (citing Reuters on a Barclays note)</td><td>Multi-manager returns come at a cost, says Barclays</td><td>9 Feb 2023</td><td><a href="https://www.hedgeweek.com/multi-manager-returns-come-cost-says-barclays/">https://www.hedgeweek.com/multi-manager-returns-come-cost-says-barclays/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S506]</td><td>MFA (Managed Funds Association)</td><td>Barclays Hedge Fund Analysis Finds that Pass-Through Expense Funds Outperform</td><td>31 Jul 2022</td><td><a href="https://www.mfaalts.org/industry-research/barclays-hedge-fund-analysis-finds-that-pass-through-expense-funds-outperform/">https://www.mfaalts.org/industry-research/barclays-hedge-fund-analysis-finds-that-pass-thr...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S510]</td><td>Investing.com (Reuters, Nell Mackenzie)</td><td>Analysis: Soaring fund manager pay cost Eisler Capital dear</td><td>13 Oct 2025</td><td><a href="https://www.investing.com/news/stock-market-news/soaring-fund-manager-pay-cost-eisler-capital-dear-4284410">https://www.investing.com/news/stock-market-news/soaring-fund-manager-pay-cost-eisler-capi...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S518]</td><td>CV5 Capital</td><td>Hedge Fund Pass-Through Fees: The 2026 Debate</td><td>Jul 2026</td><td><a href="https://www.cv5capital.io/insights/hedge-fund-pass-through-fees-debate">https://www.cv5capital.io/insights/hedge-fund-pass-through-fees-debate</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S524]</td><td>Hedgeweek</td><td>Point72 to return $5bn after strong 2024 gains</td><td>13 Jan 2025</td><td><a href="https://www.hedgeweek.com/point72-to-return-5bn-after-strong-2024-gains/">https://www.hedgeweek.com/point72-to-return-5bn-after-strong-2024-gains/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S526]</td><td>Hedgeweek (citing Bloomberg)</td><td>Millennium targeting up to $10bn in long-term capital</td><td>16 Sep 2024</td><td><a href="https://www.hedgeweek.com/millennium-targeting-up-to-10bn-in-long-term-capital/">https://www.hedgeweek.com/millennium-targeting-up-to-10bn-in-long-term-capital/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S530]</td><td>Hedgeweek</td><td>Millennium&#x27;s $20bn capital raise attracts more than $30bn of investor demand</td><td>2026-09-28</td><td><a href="https://hedgeweek.com/news/millenniums-20bn-capital-raise-attracts-more-than-30bn-of-investor-demand">https://hedgeweek.com/news/millenniums-20bn-capital-raise-attracts-more-than-30bn-of-inves...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S531]</td><td>Caproasia (citing Bloomberg)</td><td>United States $97 Billion Hedge Fund Millennium Management $20 Billion Target New Capital Raise Received Over $30 Billion Demand</td><td>2026-09-26</td><td><a href="https://www.caproasia.com/2026/09/26/united-states-97-billion-hedge-fund-millennium-management-20-billion-target-new-capital-raise-received-over-30-billion-demand/">https://www.caproasia.com/2026/09/26/united-states-97-billion-hedge-fund-millennium-manage...</a></td><td>Fetched</td><td><span class="tag i">Low</span></td></tr>
+<tr><td class="src">[S532]</td><td>Bloomberg (Nishant Kumar, Liza Tetley)</td><td>Millennium&#x27;s New Cash Raise Draws $30 Billion in Client Demand</td><td>2026-09-25</td><td><a href="https://www.bloomberg.com/news/articles/2026-09-25/millennium-s-new-cash-raise-draws-30-billion-in-client-demand">https://www.bloomberg.com/news/articles/2026-09-25/millennium-s-new-cash-raise-draws-30-bi...</a></td><td>Paywalled</td><td><span class="tag u">Snippet</span></td></tr>
+<tr><td class="src">[S533]</td><td>Bloomberg (Hema Parmar, Katherine Burton) via Yahoo Finance</td><td>Millennium Nears $100 Billion in New Era for Giant Hedge Funds</td><td>2026-09-07</td><td><a href="https://finance.yahoo.com/markets/stocks/articles/millennium-nears-100-billion-era-210034426.html">https://finance.yahoo.com/markets/stocks/articles/millennium-nears-100-billion-era-2100344...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S534]</td><td>Hedgeweek</td><td>Millennium closes in on $100bn AUM</td><td>2026-09-08</td><td><a href="https://www.hedgeweek.com/millennium-closes-in-on-100bn-aum/">https://www.hedgeweek.com/millennium-closes-in-on-100bn-aum/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S535]</td><td>LLMQuant (Substack newsletter)</td><td>$30 Billion Wants In. Can Millennium Build Enough Alpha to Take It?</td><td>2026-09-28</td><td><a href="https://llmquant.substack.com/p/30-billion-wants-in-can-millennium">https://llmquant.substack.com/p/30-billion-wants-in-can-millennium</a></td><td>Fetched</td><td><span class="tag i">Low</span></td></tr>
+<tr><td class="src">[S536]</td><td>Hedgeweek</td><td>Millennium returns additional $15bn to investors</td><td>2022-10-10</td><td><a href="https://www.hedgeweek.com/millennium-returns-additional-15bn-investors/">https://www.hedgeweek.com/millennium-returns-additional-15bn-investors/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S537]</td><td>Investing.com (Luke Juricic, on Bloomberg reporting) via Yahoo Finance</td><td>Point72 joins hedge fund peers in extending capital lockup terms</td><td>2026-09-24</td><td><a href="https://finance.yahoo.com/markets/stocks/articles/point72-joins-hedge-fund-peers-215235867.html">https://finance.yahoo.com/markets/stocks/articles/point72-joins-hedge-fund-peers-215235867...</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S538]</td><td>Hedgeweek</td><td>DE Shaw extends redemption timelines, shutters funds</td><td>2026-06-04</td><td><a href="https://www.hedgeweek.com/de-shaw-extends-redemption-timelines-shutters-funds/">https://www.hedgeweek.com/de-shaw-extends-redemption-timelines-shutters-funds/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S539]</td><td>Quantt</td><td>Biggest Hedge Funds 2026: Top 20 by AUM + Tier List</td><td>2026-09-24</td><td><a href="https://www.quantt.co.uk/resources/biggest-hedge-funds">https://www.quantt.co.uk/resources/biggest-hedge-funds</a></td><td>Fetched</td><td><span class="tag i">Low</span></td></tr>
+<tr><td class="src">[S540]</td><td>Wikipedia</td><td>Millennium Management</td><td>live</td><td><a href="https://en.wikipedia.org/wiki/Millennium_Management">https://en.wikipedia.org/wiki/Millennium_Management</a></td><td>Fetched</td><td><span class="tag i">Low</span></td></tr>
+<tr><td class="src">[S541]</td><td>Hedgeweek</td><td>Millennium targets $5bn for new private markets fund</td><td>2025-10-31</td><td><a href="https://www.hedgeweek.com/millennium-targets-5bn-for-new-private-markets-fund/">https://www.hedgeweek.com/millennium-targets-5bn-for-new-private-markets-fund/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S542]</td><td>HFR (Hedge Fund Research) press commentary</td><td>Global hedge fund industry capital surges past historic $5 trillion milestone (1Q26) and Q2 2026 industry report summary</td><td>2026-04 and 2026-07</td><td><a href="https://www.hfr.com/media/market-commentary/global-hedge-fund-industry-capital-surges-past-historic-5-trillion-milestone/">https://www.hfr.com/media/market-commentary/global-hedge-fund-industry-capital-surges-past...</a><br><a href="https://www.hfr.com/hfr-media/hfr_world/hfr-podcast-global-hedge-fund-industry-report-2026-q2/">https://www.hfr.com/hfr-media/hfr_world/hfr-podcast-global-hedge-fund-industry-report-2026...</a></td><td>Snippet</td><td><span class="tag u">Snippet</span></td></tr>
+<tr><td class="src">[S543]</td><td>Wikipedia (citing Business Insider, Bloomberg, FT, May 2018)</td><td>ExodusPoint Capital Management</td><td>live</td><td><a href="https://en.wikipedia.org/wiki/ExodusPoint_Capital_Management">https://en.wikipedia.org/wiki/ExodusPoint_Capital_Management</a></td><td>Fetched</td><td><span class="tag i">Low</span></td></tr>
+<tr><td class="src">[S544]</td><td>With Intelligence</td><td>Hedge Fund Outlook 2026: Route to $5 Trillion Accelerates</td><td>2025-12-04</td><td><a href="https://www.withintelligence.com/insights/hedge-fund-outlook-2026/">https://www.withintelligence.com/insights/hedge-fund-outlook-2026/</a></td><td>Fetched</td><td><span class="tag r">Reported</span></td></tr>
+<tr><td class="src">[S545]</td><td>Bank of England</td><td>Financial Stability Report, July 2026 (hedge fund leverage section)</td><td>2026-07-07</td><td><a href="https://www.bankofengland.co.uk/financial-stability-report/2026/july-2026">https://www.bankofengland.co.uk/financial-stability-report/2026/july-2026</a></td><td>Snippet</td><td><span class="tag c">Primary</span></td></tr>
+<tr><td class="src">[S546]</td><td>Hedgeweek</td><td>Millennium Management to open Athens office</td><td>2026-09-25</td><td><a href="https://hedgeweek.com/news/millennium-management-to-open-athens-office">https://hedgeweek.com/news/millennium-management-to-open-athens-office</a></td><td>Snippet</td><td><span class="tag u">Snippet</span></td></tr>
+<tr><td class="src">[S547]</td><td>Hedgeweek</td><td>Rates trader opts for Millennium after accepting Point72 offer</td><td>2026-09-28</td><td><a href="https://hedgeweek.com/news/rates-trader-opts-for-millennium-after-accepting-point72-offer">https://hedgeweek.com/news/rates-trader-opts-for-millennium-after-accepting-point72-offer</a></td><td>Snippet</td><td><span class="tag u">Snippet</span></td></tr>
+<tr><td class="src">[S548]</td><td>Bloomberg (headline)</td><td>Millennium Targets at Least $10 Billion in New Fundraising</td><td>2026-06-30</td><td><a href="https://www.bloomberg.com/news/articles/2026-06-30/millennium-targets-at-least-10-billion-in-latest-fundraising">https://www.bloomberg.com/news/articles/2026-06-30/millennium-targets-at-least-10-billion-...</a></td><td>Paywalled</td><td><span class="tag u">Snippet</span></td></tr>
+<tr><td class="src">[S549]</td><td>Hedgeweek (citing Bloomberg)</td><td>Investors push back on multi-strategy hedge fund fee structures (search summary: allocators seeking to retain 60-70% of gross; H1 2025 Citadel 2.5%, Millennium </td><td>2025-08</td><td><a href="https://www.hedgeweek.com/investors-push-back-on-multi-strategy-hedge-fund-fee-structures/">https://www.hedgeweek.com/investors-push-back-on-multi-strategy-hedge-fund-fee-structures/</a></td><td>Snippet</td><td><span class="tag u">Snippet</span></td></tr>
+</table></div>
+</body></html>
