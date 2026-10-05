@@ -82,3 +82,9 @@ Validate your fragment is well-formed (balanced tags; run `python3 -c "import ht
 - FY2025: income ex recoveries £8,986m (+7.1% organic), adj EBITDA £4,523m (50.3%), recurring 73% (WS2).
 - Share price derating: 12,095p (5 Feb 2025) to 7,170p (4 Feb 2026), -12.8% on 3 Feb 2026 on AI-tool fears; Elliott stake reported Feb 2026; about 8,216p on 5 Oct 2026 (WS2). CEO David Schwimmer, CFO Michel-Alain Proch, Chair Don Robert, unchanged.
 - TradElect outage was 8 Sep 2008 (not 2009).
+- LCH stake: Annual Report 2025 says 94.4% (WS8, S3xx); WS3 says 94.2%. Use "about 94%" and cite both, rising above 95% after the July 2026 deal.
+- Ownership: Tradeweb 50.9% economic; Turquoise 84.2%; Post Trade Solutions 80% (11 banks bought 20% for £170m, Oct 2025) (WS8).
+- Customers: 44,000+ in 170+ countries (not ~40,000); FXall 2,400+ institutional clients, 200+ liquidity providers (WS8).
+- Daniel Maguire runs LSEG Markets and LCH, the division this internship sits in (WS8). Check WS8 exec list for names/dates.
+- Do NOT claim commercial bundling of SwapClear with Tradeweb or ForexClear with FXall: no LSEG statement found, and open access makes it unlikely.
+- No named Bank of England fine on LCH was found: do not cite one.
