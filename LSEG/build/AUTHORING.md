@@ -76,3 +76,9 @@ Validate your fragment is well-formed (balanced tags; run `python3 -c "import ht
 - Bond consolidated tape: ETS Connect UK, live 22 Jun 2026. PS24/14 is the transparency policy statement, not the tape appointment.
 - 1963 Eurobond (Autostrade) was arranged in London but listed in Luxembourg.
 - Today's date is 5 Oct 2026. LSEG Q3 trading statement expected 22 Oct 2026 (not yet out).
+- LSEG has FOUR divisions (2026): Data & Analytics, FTSE Russell, Risk Intelligence, Markets. Markets is about 40% of revenue, +11.9% in H1 2026, 58.6% margin (WS2).
+- Headcount: 28,516 at end 2025 per Annual Report (WS2); the JD says "25,000 people across 65 countries". Flag the mismatch rather than pick one silently.
+- Tradeweb: LSEG economic interest about 50.9% (WS2); voting about 89.9% (WS3). Say "majority-owned".
+- FY2025: income ex recoveries £8,986m (+7.1% organic), adj EBITDA £4,523m (50.3%), recurring 73% (WS2).
+- Share price derating: 12,095p (5 Feb 2025) to 7,170p (4 Feb 2026), -12.8% on 3 Feb 2026 on AI-tool fears; Elliott stake reported Feb 2026; about 8,216p on 5 Oct 2026 (WS2). CEO David Schwimmer, CFO Michel-Alain Proch, Chair Don Robert, unchanged.
+- TradElect outage was 8 Sep 2008 (not 2009).
