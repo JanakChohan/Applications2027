@@ -15,19 +15,31 @@ const cover = fs.readFileSync(path.join(ROOT, 'cover.html'), 'utf8');
 const partFiles = fs.readdirSync(path.join(ROOT, 'parts')).filter(f => f.endsWith('.html')).sort();
 let body = partFiles.map(f => fs.readFileSync(path.join(ROOT, 'parts', f), 'utf8')).join('\n');
 
+// Renumber figures sequentially in document order and update every "Figure X" reference.
+const figMap = {};
+let figN = 0;
+for (const m of body.matchAll(/<div class="ft">Figure ([0-9]+[a-z]?)<\/div>/g)) { if (!(m[1] in figMap)) figMap[m[1]] = String(++figN); }
+const remap = t => t.replace(/\b(Figures?) ([0-9]+[a-z]?)((?:(?:,| and|,? and| to| or) [0-9]+[a-z]?\b)*)/g, (m, w, k, tail) =>
+  `${w} ${figMap[k] || k}` + tail.replace(/[0-9]+[a-z]?/g, x => figMap[x] || x));
+body = remap(body);
+console.log('figures renumbered:', figN);
+fs.writeFileSync(path.join(ROOT, 'figmap.json'), JSON.stringify(figMap, null, 1));
+
 // Collect TOC entries: part bands (data-toc on section) and h2 with id.
 const entries = [];
 let n = 0;
+const mk = id => { const i = entries.findIndex(e => e.id === id); return `<span class="pm">MK${1000 + i}KM</span>`; };
 body = body.replace(/<section class="part([^"]*)" id="([^"]+)" data-toc="([^"]+)">/g, (m, cls, id, title) => {
   entries.push({ id, title, level: 1 });
-  return `${m}<span class="pm">ZQ${id}ZQ</span>`;
+  return `${m}${mk(id)}`;
 });
 body = body.replace(/<h2 id="([^"]+)"([^>]*)>([\s\S]*?)<\/h2>/g, (m, id, rest, title) => {
   entries.push({ id, title: title.replace(/<[^>]+>/g, ''), level: 2 });
-  return `<h2 id="${id}"${rest}><span class="pm">ZQ${id}ZQ</span>${title}</h2>`;
+  return `<h2 id="${id}"${rest}>${mk(id)}${title}</h2>`;
 });
 // keep entries in document order
-entries.sort((a, b) => body.indexOf(`ZQ${a.id}ZQ`) - body.indexOf(`ZQ${b.id}ZQ`));
+entries.forEach((e, i) => { e.key = String(1000 + i); e.pos = body.indexOf(`MK${e.key}KM`); });
+entries.sort((a, b) => a.pos - b.pos);
 
 function tocHtml(pages) {
   const rows = entries.map(e => {
@@ -62,7 +74,7 @@ async function render(page, htmlStr, file, withHF) {
   const txt = execSync(`pdftotext -layout "${tmp1}" -`, { maxBuffer: 1 << 28 }).toString();
   const pagesTxt = txt.split('\f');
   const pages = {};
-  pagesTxt.forEach((t, i) => { for (const m of t.replace(/\s+/g, "").matchAll(/ZQ(.+?)ZQ/g)) if (!pages[m[1]]) pages[m[1]] = i + 1; });
+  pagesTxt.forEach((t, i) => { for (const m of t.replace(/\s+/g, "").matchAll(/MK(\d{4})KM/g)) { const e = entries.find(x => x.key === m[1]); if (e && !pages[e.id]) pages[e.id] = i + 1; } });
   const missing = entries.filter(e => !pages[e.id]).map(e => e.id);
   if (missing.length) console.log('WARN markers not found:', missing.join(', '));
   const final = html(pages);
@@ -87,7 +99,7 @@ w.write('${path.join(OUT, NAME + '.pdf')}')
   const csFile = partFiles.find(f => /cheat/i.test(f));
   if (csFile) {
     const b2 = await chromium.launch(); const p2 = await b2.newPage();
-    const csHtml = fs.readFileSync(path.join(cs, csFile), 'utf8').replace(/class="part([^"]*)"/, 'class="cs$1"');
+    const csHtml = remap(fs.readFileSync(path.join(cs, csFile), 'utf8')).replace(/class="part([^"]*)"/, 'class="cs$1"');
     await render(p2, `<!doctype html><html><head><meta charset="utf-8"><style>${fonts}\n${css}</style></head><body>${csHtml}</body></html>`, path.join(OUT, 'Cheat_Sheet.pdf'), true);
     await b2.close();
   }
