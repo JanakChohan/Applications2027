@@ -68,3 +68,11 @@ Be substantive. A part typically runs 6 to 20 printed pages. Prefer depth with s
 
 ## When done
 Validate your fragment is well-formed (balanced tags; run `python3 -c "import html.parser"`-style check or `xmllint --html` if available) and report the file names, the figure numbers you produced, and any source IDs you used that you were not sure about.
+
+## Cross-pack facts to keep consistent (from research; cite the IDs)
+- UK politics as of Oct 2026: Andy Burnham became Prime Minister on 20 Jul 2026; John Healey replaced Rachel Reeves as Chancellor [S242, S243, S244]. Reeves gave the 14 Jul 2026 Mansion House speech before leaving. Never call Reeves the current Chancellor. Autumn Budget: 28 Oct 2026.
+- LSEG owns about 94.2% of LCH Group after 2024 purchase (WS3), and H1 2026 says it is buying out remaining minorities to take it above 95% (WS5). Not 82.6%.
+- LSEG H1 2026 (30 Jul 2026): total income £4,799m, +8.4%; Markets division fastest growing at +11.9% (WS4/WS5).
+- Bond consolidated tape: ETS Connect UK, live 22 Jun 2026. PS24/14 is the transparency policy statement, not the tape appointment.
+- 1963 Eurobond (Autostrade) was arranged in London but listed in Luxembourg.
+- Today's date is 5 Oct 2026. LSEG Q3 trading statement expected 22 Oct 2026 (not yet out).
