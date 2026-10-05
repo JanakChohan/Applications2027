@@ -23,7 +23,7 @@ def fig_priority():
              ('4','Speed','Matters, but only inside the three lines above. Fast and wrong costs more than slow and right.',GRN)]
     b = ''
     for i,(n,t,d,c) in enumerate(tiers):
-        w = 640 - i*70; x = (720-w)/2; y = 10 + i*58
+        w = 680 - i*40; x = (720-w)/2; y = 10 + i*58
         b += rect(x, y, w, 50, '#ffffff', c, 6, 2)
         b += f'<circle cx="{x+26}" cy="{y+25}" r="15" fill="{c}"/>' + text(x+26, y+30, n, 14, '#fff', 'middle', 'bold')
         b += text(x+50, y+21, t, 12, NAVY, 'start', 'bold')

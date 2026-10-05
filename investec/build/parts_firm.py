@@ -12,7 +12,7 @@ def fig_moneyflow():
     b += node(260, 40, 220, 95, 'Net core loans £35.5bn', 'UK & Other £17.8bn: mortgages to private clients, fund finance, direct lending, real estate, aviation, energy & infrastructure', fill=ACCS, stroke=ACC, subw=44)
     b += node(260, 150, 220, 55, 'Cash and near cash £18.2bn', 'Liquidity buffer (plc LCR 349%)', fill=ACCS, stroke=ACC)
     b += node(260, 220, 220, 70, 'Advice, broking, hedging, Rathbones stake', 'Earns fees, not interest; uses little balance sheet', fill=ACCS, stroke=ACC)
-    for y1,y2 in [(85,85),(180,110),(260,175)]:
+    for y1,y2 in [(85,85),(180,115),(260,178)]:
         b += arrow(222, y1, 258, y2)
     b += node(520, 40, 190, 70, 'Net interest income £1,335.8m', '58.6% of revenue (down 1.6%)', fill=GRNS, stroke=GRN)
     b += node(520, 120, 190, 85, 'Non-interest revenue £945.7m', 'Fees £506.0m, customer-flow trading £169.9m, investment £142.0m, other £27.6m', fill=GRNS, stroke=GRN)
@@ -25,7 +25,7 @@ def fig_moneyflow():
     b += arrow(615, 322, 600, 338)
     b += node(20, 330, 200, 74, 'Dividend 38.5p a share', 'About 46% payout; plus buybacks (about £110m completed in FY26)', fill=SIGS, stroke=SIG)
     b += node(240, 330, 210, 74, 'Retained capital', 'Funds loan growth: CET1 plc 13.0% (standardised), Ltd 13.6% (AIRB)', fill=SIGS, stroke=SIG)
-    b += path('M470,372 L452,372', MUT) 
+    b += arrow(470, 372, 452, 372) + path('M245,404 L245,412 L120,412 L120,406', MUT)
     b += text(20, 425, 'Items do not sum exactly: adjusted operating profit excludes some items and includes the share of associate (Rathbones) profit.', 9, MUT)
     return svg(720, 435, b)
 
@@ -64,21 +64,21 @@ def fig_unit():
 
 def fig_history():
     ev = [(1974,'Founded in Johannesburg as a small leasing and finance company'),(1980,'Banking licence; about 8 people when Koseff joins'),
-          (1992,'Enters the UK'),(1998,'Buys Guinness Mahon and Hambros (UK)'),(2002,'Dual-listed company: Investec plc (LSE) + Investec Ltd (JSE)'),
+          (1992,'Enters the UK'),(1998,'Buys Guinness Mahon and Hambros (UK)'),(2002,'Dual-listed: Investec plc (LSE) + Investec Ltd (JSE)'),
           (2007,'Buys Kensington (UK subprime) just before the crisis'),(2011,'Buys Evolution Group (UK broking)'),
-          (2014,'Sells Kensington (£180m) and Investec Australia (A$440m)'),(2020,'Asset management demerged as Ninety One'),
-          (2023,'UK wealth combined with Rathbones'),(2025,'Mid-market strategy launch'),(2026,'Private client strategy; FY26 profit £951m; about 8,000 staff')]
-    x0, x1 = 30, 690; y = 150
-    b = f'<line x1="{x0}" y1="{y}" x2="{x1}" y2="{y}" stroke="{NAVY}" stroke-width="3"/>'
-    sc = lambda yr: x0 + (yr-1974)/(2026-1974)*(x1-x0)
+          (2014,'Sells Kensington (£180m) and Australia (A$440m)'),(2020,'Asset management demerged as Ninety One'),
+          (2023,'UK wealth combined with Rathbones'),(2025,'Mid-market strategy launch'),(2026,'Private client strategy; FY26 profit £951m; 8,000+ staff')]
+    x0, x1 = 55, 665; y = 150
+    b = f'<line x1="{x0-25}" y1="{y}" x2="{x1+25}" y2="{y}" stroke="{NAVY}" stroke-width="3"/>'
     for i,(yr,t) in enumerate(ev):
-        x = sc(yr); up = i % 2 == 0
+        x = x0 + i*(x1-x0)/(len(ev)-1); up = i % 2 == 0
         b += f'<circle cx="{x:.1f}" cy="{y}" r="5" fill="{ACC}"/>'
-        ty = 30 + (i//2 % 2)*45 if up else 185 + (i//2 % 2)*45
-        b += f'<line x1="{x:.1f}" y1="{y}" x2="{x:.1f}" y2="{ty+(26 if up else -12)}" stroke="{LINE}"/>'
+        ty = 40 if up else 182
+        b += f'<line x1="{x:.1f}" y1="{y}" x2="{x:.1f}" y2="{ty+(52 if up else -12)}" stroke="{LINE}"/>'
         b += text(x, ty, str(yr), 10.5, ACC, 'middle', 'bold')
-        b += text(x, ty+12, t, 8.4, NAVY, 'middle', width=24, lh=9.5)
-    return svg(720, 290, b)
+        b += text(x, ty+12, t, 8.2, NAVY, 'middle', width=21, lh=9.5)
+    b += text(360, 268, 'Events evenly spaced; not to time scale.', 8.5, MUT, 'middle')
+    return svg(720, 278, b)
 
 def fig_stability():
     # UK Specialist Bank and Group adjusted operating profit
@@ -165,7 +165,7 @@ def build():
 
     o += h2('p2f', 'F. Listed status, and what it means for research')
     o += P('Investec is listed, which is good news for research: almost every number in this pack comes from published results. There are four report sets: the combined group results; Investec plc and Investec Limited (each with its own capital ratio); and Investec Bank plc\'s own annual and half-year reports [C] [S70, S74, S75]. Investec plc trades on the LSE as INVP, Companies House 03633621 [C] [S86]. Its index membership (FTSE 100 or FTSE 250) was disputed between sources on 5 Oct 2026; check the FTSE Russell list before quoting it [R] [S85, S113].')
-    o += box('unc', 'Index membership, the JSE listing year (1986 or 1988), current group headcount (reported as "about 8,000"), and whether Ruth Leas is still IBP chief executive were not confirmed from a primary source. Avoid stating them as facts.')
+    o += box('unc', 'Index membership (FTSE 100 or 250) and the JSE listing year (1986 or 1988) were not confirmed from a primary source. Avoid stating them as facts. Confirmed instead: the group says "8,000+ employees" [C] [S282]; Investec Bank plc had 2,425 employees at 31 March 2026 [C] [S278]; Ruth Leas is IBP chief executive per its 2026 annual statements [C] [S278].')
 
     o += h2('p2g', 'G. Leadership\'s view of the future')
     o += P('Fani Titi has been group chief executive since 2018 [R] [S85]. Henrietta Baldock became group chair on 6 August 2026, and Stephen Koseff retired from the board the same day [C] [S73]. With Koseff gone, no founder-era figure remains on the board [I].',
@@ -221,6 +221,7 @@ def build3():
            'Collaboration lives in three places [I]: (1) the **relationship manager**, who is the client\'s single door into the bank; (2) **credit**, where every lending team draws on the same risk and capital; (3) **referral routes**, between corporate bankers, private bankers and Rathbones.',
            'The honest counter-case: HSBC UK also measures cross-selling. Referrals from its commercial bank to its private bank rose 8% in 2025 [C] [S149]. So the edge is not the idea of collaboration. It is doing it in the mid-market, with lending, advice and broking together, at a size where people know each other [I].')
     o += fig('The hub: why a relationship model needs a centre', fig_hub(), 'Illustrative [I]. Left: without a single door, every client deals with every product team. Right: the relationship manager routes needs to specialist teams and keeps the relationship.')
+    o += fig('The scarce-resource collision: how the bank allocates capital and people', fig_collision(), 'Illustrative [I]. Capital figures: Investec plc CET1 13.0% (31 Mar 26) and RWAs £20.5bn (30 Jun 26) [S70, S77]; credit committee and limits [S111, older source]. The same logic applies when two seniors compete for an intern\'s time (Part 11).')
     o += fig('The walls between businesses: what is shared, what is never shared', fig_walls(), 'Information barriers are a standard regulatory requirement for firms that advise listed companies (UK Market Abuse Regulation; FCA rules on conflicts) [I]. Specific Investec procedures were not published in sources read.')
     o += box('term', '<b>Inside information</b>: precise, non-public information that would likely move a listed company\'s share price if it were known, such as an unannounced takeover. Using or passing it on is a crime. A bank that advises listed companies keeps those teams behind an information barrier (a "Chinese wall") on the "private side".')
 
@@ -234,7 +235,20 @@ def build3():
 
     o += h2('p3d', '4. The non-core side: the centre')
     o += P('The internship requisition sits in Department "People & Organisation", Division "IBP Business Enablement" [C] [S1]. The same division label appears on central-function jobs such as an operations junior analyst [C] [S19]. So the label is an administrative home, not a sign that interns work in HR [I].')
-    o += '{{CENTRE}}'
+
+    o += P('**How big is the centre?** Investec Bank plc had 2,425 employees at 31 March 2026 (2,367 permanent), up from 2,374 a year earlier. Staff costs were £411.8m, about £174,000 per average permanent employee fully loaded [C] [S278]. The bank does not disclose a split between front office and support. The only proxy is the mix of open roles: 38 of 52 live vacancies (73%) carry a non-client-facing role category [C] [S261, S277]. That is a flow, not a stock, so do not quote it as the share of staff [I].',
+           '**How it is organised.** Postings use two meanings of "Business Enablement". As a role category it means any non-client-facing job. As a division, "IBP Business Enablement" is narrower: it holds People & Organisation (this internship and a Senior Reward Manager), Company Secretarial, Lending Operations, Finance & Tax, marketing operations, and a credit hub in Mumbai. Technology ("IBP Digital and Technology") and second-line risk ("IBP Risk & Compliance") are posted as separate divisions [C] [S277].',
+           '**Who sits at the top.** The IBP board as at 12 June 2026: Ruth Leas (CEO), Kevin McKenna (Chief Risk Officer), Marlé van der Walt (Finance Director, also responsible for Operations) and Fani Titi (Group CEO) as executive directors; Vivek Ahuja chairs the bank since 20 March 2026 [C] [S278]. The UK executive committee beyond the board was not published in sources read.',
+           '**Hub and spoke.** 15 of 52 live roles (29%) are in Mumbai at Investec Global Services India, including a 25-person "credit centre of excellence" [C] [S268, S277]. London owns and leads; Mumbai delivers at scale [I].')
+    o += P('**How the centre is wired to the front line**, in the postings\' own words:')
+    o += UL('Deal Manager: "Acting as a key partner to the lending businesses... You will work closely with Relationship Managers and stakeholders across Treasury, Client Services, Legal Risk, Group Risk, Financial Control, Settlements, Credit Services, and Financial Crime and Fraud" [C] [S269].',
+            'Head of Transactional Banking Technology: owns features "on the core banking platform only, while relying on specialist enterprise platforms and teams for payments processing, cards, digital channels, onboarding" [C] [S270]. That is embedded technology resting on firm-wide utilities.',
+            'First-line operational risk: "Reporting to the Chief Operating Officer, this role will partner closely with business and functional leaders... across our corporate banking activities" [C] [S271]. Risk embedded in the business.',
+            'Credit Hub: "providing independent credit support to Private Markets, Private Clients, TRS and Credit across the Group... Investec is also establishing a new Corporate Bank, launching in 2026, which the Hub will support" [C] [S268].',
+            'Senior Reward Manager: "partners closely with senior business leaders, People & Organisation colleagues, Finance and governance forums" [C] [S264]. A connective role.',
+            'Company Secretarial: "not simply an administrative function" [C] [S265].')
+    o += fig('How a front-line team is wired into the centre: embedded, connective, utility', fig_wiring(), 'Classification by the author [I] from posting text [S264, S265, S268, S269, S270, S271, S277].')
+    o += box('say', '"I noticed the internship sits in IBP Business Enablement under People & Organisation, and that most of the central hiring right now supports the new Corporate Bank. I would be interested in how a team like Lending Operations scales for a thousand new mid-market clients."')
     o += fig('The centre as the careers site organises it', fig_centre(), 'Source: Investec careers home page category counts, 5 Oct 2026 [S3, Confirmed]. Not an official org chart; categories are the site\'s own labels.')
     o += fig('Anatomy of one front-line team and what it draws from the centre', fig_unit(), 'Illustrative [I], built from standard bank control functions and the roles listed on Investec\'s careers site [S3, S21].')
     o += END
@@ -291,8 +305,8 @@ def fig_hub():
         x, y = cx + 100*math.cos(a), cy + 95*math.sin(a)
         b += f'<line x1="{cx}" y1="{cy}" x2="{x:.0f}" y2="{y:.0f}" stroke="{ACC}" stroke-width="1.5"/>'
         b += f'<rect x="{x-38:.0f}" y="{y-11:.0f}" width="76" height="22" rx="4" fill="{ACCS}" stroke="{ACC}"/>' + text(x, y+4, l, 8.8, NAVY, 'middle', 'bold')
-    b += f'<circle cx="400" cy="50" r="13" fill="{TEAL}"/>' + text(400, 54, 'C', 10, '#fff', 'middle', 'bold') + f'<line x1="413" y1="56" x2="512" y2="128" stroke="{TEAL}" stroke-width="2"/>'
-    b += text(542, 268, 'Client has one door; the hub routes and coordinates', 9.5, GRN, 'middle')
+    b += f'<circle cx="395" cy="250" r="13" fill="{TEAL}"/>' + text(395, 254, 'C', 10, '#fff', 'middle', 'bold') + f'<line x1="406" y1="242" x2="515" y2="165" stroke="{TEAL}" stroke-width="2"/>'
+    b += text(560, 268, 'Client has one door; the hub routes and coordinates', 9.5, GRN, 'middle')
     return svg(720, 280, b)
 
 def fig_walls():
@@ -312,3 +326,30 @@ def fig_returns():
     items = [('Barclays PBWM (RoTE, 2025)',26.3,ACC),('OakNorth (adj. ROE, 2025)',22.0,ACC),('Coutts / NatWest PB&WM (ROE, 2025)',21.7,ACC),
              ('Shawbrook (underlying RoTE, 2025)',17.2,ACC),('Investec plc (RoTE, FY26)',13.7,NAVY),('Investec plc (ROE, FY26)',10.8,NAVY),('Close Brothers (RoTE, FY26)',5.5,MUT)]
     return hbar([(l,v) for l,v,_ in items], label_w=250, unit='%', valfmt='{:.1f}', colors=[c for *_,c in items])
+
+def fig_wiring():
+    b = node(260, 8, 200, 54, 'Front-line team', 'e.g. UK Corporate Banking', fill=ACCS, stroke=ACC, size=12)
+    cols = [('EMBEDDED (inside the business)', 15, ['Corporate Banking Technology','Private Bank Technology','First-line operational risk (reports to COO)'], TEAL, TEALS, '0'),
+            ('CONNECTIVE (bridges)', 255, ['Deal Manager, Lending Operations','People & Organisation Leads','Finance Business Partner'], ACC, ACCS, '6,3'),
+            ('UTILITY (serves the whole bank)', 495, ['Shared Platform Tech (payments, cards, onboarding)','Credit Hub, Mumbai','Company Secretarial, Reward'], SIG, SIGS, '2,3')]
+    for t,x,items,c,f,dash in cols:
+        b += f'<path d="M360,62 L360,80 L{x+105},80 L{x+105},100" fill="none" stroke="{c}" stroke-width="1.6" stroke-dasharray="{dash}"/>'
+        b += rect(x, 100, 210, 26, c, c, 5) + text(x+105, 117, t, 9.5, '#fff', 'middle', 'bold')
+        for i,it in enumerate(items):
+            b += node(x, 134 + i*46, 210, 38, it, fill=f, stroke=c, size=9.4)
+    return svg(720, 275, b)
+
+def fig_collision():
+    b = node(250, 8, 220, 56, 'Scarce: capital and credit appetite', 'Investec plc RWAs £20.5bn; CET1 must stay above target', fill=NAVY, stroke=NAVY, tc='#fff', size=11)
+    asks = [('Private Bank','More mortgages for new clients'),('Corporate Banking','Facilities for the 1,000-client build'),('Fund Solutions','Bigger subscription lines'),('Real Estate','A development loan')]
+    for i,(t,d) in enumerate(asks):
+        x = 10 + i*178
+        b += node(x, 90, 165, 54, t, d, fill=ACCS, stroke=ACC, size=10.5)
+        b += arrow(x+82, 90, 360, 66, dash=True)
+    steps = [('1 Risk appetite','Board-set limits by sector and single name'),('2 Credit committee','Independent approval, deal by deal'),('3 Pricing','Return on capital must beat its cost'),('4 Decision','Approve, resize or decline; record why')]
+    for i,(t,d) in enumerate(steps):
+        x = 10 + i*178
+        b += node(x, 175, 165, 58, t, d, fill=GRNS, stroke=GRN, size=10.5)
+        if i < 3: b += arrow(x+166, 204, x+177, 204)
+    b += text(360, 262, 'Same principle for an intern with two urgent tasks: make the clash visible, let the right person set the order, record it.', 9.6, NAVY2, 'middle', 'bold', width=120)
+    return svg(720, 285, b)
