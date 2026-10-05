@@ -88,3 +88,9 @@ Validate your fragment is well-formed (balanced tags; run `python3 -c "import ht
 - Daniel Maguire runs LSEG Markets and LCH, the division this internship sits in (WS8). Check WS8 exec list for names/dates.
 - Do NOT claim commercial bundling of SwapClear with Tradeweb or ForexClear with FXall: no LSEG statement found, and open access makes it unlikely.
 - No named Bank of England fine on LCH was found: do not cite one.
+- Assessment: the Immersive Online Assessment is very likely Cappfinity (LSEG hints page links to a "Cappfinity Preparation Hub") [S264, S265]: tag Inferred, high confidence. Strengths-based video interview is Capp-style.
+- Markets leaders (WS6_WS7): Daniel Maguire (Group Head of LSEG Markets and CEO LCH Group), Julia Hoggett (CEO LSE plc, Head of Digital and Securities Markets), Charlie Walker (Deputy CEO LSE plc), Tom Stenhouse (CEO Turquoise since Mar 2026), Susi de Verdelon (CEO LCH Ltd since Feb 2025), James Pearson (Head of FX, trade press only), Trish Cuddy (Group Head of People, Markets). Public professional info only.
+- Posting went live on Workday 2026-09-21. H1 2026 Markets income £1,920m (+11.9%).
+- Markets segment created 1 Jan 2025 by merging Capital Markets and Post Trade. Internal units: Digital & Securities Markets, FX, Tradeweb, LCH Ltd, LCH SA, Post Trade Solutions, Regulatory Reporting (WS1). Careers site still uses old names.
+- The four exposure bullets are a template reused across the NY internship (R0123464) and London graduate programme (R0123406): they describe possible placements, not one team (WS1).
+- 2025 Markets total income £3,467m; FX revenue £272m (WS1). Hiring snapshot 5 Oct 2026: 661 live LSEG postings, 45 in Markets (19 Manila, 7 London) (WS1, open_roles.json).
