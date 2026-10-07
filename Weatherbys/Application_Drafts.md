@@ -28,3 +28,14 @@ Then, suddenly, he passed away. I learned he had already spoken about me to his 
 Today we look out for each other. He contacts me when he needs tenants and I spread the word among students; [X] have since rented from him. When I need a home, I go to him.
 
 Honesty, regular contact and showing up when it was hard built that relationship. It also taught me that trust can pass from one family member to the next. That is what a private bank does across generations, and what I want to do for clients.
+
+
+## Q3. What extracurricular activities, sports, societies or voluntary work are you involved in? (250 words)
+
+This year I joined UEA's Snow Sports Society, and I am helping to organise our January trip to Pas de la Casa in Andorra for [X] students. My role is [e.g. the point of contact for members in my group]. In practice, that means answering questions about what the package includes, reminding people before the [19 November] payment deadline, and helping members sort out transport and who they share with. The hardest part is [e.g. keeping track of who has paid and who is still undecided without nagging]. I handle it by [e.g. keeping a simple tracker and messaging people individually rather than in the group chat]. [Result: e.g. everyone in my group paid on time.]
+
+What I enjoy most is what I enjoyed in the uniform shop: making sure people have what they need before they have to ask. A week away for [X] students only works if everyone trusts that someone has thought about the details.
+
+Outside the society, I train at the gym [X times a week], which keeps me disciplined alongside my degree and work experience. [Second activity, one line with one detail: e.g. volunteering, a team sport, a mentoring role.]
+
+What joins these is that I like being the person others rely on to organise and follow through. That is also what draws me to private banking, where trust is built in the details a client never sees.
