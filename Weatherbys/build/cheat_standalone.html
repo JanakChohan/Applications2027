@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weatherbys Cheat Sheet</title>
+<style>
+:root{
+  --navy:#14213d; --navy2:#22335c; --ink:#1d2433; --muted:#5b6475;
+  --gold:#b8862f; --gold-soft:#f6ecd9; --signal:#0f7a6c; --signal-soft:#e2f3f0;
+  --red:#a8322d; --red-soft:#f8e5e3; --amber:#b7791f; --amber-soft:#fbf1dc;
+  --green:#2f7d4a; --green-soft:#e3f2e8; --line:#d9dde5; --paper:#ffffff; --tint:#f4f6fa;
+}
+@page{size:A4; margin:18mm 16mm 18mm 16mm;}
+*{box-sizing:border-box}
+html,body{background:var(--paper);}
+body{font-family:"Helvetica Neue",Arial,"Liberation Sans",sans-serif;color:var(--ink);font-size:10.2pt;line-height:1.48;margin:0;}
+h1,h2,h3,h4{color:var(--navy);line-height:1.2;margin:0}
+h1{font-size:22pt;margin:0 0 4mm}
+h2{font-size:14pt;margin:6mm 0 2.5mm;padding-bottom:1mm;border-bottom:1.5px solid var(--gold)}
+h3{font-size:11.5pt;margin:4.5mm 0 1.5mm}
+h4{font-size:10.4pt;margin:3mm 0 1mm}
+p{margin:0 0 2.4mm}
+ul,ol{margin:0 0 2.6mm;padding-left:5.5mm}
+li{margin:0 0 1mm}
+a{color:var(--navy2)}
+small,.small{font-size:8.4pt;color:var(--muted)}
+.src{font-size:7.6pt;color:var(--muted);vertical-align:super;white-space:nowrap}
+.conf{font-size:7.4pt;font-weight:700;padding:0 1.2mm;border-radius:2px;white-space:nowrap}
+.c-conf{background:var(--green-soft);color:var(--green)}
+.c-rep{background:var(--amber-soft);color:var(--amber)}
+.c-inf{background:#ece8f6;color:#5b3f99}
+.part{page-break-before:always;}
+.band{background:var(--navy);color:#fff;padding:7mm 8mm 6mm;margin:0 0 5mm;border-left:4mm solid var(--gold)}
+.band h1{color:#fff;margin:0}
+.band .kicker{font-size:9pt;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:1.5mm}
+.band p{color:#dfe5f1;margin:2mm 0 0;font-size:9.6pt}
+.mk{font-size:1pt;color:#fff;}
+.band .mk{color:var(--navy)}
+table{border-collapse:collapse;width:100%;margin:1.5mm 0 3.5mm;font-size:8.8pt;page-break-inside:auto}
+th{background:var(--navy);color:#fff;text-align:left;padding:1.6mm 2mm;font-weight:600}
+td{border-bottom:1px solid var(--line);padding:1.5mm 2mm;vertical-align:top}
+tr{page-break-inside:avoid}
+tr:nth-child(even) td{background:var(--tint)}
+.box{border-radius:2mm;padding:3mm 4mm;margin:2.5mm 0 3.5mm;page-break-inside:avoid;border-left:2mm solid}
+.box .lab{font-size:7.8pt;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1mm}
+.term{background:var(--tint);border-color:var(--navy2)} .term .lab{color:var(--navy2)}
+.say{background:var(--green-soft);border-color:var(--green)} .say .lab{color:var(--green)}
+.dont{background:var(--red-soft);border-color:var(--red)} .dont .lab{color:var(--red)}
+.opin{background:var(--signal-soft);border-color:var(--signal)} .opin .lab{color:var(--signal)}
+.unc{background:var(--amber-soft);border-color:var(--amber)} .unc .lab{color:var(--amber)}
+.gold{background:var(--gold-soft);border-color:var(--gold)} .gold .lab{color:var(--gold)}
+.fig{margin:3mm 0 4mm;page-break-inside:avoid;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .cap{font-size:8.2pt;color:var(--muted);text-align:left;margin-top:1mm}
+.fig .cap b{color:var(--navy)}
+.cols{display:flex;gap:5mm}.cols>div{flex:1}
+.card{border:1px solid var(--line);border-radius:2mm;padding:2.6mm 3.4mm;margin:0 0 3mm;page-break-inside:avoid;border-top:2mm solid}
+.easy{border-top-color:var(--green)} .med{border-top-color:var(--amber)} .hard{border-top-color:var(--red)}
+.card h4{margin-top:0}
+.tag{display:inline-block;font-size:7.4pt;font-weight:700;padding:.3mm 1.6mm;border-radius:2px;color:#fff;margin-right:1.5mm}
+.t-easy{background:var(--green)}.t-med{background:var(--amber)}.t-hard{background:var(--red)}
+.draft{font-family:Georgia,"Liberation Serif",serif;font-size:10pt;background:#fffdf8;border:1px dashed var(--gold);padding:3.5mm 4.5mm;border-radius:2mm;margin:2mm 0 2mm;page-break-inside:avoid}
+.draft .ph{background:#fff2c6;padding:0 .8mm}
+.wc{font-size:8pt;color:var(--muted);text-align:right;margin-bottom:3mm}
+.toc{width:100%;font-size:10pt}
+.toc td{border:none;padding:1.1mm 0;background:none!important}
+.toc .pg{text-align:right;width:12mm;color:var(--navy);font-weight:700}
+.toc .pt{color:var(--gold);font-weight:800;width:16mm}
+.toc .dots{border-bottom:1px dotted #aab;}
+.cover{height:257mm;display:flex;flex-direction:column;justify-content:space-between;background:var(--navy);color:#fff;margin:-18mm -16mm 0;padding:26mm 20mm 20mm;}
+.cover h1{color:#fff;font-size:34pt;line-height:1.05;margin:0}
+.cover .sub{color:var(--gold-soft);font-size:13pt;margin-top:5mm}
+.cover .meta{font-size:9.5pt;color:#cfd7e6;line-height:1.7}
+.cover .rule{width:40mm;height:2mm;background:var(--gold);margin:8mm 0}
+.kpi{display:flex;gap:3mm;flex-wrap:wrap;margin:2mm 0 4mm}
+.kpi div{flex:1 1 30mm;background:var(--tint);border-top:1.4mm solid var(--gold);padding:2mm 3mm;page-break-inside:avoid}
+.kpi b{display:block;font-size:14pt;color:var(--navy)}
+.kpi span{font-size:7.8pt;color:var(--muted)}
+.nobreak{page-break-inside:avoid}
+.pb{page-break-before:always}
+.mono{font-family:"DejaVu Sans Mono",monospace;font-size:8.4pt}
+.srctab td{font-size:7.4pt;padding:1mm 1.4mm;word-break:break-word}
+.srctab th{font-size:7.6pt}
+.gloss td:first-child{font-weight:700;color:var(--navy);width:34mm}
+</style>
+</head>
+<body>
+<div class="band"><div class="kicker">Weatherbys Private Banking Internship 2027</div><h1>Cheat sheet</h1></div><div class="cols" style="font-size:8.9pt;line-height:1.38">
+<div>
+  <h3 style="margin-top:0">The firm in five lines</h3>
+  <ul>
+    <li>1770 racing stakeholder; bank licence 1994; London 2006; family-owned, 7th generation <span class="src">[S4][S5]</span></li>
+    <li>FY2025: deposits £1,905m, loans £1,006m, assets £2,053m, 483 staff <span class="src">[S4]</span></li>
+    <li>87% of income is interest; NIM 4.53% to 4.05%; PBT pre one-offs £26.7m to £12.8m <span class="src">[S4]</span></li>
+    <li>NPS 84; CET1 13.1%; LCR 1,080%; LDR 53%; private LTV ~34% <span class="src">[S4]</span></li>
+    <li>CEO Quentin Marshall (ex-Coutts); Chair Roger Weatherby; Head of Private Clients Oliver Barnett <span class="src">[S4][S13]</span></li>
+  </ul>
+  <h3>Recent moves</h3>
+  <ul>
+    <li>Hamilton sold, Aug 2025; Business Bank, Q4 2025 <span class="src">[S4]</span></li>
+    <li>Private Bank of the Year, 20 May 2026 <span class="src">[S26]</span></li>
+    <li>Lombard on external portfolios, Aug 2026 <span class="src">[S27]</span></li>
+    <li>Matt Wotton (ex-Coutts), Head of Sports, Media &amp; Ent., 6 Oct 2026 <span class="src">[S31]</span></li>
+  </ul>
+  <h3>The sector in four dates</h3>
+  <ul>
+    <li>Consumer Duty 31 Jul 2023 <span class="src">[S140]</span>; FSCS £120k from 1 Dec 2025 <span class="src">[S145]</span></li>
+    <li>APR/BPR £2.5m cap from 6 Apr 2026 <span class="src">[S152]</span></li>
+    <li>Basel 3.1 + SDDT capital 1 Jan 2027 <span class="src">[S143]</span>; pensions in IHT 6 Apr 2027 <span class="src">[S154]</span></li>
+    <li>Bank Rate 3.75%, 6-3 hold on 17 Sep 2026; next 5 Nov <span class="src">[S102]</span></li>
+  </ul>
+  <h3>One question to ask</h3>
+  <p>"Since the APR and BPR cap came in, how have conversations with farming clients changed?"</p>
+</div>
+<div>
+  <h3 style="margin-top:0">Answer protocol</h3>
+  <p><b>Steady</b> (restate) &rarr; <b>Sort</b> (client, rules, time) &rarr; <b>Act</b> (steps + who you'd involve) &rarr; <b>Close</b> (client safe, nothing at risk). 45 to 75 seconds.</p>
+  <h3>Priority order</h3>
+  <p>1 Rules and the bank's name &rarr; 2 Client's real interest &rarr; 3 Process and record &rarr; 4 Speed.<br><i>"Quickly, but not in a way that puts the client or the bank at risk."</i></p>
+  <h3>Counters</h3>
+  <ul>
+    <li>Interrupted: answer, then "coming back to..."</li>
+    <li>Contradicted: "Which part?" Hold if reasoning holds.</li>
+    <li>Silence: stop talking; offer more detail.</li>
+    <li>False choice: look for the third option.</li>
+    <li>Don't know: "My understanding is X; I'd check with Y."</li>
+    <li>Badmouth bait: never criticise rivals.</li>
+  </ul>
+  <h3>Never</h3>
+  <ul>
+    <li>Give advice or tax advice as an intern</li>
+    <li>Skip a control to please a senior person</li>
+    <li>Talk about clients outside work</li>
+    <li>Claim Weatherbys is the oldest or biggest bank</li>
+    <li>Fake a love of racing</li>
+  </ul>
+  <h3>Lines ready</h3>
+  <ul>
+    <li>"Weatherbys is built so the person who knows the client makes the decision."</li>
+    <li>"It's mostly a lending and deposit business wrapped in a relationship."</li>
+    <li>"The growth in advice income is the number I'd watch."</li>
+  </ul>
+</div>
+</div>
+</body></html>
