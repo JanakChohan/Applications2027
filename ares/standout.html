@@ -1,0 +1,862 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ares Management — The Differentiators</title>
+<style>
+@page { size: A4; margin: 14mm 13mm 16mm 13mm; }
+:root{
+  --navy:#0d2340; --navy2:#16355e; --ink:#12202f; --body:#33414f;
+  --mute:#6b7a8a; --line:#dfe5ec; --soft:#f4f7fb;
+  --gold:#c8963e; --teal:#1f7a72; --red:#b4413c; --green:#2f7d55;
+  --violet:#5b4b8a; --amber:#d18b1e;
+}
+*{box-sizing:border-box;}
+body{font-family:"Segoe UI",-apple-system,"Helvetica Neue",Arial,sans-serif;
+ color:var(--body); font-size:9.6pt; line-height:1.5; margin:0; background:#fff;}
+h1,h2,h3,h4{color:var(--navy); margin:0 0 .4em; line-height:1.22; font-weight:650;}
+h1{font-size:23pt; letter-spacing:-.4px;} h2{font-size:15.5pt;}
+h3{font-size:11.6pt;} h4{font-size:10pt; color:var(--navy2);}
+p{margin:0 0 .7em;} small{font-size:8pt;}
+.page-break{page-break-before:always;} .avoid{page-break-inside:avoid;}
+
+.cover{height:297mm; margin-bottom:-30mm; display:flex; flex-direction:column; justify-content:space-between;
+  background:linear-gradient(155deg,#0d2340 0%,#16355e 50%,#1f4570 100%); color:#fff;
+  margin:-14mm -13mm 0 -13mm; padding:24mm 18mm 30mm 18mm; page-break-after:always;}
+.cover h1{color:#fff; font-size:33pt; line-height:1.08; letter-spacing:-.9px;}
+.cover .kicker{font-size:9.5pt; letter-spacing:3.2px; text-transform:uppercase;
+  color:#9dc0e8; font-weight:600; margin-bottom:13mm;}
+.cover .sub{font-size:12.5pt; color:#cfe0f2; font-weight:300; max-width:138mm; line-height:1.5; margin-top:7mm;}
+.cover .rule{width:64mm; height:3px; background:var(--gold); margin:8mm 0;}
+.cover ol{counter-reset:c; list-style:none; padding:0; margin:9mm 0 0;}
+.cover ol li{counter-increment:c; font-size:10pt; color:#dce8f5; padding:2.2mm 0 2.2mm 11mm;
+  border-top:1px solid rgba(255,255,255,.17); position:relative;}
+.cover ol li:before{content:counter(c,decimal-leading-zero); position:absolute; left:0;
+  color:var(--gold); font-weight:700; font-size:9pt;}
+.cover footer{font-size:8.2pt; color:#8fb0d6; border-top:1px solid rgba(255,255,255,.2); padding-top:4mm;}
+
+.part{background:var(--navy); color:#fff; padding:5mm 6mm; margin:0 0 6mm;
+  border-radius:3px; page-break-inside:avoid; page-break-after:avoid;}
+.part .n{font-size:7.8pt; letter-spacing:2.6px; text-transform:uppercase; color:var(--gold); font-weight:600;}
+.part h2{color:#fff; margin:1.5mm 0 0;} .part p{margin:1.5mm 0 0; color:#c3d5ea; font-size:9pt;}
+section{margin-bottom:6mm;}
+.lead{font-size:10.6pt; color:var(--navy2); line-height:1.55;}
+
+.card{border:1px solid var(--line); border-radius:4px; padding:4.5mm 5mm; margin:0 0 4mm;
+  background:#fff; page-break-inside:avoid;}
+.card.soft{background:var(--soft); border-color:#d8e2ee;}
+.card h4{margin-bottom:2mm;}
+.callout{border-left:3.5px solid var(--gold); background:#fdf8ef; padding:4mm 5mm;
+  margin:0 0 4mm; border-radius:0 4px 4px 0; page-break-inside:avoid;}
+.callout.edge{border-left-color:var(--teal); background:#eff7f6;}
+.callout.warn{border-left-color:var(--red); background:#fcf2f1;}
+.callout.key{border-left-color:var(--navy2); background:#eef3fa;}
+.callout .tag{display:block; font-size:7.4pt; letter-spacing:2px; text-transform:uppercase;
+  font-weight:700; color:var(--gold); margin-bottom:1.5mm;}
+.callout.edge .tag{color:var(--teal);} .callout.warn .tag{color:var(--red);}
+.callout.key .tag{color:var(--navy2);} .callout p:last-child{margin-bottom:0;}
+
+table{width:100%; border-collapse:collapse; font-size:8.3pt; margin:0 0 4mm; page-break-inside:avoid;}
+th{background:var(--navy); color:#fff; text-align:left; padding:2.4mm 2.6mm; font-weight:600;
+  font-size:7.7pt; letter-spacing:.4px; text-transform:uppercase;}
+td{padding:2.2mm 2.6mm; border-bottom:1px solid var(--line); vertical-align:top;}
+tr:nth-child(even) td{background:#fafcfe;}
+td.num,th.num{text-align:right; font-variant-numeric:tabular-nums;}
+.tbl-note{font-size:7.6pt; color:var(--mute); margin:-2mm 0 4mm;}
+
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:4mm;}
+.grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:4mm;}
+.grid4{display:grid; grid-template-columns:repeat(4,1fr); gap:3mm;}
+.stat{border:1px solid var(--line); border-top:3px solid var(--navy2); border-radius:3px;
+  padding:3mm 3.5mm; background:#fff;}
+.stat b{display:block; font-size:15pt; color:var(--navy); font-weight:650; line-height:1.15;}
+.stat span{display:block; font-size:7.5pt; color:var(--mute); text-transform:uppercase;
+  letter-spacing:.9px; margin-top:1mm;}
+.stat i{display:block; font-style:normal; font-size:7.8pt; color:var(--body); margin-top:1.5mm;}
+.stat.g{border-top-color:var(--green);} .stat.r{border-top-color:var(--red);}
+.stat.t{border-top-color:var(--teal);} .stat.a{border-top-color:var(--amber);}
+
+figure{margin:0 0 5mm; page-break-inside:avoid;}
+figcaption{font-size:7.8pt; color:var(--mute); margin-top:2mm; line-height:1.45;}
+figcaption b{color:var(--navy2);}
+svg{display:block; max-width:100%;}
+ul,ol{margin:0 0 .7em; padding-left:4.5mm;} li{margin-bottom:1.6mm;}
+.tight li{margin-bottom:.8mm;}
+.term{font-weight:650; color:var(--navy);}
+.src{font-size:7.4pt; color:var(--mute); font-style:italic;}
+.pill{display:inline-block; font-size:7pt; font-weight:700; letter-spacing:.7px;
+  text-transform:uppercase; padding:.8mm 2mm; border-radius:2px; color:#fff; background:var(--navy2);}
+.pill.gold{background:var(--gold);} .pill.red{background:var(--red);}
+.pill.green{background:var(--green);} .pill.teal{background:var(--teal);}
+.rank{display:flex; align-items:center; gap:3mm; margin-bottom:2.5mm;}
+.rank .no{flex:0 0 9mm; height:9mm; border-radius:50%; background:var(--navy); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-weight:700; font-size:10pt;}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div>
+    <div class="kicker">What nobody else will say</div>
+    <h1>Ares Management:<br>The Differentiators</h1>
+    <div class="rule"></div>
+    <div class="sub">Nine things that genuinely set this firm apart — none of which appear
+    on the careers page, and most of which require reading a 10-K footnote, an earnings
+    transcript or a 2020 press release to find.</div>
+  </div>
+  <div>
+    <ol>
+      <li>The AI paradox: the lender the market punished for AI, that owns an AI venture firm</li>
+      <li>Ivy Hill — a fund that owns an asset manager inside an asset manager</li>
+      <li>Employees commit more of their own money to Ares funds than Ares does</li>
+      <li>The six-year Japan arc hiding in a 2020 press release</li>
+      <li>The redemption maths that defuses the whole private-credit panic</li>
+      <li>Where Ares actually takes losses: the Lyon loan-to-own</li>
+      <li>The firm with no central investment committee — on purpose</li>
+      <li>Fee structures so strange they tell you what the firm values</li>
+      <li>The carried interest Ares gives away</li>
+    </ol>
+  </div>
+  <footer>
+    Primary sources: Ares FY2025 Form 10-K and FY2026 proxy (SEC EDGAR, CIK 1176948) ·
+    Q1 and Q2 2026 earnings calls · 2025 Annual Shareholder Letter · ARCC prospectus supplements ·
+    BofA conference remarks · contemporaneous trade press. Conflicts and single-sourced
+    claims are flagged in place.<br>
+    Compiled 9 October 2026. Ares reports Q3 2026 on 29 October — check it before you interview.
+  </footer>
+</div>
+
+<section>
+<div class="card soft avoid">
+<h3>How to use this</h3>
+<p>Your first report explained what Ares is. This one answers a narrower question:
+<b>what could you say that nobody else in the process will?</b></p>
+<p>Everything here passes a specific test — <b>it cannot be found on the Ares website, in a
+press summary, or in the first page of a Google search.</b> Each item comes from a filing
+footnote, an earnings transcript, or a document from years ago that nobody connects to the
+present.</p>
+<p style="margin-bottom:0"><b>You do not need all nine.</b> Two, deployed well, will do more than
+nine listed. Part 10 ranks them and tells you which to lead with.</p>
+</div>
+</section>
+
+<div class="part">
+  <div class="n">Differentiator 01</div>
+  <h2>The AI paradox</h2>
+  <p>The most current, least-known and most useful thing about Ares right now.</p>
+</div>
+
+<section>
+<p class="lead">In 2026 Ares became the alternative manager the market punished hardest for
+artificial intelligence. The reason is not what you would guess, the firm's response was
+unusually rigorous, and almost no candidate interviewing this cycle will know any of it.</p>
+
+<h3>1.1 What happened to the share price</h3>
+<p>Ares shares fell roughly <b>32% in the first quarter of 2026</b> and were down about
+<b>22% year-to-date</b> by September, having at one point fallen <b>46% from their peak</b>.
+In one week in early February the stock dropped over 12%, while Blue Owl fell over 8%.</p>
+<p>The cause was not credit losses, redemptions, or fundraising. It was a thesis:
+<b>Ares lends to software companies, and AI might destroy software companies.</b> If an AI
+model can replicate what a mid-sized software vendor sells, that vendor's revenue — and its
+ability to service an Ares loan — disappears.</p>
+
+<div class="callout edge">
+<span class="tag">Edge · the detail that wins the conversation</span>
+<p><b>Ares hired one of the three largest global management consultancies to run a nine-week
+review of AI disruption risk across its software-oriented portfolio.</b> Not a slide. A
+nine-week, name-brand diligence exercise on its own loan book.</p>
+<p style="margin-bottom:0">The published findings: <b>86% of the software portfolio was assessed
+low risk, 13% medium, 1% high.</b> Management's translation of that — the sentence to remember —
+is that medium-to-high risk exposure is <b>under 2% of US and European direct lending AUM, and
+under 1% of firm-wide AUM</b>.
+<span class="src">Ares Q1 2026 earnings call, 1 May 2026.</span></p>
+</div>
+
+<figure>
+<svg viewBox="0 0 760 290" role="img" aria-label="Diagram showing how Ares software exposure narrows down to under one percent of firm-wide AUM at medium-to-high AI risk">
+  <text x="0" y="13" font-size="10.5" font-weight="700" fill="#0d2340">How a scary headline narrows to a small number &#8212; follow the funnel</text>
+  <rect x="0" y="26" width="760" height="40" rx="4" fill="#0d2340"/>
+  <text x="14" y="44" font-size="10.5" font-weight="700" fill="#fff">ALL ARES AUM</text>
+  <text x="14" y="59" font-size="9" fill="#9dc0e8">$671bn at Q2 2026</text>
+  <text x="746" y="52" text-anchor="end" font-size="13" font-weight="700" fill="#fff">100%</text>
+
+  <path d="M330 68 L430 68 L395 86 L365 86 Z" fill="#b9c6d5"/>
+  <rect x="0" y="90" width="456" height="40" rx="4" fill="#2f4f75"/>
+  <text x="14" y="108" font-size="10.5" font-weight="700" fill="#fff">SOFTWARE-RELATED EXPOSURE</text>
+  <text x="14" y="123" font-size="9" fill="#c3d5ea">&#8220;About 6% of overall AUM, less than 8% of private credit AUM&#8221;</text>
+  <text x="442" y="116" text-anchor="end" font-size="13" font-weight="700" fill="#fff">~6%</text>
+
+  <path d="M200 132 L256 132 L236 150 L220 150 Z" fill="#b9c6d5"/>
+  <rect x="0" y="154" width="150" height="40" rx="4" fill="#d18b1e"/>
+  <text x="12" y="172" font-size="9.5" font-weight="700" fill="#fff">MEDIUM + HIGH RISK</text>
+  <text x="12" y="186" font-size="8.5" fill="#fdf3e2">13% medium, 1% high</text>
+  <text x="160" y="180" font-size="12" font-weight="700" fill="#d18b1e">14% of that 6%</text>
+
+  <path d="M60 196 L96 196 L84 214 L72 214 Z" fill="#b9c6d5"/>
+  <rect x="0" y="218" width="58" height="40" rx="4" fill="#2f7d55"/>
+  <text x="68" y="235" font-size="11" font-weight="700" fill="#2f7d55">&lt;1% of firm-wide AUM</text>
+  <text x="68" y="250" font-size="9" fill="#33414f">and &lt;2% of US + European direct lending AUM</text>
+
+  <line x1="0" y1="270" x2="760" y2="270" stroke="#dfe5ec"/>
+  <text x="0" y="285" font-size="8" fill="#6b7a8a">Source: Ares Q1 2026 earnings call, 1 May 2026, and the nine-week third-party consultant review cited on it. Percentages are management&#8217;s own characterisation.</text>
+</svg>
+<figcaption><b>The funnel is the argument.</b> A headline about "AI killing private credit"
+becomes, on inspection, under one percent of the firm. Being able to walk an interviewer down
+that funnel is a complete demonstration of commercial judgement.</figcaption>
+</figure>
+
+<h3>1.2 The evidence from the market itself</h3>
+<p>The strongest part of Ares' case is not its own opinion — it is that the traded loan market
+has already separated the two kinds of software. Management pointed to the split on the Q1 call:</p>
+<div class="grid2">
+<div class="card"><h4 style="color:var(--green)">Core operational software</h4>
+<p style="margin-bottom:0">Finance systems, cybersecurity, order management — software embedded
+in how a regulated business runs. Traded loans in this basket were down about
+<b>2% year-to-date</b>.</p></div>
+<div class="card"><h4 style="color:var(--red)">Content, analytics, productivity software</h4>
+<p style="margin-bottom:0">Single-function tools, content creation, data visualisation — the
+things a general model can plausibly replace. These loans were down about <b>24%</b> and
+<b>trading below 65 cents</b>.</p></div>
+</div>
+<p style="margin-top:3mm">Ares says it underwrites toward the first basket: enterprise software
+with "two-sided networks, proprietary data moats, and mission-critical systems." The software
+book carries roughly <b>40% loan-to-value</b>, about <b>10% EBITDA growth</b>, and a weighted
+average remaining maturity of about <b>three years</b>. It has also been exiting selected names
+where conviction was lower.</p>
+
+<h3>1.3 The paradox: Ares is also an AI investor and an AI user</h3>
+<div class="callout edge">
+<span class="tag">Edge · nobody will know this</span>
+<p>On <b>1 February 2024, Ares acquired BootstrapLabs</b>, a Silicon Valley venture firm that
+invests <i>exclusively</i> in early-stage applied artificial intelligence, with 30+ AI-first
+portfolio companies. BootstrapLabs became the foundation of the <b>Ares AI &amp; Innovation
+Group</b>; its founders, Nicolai Wadstrom and Benjamin Levy, were made Partners and
+Co-Heads of Ares' Venture Capital and AI &amp; Innovation Groups.</p>
+<p style="margin-bottom:0">The FY2025 10-K confirms it obliquely, listing among Other Businesses
+"a venture capital business with fund strategies that are focused on growth-stage companies and
+<b>applied artificial intelligence</b>." Almost nobody reads that line, and nobody connects it
+to a 2024 acquisition.</p>
+</div>
+
+<p>So Ares occupies three positions on AI simultaneously — and the ability to name all three is
+the most sophisticated thing you could say about the firm this autumn:</p>
+
+<figure>
+<svg viewBox="0 0 760 240" role="img" aria-label="Diagram of Ares' three simultaneous positions on artificial intelligence">
+  <text x="0" y="13" font-size="10.5" font-weight="700" fill="#0d2340">Three positions on AI, held at the same time</text>
+  <rect x="0" y="28" width="243" height="150" rx="5" fill="#fcf2f1" stroke="#b4413c" stroke-width="1.5"/>
+  <text x="121" y="52" text-anchor="middle" font-size="11" font-weight="700" fill="#b4413c">1. EXPOSED TO IT</text>
+  <text x="121" y="74" text-anchor="middle" font-size="9" fill="#33414f">As a lender to software</text>
+  <text x="121" y="88" text-anchor="middle" font-size="9" fill="#33414f">companies that AI might</text>
+  <text x="121" y="102" text-anchor="middle" font-size="9" fill="#33414f">disrupt.</text>
+  <text x="121" y="128" text-anchor="middle" font-size="10" font-weight="700" fill="#b4413c">~6% of AUM</text>
+  <text x="121" y="150" text-anchor="middle" font-size="8.5" font-style="italic" fill="#6b7a8a">Re-underwritten by a</text>
+  <text x="121" y="163" text-anchor="middle" font-size="8.5" font-style="italic" fill="#6b7a8a">top-three consultancy</text>
+
+  <rect x="258" y="28" width="243" height="150" rx="5" fill="#eff7f6" stroke="#1f7a72" stroke-width="1.5"/>
+  <text x="379" y="52" text-anchor="middle" font-size="11" font-weight="700" fill="#1f7a72">2. INVESTING IN IT</text>
+  <text x="379" y="74" text-anchor="middle" font-size="9" fill="#33414f">Bought BootstrapLabs in</text>
+  <text x="379" y="88" text-anchor="middle" font-size="9" fill="#33414f">Feb 2024 &#8212; now the Ares</text>
+  <text x="379" y="102" text-anchor="middle" font-size="9" fill="#33414f">AI &amp; Innovation Group.</text>
+  <text x="379" y="128" text-anchor="middle" font-size="10" font-weight="700" fill="#1f7a72">30+ AI companies</text>
+  <text x="379" y="150" text-anchor="middle" font-size="8.5" font-style="italic" fill="#6b7a8a">A venture arm inside a</text>
+  <text x="379" y="163" text-anchor="middle" font-size="8.5" font-style="italic" fill="#6b7a8a">credit firm</text>
+
+  <rect x="516" y="28" width="244" height="150" rx="5" fill="#eef3fa" stroke="#16355e" stroke-width="1.5"/>
+  <text x="638" y="52" text-anchor="middle" font-size="11" font-weight="700" fill="#16355e">3. USING IT</text>
+  <text x="638" y="74" text-anchor="middle" font-size="9" fill="#33414f">~160 use cases evaluated,</text>
+  <text x="638" y="88" text-anchor="middle" font-size="9" fill="#33414f">~25 deployed across front,</text>
+  <text x="638" y="102" text-anchor="middle" font-size="9" fill="#33414f">middle and back office.</text>
+  <text x="638" y="128" text-anchor="middle" font-size="10" font-weight="700" fill="#16355e">Incl. sales optimisation</text>
+  <text x="638" y="150" text-anchor="middle" font-size="8.5" font-style="italic" fill="#6b7a8a">NDA review, AML/KYC,</text>
+  <text x="638" y="163" text-anchor="middle" font-size="8.5" font-style="italic" fill="#6b7a8a">Salesforce for wealth sales</text>
+
+  <line x1="0" y1="196" x2="760" y2="196" stroke="#dfe5ec"/>
+  <text x="0" y="214" font-size="9" fill="#33414f"><tspan font-weight="700">Why position 3 matters to you specifically:</tspan> one of the deployed use cases is Salesforce optimisation for the wealth sales team. AI is being pointed</text>
+  <text x="0" y="229" font-size="9" fill="#33414f">at the distribution function you are applying to join. The CEO also noted 2025 had the <tspan font-weight="700">slowest organic headcount growth in over a decade</tspan>.</text>
+</svg>
+</figure>
+
+<div class="callout">
+<span class="tag">Say this</span>
+<p style="margin-bottom:0">"The thing I find most interesting about Ares right now is that it's
+been treated as an AI loser while quietly being an AI owner. The stock fell about a third in Q1
+on the thesis that AI breaks software borrowers. But Ares brought in a top-three consultancy for
+a nine-week review of that book, and the finding was eighty-six percent low risk — medium-to-high
+ends up under one percent of firm-wide AUM. And the same firm bought BootstrapLabs, an applied-AI
+venture manager, back in 2024, which is now the AI and Innovation Group. So it's lending to
+software, investing in AI, and deploying about twenty-five internal AI use cases — including
+Salesforce optimisation for the wealth sales team. I'd rather join a firm that re-underwrote its
+own thesis than one that issued a press release."</p>
+</div>
+
+<div class="callout warn">
+<span class="tag">Careful · the numbers conflict, so quote the right one</span>
+<p style="margin-bottom:0">Different sources give different software percentages because they use
+different denominators. The Q1 2026 earnings call — the most authoritative — says
+<b>about 6% of overall AUM and less than 8% of private credit AUM</b>. In February the CEO was
+reported as saying software was about 12% of the <i>direct lending book</i>, and CNBC cited
+"less than 9% of private credit AUM". These are not contradictory, but if you quote a number,
+<b>say which denominator you mean</b>. The consultant split is also reported as 86/13/1 on the
+call and 85/14/1 in some secondary coverage.</p>
+</div>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Differentiator 02</div>
+  <h2>Ivy Hill: the asset manager hidden inside a fund</h2>
+  <p>A structure so unusual it required an SEC exemption to exist.</p>
+</div>
+
+<section>
+<p>Buried in the Ares glossary is a sentence most readers skim past. "Our funds" includes
+"funds managed by <b>Ivy Hill Asset Management, L.P., a wholly owned portfolio company of Ares
+Capital Corporation (NASDAQ: ARCC) and an SEC-registered investment adviser</b>."</p>
+<p>Read that slowly, because it describes a Russian doll:</p>
+
+<figure>
+<svg viewBox="0 0 760 235" role="img" aria-label="Nested diagram showing Ares managing ARCC, which owns Ivy Hill, which manages its own funds">
+  <rect x="0" y="24" width="760" height="150" rx="6" fill="#eef3fa" stroke="#0d2340" stroke-width="1.6"/>
+  <text x="14" y="44" font-size="10.5" font-weight="700" fill="#0d2340">ARES MANAGEMENT</text>
+  <text x="14" y="58" font-size="8.5" fill="#6b7a8a">manages, and earns a fee from&#8230;</text>
+
+  <rect x="150" y="62" width="596" height="98" rx="5" fill="#fff" stroke="#1f7a72" stroke-width="1.5"/>
+  <text x="164" y="82" font-size="10.5" font-weight="700" fill="#1f7a72">ARES CAPITAL CORPORATION (ARCC)</text>
+  <text x="164" y="96" font-size="8.5" fill="#6b7a8a">a listed BDC, $35.9bn AUM &#8212; which wholly owns&#8230;</text>
+
+  <rect x="300" y="100" width="432" height="46" rx="5" fill="#fdf8ef" stroke="#c8963e" stroke-width="1.5"/>
+  <text x="314" y="118" font-size="10.5" font-weight="700" fill="#c8963e">IVY HILL ASSET MANAGEMENT</text>
+  <text x="314" y="134" font-size="8.5" fill="#33414f">an SEC-registered investment adviser running 24 vehicles, $16.3bn AUM</text>
+
+  <line x1="0" y1="190" x2="760" y2="190" stroke="#dfe5ec"/>
+  <text x="0" y="207" font-size="9" fill="#33414f"><tspan font-weight="700">So:</tspan> Ares manages a fund, that fund owns an asset manager, and that asset manager manages further funds &#8212; whose AUM rolls back up into</text>
+  <text x="0" y="222" font-size="9" fill="#33414f">the $671bn headline. ARCC&#8217;s stake in Ivy Hill was carried at roughly <tspan font-weight="700">$2.8bn fair value against $2.6bn cost</tspan> at 30 June 2026.</text>
+</svg>
+</figure>
+
+<div class="callout edge">
+<span class="tag">Edge · why this could not normally exist</span>
+<p>A business development company is a regulated investment vehicle. It is not supposed to own
+operating businesses outright, still less a registered investment adviser. <b>ARCC obtained
+specific exemptive relief from the SEC in 2012</b> permitting it, subject to conditions, to own
+up to 100% of Ivy Hill's equity.</p>
+<p style="margin-bottom:0">Ivy Hill has compounded quietly ever since: <b>$11.0bn of AUM in
+June 2022, $13.2bn in September 2024, $16.3bn by June 2026</b> across 24 vehicles. It is larger
+than Ares' entire Private Equity Group ($25.3bn) is... well, nearly two-thirds of it — and
+virtually nobody outside the firm can tell you it exists.</p>
+</div>
+
+<p><b>Why it is worth raising in an interview.</b> It demonstrates something real about how Ares
+builds: rather than launching a new fund family and marketing it, Ares let a capability compound
+inside a vehicle it already controlled, under an exemption it had secured a decade earlier. That
+is a patient, structural way to grow fee streams — and it is the opposite of the "raise a bigger
+fund every three years" model.</p>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Differentiator 03</div>
+  <h2>The alignment numbers</h2>
+  <p>Ares' employees commit more of their own money to Ares funds than Ares itself does.</p>
+</div>
+
+<p>Every firm claims alignment. Ares publishes a number that proves it, and the proportions are
+genuinely unusual.</p>
+
+<div class="grid4">
+<div class="stat"><b>$7.2bn</b><span>Total committed</span><i>By Ares and its employees into Ares-managed vehicles, at 31 Dec 2025.</i></div>
+<div class="stat t"><b>$3.4bn</b><span>From Ares itself</span><i>The firm's own balance-sheet commitments.</i></div>
+<div class="stat g"><b>$3.6bn</b><span>From employee vehicles</span><i><b>More than the firm commits.</b> Via employee co-investment vehicles.</i></div>
+<div class="stat a"><b>37.13%</b><span>Employee ownership</span><i>Of all outstanding shares, fully exchanged — employees own over a third of the company.</i></div>
+</div>
+
+<div class="callout edge">
+<span class="tag">Edge · the comparison to make</span>
+<p style="margin-bottom:0"><b>Ares employees have $3.6bn of their own capital in Ares funds — $200m
+more than the firm's own $3.4bn of commitments.</b> Add $0.2bn of direct employee holdings in the
+listed and perpetual wealth vehicles and staff are personally exposed to $3.8bn of the products
+they sell and manage. The proxy reinforces the design: Ares "generally expect[s] that our
+professionals who hold such participation rights in Ares funds <b>invest their own capital in
+such funds</b>," because it "discourages excessive risk-taking."
+<span class="src">FY2025 10-K; FY2026 proxy statement.</span></p>
+</div>
+
+<p>For a client-facing role this is not trivia — it is <b>a selling point you will actually use</b>.
+When an investor asks why they should trust the manager's judgement, "the people underwriting this
+have three point six billion dollars of their own money in these funds" is a materially stronger
+answer than a track record chart.</p>
+
+<h3>3.1 The ownership structure, and the word "controlled"</h3>
+<table>
+<tr><th style="width:28%">Holder</th><th class="num" style="width:14%">Economic stake</th><th>What it means</th></tr>
+<tr><td><b>Public shareholders</b></td><td class="num">62.44%</td><td>The float. Owns most of the economics.</td></tr>
+<tr><td><b>Ares Owners Holdings L.P.</b></td><td class="num">32.54%</td><td>The founders and senior partners, via Ares Operating Group units.</td></tr>
+<tr><td><b>SMBC</b></td><td class="num">5.02%</td><td>Sumitomo Mitsui Banking Corporation — a strategic holder, not a financial one. See Differentiator 04.</td></tr>
+</table>
+<p class="tbl-note">Assuming full exchange of AOG Units and conversion of Series B mandatory convertible preferred stock, at 31 December 2025. Source: FY2025 Form 10-K.</p>
+
+<p>Voting is separate from economics. Ares has <b>Class A, Class B and Class C common stock</b>
+plus non-voting stock held solely by SMBC. Class B, held by Ares Management GP LLC, carries
+<b>four times the aggregate votes of all Class A stock</b> while an ownership condition is met.
+The consequence, stated plainly in the 10-K: Ares is a <b>"controlled company" under NYSE
+governance standards and qualifies for exemptions from certain corporate governance rules</b>.</p>
+
+<div class="callout warn">
+<span class="tag">Careful · present this as a trade-off, not a flaw</span>
+<p style="margin-bottom:0">The 10-K lists it among the risk factors — "we are subject to risks
+related to our categorization as a 'controlled company'." Do not pretend it is purely positive.
+The honest framing, which is also the more impressive one: <b>founder control lets Ares make
+decade-long bets like Ivy Hill, Aspida and the Japan strategy without quarterly pressure, at the
+cost of reduced minority shareholder influence.</b> Naming both sides shows judgement.</p>
+</div>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Differentiator 04</div>
+  <h2>The Japan arc: a 2020 press release that explains 2026</h2>
+  <p>The single best "I did real research" story available to you.</p>
+</div>
+
+<section>
+<p class="lead">In March 2020, as markets were collapsing, Ares sold 4.9% of itself to a Japanese
+bank. Almost nobody connects that transaction to what Ares is doing today. The line from one to
+the other is six years long and completely traceable in public documents.</p>
+
+<figure>
+<svg viewBox="0 0 760 300" role="img" aria-label="Timeline connecting the 2020 SMBC investment to Ares' 2026 Japan strategy">
+  <line x1="38" y1="118" x2="736" y2="118" stroke="#16355e" stroke-width="2.5"/>
+  <g>
+    <circle cx="60" cy="118" r="8" fill="#0d2340"/>
+    <text x="60" y="56" text-anchor="middle" font-size="10" font-weight="700" fill="#0d2340">MAR 2020</text>
+    <text x="60" y="72" text-anchor="middle" font-size="8.5" fill="#33414f">SMBC buys 4.9%</text>
+    <text x="60" y="84" text-anchor="middle" font-size="8.5" fill="#33414f">for $384m at</text>
+    <text x="60" y="96" text-anchor="middle" font-size="8.5" font-weight="700" fill="#0d2340">$31.64/share</text>
+    <text x="60" y="142" text-anchor="middle" font-size="8" font-style="italic" fill="#6b7a8a">Alliance covers</text>
+    <text x="60" y="153" text-anchor="middle" font-size="8" font-style="italic" fill="#6b7a8a">distribution, investment,</text>
+    <text x="60" y="164" text-anchor="middle" font-size="8" font-style="italic" fill="#6b7a8a">capital markets</text>
+  </g>
+  <g>
+    <circle cx="230" cy="118" r="8" fill="#2f4f75"/>
+    <text x="230" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="#0d2340">2020&#8211;24</text>
+    <text x="230" y="80" text-anchor="middle" font-size="8.5" fill="#33414f">Ares markets products</text>
+    <text x="230" y="92" text-anchor="middle" font-size="8.5" fill="#33414f">to SMBC&#8217;s Japanese clients</text>
+    <text x="230" y="142" text-anchor="middle" font-size="8" font-style="italic" fill="#6b7a8a">Proceeds earmarked partly</text>
+    <text x="230" y="153" text-anchor="middle" font-size="8" font-style="italic" fill="#6b7a8a">for Aspida and new</text>
+    <text x="230" y="164" text-anchor="middle" font-size="8" font-style="italic" fill="#6b7a8a">Japanese products</text>
+  </g>
+  <g>
+    <circle cx="420" cy="118" r="8" fill="#1f7a72"/>
+    <text x="420" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="#0d2340">MAR 2025</text>
+    <text x="420" y="80" text-anchor="middle" font-size="8.5" fill="#33414f">GCP International closes</text>
+    <text x="420" y="92" text-anchor="middle" font-size="8.5" fill="#33414f">&#8212; brings a Japanese</text>
+    <text x="420" y="104" text-anchor="middle" font-size="8.5" font-weight="700" fill="#1f7a72">industrial platform</text>
+    <text x="420" y="142" text-anchor="middle" font-size="8" font-style="italic" fill="#6b7a8a">Japan Industrial Development</text>
+    <text x="420" y="153" text-anchor="middle" font-size="8" font-style="italic" fill="#6b7a8a">Fund V raises $3.4bn,</text>
+    <text x="420" y="164" text-anchor="middle" font-size="8" font-style="italic" fill="#6b7a8a">beating the prior $2.5bn</text>
+  </g>
+  <g>
+    <circle cx="640" cy="118" r="9" fill="#c8963e"/>
+    <text x="640" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="#c8963e">2026 PRIORITY</text>
+    <text x="640" y="80" text-anchor="middle" font-size="8.5" fill="#33414f">&#8220;Expand our product</text>
+    <text x="640" y="92" text-anchor="middle" font-size="8.5" fill="#33414f">offerings in Japan&#8221; &#8212; incl.</text>
+    <text x="640" y="104" text-anchor="middle" font-size="8.5" font-weight="700" fill="#c8963e">wealth products for</text>
+    <text x="640" y="116" text-anchor="middle" font-size="8.5" font-weight="700" fill="#c8963e">Japanese individuals</text>
+    <text x="640" y="142" text-anchor="middle" font-size="8" font-style="italic" fill="#6b7a8a">Named as one of seven</text>
+    <text x="640" y="153" text-anchor="middle" font-size="8" font-style="italic" fill="#6b7a8a">firm priorities in the</text>
+    <text x="640" y="164" text-anchor="middle" font-size="8" font-style="italic" fill="#6b7a8a">2025 shareholder letter</text>
+  </g>
+  <rect x="0" y="194" width="760" height="56" rx="4" fill="#fdf8ef" stroke="#c8963e"/>
+  <text x="14" y="214" font-size="9.5" font-weight="700" fill="#c8963e">THE POINT</text>
+  <text x="14" y="230" font-size="9" fill="#33414f">Ares did not enter Japan in 2025 by buying GCP. It bought a Japanese <tspan font-style="italic">distribution relationship</tspan> in 2020, spent five years using it, then bought</text>
+  <text x="14" y="244" font-size="9" fill="#33414f">the Japanese <tspan font-style="italic">product</tspan> to sell through it. The bank that owns 5% of the firm is the channel. That is a distribution-led strategy, not an investment-led one.</text>
+  <text x="0" y="276" font-size="8" fill="#6b7a8a">Sources: Ares/SMBC announcement, 30 March 2020; Investor Rights Agreement dated 31 March 2020 (10-K exhibit 10.29); FY2025 10-K; 2025 Annual Shareholder Letter.</text>
+  <text x="0" y="290" font-size="8" fill="#6b7a8a">SMBC&#8217;s entry price of $31.64 compares with roughly $137 in August 2026 &#8212; a return of over four times, before dividends. Verify the current price before quoting it.</text>
+</svg>
+</figure>
+
+<div class="callout">
+<span class="tag">Say this</span>
+<p style="margin-bottom:0">"Something I only noticed by reading backwards: SMBC's five percent
+stake isn't a passive investment, it's a distribution alliance signed in March 2020 covering
+marketing Ares products to Japanese clients. Five years later Ares buys GCP, which brings a
+Japanese industrial platform, and then one of the seven stated priorities for 2026 is expanding
+wealth products for Japanese individual investors. So the 2020 shareholder, the 2025 acquisition
+and the 2026 priority are the same strategy. It's a good illustration of something I like about
+Ares — distribution tends to come first, and the product gets built or bought to fit it."</p>
+</div>
+
+<p class="src" style="margin-top:3mm">Note: the SMBC share-price comparison is mine, not Ares'.
+ARES traded around $137 in August 2026 against SMBC's $31.64 entry; the stock has been volatile
+in 2026, so check the live price before using the multiple in conversation.</p>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Differentiator 05</div>
+  <h2>The redemption maths</h2>
+  <p>One sentence from the Q1 call that defuses the entire private-credit panic.</p>
+</div>
+
+<section>
+<p>Every commentator in 2026 has written about investors pulling money out of non-traded credit
+funds. Ares has been part of that story — its non-traded BDC, ASIF, pro-rated two consecutive
+quarterly tenders, with requests of 11.6% and then 14.4% against a 5% cap.</p>
+<p>What nobody quotes is management's own arithmetic on what sustained redemptions would actually
+cost the firm.</p>
+
+<div class="callout edge">
+<span class="tag">Edge · the number that reframes the panic</span>
+<p style="margin-bottom:0">On the Q1 2026 call, management stated that <b>sustained redemptions at
+the full 5% quarterly cap, for an entire year, with no new inflows at all, would reduce
+fee-paying AUM by approximately 1% annually.</b> They also noted the two US private credit wealth
+products represent about <b>4.5% of fee-paying AUM</b>, and that <b>over 95% of non-traded BDC
+investors did not request redemptions.</b></p>
+</div>
+
+<figure>
+<svg viewBox="0 0 760 215" role="img" aria-label="Chart showing that the worst-case redemption scenario costs about one percent of fee-paying AUM">
+  <text x="0" y="13" font-size="10.5" font-weight="700" fill="#0d2340">The worst realistic case, drawn to scale against fee-paying AUM</text>
+  <rect x="0" y="30" width="760" height="38" rx="4" fill="#0d2340"/>
+  <text x="14" y="54" font-size="10.5" font-weight="700" fill="#fff">TOTAL FEE-PAYING AUM &#8212; $410bn</text>
+  <text x="746" y="54" text-anchor="end" font-size="11" font-weight="700" fill="#c8963e">100%</text>
+
+  <rect x="0" y="80" width="34" height="34" rx="3" fill="#d18b1e"/>
+  <text x="44" y="96" font-size="9.5" font-weight="700" fill="#0d2340">The two US private credit wealth products</text>
+  <text x="44" y="109" font-size="9" fill="#33414f">about 4.5% of fee-paying AUM &#8212; the entire exposed surface</text>
+
+  <rect x="0" y="126" width="8" height="34" rx="2" fill="#b4413c"/>
+  <text x="44" y="142" font-size="9.5" font-weight="700" fill="#0d2340">Worst case: 5% cap hit every quarter for a year, zero inflows</text>
+  <text x="44" y="155" font-size="9" fill="#33414f">approximately <tspan font-weight="700">1% of fee-paying AUM</tspan> &#8212; against firm-wide FPAUM growth of 17% year on year</text>
+
+  <line x1="0" y1="176" x2="760" y2="176" stroke="#dfe5ec"/>
+  <text x="0" y="193" font-size="9" fill="#33414f"><tspan font-weight="700">The comparison that lands:</tspan> Ares grew fee-paying AUM 17% year on year. The maximum sustained redemption drag is about 1%.</text>
+  <text x="0" y="208" font-size="8" fill="#6b7a8a">Source: Ares Q1 2026 earnings call, 1 May 2026; Q2 2026 earnings release. Management&#8217;s own scenario, not an independent projection.</text>
+</svg>
+</figure>
+
+<p>This is the most useful single fact in this report for a client-facing role, because it is
+exactly the objection you would be handed. A wealth platform or a family office reads a Bloomberg
+headline about Ares capping withdrawals and asks what it means. The weak answer is reassurance.
+The strong answer is to size it.</p>
+
+<div class="callout warn">
+<span class="tag">Careful</span>
+<p style="margin-bottom:0">This is <b>management's own scenario</b>, disclosed on an earnings
+call, not an audited or independent figure — and it assumes no inflows, which also means it
+ignores the possibility of redemptions exceeding the cap being deferred into later quarters.
+Attribute it ("management's own stress case was...") rather than stating it as fact. And do not
+use it to dismiss the redemptions: they were real, two tenders were pro-rated, and roughly half
+the Q2 requests came from small non-US institutions and family offices that are under 1% of
+ASIF's 20,000+ shareholders.</p>
+</div>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Differentiator 06</div>
+  <h2>Where Ares actually takes losses</h2>
+  <p>The Lyon loan-to-own — a live, messy, instructive credit story.</p>
+</div>
+
+<section>
+<p>Every candidate will praise Ares' sports investments: Chelsea, Inter Miami, the Miami Dolphins,
+Atlético de Madrid, McLaren, a SailGP team backed by Kylian Mbappé. Ares exited McLaren at a
+valuation around $5bn and divested the majority of its Atlético stake at roughly €2.5bn including
+debt. Those are the wins, and they are on every blog.</p>
+<p><b>Nobody will mention the one that went wrong.</b></p>
+
+<div class="card soft">
+<h4>Eagle Football and Olympique Lyonnais</h4>
+<p>Ares lent in the region of €400–425m to John Textor's Eagle Football vehicle, principally to
+fund the 2022 acquisition of the French club Olympique Lyonnais. The structure is reported as
+mezzanine with payment-in-kind interest — debt where interest accrues onto the balance rather
+than being paid in cash.</p>
+<p>When the borrower deteriorated, Ares moved. Reporting indicates Ares issued a payment demand
+of around €250m, Textor was removed from the Eagle Football Holdings board in late January 2026,
+the holding company entered administration, and the controlling stake in Lyon was sold. Proceeds
+from the sale of Textor's Crystal Palace stake — reported at roughly £190m — are said to have
+flowed substantially to Ares, with recoveries put at around €175m. Litigation between the
+parties is ongoing.</p>
+<p style="margin-bottom:0"><b>What it demonstrates:</b> Ares behaves like a <i>lender</i>, not a
+sports fan. It took security, enforced it, removed the principal and forced a sale. That is
+exactly what the 10-K describes as the direct lending philosophy — being "lead or sole lender"
+so as to "exert greater influence over deal terms, capital structure, documentation."</p>
+</div>
+
+<div class="callout warn">
+<span class="tag">Careful · sourcing on this one is weaker</span>
+<p style="margin-bottom:0">This story comes from football and financial trade press, club
+statements and analysis blogs rather than Ares disclosure, and the figures conflict — the loan is
+variously €400m or €425m, the demand €250m or $250m, and the "loan-to-own" characterisation is
+commentary rather than reporting. <b>Raise it as something you read about and found instructive,
+not as established fact</b>, and do not assert a loss figure. The judgement being displayed is
+that you went looking for the uncomfortable case, not that you memorised it.</p>
+</div>
+
+<div class="callout">
+<span class="tag">Say this &#8212; only if the conversation earns it</span>
+<p style="margin-bottom:0">"I tried to find a case where it hadn't worked, because everyone can
+list the sports wins. The Eagle Football situation is interesting — Ares lent several hundred
+million against Lyon, and when the borrower deteriorated it enforced: payment demand, the owner
+removed from the board, the stake sold. It's been messy and it's still in litigation. But it
+told me something the marketing doesn't, which is that the sports business is a credit business.
+Ares took security and used it."</p>
+</div>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Differentiator 07</div>
+  <h2>The firm with no central investment committee</h2>
+  <p>A deliberate governance choice, stated in one sentence and almost never noticed.</p>
+</div>
+
+<section>
+<div class="callout edge">
+<span class="tag">Edge · the sentence</span>
+<p style="margin-bottom:0">"<b>We do not have a centralized investment committee</b> and instead
+our investment committees are generally structured with <b>overlapping membership from different
+investment groups</b> to ensure consistency of approach, shared investment experience and
+collaboration across our platform."
+<span class="src">Ares FY2025 Form 10-K, Item 1.</span></p>
+</div>
+
+<p>Most large managers run the opposite model: a central committee that ultimately approves
+material investments, which enforces consistency through a single bottleneck. Ares enforces
+consistency through <b>deliberate overlap</b> — the same senior people sit on multiple groups'
+committees, so a real estate decision is pressure-tested by someone who underwrites credit.</p>
+<p>Three supporting facts that make this real rather than rhetorical:</p>
+<ul class="tight">
+<li>Senior professionals "have the opportunity to <b>participate in the incentive programs of
+multiple investment groups</b> to reward collaboration" — the economics follow the structure.</li>
+<li>Proprietary research on <b>over 55 industries</b>, drawing on 2,150+ companies, 1,900+
+alternative credit investments, 1,300+ properties, 90+ infrastructure assets and 1,000+ fund
+interests — a shared intelligence base rather than siloed ones.</li>
+<li>Governance runs through an <b>Operating Committee</b> (investment and business operations
+leadership, meeting regularly) and a <b>Partners Committee</b> (senior leadership across the
+firm, meeting periodically on fundraising, performance and strategy).</li>
+</ul>
+
+<p><b>Why this matters for your role specifically.</b> Your function is horizontal — it sits
+across all four investment groups rather than inside one. A firm with a centralised committee has
+a centralised gatekeeper you would learn to navigate. A firm with overlapping committees has
+<b>many relationships you must build in parallel</b>. The structure of the investment side
+determines the shape of your internal stakeholder problem, and almost no candidate will have
+thought about the link.</p>
+
+<div class="part" style="margin-top:7mm">
+  <div class="n">Differentiator 08</div>
+  <h2>Fee structures strange enough to be revealing</h2>
+  <p>Four disclosures that tell you what Ares is really optimising for.</p>
+</div>
+
+<table>
+<tr><th style="width:24%">The oddity</th><th style="width:34%">What the filing says</th><th>What it reveals</th></tr>
+<tr><td><b>Expense support agreements</b></td>
+<td>Ares "may advance a portion of certain expenses <b>to support distribution efforts</b>" to perpetual wealth vehicles. These are reimbursable, and "may result in a <b>reduction to our Part I Fees</b> until expenses have been recovered."</td>
+<td><b>Ares funds its own distribution out of its own fee income.</b> It subsidises the cost of building the wealth channel and gets paid back later. That is a firm investing ahead of revenue in the exact function you are applying to.</td></tr>
+<tr><td><b>The J-REIT fee</b></td>
+<td>Three components: 0.18% of total assets, plus 3.50% of net operating income, plus the sum of those two multiplied by 0.033% multiplied by earnings per outstanding investment unit.</td>
+<td>A fee that scales with <b>operating performance and per-unit earnings</b>, not just asset size. Ares is paid for running the buildings well, not merely holding them.</td></tr>
+<tr><td><b>7.50% of net operating income</b></td>
+<td>"Certain real estate funds pay a management fee of <b>7.50% of net operating income</b>." Ares then presents an effective rate as a percentage of gross asset value.</td>
+<td>Same logic. In a vertically integrated platform — Marq Logistics, Ada Infrastructure — Ares is increasingly paid as an <b>operator</b> rather than an allocator.</td></tr>
+<tr><td><b>1031 exchange programs</b></td>
+<td>Two non-traded REITs charge fees on "NAV <b>plus net capital raised and outstanding from our 1031 exchange programs</b>."</td>
+<td>See below — this is the most interesting of the four.</td></tr>
+</table>
+
+<div class="callout edge">
+<span class="tag">Edge · the Ares Real Estate Exchange</span>
+<p>A Section 1031 "like-kind exchange" lets a US property owner sell a building and defer the
+capital gains tax by rolling the proceeds into another property. <b>Ares runs a programme — the
+Ares Real Estate Exchange (AREX) — that lets an individual roll an appreciated building into
+Delaware statutory trust interests, and later into operating partnership units in an Ares
+REIT</b>, via Sections 1031 and 721. A subsidiary acts as dealer-manager.</p>
+<p style="margin-bottom:0">Think about what that product is: it converts a private landlord's
+single illiquid building into a diversified institutional portfolio <b>without triggering a tax
+bill</b>. It is one of the most sophisticated wealth-channel products in the industry, it is
+sold through financial advisers to accredited investors, and it is invisible in every summary of
+Ares you will read. Combined DST share sales across the two Ares REITs were reported at
+<b>$762.4m in 2023</b>.</p>
+</div>
+
+<div class="part" style="margin-top:7mm">
+  <div class="n">Differentiator 09</div>
+  <h2>The carried interest Ares gives away</h2>
+</div>
+
+<p>Buried in the human capital section of the 10-K: Ares committed to donate a <b>minimum of 10%
+of the carried interest generated from Ares Pathfinder Fund I and Pathfinder Fund II</b>, and
+<b>5% of the incentive fees</b> from an open-ended core alternative credit fund, to global health
+and educational charities — contributed by the firm <i>and</i> its team members. Separately, the
+firm donates a portion of annualised realised net performance income from selected funds to the
+Ares Charitable Foundation, launched in 2021.</p>
+
+<p>This is not generic corporate philanthropy. <b>Carried interest is the single most
+personally valuable form of compensation in this industry</b> — the partners' own upside.
+Committing a tenth of it, contractually, at fund formation, is a different order of commitment
+from a donations-matching scheme. And the Pathfinder funds are not a side-show: Pathfinder III
+closed at $8.5bn in June 2026, oversubscribed above a $6.5bn target.</p>
+
+<div class="callout">
+<span class="tag">Say this &#8212; especially on a values or culture question</span>
+<p style="margin-bottom:0">"The thing that struck me reading the 10-K was the Pathfinder
+commitment — Ares gives away at least ten percent of the carried interest on those funds to
+global health and education charities, and that's contributed by the firm and the individuals.
+Carry is the partners' own money, so it's a more meaningful commitment than a CSR budget. And
+Pathfinder isn't small — the third fund closed at eight and a half billion this June,
+oversubscribed."</p>
+</div>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 10</div>
+  <h2>How to actually deploy these</h2>
+  <p>Ranked by impact, with the situation each one is for.</p>
+</div>
+
+<section>
+<div class="callout warn">
+<span class="tag">The rule that matters more than the content</span>
+<p style="margin-bottom:0"><b>Use two. Never nine.</b> A candidate who deploys one genuinely
+obscure fact, well-explained and clearly understood, reads as curious and rigorous. A candidate
+who lists nine reads as someone who was handed a briefing document. The point of knowing all of
+these is that you can pick the right one for whatever the conversation turns out to be — not
+that you recite them.</p>
+</div>
+
+<div class="rank"><div class="no">1</div><div>
+<h4 style="margin:0">The AI paradox &#8212; your lead</h4>
+<p style="margin:0">Most current, most specific, hardest to fake. Use it on "why Ares now",
+"what interests you about the market", or any question about risk. It shows you follow the firm
+in real time rather than having read an overview.</p></div></div>
+
+<div class="rank"><div class="no">2</div><div>
+<h4 style="margin:0">The SMBC Japan arc &#8212; your "I did the work" story</h4>
+<p style="margin:0">Use it on "why Ares over a competitor" or if asked about strategy. It proves
+you connected documents six years apart, which is the single most impressive research signal
+available.</p></div></div>
+
+<div class="rank"><div class="no">3</div><div>
+<h4 style="margin:0">The redemption maths &#8212; your objection-handler</h4>
+<p style="margin:0">Use it the moment anyone raises private credit stress, outflows or the
+Bloomberg headlines. It is also the most <i>job-relevant</i> item here, because sizing a client's
+worry is literally the work.</p></div></div>
+
+<div class="rank"><div class="no">4</div><div>
+<h4 style="margin:0">Employee alignment &#8212; your values answer</h4>
+<p style="margin:0">$3.6bn of employee money versus $3.4bn of firm money. Use it on culture, "why
+not a competitor", or when asked what you would say to a sceptical investor.</p></div></div>
+
+<div class="rank"><div class="no">5</div><div>
+<h4 style="margin:0">Expense support + AREX &#8212; your role-specific answer</h4>
+<p style="margin:0">Both are about <i>distribution</i>. Use them on "why this team" to show you
+understand that the wealth channel is a built product, not a sales effort.</p></div></div>
+
+<div class="rank"><div class="no">6</div><div>
+<h4 style="margin:0">No central investment committee &#8212; your structural insight</h4>
+<p style="margin:0">Use it if asked how you would work with investment teams. Links the firm's
+design to your day-to-day.</p></div></div>
+
+<div class="rank"><div class="no">7</div><div>
+<h4 style="margin:0">Ivy Hill &#8212; your technical flourish</h4>
+<p style="margin:0">Only with someone who clearly knows the business. With a generalist
+interviewer it will land as showing off.</p></div></div>
+
+<div class="rank"><div class="no">8</div><div>
+<h4 style="margin:0">Pathfinder carry donation &#8212; your culture answer</h4>
+<p style="margin:0">Hold for a values, ESG or "what do you admire" question. Do not force it.</p></div></div>
+
+<div class="rank"><div class="no">9</div><div>
+<h4 style="margin:0">Eagle Football / Lyon &#8212; high risk, high reward</h4>
+<p style="margin:0">Only if the conversation is genuinely senior and going well, and only framed
+as "something I read and found instructive". Sourcing is trade press. If in doubt, leave it.</p></div></div>
+
+<h3>10.1 The one-paragraph version, if you only get one shot</h3>
+<div class="card soft">
+<p style="margin-bottom:0">"Two things made me want to work here rather than at a peer. The
+first is that Ares got hit hardest of the big managers on the AI-disruption thesis this year —
+the stock fell about a third in Q1 — and instead of putting out a reassuring note, it hired a
+top-three consultancy to spend nine weeks re-underwriting its own software book. The answer was
+eighty-six percent low risk, and medium-to-high comes out under one percent of firm-wide AUM.
+The second is smaller but says more: Ares employees have three point six billion dollars of
+their own capital committed to Ares funds, which is more than the firm itself commits. A firm
+that re-tests its own thesis and makes its people put their own money in is a firm whose products
+I'd be comfortable selling."</p>
+</div>
+
+<h3>10.2 Three questions to ask them</h3>
+<p>Questions reveal more than answers. These are built from the research above and cannot be
+asked by someone who hasn't done it.</p>
+<ol>
+<li><b>"The 2025 letter said nearly half of your distribution partners carry only one Ares
+product. Is widening those relationships mostly a product-availability problem or a coverage
+problem?"</b> — shows you read the shareholder letter and understand the commercial constraint.</li>
+<li><b>"How has the AI-disruption narrative changed the conversations you're having with
+clients — is it coming up in diligence, or is it mostly a public-markets story?"</b> — current,
+role-specific, and genuinely interesting to someone in the seat.</li>
+<li><b>"With the Japan wealth push, does the SMBC relationship do the distribution, or is Ares
+building its own coverage there?"</b> — this one will likely surprise them.</li>
+</ol>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 11</div>
+  <h2>Sources and honesty notes</h2>
+</div>
+
+<section>
+<h3>Primary</h3>
+<table>
+<tr><th style="width:30%">Document</th><th>Used for</th></tr>
+<tr><td><b>Ares FY2025 Form 10-K</b><br><small>filed 25 Feb 2026, CIK 1176948</small></td>
+<td>Ivy Hill definition; employee and firm commitments ($7.2bn / $3.4bn / $3.6bn); ownership percentages and share-class structure; "controlled company"; no centralised investment committee; 55 industries; fee tables including the J-REIT formula, 7.50% of NOI and 1031 programmes; expense support agreements; Pathfinder charitable commitment; venture capital and applied AI disclosure; key person provisions.</td></tr>
+<tr><td><b>Ares Q1 2026 earnings call</b><br><small>1 May 2026</small></td>
+<td>Software exposure (~6% of AUM, &lt;8% of private credit AUM); the nine-week consultant review and 86/13/1 split; &lt;2% of direct lending AUM and &lt;1% firm-wide at medium-to-high risk; ~40% LTV; the 2% vs 24% traded-loan split; the redemption stress case (~1% of FPAUM); &gt;95% of BDC investors not redeeming; Q1 figures (AUM $644bn, FPAUM $400bn, FRE $454m, margin 42.4%); ASOF III and SDL III.</td></tr>
+<tr><td><b>Ares Q2 2026 release and call</b></td><td>AUM $671.3bn; FPAUM $409.9bn; FRE $491.1m; perpetual capital $223.3bn; record $36.4bn raised.</td></tr>
+<tr><td><b>2025 Annual Shareholder Letter</b><br><small>Form ARS, 21 Apr 2026</small></td><td>The seven 2026 priorities including Japan expansion and wealth product broadening; "asset-light balance sheet approach"; the single-product distribution partner statistic.</td></tr>
+<tr><td><b>FY2026 proxy statement</b><br><small>filed 21 Apr 2026</small></td><td>Carried interest participation policy and the expectation that professionals invest their own capital.</td></tr>
+<tr><td><b>ARCC prospectus supplements</b><br><small>Form 424B2, 2026</small></td><td>Ivy Hill AUM ($16.3bn), 24 vehicles, ARCC's carrying value ($2.6bn cost / $2.8bn fair value), and the 2012 SEC exemptive relief.</td></tr>
+</table>
+
+<h3>Secondary</h3>
+<ul class="tight">
+<li><b>Ares / SMBC announcement, 30 March 2020</b> (Businesswire and trade coverage) — the 4.9% stake, $384m, $31.64 per share, and the three-pillar alliance covering distribution, investment and capital markets.</li>
+<li><b>BofA financials conference remarks, 2026</b> — ~160 AI use cases evaluated, ~25 deployed; NDA review, AML/KYC, Salesforce optimisation for wealth sales; slowest organic headcount growth in over a decade; ~185 people supporting wealth; ~80 distribution relationships, about half single-product.</li>
+<li><b>BootstrapLabs announcement and Dealroom</b> — acquisition closed 1 February 2024; became the Ares AI &amp; Innovation Group; Wadstrom and Levy as co-heads; 30+ applied-AI portfolio companies.</li>
+<li><b>CNBC, Bloomberg, TIKR, Private Equity Wire</b> — 2026 share price moves, the AI-disruption thesis, peer redemption comparisons, the European sports fund plan and the $66bn&#8594;$125bn wealth target.</li>
+<li><b>Ares Real Estate Exchange materials and Ares REIT filings</b> — the DST/UPREIT structure under Sections 1031 and 721; CoStar for the $762.4m 2023 DST sales figure.</li>
+<li><b>Football and financial trade press</b> (Inside World Football, OneFootball, club statements, analysis blogs) — the Eagle Football / Olympique Lyonnais enforcement.</li>
+</ul>
+
+<div class="callout warn">
+<span class="tag">Read this before you quote anything</span>
+<ul class="tight" style="margin-bottom:0">
+<li><b>Software percentages depend on the denominator.</b> ~6% of total AUM and &lt;8% of private credit AUM come from the Q1 call. A February report put software at ~12% of the <i>direct lending book</i>; CNBC said &lt;9% of private credit AUM. Always say which base you mean.</li>
+<li><b>The consultant split is reported two ways</b> — 86/13/1 on the earnings call, 85/14/1 in some secondary coverage. Use the call's figures.</li>
+<li><b>The redemption stress case is management's own scenario</b>, not an independent projection, and assumes zero inflows. Attribute it.</li>
+<li><b>The Eagle Football account is trade press, not disclosure</b>, and figures conflict (€400m vs €425m loan; €250m vs $250m demand). "Loan-to-own" is commentary. Do not assert a loss number.</li>
+<li><b>The SMBC share-price multiple is my calculation</b>, not an Ares disclosure, and ARES has been volatile in 2026. Check the live price.</li>
+<li><b>The Ivy Hill comparison to the Private Equity Group</b> is mine; the two are measured on the same AUM basis but are different kinds of business.</li>
+<li><b>Ares reports Q3 2026 on 29 October 2026.</b> If you interview after that date, the AUM, FRE and fundraising figures here will be stale — check the release first. Management pre-announced expected Q3 realised net performance income of approximately $10m, against $9m a year earlier.</li>
+</ul>
+</div>
+
+<div class="card soft" style="margin-top:5mm">
+<h4>The five sentences worth memorising</h4>
+<ol class="tight" style="margin-bottom:0">
+<li>Ares hired a <b>top-three consultancy for a nine-week review</b> of AI risk in its software book: <b>86% low risk</b>, and medium-to-high is <b>under 1% of firm-wide AUM</b>.</li>
+<li>Ares bought <b>BootstrapLabs</b>, an applied-AI venture firm, in <b>February 2024</b> — it is now the <b>Ares AI &amp; Innovation Group</b>.</li>
+<li>Ares employees have <b>$3.6bn</b> of their own capital in Ares funds — <b>more than the firm's own $3.4bn</b>.</li>
+<li><b>SMBC's 5% stake is a distribution alliance from March 2020</b>, and it explains the 2025 GCP purchase and the 2026 Japanese wealth-product priority.</li>
+<li>Redemptions at the <b>full 5% cap for a year with no inflows</b> would cost about <b>1% of fee-paying AUM</b> — against 17% annual growth.</li>
+</ol>
+</div>
+</section>
+
+</body>
+</html>
