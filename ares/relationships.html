@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ares Management — Retention and the Relationship Business</title>
+<style>
+@page { size: A4; margin: 14mm 13mm 16mm 13mm; }
+:root{--navy:#0d2340;--navy2:#16355e;--body:#33414f;--mute:#6b7a8a;--line:#dfe5ec;
+ --soft:#f4f7fb;--gold:#c8963e;--teal:#1f7a72;--red:#b4413c;--green:#2f7d55;--violet:#5b4b8a;--amber:#d18b1e;}
+*{box-sizing:border-box;}
+body{font-family:"Segoe UI",-apple-system,"Helvetica Neue",Arial,sans-serif;
+ color:var(--body);font-size:9.6pt;line-height:1.5;margin:0;background:#fff;}
+h1,h2,h3,h4{color:var(--navy);margin:0 0 .4em;line-height:1.22;font-weight:650;}
+h1{font-size:23pt;letter-spacing:-.4px;} h2{font-size:15.5pt;} h3{font-size:11.6pt;} h4{font-size:10pt;color:var(--navy2);}
+p{margin:0 0 .7em;} small{font-size:8pt;}
+.page-break{page-break-before:always;} .avoid{page-break-inside:avoid;}
+.cover{height:297mm;margin-bottom:-30mm;display:flex;flex-direction:column;justify-content:space-between;
+ background:linear-gradient(155deg,#0d2340 0%,#16355e 50%,#1f4570 100%);color:#fff;
+ margin-left:-13mm;margin-right:-13mm;margin-top:-14mm;padding:24mm 18mm 30mm 18mm;page-break-after:always;}
+.cover h1{color:#fff;font-size:32pt;line-height:1.08;letter-spacing:-.9px;}
+.cover .kicker{font-size:9.5pt;letter-spacing:3.2px;text-transform:uppercase;color:#9dc0e8;font-weight:600;margin-bottom:13mm;}
+.cover .sub{font-size:12.5pt;color:#cfe0f2;font-weight:300;max-width:138mm;line-height:1.5;margin-top:7mm;}
+.cover .rule{width:64mm;height:3px;background:var(--gold);margin:8mm 0;}
+.cover .qs{margin-top:9mm;}
+.cover .qs div{font-size:10pt;color:#dce8f5;padding:2.6mm 0;border-top:1px solid rgba(255,255,255,.17);}
+.cover footer{font-size:8.2pt;color:#8fb0d6;border-top:1px solid rgba(255,255,255,.2);padding-top:4mm;}
+.part{background:var(--navy);color:#fff;padding:5mm 6mm;margin:0 0 6mm;border-radius:3px;
+ page-break-inside:avoid;page-break-after:avoid;}
+.part .n{font-size:7.8pt;letter-spacing:2.6px;text-transform:uppercase;color:var(--gold);font-weight:600;}
+.part h2{color:#fff;margin:1.5mm 0 0;} .part p{margin:1.5mm 0 0;color:#c3d5ea;font-size:9pt;}
+section{margin-bottom:6mm;} .lead{font-size:10.6pt;color:var(--navy2);line-height:1.55;}
+.card{border:1px solid var(--line);border-radius:4px;padding:4.5mm 5mm;margin:0 0 4mm;background:#fff;page-break-inside:avoid;}
+.card.soft{background:var(--soft);border-color:#d8e2ee;} .card h4{margin-bottom:2mm;}
+.callout{border-left:3.5px solid var(--gold);background:#fdf8ef;padding:4mm 5mm;margin:0 0 4mm;
+ border-radius:0 4px 4px 0;page-break-inside:avoid;}
+.callout.edge{border-left-color:var(--teal);background:#eff7f6;}
+.callout.warn{border-left-color:var(--red);background:#fcf2f1;}
+.callout.key{border-left-color:var(--navy2);background:#eef3fa;}
+.callout .tag{display:block;font-size:7.4pt;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:var(--gold);margin-bottom:1.5mm;}
+.callout.edge .tag{color:var(--teal);} .callout.warn .tag{color:var(--red);} .callout.key .tag{color:var(--navy2);}
+.callout p:last-child{margin-bottom:0;}
+table{width:100%;border-collapse:collapse;font-size:8.3pt;margin:0 0 4mm;page-break-inside:avoid;}
+th{background:var(--navy);color:#fff;text-align:left;padding:2.4mm 2.6mm;font-weight:600;font-size:7.7pt;letter-spacing:.4px;text-transform:uppercase;}
+td{padding:2.2mm 2.6mm;border-bottom:1px solid var(--line);vertical-align:top;}
+tr:nth-child(even) td{background:#fafcfe;}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;}
+.tbl-note{font-size:7.6pt;color:var(--mute);margin:-2mm 0 4mm;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:4mm;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:4mm;}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm;}
+.stat{border:1px solid var(--line);border-top:3px solid var(--navy2);border-radius:3px;padding:3mm 3.5mm;background:#fff;}
+.stat b{display:block;font-size:15pt;color:var(--navy);font-weight:650;line-height:1.15;}
+.stat span{display:block;font-size:7.5pt;color:var(--mute);text-transform:uppercase;letter-spacing:.9px;margin-top:1mm;}
+.stat i{display:block;font-style:normal;font-size:7.8pt;color:var(--body);margin-top:1.5mm;}
+.stat.g{border-top-color:var(--green);} .stat.r{border-top-color:var(--red);}
+.stat.t{border-top-color:var(--teal);} .stat.a{border-top-color:var(--amber);}
+figure{margin:0 0 5mm;page-break-inside:avoid;}
+figcaption{font-size:7.8pt;color:var(--mute);margin-top:2mm;line-height:1.45;} figcaption b{color:var(--navy2);}
+svg{display:block;max-width:100%;}
+ul,ol{margin:0 0 .7em;padding-left:4.5mm;} li{margin-bottom:1.6mm;} .tight li{margin-bottom:.8mm;}
+.src{font-size:7.4pt;color:var(--mute);font-style:italic;}
+.pill{display:inline-block;font-size:7pt;font-weight:700;letter-spacing:.7px;text-transform:uppercase;
+ padding:.8mm 2mm;border-radius:2px;color:#fff;background:var(--navy2);}
+.pill.gold{background:var(--gold);} .pill.red{background:var(--red);} .pill.green{background:var(--green);} .pill.teal{background:var(--teal);}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div>
+    <div class="kicker">The relationship business</div>
+    <h1>Retention:<br>what it actually<br>means at Ares</h1>
+    <div class="rule"></div>
+    <div class="sub">Everyone says Ares is good at keeping clients. Almost nobody can say what
+    that means mechanically, where it shows up in the numbers, or what the firm built to
+    produce it. This answers all three — and compares it to the competition.</div>
+  </div>
+  <div class="qs">
+    <div><b>Part 1</b> &nbsp;&#8212;&nbsp; Retention is three different things. Most people conflate them.</div>
+    <div><b>Part 2</b> &nbsp;&#8212;&nbsp; Why a kept client is worth more than a won one</div>
+    <div><b>Part 3</b> &nbsp;&#8212;&nbsp; Five places retention is visible in Ares' own numbers</div>
+    <div><b>Part 4</b> &nbsp;&#8212;&nbsp; The machine that produces it</div>
+    <div><b>Part 5</b> &nbsp;&#8212;&nbsp; The disclosure test: Ares vs Blackstone, Apollo, KKR, Blue Owl</div>
+    <div><b>Part 6</b> &nbsp;&#8212;&nbsp; What investors actually say they want</div>
+    <div><b>Part 7</b> &nbsp;&#8212;&nbsp; Whether you'd actually enjoy this</div>
+  </div>
+  <footer>
+    Built from Ares' FY2025 Form 10-K and FY2019&#8211;FY2024 comparatives, Q1 and Q2 2026 earnings
+    calls, and the 2025 Annual Shareholder Letter &#8212; plus the FY2025 10-K filings of Blackstone,
+    Apollo, KKR and Blue Owl, read side by side. All SEC EDGAR.<br>
+    Compiled 9 October 2026. Ares reports Q3 2026 on 29 October.
+  </footer>
+</div>
+
+<div class="part">
+  <div class="n">Part 1</div>
+  <h2>Retention is three different things</h2>
+  <p>And conflating them is the fastest way to sound like you've only read the marketing.</p>
+</div>
+
+<section>
+<p class="lead">When Ares says 79% of its institutional fundraising came from existing investors,
+that single number is hiding three separate commercial motions. They need different skills,
+happen on different timescales, and are worth different amounts. If you can separate them in an
+interview, you are immediately ahead.</p>
+
+<figure>
+<svg viewBox="0 0 760 310" role="img" aria-label="Diagram separating the three distinct meanings of retention: re-up, cross-sell and non-redemption">
+  <text x="0" y="13" font-size="10.5" font-weight="700" fill="#0d2340">The three motions inside the word &#8220;retention&#8221;</text>
+
+  <rect x="0" y="26" width="245" height="178" rx="5" fill="#eef3fa" stroke="#16355e" stroke-width="1.5"/>
+  <text x="122" y="48" text-anchor="middle" font-size="11" font-weight="700" fill="#16355e">1. THE RE-UP</text>
+  <text x="122" y="66" text-anchor="middle" font-size="9" fill="#33414f">An existing investor commits</text>
+  <text x="122" y="79" text-anchor="middle" font-size="9" fill="#33414f">to the <tspan font-style="italic">next vintage</tspan> of a fund</text>
+  <text x="122" y="92" text-anchor="middle" font-size="9" fill="#33414f">they already own.</text>
+  <text x="122" y="114" text-anchor="middle" font-size="8.5" font-weight="700" fill="#16355e">ACE V investor &#8594; ACE VI</text>
+  <text x="122" y="136" text-anchor="middle" font-size="8.5" fill="#6b7a8a">Timescale: every 2&#8211;3 years</text>
+  <text x="122" y="150" text-anchor="middle" font-size="8.5" fill="#6b7a8a">Driven by: performance +</text>
+  <text x="122" y="163" text-anchor="middle" font-size="8.5" fill="#6b7a8a">how the last fund was serviced</text>
+  <text x="122" y="185" text-anchor="middle" font-size="8.5" font-style="italic" fill="#1f7a72">The IR job protects this</text>
+
+  <rect x="258" y="26" width="245" height="178" rx="5" fill="#eff7f6" stroke="#1f7a72" stroke-width="1.5"/>
+  <text x="380" y="48" text-anchor="middle" font-size="11" font-weight="700" fill="#1f7a72">2. THE CROSS-SELL</text>
+  <text x="380" y="66" text-anchor="middle" font-size="9" fill="#33414f">An existing investor buys a</text>
+  <text x="380" y="79" text-anchor="middle" font-size="9" fill="#33414f"><tspan font-style="italic">different</tspan> Ares product for</text>
+  <text x="380" y="92" text-anchor="middle" font-size="9" fill="#33414f">the first time.</text>
+  <text x="380" y="114" text-anchor="middle" font-size="8.5" font-weight="700" fill="#1f7a72">Direct lending &#8594; infrastructure</text>
+  <text x="380" y="136" text-anchor="middle" font-size="8.5" fill="#6b7a8a">Timescale: opportunistic</text>
+  <text x="380" y="150" text-anchor="middle" font-size="8.5" fill="#6b7a8a">Driven by: trust already earned,</text>
+  <text x="380" y="163" text-anchor="middle" font-size="8.5" fill="#6b7a8a">plus knowing the whole shelf</text>
+  <text x="380" y="185" text-anchor="middle" font-size="8.5" font-style="italic" fill="#1f7a72">Client Solutions drives this</text>
+
+  <rect x="516" y="26" width="244" height="178" rx="5" fill="#fdf8ef" stroke="#c8963e" stroke-width="1.5"/>
+  <text x="638" y="48" text-anchor="middle" font-size="11" font-weight="700" fill="#c8963e">3. NON-REDEMPTION</text>
+  <text x="638" y="66" text-anchor="middle" font-size="9" fill="#33414f">An investor in a perpetual</text>
+  <text x="638" y="79" text-anchor="middle" font-size="9" fill="#33414f">vehicle simply <tspan font-style="italic">doesn&#8217;t ask</tspan></text>
+  <text x="638" y="92" text-anchor="middle" font-size="9" fill="#33414f">for their money back.</text>
+  <text x="638" y="114" text-anchor="middle" font-size="8.5" font-weight="700" fill="#c8963e">The ASIF tender decision</text>
+  <text x="638" y="136" text-anchor="middle" font-size="8.5" fill="#6b7a8a">Timescale: every single quarter</text>
+  <text x="638" y="150" text-anchor="middle" font-size="8.5" fill="#6b7a8a">Driven by: confidence, and</text>
+  <text x="638" y="163" text-anchor="middle" font-size="8.5" fill="#6b7a8a">whether anyone explained</text>
+  <text x="638" y="185" text-anchor="middle" font-size="8.5" font-style="italic" fill="#1f7a72">Both teams, continuously</text>
+
+  <line x1="0" y1="224" x2="760" y2="224" stroke="#dfe5ec"/>
+  <text x="0" y="243" font-size="9.5" font-weight="700" fill="#0d2340">Why the distinction matters commercially</text>
+  <text x="0" y="261" font-size="9" fill="#33414f">The re-up is <tspan font-weight="700">episodic</tspan> &#8212; you get one shot every few years, and the decision is largely made before you ask. The cross-sell is where <tspan font-weight="700">growth</tspan> comes from, because</text>
+  <text x="0" y="276" font-size="9" fill="#33414f">it needs no new relationship. Non-redemption is <tspan font-weight="700">continuous and invisible</tspan> &#8212; nobody thanks you for it, and you only find out you failed when the tender requests arrive.</text>
+  <text x="0" y="297" font-size="9" fill="#33414f">Ares&#8217; 79% figure explicitly covers the first two: existing investors who &#8220;committed to a new product&#8221; <tspan font-style="italic">or</tspan> &#8220;a subsequent fund vintage within the same product.&#8221;</text>
+</svg>
+<figcaption><b>The 79% is a blended number.</b> Ares' own wording separates the re-up from the
+cross-sell within it. Saying "seventy-nine percent came from existing investors — and that
+splits into re-ups and first-time buyers of a second product" shows you read the sentence, not
+the headline.</figcaption>
+</figure>
+
+<div class="callout key">
+<span class="tag">The definition to carry in your head</span>
+<p style="margin-bottom:0"><b>Retention is not "clients being happy." It is the share of this
+year's revenue that did not require a new relationship to be created.</b> That is why it is a
+business model rather than a service standard — and why a firm will spend heavily on it.</p>
+</div>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 2</div>
+  <h2>Why a kept client is worth more than a won one</h2>
+  <p>The economics, with actual numbers.</p>
+</div>
+
+<section>
+<p>In most businesses, retention is cheaper than acquisition. In asset management the gap is far
+wider than usual, for three structural reasons that are specific to how this industry works.</p>
+
+<h3>2.1 A commitment is an annuity, not a sale</h3>
+<p>If you sell someone a car, you book the revenue once. If an investor commits £100m to an Ares
+fund, Ares earns a management fee on it <b>every year, for the life of the vehicle</b>. At Ares'
+blended effective rate of roughly 1%, that commitment is worth around <b>£1m a year</b> — and in
+a perpetual vehicle there is no end date at which it stops.</p>
+
+<figure>
+<svg viewBox="0 0 760 240" role="img" aria-label="Chart comparing cumulative revenue from one retained client commitment versus a one-off sale">
+  <text x="0" y="13" font-size="10.5" font-weight="700" fill="#0d2340">What one &#163;100m commitment earns, cumulatively, at a ~1% blended fee</text>
+  <line x1="46" y1="186" x2="730" y2="186" stroke="#33414f" stroke-width="1.2"/>
+  <g font-size="8" fill="#6b7a8a" text-anchor="end">
+    <text x="41" y="189">0</text><text x="41" y="146">&#163;4m</text><text x="41" y="106">&#163;8m</text><text x="41" y="66">&#163;12m</text>
+  </g>
+  <line x1="46" y1="143" x2="730" y2="143" stroke="#eef1f5"/><line x1="46" y1="103" x2="730" y2="103" stroke="#eef1f5"/><line x1="46" y1="63" x2="730" y2="63" stroke="#eef1f5"/>
+  <g>
+    <rect x="66"  y="176" width="48" height="10"  fill="#2f4f75"/><text x="90"  y="200" text-anchor="middle" font-size="8" fill="#33414f">Yr 1</text>
+    <rect x="132" y="166" width="48" height="20"  fill="#2f4f75"/><text x="156" y="200" text-anchor="middle" font-size="8" fill="#33414f">Yr 2</text>
+    <rect x="198" y="156" width="48" height="30"  fill="#2f4f75"/><text x="222" y="200" text-anchor="middle" font-size="8" fill="#33414f">Yr 3</text>
+    <rect x="264" y="146" width="48" height="40"  fill="#2f4f75"/><text x="288" y="200" text-anchor="middle" font-size="8" fill="#33414f">Yr 4</text>
+    <rect x="330" y="136" width="48" height="50"  fill="#16355e"/><text x="354" y="200" text-anchor="middle" font-size="8" fill="#33414f">Yr 5</text>
+    <rect x="396" y="126" width="48" height="60"  fill="#16355e"/><text x="420" y="200" text-anchor="middle" font-size="8" fill="#33414f">Yr 6</text>
+    <rect x="462" y="116" width="48" height="70"  fill="#16355e"/><text x="486" y="200" text-anchor="middle" font-size="8" fill="#33414f">Yr 7</text>
+    <rect x="528" y="106" width="48" height="80"  fill="#0d2340"/><text x="552" y="200" text-anchor="middle" font-size="8" fill="#33414f">Yr 8</text>
+    <rect x="594" y="96"  width="48" height="90"  fill="#0d2340"/><text x="618" y="200" text-anchor="middle" font-size="8" fill="#33414f">Yr 9</text>
+    <rect x="660" y="86"  width="48" height="100" fill="#c8963e"/><text x="684" y="200" text-anchor="middle" font-size="8" font-weight="700" fill="#c8963e">Yr 10</text>
+  </g>
+  <text x="684" y="80" text-anchor="middle" font-size="9.5" font-weight="700" fill="#c8963e">&#163;10m</text>
+  <text x="90" y="170" text-anchor="middle" font-size="8.5" font-weight="700" fill="#2f4f75">&#163;1m</text>
+  <line x1="46" y1="212" x2="730" y2="212" stroke="#dfe5ec"/>
+  <text x="46" y="228" font-size="8.5" fill="#33414f">Illustrative, using Ares&#8217; roughly 1% blended effective management fee rate. Real fee bases step down after a fund&#8217;s investment period; perpetual vehicles do not.</text>
+</svg>
+<figcaption><b>Ten years of one relationship is worth ten times the first year of it.</b> This is
+why the firm staffs client service the way it does — and why losing a client is not losing a
+sale, it is losing an annuity.</figcaption>
+</figure>
+
+<h3>2.2 The second product costs almost nothing to sell</h3>
+<p>Winning a new institutional investor is slow and expensive: a consultant screen, an RFP,
+operational due diligence on the firm's systems and controls, investment committee approval at
+the client, legal negotiation. That process can run <b>nine to eighteen months</b> and may involve
+dozens of people on both sides.</p>
+<p>Selling a <i>second</i> product to that same investor skips nearly all of it. The operational
+diligence is done. The legal relationship exists. The trust is established. <b>This is why the
+cross-sell is the single most profitable motion in the business</b> — and why the 2025 Annual
+Shareholder Letter flags it as an explicit priority:</p>
+<div class="callout edge">
+<span class="tag">Edge · the sentence that defines the opportunity</span>
+<p style="margin-bottom:0">"We ended 2025 with eight semi-liquid products in the wealth channel
+with at least one Ares product on more than 80 global platforms... <b>Nearly half of our global
+distribution partners currently offer just one Ares product</b>, highlighting the substantial
+opportunity to broaden our footprint within established partnerships and unlock incremental
+growth."<br><span class="src">Ares 2025 Annual Shareholder Letter.</span></p>
+</div>
+
+<h3>2.3 Retention is what makes the fee base defensible</h3>
+<p>Ares earns <b>93% of its management fees from perpetual capital or long-dated funds</b>. But
+"perpetual" does not mean "trapped" — investors in perpetual wealth vehicles can request
+redemptions each quarter, and in 2026 they did. The permanence of the fee base is therefore
+<b>not purely legal. It is partly behavioural</b>, and the behaviour is managed by the client
+teams.</p>
+
+<div class="callout key">
+<span class="tag">The connection most candidates miss</span>
+<p style="margin-bottom:0">The 93% statistic is usually quoted as proof of structural resilience.
+It is really a <b>joint</b> product of structure <i>and</i> service. The fund documents stop money
+leaving <i>quickly</i>. Only the relationship stops it leaving <i>at all</i>. Saying that out loud
+connects the firm's headline resilience statistic directly to the job you are applying for.</p>
+</div>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 3</div>
+  <h2>Where retention actually shows up</h2>
+  <p>Five pieces of disclosed evidence. This is the "how is it shown in the firm" answer.</p>
+</div>
+
+<section>
+<p>Retention is easy to claim and hard to prove. Ares discloses five separate measures that, read
+together, make the claim verifiable. Here they are, with what each one does and does not tell you.</p>
+
+<table>
+<tr><th style="width:5%">#</th><th style="width:26%">The evidence</th><th style="width:16%">The number</th><th>What it proves &#8212; and its limit</th></tr>
+<tr><td><b>1</b></td><td><b>Share of fundraising from existing investors</b></td><td><b>79%</b> of 2025 institutional fundraising</td>
+<td>The headline. Covers both re-ups and cross-sells. <b>Limit:</b> it is a share, not a rate — a year with weak new-client acquisition would push it <i>up</i>, so a high number is not automatically good news on its own.</td></tr>
+<tr><td><b>2</b></td><td><b>Growth in institutional relationships</b></td><td><b>1,090 &#8594; 2,850</b><br>(2020 &#8594; 2025)</td>
+<td>Context for #1. Relationships grew 2.6x over the same period, so the 79% is <i>not</i> masking a failure to win new clients. In 2025 alone Ares added <b>235 new direct institutional investors</b> out of 540 that committed.</td></tr>
+<tr><td><b>3</b></td><td><b>Multi-fund investor AUM</b></td><td>Disclosed as a chart,<br>2025 vs 2020</td>
+<td>The cross-sell measure — AUM belonging to investors in more than one Ares fund. Ares says it "demonstrates our investors' satisfaction... and diverse product offering." <b>Limit:</b> published as a graphic, so the precise values are not machine-readable.</td></tr>
+<tr><td><b>4</b></td><td><b>Separately managed accounts</b></td><td><b>$139.6bn</b> &#8212; <b>30%</b> of institutional AUM</td>
+<td>The depth measure. An SMA is a bespoke single-client mandate. Up from 27% in 2024. Ares says institutions want them for "greater levels of transparency, liquidity and control." <b>You cannot win an SMA from a standing start</b> — they are built on existing trust.</td></tr>
+<tr><td><b>5</b></td><td><b>Redemption behaviour</b></td><td><b>&gt;95%</b> of non-traded BDC investors did not request redemptions</td>
+<td>The non-redemption measure, disclosed during the worst sentiment in years. <b>Limit:</b> the other &lt;5% were enough to force two pro-rated tenders, so this is a measure of the majority, not of calm.</td></tr>
+</table>
+<p class="tbl-note">Sources: Ares FY2025 Form 10-K (Items 1 and 7); FY2020 10-K for the 2020 relationship count; Q1 2026 earnings call for the redemption figure.</p>
+
+<div class="callout warn">
+<span class="tag">Careful · the trap in the 79%</span>
+<p style="margin-bottom:0">A high "percentage from existing investors" can mean loyalty <i>or</i>
+stagnation. The reason Ares' number is genuinely impressive is <b>evidence #2</b>: relationships
+went from 1,090 to 2,850 over the same window. <b>Always pair the two.</b> "Seventy-nine percent
+from existing investors, while the relationship count went from about eleven hundred to
+twenty-eight fifty" is a complete argument. The first half alone is not, and a sharp interviewer
+will push on exactly that.</p>
+</div>
+
+<figure>
+<svg viewBox="0 0 760 215" role="img" aria-label="Chart showing growth in Ares institutional relationships from 2019 to 2025">
+  <text x="0" y="13" font-size="10.5" font-weight="700" fill="#0d2340">Direct institutional relationships &#8212; the denominator that validates the 79%</text>
+  <line x1="46" y1="172" x2="740" y2="172" stroke="#33414f" stroke-width="1.2"/>
+  <g font-size="8" fill="#6b7a8a" text-anchor="end"><text x="41" y="175">0</text><text x="41" y="122">1,500</text><text x="41" y="72">3,000</text></g>
+  <line x1="46" y1="119" x2="740" y2="119" stroke="#eef1f5"/><line x1="46" y1="69" x2="740" y2="69" stroke="#eef1f5"/>
+  <g>
+    <rect x="66"  y="144" width="72" height="28"  fill="#b9c6d5"/><text x="102" y="138" text-anchor="middle" font-size="9" font-weight="700" fill="#6b7a8a">850+</text><text x="102" y="188" text-anchor="middle" font-size="8.5" fill="#33414f">2019</text>
+    <rect x="160" y="136" width="72" height="36"  fill="#b9c6d5"/><text x="196" y="130" text-anchor="middle" font-size="9" font-weight="700" fill="#6b7a8a">1,090+</text><text x="196" y="188" text-anchor="middle" font-size="8.5" fill="#33414f">2020</text>
+    <rect x="254" y="112" width="72" height="60"  fill="#7d93ad"/><text x="290" y="106" text-anchor="middle" font-size="9" font-weight="700" fill="#4f6b8c">1,800+</text><text x="290" y="188" text-anchor="middle" font-size="8.5" fill="#33414f">2021</text>
+    <rect x="348" y="109" width="72" height="63"  fill="#7d93ad"/><text x="384" y="103" text-anchor="middle" font-size="9" font-weight="700" fill="#4f6b8c">1,900+</text><text x="384" y="188" text-anchor="middle" font-size="8.5" fill="#33414f">2022</text>
+    <rect x="442" y="95"  width="72" height="77"  fill="#2f4f75"/><text x="478" y="89"  text-anchor="middle" font-size="9" font-weight="700" fill="#2f4f75">2,300+</text><text x="478" y="188" text-anchor="middle" font-size="8.5" fill="#33414f">2023</text>
+    <rect x="536" y="82"  width="72" height="90"  fill="#2f4f75"/><text x="572" y="76"  text-anchor="middle" font-size="9" font-weight="700" fill="#2f4f75">~2,700</text><text x="572" y="188" text-anchor="middle" font-size="8.5" fill="#33414f">2024</text>
+    <rect x="630" y="77"  width="72" height="95"  fill="#0d2340"/><text x="666" y="71"  text-anchor="middle" font-size="9" font-weight="700" fill="#0d2340">2,850+</text><text x="666" y="188" text-anchor="middle" font-size="8.5" font-weight="700" fill="#0d2340">2025</text>
+  </g>
+  <text x="46" y="208" font-size="8" fill="#6b7a8a">Source: the &#8220;Overview&#8221; paragraph of each Ares Form 10-K, FY2019&#8211;FY2025. Ares reports these as approximate or &#8220;over&#8221; figures.</text>
+</svg>
+<figcaption><b>Retention and acquisition are both happening.</b> That is the rarer combination,
+and it is the one worth describing.</figcaption>
+</figure>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 4</div>
+  <h2>The machine that produces retention</h2>
+  <p>Retention is not a culture. It is roughly 375 people and four named functions.</p>
+</div>
+
+<section>
+<p class="lead">This is the part that answers "how is it shown in the firm". Ares has built
+specific, named, staffed infrastructure whose only purpose is keeping and deepening client
+relationships. Most of it is disclosed; some of it only appears in leadership biographies.</p>
+
+<figure>
+<svg viewBox="0 0 760 330" role="img" aria-label="Diagram of the Ares client-facing organisation and its component teams">
+  <text x="0" y="13" font-size="10.5" font-weight="700" fill="#0d2340">The client-facing organisation, and what each part does</text>
+
+  <rect x="0" y="26" width="760" height="34" rx="4" fill="#0d2340"/>
+  <text x="14" y="48" font-size="10.5" font-weight="700" fill="#fff">OPERATIONS MANAGEMENT GROUP &#8212; costs not allocated to any investment segment</text>
+  <text x="746" y="48" text-anchor="end" font-size="9" fill="#9dc0e8">2,550+ people in total</text>
+
+  <rect x="0" y="72" width="368" height="104" rx="5" fill="#eef3fa" stroke="#16355e" stroke-width="1.5"/>
+  <text x="14" y="92" font-size="10" font-weight="700" fill="#16355e">GLOBAL CLIENT SOLUTIONS</text>
+  <text x="14" y="109" font-size="9" fill="#33414f"><tspan font-weight="700">200+</tspan> relationship management professionals across</text>
+  <text x="14" y="122" font-size="9" fill="#33414f">North America, Europe, APAC and the Middle East</text>
+  <text x="14" y="140" font-size="8.5" fill="#6b7a8a">Raises capital across all funds, services existing investors,</text>
+  <text x="14" y="152" font-size="8.5" fill="#6b7a8a">tailors offerings, develops products, deepens relationships</text>
+  <text x="14" y="168" font-size="8.5" font-style="italic" fill="#1f7a72">The institutional side &#8212; pensions, insurers, sovereigns</text>
+
+  <rect x="392" y="72" width="368" height="104" rx="5" fill="#eff7f6" stroke="#1f7a72" stroke-width="1.5"/>
+  <text x="406" y="92" font-size="10" font-weight="700" fill="#1f7a72">ARES WEALTH MANAGEMENT SOLUTIONS</text>
+  <text x="406" y="109" font-size="9" fill="#33414f"><tspan font-weight="700">175+</tspan> professionals covering the global</text>
+  <text x="406" y="122" font-size="9" fill="#33414f">wealth management channel</text>
+  <text x="406" y="140" font-size="8.5" fill="#6b7a8a">Product development, distribution, marketing and client</text>
+  <text x="406" y="152" font-size="8.5" fill="#6b7a8a">management, via broker-dealer subsidiary AMCM</text>
+  <text x="406" y="168" font-size="8.5" font-style="italic" fill="#1f7a72">The wealth side &#8212; 80+ platforms, 8 semi-liquid products</text>
+
+  <text x="0" y="200" font-size="9.5" font-weight="700" fill="#0d2340">Supporting functions &#8212; the unglamorous machinery that makes the above possible</text>
+
+  <rect x="0" y="210" width="183" height="74" rx="4" fill="#fff" stroke="#dfe5ec"/>
+  <text x="10" y="228" font-size="9" font-weight="700" fill="#16355e">Product managers</text>
+  <text x="10" y="244" font-size="8.3" fill="#33414f">Embedded specialists with</text>
+  <text x="10" y="256" font-size="8.3" fill="#33414f">deep expertise in <tspan font-style="italic">each</tspan> investment</text>
+  <text x="10" y="268" font-size="8.3" fill="#33414f">group, dedicated to servicing</text>
+  <text x="10" y="280" font-size="8.3" fill="#33414f">existing and prospective investors</text>
+
+  <rect x="193" y="210" width="183" height="74" rx="4" fill="#fff" stroke="#dfe5ec"/>
+  <text x="203" y="228" font-size="9" font-weight="700" fill="#16355e">Investor relations pros</text>
+  <text x="203" y="244" font-size="8.3" fill="#33414f">Also with group-specific</text>
+  <text x="203" y="256" font-size="8.3" fill="#33414f">experience. Reporting, queries,</text>
+  <text x="203" y="268" font-size="8.3" fill="#33414f">capital calls, distributions,</text>
+  <text x="203" y="280" font-size="8.3" fill="#33414f">the quarterly rhythm</text>
+
+  <rect x="386" y="210" width="183" height="74" rx="4" fill="#fff" stroke="#c8963e" stroke-width="1.3"/>
+  <text x="396" y="228" font-size="9" font-weight="700" fill="#c8963e">RFP &amp; Diligence team</text>
+  <text x="396" y="244" font-size="8.3" fill="#33414f">A <tspan font-style="italic">dedicated</tspan> team for formal</text>
+  <text x="396" y="256" font-size="8.3" fill="#33414f">tenders and due diligence</text>
+  <text x="396" y="268" font-size="8.3" fill="#33414f">questionnaires. Most firms</text>
+  <text x="396" y="280" font-size="8.3" fill="#33414f">make salespeople do this.</text>
+
+  <rect x="579" y="210" width="181" height="74" rx="4" fill="#fff" stroke="#c8963e" stroke-width="1.3"/>
+  <text x="589" y="228" font-size="9" font-weight="700" fill="#c8963e">Global Conferences &amp; Events</text>
+  <text x="589" y="244" font-size="8.3" fill="#33414f">A standing team for investor</text>
+  <text x="589" y="256" font-size="8.3" fill="#33414f">meetings and annual events &#8212;</text>
+  <text x="589" y="268" font-size="8.3" fill="#33414f">the in-person touchpoints that</text>
+  <text x="589" y="280" font-size="8.3" fill="#33414f">relationships are built on</text>
+
+  <line x1="0" y1="298" x2="760" y2="298" stroke="#dfe5ec"/>
+  <text x="0" y="314" font-size="8.5" fill="#33414f">The RFP &amp; Diligence and Global Conferences &amp; Events teams both sit under the <tspan font-weight="700">Chief Operating Officer of Global Client Solutions</tspan>, per her Ares biography.</text>
+  <text x="0" y="327" font-size="8" fill="#6b7a8a">Sources: Ares FY2025 Form 10-K, Item 1 (team sizes, product managers, IR professionals, AWMS, OMG); Ares leadership biography for the COO reporting lines.</text>
+</svg>
+</figure>
+
+<div class="callout edge">
+<span class="tag">Edge · the detail that shows how seriously they take this</span>
+<p style="margin-bottom:0"><b>Ares has a dedicated RFP &amp; Diligence team.</b> At most firms,
+responding to a request for proposal or a due diligence questionnaire is something a salesperson
+does badly at 11pm. A DDQ can run to hundreds of questions on everything from valuation policy to
+cybersecurity to key-person provisions, and a weak answer can end a mandate before any human
+conversation happens. Building a standing team for it is an operational statement: <b>Ares treats
+the written, procedural part of client service as a competitive weapon rather than an
+overhead.</b> If you want one concrete thing to admire about how they run this function, it is
+this.</p>
+</div>
+
+<h3>4.1 The scale, in one line</h3>
+<div class="grid4">
+<div class="stat"><b>200+</b><span>Relationship mgmt</span><i>Institutional, across four regions.</i></div>
+<div class="stat t"><b>175+</b><span>AWMS wealth</span><i>Product, distribution, marketing, client management.</i></div>
+<div class="stat a"><b>~375</b><span>Combined, disclosed</span><i>Before product managers, IR pros, RFP and events teams.</i></div>
+<div class="stat g"><b>55 &#8594; 200+</b><span>RM team, 2022&#8594;2025</span><i>Roughly 3.6x in three years, while peers cut distribution.</i></div>
+</div>
+<p style="margin-top:3mm" class="src">Note on the 55&#8594;200+ series: Ares narrowed its disclosure
+definition in FY2021, so FY2022 onward is the like-for-like comparison. Do not compare it to the
+FY2019 figure, which bundled strategy teams in.</p>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 5</div>
+  <h2>The disclosure test</h2>
+  <p>I read all five firms' 10-Ks side by side. Only one quantifies its client function.</p>
+</div>
+
+<section>
+<p class="lead">There is no public league table of client service quality in private markets — I
+looked, and it does not exist. So I ran a different test, which is arguably better: <b>what does
+each firm choose to tell its own shareholders about its client function in its annual report?</b>
+A 10-K is audited, legally binding and tightly edited. What a firm puts in it is what it thinks
+is material.</p>
+
+<table>
+<tr><th style="width:15%">Firm</th><th style="width:19%">Client team headcount</th><th style="width:19%">Investor / relationship count</th><th style="width:17%">Retention statistic</th><th>How the client function appears</th></tr>
+<tr><td><b>Ares</b></td>
+<td><b>Yes</b> — 200+ relationship management; 175+ AWMS</td>
+<td><b>Yes</b> — 2,850+ relationships; 540 investors in 2025; 235 new</td>
+<td><b>Yes</b> — 79% from existing investors; multi-fund investor chart; 30% in SMAs</td>
+<td>A dedicated subsection, "Investor Base and Fundraising", describing the team, its geography and its tasks.</td></tr>
+<tr><td><b>Blackstone</b></td><td>Not found</td><td>Not found</td><td>Not found</td>
+<td>"Client Solutions" appears as a named business unit and in an executive title. Client relationships are described qualitatively.</td></tr>
+<tr><td><b>Apollo</b></td><td>Not found</td><td><b>Partly</b> — "more than 1,000 investors in Apollo's active credit and equity funds"</td><td>Not found</td>
+<td>The investor count appears as a <i>concentration</i> disclosure — no single investor over 10% of committed capital — rather than a relationship metric.</td></tr>
+<tr><td><b>KKR</b></td><td>Not found</td><td>Not found</td><td>Not found</td>
+<td>"Investor relations" appears mainly in reference to the IR website and executive responsibilities.</td></tr>
+<tr><td><b>Blue Owl</b></td><td>Not found</td><td>Not found</td><td>Not found</td>
+<td>Many mentions, but predominantly in <b>risk factors</b> — failing to maintain investor relationships "could adversely affect our business" — and in cross-sell strategy language.</td></tr>
+</table>
+<p class="tbl-note">Method: full-text search of each firm's FY2025 Form 10-K (all filed February 2026) for team headcounts, investor counts and repeat-investor percentages. "Not found" means my searches did not surface it in that filing — see the caveat below.</p>
+
+<div class="callout warn">
+<span class="tag">Careful · state this precisely or it becomes an overclaim</span>
+<p>The honest version is: <b>"In the 10-K specifically, Ares quantifies its client-facing function
+in a way its four largest listed peers do not."</b> It is <i>not</i> "Ares has the biggest client
+team" or "peers don't invest in client service" — neither follows.</p>
+<p style="margin-bottom:0">Two things keep this fair. <b>First</b>, peers disclose elsewhere:
+Blackstone's Q1 2026 BCRED shareholder letter describes a private wealth platform of <b>345
+professionals</b> — materially larger than Ares' 175+ AWMS team, against roughly $324bn of
+private wealth AUM. <b>Second</b>, my method is a text search; a differently-worded disclosure
+could have been missed. Present it as "when I read the filings side by side, what struck me
+was..." rather than as an audited finding.</p>
+</div>
+
+<div class="callout edge">
+<span class="tag">Edge · what the difference actually signals</span>
+<p style="margin-bottom:0">Disclosure is a choice about what management wants to be judged on.
+Ares puts a retention percentage, a relationship count and a team headcount into a document its
+CEO signs — which means <b>it has chosen to be held to them, and will have to explain if they
+deteriorate.</b> Blue Owl, by contrast, mentions investor relationships mostly where firms are
+required to list what could go wrong. That is a real difference in posture, and it is the sort of
+observation you can only make by having opened all five documents.</p>
+</div>
+
+<h3>5.1 Where competitors are genuinely stronger</h3>
+<p>A comparison that only flatters Ares is not credible. Two honest points:</p>
+<div class="grid2">
+<div class="card"><h4>Blackstone: scale and brand in wealth</h4>
+<p style="margin-bottom:0">345 private wealth professionals and roughly <b>$324bn</b> of private
+wealth AUM, versus Ares' 175+ and $108.4bn across publicly-traded and perpetual wealth vehicles.
+Blackstone is the better-known consumer brand and reaches more advisers. If pure wealth
+distribution scale is the measure, Ares is not the leader.</p></div>
+<div class="card"><h4>Blue Owl: individual-investor concentration</h4>
+<p style="margin-bottom:0">Roughly <b>40%</b> of Blue Owl's $300bn+ comes from individuals,
+against Ares' 17% in wealth and listed vehicles. Blue Owl is further down the retail path. The
+flip side showed in 2026: Blue Owl's funds saw the heaviest redemption requests of the peer set
+(22% at OCIC, 41% at its tech fund, both capped at 5%).</p></div>
+</div>
+<p style="margin-top:3mm"><b>The fair summary:</b> Ares is not the biggest in wealth distribution,
+and does not claim to be. It is <b>the most institutional of the large alternative managers</b>
+— 76% of AUM from direct institutional relationships, 30% of that in bespoke SMAs — and it is the
+one that publishes the evidence.</p>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 6</div>
+  <h2>What investors actually say they want</h2>
+  <p>Because "clients value trust" is an assumption until somebody surveys them.</p>
+</div>
+
+<section>
+<p>The 2026 SS&amp;C Intralinks LP survey asked institutional investors directly what would improve
+their relationships with managers, and what builds trust. The answers are strikingly operational
+— they are about <b>communication quality</b>, not performance.</p>
+
+<figure>
+<svg viewBox="0 0 760 230" role="img" aria-label="Chart of LP survey responses on what improves GP relationships and builds trust">
+  <text x="0" y="13" font-size="10.5" font-weight="700" fill="#0d2340">What institutional investors said, 2026 LP survey</text>
+  <text x="0" y="34" font-size="9" font-weight="700" fill="#16355e">What would most improve your GP relationships?</text>
+  <g font-size="8.5">
+    <text x="0" y="56" fill="#33414f">Better digital communication interfaces</text>
+    <rect x="300" y="46" width="250" height="14" fill="#16355e"/><text x="558" y="57" font-size="9" font-weight="700" fill="#16355e">25%</text>
+    <text x="0" y="78" fill="#33414f">Enhanced reporting analytics</text>
+    <rect x="300" y="68" width="230" height="14" fill="#2f4f75"/><text x="538" y="79" font-size="9" font-weight="700" fill="#2f4f75">23%</text>
+  </g>
+  <text x="0" y="106" font-size="9" font-weight="700" fill="#1f7a72">What builds transparency and trust?</text>
+  <g font-size="8.5">
+    <text x="0" y="128" fill="#33414f">Clear explanation of valuation methods and assumptions</text>
+    <rect x="300" y="118" width="390" height="14" fill="#1f7a72"/><text x="698" y="129" font-size="9" font-weight="700" fill="#1f7a72">39%</text>
+    <text x="0" y="150" fill="#33414f">Data-backed valuations</text>
+    <rect x="300" y="140" width="180" height="14" fill="#5aa9a1"/><text x="488" y="151" font-size="9" font-weight="700" fill="#5aa9a1">18%</text>
+  </g>
+  <line x1="0" y1="170" x2="760" y2="170" stroke="#dfe5ec"/>
+  <text x="0" y="188" font-size="9" fill="#33414f"><tspan font-weight="700">Read the top answer carefully.</tspan> The single biggest driver of trust is not returns. It is <tspan font-style="italic">being able to explain how a number was arrived at</tspan>.</text>
+  <text x="0" y="204" font-size="9" fill="#33414f">That is a communication task performed by the client team &#8212; and it is precisely the &#8220;explain something technical, accurately, to someone who doesn&#8217;t share your vocabulary&#8221; skill.</text>
+  <text x="0" y="222" font-size="8" fill="#6b7a8a">Source: 2026 SS&amp;C Intralinks LP Survey, as reported in secondary coverage and briefing material. See the honesty note below before quoting these figures.</text>
+</svg>
+</figure>
+
+<div class="callout warn">
+<span class="tag">Careful · sourcing on this part is weaker than the rest</span>
+<p style="margin-bottom:0">These percentages come from <b>secondary coverage and briefing
+summaries</b> of the survey, not the primary report, which I could not obtain. Other figures
+circulating — such as a claim that 92% of institutional LPs say reporting quality influences
+re-ups — are attributed to Preqin by vendor blogs <b>without a verifiable link</b>, so I have
+left them out. Use the Intralinks figures as "one 2026 LP survey found..." rather than as hard
+fact, and do not cite the 92% figure at all.</p>
+</div>
+
+<h3>6.1 The tension worth noticing</h3>
+<p>Two credible sources point in opposite directions, and holding both is a sign of genuine
+understanding rather than confusion.</p>
+<div class="grid2">
+<div class="card"><h4>Ares' 10-K says consolidation</h4>
+<p style="margin-bottom:0">"Several large institutional investors have announced a desire to
+<b>consolidate their investments in a more limited number of managers</b>. We expect that this
+will cause competition in our industry to intensify."</p></div>
+<div class="card"><h4>The LP survey says expansion</h4>
+<p style="margin-bottom:0">Nearly <b>three-quarters of institutional LPs</b> said they plan to
+<b>increase</b> the number of GP relationships they hold over the next twelve months.</p></div>
+</div>
+<p style="margin-top:3mm"><b>Both can be true, and the reconciliation is the interesting bit.</b>
+Large, sophisticated investors are concentrating their <i>core</i> allocations into fewer, deeper
+relationships — which favours scaled managers who can take an SMA mandate. Meanwhile the broader
+LP universe is still widening its roster, often into newer or more specialised strategies.</p>
+<p style="margin-bottom:0"><b>Either way the conclusion for Ares is the same:</b> if investors
+concentrate, you must be one of the few they keep; if they expand, you must be one of the ones
+they add. <b>Both outcomes are won by the client team</b>, which is a reasonable one-sentence
+answer to "why does this function matter strategically?"</p>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 7</div>
+  <h2>Whether you would actually enjoy this</h2>
+  <p>You said you value trust and relationships. Here is the honest version of what that gets you.</p>
+</div>
+
+<section>
+<p class="lead">It would be easy to tell you this job is a perfect match for someone who likes
+building trust. Mostly it is. But the match is better than the cliché in some ways and worse in
+others, and knowing both is what lets you talk about it credibly rather than enthusiastically.</p>
+
+<h3>7.1 Where the fit is real</h3>
+<div class="grid2">
+<div class="card"><h4 style="color:var(--green)">Relationships here are measured in decades</h4>
+<p style="margin-bottom:0">ARCC launched in 2004 and still contributes about <b>31% of Credit
+Group management fees</b>. The European direct lending ladder runs ACE IV (2018) to ACE V (2020)
+to ACE VI (2022), each larger than the last. Some of the investors in ACE VI were in ACE IV.
+<b>You would be joining relationships already a decade old and expected to last another.</b>
+If you like compounding trust rather than closing transactions, that is the actual job.</p></div>
+<div class="card"><h4 style="color:var(--green)">Depth is structurally rewarded</h4>
+<p style="margin-bottom:0"><b>30% of institutional AUM sits in SMAs</b> — bespoke mandates built
+around one client's constraints. You cannot win one on a pitch; it requires knowing a client's
+regulatory position, risk appetite and internal politics well enough to design around them.
+That is a <i>relationship</i> product, and the firm has $139.6bn of them.</p></div>
+</div>
+<div class="grid2">
+<div class="card"><h4 style="color:var(--green)">The firm is honest with its clients under pressure</h4>
+<p style="margin-bottom:0">When ASIF's tenders were pro-rated, Ares disclosed the uncomfortable
+detail: how much was requested, how much was honoured, which investor segments were leaving. It
+also commissioned a nine-week external review of AI risk in its software book and published the
+findings. <b>If you value trust, the test is how a firm communicates when the news is bad</b> —
+and the evidence here is reasonable.</p></div>
+<div class="card"><h4 style="color:var(--green)">Breadth, because the function is horizontal</h4>
+<p style="margin-bottom:0">Client Solutions and IR sit in the Operations Management Group, across
+all four investment groups rather than inside one. You would learn credit, real assets,
+secondaries and private equity because a client might buy any of them — rather than becoming the
+person who sells one sleeve.</p></div>
+</div>
+
+<h3>7.2 Where it will be harder than you expect</h3>
+<div class="card">
+<h4 style="color:var(--red)">Most of the "relationship" is actually accuracy</h4>
+<p style="margin-bottom:0">The romantic version of this job is dinners and conferences. The real
+version, especially in the first two years, is capital account statements, capital call notices,
+DDQ responses and quarterly reporting against deadlines set by fund documents that cannot move.
+<b>Trust in this industry is built mostly through being reliably correct, not through being
+personable.</b> The LP survey bears this out — the top trust driver was explaining valuation
+methods clearly, not rapport.</p>
+</div>
+<div class="card">
+<h4 style="color:var(--red)">Your hardest relationships are internal</h4>
+<p style="margin-bottom:0">You will need time from portfolio managers who do not report to you,
+whose time is the scarcest resource in the building, to answer a client question. Getting that
+time repeatedly, without exhausting goodwill, <b>is</b> the job. If you enjoy relationships only
+when they are warm and reciprocal, the internal half of this will be a surprise.</p>
+</div>
+<div class="card">
+<h4 style="color:var(--red)">You will deliver news you did not cause</h4>
+<p style="margin-bottom:0">Someone had to tell ASIF investors their redemption request had been
+cut to 43% of what they asked for. That person did not make the decision and could not change it.
+Private credit in 2026 means more of these conversations, not fewer.</p>
+</div>
+
+<div class="callout key">
+<span class="tag">The honest summary</span>
+<p style="margin-bottom:0">If what you like about relationships is <b>being trusted over a long
+period</b>, this is one of the better seats in finance — the time horizons are genuinely long and
+the firm has built real infrastructure around them. If what you like is <b>the social side of
+relationships</b>, you will find the first two years more procedural than you imagined. The
+candidates who do well here tend to be the ones who find satisfaction in being the person who
+always has the right number.</p>
+</div>
+
+<h3>7.3 How to say this without sounding like everyone else</h3>
+<div class="card soft">
+<p style="margin-bottom:0">"I'm drawn to the relationship side because of how long the
+relationships last here. Ares Capital launched in 2004 and still produces about a third of Credit
+Group management fees. The European direct lending series went from fund four to fund six with
+the same investors re-upping and committing more each time. And thirty percent of institutional
+assets sit in separately managed accounts, which you can't win from a pitch — they're built
+around one client's specific constraints. What I've also realised reading the LP surveys is that
+trust in this industry is mostly technical: the single biggest driver investors named was clear
+explanation of valuation methods. So it's less about rapport than I'd assumed, and more about
+being the person who can explain a number accurately. That suits how I like to work."</p>
+</div>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 8</div>
+  <h2>Sources and honesty notes</h2>
+</div>
+
+<section>
+<table>
+<tr><th style="width:30%">Source</th><th>Used for</th></tr>
+<tr><td><b>Ares FY2025 Form 10-K</b><br><small>filed 25 Feb 2026</small></td>
+<td>The 79% existing-investor statistic; 2,850+ relationships; 540 investors and 235 new in 2025; the multi-fund investor chart; SMAs at $139.6bn / 30%; relationship management team of 200+ and its four regions; AWMS 175+; product managers and IR professionals per investment group; the OMG description; the "consolidate their investments" competition language; 93% of fees from perpetual or long-dated funds.</td></tr>
+<tr><td><b>Ares FY2019&#8211;FY2024 10-Ks</b></td><td>The relationship-count series (850+ in 2019 through ~2,700 in 2024) and the relationship-management headcount series, including the FY2021 definitional change.</td></tr>
+<tr><td><b>Ares Q1 2026 earnings call</b><br><small>1 May 2026</small></td><td>&gt;95% of non-traded BDC investors not requesting redemptions; the redemption stress case; wealth AUM.</td></tr>
+<tr><td><b>Ares 2025 Annual Shareholder Letter</b></td><td>Eight semi-liquid products; 80+ global platforms; "nearly half of our global distribution partners currently offer just one Ares product."</td></tr>
+<tr><td><b>Ares leadership biography</b><br><small>COO, Global Client Solutions</small></td><td>That the Global Conferences &amp; Events and RFP &amp; Diligence teams sit under the Global Client Solutions COO.</td></tr>
+<tr><td><b>Blackstone, Apollo, KKR and Blue Owl FY2025 Form 10-Ks</b><br><small>all filed Feb 2026</small></td><td>The disclosure comparison in Part 5. Read in full text and searched for client-team headcounts, investor counts and repeat-investor statistics.</td></tr>
+<tr><td><b>Blackstone BCRED Q1 2026 shareholder letter</b></td><td>The 345 private wealth professionals figure.</td></tr>
+<tr><td><b>2026 SS&amp;C Intralinks LP Survey</b><br><small>via secondary coverage</small></td><td>The LP survey figures in Part 6 — 25% / 23% / 39% / 18%, and the three-quarters planning to expand GP rosters.</td></tr>
+</table>
+
+<div class="callout warn">
+<span class="tag">Before you quote any of this</span>
+<ul class="tight" style="margin-bottom:0">
+<li><b>The Part 5 comparison is my own analysis</b>, done by full-text searching five 10-Ks. "Not found" means my search did not surface it, not that it provably does not exist. Frame it as what struck you reading the filings, not as an audited finding.</li>
+<li><b>Blackstone's wealth platform is larger than Ares'</b> — 345 professionals and ~$324bn versus Ares' 175+ and $108.4bn. Do not imply Ares leads in wealth distribution; its lead is in institutional depth.</li>
+<li><b>The LP survey percentages are from secondary coverage</b>, not the primary report. Attribute them loosely. The widely circulated "92% of LPs say reporting quality influences re-ups" figure is unverifiable — I have excluded it and you should too.</li>
+<li><b>The 79% is a share, not a retention rate.</b> It must be paired with the relationship growth from 1,090 to 2,850, or it is a weak argument.</li>
+<li><b>The multi-fund investor data is published as a chart</b>, so I cannot give you the underlying values — only that Ares discloses the comparison and what it says it demonstrates.</li>
+<li><b>The &#163;1m-per-&#163;100m fee illustration is mine</b>, using Ares' roughly 1% blended effective rate. Real fee bases vary by strategy and step down after investment periods.</li>
+<li><b>Ares reports Q3 2026 on 29 October 2026</b> — check it before interviewing, as the redemption and wealth figures may move.</li>
+</ul>
+</div>
+
+<div class="card soft" style="margin-top:5mm">
+<h4>The five things to take from this</h4>
+<ol class="tight" style="margin-bottom:0">
+<li><b>Retention is three motions, not one</b> — the re-up, the cross-sell, and simply not redeeming. The 79% covers the first two.</li>
+<li><b>Pair the 79% with the relationship count</b> (1,090 &#8594; 2,850). Alone, the 79% could just as easily signal stagnation.</li>
+<li><b>Ares has roughly 375 disclosed client-facing people</b>, plus product managers, IR professionals, a dedicated <b>RFP &amp; Diligence team</b> and a standing <b>Conferences &amp; Events</b> team.</li>
+<li><b>Of the five big listed managers, only Ares quantifies this function in its 10-K</b> — headcount, relationship count and a retention percentage. The others mostly describe it qualitatively or in risk factors.</li>
+<li><b>Trust in this industry is technical.</b> The top driver LPs named was clear explanation of valuation methods — which makes this a precision job before it is a people job.</li>
+</ol>
+</div>
+</section>
+
+</body>
+</html>
