@@ -20,6 +20,9 @@ REPORTS = {
     "learn": dict(parts="parts_learn", cover="cover_learn.html",
                   stem="KKR_KCS_What_You_Will_Learn_Technical_Guide",
                   header="KKR KCS · What you will learn: the technical guide"),
+    "pictet": dict(parts="parts_pictet", cover="cover_pictet.html",
+                  stem="KKR_KCS_Previous_Experience_Pictet_Guide",
+                  header="From Pictet Asset Management to KKR KCS · Experience guide"),
     "cheat": dict(parts="parts_cheat", cover=None,
                   stem="Cheat_Sheet", header="KKR KCS · Cheat Sheet"),
 }
