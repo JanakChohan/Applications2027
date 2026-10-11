@@ -67,3 +67,10 @@ scenario cards:
 - Data series (categorical, in this fixed order): #2a78d6, #eb6834, #1baf7a, #eda100, #6250d6, #e34948. Text never takes the series colour: labels stay ink/ink-2. Direct-label series. One y-axis only. Thin bars with 2px gaps, recessive gridlines (#D5DAE3).
 - Every figure that shows a number carries the source ID and as-of date in its caption; estimated numbers carry "est." on the chart itself.
 - Use arrows with `<defs><marker id="arrUNIQUE" ...>`: make marker ids unique per figure (prefix with your part id) because all SVGs share one document.
+
+## Addendum for the "What you will learn" technical guide (`parts_learn/`, build key `learn`, ids prefix `l`)
+- The reader asked for MAXIMUM technical depth explained from zero: every mechanism shown step by step, with worked numerical examples (clearly labelled "illustrative numbers" unless sourced), formulas written out in plain words and symbols, and a diagram for every mechanism.
+- Every module must answer three questions explicitly, in boxes: "What you will learn" (the technical skill), "Where you would meet it at KKR" (a specific fund, product, client type, team or news story, sourced), and "Why you could not learn this the same way elsewhere" (mechanism, honest, never overclaim; tag [Inferred] where reasoning).
+- Use `<div class="box key"><span class="lbl">What you will learn</span>`, `<div class="box term"><span class="lbl">Where you meet it at KKR</span>`, `<div class="box opinion"><span class="lbl">Only at KKR</span>` for these three.
+- End each module with "Say it in one line" (a SAY THIS box): one sentence the candidate could use in the application answer or interview.
+- SVG text may contain source markers like [S12] in plain text (the build leaves SVG untouched), but keep them short.

@@ -17,6 +17,9 @@ REPORTS = {
     "kcs": dict(parts="parts_kcs", cover="cover_kcs.html",
                 stem="KKR_Client_Solutions_KCS_Deep_Dive",
                 header="KKR Global Client Solutions (KCS) · Role Deep Dive"),
+    "learn": dict(parts="parts_learn", cover="cover_learn.html",
+                  stem="KKR_KCS_What_You_Will_Learn_Technical_Guide",
+                  header="KKR KCS · What you will learn: the technical guide"),
     "cheat": dict(parts="parts_cheat", cover=None,
                   stem="Cheat_Sheet", header="KKR KCS · Cheat Sheet"),
 }
