@@ -1,0 +1,695 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Hayfin as a Shop</title><style>:root{--navy:#12233f;--navy2:#1f3a63;--ink:#1c2533;--mute:#5b6676;--line:#d7dce4;--bg:#ffffff;--soft:#f3f5f8;
+--acc:#c8873a;--acc2:#f6ead9;--sig:#7a3fb0;--sig2:#f1e8fa;--ok:#1d7a4c;--ok2:#e3f3ea;--bad:#b3261e;--bad2:#fbe7e5;--warn:#9a6a00;--warn2:#fff4d6;
+--easy:#2f8f5b;--med:#c8873a;--hard:#b3261e;}
+@page{size:A4;margin:16mm 0 15mm 0}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;color:var(--ink);font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:10pt;line-height:1.45}
+.page{padding:0 15mm}
+h1,h2,h3,h4{color:var(--navy);line-height:1.2;margin:0}
+h1{font-size:24pt}
+h2{font-size:15pt;margin:16px 0 6px;padding-top:4px;border-top:2px solid var(--acc);break-after:avoid}
+h3{font-size:11.5pt;margin:12px 0 4px;break-after:avoid}
+h4{font-size:10pt;margin:8px 0 3px;break-after:avoid}
+p{margin:4px 0 7px}
+ul,ol{margin:3px 0 8px;padding-left:18px} li{margin:2px 0}
+a{color:var(--navy2);text-decoration:none;word-break:break-all}
+small,.small{font-size:8.3pt;color:var(--mute)}
+.mk{font-size:1px;color:#fff;line-height:1px}
+.pb{break-before:page}
+.avoid{break-inside:avoid}
+/* Part band */
+.band{break-before:page;margin:0 0 12px 0;padding:18px 15mm 14px;color:#fff;background:var(--navy);position:relative}
+.band .num{font-size:9pt;letter-spacing:2px;text-transform:uppercase;color:var(--acc)}
+.band h1{color:#fff;font-size:21pt;margin-top:3px}
+.band .sub{color:#c9d3e3;font-size:9.5pt;margin-top:4px}
+.band.b2{background:#1f3a63}.band.b3{background:#24425a}.band.b4{background:#3b2f57}.band.b5{background:#22423c}
+/* tags */
+.c,.r,.i{font-size:7pt;font-weight:700;padding:0 3px;border-radius:2px;white-space:nowrap;vertical-align:1px}
+.c{background:#e3f3ea;color:#1d7a4c}.r{background:#fff4d6;color:#8a5d00}.i{background:#f1e8fa;color:#6a2fa0}
+.s{font-size:7.3pt;color:var(--navy2);font-weight:600;white-space:nowrap}
+/* callouts */
+.box{border-radius:5px;padding:7px 10px 6px;margin:8px 0 10px;break-inside:avoid;border-left:5px solid}
+.box .lab{font-size:7.5pt;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:2px;display:block}
+.key{background:#eef2f8;border-color:var(--navy2)}.key .lab{color:var(--navy2)}
+.say{background:var(--ok2);border-color:var(--ok)}.say .lab{color:var(--ok)}
+.dont{background:var(--bad2);border-color:var(--bad)}.dont .lab{color:var(--bad)}
+.op{background:var(--sig2);border-color:var(--sig)}.op .lab{color:var(--sig)}
+.unc{background:var(--warn2);border-color:var(--warn);border-left-style:dashed}.unc .lab{color:var(--warn)}
+.note{background:var(--soft);border-color:var(--acc)}.note .lab{color:var(--acc)}
+/* tables */
+table{border-collapse:collapse;width:100%;margin:6px 0 10px;font-size:8.6pt}
+th{background:var(--navy);color:#fff;text-align:left;padding:4px 5px;font-weight:600;vertical-align:bottom}
+td{border-bottom:1px solid var(--line);padding:3.5px 5px;vertical-align:top}
+tr{break-inside:avoid}
+tbody tr:nth-child(even) td{background:#f8f9fb}
+table.src{font-size:7.2pt} table.src td{padding:2px 4px}
+/* figures */
+figure{margin:10px 0 12px;break-inside:avoid;border:1px solid var(--line);border-radius:6px;padding:8px 8px 6px;background:#fff}
+figure svg{width:100%;height:auto;display:block}
+figcaption{font-size:8.2pt;color:var(--mute);margin-top:5px;border-top:1px dashed var(--line);padding-top:4px}
+figcaption b{color:var(--navy)}
+.fullfig{}
+/* cards */
+.card{border:1px solid var(--line);border-radius:6px;margin:8px 0;break-inside:avoid;overflow:hidden}
+.card .hd{padding:4px 9px;color:#fff;font-weight:700;font-size:9pt;display:flex;justify-content:space-between}
+.card.easy .hd{background:var(--easy)}.card.med .hd{background:var(--med)}.card.hard .hd{background:var(--hard)}
+.card .bd{padding:5px 9px 6px;font-size:8.8pt}
+.card .bd p{margin:2px 0 4px}
+.card .bd b{color:var(--navy)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.kpi{background:var(--soft);border-radius:6px;padding:8px;text-align:center;break-inside:avoid}
+.kpi .v{font-size:17pt;font-weight:800;color:var(--navy)} .kpi .l{font-size:8pt;color:var(--mute)}
+.toc{columns:1} .toc .row{display:flex;align-items:baseline;font-size:10pt;margin:3px 0}
+.toc .row .t{flex:0 1 auto} .toc .row .dots{flex:1;border-bottom:1px dotted #9aa4b2;margin:0 5px}
+.toc .row.sub{font-size:8.8pt;padding-left:16px;color:var(--mute)}
+.tocpg{font-weight:700;color:var(--navy)}
+.cover{height:265mm;background:var(--navy);color:#fff;padding:30mm 18mm;position:relative;break-after:page}
+.qa{border-left:3px solid var(--acc);padding:3px 8px;margin:6px 0;break-inside:avoid;font-size:8.9pt}
+.qa .q{font-weight:700;color:var(--navy)}
+.mono{font-family:Menlo,Consolas,monospace;font-size:8pt}
+.grid3 .card .bd{font-size:7.6pt;line-height:1.35}.grid3 .card .hd{font-size:8pt}
+.shopbox{background:#fff7ec;border-left:5px solid #c8873a;border-radius:5px;padding:7px 10px 6px;margin:8px 0 10px;break-inside:avoid}
+.shopbox .lab{font-size:7.5pt;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:#b06f22;display:block;margin-bottom:2px}
+.seg{border:1px solid #d7dce4;border-radius:6px;margin:10px 0;break-inside:avoid;overflow:hidden}
+.seg .hd{background:#12233f;color:#fff;padding:5px 10px;font-weight:700;display:flex;justify-content:space-between}
+.seg .bd{padding:6px 10px}
+.seg .bd table{margin:4px 0}
+</style></head><body><div class="cover">
+  <div style="font-size:9pt;letter-spacing:3px;color:#c8873a;text-transform:uppercase">Explainer · zero knowledge assumed · for a Partner Solutions candidate</div>
+  <div style="font-size:34pt;font-weight:800;line-height:1.05;margin-top:16mm">Hayfin as a Shop</div>
+  <div style="font-size:15pt;color:#c9d3e3;margin-top:6mm">Who the customers are, what hurts them, what is on the shelves,<br>why Hayfin's shop is different, and why customers keep coming back</div>
+  <svg viewBox="0 0 600 230" style="width:100%;margin-top:14mm" font-family="Helvetica,Arial">
+    <g>
+      <polygon points="40,90 300,20 560,90" fill="#c8873a"/>
+      <rect x="60" y="90" width="480" height="120" fill="#1f3a63"/>
+      <rect x="60" y="90" width="480" height="26" fill="#c8873a" opacity="0.35"/>
+      <text x="300" y="108" text-anchor="middle" fill="#fff" font-size="15" font-weight="800" letter-spacing="3">HAYFIN · EUROPEAN CREDIT</text>
+      <rect x="90" y="130" width="110" height="80" fill="#eef2f8"/><text x="145" y="160" text-anchor="middle" fill="#12233f" font-size="10" font-weight="700">Shelves</text><text x="145" y="176" text-anchor="middle" fill="#12233f" font-size="9">the products</text>
+      <rect x="245" y="130" width="110" height="80" fill="#f6ead9"/><text x="300" y="160" text-anchor="middle" fill="#12233f" font-size="10" font-weight="700">Shop front</text><text x="300" y="176" text-anchor="middle" fill="#12233f" font-size="9">Partner Solutions</text>
+      <rect x="400" y="130" width="110" height="80" fill="#eef2f8"/><text x="455" y="160" text-anchor="middle" fill="#12233f" font-size="10" font-weight="700">Back room</text><text x="455" y="176" text-anchor="middle" fill="#12233f" font-size="9">lending teams</text>
+    </g>
+  </svg>
+  <div style="position:absolute;bottom:26mm;left:18mm;right:18mm;font-size:9pt;color:#c9d3e3;line-height:1.6">
+    <div><b style="color:#fff">How to read it:</b> every orange box is the shop analogy; everything else is the real thing, with a source marker [S] that matches the source list at the back. Confidence tags: Confirmed (primary source or two outlets), Reported (one credible source), Inferred (my reasoning).</div>
+    <div><b style="color:#fff">Built:</b> 11 October 2026, from public sources only, reusing the research behind the full Hayfin PSG interview pack.</div>
+  </div>
+</div>
+<div class="page">
+  <h1 style="margin-top:4mm">Contents</h1>
+  <div class="toc"><div class="row"><span class="t">0 · Before you start: ten things to assume</span><span class="dots"></span><span class="tocpg" data-for="a0">3</span></div>
+<div class="row"><span class="t">1 · The shop at a glance</span><span class="dots"></span><span class="tocpg" data-for="a1">4</span></div>
+<div class="row sub"><span class="t">The analogy, piece by piece</span><span class="dots"></span><span class="tocpg" data-for="a1a">4</span></div>
+<div class="row"><span class="t">2 · The target audience: who walks into the shop</span><span class="dots"></span><span class="tocpg" data-for="a2">6</span></div>
+<div class="row sub"><span class="t">The regions, and why Australia is so big</span><span class="dots"></span><span class="tocpg" data-for="a2a">8</span></div>
+<div class="row sub"><span class="t">The gatekeepers: consultants</span><span class="dots"></span><span class="tocpg" data-for="a2b">9</span></div>
+<div class="row sub"><span class="t">Who is not a customer</span><span class="dots"></span><span class="tocpg" data-for="a2c">9</span></div>
+<div class="row"><span class="t">3 · Pain points and the value Hayfin creates</span><span class="dots"></span><span class="tocpg" data-for="a3">10</span></div>
+<div class="row sub"><span class="t">The 2026 pains: what customers actually asked Hayfin</span><span class="dots"></span><span class="tocpg" data-for="a3a">10</span></div>
+<div class="row"><span class="t">4 · The products on the shelves, and the packaging</span><span class="dots"></span><span class="tocpg" data-for="a4">12</span></div>
+<div class="row sub"><span class="t">Each product line, simply</span><span class="dots"></span><span class="tocpg" data-for="a4a">12</span></div>
+<div class="row sub"><span class="t">The packaging: same product, different wrappers</span><span class="dots"></span><span class="tocpg" data-for="a4b">13</span></div>
+<div class="row"><span class="t">5 · Product differentiation: why this shop and not the one next door</span><span class="dots"></span><span class="tocpg" data-for="a5">15</span></div>
+<div class="row sub"><span class="t">The street: who else sells credit</span><span class="dots"></span><span class="tocpg" data-for="a5a">15</span></div>
+<div class="row sub"><span class="t">Eight differentiators, in depth</span><span class="dots"></span><span class="tocpg" data-for="a5b">16</span></div>
+<div class="row sub"><span class="t">Where the shop next door wins</span><span class="dots"></span><span class="tocpg" data-for="a5c">18</span></div>
+<div class="row"><span class="t">6 · The client side: how the shop front shows the difference</span><span class="dots"></span><span class="tocpg" data-for="a6">19</span></div>
+<div class="row sub"><span class="t">Which differentiator is shown where</span><span class="dots"></span><span class="tocpg" data-for="a6a">19</span></div>
+<div class="row sub"><span class="t">Five things the shop front does differently</span><span class="dots"></span><span class="tocpg" data-for="a6b">20</span></div>
+<div class="row"><span class="t">7 · Why the customer sees the value</span><span class="dots"></span><span class="tocpg" data-for="a7">21</span></div>
+<div class="row sub"><span class="t">Three customers walk into the shop</span><span class="dots"></span><span class="tocpg" data-for="a7a">21</span></div>
+<div class="row"><span class="t">8 · Retention: why customers keep coming back</span><span class="dots"></span><span class="tocpg" data-for="a8">23</span></div>
+<div class="row sub"><span class="t">Why customers stay: six reasons</span><span class="dots"></span><span class="tocpg" data-for="a8a">23</span></div>
+<div class="row sub"><span class="t">The evidence that it works</span><span class="dots"></span><span class="tocpg" data-for="a8b">24</span></div>
+<div class="row sub"><span class="t">What could break loyalty</span><span class="dots"></span><span class="tocpg" data-for="a8c">24</span></div>
+<div class="row"><span class="t">9 · The shop on one page, and what to say</span><span class="dots"></span><span class="tocpg" data-for="a9">25</span></div>
+<div class="row sub"><span class="t">Lines you can use in an interview</span><span class="dots"></span><span class="tocpg" data-for="a9a">25</span></div>
+<div class="row sub"><span class="t">Mini glossary</span><span class="dots"></span><span class="tocpg" data-for="a9b">26</span></div>
+<div class="row"><span class="t">Sources</span><span class="dots"></span><span class="tocpg" data-for="a10">27</span></div></div>
+</div>
+
+<div class="band" data-toc="a0" data-title="0 · Before you start: ten things to assume"><span class="mk">QQa0QQ</span><div class="num">Section 0</div><h1>Before you start: ten things to assume</h1><div class="sub">The background facts that make everything else make sense</div></div>
+<div class="page">
+<p>Most confusion about firms like Hayfin comes from carrying assumptions over from ordinary shops. Read these ten first.</p>
+<table>
+<thead><tr><th style="width:4%">#</th><th style="width:31%">Assumption</th><th>What it means in plain English</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><b>Hayfin does not mainly lend its own money.</b></td><td>It lends other people's money and charges a fee for doing it well. The "other people" are big institutions such as pension funds. Hayfin is the shopkeeper, not the owner of the stock. (It started in 2009 by lending its backers' money from its own balance sheet, then switched to running funds <span class="s">[S307]</span>.)</td></tr>
+<tr><td>2</td><td><b>There are two kinds of customer.</b></td><td><b>Investors</b> give Hayfin money to lend. <b>Borrowers</b> (mostly mid-sized European companies owned by private equity firms) take the loans. You are applying to the team that serves the investors, so in this document "customer" means investor unless it says otherwise.</td></tr>
+<tr><td>3</td><td><b>The customer is an institution, not a person.</b></td><td>"All of our investors are institutional" <span class="s">[S305]</span>. Hayfin's private credit takes "no retail capital" <span class="s">[S227]</span>. Nobody walks in off the street with £1,000; the usual minimum is about $11.8m (roughly €10m) <span class="s">[S303]</span>.</td></tr>
+<tr><td>4</td><td><b>The "product" is a stream of loan repayments.</b></td><td>When an investor buys into a Hayfin fund, it is buying a share of hundreds of millions of euros of loans. The return is mostly interest the borrowers pay, not a share price going up.</td></tr>
+<tr><td>5</td><td><b>You cannot return the product.</b></td><td>Money is locked in for years. Funds invest for three to four years, then collect repayments for another three to four, with two possible one-year extensions <span class="s">[S305]</span>. Investors "are not entitled to have their interests in the respective Fund redeemed" <span class="s">[S301]</span>. Think of it as a ten-year subscription you cannot cancel.</td></tr>
+<tr><td>6</td><td><b>Customers pay over time, not at the till.</b></td><td>An investor <i>commits</i> an amount, and Hayfin <i>calls</i> it in chunks as loans are made. So "raising €15bn" means €15bn of promises, drawn over years.</td></tr>
+<tr><td>7</td><td><b>The shop opens a new "edition" every few years.</b></td><td>Each fund is raised once and then closed to new money. The next one is a new edition: Direct Lending Fund I, II, III, IV, V <span class="s">[S79]</span><span class="s">[S90]</span><span class="s">[S88]</span><span class="s">[S71]</span>. Customers decide each time whether to buy the new edition. That decision is called a <b>re-up</b>.</td></tr>
+<tr><td>8</td><td><b>Buying is slow and heavily checked.</b></td><td>Before committing, an investor sends long questionnaires (DDQs), often hires a consultant to vet the manager, and gets committee approval. One vendor estimates six to eighteen months for the process <span class="s">[S202]</span> (low-weight source). Your future team does much of this paperwork.</td></tr>
+<tr><td>9</td><td><b>Some numbers are private.</b></td><td>Hayfin is privately owned, so fees, recent fund returns and loss rates are not public. Where this document says "not public", that is the honest answer, and it is the right one to give in an interview too.</td></tr>
+<tr><td>10</td><td><b>Dates matter.</b></td><td>Figures change fast. Assets under management (AUM) were about €33bn in March 2025 <span class="s">[S305]</span> and about €40bn by mid-2026 <span class="s">[S224]</span>. Always say the date with the number.</td></tr>
+</tbody></table>
+<div class="box key"><span class="lab">Five words you need</span><b>Fund:</b> a pot of investors' money run by a manager for a fixed purpose and period. <b>LP (limited partner):</b> an investor in a fund (the customer). <b>GP (general partner):</b> the manager (Hayfin). <b>Private credit:</b> loans made by funds rather than banks, agreed one to one and held until repaid. <b>Partner Solutions Group (PSG):</b> Hayfin's investor-facing team, the shop front.</div>
+</div>
+
+<div class="band b2" data-toc="a1" data-title="1 · The shop at a glance"><span class="mk">QQa1QQ</span><div class="num">Section 1</div><h1>The shop at a glance</h1><div class="sub">What kind of shop Hayfin is, and how the analogy maps onto the real firm</div></div>
+<div class="page">
+<div class="shopbox"><span class="lab">The analogy in one paragraph</span>Imagine a specialist <b>wholesale food importer</b> based in London that supplies hospitals, schools and airlines across the world. It does not run a supermarket for the public. Its buyers are professional procurement teams who need steady, reliable supply for years and who inspect everything. The importer's edge is that it has local buyers in every European market who know which farms are sound, it has a range from everyday staples to premium specialist goods, it packs the same produce in different ways for different customers, and when a farm has a bad harvest it sends its own team to fix the problem. That is Hayfin.</div>
+<figure>
+<svg viewBox="0 0 700 430" font-family="Helvetica,Arial">
+<defs><marker id="s1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#12233f"/></marker></defs>
+<g font-size="10.5">
+<text x="350" y="16" text-anchor="middle" font-weight="700" fill="#12233f" font-size="13">The Hayfin shop: who supplies it, what it sells, who buys</text>
+<rect x="10" y="35" width="190" height="240" rx="8" fill="#eef2f8" stroke="#1f3a63"/>
+<text x="105" y="56" text-anchor="middle" font-weight="700" fill="#12233f">THE "FARMS"</text>
+<text x="105" y="72" text-anchor="middle" fill="#5b6676">where the raw product comes from</text>
+<text x="20" y="98">Mid-sized European companies,</text><text x="20" y="113">mostly owned by private equity</text><text x="20" y="128">firms, that need to borrow</text>
+<text x="20" y="152">Deal size €100m to €400m [S224]</text>
+<text x="20" y="170">Examples 2026: Condis (Spain,</text><text x="20" y="185">€305m), Hyve, CloserStill,</text><text x="20" y="200">Serwent (Nordics) [S231][S233]</text>
+<text x="20" y="224">They pay interest and fees, and</text><text x="20" y="239">give security and promises</text><text x="20" y="254">(covenants)</text>
+<rect x="250" y="35" width="200" height="240" rx="8" fill="#fff" stroke="#12233f" stroke-width="2"/>
+<text x="350" y="56" text-anchor="middle" font-weight="700" fill="#12233f">THE SHOP: HAYFIN</text>
+<rect x="262" y="68" width="176" height="56" rx="5" fill="#12233f"/><text x="350" y="88" text-anchor="middle" fill="#fff" font-weight="700">Back room</text><text x="350" y="104" text-anchor="middle" fill="#c9d3e3">lending teams in 13 offices</text><text x="350" y="117" text-anchor="middle" fill="#c9d3e3">pick and check the "produce" [S71]</text>
+<rect x="262" y="132" width="176" height="56" rx="5" fill="#3d5a85"/><text x="350" y="152" text-anchor="middle" fill="#fff" font-weight="700">Shelves</text><text x="350" y="168" text-anchor="middle" fill="#e8edf5">funds: Direct Lending, Special</text><text x="350" y="181" text-anchor="middle" fill="#e8edf5">Opps, liquid credit, specialists</text>
+<rect x="262" y="196" width="176" height="66" rx="5" fill="#c8873a"/><text x="350" y="216" text-anchor="middle" fill="#fff" font-weight="700">Shop front</text><text x="350" y="232" text-anchor="middle" fill="#fff">Partner Solutions: selling,</text><text x="350" y="245" text-anchor="middle" fill="#fff">packaging, answering questions,</text><text x="350" y="258" text-anchor="middle" fill="#fff">quarterly statements</text>
+<rect x="500" y="35" width="190" height="240" rx="8" fill="#e3f3ea" stroke="#1d7a4c"/>
+<text x="595" y="56" text-anchor="middle" font-weight="700" fill="#12233f">THE CUSTOMERS</text>
+<text x="595" y="72" text-anchor="middle" fill="#5b6676">who buy the product</text>
+<text x="510" y="98">Pension funds 51.1%</text><text x="510" y="114">Insurers 19.5%</text><text x="510" y="130">Sovereign wealth funds 12.1%</text><text x="510" y="146">Banks 6.9%</text><text x="510" y="162">Funds of funds 4.3%</text><text x="510" y="178">Family offices, endowments 4.0%</text><text x="510" y="194">Consultants 2.1%</text>
+<text x="510" y="218" fill="#5b6676">share of AUM, 31 Mar 2025,</text><text x="510" y="232" fill="#5b6676">read from Hayfin's charts [S305]</text>
+<text x="510" y="256" font-weight="700">No retail shoppers [S227]</text>
+<line x1="200" y1="150" x2="248" y2="150" stroke="#12233f" stroke-width="2" marker-end="url(#s1)"/><text x="224" y="142" text-anchor="middle" font-size="9">loans</text>
+<line x1="450" y1="225" x2="498" y2="200" stroke="#12233f" stroke-width="2" marker-end="url(#s1)"/><text x="470" y="200" text-anchor="middle" font-size="9">sells</text>
+<line x1="498" y1="120" x2="452" y2="120" stroke="#1d7a4c" stroke-width="2" marker-end="url(#s1)"/><text x="475" y="113" text-anchor="middle" font-size="9" fill="#1d7a4c">money</text>
+<rect x="10" y="300" width="680" height="118" rx="8" fill="#fff7ec" stroke="#c8873a"/>
+<text x="22" y="320" font-weight="700" fill="#b06f22">THE MONEY LOOP</text>
+<text x="22" y="340">1. Customers commit money to a fund for years.  2. The back room lends it to companies.  3. Companies pay interest and repay.</text>
+<text x="22" y="358">4. Hayfin passes the money back to customers, after taking a fee for running the shop and a share of profit above an agreed minimum.</text>
+<text x="22" y="376">5. Partner Solutions tells customers exactly how their money is doing every quarter.  6. If they are happy, they buy the next edition (re-up).</text>
+<text x="22" y="400" fill="#5b6676">Fees not public. Norm: about 1% a year plus a profit share above a minimum return (Macfarlanes) [S104].</text>
+</g>
+</svg>
+<figcaption><b>Figure 1.1 · The Hayfin shop.</b> Customer shares from Hayfin's UK Stewardship Code report <span class="s">[S305]</span>; deal sizes and examples from Hayfin releases <span class="s">[S224]</span><span class="s">[S231]</span><span class="s">[S233]</span>; offices <span class="s">[S71]</span>. The importer framing is an analogy, not a description of how Hayfin describes itself.</figcaption>
+</figure>
+
+<h2 data-toc="a1a" data-title="The analogy, piece by piece" data-lvl="2"><span class="mk">QQa1aQQ</span>The analogy, piece by piece</h2>
+<table>
+<thead><tr><th style="width:24%">In a shop</th><th style="width:30%">At Hayfin</th><th>Why the comparison holds (and where it breaks)</th></tr></thead>
+<tbody>
+<tr><td>Customers</td><td>Investors (LPs): pensions, insurers, sovereign wealth funds</td><td>They pay for something and expect value. <i>Breaks:</i> they hand over money first and get it back with interest later.</td></tr>
+<tr><td>Suppliers / farms</td><td>Borrowing companies</td><td>The raw material is a loan to a company. Quality of the "farm" decides quality of the product.</td></tr>
+<tr><td>Buyers who choose stock</td><td>Origination and underwriting teams</td><td>They choose which loans to make. In 2012 Hayfin saw over 1,400 opportunities and made 60 investments <span class="s">[S306]</span>, so most produce is rejected.</td></tr>
+<tr><td>Shelves and product lines</td><td>Strategies and funds</td><td>Direct Lending, Special Opportunities, Tactical Solutions, High Yield and Loans, CLOs, PE Solutions, Healthcare, Maritime, Real Estate <span class="s">[S327]</span><span class="s">[S328]</span>.</td></tr>
+<tr><td>Packaging and sizes</td><td>"Wrappers": funds, SMAs, evergreen vehicles, a rated note feeder</td><td>The same loans can be sold in different packaging to suit each customer <span class="s">[S222]</span>.</td></tr>
+<tr><td>Shop front and staff</td><td>Partner Solutions Group</td><td>Sells, explains, answers questions, sends statements, keeps customers happy.</td></tr>
+<tr><td>Product labels and spec sheets</td><td>Pitch books, DDQ answers, case studies</td><td>Must be accurate by law: "fair, clear and not misleading" <span class="s">[S49]</span>.</td></tr>
+<tr><td>Receipts and statements</td><td>Quarterly reports, CEO letter, audited accounts</td><td>Line-by-line, every quarter <span class="s">[S305]</span>.</td></tr>
+<tr><td>Warranty and repair service</td><td>Workout and legal team</td><td>When a loan goes wrong, Hayfin's own team fixes it <span class="s">[S307]</span><span class="s">[S331]</span>.</td></tr>
+<tr><td>Branches</td><td>13 offices; investor-only offices in Seoul and Dubai</td><td>Some branches only serve customers, not suppliers <span class="s">[S223]</span><span class="s">[S275]</span>.</td></tr>
+<tr><td>Customer loyalty</td><td>Re-ups into the next fund edition</td><td>Loyalty is measured once every few years, in very large amounts.</td></tr>
+<tr><td>Consumer magazine (e.g. Which?)</td><td>Investment consultants</td><td>They rate managers for many pension funds at once. A good rating unlocks many customers <span class="s">[S222]</span>.</td></tr>
+</tbody></table>
+</div>
+
+<div class="band b3" data-toc="a2" data-title="2 · The target audience: who walks into the shop"><span class="mk">QQa2QQ</span><div class="num">Section 2</div><h1>The target audience</h1><div class="sub">Who the customers are, what each type needs, and what each one specifically wants from Hayfin</div></div>
+<div class="page">
+<div class="shopbox"><span class="lab">Shop analogy</span>A wholesale importer does not market to "everyone". It markets to hospital caterers, airline kitchens and school canteens, and it knows each one's menu, budget, rules and calendar. Hayfin is the same. It markets to a short list of very large professional buyers, and each type buys for a different reason.</div>
+
+<figure>
+<svg viewBox="0 0 700 260" font-family="Helvetica,Arial">
+<g font-size="10.5">
+<text x="10" y="16" font-weight="700" fill="#12233f" font-size="12">Who Hayfin's customers are (share of AUM, 31 March 2025)</text>
+<text x="10" y="44" font-weight="700">By type</text>
+<rect x="10" y="52" width="332" height="26" fill="#12233f"/><text x="16" y="69" fill="#fff">Pension funds 51.1%</text>
+<rect x="342" y="52" width="127" height="26" fill="#1f3a63"/><text x="348" y="69" fill="#fff">Insurers 19.5%</text>
+<rect x="469" y="52" width="79" height="26" fill="#3d5a85"/><text x="473" y="69" fill="#fff">SWFs 12.1%</text>
+<rect x="548" y="52" width="45" height="26" fill="#6f87a8"/><rect x="593" y="52" width="28" height="26" fill="#97abc4"/><rect x="621" y="52" width="26" height="26" fill="#c8873a"/><rect x="647" y="52" width="14" height="26" fill="#e0b27a"/>
+<text x="660" y="94" text-anchor="end" font-size="9.5">Banks 6.9% · funds of funds 4.3% · family offices/endowments 4.0% · consultants 2.1%</text>
+<text x="10" y="130" font-weight="700">By region</text>
+<rect x="10" y="138" width="170" height="26" fill="#12233f"/><text x="16" y="155" fill="#fff">North America 26.2%</text>
+<rect x="180" y="138" width="161" height="26" fill="#1f3a63"/><text x="186" y="155" fill="#fff">Europe 24.7%</text>
+<rect x="341" y="138" width="148" height="26" fill="#c8873a"/><text x="347" y="155" fill="#fff">Australia 22.8%</text>
+<rect x="489" y="138" width="127" height="26" fill="#3d5a85"/><text x="495" y="155" fill="#fff">UK 19.5%</text>
+<rect x="616" y="138" width="27" height="26" fill="#6f87a8"/><rect x="643" y="138" width="9" height="26" fill="#97abc4"/><rect x="652" y="138" width="8" height="26" fill="#e0b27a"/>
+<text x="660" y="180" text-anchor="end" font-size="9.5">Asia 4.2% · Nordics 1.3% · Middle East 1.2%</text>
+<text x="10" y="212" fill="#1c2533">Newer data (DLF V, 2026): over half of the new fund's money came from Europe, the Middle East and Africa, including 10% from the Middle East;</text>
+<text x="10" y="228" fill="#1c2533">the rest split broadly between North America and Asia-Pacific [S222]. Korea: close to €1bn managed for Korean investors [S239].</text>
+<text x="10" y="250" fill="#5b6676" font-size="9.5">Bar widths to scale (100% = 650 px). Values read from rendered charts in [S305]; label-to-value mapping is high confidence but inferred.</text>
+</g>
+</svg>
+<figcaption><b>Figure 2.1 · The customer base.</b> Source: Hayfin UK Stewardship Code disclosure, October 2025 <span class="s">[S305]</span>; DLF V debrief by the PSG co-heads, 22 September 2026 <span class="s">[S222]</span>.</figcaption>
+</figure>
+
+<p>Below, each customer type gets the same five questions: who they are, what is on their "shopping list", what hurts, what they buy at Hayfin, and what they specifically like about Hayfin. Where a reason is the author's reading rather than a stated fact, it is tagged.</p>
+
+<div class="seg"><div class="hd"><span>Customer 1 · Pension funds (51.1% of AUM)</span><span>the anchor customer</span></div><div class="bd">
+<p><b>Who they are.</b> Funds that pay retirement income to workers, for decades. Public ones (state and city employees, teachers) and corporate ones. Public examples that have committed to Hayfin: Pennsylvania's public school pension, PSERS (€200m in 2012, up to $200m in 2016) <span class="s">[S306]</span><span class="s">[S307]</span>; Nashville's employee pension ($60m in 2013) <span class="s">[S309]</span>; Vermont ($50m to the Tactical Solutions Evergreen Fund, reported August 2026) <span class="s">[S322]</span>.</p>
+<div class="shopbox" style="margin:4px 0"><span class="lab">Shop analogy</span>The hospital caterer: it must feed patients every day for the next 30 years, so it values steady, predictable supply over a one-off bargain.</div>
+<table><tbody>
+<tr><td style="width:22%"><b>Shopping list</b></td><td>Steady income to meet pension payments; returns above what government bonds pay; diversification away from shares; a long time horizon that can live with money locked up.</td></tr>
+<tr><td><b>Pain points</b></td><td>Promises to retirees are fixed, but markets move. Running dozens of managers is a big workload. Boards and trustees need simple, defensible reasons. Non-euro pensions face currency swings: PSERS's first Hayfin fund made 8.0% a year in euros but -2.6% in dollars by 2015 because the euro fell <span class="s">[S307]</span>.</td></tr>
+<tr><td><b>What they buy</b></td><td>Mostly the core Direct Lending fund; some take Special Opportunities or Tactical Solutions <span class="s">[S306]</span><span class="s">[S307]</span><span class="s">[S322]</span>. Some hedge the currency: Nashville voted to "execute a Euro currency hedge" alongside its commitment <span class="s">[S309]</span>.</td></tr>
+<tr><td><b>What they like about Hayfin</b></td><td>(1) Senior, secured loans mostly paid in cash: the "staple" product <span class="s">[S71]</span>. (2) The PSERS memo's point that Hayfin's dual role as an "8%+ and 15%+ lender" widens its deal flow <span class="s">[S307]</span>. (3) Line-by-line quarterly reporting that a trustee board can read <span class="s">[S305]</span>. (4) A seat on the fund's Advisory Board for selected investors <span class="s">[S305]</span>. [Inferred: which of these each pension values most is not public.]</td></tr>
+</tbody></table></div></div>
+
+<div class="seg"><div class="hd"><span>Customer 2 · Insurers (19.5% of AUM)</span><span>the regulated customer</span></div><div class="bd">
+<p><b>Who they are.</b> Life insurers and other insurers that hold large investment portfolios to pay future claims. Two insurer-linked groups own minority stakes in Hayfin: Samsung Life (Korea) and AXA IM Prime <span class="s">[S75]</span><span class="s">[S74]</span>. Hayfin's Fund Controller job supports "Solvency II reporting" <span class="s">[S333]</span>, the EU insurance capital rules.</p>
+<div class="shopbox" style="margin:4px 0"><span class="lab">Shop analogy</span>The airline kitchen: strict regulations on what it may serve and how it must be packed. It will only buy produce that comes in approved, certified packaging.</div>
+<table><tbody>
+<tr><td style="width:22%"><b>Shopping list</b></td><td>Long-dated assets that match long-dated promises; extra yield over bonds; but in a form that does not eat up too much regulatory capital.</td></tr>
+<tr><td><b>Pain points</b></td><td>Capital rules make some investments "expensive" to hold even if they are safe. A plain fund stake can be capital-heavy <span class="i">Inferred</span>. Insurers need detailed data for their regulators.</td></tr>
+<tr><td><b>What they buy</b></td><td>Direct Lending exposure through a <b>rated note feeder</b>: a vehicle that issues rated bonds backed by the fund, which about $600m of DLF V came through <span class="s">[S237]</span>. The PSG co-heads describe it as "giving insurers a more capital-efficient route into the strategy without changing the underlying investment" <span class="s">[S222]</span>.</td></tr>
+<tr><td><b>What they like about Hayfin</b></td><td>The same loans, re-packaged for their rulebook. Hayfin claims its feeder was "one of the first priced by a European direct lending manager" <span class="s">[S222]</span> (Hayfin's own claim). Ownership links (Samsung Life, AXA IM Prime) and a Seoul office <span class="s">[S223]</span> show Hayfin courting insurers directly <span class="i">Inferred</span>.</td></tr>
+</tbody></table></div></div>
+
+<div class="seg"><div class="hd"><span>Customer 3 · Sovereign wealth funds (12.1% of AUM)</span><span>the very large, very patient customer</span></div><div class="bd">
+<p><b>Who they are.</b> State-owned investment funds that invest a country's savings, often for generations. Australia's Future Fund was one of Hayfin's founding backers <span class="s">[S307]</span>. Mubadala (Abu Dhabi) is a minority shareholder <span class="s">[S74]</span>; whether it is also a fund investor is not public. DLF V drew 10% of its capital from the Middle East <span class="s">[S222]</span>.</p>
+<div class="shopbox" style="margin:4px 0"><span class="lab">Shop analogy</span>The national catering contractor: buys in bulk, wants its own custom mix, and visits the warehouse in person.</div>
+<table><tbody>
+<tr><td style="width:22%"><b>Shopping list</b></td><td>Very large tickets, often through their own account rather than a shared fund; diversification across regions; access to specialist teams; sometimes co-investment.</td></tr>
+<tr><td><b>Pain points</b></td><td>Hard to deploy billions without moving markets; need to diversify away from their home region; want control over terms.</td></tr>
+<tr><td><b>What they buy</b></td><td>Often <b>SMAs</b> (separately managed accounts): a custom account just for them that follows a Hayfin strategy. Hayfin's SEC filings list several single-investor vehicles, such as one $568m vehicle with one owner <span class="s">[S304]</span> (identity not public; SMA reading is inferred).</td></tr>
+<tr><td><b>What they like about Hayfin</b></td><td>European diversification ("adding European exposure is a genuine diversification of underlying risk", Carlos Pla <span class="s">[S277]</span>); custom packaging; a local presence: Hayfin opened a Dubai office in January 2024 "to enhance its coverage in the UAE and Middle Eastern markets" <span class="s">[S9]</span>.</td></tr>
+</tbody></table></div></div>
+
+<div class="seg"><div class="hd"><span>Customers 4-7 · Banks, funds of funds, family offices and endowments, consultants (17.3% together)</span><span>the smaller segments</span></div><div class="bd">
+<table><tbody>
+<tr><td style="width:22%"><b>Banks (6.9%)</b></td><td>Banks with investment arms. Example: Sumitomo Mitsui Trust Bank committed to Hayfin's Maritime Yield strategy in April 2025 <span class="s">[S114]</span>. <i>Like:</i> specialist assets they cannot easily build themselves.</td></tr>
+<tr><td><b>Funds of funds (4.3%)</b></td><td>Funds that pick other managers for smaller clients. <i>Like:</i> a manager they can defend to their own clients; standard reporting.</td></tr>
+<tr><td><b>Family offices, endowments (4.0%)</b></td><td>Very wealthy families and university or charity endowments. <i>Like:</i> long-horizon income; often smaller tickets, close to the €10m minimum <span class="s">[S303]</span>.</td></tr>
+<tr><td><b>Consultants (2.1%)</b></td><td>Investment consultants that also run money for clients. <i>Like:</i> a manager that passes their research process.</td></tr>
+</tbody></table>
+</div></div>
+
+<h2 data-toc="a2a" data-title="The regions, and why Australia is so big" data-lvl="2"><span class="mk">QQa2aQQ</span>The regions, and why Australia is so big</h2>
+<p>Australia supplies 22.8% of Hayfin's AUM <span class="s">[S305]</span>, almost as much as all of continental Europe. That is unusual for a European lender. Three facts point to why [Inferred link between them]: Australia's Future Fund was a founding backer in 2009 <span class="s">[S307]</span>; Australia has very large, fast-growing retirement funds that invest abroad [Inferred, general knowledge]; and Hayfin hired a Melbourne-based managing director, a former chief investment officer of the consultant JANA, to lead its Australian clients in 2025 <span class="s">[S272]</span>. A Companies House entity named "Hayfin Hostplus LP" exists <span class="s">[S42]</span>; Hostplus is an Australian pension fund name, but whether it is an SMA for that fund is not confirmed.</p>
+<p>The newest branch, Seoul, opened on 1 October 2026 as "a dedicated distribution and investor relations office", that is, a shop front with no lending team <span class="s">[S223]</span>. Hayfin manages close to €1bn for Korean investors and has done since 2016 <span class="s">[S239]</span>.</p>
+
+<h2 data-toc="a2b" data-title="The gatekeepers: consultants" data-lvl="2"><span class="mk">QQa2bQQ</span>The gatekeepers: consultants, the "consumer magazine"</h2>
+<div class="shopbox"><span class="lab">Shop analogy</span>Before a hospital chooses a supplier, its procurement team reads the trade magazine's ratings. A "Best Buy" from the magazine opens doors at hundreds of hospitals at once. Consultants are that magazine for pension funds.</div>
+<p>Consultants such as Mercer, Cambridge Associates and Meketa advise many pension funds on which managers to hire. A vendor source says "for most institutional LPs, a consultant's recommendation is a prerequisite" <span class="s">[S202]</span> (low-weight source). For Hayfin they matter more each year: "Investment consultant involvement in DLF V was also greater than in any prior Hayfin fundraise" <span class="s">[S222]</span>. Hayfin has responded by hiring consultants into its own shop front: a head of consultant relations from BlackRock (Steve Bringardner), an ex-Mercer consultant (Rob Kneip), the ex-chief investment officer of JANA (Steven Carew) and an ex-Meketa principal (Tim Atkinson) <span class="s">[S1]</span><span class="s">[S4]</span><span class="s">[S272]</span>. [Confirmed hires; strategy Inferred]</p>
+
+<h2 data-toc="a2c" data-title="Who is not a customer" data-lvl="2"><span class="mk">QQa2cQQ</span>Who is <i>not</i> a customer, and why that is a choice</h2>
+<p>Many rivals now sell private credit to wealthy individuals through "evergreen" funds that let investors leave each quarter. Hayfin does not: its private credit uses "fully locked-up institutional drawdown funds, with no retail capital" <span class="s">[S227]</span>. In 2026 that choice became a selling point, because several large US retail funds received withdrawal requests well above their 5% quarterly limit and had to cap payouts <span class="s">[S184]</span><span class="s">[S243]</span>. Hayfin said those strains "accelerated LP demand for conservative fund structures" <span class="s">[S221]</span>. Note the nuance: Hayfin does offer "institutional evergreen vehicles" <span class="s">[S221]</span>, such as the Tactical Solutions Evergreen Fund <span class="s">[S322]</span>, but only to institutions.</p>
+<div class="shopbox"><span class="lab">Shop analogy</span>A wholesaler that refuses to open a retail counter. It gives up some sales, but it never has a queue of members of the public demanding refunds on the same day.</div>
+</div>
+
+<div class="band b4" data-toc="a3" data-title="3 · Pain points and the value Hayfin creates"><span class="mk">QQa3QQ</span><div class="num">Section 3</div><h1>Pain points, and the value created</h1><div class="sub">What keeps a pension fund's investment team awake, and Hayfin's answer to each problem</div></div>
+<div class="page">
+<div class="shopbox"><span class="lab">Shop analogy</span>A good shop starts from the customer's problem, not its own stock. The hospital caterer's problems are: feed people reliably, stay within budget, pass inspections, and never be embarrassed by a bad batch. Hayfin's customers have the investment versions of those problems.</div>
+
+<figure>
+<svg viewBox="0 0 700 520" font-family="Helvetica,Arial">
+<defs><marker id="pv" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#1d7a4c"/></marker></defs>
+<g font-size="10">
+<text x="160" y="16" text-anchor="middle" font-weight="700" fill="#b3261e" font-size="12">THE CUSTOMER'S PAIN</text>
+<text x="530" y="16" text-anchor="middle" font-weight="700" fill="#1d7a4c" font-size="12">HAYFIN'S ANSWER (THE VALUE)</text>
+<g>
+<rect x="10" y="30" width="300" height="52" rx="6" fill="#fbe7e5" stroke="#b3261e"/><text x="20" y="49" font-weight="700">1. "We need more income than bonds pay"</text><text x="20" y="66">Pension promises must be met; bonds alone</text><text x="20" y="78">may not cover them [Inferred]</text>
+<rect x="390" y="30" width="300" height="52" rx="6" fill="#e3f3ea" stroke="#1d7a4c"/><text x="400" y="49" font-weight="700">Floating-rate interest from senior loans</text><text x="400" y="66">LPs judge the extra spread over public bonds</text><text x="400" y="78">(PitchBook) [S151]; mostly cash-paid [S71]</text>
+<rect x="10" y="92" width="300" height="52" rx="6" fill="#fbe7e5" stroke="#b3261e"/><text x="20" y="111" font-weight="700">2. "We can't afford big losses"</text><text x="20" y="128">Defaults are rising on broad measures:</text><text x="20" y="140">Fitch US rate 6.3% in Aug 2026 [S245]</text>
+<rect x="390" y="92" width="300" height="52" rx="6" fill="#e3f3ea" stroke="#1d7a4c"/><text x="400" y="111" font-weight="700">Senior position + in-house workout team</text><text x="400" y="128">Workout capability is the LPs' "number one</text><text x="400" y="140">theme" (Flynn) [S281]; legal team in every EU regime [S307]</text>
+<rect x="10" y="154" width="300" height="52" rx="6" fill="#fbe7e5" stroke="#b3261e"/><text x="20" y="173" font-weight="700">3. "We're too concentrated in our home market"</text><text x="20" y="190">US, Australian, Korean and Gulf funds hold</text><text x="20" y="202">mostly home assets [Inferred]</text>
+<rect x="390" y="154" width="300" height="52" rx="6" fill="#e3f3ea" stroke="#1d7a4c"/><text x="400" y="173" font-weight="700">European exposure, sourced locally</text><text x="400" y="190">"a genuine diversification of underlying risk"</text><text x="400" y="202">(Carlos Pla) [S277]; 13 offices [S71]</text>
+<rect x="10" y="216" width="300" height="52" rx="6" fill="#fbe7e5" stroke="#b3261e"/><text x="20" y="235" font-weight="700">4. "Our rules make some assets costly to hold"</text><text x="20" y="252">Insurers' capital rules; currency limits;</text><text x="20" y="264">custom guidelines [Inferred]</text>
+<rect x="390" y="216" width="300" height="52" rx="6" fill="#e3f3ea" stroke="#1d7a4c"/><text x="400" y="235" font-weight="700">The same loans in different packaging</text><text x="400" y="252">rated note feeder (~$600m), SMAs, levered and</text><text x="400" y="264">unlevered funds, evergreen [S222][S237]</text>
+<rect x="10" y="278" width="300" height="52" rx="6" fill="#fbe7e5" stroke="#b3261e"/><text x="20" y="297" font-weight="700">5. "We can't see inside private loans"</text><text x="20" y="314">Loans don't trade, so values are estimates;</text><text x="20" y="326">regulators are scrutinising marks [S166][S250]</text>
+<rect x="390" y="278" width="300" height="52" rx="6" fill="#e3f3ea" stroke="#1d7a4c"/><text x="400" y="297" font-weight="700">Line-by-line quarterly reporting</text><text x="400" y="314">every loan's EBITDA, value, leverage; audited</text><text x="400" y="326">accounts within 90 days; Advisory Boards [S305]</text>
+<rect x="10" y="340" width="300" height="52" rx="6" fill="#fbe7e5" stroke="#b3261e"/><text x="20" y="359" font-weight="700">6. "Will the fund have to sell in a panic?"</text><text x="20" y="376">2026: US retail funds capped withdrawals</text><text x="20" y="388">after 10-40% requests [S184]</text>
+<rect x="390" y="340" width="300" height="52" rx="6" fill="#e3f3ea" stroke="#1d7a4c"/><text x="400" y="359" font-weight="700">Locked-up institutional money only</text><text x="400" y="376">"no retail capital" [S227]; the fund can never</text><text x="400" y="388">face a run, so it never has to sell [Inferred]</text>
+<rect x="10" y="402" width="300" height="52" rx="6" fill="#fbe7e5" stroke="#b3261e"/><text x="20" y="421" font-weight="700">7. "Is this manager treating us fairly?"</text><text x="20" y="438">One manager, many funds, possibly in the</text><text x="20" y="450">same company [Inferred]</text>
+<rect x="390" y="402" width="300" height="52" rx="6" fill="#e3f3ea" stroke="#1d7a4c"/><text x="400" y="421" font-weight="700">Written conflict rules</text><text x="400" y="438">non-blocking minority rule, CCO/COO sign-off,</text><text x="400" y="450">Conflicts Committee, allocation policy [S305]</text>
+<rect x="10" y="464" width="300" height="52" rx="6" fill="#fbe7e5" stroke="#b3261e"/><text x="20" y="483" font-weight="700">8. "Checking managers takes months"</text><text x="20" y="500">A DDQ can take 40-60 hours of work</text><text x="20" y="512">(vendor estimate) [S190]</text>
+<rect x="390" y="464" width="300" height="52" rx="6" fill="#e3f3ea" stroke="#1d7a4c"/><text x="400" y="483" font-weight="700">A shop front built to answer fast</text><text x="400" y="500">product strategy team, approved answers, local</text><text x="400" y="512">coverage in 8 regions [S1][S20]</text>
+</g>
+<g stroke="#1d7a4c" stroke-width="2">
+<line x1="312" y1="56" x2="386" y2="56" marker-end="url(#pv)"/><line x1="312" y1="118" x2="386" y2="118" marker-end="url(#pv)"/><line x1="312" y1="180" x2="386" y2="180" marker-end="url(#pv)"/><line x1="312" y1="242" x2="386" y2="242" marker-end="url(#pv)"/><line x1="312" y1="304" x2="386" y2="304" marker-end="url(#pv)"/><line x1="312" y1="366" x2="386" y2="366" marker-end="url(#pv)"/><line x1="312" y1="428" x2="386" y2="428" marker-end="url(#pv)"/><line x1="312" y1="490" x2="386" y2="490" marker-end="url(#pv)"/>
+</g>
+</g>
+</svg>
+<figcaption><b>Figure 3.1 · Eight customer pain points and the value Hayfin creates for each.</b> Pains marked Inferred are the author's reading of investor needs; Hayfin's answers are sourced.</figcaption>
+</figure>
+
+<h2 data-toc="a3a" data-title="The 2026 pains: what customers actually asked Hayfin" data-lvl="2"><span class="mk">QQa3aQQ</span>The 2026 pains: what customers actually asked Hayfin</h2>
+<p>We do not have to guess this. The PSG co-heads wrote that during the DLF V fundraise "LP scrutiny of downside protection [was] even deeper than in previous cycles, particularly around use of PIK, technology exposure and loss rates" <span class="s">[S222]</span>. And Hayfin's New York Investor Day (April 2026, over 90 investors and partners) focused on "portfolio transparency, views on AI disruption across our own portfolios, and the durability of European private credit" <span class="s">[S228]</span><span class="s">[S31]</span>.</p>
+<table>
+<thead><tr><th style="width:20%">The worry</th><th style="width:38%">What it means in plain English</th><th>Hayfin's stated answer</th></tr></thead>
+<tbody>
+<tr><td><b>PIK</b></td><td>"Payment in kind": a borrower adds interest to its debt instead of paying cash. Sometimes planned, sometimes a sign of trouble. Fitch counted PIK switches and deferrals as 47% of US private credit defaults in August 2026 <span class="s">[S245]</span>.</td><td>Hayfin published "A Tale of Three PIKs" separating good, bad and "fake good" PIK: "Done well, PIK is not something to be feared" <span class="s">[S229]</span>. Most interest across its book is paid in cash (firm claim) <span class="s">[S95]</span>.</td></tr>
+<tr><td><b>Technology exposure</b></td><td>Lenders to software companies worry AI could undercut those businesses. Around 19% of direct loans went to software firms by end-2025 (BIS) <span class="s">[S242]</span>.</td><td>Software under 6% of the Direct Lending book, under 5% in the latest fund (Hayfin's figure) <span class="s">[S227]</span>.</td></tr>
+<tr><td><b>Loss rates</b></td><td>How much lent money is actually lost.</td><td>Not published recently. The last public statement (2015) was no realised losses from borrower default <span class="s">[S307]</span>. In 2026 Hayfin said its watchlist had fallen by almost a third since end-2023 (firm claim) <span class="s">[S95]</span>.</td></tr>
+</tbody></table>
+<div class="box unc"><span class="lab">Know what is not public</span>Hayfin's current loss rate and recent fund returns are not public. If an interviewer asks, say what is public (the 2015 statement, the watchlist claim, the software figure) and that the full track record sits in the fund documents investors receive. That honesty is itself an investor relations skill.</div>
+</div>
+
+<div class="band b5" data-toc="a4" data-title="4 · The products on the shelves, and the packaging"><span class="mk">QQa4QQ</span><div class="num">Section 4</div><h1>The products on the shelves</h1><div class="sub">Every product line explained simply, with its shop equivalent, then the packaging the same product comes in</div></div>
+<div class="page">
+<div class="shopbox"><span class="lab">Shop analogy</span>The importer has an <b>everyday staples aisle</b> (bread, rice), a <b>premium deli counter</b> (higher price, more skill to judge), a <b>pre-packed aisle</b> of tins with a printed label that can be resold quickly, and a few <b>specialist counters</b> (a fishmonger, a pharmacy) where only experts can buy well. Same at Hayfin.</div>
+
+<figure>
+<svg viewBox="0 0 700 430" font-family="Helvetica,Arial">
+<g font-size="10">
+<text x="350" y="16" text-anchor="middle" font-weight="700" fill="#12233f" font-size="12">The shop floor plan: product lines by risk, return and size</text>
+<line x1="70" y1="390" x2="680" y2="390" stroke="#5b6676"/><line x1="70" y1="390" x2="70" y2="40" stroke="#5b6676"/>
+<text x="375" y="420" text-anchor="middle" fill="#5b6676">more complex, more risk, more effort to judge →</text>
+<text x="30" y="215" text-anchor="middle" fill="#5b6676" transform="rotate(-90 30 215)">higher target return →</text>
+<!-- bubbles: area roughly ~ AUM -->
+<circle cx="200" cy="300" r="62" fill="#12233f" opacity="0.92"/><text x="200" y="292" text-anchor="middle" fill="#fff" font-weight="700">Direct Lending</text><text x="200" y="307" text-anchor="middle" fill="#fff">€16.2bn (Mar 2025)</text><text x="200" y="321" text-anchor="middle" fill="#c9d3e3">"8%+ lender" [S307]</text>
+<circle cx="120" cy="345" r="46" fill="#6f87a8" opacity="0.9"/><text x="120" y="340" text-anchor="middle" fill="#fff" font-weight="700">HY &amp; Loans,</text><text x="120" y="354" text-anchor="middle" fill="#fff">CLOs €9.2bn</text>
+<circle cx="380" cy="215" r="24" fill="#1f3a63"/><text x="380" y="212" text-anchor="middle" fill="#fff" font-weight="700" font-size="9">Tactical</text><text x="380" y="224" text-anchor="middle" fill="#fff" font-size="9">€2.3bn</text>
+<circle cx="520" cy="130" r="26" fill="#3d5a85"/><text x="520" y="127" text-anchor="middle" fill="#fff" font-weight="700" font-size="9">Special Opps</text><text x="520" y="139" text-anchor="middle" fill="#fff" font-size="9">€2.6bn</text>
+<text x="520" y="172" text-anchor="middle" fill="#1c2533">"15%+ lender" [S307]</text>
+<circle cx="610" cy="80" r="17" fill="#7a3fb0"/><text x="610" y="84" text-anchor="middle" fill="#fff" font-size="8.5">PE Sol.</text><text x="610" y="110" text-anchor="middle" fill="#1c2533">€1.1bn</text>
+<circle cx="440" cy="300" r="13" fill="#c8873a"/><text x="460" y="296" fill="#1c2533">Healthcare €0.6bn</text>
+<circle cx="440" cy="340" r="12" fill="#c8873a"/><text x="460" y="344" fill="#1c2533">Maritime €0.5bn</text>
+<circle cx="440" cy="372" r="8" fill="#e0b27a"/><text x="460" y="376" fill="#1c2533">Real estate (inside private credit)</text>
+<text x="80" y="58" fill="#5b6676" font-size="9.5">Bubble area roughly proportional to AUM at 31 Mar 2025 [S305]. Positions are</text>
+<text x="80" y="71" fill="#5b6676" font-size="9.5">the author's ILLUSTRATIVE placing, not data. Since then DLF V (&gt;€15bn) has made</text>
+<text x="80" y="84" fill="#5b6676" font-size="9.5">Direct Lending much larger [S71].</text>
+</g>
+</svg>
+<figcaption><b>Figure 4.1 · The shop floor plan.</b> AUM by strategy from <span class="s">[S305]</span>. The 8%+ and 15%+ labels come from a 2016 Pennsylvania pension memo describing how the market saw Hayfin <span class="s">[S307]</span>; they are not current fund targets, which are not public.</figcaption>
+</figure>
+
+<h2 data-toc="a4a" data-title="Each product line, simply" data-lvl="2"><span class="mk">QQa4aQQ</span>Each product line, simply</h2>
+<table>
+<thead><tr><th style="width:17%">Product line</th><th style="width:17%">Shop equivalent</th><th style="width:36%">What it is</th><th>Who buys it, and why</th></tr></thead>
+<tbody>
+<tr><td><b>Direct Lending</b> (the flagship)</td><td>The everyday staples aisle</td><td>Senior secured loans, often "unitranche" (one loan instead of several layers), to mid-sized private-equity-owned European companies. 40% of the book is "sole lender" deals <span class="s">[S95]</span>. DLF V raised over €15bn in July 2026 <span class="s">[S71]</span>.</td><td>Pensions and insurers wanting steady, cash-paid income with first claim on the borrower's assets. The bulk of AUM.</td></tr>
+<tr><td><b>Special Opportunities</b></td><td>The premium deli counter</td><td>Flexible capital for complex or stressed situations, made directly or by buying loans from others at a discount, "to find attractive deployment at all points of the cycle" <span class="s">[S328]</span>. Fund III raised over €2bn in 2021 <span class="s">[S89]</span>.</td><td>Investors willing to take more complexity for higher returns. The first fund targeted 11-15% net a year (2012) <span class="s">[S306]</span>.</td></tr>
+<tr><td><b>Tactical Solutions</b></td><td>The "between" shelf</td><td>Sits "between our Direct Lending and Special Opportunities strategies" <span class="s">[S328]</span>: more structure than a plain loan, less risk than rescue capital. Has an evergreen version <span class="s">[S322]</span>.</td><td>Investors wanting a middle step on the risk ladder. Vermont committed $50m in 2026 <span class="s">[S322]</span>.</td></tr>
+<tr><td><b>High Yield &amp; Syndicated Loans, CLOs</b></td><td>The pre-packed aisle</td><td>Traded bonds and loans arranged by banks, plus CLOs (vehicles that buy pools of loans and sell rated slices). European CLOs: €5.8bn across 14 deals; the €1.4bn US CLO business is under review <span class="s">[S225]</span>.</td><td>Investors wanting credit they can trade, and CLO bond buyers. Different customers from the private funds <span class="i">Inferred</span>.</td></tr>
+<tr><td><b>Private Equity Solutions</b></td><td>The rare-goods counter</td><td>Buys stakes in "continuation vehicles", where a PE firm keeps one company longer <span class="s">[S106]</span>. Hayfin co-led a €155m one for Health in Code in 2026 <span class="s">[S70]</span>.</td><td>Investors wanting equity-like upside with a credit manager's caution.</td></tr>
+<tr><td><b>Healthcare</b></td><td>The pharmacy counter</td><td>Life sciences lending pitched on "value protection through intellectual property, diversification and low correlation" <span class="s">[S328]</span>. Example: €550m Juvisé Pharmaceuticals refinancing, February 2026 <span class="s">[S70]</span>.</td><td>Investors wanting returns that move differently from the economy.</td></tr>
+<tr><td><b>Maritime</b></td><td>The fishmonger</td><td>Lending against and owning ships on long charters. 15 specialists, over $4bn deployed, over 100 vessels <span class="s">[S227]</span>; in-house ship manager Greenheart <span class="s">[S102]</span>.</td><td>Banks and insurers wanting real-asset income; Sumitomo Mitsui Trust Bank committed in 2025 <span class="s">[S114]</span>.</td></tr>
+<tr><td><b>Real Estate</b></td><td>The property counter</td><td>Real estate lending and buying, inside private credit; e.g. 70 St Mary Axe, London, with Capreon (Dec 2025) <span class="s">[S115]</span>.</td><td>Investors wanting secured property-backed income.</td></tr>
+</tbody></table>
+
+<h2 data-toc="a4b" data-title="The packaging: same product, different wrappers" data-lvl="2"><span class="mk">QQa4bQQ</span>The packaging: same product, different wrappers</h2>
+<div class="shopbox"><span class="lab">Shop analogy</span>The same coffee beans can be sold as a retail bag, a bulk sack for a café, a monthly subscription, or a sealed and certified box for an airline. The beans do not change. The packaging changes so each customer can buy. In finance the packaging is called a <b>wrapper</b>.</div>
+<figure>
+<svg viewBox="0 0 700 300" font-family="Helvetica,Arial">
+<g font-size="10">
+<text x="350" y="16" text-anchor="middle" font-weight="700" fill="#12233f" font-size="12">One strategy, five ways to buy it: how DLF V was sold [S222]</text>
+<circle cx="350" cy="150" r="58" fill="#12233f"/><text x="350" y="142" text-anchor="middle" fill="#fff" font-weight="700">European</text><text x="350" y="156" text-anchor="middle" fill="#fff" font-weight="700">Direct Lending</text><text x="350" y="172" text-anchor="middle" fill="#c9d3e3">same loans</text>
+<g>
+<rect x="10" y="35" width="210" height="64" rx="6" fill="#eef2f8" stroke="#1f3a63"/><text x="20" y="53" font-weight="700">1. Unlevered commingled fund</text><text x="20" y="69">Shared pot, no borrowing at fund level.</text><text x="20" y="84" fill="#b06f22">Shop: the standard bag</text>
+<rect x="480" y="35" width="210" height="64" rx="6" fill="#eef2f8" stroke="#1f3a63"/><text x="490" y="53" font-weight="700">2. Levered commingled fund</text><text x="490" y="69">Fund borrows to boost returns.</text><text x="490" y="84" fill="#b06f22">Shop: the family-size bag</text>
+<rect x="10" y="200" width="210" height="64" rx="6" fill="#eef2f8" stroke="#1f3a63"/><text x="20" y="218" font-weight="700">3. SMA (separately managed account)</text><text x="20" y="234">One investor, custom rules.</text><text x="20" y="249" fill="#b06f22">Shop: the bulk catering contract</text>
+<rect x="480" y="200" width="210" height="64" rx="6" fill="#eef2f8" stroke="#1f3a63"/><text x="490" y="218" font-weight="700">4. Institutional evergreen</text><text x="490" y="234">No fixed end date; limited exits.</text><text x="490" y="249" fill="#b06f22">Shop: the subscription</text>
+<rect x="245" y="240" width="210" height="56" rx="6" fill="#f6ead9" stroke="#c8873a" stroke-width="2"/><text x="255" y="258" font-weight="700">5. Rated note feeder (~$600m) [S237]</text><text x="255" y="274">Rated bonds backed by the fund, for</text><text x="255" y="288">insurers' capital rules. Shop: certified box</text>
+</g>
+<g stroke="#5b6676" stroke-width="1.5"><line x1="220" y1="67" x2="300" y2="118"/><line x1="480" y1="67" x2="400" y2="118"/><line x1="220" y1="232" x2="300" y2="182"/><line x1="480" y1="232" x2="400" y2="182"/><line x1="350" y1="208" x2="350" y2="238"/></g>
+
+</g>
+</svg>
+<figcaption><b>Figure 4.2 · The packaging.</b> The five access routes for DLF V are listed by the PSG co-heads <span class="s">[S222]</span>, who add that assets in the levered fund more than doubled versus DLF IV. Their line: managers should "remain disciplined in how they invest, while becoming increasingly flexible in how investors access those investments" <span class="s">[S94]</span>.</figcaption>
+</figure>
+<div class="box say"><span class="lab">Why this matters for your team</span>Designing and explaining the packaging is Partner Solutions work. Hayfin's own product strategy team "owns" it: Maura English heads Product Strategy, and Tim Atkinson leads product strategy for the opportunistic strategies from London <span class="s">[S284]</span><span class="s">[S287]</span>. When you say "the strategy stays the same, the wrappers change", you are describing your future job.</div>
+</div>
+
+<div class="band b2" data-toc="a5" data-title="5 · Product differentiation: why this shop and not the one next door"><span class="mk">QQa5QQ</span><div class="num">Section 5</div><h1>Product differentiation</h1><div class="sub">The street is full of credit shops. Eight things that make Hayfin's different, each with evidence, and where rivals beat it</div></div>
+<div class="page">
+<div class="shopbox"><span class="lab">Shop analogy</span>Every importer sells rice. Customers pick one because of <i>how</i> it sources, checks, packs and stands behind the rice. "Our rice is good" is not differentiation. "We have a buyer on every farm, and if a batch fails we replace it ourselves" is.</div>
+
+<h2 data-toc="a5a" data-title="The street: who else sells credit" data-lvl="2"><span class="mk">QQa5aQQ</span>The street: who else is selling</h2>
+<figure>
+<svg viewBox="0 0 700 250" font-family="Helvetica,Arial">
+<g font-size="10">
+<text x="10" y="16" font-weight="700" fill="#12233f" font-size="12">The high street of European private credit: shop size by latest European direct lending fund (€ bn)</text>
+<g>
+<rect x="20" y="230" width="70" height="0" fill="#6f87a8"/>
+<rect x="20" y="60" width="70" height="170" fill="#6f87a8"/><text x="55" y="52" text-anchor="middle" font-weight="700">17.1</text><text x="55" y="244" text-anchor="middle">Ares</text>
+<rect x="110" y="79" width="70" height="151" fill="#6f87a8"/><text x="145" y="71" text-anchor="middle" font-weight="700">~15.2</text><text x="145" y="244" text-anchor="middle">ICG</text>
+<rect x="200" y="80" width="70" height="150" fill="#c8873a"/><text x="235" y="72" text-anchor="middle" font-weight="700">&gt;15</text><text x="235" y="244" text-anchor="middle" font-weight="700">Hayfin</text>
+<rect x="290" y="126" width="70" height="104" fill="#97abc4"/><text x="325" y="118" text-anchor="middle" font-weight="700">10.4</text><text x="325" y="244" text-anchor="middle">CVC</text>
+<rect x="380" y="130" width="70" height="100" fill="#97abc4"/><text x="415" y="122" text-anchor="middle" font-weight="700">10.0</text><text x="415" y="244" text-anchor="middle">Arcmont</text>
+<rect x="470" y="169" width="70" height="61" fill="#97abc4"/><text x="505" y="161" text-anchor="middle" font-weight="700">6.1</text><text x="505" y="244" text-anchor="middle">Pemberton</text>
+<rect x="560" y="178" width="70" height="52" fill="#97abc4"/><text x="595" y="170" text-anchor="middle" font-weight="700">5.2</text><text x="595" y="244" text-anchor="middle">Tikehau</text>
+</g>
+</g>
+</svg>
+<figcaption><b>Figure 5.1 · The street.</b> Scale 10 px per €1bn. Ares ACE VI (Jan 2025) <span class="s">[S135]</span>; ICG SDP 5 ($17bn, Sep 2024) <span class="s">[S132]</span>; Hayfin DLF V (Jul 2026) <span class="s">[S71]</span>; CVC EUDL IV (Oct 2025) <span class="s">[S147]</span>; Arcmont DLF IV (Jan 2024) <span class="s">[S129]</span>; Pemberton two funds combined (May 2025) <span class="s">[S138]</span>; Tikehau 6th vintage (2026) <span class="s">[S141]</span>. Not like-for-like: some include mandates, leverage or related vehicles.</figcaption>
+</figure>
+<p>So Hayfin is one of the three biggest "shops" on the street for this product, next to two much larger, stock-market-listed groups (Ares and ICG). Size alone does not differentiate it. The eight points below do.</p>
+
+<h2 data-toc="a5b" data-title="Eight differentiators, in depth" data-lvl="2"><span class="mk">QQa5bQQ</span>Eight differentiators, in depth</h2>
+
+<div class="seg"><div class="hd"><span>1 · One sourcing team, several doors</span><span>the core idea</span></div><div class="bd">
+<p><b>What it is.</b> The same local teams can offer a company a cheap senior loan (Direct Lending), something in between (Tactical Solutions) or expensive rescue capital (Special Opportunities). A 2016 Pennsylvania pension memo: Direct Lending "has served to benefit the Firm's Special Opportunities strategy... the market now not only viewing Hayfin as a 15%+ lender but an 8%+ lender. Once engaged, Hayfin has a greater ability to obtain favorable pricing" <span class="s">[S307]</span>. [Confirmed, primary investor document]</p>
+<div class="shopbox" style="margin:4px 0"><span class="lab">Shop analogy</span>A farm that sells you everyday wheat also tells you first when it has a rare harvest. Because you buy both, you hear about every crop, and you get first pick.</div>
+<p><b>Why a customer cares.</b> More deals seen means more can be rejected; in 2012 Hayfin saw over 1,400 opportunities and made 60 investments <span class="s">[S306]</span>. And the firm can keep lending when the economy turns, because stressed companies become Special Opportunities customers rather than "no thanks" <span class="s">[S328]</span>.</p>
+<p><b>Versus rivals.</b> Arcmont, Pemberton and Permira Credit are more focused on direct lending; Ares and ICG are broader but are huge multi-asset groups <span class="s">[S130]</span><span class="s">[S138]</span><span class="s">[S133]</span>. Hayfin is unusual in being credit-only but across the whole risk range [Inferred from S127].</p></div></div>
+
+<div class="seg"><div class="hd"><span>2 · Its own repair service: the workout team</span><span>the warranty</span></div><div class="bd">
+<p><b>What it is.</b> When a borrower struggles, Hayfin's in-house legal and restructuring people step in. "Our edge lying in our origination networks and proven expertise in managing complex restructurings, workouts and liquidations" <span class="s">[S331]</span>; internal legal staff experienced "in each of the relevant creditor regimes in Europe" <span class="s">[S307]</span>.</p>
+<div class="shopbox" style="margin:4px 0"><span class="lab">Shop analogy</span>Two shops sell the same washing machine. One sends its own engineer within a day if it breaks; the other gives you a phone number. Customers pay for the engineer.</div>
+<p><b>Why a customer cares.</b> In credit, the upside is capped (you get your interest), so avoiding losses is everything. Flynn: workout capability is "the number one theme in the LP community" <span class="s">[S281]</span>; at a Hayfin Investor Day it was the top-voted factor in a poll <span class="s">[S105]</span>. Europe has many different insolvency regimes, so local legal skill is hard to copy <span class="i">Inferred</span>.</p></div></div>
+
+<div class="seg"><div class="hd"><span>3 · The local "home team" in a fragmented market</span><span>buyers on every farm</span></div><div class="bd">
+<p><b>What it is.</b> 13 offices with local origination <span class="s">[S71]</span>. Tognolini: "We consider ourselves the European home team, with 17 years of track record and a platform built to operate across fragmented jurisdictions, languages and legal regimes" <span class="s">[S227]</span>. 40% of the Direct Lending book is sole-lender deals <span class="s">[S95]</span>, and about half of recent lending went to existing borrowers, which Tognolini calls "a competitive advantage" <span class="s">[S117]</span>.</p>
+<div class="shopbox" style="margin:4px 0"><span class="lab">Shop analogy</span>A buyer who lives in the village knows which farmer is reliable before the harvest is weighed. A buyer who flies in once a year does not.</div>
+<p><b>Why a customer cares.</b> Sole-lender deals mean Hayfin controls the terms and the restructuring if things go wrong <span class="i">Inferred</span>. Repeat borrowers mean Hayfin already knows the business. Hayfin also argues Europe carries "lower leverage, tighter documentation and smaller lender groups" than the US <span class="s">[S95]</span> (firm claim).</p></div></div>
+
+<div class="seg"><div class="hd"><span>4 · Specialist counters few rivals have</span><span>the fishmonger and the pharmacy</span></div><div class="bd">
+<p><b>What it is.</b> Dedicated healthcare (life sciences), maritime and real estate teams <span class="s">[S327]</span>. Maritime has 15 specialists, over $4bn deployed and over 100 vessels, with its own ship manager, Greenheart <span class="s">[S227]</span><span class="s">[S102]</span>.</p>
+<p><b>Why a customer cares.</b> These are small (Healthcare €0.6bn, Maritime €0.5bn in March 2025 <span class="s">[S305]</span>) but give investors returns that move differently from ordinary company loans, and they make the generalist teams smarter about those sectors <span class="i">Inferred</span>. No peer of similar size in the comparison set showed maritime lending [Inferred from S127 and peer sites].</p></div></div>
+
+<div class="seg"><div class="hd"><span>5 · No run on the shop: locked-up institutional money only</span><span>the 2026 differentiator</span></div><div class="bd">
+<p><b>What it is.</b> "Hayfin's private credit strategies rely exclusively on fully locked-up institutional drawdown funds, with no retail capital" <span class="s">[S227]</span>.</p>
+<div class="shopbox" style="margin:4px 0"><span class="lab">Shop analogy</span>A shop with an unlimited same-day refund policy can be forced to dump stock cheaply when everyone returns things at once. A shop with no refunds never has to.</div>
+<p><b>Why a customer cares.</b> In 2026 several large US retail credit funds got withdrawal requests far above 5% a quarter and had to cap payouts <span class="s">[S184]</span>. A fund that never faces withdrawals never has to sell loans at a bad price <span class="i">Inferred</span>. Hayfin linked this directly to DLF V's success <span class="s">[S221]</span>. <i>Honest note:</i> ICG says almost exactly the same ("no open-ended or so-called semi-liquid structures in direct lending") <span class="s">[S134]</span>, so this is a shared stance, not unique.</p></div></div>
+
+<div class="seg"><div class="hd"><span>6 · Packaging built for each customer</span><span>the certified box</span></div><div class="bd">
+<p><b>What it is.</b> Five wrappers for DLF V, including a rated note feeder of about $600m for insurers <span class="s">[S222]</span><span class="s">[S237]</span> (Section 4).</p>
+<p><b>Why a customer cares.</b> Without the right wrapper, some customers simply cannot buy, whatever the quality. The rated feeder turns a capital-heavy stake into something an insurer's rulebook can accept <span class="s">[S222]</span>. Ares also serves insurers through its insurance platform <span class="s">[S136]</span>, so the idea is not unique; Hayfin's point is doing it inside a European mid-sized manager's flagship close <span class="i">Inferred</span>.</p></div></div>
+
+<div class="seg"><div class="hd"><span>7 · Written fairness rules between its own funds</span><span>the honest scales</span></div><div class="bd">
+<p><b>What it is.</b> Because Hayfin runs several funds, two could end up lending to the same company in different layers. Its rules: one must be a "non-blocking minority stake", under a third of the tranche; trades between Hayfin funds need prior sign-off from the Chief Compliance Officer and Chief Operating Officer; exceptions go to an Investments Conflicts Committee of the CEO, CRO, COO, CCO and General Counsel <span class="s">[S305]</span>. Staff are "rewarded to collaborate, rather than outperform peers" <span class="s">[S305]</span>.</p>
+<div class="shopbox" style="margin:4px 0"><span class="lab">Shop analogy</span>A shop that serves two rival restaurants publishes exactly how it splits the best fish between them, so neither suspects favouritism.</div>
+<p><b>Why a customer cares.</b> An investor in one Hayfin fund needs to know another Hayfin fund will not benefit at its expense. These rules are written, specific and auditable, and they answer the first question in a multi-fund investor's DDQ <span class="i">Inferred</span>.</p></div></div>
+
+<div class="seg"><div class="hd"><span>8 · Owned by the people running it</span><span>the owner behind the counter</span></div><div class="bd">
+<p><b>What it is.</b> After a 2025 management buyout funded by Arctos, the Hayfin team holds the majority of the common equity; Mubadala, AXA IM Prime and Samsung Life hold minority stakes <span class="s">[S73]</span><span class="s">[S74]</span><span class="s">[S75]</span><span class="s">[S301]</span>.</p>
+<div class="shopbox" style="margin:4px 0"><span class="lab">Shop analogy</span>An owner-run shop versus a branch of a chain: the owner lives with every decision and is not following head-office targets.</div>
+<p><b>Why a customer cares.</b> Alignment: the decision-makers own the business. Contrast: Arcmont is majority-owned by Nuveen/TIAA, HPS by BlackRock, and Ares, ICG and Tikehau are listed <span class="s">[S131]</span><span class="s">[S146]</span><span class="s">[S133]</span>. Some customers prefer the resources of a big parent, so this cuts both ways <span class="i">Inferred</span>.</p></div></div>
+
+<h2 data-toc="a5c" data-title="Where the shop next door wins" data-lvl="2"><span class="mk">QQa5cQQ</span>Where the shop next door wins (so you never overclaim)</h2>
+<table>
+<thead><tr><th style="width:30%">Rival advantage</th><th>Evidence</th></tr></thead>
+<tbody>
+<tr><td>Bigger shop, bigger fund</td><td>Ares ACE VI €17.1bn <span class="s">[S135]</span>; Ares manages $671bn overall <span class="s">[S136]</span>; ICG $126bn <span class="s">[S133]</span>.</td></tr>
+<tr><td>Fundraising league tables</td><td>Ares is first and ICG sixth in the PEI Private Credit 200; Hayfin is not in the top 10 <span class="s">[S144]</span>.</td></tr>
+<tr><td>Deal league tables</td><td>Ares (31 deals), Arcmont (23), Apollo (20) led European direct lending in H1 2026 <span class="s">[S186]</span>.</td></tr>
+<tr><td>A retail counter</td><td>Ares raised $1.0bn into its European evergreen fund in one quarter <span class="s">[S136]</span>; Tikehau sells widely to private banks <span class="s">[S141]</span>. Hayfin does not.</td></tr>
+<tr><td>Awards</td><td>Pemberton won PDI's Lender of the Year Europe for 2025 <span class="s">[S139]</span> (Hayfin won Mergermarket's Private Credit Lender of the Year in 2026 <span class="s">[S224]</span>).</td></tr>
+</tbody></table>
+<div class="box dont"><span class="lab">Don't say this</span>"Hayfin is the biggest" or "Hayfin has the best returns". Say: "one of the three largest European direct lending funds on record, with a sourcing and workout model built for a fragmented market."</div>
+</div>
+
+<div class="band b3" data-toc="a6" data-title="6 · The client side: how the shop front shows the difference"><span class="mk">QQa6QQ</span><div class="num">Section 6</div><h1>The client side: the shop front</h1><div class="sub">Where each differentiator is shown to customers, how Partner Solutions does it, and what is distinctive about how Hayfin does it</div></div>
+<div class="page">
+<div class="shopbox"><span class="lab">Shop analogy</span>A great product nobody understands does not sell. The shop front decides what goes in the window, what the labels say, how staff answer questions, what the receipt shows, and how complaints are handled. At Hayfin, the shop front is the Partner Solutions Group (PSG).</div>
+<figure>
+<svg viewBox="0 0 700 330" font-family="Helvetica,Arial">
+<defs><marker id="cs" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#12233f"/></marker></defs>
+<g font-size="10">
+<text x="350" y="16" text-anchor="middle" font-weight="700" fill="#12233f" font-size="12">The shop front's six tools, in the order a customer meets them</text>
+<g>
+<rect x="10" y="35" width="105" height="120" rx="6" fill="#f6ead9" stroke="#c8873a"/><text x="62" y="55" text-anchor="middle" font-weight="700">1. Window</text><text x="62" y="73" text-anchor="middle">thought</text><text x="62" y="87" text-anchor="middle">leadership,</text><text x="62" y="101" text-anchor="middle">conferences,</text><text x="62" y="115" text-anchor="middle">consultant</text><text x="62" y="129" text-anchor="middle">databases</text>
+<rect x="125" y="35" width="105" height="120" rx="6" fill="#f6ead9" stroke="#c8873a"/><text x="177" y="55" text-anchor="middle" font-weight="700">2. Label</text><text x="177" y="73" text-anchor="middle">pitch book,</text><text x="177" y="87" text-anchor="middle">case studies</text>
+<rect x="240" y="35" width="105" height="120" rx="6" fill="#f6ead9" stroke="#c8873a"/><text x="292" y="55" text-anchor="middle" font-weight="700">3. Questions</text><text x="292" y="73" text-anchor="middle">DDQs, RFPs,</text><text x="292" y="87" text-anchor="middle">ad hoc</text><text x="292" y="101" text-anchor="middle">requests</text>
+<rect x="355" y="35" width="105" height="120" rx="6" fill="#f6ead9" stroke="#c8873a"/><text x="407" y="55" text-anchor="middle" font-weight="700">4. Packaging</text><text x="407" y="73" text-anchor="middle">wrapper design:</text><text x="407" y="87" text-anchor="middle">fund, SMA,</text><text x="407" y="101" text-anchor="middle">evergreen,</text><text x="407" y="115" text-anchor="middle">rated feeder</text>
+<rect x="470" y="35" width="105" height="120" rx="6" fill="#f6ead9" stroke="#c8873a"/><text x="522" y="55" text-anchor="middle" font-weight="700">5. Receipt</text><text x="522" y="73" text-anchor="middle">quarterly</text><text x="522" y="87" text-anchor="middle">reports, CEO</text><text x="522" y="101" text-anchor="middle">letter, audited</text><text x="522" y="115" text-anchor="middle">accounts</text>
+<rect x="585" y="35" width="105" height="120" rx="6" fill="#f6ead9" stroke="#c8873a"/><text x="637" y="55" text-anchor="middle" font-weight="700">6. Club</text><text x="637" y="73" text-anchor="middle">Advisory</text><text x="637" y="87" text-anchor="middle">Boards,</text><text x="637" y="101" text-anchor="middle">investor days,</text><text x="637" y="115" text-anchor="middle">local offices</text>
+<g stroke="#12233f"><line x1="115" y1="95" x2="123" y2="95" marker-end="url(#cs)"/><line x1="230" y1="95" x2="238" y2="95" marker-end="url(#cs)"/><line x1="345" y1="95" x2="353" y2="95" marker-end="url(#cs)"/><line x1="460" y1="95" x2="468" y2="95" marker-end="url(#cs)"/><line x1="575" y1="95" x2="583" y2="95" marker-end="url(#cs)"/></g>
+</g>
+<rect x="10" y="175" width="680" height="145" rx="6" fill="#fff" stroke="#d7dce4"/>
+<text x="20" y="195" font-weight="700" fill="#12233f">Real Hayfin examples of each tool</text>
+<text x="20" y="214">1. "A Tale of Three PIKs" (Jul 2026) [S229]; "The Complexity Premium" (Sep 2026) [S262]; the €15bn fundraise debrief (Sep 2026) [S222]</text>
+<text x="20" y="232">2. Case studies with US marketing-rule disclaimers, gross and net defined (e.g. PE Solutions update) [S330]</text>
+<text x="20" y="250">3. DDQ and RFP drafting by the London Product Strategy team [S20]; ESG answers on PRI and SFDR (six Article 8 funds) [S25]</text>
+<text x="20" y="268">4. Five wrappers for DLF V, including the ~$600m rated note feeder [S222][S237]</text>
+<text x="20" y="286">5. Line-by-line track record, every loan's EBITDA, value and leverage, quarterly; audited accounts within 90 days [S305]</text>
+<text x="20" y="304">6. Advisory Boards twice a year [S305]; New York Investor Day, 90+ attendees [S31]; Seoul and Dubai investor offices [S223][S275]</text>
+</g>
+</svg>
+<figcaption><b>Figure 6.1 · The shop front's toolkit.</b> Sources as marked. The ordering is the author's framing of a typical investor's journey <span class="i">Inferred</span>.</figcaption>
+</figure>
+
+<h2 data-toc="a6a" data-title="Which differentiator is shown where" data-lvl="2"><span class="mk">QQa6aQQ</span>Which differentiator is shown where</h2>
+<table>
+<thead><tr><th style="width:24%">Differentiator</th><th style="width:38%">How the client side shows it</th><th>What makes Hayfin's way distinctive</th></tr></thead>
+<tbody>
+<tr><td>1 · One sourcing team, several doors</td><td>Pitch book explains the strategy ladder; product strategists split by strategy (DL and PES; opportunistic credit) <span class="s">[S1]</span></td><td>Cross-selling: an investor in DLF can be shown Special Opps or Tactical from the same relationship. Coverage is organised by <i>region</i>, product strategy by <i>strategy</i>, so both views exist <span class="s">[S1]</span><span class="i">Inferred</span></td></tr>
+<tr><td>2 · Workout team</td><td>Case studies of restructured loans; DDQ answers on recovery; investor days</td><td>Hayfin puts the workout story at the front, because LPs rank it first <span class="s">[S281]</span><span class="s">[S105]</span></td></tr>
+<tr><td>3 · Local home team</td><td>Deal case studies (Condis in Spain, Serwent in the Nordics) <span class="s">[S231]</span><span class="s">[S232]</span>; regional coverage officers who speak the market's language</td><td>Coverage is local too: Tokyo, Seoul, Munich, Stockholm, Melbourne, Dallas, Dubai <span class="s">[S1]</span></td></tr>
+<tr><td>4 · Specialist counters</td><td>Thought leadership ("The Capital Gap in Healthcare", Jul 2026) <span class="s">[S235]</span>; a London MD for opportunistic and specialist products <span class="s">[S287]</span></td><td>Specialist products have their own product strategist, not just a line in the deck <span class="s">[S287]</span></td></tr>
+<tr><td>5 · No run on the shop</td><td>Fund terms explained in DDQs; the DLF V press release made it the headline <span class="s">[S221]</span></td><td>Turned a market crisis into a reason to buy, in real time <span class="s">[S221]</span><span class="s">[S227]</span></td></tr>
+<tr><td>6 · Packaging</td><td>Wrapper design and structuring; insurer-specific materials</td><td>Rated feeder "without changing the underlying investment" <span class="s">[S222]</span></td></tr>
+<tr><td>7 · Fairness rules</td><td>DDQ conflict sections; Advisory Board reviews of conflicts and expenses twice a year <span class="s">[S305]</span></td><td>Rules published in the Stewardship report, not only shown privately <span class="s">[S305]</span></td></tr>
+<tr><td>8 · Owner-run</td><td>Ownership and key-person sections of DDQs; updates when leaders change (e.g. new Head of Investments, May 2026) <span class="s">[S226]</span></td><td>Several shareholders are also big allocators, linking ownership to distribution <span class="i">Inferred</span></td></tr>
+</tbody></table>
+
+<h2 data-toc="a6b" data-title="Five things the shop front does differently" data-lvl="2"><span class="mk">QQa6bQQ</span>Five things Hayfin's shop front does differently</h2>
+<ol>
+<li><b>It hired the "magazine reviewers".</b> Senior PSG hires came from consultants and allocators: BlackRock consultant relations, Mercer, JANA (ex-CIO), Meketa, and the Texas Permanent School Fund <span class="s">[S1]</span><span class="s">[S4]</span><span class="s">[S272]</span><span class="s">[S289]</span>. People who used to judge managers now explain Hayfin to the judges. [Confirmed hires; strategy Inferred]</li>
+<li><b>It sits in the kitchen, not just at the counter.</b> PSG is a member of the ESG Deal Committee that every private credit deal passes before final approval <span class="s">[S305]</span>, and investor relations co-produces quarterly reports with the investment teams <span class="s">[S305]</span>. So the shop front sees deals early and can explain them accurately. <span class="c">Confirmed</span></li>
+<li><b>It writes in public about what customers worry about.</b> When LPs worried about PIK, Hayfin published a framework for it <span class="s">[S229]</span>; when they worried about the market, the PSG co-heads published what the €15bn raise taught them <span class="s">[S222]</span>. <span class="c">Confirmed</span></li>
+<li><b>It opens branches only for customers.</b> Seoul (2026) and Dubai (2024) are investor offices <span class="s">[S223]</span><span class="s">[S275]</span>. Hayfin is "European assets, global capital": investing focused on Europe, customers worldwide [Inferred from S225 and the office list].</li>
+<li><b>It trains staff on honest labelling.</b> Hayfin trained its "Investor Relations and Partner Solutions teams" on the FCA's anti-greenwashing rule in 2024 <span class="s">[S25]</span>. Labels must match the product. <span class="c">Confirmed</span></li>
+</ol>
+</div>
+
+<div class="band b4" data-toc="a7" data-title="7 · Why the customer sees the value"><span class="mk">QQa7QQ</span><div class="num">Section 7</div><h1>Why the customer sees the value</h1><div class="sub">The value equation, and three customers walking through the shop</div></div>
+<div class="page">
+<div class="shopbox"><span class="lab">Shop analogy</span>A caterer does not buy the cheapest rice. It buys the rice with the best mix of price, reliability, quality checks, packaging that fits its kitchen, and a supplier it trusts to fix problems. "Value" is the whole bundle, not the price tag.</div>
+<figure>
+<svg viewBox="0 0 700 250" font-family="Helvetica,Arial">
+<g font-size="11">
+<text x="350" y="18" text-anchor="middle" font-weight="700" fill="#12233f" font-size="13">The customer's value equation (author's framework)</text>
+<rect x="10" y="40" width="680" height="70" rx="8" fill="#12233f"/>
+<text x="350" y="70" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">VALUE  =  income above bonds  ×  confidence it will be paid</text>
+<text x="350" y="94" text-anchor="middle" fill="#c9d3e3" font-size="12">×  fit with my rules and portfolio  ×  ease of owning it  ÷  fees and lock-up</text>
+<g font-size="10">
+<rect x="10" y="125" width="128" height="115" rx="6" fill="#e3f3ea" stroke="#1d7a4c"/><text x="74" y="144" text-anchor="middle" font-weight="700">Income</text><text x="74" y="162" text-anchor="middle">floating-rate,</text><text x="74" y="176" text-anchor="middle">mostly cash-paid</text><text x="74" y="190" text-anchor="middle">senior loans</text><text x="74" y="214" text-anchor="middle" fill="#5b6676">[S71][S151]</text>
+<rect x="148" y="125" width="128" height="115" rx="6" fill="#e3f3ea" stroke="#1d7a4c"/><text x="212" y="144" text-anchor="middle" font-weight="700">Confidence</text><text x="212" y="162" text-anchor="middle">wide funnel, senior</text><text x="212" y="176" text-anchor="middle">position, workout</text><text x="212" y="190" text-anchor="middle">team, no forced sales</text><text x="212" y="214" text-anchor="middle" fill="#5b6676">[S306][S307][S227]</text>
+<rect x="286" y="125" width="128" height="115" rx="6" fill="#e3f3ea" stroke="#1d7a4c"/><text x="350" y="144" text-anchor="middle" font-weight="700">Fit</text><text x="350" y="162" text-anchor="middle">wrapper for each</text><text x="350" y="176" text-anchor="middle">rulebook; European</text><text x="350" y="190" text-anchor="middle">diversification</text><text x="350" y="214" text-anchor="middle" fill="#5b6676">[S222][S277]</text>
+<rect x="424" y="125" width="128" height="115" rx="6" fill="#e3f3ea" stroke="#1d7a4c"/><text x="488" y="144" text-anchor="middle" font-weight="700">Ease</text><text x="488" y="162" text-anchor="middle">clear reporting,</text><text x="488" y="176" text-anchor="middle">fast answers,</text><text x="488" y="190" text-anchor="middle">local coverage</text><text x="488" y="214" text-anchor="middle" fill="#5b6676">[S305][S1]</text>
+<rect x="562" y="125" width="128" height="115" rx="6" fill="#fbe7e5" stroke="#b3261e"/><text x="626" y="144" text-anchor="middle" font-weight="700">Cost</text><text x="626" y="162" text-anchor="middle">fees (~1% norm),</text><text x="626" y="176" text-anchor="middle">7-10 year lock-up,</text><text x="626" y="190" text-anchor="middle">currency risk</text><text x="626" y="214" text-anchor="middle" fill="#5b6676">[S104][S305][S307]</text>
+</g>
+</g>
+</svg>
+<figcaption><b>Figure 7.1 · The value equation.</b> The equation is the author's simplification <span class="i">Inferred</span>, not a formula investors use. Each term is sourced. Fee level is an industry norm, not Hayfin's terms.</figcaption>
+</figure>
+<p>Investors themselves rank what matters. In the 2026 SS&amp;C Intralinks survey of 280+ LPs, the top reasons for choosing a manager were investment strategy (51%), sector-specific knowledge (30%), risk appetite (27%), co-investment opportunities (22%), reputation and track record (21% each) and fees (14%) <span class="s">[S189]</span>. Fees came last. That supports the point: customers buy the bundle.</p>
+
+<h2 data-toc="a7a" data-title="Three customers walk into the shop" data-lvl="2"><span class="mk">QQa7aQQ</span>Three customers walk into the shop</h2>
+<p>These are <b>illustrative composites</b> <span class="i">Inferred</span>, built from the real customer types and Hayfin facts above. They are not real named investors.</p>
+<div class="seg"><div class="hd"><span>Walk-through A · A US state pension fund</span><span>illustrative</span></div><div class="bd">
+<p><b>Need:</b> income above US bonds, and diversification away from US companies. <b>Pain:</b> its consultant must approve any new manager; the board worries about currency and about 2026's private credit headlines. <b>Journey:</b> its consultant shortlists Hayfin (consultant involvement in DLF V was the highest ever <span class="s">[S222]</span>) → the pension sends a DDQ; PSG answers on PIK, software exposure (under 6% <span class="s">[S227]</span>) and loss history → it commits to DLF V and, like Nashville in 2013, hedges the euro <span class="s">[S309]</span> → it receives quarterly line-by-line reports <span class="s">[S305]</span>. <b>Value it sees:</b> European loans it could not source itself, from a manager its consultant has vetted, with a currency answer ready. <b>Watch-out:</b> unhedged, euro moves can erase returns (PSERS: 8.0% in euros, -2.6% in dollars by 2015 <span class="s">[S307]</span>).</p></div></div>
+<div class="seg"><div class="hd"><span>Walk-through B · A Korean life insurer</span><span>illustrative</span></div><div class="bd">
+<p><b>Need:</b> long-dated assets that match long-dated policies, with good capital treatment. <b>Pain:</b> a plain fund stake may be expensive in regulatory capital. <b>Journey:</b> meets Hayfin's new Seoul office (opened 1 Oct 2026, "dedicated distribution and investor relations" <span class="s">[S223]</span>) → is shown the rated note feeder route into Direct Lending <span class="s">[S222]</span> → Finance supplies the data for its regulatory reporting <span class="s">[S333]</span>. <b>Value it sees:</b> the same senior loans in packaging its rulebook accepts, plus a local relationship. Hayfin already manages close to €1bn for Korean investors <span class="s">[S239]</span>.</p></div></div>
+<div class="seg"><div class="hd"><span>Walk-through C · A Gulf sovereign wealth fund</span><span>illustrative</span></div><div class="bd">
+<p><b>Need:</b> deploy hundreds of millions into Europe on its own terms. <b>Pain:</b> commingled funds do not fit its size or rules. <b>Journey:</b> covered from London and Dubai (Camilla Coriani heads Middle East and Southern Europe coverage <span class="s">[S288]</span>) → negotiates an SMA following Direct Lending, or commits alongside the main fund (the Middle East supplied 10% of DLF V <span class="s">[S222]</span>) → joins the Advisory Board <span class="s">[S305]</span>. <b>Value it sees:</b> custom terms, direct access to the team, and European diversification.</p></div></div>
+</div>
+
+<div class="band b5" data-toc="a8" data-title="8 · Retention: why customers keep coming back"><span class="mk">QQa8QQ</span><div class="num">Section 8</div><h1>Retention: why customers come back</h1><div class="sub">The re-up loop, the switching costs, the evidence, and what could break it</div></div>
+<div class="page">
+<div class="shopbox"><span class="lab">Shop analogy</span>A caterer stays with an importer for decades if every delivery arrives as described, every invoice is clear, problems get fixed, and switching would mean months of new supplier checks. Loyalty is earned on every delivery, not at the sale.</div>
+<figure>
+<svg viewBox="0 0 700 330" font-family="Helvetica,Arial">
+<defs><marker id="rl" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#12233f"/></marker></defs>
+<g font-size="10.5">
+<text x="350" y="16" text-anchor="middle" font-weight="700" fill="#12233f" font-size="12">The re-up loop: every quarter is a sales pitch for the next fund</text>
+<rect x="260" y="30" width="180" height="56" rx="8" fill="#12233f"/><text x="350" y="53" text-anchor="middle" fill="#fff" font-weight="700">1. Customer commits</text><text x="350" y="70" text-anchor="middle" fill="#c9d3e3">to DLF V</text>
+<rect x="500" y="125" width="190" height="64" rx="8" fill="#eef2f8" stroke="#1f3a63"/><text x="595" y="148" text-anchor="middle" font-weight="700">2. Every quarter</text><text x="595" y="165" text-anchor="middle">reports, letters, answers;</text><text x="595" y="179" text-anchor="middle">trust builds (or erodes)</text>
+<rect x="260" y="240" width="180" height="70" rx="8" fill="#f6ead9" stroke="#c8873a" stroke-width="2"/><text x="350" y="262" text-anchor="middle" font-weight="700">3. Problems handled</text><text x="350" y="279" text-anchor="middle">workouts, honest updates,</text><text x="350" y="293" text-anchor="middle">Advisory Board reviews</text>
+<rect x="10" y="125" width="190" height="64" rx="8" fill="#e3f3ea" stroke="#1d7a4c"/><text x="105" y="148" text-anchor="middle" font-weight="700">4. Next edition</text><text x="105" y="165" text-anchor="middle">DLF VI (already mentioned</text><text x="105" y="179" text-anchor="middle">in a job post) [S333]</text>
+<path d="M440,58 C540,58 595,80 595,123" fill="none" stroke="#12233f" stroke-width="2" marker-end="url(#rl)"/>
+<path d="M595,189 C595,260 520,275 442,275" fill="none" stroke="#12233f" stroke-width="2" marker-end="url(#rl)"/>
+<path d="M260,275 C160,275 105,240 105,191" fill="none" stroke="#12233f" stroke-width="2" marker-end="url(#rl)"/>
+<path d="M105,125 C105,80 170,58 258,58" fill="none" stroke="#1d7a4c" stroke-width="2.5" marker-end="url(#rl)"/>
+<text x="140" y="80" fill="#1d7a4c" font-weight="700">re-up</text>
+<text x="350" y="150" text-anchor="middle" fill="#b06f22" font-weight="700" font-size="11">Partner Solutions</text><text x="350" y="166" text-anchor="middle" fill="#b06f22" font-size="11">runs every step</text><text x="350" y="182" text-anchor="middle" fill="#b06f22" font-size="11">of this loop</text>
+</g>
+</svg>
+<figcaption><b>Figure 8.1 · The re-up loop.</b> The loop is the author's framing <span class="i">Inferred</span>. DLF VI is referenced in a Hayfin Fund Controller job posting <span class="s">[S333]</span>; reporting and Advisory Boards from <span class="s">[S305]</span>.</figcaption>
+</figure>
+
+<h2 data-toc="a8a" data-title="Why customers stay: six reasons" data-lvl="2"><span class="mk">QQa8aQQ</span>Why customers stay: six reasons</h2>
+<table>
+<thead><tr><th style="width:24%">Reason</th><th style="width:20%">Shop equivalent</th><th>Evidence and explanation</th></tr></thead>
+<tbody>
+<tr><td><b>1. They must keep buying anyway</b></td><td>The caterer needs supplies every year</td><td>Pensions and insurers set a target share for private credit and must recommit as old funds repay [Inferred, standard allocation practice; see S202]. The question is not "whether" but "with whom". An existing, trusted manager starts ahead.</td></tr>
+<tr><td><b>2. Switching is expensive</b></td><td>Re-vetting a new supplier takes months</td><td>A DDQ can take 40-60 hours (vendor estimate) <span class="s">[S190]</span>; the whole selection process can take 6-18 months (vendor, low weight) <span class="s">[S202]</span>. Re-upping with a known manager skips much of that.</td></tr>
+<tr><td><b>3. The market rewards incumbents</b></td><td>Customers stick to the shops they know</td><td>93% of 2025 private debt capital went to managers raising their fourth fund or later <span class="s">[S152]</span>. PitchBook reads 2026's big closes as "LPs re-upping with proven managers rather than underwriting new relationships" <span class="s">[S151]</span>.</td></tr>
+<tr><td><b>4. Every receipt builds trust</b></td><td>Clear invoices, no surprises</td><td>Line-by-line quarterly reports, CEO letters, audited accounts in 90 days <span class="s">[S305]</span>. Accuracy here is what the intern role protects.</td></tr>
+<tr><td><b>5. One relationship, many shelves</b></td><td>Buying more lines from one trusted supplier</td><td>An investor in Direct Lending can add Special Opps, Tactical or a specialist strategy without a new relationship <span class="s">[S327]</span>. Vermont's 2026 commitment was to Tactical Solutions Evergreen <span class="s">[S322]</span>; PSERS invested in two Special Opportunities funds <span class="s">[S306]</span><span class="s">[S307]</span>.</td></tr>
+<tr><td><b>6. Customers become partners, even owners</b></td><td>The caterer that buys a stake in the importer</td><td>BCI sold its majority stake but stayed "a significant and strategic limited partner in certain key Hayfin fund strategies" <span class="s">[S315]</span>. Samsung Life became a shareholder and said it "will support Hayfin's investment strategies" <span class="s">[S75]</span>.</td></tr>
+</tbody></table>
+
+<h2 data-toc="a8b" data-title="The evidence that it works" data-lvl="2"><span class="mk">QQa8bQQ</span>The evidence that it works</h2>
+<figure>
+<svg viewBox="0 0 700 210" font-family="Helvetica,Arial">
+<g font-size="10.5">
+<text x="10" y="16" font-weight="700" fill="#12233f" font-size="12">Each edition of the flagship has been bigger than the last (Direct Lending fund size, € bn, "over")</text>
+<line x1="60" y1="170" x2="680" y2="170" stroke="#5b6676"/>
+<rect x="90" y="150" width="70" height="20" fill="#97abc4"/><text x="125" y="143" text-anchor="middle">~2</text><text x="125" y="186" text-anchor="middle">DLF I · 2013</text>
+<rect x="210" y="135" width="70" height="35" fill="#6f87a8"/><text x="245" y="128" text-anchor="middle">3.5</text><text x="245" y="186" text-anchor="middle">DLF II · 2017</text>
+<rect x="330" y="120" width="70" height="50" fill="#3d5a85"/><text x="365" y="113" text-anchor="middle">5</text><text x="365" y="186" text-anchor="middle">DLF III · 2020</text>
+<rect x="450" y="110" width="70" height="60" fill="#1f3a63"/><text x="485" y="103" text-anchor="middle">6</text><text x="485" y="186" text-anchor="middle">DLF IV · 2023</text>
+<rect x="570" y="20" width="70" height="150" fill="#c8873a"/><text x="605" y="40" text-anchor="middle" fill="#fff" font-weight="700">15</text><text x="605" y="186" text-anchor="middle" font-weight="700">DLF V · 2026</text>
+<text x="10" y="204" fill="#5b6676" font-size="9.5">Scale 10 px per €1bn. Sources: S79, S90, S90, S88, S71. Sizes include SMAs or related vehicles where Hayfin says so.</text>
+</g>
+</svg>
+<figcaption><b>Figure 8.2 · Customers kept coming back, and brought more.</b> Hayfin thanked "both new and long-standing investors" at the DLF V close <span class="s">[S29]</span>. The split between re-ups and new investors is not public [Gap].</figcaption>
+</figure>
+
+<h2 data-toc="a8c" data-title="What could break loyalty" data-lvl="2"><span class="mk">QQa8cQQ</span>What could break loyalty (be ready to discuss)</h2>
+<ul>
+<li><b>Bad deliveries.</b> Losses or weak returns. Hayfin publishes no current loss rate; one investor (PSERS) booked a small negative carried-interest accrual on its Hayfin funds in 2024 <span class="s">[S308]</span>, suggesting weaker marks on older funds <span class="i">Inferred</span>.</li>
+<li><b>Too big to stay picky.</b> A €15bn fund must be deployed while European deal volumes were down 29% in 2026 (PitchBook via ACI) <span class="s">[S240]</span>. Hayfin's own answer: "Scale should be an outcome of repeatability, rather than an objective in itself" <span class="s">[S222]</span>.</li>
+<li><b>People leaving.</b> Investors watch key people closely. Some former senior names no longer appear on Hayfin's website <span class="s">[S296]</span>.</li>
+<li><b>Cheaper or bigger shops.</b> Ares, ICG and US managers moving into Europe; bank and fund partnerships such as Citi with HPS <span class="s">[S186]</span><span class="s">[S255]</span>.</li>
+<li><b>A bad receipt.</b> An error in reporting damages trust faster than a weak quarter <span class="i">Inferred</span>. This is why proofreading is a named intern duty.</li>
+</ul>
+</div>
+
+<div class="band" data-toc="a9" data-title="9 · The shop on one page, and what to say"><span class="mk">QQa9QQ</span><div class="num">Section 9</div><h1>The shop on one page</h1><div class="sub">The whole picture, plus lines you can use in an interview</div></div>
+<div class="page">
+<figure>
+<svg viewBox="0 0 700 470" font-family="Helvetica,Arial">
+<g font-size="10">
+<text x="350" y="16" text-anchor="middle" font-weight="700" fill="#12233f" font-size="13">Hayfin as a shop, on one page</text>
+<g>
+<rect x="10" y="30" width="220" height="140" rx="8" fill="#e3f3ea" stroke="#1d7a4c"/><text x="20" y="50" font-weight="700" fill="#1d7a4c">WHO BUYS</text>
+<text x="20" y="68">Institutions only, ~€10m minimum</text><text x="20" y="84">Pensions 51% · insurers 19.5%</text><text x="20" y="100">SWFs 12% · banks, FoFs, others</text><text x="20" y="116">N. America 26% · Europe 25%</text><text x="20" y="132">Australia 23% · UK 20%</text><text x="20" y="152" fill="#5b6676">[S305][S303][S227]</text>
+<rect x="240" y="30" width="220" height="140" rx="8" fill="#fbe7e5" stroke="#b3261e"/><text x="250" y="50" font-weight="700" fill="#b3261e">WHAT HURTS</text>
+<text x="250" y="68">Need income above bonds</text><text x="250" y="84">Fear of losses (PIK, software)</text><text x="250" y="100">Home-market concentration</text><text x="250" y="116">Rules on what they can hold</text><text x="250" y="132">Opaque private marks; slow vetting</text><text x="250" y="152" fill="#5b6676">[S222][S245][S166]</text>
+<rect x="470" y="30" width="220" height="140" rx="8" fill="#eef2f8" stroke="#1f3a63"/><text x="480" y="50" font-weight="700" fill="#12233f">ON THE SHELVES</text>
+<text x="480" y="68">Direct Lending (staples)</text><text x="480" y="84">Tactical, Special Opps (deli)</text><text x="480" y="100">HY, loans, CLOs (pre-packed)</text><text x="480" y="116">Healthcare, Maritime, RE, PES</text><text x="480" y="132">5 wrappers incl. rated feeder</text><text x="480" y="152" fill="#5b6676">[S327][S222]</text>
+<rect x="10" y="185" width="450" height="160" rx="8" fill="#12233f"/><text x="20" y="205" font-weight="700" fill="#c8873a">WHY THIS SHOP (DIFFERENTIATION)</text>
+<g fill="#fff"><text x="20" y="225">1. One sourcing team, several doors: "8%+ and 15%+ lender" [S307]</text><text x="20" y="243">2. Own repair service: in-house workout and legal team [S331]</text><text x="20" y="261">3. Local home team: 13 offices; 40% sole-lender deals [S71][S95]</text><text x="20" y="279">4. Specialist counters: healthcare, maritime, real estate [S327]</text><text x="20" y="297">5. No run on the shop: locked-up institutional money [S227]</text><text x="20" y="315">6. Packaging per customer; 7. written fairness rules [S222][S305]</text><text x="20" y="333">8. Owned by the people running it [S301]</text></g>
+<rect x="470" y="185" width="220" height="160" rx="8" fill="#f6ead9" stroke="#c8873a" stroke-width="2"/><text x="480" y="205" font-weight="700" fill="#b06f22">THE SHOP FRONT (PSG)</text>
+<text x="480" y="225">Window: thought leadership</text><text x="480" y="243">Labels: pitch book, case studies</text><text x="480" y="261">Questions: DDQs, RFPs</text><text x="480" y="279">Packaging: wrapper design</text><text x="480" y="297">Receipts: quarterly reports</text><text x="480" y="315">Club: Advisory Boards, investor</text><text x="480" y="331">days, Seoul and Dubai offices</text>
+<rect x="10" y="360" width="680" height="100" rx="8" fill="#f1e8fa" stroke="#7a3fb0"/><text x="20" y="380" font-weight="700" fill="#7a3fb0">WHY THEY COME BACK (RETENTION)</text>
+<text x="20" y="400">They must keep buying credit anyway · switching costs months of checks · the market rewards proven managers (93% of 2025 capital to fund 4+) [S152]</text>
+<text x="20" y="418">· every accurate quarterly report builds trust · one relationship opens many shelves · some customers become partners and owners [S315][S75]</text>
+<text x="20" y="442" font-weight="700">Proof: Direct Lending fund editions ~€2bn → 3.5 → 5 → 6 → over €15bn (2013-2026) [S79][S90][S88][S71]</text>
+</g>
+</g>
+</svg>
+<figcaption><b>Figure 9.1 · The shop on one page.</b> Every element is sourced in Sections 1 to 8.</figcaption>
+</figure>
+
+<h2 data-toc="a9a" data-title="Lines you can use in an interview" data-lvl="2"><span class="mk">QQa9aQQ</span>Lines you can use in an interview</h2>
+<div class="box say"><span class="lab">The 20-second version</span>"I think of Hayfin as a specialist shop for European credit. Its customers are institutions, half of them pension funds. They come for steady, senior, cash-paid income, and they stay because of three things: one local sourcing team that sees deals as both an 8% and a 15% lender, an in-house workout team that fixes problems, and packaging that fits each customer, like the rated feeder for insurers. Partner Solutions is the shop front that makes all of that visible, quarter after quarter."</div>
+<div class="box say"><span class="lab">If asked "what does the client side actually do?"</span>"It decides what goes in the window, writes the labels, answers every question, designs the packaging, sends the receipts and runs the customer club. The quality of the receipts is what drives the next sale, because every quarterly report is effectively a pitch for the next fund."</div>
+<div class="box say"><span class="lab">If asked "why would an investor pick Hayfin over Ares?"</span>"Ares is bigger and has a retail counter. Hayfin's case is different: an owner-run, Europe-focused shop with one sourcing team across the whole risk range, a workout team behind every loan, and only locked-up institutional money, which mattered a lot in 2026."</div>
+<div class="box dont"><span class="lab">Don't say this</span>"Hayfin is the biggest", "Hayfin has the best returns" or "Hayfin sells to retail investors". None is supported. Avoid quoting current fund return targets or loss rates; they are not public.</div>
+
+<h2 data-toc="a9b" data-title="Mini glossary" data-lvl="2"><span class="mk">QQa9bQQ</span>Mini glossary</h2>
+<table style="font-size:8.4pt"><tbody>
+<tr><td style="width:22%"><b>AUM</b></td><td>Assets under management: how much money the manager looks after.</td></tr>
+<tr><td><b>Commitment / capital call</b></td><td>The amount an investor promises / the manager asking for part of it when a loan is made.</td></tr>
+<tr><td><b>Commingled fund</b></td><td>A shared fund with many investors.</td></tr>
+<tr><td><b>Consultant</b></td><td>A firm that advises pension funds on which managers to hire.</td></tr>
+<tr><td><b>Covenant</b></td><td>A promise by the borrower, such as keeping debt below a limit.</td></tr>
+<tr><td><b>DDQ / RFP</b></td><td>Due diligence questionnaire / request for proposal: the long question lists investors send managers.</td></tr>
+<tr><td><b>Evergreen</b></td><td>A fund with no end date that allows limited exits.</td></tr>
+<tr><td><b>Leverage</b></td><td>Borrowing. A levered fund borrows to boost returns.</td></tr>
+<tr><td><b>LP / GP</b></td><td>Limited partner (investor) / general partner (manager).</td></tr>
+<tr><td><b>PIK</b></td><td>Payment in kind: interest added to the loan instead of paid in cash.</td></tr>
+<tr><td><b>Rated note feeder</b></td><td>A vehicle that issues rated bonds backed by a fund so insurers can hold the exposure more capital-efficiently.</td></tr>
+<tr><td><b>Re-up</b></td><td>An existing investor committing to the next fund.</td></tr>
+<tr><td><b>Senior secured</b></td><td>Debt with first claim on the company's assets.</td></tr>
+<tr><td><b>SMA</b></td><td>Separately managed account: a custom account for one investor.</td></tr>
+<tr><td><b>Solvency II</b></td><td>EU insurance capital rules.</td></tr>
+<tr><td><b>Unitranche</b></td><td>One loan replacing several layers of debt, at one price.</td></tr>
+<tr><td><b>Workout</b></td><td>Fixing or recovering a loan that has gone wrong.</td></tr>
+</tbody></table>
+</div>
+
+<div class="band b2" data-toc="a10" data-title="Sources"><span class="mk">QQa10QQ</span><div class="num">Sources</div><h1>Sources</h1><div class="sub">Every [S] marker in this document. IDs match the full Hayfin PSG interview pack.</div></div>
+<div class="page">
+<p class="small">Status: FETCHED = full page read; SNIPPET = only a search extract was seen; PAYWALLED = headline only. Gaps: Hayfin's fees, recent fund returns, loss rates, the DLF V split between new and returning investors, and which SMA belongs to which investor are not public.</p>
+<table class="src"><thead><tr><th>ID</th><th>Outlet</th><th>Title</th><th>Date</th><th>URL (accessed Oct 2026)</th><th>Status</th></tr></thead><tbody><tr><td><b>S1</b></td><td>Hayfin (WordPress API)</td><td>Team member bios, 95 records</td><td>2023 to 2026 (modified dates vary)</td><td style="word-break:break-all">https://www.hayfin.com/wp-json/wp/v2/team-member?per_page=100</td><td>FETCHED</td></tr><tr><td><b>S4</b></td><td>Hayfin</td><td>Hayfin strengthens Partner Solutions team with senior hire (Bringardner)</td><td>2023-04-17</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-strengthens-partner-solutions-team-with-senior-hire/</td><td>FETCHED</td></tr><tr><td><b>S9</b></td><td>Hayfin</td><td>Hayfin strengthens its MENA presence with new Dubai office</td><td>2024-01-16</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-strengthens-its-mena-presence-with-new-dubai-office/</td><td>FETCHED</td></tr><tr><td><b>S20</b></td><td>Glassdoor UK</td><td>Hayfin Analyst, Product Strategy (London)</td><td>n/a</td><td style="word-break:break-all">https://www.glassdoor.co.uk/job-listing/analyst-investor-relations-hayfin-capital-management-JV_IC2671300_KO0,26_KE27,52.htm?jl=1009458825571</td><td>SNIPPET (403 on fetch)</td></tr><tr><td><b>S25</b></td><td>Hayfin</td><td>UK Stewardship Code 2020 report (period to 30 Apr 2025)</td><td>uploaded Jan 2026</td><td style="word-break:break-all">https://www.hayfin.com/wp-content/uploads/2026/01/Hayfin-Capital-Management-Stewardship-Code-2020-2025-final.pdf</td><td>FETCHED</td></tr><tr><td><b>S29</b></td><td>Hayfin</td><td>Hayfin announces record close of Direct Lending Fund V in excess of €15bn</td><td>2026-07-02</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-announces-record-close-of-direct-lending-fund-v-in-excess-of-e15bn/</td><td>FETCHED</td></tr><tr><td><b>S31</b></td><td>Hayfin</td><td>Reflections on Hayfin&#x27;s New York Investor Day 2026</td><td>2026-05-19</td><td style="word-break:break-all">https://www.hayfin.com/reflections-on-hayfins-new-york-investor-day-2026/</td><td>FETCHED</td></tr><tr><td><b>S42</b></td><td>Companies House</td><td>Search results for &quot;hayfin&quot;</td><td>2026</td><td style="word-break:break-all">https://find-and-update.company-information.service.gov.uk/search/companies?q=hayfin</td><td>FETCHED</td></tr><tr><td><b>S49</b></td><td>FCA Handbook</td><td>COBS 4.2 Fair, clear and not misleading</td><td>current</td><td style="word-break:break-all">https://www.handbook.fca.org.uk/handbook/COBS/4/2.html</td><td>FETCHED</td></tr><tr><td><b>S70</b></td><td>Hayfin (WordPress REST API)</td><td>Hayfin posts list, 95 posts Mar 2021 to Oct 2026 (/wp-json/wp/v2/posts)</td><td>2026-10-01 latest</td><td style="word-break:break-all">https://www.hayfin.com/wp-json/wp/v2/posts?per_page=100&amp;_fields=date,link</td><td>FETCHED</td></tr><tr><td><b>S71</b></td><td>Hayfin</td><td>Hayfin announces record close of Direct Lending Fund V in excess of EUR15bn</td><td>2026-07-02</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-announces-record-close-of-direct-lending-fund-v-in-excess-of-e15bn/</td><td>FETCHED</td></tr><tr><td><b>S73</b></td><td>Hayfin</td><td>Hayfin completes Arctos-backed management buyout</td><td>2025-02-10</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-completes-arctos-backed-management-buyout/</td><td>FETCHED</td></tr><tr><td><b>S74</b></td><td>Hayfin</td><td>Hayfin welcomes Mubadala and AXA IM Prime as strategic minority shareholders</td><td>2025-07-22</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-welcomes-mubadala-and-axa-im-prime-as-strategic-minority-shareholders-building-on-arctos-backed-management-buyout/</td><td>FETCHED</td></tr><tr><td><b>S75</b></td><td>Hayfin</td><td>Hayfin welcomes Samsung Life as strategic minority shareholder</td><td>2025-09-10</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-welcomes-samsung-life-as-strategic-minority-shareholder-alongside-mubadala-and-axa-im-prime/</td><td>FETCHED</td></tr><tr><td><b>S79</b></td><td>Hayfin</td><td>Our History</td><td>as at 30 Jun 2026</td><td style="word-break:break-all">https://www.hayfin.com/about-hayfin/history/</td><td>FETCHED</td></tr><tr><td><b>S88</b></td><td>Hayfin</td><td>Hayfin positioned to meet growing demand for private credit (DLF IV &gt;EUR6bn)</td><td>2023-08-18</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-positioned-to-meet-growing-demand-for-private-credit/</td><td>FETCHED</td></tr><tr><td><b>S89</b></td><td>Hayfin</td><td>Hayfin exceeds EUR2bn target for Special Opportunities Fund III</td><td>2021-12-20</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-exceeds-e2bn-target-special-opportunities-fund-iii/</td><td>FETCHED</td></tr><tr><td><b>S90</b></td><td>Hayfin</td><td>Hayfin sees record deployment via Direct Lending strategy</td><td>2021-03-31</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-sees-record-deployment-via-direct-lending-strategy/</td><td>FETCHED</td></tr><tr><td><b>S94</b></td><td>Hayfin</td><td>What a EUR15bn fundraise tells us about the evolution of European private credit (Lipsky, Bringardner)</td><td>2026-09-22</td><td style="word-break:break-all">https://www.hayfin.com/what-a-e15bn-fundraise-tells-us-about-the-evolution-of-european-private-credit/</td><td>FETCHED</td></tr><tr><td><b>S95</b></td><td>Hayfin</td><td>Reflections on Hayfin&#x27;s New York Investor Day 2026 (Maura English)</td><td>2026-05-19</td><td style="word-break:break-all">https://www.hayfin.com/reflections-on-hayfins-new-york-investor-day-2026/</td><td>FETCHED</td></tr><tr><td><b>S102</b></td><td>Hayfin</td><td>Hayfin to acquire up to $1bn of shipping assets through Maritime Yield strategy</td><td>2023-12-07</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-to-acquire-up-to-1bn-of-shipping-assets-through-maritime-yield-strategy-building-on-longstanding-sector-track-record/</td><td>FETCHED</td></tr><tr><td><b>S104</b></td><td>Macfarlanes</td><td>The evolution of direct lending fund fee structures</td><td>2024-11-28</td><td style="word-break:break-all">https://www.macfarlanes.com/insights/102loh7/the-evolution-of-direct-lending-fund-fee-structures/</td><td>FETCHED</td></tr><tr><td><b>S105</b></td><td>Proskauer</td><td>Private Market Talks: Thinking Different in Direct Lending with Hayfin&#x27;s Tim Flynn</td><td>2024-04-05</td><td style="word-break:break-all">https://www.proskauer.com/podcast/private-market-talks-thinking-different-in-direct-lending-with-hayfins-tim-flynn</td><td>FETCHED</td></tr><tr><td><b>S106</b></td><td>Hayfin</td><td>Private Credit strategies page and homepage</td><td>undated (2026)</td><td style="word-break:break-all">https://www.hayfin.com/strategies/private-credit/</td><td>FETCHED</td></tr><tr><td><b>S114</b></td><td>Hayfin</td><td>Hayfin bolsters Maritime Yield fund with commitment from Sumitomo Mitsui Trust Bank</td><td>2025-04-10</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-bolsters-maritime-yield-fund-with-commitment-from-sumitomo-mitsui-trust-bank/</td><td>FETCHED</td></tr><tr><td><b>S115</b></td><td>Hayfin</td><td>Hayfin and Capreon acquire 70 St Mary Axe from Nuveen</td><td>2025-12-08</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-and-capreon-acquire-iconic-london-office-building-70-st-mary-axe-from-nuveen/</td><td>FETCHED</td></tr><tr><td><b>S117</b></td><td>Hayfin</td><td>Why scale, adaptability and culture will determine the winners in private credit&#x27;s next chapter (Tognolini)</td><td>2026-02-26</td><td style="word-break:break-all">https://www.hayfin.com/why-scale-adaptability-and-culture-will-determine-the-winners-in-private-credits-next-chapter/</td><td>FETCHED</td></tr><tr><td><b>S129</b></td><td>Arcmont</td><td>Arcmont completes €10bn fundraise for its latest European direct lending fund</td><td>2024-01-23</td><td style="word-break:break-all">https://arcmont.com/news-and-insights/arcmont-completes-e10bn-fundraise-for-its-latest-european-direct-lending-fund/</td><td>FETCHED</td></tr><tr><td><b>S130</b></td><td>Arcmont</td><td>Arcmont completes €1.5 billion fundraise for Capital Solutions Fund II</td><td>2026-02-26</td><td style="word-break:break-all">https://arcmont.com/news-and-insights/arcmont-completes-e1-5-billion-fundraise-for-capital-solutions-fund-ii/</td><td>FETCHED</td></tr><tr><td><b>S131</b></td><td>SFNet / Arcmont</td><td>Nuveen Closes Acquisition of Arcmont, Leading European Private Debt Manager</td><td>2023-03-02</td><td style="word-break:break-all">https://www.sfnet.com/home/chapters/canada/news-detail/2023/03/02/nuveen-closes-acquisition-of-arcmont-leading-european-private-debt-manager</td><td>SNIPPET</td></tr><tr><td><b>S132</b></td><td>ICG</td><td>ICG announces final close for Senior Debt Partners fund 5 at $17bn</td><td>2024-09-11</td><td style="word-break:break-all">https://www.icgam.com/2024/09/11/icg-announces-final-close-for-senior-debt-partners-fund-5-at-17bn-significantly-above-target/</td><td>FETCHED</td></tr><tr><td><b>S133</b></td><td>ICG</td><td>ICG final results for the financial year ended 31 March 2026</td><td>2026-05-21</td><td style="word-break:break-all">https://www.icgam.com/2026/05/21/icg-final-results-for-the-financial-year-ended-31-march-2026/</td><td>FETCHED</td></tr><tr><td><b>S134</b></td><td>ICG</td><td>FY26 Results Presentation Transcript (PDF)</td><td>2026-05-21</td><td style="word-break:break-all">https://www.icgam.com/wp-content/uploads/2026/05/FY26-Results-Presentation-Transcript.pdf</td><td>FETCHED</td></tr><tr><td><b>S135</b></td><td>Dakota</td><td>Ares closes European direct lending fund at €17.1B hard cap</td><td>2025-01</td><td style="word-break:break-all">https://www.dakota.com/fundraising-news/ares-closes-european-direct-lending-fund-at-17.1b-hard-cap</td><td>FETCHED</td></tr><tr><td><b>S136</b></td><td>Ares Management (SEC 8-K Ex 99.2)</td><td>Ares Management Q2 2026 earnings release</td><td>2026-07-31</td><td style="word-break:break-all">https://www.sec.gov/Archives/edgar/data/0001176948/000162828026051191/a2026q2-ex992earningspre.htm</td><td>FETCHED</td></tr><tr><td><b>S138</b></td><td>Alternatives Watch</td><td>Pemberton&#x27;s latest European debt offerings raise €6.1bn</td><td>2025-05-16</td><td style="word-break:break-all">https://www.alternativeswatch.com/2025/05/16/pemberton-european-mid-market-senior-loan-debt-offerings/</td><td>FETCHED</td></tr><tr><td><b>S139</b></td><td>Pemberton</td><td>Pemberton awarded Lender of the Year – Europe by PDI, marking 12 wins in 10 years</td><td>2026-03-03</td><td style="word-break:break-all">https://pembertonam.com/news/pemberton-awarded-lender-of-the-year-europe-by-private-debt-investor-marking-12-wins-in-10-years</td><td>FETCHED</td></tr><tr><td><b>S141</b></td><td>Tikehau Capital</td><td>H1 2026 results presentation (PDF)</td><td>2026-07-29</td><td style="word-break:break-all">https://www.tikehaucapital.com/~/media/Files/T/Tikehau-Capital-V2/documents/shareholders/publications-en/2026-07-29-tikehau-capital-h1-2026-results-presentation.pdf</td><td>FETCHED</td></tr><tr><td><b>S144</b></td><td>PEI / Private Debt Investor</td><td>PEI Private Credit 200 (formerly PDI 200)</td><td>2026-09-01</td><td style="word-break:break-all">https://www.pei-privatecredit.com/pdi-200/</td><td>FETCHED</td></tr><tr><td><b>S146</b></td><td>Business Wire / StreetInsider</td><td>BlackRock Completes Acquisition of HPS Investment Partners</td><td>2025-07-01</td><td style="word-break:break-all">https://www.streetinsider.com/Business+Wire/BlackRock+Completes+Acquisition+of+HPS+Investment+Partners/25002052.html</td><td>SNIPPET</td></tr><tr><td><b>S147</b></td><td>Alternatives Watch</td><td>CVC Credit raises record €10.4bn European lending fund (EUDL IV)</td><td>2025-10-02</td><td style="word-break:break-all">https://www.alternativeswatch.com/2025/10/02/cvc-credit-raises-record-104-billion-euros-european-lending-fund-eudl-iv/</td><td>FETCHED</td></tr><tr><td><b>S151</b></td><td>PitchBook</td><td>Q2 2026 Global Private Market Fundraising Report</td><td>2026 (data to 30 Jun 2026)</td><td style="word-break:break-all">https://pitchbook.brightspotcdn.com/74/45/4f36da844589a606c5cea79f2aeb/q2-2026-global-private-market-fundraising-report.pdf</td><td>FETCHED</td></tr><tr><td><b>S152</b></td><td>PitchBook</td><td>2025 Annual Global Private Debt Report</td><td>2026 (data to end-2025)</td><td style="word-break:break-all">https://pitchbook.brightspotcdn.com/2e/21/8aea41054e73bdb66e191098e571/2025-annual-global-private-debt-report.pdf</td><td>FETCHED</td></tr><tr><td><b>S166</b></td><td>FCA</td><td>Private market valuation practices (multi-firm review)</td><td>2025-03-05</td><td style="word-break:break-all">https://www.fca.org.uk/publications/multi-firm-reviews/private-market-valuation-practices</td><td>FETCHED</td></tr><tr><td><b>S184</b></td><td>Advisor.ca</td><td>Private credit recap: Asset managers respond to elevated redemption requests</td><td>2026-04-14</td><td style="word-break:break-all">https://www.advisor.ca/news/products/private-credit-recap-asset-managers-respond-to-elevated-redemption-requests/</td><td>FETCHED</td></tr><tr><td><b>S186</b></td><td>Alternative Credit Investor</td><td>European direct lending hits record despite Q2 dip (Debtwire data)</td><td>2026-08-25</td><td style="word-break:break-all">https://alternativecreditinvestor.com/2026/08/25/european-direct-lending-hits-record-despite-q2-dip/</td><td>FETCHED</td></tr><tr><td><b>S189</b></td><td>SS&amp;C Intralinks with Reuters Events</td><td>2026 LP Survey Report</td><td>2025-26</td><td style="word-break:break-all">https://www3.intralinks.com/rs/414-BKN-706/images/SSC-Intralinks-2026-LP-Survey-Report.pdf</td><td>FETCHED</td></tr><tr><td><b>S190</b></td><td>Juniper Square</td><td>Juniper Square acquires Sightglass</td><td>2026-04-14</td><td style="word-break:break-all">https://www.junipersquare.com/news/sightglass</td><td>FETCHED</td></tr><tr><td><b>S202</b></td><td>Altss (vendor blog)</td><td>Investment consultants as gatekeepers in 2026</td><td>2026</td><td style="word-break:break-all">https://altss.com/blog/investment-consultants-as-gatekeepers-in-2026.md</td><td>SNIPPET</td></tr><tr><td><b>S221</b></td><td>Hayfin press release</td><td>Hayfin announces record close of Direct Lending Fund V in excess of EUR15bn</td><td>2 Jul 2026</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-announces-record-close-of-direct-lending-fund-v-in-excess-of-e15bn/</td><td>FETCHED</td></tr><tr><td><b>S222</b></td><td>Hayfin insight</td><td>What a EUR15bn Fundraise Tells Us About the Evolution of European Private Credit</td><td>22 Sep 2026</td><td style="word-break:break-all">https://www.hayfin.com/what-a-e15bn-fundraise-tells-us-about-the-evolution-of-european-private-credit/</td><td>FETCHED</td></tr><tr><td><b>S223</b></td><td>Hayfin press release</td><td>Hayfin deepens Korean market presence with Seoul office opening</td><td>1 Oct 2026</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-deepens-korean-market-presence-with-seoul-office-opening/</td><td>FETCHED</td></tr><tr><td><b>S224</b></td><td>Hayfin press release</td><td>Hayfin named Private Credit Lender of the Year at ION Analytics Mergermarket Private Equity Awards 2026</td><td>30 Sep 2026</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-named-private-credit-lender-of-the-year-at-ion-analytics-mergermarket-private-equity-awards-2026/</td><td>FETCHED</td></tr><tr><td><b>S225</b></td><td>Hayfin press release</td><td>Hayfin Expands European CLO Platform to Support Strategic Focus on European Alternative Credit</td><td>18 May 2026</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-expands-european-clo-platform-to-support-strategic-focus-on-european-alternative-credit/</td><td>FETCHED</td></tr><tr><td><b>S226</b></td><td>Hayfin press release</td><td>Hayfin appoints Michael Marsh as Head of Investments</td><td>7 May 2026</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-appoints-michael-marsh-as-head-of-investments/</td><td>FETCHED</td></tr><tr><td><b>S227</b></td><td>Hayfin insight</td><td>Investing in volatile times - how private credit managers can manage risk and capitalise on opportunity</td><td>12 May 2026</td><td style="word-break:break-all">https://www.hayfin.com/investing-in-volatile-times-how-private-credit-managers-can-manage-risk-and-capitalise-on-opportunity/</td><td>FETCHED</td></tr><tr><td><b>S228</b></td><td>Hayfin insight</td><td>Reflections on Hayfin&#x27;s New York Investor Day 2026</td><td>19 May 2026</td><td style="word-break:break-all">https://www.hayfin.com/reflections-on-hayfins-new-york-investor-day-2026/</td><td>FETCHED</td></tr><tr><td><b>S229</b></td><td>Hayfin insight</td><td>A Tale of Three PIKs</td><td>28 Jul 2026</td><td style="word-break:break-all">https://www.hayfin.com/a-tale-of-three-piks/</td><td>FETCHED</td></tr><tr><td><b>S231</b></td><td>Hayfin press release</td><td>Hayfin provides EUR305m financing to Condis to support management and Portobello in its next phase of growth</td><td>9 Sep 2026</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-provides-e305m-financing-to-condis-to-support-management-and-portobello-in-its-next-phase-of-growth/</td><td>FETCHED</td></tr><tr><td><b>S232</b></td><td>Hayfin press release</td><td>Hayfin supports Norvestor&#x27;s refinancing of Serwent to drive Nordic expansion</td><td>3 Sep 2026</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-supports-norvestors-refinancing-of-serwent-to-drive-nordic-expansion/</td><td>FETCHED</td></tr><tr><td><b>S233</b></td><td>Hayfin press release</td><td>Hayfin supports Hellman &amp; Friedman&#x27;s acquisition of Hyve</td><td>3 Jun 2026</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-supports-hellman-friedmans-acquisition-of-hyve/</td><td>FETCHED</td></tr><tr><td><b>S235</b></td><td>Hayfin insight</td><td>The Capital Gap in Healthcare</td><td>13 Jul 2026</td><td style="word-break:break-all">https://www.hayfin.com/the-capital-gap-in-healthcare/</td><td>FETCHED</td></tr><tr><td><b>S237</b></td><td>Proskauer</td><td>Proskauer advises Hayfin Capital Management on close of rated note feeder for DLF V fundraise</td><td>7 Jul 2026</td><td style="word-break:break-all">https://www.proskauer.com/release/proskauer-advises-hayfin-capital-management-on-close-of-rated-note-feeder-for-dlf-v-fundraise</td><td>FETCHED</td></tr><tr><td><b>S239</b></td><td>The Korea Herald</td><td>Samsung Life-backed Hayfin opens Seoul office (Im Eun-byel)</td><td>1 Oct 2026</td><td style="word-break:break-all">https://www.koreaherald.com/article/10890737</td><td>FETCHED</td></tr><tr><td><b>S240</b></td><td>Alternative Credit Investor</td><td>Direct lending: Europe in vogue (Aysha Gilmore)</td><td>15 Sep 2026</td><td style="word-break:break-all">https://alternativecreditinvestor.com/2026/09/15/direct-lending-europe-in-vogue/</td><td>FETCHED</td></tr><tr><td><b>S242</b></td><td>BIS Quarterly Review</td><td>Private credit&#x27;s software lending meets AI disruption (Box B)</td><td>16 Mar 2026</td><td style="word-break:break-all">https://www.bis.org/publ/qtrpdf/r_qt2603v.htm</td><td>FETCHED</td></tr><tr><td><b>S243</b></td><td>Bloomberg (via Bloomberg Law / BNN Bloomberg)</td><td>Blackstone&#x27;s BCRED Caps Redemptions After Investors Seek 10%</td><td>4 Jun 2026</td><td style="word-break:break-all">https://news.bloomberglaw.com/private-equity/blackstones-bcred-caps-redemptions-after-investors-seek-10-2</td><td>SNIPPET</td></tr><tr><td><b>S245</b></td><td>Benzinga (via Webull), citing Fitch Ratings</td><td>Private Credit Defaults Climb To 6.3% In August, Fitch Says</td><td>14 Sep 2026</td><td style="word-break:break-all">https://www.webull.com/news/15578827387765760</td><td>FETCHED</td></tr><tr><td><b>S250</b></td><td>Alternative Credit Investor</td><td>SEC issues &quot;critical reminder&quot; on private credit valuations (Aysha Gilmore)</td><td>29 Sep 2026</td><td style="word-break:break-all">https://alternativecreditinvestor.com/2026/09/29/sec-issues-critical-reminder-on-private-credit-valuations/</td><td>FETCHED</td></tr><tr><td><b>S255</b></td><td>Alternative Credit Investor</td><td>Blackrock&#x27;s HPS and Citi team up on European private credit drive (Aysha Gilmore)</td><td>18 May 2026</td><td style="word-break:break-all">https://alternativecreditinvestor.com/2026/05/18/blackrocks-hps-and-citi-team-up-on-european-private-credit-drive/</td><td>FETCHED</td></tr><tr><td><b>S262</b></td><td>Hayfin</td><td>The Complexity Premium (Tim Atkinson, Lauren Laws)</td><td>15 Sep 2026</td><td style="word-break:break-all">https://www.hayfin.com/the-complexity-premium/</td><td>FETCHED</td></tr><tr><td><b>S272</b></td><td>Hayfin</td><td>Hayfin strengthens Partner Solutions Group with appointment of Tim Atkinson and Steven Carew as Managing Directors</td><td>22 Sep 2025</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-strengthens-partner-solutions-group-with-appointment-of-tim-atkinson-and-steven-carew-as-managing-directors/</td><td>FETCHED</td></tr><tr><td><b>S275</b></td><td>Hayfin</td><td>Hayfin strengthens its MENA presence with new Dubai office</td><td>16 Jan 2024</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-strengthens-its-mena-presence-with-new-dubai-office/</td><td>FETCHED</td></tr><tr><td><b>S277</b></td><td>Korea Herald</td><td>Samsung Life-backed Hayfin opens Seoul office</td><td>1 Oct 2026</td><td style="word-break:break-all">https://www.koreaherald.com/article/10890737</td><td>FETCHED</td></tr><tr><td><b>S281</b></td><td>Proskauer, Private Market Talks</td><td>Thinking Different in Direct Lending with Hayfin&#x27;s Tim Flynn (transcript PDF)</td><td>5 Apr 2024</td><td style="word-break:break-all">https://www.proskauer.com/insights/get-pdf/27420</td><td>FETCHED</td></tr><tr><td><b>S284</b></td><td>Hayfin</td><td>Team member: Maura English</td><td>current</td><td style="word-break:break-all">https://www.hayfin.com/team/maura-english/</td><td>FETCHED</td></tr><tr><td><b>S287</b></td><td>Hayfin</td><td>Team member: Tim Atkinson</td><td>current</td><td style="word-break:break-all">https://www.hayfin.com/team/tim-atkinson/</td><td>FETCHED</td></tr><tr><td><b>S288</b></td><td>Hayfin</td><td>Team member: Camilla Coriani</td><td>current</td><td style="word-break:break-all">https://www.hayfin.com/team-member/camilla-coriani/</td><td>FETCHED</td></tr><tr><td><b>S289</b></td><td>Hayfin</td><td>Team member: Graham Ballard</td><td>current</td><td style="word-break:break-all">https://www.hayfin.com/team/graham-ballard/</td><td>FETCHED</td></tr><tr><td><b>S296</b></td><td>Equilar ExecAtlas</td><td>Alexander Wolfman, executive bio</td><td>22 Apr 2025</td><td style="word-break:break-all">https://people.equilar.com/bio/person/alexander-wolfman-hayfin-capital-management-llp/29417260</td><td>FETCHED</td></tr><tr><td><b>S301</b></td><td>SEC IAPD</td><td>Hayfin Capital Management LLC Form ADV Part 2A Brochure</td><td>30 Mar 2026</td><td style="word-break:break-all">https://files.adviserinfo.sec.gov/IAPD/Content/Common/crd_iapd_Brochure.aspx?BRCHR_VRSN_ID=1031029</td><td>FETCHED</td></tr><tr><td><b>S303</b></td><td>SEC IAPD</td><td>Form ADV Part 1, Hayfin Capital Management LLP (CRD 162993, exempt reporting adviser)</td><td>filed 30 Mar 2026</td><td style="word-break:break-all">https://reports.adviserinfo.sec.gov/reports/ADV/162993/PDF/162993.pdf</td><td>FETCHED</td></tr><tr><td><b>S304</b></td><td>SEC IAPD</td><td>Form ADV Part 1, Hayfin Management Limited (CRD 298617, ERA)</td><td>filed 30 Mar 2026</td><td style="word-break:break-all">https://reports.adviserinfo.sec.gov/reports/ADV/298617/PDF/298617.pdf</td><td>FETCHED</td></tr><tr><td><b>S305</b></td><td>Hayfin Capital Management LLP</td><td>UK Stewardship Code 2020 Disclosure</td><td>Oct 2025</td><td style="word-break:break-all">https://www.hayfin.com/wp-content/uploads/2026/01/Hayfin-Capital-Management-Stewardship-Code-2020-2025-final.pdf</td><td>FETCHED</td></tr><tr><td><b>S306</b></td><td>PSERS (Pennsylvania) / Portfolio Advisors</td><td>Re: HayFin Special Opportunities Credit Fund, L.P. (board resolution pack)</td><td>7 Sep 2012</td><td style="word-break:break-all">https://www.pa.gov/content/dam/copapwp-pagov/en/psers/documents/board3/resolutions/2012/res48_hayfin.pdf</td><td>FETCHED</td></tr><tr><td><b>S307</b></td><td>PSERS</td><td>Public Investment Memorandum: Hayfin SOF II USD LP</td><td>11 Feb 2016</td><td style="word-break:break-all">https://www.pa.gov/content/dam/copapwp-pagov/en/psers/documents/board3/resolutions/2016/res08.pdf</td><td>FETCHED</td></tr><tr><td><b>S308</b></td><td>PSERS</td><td>Private Markets Fee Review CY2024 (Investment Committee 23 Oct 2025)</td><td>23 Oct 2025</td><td style="word-break:break-all">https://www.pa.gov/content/dam/copapwp-pagov/en/psers/documents/transparency/investment/private%20markets%20fee%20review%20cy%202024.pdf</td><td>FETCHED</td></tr><tr><td><b>S309</b></td><td>Metro Nashville MEBS</td><td>Investment Committee minutes</td><td>26 Nov 2013</td><td style="word-break:break-all">https://www.nashville.gov/sites/default/files/2021-10/InvestComm-131126m.pdf</td><td>FETCHED</td></tr><tr><td><b>S315</b></td><td>BCI</td><td>BCI completes sale of majority stake in Hayfin to Arctos</td><td>10 Feb 2025</td><td style="word-break:break-all">https://www.bci.ca/?p=16265</td><td>FETCHED</td></tr><tr><td><b>S322</b></td><td>Dealroom</td><td>Vermont pension commits $50M to Hayfin&#x27;s Tactical Solutions Evergreen Fund</td><td>4 Aug 2026</td><td style="word-break:break-all">https://dealroom.co/news/142935-vermont-pension-commits-50m-to-hayfins-tactical-solutions-evergreen-fund/</td><td>FETCHED</td></tr><tr><td><b>S327</b></td><td>Hayfin</td><td>About Hayfin</td><td>2026</td><td style="word-break:break-all">https://www.hayfin.com/about-hayfin/</td><td>FETCHED</td></tr><tr><td><b>S328</b></td><td>Hayfin</td><td>Private Credit strategy page</td><td>2026</td><td style="word-break:break-all">https://www.hayfin.com/strategies/private-credit/</td><td>FETCHED</td></tr><tr><td><b>S330</b></td><td>Hayfin</td><td>PES Strategy Update H1 2025</td><td>2025</td><td style="word-break:break-all">https://www.hayfin.com/pes-strategy-update-h1-2025/</td><td>FETCHED</td></tr><tr><td><b>S331</b></td><td>Workable (Hayfin careers)</td><td>Hayfin Capital Management company page</td><td>2026</td><td style="word-break:break-all">https://jobs.workable.com/companies/bCukQH8Jt7grECr7sjvWu3.md</td><td>FETCHED</td></tr><tr><td><b>S333</b></td><td>Workable (Hayfin)</td><td>Fund Controller - Private Credit, London</td><td>2026</td><td style="word-break:break-all">https://jobs.workable.com/jobs/f254b0e9-8551-4f4d-bcdc-bb4534c86447.md</td><td>FETCHED</td></tr></tbody></table>
+</div>
+</body></html>
