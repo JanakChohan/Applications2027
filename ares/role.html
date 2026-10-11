@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ares Client Solutions — The Technical Reality of the Role</title>
+<style>
+@page { size: A4; margin: 14mm 13mm 16mm 13mm; }
+:root{--navy:#0d2340;--navy2:#16355e;--body:#33414f;--mute:#6b7a8a;--line:#dfe5ec;
+ --soft:#f4f7fb;--gold:#c8963e;--teal:#1f7a72;--red:#b4413c;--green:#2f7d55;--violet:#5b4b8a;--amber:#d18b1e;}
+*{box-sizing:border-box;}
+body{font-family:"Segoe UI",-apple-system,"Helvetica Neue",Arial,sans-serif;
+ color:var(--body);font-size:9.6pt;line-height:1.5;margin:0;background:#fff;}
+h1,h2,h3,h4{color:var(--navy);margin:0 0 .4em;line-height:1.22;font-weight:650;}
+h1{font-size:23pt;letter-spacing:-.4px;} h2{font-size:15.5pt;} h3{font-size:11.6pt;} h4{font-size:10pt;color:var(--navy2);}
+p{margin:0 0 .7em;} small{font-size:8pt;}
+.page-break{page-break-before:always;} .avoid{page-break-inside:avoid;}
+.cover{height:297mm;margin-bottom:-30mm;display:flex;flex-direction:column;justify-content:space-between;
+ background:linear-gradient(155deg,#0d2340 0%,#16355e 50%,#1f4570 100%);color:#fff;
+ margin-left:-13mm;margin-right:-13mm;margin-top:-14mm;padding:24mm 18mm 30mm 18mm;page-break-after:always;}
+.cover h1{color:#fff;font-size:31pt;line-height:1.08;letter-spacing:-.9px;}
+.cover .kicker{font-size:9.5pt;letter-spacing:3.2px;text-transform:uppercase;color:#9dc0e8;font-weight:600;margin-bottom:13mm;}
+.cover .sub{font-size:12.5pt;color:#cfe0f2;font-weight:300;max-width:138mm;line-height:1.5;margin-top:7mm;}
+.cover .rule{width:64mm;height:3px;background:var(--gold);margin:8mm 0;}
+.cover .qs{margin-top:8mm;}
+.cover .qs div{font-size:9.6pt;color:#dce8f5;padding:2.1mm 0;border-top:1px solid rgba(255,255,255,.17);}
+.cover footer{font-size:8.2pt;color:#8fb0d6;border-top:1px solid rgba(255,255,255,.2);padding-top:4mm;}
+.part{background:var(--navy);color:#fff;padding:5mm 6mm;margin:0 0 6mm;border-radius:3px;
+ page-break-inside:avoid;page-break-after:avoid;}
+.part .n{font-size:7.8pt;letter-spacing:2.6px;text-transform:uppercase;color:var(--gold);font-weight:600;}
+.part h2{color:#fff;margin:1.5mm 0 0;} .part p{margin:1.5mm 0 0;color:#c3d5ea;font-size:9pt;}
+section{margin-bottom:6mm;} .lead{font-size:10.6pt;color:var(--navy2);line-height:1.55;}
+.card{border:1px solid var(--line);border-radius:4px;padding:4.5mm 5mm;margin:0 0 4mm;background:#fff;page-break-inside:avoid;}
+.card.soft{background:var(--soft);border-color:#d8e2ee;} .card h4{margin-bottom:2mm;}
+.callout{border-left:3.5px solid var(--gold);background:#fdf8ef;padding:4mm 5mm;margin:0 0 4mm;
+ border-radius:0 4px 4px 0;page-break-inside:avoid;}
+.callout.edge{border-left-color:var(--teal);background:#eff7f6;}
+.callout.warn{border-left-color:var(--red);background:#fcf2f1;}
+.callout.key{border-left-color:var(--navy2);background:#eef3fa;}
+.callout .tag{display:block;font-size:7.4pt;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:var(--gold);margin-bottom:1.5mm;}
+.callout.edge .tag{color:var(--teal);} .callout.warn .tag{color:var(--red);} .callout.key .tag{color:var(--navy2);}
+.callout p:last-child{margin-bottom:0;}
+table{width:100%;border-collapse:collapse;font-size:8.3pt;margin:0 0 4mm;page-break-inside:avoid;}
+th{background:var(--navy);color:#fff;text-align:left;padding:2.4mm 2.6mm;font-weight:600;font-size:7.7pt;letter-spacing:.4px;text-transform:uppercase;}
+td{padding:2.2mm 2.6mm;border-bottom:1px solid var(--line);vertical-align:top;}
+tr:nth-child(even) td{background:#fafcfe;}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;}
+.tbl-note{font-size:7.6pt;color:var(--mute);margin:-2mm 0 4mm;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:4mm;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:4mm;}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm;}
+.stat{border:1px solid var(--line);border-top:3px solid var(--navy2);border-radius:3px;padding:3mm 3.5mm;background:#fff;}
+.stat b{display:block;font-size:15pt;color:var(--navy);font-weight:650;line-height:1.15;}
+.stat span{display:block;font-size:7.5pt;color:var(--mute);text-transform:uppercase;letter-spacing:.9px;margin-top:1mm;}
+.stat i{display:block;font-style:normal;font-size:7.8pt;color:var(--body);margin-top:1.5mm;}
+.stat.g{border-top-color:var(--green);} .stat.r{border-top-color:var(--red);}
+.stat.t{border-top-color:var(--teal);} .stat.a{border-top-color:var(--amber);}
+figure{margin:0 0 5mm;page-break-inside:avoid;}
+figcaption{font-size:7.8pt;color:var(--mute);margin-top:2mm;line-height:1.45;} figcaption b{color:var(--navy2);}
+svg{display:block;max-width:100%;}
+ul,ol{margin:0 0 .7em;padding-left:4.5mm;} li{margin-bottom:1.6mm;} .tight li{margin-bottom:.8mm;}
+.src{font-size:7.4pt;color:var(--mute);font-style:italic;}
+.pill{display:inline-block;font-size:7pt;font-weight:700;letter-spacing:.7px;text-transform:uppercase;
+ padding:.8mm 2mm;border-radius:2px;color:#fff;background:var(--navy2);}
+.pill.gold{background:var(--gold);} .pill.red{background:var(--red);} .pill.green{background:var(--green);} .pill.teal{background:var(--teal);}
+.qa{border:1px solid var(--line);border-radius:4px;margin-bottom:3.5mm;page-break-inside:avoid;overflow:hidden;}
+.qa .q{background:#eef3fa;padding:3mm 4mm;font-weight:650;color:var(--navy);font-size:9.3pt;}
+.qa .a{padding:3mm 4mm;}
+.qa .a .lbl{font-size:7.2pt;letter-spacing:1.6px;text-transform:uppercase;color:var(--teal);font-weight:700;display:block;margin-bottom:1.2mm;}
+.defn{background:#f4f7fb;border:1px dashed #b9c6d5;border-radius:3px;padding:2.6mm 3.4mm;margin:0 0 3mm;font-size:8.8pt;}
+.defn b{color:var(--navy);}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div>
+    <div class="kicker">The role, technically</div>
+    <h1>What you would<br>actually learn in<br>Ares Client Solutions</h1>
+    <div class="rule"></div>
+    <div class="sub">A technical manual for a role most people describe in generalities.
+    Built around real Ares funds, real fee schedules, and the real questions an investor asks —
+    explained from zero, with nothing assumed.</div>
+  </div>
+  <div class="qs">
+    <div><b>1</b> &nbsp;What the team is, and the one structural thing it does differently</div>
+    <div><b>2</b> &nbsp;Anatomy of the product: the fee stack, decoded</div>
+    <div><b>3</b> &nbsp;The five numbers you must be able to defend</div>
+    <div><b>4</b> &nbsp;Worked example: SDL III, read line by line</div>
+    <div><b>5</b> &nbsp;The question bank &#8212; what investors ask, and what a good answer sounds like</div>
+    <div><b>6</b> &nbsp;Inside a DDQ: the technical document that wins or loses mandates</div>
+    <div><b>7</b> &nbsp;The semi-liquid machine: NAV, tenders and pro-ration</div>
+    <div><b>8</b> &nbsp;The live news that lands on your desk in 2026</div>
+    <div><b>9</b> &nbsp;What you could not learn anywhere else</div>
+    <div><b>10</b> &nbsp;Your 1,000-character answer</div>
+  </div>
+  <footer>
+    Every number is from Ares&#8217; FY2025 Form 10-K (SEC EDGAR, CIK 1176948) unless stated, with
+    market context from Q1 and Q2 2026 earnings calls, PitchBook BDC data, ILPA guidance and
+    contemporaneous reporting.<br>
+    Compiled 11 October 2026. Fund performance figures are as at 31 December 2025. Ares reports
+    Q3 2026 on 29 October.
+  </footer>
+</div>
+
+<div class="part">
+  <div class="n">Part 1</div>
+  <h2>What the team is &#8212; in one page</h2>
+  <p>The structural fact first, because everything technical follows from it.</p>
+</div>
+
+<section>
+<p class="lead">Client Solutions is the team that owns the relationship between Ares and the
+people whose money it manages. It is not a support function attached to the investment teams.
+It is a separate, firm-wide group — and <b>where it sits in the org chart determines what you
+would learn</b>.</p>
+
+<div class="defn">
+<b>The structural fact.</b> Ares reports in five buckets: four investment groups (Credit, Real
+Assets, Secondaries, Private Equity) plus the <b>Operations Management Group</b>. Client
+Solutions, Investor Relations and wealth distribution sit in the OMG, and the 10-K states the
+OMG's "revenues and expenses are <b>not allocated to our operating segments</b>."
+</div>
+
+<p>In plain terms: the team sits <i>underneath all four investment groups at once</i>, not inside
+one. A salesperson at a firm organised the other way learns one asset class deeply. Here, an
+investor might buy senior secured loans to US mid-market companies, a Japanese logistics
+portfolio, a stake in somebody else's private equity fund bought second-hand, or a loan secured
+on music royalties — and the same person covers all of it.</p>
+
+<figure>
+<svg viewBox="0 0 760 180" role="img" aria-label="Diagram showing Client Solutions sitting horizontally beneath all four Ares investment groups">
+  <text x="0" y="13" font-size="10.5" font-weight="700" fill="#0d2340">Four product factories, one client-facing team</text>
+  <rect x="0" y="26" width="181" height="52" rx="4" fill="#eef3fa" stroke="#0d2340" stroke-width="1.3"/>
+  <text x="90" y="46" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0d2340">CREDIT</text>
+  <text x="90" y="60" text-anchor="middle" font-size="8.3" fill="#33414f">$406.9bn &#183; lending</text>
+  <text x="90" y="72" text-anchor="middle" font-size="8.3" fill="#6b7a8a">to companies</text>
+  <rect x="193" y="26" width="181" height="52" rx="4" fill="#eff7f6" stroke="#1f7a72" stroke-width="1.3"/>
+  <text x="283" y="46" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0d2340">REAL ASSETS</text>
+  <text x="283" y="60" text-anchor="middle" font-size="8.3" fill="#33414f">$139.1bn &#183; buildings,</text>
+  <text x="283" y="72" text-anchor="middle" font-size="8.3" fill="#6b7a8a">data centres</text>
+  <rect x="386" y="26" width="181" height="52" rx="4" fill="#f4f1fa" stroke="#5b4b8a" stroke-width="1.3"/>
+  <text x="476" y="46" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0d2340">SECONDARIES</text>
+  <text x="476" y="60" text-anchor="middle" font-size="8.3" fill="#33414f">$42.1bn &#183; second-hand</text>
+  <text x="476" y="72" text-anchor="middle" font-size="8.3" fill="#6b7a8a">fund stakes</text>
+  <rect x="579" y="26" width="181" height="52" rx="4" fill="#fdf8ef" stroke="#c8963e" stroke-width="1.3"/>
+  <text x="669" y="46" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0d2340">PRIVATE EQUITY</text>
+  <text x="669" y="60" text-anchor="middle" font-size="8.3" fill="#33414f">$25.3bn &#183; buying</text>
+  <text x="669" y="72" text-anchor="middle" font-size="8.3" fill="#6b7a8a">companies</text>
+  <g stroke="#c8963e" stroke-width="1.5" stroke-dasharray="3 2">
+    <line x1="90" y1="78" x2="90" y2="98"/><line x1="283" y1="78" x2="283" y2="98"/>
+    <line x1="476" y1="78" x2="476" y2="98"/><line x1="669" y1="78" x2="669" y2="98"/>
+  </g>
+  <rect x="0" y="98" width="760" height="44" rx="4" fill="#c8963e"/>
+  <text x="380" y="118" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fff">GLOBAL CLIENT SOLUTIONS &#183; 200+ professionals &#183; 2,850+ institutional relationships</text>
+  <text x="380" y="134" text-anchor="middle" font-size="8.8" fill="#fdf3e2">You would have to be able to explain all four, to someone who may be an expert in none of them</text>
+  <text x="0" y="162" font-size="8.5" fill="#33414f"><tspan font-weight="700">The learning consequence:</tspan> breadth is not a perk of this seat, it is a requirement of it. That is the first technical thing to understand about the role.</text>
+  <text x="0" y="175" font-size="8" fill="#6b7a8a">AUM as at 31 December 2025. Source: Ares FY2025 Form 10-K.</text>
+</svg>
+</figure>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 2</div>
+  <h2>Anatomy of the product: the fee stack</h2>
+  <p>You cannot sell a fund you cannot price. This is the actual mechanism.</p>
+</div>
+
+<section>
+<p>Every conversation you would have eventually reaches the same question: <i>what am I paying,
+on what, and when?</i> Ares' fees are not a single number. They are a stack of four components
+that behave differently. Here is the whole thing, using Ares' own published schedules.</p>
+
+<figure>
+<svg viewBox="0 0 760 360" role="img" aria-label="Diagram of the four components of the Ares fee stack">
+  <text x="0" y="13" font-size="10.5" font-weight="700" fill="#0d2340">The four layers, and what each one is charged on</text>
+
+  <rect x="0" y="26" width="760" height="68" rx="4" fill="#0d2340"/>
+  <text x="14" y="46" font-size="10.5" font-weight="700" fill="#fff">1. BASE MANAGEMENT FEE &#8212; the bedrock</text>
+  <text x="14" y="62" font-size="8.8" fill="#c3d5ea">A percentage of a <tspan font-style="italic">fee base</tspan>, charged whether the fund is up or down. The fee base is the technical bit:</text>
+  <text x="14" y="76" font-size="8.8" fill="#c3d5ea">it can be committed capital, invested capital, NAV, gross asset value, or par value of collateral &#8212; and it can <tspan font-weight="700">change mid-life</tspan>.</text>
+  <text x="14" y="89" font-size="8.5" fill="#9dc0e8">Ares examples &#8212; ARCC: <tspan font-weight="700" fill="#ffffff">1.50% of total assets excluding cash</tspan> &#183; ASIF: <tspan font-weight="700" fill="#ffffff">1.25% of NAV</tspan> &#183; US/European direct lending funds: 0.75%&#8211;1.50%</text>
+
+  <rect x="0" y="102" width="760" height="62" rx="4" fill="#2f4f75"/>
+  <text x="14" y="122" font-size="10.5" font-weight="700" fill="#fff">2. PART I FEE &#8212; the quarterly income fee</text>
+  <text x="14" y="138" font-size="8.8" fill="#c3d5ea">A share of the fund&#8217;s <tspan font-style="italic">net investment income</tspan> each quarter, but only above a hurdle. Ares classifies this as a</text>
+  <text x="14" y="151" font-size="8.8" fill="#c3d5ea">management fee, not a performance fee, because it is predictable, recurring and cash-settled quarterly.</text>
+  <text x="14" y="163" font-size="8.5" fill="#9dc0e8">ARCC: <tspan font-weight="700" fill="#ffffff">20% above a 1.75%/quarter hurdle</tspan> &#183; ASIF: <tspan font-weight="700" fill="#ffffff">12.5% above 1.25%/quarter</tspan> &#8212; note ASIF is the cheaper vehicle on both layers</text>
+
+  <rect x="0" y="172" width="760" height="56" rx="4" fill="#1f7a72"/>
+  <text x="14" y="192" font-size="10.5" font-weight="700" fill="#fff">3. PART II FEE / CARRIED INTEREST &#8212; the upside share</text>
+  <text x="14" y="208" font-size="8.8" fill="#cfe8e5">Part II: paid annually on realised capital gains. Carried interest: typically ~20% of profits, but only after investors</text>
+  <text x="14" y="221" font-size="8.8" fill="#cfe8e5">receive all their capital back plus a preferred return. Lumpy, uncertain, and the partners&#8217; main upside.</text>
+
+  <rect x="0" y="236" width="760" height="56" rx="4" fill="#c8963e"/>
+  <text x="14" y="256" font-size="10.5" font-weight="700" fill="#fff">4. THE OFFSETS &#8212; the layer nobody reads</text>
+  <text x="14" y="272" font-size="8.8" fill="#fdf3e2">Expense support agreements: Ares may <tspan font-style="italic">advance</tspan> expenses to support distribution of wealth vehicles. These are</text>
+  <text x="14" y="285" font-size="8.8" fill="#fdf3e2">recoverable, and recovery <tspan font-weight="700">reduces Ares&#8217; own Part I fees until repaid</tspan>. Fees can also step down &#8212; see below.</text>
+
+  <line x1="0" y1="306" x2="760" y2="306" stroke="#dfe5ec"/>
+  <text x="0" y="324" font-size="9" fill="#33414f"><tspan font-weight="700">The step-down &#8212; the single most common technical question on a closed-end fund.</tspan> During the investment period, an opportunistic credit fund charges 1.50%.</text>
+  <text x="0" y="338" font-size="9" fill="#33414f">Afterwards it <tspan font-weight="700">steps down to between 1.00% and 1.25%</tspan>, and the <tspan font-style="italic">base</tspan> often changes too &#8212; from committed capital to invested capital, or to the cost of</text>
+  <text x="0" y="352" font-size="9" fill="#33414f">remaining unrealised investments. So the fee falls twice: the rate drops <tspan font-style="italic">and</tspan> the thing it is charged on shrinks. Most candidates do not know this happens at all.</text>
+</svg>
+<figcaption><b>Why this matters for the role:</b> an investor comparing Ares to a competitor is
+rarely comparing a single headline rate. They are comparing fee <i>bases</i>, hurdles,
+catch-ups and step-downs. Being able to walk that stack is the baseline technical competence of
+the job.</figcaption>
+</figure>
+
+<div class="defn">
+<b>Catch-up, explained once.</b> A hurdle means the manager earns nothing until the fund returns
+a minimum. A <b>catch-up</b> then lets the manager collect its full percentage <i>from the first
+dollar</i> once the hurdle is cleared, rather than only on the excess. ARCC's Part I fee has a
+20% rate, a 1.75%-per-quarter hurdle and a 20% catch-up. Without the catch-up the manager would
+earn materially less; with it, crossing the hurdle is a cliff rather than a ramp.
+</div>
+
+<div class="callout edge">
+<span class="tag">Edge · catch-up fees are a different thing with the same name</span>
+<p style="margin-bottom:0">Confusingly, Ares also uses "catch-up fees" to mean something else
+entirely: fees "charged retroactively on limited partner commitments to a fund <b>following the
+initial close</b>", so that investors who join later are treated equally with those who came in
+first. On earnings calls Ares flags when a quarter contains <b>no</b> catch-up fees — because
+their presence or absence distorts quarter-on-quarter fee growth. If you can distinguish a
+<i>catch-up provision</i> (performance) from <i>catch-up fees</i> (late closers), you are already
+using the vocabulary correctly.</p>
+</div>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 3</div>
+  <h2>The five numbers you must be able to defend</h2>
+  <p>This is the technical heart of the job. Each one has a trap in it.</p>
+</div>
+
+<section>
+<p class="lead">An investor will not ask "is this a good fund?". They will ask about a specific
+number, and the question is almost always testing whether you know the number's weakness. Here
+are the five, each explained from zero, each with the trap named.</p>
+
+<h3>3.1 Gross versus net</h3>
+<div class="defn"><b>Gross return</b> is what the investments earned. <b>Net return</b> is what
+the investor actually received, after management fees, carried interest, fund expenses and
+credit facility interest.</div>
+<p>The gap is the cost of the manager. For <b>SDL III Levered</b>, Ares' 2023-vintage US senior
+direct lending fund, the gross IRR was <b>24.6%</b> and the net IRR <b>17.3%</b> — a spread of
+<b>730 basis points</b>.</p>
+
+<figure>
+<svg viewBox="0 0 760 170" role="img" aria-label="Bridge chart showing the gap between gross and net IRR on Ares SDL III Levered">
+  <text x="0" y="13" font-size="10.5" font-weight="700" fill="#0d2340">SDL III Levered &#8212; where 730 basis points go, at 31 Dec 2025</text>
+  <rect x="30" y="34" width="150" height="76" fill="#0d2340"/>
+  <text x="105" y="60" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">24.6%</text>
+  <text x="105" y="76" text-anchor="middle" font-size="8.5" fill="#9dc0e8">GROSS IRR</text>
+  <text x="105" y="90" text-anchor="middle" font-size="8" fill="#9dc0e8">what the loans earned</text>
+  <text x="105" y="126" text-anchor="middle" font-size="8.2" fill="#6b7a8a">before fees and carry</text>
+
+  <rect x="230" y="52" width="150" height="58" fill="#c8963e"/>
+  <text x="305" y="76" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">&#8722;7.3pp</text>
+  <text x="305" y="92" text-anchor="middle" font-size="8.5" fill="#fdf3e2">MANAGER&#8217;S CUT</text>
+  <text x="305" y="126" text-anchor="middle" font-size="8.2" fill="#6b7a8a">mgmt fees, carried interest,</text>
+  <text x="305" y="138" text-anchor="middle" font-size="8.2" fill="#6b7a8a">fund expenses, facility interest</text>
+
+  <rect x="430" y="56" width="150" height="54" fill="#2f7d55"/>
+  <text x="505" y="80" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">17.3%</text>
+  <text x="505" y="96" text-anchor="middle" font-size="8.5" fill="#cfe8da">NET IRR</text>
+  <text x="505" y="126" text-anchor="middle" font-size="8.2" fill="#6b7a8a">what the investor keeps</text>
+
+  <text x="600" y="66" font-size="9" font-weight="700" fill="#b4413c">THE TRAP</text>
+  <text x="600" y="81" font-size="8.3" fill="#33414f">A competitor quoting</text>
+  <text x="600" y="93" font-size="8.3" fill="#33414f">&#8220;24%&#8221; may be quoting</text>
+  <text x="600" y="105" font-size="8.3" fill="#33414f">gross against your net.</text>
+  <text x="600" y="121" font-size="8.3" font-weight="700" fill="#b4413c">Always establish which.</text>
+  <line x1="0" y1="152" x2="760" y2="152" stroke="#dfe5ec"/>
+  <text x="0" y="166" font-size="8" fill="#6b7a8a">Source: Ares FY2025 Form 10-K, Credit Group fund performance metrics. Past performance is not indicative of future results.</text>
+</svg>
+</figure>
+
+<h3>3.2 Levered versus unlevered &#8212; the same fund, two different answers</h3>
+<p>This is the one that genuinely surprises people. Ares offers many credit funds in two
+sleeves. The <b>unlevered</b> sleeve holds the loans outright. The <b>levered</b> sleeve borrows
+against them to buy more. Same manager, same loans, same vintage — very different returns.</p>
+
+<table>
+<tr><th style="width:24%">Fund and sleeve</th><th class="num" style="width:13%">Gross IRR</th><th class="num" style="width:13%">Net IRR</th><th class="num" style="width:13%">Net MoIC</th><th>What it tells you</th></tr>
+<tr><td><b>SDL III Unlevered</b><br><small>US direct lending, 2023</small></td><td class="num">12.9%</td><td class="num">9.6%</td><td class="num">1.1x</td><td rowspan="2">The levered sleeve produced <b>nearly double the gross IRR</b> from the same underlying loans. Leverage amplifies both directions — in a downturn the same mechanism works against you.</td></tr>
+<tr><td><b>SDL III Levered</b></td><td class="num"><b>24.6%</b></td><td class="num"><b>17.3%</b></td><td class="num">1.1x</td></tr>
+<tr><td><b>ACE VI Unlevered</b><br><small>European direct lending, 2022</small></td><td class="num">12.3%</td><td class="num">8.8%</td><td class="num">1.1x</td><td rowspan="2">The same pattern in Europe, with a narrower spread. Comparing the two spreads tells you how much leverage each sleeve carries.</td></tr>
+<tr><td><b>ACE VI Levered</b></td><td class="num">18.6%</td><td class="num">13.2%</td><td class="num">1.1x</td></tr>
+</table>
+<p class="tbl-note">Source: Ares FY2025 Form 10-K, as at 31 December 2025. ACE VI figures combine the levered and unlevered parallel funds converted to US dollars at quarter-end rates.</p>
+
+<div class="callout warn">
+<span class="tag">The trap</span>
+<p style="margin-bottom:0">Note the <b>net MoIC is 1.1x for all four</b>. Leverage has transformed
+the IRR while barely moving the multiple. That is because IRR is time-sensitive and MoIC is not —
+borrowing lets you deploy sooner and return cash faster, which flatters an annualised rate far
+more than a multiple. <b>If someone quotes you a direct lending IRR without saying whether the
+sleeve is levered, the number is close to meaningless.</b> This single distinction will put you
+ahead of most people in the building's first-year analyst cohort.</p>
+</div>
+
+<h3>3.3 IRR versus MoIC</h3>
+<div class="defn"><b>MoIC</b> (multiple of invested capital) is simply money out divided by money
+in. 1.4x means you got £1.40 back for every £1. It ignores time entirely. <b>IRR</b> is the
+annualised rate of return, and it is extremely sensitive to <i>when</i> cash moves.</div>
+<p>A fund returning 1.4x over three years has a far higher IRR than one returning 1.4x over eight
+years, despite identical multiples. An investor who cares about compounding asks for IRR; one
+who cares about total value asks for MoIC. <b>Good managers publish both, and Ares does.</b></p>
+
+<h3>3.4 The subscription line &#8212; the most technical thing in this report</h3>
+<div class="defn"><b>A subscription credit facility</b> is a loan the fund takes, secured against
+investors' unfunded commitments. Instead of calling cash from investors to buy an asset, the
+fund borrows, buys, and calls the cash later.</div>
+<p>This is administratively convenient and completely standard. It also <b>mechanically inflates
+the fund's IRR</b>, because IRR measures returns from the moment investors' money leaves their
+account — and the facility delays that moment.</p>
+
+<div class="callout edge">
+<span class="tag">Edge · Ares discloses this against itself, in its own 10-K</span>
+<p>Ares states, in the footnotes to every fund performance table: <i>"Early in the life of a
+fund, the gross fund-level MoICs <b>would generally have been lower</b> had such fund called
+capital from its limited partners instead of utilizing the credit facility."</i> The same
+sentence appears for net MoIC, gross IRR and net IRR — <b>sixteen times</b> across the FY2025
+10-K.</p>
+<p style="margin-bottom:0">Why this matters: the <b>Institutional Limited Partners Association
+(ILPA)</b> — the body representing investors — has issued guidance since 2017 asking managers to
+report net IRR <b>both with and without</b> the facility, precisely because it distorts
+comparisons. ILPA notes there is still "not an agreed upon methodology" for doing so. <b>A
+sophisticated investor will ask this question</b>, and knowing that Ares already flags it is
+exactly the kind of preparation that separates a good answer from a flustered one.</p>
+</div>
+
+<h3>3.5 Currency sleeves &#8212; the detail hiding in a footnote</h3>
+<p>SDL III accepts commitments in <b>US dollars, sterling and yen</b>. The headline 12.9% gross /
+9.6% net is for dollar investors. For <b>sterling</b> investors the same fund returned
+<b>13.8% gross and 10.3% net</b>.</p>
+<p style="margin-bottom:0"><b>Same fund, same assets, same manager, different answer depending on
+which currency you committed in</b> — driven by hedging costs and interest rate differentials
+between currencies. If a UK pension scheme asks "what did SDL III return?", the correct response
+begins with a question: <i>in which currency are you committed?</i> That is the technical
+reflex this job builds.</p>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 4</div>
+  <h2>Worked example: SDL III, read line by line</h2>
+  <p>One row of a 10-K table, fully decoded. This is what fluency looks like.</p>
+</div>
+
+<section>
+<p>Below is the actual disclosure line for Ares Senior Direct Lending Fund III. If you can read
+this row out loud and explain every field, you can hold a technical conversation about any Ares
+credit fund.</p>
+
+<figure>
+<svg viewBox="0 0 760 330" role="img" aria-label="Annotated breakdown of the SDL III fund performance disclosure line">
+  <rect x="0" y="24" width="760" height="30" rx="3" fill="#0d2340"/>
+  <text x="8" y="43" font-size="8.6" font-weight="700" fill="#fff">SDL III Levered &#8226; U.S. Direct Lending &#8226; 2023 &#8226; AUM $27,353m &#8226; Commitments $11,959m &#8226; Invested $4,540m &#8226; Realised $407m &#8226; Unrealised $4,766m &#8226; Total $5,173m &#8226; 1.2x / 1.1x &#8226; 24.6 / 17.3</text>
+
+  <g font-size="8.4" fill="#33414f">
+    <rect x="0" y="66" width="370" height="36" rx="3" fill="#f4f7fb" stroke="#dfe5ec"/>
+    <text x="8" y="81" font-weight="700" fill="#16355e">Year of inception: 2023</text>
+    <text x="8" y="95">The vintage. Loans written into 2023&#8211;25 conditions &#8212; high base rates, wide spreads.</text>
+
+    <rect x="390" y="66" width="370" height="36" rx="3" fill="#f4f7fb" stroke="#dfe5ec"/>
+    <text x="398" y="81" font-weight="700" fill="#16355e">AUM $27,353m vs Commitments $11,959m</text>
+    <text x="398" y="95">AUM includes fund-level debt and undrawn capital. Commitments are investor promises only.</text>
+
+    <rect x="0" y="110" width="370" height="36" rx="3" fill="#f4f7fb" stroke="#dfe5ec"/>
+    <text x="8" y="125" font-weight="700" fill="#16355e">Capital invested to date: $4,540m</text>
+    <text x="8" y="139">Of $11,959m committed, 38% is deployed. The rest is dry powder still to be called.</text>
+
+    <rect x="390" y="110" width="370" height="36" rx="3" fill="#f4f7fb" stroke="#dfe5ec"/>
+    <text x="398" y="125" font-weight="700" fill="#16355e">Realised $407m &#183; Unrealised $4,766m</text>
+    <text x="398" y="139">Only 8% of value is cash in hand. The rest is a <tspan font-style="italic">valuation</tspan> &#8212; hence the valuation questions.</text>
+
+    <rect x="0" y="154" width="370" height="36" rx="3" fill="#fdf8ef" stroke="#c8963e"/>
+    <text x="8" y="169" font-weight="700" fill="#c8963e">Gross MoIC 1.2x &#183; Net MoIC 1.1x</text>
+    <text x="8" y="183">Money out over money in. The 0.1x gap is the manager&#8217;s cut expressed as a multiple.</text>
+
+    <rect x="390" y="154" width="370" height="36" rx="3" fill="#fdf8ef" stroke="#c8963e"/>
+    <text x="398" y="169" font-weight="700" fill="#c8963e">Gross IRR 24.6% &#183; Net IRR 17.3%</text>
+    <text x="398" y="183">Annualised. Flattered by leverage <tspan font-style="italic">and</tspan> by the subscription facility.</text>
+  </g>
+
+  <rect x="0" y="204" width="760" height="62" rx="4" fill="#eef3fa" stroke="#16355e" stroke-width="1.3"/>
+  <text x="12" y="222" font-size="9.5" font-weight="700" fill="#16355e">The sentence that ties it together &#8212; say this and you sound like you work there</text>
+  <text x="12" y="240" font-size="8.8" fill="#33414f">&#8220;SDL III is a 2023-vintage senior direct lending fund. The levered sleeve shows a 24.6% gross and 17.3% net IRR, but the net MoIC is only 1.1x &#8212;</text>
+  <text x="12" y="253" font-size="8.8" fill="#33414f">so most of that IRR is leverage and deployment timing, not multiple. Thirty-eight percent of commitments are drawn, and ninety-two percent of</text>
+  <text x="12" y="261" font-size="8.8" fill="#33414f">total value is still unrealised, so it is early.&#8221;</text>
+
+  <text x="0" y="288" font-size="9" font-weight="700" fill="#b4413c">What a weak candidate says instead</text>
+  <text x="0" y="304" font-size="8.8" fill="#33414f">&#8220;SDL III has returned 24.6%.&#8221; &#8212; wrong sleeve unstated, gross quoted as if net, no acknowledgement that the fund is two years old and barely realised.</text>
+  <text x="0" y="322" font-size="8" fill="#6b7a8a">All figures from Ares FY2025 Form 10-K, Credit Group fund performance metrics, as at 31 December 2025. Dollar-committed investors. Past performance is not indicative of future results.</text>
+</svg>
+</figure>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 5</div>
+  <h2>The question bank</h2>
+  <p>Ten real questions, with the technical answer and the number behind it.</p>
+</div>
+
+<section>
+<p>This is the closest thing to a transcript of the job. Each question is one a genuine
+institutional investor or wealth platform asks. The answers use Ares' disclosed figures.</p>
+
+<div class="qa"><div class="q">1. "What is your non-accrual rate, and how do you define it?"</div>
+<div class="a"><span class="lbl">Why they ask &#183; the single most important health metric in credit</span>
+<p style="margin-bottom:0">A <b>non-accrual</b> is a loan where the borrower has stopped paying and
+the lender stops booking the interest as income. It is the first hard evidence of credit
+deterioration. <b>ARCC's non-accruals at amortised cost were 1.8% at end-2025, 2.1% in Q1 2026
+and 2.4% in Q2 2026</b> — three consecutive increases — against roughly 1.4% at fair value and a
+historical average near 3% since the financial crisis. The honest answer names the trend
+<i>and</i> the benchmark. Note "at cost" and "at fair value" give different numbers; always say which.</p></div></div>
+
+<div class="qa"><div class="q">2. "How much of your income is PIK?"</div>
+<div class="a"><span class="lbl">Why they ask &#183; non-cash income can disguise stress</span>
+<p style="margin-bottom:0"><b>PIK</b> means payment-in-kind: instead of paying interest in cash,
+the borrower adds it to the loan balance. Sometimes that is a deliberate structure for a growing
+company; sometimes it is a struggling borrower being granted relief. Across the fifteen largest
+listed BDCs, PIK ran at about <b>8.2%&#8211;8.3% of total interest income through 2026</b>, the
+lowest since Q4 2023. Concentration is uneven — <b>Prospect Capital at 35%, FS KKR 27%,
+Blackstone Secured Lending 20%</b>. Ares does not appear among the highest. A Lincoln
+International estimate put ~11% of private credit portfolios as carrying PIK, of which ~6% was
+distress-driven.</p></div></div>
+
+<div class="qa"><div class="q">3. "Is that IRR with or without the subscription line?"</div>
+<div class="a"><span class="lbl">Why they ask &#183; the sophisticated investor&#8217;s test question</span>
+<p style="margin-bottom:0">See 3.4. Ares' own footnotes state returns "would generally have been
+lower" without the facility. ILPA has asked since 2017 for net IRR reported both ways, and
+acknowledges there is no agreed methodology. <b>The right answer is not a number, it is
+transparency about method</b> — which is exactly what ILPA asks for.</p></div></div>
+
+<div class="qa"><div class="q">4. "What is the loan-to-value on the portfolio?"</div>
+<div class="a"><span class="lbl">Why they ask &#183; it measures the cushion beneath the loan</span>
+<p style="margin-bottom:0"><b>LTV</b> is the loan divided by the enterprise value of the borrower.
+At 40% LTV, the company's value would have to fall by 60% before the lender loses a penny — the
+equity owner absorbs losses first. Ares' software book runs at roughly <b>40% LTV</b> with about
+<b>10% EBITDA growth</b> and a weighted average remaining maturity near <b>three years</b>.</p></div></div>
+
+<div class="qa"><div class="q">5. "Given AI, what is your software exposure?"</div>
+<div class="a"><span class="lbl">Why they ask &#183; the defining market question of 2026</span>
+<p style="margin-bottom:0">Software is about <b>6% of total AUM and under 8% of private credit
+AUM</b>. Ares commissioned a <b>nine-week review by a top-three consultancy</b>: <b>86% of the
+software portfolio low risk, 13% medium, 1% high</b>, putting medium-to-high at <b>under 2% of
+US and European direct lending AUM and under 1% firm-wide</b>. Supporting evidence from traded
+markets: loans to core operational software are down ~2% year-to-date while content-generation
+and productivity software loans are down ~24% and trade below 65.</p></div></div>
+
+<div class="qa"><div class="q">6. "Why did you pro-rate the tender, and will it happen again?"</div>
+<div class="a"><span class="lbl">Why they ask &#183; they could not get their money out</span>
+<p style="margin-bottom:0">ASIF received repurchase requests of <b>11.6% of shares in Q1 2026
+against a 5% cap</b> — <b>43.1% of each request was honoured, paying out $523.5m</b> — then
+<b>14.4% in Q2</b>. The context that matters: requests from the <b>US private wealth channel
+were only 2.4% of shares</b>, down more than 35% quarter-on-quarter, and nearly half of all
+requests came from smaller non-US institutions and family offices representing <b>under 1% of
+the fund's 20,000+ shareholders</b>. Management's stress case: the full 5% cap every quarter for
+a year with zero inflows would cost about <b>1% of fee-paying AUM</b>.</p></div></div>
+
+<div class="qa"><div class="q">7. "What happens to the fee after the investment period?"</div>
+<div class="a"><span class="lbl">Why they ask &#183; total cost of ownership over the fund&#8217;s life</span>
+<p style="margin-bottom:0">It usually falls twice. An opportunistic credit fund charges 1.50%
+during the investment period, then <b>steps down to 1.00%&#8211;1.25%</b>, and the base changes
+from committed capital to invested capital or the cost of remaining unrealised investments. For
+corporate private equity the step-down is to <b>0.75%&#8211;1.00%</b>, triggered by the earlier of
+the investment period ending <i>or</i> a successor fund activating.</p></div></div>
+
+<div class="qa"><div class="q">8. "Who else is in the fund, and how concentrated is it?"</div>
+<div class="a"><span class="lbl">Why they ask &#183; co-investor quality and exit risk</span>
+<p style="margin-bottom:0">An investor wants to know they are not the only one, and that no single
+holder could force a liquidation. Ares raised 2025 commitments from <b>over 540 institutional
+investors, 235 of them new</b>, across <b>190+ vehicles</b>, with <b>2,850+ direct institutional
+relationships</b>. This is also where alignment lands: <b>Ares and its employees have over $7.2bn
+committed</b>, of which <b>$3.6bn is employee money</b> — more than the firm's own $3.4bn.</p></div></div>
+
+<div class="qa"><div class="q">9. "How do you value assets nobody trades?"</div>
+<div class="a"><span class="lbl">Why they ask &#183; 92% of SDL III&#8217;s value is unrealised</span>
+<p style="margin-bottom:0">This is the <b>number one trust driver</b> in LP surveys — 39% named
+clear explanation of valuation methods and assumptions, more than any other factor. For private
+loans, valuation typically rests on discounted cash flow and comparable market yields, reviewed
+by independent third parties and the fund's auditors. <b>You would not perform the valuation;
+you would have to explain it</b> — which is why this role teaches you how a mark is actually
+built.</p></div></div>
+
+<div class="qa"><div class="q">10. "What did you learn from First Brands and Tricolor?"</div>
+<div class="a"><span class="lbl">Why they ask &#183; testing whether you deflect</span>
+<p style="margin-bottom:0">Both 2025 collapses were <b>fraud</b>, not credit cycle: Tricolor
+pledged the same auto-loan collateral to multiple lenders; First Brands collapsed with $11.6bn
+of liabilities amid allegations of fabricated receivables and double-pledged inventory. Ares'
+own 10-K concedes the industry faces "increased negative publicity... following certain high
+profile defaults and bankruptcies" while noting Ares "<b>has not been involved in those
+particular defaults</b>." The good answer moves to process — collateral verification, lender
+documentation, being lead or sole lender so you control the terms.</p></div></div>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 6</div>
+  <h2>Inside a DDQ</h2>
+  <p>The document that wins or loses mandates before anyone meets anyone.</p>
+</div>
+
+<section>
+<div class="defn"><b>A DDQ</b> — due diligence questionnaire — is a standardised document an
+investor sends before committing. <b>An RFP</b> — request for proposal — is a competitive tender,
+often run by an investment consultant on behalf of a pension scheme. Both are written, scored,
+and frequently decide the outcome before a single meeting happens.</div>
+
+<p>Ares has a <b>dedicated RFP &amp; Diligence team</b> sitting under the COO of Global Client
+Solutions. At most firms this work is done badly, late, by a salesperson. Building a standing
+team for it is a deliberate choice — and as an intern it is one of the places you would most
+plausibly do real work, because the questions are factual and the sources are internal.</p>
+
+<h3>6.1 What is actually in one</h3>
+<table>
+<tr><th style="width:22%">Section</th><th>Representative questions &#8212; and what they are really testing</th></tr>
+<tr><td><b>Firm and ownership</b></td><td>Who owns the manager? Is it a controlled company? What is employee ownership? <i>Testing: stability and alignment. Ares' answers are unusually strong — 37.13% employee ownership, $3.6bn of employee capital in the funds.</i></td></tr>
+<tr><td><b>Team and key persons</b></td><td>Who are the key persons? What happens if they leave? <i>Testing: whether the fund's governing documents let investors suspend or terminate the investment period on a key-person departure — Ares discloses that they can.</i></td></tr>
+<tr><td><b>Track record</b></td><td>Gross and net IRR and MoIC by vintage; realised versus unrealised; returns with and without the subscription facility. <i>Testing: everything in Part 3.</i></td></tr>
+<tr><td><b>Valuation policy</b></td><td>Who values assets? How often? What independent review? <i>Testing: the #1 trust driver in LP surveys.</i></td></tr>
+<tr><td><b>Fees and expenses</b></td><td>Full fee schedule, bases, step-downs, hurdles, catch-ups, offsets, what expenses the fund bears. <i>Testing: whether the total cost of ownership is as advertised.</i></td></tr>
+<tr><td><b>Risk and portfolio</b></td><td>Non-accruals, PIK share, LTV, sector and single-name concentration, leverage. <i>Testing: the credit quality questions in Part 5.</i></td></tr>
+<tr><td><b>Operations and controls</b></td><td>Fund administrator, auditor, custodian, cybersecurity, business continuity, compliance programme. <i>Testing: operational due diligence, which can veto a mandate on its own regardless of returns.</i></td></tr>
+<tr><td><b>Terms</b></td><td>Fund life, extensions, redemption rights, transfer restrictions, most-favoured-nation provisions, waterfall type. <i>Testing: what the investor can actually do if things go wrong.</i></td></tr>
+</table>
+
+<div class="callout edge">
+<span class="tag">Edge · why the DDQ is the best technical teacher in the building</span>
+<p style="margin-bottom:0">A DDQ forces you to source every claim. You cannot write "strong
+performance" — you must write the net IRR, name the vintage, state the sleeve and footnote the
+methodology. <b>Working on DDQs is how client-facing people in this industry actually learn the
+technical material</b>, far more than from pitch decks. If you are asked in interview what you
+would want to work on, naming the DDQ and RFP process is a genuinely sophisticated answer, and
+almost nobody gives it.</p>
+</div>
+
+<div class="defn"><b>Waterfall</b>, since it appears above. The order in which fund profits are
+split. <b>European-style</b>: the manager earns carried interest only after investors get back
+<i>all</i> their capital plus a preferred return. <b>American-style</b>: carry is paid deal by
+deal, as each investment is realised. European is more investor-friendly, and <b>Ares' credit
+funds predominantly use it</b> — the 10-K labels ASOF, Pathfinder and other funds "European".</div>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 7</div>
+  <h2>The semi-liquid machine</h2>
+  <p>How a private-credit fund gives individual investors monthly access to illiquid loans.</p>
+</div>
+
+<section>
+<p class="lead">The wealth channel runs on a structure most people — including most finance
+students — cannot explain. It is the engineering problem at the centre of the industry's growth,
+and it is why 2026 has been difficult.</p>
+
+<p><b>The problem:</b> the underlying assets are loans that take years to repay. The investors
+are individuals who expect to get money back on request. Those two facts are incompatible, and
+the semi-liquid structure is the compromise.</p>
+
+<figure>
+<svg viewBox="0 0 760 300" role="img" aria-label="Diagram of how a semi-liquid fund matches illiquid assets with periodic investor liquidity">
+  <text x="0" y="13" font-size="10.5" font-weight="700" fill="#0d2340">How money gets in, and how it gets out</text>
+
+  <rect x="0" y="26" width="360" height="92" rx="5" fill="#eff7f6" stroke="#1f7a72" stroke-width="1.4"/>
+  <text x="14" y="46" font-size="10" font-weight="700" fill="#1f7a72">GETTING IN &#8212; easy, monthly</text>
+  <text x="14" y="64" font-size="8.6" fill="#33414f">Shares are sold at <tspan font-weight="700">net asset value</tspan>, usually monthly.</text>
+  <text x="14" y="78" font-size="8.6" fill="#33414f">NAV is struck by valuing every loan in the portfolio,</text>
+  <text x="14" y="92" font-size="8.6" fill="#33414f">dividing by shares outstanding. An investor buys at</text>
+  <text x="14" y="106" font-size="8.6" fill="#33414f">that price. No queue, no cap.</text>
+
+  <rect x="400" y="26" width="360" height="92" rx="5" fill="#fdf8ef" stroke="#c8963e" stroke-width="1.4"/>
+  <text x="414" y="46" font-size="10" font-weight="700" fill="#c8963e">GETTING OUT &#8212; rationed, quarterly</text>
+  <text x="414" y="64" font-size="8.6" fill="#33414f">The fund makes a <tspan font-weight="700">tender offer</tspan>, typically to buy back</text>
+  <text x="414" y="78" font-size="8.6" fill="#33414f">up to <tspan font-weight="700">5% of shares per quarter</tspan>. Investors who want out</text>
+  <text x="414" y="92" font-size="8.6" fill="#33414f">submit a request. Many funds also charge an <tspan font-weight="700">early</tspan></text>
+  <text x="414" y="106" font-size="8.6" fill="#33414f"><tspan font-weight="700">repurchase deduction</tspan> &#8212; commonly 2% within year one.</text>
+
+  <rect x="0" y="132" width="760" height="78" rx="5" fill="#fcf2f1" stroke="#b4413c" stroke-width="1.4"/>
+  <text x="14" y="152" font-size="10" font-weight="700" fill="#b4413c">WHEN REQUESTS EXCEED THE CAP &#8212; pro-ration</text>
+  <text x="14" y="170" font-size="8.8" fill="#33414f">If 11.6% of shares ask to leave and the cap is 5%, the fund cannot honour everyone. Each request is scaled down by the same factor.</text>
+  <text x="14" y="185" font-size="8.8" fill="#33414f">In ASIF&#8217;s Q1 2026 tender, <tspan font-weight="700">43.1% of each request was honoured</tspan>, paying out <tspan font-weight="700">$523.5m</tspan>. An investor asking for &#163;100,000 received &#163;43,100.</text>
+  <text x="14" y="202" font-size="8.8" fill="#33414f">They must then re-apply next quarter. <tspan font-weight="700">The cap is a feature, not a failure</tspan> &#8212; without it the fund would be forced to dump loans at distressed prices.</text>
+
+  <rect x="0" y="224" width="760" height="56" rx="5" fill="#eef3fa" stroke="#16355e" stroke-width="1.3"/>
+  <text x="14" y="244" font-size="9.5" font-weight="700" fill="#16355e">Why this is the hardest conversation in the job</text>
+  <text x="14" y="261" font-size="8.8" fill="#33414f">The person explaining pro-ration did not set the cap, cannot change it, and is telling someone they cannot have their own money this quarter.</text>
+  <text x="14" y="275" font-size="8.8" fill="#33414f">Doing that well &#8212; accurately, without defensiveness, with the structural reason &#8212; is the single most valuable thing you could learn in 2026.</text>
+  <text x="0" y="296" font-size="8" fill="#6b7a8a">Sources: Ares Q1 and Q2 2026 disclosures on ASIF tenders; early repurchase deduction terms are a standard feature of US evergreen and non-traded BDC structures, not specific to Ares.</text>
+</svg>
+</figure>
+
+<div class="callout key">
+<span class="tag">The technical point worth internalising</span>
+<p style="margin-bottom:0"><b>A semi-liquid fund is a liquidity transformation engine.</b> It
+converts assets that take 3&#8211;7 years to repay into a product offering quarterly partial
+liquidity, and it manages the mismatch with a cap. Every argument about private credit and retail
+investors — including the questions from the House Financial Services Committee in April 2026 —
+is ultimately an argument about whether that transformation is honestly explained. <b>Being the
+person who explains it honestly is the job.</b></p>
+</div>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 8</div>
+  <h2>The live news that lands on your desk</h2>
+  <p>Four running stories in 2026, each producing a specific question you would answer.</p>
+</div>
+
+<section>
+<table>
+<tr><th style="width:21%">The story</th><th style="width:30%">What happened</th><th>The question it produces &#8212; and what you would learn answering it</th></tr>
+<tr><td><b>AI and software</b><br><span class="pill red">Biggest</span></td>
+<td>Investors decided AI might destroy mid-market software companies. ARES fell ~32% in Q1 2026 and was at one point 46% off its peak.</td>
+<td><i>"How exposed are you?"</i> Answering it teaches you to decompose a portfolio by sector, understand <b>why core operational software differs from content-generation software</b>, and use third-party validation (the nine-week consultant review) rather than assertion. This is portfolio analysis, taught by necessity.</td></tr>
+<tr><td><b>Fraud and documentation</b></td>
+<td>Tricolor double-pledged collateral; First Brands collapsed with $11.6bn of liabilities amid alleged fabricated receivables. Both 2025.</td>
+<td><i>"How do you know your collateral exists?"</i> Teaches you <b>loan documentation, collateral perfection and why being lead or sole lender matters</b> — Ares' direct lending philosophy is explicitly to lead so it controls "deal terms, capital structure, documentation."</td></tr>
+<tr><td><b>Redemptions and liquidity</b></td>
+<td>ASIF pro-rated two consecutive tenders. Peers were worse — Blue Owl's tech fund saw 41% of shares requested against a 5% cap.</td>
+<td><i>"Can I get my money out?"</i> Teaches you the full semi-liquid mechanism in Part 7, plus how to size a worry rather than soothe it (the ~1% of FPAUM stress case).</td></tr>
+<tr><td><b>Political and regulatory scrutiny</b></td>
+<td>On 1 April 2026 Democrats on the House Financial Services Committee sent inquiries to Ares, Blackstone, Apollo, BlackRock, Blue Owl, Carlyle and KKR on marketing, valuation, fees, leverage, incentives, audits, BDC handling and PIK loans.</td>
+<td><i>"Are you going to be regulated differently?"</i> Teaches you how <b>disclosure standards and fund terms respond to political pressure</b> — and that every topic on that list is one a client team must be able to explain.</td></tr>
+</table>
+<p class="tbl-note">The congressional item was a set of written inquiries reported on 1 April 2026, not sworn testimony. Describe it accurately if you raise it.</p>
+
+<div class="callout edge">
+<span class="tag">Edge · the pattern across all four</span>
+<p style="margin-bottom:0">Look at the right-hand column. <b>Every live controversy in private
+credit converts into a technical question that arrives at the client-facing desk first.</b> The
+investment team experiences AI risk as an underwriting problem. Client Solutions experiences it
+as 200 investors asking the same question in the same month, each needing an accurate,
+consistent, defensible answer. <b>That is the actual learning mechanism of this role</b> — you
+are forced to understand things properly because you have to explain them repeatedly to people
+who will check.</p>
+</div>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 9</div>
+  <h2>What you could not learn anywhere else</h2>
+  <p>The honest version: most of this role is learnable at any large manager. These seven things are not.</p>
+</div>
+
+<section>
+<p class="lead">Plenty of firms would teach you gross versus net. The question is what is
+specific to <i>this</i> platform. Seven things, ranked by how hard they would be to get elsewhere.</p>
+
+<table>
+<tr><th style="width:4%">#</th><th style="width:27%">What you would learn</th><th>Why Ares specifically &#8212; and where else you could get it</th></tr>
+<tr><td><b>1</b></td><td><b>Two direct lending markets, not one</b></td>
+<td>Ares runs <b>$189.6bn in US direct lending covering 520+ sponsors</b> and <b>$84.7bn in European direct lending covering 435+ sponsors</b>. European lending is structurally harder — multiple legal systems, languages and insolvency regimes. <b>Very few firms are genuinely scaled in both</b>, so very few seats teach you how a UK unitranche differs from a US one. <span class="src">Elsewhere: possible at a handful of firms, not many.</span></td></tr>
+<tr><td><b>2</b></td><td><b>Institutional and wealth channels under one roof</b></td>
+<td>Most managers are predominantly one or the other. Ares is <b>76% institutional</b> and simultaneously runs <b>eight semi-liquid wealth products on 80+ platforms</b>. You would see a sovereign wealth fund negotiating a bespoke SMA and a private bank adviser asking about a quarterly tender — <b>the same asset class explained in two completely different technical languages</b>. <span class="src">Elsewhere: rare in one seat.</span></td></tr>
+<tr><td><b>3</b></td><td><b>Insurance-client technical vocabulary</b></td>
+<td><b>$86.5bn of Ares AUM comes from insurance companies</b>, and insurance fee-paying AUM grew <b>54% year on year</b> — the firm's fastest-growing channel. Insurers ask different questions: risk-based capital treatment, asset-liability duration matching, ratings-agency treatment, NAIC designations. <span class="src">Elsewhere: Apollo and KKR, but there it sits inside an owned insurer rather than a client relationship.</span></td></tr>
+<tr><td><b>4</b></td><td><b>Structurally complex funds</b></td>
+<td>SDL III alone has <b>levered and unlevered sleeves and three currency classes</b> with materially different reported returns (12.9%/9.6% in USD versus 13.8%/10.3% in GBP, gross/net). Explaining that correctly is a genuine skill, and you only build it on funds that are actually built that way. <span class="src">Elsewhere: only at managers running multi-sleeve, multi-currency vehicles.</span></td></tr>
+<tr><td><b>5</b></td><td><b>Secondaries &#8212; pricing other managers' funds</b></td>
+<td>Ares' <b>$42.1bn Secondaries Group</b> buys second-hand stakes in other firms' funds. To sell it you must understand <b>how one manager values another manager's portfolio at a discount</b> — which teaches you more about valuation than any single-strategy seat. Live example: in July 2026 Ares moved to sell ~$3.4bn of LP interests in its own ACE IV to credit-secondaries buyers. <span class="src">Elsewhere: specialist secondaries firms, but without the credit platform alongside.</span></td></tr>
+<tr><td><b>6</b></td><td><b>A dedicated RFP &amp; Diligence function to learn from</b></td>
+<td>Most firms have no such team, so the technical writing is done ad hoc. Here there is a standing team under the Global Client Solutions COO — meaning there is an actual apprenticeship in sourcing and defending every claim. <span class="src">Elsewhere: uncommon at this level of formality.</span></td></tr>
+<tr><td><b>7</b></td><td><b>A stress year, from inside</b></td>
+<td>2026 gave Ares an AI-driven selloff, two pro-rated tenders, rising non-accruals, and congressional inquiries &#8212; while it raised a <b>record $36.4bn in Q2</b> and closed <b>Pathfinder III oversubscribed at $8.5bn</b> against a $6.5bn target. <b>You cannot manufacture this.</b> Learning client communication in a calm year teaches you half the job. <span class="src">Elsewhere: nowhere, by definition &#8212; this window closes.</span></td></tr>
+</table>
+
+<div class="callout warn">
+<span class="tag">Careful · don't overclaim</span>
+<p style="margin-bottom:0">Items 1, 2, 3 and 5 are about <b>breadth available in one seat</b>, not
+about Ares being the only place each thing exists. The defensible claim is: "very few firms
+combine scaled US and European direct lending, a large insurance client book, a secondaries
+platform and a built-out wealth channel in one client-facing team." That is true and specific.
+"Nowhere else does this" is not, and an interviewer who works at a competitor will know it.</p>
+</div>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 10</div>
+  <h2>Your 1,000-character answer</h2>
+  <p>"What do you hope to learn whilst interning at Ares?"</p>
+</div>
+
+<section>
+<div class="callout key">
+<span class="tag">The strategy for this specific question</span>
+<p>A 1,000-character limit is roughly 170&#8211;180 words — <b>tight</b>. That rules out listing
+four things. The winning structure is: <b>one technical thing you want to master, one commercial
+thing you want to understand, and one sentence on why Ares specifically.</b></p>
+<p style="margin-bottom:0">The common failure is naming skills ("communication, teamwork,
+commercial awareness"). Name <b>a specific technical capability instead</b> — it proves you
+already know what the work involves.</p>
+</div>
+
+<div class="card soft">
+<h4>Draft &#8212; 938 characters including spaces</h4>
+<p>Two things, mainly.</p>
+<p>First, how to explain a private credit return accurately. Reading Ares' fund disclosures, SDL
+III's levered sleeve shows a 24.6% gross and 17.3% net IRR, but the net MoIC is only 1.1x, so
+most of that is leverage and deployment timing. Sterling-committed investors see different
+figures again. I want to get to the point where I can explain that to someone without
+oversimplifying it or hiding behind it. Working on DDQs would be the fastest way, because they
+force you to source every claim.</p>
+<p>Second, how investors actually decide. With roughly 79% of institutional fundraising coming
+from existing investors, retention isn't a service function at Ares, it's the growth engine. I
+want to understand what makes someone commit to a second product.</p>
+<p style="margin-bottom:0">I'd also rather learn this in a hard year. Explaining a pro-rated
+tender to a worried client is harder than explaining a good quarter, and I suspect it teaches
+you more.</p>
+</div>
+
+<div class="grid2">
+<div class="card"><h4 style="color:var(--green)">Why this works</h4>
+<ul class="tight" style="margin-bottom:0">
+<li>Opens with a <b>real number from a real fund</b> — proves you read filings, not the website.</li>
+<li>The MoIC-versus-IRR point is <b>genuinely technical</b> and almost nobody will make it.</li>
+<li>The currency sleeve detail is a footnote-level find.</li>
+<li>Links learning to the <b>commercial model</b> (79%), not to personal development.</li>
+<li>Naming the <b>DDQ</b> is the sophisticated touch &#8212; see Part 6. Almost nobody says it.</li>
+<li>The closing line shows you know what 2026 is actually like and are choosing it.</li>
+<li><b>Says "learn", not "bring"</b> — answers the question asked.</li>
+</ul></div>
+<div class="card"><h4 style="color:var(--red)">What to avoid</h4>
+<ul class="tight" style="margin-bottom:0">
+<li>"I hope to learn from industry-leading professionals" — says nothing.</li>
+<li>Listing more than two or three learning goals; the limit punishes breadth.</li>
+<li>Technical terms you cannot explain if asked — <b>every number here you must be able to unpack.</b></li>
+<li>Claiming Ares is unaffected by the downturn. It pro-rated two tenders.</li>
+<li>Repeating your "Why Ares?" answer. If that one used perpetual capital and the 93% figure, keep this one on different ground — as this draft does.</li>
+</ul></div>
+</div>
+
+<div class="callout warn">
+<span class="tag">Before you submit</span>
+<p style="margin-bottom:0"><b>Check the counter on the actual form.</b> Character limits vary in
+whether they count spaces and line breaks. This draft is 938 characters with spaces, leaving 62 to spare — but if the form counts differently, the easiest cut is the DDQ sentence, which
+costs 84 characters. <b>Also be ready to be asked about SDL III in interview.</b> If you put a
+fund in your application, you own it: know it is 2023 vintage, US senior direct lending, roughly
+38% deployed, 92% unrealised.</p>
+</div>
+</section>
+
+<div class="page-break"></div>
+<div class="part">
+  <div class="n">Part 11</div>
+  <h2>Sources and honesty notes</h2>
+</div>
+
+<section>
+<table>
+<tr><th style="width:30%">Source</th><th>Used for</th></tr>
+<tr><td><b>Ares FY2025 Form 10-K</b><br><small>SEC EDGAR, CIK 1176948, filed 25 Feb 2026</small></td>
+<td>All fund performance figures (SDL III, ACE VI, Pathfinder II) as at 31 Dec 2025, including levered/unlevered sleeves and the sterling currency-class footnote; the complete fee schedules for ARCC, ASIF, CADC and the J-REIT; fee step-downs; Part I hurdles and catch-ups; expense support agreements; the credit facility disclaimer repeated in every performance footnote; the glossary definitions of catch-up fees, perpetual capital and AUM; segment AUM; sponsor coverage; employee and firm commitments; the private credit publicity risk factor.</td></tr>
+<tr><td><b>Ares Q1 2026 earnings call</b><br><small>1 May 2026</small></td><td>Software exposure (~6% of AUM, &lt;8% of private credit AUM); the nine-week consultant review and the 86/13/1 split; the traded-loan 2% versus 24% comparison; ~40% LTV; the ASIF Q1 tender detail; the ~1% of FPAUM redemption stress case.</td></tr>
+<tr><td><b>Ares Q2 2026 release and call</b></td><td>Record $36.4bn raised; AUM $671.3bn; FPAUM $409.9bn; FRE $491.1m; the Q2 tender at 14.4%.</td></tr>
+<tr><td><b>Ares Capital (ARCC) Q4 2025 &#8211; Q2 2026 earnings calls</b></td><td>Non-accruals at amortised cost: 1.8%, 2.1%, 2.4%; ~1.4% at fair value; the ~3% post-crisis historical average.</td></tr>
+<tr><td><b>PitchBook BDC analysis, 2026</b></td><td>PIK at 8.2%&#8211;8.3% of total interest income across the 15 largest listed BDCs; concentration at Prospect Capital (35%), FS KKR (27%) and Blackstone Secured Lending (20%).</td></tr>
+<tr><td><b>ILPA guidance, 2017 and 2020</b></td><td>Subscription line disclosure: net IRR with and without the facility, and ILPA's acknowledgement that no agreed methodology exists.</td></tr>
+<tr><td><b>Bloomberg and trade press, 1 April 2026</b></td><td>House Financial Services Committee inquiries to Ares and six peers.</td></tr>
+<tr><td><b>2026 SS&amp;C Intralinks LP Survey</b><br><small>via secondary coverage</small></td><td>39% of LPs naming clear explanation of valuation methods as the top trust driver.</td></tr>
+<tr><td><b>US evergreen fund prospectuses</b></td><td>The 2% early repurchase deduction and pro-ration mechanics described in Part 7 as standard structural features.</td></tr>
+</table>
+
+<div class="callout warn">
+<span class="tag">Read before quoting</span>
+<ul class="tight" style="margin-bottom:0">
+<li><b>All fund performance is as at 31 December 2025</b> and historical. Past performance is not indicative of future results. Ares reports Q3 2026 on <b>29 October 2026</b> — check it before interviewing.</li>
+<li><b>The SDL III figures are for dollar-committed investors</b> in the levered sleeve unless stated. Sterling investors saw 13.8% gross / 10.3% net on the unlevered sleeve. Always state sleeve and currency.</li>
+<li><b>Software percentages depend on the denominator</b> — ~6% of total AUM and &lt;8% of private credit AUM come from the Q1 call; other reports cite ~12% of the direct lending book. Say which base you mean.</li>
+<li><b>The congressional item was written inquiries, not testimony.</b></li>
+<li><b>The early repurchase deduction is a standard structural feature</b> illustrated from US evergreen prospectuses generally; I have not verified the specific terms of each Ares wealth vehicle. Check the relevant prospectus before asserting Ares' own terms.</li>
+<li><b>The LP survey figure comes from secondary coverage</b>, not the primary report. Attribute it loosely.</li>
+<li><b>The $7.2bn alignment figure</b> comprises $3.4bn from Ares, $3.6bn from employee co-investment vehicles and $0.2bn of direct employee holdings.</li>
+</ul>
+</div>
+
+<div class="card soft" style="margin-top:5mm">
+<h4>If you remember six things from this document</h4>
+<ol class="tight" style="margin-bottom:0">
+<li><b>Gross versus net, and levered versus unlevered.</b> SDL III: 24.6% gross / 17.3% net levered, against 12.9% / 9.6% unlevered — but <b>net MoIC is 1.1x for both</b>.</li>
+<li><b>The subscription line inflates IRR</b>, Ares says so in its own footnotes, and ILPA has asked for with-and-without reporting since 2017.</li>
+<li><b>Non-accruals are the health metric.</b> ARCC: 1.8% &#8594; 2.1% &#8594; 2.4% at cost over three quarters, versus a ~3% post-crisis average.</li>
+<li><b>PIK is the stress tell.</b> ~8% across large listed BDCs; Ares is not among the concentrated names.</li>
+<li><b>Pro-ration is a feature.</b> ASIF honoured 43.1% of each Q1 request, paying $523.5m, because the alternative is dumping loans.</li>
+<li><b>Fees step down twice</b> after the investment period — the rate falls <i>and</i> the base changes.</li>
+</ol>
+</div>
+</section>
+
+</body>
+</html>
