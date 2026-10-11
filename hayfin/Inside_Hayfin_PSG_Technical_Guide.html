@@ -1,0 +1,722 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Inside Hayfin PSG</title><style>:root{--navy:#12233f;--navy2:#1f3a63;--ink:#1c2533;--mute:#5b6676;--line:#d7dce4;--bg:#ffffff;--soft:#f3f5f8;
+--acc:#c8873a;--acc2:#f6ead9;--sig:#7a3fb0;--sig2:#f1e8fa;--ok:#1d7a4c;--ok2:#e3f3ea;--bad:#b3261e;--bad2:#fbe7e5;--warn:#9a6a00;--warn2:#fff4d6;
+--easy:#2f8f5b;--med:#c8873a;--hard:#b3261e;}
+@page{size:A4;margin:16mm 0 15mm 0}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;color:var(--ink);font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:10pt;line-height:1.45}
+.page{padding:0 15mm}
+h1,h2,h3,h4{color:var(--navy);line-height:1.2;margin:0}
+h1{font-size:24pt}
+h2{font-size:15pt;margin:16px 0 6px;padding-top:4px;border-top:2px solid var(--acc);break-after:avoid}
+h3{font-size:11.5pt;margin:12px 0 4px;break-after:avoid}
+h4{font-size:10pt;margin:8px 0 3px;break-after:avoid}
+p{margin:4px 0 7px}
+ul,ol{margin:3px 0 8px;padding-left:18px} li{margin:2px 0}
+a{color:var(--navy2);text-decoration:none;word-break:break-all}
+small,.small{font-size:8.3pt;color:var(--mute)}
+.mk{font-size:1px;color:#fff;line-height:1px}
+.pb{break-before:page}
+.avoid{break-inside:avoid}
+/* Part band */
+.band{break-before:page;margin:0 0 12px 0;padding:18px 15mm 14px;color:#fff;background:var(--navy);position:relative}
+.band .num{font-size:9pt;letter-spacing:2px;text-transform:uppercase;color:var(--acc)}
+.band h1{color:#fff;font-size:21pt;margin-top:3px}
+.band .sub{color:#c9d3e3;font-size:9.5pt;margin-top:4px}
+.band.b2{background:#1f3a63}.band.b3{background:#24425a}.band.b4{background:#3b2f57}.band.b5{background:#22423c}
+/* tags */
+.c,.r,.i{font-size:7pt;font-weight:700;padding:0 3px;border-radius:2px;white-space:nowrap;vertical-align:1px}
+.c{background:#e3f3ea;color:#1d7a4c}.r{background:#fff4d6;color:#8a5d00}.i{background:#f1e8fa;color:#6a2fa0}
+.s{font-size:7.3pt;color:var(--navy2);font-weight:600;white-space:nowrap}
+/* callouts */
+.box{border-radius:5px;padding:7px 10px 6px;margin:8px 0 10px;break-inside:avoid;border-left:5px solid}
+.box .lab{font-size:7.5pt;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:2px;display:block}
+.key{background:#eef2f8;border-color:var(--navy2)}.key .lab{color:var(--navy2)}
+.say{background:var(--ok2);border-color:var(--ok)}.say .lab{color:var(--ok)}
+.dont{background:var(--bad2);border-color:var(--bad)}.dont .lab{color:var(--bad)}
+.op{background:var(--sig2);border-color:var(--sig)}.op .lab{color:var(--sig)}
+.unc{background:var(--warn2);border-color:var(--warn);border-left-style:dashed}.unc .lab{color:var(--warn)}
+.note{background:var(--soft);border-color:var(--acc)}.note .lab{color:var(--acc)}
+/* tables */
+table{border-collapse:collapse;width:100%;margin:6px 0 10px;font-size:8.6pt}
+th{background:var(--navy);color:#fff;text-align:left;padding:4px 5px;font-weight:600;vertical-align:bottom}
+td{border-bottom:1px solid var(--line);padding:3.5px 5px;vertical-align:top}
+tr{break-inside:avoid}
+tbody tr:nth-child(even) td{background:#f8f9fb}
+table.src{font-size:7.2pt} table.src td{padding:2px 4px}
+/* figures */
+figure{margin:10px 0 12px;break-inside:avoid;border:1px solid var(--line);border-radius:6px;padding:8px 8px 6px;background:#fff}
+figure svg{width:100%;height:auto;display:block}
+figcaption{font-size:8.2pt;color:var(--mute);margin-top:5px;border-top:1px dashed var(--line);padding-top:4px}
+figcaption b{color:var(--navy)}
+.fullfig{}
+/* cards */
+.card{border:1px solid var(--line);border-radius:6px;margin:8px 0;break-inside:avoid;overflow:hidden}
+.card .hd{padding:4px 9px;color:#fff;font-weight:700;font-size:9pt;display:flex;justify-content:space-between}
+.card.easy .hd{background:var(--easy)}.card.med .hd{background:var(--med)}.card.hard .hd{background:var(--hard)}
+.card .bd{padding:5px 9px 6px;font-size:8.8pt}
+.card .bd p{margin:2px 0 4px}
+.card .bd b{color:var(--navy)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.kpi{background:var(--soft);border-radius:6px;padding:8px;text-align:center;break-inside:avoid}
+.kpi .v{font-size:17pt;font-weight:800;color:var(--navy)} .kpi .l{font-size:8pt;color:var(--mute)}
+.toc{columns:1} .toc .row{display:flex;align-items:baseline;font-size:10pt;margin:3px 0}
+.toc .row .t{flex:0 1 auto} .toc .row .dots{flex:1;border-bottom:1px dotted #9aa4b2;margin:0 5px}
+.toc .row.sub{font-size:8.8pt;padding-left:16px;color:var(--mute)}
+.tocpg{font-weight:700;color:var(--navy)}
+.cover{height:265mm;background:var(--navy);color:#fff;padding:30mm 18mm;position:relative;break-after:page}
+.qa{border-left:3px solid var(--acc);padding:3px 8px;margin:6px 0;break-inside:avoid;font-size:8.9pt}
+.qa .q{font-weight:700;color:var(--navy)}
+.mono{font-family:Menlo,Consolas,monospace;font-size:8pt}
+.grid3 .card .bd{font-size:7.6pt;line-height:1.35}.grid3 .card .hd{font-size:8pt}
+.shopbox{background:#fff7ec;border-left:5px solid #c8873a;border-radius:5px;padding:7px 10px 6px;margin:8px 0 10px;break-inside:avoid}
+.shopbox .lab{font-size:7.5pt;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:#b06f22;display:block;margin-bottom:2px}
+.seg{border:1px solid #d7dce4;border-radius:6px;margin:10px 0;break-inside:avoid;overflow:hidden}
+.seg .hd{background:#12233f;color:#fff;padding:5px 10px;font-weight:700;display:flex;justify-content:space-between}
+.seg .bd{padding:6px 10px}
+.seg .bd table{margin:4px 0}
+.calc{background:#f3f5f8;border:1px solid #d7dce4;border-radius:5px;padding:7px 10px;margin:8px 0;font-family:Menlo,Consolas,monospace;font-size:8.2pt;break-inside:avoid;white-space:pre-wrap}
+</style></head><body><div class="cover">
+  <div style="font-size:9pt;letter-spacing:3px;color:#c8873a;text-transform:uppercase">Technical guide · beginner-friendly · Summer 2027 internship</div>
+  <div style="font-size:32pt;font-weight:800;line-height:1.05;margin-top:16mm">Inside Hayfin's<br>Partner Solutions Group</div>
+  <div style="font-size:14pt;color:#c9d3e3;margin-top:6mm">What the team really does, the technical skills behind it,<br>what you would do and learn as an intern, and what you can only learn at Hayfin</div>
+  <svg viewBox="0 0 600 190" style="width:100%;margin-top:12mm" font-family="Helvetica,Arial">
+    <g fill="#fff" font-size="11">
+      <rect x="0" y="0" width="140" height="150" rx="8" fill="#1f3a63"/><text x="70" y="40" text-anchor="middle" font-size="24" font-weight="800">5</text><text x="70" y="62" text-anchor="middle">technical toolkits</text><text x="70" y="78" text-anchor="middle" fill="#c9d3e3">fund maths, loans,</text><text x="70" y="92" text-anchor="middle" fill="#c9d3e3">structuring, documents,</text><text x="70" y="106" text-anchor="middle" fill="#c9d3e3">rules</text>
+      <rect x="153" y="0" width="140" height="150" rx="8" fill="#1f3a63"/><text x="223" y="40" text-anchor="middle" font-size="24" font-weight="800">12</text><text x="223" y="62" text-anchor="middle">weeks mapped</text><text x="223" y="78" text-anchor="middle" fill="#c9d3e3">June to August 2027,</text><text x="223" y="92" text-anchor="middle" fill="#c9d3e3">against the real</text><text x="223" y="106" text-anchor="middle" fill="#c9d3e3">reporting calendar</text>
+      <rect x="306" y="0" width="140" height="150" rx="8" fill="#1f3a63"/><text x="376" y="40" text-anchor="middle" font-size="24" font-weight="800">10</text><text x="376" y="62" text-anchor="middle">Hayfin-only lessons</text><text x="376" y="78" text-anchor="middle" fill="#c9d3e3">what you would not</text><text x="376" y="92" text-anchor="middle" fill="#c9d3e3">learn at Ares, ICG</text><text x="376" y="106" text-anchor="middle" fill="#c9d3e3">or a bank</text>
+      <rect x="459" y="0" width="141" height="150" rx="8" fill="#c8873a"/><text x="529" y="40" text-anchor="middle" font-size="24" font-weight="800">200</text><text x="529" y="62" text-anchor="middle">words</text><text x="529" y="78" text-anchor="middle">your application</text><text x="529" y="92" text-anchor="middle">answer, drafted and</text><text x="529" y="106" text-anchor="middle">explained</text>
+    </g>
+  </svg>
+  <div style="position:absolute;bottom:24mm;left:18mm;right:18mm;font-size:9pt;color:#c9d3e3;line-height:1.6">
+    <div><b style="color:#fff">How to read it:</b> grey boxes in monospace are worked calculations. Every worked example uses <b style="color:#fff">illustrative</b> numbers unless a source marker [S] says otherwise. Facts about Hayfin carry a source and a confidence tag: Confirmed, Reported or Inferred.</div>
+    <div><b style="color:#fff">Built:</b> 11 October 2026 from public sources only. It complements the full interview pack and the "Hayfin as a Shop" explainer.</div>
+  </div>
+</div>
+<div class="page">
+  <h1 style="margin-top:4mm">Contents</h1>
+  <div class="toc"><div class="row"><span class="t">0 · The application question, answered first</span><span class="dots"></span><span class="tocpg" data-for="t0">3</span></div>
+<div class="row"><span class="t">1 · What you need to assume before you start</span><span class="dots"></span><span class="tocpg" data-for="t1">4</span></div>
+<div class="row"><span class="t">2 · What PSG actually is: the machine</span><span class="dots"></span><span class="tocpg" data-for="t2">5</span></div>
+<div class="row sub"><span class="t">The data spine: where every number comes from</span><span class="dots"></span><span class="tocpg" data-for="t2a">5</span></div>
+<div class="row sub"><span class="t">The annual rhythm of the team</span><span class="dots"></span><span class="tocpg" data-for="t2b">6</span></div>
+<div class="row"><span class="t">3 · What Hayfin's PSG does differently</span><span class="dots"></span><span class="tocpg" data-for="t3">7</span></div>
+<div class="row"><span class="t">4 · Toolkit 1: fund maths an LP reads</span><span class="dots"></span><span class="tocpg" data-for="t4">8</span></div>
+<div class="row sub"><span class="t">Cash flows, IRR and MOIC</span><span class="dots"></span><span class="tocpg" data-for="t4a">8</span></div>
+<div class="row sub"><span class="t">DPI, TVPI and the J-curve</span><span class="dots"></span><span class="tocpg" data-for="t4b">8</span></div>
+<div class="row sub"><span class="t">The subscription line trick</span><span class="dots"></span><span class="tocpg" data-for="t4c">9</span></div>
+<div class="row sub"><span class="t">Fees and the waterfall</span><span class="dots"></span><span class="tocpg" data-for="t4d">9</span></div>
+<div class="row sub"><span class="t">Currency: the lesson in Hayfin's own history</span><span class="dots"></span><span class="tocpg" data-for="t4e">10</span></div>
+<div class="row"><span class="t">5 · Toolkit 2: the loan underneath</span><span class="dots"></span><span class="tocpg" data-for="t5">11</span></div>
+<div class="row sub"><span class="t">Pricing a unitranche loan</span><span class="dots"></span><span class="tocpg" data-for="t5a">11</span></div>
+<div class="row sub"><span class="t">Measuring a borrower's health</span><span class="dots"></span><span class="tocpg" data-for="t5b">11</span></div>
+<div class="row sub"><span class="t">PIK: the topic of 2026</span><span class="dots"></span><span class="tocpg" data-for="t5c">12</span></div>
+<div class="row sub"><span class="t">From one loan to the whole fund</span><span class="dots"></span><span class="tocpg" data-for="t5d">12</span></div>
+<div class="row"><span class="t">6 · Toolkit 3: packaging and insurer capital</span><span class="dots"></span><span class="tocpg" data-for="t6">13</span></div>
+<div class="row sub"><span class="t">The five wrappers, technically</span><span class="dots"></span><span class="tocpg" data-for="t6a">13</span></div>
+<div class="row sub"><span class="t">How a rated note feeder works</span><span class="dots"></span><span class="tocpg" data-for="t6b">14</span></div>
+<div class="row sub"><span class="t">Why it saves capital: three insurer rulebooks</span><span class="dots"></span><span class="tocpg" data-for="t6c">14</span></div>
+<div class="row sub"><span class="t">Look-through data: the TPT and EET</span><span class="dots"></span><span class="tocpg" data-for="t6d">15</span></div>
+<div class="row"><span class="t">7 · Toolkit 4: the documents you will build</span><span class="dots"></span><span class="tocpg" data-for="t7">16</span></div>
+<div class="row sub"><span class="t">The pitch book</span><span class="dots"></span><span class="tocpg" data-for="t7a">16</span></div>
+<div class="row sub"><span class="t">The DDQ: twenty topics, and the hard ones</span><span class="dots"></span><span class="tocpg" data-for="t7b">16</span></div>
+<div class="row sub"><span class="t">RFPs and consultant databases</span><span class="dots"></span><span class="tocpg" data-for="t7c">17</span></div>
+<div class="row sub"><span class="t">The case study, built properly</span><span class="dots"></span><span class="tocpg" data-for="t7d">17</span></div>
+<div class="row sub"><span class="t">The quarterly report, page by page</span><span class="dots"></span><span class="tocpg" data-for="t7e">17</span></div>
+<div class="row sub"><span class="t">The ILPA templates arriving in your summer</span><span class="dots"></span><span class="tocpg" data-for="t7f">18</span></div>
+<div class="row"><span class="t">8 · Toolkit 5: the rules</span><span class="dots"></span><span class="tocpg" data-for="t8">19</span></div>
+<div class="row"><span class="t">9 · Your summer, week by week</span><span class="dots"></span><span class="tocpg" data-for="t9">20</span></div>
+<div class="row"><span class="t">10 · What you can only learn at Hayfin</span><span class="dots"></span><span class="tocpg" data-for="t10">21</span></div>
+<div class="row"><span class="t">11 · The news, and what each story teaches you</span><span class="dots"></span><span class="tocpg" data-for="t11">22</span></div>
+<div class="row"><span class="t">12 · The 200-word answer, dissected</span><span class="dots"></span><span class="tocpg" data-for="t12">23</span></div>
+<div class="row sub"><span class="t">What the question is really testing</span><span class="dots"></span><span class="tocpg" data-for="t12a">23</span></div>
+<div class="row sub"><span class="t">The recommended answer, line by line</span><span class="dots"></span><span class="tocpg" data-for="t12b">23</span></div>
+<div class="row sub"><span class="t">An alternative version (two teams)</span><span class="dots"></span><span class="tocpg" data-for="t12c">23</span></div>
+<div class="row sub"><span class="t">Traps to avoid</span><span class="dots"></span><span class="tocpg" data-for="t12d">24</span></div>
+<div class="row"><span class="t">Sources</span><span class="dots"></span><span class="tocpg" data-for="t13">25</span></div></div>
+</div>
+
+<div class="band" data-toc="t0" data-title="0 · The application question, answered first"><span class="mk">QQt0QQ</span><div class="num">Section 0</div><h1>The application question, answered first</h1><div class="sub">"What interests you about this opportunity, and how does it align with your career goals? Please reference your preferred team(s) and explain why they appeal to you." (max. 200 words)</div></div>
+<div class="page">
+<p>The answer is first so you have it now. Section 11 explains why each sentence is there and gives an alternative. Personalise the bracketed part with your own experience; do not invent any.</p>
+<div class="box say"><span class="lab">Recommended answer · 167 words + your own sentence (up to ~30 words)</span>
+<p>I want to work in Partner Solutions because it is where Hayfin's lending becomes something an investor can underwrite. DLF V raised over €15bn through five wrappers for one strategy, including a rated note feeder that gives insurers capital-efficient access to the same loans. That one example joins three things I want to master: how institutions allocate capital, how fund terms and reporting are engineered, and how credit risk is explained honestly.</p>
+<p>Hayfin is unusual because the same platform lends at both ends of the risk range, and its workout team stands behind every fund. PSG has to evidence that to pensions, insurers and consultants who now probe PIK, software exposure and loss rates. I want to learn to answer those questions with data: building track records, reconciling the Portfolio Breakdown and preparing for ILPA's new performance reporting.</p>
+<p>[One sentence from your own experience: e.g. "At X, I rebuilt a client data pack and caught errors before it went out."] I would like to begin a career in investor relations, moving from reporting into coverage. PSG's global reach, from Seoul to Dallas, is where I would learn that best.</p></div>
+<p class="small">Facts used: five wrappers and LP scrutiny <span class="s">[S222]</span>; rated note feeder ~$600m <span class="s">[S237]</span>; "8%+ and 15%+ lender" idea <span class="s">[S307]</span>; workout team <span class="s">[S331]</span>; Portfolio Breakdown <span class="s">[S305]</span>; ILPA Performance Template <span class="s">[S43]</span><span class="s">[S45]</span>; Seoul and Dallas <span class="s">[S223]</span><span class="s">[S99]</span>. The 167 words exclude the bracketed instruction; your own sentence can use up to about 30 words. Recount after adding it.</p>
+
+<div class="box key"><span class="lab">How to use the rest of this guide</span>Sections 1 to 3 explain the team. Sections 4 to 8 are the five technical toolkits, from basic fund maths to insurer capital rules. Section 9 maps your summer week by week. Section 10 lists what only Hayfin can teach you. Section 11 links current news to the role. Section 12 is the answer, dissected.</div>
+</div>
+
+<div class="band b2" data-toc="t1" data-title="1 · What you need to assume before you start"><span class="mk">QQt1QQ</span><div class="num">Section 1</div><h1>What you need to assume</h1><div class="sub">Eight building blocks. If any feels shaky, read it twice; every later section depends on them</div></div>
+<div class="page">
+<table>
+<thead><tr><th style="width:4%">#</th><th style="width:28%">Building block</th><th>Plain-English explanation</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><b>A fund is a contract, not a product on a shelf</b></td><td>Investors (limited partners, LPs) sign a limited partnership agreement (LPA) promising money to a fund run by Hayfin (the general partner, GP). The LPA sets the fees, the rules, the life of the fund and the reports Hayfin must send. Much of Partner Solutions' work is honouring that contract in writing.</td></tr>
+<tr><td>2</td><td><b>Commitments are drawn over time</b></td><td>An LP commits, say, €100m. Hayfin "calls" it in pieces when it makes loans, then "distributes" interest and repayments back. Hayfin's private credit funds invest for three to four years and harvest for three to four more, with two possible one-year extensions <span class="s">[S305]</span>.</td></tr>
+<tr><td>3</td><td><b>Returns are measured several ways</b></td><td>IRR (an annual rate that accounts for timing), MOIC (how many times money came back), DPI (cash returned so far), TVPI (cash returned plus what is still held). Section 4 calculates each.</td></tr>
+<tr><td>4</td><td><b>Gross is before fees; net is after</b></td><td>Investors care about net. Regulators insist net is shown next to gross in marketing <span class="s">[S53]</span>.</td></tr>
+<tr><td>5</td><td><b>Private loans have no market price</b></td><td>So the manager estimates their value every quarter (a "mark"). That is why valuation policy is one of the most scrutinised sections of any due diligence questionnaire <span class="s">[S166]</span><span class="s">[S250]</span>.</td></tr>
+<tr><td>6</td><td><b>Investors have their own rulebooks</b></td><td>An insurer's capital rules, a pension's currency limits, a sovereign fund's custom terms. The same loans may need different packaging (a "wrapper") for each <span class="s">[S222]</span>.</td></tr>
+<tr><td>7</td><td><b>Everything external is regulated</b></td><td>Every slide, case study and DDQ answer is a communication that must be "fair, clear and not misleading" (FCA COBS 4.2.1R) <span class="s">[S49]</span>.</td></tr>
+<tr><td>8</td><td><b>Hayfin is private</b></td><td>Fees, recent fund returns and loss rates are not public. This guide teaches the mechanics with illustrative numbers and only uses real Hayfin figures where they are published.</td></tr>
+</tbody></table>
+</div>
+
+<div class="band b3" data-toc="t2" data-title="2 · What PSG actually is: the machine"><span class="mk">QQt2QQ</span><div class="num">Section 2</div><h1>What PSG actually is: the machine</h1><div class="sub">Four engines, the data that flows through them, and where an intern plugs in</div></div>
+<div class="page">
+<p>The job description lists four duties: marketing and fundraising materials, ad hoc requests, case studies and quarterly LP reporting [JD]. Those are outputs. Underneath sit four engines that produce them. Hayfin's public bios and postings show each one <span class="s">[S1]</span><span class="s">[S19]</span><span class="s">[S20]</span><span class="s">[S305]</span>.</p>
+<figure>
+<svg viewBox="0 0 700 430" font-family="Helvetica,Arial">
+<defs><marker id="m2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#12233f"/></marker></defs>
+<g font-size="10">
+<text x="350" y="16" text-anchor="middle" font-weight="700" fill="#12233f" font-size="12">The PSG machine: inputs, four engines, outputs</text>
+<text x="70" y="40" text-anchor="middle" font-weight="700" fill="#5b6676">INPUTS</text>
+<g>
+<rect x="10" y="50" width="120" height="44" rx="5" fill="#eef2f8" stroke="#1f3a63"/><text x="70" y="68" text-anchor="middle" font-weight="700">Deal teams</text><text x="70" y="83" text-anchor="middle">memos, deal facts</text>
+<rect x="10" y="102" width="120" height="44" rx="5" fill="#eef2f8" stroke="#1f3a63"/><text x="70" y="120" text-anchor="middle" font-weight="700">Portfolio Mgmt</text><text x="70" y="135" text-anchor="middle">EBITDA, leverage, PIK</text>
+<rect x="10" y="154" width="120" height="44" rx="5" fill="#eef2f8" stroke="#1f3a63"/><text x="70" y="172" text-anchor="middle" font-weight="700">Finance + admins</text><text x="70" y="187" text-anchor="middle">NAV, cash flows, fees</text>
+<rect x="10" y="206" width="120" height="44" rx="5" fill="#eef2f8" stroke="#1f3a63"/><text x="70" y="224" text-anchor="middle" font-weight="700">Legal, Compliance</text><text x="70" y="239" text-anchor="middle">terms, sign-off</text>
+<rect x="10" y="258" width="120" height="44" rx="5" fill="#eef2f8" stroke="#1f3a63"/><text x="70" y="276" text-anchor="middle" font-weight="700">ESG, Risk, Ops</text><text x="70" y="291" text-anchor="middle">PRI, SFDR, cyber</text>
+</g>
+<text x="350" y="40" text-anchor="middle" font-weight="700" fill="#5b6676">THE FOUR ENGINES</text>
+<g>
+<rect x="165" y="50" width="180" height="120" rx="6" fill="#12233f"/><text x="255" y="70" text-anchor="middle" fill="#c8873a" font-weight="700">A · PRODUCT STRATEGY</text><text x="175" y="90" fill="#fff">Pitch books and fund decks</text><text x="175" y="105" fill="#fff">DDQ / RFP answer library</text><text x="175" y="120" fill="#fff">Wrapper and term design</text><text x="175" y="135" fill="#fff">Case studies</text><text x="175" y="155" fill="#9fb0c8">English (NY), Atkinson (London),</text><text x="175" y="166" fill="#9fb0c8">Schol (Madrid) [S1]</text>
+<rect x="355" y="50" width="180" height="120" rx="6" fill="#1f3a63"/><text x="445" y="70" text-anchor="middle" fill="#c8873a" font-weight="700">B · CLIENT COVERAGE</text><text x="365" y="90" fill="#fff">Relationships by region</text><text x="365" y="105" fill="#fff">Meetings, roadshows</text><text x="365" y="120" fill="#fff">Consultant relations</text><text x="365" y="135" fill="#fff">Pipeline and closing</text><text x="365" y="155" fill="#9fb0c8">Lipsky, Bringardner co-heads;</text><text x="365" y="166" fill="#9fb0c8">8 regions [S1]</text>
+<rect x="165" y="180" width="180" height="120" rx="6" fill="#3d5a85"/><text x="255" y="200" text-anchor="middle" fill="#c8873a" font-weight="700">C · REPORTING / IR</text><text x="175" y="220" fill="#fff">Quarterly fund + SMA reports</text><text x="175" y="235" fill="#fff">Portfolio Breakdown</text><text x="175" y="250" fill="#fff">CEO letter, ESG case studies</text><text x="175" y="265" fill="#fff">Ad hoc data requests</text><text x="175" y="288" fill="#9fb0c8">"IR and Investment teams" [S305]</text>
+<rect x="355" y="180" width="180" height="120" rx="6" fill="#6f87a8"/><text x="445" y="200" text-anchor="middle" fill="#c8873a" font-weight="700">D · INTELLIGENCE</text><text x="365" y="220" fill="#fff">CRM, prospect lists</text><text x="365" y="235" fill="#fff">LP allocation trends</text><text x="365" y="250" fill="#fff">Consultant scoring</text><text x="365" y="265" fill="#fff">Competitor tracking</text><text x="365" y="288" fill="#fff">Chicago posting [S19]; [S265]</text>
+</g>
+<text x="625" y="40" text-anchor="middle" font-weight="700" fill="#5b6676">OUTPUTS</text>
+<g>
+<rect x="560" y="50" width="130" height="44" rx="5" fill="#e3f3ea" stroke="#1d7a4c"/><text x="625" y="68" text-anchor="middle" font-weight="700">Commitments</text><text x="625" y="83" text-anchor="middle">new LPs and re-ups</text>
+<rect x="560" y="102" width="130" height="44" rx="5" fill="#e3f3ea" stroke="#1d7a4c"/><text x="625" y="120" text-anchor="middle" font-weight="700">Answered DDQs</text><text x="625" y="135" text-anchor="middle">and RFPs</text>
+<rect x="560" y="154" width="130" height="44" rx="5" fill="#e3f3ea" stroke="#1d7a4c"/><text x="625" y="172" text-anchor="middle" font-weight="700">Reports on time</text><text x="625" y="187" text-anchor="middle">accurate, consistent</text>
+<rect x="560" y="206" width="130" height="44" rx="5" fill="#e3f3ea" stroke="#1d7a4c"/><text x="625" y="224" text-anchor="middle" font-weight="700">Consultant ratings</text><text x="625" y="239" text-anchor="middle">database profiles</text>
+<rect x="560" y="258" width="130" height="44" rx="5" fill="#e3f3ea" stroke="#1d7a4c"/><text x="625" y="276" text-anchor="middle" font-weight="700">New wrappers</text><text x="625" y="291" text-anchor="middle">e.g. rated feeder</text>
+</g>
+<g stroke="#12233f"><line x1="130" y1="175" x2="163" y2="175" marker-end="url(#m2)"/><line x1="535" y1="175" x2="558" y2="175" marker-end="url(#m2)"/></g>
+<rect x="165" y="320" width="370" height="96" rx="8" fill="#f6ead9" stroke="#c8873a" stroke-width="2"/>
+<text x="350" y="342" text-anchor="middle" font-weight="700" fill="#12233f">WHERE THE INTERN PLUGS IN</text>
+<text x="175" y="362">Engines A and C mostly: "responding to DDQs and RFPs, taking the</text>
+<text x="175" y="377">minutes for meetings, creating and updating investment case study</text>
+<text x="175" y="392">slides and developing an investment fund track record" (2024 PSG</text>
+<text x="175" y="407">intern) [S15]; plus research for engines B and D [S265]</text>
+</g>
+</svg>
+<figcaption><b>Figure 2.1 · The PSG machine.</b> Engine names are the author's grouping <span class="i">Inferred</span>; each engine's people and tasks are from Hayfin's bios <span class="s">[S1]</span>, postings <span class="s">[S19]</span><span class="s">[S20]</span>, the Stewardship report <span class="s">[S305]</span> and intern accounts <span class="s">[S15]</span><span class="s">[S265]</span>.</figcaption>
+</figure>
+
+<h2 data-toc="t2a" data-title="The data spine: where every number comes from" data-lvl="2"><span class="mk">QQt2aQQ</span>The data spine: where every number in a PSG document comes from</h2>
+<p>The single most important technical idea in investor relations is <b>provenance</b>: every figure must trace back to one approved source, and the same figure must match everywhere. A DDQ, a pitch book and a quarterly report that disagree by one decimal place will be noticed by a consultant.</p>
+<figure>
+<svg viewBox="0 0 700 250" font-family="Helvetica,Arial">
+<defs><marker id="m3" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#12233f"/></marker></defs>
+<g font-size="10">
+<rect x="10" y="20" width="130" height="70" rx="6" fill="#12233f"/><text x="75" y="44" text-anchor="middle" fill="#fff" font-weight="700">Loan documents</text><text x="75" y="60" text-anchor="middle" fill="#c9d3e3">margin, fees,</text><text x="75" y="74" text-anchor="middle" fill="#c9d3e3">covenants, PIK terms</text>
+<rect x="155" y="20" width="130" height="70" rx="6" fill="#1f3a63"/><text x="220" y="44" text-anchor="middle" fill="#fff" font-weight="700">Monitoring data</text><text x="220" y="60" text-anchor="middle" fill="#c9d3e3">quarterly EBITDA,</text><text x="220" y="74" text-anchor="middle" fill="#c9d3e3">leverage, watchlist</text>
+<rect x="300" y="20" width="130" height="70" rx="6" fill="#3d5a85"/><text x="365" y="44" text-anchor="middle" fill="#fff" font-weight="700">Valuation</text><text x="365" y="60" text-anchor="middle" fill="#c9d3e3">Valuation Committee</text><text x="365" y="74" text-anchor="middle" fill="#c9d3e3">sets the marks [S305]</text>
+<rect x="445" y="20" width="130" height="70" rx="6" fill="#6f87a8"/><text x="510" y="44" text-anchor="middle" fill="#fff" font-weight="700">Fund accounting</text><text x="510" y="60" text-anchor="middle" fill="#fff">administrator NAV;</text><text x="510" y="74" text-anchor="middle" fill="#fff">Finance review [S333]</text>
+<rect x="590" y="20" width="100" height="70" rx="6" fill="#c8873a"/><text x="640" y="44" text-anchor="middle" fill="#fff" font-weight="700">PSG</text><text x="640" y="60" text-anchor="middle" fill="#fff">reports, DDQs,</text><text x="640" y="74" text-anchor="middle" fill="#fff">pitch, data</text>
+<g stroke="#12233f"><line x1="140" y1="55" x2="153" y2="55" marker-end="url(#m3)"/><line x1="285" y1="55" x2="298" y2="55" marker-end="url(#m3)"/><line x1="430" y1="55" x2="443" y2="55" marker-end="url(#m3)"/><line x1="575" y1="55" x2="588" y2="55" marker-end="url(#m3)"/></g>
+<rect x="10" y="115" width="680" height="125" rx="6" fill="#fff" stroke="#d7dce4"/>
+<text x="20" y="135" font-weight="700" fill="#12233f">What the intern checks at the last step (the "tie-out")</text>
+<text x="20" y="155">1. Does every number tie to the administrator or Finance-reviewed source for the same date?</text>
+<text x="20" y="173">2. Is the definition the same (gross or net; fund or strategy; committed or invested; EUR or USD)?</text>
+<text x="20" y="191">3. Do totals add, and do percentages sum to 100% (or carry a rounding note)?</text>
+<text x="20" y="209">4. Does the commentary match the numbers (e.g. "leverage fell" when it did)?</text>
+<text x="20" y="227">5. Is anything confidential (borrower names, terms, another LP's details) where it should not be?</text>
+</g>
+</svg>
+<figcaption><b>Figure 2.2 · The data spine.</b> The chain is the author's description of standard practice <span class="i">Inferred</span>, anchored on Hayfin's Valuation Committee <span class="s">[S305]</span> and the Fund Controller role that reviews NAV "before it goes to investors" <span class="s">[S333]</span>.</figcaption>
+</figure>
+
+<h2 data-toc="t2b" data-title="The annual rhythm of the team" data-lvl="2"><span class="mk">QQt2bQQ</span>The annual rhythm of the team</h2>
+<figure>
+<svg viewBox="0 0 700 210" font-family="Helvetica,Arial">
+<g font-size="9.5">
+<text x="10" y="14" font-weight="700" fill="#12233f" font-size="12">A PSG year (illustrative, based on standard quarter-end practice)</text>
+<g>
+<rect x="10" y="30" width="680" height="24" fill="#eef2f8"/>
+<g text-anchor="middle" font-weight="700" fill="#12233f"><text x="38" y="46">Jan</text><text x="95" y="46">Feb</text><text x="152" y="46">Mar</text><text x="209" y="46">Apr</text><text x="266" y="46">May</text><text x="323" y="46">Jun</text><text x="380" y="46">Jul</text><text x="437" y="46">Aug</text><text x="494" y="46">Sep</text><text x="551" y="46">Oct</text><text x="608" y="46">Nov</text><text x="665" y="46">Dec</text></g>
+<rect x="10" y="62" width="114" height="22" fill="#c8873a"/><text x="16" y="77" fill="#fff">Q4 reports</text>
+<rect x="124" y="62" width="57" height="22" fill="#b3261e"/><text x="128" y="77" fill="#fff">audit 90d</text>
+<rect x="181" y="62" width="114" height="22" fill="#c8873a"/><text x="187" y="77" fill="#fff">Q1 reports</text>
+<rect x="352" y="62" width="114" height="22" fill="#c8873a"/><text x="358" y="77" fill="#fff">Q2 reports</text>
+<rect x="523" y="62" width="114" height="22" fill="#c8873a"/><text x="529" y="77" fill="#fff">Q3 reports</text>
+<rect x="181" y="92" width="114" height="22" fill="#1f3a63"/><text x="187" y="107" fill="#fff">Investor Day (NY, Apr)</text>
+<rect x="295" y="92" width="114" height="22" fill="#3d5a85"/><text x="301" y="107" fill="#fff">Advisory Boards</text>
+<rect x="523" y="92" width="114" height="22" fill="#3d5a85"/><text x="529" y="107" fill="#fff">Advisory Boards</text>
+<rect x="10" y="122" width="680" height="22" fill="#6f87a8"/><text x="16" y="137" fill="#fff">All year: DDQs, RFPs, consultant database updates, ad hoc requests, roadshows, new-fund marketing</text>
+<rect x="295" y="152" width="171" height="22" fill="#e3f3ea" stroke="#1d7a4c"/><text x="300" y="167" fill="#12233f" font-weight="700">YOUR INTERNSHIP: 1 Jun - 31 Aug</text>
+</g>
+<text x="10" y="196" fill="#5b6676">Audited accounts within 90 days of 31 Dec and Advisory Boards twice a year: [S305]. Investor Day April 2026: [S31]. Report timing and Advisory Board months are illustrative [Inferred].</text>
+</g>
+</svg>
+<figcaption><b>Figure 2.3 · The PSG calendar.</b> Your internship spans the Q1 reporting tail, the 30 June quarter end and the Q2 reporting season, so you are likely to see a full reporting cycle <span class="i">Inferred</span>.</figcaption>
+</figure>
+</div>
+
+<div class="band b4" data-toc="t3" data-title="3 · What Hayfin's PSG does differently"><span class="mk">QQt3QQ</span><div class="num">Section 3</div><h1>What Hayfin's PSG does differently</h1><div class="sub">Ten features that change the technical content of the job, compared with a typical IR team</div></div>
+<div class="page">
+<table>
+<thead><tr><th style="width:4%">#</th><th style="width:25%">Feature</th><th style="width:36%">Evidence</th><th>What it changes in the work</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Sells a <b>multi-strategy credit platform</b>, not one fund</td><td>DL, Special Opps, Tactical, HY/CLOs, PE Solutions, Healthcare, Maritime, Real Estate <span class="s">[S327]</span>; "8%+ and 15%+ lender" <span class="s">[S307]</span></td><td>You must explain how strategies relate, and how cross-fund conflicts are handled <span class="s">[S305]</span>. A single-strategy IR team never answers that.</td></tr>
+<tr><td>2</td><td><b>Engineers wrappers</b>, including a rated note feeder</td><td>Five access routes for DLF V; ~$600m rated feeder "one of the first priced by a European direct lending manager" (Hayfin's claim) <span class="s">[S222]</span><span class="s">[S237]</span></td><td>Structuring knowledge: insurer capital rules, ratings, look-through data (Section 6).</td></tr>
+<tr><td>3</td><td><b>Sits inside deal approval</b></td><td>ESG Deal Committee includes "partner solutions" <span class="s">[S305]</span></td><td>PSG hears about deals before IC, so materials are built from the source, not second-hand.</td></tr>
+<tr><td>4</td><td><b>Co-produces reporting</b> with investment teams</td><td>"Hayfin's Investor Relations and Investment teams produce the following quarterly reports" <span class="s">[S305]</span></td><td>You learn to read company-level credit data, not just fund totals.</td></tr>
+<tr><td>5</td><td><b>Line-by-line transparency</b></td><td>Line-by-line track record, expected gross IRR per deal and fund, LTM EBITDA, EV and leverage per company <span class="s">[S305]</span></td><td>Very granular proofreading and data work; a real credit education.</td></tr>
+<tr><td>6</td><td><b>Hired the gatekeepers</b></td><td>Ex-BlackRock consultant relations, ex-Mercer, ex-JANA CIO, ex-Meketa, ex-Texas PSF allocator <span class="s">[S1]</span><span class="s">[S4]</span><span class="s">[S272]</span><span class="s">[S289]</span></td><td>You learn how consultants score managers from people who did it.</td></tr>
+<tr><td>7</td><td><b>Global investor base</b> for European assets</td><td>Australia 22.8%, North America 26.2% of AUM <span class="s">[S305]</span>; Seoul, Tokyo, Dubai, Melbourne, Dallas <span class="s">[S1]</span><span class="s">[S223]</span></td><td>Currency, time zones, local regulation (e.g. Korean insurers) become part of the job.</td></tr>
+<tr><td>8</td><td><b>Publishes its thinking</b></td><td>"A Tale of Three PIKs" <span class="s">[S229]</span>; "The Complexity Premium" <span class="s">[S262]</span>; €15bn debrief by PSG co-heads <span class="s">[S222]</span></td><td>Content creation is part of the role; you see how a view becomes a marketing asset.</td></tr>
+<tr><td>9</td><td><b>Institutional only</b>, closed-end by default</td><td>"no retail capital" <span class="s">[S227]</span>; institutional evergreen exists <span class="s">[S221]</span><span class="s">[S322]</span></td><td>No retail distribution work; deep institutional diligence instead.</td></tr>
+<tr><td>10</td><td><b>Small team, wide remit</b></td><td>~32 people estimated (range 28-40) [Inferred, see main pack]; 228 firm staff in 2025 <span class="s">[S305]</span></td><td>An intern touches more of the chain than at a giant: Ares has over 2,850 direct institutional relationships <span class="s">[S64]</span>.</td></tr>
+</tbody></table>
+</div>
+
+<div class="band b5" data-toc="t4" data-title="4 · Toolkit 1: fund maths an LP reads"><span class="mk">QQt4QQ</span><div class="num">Section 4 · Toolkit 1</div><h1>Fund maths, the way an LP reads it</h1><div class="sub">Cash flows, IRR, MOIC, DPI, TVPI, the J-curve, subscription lines, fees, the waterfall and currency, all worked through</div></div>
+<div class="page">
+<p>Everything here uses one <b>illustrative</b> fund so the numbers connect. It is not a Hayfin fund. An LP commits €100m. Hayfin calls €90m over three years and pays back €116m over six.</p>
+
+<h2 data-toc="t4a" data-title="Cash flows, IRR and MOIC" data-lvl="2"><span class="mk">QQt4aQQ</span>Cash flows, IRR and MOIC</h2>
+<div class="calc">Year:            0      1      2      3      4      5      6
+Capital called: -30    -40    -20     0      0      0      0
+Distributions:    0     +3     +8    +25    +30    +30    +20
+Net cash flow:  -30    -37    -12    +25    +30    +30    +20
+
+MOIC  = total returned / total paid in = 116 / 90 = 1.29x
+IRR   = the rate r where  -30 - 37/(1+r) - 12/(1+r)^2 + 25/(1+r)^3
+        + 30/(1+r)^4 + 30/(1+r)^5 + 20/(1+r)^6 = 0   →   r ≈ 8.1%
+In Excel: =IRR(range) for annual flows, or =XIRR(values, dates) for real dates.</div>
+<div class="box key"><span class="lab">Why both numbers</span><b>IRR</b> rewards speed: getting money back sooner lifts it. <b>MOIC</b> ignores time: it only counts how many euros came back per euro in. A fund can have a high IRR and a low multiple (quick but small gains) or the reverse. LPs look at both, which is why ILPA's new Performance Template asks for IRR and multiples together <span class="s">[S45]</span>.</div>
+
+<h2 data-toc="t4b" data-title="DPI, TVPI and the J-curve" data-lvl="2"><span class="mk">QQt4bQQ</span>DPI, TVPI and the J-curve</h2>
+<figure>
+<svg viewBox="0 0 700 250" font-family="Helvetica,Arial">
+<g font-size="10">
+<text x="10" y="16" font-weight="700" fill="#12233f" font-size="12">DPI over the life of the illustrative fund (cash back ÷ cash paid in)</text>
+<line x1="60" y1="210" x2="680" y2="210" stroke="#5b6676"/><line x1="60" y1="210" x2="60" y2="30" stroke="#5b6676"/>
+<line x1="60" y1="94" x2="680" y2="94" stroke="#1d7a4c" stroke-dasharray="4 3"/><text x="676" y="88" text-anchor="end" fill="#1d7a4c">DPI = 1.0x: all money back</text>
+<g fill="#12233f">
+<rect x="80" y="210" width="50" height="0"/><rect x="170" y="205" width="50" height="5"/><rect x="260" y="196" width="50" height="14"/><rect x="350" y="164" width="50" height="46"/><rect x="440" y="125" width="50" height="85"/><rect x="530" y="86" width="50" height="124" fill="#1d7a4c"/><rect x="620" y="60" width="50" height="150" fill="#1d7a4c"/>
+</g>
+<g text-anchor="middle"><text x="105" y="204">0.00</text><text x="195" y="199">0.04</text><text x="285" y="190">0.12</text><text x="375" y="158">0.40</text><text x="465" y="119">0.73</text><text x="555" y="80">1.07</text><text x="645" y="54">1.29</text>
+<text x="105" y="226">Y0</text><text x="195" y="226">Y1</text><text x="285" y="226">Y2</text><text x="375" y="226">Y3</text><text x="465" y="226">Y4</text><text x="555" y="226">Y5</text><text x="645" y="226">Y6</text></g>
+<text x="65" y="244" fill="#5b6676" font-size="9.5">Illustrative numbers. Scale: 116 px = 1.0x. TVPI = DPI + RVPI (remaining value ÷ paid in); at Y6 everything is distributed, so TVPI = DPI = 1.29x.</text>
+</g>
+</svg>
+<figcaption><b>Figure 4.1 · DPI builds slowly.</b> Early on, fees and set-up costs mean the value an LP holds can dip below what it paid: the "J-curve". Credit funds have a shallower J-curve than private equity because loans pay interest from the start [Inferred, standard].</figcaption>
+</figure>
+<p><b>Why this matters in 2026.</b> When exits slow, LPs focus on DPI, the cash actually returned. A credit fund's steady interest and repayments are a DPI story. Hayfin's DLF V was over 50% deployed across 35+ companies at close <span class="s">[S71]</span>, so its DPI clock is already running.</p>
+
+<h2 data-toc="t4c" data-title="The subscription line trick" data-lvl="2"><span class="mk">QQt4cQQ</span>The subscription line trick (and why ILPA cares)</h2>
+<div class="calc">Same fund, but it borrows from a bank for one year before calling capital (a "subscription line"),
+paying 5% interest, so each call arrives a year later and 5% larger:
+
+                 Y0     Y1      Y2      Y3     Y4     Y5     Y6
+Net cash flow:    0   -28.5   -34.0   +4.0   +30    +30    +20
+
+IRR  ≈ 9.6%   (was 8.1%)   →  looks better, because the LP's money is out for less time
+MOIC ≈ 1.23x  (was 1.29x)  →  is actually worse, because the fund paid interest</div>
+<p>ILPA's own notional example shows the same effect: IRR 6.62% and TVPI 1.45x with no line; 7.14% and 1.40x with a one-year line; 7.98% and 1.35x with a two-year line <span class="s">[S437]</span>. ILPA's 2017 guidance suggested lines of 15-25% of uncalled capital outstanding for no more than 180 days <span class="s">[S437]</span>.</p>
+<p>This is why the ILPA Performance Template asks managers to show performance with and without the effect of subscription facilities <span class="s">[S45]</span>. When you proofread a performance page, check which basis each IRR uses. An intern who can explain this example will stand out.</p>
+
+<h2 data-toc="t4d" data-title="Fees and the waterfall" data-lvl="2"><span class="mk">QQt4dQQ</span>Fees and the waterfall</h2>
+<p><b>Management fee.</b> Hayfin's terms are not public. European direct lending norm (Macfarlanes, Hayfin's fund counsel): "a management fee on net invested capital, a performance fee subject to a preferred return with catch-up", headline about 1%, slightly less after discounts; "A 2% management fee would be seen as commercially unviable within direct lending" <span class="s">[S104]</span>. Charging on <i>invested</i> rather than <i>committed</i> capital means LPs do not pay fees on money sitting idle <span class="i">Inferred</span>. In Macfarlanes' model, cutting the fee from 1% to 0.75% lifts net IRR to 9.05%, and "all of the performance fee" arrives in the last two years <span class="s">[S440]</span>. A survey of mostly US lenders (Cliffwater 2025, relayed by a blog, so treat with care) put unlevered direct lending at about 1.04% fees, an average hurdle of 5.12% and average carry of 11.2% <span class="s">[S441]</span>: far below private equity's typical 2% and 20% <span class="i">Inferred</span>.</p>
+<div class="calc">Illustrative "whole-fund" waterfall (NOT Hayfin's terms). Fund returns €120m on €90m paid in.
+Assume a preferred return worth €15m, a 100% catch-up and a 15% performance fee
+(within the 10-15% range seen in direct lending <span class="s">[S441]</span>).
+
+Step 1  Return of capital        LP gets 90.0              (remaining profit 30.0)
+Step 2  Preferred return (hurdle) LP gets 15.0              (remaining 15.0)
+Step 3  Catch-up to GP            GP gets c, where c = 15% × (15 + c)  →  c = 2.65
+Step 4  Split the rest 85/15      remaining 12.35 → LP 10.50, GP 1.85
+
+Totals: LP profit 25.5, GP profit 4.5  →  GP has exactly 15% of the 30.0 profit.</div>
+<div class="box key"><span class="lab">Gross-to-net in one line</span>Gross return (what the loans earned) minus management fee, minus fund expenses, minus the performance fee, minus the cost of any fund borrowing, equals net return to the LP. ILPA's 2025 Reporting Template adds a standard gross-to-net fee reconciliation, including rebates, waivers, offsets, placement fees and internal chargebacks <span class="s">[S170]</span><span class="s">[S258]</span>.</div>
+
+<h2 data-toc="t4e" data-title="Currency: the lesson in Hayfin's own history" data-lvl="2"><span class="mk">QQt4eQQ</span>Currency: the lesson in Hayfin's own history</h2>
+<figure>
+<svg viewBox="0 0 700 170" font-family="Helvetica,Arial">
+<g font-size="10.5">
+<text x="10" y="16" font-weight="700" fill="#12233f" font-size="12">Same fund, two currencies: Special Opportunities Credit Fund I at 30 Sep 2015 (real figures)</text>
+<line x1="250" y1="30" x2="250" y2="115" stroke="#5b6676"/>
+<text x="240" y="58" text-anchor="end">Net IRR in euros</text><rect x="250" y="45" width="200" height="20" fill="#1f3a63"/><text x="456" y="60">+8.0% (1.10x net MOIC)</text>
+<text x="178" y="98" text-anchor="end">Net IRR, US dollar LP</text><rect x="185" y="85" width="65" height="20" fill="#b3261e"/><text x="256" y="100">-2.6% (0.97x) for PSERS, unhedged</text>
+<text x="10" y="135" fill="#5b6676" font-size="9.5">Scale 25 px per point. Source: PSERS investment memo, February 2016 [S307]. Nashville hedged the euro on its 2013 Hayfin commitment [S309].</text>
+</g>
+</svg>
+<figcaption><b>Figure 4.2 · Currency can erase a good result.</b> Hayfin's investors are 26.2% North American and 22.8% Australian by AUM <span class="s">[S305]</span>, so "how do I hedge the euro?" is a standing question. You will see currency in DDQs, in reports and in wrapper design (for example hedged share classes or feeders) <span class="i">Inferred</span>.</figcaption>
+</figure>
+</div>
+
+<div class="band" data-toc="t5" data-title="5 · Toolkit 2: the loan underneath"><span class="mk">QQt5QQ</span><div class="num">Section 5 · Toolkit 2</div><h1>The loan underneath</h1><div class="sub">How a direct loan is priced, how its health is measured, and what PIK really does</div></div>
+<div class="page">
+<p>You cannot explain a credit fund without understanding a single loan. Hayfin's quarterly Portfolio Breakdown shows each company's "LTM EBITDA, enterprise value and leverage" <span class="s">[S305]</span>. Here is how to read those.</p>
+
+<h2 data-toc="t5a" data-title="Pricing a unitranche loan" data-lvl="2"><span class="mk">QQt5aQQ</span>Pricing a unitranche loan</h2>
+<div class="calc">Illustrative €100m unitranche, 3-year expected life (NOT a Hayfin deal):
+
+Base rate: 3-month Euribor, June 2026 <span class="s">[S443]</span>           2.32%
+Margin over Euribor (market range E+500-625bps)      + 5.25%
+Cash coupon                                          = 7.57% a year
+Issue price 98 (a 2-point OID; market 97.5-98.5),
+spread over a 3-year expected life                   + 0.67% a year (approx.)
+Approximate all-in yield to the lender               ≈ 8.2% a year (gross)
+
+Floating rate: if Euribor rises 1 point, the coupon rises 1 point. Good for the lender's
+income; harder for the borrower to pay.</div>
+<p><b>Where the market is (2025-2026).</b> European direct lending median spreads fell from 613bps (2023) to 550bps (2024) to 500bps (2025 YTD), while sponsored leverage averaged 6.12x EBITDA against 4.83x in syndicated loans (Rothschild) <span class="s">[S445]</span>. Q1 2026 unitranche priced at about E+525-625bps in the traditional mid-market and E+500-600bps upper mid-market (Baird) <span class="s">[S442]</span>; KBRA said euro loans were "flirting with sub-8% yields for the first time" <span class="s">[S444]</span>. The ECB raised its deposit rate to 2.25% in June 2026, its first hike in almost three years <span class="s">[S443]</span>. Call protection is thin: over 80% of European deals had none from year three (2022 data) <span class="s">[S446]</span>.</p>
+<p>This is why Hayfin was described by its LP as "an 8%+ lender" in direct lending and "15%+" in special opportunities <span class="s">[S307]</span>: the label is best read as the rough all-in yield range of each product <span class="i">Inferred</span>.</p>
+
+<h2 data-toc="t5b" data-title="Measuring a borrower's health" data-lvl="2"><span class="mk">QQt5bQQ</span>Measuring a borrower's health</h2>
+<div class="calc">Illustrative borrower:  LTM EBITDA €50m, total debt €250m, enterprise value (EV) €550m
+(5.0x is below the 6.12x 2025 average for sponsored European direct lending <span class="s">[S445]</span>)
+
+Leverage           = debt / EBITDA          = 250 / 50     = 5.0x
+Loan-to-value (LTV)= debt / EV              = 250 / 550    = 45%
+Interest cost      = 250 × 7.57%            = €18.9m
+Interest cover     = EBITDA / interest      = 50 / 18.9    = 2.6x
+(syndicated loans averaged 2.71x in Q2 2026, vs 4.0x before 2022 <span class="s">[S443]</span>)
+Equity cushion     = EV − debt              = €300m  (what the PE owner loses first)</div>
+<div class="box key"><span class="lab">Read the Portfolio Breakdown like a credit analyst</span>Rising leverage or falling interest cover across several quarters is a warning. A big equity cushion below the loan is protection: the private equity owner loses first. A covenant (for example "leverage must stay under 6.0x") gives the lender a seat at the table before things get bad. Hayfin says European deals offer "lower leverage, tighter documentation and smaller lender groups" than US ones <span class="s">[S95]</span> (firm claim).</div>
+
+<h2 data-toc="t5c" data-title="PIK: the topic of 2026" data-lvl="2"><span class="mk">QQt5cQQ</span>PIK: the topic of 2026</h2>
+<div class="calc">PIK (payment in kind) = interest added to the loan instead of paid in cash.
+
+€100m loan, 4% PIK for 3 years:   100 × 1.04^3 = €112.5m owed
+Interest earned on paper: €12.5m. Cash received: €0.
+If the company's value falls, the extra €12.5m may never be collected.</div>
+<table>
+<thead><tr><th style="width:18%">Hayfin's three PIKs <span class="s">[S229]</span></th><th>What it means</th><th style="width:30%">How you would report it</th></tr></thead>
+<tbody>
+<tr><td><b>Good PIK</b></td><td>Agreed at the start, capped, time-limited, priced at a premium, used for growth that pays it back.</td><td>Show it as planned, with the cap and the coverage.</td></tr>
+<tr><td><b>Bad PIK</b></td><td>Introduced later because the borrower cannot pay cash: a stress signal. Lincoln calls loans that switched to PIK a "shadow default" (6.2% of loans, Q2 2026) <span class="s">[S162]</span>.</td><td>Flag as an amendment; track on the watchlist.</td></tr>
+<tr><td><b>Fake good PIK</b></td><td>Agreed at entry, but the business never really covers it, so value slowly moves from lender to borrower.</td><td>Hayfin's point: origin "says nothing about whether the position stays covered" <span class="s">[S229]</span>. Track coverage, not just origin.</td></tr>
+</tbody></table>
+<p><b>Why it is in your job.</b> Fitch counted interest deferrals and PIK switches as 47% of US private credit default events in August 2026 <span class="s">[S245]</span>, and Hayfin's LPs probed PIK harder in DLF V than ever before <span class="s">[S222]</span>. Expect ad hoc requests like "PIK income as a share of total income, split by planned and amended", and DDQ questions on PIK policy.</p>
+
+<h2 data-toc="t5d" data-title="From one loan to the whole fund" data-lvl="2"><span class="mk">QQt5dQQ</span>From one loan to the whole fund</h2>
+<figure>
+<svg viewBox="0 0 700 200" font-family="Helvetica,Arial">
+<defs><marker id="m4" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#12233f"/></marker></defs>
+<g font-size="10">
+<rect x="10" y="20" width="150" height="150" rx="6" fill="#eef2f8" stroke="#1f3a63"/><text x="85" y="40" text-anchor="middle" font-weight="700">35+ loans</text><text x="85" y="58" text-anchor="middle">at DLF V close [S71]</text><text x="85" y="84" text-anchor="middle">each: margin, OID,</text><text x="85" y="98" text-anchor="middle">leverage, cover,</text><text x="85" y="112" text-anchor="middle">PIK, sector, country,</text><text x="85" y="126" text-anchor="middle">currency, mark</text>
+<rect x="200" y="20" width="200" height="150" rx="6" fill="#1f3a63"/><text x="300" y="40" text-anchor="middle" fill="#fff" font-weight="700">Aggregation</text><text x="300" y="64" text-anchor="middle" fill="#c9d3e3">weighted average spread</text><text x="300" y="80" text-anchor="middle" fill="#c9d3e3">weighted average leverage</text><text x="300" y="96" text-anchor="middle" fill="#c9d3e3">sector and country mix</text><text x="300" y="112" text-anchor="middle" fill="#c9d3e3">top-10 concentration</text><text x="300" y="128" text-anchor="middle" fill="#c9d3e3">PIK share of income</text><text x="300" y="144" text-anchor="middle" fill="#c9d3e3">watchlist and non-accruals</text>
+<rect x="440" y="20" width="250" height="150" rx="6" fill="#f6ead9" stroke="#c8873a"/><text x="565" y="40" text-anchor="middle" font-weight="700">Where it shows up</text><text x="450" y="64">Pitch book: portfolio pages</text><text x="450" y="80">DDQ: portfolio construction, risk</text><text x="450" y="96">Quarterly report: Summary of</text><text x="450" y="110">Investments, Portfolio Breakdown [S305]</text><text x="450" y="128">Insurer look-through data (Section 6)</text><text x="450" y="146">Ad hoc: "software exposure?" (&lt;6% [S227])</text>
+<line x1="160" y1="95" x2="198" y2="95" stroke="#12233f" marker-end="url(#m4)"/><line x1="400" y1="95" x2="438" y2="95" stroke="#12233f" marker-end="url(#m4)"/>
+</g>
+</svg>
+<figcaption><b>Figure 5.1 · From loan data to investor answers.</b> Aggregation metrics are standard practice <span class="i">Inferred</span>; Hayfin's report contents from <span class="s">[S305]</span>.</figcaption>
+</figure>
+<div class="box key"><span class="lab">Weighted average, the most used formula in IR</span>Weighted average leverage = Σ (loan size × leverage) ÷ Σ loan size. Two loans: €60m at 5.0x and €40m at 4.0x → (60×5 + 40×4) ÷ 100 = 4.6x. A simple average would wrongly say 4.5x. Always ask "weighted by what?" (commitment, drawn amount, fair value).</div>
+</div>
+
+<div class="band b2" data-toc="t6" data-title="6 · Toolkit 3: packaging and insurer capital"><span class="mk">QQt6QQ</span><div class="num">Section 6 · Toolkit 3</div><h1>Packaging: why the same loans need different wrappers</h1><div class="sub">The rated note feeder, insurer capital rules in the EU, US and Korea, and the look-through data insurers need. The most Hayfin-specific technical topic in this guide</div></div>
+<div class="page">
+<p>The PSG co-heads put the problem in one sentence: "A European pension fund, a US institution and an Asian insurer may all want exposure to the same underlying senior-secured loans, but they may not want to access that exposure in the same form" <span class="s">[S403]</span>. This section explains why, with the actual rule numbers.</p>
+
+<h2 data-toc="t6a" data-title="The five wrappers, technically" data-lvl="2"><span class="mk">QQt6aQQ</span>The five wrappers, technically</h2>
+<table>
+<thead><tr><th style="width:20%">Wrapper</th><th style="width:40%">How it works</th><th>Who it suits, and the technical catch</th></tr></thead>
+<tbody>
+<tr><td>Unlevered commingled fund</td><td>Many LPs in one closed-ended fund; no borrowing at fund level beyond short-term lines</td><td>Pensions. For EU insurers, units of an unleveraged closed-ended EU AIF can get a 39% equity charge instead of 49% even without look-through (Solvency II Art 168(6)(c)) <span class="s">[S407]</span></td></tr>
+<tr><td>Levered commingled fund</td><td>The fund borrows against its loans (asset-backed or NAV facilities) to lift returns; levered DLF V assets "more than doubling" vs DLF IV <span class="s">[S403]</span></td><td>Return-seeking LPs. Leverage disqualifies the 39% route above, so insurers without look-through face 49% [Inferred from S407]. EU loan-origination AIFs are capped at 300% leverage (closed-ended) under AIFMD II <span class="s">[S163]</span></td></tr>
+<tr><td>SMA</td><td>A separate account for one investor following the strategy, with custom rules and reporting</td><td>Large pensions, SWFs, insurers wanting control. Extra reporting per account <span class="s">[S305]</span></td></tr>
+<tr><td>Institutional evergreen</td><td>No fixed end date; limited, gated exits; e.g. Tactical Solutions Evergreen Fund <span class="s">[S322]</span></td><td>Investors wanting to stay invested without re-upping. Liquidity terms must be explained precisely</td></tr>
+<tr><td>Rated note feeder (RNF)</td><td>A vehicle that invests in the fund and funds itself by issuing rated notes (debt) plus some equity. DLF V's raised about $600m <span class="s">[S402]</span></td><td>Insurers. Notes are treated as bonds, not fund equity, so capital charges fall sharply (below). Catches: rating cost, securitisation classification, equity tranche <span class="s">[S417]</span><span class="s">[S418]</span></td></tr>
+</tbody></table>
+
+<h2 data-toc="t6b" data-title="How a rated note feeder works" data-lvl="2"><span class="mk">QQt6bQQ</span>How a rated note feeder works</h2>
+<figure>
+<svg viewBox="0 0 700 300" font-family="Helvetica,Arial">
+<defs><marker id="r1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#12233f"/></marker></defs>
+<g font-size="10">
+<text x="350" y="16" text-anchor="middle" font-weight="700" fill="#12233f" font-size="12">Rated note feeder: the same loans, re-shaped into rated debt (simplified)</text>
+<rect x="10" y="40" width="170" height="220" rx="8" fill="#e3f3ea" stroke="#1d7a4c"/>
+<text x="95" y="60" text-anchor="middle" font-weight="700">INSURERS</text>
+<rect x="25" y="75" width="140" height="70" rx="5" fill="#12233f"/><text x="95" y="98" text-anchor="middle" fill="#fff" font-weight="700">Buy rated notes</text><text x="95" y="114" text-anchor="middle" fill="#c9d3e3">e.g. A or BBB rating;</text><text x="95" y="128" text-anchor="middle" fill="#c9d3e3">fixed or floating coupon</text>
+<rect x="25" y="160" width="140" height="80" rx="5" fill="#c8873a"/><text x="95" y="183" text-anchor="middle" fill="#fff" font-weight="700">Equity / junior</text><text x="95" y="199" text-anchor="middle" fill="#fff">held by manager or</text><text x="95" y="213" text-anchor="middle" fill="#fff">investors who can bear</text><text x="95" y="227" text-anchor="middle" fill="#fff">first loss</text>
+<rect x="250" y="80" width="190" height="140" rx="8" fill="#1f3a63"/><text x="345" y="104" text-anchor="middle" fill="#fff" font-weight="700">FEEDER VEHICLE</text><text x="345" y="124" text-anchor="middle" fill="#c9d3e3">issues notes + equity;</text><text x="345" y="140" text-anchor="middle" fill="#c9d3e3">invests proceeds as an LP</text><text x="345" y="156" text-anchor="middle" fill="#c9d3e3">in the main fund;</text><text x="345" y="172" text-anchor="middle" fill="#c9d3e3">rated by an agency</text><text x="345" y="196" text-anchor="middle" fill="#c8873a" font-weight="700">~$600m for DLF V [S402]</text>
+<rect x="510" y="80" width="180" height="140" rx="8" fill="#12233f"/><text x="600" y="104" text-anchor="middle" fill="#fff" font-weight="700">DLF V</text><text x="600" y="124" text-anchor="middle" fill="#c9d3e3">senior secured loans</text><text x="600" y="140" text-anchor="middle" fill="#c9d3e3">to European companies</text><text x="600" y="164" text-anchor="middle" fill="#c9d3e3">"without changing the</text><text x="600" y="178" text-anchor="middle" fill="#c9d3e3">underlying investment"</text><text x="600" y="194" text-anchor="middle" fill="#c9d3e3">[S403]</text>
+<line x1="165" y1="110" x2="248" y2="130" stroke="#12233f" marker-end="url(#r1)"/><line x1="165" y1="200" x2="248" y2="180" stroke="#12233f" marker-end="url(#r1)"/><line x1="440" y1="150" x2="508" y2="150" stroke="#12233f" marker-end="url(#r1)"/>
+<path d="M510,205 C470,250 220,260 170,225" fill="none" stroke="#1d7a4c" stroke-dasharray="5 3" marker-end="url(#r1)"/>
+<text x="345" y="258" text-anchor="middle" fill="#1d7a4c">loan income flows back: notes paid first, equity last</text>
+<text x="10" y="290" fill="#5b6676" font-size="9.5">Simplified. Hayfin's feeder terms (ratings, currencies, tranches) are not public. Features: [S417][S418].</text>
+</g>
+</svg>
+<figcaption><b>Figure 6.1 · A rated note feeder.</b> Because the notes are paid before the equity, they are safer than a fund stake, which is what earns the rating. Hayfin calls its feeder "one of the first priced by a European direct lending manager" <span class="s">[S403]</span>; KBRA rated $17bn of note feeder funds in 2025 against $8bn in 2024 (per Macfarlanes) <span class="s">[S418]</span>.</figcaption>
+</figure>
+
+<h2 data-toc="t6c" data-title="Why it saves capital: three insurer rulebooks" data-lvl="2"><span class="mk">QQt6cQQ</span>Why it saves capital: three insurer rulebooks</h2>
+<div class="box key"><span class="lab">Key idea</span>Insurers must hold capital against each investment, in proportion to how risky the regulator thinks it is. An opaque fund stake is treated like equity (high charge). A rated bond is treated like a bond (low charge). Same loans underneath; very different capital cost.</div>
+<figure>
+<svg viewBox="0 0 700 330" font-family="Helvetica,Arial">
+<g font-size="10">
+<text x="10" y="16" font-weight="700" fill="#12233f" font-size="12">Capital charge per €100 invested, by rulebook and wrapper (standard formula / base factors)</text>
+<line x1="230" y1="30" x2="230" y2="300" stroke="#5b6676"/>
+<text x="10" y="44" font-weight="700" fill="#1f3a63">EU Solvency II</text>
+<text x="225" y="62" text-anchor="end">Fund units, no look-through</text><rect x="230" y="51" width="245" height="16" fill="#b3261e"/><text x="481" y="63">49% + adj. (39% unlevered EU AIF)</text>
+<text x="225" y="84" text-anchor="end">Look-through, unrated loans, dur 3</text><rect x="230" y="73" width="45" height="16" fill="#c8873a"/><text x="281" y="85">9% (3% × duration) [S410]</text>
+<text x="225" y="106" text-anchor="end">Rated note BBB, duration 5</text><rect x="230" y="95" width="62" height="16" fill="#1d7a4c"/><text x="298" y="107">12.5% [S410]</text>
+<text x="225" y="128" text-anchor="end">Rated note A, duration 5</text><rect x="230" y="117" width="35" height="16" fill="#1d7a4c"/><text x="271" y="129">7.0% [S410]</text>
+<text x="225" y="150" text-anchor="end">Same BBB note if a non-STS</text><text x="225" y="162" text-anchor="end">securitisation, duration 5</text><rect x="230" y="141" width="440" height="16" fill="#7a3fb0" opacity="0.6"/><text x="236" y="153" fill="#12233f">≈98.5% (19.7% × 5): the securitisation trap [S412]</text>
+<text x="10" y="196" font-weight="700" fill="#1f3a63">US NAIC (life RBC)</text>
+<text x="225" y="214" text-anchor="end">LP interest in a private fund</text><rect x="230" y="203" width="150" height="16" fill="#b3261e"/><text x="386" y="215">30% [S419]</text>
+<text x="225" y="236" text-anchor="end">Rated note, NAIC 2.B (≈BBB)</text><rect x="230" y="225" width="8" height="16" fill="#1d7a4c"/><text x="244" y="237">1.52% [S421]</text>
+<text x="225" y="258" text-anchor="end">Rated note, NAIC 1.F (≈A)</text><rect x="230" y="247" width="4" height="16" fill="#1d7a4c"/><text x="240" y="259">0.82% [S421]</text>
+<text x="10" y="288" font-weight="700" fill="#1f3a63">Korea K-ICS</text><text x="230" y="288" fill="#5b6676">Fund-unit and credit factors not found in public sources [Gap]; same logic applies [Inferred]</text>
+<text x="10" y="318" fill="#5b6676" font-size="9.5">Scale 5 px per point. Solvency II: Reg. 2015/35 as amended [S407][S408]; NAIC: pretax base factors. Durations illustrative.</text>
+</g>
+</svg>
+<figcaption><b>Figure 6.2 · The capital arithmetic behind "capital-efficient".</b> A vendor worked example: a €50m commitment at 49% needs "nearly €25 million" of capital; via a BBB rated note feeder "9% to 15%", or €4.5-7.5m <span class="s">[S417]</span> (vendor framing, not a regulator).</figcaption>
+</figure>
+<h3>The three rulebooks, simply</h3>
+<ul>
+<li><b>EU insurers (Solvency II).</b> Without look-through, fund units are "type 2" equity at 49% plus a symmetric adjustment of -10% to +10% (widening to ±13% from 30 January 2027) <span class="s">[S408]</span><span class="s">[S409]</span><span class="s">[S414]</span>. Unleveraged closed-ended EU funds can be "type 1" at 39% <span class="s">[S407]</span>. With look-through, each loan is charged as spread risk; unrated loans cost 3% × duration <span class="s">[S410]</span>, which is why insurers demand line-by-line data (below). A rated note gets bond factors, unless it counts as a securitisation, in which case much higher factors apply <span class="s">[S412]</span>. Macfarlanes says a feeder that works for Solvency II insurers, as opposed to US ones, "remains a work in progress" <span class="s">[S448]</span>. The Solvency II review applies from 30 January 2027 <span class="s">[S414]</span><span class="s">[S415]</span>.</li>
+<li><b>US insurers (NAIC).</b> A private fund LP interest carries a 30% risk-based capital charge; investment-grade debt is "generally under 2%" <span class="s">[S419]</span>. Rated feeders started here ("first designed for US insurers") <span class="s">[S418]</span>. Regulators push back: the NAIC worried feeders could "repackage equity-like exposure", one driver of the principles-based bond definition effective 1 January 2025 <span class="s">[S419]</span><span class="s">[S423]</span>, and the NAIC's securities office gained power from 1 January 2026 to challenge private ratings <span class="s">[S422]</span>.</li>
+<li><b>Korean insurers (K-ICS).</b> Since 2023 Korea uses K-ICS, a market-consistent regime at a 99.5% confidence level <span class="s">[S429]</span>. Regulators cut the recommended ratio from 150% to 130-140% in 2025 and add a core capital rule from 2027 <span class="s">[S426]</span><span class="s">[S427]</span>. Samsung Life, a Hayfin shareholder, reported 208.2% at end-June 2026 <span class="s">[S428]</span>. Exact fund and credit factors were not found [Gap], but one industry comment says some Korean insurers restructure alternatives into "rated" notes to get better treatment <span class="s">[S430]</span> (snippet). This is the context for Hayfin's new Seoul office <span class="s">[S404]</span>.</li>
+</ul>
+<div class="box say"><span class="lab">Why this is the most distinctive thing you could learn at Hayfin</span>Most students can define IRR. Very few can explain why an insurer would buy the same European loans through a rated note rather than a fund stake, what the capital difference is, and what can go wrong (the securitisation classification, the NAIC's scrutiny). Hayfin did this in its flagship raise in 2026 <span class="s">[S402]</span>. That is a conversation you can have in an interview.</div>
+
+<h2 data-toc="t6d" data-title="Look-through data: the TPT and EET" data-lvl="2"><span class="mk">QQt6dQQ</span>Look-through data: the TPT and EET</h2>
+<p>If an insurer wants the lower look-through charge, it needs data on every loan. The industry template is the <b>Tripartite Template (TPT)</b>, maintained by FinDatEx: "a widely used European data exchange template designed to support the provision of asset data from asset managers to insurers for Solvency II reporting purposes" <span class="s">[S431]</span>. Version 7 (December 2024) added "Improved handling of bonds or loans with payment-in-kind features" <span class="s">[S432]</span>. Version 8 was consulted on from July to September 2026 and is expected to be mandatory in Q1 2027 <span class="s">[S431]</span>. Whether V8 was finalised is not confirmed [Gap].</p>
+<figure>
+<svg viewBox="0 0 700 220" font-family="Helvetica,Arial">
+<g font-size="10">
+<text x="10" y="16" font-weight="700" fill="#12233f" font-size="12">What a direct lending fund supplies in a TPT, one row per loan (V7 field groups) [S433]</text>
+<g>
+<rect x="10" y="30" width="160" height="170" rx="6" fill="#12233f"/><text x="90" y="50" text-anchor="middle" fill="#fff" font-weight="700">Portfolio level</text><text x="20" y="72" fill="#c9d3e3">fund ID, currency</text><text x="20" y="88" fill="#c9d3e3">NAV, reporting date</text><text x="20" y="104" fill="#c9d3e3">cash ratio</text><text x="20" y="120" fill="#c9d3e3">portfolio duration</text>
+<rect x="180" y="30" width="160" height="170" rx="6" fill="#1f3a63"/><text x="260" y="50" text-anchor="middle" fill="#fff" font-weight="700">Each loan</text><text x="190" y="72" fill="#c9d3e3">CIC code, name</text><text x="190" y="88" fill="#c9d3e3">nominal, market value</text><text x="190" y="104" fill="#c9d3e3">reference index (Euribor)</text><text x="190" y="120" fill="#c9d3e3">interest rate margin</text><text x="190" y="136" fill="#c9d3e3">maturity, call dates</text><text x="190" y="152" fill="#c9d3e3">PIK flag (new in V7)</text>
+<rect x="350" y="30" width="160" height="170" rx="6" fill="#3d5a85"/><text x="430" y="50" text-anchor="middle" fill="#fff" font-weight="700">Issuer</text><text x="360" y="72" fill="#e8edf5">name, LEI, group</text><text x="360" y="88" fill="#e8edf5">country, NACE sector</text><text x="360" y="104" fill="#e8edf5">subordination, tranche</text><text x="360" y="120" fill="#e8edf5">credit quality step</text><text x="360" y="136" fill="#e8edf5">rating, agency</text>
+<rect x="520" y="30" width="170" height="170" rx="6" fill="#c8873a"/><text x="605" y="50" text-anchor="middle" fill="#fff" font-weight="700">Analytics</text><text x="530" y="72" fill="#fff">modified duration</text><text x="530" y="88" fill="#fff">credit sensitivity</text><text x="530" y="104" fill="#fff">optional SCR</text><text x="530" y="120" fill="#fff">contributions: rates,</text><text x="530" y="136" fill="#fff">equity, spread, FX</text>
+</g>
+<text x="10" y="215" fill="#5b6676" font-size="9.5">About 150 fields in total in the V7 workbook [S433]. Who prepares Hayfin's TPTs (PSG, Finance or the administrator) is not public; the Fund Controller role supports "Solvency II reporting" [S333].</text>
+</g>
+</svg>
+<figcaption><b>Figure 6.3 · Look-through data.</b> Notice the overlap with the quarterly Portfolio Breakdown and with PIK reporting: the same loan data feeds investor reports, DDQ answers and insurer capital calculations <span class="i">Inferred</span>.</figcaption>
+</figure>
+<p>The <b>European ESG Template (EET)</b> does the same job for sustainability data under SFDR and the EU's suitability rules; version 1.1.3 has applied since 1 January 2025 <span class="s">[S434]</span>. Hayfin runs six SFDR Article 8 funds <span class="s">[S25]</span>.</p>
+</div>
+
+<div class="band b3" data-toc="t7" data-title="7 · Toolkit 4: the documents you will build"><span class="mk">QQt7QQ</span><div class="num">Section 7 · Toolkit 4</div><h1>The documents you will build</h1><div class="sub">Pitch book, DDQ, RFP, case study and quarterly report, with their anatomy and the checks that matter</div></div>
+<div class="page">
+
+<h2 data-toc="t7a" data-title="The pitch book" data-lvl="2"><span class="mk">QQt7aQQ</span>The pitch book</h2>
+<figure>
+<svg viewBox="0 0 700 200" font-family="Helvetica,Arial">
+<g font-size="9.5">
+<text x="10" y="14" font-weight="700" fill="#12233f" font-size="12">Anatomy of a private credit fund pitch book (typical order)</text>
+<g>
+<rect x="10" y="28" width="80" height="110" rx="4" fill="#12233f"/><text x="50" y="50" text-anchor="middle" fill="#fff" font-weight="700">1</text><text x="50" y="68" text-anchor="middle" fill="#fff">Firm</text><text x="50" y="82" text-anchor="middle" fill="#c9d3e3">AUM, team,</text><text x="50" y="94" text-anchor="middle" fill="#c9d3e3">offices,</text><text x="50" y="106" text-anchor="middle" fill="#c9d3e3">ownership</text>
+<rect x="96" y="28" width="80" height="110" rx="4" fill="#1f3a63"/><text x="136" y="50" text-anchor="middle" fill="#fff" font-weight="700">2</text><text x="136" y="68" text-anchor="middle" fill="#fff">Market</text><text x="136" y="82" text-anchor="middle" fill="#c9d3e3">why European</text><text x="136" y="94" text-anchor="middle" fill="#c9d3e3">credit now</text>
+<rect x="182" y="28" width="80" height="110" rx="4" fill="#1f3a63"/><text x="222" y="50" text-anchor="middle" fill="#fff" font-weight="700">3</text><text x="222" y="68" text-anchor="middle" fill="#fff">Edge</text><text x="222" y="82" text-anchor="middle" fill="#c9d3e3">origination,</text><text x="222" y="94" text-anchor="middle" fill="#c9d3e3">sole-lender,</text><text x="222" y="106" text-anchor="middle" fill="#c9d3e3">incumbency</text>
+<rect x="268" y="28" width="80" height="110" rx="4" fill="#3d5a85"/><text x="308" y="50" text-anchor="middle" fill="#fff" font-weight="700">4</text><text x="308" y="68" text-anchor="middle" fill="#fff">Process</text><text x="308" y="82" text-anchor="middle" fill="#e8edf5">IC, ESG Deal</text><text x="308" y="94" text-anchor="middle" fill="#e8edf5">Cttee, risk</text>
+<rect x="354" y="28" width="80" height="110" rx="4" fill="#c8873a"/><text x="394" y="50" text-anchor="middle" fill="#fff" font-weight="700">5</text><text x="394" y="68" text-anchor="middle" fill="#fff">Track record</text><text x="394" y="82" text-anchor="middle" fill="#fff">gross AND net,</text><text x="394" y="94" text-anchor="middle" fill="#fff">losses, by</text><text x="394" y="106" text-anchor="middle" fill="#fff">vintage</text>
+<rect x="440" y="28" width="80" height="110" rx="4" fill="#3d5a85"/><text x="480" y="50" text-anchor="middle" fill="#fff" font-weight="700">6</text><text x="480" y="68" text-anchor="middle" fill="#fff">Portfolio</text><text x="480" y="82" text-anchor="middle" fill="#e8edf5">mix, leverage,</text><text x="480" y="94" text-anchor="middle" fill="#e8edf5">PIK, sectors</text>
+<rect x="526" y="28" width="80" height="110" rx="4" fill="#6f87a8"/><text x="566" y="50" text-anchor="middle" fill="#fff" font-weight="700">7</text><text x="566" y="68" text-anchor="middle" fill="#fff">Case studies</text><text x="566" y="82" text-anchor="middle" fill="#fff">incl. a workout</text>
+<rect x="612" y="28" width="78" height="110" rx="4" fill="#6f87a8"/><text x="651" y="50" text-anchor="middle" fill="#fff" font-weight="700">8</text><text x="651" y="68" text-anchor="middle" fill="#fff">Terms</text><text x="651" y="82" text-anchor="middle" fill="#fff">wrappers,</text><text x="651" y="94" text-anchor="middle" fill="#fff">fees, risks</text>
+</g>
+<text x="10" y="160">Intern work: refresh every number for the latest quarter; check page 5 shows net with equal prominence to gross [S53]; make sure page 1</text>
+<text x="10" y="175">says ~€40bn (Q2 2026) [S224], 13 offices [S71], not the old €30bn; keep a version log; route every change through Compliance.</text>
+</g>
+</svg>
+<figcaption><b>Figure 7.1 · Pitch book anatomy.</b> Typical structure <span class="i">Inferred</span>; Hayfin themes from <span class="s">[S95]</span><span class="s">[S117]</span><span class="s">[S305]</span>.</figcaption>
+</figure>
+
+<h2 data-toc="t7b" data-title="The DDQ: twenty topics, and the hard ones" data-lvl="2"><span class="mk">QQt7bQQ</span>The DDQ: twenty topics, and the hard ones for Hayfin</h2>
+<p>The industry template is ILPA DDQ 2.0 (November 2021) with 20 topics: firm, fund, succession and key persons, strategy, co-investments, GP-led secondaries, credit facilities, investment process, team, alignment of interests, market environment, fund terms, governance, risk and compliance, track record, accounting and valuation, reporting, legal, data security and technology, ESG, and diversity <span class="s">[S299]</span>. ILPA says it "was not designed with" private credit in mind <span class="s">[S46]</span>, so credit managers also see AIMA's private credit modules <span class="s">[S48]</span>.</p>
+<table>
+<thead><tr><th style="width:22%">DDQ topic</th><th style="width:40%">Why it is hard for a multi-strategy credit manager</th><th>The Hayfin facts you would draw on</th></tr></thead>
+<tbody>
+<tr><td>Conflicts and allocation</td><td>Several Hayfin funds can face the same company</td><td>Non-blocking minority rule; CCO/COO cross-trade sign-off; Investments Conflicts Committee; annual allocation policy review <span class="s">[S305]</span></td></tr>
+<tr><td>Valuation</td><td>No market prices; regulators watching <span class="s">[S166]</span><span class="s">[S250]</span></td><td>Valuation Committee; Finance reviews NAV before investors see it <span class="s">[S305]</span><span class="s">[S333]</span></td></tr>
+<tr><td>Track record and losses</td><td>LPs probed loss rates in DLF V <span class="s">[S222]</span></td><td>Line-by-line realised and unrealised track record in reports <span class="s">[S305]</span>; current loss rate not public</td></tr>
+<tr><td>Key persons, succession</td><td>New leaders arrive</td><td>Co-CEOs since 2025; Head of Investments created May 2026 <span class="s">[S81]</span><span class="s">[S226]</span></td></tr>
+<tr><td>Credit facilities</td><td>Fund leverage and subscription lines change returns (Section 4)</td><td>Levered and unlevered DLF V sleeves <span class="s">[S222]</span>; AIFMD II leverage caps for EU loan funds <span class="s">[S163]</span></td></tr>
+<tr><td>ESG</td><td>77% of LPs call ESG credentials very important <span class="s">[S189]</span></td><td>PRI signatory since 2018; six SFDR Article 8 funds; ESG Deal Committee <span class="s">[S25]</span><span class="s">[S305]</span></td></tr>
+<tr><td>Ownership</td><td>Changes since 2017</td><td>Management majority after Arctos-backed MBO; minorities Mubadala, AXA IM Prime, Samsung Life <span class="s">[S301]</span><span class="s">[S74]</span><span class="s">[S75]</span></td></tr>
+</tbody></table>
+<div class="box note"><span class="lab">The DDQ workflow skill</span>A vendor estimates 40-60 hours per DDQ across IR, finance, compliance and legal <span class="s">[S190]</span>. The real skill is an answer library: each answer tagged with owner, date and source, so stale answers flag themselves. That is where AI tools help safely: first drafts from approved text only, every fact human-checked, nothing confidential pasted into public tools. Hayfin's Chicago IR posting asks for AI "used with careful attention to accuracy" <span class="s">[S19]</span>.</div>
+
+<h2 data-toc="t7c" data-title="RFPs and consultant databases" data-lvl="2"><span class="mk">QQt7cQQ</span>RFPs and consultant databases</h2>
+<p>An RFP (request for proposal) is a formal search by an investor or consultant with fixed questions, word limits and deadlines. Consultants also screen managers through databases such as eVestment, which covered 16,231 GP profiles in Q1 2026 (vendor figure) <span class="s">[S55]</span>. Hayfin's Chicago posting mentions tracking "consultant scoring activity" <span class="s">[S19]</span>. Because DLF V had more consultant involvement than any earlier Hayfin fund <span class="s">[S222]</span>, database accuracy is now a fundraising tool, not admin.</p>
+
+<h2 data-toc="t7d" data-title="The case study, built properly" data-lvl="2"><span class="mk">QQt7dQQ</span>The case study, built properly</h2>
+<div class="calc">One-page case study template (illustrative):
+1. Situation     borrower, sector, country, sponsor, why it needed capital
+2. Why Hayfin    sole lender? speed? sector team? incumbency?
+3. Structure     senior / unitranche, size, leverage, covenants (only cleared terms)
+4. Protections   equity cushion, security, documentation
+5. Outcome       realised or current status; if shown, gross AND fund-level net
+6. Disclosures   selection basis; "past performance is not a reliable indicator...";
+                 hypothetical-performance wording where relevant; Compliance sign-off</div>
+<p>The rules: fair, clear and not misleading (COBS 4.2.1R) <span class="s">[S49]</span>; past-performance standards (COBS 4.6.2R) <span class="s">[S50]</span>; for US material, single-deal gross figures only with whole-portfolio gross and net at equal prominence (SEC FAQ, 19 March 2025) <span class="s">[S53]</span>; sustainability claims must match the product (anti-greenwashing rule, ESG 4.3.1R) <span class="s">[S52]</span>. Hayfin's own PE Solutions update shows the house style: gross and net TVPI defined and hypothetical performance labelled under Rule 206(4)-1 <span class="s">[S330]</span>.</p>
+
+<h2 data-toc="t7e" data-title="The quarterly report, page by page" data-lvl="2"><span class="mk">QQt7eQQ</span>The quarterly report, page by page</h2>
+<table>
+<thead><tr><th style="width:24%">Section (Hayfin's list <span class="s">[S305]</span>)</th><th style="width:40%">What is in it</th><th>Your checks as an intern</th></tr></thead>
+<tbody>
+<tr><td>Summary of Investments and Portfolio Update</td><td>"A line-by-line track record is provided for both realised and unrealised investments": amount invested and called, carrying value, realised proceeds, expected gross IRR at deal and fund level, deployment and repayment profile</td><td>Ties to administrator data; realised vs unrealised labelled; gross IRR not presented as net</td></tr>
+<tr><td>Portfolio Breakdown</td><td>Each company's LTM EBITDA, enterprise value, leverage</td><td>Quarter-on-quarter changes explained; leverage = debt ÷ EBITDA; names spelt right</td></tr>
+<tr><td>CEO Letter</td><td>Market view and fund commentary, released via the administrator portal</td><td>Commentary matches the numbers; no stray forward-looking promises</td></tr>
+<tr><td>ESG case studies</td><td>"drafted by the ESG function and overseen by the Investor Relations team"</td><td>Claims evidenced (anti-greenwashing)</td></tr>
+<tr><td>Audited financials</td><td>Annual, at 31 December, within 90 days</td><td>Deadline management</td></tr>
+</tbody></table>
+
+<h2 data-toc="t7f" data-title="The ILPA templates arriving in your summer" data-lvl="2"><span class="mk">QQt7fQQ</span>The ILPA templates arriving in your summer</h2>
+<p>ILPA's updated Reporting Template is "provided for the first time after Q1 2026", and the new Performance Template "for the first time after Q1 2027", with data capture from Q1 2026 <span class="s">[S436]</span>. Your internship (June to August 2027) falls just after those first performance deliveries [Inferred, if Hayfin adopts them].</p>
+<table>
+<thead><tr><th style="width:26%">Template element</th><th style="width:44%">What changes</th><th>Why a credit manager notices</th></tr></thead>
+<tbody>
+<tr><td>Management fees</td><td>"Added gross-to-net reconciliation of management fees. Step-by-step netting of rebates, waivers and offsets" <span class="s">[S436]</span></td><td>Discounts for early and large LPs (common in DL <span class="s">[S440]</span>) must be shown line by line</td></tr>
+<tr><td>Partnership expenses</td><td>Internal chargebacks split from external; new lines incl. third-party valuations and "Subscription Facility Fees/Interest" <span class="s">[S436]</span></td><td>Valuation costs and fund borrowing costs become visible</td></tr>
+<tr><td>Offsets / portfolio company fees</td><td>Arrangement, origination and consulting fees captured <span class="s">[S436]</span></td><td>Direct lenders earn arrangement fees on every loan <span class="i">Inferred</span></td></tr>
+<tr><td>Carried interest</td><td>Accrued, earned and paid carry reconciled inside the capital account statement <span class="s">[S436]</span></td><td>Ties the waterfall (Section 4) to each LP's statement</td></tr>
+<tr><td>Performance Template</td><td>Three tables: Fund, Gross Portfolio, Net Portfolio; net fund metrics required; "both with and without the impact of fund-level subscription facilities" <span class="s">[S436]</span></td><td>Exactly the subscription-line example in Section 4</td></tr>
+<tr><td>Granular vs Gross Up</td><td>Granular itemises calls and excludes fees from gross; Gross Up uses total calls, giving "a slightly lower gross IRR and TVPI" but a smaller gross/net spread <span class="s">[S436]</span></td><td>Two legitimate ways to compute gross; know which one a page uses</td></tr>
+</tbody></table>
+<p>The template cannot be modified by GPs or LPs <span class="s">[S436]</span>. ILPA Principles 3.0 (2019) call "whole of fund" waterfalls best practice <span class="s">[S439]</span>.</p>
+</div>
+
+<div class="band b4" data-toc="t8" data-title="8 · Toolkit 5: the rules"><span class="mk">QQt8QQ</span><div class="num">Section 8 · Toolkit 5</div><h1>The rules that shape every page</h1><div class="sub">What an intern must know about regulation, explained simply</div></div>
+<div class="page">
+<table>
+<thead><tr><th style="width:22%">Rule</th><th style="width:40%">What it says, simply</th><th>Where it bites in PSG work</th></tr></thead>
+<tbody>
+<tr><td>FCA COBS 4.2.1R</td><td>Communications must be "fair, clear and not misleading" <span class="s">[S49]</span></td><td>Every slide, DDQ answer, email with numbers</td></tr>
+<tr><td>FCA COBS 4.6.2R</td><td>Past performance: not most prominent, full 12-month periods, source stated, warning, effect of fees <span class="s">[S50]</span></td><td>Track record pages, case studies (best practice for professional clients <span class="i">Inferred</span>)</td></tr>
+<tr><td>FCA anti-greenwashing (ESG 4.3.1R)</td><td>Sustainability claims must match the product <span class="s">[S52]</span></td><td>ESG pages, case studies; Hayfin trained PSG on it in 2024 <span class="s">[S25]</span></td></tr>
+<tr><td>SEC Marketing Rule (206(4)-1)</td><td>Net with gross; context for extracted performance (FAQ 19 Mar 2025) <span class="s">[S53]</span></td><td>US-facing materials (Chicago, Dallas, San Diego, New York coverage)</td></tr>
+<tr><td>AIFMD and AIFMD II (EU)</td><td>Rules on marketing EU funds; pre-marketing cannot include subscription documents <span class="s">[S54]</span>; loan-origination funds: leverage caps 300% closed / 175% open, 5% retention, no originate-to-distribute; transposed by 16 Apr 2026 <span class="s">[S163]</span><span class="s">[S251]</span></td><td>What can be sent to EU prospects; DDQ answers on leverage and liquidity</td></tr>
+<tr><td>UK AIFM reform (CP26/28)</td><td>A tiered UK regime; consultation closes 22 Oct 2026; final rules expected 2027 <span class="s">[S167]</span><span class="s">[S253]</span></td><td>Future UK reporting (FRAME replacing Annex IV) <span class="s">[S253]</span></td></tr>
+<tr><td>SFDR (EU)</td><td>Sustainability disclosures; Article 8 funds report periodically; SFDR 2.0 being negotiated <span class="s">[S174]</span><span class="s">[S254]</span></td><td>Hayfin's six Article 8 funds need periodic ESG data <span class="s">[S25]</span></td></tr>
+<tr><td>Market abuse (MNPI)</td><td>No trading or tipping on material non-public information <span class="s">[S301]</span></td><td>Borrower data is often private; Hayfin also runs public high-yield funds <span class="s">[S305]</span></td></tr>
+</tbody></table>
+<div class="box say"><span class="lab">The sentence that shows you get it</span>"In investor relations every page is a regulated communication, so accuracy is not polish, it is compliance. Net next to gross, claims that match the product, and nothing confidential leaving the building."</div>
+</div>
+
+<div class="band b5" data-toc="t9" data-title="9 · Your summer, week by week"><span class="mk">QQt9QQ</span><div class="num">Section 9</div><h1>Your summer, week by week</h1><div class="sub">A realistic map of June to August 2027, tied to the reporting calendar and to the skill each week builds</div></div>
+<div class="page">
+<div class="box unc"><span class="lab">Illustrative plan</span>Hayfin has not published an intern schedule. This plan combines the 2024 PSG intern's account (DDQs and RFPs, meeting minutes, case study slides, a fund track record, a Monday "Weekly IR" meeting) <span class="s">[S15]</span>, the 2026 intern posting (marketing support, ESG projects, client requests, competitive landscape, case studies) <span class="s">[S265]</span>, the 2027 job description, and the standard quarter-end cycle. Treat it as a likely shape, not a promise.</div>
+<figure>
+<svg viewBox="0 0 700 470" font-family="Helvetica,Arial">
+<g font-size="9.5">
+<text x="10" y="14" font-weight="700" fill="#12233f" font-size="12">Twelve weeks: what you do, and what you learn</text>
+<g>
+<rect x="10" y="26" width="680" height="20" fill="#12233f"/><text x="16" y="40" fill="#fff" font-weight="700">Week</text><text x="80" y="40" fill="#fff" font-weight="700">Likely work</text><text x="430" y="40" fill="#fff" font-weight="700">Technical skill built</text>
+</g>
+<g>
+<rect x="10" y="48" width="680" height="34" fill="#eef2f8"/><text x="16" y="62" font-weight="700">1-2</text><text x="16" y="75" fill="#5b6676">June</text><text x="80" y="62">Induction; read DLF V and SOF materials; shadow the DDQ library;</text><text x="80" y="75">take minutes at the Monday "Weekly IR" meeting [S15]</text><text x="430" y="62">Product map; vocabulary; where data</text><text x="430" y="75">lives (Section 2)</text>
+<rect x="10" y="84" width="680" height="34" fill="#fff"/><text x="16" y="98" font-weight="700">3-4</text><text x="16" y="111" fill="#5b6676">June</text><text x="80" y="98">First DDQ: update 20-30 library answers; route new questions to</text><text x="80" y="111">Legal, Risk, ESG; draft one RFP section within word limits</text><text x="430" y="98">DDQ topics; provenance; conflict and</text><text x="430" y="111">valuation answers (Section 7)</text>
+<rect x="10" y="120" width="680" height="34" fill="#f6ead9"/><text x="16" y="134" font-weight="700">5</text><text x="16" y="147" fill="#5b6676">30 Jun</text><text x="80" y="134">Q2 quarter end. Help prepare data requests to deal teams and</text><text x="80" y="147">Finance; set up the Q2 report templates</text><text x="430" y="134">Reporting calendar; the data spine</text><text x="430" y="147">(Figure 2.2)</text>
+<rect x="10" y="156" width="680" height="34" fill="#eef2f8"/><text x="16" y="170" font-weight="700">6-7</text><text x="16" y="183" fill="#5b6676">July</text><text x="80" y="170">Build a fund track record in Excel: calls, distributions, NAV;</text><text x="80" y="183">IRR, MOIC, DPI, TVPI; with and without the subscription line</text><text x="430" y="170">Fund maths (Section 4); XIRR; ILPA</text><text x="430" y="183">performance logic</text>
+<rect x="10" y="192" width="680" height="34" fill="#fff"/><text x="16" y="206" font-weight="700">7-8</text><text x="16" y="219" fill="#5b6676">July</text><text x="80" y="206">Proofread the Q2 Portfolio Breakdown: tie EBITDA, EV, leverage</text><text x="80" y="219">per company; flag changes; check PIK lines</text><text x="430" y="206">Credit metrics (Section 5); weighted</text><text x="430" y="219">averages; PIK classification</text>
+<rect x="10" y="228" width="680" height="34" fill="#eef2f8"/><text x="16" y="242" font-weight="700">8-9</text><text x="16" y="255" fill="#5b6676">July</text><text x="80" y="242">Two case studies (e.g. a sole-lender unitranche and a workout);</text><text x="80" y="255">add selection basis and disclosures; Compliance review</text><text x="430" y="242">Marketing rules (Section 8);</text><text x="430" y="255">storytelling with evidence</text>
+<rect x="10" y="264" width="680" height="34" fill="#fff"/><text x="16" y="278" font-weight="700">9-10</text><text x="16" y="291" fill="#5b6676">August</text><text x="80" y="278">Ad hoc requests: e.g. an insurer's look-through data, a US LP's</text><text x="80" y="291">currency question, a Korean LP's sector exposure</text><text x="430" y="278">Wrapper and insurer needs (Section 6);</text><text x="430" y="291">currency (Figure 4.2)</text>
+<rect x="10" y="300" width="680" height="34" fill="#eef2f8"/><text x="16" y="314" font-weight="700">10-11</text><text x="16" y="327" fill="#5b6676">August</text><text x="80" y="314">Research project for coverage: e.g. competitor fundraising, LP</text><text x="80" y="327">allocation trends in one region; one-page summary and presentation</text><text x="430" y="314">Market intelligence; presenting</text><text x="430" y="327">"with gravitas" (JD)</text>
+<rect x="10" y="336" width="680" height="34" fill="#fff"/><text x="16" y="350" font-weight="700">12</text><text x="16" y="363" fill="#5b6676">31 Aug</text><text x="80" y="350">Present an improvement idea (e.g. tagged answer library or AI</text><text x="80" y="363">first-draft workflow); handover notes</text><text x="430" y="350">Process design; responsible AI use</text><text x="430" y="363">(JD skill line)</text>
+</g>
+<rect x="10" y="384" width="680" height="76" rx="6" fill="#e3f3ea" stroke="#1d7a4c"/>
+<text x="20" y="402" font-weight="700" fill="#1d7a4c">What could make your summer unusual (live items in 2027)</text>
+<text x="20" y="420">• DLF V likely fully deployed or close to it, with "DLF VI to follow" mentioned in a Hayfin posting [S333]: reporting and marketing overlap.</text>
+<text x="20" y="436">• First ILPA Performance Template deliveries due after Q1 2027 for funds started from 2026, if Hayfin adopts it [S45] [Inferred applicability].</text>
+<text x="20" y="452">• A new Seoul office in its first year [S223]; AIFMD II and possibly final UK AIFM rules bedding in [S251][S253].</text>
+</g>
+</svg>
+<figcaption><b>Figure 9.1 · A likely twelve-week shape.</b> Illustrative <span class="i">Inferred</span>. The 2026 PSG internship ran 22 June to 14 August <span class="s">[S265]</span>; the 2027 SEO listing says 1 June to 31 August.</figcaption>
+</figure>
+</div>
+
+<div class="band b2" data-toc="t10" data-title="10 · What you can only learn at Hayfin"><span class="mk">QQt10QQ</span><div class="num">Section 10</div><h1>What you can only learn at Hayfin</h1><div class="sub">Ten lessons, each with why it is specific to Hayfin, and what you would learn instead at a giant like Ares or a bank</div></div>
+<div class="page">
+<table>
+<thead><tr><th style="width:4%">#</th><th style="width:22%">The lesson</th><th style="width:40%">Why Hayfin specifically</th><th>Compared with elsewhere</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><b>Packaging one strategy five ways</b></td><td>DLF V was sold as unlevered and levered commingled funds, SMAs, institutional evergreen and a rated note feeder <span class="s">[S222]</span></td><td>A single-strategy manager sells one fund; a giant has separate product teams for each wrapper, so an intern sees one slice <span class="i">Inferred</span></td></tr>
+<tr><td>2</td><td><b>Insurer structuring inside a flagship raise</b></td><td>The ~$600m rated note feeder, "one of the first priced by a European direct lending manager" (Hayfin's claim) <span class="s">[S222]</span><span class="s">[S237]</span></td><td>At a US insurer-owned platform this is routine and siloed; at Hayfin it was new, so the reasoning is visible <span class="i">Inferred</span></td></tr>
+<tr><td>3</td><td><b>Explaining cross-fund conflicts</b></td><td>Written rules: non-blocking minority stakes, cross-trade sign-off, Conflicts Committee <span class="s">[S305]</span></td><td>Single-strategy lenders rarely face this question</td></tr>
+<tr><td>4</td><td><b>Selling the full risk ladder</b></td><td>8%+ and 15%+ lending from one platform <span class="s">[S307]</span>; Tactical between DL and SO <span class="s">[S328]</span></td><td>Most direct lenders sell one rung</td></tr>
+<tr><td>5</td><td><b>Reporting workouts honestly</b></td><td>Workout team as a core edge <span class="s">[S331]</span>; Hayfin took equity in Netceed in a 2025 debt-for-equity swap <span class="s">[S109]</span></td><td>A bank IR team rarely reports a single restructuring to the investors who own the loan</td></tr>
+<tr><td>6</td><td><b>Specialist asset reporting</b></td><td>Maritime (vessels, charters, in-house ship manager Greenheart) and healthcare IP-backed lending <span class="s">[S227]</span><span class="s">[S102]</span><span class="s">[S328]</span></td><td>Few peers of similar size run maritime <span class="i">Inferred</span></td></tr>
+<tr><td>7</td><td><b>Global LPs, European assets</b></td><td>Australia 22.8% and North America 26.2% of AUM <span class="s">[S305]</span>; Seoul IR office (Oct 2026) <span class="s">[S223]</span></td><td>A domestic manager does not face currency, time-zone and foreign-rulebook questions daily</td></tr>
+<tr><td>8</td><td><b>How consultants score managers</b></td><td>PSG staffed with ex-consultants (Mercer, JANA, Meketa) and a BlackRock consultant-relations head <span class="s">[S1]</span><span class="s">[S4]</span><span class="s">[S272]</span></td><td>Elsewhere you learn the consultant process from the outside</td></tr>
+<tr><td>9</td><td><b>Line-by-line credit transparency</b></td><td>Every loan's EBITDA, EV, leverage and expected gross IRR in quarterly reports <span class="s">[S305]</span></td><td>Many funds report at portfolio level only <span class="i">Inferred</span></td></tr>
+<tr><td>10</td><td><b>Seeing a whole small team at once</b></td><td>About 32 people across coverage, product strategy and reporting (estimate) <span class="i">Inferred</span>; PSG on the ESG Deal Committee <span class="s">[S305]</span></td><td>Ares has 2,850+ direct institutional relationships <span class="s">[S64]</span>; scale means narrower intern roles <span class="i">Inferred</span></td></tr>
+</tbody></table>
+<div class="box op"><span class="lab">Pick two for your application and interviews</span>Lessons 1-2 (packaging and insurer structuring) and 3 (conflicts) are the most specific to Hayfin and the hardest for another candidate to copy. They also link directly to the JD's "pitch materials, DDQ responses" and "quarterly LP reporting".</div>
+</div>
+
+<div class="band b3" data-toc="t11" data-title="11 · The news, and what each story teaches you"><span class="mk">QQt11QQ</span><div class="num">Section 11</div><h1>The news, and what each story teaches you</h1><div class="sub">Stories that directly involve or affect Hayfin, how they hit PSG's work, and the skill you would build from each</div></div>
+<div class="page">
+<table>
+<thead><tr><th style="width:20%">Story (date)</th><th style="width:30%">What happened</th><th style="width:25%">How it hits PSG</th><th>What you learn from it</th></tr></thead>
+<tbody>
+<tr><td>DLF V closes &gt;€15bn (2 Jul 2026)</td><td>More than double DLF IV; ~$600m rated feeder; &gt;50% deployed at close <span class="s">[S71]</span><span class="s">[S237]</span></td><td>Reporting on a much larger fund; feeder reporting; marketing the next vintage</td><td>Wrappers; insurer needs; deployment metrics</td></tr>
+<tr><td>PSG co-heads' debrief (22 Sep 2026)</td><td>Over half from EMEA, 10% Middle East; consultants more involved; LPs probed PIK, tech, losses <span class="s">[S222]</span></td><td>The questions you will answer all summer</td><td>What institutional LPs worry about, in their order</td></tr>
+<tr><td>Seoul IR office opens (1 Oct 2026)</td><td>Dedicated distribution and IR office; ~€1bn for Korean investors <span class="s">[S223]</span><span class="s">[S239]</span></td><td>New regional reporting and DDQ needs</td><td>Serving foreign insurers and pensions (Section 6)</td></tr>
+<tr><td>US CLO review; European CLO raise (18 May 2026)</td><td>Greensledge appointed for the €1.4bn US CLO business <span class="s">[S225]</span></td><td>Careful, consistent investor messaging on a strategic change</td><td>Communicating change to different investor groups</td></tr>
+<tr><td>New Head of Investments (7 May 2026)</td><td>Michael Marsh, ex-Goldman <span class="s">[S226]</span></td><td>Key-person and team sections of every DDQ need updating</td><td>Keeping the answer library current</td></tr>
+<tr><td>"A Tale of Three PIKs" (28 Jul 2026)</td><td>Good, bad and fake-good PIK <span class="s">[S229]</span></td><td>Framework for PIK questions and reporting</td><td>Reading PIK in a Portfolio Breakdown (Section 5)</td></tr>
+<tr><td>Fitch US default rate 6.3% (14 Sep 2026)</td><td>47% of defaults were PIK or deferrals <span class="s">[S245]</span></td><td>LPs bring these numbers to meetings</td><td>Why default definitions differ</td></tr>
+<tr><td>US retail fund gating (Q1-Q3 2026)</td><td>Withdrawals far above 5% limits <span class="s">[S184]</span><span class="s">[S243]</span><span class="s">[S244]</span></td><td>Hayfin made "locked-up institutional" a selling point <span class="s">[S221]</span></td><td>Liquidity terms as a product feature</td></tr>
+<tr><td>SEC valuation statement (28 Sep 2026)</td><td>Private credit valuations need "particular care" <span class="s">[S250]</span></td><td>Valuation DDQ sections; US investors' focus</td><td>Valuation policy and how to explain marks</td></tr>
+<tr><td>ILPA templates (Q1 2026 / Q1 2027)</td><td>New reporting and performance standards <span class="s">[S43]</span><span class="s">[S45]</span></td><td>Possible template work during your internship</td><td>Standardised gross-to-net and performance reporting</td></tr>
+<tr><td>AIFMD II in force (16 Apr 2026); UK CP26/28 (closes 22 Oct 2026)</td><td>EU loan-fund rules; UK tiered regime <span class="s">[S251]</span><span class="s">[S167]</span></td><td>DDQ answers on leverage, liquidity, delegation</td><td>How regulation becomes investor content</td></tr>
+<tr><td>Mergermarket Private Credit Lender of the Year (30 Sep 2026)</td><td>Award, with a disclaimer that awards are not indicative of performance <span class="s">[S224]</span></td><td>Marketing use of awards</td><td>Compliance wording on marketing claims</td></tr>
+</tbody></table>
+<p><b>Newest item (9 Oct 2026):</b> Hayfin published "Opportunities in European Real Estate: Enhancing Opportunistic Credit Portfolios by Adapting to Evolving Markets", citing "more than €4bn invested across European real estate over 15 years" <span class="s">[S401]</span>. It is framed around opportunistic credit portfolios, which could hint at marketing for the opportunistic strategies [Inferred; no Special Opportunities Fund IV announcement found <span class="s">[S449]</span>]. What you learn from it: how a gated thought-leadership report works as a lead-generation tool for PSG.</p>
+</div>
+
+<div class="band b4" data-toc="t12" data-title="12 · The 200-word answer, dissected"><span class="mk">QQt12QQ</span><div class="num">Section 12</div><h1>The 200-word answer, dissected</h1><div class="sub">Why each sentence is there, an alternative version, and the traps to avoid</div></div>
+<div class="page">
+<h2 data-toc="t12a" data-title="What the question is really testing" data-lvl="2"><span class="mk">QQt12aQQ</span>What the question is really testing</h2>
+<table>
+<thead><tr><th style="width:30%">Part of the question</th><th>What the reader is checking</th></tr></thead>
+<tbody>
+<tr><td>"What interests you about this opportunity"</td><td>That you know what PSG does, specifically at Hayfin, not investor relations in general</td></tr>
+<tr><td>"How does it align with your career goals"</td><td>That you want a career on the client side, so you are a retention risk worth taking</td></tr>
+<tr><td>"Reference your preferred team(s)"</td><td>That you chose PSG deliberately, among six intern teams (HY Syndicated Loans, Portfolio Management, Change &amp; Transformation, Financing Solutions, Healthcare, Partner Solutions)</td></tr>
+<tr><td>"Explain why they appeal to you"</td><td>Mechanism, not adjectives: what about this team's work fits you</td></tr>
+</tbody></table>
+
+<h2 data-toc="t12b" data-title="The recommended answer, line by line" data-lvl="2"><span class="mk">QQt12bQQ</span>The recommended answer, line by line</h2>
+<table>
+<thead><tr><th style="width:44%">Sentence</th><th>Why it is there</th></tr></thead>
+<tbody>
+<tr><td>"...where Hayfin's lending becomes something an investor can underwrite."</td><td>Defines PSG's job in one line, from the investor's side. Shows you understand the role is translation, not sales.</td></tr>
+<tr><td>"DLF V raised over €15bn through five wrappers... rated note feeder..."</td><td>One concrete, recent, Hayfin-only fact <span class="s">[S222]</span><span class="s">[S237]</span>. Few applicants will know the feeder exists.</td></tr>
+<tr><td>"...how institutions allocate capital, how fund terms and reporting are engineered, and how credit risk is explained honestly."</td><td>Mirrors the JD's attributes (how investors allocate capital) and duties (reporting, DDQs) without copying them.</td></tr>
+<tr><td>"...lends at both ends of the risk range, and its workout team stands behind every fund."</td><td>The mechanism behind "why Hayfin" <span class="s">[S307]</span><span class="s">[S331]</span>; shows you read beyond the website headline.</td></tr>
+<tr><td>"...pensions, insurers and consultants who now probe PIK, software exposure and loss rates."</td><td>Proves current awareness, straight from the PSG co-heads' September 2026 piece <span class="s">[S222]</span>.</td></tr>
+<tr><td>"...building track records, reconciling the Portfolio Breakdown and preparing for ILPA's new performance reporting."</td><td>Names the real technical work: track records (2024 intern <span class="s">[S15]</span>), the Portfolio Breakdown (Hayfin's own report name <span class="s">[S305]</span>), ILPA templates <span class="s">[S45]</span>.</td></tr>
+<tr><td>[Your evidence sentence]</td><td>The only place for you. One real example of accuracy, client materials or data. Without it the answer is about Hayfin, not you.</td></tr>
+<tr><td>"...moving from reporting into coverage... from Seoul to Dallas"</td><td>Career goal on the client side; shows you know PSG's two tracks and its global reach <span class="s">[S223]</span><span class="s">[S99]</span>.</td></tr>
+</tbody></table>
+
+<h2 data-toc="t12c" data-title="An alternative version (two teams)" data-lvl="2"><span class="mk">QQt12cQQ</span>An alternative version, naming two teams</h2>
+<p>Use this only if you genuinely want a second team considered. Portfolio Management is the natural partner: it supplies the data PSG reports.</p>
+<div class="box say"><span class="lab">Alternative answer · 172 words + your own sentence (up to ~25 words)</span>
+<p>My first choice is Partner Solutions, with Portfolio Management second, because together they connect a loan's performance to the investor who owns it.</p>
+<p>Partner Solutions appeals to me because Hayfin sells one platform through many doors. DLF V raised over €15bn through five wrappers, including a rated note feeder built for insurers, and investors pressed hardest on PIK, software exposure and loss rates. Answering them well needs both a clear story and exact data, which is the work I want to learn: DDQs, case studies and quarterly reports where every number ties back to its source.</p>
+<p>Portfolio Management interests me as the source of that data. Understanding how leverage, interest cover and PIK are tracked loan by loan would make me a better investor relations professional, because I could explain a workout as well as a win.</p>
+<p>[One sentence from your own experience.] My goal is a career on the client side of private credit. Hayfin's mix of strategies, its workout capability and its global investor base, from Seoul to Melbourne, make it the best place to start.</p></div>
+
+<h2 data-toc="t12d" data-title="Traps to avoid" data-lvl="2"><span class="mk">QQt12dQQ</span>Traps to avoid in a 200-word answer</h2>
+<ul>
+<li><b>Stale facts.</b> Do not write "€30bn" or "ten offices". Use "about €40bn" (Q2 2026) <span class="s">[S224]</span> or avoid AUM entirely.</li>
+<li><b>Adjectives.</b> "Leading", "prestigious", "dynamic" add nothing. Replace each with a fact.</li>
+<li><b>Overclaiming.</b> Do not say Hayfin has the best returns or the biggest fund; neither is supported.</li>
+<li><b>The JD's typo.</b> "Special Memorandum Accounts" should be "separately managed accounts" <span class="s">[S25]</span>. If you mention SMAs, use the correct term.</li>
+<li><b>No "you".</b> Without your own evidence sentence, the answer could be written by anyone who read this guide.</li>
+<li><b>Word count.</b> The limit is 200. Count after you add your own sentence.</li>
+</ul>
+</div>
+
+<div class="band b2" data-toc="t13" data-title="Sources"><span class="mk">QQt13QQ</span><div class="num">Sources</div><h1>Sources</h1><div class="sub">Every [S] marker in this guide. IDs match the full Hayfin PSG interview pack; S400+ are new for this guide.</div></div>
+<div class="page">
+<p class="small">Status: FETCHED = full page read; SNIPPET = search extract only; PAYWALLED = headline only. Worked examples are illustrative unless sourced. Not public: Hayfin's fees, hurdle and carry; recent fund returns; loss rates; whether Hayfin has adopted the ILPA templates.</p>
+<table class="src"><thead><tr><th>ID</th><th>Outlet</th><th>Title</th><th>Date</th><th>URL (accessed Oct 2026)</th><th>Status</th></tr></thead><tbody><tr><td><b>S1</b></td><td>Hayfin (WordPress API)</td><td>Team member bios, 95 records</td><td>2023 to 2026 (modified dates vary)</td><td style="word-break:break-all">https://www.hayfin.com/wp-json/wp/v2/team-member?per_page=100</td><td>FETCHED</td></tr><tr><td><b>S4</b></td><td>Hayfin</td><td>Hayfin strengthens Partner Solutions team with senior hire (Bringardner)</td><td>2023-04-17</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-strengthens-partner-solutions-team-with-senior-hire/</td><td>FETCHED</td></tr><tr><td><b>S15</b></td><td>Hayfin</td><td>Interns Q&amp;A: Stephanie Sarpong (Partner Solutions)</td><td>2025-02-02</td><td style="word-break:break-all">https://www.hayfin.com/interns-qa-stephanie-sarpong/</td><td>FETCHED</td></tr><tr><td><b>S19</b></td><td>Built In Chicago</td><td>Hayfin Investor Relations Analyst (PSG, Chicago)</td><td>2026 (reposted)</td><td style="word-break:break-all">https://www.builtinchicago.org/job/investor-relations-analyst/9705071</td><td>FETCHED</td></tr><tr><td><b>S20</b></td><td>Glassdoor UK</td><td>Hayfin Analyst, Product Strategy (London)</td><td>n/a</td><td style="word-break:break-all">https://www.glassdoor.co.uk/job-listing/analyst-investor-relations-hayfin-capital-management-JV_IC2671300_KO0,26_KE27,52.htm?jl=1009458825571</td><td>SNIPPET (403 on fetch)</td></tr><tr><td><b>S25</b></td><td>Hayfin</td><td>UK Stewardship Code 2020 report (period to 30 Apr 2025)</td><td>uploaded Jan 2026</td><td style="word-break:break-all">https://www.hayfin.com/wp-content/uploads/2026/01/Hayfin-Capital-Management-Stewardship-Code-2020-2025-final.pdf</td><td>FETCHED</td></tr><tr><td><b>S31</b></td><td>Hayfin</td><td>Reflections on Hayfin&#x27;s New York Investor Day 2026</td><td>2026-05-19</td><td style="word-break:break-all">https://www.hayfin.com/reflections-on-hayfins-new-york-investor-day-2026/</td><td>FETCHED</td></tr><tr><td><b>S43</b></td><td>ILPA</td><td>Reporting Template Overview &amp; Documents</td><td>2025</td><td style="word-break:break-all">https://ilpa.org/industry-guidance/templates-standards-model-documents/reporting-template</td><td>FETCHED</td></tr><tr><td><b>S45</b></td><td>Travers Smith</td><td>Institutional Limited Partners Association releases new reporting standards</td><td>2025</td><td style="word-break:break-all">https://www.traverssmith.com/knowledge/knowledge-container/institutional-limited-partners-association-releases-new-reporting-standards/</td><td>FETCHED</td></tr><tr><td><b>S46</b></td><td>ILPA</td><td>ILPA DDQ 2.0 User Guide v1.0</td><td>2021-11-09</td><td style="word-break:break-all">https://ilpa.org/wp-content/uploads/2021/11/ILPA-DDQ-2.0-User-Guide.pdf</td><td>FETCHED</td></tr><tr><td><b>S48</b></td><td>AIMA</td><td>DDQs, Illiquid Credit module, private credit modules</td><td>2019 to 2025</td><td style="word-break:break-all">https://www.aima.org/compass/ddqs/ddqs-2019/illiquid-credit.html</td><td>SNIPPET</td></tr><tr><td><b>S49</b></td><td>FCA Handbook</td><td>COBS 4.2 Fair, clear and not misleading</td><td>current</td><td style="word-break:break-all">https://www.handbook.fca.org.uk/handbook/COBS/4/2.html</td><td>FETCHED</td></tr><tr><td><b>S50</b></td><td>FCA Handbook</td><td>COBS 4.6 Past, simulated past and future performance</td><td>current</td><td style="word-break:break-all">https://www.handbook.fca.org.uk/handbook/COBS/4/6.html</td><td>FETCHED</td></tr><tr><td><b>S52</b></td><td>FCA Handbook</td><td>ESG 4.3 Anti-greenwashing rule</td><td>current</td><td style="word-break:break-all">https://www.handbook.fca.org.uk/handbook/ESG/4/3.html</td><td>FETCHED</td></tr><tr><td><b>S53</b></td><td>K&amp;L Gates</td><td>SEC Marketing Rule FAQs Yield New Guidance</td><td>2025-03-20</td><td style="word-break:break-all">https://www.klgates.com/thought-leadership/SEC-Marketing-Rule-FAQs-Yield-New-Guidance-3-20-2025</td><td>FETCHED</td></tr><tr><td><b>S54</b></td><td>Ocorian</td><td>What do asset managers need to know about pre-marketing alternative investment funds in Europe</td><td>2021-08-12</td><td style="word-break:break-all">https://www.ocorian.com/insight/what-do-asset-managers-need-know-about-pre-marketing-alternative-investment-funds-europe</td><td>FETCHED</td></tr><tr><td><b>S55</b></td><td>Nasdaq eVestment</td><td>Submit my data / data coverage March 2026</td><td>2026</td><td style="word-break:break-all">https://nasdaq.com/solutions/evestment/submit-my-data</td><td>SNIPPET</td></tr><tr><td><b>S64</b></td><td>SEC EDGAR</td><td>Ares Management Corp Form 10-K FY2025</td><td>2026</td><td style="word-break:break-all">https://www.sec.gov/Archives/edgar/data/1176948/000162828026011413/ares-20251231.htm</td><td>FETCHED</td></tr><tr><td><b>S71</b></td><td>Hayfin</td><td>Hayfin announces record close of Direct Lending Fund V in excess of EUR15bn</td><td>2026-07-02</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-announces-record-close-of-direct-lending-fund-v-in-excess-of-e15bn/</td><td>FETCHED</td></tr><tr><td><b>S74</b></td><td>Hayfin</td><td>Hayfin welcomes Mubadala and AXA IM Prime as strategic minority shareholders</td><td>2025-07-22</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-welcomes-mubadala-and-axa-im-prime-as-strategic-minority-shareholders-building-on-arctos-backed-management-buyout/</td><td>FETCHED</td></tr><tr><td><b>S75</b></td><td>Hayfin</td><td>Hayfin welcomes Samsung Life as strategic minority shareholder</td><td>2025-09-10</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-welcomes-samsung-life-as-strategic-minority-shareholder-alongside-mubadala-and-axa-im-prime/</td><td>FETCHED</td></tr><tr><td><b>S81</b></td><td>Alternative Credit Investor</td><td>Hayfin names new COO as Tognolini takes on co-CEO role</td><td>2025-05-27</td><td style="word-break:break-all">https://alternativecreditinvestor.com/2025/05/27/hayfin-names-new-coo-as-tognolini-takes-on-co-ceo-role/</td><td>FETCHED</td></tr><tr><td><b>S95</b></td><td>Hayfin</td><td>Reflections on Hayfin&#x27;s New York Investor Day 2026 (Maura English)</td><td>2026-05-19</td><td style="word-break:break-all">https://www.hayfin.com/reflections-on-hayfins-new-york-investor-day-2026/</td><td>FETCHED</td></tr><tr><td><b>S99</b></td><td>Hayfin</td><td>Hayfin expands Americas coverage with appointment of Graham Ballard as MD</td><td>2025-11-18</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-expands-americas-coverage-with-appointment-of-graham-ballard-as-managing-director/</td><td>FETCHED</td></tr><tr><td><b>S102</b></td><td>Hayfin</td><td>Hayfin to acquire up to $1bn of shipping assets through Maritime Yield strategy</td><td>2023-12-07</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-to-acquire-up-to-1bn-of-shipping-assets-through-maritime-yield-strategy-building-on-longstanding-sector-track-record/</td><td>FETCHED</td></tr><tr><td><b>S104</b></td><td>Macfarlanes</td><td>The evolution of direct lending fund fee structures</td><td>2024-11-28</td><td style="word-break:break-all">https://www.macfarlanes.com/insights/102loh7/the-evolution-of-direct-lending-fund-fee-structures/</td><td>FETCHED</td></tr><tr><td><b>S109</b></td><td>Private Equity Wire (citing Bloomberg)</td><td>Private credit lenders take ownership of telecom supplier Netceed</td><td>2025-10-27</td><td style="word-break:break-all">https://www.privateequitywire.co.uk/private-credit-lenders-take-ownership-of-telecom-supplier-netceed/</td><td>FETCHED</td></tr><tr><td><b>S117</b></td><td>Hayfin</td><td>Why scale, adaptability and culture will determine the winners in private credit&#x27;s next chapter (Tognolini)</td><td>2026-02-26</td><td style="word-break:break-all">https://www.hayfin.com/why-scale-adaptability-and-culture-will-determine-the-winners-in-private-credits-next-chapter/</td><td>FETCHED</td></tr><tr><td><b>S162</b></td><td>Lincoln International</td><td>The Lincoln Private Market Index: Earnings Growth Drove a Q2 Rebound</td><td>2026-08-13</td><td style="word-break:break-all">https://www.lincolninternational.com/news/the-lincoln-private-market-index-earnings-growth-drove-a-q2-rebound-while-private-markets-became-more-selective/</td><td>FETCHED</td></tr><tr><td><b>S163</b></td><td>EUR-Lex</td><td>Directive (EU) 2024/927 (AIFMD II)</td><td>2024-03-26</td><td style="word-break:break-all">https://eur-lex.europa.eu/eli/dir/2024/927/oj/eng</td><td>FETCHED</td></tr><tr><td><b>S166</b></td><td>FCA</td><td>Private market valuation practices (multi-firm review)</td><td>2025-03-05</td><td style="word-break:break-all">https://www.fca.org.uk/publications/multi-firm-reviews/private-market-valuation-practices</td><td>FETCHED</td></tr><tr><td><b>S167</b></td><td>FCA</td><td>CP26/28: The UK AIFM regime</td><td>2026-07-14 (upd. 2026-08-28)</td><td style="word-break:break-all">https://www.fca.org.uk/publications/consultation-papers/cp26-28-uk-aifm-regime</td><td>FETCHED</td></tr><tr><td><b>S170</b></td><td>Travers Smith</td><td>Institutional Limited Partners Association releases new reporting standards</td><td>2025</td><td style="word-break:break-all">https://www.traverssmith.com/knowledge/knowledge-container/institutional-limited-partners-association-releases-new-reporting-standards/</td><td>SNIPPET</td></tr><tr><td><b>S174</b></td><td>Sidley Austin</td><td>SFDR: Five Key Takeaways from the European Commission&#x27;s Proposal</td><td>2025-11</td><td style="word-break:break-all">https://sidley.com/en/insights/newsupdates/2025/11/sfdr--five-key-takeaways-from-the-european-commissions-proposal</td><td>SNIPPET</td></tr><tr><td><b>S184</b></td><td>Advisor.ca</td><td>Private credit recap: Asset managers respond to elevated redemption requests</td><td>2026-04-14</td><td style="word-break:break-all">https://www.advisor.ca/news/products/private-credit-recap-asset-managers-respond-to-elevated-redemption-requests/</td><td>FETCHED</td></tr><tr><td><b>S189</b></td><td>SS&amp;C Intralinks with Reuters Events</td><td>2026 LP Survey Report</td><td>2025-26</td><td style="word-break:break-all">https://www3.intralinks.com/rs/414-BKN-706/images/SSC-Intralinks-2026-LP-Survey-Report.pdf</td><td>FETCHED</td></tr><tr><td><b>S190</b></td><td>Juniper Square</td><td>Juniper Square acquires Sightglass</td><td>2026-04-14</td><td style="word-break:break-all">https://www.junipersquare.com/news/sightglass</td><td>FETCHED</td></tr><tr><td><b>S221</b></td><td>Hayfin press release</td><td>Hayfin announces record close of Direct Lending Fund V in excess of EUR15bn</td><td>2 Jul 2026</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-announces-record-close-of-direct-lending-fund-v-in-excess-of-e15bn/</td><td>FETCHED</td></tr><tr><td><b>S222</b></td><td>Hayfin insight</td><td>What a EUR15bn Fundraise Tells Us About the Evolution of European Private Credit</td><td>22 Sep 2026</td><td style="word-break:break-all">https://www.hayfin.com/what-a-e15bn-fundraise-tells-us-about-the-evolution-of-european-private-credit/</td><td>FETCHED</td></tr><tr><td><b>S223</b></td><td>Hayfin press release</td><td>Hayfin deepens Korean market presence with Seoul office opening</td><td>1 Oct 2026</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-deepens-korean-market-presence-with-seoul-office-opening/</td><td>FETCHED</td></tr><tr><td><b>S224</b></td><td>Hayfin press release</td><td>Hayfin named Private Credit Lender of the Year at ION Analytics Mergermarket Private Equity Awards 2026</td><td>30 Sep 2026</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-named-private-credit-lender-of-the-year-at-ion-analytics-mergermarket-private-equity-awards-2026/</td><td>FETCHED</td></tr><tr><td><b>S225</b></td><td>Hayfin press release</td><td>Hayfin Expands European CLO Platform to Support Strategic Focus on European Alternative Credit</td><td>18 May 2026</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-expands-european-clo-platform-to-support-strategic-focus-on-european-alternative-credit/</td><td>FETCHED</td></tr><tr><td><b>S226</b></td><td>Hayfin press release</td><td>Hayfin appoints Michael Marsh as Head of Investments</td><td>7 May 2026</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-appoints-michael-marsh-as-head-of-investments/</td><td>FETCHED</td></tr><tr><td><b>S227</b></td><td>Hayfin insight</td><td>Investing in volatile times - how private credit managers can manage risk and capitalise on opportunity</td><td>12 May 2026</td><td style="word-break:break-all">https://www.hayfin.com/investing-in-volatile-times-how-private-credit-managers-can-manage-risk-and-capitalise-on-opportunity/</td><td>FETCHED</td></tr><tr><td><b>S229</b></td><td>Hayfin insight</td><td>A Tale of Three PIKs</td><td>28 Jul 2026</td><td style="word-break:break-all">https://www.hayfin.com/a-tale-of-three-piks/</td><td>FETCHED</td></tr><tr><td><b>S237</b></td><td>Proskauer</td><td>Proskauer advises Hayfin Capital Management on close of rated note feeder for DLF V fundraise</td><td>7 Jul 2026</td><td style="word-break:break-all">https://www.proskauer.com/release/proskauer-advises-hayfin-capital-management-on-close-of-rated-note-feeder-for-dlf-v-fundraise</td><td>FETCHED</td></tr><tr><td><b>S239</b></td><td>The Korea Herald</td><td>Samsung Life-backed Hayfin opens Seoul office (Im Eun-byel)</td><td>1 Oct 2026</td><td style="word-break:break-all">https://www.koreaherald.com/article/10890737</td><td>FETCHED</td></tr><tr><td><b>S243</b></td><td>Bloomberg (via Bloomberg Law / BNN Bloomberg)</td><td>Blackstone&#x27;s BCRED Caps Redemptions After Investors Seek 10%</td><td>4 Jun 2026</td><td style="word-break:break-all">https://news.bloomberglaw.com/private-equity/blackstones-bcred-caps-redemptions-after-investors-seek-10-2</td><td>SNIPPET</td></tr><tr><td><b>S244</b></td><td>PitchBook News (via Yahoo Finance)</td><td>Goldman Sachs private credit BDC redemptions come in below 5% again in Q3 (Sami Vukelj)</td><td>30 Sep 2026</td><td style="word-break:break-all">https://ca.finance.yahoo.com/news/goldman-sachs-private-credit-bdc-205042918.html</td><td>FETCHED</td></tr><tr><td><b>S245</b></td><td>Benzinga (via Webull), citing Fitch Ratings</td><td>Private Credit Defaults Climb To 6.3% In August, Fitch Says</td><td>14 Sep 2026</td><td style="word-break:break-all">https://www.webull.com/news/15578827387765760</td><td>FETCHED</td></tr><tr><td><b>S250</b></td><td>Alternative Credit Investor</td><td>SEC issues &quot;critical reminder&quot; on private credit valuations (Aysha Gilmore)</td><td>29 Sep 2026</td><td style="word-break:break-all">https://alternativecreditinvestor.com/2026/09/29/sec-issues-critical-reminder-on-private-credit-valuations/</td><td>FETCHED</td></tr><tr><td><b>S251</b></td><td>Linklaters (Financial Regulation blog)</td><td>AIFMD II takes effect at last</td><td>16 Apr 2026</td><td style="word-break:break-all">https://financialregulation.linklaters.com/post/102mq84/aifmd-ii-takes-effect-at-last</td><td>FETCHED</td></tr><tr><td><b>S253</b></td><td>Macfarlanes</td><td>A new regime for UK AIFMs: a consultation on the FCA&#x27;s latest proposals in CP26/28</td><td>22 Jul 2026</td><td style="word-break:break-all">https://www.macfarlanes.com/insights/102ndli/a-new-regime-for-uk-aifms-a-consultation-on-the-fcas-latest-proposals-in-cp26-2/</td><td>FETCHED</td></tr><tr><td><b>S254</b></td><td>Proskauer</td><td>Council position on SFDR reform agreed, with increased uncertainty ahead for private markets</td><td>24 Jun 2026</td><td style="word-break:break-all">https://www.proskauer.com/blog/council-position-on-sfdr-reform-agreed-with-increased-uncertainty-ahead-for-private-markets</td><td>FETCHED</td></tr><tr><td><b>S258</b></td><td>BDO (and other adviser summaries)</td><td>Preparing for Q1 2026: The New Era of ILPA Reporting and Performance Templates</td><td>2025 (exact date not captured)</td><td style="word-break:break-all">https://www.bdo.com/insights/industries/asset-management/preparing-for-q1-2026-the-new-era-of-ilpa-reporting-and-performance-templates</td><td>SNIPPET</td></tr><tr><td><b>S262</b></td><td>Hayfin</td><td>The Complexity Premium (Tim Atkinson, Lauren Laws)</td><td>15 Sep 2026</td><td style="word-break:break-all">https://www.hayfin.com/the-complexity-premium/</td><td>FETCHED</td></tr><tr><td><b>S265</b></td><td>Built In</td><td>Partner Solutions - Summer Intern 2026, Hayfin Capital Management</td><td>posted 2025; removed 17 Nov 2025</td><td style="word-break:break-all">https://builtin.com/job/partner-solutions-summer-intern-2026/7709366</td><td>FETCHED</td></tr><tr><td><b>S272</b></td><td>Hayfin</td><td>Hayfin strengthens Partner Solutions Group with appointment of Tim Atkinson and Steven Carew as Managing Directors</td><td>22 Sep 2025</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-strengthens-partner-solutions-group-with-appointment-of-tim-atkinson-and-steven-carew-as-managing-directors/</td><td>FETCHED</td></tr><tr><td><b>S289</b></td><td>Hayfin</td><td>Team member: Graham Ballard</td><td>current</td><td style="word-break:break-all">https://www.hayfin.com/team/graham-ballard/</td><td>FETCHED</td></tr><tr><td><b>S299</b></td><td>ILPA</td><td>Due Diligence Questionnaire 2.0</td><td>Nov 2021</td><td style="word-break:break-all">https://ilpa.org/wp-content/uploads/2021/11/ILPA-DDQ-2.0.pdf</td><td>FETCHED</td></tr><tr><td><b>S301</b></td><td>SEC IAPD</td><td>Hayfin Capital Management LLC Form ADV Part 2A Brochure</td><td>30 Mar 2026</td><td style="word-break:break-all">https://files.adviserinfo.sec.gov/IAPD/Content/Common/crd_iapd_Brochure.aspx?BRCHR_VRSN_ID=1031029</td><td>FETCHED</td></tr><tr><td><b>S305</b></td><td>Hayfin Capital Management LLP</td><td>UK Stewardship Code 2020 Disclosure</td><td>Oct 2025</td><td style="word-break:break-all">https://www.hayfin.com/wp-content/uploads/2026/01/Hayfin-Capital-Management-Stewardship-Code-2020-2025-final.pdf</td><td>FETCHED</td></tr><tr><td><b>S307</b></td><td>PSERS</td><td>Public Investment Memorandum: Hayfin SOF II USD LP</td><td>11 Feb 2016</td><td style="word-break:break-all">https://www.pa.gov/content/dam/copapwp-pagov/en/psers/documents/board3/resolutions/2016/res08.pdf</td><td>FETCHED</td></tr><tr><td><b>S309</b></td><td>Metro Nashville MEBS</td><td>Investment Committee minutes</td><td>26 Nov 2013</td><td style="word-break:break-all">https://www.nashville.gov/sites/default/files/2021-10/InvestComm-131126m.pdf</td><td>FETCHED</td></tr><tr><td><b>S322</b></td><td>Dealroom</td><td>Vermont pension commits $50M to Hayfin&#x27;s Tactical Solutions Evergreen Fund</td><td>4 Aug 2026</td><td style="word-break:break-all">https://dealroom.co/news/142935-vermont-pension-commits-50m-to-hayfins-tactical-solutions-evergreen-fund/</td><td>FETCHED</td></tr><tr><td><b>S327</b></td><td>Hayfin</td><td>About Hayfin</td><td>2026</td><td style="word-break:break-all">https://www.hayfin.com/about-hayfin/</td><td>FETCHED</td></tr><tr><td><b>S328</b></td><td>Hayfin</td><td>Private Credit strategy page</td><td>2026</td><td style="word-break:break-all">https://www.hayfin.com/strategies/private-credit/</td><td>FETCHED</td></tr><tr><td><b>S330</b></td><td>Hayfin</td><td>PES Strategy Update H1 2025</td><td>2025</td><td style="word-break:break-all">https://www.hayfin.com/pes-strategy-update-h1-2025/</td><td>FETCHED</td></tr><tr><td><b>S331</b></td><td>Workable (Hayfin careers)</td><td>Hayfin Capital Management company page</td><td>2026</td><td style="word-break:break-all">https://jobs.workable.com/companies/bCukQH8Jt7grECr7sjvWu3.md</td><td>FETCHED</td></tr><tr><td><b>S333</b></td><td>Workable (Hayfin)</td><td>Fund Controller - Private Credit, London</td><td>2026</td><td style="word-break:break-all">https://jobs.workable.com/jobs/f254b0e9-8551-4f4d-bcdc-bb4534c86447.md</td><td>FETCHED</td></tr><tr><td><b>S401</b></td><td>Hayfin</td><td>Opportunities in European Real Estate: Enhancing Opportunistic Credit Portfolios by Adapting to Evolving Markets</td><td>2026-10-09</td><td style="word-break:break-all">https://www.hayfin.com/opportunities-in-european-real-estate-enhancing-opportunistic-credit-portfolios-by-adapting-to-evolving-markets/</td><td>FETCHED</td></tr><tr><td><b>S402</b></td><td>Hayfin</td><td>Hayfin announces record close of Direct Lending Fund V in excess of EUR15bn</td><td>2026-07-02</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-announces-record-close-of-direct-lending-fund-v-in-excess-of-e15bn/</td><td>FETCHED</td></tr><tr><td><b>S403</b></td><td>Hayfin</td><td>What a EUR15bn Fundraise Tells Us About the Evolution of European Private Credit</td><td>2026-09-22</td><td style="word-break:break-all">https://www.hayfin.com/what-a-e15bn-fundraise-tells-us-about-the-evolution-of-european-private-credit/</td><td>FETCHED</td></tr><tr><td><b>S404</b></td><td>Hayfin</td><td>Hayfin deepens Korean market presence with Seoul office opening</td><td>2026-10-01</td><td style="word-break:break-all">https://www.hayfin.com/hayfin-deepens-korean-market-presence-with-seoul-office-opening/</td><td>FETCHED</td></tr><tr><td><b>S407</b></td><td>legislation.gov.uk</td><td>Delegated Regulation (EU) 2015/35, Article 168</td><td>as amended to 2020</td><td style="word-break:break-all">https://www.legislation.gov.uk/eur/2015/35/article/168/2020-12-31</td><td>FETCHED</td></tr><tr><td><b>S408</b></td><td>legislation.gov.uk</td><td>Delegated Regulation (EU) 2015/35, Article 169 (as substituted by 2019/981)</td><td>as amended to 2020</td><td style="word-break:break-all">https://www.legislation.gov.uk/eur/2015/35/article/169/2020-12-31</td><td>FETCHED</td></tr><tr><td><b>S409</b></td><td>legislation.gov.uk</td><td>Delegated Regulation (EU) 2015/35, Article 172</td><td>as amended to 2020</td><td style="word-break:break-all">https://www.legislation.gov.uk/eur/2015/35/article/172/2020-12-31</td><td>FETCHED</td></tr><tr><td><b>S410</b></td><td>legislation.gov.uk</td><td>Delegated Regulation (EU) 2015/35, Article 176</td><td>as amended to 2020</td><td style="word-break:break-all">https://www.legislation.gov.uk/eur/2015/35/article/176/2020-12-31</td><td>FETCHED</td></tr><tr><td><b>S412</b></td><td>legislation.gov.uk</td><td>Delegated Regulation (EU) 2015/35, Article 178</td><td>as amended to 2020</td><td style="word-break:break-all">https://www.legislation.gov.uk/eur/2015/35/article/178/2020-12-31</td><td>FETCHED</td></tr><tr><td><b>S414</b></td><td>Debevoise &amp; Plimpton</td><td>European Commission Adopts Amendments to the Solvency II Delegated Regulation</td><td>2026-03-02</td><td style="word-break:break-all">https://www.debevoise.com/insights/publications/2026/03/european-commission-adopts-amendments-to-the-solve</td><td>FETCHED</td></tr><tr><td><b>S415</b></td><td>KPMG Klardenker / EU Monitor (search results)</td><td>Revised Solvency II Directive published in OJ (Directive (EU) 2025/2)</td><td>2025-01</td><td style="word-break:break-all">https://klardenker.kpmg.de/financialservices-hub/regulatory-update/ueberarbeitete-solvency-ii-richtlinie-im-eu-amtsblatt-veroeffentlicht/</td><td>SNIPPET</td></tr><tr><td><b>S417</b></td><td>Alter Domus</td><td>Unlocking Capital Efficiency: Why Insurers Are Turning to Rated Note Feeders</td><td>2025-10-15</td><td style="word-break:break-all">https://alterdomus.com/insight/rated-note-feeders-capital-relief/</td><td>FETCHED</td></tr><tr><td><b>S418</b></td><td>Macfarlanes (via Mondaq)</td><td>Rated Note Feeders: Structuring Access To Private Capital</td><td>2026-07-12</td><td style="word-break:break-all">https://www.mondaq.com/uk/fund-finance/1815512/rated-note-feeders-structuring-access-to-private-capital</td><td>FETCHED</td></tr><tr><td><b>S419</b></td><td>Akin Gump (Law360 reprint)</td><td>How Rated Note Feeders Help Insurers Tap Private Credit</td><td>2026-07-09</td><td style="word-break:break-all">https://www.akingump.com/a/web/oe1DTVT3a6bPV1LACkQiEe/law360-how-rated-note-feeders-help-insurers-tap-private-credit.pdf</td><td>FETCHED</td></tr><tr><td><b>S421</b></td><td>MetLife Investment Management (InsuranceAUM Journal reprint)</td><td>A Very Long Engagement: Asset Allocation Implications of U.S. Life Insurance RBC Changes</td><td>2021 (Q3)</td><td style="word-break:break-all">https://insuranceaum.com/sites/default/files/pdf/InAUMJournal-Q3-2021-mim-a-very-long-engagement.pdf</td><td>FETCHED</td></tr><tr><td><b>S422</b></td><td>Capstone DC</td><td>Insurers&#x27; Increasing Exposure to Private Credit Attracts Regulators&#x27; Scrutiny</td><td>2026-05-14</td><td style="word-break:break-all">https://capstonedc.com/?p=54390</td><td>FETCHED</td></tr><tr><td><b>S423</b></td><td>Insurance Business Magazine</td><td>NAIC tightens grip on insurers&#x27; investment risk with bond and CLO overhaul</td><td>2026-04-20</td><td style="word-break:break-all">https://www.insurancebusinessmag.com/us/news/claims/naic-tightens-grip-on-insurers-investment-risk-with-bond-and-clo-overhaul-572390.aspx</td><td>FETCHED</td></tr><tr><td><b>S426</b></td><td>Insurance Business Asia (Fitch)</td><td>New Korean capital rules ease insurers&#x27; burden</td><td>2025-04-01</td><td style="word-break:break-all">https://insurancebusinessmag.com/asia/news/breaking-news/new-korean-capital-rules-ease-insurers-burden--fitch-ratings-530437.aspx</td><td>FETCHED</td></tr><tr><td><b>S427</b></td><td>Seoul Economic Daily</td><td>Korea to Introduce Core Capital Rules for Insurers From 2027</td><td>2025-12-31</td><td style="word-break:break-all">https://en.sedaily.com/finance/2025/12/31/korea-to-introduce-core-capital-rules-for-insurers-from-2027</td><td>FETCHED</td></tr><tr><td><b>S428</b></td><td>Herald Corp (Herald Business)</td><td>Post-transitional-measure ratio as of end-June falls 0.8 percentage points</td><td>2026-09-17</td><td style="word-break:break-all">https://biz.heraldcorp.com/article/10876878</td><td>FETCHED</td></tr><tr><td><b>S429</b></td><td>Skadden</td><td>The Standard Formula: Encyclopaedia of Prudential Solvency, Ch. 13 Korea</td><td>2026-04</td><td style="word-break:break-all">https://www.skadden.com/insights/publications/2026/04/chapter-13-the-prudential-solvency-regime-in-korea</td><td>FETCHED</td></tr><tr><td><b>S430</b></td><td>AsianInvestor (WTW comment)</td><td>Korean insurers looking to get their K-ICS from more alts</td><td>2019-02-26</td><td style="word-break:break-all">https://asianinvestor.net/article/korean-insurers-looking-to-get-their-k-ics-from-more-alts/450100</td><td>PAYWALLED</td></tr><tr><td><b>S431</b></td><td>FinDatEx</td><td>FinDatEx launches public consultation on TPT V8</td><td>2026-07-07</td><td style="word-break:break-all">https://findatex.eu/news/91/findatex-launches-public-consultation-on-tpt-v8</td><td>FETCHED</td></tr><tr><td><b>S432</b></td><td>FinDatEx</td><td>FinDatEx Releases Updated TPT V7 Template</td><td>2024-12-17</td><td style="word-break:break-all">https://findatex.eu/news/82/findatex-releases-updated-tpt-v7-template</td><td>FETCHED</td></tr><tr><td><b>S433</b></td><td>FinDatEx</td><td>TPT_V7 20241125_updated.xlsx (template workbook)</td><td>2024-11-25</td><td style="word-break:break-all">https://findatex.eu/mediaitem/ac6fc8a5-67b0-4f4b-ad74-1487b5a4ceaa/TPT_V7++20241125_updated.xlsx</td><td>FETCHED</td></tr><tr><td><b>S434</b></td><td>FinDatEx</td><td>FinDatEx publishes EET V1.1.3</td><td>2024-12-18</td><td style="word-break:break-all">https://findatex.eu/news/84/findatex-publishes-eet-v1-1-3</td><td>FETCHED</td></tr><tr><td><b>S436</b></td><td>ILPA</td><td>Frequently Asked Questions: ILPA Reporting Template and ILPA Performance Templates (v1.1)</td><td>2025-04 (released Jan 2025)</td><td style="word-break:break-all">https://ilpa.org/wp-content/uploads/2025/04/ILPA-Templates-FAQs-v1.1.pdf</td><td>FETCHED</td></tr><tr><td><b>S437</b></td><td>ILPA</td><td>Enhancing Transparency Around Subscription Lines of Credit</td><td>2020-06</td><td style="word-break:break-all">https://ilpa.org/wp-content/uploads/2020/06/ILPA-Guidance-on-Disclosures-Related-to-Subscription-Lines-of-Credit_2020_FINAL.pdf</td><td>FETCHED</td></tr><tr><td><b>S439</b></td><td>ILPA</td><td>ILPA Principles 3.0: Fostering Transparency, Governance and Alignment of Interests</td><td>2019 (June upload folder)</td><td style="word-break:break-all">https://ilpa.org/wp-content/uploads/2019/06/ILPA-Principles-3.0_2019.pdf</td><td>FETCHED</td></tr><tr><td><b>S440</b></td><td>Macfarlanes</td><td>The evolution of direct lending fund fee structures</td><td>2024-11-28</td><td style="word-break:break-all">https://www.macfarlanes.com/insights/102loh7/the-evolution-of-direct-lending-fund-fee-structures/</td><td>FETCHED</td></tr><tr><td><b>S441</b></td><td>Larry Swedroe Substack (summarising Cliffwater)</td><td>2025 Private Credit Fund Expenses</td><td>2025-03-24</td><td style="word-break:break-all">https://larryswedroe.substack.com/p/2025-private-credit-fund-expenses</td><td>FETCHED</td></tr><tr><td><b>S442</b></td><td>Baird</td><td>European Debt Markets Q2 2026: Looking Through the Noise</td><td>2026-06-22</td><td style="word-break:break-all">https://www.rwbaird.com/corporations-and-institutions/investment-banking/insights/2026/06/looking-through-the-noise/</td><td>FETCHED</td></tr><tr><td><b>S443</b></td><td>VRC via EACCNY</td><td>European Private Market Trends: Q2 2026 Direct Lending and Private Equity Update</td><td>2026-08-07</td><td style="word-break:break-all">https://eaccny.com/news/vrc-european-private-market-trends-q2-2026-direct-lending-private-equity-update/</td><td>FETCHED</td></tr><tr><td><b>S444</b></td><td>KBRA DLD</td><td>Europe Insights and Outlook Report: 1Q26 volume rises 16% YoY to EUR16.7B</td><td>2026-04-30</td><td style="word-break:break-all">https://www.kbra.com/analytics/products/dld/insights/europe-insights-outlook-report-1q26-volume-rises-16-yoy-to-16-7b</td><td>FETCHED</td></tr><tr><td><b>S445</b></td><td>Rothschild &amp; Co</td><td>European Leveraged Finance Market: September Update</td><td>2025-09</td><td style="word-break:break-all">https://www.rothschildandco.com/siteassets/publications/rothschildandco/global_advisory/2025/growth_equity_update/09/european-leveraged-finance-market---september-update.pdf</td><td>FETCHED</td></tr><tr><td><b>S446</b></td><td>Proskauer</td><td>Private Credit Deep Dives: Call Protection (Europe)</td><td>2023-05-22</td><td style="word-break:break-all">https://proskauer.com/alert/private-credit-deep-dives-call-protection</td><td>FETCHED</td></tr><tr><td><b>S448</b></td><td>Macfarlanes</td><td>Insurers and the EU securitisation reforms: an asset class finally unlocked?</td><td>2026-01-15</td><td style="word-break:break-all">https://www.macfarlanes.com/insights/102m1xa/insurers-and-the-eu-securitisation-reforms-an-asset-class-finally-unlocked/</td><td>FETCHED</td></tr><tr><td><b>S449</b></td><td>Hayfin / Alternatives Watch / 9fin (search results)</td><td>Hayfin exceeds EUR2bn target for Special Opportunities Fund III; Hayfin to exceed EUR10bn target for fifth direct lending fund</td><td>2021-12 / 2026-03-05</td><td style="word-break:break-all">http://www.hayfin.com/hayfin-exceeds-e2-2bn-target-special-opportunities-fund-iii/</td><td>SNIPPET</td></tr></tbody></table>
+</div>
+</body></html>

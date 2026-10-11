@@ -1,0 +1,137 @@
+<div class="band b5" data-toc="t4" data-title="4 · Toolkit 1: fund maths an LP reads"><div class="num">Section 4 · Toolkit 1</div><h1>Fund maths, the way an LP reads it</h1><div class="sub">Cash flows, IRR, MOIC, DPI, TVPI, the J-curve, subscription lines, fees, the waterfall and currency, all worked through</div></div>
+<div class="page">
+<p>Everything here uses one <b>illustrative</b> fund so the numbers connect. It is not a Hayfin fund. An LP commits €100m. Hayfin calls €90m over three years and pays back €116m over six.</p>
+
+<h2 data-toc="t4a" data-title="Cash flows, IRR and MOIC" data-lvl="2">Cash flows, IRR and MOIC</h2>
+<div class="calc">Year:            0      1      2      3      4      5      6
+Capital called: -30    -40    -20     0      0      0      0
+Distributions:    0     +3     +8    +25    +30    +30    +20
+Net cash flow:  -30    -37    -12    +25    +30    +30    +20
+
+MOIC  = total returned / total paid in = 116 / 90 = 1.29x
+IRR   = the rate r where  -30 - 37/(1+r) - 12/(1+r)^2 + 25/(1+r)^3
+        + 30/(1+r)^4 + 30/(1+r)^5 + 20/(1+r)^6 = 0   →   r ≈ 8.1%
+In Excel: =IRR(range) for annual flows, or =XIRR(values, dates) for real dates.</div>
+<div class="box key"><span class="lab">Why both numbers</span><b>IRR</b> rewards speed: getting money back sooner lifts it. <b>MOIC</b> ignores time: it only counts how many euros came back per euro in. A fund can have a high IRR and a low multiple (quick but small gains) or the reverse. LPs look at both, which is why ILPA's new Performance Template asks for IRR and multiples together [S45].</div>
+
+<h2 data-toc="t4b" data-title="DPI, TVPI and the J-curve" data-lvl="2">DPI, TVPI and the J-curve</h2>
+<figure>
+<svg viewBox="0 0 700 250" font-family="Helvetica,Arial">
+<g font-size="10">
+<text x="10" y="16" font-weight="700" fill="#12233f" font-size="12">DPI over the life of the illustrative fund (cash back ÷ cash paid in)</text>
+<line x1="60" y1="210" x2="680" y2="210" stroke="#5b6676"/><line x1="60" y1="210" x2="60" y2="30" stroke="#5b6676"/>
+<line x1="60" y1="94" x2="680" y2="94" stroke="#1d7a4c" stroke-dasharray="4 3"/><text x="676" y="88" text-anchor="end" fill="#1d7a4c">DPI = 1.0x: all money back</text>
+<g fill="#12233f">
+<rect x="80" y="210" width="50" height="0"/><rect x="170" y="205" width="50" height="5"/><rect x="260" y="196" width="50" height="14"/><rect x="350" y="164" width="50" height="46"/><rect x="440" y="125" width="50" height="85"/><rect x="530" y="86" width="50" height="124" fill="#1d7a4c"/><rect x="620" y="60" width="50" height="150" fill="#1d7a4c"/>
+</g>
+<g text-anchor="middle"><text x="105" y="204">0.00</text><text x="195" y="199">0.04</text><text x="285" y="190">0.12</text><text x="375" y="158">0.40</text><text x="465" y="119">0.73</text><text x="555" y="80">1.07</text><text x="645" y="54">1.29</text>
+<text x="105" y="226">Y0</text><text x="195" y="226">Y1</text><text x="285" y="226">Y2</text><text x="375" y="226">Y3</text><text x="465" y="226">Y4</text><text x="555" y="226">Y5</text><text x="645" y="226">Y6</text></g>
+<text x="65" y="244" fill="#5b6676" font-size="9.5">Illustrative numbers. Scale: 116 px = 1.0x. TVPI = DPI + RVPI (remaining value ÷ paid in); at Y6 everything is distributed, so TVPI = DPI = 1.29x.</text>
+</g>
+</svg>
+<figcaption><b>Figure 4.1 · DPI builds slowly.</b> Early on, fees and set-up costs mean the value an LP holds can dip below what it paid: the "J-curve". Credit funds have a shallower J-curve than private equity because loans pay interest from the start [Inferred, standard].</figcaption>
+</figure>
+<p><b>Why this matters in 2026.</b> When exits slow, LPs focus on DPI, the cash actually returned. A credit fund's steady interest and repayments are a DPI story. Hayfin's DLF V was over 50% deployed across 35+ companies at close [S71], so its DPI clock is already running.</p>
+
+<h2 data-toc="t4c" data-title="The subscription line trick" data-lvl="2">The subscription line trick (and why ILPA cares)</h2>
+<div class="calc">Same fund, but it borrows from a bank for one year before calling capital (a "subscription line"),
+paying 5% interest, so each call arrives a year later and 5% larger:
+
+                 Y0     Y1      Y2      Y3     Y4     Y5     Y6
+Net cash flow:    0   -28.5   -34.0   +4.0   +30    +30    +20
+
+IRR  ≈ 9.6%   (was 8.1%)   →  looks better, because the LP's money is out for less time
+MOIC ≈ 1.23x  (was 1.29x)  →  is actually worse, because the fund paid interest</div>
+<p>ILPA's own notional example shows the same effect: IRR 6.62% and TVPI 1.45x with no line; 7.14% and 1.40x with a one-year line; 7.98% and 1.35x with a two-year line [S437]. ILPA's 2017 guidance suggested lines of 15-25% of uncalled capital outstanding for no more than 180 days [S437].</p>
+<p>This is why the ILPA Performance Template asks managers to show performance with and without the effect of subscription facilities [S45]. When you proofread a performance page, check which basis each IRR uses. An intern who can explain this example will stand out.</p>
+
+<h2 data-toc="t4d" data-title="Fees and the waterfall" data-lvl="2">Fees and the waterfall</h2>
+<p><b>Management fee.</b> Hayfin's terms are not public. European direct lending norm (Macfarlanes, Hayfin's fund counsel): "a management fee on net invested capital, a performance fee subject to a preferred return with catch-up", headline about 1%, slightly less after discounts; "A 2% management fee would be seen as commercially unviable within direct lending" [S104]. Charging on <i>invested</i> rather than <i>committed</i> capital means LPs do not pay fees on money sitting idle [Inferred]. In Macfarlanes' model, cutting the fee from 1% to 0.75% lifts net IRR to 9.05%, and "all of the performance fee" arrives in the last two years [S440]. A survey of mostly US lenders (Cliffwater 2025, relayed by a blog, so treat with care) put unlevered direct lending at about 1.04% fees, an average hurdle of 5.12% and average carry of 11.2% [S441]: far below private equity's typical 2% and 20% [Inferred].</p>
+<div class="calc">Illustrative "whole-fund" waterfall (NOT Hayfin's terms). Fund returns €120m on €90m paid in.
+Assume a preferred return worth €15m, a 100% catch-up and a 15% performance fee
+(within the 10-15% range seen in direct lending [S441]).
+
+Step 1  Return of capital        LP gets 90.0              (remaining profit 30.0)
+Step 2  Preferred return (hurdle) LP gets 15.0              (remaining 15.0)
+Step 3  Catch-up to GP            GP gets c, where c = 15% × (15 + c)  →  c = 2.65
+Step 4  Split the rest 85/15      remaining 12.35 → LP 10.50, GP 1.85
+
+Totals: LP profit 25.5, GP profit 4.5  →  GP has exactly 15% of the 30.0 profit.</div>
+<div class="box key"><span class="lab">Gross-to-net in one line</span>Gross return (what the loans earned) minus management fee, minus fund expenses, minus the performance fee, minus the cost of any fund borrowing, equals net return to the LP. ILPA's 2025 Reporting Template adds a standard gross-to-net fee reconciliation, including rebates, waivers, offsets, placement fees and internal chargebacks [S170][S258].</div>
+
+<h2 data-toc="t4e" data-title="Currency: the lesson in Hayfin's own history" data-lvl="2">Currency: the lesson in Hayfin's own history</h2>
+<figure>
+<svg viewBox="0 0 700 170" font-family="Helvetica,Arial">
+<g font-size="10.5">
+<text x="10" y="16" font-weight="700" fill="#12233f" font-size="12">Same fund, two currencies: Special Opportunities Credit Fund I at 30 Sep 2015 (real figures)</text>
+<line x1="250" y1="30" x2="250" y2="115" stroke="#5b6676"/>
+<text x="240" y="58" text-anchor="end">Net IRR in euros</text><rect x="250" y="45" width="200" height="20" fill="#1f3a63"/><text x="456" y="60">+8.0% (1.10x net MOIC)</text>
+<text x="178" y="98" text-anchor="end">Net IRR, US dollar LP</text><rect x="185" y="85" width="65" height="20" fill="#b3261e"/><text x="256" y="100">-2.6% (0.97x) for PSERS, unhedged</text>
+<text x="10" y="135" fill="#5b6676" font-size="9.5">Scale 25 px per point. Source: PSERS investment memo, February 2016 [S307]. Nashville hedged the euro on its 2013 Hayfin commitment [S309].</text>
+</g>
+</svg>
+<figcaption><b>Figure 4.2 · Currency can erase a good result.</b> Hayfin's investors are 26.2% North American and 22.8% Australian by AUM [S305], so "how do I hedge the euro?" is a standing question. You will see currency in DDQs, in reports and in wrapper design (for example hedged share classes or feeders) [Inferred].</figcaption>
+</figure>
+</div>
+
+<div class="band" data-toc="t5" data-title="5 · Toolkit 2: the loan underneath"><div class="num">Section 5 · Toolkit 2</div><h1>The loan underneath</h1><div class="sub">How a direct loan is priced, how its health is measured, and what PIK really does</div></div>
+<div class="page">
+<p>You cannot explain a credit fund without understanding a single loan. Hayfin's quarterly Portfolio Breakdown shows each company's "LTM EBITDA, enterprise value and leverage" [S305]. Here is how to read those.</p>
+
+<h2 data-toc="t5a" data-title="Pricing a unitranche loan" data-lvl="2">Pricing a unitranche loan</h2>
+<div class="calc">Illustrative €100m unitranche, 3-year expected life (NOT a Hayfin deal):
+
+Base rate: 3-month Euribor, June 2026 [S443]           2.32%
+Margin over Euribor (market range E+500-625bps)      + 5.25%
+Cash coupon                                          = 7.57% a year
+Issue price 98 (a 2-point OID; market 97.5-98.5),
+spread over a 3-year expected life                   + 0.67% a year (approx.)
+Approximate all-in yield to the lender               ≈ 8.2% a year (gross)
+
+Floating rate: if Euribor rises 1 point, the coupon rises 1 point. Good for the lender's
+income; harder for the borrower to pay.</div>
+<p><b>Where the market is (2025-2026).</b> European direct lending median spreads fell from 613bps (2023) to 550bps (2024) to 500bps (2025 YTD), while sponsored leverage averaged 6.12x EBITDA against 4.83x in syndicated loans (Rothschild) [S445]. Q1 2026 unitranche priced at about E+525-625bps in the traditional mid-market and E+500-600bps upper mid-market (Baird) [S442]; KBRA said euro loans were "flirting with sub-8% yields for the first time" [S444]. The ECB raised its deposit rate to 2.25% in June 2026, its first hike in almost three years [S443]. Call protection is thin: over 80% of European deals had none from year three (2022 data) [S446].</p>
+<p>This is why Hayfin was described by its LP as "an 8%+ lender" in direct lending and "15%+" in special opportunities [S307]: the label is best read as the rough all-in yield range of each product [Inferred].</p>
+
+<h2 data-toc="t5b" data-title="Measuring a borrower's health" data-lvl="2">Measuring a borrower's health</h2>
+<div class="calc">Illustrative borrower:  LTM EBITDA €50m, total debt €250m, enterprise value (EV) €550m
+(5.0x is below the 6.12x 2025 average for sponsored European direct lending [S445])
+
+Leverage           = debt / EBITDA          = 250 / 50     = 5.0x
+Loan-to-value (LTV)= debt / EV              = 250 / 550    = 45%
+Interest cost      = 250 × 7.57%            = €18.9m
+Interest cover     = EBITDA / interest      = 50 / 18.9    = 2.6x
+(syndicated loans averaged 2.71x in Q2 2026, vs 4.0x before 2022 [S443])
+Equity cushion     = EV − debt              = €300m  (what the PE owner loses first)</div>
+<div class="box key"><span class="lab">Read the Portfolio Breakdown like a credit analyst</span>Rising leverage or falling interest cover across several quarters is a warning. A big equity cushion below the loan is protection: the private equity owner loses first. A covenant (for example "leverage must stay under 6.0x") gives the lender a seat at the table before things get bad. Hayfin says European deals offer "lower leverage, tighter documentation and smaller lender groups" than US ones [S95] (firm claim).</div>
+
+<h2 data-toc="t5c" data-title="PIK: the topic of 2026" data-lvl="2">PIK: the topic of 2026</h2>
+<div class="calc">PIK (payment in kind) = interest added to the loan instead of paid in cash.
+
+€100m loan, 4% PIK for 3 years:   100 × 1.04^3 = €112.5m owed
+Interest earned on paper: €12.5m. Cash received: €0.
+If the company's value falls, the extra €12.5m may never be collected.</div>
+<table>
+<thead><tr><th style="width:18%">Hayfin's three PIKs [S229]</th><th>What it means</th><th style="width:30%">How you would report it</th></tr></thead>
+<tbody>
+<tr><td><b>Good PIK</b></td><td>Agreed at the start, capped, time-limited, priced at a premium, used for growth that pays it back.</td><td>Show it as planned, with the cap and the coverage.</td></tr>
+<tr><td><b>Bad PIK</b></td><td>Introduced later because the borrower cannot pay cash: a stress signal. Lincoln calls loans that switched to PIK a "shadow default" (6.2% of loans, Q2 2026) [S162].</td><td>Flag as an amendment; track on the watchlist.</td></tr>
+<tr><td><b>Fake good PIK</b></td><td>Agreed at entry, but the business never really covers it, so value slowly moves from lender to borrower.</td><td>Hayfin's point: origin "says nothing about whether the position stays covered" [S229]. Track coverage, not just origin.</td></tr>
+</tbody></table>
+<p><b>Why it is in your job.</b> Fitch counted interest deferrals and PIK switches as 47% of US private credit default events in August 2026 [S245], and Hayfin's LPs probed PIK harder in DLF V than ever before [S222]. Expect ad hoc requests like "PIK income as a share of total income, split by planned and amended", and DDQ questions on PIK policy.</p>
+
+<h2 data-toc="t5d" data-title="From one loan to the whole fund" data-lvl="2">From one loan to the whole fund</h2>
+<figure>
+<svg viewBox="0 0 700 200" font-family="Helvetica,Arial">
+<defs><marker id="m4" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#12233f"/></marker></defs>
+<g font-size="10">
+<rect x="10" y="20" width="150" height="150" rx="6" fill="#eef2f8" stroke="#1f3a63"/><text x="85" y="40" text-anchor="middle" font-weight="700">35+ loans</text><text x="85" y="58" text-anchor="middle">at DLF V close [S71]</text><text x="85" y="84" text-anchor="middle">each: margin, OID,</text><text x="85" y="98" text-anchor="middle">leverage, cover,</text><text x="85" y="112" text-anchor="middle">PIK, sector, country,</text><text x="85" y="126" text-anchor="middle">currency, mark</text>
+<rect x="200" y="20" width="200" height="150" rx="6" fill="#1f3a63"/><text x="300" y="40" text-anchor="middle" fill="#fff" font-weight="700">Aggregation</text><text x="300" y="64" text-anchor="middle" fill="#c9d3e3">weighted average spread</text><text x="300" y="80" text-anchor="middle" fill="#c9d3e3">weighted average leverage</text><text x="300" y="96" text-anchor="middle" fill="#c9d3e3">sector and country mix</text><text x="300" y="112" text-anchor="middle" fill="#c9d3e3">top-10 concentration</text><text x="300" y="128" text-anchor="middle" fill="#c9d3e3">PIK share of income</text><text x="300" y="144" text-anchor="middle" fill="#c9d3e3">watchlist and non-accruals</text>
+<rect x="440" y="20" width="250" height="150" rx="6" fill="#f6ead9" stroke="#c8873a"/><text x="565" y="40" text-anchor="middle" font-weight="700">Where it shows up</text><text x="450" y="64">Pitch book: portfolio pages</text><text x="450" y="80">DDQ: portfolio construction, risk</text><text x="450" y="96">Quarterly report: Summary of</text><text x="450" y="110">Investments, Portfolio Breakdown [S305]</text><text x="450" y="128">Insurer look-through data (Section 6)</text><text x="450" y="146">Ad hoc: "software exposure?" (&lt;6% [S227])</text>
+<line x1="160" y1="95" x2="198" y2="95" stroke="#12233f" marker-end="url(#m4)"/><line x1="400" y1="95" x2="438" y2="95" stroke="#12233f" marker-end="url(#m4)"/>
+</g>
+</svg>
+<figcaption><b>Figure 5.1 · From loan data to investor answers.</b> Aggregation metrics are standard practice [Inferred]; Hayfin's report contents from [S305].</figcaption>
+</figure>
+<div class="box key"><span class="lab">Weighted average, the most used formula in IR</span>Weighted average leverage = Σ (loan size × leverage) ÷ Σ loan size. Two loans: €60m at 5.0x and €40m at 4.0x → (60×5 + 40×4) ÷ 100 = 4.6x. A simple average would wrongly say 4.5x. Always ask "weighted by what?" (commitment, drawn amount, fair value).</div>
+</div>

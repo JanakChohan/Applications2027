@@ -1,0 +1,86 @@
+<div class="band b2" data-toc="t6" data-title="6 · Toolkit 3: packaging and insurer capital"><div class="num">Section 6 · Toolkit 3</div><h1>Packaging: why the same loans need different wrappers</h1><div class="sub">The rated note feeder, insurer capital rules in the EU, US and Korea, and the look-through data insurers need. The most Hayfin-specific technical topic in this guide</div></div>
+<div class="page">
+<p>The PSG co-heads put the problem in one sentence: "A European pension fund, a US institution and an Asian insurer may all want exposure to the same underlying senior-secured loans, but they may not want to access that exposure in the same form" [S403]. This section explains why, with the actual rule numbers.</p>
+
+<h2 data-toc="t6a" data-title="The five wrappers, technically" data-lvl="2">The five wrappers, technically</h2>
+<table>
+<thead><tr><th style="width:20%">Wrapper</th><th style="width:40%">How it works</th><th>Who it suits, and the technical catch</th></tr></thead>
+<tbody>
+<tr><td>Unlevered commingled fund</td><td>Many LPs in one closed-ended fund; no borrowing at fund level beyond short-term lines</td><td>Pensions. For EU insurers, units of an unleveraged closed-ended EU AIF can get a 39% equity charge instead of 49% even without look-through (Solvency II Art 168(6)(c)) [S407]</td></tr>
+<tr><td>Levered commingled fund</td><td>The fund borrows against its loans (asset-backed or NAV facilities) to lift returns; levered DLF V assets "more than doubling" vs DLF IV [S403]</td><td>Return-seeking LPs. Leverage disqualifies the 39% route above, so insurers without look-through face 49% [Inferred from S407]. EU loan-origination AIFs are capped at 300% leverage (closed-ended) under AIFMD II [S163]</td></tr>
+<tr><td>SMA</td><td>A separate account for one investor following the strategy, with custom rules and reporting</td><td>Large pensions, SWFs, insurers wanting control. Extra reporting per account [S305]</td></tr>
+<tr><td>Institutional evergreen</td><td>No fixed end date; limited, gated exits; e.g. Tactical Solutions Evergreen Fund [S322]</td><td>Investors wanting to stay invested without re-upping. Liquidity terms must be explained precisely</td></tr>
+<tr><td>Rated note feeder (RNF)</td><td>A vehicle that invests in the fund and funds itself by issuing rated notes (debt) plus some equity. DLF V's raised about $600m [S402]</td><td>Insurers. Notes are treated as bonds, not fund equity, so capital charges fall sharply (below). Catches: rating cost, securitisation classification, equity tranche [S417][S418]</td></tr>
+</tbody></table>
+
+<h2 data-toc="t6b" data-title="How a rated note feeder works" data-lvl="2">How a rated note feeder works</h2>
+<figure>
+<svg viewBox="0 0 700 300" font-family="Helvetica,Arial">
+<defs><marker id="r1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#12233f"/></marker></defs>
+<g font-size="10">
+<text x="350" y="16" text-anchor="middle" font-weight="700" fill="#12233f" font-size="12">Rated note feeder: the same loans, re-shaped into rated debt (simplified)</text>
+<rect x="10" y="40" width="170" height="220" rx="8" fill="#e3f3ea" stroke="#1d7a4c"/>
+<text x="95" y="60" text-anchor="middle" font-weight="700">INSURERS</text>
+<rect x="25" y="75" width="140" height="70" rx="5" fill="#12233f"/><text x="95" y="98" text-anchor="middle" fill="#fff" font-weight="700">Buy rated notes</text><text x="95" y="114" text-anchor="middle" fill="#c9d3e3">e.g. A or BBB rating;</text><text x="95" y="128" text-anchor="middle" fill="#c9d3e3">fixed or floating coupon</text>
+<rect x="25" y="160" width="140" height="80" rx="5" fill="#c8873a"/><text x="95" y="183" text-anchor="middle" fill="#fff" font-weight="700">Equity / junior</text><text x="95" y="199" text-anchor="middle" fill="#fff">held by manager or</text><text x="95" y="213" text-anchor="middle" fill="#fff">investors who can bear</text><text x="95" y="227" text-anchor="middle" fill="#fff">first loss</text>
+<rect x="250" y="80" width="190" height="140" rx="8" fill="#1f3a63"/><text x="345" y="104" text-anchor="middle" fill="#fff" font-weight="700">FEEDER VEHICLE</text><text x="345" y="124" text-anchor="middle" fill="#c9d3e3">issues notes + equity;</text><text x="345" y="140" text-anchor="middle" fill="#c9d3e3">invests proceeds as an LP</text><text x="345" y="156" text-anchor="middle" fill="#c9d3e3">in the main fund;</text><text x="345" y="172" text-anchor="middle" fill="#c9d3e3">rated by an agency</text><text x="345" y="196" text-anchor="middle" fill="#c8873a" font-weight="700">~$600m for DLF V [S402]</text>
+<rect x="510" y="80" width="180" height="140" rx="8" fill="#12233f"/><text x="600" y="104" text-anchor="middle" fill="#fff" font-weight="700">DLF V</text><text x="600" y="124" text-anchor="middle" fill="#c9d3e3">senior secured loans</text><text x="600" y="140" text-anchor="middle" fill="#c9d3e3">to European companies</text><text x="600" y="164" text-anchor="middle" fill="#c9d3e3">"without changing the</text><text x="600" y="178" text-anchor="middle" fill="#c9d3e3">underlying investment"</text><text x="600" y="194" text-anchor="middle" fill="#c9d3e3">[S403]</text>
+<line x1="165" y1="110" x2="248" y2="130" stroke="#12233f" marker-end="url(#r1)"/><line x1="165" y1="200" x2="248" y2="180" stroke="#12233f" marker-end="url(#r1)"/><line x1="440" y1="150" x2="508" y2="150" stroke="#12233f" marker-end="url(#r1)"/>
+<path d="M510,205 C470,250 220,260 170,225" fill="none" stroke="#1d7a4c" stroke-dasharray="5 3" marker-end="url(#r1)"/>
+<text x="345" y="258" text-anchor="middle" fill="#1d7a4c">loan income flows back: notes paid first, equity last</text>
+<text x="10" y="290" fill="#5b6676" font-size="9.5">Simplified. Hayfin's feeder terms (ratings, currencies, tranches) are not public. Features: [S417][S418].</text>
+</g>
+</svg>
+<figcaption><b>Figure 6.1 · A rated note feeder.</b> Because the notes are paid before the equity, they are safer than a fund stake, which is what earns the rating. Hayfin calls its feeder "one of the first priced by a European direct lending manager" [S403]; KBRA rated $17bn of note feeder funds in 2025 against $8bn in 2024 (per Macfarlanes) [S418].</figcaption>
+</figure>
+
+<h2 data-toc="t6c" data-title="Why it saves capital: three insurer rulebooks" data-lvl="2">Why it saves capital: three insurer rulebooks</h2>
+<div class="box key"><span class="lab">Key idea</span>Insurers must hold capital against each investment, in proportion to how risky the regulator thinks it is. An opaque fund stake is treated like equity (high charge). A rated bond is treated like a bond (low charge). Same loans underneath; very different capital cost.</div>
+<figure>
+<svg viewBox="0 0 700 330" font-family="Helvetica,Arial">
+<g font-size="10">
+<text x="10" y="16" font-weight="700" fill="#12233f" font-size="12">Capital charge per €100 invested, by rulebook and wrapper (standard formula / base factors)</text>
+<line x1="230" y1="30" x2="230" y2="300" stroke="#5b6676"/>
+<text x="10" y="44" font-weight="700" fill="#1f3a63">EU Solvency II</text>
+<text x="225" y="62" text-anchor="end">Fund units, no look-through</text><rect x="230" y="51" width="245" height="16" fill="#b3261e"/><text x="481" y="63">49% + adj. (39% unlevered EU AIF)</text>
+<text x="225" y="84" text-anchor="end">Look-through, unrated loans, dur 3</text><rect x="230" y="73" width="45" height="16" fill="#c8873a"/><text x="281" y="85">9% (3% × duration) [S410]</text>
+<text x="225" y="106" text-anchor="end">Rated note BBB, duration 5</text><rect x="230" y="95" width="62" height="16" fill="#1d7a4c"/><text x="298" y="107">12.5% [S410]</text>
+<text x="225" y="128" text-anchor="end">Rated note A, duration 5</text><rect x="230" y="117" width="35" height="16" fill="#1d7a4c"/><text x="271" y="129">7.0% [S410]</text>
+<text x="225" y="150" text-anchor="end">Same BBB note if a non-STS</text><text x="225" y="162" text-anchor="end">securitisation, duration 5</text><rect x="230" y="141" width="440" height="16" fill="#7a3fb0" opacity="0.6"/><text x="236" y="153" fill="#12233f">≈98.5% (19.7% × 5): the securitisation trap [S412]</text>
+<text x="10" y="196" font-weight="700" fill="#1f3a63">US NAIC (life RBC)</text>
+<text x="225" y="214" text-anchor="end">LP interest in a private fund</text><rect x="230" y="203" width="150" height="16" fill="#b3261e"/><text x="386" y="215">30% [S419]</text>
+<text x="225" y="236" text-anchor="end">Rated note, NAIC 2.B (≈BBB)</text><rect x="230" y="225" width="8" height="16" fill="#1d7a4c"/><text x="244" y="237">1.52% [S421]</text>
+<text x="225" y="258" text-anchor="end">Rated note, NAIC 1.F (≈A)</text><rect x="230" y="247" width="4" height="16" fill="#1d7a4c"/><text x="240" y="259">0.82% [S421]</text>
+<text x="10" y="288" font-weight="700" fill="#1f3a63">Korea K-ICS</text><text x="230" y="288" fill="#5b6676">Fund-unit and credit factors not found in public sources [Gap]; same logic applies [Inferred]</text>
+<text x="10" y="318" fill="#5b6676" font-size="9.5">Scale 5 px per point. Solvency II: Reg. 2015/35 as amended [S407][S408]; NAIC: pretax base factors. Durations illustrative.</text>
+</g>
+</svg>
+<figcaption><b>Figure 6.2 · The capital arithmetic behind "capital-efficient".</b> A vendor worked example: a €50m commitment at 49% needs "nearly €25 million" of capital; via a BBB rated note feeder "9% to 15%", or €4.5-7.5m [S417] (vendor framing, not a regulator).</figcaption>
+</figure>
+<h3>The three rulebooks, simply</h3>
+<ul>
+<li><b>EU insurers (Solvency II).</b> Without look-through, fund units are "type 2" equity at 49% plus a symmetric adjustment of -10% to +10% (widening to ±13% from 30 January 2027) [S408][S409][S414]. Unleveraged closed-ended EU funds can be "type 1" at 39% [S407]. With look-through, each loan is charged as spread risk; unrated loans cost 3% × duration [S410], which is why insurers demand line-by-line data (below). A rated note gets bond factors, unless it counts as a securitisation, in which case much higher factors apply [S412]. Macfarlanes says a feeder that works for Solvency II insurers, as opposed to US ones, "remains a work in progress" [S448]. The Solvency II review applies from 30 January 2027 [S414][S415].</li>
+<li><b>US insurers (NAIC).</b> A private fund LP interest carries a 30% risk-based capital charge; investment-grade debt is "generally under 2%" [S419]. Rated feeders started here ("first designed for US insurers") [S418]. Regulators push back: the NAIC worried feeders could "repackage equity-like exposure", one driver of the principles-based bond definition effective 1 January 2025 [S419][S423], and the NAIC's securities office gained power from 1 January 2026 to challenge private ratings [S422].</li>
+<li><b>Korean insurers (K-ICS).</b> Since 2023 Korea uses K-ICS, a market-consistent regime at a 99.5% confidence level [S429]. Regulators cut the recommended ratio from 150% to 130-140% in 2025 and add a core capital rule from 2027 [S426][S427]. Samsung Life, a Hayfin shareholder, reported 208.2% at end-June 2026 [S428]. Exact fund and credit factors were not found [Gap], but one industry comment says some Korean insurers restructure alternatives into "rated" notes to get better treatment [S430] (snippet). This is the context for Hayfin's new Seoul office [S404].</li>
+</ul>
+<div class="box say"><span class="lab">Why this is the most distinctive thing you could learn at Hayfin</span>Most students can define IRR. Very few can explain why an insurer would buy the same European loans through a rated note rather than a fund stake, what the capital difference is, and what can go wrong (the securitisation classification, the NAIC's scrutiny). Hayfin did this in its flagship raise in 2026 [S402]. That is a conversation you can have in an interview.</div>
+
+<h2 data-toc="t6d" data-title="Look-through data: the TPT and EET" data-lvl="2">Look-through data: the TPT and EET</h2>
+<p>If an insurer wants the lower look-through charge, it needs data on every loan. The industry template is the <b>Tripartite Template (TPT)</b>, maintained by FinDatEx: "a widely used European data exchange template designed to support the provision of asset data from asset managers to insurers for Solvency II reporting purposes" [S431]. Version 7 (December 2024) added "Improved handling of bonds or loans with payment-in-kind features" [S432]. Version 8 was consulted on from July to September 2026 and is expected to be mandatory in Q1 2027 [S431]. Whether V8 was finalised is not confirmed [Gap].</p>
+<figure>
+<svg viewBox="0 0 700 220" font-family="Helvetica,Arial">
+<g font-size="10">
+<text x="10" y="16" font-weight="700" fill="#12233f" font-size="12">What a direct lending fund supplies in a TPT, one row per loan (V7 field groups) [S433]</text>
+<g>
+<rect x="10" y="30" width="160" height="170" rx="6" fill="#12233f"/><text x="90" y="50" text-anchor="middle" fill="#fff" font-weight="700">Portfolio level</text><text x="20" y="72" fill="#c9d3e3">fund ID, currency</text><text x="20" y="88" fill="#c9d3e3">NAV, reporting date</text><text x="20" y="104" fill="#c9d3e3">cash ratio</text><text x="20" y="120" fill="#c9d3e3">portfolio duration</text>
+<rect x="180" y="30" width="160" height="170" rx="6" fill="#1f3a63"/><text x="260" y="50" text-anchor="middle" fill="#fff" font-weight="700">Each loan</text><text x="190" y="72" fill="#c9d3e3">CIC code, name</text><text x="190" y="88" fill="#c9d3e3">nominal, market value</text><text x="190" y="104" fill="#c9d3e3">reference index (Euribor)</text><text x="190" y="120" fill="#c9d3e3">interest rate margin</text><text x="190" y="136" fill="#c9d3e3">maturity, call dates</text><text x="190" y="152" fill="#c9d3e3">PIK flag (new in V7)</text>
+<rect x="350" y="30" width="160" height="170" rx="6" fill="#3d5a85"/><text x="430" y="50" text-anchor="middle" fill="#fff" font-weight="700">Issuer</text><text x="360" y="72" fill="#e8edf5">name, LEI, group</text><text x="360" y="88" fill="#e8edf5">country, NACE sector</text><text x="360" y="104" fill="#e8edf5">subordination, tranche</text><text x="360" y="120" fill="#e8edf5">credit quality step</text><text x="360" y="136" fill="#e8edf5">rating, agency</text>
+<rect x="520" y="30" width="170" height="170" rx="6" fill="#c8873a"/><text x="605" y="50" text-anchor="middle" fill="#fff" font-weight="700">Analytics</text><text x="530" y="72" fill="#fff">modified duration</text><text x="530" y="88" fill="#fff">credit sensitivity</text><text x="530" y="104" fill="#fff">optional SCR</text><text x="530" y="120" fill="#fff">contributions: rates,</text><text x="530" y="136" fill="#fff">equity, spread, FX</text>
+</g>
+<text x="10" y="215" fill="#5b6676" font-size="9.5">About 150 fields in total in the V7 workbook [S433]. Who prepares Hayfin's TPTs (PSG, Finance or the administrator) is not public; the Fund Controller role supports "Solvency II reporting" [S333].</text>
+</g>
+</svg>
+<figcaption><b>Figure 6.3 · Look-through data.</b> Notice the overlap with the quarterly Portfolio Breakdown and with PIK reporting: the same loan data feeds investor reports, DDQ answers and insurer capital calculations [Inferred].</figcaption>
+</figure>
+<p>The <b>European ESG Template (EET)</b> does the same job for sustainability data under SFDR and the EU's suitability rules; version 1.1.3 has applied since 1 January 2025 [S434]. Hayfin runs six SFDR Article 8 funds [S25].</p>
+</div>
