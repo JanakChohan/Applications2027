@@ -74,3 +74,9 @@ scenario cards:
 - Use `<div class="box key"><span class="lbl">What you will learn</span>`, `<div class="box term"><span class="lbl">Where you meet it at KKR</span>`, `<div class="box opinion"><span class="lbl">Only at KKR</span>` for these three.
 - End each module with "Say it in one line" (a SAY THIS box): one sentence the candidate could use in the application answer or interview.
 - SVG text may contain source markers like [S12] in plain text (the build leaves SVG untouched), but keep them short.
+
+## Addendum for the Pictet experience guide (`parts_pictet/`, build key `pictet`, ids prefix `p`)
+- Reader: same candidate. They did a roughly six-week summer internship at Pictet Asset Management in what they call the "Global Client Group" (client servicing, client onboarding, client relationship management). Public sources do not use the name "Global Client Group"; write "the client group (the candidate's team name)" and never contradict the candidate's own account.
+- HONESTY RULE: never invent what the candidate personally did, achieved or measured. Describe what such a team does and what interns in such seats typically do, labelled [Inferred] or sourced. When you show example CV bullets or stories, mark them "Template: keep only if true" and use [square-bracket slots] for their real specifics.
+- Required boxes per major section: `box key` "What the work really is" (the technical content); `box term` "How it transfers to KKR KCS" (specific KKR product, client type, team or task, sourced); `box opinion` "Say it in one line".
+- Same technical depth as the "What you will learn" guide: explain every mechanism from zero, worked examples, diagrams for every mechanism.
