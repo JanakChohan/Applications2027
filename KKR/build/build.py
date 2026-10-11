@@ -24,18 +24,27 @@ REPORTS = {
 CONF = {"Confirmed": "c", "Reported": "r", "Inferred": "i"}
 
 
-def decorate(body: str) -> str:
-    # [S12] or [S12, S40] or [S12-S14] -> styled source marker (skip inside src-table first cells handled by class)
-    body = re.sub(r"\[(S\d+(?:\s*[,–-]\s*S?\d+)*)\]", r'<span class="src">[\1]</span>', body)
-    body = re.sub(r"\[(Confirmed|Reported|Inferred)\]",
-                  lambda m: f'<span class="conf {CONF[m.group(1)]}">{m.group(1).upper()}</span>', body)
-    # Figure numbering
+def decorate(body: str):
+    # leave SVG blocks untouched (spans are invalid inside SVG)
+    parts = re.split(r"(<svg.*?</svg>)", body, flags=re.S)
+    out = []
+    for i, seg in enumerate(parts):
+        out.append(seg if i % 2 else _decorate_text(seg))
+    body = "".join(out)
     n = [0]
     def fig(m):
         n[0] += 1
         return f'<span class="fig-num">Figure {n[0]}.</span>'
     body = re.sub(r'<span class="fig-num"></span>', fig, body)
     return body, n[0]
+
+
+def _decorate_text(body: str) -> str:
+    # [S12] or [S12, S40] or [S12-S14] -> styled source marker (skip inside src-table first cells handled by class)
+    body = re.sub(r"\[(S\d+(?:\s*[,–-]\s*S?\d+)*)\]", r'<span class="src">[\1]</span>', body)
+    body = re.sub(r"\[(Confirmed|Reported|Inferred)\]",
+                  lambda m: f'<span class="conf {CONF[m.group(1)]}">{m.group(1).upper()}</span>', body)
+    return body
 
 
 def build_toc(body: str):
