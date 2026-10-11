@@ -1,0 +1,886 @@
+<section class="part" id="l2">
+<div class="part-band alt"><div class="num">Part 2</div><h1>Module 1: The plumbing of private markets products</h1><p>Every KKR product is a pipe that carries money from a client to a deal and back. This module takes the pipes apart: who can use each one, when money moves, who gets paid in what order, and what happens when too many people want their money back at once.</p></div>
+
+<p class="lead">Part 1 showed that a KCS desk matches a client's constraints to a product's terms. This part is the product side in full mechanical detail. By the end you should be able to take any KKR vehicle, say what legal box it sits in, draw how cash flows through it, compute its fees for a year, and explain what happens in a bad quarter. That is the vocabulary every product specialist, relationship manager and analyst in KCS uses every day [Inferred].</p>
+
+<!-- ============================================================ 1 -->
+<h2 id="l2-menu">1. The vehicle menu: eleven ways to own the same kind of asset</h2>
+
+<p>A <b>vehicle</b> (or "wrapper") is the legal container investors put money into. The assets inside can be similar: companies, power grids, loans, buildings. What changes from wrapper to wrapper is four things: <b>who is allowed in</b>, <b>when cash moves</b>, <b>how fees are charged</b> and <b>how (and whether) you can get out</b>. KKR's 10-K describes the range: drawdown private equity funds with management fees of 1.0% to 2.0% of committed capital during the investment period, drawdown infrastructure and real estate funds at 0.75% to 1.50%, and open-ended vehicles (core infrastructure, core+ real estate, evergreen direct lending, K-Series) at 0.50% to 1.25% [S2] [Confirmed]. Here is the menu, from most locked-up to most liquid.</p>
+
+<table class="tight">
+<thead><tr><th>Wrapper</th><th>What it is in one line</th><th>Live KKR example</th></tr></thead>
+<tbody>
+<tr><td><b>Closed-end drawdown LP fund</b></td><td>Investors promise money; KKR calls it over years, invests, sells, and returns cash. Fixed life.</td><td>Global Infrastructure Investors V (GII V), $19.2bn final close, 3 Aug 2026 [S430] [Confirmed]; North America Fund XIV, about $23bn [S335] [Confirmed]; European Fund VI, $7.5bn committed (about $8bn reported close) [S175, S185] [Confirmed]</td></tr>
+<tr><td><b>Parallel fund</b></td><td>A legally separate twin that invests side by side with the main fund, in fixed proportions, for investors who need a different legal or tax form.</td><td>Generic structure [Inferred]. CalPERS reports a holding in "KKR European Fund V (USD)" [S117] [Confirmed], which suggests a currency-specific vehicle alongside the main fund [Inferred].</td></tr>
+<tr><td><b>Feeder fund</b></td><td>A pooling vehicle: many small investors buy into the feeder; the feeder makes one large commitment to the main fund.</td><td>"KKR FS Income Trust iCapital Offshore Access Fund SPC" on EDGAR [S114] [Confirmed]; K-PRIME's "Feeder-I" sub-fund investing into a master FCP [S429] [Reported]</td></tr>
+<tr><td><b>Separately managed account (SMA)</b></td><td>A "fund of one": a single large client with its own terms.</td><td>"Bespoke Separately Managed Accounts" for families [S84] [Confirmed]; ABF Partners II raised about $1bn of SMAs beside a $5.6bn fund [S433] [Reported]</td></tr>
+<tr><td><b>Co-investment vehicle</b></td><td>Lets a client put extra money into one specific deal next to the fund, usually at low or no fee.</td><td>Syndicated by KKR Capital Markets (KCM) [S425] [Confirmed]</td></tr>
+<tr><td><b>Evergreen operating company ("conglomerate") LLC</b></td><td>No end date; buys stakes in deals through joint ventures and is legally an operating company, not a fund.</td><td>K-PEC (private equity), K-INFRA (infrastructure) [S420, S421] [Confirmed]</td></tr>
+<tr><td><b>Business development company (BDC)</b></td><td>A US lending vehicle regulated under the 1940 Act framework; pays out its income.</td><td>K-FIT and K-FITS (private credit) [S422, S423] [Confirmed]</td></tr>
+<tr><td><b>Registered closed-end fund</b></td><td>A 1940 Act registered fund, publicly offered, that buys back shares by discretionary tender.</td><td>KREST (real estate) [S424] [Confirmed]</td></tr>
+<tr><td><b>Luxembourg SICAV</b></td><td>A European open-ended investment company, supervised by Luxembourg's CSSF.</td><td>K-PRIME, the non-US twin of K-PEC [S429] [Reported]; "similar objectives and strategies" [S111] [Confirmed]</td></tr>
+<tr><td><b>US interval fund</b></td><td>A registered fund that <i>must</i> offer to buy back 5% to 25% of its shares every quarter.</td><td>Capital Group KKR Core Plus+, Multi-Sector+, U.S. Equity+ [S426, S427] [Confirmed]</td></tr>
+<tr><td><b>Open-ended core fund (institutional)</b></td><td>No end date, but long lock-ups; aimed at steady, lower-risk assets.</td><td>Diversified Core Infrastructure Fund (DCIF) [S432] [Confirmed]</td></tr>
+<tr><td><b>Insurance sidecar</b></td><td>Third-party equity that reinsures a share of the insurance business Global Atlantic writes.</td><td>The "Ivy" vehicles: $62bn of IV-related AUM at Q2 2026 [S440] [Confirmed]</td></tr>
+</tbody>
+</table>
+
+<figure>
+<svg viewBox="0 0 680 440" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10">
+<text x="8" y="16" font-weight="700" font-size="13" fill="#13294B">The KKR vehicle map: who it is for (rows) and how easily you can get out (columns)</text>
+<g fill="#E8EDF5" stroke="#24467A" stroke-width="0.8">
+<rect x="100" y="26" width="140" height="36" rx="3"/><rect x="245" y="26" width="140" height="36" rx="3"/><rect x="390" y="26" width="140" height="36" rx="3"/><rect x="535" y="26" width="140" height="36" rx="3"/>
+</g>
+<g font-weight="700" fill="#13294B" text-anchor="middle">
+<text x="170" y="41">Locked for fund life</text><text x="170" y="55">(about 10 to 13 years)</text>
+<text x="315" y="41">Open-ended, but a</text><text x="315" y="55">multi-year lock-up</text>
+<text x="460" y="41">Quarterly, capped;</text><text x="460" y="55">board may pay less</text>
+<text x="605" y="41">Quarterly offer</text><text x="605" y="55">required by rule</text>
+</g>
+<rect x="4" y="68" width="671" height="148" fill="#F6F8FB"/>
+<rect x="4" y="220" width="671" height="56" fill="#FFFFFF"/>
+<rect x="4" y="280" width="671" height="152" fill="#FBF6EF"/>
+<g font-weight="700" fill="#13294B">
+<text x="10" y="90">Institutions</text>
+<text x="10" y="242">Wealth, via</text><text x="10" y="255">feeders</text>
+<text x="10" y="302">Individuals</text>
+</g>
+<g fill="#4A5160" font-size="9.5">
+<text x="10" y="104">pensions, SWFs,</text><text x="10" y="117">insurers, families</text>
+<text x="10" y="316">via advisers,</text><text x="10" y="329">wirehouses and</text><text x="10" y="342">private banks</text>
+</g>
+<g stroke-width="1" fill="#FFFFFF">
+<rect x="104" y="74" width="132" height="62" rx="4" stroke="#13294B"/>
+<rect x="104" y="140" width="132" height="34" rx="4" stroke="#13294B"/>
+<rect x="104" y="178" width="132" height="34" rx="4" stroke="#13294B"/>
+<rect x="249" y="74" width="132" height="62" rx="4" stroke="#0E8F7E"/>
+<rect x="104" y="226" width="132" height="46" rx="4" stroke="#24467A"/>
+<rect x="394" y="286" width="132" height="34" rx="4" stroke="#C8792B"/>
+<rect x="394" y="324" width="132" height="34" rx="4" stroke="#C8792B"/>
+<rect x="394" y="362" width="132" height="30" rx="4" stroke="#C8792B"/>
+<rect x="394" y="396" width="132" height="32" rx="4" stroke="#C8792B"/>
+<rect x="539" y="286" width="132" height="72" rx="4" stroke="#0E8F7E"/>
+<rect x="249" y="286" width="132" height="48" rx="4" stroke="#B23A48" stroke-dasharray="4 3"/>
+</g>
+<g fill="#1B1F27">
+<text x="110" y="89" font-weight="700">Drawdown LP funds</text>
+<text x="110" y="103">GII V $19.2bn</text><text x="110" y="116">NA Fund XIV about $23bn</text><text x="110" y="129">European VI about $8bn</text>
+<text x="110" y="154" font-weight="700">SMAs and co-invest</text><text x="110" y="167">one client, own terms</text>
+<text x="110" y="192" font-weight="700">Ivy insurance sidecars</text><text x="110" y="205">commitment-based</text>
+<text x="255" y="89" font-weight="700">DCIF</text><text x="255" y="103">open-ended core infra</text><text x="255" y="116">3-yr hard + 3-yr soft</text><text x="255" y="129">lock-up (2021 terms)</text>
+<text x="110" y="241" font-weight="700">Feeders (e.g. iCapital)</text><text x="110" y="254">pool small tickets into</text><text x="110" y="267">one LP commitment</text>
+<text x="400" y="300" font-weight="700">K-PEC, K-INFRA</text><text x="400" y="313">LLC "conglomerates"</text>
+<text x="400" y="338" font-weight="700">K-FIT, K-FITS</text><text x="400" y="351">perpetual BDCs</text>
+<text x="400" y="375" font-weight="700">KREST</text><text x="400" y="387">registered closed-end</text>
+<text x="400" y="410" font-weight="700">K-PRIME (Lux SICAV)</text><text x="400" y="423">non-US twin of K-PEC</text>
+<text x="545" y="300" font-weight="700">Capital Group KKR</text><text x="545" y="313">Core Plus+</text><text x="545" y="326">Multi-Sector+</text><text x="545" y="339">U.S. Equity+</text><text x="545" y="352">(interval funds)</text>
+<text x="255" y="300" font-weight="700">EU ELTIF / UK LTAF</text><text x="255" y="313">monthly to quarterly</text><text x="255" y="326">no KKR fund found</text>
+</g>
+<g fill="#4A5160" font-size="9.5"><text x="394" y="240">More liquid to the right, more retail towards the bottom.</text><text x="394" y="253">The diagonal is the whole wealth story.</text></g>
+</svg>
+<figcaption><span class="fig-num"></span> <b>The vehicle map.</b> Institutional money sits top left (locked, drawdown); individual money sits bottom right (evergreen, some liquidity). Fund sizes: GII V [S430], NA XIV [S335], European VI [S185]; structures from the K-Series filings [S420, S421, S422, S424], K-PRIME [S429] [Reported], interval funds [S426, S427], DCIF [S432], Ivy [S425]. No KKR ELTIF or LTAF was found in the sources. Column placement is the author's [Inferred].</figcaption>
+</figure>
+
+<h3>How the institutional pieces fit around one deal</h3>
+<p>The top-left corner is not one product but a family. One KKR deal can be funded by five different pipes at once. The main fund and any parallel funds take their fixed shares. Feeders sit <i>above</i> the main fund and simply pass money through. SMAs invest next to the fund under their own contract. Co-investors buy extra pieces of that one deal. Since 2023 a sixth pipe exists: K-PEC (or K-INFRA in infrastructure) joins the deal as a <i>co-general partner</i> of a deal-level joint venture alongside the flagship fund [S420, S421] [Confirmed].</p>
+
+<figure>
+<svg viewBox="0 0 680 330" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10">
+<defs><marker id="l2a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#24467A"/></marker></defs>
+<text x="8" y="16" font-weight="700" font-size="13" fill="#13294B">Six pipes into one deal</text>
+<g fill="#E8EDF5" stroke="#24467A" stroke-width="0.8">
+<rect x="8" y="28" width="104" height="44" rx="4"/><rect x="120" y="28" width="104" height="44" rx="4"/><rect x="232" y="28" width="104" height="44" rx="4"/><rect x="344" y="28" width="104" height="44" rx="4"/><rect x="456" y="28" width="104" height="44" rx="4"/><rect x="568" y="28" width="104" height="44" rx="4"/>
+</g>
+<g fill="#1B1F27" text-anchor="middle" font-size="9.5">
+<text x="60" y="45">Many small</text><text x="60" y="58">wealth clients</text>
+<text x="172" y="45">Pensions, SWFs,</text><text x="172" y="58">insurers</text>
+<text x="284" y="45">LPs needing another</text><text x="284" y="58">legal or tax form</text>
+<text x="396" y="45">One very large</text><text x="396" y="58">client</text>
+<text x="508" y="45">LPs wanting more</text><text x="508" y="58">of this one deal</text>
+<text x="620" y="45">Individuals in</text><text x="620" y="58">the K-Series</text>
+</g>
+<g stroke="#24467A" stroke-width="1.3" fill="none" marker-end="url(#l2a)">
+<path d="M60,72 L60,96"/><path d="M172,72 L172,146"/><path d="M284,72 L284,146"/><path d="M396,72 L396,146"/><path d="M508,72 L508,146"/><path d="M620,72 L620,146"/>
+<path d="M112,120 L150,148"/>
+</g>
+<rect x="8" y="98" width="104" height="40" rx="4" fill="#FFFFFF" stroke="#24467A"/>
+<text x="60" y="114" text-anchor="middle" font-weight="700" fill="#13294B">Feeder fund</text><text x="60" y="128" text-anchor="middle" fill="#4A5160" font-size="9.5">one big ticket</text>
+<g stroke-width="1.2">
+<rect x="120" y="148" width="104" height="44" rx="4" fill="#13294B" stroke="#13294B"/>
+<rect x="232" y="148" width="104" height="44" rx="4" fill="#24467A" stroke="#24467A"/>
+<rect x="344" y="148" width="104" height="44" rx="4" fill="#FFFFFF" stroke="#13294B"/>
+<rect x="456" y="148" width="104" height="44" rx="4" fill="#FFFFFF" stroke="#13294B"/>
+<rect x="568" y="148" width="104" height="44" rx="4" fill="#FBF1E6" stroke="#C8792B"/>
+</g>
+<g text-anchor="middle" font-weight="700">
+<text x="172" y="166" fill="#FFFFFF">Main fund</text><text x="172" y="180" fill="#FFFFFF" font-weight="400" font-size="9.5">e.g. NA Fund XIV</text>
+<text x="284" y="166" fill="#FFFFFF">Parallel fund</text><text x="284" y="180" fill="#FFFFFF" font-weight="400" font-size="9.5">same deals, fixed %</text>
+<text x="396" y="166" fill="#13294B">SMA</text><text x="396" y="180" fill="#4A5160" font-weight="400" font-size="9.5">own contract</text>
+<text x="508" y="166" fill="#13294B">Co-invest vehicle</text><text x="508" y="180" fill="#4A5160" font-weight="400" font-size="9.5">via KCM, low fee</text>
+<text x="620" y="166" fill="#13294B">K-PEC</text><text x="620" y="180" fill="#4A5160" font-weight="400" font-size="9.5">co-GP of the JV</text>
+</g>
+<g stroke="#24467A" stroke-width="1.3" fill="none" marker-end="url(#l2a)">
+<path d="M172,192 L300,242"/><path d="M284,192 L320,242"/><path d="M396,192 L345,242"/><path d="M508,192 L370,242"/><path d="M620,192 L395,250"/>
+</g>
+<rect x="210" y="244" width="260" height="44" rx="6" fill="#0E8F7E"/>
+<text x="340" y="262" text-anchor="middle" fill="#FFFFFF" font-weight="700" font-size="11">One portfolio company</text>
+<text x="340" y="278" text-anchor="middle" fill="#FFFFFF" font-size="9.5">each pipe owns a slice of the same equity</text>
+<text x="8" y="312" fill="#4A5160" font-size="9.5">Generic structure for feeder, parallel fund and SMA [Inferred]. K-PEC as co-general partner alongside the flagship fund: K-PEC 10-K [S420].</text>
+</svg>
+<figcaption><span class="fig-num"></span> <b>Six pipes into one deal.</b> The client chooses the pipe; the deal team sees one pool of equity. KCS's job is matching each client to the right pipe, and KCM syndicates the co-investment piece [S425] [Confirmed]. Structure drawn by the author [Inferred].</figcaption>
+</figure>
+
+<h3>Three wrappers that look odd until you see why they exist</h3>
+<p><b>Co-investment is a profit engine, not a giveaway.</b> Since 2014 KKR's fund agreements "typically require us to share 100% of any monitoring, transaction, and break-up fees that are allocable to a fund" with fund investors, but "transaction fees earned in our capital markets business are not shared with fund investors" [S425] [Confirmed]. So when KCS places a slice of a deal with a co-investor, the co-investor pays a low fee, but the deal can generate KCM fees that fund investors do not offset [S425] [Inferred]. KCM earned $930m of capital markets transaction fees in 2025 [S425] [Confirmed]. Industry-wide, PitchBook tracked $37.5bn of co-investment fundraising in the 12 months to June 2026 [S260] [Confirmed].</p>
+<p><b>SMAs are where the biggest clients are going.</b> KKR's 10-K warns that sovereign wealth funds and public pension funds "continue to demonstrate an increased preference for alternatives to traditional fund structures, such as separately managed accounts" [S70] [Confirmed].</p>
+<p><b>Insurance sidecars turn equity into balance sheet.</b> The Ivy vehicles are "commitment-based structures with third-party investors" that "participate alongside Global Atlantic through reinsurance" during their investment periods, and are supervised by the Bermuda Monetary Authority [S425] [Confirmed]. At Q2 2026 KKR described "$6 billion of dry powder that we think translates to north of $60 billion of buying power on the liability side" [S440] [Confirmed]. That is roughly $1 of investor equity supporting $10 of insurance liabilities [S440] [Inferred].</p>
+
+<div class="two">
+<div class="box key"><span class="lbl">What you will learn</span><p>To classify any product by four questions (who may buy, when cash moves, how fees are charged, how you exit) and place it on the map in Figure 1. Once you can do that, a new product is a variation, not a mystery.</p></div>
+<div class="box term"><span class="lbl">Where you meet it at KKR</span><p>A KKR Global Wealth Solutions posting asks for "depth of expertise across alternative assets classes in both private and registered structures (interval funds, BDCs, REITs)" [S103] [Confirmed]. In London, Matt Yates is "Head of EMEA Product Development" and runs product management for K-PRIME and K-PEC [S133] [Confirmed].</p></div>
+</div>
+<div class="box opinion"><span class="lbl">Only at KKR</span><p>Most managers have drawdown funds, SMAs and an evergreen range. KKR adds two pipes few rivals combine with them: a capital markets desk whose co-investment fees sit outside the fund offset [S425], and an owned insurer whose sidecars take third-party equity [S425, S440]. Blackstone and Apollo also have in-house capital markets [S214, S220] [Confirmed], so the honest claim is the combination on one shelf, not any single pipe [Inferred].</p></div>
+<div class="box say"><span class="lbl">Say it in one line</span><p>"I want to learn the whole KKR product shelf as one map, from GII V's drawdown fund to K-INFRA's monthly NAV, so I can explain why the same infrastructure asset sits in five different wrappers."</p></div>
+
+<!-- ============================================================ 2 -->
+<h2 id="l2-drawdown">2. Drawdown mechanics: commitment, call, fee, return</h2>
+
+<h3>Step 1: the commitment</h3>
+<p>An institution signs the Limited Partnership Agreement (LPA, the fund's contract) and <b>commits</b>, say, $100m. No cash moves yet. The commitment is a legally binding promise to pay when asked [Inferred]. KKR's 10-K describes this model: commit now, and KKR calls the money over the investment period [S70] [Confirmed]. Investment periods are long: North America Fund XIV invests from April 2025 to April 2031, GII V from July 2024 to July 2030, and European Fund VI from June 2022 to June 2028 [S1] [Confirmed]. Infrastructure and real estate drawdown funds have fund terms of 10 to 13 years [S2] [Confirmed].</p>
+
+<h3>Step 2: the capital call</h3>
+<p>When KKR agrees a deal, the fund sends each LP a <b>capital call notice</b> (a drawdown notice): "please wire X by date Y". X is the LP's percentage of the fund times the cash needed. If a $10bn fund needs $400m for a deal plus $25m of fees and expenses, an LP with a $100m commitment (1% of the fund) wires $4.25m (illustrative numbers). The money not yet called is the <b>uncalled commitment</b>, also called "dry powder". KKR reported $142.7bn of uncalled commitments across the firm at 30 June 2026 [S1] [Confirmed].</p>
+
+<div class="box term"><span class="lbl">Key term</span><p><b>Uncalled commitment:</b> commitment minus everything called so far. For an LP it is a liability (cash it must keep ready). For KKR it is future fee-paying capital. For a KCS pacing conversation, it is the number that decides how much more a client can commit this year [Inferred].</p></div>
+
+<h3>A real fund, read like an LP statement</h3>
+<p>KKR's 10-Q fund table gives the live state of European Fund VI at 30 June 2026: commitment $7,513m, uncalled $1,795m, invested $5,719m, remaining fair value $7,269m [S175] [Confirmed]. Read it the way an LP would. Called so far is about $7,513m minus $1,795m, roughly $5,718m, or 76% of commitments [Inferred]. Remaining fair value of $7,269m against $5,719m invested is about 1.27x on paper, before any distributions already made [Inferred] (the table does not separate realised proceeds).</p>
+
+<figure>
+<svg viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10.5">
+<text x="8" y="16" font-weight="700" font-size="13" fill="#13294B">European Fund VI at 30 June 2026 ($m)</text>
+<text x="8" y="47" fill="#1B1F27" font-weight="700">Commitment</text>
+<rect x="130" y="32" width="400.3" height="24" fill="#2a78d6"/>
+<rect x="532.3" y="32" width="125.7" height="24" fill="#eda100"/>
+<text x="140" y="48" fill="#FFFFFF" font-weight="700">Called: about 5,718 (76%)</text>
+<text x="540" y="48" fill="#1B1F27" font-weight="700">Uncalled 1,795</text>
+<text x="8" y="87" fill="#1B1F27" font-weight="700">Invested</text>
+<rect x="130" y="72" width="400.3" height="24" fill="#6250d6"/>
+<text x="140" y="88" fill="#FFFFFF" font-weight="700">5,719</text>
+<text x="8" y="127" fill="#1B1F27" font-weight="700">Fair value now</text>
+<rect x="130" y="112" width="508.8" height="24" fill="#1baf7a"/>
+<text x="140" y="128" fill="#FFFFFF" font-weight="700">7,269 remaining fair value (about 1.27x invested)</text>
+<text x="8" y="154" fill="#4A5160" font-size="9.5">Total commitment 7,513. Scale: 1mm per about $270m. "Called" and the multiple are the author's arithmetic.</text>
+</svg>
+<figcaption><span class="fig-num"></span> <b>A live drawdown fund in three bars.</b> A quarter of the promise is still uncalled four years into the investment period. Source: KKR 10-Q fund table [S175], as of 30 Jun 2026 [Confirmed]; derived figures [Inferred].</figcaption>
+</figure>
+
+<h3>Step 3: the management fee and its base</h3>
+<p>The fee <i>base</i> matters as much as the rate. KKR's drawdown private equity funds charge 1.0% to 2.0% of <b>committed</b> capital during the investment period, then 0.75% to 1.50% of <b>invested</b> capital afterwards [S2] [Confirmed]. Worked example, illustrative numbers within those ranges:</p>
+<table class="tight">
+<thead><tr><th>Phase</th><th>Formula</th><th>LP with $100m commitment</th></tr></thead>
+<tbody>
+<tr><td>Investment period (6 years)</td><td>rate × commitment = 1.5% × $100m</td><td>$1.5m a year, $9.0m over 6 years, even in year 1 when only $20m is called</td></tr>
+<tr><td>Year 1 effective rate</td><td>fee ÷ cash called = $1.5m ÷ $20m</td><td>7.5% of the cash actually at work</td></tr>
+<tr><td>After investment period</td><td>rate × invested capital = 1.0% × $60m still invested</td><td>$0.6m a year, falling as assets are sold</td></tr>
+</tbody>
+</table>
+<p>This is why large LPs negotiate the base as hard as the rate, and why fees on uncalled money show up in every institutional fee discussion [Inferred]. It also explains a KKR-level number: committed capital that is not yet paying fees is "shadow" revenue that switches on when the fund starts its investment period [S1, S2] [Inferred].</p>
+<p><b>Fee offsets.</b> Portfolio companies can pay transaction or monitoring fees. Under KKR's post-2014 fund agreements, 100% of such fees allocable to the fund are shared with fund investors, in practice by reducing the management fee [S425] [Confirmed].</p>
+<p><b>Recycling.</b> Many LPAs let the GP re-use ("recycle") early proceeds, for example from a deal sold within the investment period, instead of distributing them, which lets more than 100% of commitments be invested over the fund's life [Inferred] (general practice; KKR's specific recycling terms are not in the sources). KKR's portfolio construction team makes the client-side version of the point: investors should use "recycled distributions" in pacing, noting that "annual distributions have historically averaged approximately 10-30% of NAV" [S436] [Confirmed].</p>
+
+<h3>Step 4: the lifetime cash profile (the J-curve)</h3>
+<figure>
+<svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10.5">
+<text x="10" y="20" font-weight="700" font-size="13" fill="#13294B">One LP, one $100m commitment, ten years (illustrative numbers)</text>
+<line x1="80" y1="242.0" x2="640" y2="242.0" stroke="#D5DAE3" stroke-width="0.7"/>
+<text x="74" y="245.5" text-anchor="end" fill="#4A5160">-80</text>
+<line x1="80" y1="196.0" x2="640" y2="196.0" stroke="#D5DAE3" stroke-width="0.7"/>
+<text x="74" y="199.5" text-anchor="end" fill="#4A5160">-40</text>
+<line x1="80" y1="150.0" x2="640" y2="150.0" stroke="#4A5160" stroke-width="1"/>
+<text x="74" y="153.5" text-anchor="end" fill="#4A5160">0</text>
+<line x1="80" y1="104.0" x2="640" y2="104.0" stroke="#D5DAE3" stroke-width="0.7"/>
+<text x="74" y="107.5" text-anchor="end" fill="#4A5160">+40</text>
+<line x1="80" y1="58.0" x2="640" y2="58.0" stroke="#D5DAE3" stroke-width="0.7"/>
+<text x="74" y="61.5" text-anchor="end" fill="#4A5160">+80</text>
+<text x="14" y="153.5" fill="#4A5160" font-size="9.5">$m</text>
+<rect x="97.0" y="150.0" width="10" height="23.0" fill="#eb6834"/>
+<text x="102.0" y="185.0" text-anchor="middle" fill="#1B1F27" font-size="9.5">-20</text>
+<text x="108.0" y="258.0" text-anchor="middle" fill="#4A5160">Yr 1</text>
+<rect x="153.0" y="150.0" width="10" height="28.7" fill="#eb6834"/>
+<text x="158.0" y="190.8" text-anchor="middle" fill="#1B1F27" font-size="9.5">-25</text>
+<text x="164.0" y="258.0" text-anchor="middle" fill="#4A5160">Yr 2</text>
+<rect x="209.0" y="150.0" width="10" height="23.0" fill="#eb6834"/>
+<text x="214.0" y="185.0" text-anchor="middle" fill="#1B1F27" font-size="9.5">-20</text>
+<text x="220.0" y="258.0" text-anchor="middle" fill="#4A5160">Yr 3</text>
+<rect x="265.0" y="150.0" width="10" height="17.2" fill="#eb6834"/>
+<text x="270.0" y="179.2" text-anchor="middle" fill="#1B1F27" font-size="9.5">-15</text>
+<rect x="277.0" y="144.2" width="10" height="5.8" fill="#2a78d6"/>
+<text x="282.0" y="140.2" text-anchor="middle" fill="#1B1F27" font-size="9.5">+5</text>
+<text x="276.0" y="258.0" text-anchor="middle" fill="#4A5160">Yr 4</text>
+<rect x="321.0" y="150.0" width="10" height="11.5" fill="#eb6834"/>
+<text x="326.0" y="173.5" text-anchor="middle" fill="#1B1F27" font-size="9.5">-10</text>
+<rect x="333.0" y="138.5" width="10" height="11.5" fill="#2a78d6"/>
+<text x="338.0" y="134.5" text-anchor="middle" fill="#1B1F27" font-size="9.5">+10</text>
+<text x="332.0" y="258.0" text-anchor="middle" fill="#4A5160">Yr 5</text>
+<rect x="389.0" y="121.2" width="10" height="28.7" fill="#2a78d6"/>
+<text x="394.0" y="117.2" text-anchor="middle" fill="#1B1F27" font-size="9.5">+25</text>
+<text x="388.0" y="258.0" text-anchor="middle" fill="#4A5160">Yr 6</text>
+<rect x="445.0" y="109.8" width="10" height="40.2" fill="#2a78d6"/>
+<text x="450.0" y="105.8" text-anchor="middle" fill="#1B1F27" font-size="9.5">+35</text>
+<text x="444.0" y="258.0" text-anchor="middle" fill="#4A5160">Yr 7</text>
+<rect x="501.0" y="104.0" width="10" height="46.0" fill="#2a78d6"/>
+<text x="506.0" y="100.0" text-anchor="middle" fill="#1B1F27" font-size="9.5">+40</text>
+<text x="500.0" y="258.0" text-anchor="middle" fill="#4A5160">Yr 8</text>
+<rect x="557.0" y="115.5" width="10" height="34.5" fill="#2a78d6"/>
+<text x="562.0" y="111.5" text-anchor="middle" fill="#1B1F27" font-size="9.5">+30</text>
+<text x="556.0" y="258.0" text-anchor="middle" fill="#4A5160">Yr 9</text>
+<rect x="613.0" y="132.8" width="10" height="17.2" fill="#2a78d6"/>
+<text x="618.0" y="128.8" text-anchor="middle" fill="#1B1F27" font-size="9.5">+15</text>
+<text x="612.0" y="258.0" text-anchor="middle" fill="#4A5160">Yr 10</text>
+<polyline fill="none" stroke="#13294B" stroke-width="2" points="108.0,173.0 164.0,201.8 220.0,224.8 276.0,236.2 332.0,236.2 388.0,207.5 444.0,167.2 500.0,121.2 556.0,86.8 612.0,69.5"/>
+<circle cx="108.0" cy="173.0" r="2.8" fill="#13294B"/>
+<circle cx="164.0" cy="201.8" r="2.8" fill="#13294B"/>
+<circle cx="220.0" cy="224.8" r="2.8" fill="#13294B"/>
+<circle cx="276.0" cy="236.2" r="2.8" fill="#13294B"/>
+<circle cx="332.0" cy="236.2" r="2.8" fill="#13294B"/>
+<circle cx="388.0" cy="207.5" r="2.8" fill="#13294B"/>
+<circle cx="444.0" cy="167.2" r="2.8" fill="#13294B"/>
+<circle cx="500.0" cy="121.2" r="2.8" fill="#13294B"/>
+<circle cx="556.0" cy="86.8" r="2.8" fill="#13294B"/>
+<circle cx="612.0" cy="69.5" r="2.8" fill="#13294B"/>
+<text x="342.0" y="240.2" fill="#13294B" font-weight="700">Trough: -75</text>
+<text x="608.0" y="61.5" text-anchor="end" fill="#13294B" font-weight="700">Net +70</text>
+<rect x="100" y="32" width="10" height="10" fill="#eb6834"/><text x="115" y="41" fill="#1B1F27">Capital call (cash out)</text>
+<rect x="100" y="48" width="10" height="10" fill="#2a78d6"/><text x="115" y="57" fill="#1B1F27">Distribution (cash back)</text>
+<line x1="100" y1="70" x2="110" y2="70" stroke="#13294B" stroke-width="2"/><text x="115" y="74" fill="#1B1F27">Cumulative net cash (the J-curve)</text>
+<text x="80" y="292" fill="#4A5160" font-size="9.5">Called 90 of 100; 10 never called. Paid back 160. Multiple on called cash 1.78x. All numbers illustrative.</text>
+</svg>
+<figcaption><span class="fig-num"></span> <b>The J-curve.</b> The LP is out of pocket for about seven years; the deepest point (minus 75) comes in years 4 to 5, after most calls and before most exits. This is why DPI (cash actually returned) is the number LPs watch most closely today [S262] [Confirmed]. All flows illustrative, shaped to KKR's stated six-year investment periods and 10 to 13 year fund terms [S1, S2].</figcaption>
+</figure>
+
+<h3>Step 5: the GP commitment</h3>
+<p>KKR also puts its own money in, so it shares the outcome. At 31 December 2025, KKR and its employees had about $30bn invested in or committed to KKR funds and companies: about $15bn funded from the balance sheet, $10bn more committed from it, $4bn of personal investments and $1bn more personally committed [S12] [Confirmed]. For GII IV, about $1bn came from KKR's balance sheet, affiliates and employees [S431] [Reported]; for DCIF, KKR committed at least $500m [S432] [Confirmed]. KKR says the <i>relative</i> size of GP commitments has declined as funds grew [S2] [Confirmed]. LPs test this in ILPA's due diligence questionnaire, whose section 10 is "Alignment of Interests" [S444] [Confirmed].</p>
+
+<h2 id="l2-waterfall">2b. The distribution waterfall, worked in full</h2>
+
+<p>When the fund sells a company, cash flows down a "waterfall": a fixed order of who is paid first. KKR's carried interest is typically 10% to 20% of fund profits, "usually after a 6% to 8% preferred return (hurdle) with a catch-up to the general partner" [S2] [Confirmed]. The four tiers of a <b>European (whole-of-fund) waterfall</b> are:</p>
+<ol>
+<li><b>Return of capital.</b> 100% to LPs until they have back everything they paid in.</li>
+<li><b>Preferred return (hurdle).</b> 100% to LPs until they have earned, say, 8% a year compounding on that capital.</li>
+<li><b>GP catch-up.</b> 100% (in a "full" catch-up) to the GP until the GP has 20% of all profit paid so far.</li>
+<li><b>Split.</b> Everything after that: 80% to LPs, 20% to the GP.</li>
+</ol>
+
+<h3>The worked example (illustrative numbers)</h3>
+<p>A $1,000m fund calls all its money on day one and receives all its proceeds in year 5. Terms: 8% compounding hurdle, 20% carry, 100% catch-up. These are within KKR's stated ranges [S2] but are not any specific fund's terms.</p>
+<table class="tight">
+<thead><tr><th>Tier</th><th>Formula in words and symbols</th><th>Proceeds $1,800m</th></tr></thead>
+<tbody>
+<tr><td>1 Return of capital</td><td>min(proceeds, capital) = min(1,800, 1,000)</td><td>LP 1,000.0; 800.0 left</td></tr>
+<tr><td>2 Preferred return</td><td>capital × (1.08<sup>5</sup> minus 1) = 1,000 × 0.4693</td><td>LP 469.3; 330.7 left</td></tr>
+<tr><td>3 Catch-up</td><td>GP takes C so that C = 20% × (469.3 + C), so C = 469.3 × 0.2 ÷ 0.8</td><td>GP 117.3; 213.4 left</td></tr>
+<tr><td>4 Split</td><td>80% / 20% of what is left</td><td>LP 170.7; GP 42.7</td></tr>
+<tr><td><b>Totals</b></td><td>Check: profit 800 × 20% = 160</td><td><b>LP 1,640.0 (1.64x); GP 160.0</b></td></tr>
+</tbody>
+</table>
+<figure>
+<svg viewBox="0 0 680 305" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10.5">
+<text x="10" y="20" font-weight="700" font-size="13" fill="#13294B">Who gets each dollar? $1,000m fund, 5 years, 8% hurdle, 20% carry, full catch-up</text>
+<rect x="10" y="34" width="10" height="10" fill="#2a78d6"/><text x="24" y="43" fill="#1B1F27" font-size="9.5">1 Return of capital (LP)</text>
+<rect x="230" y="34" width="10" height="10" fill="#1baf7a"/><text x="244" y="43" fill="#1B1F27" font-size="9.5">2 Preferred return 8% (LP)</text>
+<rect x="450" y="34" width="10" height="10" fill="#eb6834"/><text x="464" y="43" fill="#1B1F27" font-size="9.5">3 Catch-up (GP, 100%)</text>
+<rect x="10" y="50" width="10" height="10" fill="#6250d6"/><text x="24" y="59" fill="#1B1F27" font-size="9.5">4 Split: LP 80%</text>
+<rect x="230" y="50" width="10" height="10" fill="#eda100"/><text x="244" y="59" fill="#1B1F27" font-size="9.5">4 Split: GP 20%</text>
+<text x="10" y="95" fill="#1B1F27" font-weight="700">Proceeds $1,300m</text>
+<rect x="130.0" y="80" width="190.0" height="22" fill="#2a78d6"/>
+<rect x="320.0" y="80" width="57.0" height="22" fill="#1baf7a"/>
+<text x="560" y="90" fill="#1B1F27" font-size="9.5" font-weight="700">GP $0.0m</text>
+<text x="560" y="102" fill="#4A5160" font-size="9.5">= 0.0% of profit</text>
+<text x="10" y="143" fill="#1B1F27" font-weight="700">Proceeds $1,500m</text>
+<rect x="130.0" y="128" width="190.0" height="22" fill="#2a78d6"/>
+<rect x="320.0" y="128" width="89.2" height="22" fill="#1baf7a"/>
+<rect x="409.2" y="128" width="5.8" height="22" fill="#eb6834"/>
+<text x="560" y="138" fill="#1B1F27" font-size="9.5" font-weight="700">GP $30.7m</text>
+<text x="560" y="150" fill="#4A5160" font-size="9.5">= 6.1% of profit</text>
+<text x="10" y="191" fill="#1B1F27" font-weight="700">Proceeds $1,800m</text>
+<rect x="130.0" y="176" width="190.0" height="22" fill="#2a78d6"/>
+<rect x="320.0" y="176" width="89.2" height="22" fill="#1baf7a"/>
+<rect x="409.2" y="176" width="22.3" height="22" fill="#eb6834"/>
+<rect x="431.5" y="176" width="32.4" height="22" fill="#6250d6"/>
+<rect x="463.9" y="176" width="8.1" height="22" fill="#eda100"/>
+<text x="560" y="186" fill="#1B1F27" font-size="9.5" font-weight="700">GP $160.0m</text>
+<text x="560" y="198" fill="#4A5160" font-size="9.5">= 20.0% of profit</text>
+<text x="10" y="239" fill="#1B1F27" font-weight="700">Proceeds $2,200m</text>
+<rect x="130.0" y="224" width="190.0" height="22" fill="#2a78d6"/>
+<rect x="320.0" y="224" width="89.2" height="22" fill="#1baf7a"/>
+<rect x="409.2" y="224" width="22.3" height="22" fill="#eb6834"/>
+<rect x="431.5" y="224" width="93.2" height="22" fill="#6250d6"/>
+<rect x="524.7" y="224" width="23.3" height="22" fill="#eda100"/>
+<text x="560" y="234" fill="#1B1F27" font-size="9.5" font-weight="700">GP $240.0m</text>
+<text x="560" y="246" fill="#4A5160" font-size="9.5">= 20.0% of profit</text>
+<line x1="320.0" y1="74" x2="320.0" y2="272" stroke="#13294B" stroke-dasharray="3 3"/>
+<text x="320.0" y="284" text-anchor="end" fill="#13294B" font-size="9.5">1,000 capital back</text>
+<line x1="409.2" y1="74" x2="409.2" y2="286" stroke="#13294B" stroke-dasharray="3 3"/>
+<text x="409.2" y="298" text-anchor="start" fill="#13294B" font-size="9.5">1,469 hurdle cleared</text>
+</svg>
+<figcaption><span class="fig-num"></span> <b>The European waterfall at four outcomes.</b> Below the 1,469 line KKR earns nothing; just above it KKR takes 100% (catch-up); beyond about 1,587 every outcome splits exactly 80/20 of profit. Terms are illustrative, within KKR's stated ranges of 10% to 20% carry after a 6% to 8% hurdle [S2] [Confirmed].</figcaption>
+</figure>
+<p>Read the chart from top to bottom. At $1,300m the hurdle is not met, so KKR earns nothing. At $1,500m KKR is inside the catch-up and has only 6.1% of profit. From the point where catch-up ends (about $1,587m) KKR has exactly 20% of profit, which is the point of a full catch-up: it makes the hurdle a <i>timing</i> protection for LPs, not a permanent discount on carry [Inferred].</p>
+
+<h3>The American (deal-by-deal) contrast and the clawback</h3>
+<p>An <b>American waterfall</b> runs the tiers deal by deal, so the GP can receive carry on an early winner before the fund as a whole has made money. ILPA has long favoured whole-of-fund waterfalls plus a <b>clawback</b>, the GP's duty to hand back carry it turns out not to have earned; ILPA Principles 2.0 (2011) added a Clawback appendix [S317] [Confirmed]. Worked example, illustrative numbers: the same $1,000m fund invests $500m in deal A and $500m in deal B on day one.</p>
+
+<figure>
+<svg viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10">
+<text x="8" y="16" font-weight="700" font-size="13" fill="#13294B">Same two deals, two waterfalls (illustrative, $m, 8% hurdle, 20% carry)</text>
+<rect x="210" y="26" width="228" height="26" rx="3" fill="#B23A48"/><rect x="446" y="26" width="228" height="26" rx="3" fill="#13294B"/>
+<text x="324" y="43" text-anchor="middle" fill="#FFFFFF" font-weight="700">American: deal by deal</text>
+<text x="560" y="43" text-anchor="middle" fill="#FFFFFF" font-weight="700">European: whole fund</text>
+<g fill="#F6F8FB"><rect x="4" y="58" width="670" height="44"/><rect x="4" y="158" width="670" height="44"/><rect x="4" y="258" width="670" height="56"/></g>
+<g fill="#1B1F27" font-weight="700">
+<text x="10" y="76">Year 0</text><text x="10" y="126">Year 2: A sells</text><text x="10" y="176">Year 5: B sells</text><text x="10" y="226">Totals before</text><text x="10" y="276">Clawback at</text>
+</g>
+<g fill="#4A5160" font-size="9.5">
+<text x="10" y="90">500 into A, 500 into B</text><text x="10" y="140">for 1,000 (profit 500)</text><text x="10" y="190">for 250 (loss of 250)</text><text x="10" y="240">clawback</text><text x="10" y="290">fund end</text><text x="10" y="304">fund profit = 250</text>
+</g>
+<g fill="#1B1F27">
+<text x="216" y="76">LPs pay in 1,000</text><text x="452" y="76">LPs pay in 1,000</text>
+<text x="216" y="122">LP 900 = 500 capital + 83 hurdle</text><text x="216" y="136">+ 317 split. <tspan font-weight="700">GP 100</tspan> paid now</text>
+<text x="452" y="122">LP 1,000: all capital back first</text><text x="452" y="136"><tspan font-weight="700">GP 0</tspan> (fund not yet in profit)</text>
+<text x="216" y="176">LP 250. GP 0</text><text x="216" y="190">(deal B lost money)</text>
+<text x="452" y="176">LP 200 = 166 hurdle + 34 split</text><text x="452" y="190"><tspan font-weight="700">GP 50</tspan> = 42 catch-up + 8 split</text>
+<text x="216" y="226" font-weight="700">LP 1,150 | GP 100</text><text x="216" y="240">GP has 40% of fund profit</text>
+<text x="452" y="226" font-weight="700">LP 1,200 | GP 50</text><text x="452" y="240">GP has 20% of fund profit</text>
+<text x="216" y="276">GP is entitled to 20% × 250 = 50,</text><text x="216" y="290">so it hands back 50.</text><text x="216" y="304" font-weight="700" fill="#B23A48">After clawback: LP 1,200 | GP 50</text>
+<text x="452" y="276">Nothing to hand back:</text><text x="452" y="290">carry was never paid early</text>
+</g>
+</svg>
+<figcaption><span class="fig-num"></span> <b>Deal-by-deal pays the GP earlier; the clawback squares it at the end.</b> Both columns end at LP 1,200 and GP 50. The difference is who holds 50 of cash for three years, and whether the GP can still pay it back. Simplifications: unpaid hurdle does not compound after year 2; real clawbacks are often limited to after-tax carry. All numbers illustrative [Inferred].</figcaption>
+</figure>
+
+<p><b>This happened at KKR.</b> In Q4 2025 KKR repaid $344m of carried interest on Asian Fund II (a 2013 vintage, $5.8bn fund); net of amounts recouped from current and former employees, the clawback cut net realised performance income by $207m [S2, S4] [Confirmed]. CalPERS reports a 1.0% net IRR and 1.0x multiple on its $350m commitment to that fund [S117] [Confirmed]. A clawback is not theory; it is a line in KKR's 2025 results [Inferred].</p>
+
+<div class="two">
+<div class="box key"><span class="lbl">What you will learn</span><p>To trace a drawdown fund's cash from commitment to clawback: fee base by phase, the four waterfall tiers with the catch-up formula C = H × carry ÷ (1 minus carry), and why deal-by-deal timing changes value even when final splits match.</p></div>
+<div class="box term"><span class="lbl">Where you meet it at KKR</span><p>Every flagship raise: GII V ($19.2bn, with investors from "pension plans, sovereign wealth funds, insurance companies, asset managers, private wealth platforms, and family offices") [S430] [Confirmed]. Clients re-up on the evidence of waterfalls like Asian Fund II's [S2, S117].</p></div>
+</div>
+<div class="box opinion"><span class="lbl">Only at KKR</span><p>Any GP can teach the textbook waterfall. KKR's filings let you check it against live numbers: the European Fund VI fund table [S175], a real $344m clawback [S2], and LP-reported returns from CalPERS [S117]. Learning from a firm that has just paid a clawback teaches why LPs insist on whole-of-fund terms [Inferred].</p></div>
+<div class="box say"><span class="lbl">Say it in one line</span><p>"I want to be able to walk a pension fund through a drawdown fund's life, from the capital call to the catch-up to KKR's own Asian Fund II clawback, in numbers rather than adjectives."</p></div>
+
+<!-- ============================================================ 3 -->
+<h2 id="l2-evergreen">3. Evergreen mechanics: how K-PEC actually works</h2>
+
+<p>A drawdown fund needs a $10m-plus cheque, a ten-year lock and an operations team to answer capital calls. Individuals cannot do that. An <b>evergreen</b> fund solves it: no end date, money goes in once, fully invested, and a limited amount can come out each quarter [Inferred]. K-PEC, KKR Private Equity Conglomerate LLC, is the flagship. It is a Delaware LLC formed on 6 December 2022 that began operations on 1 August 2023 [S420] [Confirmed].</p>
+
+<figure>
+<svg viewBox="0 0 680 450" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10">
+<defs><marker id="l2b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#24467A"/></marker></defs>
+<text x="8" y="16" font-weight="700" font-size="13" fill="#13294B">K-PEC: an operating company built from general partner stakes</text>
+<rect x="190" y="28" width="300" height="42" rx="5" fill="#E8EDF5" stroke="#24467A"/>
+<text x="340" y="45" text-anchor="middle" font-weight="700" fill="#13294B">Investors: Classes S, D, U and I</text>
+<text x="340" y="60" text-anchor="middle" fill="#4A5160" font-size="9.5">US accredited (Reg D) and non-US (Reg S); monthly subscriptions</text>
+<rect x="190" y="94" width="300" height="46" rx="5" fill="#13294B"/>
+<text x="340" y="113" text-anchor="middle" font-weight="700" fill="#FFFFFF" font-size="11">K-PEC (Delaware LLC)</text>
+<text x="340" y="129" text-anchor="middle" fill="#FFFFFF" font-size="9.5">Board plus Manager (KKR); NAV struck monthly</text>
+<rect x="60" y="176" width="250" height="42" rx="5" fill="#FFFFFF" stroke="#13294B"/>
+<text x="185" y="193" text-anchor="middle" font-weight="700" fill="#13294B">Operating Subsidiaries</text>
+<text x="185" y="208" text-anchor="middle" fill="#4A5160" font-size="9.5">e.g. K-PEC Holdings LLC (wholly owned)</text>
+<rect x="400" y="170" width="270" height="56" rx="5" fill="#FBF1E6" stroke="#C8792B"/>
+<text x="535" y="187" text-anchor="middle" font-weight="700" fill="#13294B">Liquidity Portfolio (up to 20%)</text>
+<text x="535" y="201" text-anchor="middle" fill="#1B1F27" font-size="9.5">cash, Treasuries, credit, CLOs, loans</text>
+<text x="535" y="215" text-anchor="middle" fill="#B23A48" font-size="9.5" font-weight="700">these ARE investment securities</text>
+<rect x="60" y="262" width="250" height="46" rx="5" fill="#0E8F7E"/>
+<text x="185" y="280" text-anchor="middle" font-weight="700" fill="#FFFFFF">Deal-level Joint Venture</text>
+<text x="185" y="296" text-anchor="middle" fill="#FFFFFF" font-size="9.5">two co-general partners; shares vary by deal</text>
+<rect x="400" y="262" width="270" height="46" rx="5" fill="#E8EDF5" stroke="#24467A"/>
+<text x="535" y="280" text-anchor="middle" font-weight="700" fill="#13294B">KKR flagship fund</text>
+<text x="535" y="296" text-anchor="middle" fill="#4A5160" font-size="9.5">e.g. North America Fund XIII or XIV</text>
+<rect x="85" y="338" width="200" height="34" rx="5" fill="#E3F4F1" stroke="#0E8F7E"/>
+<text x="185" y="359" text-anchor="middle" font-weight="700" fill="#13294B">Portfolio company</text>
+<g stroke="#24467A" stroke-width="1.4" fill="none" marker-end="url(#l2b)">
+<path d="M340,70 L340,92"/><path d="M280,140 L200,174"/><path d="M420,140 L500,168"/><path d="M185,218 L185,260"/><path d="M400,285 L312,285"/><path d="M185,308 L185,336"/>
+</g>
+<text x="194" y="236" fill="#13294B" font-size="9.5" font-weight="700">GP interest:</text>
+<text x="194" y="249" fill="#13294B" font-size="9.5">not an investment security</text>
+<text x="322" y="278" fill="#13294B" font-size="9.5">co-GP</text>
+<rect x="380" y="322" width="290" height="122" rx="5" fill="#FFFFFF" stroke="#13294B"/>
+<text x="390" y="339" font-weight="700" fill="#13294B">The 40% test (illustrative $10bn K-PEC)</text>
+<text x="390" y="357" fill="#1B1F27">GP interests in JVs: $8.0bn</text><text x="660" y="357" text-anchor="end" fill="#0E8F7E" font-weight="700">not counted</text>
+<text x="390" y="373" fill="#1B1F27">Liquidity Portfolio: $2.0bn</text><text x="660" y="373" text-anchor="end" fill="#B23A48" font-weight="700">counted</text>
+<text x="390" y="391" fill="#1B1F27">Investment securities = 2.0 ÷ 10.0 = 20%</text>
+<text x="390" y="407" fill="#0E8F7E" font-weight="700">20% is below 40%: not an investment company</text>
+<text x="390" y="425" fill="#4A5160">Same assets held as LP stakes instead:</text>
+<text x="390" y="438" fill="#B23A48" font-weight="700">100% counted, above 40%: caught by the Act</text>
+<rect x="10" y="390" width="355" height="54" rx="5" fill="#FBF1E6" stroke="#B23A48" stroke-dasharray="4 3"/>
+<text x="20" y="407" fill="#B23A48" font-weight="700">The kill switch</text>
+<text x="20" y="422" fill="#1B1F27" font-size="9.5">If the Management Agreement with KKR ends, K-PEC forfeits</text>
+<text x="20" y="436" fill="#1B1F27" font-size="9.5">control of the JVs and "would likely" have to register.</text>
+</svg>
+<figcaption><span class="fig-num"></span> <b>The conglomerate structure.</b> The whole design exists so that K-PEC's main asset is a general partner interest, which is not an investment security. Target mix about 80% portfolio companies and up to 20% Liquidity Portfolio. Source: K-PEC 10-K FY2025 [S420] [Confirmed], filed 26 Mar 2026. The $10bn split is illustrative; K-PEC's actual NAV was $9.93bn at 31 Dec 2025.</figcaption>
+</figure>
+
+<h3>The legal puzzle: why K-PEC is not an "investment company"</h3>
+<p>The US Investment Company Act of 1940 regulates funds that hold securities. If K-PEC were caught by it, the Act would restrict its leverage, its dealings with KKR affiliates and its fee structure [S420] [Confirmed]. The Act has two tests, and K-PEC's 10-K explains how it passes each [S420] [Confirmed]:</p>
+<ul>
+<li><b>Test 1, "primarily engaged".</b> A company is an investment company if it is "engaged primarily ... in the business of investing, reinvesting or trading in securities". K-PEC says that "through its Joint Ventures, the Company is primarily engaged in the businesses of its Joint Ventures, namely, the business of owning and controlling portfolio companies."</li>
+<li><b>Test 2, the "40% test".</b> A company is an investment company if "investment securities" exceed 40% of its total assets (excluding government securities and cash). K-PEC's main assets are wholly owned Operating Subsidiaries (for example K-PEC Holdings LLC). Those subsidiaries hold <i>general partner</i> interests in each deal-level Joint Venture, and "such general partner interests are not 'investment securities'." The only investment securities sit in the liquidity sleeve, which K-PEC keeps below 40%.</li>
+</ul>
+<p>In plain English: a limited partner owns a passive stake (a security); a general partner runs the partnership (an operating business). By making K-PEC a <b>co-general partner</b> of each deal, alongside the KKR flagship fund, KKR turned a fund into an operating company, an old-style conglomerate [S420] [Inferred]. The structure has teeth: if the Management Agreement with KKR ends, K-PEC must "forfeit our controlling interest in any Joint Venture, which would likely require us to register as an investment company" [S420] [Confirmed].</p>
+
+
+<h3>Allocation: who gets the deal first</h3>
+<p>K-PEC co-invests with KKR's flagship private equity funds, but it is at the back of the queue. Its 10-K says: "the Company does not benefit from any mandatory minimum purchase rights or minimum purchase thresholds. As such the Company will not benefit from any priority acquisition allocation." Flagship funds have a mandatory minimum that is filled first. K-PEC is then offered a "first tier" alongside nearly all KKR vehicles "up to a capped amount", and may then be offered part of any "second tier" [S420] [Confirmed]. The institutional flagship LP gets first call; the wealth vehicle fills in behind [Inferred].</p>
+
+<figure>
+<svg viewBox="0 0 680 230" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10">
+<text x="8" y="16" font-weight="700" font-size="13" fill="#13294B">Splitting a $2,000m equity cheque (illustrative numbers)</text>
+<g fill="#1B1F27" text-anchor="middle" font-size="9.5">
+<text x="577" y="44" font-weight="700">Second tier $300m</text><text x="577" y="57">K-PEC may get part ($60m)</text><text x="577" y="70">co-investors via KCM ($240m)</text>
+</g>
+<path d="M577,74 L577,90" stroke="#4A5160"/>
+<rect x="40" y="92" width="348" height="40" fill="#13294B"/>
+<rect x="388" y="92" width="116" height="40" fill="#24467A"/>
+<rect x="504" y="92" width="29" height="40" fill="#C8792B"/>
+<rect x="533" y="92" width="17.4" height="40" fill="#C8792B"/>
+<rect x="550.4" y="92" width="69.6" height="40" fill="#0E8F7E"/>
+<g stroke="#FFFFFF" stroke-width="1.5"><path d="M388,92 L388,132"/><path d="M504,92 L504,132"/><path d="M533,92 L533,132"/><path d="M550.4,92 L550.4,132"/></g>
+<text x="214" y="117" text-anchor="middle" fill="#FFFFFF" font-weight="700">Flagship fund minimum $1,200m</text>
+<text x="446" y="117" text-anchor="middle" fill="#FFFFFF" font-size="9.5">other KKR</text>
+<g fill="#1B1F27" text-anchor="middle" font-size="9.5">
+<text x="214" y="152" font-weight="700">Filled first (mandatory minimum)</text>
+<text x="214" y="165">priority for institutional flagship LPs</text>
+<text x="460" y="152" font-weight="700">First tier $500m</text>
+<text x="460" y="165">shared by nearly all KKR vehicles;</text>
+<text x="460" y="178">K-PEC capped (here $100m)</text>
+</g>
+<path d="M518,132 L518,140" stroke="#4A5160"/>
+<text x="40" y="208" fill="#4A5160" font-size="9.5">K-PEC total here: $100m + $60m = $160m, 8% of the deal. Tier order: K-PEC 10-K [S420]. Amounts illustrative.</text>
+</svg>
+<figcaption><span class="fig-num"></span> <b>Flagships first, wealth vehicle second.</b> The orange slivers are K-PEC. The tier order is K-PEC's disclosed policy [S420] [Confirmed]; sizes are invented to show the mechanism. Capital Group's U.S. Equity+ also buys co-investments alongside K-PEC [S427] [Confirmed], so it competes for the teal slice [Inferred].</figcaption>
+</figure>
+
+<p>K-PEC also bought stakes in two companies in 2025 ($165.5m) "from affiliated KKR-sponsored investment vehicles alongside the relevant flagship private equity vehicle as part of a sale and purchase between successive fund vintages" [S420] [Confirmed]. That is the kind of related-party transfer ILPA's due diligence questionnaire probes in its section on GP-led secondaries [S444] [Inferred].</p>
+
+<h3>NAV: how the price is struck every month</h3>
+<p><b>NAV (net asset value)</b> is the value of everything the fund owns minus what it owes, divided by shares. For K-PEC, the Manager "determines the NAV of our Shares monthly" and an Administrator computes the per-share figure [S420] [Confirmed]. All portfolio companies are <b>Level III</b>, meaning there is no market price, so value comes from models and comparables; K-PEC discloses that a 10% fall in their fair value would cut net assets by $898.6m [S420] [Confirmed]. The price investors deal at is the <b>Transactional NAV</b>, which differs from accounting (GAAP) NAV mainly because GAAP books the lifetime cost of distribution fees up front: $9.932bn Transactional versus $9.495bn GAAP at 31 December 2025 [S420] [Confirmed], a gap of $437m [Inferred].</p>
+
+<h3>Subscribing: you buy dollars, not shares</h3>
+<p>K-PEC runs "a continuous private offering of our Shares on a monthly basis" [S420] [Confirmed]. An investor subscribes a dollar amount and only learns the share count afterwards: a subscription accepted on 1 September is priced at the 31 August Transactional NAV [S420] [Confirmed]. Worked example using the Class I NAV per share at 31 December 2025, $33.80 [S420] [Confirmed]:</p>
+<table class="tight">
+<thead><tr><th>Step</th><th>Class I (no load)</th><th>Class S (illustrative full load)</th></tr></thead>
+<tbody>
+<tr><td>Cheque</td><td>$100,000</td><td>$100,000</td></tr>
+<tr><td>Upfront sales load and dealer-manager fee</td><td>none</td><td>up to 3.00% + 0.50%, capped at 3.50% [S420]: $3,500</td></tr>
+<tr><td>Invested at $33.80</td><td>2,958.6 shares</td><td>$96,500 ÷ 33.80 = 2,855.0 shares</td></tr>
+<tr><td>Ongoing distribution and servicing fee</td><td>none</td><td>0.85% of NAV a year (0.60% + 0.25%), paid to KKR Capital Markets as dealer-manager [S420]</td></tr>
+</tbody>
+</table>
+<p>How the load is applied in practice depends on the selling agreement; the table shows the maximum. The share classes map to sales channels: Class S through brokers who take a commission, Class D through fee-based advisers, Class I through institutional or advisory accounts [Inferred] (the 10-K does not define the channel per class).</p>
+
+<h2 id="l2-evfees">3b. The evergreen fee stack and the repurchase plan, worked</h2>
+
+<h3>The two fees</h3>
+<p><b>Management fee:</b> 1.25% a year of month-end NAV for Classes S, D, U and I, paid monthly. The early "R" classes pay 1.00% for 60 months from 1 August 2023, then 1.25% [S420] [Confirmed]. <b>Performance Participation Allocation</b> (the evergreen version of carry): "15.0% of the Total Return attributable to Investor Shares subject to a 5.0% annual Hurdle Amount and a High Water Mark, with a 100% Catch-Up", measured and paid annually and accrued monthly [S420] [Confirmed].</p>
+<div class="box term"><span class="lbl">Key terms</span><p><b>Hurdle:</b> the return investors keep before KKR shares in any gain (here 5% a year). <b>Catch-up:</b> once over the hurdle, KKR takes 100% of the next slice until it has 15% of the whole return. <b>High-water mark:</b> KKR earns nothing on gains that only recover earlier losses (the 10-K's "Loss Carryforward Amount") [S420] [Confirmed] (plain-English gloss [Inferred]).</p></div>
+
+<h3>One year, worked (illustrative numbers)</h3>
+<p>An investor holds $1,000,000 of Class I at the start of the year. The portfolio gains $200,000 before fees. Average NAV during the year is about $1,100,000.</p>
+<table class="tight">
+<thead><tr><th>Step</th><th>Formula</th><th>Amount</th></tr></thead>
+<tbody>
+<tr><td>Management fee</td><td>1.25% × average NAV ≈ 1.25% × 1,100,000</td><td>$13,750</td></tr>
+<tr><td>Total Return before performance allocation</td><td>200,000 minus 13,750</td><td>$186,250 (18.6%)</td></tr>
+<tr><td>Hurdle (investor keeps)</td><td>5% × 1,000,000</td><td>$50,000</td></tr>
+<tr><td>Catch-up (100% to KKR)</td><td>C = 15% × (50,000 + C), so C = 7,500 ÷ 0.85</td><td>$8,824</td></tr>
+<tr><td>Split of the rest, 85 / 15</td><td>186,250 minus 58,824 = 127,426; KKR 15%</td><td>KKR $19,114; investor $108,312</td></tr>
+<tr><td><b>KKR's performance allocation</b></td><td>Check: 15% × 186,250</td><td><b>$27,938</b></td></tr>
+<tr><td><b>Investor keeps</b></td><td>186,250 minus 27,938</td><td><b>$158,312 (15.8%)</b></td></tr>
+</tbody>
+</table>
+<p>For comparison, K-PEC's actual 2025 total return was 16.81% for Class I and 14.80% for Class D; inception-to-date annualised return for Class I was 12.94% since September 2023 [S420] [Confirmed]. Now the two edge cases. If the Total Return is 4%, it is below the hurdle and KKR takes nothing. If it is 5.5% ($55,000), the investor keeps the first $50,000 and KKR takes all $5,000 above it, because that slice is inside the catch-up zone [Inferred]. In a year after a loss, say minus $100,000, the next $100,000 of gain is a recovery under the high-water mark and attracts no performance allocation [S420] (numbers illustrative).</p>
+<figure>
+<svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10.5">
+<text x="10" y="20" font-weight="700" font-size="13" fill="#13294B">What the investor keeps, by year of fund return (after the 1.25% management fee)</text>
+<line x1="80" y1="250.0" x2="580" y2="250.0" stroke="#D5DAE3" stroke-width="0.7"/>
+<text x="74" y="253.5" text-anchor="end" fill="#4A5160">0%</text>
+<text x="80" y="266.0" text-anchor="middle" fill="#4A5160">0%</text>
+<line x1="80" y1="197.5" x2="580" y2="197.5" stroke="#D5DAE3" stroke-width="0.7"/>
+<text x="74" y="201.0" text-anchor="end" fill="#4A5160">5%</text>
+<text x="205" y="266.0" text-anchor="middle" fill="#4A5160">5%</text>
+<line x1="80" y1="145.0" x2="580" y2="145.0" stroke="#D5DAE3" stroke-width="0.7"/>
+<text x="74" y="148.5" text-anchor="end" fill="#4A5160">10%</text>
+<text x="330" y="266.0" text-anchor="middle" fill="#4A5160">10%</text>
+<line x1="80" y1="92.5" x2="580" y2="92.5" stroke="#D5DAE3" stroke-width="0.7"/>
+<text x="74" y="96.0" text-anchor="end" fill="#4A5160">15%</text>
+<text x="455" y="266.0" text-anchor="middle" fill="#4A5160">15%</text>
+<line x1="80" y1="40.0" x2="580" y2="40.0" stroke="#D5DAE3" stroke-width="0.7"/>
+<text x="74" y="43.5" text-anchor="end" fill="#4A5160">20%</text>
+<text x="580" y="266.0" text-anchor="middle" fill="#4A5160">20%</text>
+<text x="330" y="282.0" text-anchor="middle" fill="#4A5160">Total Return before performance allocation (x axis); investor keeps (y axis)</text>
+<rect x="205" y="40.0" width="22.0" height="210.0" fill="#FBF1E6"/>
+<line x1="80" y1="250.0" x2="580" y2="40.0" stroke="#4A5160" stroke-dasharray="4 3" stroke-width="1"/>
+<polyline fill="none" stroke="#2a78d6" stroke-width="2.2" points="80.0,250.0 205.0,197.5 227.1,197.5 580.0,71.5"/>
+<polyline fill="none" stroke="#1baf7a" stroke-width="2.2" points="80.0,250.0 205.0,197.5 222.9,197.5 580.0,66.2"/>
+<text x="576" y="34.0" text-anchor="end" fill="#4A5160">No fee: keep 100%</text>
+<text x="584" y="68.25" fill="#1B1F27">K-INFRA 12.5%</text>
+<text x="584" y="85.5" fill="#1B1F27">K-PEC 15%</text>
+<text x="207" y="61.0" fill="#1B1F27" font-size="9.5">Catch-up zone:</text>
+<text x="207" y="73.0" fill="#1B1F27" font-size="9.5">5.0% to 5.9%, all to KKR</text>
+<circle cx="545.6" cy="83.8" r="3.5" fill="#13294B"/>
+<line x1="545.6" y1="87.8" x2="455.0" y2="166.5" stroke="#13294B" stroke-width="0.8"/>
+<text x="455.0" y="176.5" text-anchor="middle" fill="#13294B" font-weight="700">Worked example: 18.6% in, 15.8% kept</text>
+</svg>
+<figcaption><span class="fig-num"></span> <b>The evergreen fee curve.</b> Below 5% the investor keeps everything; between 5.0% and about 5.9% (K-PEC) or 5.7% (K-INFRA) KKR takes every extra dollar; above that the investor keeps 85% (K-PEC) or 87.5% (K-INFRA). Terms: K-PEC 10-K [S420], K-INFRA 10-K [S421] [Confirmed]. Curve and worked point are the author's arithmetic, before the high-water mark is applied [Inferred].</figcaption>
+</figure>
+
+<h3>The repurchase plan: the exit door and its size</h3>
+<p>K-PEC lets investors sell shares back quarterly, but the door is narrow [S420] [Confirmed]:</p>
+<ul>
+<li><b>The cap (gate):</b> total repurchases of "no more than 5.0% of our aggregate NAV ... per calendar quarter". The Board can repurchase less, or nothing.</li>
+<li><b>Early Repurchase Fee:</b> 5.0% of NAV on shares held under 24 months, kept by the fund for the remaining holders; it may be waived on death, disability or divorce.</li>
+<li><b>Overflow:</b> if requests exceed 5%, the Board may run a tender for "Excess Shares" "at or about a 10% discount to the most recent NAV". This is unusual: a paid exit valve above the gate [Inferred].</li>
+<li><b>Minimum balance</b> after a partial repurchase: $1,000.</li>
+</ul>
+
+<figure>
+<svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10">
+<text x="8" y="16" font-weight="700" font-size="13" fill="#13294B">A crowded quarter, worked (illustrative $10bn fund)</text>
+<line x1="40" y1="250" x2="290" y2="250" stroke="#4A5160"/>
+<rect x="70" y="90" width="70" height="160" fill="#eb6834"/>
+<rect x="190" y="150" width="70" height="100" fill="#2a78d6"/>
+<line x1="40" y1="150" x2="290" y2="150" stroke="#B23A48" stroke-dasharray="5 3" stroke-width="1.5"/>
+<text x="290" y="144" text-anchor="end" fill="#B23A48" font-weight="700">Cap: 5% × $10bn = $500m</text>
+<text x="105" y="84" text-anchor="middle" fill="#1B1F27" font-weight="700">$800m</text>
+<text x="225" y="174" text-anchor="middle" fill="#FFFFFF" font-weight="700">$500m</text>
+<text x="105" y="266" text-anchor="middle" fill="#1B1F27">Requested</text>
+<text x="225" y="266" text-anchor="middle" fill="#1B1F27">Paid</text>
+<text x="40" y="288" fill="#13294B" font-weight="700">Pro-rata = 500 ÷ 800 = 62.5% of each request</text>
+<rect x="320" y="30" width="352" height="196" rx="5" fill="#F6F8FB" stroke="#D5DAE3"/>
+<text x="332" y="49" font-weight="700" fill="#13294B">Investor A, shares held 18 months</text>
+<g fill="#1B1F27">
+<text x="332" y="70">Asks to sell</text><text x="660" y="70" text-anchor="end">$1,000,000</text>
+<text x="332" y="88">Accepted: × 62.5%</text><text x="660" y="88" text-anchor="end">$625,000</text>
+<text x="332" y="106">Less 5% early repurchase fee</text><text x="660" y="106" text-anchor="end">minus $31,250</text>
+<text x="332" y="126" font-weight="700">Cash received</text><text x="660" y="126" text-anchor="end" font-weight="700">$593,750</text>
+<text x="332" y="150">Not accepted this quarter</text><text x="660" y="150" text-anchor="end">$375,000</text>
+<text x="332" y="168">If the Board runs an overflow tender</text>
+<text x="332" y="182">at about 10% below NAV: 375,000 × 0.9</text><text x="660" y="182" text-anchor="end">$337,500</text>
+<text x="332" y="206" fill="#4A5160" font-size="9.5">Fee and discount stay in the fund, which is what</text>
+<text x="332" y="219" fill="#4A5160" font-size="9.5">protects investors who do not ask to leave.</text>
+</g>
+<rect x="320" y="238" width="352" height="54" rx="5" fill="#FBF1E6" stroke="#C8792B"/>
+<text x="332" y="256" font-weight="700" fill="#13294B">Live check: K-FIT, Q1 2026</text>
+<text x="332" y="271" fill="#1B1F27">6.3% of shares asked to leave; cap 5%</text>
+<text x="332" y="285" fill="#1B1F27">5.0 ÷ 6.3 = 79%, reported as "about 80%" [S338]</text>
+</svg>
+<figcaption><span class="fig-num"></span> <b>Gate, pro-rata, fee, overflow.</b> Terms from the K-PEC 10-K [S420] [Confirmed]; the fund size and requests are illustrative. K-FIT figures from Bloomberg Law, 6 Jul 2026 [S338] [Reported]; the 79% is the author's check [Inferred]. Note K-FIT's cap is on shares outstanding, K-PEC's on NAV.</figcaption>
+</figure>
+
+<p>In practice K-PEC's door has been barely used so far: 2025 repurchases were about $26.4m net of early repurchase fees against $9.9bn of NAV [S420] [Confirmed], roughly 0.3% for the year [Inferred]. The fund also has a third-party revolving credit facility upsized to $1.0bn in March 2026, with recourse borrowing capped at 30% of total assets [S420] [Confirmed]; a credit line is a further buffer between a redemption request and a forced sale [Inferred].</p>
+
+<h2 id="l2-kseries">3c. The rest of the K-Series: three more legal answers</h2>
+
+<p><b>K-INFRA</b> uses the same conglomerate design for infrastructure. It owns "Infrastructure Assets" through Joint Ventures with Global Infrastructure Investors II to V, Asia Pacific Infrastructure Investors I to III, DCIF and the Global Climate Fund. Target mix about 85% infrastructure (no more than 15% non-OECD) and 15% liquidity. Fees: 1.25% of NAV plus 12.5% of Total Return over a 5% hurdle, with a high-water mark and 100% catch-up. Repurchases quarterly, capped at 5% of NAV, 5% fee within 24 months. Distributions are quarterly, and the 10-K warns they "may and are expected to exceed our earnings and cash flow from operating activities" [S421] [Confirmed]. K-INFRA can also buy "Warehoused Assets" that KKR or a bank bought first, "at cost, or cost plus an interest rate or carrying cost" [S421] [Confirmed]: the same buy-then-syndicate engine KCM runs for institutional co-investors [Inferred].</p>
+
+<p><b>K-FIT</b> takes the opposite legal route. It <i>is</i> inside the 1940 Act framework, as "an externally managed, non-diversified, closed-end management investment company that has elected to be regulated as a business development company", and is a RIC for tax, paying no corporate tax if it distributes its income [S422] [Confirmed]. Its adviser, FS/KKR Advisor, is jointly operated by KKR Credit and an affiliate of Future Standard (formerly FS Investments) [S422] [Confirmed]. Rules: at least 60% of assets in first lien senior secured loans to US middle-market companies; up to 30% in asset-based finance and subordinated loans; quarterly tender for "up to 5% of our Common Shares outstanding"; a 2% Early Repurchase Deduction within 12 months [S422] [Confirmed]. Its fee is income-based, worked below.</p>
+
+<figure>
+<svg viewBox="0 0 680 165" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10">
+<text x="8" y="16" font-weight="700" font-size="13" fill="#13294B">K-FIT's quarterly income incentive fee, by quarterly net investment income (% of net assets)</text>
+<rect x="60" y="62" width="290" height="34" fill="#1baf7a"/>
+<rect x="350" y="62" width="41.4" height="34" fill="#eb6834"/>
+<rect x="391.4" y="62" width="248.6" height="34" fill="#2a78d6"/>
+<text x="205" y="83" text-anchor="middle" fill="#FFFFFF" font-weight="700">Below hurdle: investors keep 100%</text>
+<text x="515" y="83" text-anchor="middle" fill="#FFFFFF" font-weight="700">Adviser 12.5% of all income</text>
+<text x="370" y="40" text-anchor="middle" fill="#1B1F27" font-weight="700">Catch-up:</text>
+<text x="370" y="53" text-anchor="middle" fill="#1B1F27">adviser 100%</text>
+<g fill="#4A5160" text-anchor="middle">
+<text x="60" y="112">0%</text><text x="176" y="112">0.5%</text><text x="292" y="112">1.0%</text><text x="350" y="112">1.25%</text><text x="400" y="112">1.43%</text><text x="524" y="112">2.0%</text><text x="640" y="112">2.5%</text>
+<text x="350" y="125" font-size="9.5">(5.0% a yr)</text><text x="412" y="125" font-size="9.5">(5.72% a yr)</text>
+</g>
+<path d="M373,96 L373,103" stroke="#13294B"/><path d="M524,96 L524,103" stroke="#13294B"/><path d="M373,131 L373,141" stroke="#13294B"/><path d="M524,131 L524,141" stroke="#13294B"/>
+<text x="367" y="152" text-anchor="end" fill="#13294B" font-size="9.5">1.35%: fee 0.10%, keep 1.25%</text>
+<text x="530" y="152" fill="#13294B" font-size="9.5">2.0%: fee 0.25%, keep 1.75%</text>
+</svg>
+<figcaption><span class="fig-num"></span> <b>A BDC's fee is charged on income, quarter by quarter.</b> Hurdle 1.25% a quarter (5.0% annualised), 100% catch-up to 1.43% (5.72%), then 12.5% of all income; plus a separate 12.5% fee on cumulative realised capital gains net of losses, and a 1.25% base fee. Source: K-FIT 10-K FY2025 [S422] [Confirmed]; worked points are illustrative [Inferred].</figcaption>
+</figure>
+
+<p>Why the catch-up ends at 1.43%: the adviser has caught up when its fee equals 12.5% of all income, so (I minus 1.25) = 0.125 × I, which gives I = 1.25 ÷ 0.875 = 1.4286% [Inferred]. K-FIT's leverage limit is the BDC rule of 150% asset coverage, meaning assets must be at least 1.5 times debt, which allows debt of up to roughly 2x equity [S422] [Confirmed] ("2x" is [Inferred]). At 31 December 2025 it had total assets of $2.75bn and shareholders' equity of $1.54bn [S422] [Confirmed], so liabilities of about $1.21bn, or about 0.8x equity, well inside the limit [Inferred].</p>
+
+<p><b>KREST</b> is a third answer: a <i>registered</i> closed-end fund under the 1940 Act (the N-2 cover ticks "Registered Closed-End Fund", not "Interval Fund"). It invests at least 80% of net assets in real estate. Minimum initial investment is $10,000 for Classes S, D and U and $1,000,000 for Class I, with $500 subsequent; it is the only K-Series vehicle with a published minimum in the sources. Fees: 1.25% of average daily net assets plus 12.5% of quarterly "Portfolio Operating Income", with no incentive fee on capital gains. It "intends, but is not obligated, to conduct quarterly tender offers for up to 5.0% of the aggregate NAV", and admits repurchases "have in the past been and may in the future be oversubscribed" [S424] [Confirmed].</p>
+
+<table class="tight">
+<thead><tr><th></th><th>K-PEC</th><th>K-INFRA</th><th>K-FIT</th><th>KREST</th></tr></thead>
+<tbody>
+<tr><td>Legal form</td><td>Delaware LLC "conglomerate", outside 1940 Act</td><td>Same design</td><td>BDC under the 1940 Act framework; RIC</td><td>Registered closed-end fund (1940 Act)</td></tr>
+<tr><td>Management fee</td><td>1.25% of NAV</td><td>1.25% of NAV</td><td>1.25% of net assets</td><td>1.25% of net assets</td></tr>
+<tr><td>Performance fee</td><td>15% over 5% hurdle, HWM, 100% catch-up</td><td>12.5% over 5% hurdle, HWM, 100% catch-up</td><td>12.5% of income over 5% (catch-up to 5.72%) + 12.5% of realised gains</td><td>12.5% of operating income; none on gains</td></tr>
+<tr><td>Exit door</td><td>Quarterly, 5% of NAV; 5% fee &lt; 24 months; overflow tender about 10% below NAV</td><td>Quarterly, 5% of NAV; 5% fee &lt; 24 months</td><td>Quarterly tender, 5% of shares; 2% &lt; 12 months</td><td>Quarterly tender up to 5% of NAV, discretionary</td></tr>
+<tr><td>Fund-level leverage cap</td><td>30% recourse</td><td>30% recourse</td><td>150% asset coverage</td><td>33 1/3% borrowing</td></tr>
+<tr><td>Size</td><td>$9.93bn NAV (Dec 2025)</td><td>$6.47bn NAV (Dec 2025)</td><td>$1.54bn equity (Dec 2025)</td><td>about $1.53bn estimated average net assets</td></tr>
+<tr><td>2025 return</td><td>Class I 16.81%</td><td>Class I 10.13%</td><td>Not in sources</td><td>Not in sources</td></tr>
+<tr><td>Minimum</td><td>Not in filings</td><td>Not in filings</td><td>Not in sources</td><td>$10,000 (S, D, U); $1m (I)</td></tr>
+</tbody>
+</table>
+<p class="muted">Sources: S420, S421, S422, S424 [Confirmed]. K-FITS, the "Select" sibling, had $1.006bn of shareholders' equity at 30 June 2026 [S423] [Confirmed]. K-Series AUM in total was $42bn at 30 June 2026 [S330] [Confirmed].</p>
+
+<div class="two">
+<div class="box key"><span class="lbl">What you will learn</span><p>To explain the 40% test in one breath, to price a monthly subscription, to compute a year's performance allocation with hurdle, catch-up and high-water mark, and to work a pro-rated quarter with early repurchase fees and an overflow tender.</p></div>
+<div class="box term"><span class="lbl">Where you meet it at KKR</span><p>London product management for K-PRIME and K-PEC [S133] [Confirmed]; the UK launch of KKR's evergreen private equity strategy with Quilter Cheviot from January 2026 [S177] [Confirmed]; and KKR's earnings, where K-Series private equity performance fees (about $160m in Q2 2026) now sit in Fee Related Earnings [S332] [Confirmed].</p></div>
+</div>
+<div class="box opinion"><span class="lbl">Only at KKR</span><p>Evergreen private equity is not unique to KKR: Blackstone's BXPE raised $2.4bn in Q2 2026 alone [S213] [Confirmed]. What is specific is the co-general-partner Joint Venture route around the 40% test, explained in K-PEC's own 10-K [S420], and a London team that manages both the US LLC and its Luxembourg twin [S133]. Learning both at once shows how one strategy is rebuilt for two legal systems [Inferred].</p></div>
+<div class="box say"><span class="lbl">Say it in one line</span><p>"I want to understand how K-PEC turns a buyout fund into an operating company through co-GP joint ventures, and how its 5% quarterly door, hurdle and catch-up actually feel to the adviser whose client owns it."</p></div>
+
+<!-- ============================================================ 4 -->
+<h2 id="l2-interval">4. Interval funds: the public-private blend</h2>
+
+<p>An <b>interval fund</b> is a US registered fund that continuously sells shares and, under SEC Rule 23c-3, adopts a "fundamental policy" (changeable only by a shareholder vote) to make <b>quarterly repurchase offers</b> for a set share of its stock. Capital Group KKR Core Plus+ commits to offers of "between 5% and 25% of its outstanding shares at net asset value" and "currently expects to offer to repurchase 10%"; oversubscribed offers are pro-rated [S426] [Confirmed]. The key contrast: an interval fund <i>must</i> make the offer every quarter; a K-Series board <i>may</i> repurchase less or nothing [S420, S426] [Inferred].</p>
+
+<h3>Why blend public and private?</h3>
+<p>A fund that promises 10% liquidity a quarter cannot hold only assets that take months to sell. So the blend is the liquidity engine. Core Plus+ allocates "approximately 60% of its net assets to public debt assets (to be managed by the investment adviser) and approximately 40% to private credit assets (to be managed by the sub-adviser)"; the adviser is Capital Research and Management Company and the sub-adviser KKR Credit Advisors (US) LLC, paid "solely by the investment adviser out of the investment adviser's fees" [S426] [Confirmed]. The minimum is "normally $1,000 per account", the management fee 0.61%, and total expenses after a 0.30% waiver range from 0.84% (F-3, R-6) to 1.54% (A-2) [S426] [Confirmed].</p>
+
+<p>A simple stress test shows why the private share stops at 40% (illustrative numbers) [Inferred]:</p>
+<table class="tight">
+<thead><tr><th>Vehicle (stylised)</th><th>Liquid sleeve</th><th>Maximum quarterly exit</th><th>Quarters of maximum exits the liquid sleeve covers with no new money</th></tr></thead>
+<tbody>
+<tr><td>Core Plus+ style interval fund, $1bn</td><td>60% = $600m</td><td>10% = $100m (expected offer)</td><td>6</td></tr>
+<tr><td>U.S. Equity+ style interval fund, $1bn</td><td>60% = $600m</td><td>5% = $50m</td><td>12</td></tr>
+<tr><td>K-PEC style evergreen, $1bn</td><td>up to 20% = $200m</td><td>5% = $50m (board may pay less)</td><td>4</td></tr>
+</tbody>
+</table>
+<p>The arithmetic ignores rebalancing, inflows and the credit line, but it shows the trade-off clearly: firmer liquidity costs private exposure [Inferred]. Capital Group's own warehouse makes the launch work: a financing provider pre-bought private credit; once the fund reaches $150m of net assets it must buy up to $2m of those assets, rising to $8m at $400m and up to 2% of net assets at $500m [S426] [Confirmed]. That is how a new fund starts with a seasoned private portfolio [Inferred].</p>
+
+<h3>U.S. Equity+: a fund that owns K-PEC</h3>
+<p>Capital Group KKR U.S. Equity+ is also an interval fund, with "approximately 60% of its net assets in publicly traded equity securities and approximately 40% of its net assets in private equity securities". The 40% is split: "Normally, the fund expects to invest approximately 30% of its net assets in K-PEC and approximately 10% of its net assets in co-investments" alongside K-PEC or other KKR private equity vehicles. It buys K-PEC units monthly like any investor, and its K-PEC stake can only be redeemed through K-PEC's 5%-per-quarter plan. It makes quarterly offers "for 5% of its outstanding shares under ordinary circumstances", and charges a fund-level management fee of 0.350% [S427] [Confirmed]. A third-party analysis says it opened on 2 March 2026 [S364] [Reported] (low-authority source).</p>
+
+<figure>
+<svg viewBox="0 0 680 400" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10">
+<defs><marker id="l2c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#24467A"/></marker></defs>
+<text x="8" y="16" font-weight="700" font-size="13" fill="#13294B">Look-through: $10,000 in Capital Group KKR U.S. Equity+ (illustrative)</text>
+<rect x="170" y="28" width="340" height="48" rx="5" fill="#13294B"/>
+<text x="340" y="47" text-anchor="middle" fill="#FFFFFF" font-weight="700" font-size="11">Your $10,000 in the interval fund</text>
+<text x="340" y="64" text-anchor="middle" fill="#FFFFFF" font-size="9.5">offers to buy back 5% of shares a quarter; fee 0.350%</text>
+<g stroke="#24467A" stroke-width="1.4" fill="none" marker-end="url(#l2c)">
+<path d="M230,76 L115,108"/><path d="M340,76 L340,108"/><path d="M450,76 L565,108"/>
+</g>
+<rect x="10" y="110" width="210" height="72" rx="5" fill="#E8EDF5" stroke="#24467A"/>
+<rect x="235" y="110" width="210" height="72" rx="5" fill="#FBF1E6" stroke="#C8792B"/>
+<rect x="460" y="110" width="210" height="72" rx="5" fill="#E3F4F1" stroke="#0E8F7E"/>
+<g text-anchor="middle">
+<text x="115" y="130" font-weight="700" fill="#13294B" font-size="11">$6,000 public equities</text>
+<text x="115" y="146" fill="#1B1F27">run by Capital Group</text>
+<text x="115" y="160" fill="#1B1F27">can be sold any trading day</text>
+<text x="115" y="174" fill="#0E8F7E" font-weight="700">the liquidity engine</text>
+<text x="340" y="130" font-weight="700" fill="#13294B" font-size="11">$3,000 in K-PEC</text>
+<text x="340" y="146" fill="#1B1F27">bought monthly at NAV</text>
+<text x="340" y="160" fill="#1B1F27">exit only via K-PEC's</text>
+<text x="340" y="174" fill="#B23A48" font-weight="700">5%-a-quarter plan</text>
+<text x="565" y="130" font-weight="700" fill="#13294B" font-size="11">$1,000 co-investments</text>
+<text x="565" y="146" fill="#1B1F27">beside K-PEC or other</text>
+<text x="565" y="160" fill="#1B1F27">KKR PE vehicles</text>
+<text x="565" y="174" fill="#B23A48" font-weight="700">no redemption route</text>
+</g>
+<g stroke="#24467A" stroke-width="1.4" fill="none" marker-end="url(#l2c)">
+<path d="M340,182 L340,206"/><path d="M565,182 L460,280"/><path d="M300,250 L320,278"/>
+</g>
+<rect x="190" y="208" width="300" height="42" rx="5" fill="#FFFFFF" stroke="#C8792B"/>
+<text x="340" y="225" text-anchor="middle" fill="#1B1F27">Inside K-PEC: about 80% in deal Joint Ventures,</text>
+<text x="340" y="240" text-anchor="middle" fill="#1B1F27">up to 20% in the Liquidity Portfolio</text>
+<rect x="190" y="280" width="300" height="40" rx="5" fill="#0E8F7E"/>
+<text x="340" y="297" text-anchor="middle" fill="#FFFFFF" font-weight="700">KKR portfolio companies</text>
+<text x="340" y="312" text-anchor="middle" fill="#FFFFFF" font-size="9.5">co-owned with flagship funds such as NA Fund XIV</text>
+<rect x="10" y="334" width="660" height="60" rx="5" fill="#F6F8FB" stroke="#D5DAE3"/>
+<text x="20" y="352" font-weight="700" fill="#13294B">Look-through management fee (illustrative, assuming K-PEC's 1.25% applies to the class held)</text>
+<text x="20" y="368" fill="#1B1F27">0.35% on all $10,000 = $35, plus 1.25% on the $3,000 in K-PEC = $37.50. Total $72.50, about 0.73% a year,</text>
+<text x="20" y="383" fill="#1B1F27">before K-PEC's 15% performance allocation and other fund expenses. Layering is the author's arithmetic [Inferred].</text>
+</svg>
+<figcaption><span class="fig-num"></span> <b>A retail fund built from KKR parts.</b> Two liquidity promises are stacked: the interval fund's 5% quarterly offer sits on top of K-PEC's own 5% quarterly cap. The 60/30/10 split and the 0.350% fee are from the U.S. Equity+ N-2/A, 19 Feb 2026 [S427] [Confirmed]; K-PEC's internals from [S420]; dollar figures and fee layering illustrative [Inferred].</figcaption>
+</figure>
+
+<div class="two">
+<div class="box key"><span class="lbl">What you will learn</span><p>How Rule 23c-3 turns liquidity into a legal promise, how to size the liquid sleeve that backs it, and how to look through a fund-of-KKR product to the underlying deals, fees and exit doors.</p></div>
+<div class="box term"><span class="lbl">Where you meet it at KKR</span><p>The Capital Group partnership: Nuttall said it extends KKR's "reach and our distribution relationships", adding that Capital Group has "relationships with 220,000 of the 300,000 advisers in the United States" [S362] [Reported]. KKR's 10-K notes the Capital Group equity product "invests in a K-Series private equity vehicle" [S70] [Confirmed].</p></div>
+</div>
+<div class="box opinion"><span class="lbl">Only at KKR</span><p>Other alternatives firms partner with traditional managers, so the concept is not unique; the Capital Group pairing is KKR's alone [S210, S201] [Confirmed] (uniqueness of the pairing [Inferred]). Seeing K-PEC used as an ingredient inside someone else's interval fund is a rare view of the same product from both ends [Inferred].</p></div>
+<div class="box say"><span class="lbl">Say it in one line</span><p>"I want to learn why Capital Group KKR U.S. Equity+ can only put 40% into private equity, and what it means that a third of that 40% is redeemable only through K-PEC's own quarterly door."</p></div>
+
+<!-- ============================================================ 5 -->
+<h2 id="l2-liquidity">5. Liquidity mismatch and the toolkit</h2>
+
+<p>The core problem of every semi-liquid fund in one sentence: <b>the assets take years to sell, but the investors can ask for money every quarter</b>. If everyone asks at once, the fund must either sell assets cheaply (hurting those who stay), pay some investors and not others, or say no. Each tool below is a rule decided in advance about which of those happens [Inferred].</p>
+
+<figure>
+<svg viewBox="0 0 680 430" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10">
+<defs><marker id="l2d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#13294B"/></marker></defs>
+<text x="8" y="16" font-weight="700" font-size="13" fill="#13294B">The liquidity spectrum, and the tools that hold each promise together</text>
+<line x1="20" y1="76" x2="664" y2="76" stroke="#13294B" stroke-width="2" marker-end="url(#l2d)"/>
+<text x="20" y="100" fill="#4A5160" font-size="9.5">Less liquid</text><text x="664" y="100" text-anchor="end" fill="#4A5160" font-size="9.5">More liquid</text>
+<g fill="#13294B"><circle cx="60" cy="76" r="5"/><circle cx="160" cy="76" r="5"/><circle cx="260" cy="76" r="5"/><circle cx="360" cy="76" r="5"/><circle cx="460" cy="76" r="5"/><circle cx="560" cy="76" r="5"/></g>
+<g text-anchor="middle" font-size="9.5" fill="#1B1F27">
+<text x="60" y="40" font-weight="700">Drawdown fund</text><text x="60" y="53">no exit; 10 to 13</text><text x="60" y="65">year life</text>
+<text x="160" y="104" font-weight="700">DCIF</text><text x="160" y="117">3-yr hard + 3-yr</text><text x="160" y="129">soft lock</text>
+<text x="260" y="40" font-weight="700">UK LTAF</text><text x="260" y="53">monthly at most;</text><text x="260" y="65">90+ days notice (Rep.)</text>
+<text x="360" y="104" font-weight="700">K-PEC, K-INFRA</text><text x="360" y="117">5% of NAV a quarter,</text><text x="360" y="129">board may pay less</text>
+<text x="460" y="40" font-weight="700">K-FIT</text><text x="460" y="53">tender up to 5% of</text><text x="460" y="65">shares a quarter</text>
+<text x="560" y="104" font-weight="700">Interval fund</text><text x="560" y="117">5% to 25% a quarter,</text><text x="560" y="129">offer required</text>
+</g>
+<text x="8" y="160" font-weight="700" fill="#13294B" font-size="11.5">The toolkit (KKR example or rule in brackets)</text>
+<g stroke="#D5DAE3" fill="#F6F8FB">
+<rect x="8" y="170" width="216" height="58" rx="4"/><rect x="232" y="170" width="216" height="58" rx="4"/><rect x="456" y="170" width="216" height="58" rx="4"/>
+<rect x="8" y="234" width="216" height="58" rx="4"/><rect x="232" y="234" width="216" height="58" rx="4"/><rect x="456" y="234" width="216" height="58" rx="4"/>
+<rect x="8" y="298" width="216" height="58" rx="4"/><rect x="232" y="298" width="216" height="58" rx="4"/><rect x="456" y="298" width="216" height="58" rx="4"/>
+<rect x="8" y="362" width="216" height="58" rx="4"/><rect x="232" y="362" width="216" height="58" rx="4"/><rect x="456" y="362" width="216" height="58" rx="4"/>
+</g>
+<g fill="#13294B" font-weight="700">
+<text x="16" y="187">Gate (cap)</text><text x="240" y="187">Pro-rata</text><text x="464" y="187">Early redemption fee</text>
+<text x="16" y="251">Liquidity sleeve</text><text x="240" y="251">Notice period</text><text x="464" y="251">Lock-up</text>
+<text x="16" y="315">Overflow tender at a discount</text><text x="240" y="315">Credit line</text><text x="464" y="315">Swing / dual pricing, levy</text>
+<text x="16" y="379">Redemption in kind</text><text x="240" y="379">Suspension, side pocket</text><text x="464" y="379">Matching and NAV lag</text>
+</g>
+<g fill="#1B1F27" font-size="9.5">
+<text x="16" y="202">limits total exits per period</text><text x="16" y="216">(K-PEC 5% of NAV per quarter)</text>
+<text x="240" y="202">everyone gets the same share</text><text x="240" y="216">(K-FIT Q1 2026: about 80% paid)</text>
+<text x="464" y="202">leavers pay stayers</text><text x="464" y="216">(K-PEC 5% / 24m; K-FIT 2% / 12m)</text>
+<text x="16" y="266">cash and liquid credit held</text><text x="16" y="280">(K-PEC up to 20%; K-INFRA 15%)</text>
+<text x="240" y="266">time to raise cash</text><text x="240" y="280">(LTAF 90+ days, reported)</text>
+<text x="464" y="266">no exits for a set time</text><text x="464" y="280">(DCIF: 3 years hard)</text>
+<text x="16" y="330">paid exit above the gate</text><text x="16" y="344">(K-PEC: about 10% below NAV)</text>
+<text x="240" y="330">borrow instead of selling</text><text x="240" y="344">(K-PEC $1.0bn revolver)</text>
+<text x="464" y="330">traders bear their own costs</text><text x="464" y="344">(AIFMD II Annex V tools)</text>
+<text x="16" y="394">pay in assets, not cash</text><text x="16" y="408">(EU: professional investors only)</text>
+<text x="240" y="394">exceptional tools, outside</text><text x="240" y="408">the AIFMD II two-tool count</text>
+<text x="464" y="394">match leavers with new money;</text><text x="464" y="408">price at last month-end NAV</text>
+</g>
+</svg>
+<figcaption><span class="fig-num"></span> <b>Each step to the right needs more tools.</b> Positions on the line are qualitative. Terms: K-PEC [S420], K-INFRA [S421], K-FIT [S422] and its Q1 2026 queue [S338] [Reported], interval funds [S426], DCIF [S432], LTAF [S451] [Reported], AIFMD II tools [S449, S450], ELTIF matching [S447]. Placement and grouping are the author's [Inferred].</figcaption>
+</figure>
+
+<h3>The tools one by one</h3>
+<ul>
+<li><b>Gate.</b> A cap on total exits per period. Without it, the first investors to leave get cash from the liquid sleeve and those who stay end up owning only illiquid assets [Inferred].</li>
+<li><b>Pro-rata.</b> If requests exceed the gate, everyone gets the same fraction. In the crowded quarter worked above, 62.5%.</li>
+<li><b>Redemption fee.</b> Charged to leavers and kept in the fund. It compensates stayers for the cost of raising cash and discourages short-term money [S420] [Inferred].</li>
+<li><b>Liquidity sleeve.</b> Cash and tradable credit held to meet exits; it drags returns in good times, which is why it is capped at about 15 to 20% in the K-Series [S420, S421] [Confirmed].</li>
+<li><b>NAV lag.</b> K-PEC strikes NAV monthly from Level III models and deals at the prior month-end price [S420]. If markets fall sharply mid-month, a leaver may exit at a stale, higher price. Funds that trade on NAV are exactly where operational due diligence focuses: Cambridge Associates stresses open-end and evergreen funds "where transactions are based on the fund's NAV" and that "Fee calculations rely on accurate valuations" [S458] [Confirmed].</li>
+</ul>
+
+<h3>The live example: K-FIT's queue in Q1 2026</h3>
+<p>In Q1 2026 investors in K-FIT "tried to redeem 6.3% of shares in the prior quarter, causing the fund to prorate requests at about 80%"; in Q2 requests fell to 1.65% and were paid in full [S338] [Reported]. The arithmetic checks: 5% cap ÷ 6.3% requested = 79% [Inferred]. It was part of an industry wave: private credit redemption requests topped $20bn in Q1 2026 [S337] [Reported]. Apollo Debt Solutions received requests of 11.2% and honoured 5%, Blue Owl enforced a 5% cap, and Blackstone's BCRED paid 100% of record requests of 7.9% of NAV [S278] [Reported]. Partners Group said requests at its Delaware private equity evergreen fund would be "slightly above the 5%" limit [S339] [Reported].</p>
+<p>Two lessons for a client team. First, a gate working as designed is not a default: it is the contract doing what it said. Second, the reputational cost lands on whoever set expectations at the point of sale [Inferred]. KCS juniors are the people who draft the investor letters and adviser FAQs when a queue forms [Inferred].</p>
+
+<h3>The European and UK rulebooks</h3>
+<p><b>AIFMD II (EU).</b> Open-ended alternative investment funds must select "at least two appropriate LMTs" (liquidity management tools) from points 2 to 8 of Annex V: redemption gates, extension of notice periods, redemption fees, swing pricing, dual pricing, anti-dilution levies and redemption in kind. Suspension and side pockets sit outside the count as exceptional tools. "This cannot be done by selecting only dual and swing pricing", and redemptions in kind are for professional investors only [S449] [Confirmed] [S450] [Reported]. The Level 2 rules (Commission Delegated Regulation (EU) 2026/465) apply from 16 April 2026; funds constituted before that date are "deemed to comply with the RTS until 16 April 2027" [S449] [Confirmed]. ESMA recommends, but does not require, "at least one quantitative LMT and one Anti-Dilution Tool" [S448] [Confirmed]. Worked example (illustrative): gate plus notice period is a valid pair; swing pricing plus dual pricing is not.</p>
+
+<p><b>ELTIF 2.0 (EU).</b> The redemption rules (Delegated Regulation (EU) 2024/2759, in force 26 October 2024) set no fixed minimum holding period; redemptions more often than quarterly must be justified; a notice period under 3 months must be explained to the regulator; and matching exiting with incoming investors is allowed under a policy [S447] [Confirmed]. The maximum redemption is sized by one of two methods [S447] [Confirmed]:</p>
+<table class="tight">
+<thead><tr><th>Method</th><th>Rule from the RTS example</th><th>Worked: €500m fund with €100m of liquid assets (illustrative)</th></tr></thead>
+<tbody>
+<tr><td>Annex I: frequency + notice period</td><td>Quarterly with 3 months' notice: up to 33.3% of liquid assets</td><td>0.333 × €100m = €33.3m a quarter, 6.7% of NAV</td></tr>
+<tr><td>Annex II: frequency + minimum liquid assets</td><td>Quarterly with at least 20% liquid assets: up to 50%</td><td>0.50 × €100m = €50m a quarter, 10% of NAV</td></tr>
+</tbody>
+</table>
+<p class="muted">The liquid-asset base also includes cash flows forecast prudently over 12 months [S447] [Confirmed]. The ELTIF market reached about €34bn at end-2025 with 189 new ELTIFs since 2024 [S302] [Reported].</p>
+
+<div class="box unsure"><span class="lbl">Source uncertain</span><p><b>UK LTAF.</b> Secondary sources describe the Long-Term Asset Fund as open-ended with dealing no more often than monthly and a notice period of at least 90 days [S451] [Reported]; the FCA rulebook (COLL 15) itself was not read. The LTAF has been open to retail investors as a Restricted Mass Market Investment since 3 July 2023 [S305] [Confirmed]. An FCA speech in May 2026 put LTAF assets at £7.5bn, up from £5bn in under a year [S452] [Reported]. No KKR ELTIF or LTAF was found in the sources; EQT launched an evergreen infrastructure ELTIF in April 2026 [S464] [Reported].</p></div>
+
+<div class="two">
+<div class="box key"><span class="lbl">What you will learn</span><p>To diagnose a liquidity mismatch, choose and size the tools (gate, pro-rata, fee, sleeve, notice, matching), and map them to the rulebook in each market: SEC Rule 23c-3, AIFMD II Annex V, the ELTIF RTS and the LTAF.</p></div>
+<div class="box term"><span class="lbl">Where you meet it at KKR</span><p>K-FIT's Q1 2026 pro-rating [S338]; K-PRIME in Luxembourg, which the sources describe as an open-ended Part II UCI [S429] [Reported], so its toolkit sits under European rules [Inferred]; and the FCA's Consumer Duty, under which a UK distributor of a KKR fund needs target market and fair value information from KKR [S452] [Reported] (link to KKR [Inferred]).</p></div>
+</div>
+<div class="box opinion"><span class="lbl">Only at KKR</span><p>KKR runs the full range of doors on one shelf: mandatory quarterly offers (Capital Group interval funds), discretionary 5% plans with an overflow tender (K-PEC), a BDC tender (K-FIT), and multi-year institutional lock-ups (DCIF) [S420, S422, S426, S432]. A London seat also adds the EU and UK rulebooks. Few places let a junior compare all of these from the same desk [Inferred].</p></div>
+<div class="box say"><span class="lbl">Say it in one line</span><p>"After K-FIT paid about 80% of requests in Q1 2026 and 100% in Q2, I want to learn how a client team explains a gate before the queue forms, not after."</p></div>
+
+<!-- ============================================================ 6 -->
+<h2 id="l2-wrappers">6. The same strategy, three wrappers: KKR infrastructure</h2>
+
+<p>Put everything together on one asset class. KKR manages about $120bn of infrastructure equity, "up from just $13 billion in 2019", with about 160 dedicated infrastructure executives [S430] [Confirmed]. The same team sells that exposure through three very different wrappers. KKR itself counts them together: GII V contributes to "approximately $45 billion raised across KKR's latest infrastructure vehicle vintages globally", a figure that includes infrastructure perpetual vehicles such as K-INFRA [S430] [Confirmed].</p>
+
+
+<h3>The three wrappers, row by row</h3>
+<p>The full-page figure below sets them side by side; here is how to read it.</p>
+<p><b>Who each serves.</b> GII V is for institutions that can commit for a decade and manage capital calls; its investor list includes "private wealth platforms" too, which typically enter through feeders [S430] [Confirmed] (feeder route [Inferred]). DCIF is for institutions that want steady, yield-like infrastructure with "low volatility and strong downside protection" and are willing to accept a three-year hard lock [S432] [Confirmed]. K-INFRA is for individuals who need a monthly price and some quarterly liquidity [S421] [Confirmed].</p>
+<p><b>Why the fees differ.</b> The institutional open-ended core fund charges 0.6% to 0.8% with carry only on cash yield; the wealth vehicle charges 1.25% plus 12.5% over 5% [S421, S432] [Confirmed]. The wealth price pays for things institutions do themselves: monthly valuation and administration, the liquidity sleeve, adviser education, and distribution through platforms [Inferred]. KKR's own fee table shows the same split across products: open-ended vehicles at 0.50% to 1.25% versus drawdown infrastructure at 0.75% to 1.50% [S2] [Confirmed].</p>
+
+<figure class="fullpage">
+<svg viewBox="0 0 680 900" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10">
+<defs><marker id="l2e" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#24467A"/></marker></defs>
+<text x="340" y="20" text-anchor="middle" font-weight="700" font-size="15" fill="#13294B">One infrastructure team, three price lists</text>
+<text x="340" y="38" text-anchor="middle" fill="#4A5160">KKR infrastructure: about $120bn of equity, about 160 executives, 100+ investments [S430]</text>
+<rect x="10" y="50" width="210" height="58" rx="5" fill="#13294B"/>
+<rect x="235" y="50" width="210" height="58" rx="5" fill="#0E8F7E"/>
+<rect x="460" y="50" width="210" height="58" rx="5" fill="#C8792B"/>
+<g text-anchor="middle" fill="#FFFFFF">
+<text x="115" y="72" font-weight="700" font-size="13">GII V</text><text x="115" y="89">closed-end drawdown fund</text><text x="115" y="102" font-size="9.5">Core+, N. America and W. Europe</text>
+<text x="340" y="72" font-weight="700" font-size="13">DCIF</text><text x="340" y="89">open-ended core fund</text><text x="340" y="102" font-size="9.5">institutional, OECD only</text>
+<text x="565" y="72" font-weight="700" font-size="13">K-INFRA</text><text x="565" y="89">evergreen LLC conglomerate</text><text x="565" y="102" font-size="9.5">for individuals</text>
+</g>
+<g fill="#F6F8FB" stroke="#D5DAE3">
+<rect x="10" y="114" width="210" height="566"/><rect x="235" y="114" width="210" height="566"/><rect x="460" y="114" width="210" height="566"/>
+</g>
+<g fill="#E8EDF5">
+<rect x="10" y="114" width="660" height="16"/><rect x="10" y="196" width="660" height="16"/><rect x="10" y="278" width="660" height="16"/><rect x="10" y="360" width="660" height="16"/><rect x="10" y="442" width="660" height="16"/><rect x="10" y="524" width="660" height="16"/><rect x="10" y="606" width="660" height="16"/>
+</g>
+<g font-weight="700" fill="#24467A" font-size="9.5">
+<text x="16" y="126">SIZE</text><text x="16" y="208">WHO IT SERVES</text><text x="16" y="290">WHAT IT HOLDS AND TARGETS</text><text x="16" y="372">MANAGEMENT FEE</text><text x="16" y="454">PERFORMANCE FEE</text><text x="16" y="536">LIQUIDITY</text><text x="16" y="618">MINIMUM AND CASH PROFILE</text>
+</g>
+<g fill="#1B1F27">
+<text x="18" y="148" font-weight="700">$19.2bn final close</text><text x="18" y="162">3 Aug 2026; KKR's largest</text><text x="18" y="176">infrastructure fund [S430]</text><text x="18" y="190">$18.6bn committed in 10-Q [S1]</text>
+<text x="243" y="148" font-weight="700">Size not in sources</text><text x="243" y="162">KKR committed at least</text><text x="243" y="176">$500m (2021) [S432]</text>
+<text x="468" y="148" font-weight="700">$6.47bn Transactional NAV</text><text x="468" y="162">31 Dec 2025; 2025 subscriptions</text><text x="468" y="176">$2.84bn [S421]</text>
+
+<text x="18" y="230">Pension plans, sovereign wealth</text><text x="18" y="244">funds, insurers, asset managers,</text><text x="18" y="258">private wealth platforms and</text><text x="18" y="272">family offices [S430]</text>
+<text x="243" y="230">Institutions; e.g. Cliffwater</text><text x="243" y="244">advised Rhode Island to commit</text><text x="243" y="258">up to $100m (2021) [S432]</text>
+<text x="468" y="230">Individuals: US accredited</text><text x="468" y="244">(Reg D) and non-US (Reg S);</text><text x="468" y="258">Classes S, D and I [S421]</text>
+
+<text x="18" y="312">Over $9bn committed already:</text><text x="18" y="326">FiberCop, Metronet, Enilive,</text><text x="18" y="340">Sempra Infrastructure, Global</text><text x="18" y="354">Technical Realty and others [S430]</text>
+<text x="243" y="312">Water, power and gas networks,</text><text x="243" y="326">digital, renewables, contracted</text><text x="243" y="340">transport; target net return</text><text x="243" y="354">7% to 9% a year [S432]</text>
+<text x="468" y="312">About 85% infrastructure via</text><text x="468" y="326">JVs (max 15% non-OECD), about</text><text x="468" y="340">15% liquidity; 2025 Class I</text><text x="468" y="354">return 10.13% [S421]</text>
+
+<text x="18" y="394">Drawdown infra range in the</text><text x="18" y="408">10-K: 0.75% to 1.50% [S2];</text><text x="18" y="422">GII V's own rate not in sources;</text><text x="18" y="436">base is committed or invested</text>
+<text x="243" y="394" font-weight="700">0.8% of NAV</text><text x="243" y="408">(commitments under $200m);</text><text x="243" y="422">0.6% for 6 years for early</text><text x="243" y="436">$50m to $200m tickets [S432]</text>
+<text x="468" y="394" font-weight="700">1.25% of month-end NAV</text><text x="468" y="408">(D, I, S); early classes 1.00%</text><text x="468" y="422">for 60 months from</text><text x="468" y="436">1 June 2023 [S421]</text>
+
+<text x="18" y="476">KKR carry range 10% to 20%</text><text x="18" y="490">after a 6% to 8% hurdle,</text><text x="18" y="504">with GP catch-up [S2];</text><text x="18" y="518">fund-specific terms not sourced</text>
+<text x="243" y="476">None for 6 years; then 5% of</text><text x="243" y="490">asset-level cash yield, above</text><text x="243" y="504">a 4% minimum cash yield</text><text x="243" y="518">hurdle [S432]</text>
+<text x="468" y="476" font-weight="700">12.5% of Total Return</text><text x="468" y="490">over a 5% hurdle, high-water</text><text x="468" y="504">mark, 100% catch-up [S421]</text>
+
+<text x="18" y="558">None. Investment period</text><text x="18" y="572">Jul 2024 to Jul 2030 [S1];</text><text x="18" y="586">fund terms typically 10 to 13</text><text x="18" y="600">years [S2]</text>
+<text x="243" y="558">3-year hard lock-up, then</text><text x="243" y="572">3-year soft lock-up with a 5%</text><text x="243" y="586">early redemption fee; then</text><text x="243" y="600">open-ended [S432]</text>
+<text x="468" y="558">Quarterly repurchases capped</text><text x="468" y="572">at 5% of NAV; 5% fee within</text><text x="468" y="586">24 months [S421]</text>
+
+<text x="18" y="640">Minimum not in sources.</text><text x="18" y="654">Capital calls, then</text><text x="18" y="668">distributions as assets sell</text>
+<text x="243" y="640">No minimum in sources.</text><text x="243" y="654">Pitched as "buy simplicity</text><text x="243" y="668">and hold simplicity" [S432]</text>
+<text x="468" y="640">Minimum not in filings.</text><text x="468" y="654">Quarterly distributions, which</text><text x="468" y="668">may exceed earnings [S421]</text>
+</g>
+<g stroke="#24467A" stroke-width="1.4" fill="none" marker-end="url(#l2e)">
+<path d="M115,680 L270,712"/><path d="M340,680 L340,710"/><path d="M565,680 L410,712"/>
+</g>
+<rect x="120" y="714" width="440" height="66" rx="6" fill="#13294B"/>
+<text x="340" y="734" text-anchor="middle" fill="#FFFFFF" font-weight="700" font-size="11.5">The same assets, shared through Joint Ventures</text>
+<text x="340" y="751" text-anchor="middle" fill="#FFFFFF">K-INFRA co-owns assets with GII II to V, Asia Pacific</text>
+<text x="340" y="766" text-anchor="middle" fill="#FFFFFF">Infrastructure Investors I to III, DCIF and the Global Climate Fund [S421]</text>
+<rect x="10" y="794" width="660" height="100" rx="6" fill="#FBF1E6" stroke="#C8792B"/>
+<text x="20" y="813" font-weight="700" fill="#13294B">One year at an 8% gross asset return, $10m in each (illustrative numbers, fees only, expenses ignored)</text>
+<text x="20" y="833" fill="#1B1F27"><tspan font-weight="700">DCIF:</tspan> 8.0% minus 0.8% fee, no performance fee in years 1 to 6: keep about 7.2% ($720,000).</text>
+<text x="20" y="851" fill="#1B1F27"><tspan font-weight="700">K-INFRA Class I:</tspan> 8.0% minus 1.25% = 6.75% Total Return; above the 5.71% catch-up end, so KKR takes 12.5%</text>
+<text x="20" y="865" fill="#1B1F27">of 6.75% = 0.84%: keep about 5.9% ($590,600).</text>
+<text x="20" y="883" fill="#1B1F27"><tspan font-weight="700">GII V style drawdown:</tspan> a 1.0% fee on a $10m commitment with only $5m called is 2.0% of the money at work.</text>
+</svg>
+<figcaption><span class="fig-num"></span> <b>Same strategy, three wrappers.</b> Read across each row: the institution buys lower fees with less liquidity; the individual buys a monthly NAV and a quarterly door with a higher fee. Sources: GII V release, 3 Aug 2026 [S430]; KKR 10-Q vehicle table [S1]; KKR 10-K fee ranges [S2]; DCIF terms from a Cliffwater memo of 11 May 2021, which may have changed [S432]; K-INFRA 10-K FY2025 [S421]. Worked returns illustrative [Inferred].</figcaption>
+</figure>
+
+<p><b>Why the performance fee is lower than K-PEC's.</b> K-INFRA's 12.5% versus K-PEC's 15% matches the lower expected return of infrastructure [S421] [Confirmed] (interpretation [Inferred]). K-INFRA's 2025 Class I return was 10.13% against K-PEC's 16.81% [S420, S421] [Confirmed].</p>
+<p><b>Why it matters to a client conversation.</b> A family office asking "should I buy KKR infrastructure?" is really asking three questions: can you meet capital calls for six years, can you accept a multi-year lock, or do you need a quarterly door? The answer picks the wrapper, and the wrapper sets the fee [Inferred].</p>
+
+<div class="two">
+<div class="box key"><span class="lbl">What you will learn</span><p>To present one strategy in three wrappers side by side, explain every row of the trade-off (fee base, carry design, lock-up, door, cash profile), and match the wrapper to a client's liquidity and operational capacity.</p></div>
+<div class="box term"><span class="lbl">Where you meet it at KKR</span><p>The London infrastructure product team, which includes a specialist for "infra for individuals" [S150] [Confirmed]; GII V's investor base [S430]; and K-INFRA's Joint Ventures with GII and DCIF [S421]. Daniel Valladares moved from the infrastructure product team to Head of EMEA Consultant Relations [S132] [Confirmed], the people who read memos like Cliffwater's [S432].</p></div>
+</div>
+<div class="box opinion"><span class="lbl">Only at KKR</span><p>At KKR the three wrappers are literally linked: K-INFRA's 10-K names GII II to V and DCIF as its Joint Venture partners [S421] [Confirmed], and GII V's $45bn platform figure counts the perpetual vehicles alongside the drawdown funds [S430] [Confirmed]. Rivals also sell infrastructure in several wrappers (EQT's evergreen ELTIF, for one [S464] [Reported]); what you learn at KKR is how one asset is shared across all three by contract [Inferred].</p></div>
+<div class="box say"><span class="lbl">Say it in one line</span><p>"I want to learn to put GII V, DCIF and K-INFRA side by side and explain to a client why the same infrastructure costs 0.8% in one wrapper and 1.25% plus 12.5% in another, and when each price is fair."</p></div>
+
+<div class="box key"><span class="lbl">Module 1 in one paragraph</span><p>A private markets product is a contract about four things: who may buy, when cash moves, how fees are charged and how you get out. Drawdown funds answer with commitments, capital calls, a fee on committed capital and a whole-of-fund waterfall with a clawback. Evergreen funds answer with a monthly NAV, a fee on NAV, a hurdle with catch-up and high-water mark, and a narrow quarterly door. Interval funds add a legal promise of liquidity and pay for it with a large public sleeve. When too many people head for the door, gates, pro-rating, fees and notice periods decide who bears the cost. KKR runs every one of these pipes, and often runs them into the same deals [Inferred].</p></div>
+
+</section>

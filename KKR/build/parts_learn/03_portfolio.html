@@ -1,0 +1,925 @@
+<section class="part" id="l3">
+<div class="part-band"><div class="num">Part 3</div><h1>Module 2: Thinking like the client: portfolio construction and performance</h1><p>Before KKR can sell a client anything, someone has to understand the client's whole portfolio better than the client's own spreadsheet does. This module teaches that spreadsheet: liabilities, allocation, pacing, performance maths and insurance capital, each with numbers you can redo by hand.</p></div>
+
+<p>Part 1 profiled six client types on five constraints. This module goes one level down and puts formulas on them. Every section follows the same pattern: the mechanism from zero, a worked example with numbers, a diagram, then where the same mechanism shows up in real KKR material. Numbers marked "illustrative" are invented to teach the arithmetic; every other number carries its source.</p>
+
+<div class="box term"><span class="lbl">Five words you need before you start</span>
+<p><b>Liability:</b> money a client must pay out in future (pensions, insurance claims, a family's spending). <b>Asset allocation:</b> the split of a portfolio between types of investment. <b>Commitment:</b> a promise to give a private fund money when it asks. <b>NAV (net asset value):</b> what a holding is worth today on the manager's valuation. <b>Benchmark:</b> the yardstick a result is compared against.</p></div>
+
+<!-- ============ SECTION 1 ============ -->
+<h2 id="l3-liabilities">Liabilities first: what "enough" means to each client</h2>
+
+<p>An investment professional's first question is never "what will make the most money?" It is "what does this money have to do, and when?" The answer is set by the client's <b>liabilities</b>. Return and liquidity targets are derived from them, not chosen freely.</p>
+
+<h3>Two jobs a portfolio can do</h3>
+<p><b>Liability matching</b> means owning assets whose cash flows or values move with what you owe. If a pension must pay £50m in 2035, a government bond that pays £50m in 2035 removes that risk: whatever interest rates do, the asset and the bill move together. <b>Return seeking</b> means owning assets expected to grow faster than the liabilities, such as shares or private equity, accepting that their value swings. Every institutional portfolio is a blend of the two. The blend is the single most important decision a client makes, and it decides how much room there is for private markets [Inferred].</p>
+
+<div class="box term"><span class="lbl">Key terms</span>
+<p><b>Funding ratio:</b> assets divided by the present value of liabilities. 100% means the client can pay every promise today. <b>Present value:</b> what a future payment is worth today once you discount it at an interest rate. <b>LDI (liability-driven investment):</b> a strategy, mostly with bonds and interest rate hedges, that makes assets move with liabilities. <b>Liquidity budget:</b> how much cash the client must be able to raise, how quickly, in a bad month.</p></div>
+
+<figure>
+<svg viewBox="0 0 680 380" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10.5">
+<defs><marker id="l3arrA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4A5160"/></marker></defs>
+<rect x="90" y="30" width="570" height="290" fill="#F7F9FC" stroke="#D5DAE3"/>
+<line x1="90" y1="320" x2="660" y2="320" stroke="#4A5160" stroke-width="1.2" marker-end="url(#l3arrA)"/>
+<line x1="90" y1="320" x2="90" y2="34" stroke="#4A5160" stroke-width="1.2" marker-end="url(#l3arrA)"/>
+<g fill="#4A5160" font-size="10">
+<text x="96" y="340">Liability-driven: match a known bill</text>
+<text x="660" y="340" text-anchor="end">Return-seeking: grow real wealth</text>
+<text x="30" y="200" transform="rotate(-90 30 200)" text-anchor="middle">Liquidity need</text>
+<text x="80" y="46" text-anchor="end">High</text>
+<text x="80" y="318" text-anchor="end">Low</text>
+</g>
+<g fill="#13294B"><circle cx="135" cy="165" r="8"/><circle cx="235" cy="95" r="8"/><circle cx="430" cy="70" r="8"/><circle cx="470" cy="215" r="8"/><circle cx="600" cy="290" r="8"/></g>
+<g fill="#1B1F27">
+<text x="149" y="162" font-weight="700" font-size="11.5">Life insurer</text>
+<text x="149" y="177">Enough = asset yield above the</text>
+<text x="149" y="190">rate promised to policyholders</text>
+<text x="249" y="92" font-weight="700" font-size="11.5">Mature DB pension</text>
+<text x="249" y="107">Enough = liability growth plus</text>
+<text x="249" y="120">deficit repair (6.0%, worked below)</text>
+<text x="444" y="67" font-weight="700" font-size="11.5">UK DC default fund</text>
+<text x="444" y="82">Enough = beat inflation for</text>
+<text x="444" y="95">40-year savers, daily dealing</text>
+<text x="484" y="212" font-weight="700" font-size="11.5">Family office</text>
+<text x="484" y="227">Enough = keep real wealth</text>
+<text x="484" y="240">across generations</text>
+<text x="586" y="287" font-weight="700" font-size="11.5" text-anchor="end">Sovereign wealth fund</text>
+<text x="586" y="302" text-anchor="end">Enough = long-run real return</text>
+</g>
+<rect x="100" y="245" width="250" height="58" rx="4" fill="#FBF1E6" stroke="#C8792B"/>
+<g fill="#1B1F27" font-size="10">
+<text x="110" y="262">Down and to the right = more room for</text>
+<text x="110" y="276">illiquid, return-seeking private assets.</text>
+<text x="110" y="290">Up and to the left = less room.</text>
+</g>
+</svg>
+<figcaption><span class="fig-num"></span> <b>Where each client sits.</b> The horizontal axis is how far the client's goal is "pay a known bill" versus "grow wealth"; the vertical axis is how much cash it may need at short notice. Positions are the author's judgement for typical clients of each type [Inferred]; real clients vary.</figcaption>
+</figure>
+
+<h3>Worked example 1: a DB pension's "enough return" (illustrative numbers)</h3>
+<p>A UK company pension has £1.0bn of assets. Its promises to members are worth £1.1bn in present value. Assume its liabilities grow 5% a year (interest on the promises plus new accrual, net of payments; illustrative).</p>
+<ol>
+<li><b>Funding ratio</b> = assets ÷ liabilities = 1.0 ÷ 1.1 = <b>90.9%</b>. The deficit is £100m.</li>
+<li><b>Goal:</b> be fully funded in 10 years with no extra cash from the employer. Assets must reach the liabilities' future value: 1.0 × (1 + r)<sup>10</sup> = 1.1 × 1.05<sup>10</sup>.</li>
+<li>Divide both sides by 1.0 and take the tenth root: 1 + r = 1.05 × 1.1<sup>1/10</sup> = 1.05 × 1.00958 = 1.0601.</li>
+<li><b>"Enough return" = 6.0% a year.</b> Of that, 5.0 points just keep pace with the liabilities and about 1.0 point repairs the deficit.</li>
+</ol>
+<p>The lesson: this scheme does not need 12%. It needs 6.0% with as little chance as possible of a big miss. If it hedges most of its liabilities with bonds that earn roughly the 5% liability growth, the remaining "growth" assets have to earn the extra. Private markets compete for that small growth slice, which is why a mature DB scheme is a shrinking buyer of private equity and a natural buyer of contracted, income-producing assets such as core infrastructure or investment-grade private credit [Inferred]. KKR's own institutional page offers corporate pensions "consultative advice to corporations who are considering the benefits and challenges associated with de-risking their defined benefit plans" [S81] [Confirmed].</p>
+
+<figure>
+<svg viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10.5">
+<g font-weight="700" font-size="12" fill="#13294B" text-anchor="middle"><text x="190" y="22">ASSETS £1.0bn</text><text x="370" y="22">LIABILITIES £1.1bn</text></g>
+<rect x="120" y="48" width="140" height="22" fill="#FFFFFF" stroke="#B23A48" stroke-dasharray="4 3"/>
+<text x="190" y="63" text-anchor="middle" fill="#B23A48" font-weight="700">Deficit £100m</text>
+<rect x="120" y="70" width="140" height="22" fill="#1baf7a"/>
+<rect x="120" y="92" width="140" height="66" fill="#2a78d6"/>
+<rect x="120" y="158" width="140" height="132" fill="#24467A"/>
+<g fill="#FFFFFF" text-anchor="middle">
+<text x="190" y="85" font-size="10">Private markets £100m</text>
+<text x="190" y="122" font-weight="700">Growth assets</text><text x="190" y="137">listed shares £300m</text>
+<text x="190" y="218" font-weight="700">Hedge assets £600m</text><text x="190" y="233">gilts and LDI: move</text><text x="190" y="248">with the liabilities</text>
+</g>
+<rect x="300" y="48" width="140" height="242" fill="#E8EDF5" stroke="#13294B"/>
+<g fill="#13294B" text-anchor="middle"><text x="370" y="150" font-weight="700">Present value of</text><text x="370" y="166" font-weight="700">pension promises</text><text x="370" y="186">grows about 5% a year</text><text x="370" y="200">(illustrative)</text></g>
+<line x1="100" y1="290" x2="460" y2="290" stroke="#4A5160"/>
+<rect x="480" y="40" width="190" height="250" rx="5" fill="#FBF1E6" stroke="#C8792B"/>
+<g fill="#1B1F27" font-size="10.5">
+<text x="490" y="60" font-weight="700" fill="#13294B">Funding ratio</text>
+<text x="490" y="76">= assets ÷ liabilities</text>
+<text x="490" y="92">= 1.0 ÷ 1.1 = 90.9%</text>
+<text x="490" y="122" font-weight="700" fill="#13294B">Return needed to be fully</text>
+<text x="490" y="137" font-weight="700" fill="#13294B">funded in 10 years</text>
+<text x="490" y="155">1.0 × (1+r)^10 = 1.1 × 1.05^10</text>
+<text x="490" y="171">1 + r = 1.05 × 1.1^(1/10)</text>
+<text x="490" y="187">r = 6.0% a year</text>
+<text x="490" y="217" font-weight="700" fill="#13294B">Where it must come from</text>
+<text x="490" y="233">Hedge assets earn about</text>
+<text x="490" y="248">the liability rate. The extra</text>
+<text x="490" y="263">has to come from the growth</text>
+<text x="490" y="278">slice: only 40% of assets.</text>
+</g>
+</svg>
+<figcaption><span class="fig-num"></span> <b>A DB pension balance sheet, liability first.</b> Read from right to left: the liabilities fix the return target (6.0%), the hedge assets neutralise most interest rate risk, and private markets compete for a slice of the growth bucket. All numbers illustrative [Inferred].</figcaption>
+</figure>
+
+<h3>The five clients, side by side</h3>
+<table class="tight">
+<thead><tr><th>Client</th><th>"Enough return" is set by</th><th>"Enough liquidity" is set by</th><th>Private markets job</th></tr></thead>
+<tbody>
+<tr><td><b>DB pension</b> (mature, de-risking)</td><td>Liability growth plus deficit repair (6.0% above) [Inferred]</td><td>Monthly pension payments; collateral for interest rate hedges [Inferred]</td><td>Income assets that match long liabilities; less PE over time. KKR offers DB "de-risking" advice [S81] [Confirmed]</td></tr>
+<tr><td><b>UK DC default fund</b></td><td>Real growth for savers 20 to 40 years from retirement [Inferred]</td><td>Daily pricing and dealing of the default fund [Inferred]; fees closely watched</td><td>Up to 10% of default funds in private assets by 2030, at least 5% UK, under the Mansion House Accord [S315] [Confirmed]</td></tr>
+<tr><td><b>Life insurer</b></td><td>Asset yield minus the rate credited on policies, per unit of regulatory capital [Inferred]</td><td>Predictable claims; surrender risk on some products [Inferred]</td><td>Investment-grade private credit and ABF; CIOs list "Asset-liability matching, illiquidity limits, regulatory capital, reinvestment risk" as concerns [S438] [Confirmed]</td></tr>
+<tr><td><b>Sovereign wealth fund</b></td><td>Long-run real return for future generations [Inferred]</td><td>Low, unless the state needs cash in a shock. Some Gulf states reviewed investments during the 2026 Iran war [S366] [Reported]</td><td>Large tickets, co-investment, SMAs; preference for "separately managed accounts" and fewer managers [S70] [Confirmed]</td></tr>
+<tr><td><b>Family office</b></td><td>Preserve and grow real wealth; often a tax lens [Inferred]</td><td>Family spending and opportunistic deals [Inferred]</td><td>Co-investment, bespoke SMAs, "Two-Way Sourcing Dialogues" [S84] [Confirmed]</td></tr>
+</tbody></table>
+
+<h3>Worked example 2: a liquidity budget (illustrative numbers)</h3>
+<p>The same £1.0bn pension pays £60m of pensions a year (£5m a month). Its hedges can demand cash collateral if gilt yields jump; assume a stress call of £80m. It also has £70m of unfunded private commitments that could be called within a year. Stress cash need = 60 + 80 + 70 = <b>£210m</b>. Assets it can sell within a month at a fair price: cash £20m plus listed shares £300m plus a share of the gilts not tied up as collateral, say £100m: £420m. <b>Liquidity coverage</b> = 420 ÷ 210 = <b>2.0x</b>. If the board's rule is "at least 1.5x", the scheme can afford more illiquid assets only until coverage falls to 1.5x: it could move up to £105m more into private assets, assuming that money comes from the listed shares (each £1 moved cuts liquid assets by £1: 420 − 1.5 × 210 = 105). This is the sum a KCS junior should be able to do before suggesting a commitment size [Inferred].</p>
+
+<div class="two">
+<div class="box key"><span class="lbl">What you will learn</span><p>To derive a client's required return and liquidity budget from its liabilities: funding ratio, required return to close a deficit, liquidity coverage under stress. Then to say how much room that leaves for private markets, before any product is mentioned.</p></div>
+<div class="box term"><span class="lbl">Where you meet it at KKR</span><p>KKR's institutional client segments are corporate pensions, public pensions, sovereign wealth funds, insurers, endowments and foundations [S81] [Confirmed]. Pensions and other institutions are 14% of KKR's AUM, sovereigns 12%, third-party insurers 11% and Global Atlantic's balance sheet 22% (31 Dec 2025) [S71] [Confirmed]. Each segment brings a different definition of "enough".</p></div>
+</div>
+<div class="box opinion"><span class="lbl">Only at KKR</span><p>KKR runs an insurer (Global Atlantic) on its own balance sheet, so liability-first thinking is not theory inside the firm: Global Atlantic's $220bn of AUM must match real annuity promises (30 Jun 2026) [S1] [Confirmed]. A KCS team that sells to pensions and insurers sits next to colleagues who manage liabilities every day. Most fund managers have no liabilities of their own to learn from [Inferred].</p></div>
+<div class="box say"><span class="lbl">Say it in one line</span><p>"I want to learn to start from a client's liabilities, to work out the return and liquidity they actually need, and only then ask which KKR strategy fits."</p></div>
+
+<!-- ============ SECTION 2 ============ -->
+<h2 id="l3-tpa">Strategic asset allocation and KKR's Total Portfolio Approach</h2>
+
+<h3>Strategic asset allocation (SAA) from zero</h3>
+<p>Most institutions run a <b>strategic asset allocation</b>: the board fixes a long-term target weight for each asset class ("bucket"), say 50% listed equity, 30% bonds, 8% private equity, 6% infrastructure, 6% real estate. Each bucket has its own team, its own benchmark and a tolerance band (for example 6% to 10% for private equity). When a bucket drifts outside its band, the client buys or sells to rebalance. SAA is simple to govern: the board can see at a glance whether the portfolio is "on policy" [Inferred].</p>
+<p>The weakness is that buckets are defined by legal form, not by risk. A private credit loan, a listed high-yield bond and a slice of infrastructure debt can carry very similar risks yet sit in three buckets with three benchmarks. An opportunity that fits no bucket (a capital solutions deal, a reinsurance sidecar) may have no home at all [Inferred].</p>
+
+<h3>The Total Portfolio Approach (TPA): what KKR actually published</h3>
+<p>KKR's Multi-Asset Strategies team published "The Total Portfolio Approach: A Practical Framework" in February 2026, by Henry H. McVey, David McNellis and Christian Olinger [S435, S462] [Confirmed]. A follow-up, "The Dog Has Caught the Bus: The Total Portfolio Approach", appeared in July 2026, adding Amy Dai as an author [S436] [Confirmed]. McVey is Head of Global Macro &amp; Asset Allocation and CIO of KKR's Balance Sheet; McNellis is Co-Head of Global Macro and Head of Portfolio Construction and Multi-Asset Strategies for Private Markets [S436] [Confirmed].</p>
+<ul>
+<li><b>Definition.</b> TPA is "a whole-portfolio decision and governance framework that evaluates investment opportunities across Public and Private Markets based on their contributions to total portfolio objectives, rather than within static asset-class sleeves" [S435] [Confirmed].</li>
+<li><b>Governance.</b> "The board sets a reference portfolio (for instance, 70% Public Equity/30% Fixed Income) and risk appetite ... and delegates allocation authority to the CIO within a total portfolio risk budget" [S435] [Confirmed].</li>
+<li><b>The contrast table.</b> SAA uses fixed asset-class targets, many benchmarks and diversification "Through asset classes"; TPA uses dynamic weights, a "Single reference portfolio and risk budget" and diversification "Through risk factors" [S435] [Confirmed].</li>
+<li><b>The analogy KKR uses with clients:</b> TPA is "zero-based budgeting for portfolio construction ... if every investment had to earn its place in the portfolio today, how would capital be allocated?" [S436] [Confirmed].</li>
+<li><b>The on-ramp:</b> a "minimum viable TPA", which "can include centralizing portfolio-level functions, strengthening in-house portfolio construction and relative-value capabilities, refreshing views more frequently, and piloting TPA through a dedicated sleeve that has clear risk and liquidity guardrails" [S435] [Confirmed].</li>
+</ul>
+
+<figure>
+<svg viewBox="0 0 680 410" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10.5">
+<defs><marker id="l3arrB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#24467A"/></marker></defs>
+<g font-weight="700" font-size="12.5" fill="#13294B"><text x="12" y="20">BUCKET MODEL (SAA)</text><text x="352" y="20">TOTAL PORTFOLIO APPROACH (TPA)</text></g>
+<line x1="340" y1="8" x2="340" y2="400" stroke="#D5DAE3"/>
+<rect x="60" y="32" width="220" height="34" rx="4" fill="#13294B"/>
+<text x="170" y="53" fill="#FFFFFF" text-anchor="middle" font-weight="700">Board fixes a weight per bucket</text>
+<g stroke="#24467A" stroke-width="1.3" marker-end="url(#l3arrB)"><line x1="170" y1="66" x2="170" y2="84"/></g>
+<g stroke="#24467A" fill="#E8EDF5">
+<rect x="12" y="88" width="316" height="36" rx="3"/><rect x="12" y="130" width="316" height="36" rx="3"/><rect x="12" y="172" width="316" height="36" rx="3"/><rect x="12" y="214" width="316" height="36" rx="3"/><rect x="12" y="256" width="316" height="36" rx="3"/>
+</g>
+<g fill="#1B1F27">
+<text x="22" y="110" font-weight="700">Listed equity 50%</text><text x="318" y="110" text-anchor="end" fill="#4A5160">own team, own benchmark</text>
+<text x="22" y="152" font-weight="700">Bonds 30%</text><text x="318" y="152" text-anchor="end" fill="#4A5160">own team, own benchmark</text>
+<text x="22" y="194" font-weight="700">Private equity 8%</text><text x="318" y="194" text-anchor="end" fill="#4A5160">band 6% to 10%</text>
+<text x="22" y="236" font-weight="700">Infrastructure 6%</text><text x="318" y="236" text-anchor="end" fill="#4A5160">band 4% to 8%</text>
+<text x="22" y="278" font-weight="700">Real estate 6%</text><text x="318" y="278" text-anchor="end" fill="#4A5160">band 4% to 8%</text>
+</g>
+<rect x="12" y="304" width="316" height="86" rx="4" fill="#FBF1E6" stroke="#C8792B"/>
+<g fill="#1B1F27"><text x="22" y="322" font-weight="700">The problems</text>
+<text x="22" y="338">A deal that fits no bucket has no home.</text>
+<text x="22" y="353">Similar risks sit in different buckets.</text>
+<text x="22" y="368">A market fall breaks bands mechanically.</text>
+<text x="22" y="383">Weights shown are illustrative.</text></g>
+<rect x="380" y="32" width="270" height="50" rx="4" fill="#13294B"/>
+<g fill="#FFFFFF" text-anchor="middle"><text x="515" y="52" font-weight="700">Board sets a reference portfolio</text><text x="515" y="70">70% equity / 30% bonds + risk budget</text></g>
+<g stroke="#24467A" stroke-width="1.3" marker-end="url(#l3arrB)"><line x1="515" y1="82" x2="515" y2="98"/><line x1="515" y1="136" x2="515" y2="152"/></g>
+<rect x="400" y="102" width="230" height="34" rx="4" fill="#24467A"/>
+<text x="515" y="123" fill="#FFFFFF" text-anchor="middle" font-weight="700">CIO allocates within the budget</text>
+<rect x="352" y="156" width="318" height="140" rx="5" fill="#E3F4F1" stroke="#0E8F7E"/>
+<text x="362" y="174" font-weight="700" fill="#13294B">One pool: every idea competes</text>
+<g fill="#FFFFFF" stroke="#0E8F7E">
+<rect x="362" y="184" width="96" height="24" rx="12"/><rect x="464" y="184" width="60" height="24" rx="12"/><rect x="530" y="184" width="130" height="24" rx="12"/>
+<rect x="362" y="214" width="110" height="24" rx="12"/><rect x="478" y="214" width="106" height="24" rx="12"/><rect x="590" y="214" width="70" height="24" rx="12"/>
+<rect x="362" y="244" width="140" height="24" rx="12"/><rect x="508" y="244" width="152" height="24" rx="12"/>
+</g>
+<g fill="#1B1F27" font-size="10" text-anchor="middle">
+<text x="410" y="200">Listed equity</text><text x="494" y="200">Bonds</text><text x="595" y="200">Private equity</text>
+<text x="417" y="230">Private credit</text><text x="531" y="230">Infrastructure</text><text x="625" y="230">ABF</text>
+<text x="432" y="260">Capital solutions</text><text x="584" y="260">Reinsurance</text>
+</g>
+<text x="362" y="287" fill="#13294B" font-weight="700">Test: does it beat what it replaces?</text>
+<rect x="352" y="304" width="318" height="86" rx="4" fill="#FBF1E6" stroke="#C8792B"/>
+<g fill="#1B1F27"><text x="362" y="322" font-weight="700">What changes</text>
+<text x="362" y="338">One reference portfolio, one risk budget.</text>
+<text x="362" y="353">Diversify by risk factor, not label.</text>
+<text x="362" y="368">Weights move as opportunities move.</text>
+<text x="362" y="383">KKR TPA paper, Feb 2026 [S435].</text></g>
+</svg>
+<figcaption><span class="fig-num"></span> <b>Bucket model versus total portfolio model.</b> Left: the board's weights are the decision. Right: the board's reference portfolio and risk budget are the decision, and every candidate, including categories "such as Capital Solutions and Reinsurance" that "don't fit cleanly into buckets", competes for capital [S435] [Confirmed]. Bucket weights on the left are illustrative.</figcaption>
+</figure>
+
+<h3>Worked example 3: the TPA "funding rule" (illustrative numbers)</h3>
+<p>The core TPA move is to ask what an investment <i>replaces</i>. Suppose analysis shows a private credit fund behaves, in risk terms, like 30% listed equity plus 70% bonds (an illustrative factor mix, not a KKR estimate). Assume expected returns of 7.0% for listed equity and 4.5% for bonds.</p>
+<ol>
+<li><b>Fund it from its twin.</b> To add £100m of private credit without changing the portfolio's risk, sell £30m of equity and £70m of bonds.</li>
+<li><b>Its hurdle is the twin's return:</b> 0.30 × 7.0% + 0.70 × 4.5% = 2.10% + 3.15% = <b>5.25%</b>.</li>
+<li><b>Value added:</b> if the private credit is expected to earn 8.0% after fees, the gain is (8.0% − 5.25%) × £100m = <b>£2.75m a year</b>, for roughly the same risk, paid for with illiquidity.</li>
+<li><b>The SAA contrast:</b> in a bucket model the same loan sits in an "alternatives" bucket, measured against its own peer benchmark, and nobody checks what it displaced.</li>
+</ol>
+<p>KKR's paper runs the grown-up version: an optimiser matches the factor exposures of a "70% Equities/30% Bonds reference portfolio" while allowing "up to 30% of total portfolio capital to be allocated to Private Markets" and "up to 10% total portfolio leverage" [S435] [Confirmed].</p>
+
+<h3>Why TPA matters for private markets in particular</h3>
+<p>KKR argues TPA gives private markets investors "improved liquidity management, steadier commitment pacing, better vintage diversification, and greater flexibility through drawdowns and denominator effects" [S435] [Confirmed]. The July paper lists three hard problems for private assets inside TPA: the opportunity set and relative value; risk measurement, because "Investors often commit capital before knowing the exposures they will ultimately own"; and dynamism, meaning illiquidity [S436] [Confirmed]. Its answers include strategy-level benchmarks, public comparables, pacing with recycled distributions, and "secondaries and liquidity facilities available during dislocations" [S436] [Confirmed]. It also gives the key pacing input: "Across private market strategies, annual distributions have historically averaged approximately 10-30% of NAV" [S436] [Confirmed]. You will use that number in the next section.</p>
+
+<h3>KKR's model portfolios: how much private, in KKR's own published numbers</h3>
+<p>For financial advisers, KKR's Global Macro &amp; Asset Allocation team publishes three illustrative model portfolios on kkr.com/wealth, built from Burgiss, Bloomberg and NCREIF data, with "No specific KKR products referenced" [S437] [Confirmed]. The arithmetic of their weights gives 45% equity / 25% bonds / 30% private for the Growth model, and 30% / 40% / 30% for the Income and Capital Preservation models [Inferred from S437].</p>
+
+<figure>
+<svg viewBox="0 0 680 290" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10.5">
+<g fill="#1B1F27" font-weight="700" font-size="11"><text x="10" y="44">Traditional 60/40</text><text x="10" y="110">Growth</text><text x="10" y="176">Income</text><text x="10" y="242">Capital</text><text x="10" y="256">preservation</text></g>
+<g>
+<rect x="130" y="28" width="216" height="26" fill="#2a78d6"/><rect x="348" y="28" width="142" height="26" fill="#eb6834"/>
+<rect x="130" y="94" width="162" height="26" fill="#2a78d6"/><rect x="294" y="94" width="88" height="26" fill="#eb6834"/><rect x="384" y="94" width="106" height="26" fill="#1baf7a"/>
+<rect x="130" y="160" width="106" height="26" fill="#2a78d6"/><rect x="238" y="160" width="142" height="26" fill="#eb6834"/><rect x="382" y="160" width="108" height="26" fill="#1baf7a"/>
+<rect x="130" y="226" width="106" height="26" fill="#2a78d6"/><rect x="238" y="226" width="142" height="26" fill="#eb6834"/><rect x="382" y="226" width="108" height="26" fill="#1baf7a"/>
+</g>
+<g fill="#FFFFFF" font-weight="700" text-anchor="middle">
+<text x="238" y="45">Equity 60</text><text x="419" y="45">Bonds 40</text>
+<text x="211" y="111">Equity 45</text><text x="338" y="111">Bonds 25</text><text x="437" y="111">Private 30</text>
+<text x="183" y="177">Eq. 30</text><text x="309" y="177">Bonds 40</text><text x="436" y="177">Private 30</text>
+<text x="183" y="243">Eq. 30</text><text x="309" y="243">Bonds 40</text><text x="436" y="243">Private 30</text>
+</g>
+<g fill="#4A5160" font-size="9.5">
+<text x="130" y="68">Benchmark mix</text>
+<text x="130" y="134">Private: PE 15, private credit 5, infrastructure 5, real estate 5</text>
+<text x="130" y="200">Private: private credit 15, infrastructure 7.5, real estate 7.5</text>
+<text x="130" y="266">Private: private credit 12.5, infrastructure 7.5, PE 5, real estate 5</text>
+</g>
+<g fill="#1B1F27" font-size="10.5">
+<text x="502" y="104" font-weight="700">+0.5% a year vs 60/40</text><text x="502" y="119">$100 grew to $555 vs $464</text>
+<text x="502" y="170" font-weight="700">Yield 4.5% vs 3.1%</text><text x="502" y="185">for the 60/40</text>
+<text x="502" y="236" font-weight="700">Volatility 8.5% vs 11.6%</text><text x="502" y="251">similar return to 60/40</text>
+</g>
+<text x="10" y="14" fill="#4A5160" font-size="10">Weights in % of portfolio. Results are KKR's historical back-tests, not forecasts.</text>
+</svg>
+<figcaption><span class="fig-num"></span> <b>KKR's three published model portfolios against a 60/40.</b> Each moves 30% into private markets; they differ in what is sold to pay for it. Growth "maintain[s] 70% of the portfolio in liquid assets". Source: KKR wealth model portfolios page [S437], data 2005/2006 to 2024, accessed Oct 2026 [Confirmed]; weight totals derived [Inferred].</figcaption>
+</figure>
+
+<div class="box unsure"><span class="lbl">Get this right</span><p>KKR publishes <b>no "40/30/30"</b> model. If anyone (or any summary you read) says KKR recommends 40% equity / 30% bonds / 30% private, correct it: the published models are 45/25/30 (Growth) and 30/40/30 (Income and Capital Preservation) [S437] [Confirmed; totals Inferred]. The common thread is 30% in private markets for a balanced portfolio. KKR's case also rests on two claims on the same page: stock-bond correlations "have risen meaningfully, reducing the diversification benefits that once anchored the 60/40", and "the number of publicly listed U.S. companies has declined by nearly 50%" since 2000 [S437] [Confirmed].</p></div>
+
+<div class="two">
+<div class="box key"><span class="lbl">What you will learn</span><p>How institutions decide weights (SAA, bands, rebalancing), how TPA replaces buckets with a reference portfolio and a risk budget, and how to compute an investment's hurdle from what it displaces. Also how KKR translates the same logic into adviser-friendly model portfolios.</p></div>
+<div class="box term"><span class="lbl">Where you meet it at KKR</span><p>The two TPA papers [S435, S436] and the TPA FAQ page [S463] are client-facing content: KKR says the TPA analogy "consistently resonated with clients" [S436] [Confirmed]. The model portfolios sit on kkr.com/wealth next to the "Alternatives Unlocked" courses [S437, S465] [Confirmed].</p></div>
+</div>
+<div class="box opinion"><span class="lbl">Only at KKR</span><p>KKR's TPA authors also run the firm's own balance sheet (McVey is its CIO) [S436] [Confirmed], and KKR says portfolio-level exposure observations "inform future deployment decisions, including where to lean in and where to syndicate through co-investment" [S436] [Confirmed]. So the framework KCS takes to clients is also how KKR allocates its own capital. Elsewhere, TPA papers usually come from consultants or asset owners who do not originate the private assets themselves [Inferred].</p></div>
+<div class="box say"><span class="lbl">Say it in one line</span><p>"I want to understand how a CIO decides what earns a place in a total portfolio, using KKR's own Total Portfolio Approach work, so I can explain why a private allocation belongs there, not just what it is."</p></div>
+
+<!-- ============ SECTION 3 ============ -->
+<h2 id="l3-pacing">Commitment pacing: why you cannot just "buy 10% private equity"</h2>
+
+<p>With listed shares, deciding on a 10% weight and owning 10% are the same day's work. With a private fund they are years apart. A client <b>commits</b> money; the fund <b>calls</b> it in instalments as deals are found (typically over 3 to 5 years for KKR's drawdown funds [S70] [Confirmed]); it <b>distributes</b> cash as assets are sold; and the client's actual exposure is the <b>NAV</b> in between. So the client controls commitments, but its target is set in NAV. Converting one into the other is called <b>commitment pacing</b>, and the standard tool is a 2002 model from Yale [Inferred].</p>
+
+<h3>The Takahashi-Alexander ("Yale") model</h3>
+<p>Dean Takahashi and Seth Alexander published "Illiquid Alternative Asset Fund Modeling" in the <i>Journal of Portfolio Management</i> in 2002 [S454] [Confirmed]. It is "a discrete-time deterministic model" (it steps year by year and has no randomness) with six inputs: "RC (rate of contribution), CC (capital commitment), L (life of the fund), B (bow factor describing changes on the rate of distribution over time), G (annual growth rate), and Y (yield percentage)" [S454] [Confirmed]. In words: each year the fund calls a share of what is still uncalled; the NAV grows; a rising share of the NAV is paid out, and the bow sets how back-loaded that payout is [S455] [Reported].</p>
+
+<div class="box term"><span class="lbl">The four equations, in symbols and in words</span>
+<p><b>1. Calls:</b> C<sub>t</sub> = RC<sub>t</sub> × (CC − PIC<sub>t−1</sub>). "This year's call = the call rate × the commitment not yet paid in." PIC is paid-in capital to date.</p>
+<p><b>2. Distribution rate:</b> RD<sub>t</sub> = max[ Y , (t ÷ L)<sup>B</sup> ]. "The share of NAV paid out rises with the fund's age; a bigger bow B keeps it low for longer." Y is a floor for income-paying assets.</p>
+<p><b>3. Distributions:</b> D<sub>t</sub> = RD<sub>t</sub> × NAV<sub>t−1</sub> × (1 + G). "Pay out that share of last year's NAV after this year's growth."</p>
+<p><b>4. NAV:</b> NAV<sub>t</sub> = NAV<sub>t−1</sub> × (1 + G) + C<sub>t</sub> − D<sub>t</sub>. "Grow it, add what came in, take off what went out."</p>
+<p>The six inputs are from the source [S454] [Confirmed]; this written-out form is the widely used textbook version [Inferred].</p></div>
+
+<h3>Worked example 4: one £100m commitment, step by step (illustrative numbers)</h3>
+<p>Inputs: CC = £100m; L = 10 years; B = 2.5; G = 10% a year; Y = 0; call rates RC = 25% in year 1, 33.3% in year 2, then 50% of whatever remains each year after.</p>
+<table class="tight">
+<thead><tr><th>Year</th><th>Call C<sub>t</sub></th><th>NAV after growth</th><th>RD<sub>t</sub> = (t/10)<sup>2.5</sup></th><th>Distribution D<sub>t</sub></th><th>NAV<sub>t</sub></th><th>Paid in to date</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>25% × 100 = 25.0</td><td>0 × 1.1 = 0.0</td><td>0.003</td><td>0.0</td><td>0 + 25.0 − 0 = <b>25.0</b></td><td>25.0</td></tr>
+<tr><td>2</td><td>33.3% × 75 = 25.0</td><td>25.0 × 1.1 = 27.5</td><td>0.018</td><td>0.018 × 27.5 = 0.5</td><td>27.5 + 25.0 − 0.5 = <b>52.0</b></td><td>50.0</td></tr>
+<tr><td>3</td><td>50% × 50 = 25.0</td><td>52.0 × 1.1 = 57.2</td><td>0.049</td><td>0.049 × 57.2 = 2.8</td><td>57.2 + 25.0 − 2.8 = <b>79.4</b></td><td>75.0</td></tr>
+<tr><td>4</td><td>50% × 25 = 12.5</td><td>79.4 × 1.1 = 87.3</td><td>0.101</td><td>0.101 × 87.3 = 8.8</td><td>87.3 + 12.5 − 8.8 = <b>91.0</b></td><td>87.5</td></tr>
+<tr><td>5</td><td>50% × 12.5 = 6.25</td><td>91.0 × 1.1 = 100.1</td><td>0.177</td><td>0.177 × 100.1 = 17.7</td><td>100.1 + 6.25 − 17.7 = <b>88.6</b></td><td>93.75</td></tr>
+</tbody></table>
+<p>Run the same four equations to year 10 and the fund pays back £148.5m in total, 1.49 times the money paid in. But look at the NAV column: <b>it never reaches £100m</b>. It peaks at £91.0m in year 4 and then shrinks, because distributions start before the last calls arrive. A client that wants £100m of exposure cannot get it by committing £100m once.</p>
+
+<figure>
+<svg viewBox="0 0 680 330" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10.5">
+<g stroke="#D5DAE3" stroke-width="0.8"><line x1="70" y1="50" x2="660" y2="50"/><line x1="70" y1="90" x2="660" y2="90"/><line x1="70" y1="130" x2="660" y2="130"/><line x1="70" y1="170" x2="660" y2="170"/><line x1="70" y1="250" x2="660" y2="250"/></g>
+<line x1="70" y1="210" x2="660" y2="210" stroke="#4A5160" stroke-width="1"/>
+<g fill="#4A5160" font-size="10" text-anchor="end"><text x="62" y="54">100</text><text x="62" y="94">75</text><text x="62" y="134">50</text><text x="62" y="174">25</text><text x="62" y="214">0</text><text x="62" y="254">−25</text></g>
+<text x="12" y="30" fill="#4A5160" font-size="10">£m, per £100m committed</text>
+<g fill="#eb6834">
+<rect x="79" y="210" width="22" height="40"/><rect x="139" y="210" width="22" height="40"/><rect x="199" y="210" width="22" height="40"/><rect x="259" y="210" width="22" height="20"/><rect x="319" y="210" width="22" height="10"/><rect x="379" y="210" width="22" height="5"/><rect x="439" y="210" width="22" height="2.5"/><rect x="499" y="210" width="22" height="1.3"/>
+</g>
+<g fill="#1baf7a">
+<rect x="139" y="209.2" width="22" height="0.8"/><rect x="199" y="205.5" width="22" height="4.5"/><rect x="259" y="195.9" width="22" height="14.1"/><rect x="319" y="181.7" width="22" height="28.3"/><rect x="379" y="166.5" width="22" height="43.5"/><rect x="439" y="157" width="22" height="53"/><rect x="499" y="160.4" width="22" height="49.6"/><rect x="559" y="177.7" width="22" height="32.3"/><rect x="619" y="198.6" width="22" height="11.4"/>
+</g>
+<polyline fill="none" stroke="#2a78d6" stroke-width="2.4" points="90,170 150,126.8 210,83 270,64.4 330,68.2 390,92.6 450,131.3 510,171.8 570,199.6 630,209.7"/>
+<g fill="#2a78d6"><circle cx="270" cy="64.4" r="3.5"/></g>
+<g fill="#4A5160" font-size="10" text-anchor="middle">
+<text x="90" y="272">Y1</text><text x="150" y="272">Y2</text><text x="210" y="272">Y3</text><text x="270" y="272">Y4</text><text x="330" y="272">Y5</text><text x="390" y="272">Y6</text><text x="450" y="272">Y7</text><text x="510" y="272">Y8</text><text x="570" y="272">Y9</text><text x="630" y="272">Y10</text>
+</g>
+<g fill="#1B1F27" font-size="10.5">
+<text x="282" y="52" font-weight="700">NAV peaks at £91.0m in year 4</text>
+<text x="282" y="66">(never the £100m committed)</text>
+<text x="470" y="150" font-weight="700">Distributions</text>
+<text x="470" y="164">peak £33.1m, year 7</text>
+<text x="108" y="292" font-weight="700">Capital calls: £25m a year, years 1 to 3</text>
+<text x="108" y="306">then halving each year</text>
+<text x="420" y="292">Total paid back £148.5m = 1.49x</text>
+<text x="420" y="306">over 10 years (with G = 10%)</text>
+</g>
+</svg>
+<figcaption><span class="fig-num"></span> <b>The life of one commitment.</b> Orange bars below the line are cash the client sends; green bars above are cash it gets back; the blue line is its exposure (NAV). Inputs: RC 25%, 33%, then 50%; B = 2.5; G = 10%; L = 10. Model structure from Takahashi and Alexander [S454]; all numbers illustrative [Inferred].</figcaption>
+</figure>
+
+<h3>Worked example 5: a five-year pacing plan (illustrative numbers)</h3>
+<p>A client with a £10bn portfolio wants 10% (£1.0bn) in private equity NAV. It has none today. Assume the portfolio stays at £10bn and every commitment behaves like the fund above. How much should it commit each year? Try £300m a year and run the model for each vintage (a "vintage" is the year a fund starts investing).</p>
+<table class="tight">
+<thead><tr><th>Year</th><th>New commitment</th><th>Calls (all vintages)</th><th>Distributions</th><th>Net cash out</th><th>Private NAV</th><th>NAV as % of £10bn</th><th>Unfunded commitments</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>300</td><td>75.0</td><td>0.0</td><td>75.0</td><td>75.0</td><td>0.75%</td><td>225.0</td></tr>
+<tr><td>2</td><td>300</td><td>150.0</td><td>1.5</td><td>148.5</td><td>231.0</td><td>2.31%</td><td>375.0</td></tr>
+<tr><td>3</td><td>300</td><td>225.0</td><td>9.9</td><td>215.1</td><td>469.2</td><td>4.69%</td><td>450.0</td></tr>
+<tr><td>4</td><td>300</td><td>262.5</td><td>36.4</td><td>226.1</td><td>742.2</td><td>7.42%</td><td>487.5</td></tr>
+<tr><td>5</td><td>300</td><td>281.2</td><td>89.5</td><td>191.7</td><td><b>1,008.1</b></td><td><b>10.08%</b></td><td>506.2</td></tr>
+</tbody></table>
+<p>How each cell is built: year 3's NAV of £469.2m is three vintages added together: vintage 1 at age 3 (3 × 79.4 = 238.2), vintage 2 at age 2 (3 × 52.0 = 156.0) and vintage 3 at age 1 (3 × 25.0 = 75.0). Calls and distributions are summed the same way. All figures £m, illustrative.</p>
+
+<figure>
+<svg viewBox="0 0 680 310" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10.5">
+<g stroke="#D5DAE3" stroke-width="0.8"><line x1="80" y1="215.5" x2="600" y2="215.5"/><line x1="80" y1="161" x2="600" y2="161"/><line x1="80" y1="106.5" x2="600" y2="106.5"/></g>
+<line x1="80" y1="52" x2="600" y2="52" stroke="#B23A48" stroke-width="1.4" stroke-dasharray="6 3"/>
+<line x1="80" y1="270" x2="600" y2="270" stroke="#4A5160"/>
+<g fill="#4A5160" font-size="10" text-anchor="end"><text x="72" y="274">0</text><text x="72" y="219">250</text><text x="72" y="165">500</text><text x="72" y="110">750</text><text x="72" y="56">1,000</text></g>
+<text x="12" y="30" fill="#4A5160" font-size="10">Private NAV, £m</text>
+<text x="84" y="46" fill="#B23A48" font-size="10" font-weight="700">Target £1,000m = 10% of £10bn</text>
+<g fill="#2a78d6"><rect x="120" y="253.6" width="60" height="16.4"/><rect x="220" y="236" width="60" height="34"/><rect x="320" y="218.1" width="60" height="51.9"/><rect x="420" y="210.5" width="60" height="59.5"/><rect x="520" y="212" width="60" height="58"/></g>
+<g fill="#eb6834"><rect x="220" y="219.6" width="60" height="15.4"/><rect x="320" y="184.1" width="60" height="33"/><rect x="420" y="158.6" width="60" height="50.9"/><rect x="520" y="152.5" width="60" height="58.5"/></g>
+<g fill="#1baf7a"><rect x="320" y="167.7" width="60" height="15.4"/><rect x="420" y="124.6" width="60" height="33"/><rect x="520" y="100.6" width="60" height="50.9"/></g>
+<g fill="#eda100"><rect x="420" y="108.2" width="60" height="15.4"/><rect x="520" y="66.6" width="60" height="33"/></g>
+<g fill="#6250d6"><rect x="520" y="50.2" width="60" height="15.4"/></g>
+<g fill="#1B1F27" font-size="10.5" font-weight="700" text-anchor="middle"><text x="150" y="247">75</text><text x="250" y="213">231</text><text x="350" y="161">469</text><text x="450" y="102">742</text><text x="550" y="44">1,008</text></g>
+<g fill="#4A5160" font-size="10" text-anchor="middle"><text x="150" y="288">Year 1</text><text x="250" y="288">Year 2</text><text x="350" y="288">Year 3</text><text x="450" y="288">Year 4</text><text x="550" y="288">Year 5</text></g>
+<g fill="#1B1F27" font-size="10"><text x="588" y="244">Vintage 1</text><text x="588" y="185">Vintage 2</text><text x="588" y="129">Vintage 3</text><text x="588" y="87">Vintage 4</text><text x="588" y="62">Vintage 5</text></g>
+<polyline fill="none" stroke="#1B1F27" stroke-width="1.6" stroke-dasharray="3 3" points="150,215.5 250,156.6 350,96.9 450,71.6 550,76.9"/>
+<rect x="96" y="120" width="190" height="34" rx="3" fill="#FFFFFF" stroke="#4A5160"/>
+<text x="104" y="134" fill="#1B1F27" font-size="10">Dotted: commit £1bn once in year 1.</text>
+<text x="104" y="148" fill="#1B1F27" font-size="10">Peaks at £910m, then runs off.</text>
+</svg>
+<figcaption><span class="fig-num"></span> <b>Building exposure one vintage at a time.</b> Committing £300m a year reaches the £1bn target in year 5 with five vintages layered on top of each other. The dotted line shows the "just buy 10%" mistake: one £1bn commitment peaks below target and then shrinks. Illustrative numbers from the single-commitment model above [Inferred].</figcaption>
+</figure>
+
+<h3>Over-commitment and the commitment ratio</h3>
+<p>Look at year 5 of the plan: the client has signed £1.5bn of commitments to hold £1.0bn of NAV, and £506m is still uncalled. <b>Over-commitment</b> is the deliberate practice of committing more than the NAV target, because some of the money will not be called for years and some will already have come back [Inferred]. Two ratios keep it honest:</p>
+<ul>
+<li><b>Commitment ratio</b> = total commitments ÷ target NAV = 1,500 ÷ 1,000 = <b>1.5x</b> in the plan.</li>
+<li><b>Unfunded cover</b> = liquid assets ÷ unfunded commitments. The unfunded £506m is a real promise: if all of it were called in a bad year, the client must pay from its liquid assets. A client with £2bn of cash and bonds has cover of about 4x.</li>
+</ul>
+<p>The steady-state check uses KKR's own figure. If distributions run at 10% to 30% of NAV a year [S436] [Confirmed], a £1.0bn private book returns roughly £100m to £300m a year. To hold NAV flat, new calls must replace that, which is why mature programmes commit every year rather than in bursts [Inferred]. KKR's TPA paper argues for "steadier commitment pacing" and "better vintage diversification" for exactly this reason [S435] [Confirmed].</p>
+
+<h3>Worked example 6: the denominator effect, now with pacing (illustrative numbers)</h3>
+<p>Part 1 showed the basic denominator effect. Here it is with the pacing plan's year-5 numbers, so you can see what it does to next year's commitment.</p>
+
+<figure>
+<svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10.5">
+<line x1="60" y1="260" x2="440" y2="260" stroke="#4A5160"/>
+<rect x="100" y="62.2" width="110" height="197.8" fill="#2a78d6"/><rect x="100" y="40" width="110" height="21.2" fill="#1baf7a"/>
+<rect x="290" y="111.6" width="110" height="148.4" fill="#2a78d6"/><rect x="290" y="91.2" width="110" height="19.4" fill="#1baf7a"/>
+<g fill="#FFFFFF" text-anchor="middle" font-weight="700"><text x="155" y="160">Listed</text><text x="155" y="176">£8,992m</text><text x="345" y="185">Listed</text><text x="345" y="201">£6,744m</text></g>
+<g fill="#1B1F27" text-anchor="middle" font-size="10.5">
+<text x="155" y="32" font-weight="700">Private £1,008m = 10.1%</text>
+<text x="345" y="83" font-weight="700">Private £927m = 12.1%</text>
+<text x="155" y="280">Before: £10,000m</text><text x="345" y="280">After: £7,671m</text>
+</g>
+<g fill="#4A5160" font-size="10" text-anchor="middle"><text x="250" y="150">Listed −25%</text><text x="250" y="164">Private −8%</text><text x="250" y="178">(lagged marks)</text></g>
+<rect x="455" y="30" width="215" height="240" rx="5" fill="#FBF1E6" stroke="#C8792B"/>
+<g fill="#1B1F27" font-size="10.5">
+<text x="465" y="50" font-weight="700" fill="#13294B">The arithmetic</text>
+<text x="465" y="67">Listed: 8,992 × 0.75 = 6,744</text>
+<text x="465" y="83">Private: 1,008 × 0.92 = 927</text>
+<text x="465" y="99">Total: 6,744 + 927 = 7,671</text>
+<text x="465" y="115">Private share: 927 ÷ 7,671</text>
+<text x="465" y="131" font-weight="700">= 12.1% (band 8% to 12%)</text>
+<text x="465" y="157" font-weight="700" fill="#13294B">Committed exposure</text>
+<text x="465" y="174">(NAV + unfunded) ÷ total</text>
+<text x="465" y="190">= (927 + 506) ÷ 7,671</text>
+<text x="465" y="206" font-weight="700">= 18.7%</text>
+<text x="465" y="232">Nothing was bought. The</text>
+<text x="465" y="247">band breaks anyway, so next</text>
+<text x="465" y="262">year's £300m is at risk.</text>
+</g>
+</svg>
+<figcaption><span class="fig-num"></span> <b>The denominator effect hits a pacing plan.</b> Listed assets are repriced at once; private marks fall less and later. The private share rises from 10.1% to 12.1% and, counting promises not yet called, to 18.7%. Illustrative numbers [Inferred]; mechanism per [S323] [Reported].</figcaption>
+</figure>
+
+<p>The client now has three choices, each with a cost. (1) <b>Pause commitments.</b> Cheap today, but it leaves a hole in the vintage sequence that shows up as missing NAV five years later. (2) <b>Sell fund stakes in the secondary market.</b> Evercore reported high-quality buyout interests clearing at around 90% of NAV in H1 2026 [S267] [Confirmed]; selling £200m at 90% crystallises a £20m loss. (3) <b>Widen the lens.</b> KKR's TPA paper models a hypothetical 40% public equity drawdown that mechanically makes private assets look overweight, and argues a total portfolio risk budget gives "greater flexibility through drawdowns and denominator effects" [S435] [Confirmed]. This is not a textbook problem: S&amp;P Global found 174 of 298 pension funds over-allocated to private equity in Q1 2025 [S324] [Reported], and 53% of LPs in an ILPA survey said undrawn commitments limit new private equity commitments [S262] [Confirmed].</p>
+
+<div class="two">
+<div class="box key"><span class="lbl">What you will learn</span><p>To run the Takahashi-Alexander model by hand, turn a NAV target into a yearly commitment budget, size over-commitment and unfunded cover, and predict when the denominator effect will freeze a client's next commitment.</p></div>
+<div class="box term"><span class="lbl">Where you meet it at KKR</span><p>Every flagship fundraise depends on clients' pacing budgets: North America Fund XIV closed at about $23bn in April 2026 [S459] [Reported] and Global Infrastructure Investors V at $19.2bn in August 2026 [S430] [Confirmed]. KKR's TPA papers name "pacing and recycled distributions" as a core private markets tool [S436] [Confirmed].</p></div>
+</div>
+<div class="box opinion"><span class="lbl">Only at KKR</span><p>KKR raises drawdown funds and evergreen funds in the same asset classes, so a KCS team can offer a client two routes to the same exposure: a paced commitment programme, or an evergreen vehicle such as K-INFRA that is invested from the day money arrives (about 85% infrastructure assets, 15% liquidity portfolio) [S421] [Confirmed]. Learning when each route wins needs a shelf with both, which few managers have at KKR's scale [Inferred].</p></div>
+<div class="box say"><span class="lbl">Say it in one line</span><p>"I want to learn commitment pacing properly, the Yale model, over-commitment and the denominator effect, because a client's 'yes' to a KKR fund is really a yes to a five-year cash flow plan."</p></div>
+
+<!-- ============ SECTION 4 ============ -->
+<h2 id="l3-performance">Reading performance like an LP</h2>
+
+<p>A KCS team spends much of its life presenting performance, and clients' due diligence teams spend theirs taking it apart. ILPA's due diligence questionnaire has a whole section on track record [S444] [Confirmed], and ILPA's 2025 Performance Template standardises IRR and TVPI/MOIC, gross and net, "with and without the impact of fund-level subscription facilities" [S445] [Confirmed]. This section teaches each measure, then shows how each one can flatter or mislead.</p>
+
+<h3>IRR: the return that cares about timing</h3>
+<p>The <b>internal rate of return</b> is the single annual interest rate that makes all of a fund's cash flows, in and out, worth exactly zero today.</p>
+<div class="box term"><span class="lbl">Formula</span><p>0 = Σ CF<sub>t</sub> ÷ (1 + IRR)<sup>t</sup>. In words: discount every cash flow back to day 0 at the rate IRR; IRR is the rate at which the money you put in and the money you got out cancel exactly. Calls are negative CF, distributions positive, and any remaining NAV is treated as a final positive flow.</p></div>
+<p><b>Worked example 7 (illustrative).</b> An LP pays £100m at year 0 and £50m at year 1, receives £60m at year 2 and £150m at year 4. There is no algebraic shortcut, so you try rates:</p>
+<ul>
+<li>At 10%: −100 − 50 ÷ 1.10 + 60 ÷ 1.10<sup>2</sup> + 150 ÷ 1.10<sup>4</sup> = −100 − 45.45 + 49.59 + 102.45 = <b>+6.59</b>. Positive, so the true rate is higher.</li>
+<li>At 15%: −100 − 43.48 + 45.37 + 85.76 = <b>−12.35</b>. Negative, so the rate is lower.</li>
+<li>Straight-line between them: 10% + 5% × 6.59 ÷ (6.59 + 12.35) = <b>11.7%</b>. A spreadsheet's IRR function gives 11.6%.</li>
+</ul>
+
+<h3>The timing trap</h3>
+<figure>
+<svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10.5">
+<defs>
+<marker id="l3arrDn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#eb6834"/></marker>
+<marker id="l3arrUp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1baf7a"/></marker>
+</defs>
+<g font-weight="700" fill="#13294B" font-size="11.5"><text x="10" y="50">Fund A</text><text x="10" y="140">Fund B</text><text x="10" y="230">Fund A with a</text><text x="10" y="245">credit line</text></g>
+<g fill="#4A5160" font-size="10"><text x="10" y="65">quick flip</text><text x="10" y="155">long hold</text><text x="10" y="260">call delayed a year</text></g>
+<g stroke="#4A5160" stroke-width="1"><line x1="150" y1="60" x2="470" y2="60"/><line x1="150" y1="150" x2="470" y2="150"/><line x1="150" y1="240" x2="470" y2="240"/></g>
+<g fill="#4A5160" font-size="9.5" text-anchor="middle">
+<text x="160" y="94">0</text><text x="210" y="94">1</text><text x="260" y="94">2</text><text x="310" y="94">3</text><text x="360" y="94">4</text><text x="410" y="94">5</text><text x="460" y="94">6</text>
+<text x="160" y="184">0</text><text x="210" y="184">1</text><text x="260" y="184">2</text><text x="310" y="184">3</text><text x="360" y="184">4</text><text x="410" y="184">5</text><text x="460" y="184">6</text>
+<text x="160" y="274">0</text><text x="210" y="274">1</text><text x="260" y="274">2</text><text x="310" y="274">3</text><text x="360" y="274">4</text><text x="410" y="274">5</text><text x="460" y="274">6</text>
+</g>
+<g stroke="#eb6834" stroke-width="2.4" marker-end="url(#l3arrDn)"><line x1="160" y1="62" x2="160" y2="82"/><line x1="160" y1="152" x2="160" y2="172"/><line x1="210" y1="242" x2="210" y2="262"/></g>
+<g stroke="#1baf7a" stroke-width="2.4" marker-end="url(#l3arrUp)"><line x1="260" y1="58" x2="260" y2="30"/><line x1="460" y1="148" x2="460" y2="112"/><line x1="260" y1="238" x2="260" y2="210"/></g>
+<g fill="#1B1F27" font-size="10">
+<text x="168" y="80">−100</text><text x="268" y="34">+150</text>
+<text x="168" y="170">−100</text><text x="420" y="116" text-anchor="end">+250</text>
+<text x="218" y="260">−106</text><text x="268" y="214">+150</text>
+<text x="300" y="218" fill="#4A5160">fund borrowed 100 at 6% in year 0;</text>
+<text x="300" y="231" fill="#4A5160">LP repays 106 in year 1</text>
+</g>
+<rect x="490" y="20" width="180" height="62" rx="4" fill="#E8EDF5"/>
+<rect x="490" y="110" width="180" height="62" rx="4" fill="#E8EDF5"/>
+<rect x="490" y="200" width="180" height="62" rx="4" fill="#FBF1E6" stroke="#C8792B"/>
+<g fill="#1B1F27" font-size="10.5">
+<text x="500" y="40">MOIC 150 ÷ 100 = <tspan font-weight="700">1.50x</tspan></text><text x="500" y="56">IRR 1.5^(1/2) − 1 = <tspan font-weight="700">22.5%</tspan></text><text x="500" y="72" fill="#4A5160">profit £50m</text>
+<text x="500" y="130">MOIC 250 ÷ 100 = <tspan font-weight="700">2.50x</tspan></text><text x="500" y="146">IRR 2.5^(1/6) − 1 = <tspan font-weight="700">16.5%</tspan></text><text x="500" y="162" fill="#4A5160">profit £150m</text>
+<text x="500" y="220">MOIC 150 ÷ 106 = <tspan font-weight="700">1.42x</tspan></text><text x="500" y="236">IRR 150 ÷ 106 − 1 = <tspan font-weight="700">41.5%</tspan></text><text x="500" y="252" fill="#B23A48">IRR up, real money down</text>
+</g>
+</svg>
+<figcaption><span class="fig-num"></span> <b>Three ways IRR can mislead.</b> Fund A beats Fund B on IRR but makes a third of the profit. Fund A with a subscription credit line (the fund borrows first and calls LPs later) nearly doubles its IRR while the LP's multiple falls. This is why ILPA's template reports returns with and without subscription facilities [S445] [Confirmed]. Cash flows illustrative [Inferred].</figcaption>
+</figure>
+<p>IRR rewards speed. Return money early and IRR jumps even if total profit is small. Delay the call with a credit line and IRR jumps again even though the LP pays interest. Neither makes the LP richer. So an LP never reads IRR alone: it reads it next to the multiples below [Inferred].</p>
+
+<h3>The multiples: TVPI, DPI, RVPI and MOIC</h3>
+<div class="box term"><span class="lbl">Formulas</span>
+<p><b>DPI</b> (distributions to paid-in) = cumulative distributions ÷ paid-in capital. "How much cash have I actually had back?" <b>RVPI</b> (residual value to paid-in) = current NAV ÷ paid-in. "How much is still on paper?" <b>TVPI</b> (total value to paid-in) = DPI + RVPI. <b>MOIC</b> (multiple on invested capital) is the same idea measured on the money put into deals, usually gross of fees, often deal by deal (standard industry definitions) [Inferred].</p></div>
+<p><b>Worked example 8.</b> Take the fund from the pacing section at the end of year 6: paid in £96.9m, distributed £57.0m to date, NAV £73.4m. DPI = 57.0 ÷ 96.9 = <b>0.59x</b>. RVPI = 73.4 ÷ 96.9 = <b>0.76x</b>. TVPI = 0.59 + 0.76 = <b>1.35x</b>. In words: the LP has had 59p back for every £1 paid in, and the manager values what is left at another 76p.</p>
+
+<figure>
+<svg viewBox="0 0 680 290" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10.5">
+<g stroke="#D5DAE3" stroke-width="0.8"><line x1="60" y1="180" x2="650" y2="180"/><line x1="60" y1="60" x2="650" y2="60"/></g>
+<line x1="60" y1="120" x2="650" y2="120" stroke="#13294B" stroke-dasharray="5 3"/>
+<line x1="60" y1="240" x2="650" y2="240" stroke="#4A5160"/>
+<g fill="#4A5160" font-size="10" text-anchor="end"><text x="54" y="244">0.0x</text><text x="54" y="184">0.5x</text><text x="54" y="124">1.0x</text><text x="54" y="64">1.5x</text></g>
+<g fill="#1baf7a">
+<rect x="138" y="238.8" width="34" height="1.2"/><rect x="196" y="235.2" width="34" height="4.8"/><rect x="254" y="223.2" width="34" height="16.8"/><rect x="312" y="201.6" width="34" height="38.4"/><rect x="370" y="169.2" width="34" height="70.8"/><rect x="428" y="129.6" width="34" height="110.4"/><rect x="486" y="93.6" width="34" height="146.4"/><rect x="544" y="69.6" width="34" height="170.4"/><rect x="602" y="61.2" width="34" height="178.8"/>
+</g>
+<g fill="#2a78d6">
+<rect x="80" y="120" width="34" height="120"/><rect x="138" y="114.4" width="34" height="123.6"/><rect x="196" y="108.6" width="34" height="125.8"/><rect x="254" y="99.6" width="34" height="122.8"/><rect x="312" y="89.4" width="34" height="111.4"/><rect x="370" y="78.8" width="34" height="89.6"/><rect x="428" y="70.4" width="34" height="58.4"/><rect x="486" y="65.6" width="34" height="27.2"/><rect x="544" y="62.4" width="34" height="6.4"/>
+</g>
+<g fill="#1B1F27" font-size="9.5" text-anchor="middle">
+<text x="97" y="114">1.00</text><text x="155" y="108">1.05</text><text x="213" y="102">1.10</text><text x="271" y="94">1.18</text><text x="329" y="84">1.26</text><text x="387" y="73">1.35</text><text x="445" y="65">1.42</text><text x="503" y="60">1.46</text><text x="561" y="57">1.48</text><text x="619" y="56">1.49</text>
+</g>
+<g fill="#4A5160" font-size="10" text-anchor="middle"><text x="97" y="256">Y1</text><text x="155" y="256">Y2</text><text x="213" y="256">Y3</text><text x="271" y="256">Y4</text><text x="329" y="256">Y5</text><text x="387" y="256">Y6</text><text x="445" y="256">Y7</text><text x="503" y="256">Y8</text><text x="561" y="256">Y9</text><text x="619" y="256">Y10</text></g>
+<g fill="#1B1F27" font-size="10.5">
+<text x="64" y="30" font-weight="700">TVPI on top of each bar = DPI (green, cash back) + RVPI (blue, still on paper)</text>
+<text x="64" y="278">Dashed line = 1.0x, "money back". This fund's DPI crosses it only in year 8.</text>
+</g>
+</svg>
+<figcaption><span class="fig-num"></span> <b>How a fund's value turns from paper into cash.</b> Early on, TVPI is almost all RVPI: the manager's valuation. DPI only dominates late. Same illustrative fund as the pacing model [Inferred].</figcaption>
+</figure>
+
+<h3>Gross versus net: the fee drag, worked</h3>
+<p><b>Gross</b> returns are what the deals earned. <b>Net</b> returns are what the LP kept after management fees, fund expenses and carried interest. The gap is the price of the manager. Drawdown funds traditionally charge a management fee of about 1.5% to 2% a year and carried interest of about 20% above a hurdle, often 8% (standard industry terms; exact terms vary by fund) [Inferred]. KKR's evergreen K-PEC uses a different formula: 1.25% a year of NAV and 15% of total return above a 5% hurdle, with a high-water mark and a 100% catch-up [S420] [Confirmed].</p>
+<p><b>Worked example 9 (illustrative, simplified).</b> An LP commits and pays in £100m over the fund's life. Management fees take £12m in total, so £88m goes into deals. The deals return 2.2 times their cost. Assume a single 5-year holding period, the 8% hurdle is cleared, and a full catch-up gives the manager 20% of all profit.</p>
+<ol>
+<li>Gross value = 88 × 2.2 = <b>£193.6m</b>. Gross MOIC = <b>2.20x</b>.</li>
+<li>Profit over everything the LP paid = 193.6 − 100 = £93.6m. Hurdle check: 100 × 1.08<sup>5</sup> = 146.9 &lt; 193.6, so carry is due.</li>
+<li>Carry = 20% × 93.6 = <b>£18.7m</b>. LP receives 193.6 − 18.7 = <b>£174.9m</b>. Net TVPI = <b>1.75x</b>.</li>
+<li>Over five years: gross IRR = 2.20<sup>1/5</sup> − 1 = <b>17.1%</b>; net IRR = 1.749<sup>1/5</sup> − 1 = <b>11.8%</b>. Fee drag = <b>5.3 points a year</b>.</li>
+</ol>
+
+<figure>
+<svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10.5">
+<line x1="30" y1="250" x2="650" y2="250" stroke="#4A5160"/>
+<rect x="40" y="150" width="60" height="100" fill="#24467A"/>
+<rect x="128" y="150" width="60" height="12" fill="#B23A48"/>
+<rect x="216" y="162" width="60" height="88" fill="#24467A"/>
+<rect x="304" y="56.4" width="60" height="105.6" fill="#1baf7a"/>
+<rect x="392" y="56.4" width="60" height="193.6" fill="#24467A"/>
+<rect x="480" y="56.4" width="60" height="18.7" fill="#B23A48"/>
+<rect x="568" y="75.1" width="60" height="174.9" fill="#13294B"/>
+<g stroke="#4A5160" stroke-dasharray="2 2"><line x1="100" y1="150" x2="128" y2="150"/><line x1="188" y1="162" x2="216" y2="162"/><line x1="276" y1="162" x2="304" y2="162"/><line x1="364" y1="56.4" x2="392" y2="56.4"/><line x1="452" y1="56.4" x2="480" y2="56.4"/><line x1="540" y1="75.1" x2="568" y2="75.1"/></g>
+<g fill="#1B1F27" font-weight="700" text-anchor="middle" font-size="11">
+<text x="70" y="143">100.0</text><text x="158" y="143">−12.0</text><text x="246" y="155">88.0</text><text x="334" y="49">+105.6</text><text x="422" y="49">193.6</text><text x="510" y="49">−18.7</text><text x="598" y="68">174.9</text>
+</g>
+<g fill="#4A5160" font-size="10" text-anchor="middle">
+<text x="70" y="266">Paid in</text><text x="70" y="279">by LP</text>
+<text x="158" y="266">Management</text><text x="158" y="279">fees</text>
+<text x="246" y="266">Invested</text><text x="246" y="279">in deals</text>
+<text x="334" y="266">Gross gain</text><text x="334" y="279">(2.2x)</text>
+<text x="422" y="266">Gross</text><text x="422" y="279">value</text>
+<text x="510" y="266">Carried</text><text x="510" y="279">interest 20%</text>
+<text x="598" y="266">Net to</text><text x="598" y="279">the LP</text>
+</g>
+<g fill="#1B1F27" font-size="10.5"><text x="40" y="24" font-weight="700">Gross MOIC 193.6 ÷ 88 = 2.20x   ·   Net TVPI 174.9 ÷ 100 = 1.75x</text>
+<text x="40" y="40">Gross IRR 17.1%, net IRR 11.8% (single 5-year hold)</text></g>
+</svg>
+<figcaption><span class="fig-num"></span> <b>From gross to net, £m.</b> Fees shrink the base that compounds; carry takes a share of the gain. Together they turn 2.20x into 1.75x. Illustrative and simplified (no fund expenses, no fee offsets) [Inferred].</figcaption>
+</figure>
+
+<h3>PME: did the fund beat the stock market?</h3>
+<p>An 11% IRR is good or bad only relative to what the same money would have made in listed shares. Kaplan and Schoar's <b>public market equivalent</b> (2003 working paper, 2005 <i>Journal of Finance</i>) answers that. In their words: "The PME measures the discounted value of the cash outflows of the fund relative to the discounted value of the cash inflows (all net of fees), where discounting is undertaken using the total return to the S&amp;P 500" [S453] [Confirmed]. Above 1.0 means the fund beat the index [Inferred]. Their research found average net returns roughly equal to the S&amp;P 500, with large dispersion and strong persistence between a manager's successive funds [S453] [Reported].</p>
+<div class="box term"><span class="lbl">Formula</span><p>KS-PME = [ Σ D<sub>t</sub> ÷ I<sub>t</sub> ] ÷ [ Σ C<sub>t</sub> ÷ I<sub>t</sub> ]. In words: convert every distribution and every call into "units of the index" by dividing by the index level on that date, then compare units out with units in. (Remaining NAV counts as a final distribution.)</p></div>
+
+<figure>
+<svg viewBox="0 0 680 290" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10.5">
+<defs>
+<marker id="l3arrDn2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#eb6834"/></marker>
+<marker id="l3arrUp2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1baf7a"/></marker>
+</defs>
+<text x="20" y="24" font-weight="700" fill="#13294B" font-size="11.5">Stock index level</text>
+<g stroke="#D5DAE3" stroke-width="0.8"><line x1="60" y1="56" x2="420" y2="56"/><line x1="60" y1="130" x2="420" y2="130"/></g>
+<polyline fill="none" stroke="#2a78d6" stroke-width="2.2" points="80,120 160,100 240,130 320,80 400,56"/>
+<g fill="#2a78d6"><circle cx="80" cy="120" r="3"/><circle cx="160" cy="100" r="3"/><circle cx="240" cy="130" r="3"/><circle cx="320" cy="80" r="3"/><circle cx="400" cy="56" r="3"/></g>
+<g fill="#1B1F27" font-size="10" text-anchor="middle"><text x="80" y="112">100</text><text x="160" y="92">110</text><text x="240" y="146">95</text><text x="320" y="72">120</text><text x="400" y="48">132</text></g>
+<text x="20" y="180" font-weight="700" fill="#13294B" font-size="11.5">Fund cash flows, £m</text>
+<line x1="60" y1="225" x2="420" y2="225" stroke="#4A5160"/>
+<g stroke="#eb6834" stroke-width="2.6" marker-end="url(#l3arrDn2)"><line x1="80" y1="227" x2="80" y2="262"/><line x1="160" y1="227" x2="160" y2="246"/></g>
+<g stroke="#1baf7a" stroke-width="2.6" marker-end="url(#l3arrUp2)"><line x1="320" y1="223" x2="320" y2="194"/><line x1="400" y1="223" x2="400" y2="186"/></g>
+<g fill="#1B1F27" font-size="10"><text x="88" y="262">call 100</text><text x="168" y="248">call 50</text><text x="328" y="200">dist 90</text><text x="408" y="192">dist 120</text></g>
+<g fill="#4A5160" font-size="10" text-anchor="middle"><text x="80" y="282">t0</text><text x="160" y="282">t1</text><text x="240" y="282">t2</text><text x="320" y="282">t3</text><text x="400" y="282">t4</text></g>
+<rect x="440" y="14" width="230" height="270" rx="5" fill="#FBF1E6" stroke="#C8792B"/>
+<g fill="#1B1F27" font-size="10.5">
+<text x="450" y="34" font-weight="700" fill="#13294B">Distributions in index units</text>
+<text x="450" y="50">90 ÷ 120 + 120 ÷ 132</text>
+<text x="450" y="66">= 0.750 + 0.909 = 1.659</text>
+<text x="450" y="92" font-weight="700" fill="#13294B">Calls in index units</text>
+<text x="450" y="108">100 ÷ 100 + 50 ÷ 110</text>
+<text x="450" y="124">= 1.000 + 0.455 = 1.455</text>
+<text x="450" y="150" font-weight="700" fill="#13294B">KS-PME = 1.659 ÷ 1.455 = 1.14</text>
+<text x="450" y="176">Check: calls put in the index</text>
+<text x="450" y="191">would be worth 192 at t4;</text>
+<text x="450" y="206">the fund's cash, grown the</text>
+<text x="450" y="221">same way, is worth 219.</text>
+<text x="450" y="236">219 ÷ 192 = 1.14 again.</text>
+<text x="450" y="262" font-weight="700">Fund: TVPI 1.40x, IRR 11.0%.</text>
+<text x="450" y="277">Beat the index by 14% in total.</text>
+</g>
+</svg>
+<figcaption><span class="fig-num"></span> <b>A Kaplan-Schoar PME on a four-flow fund.</b> Dividing each cash flow by the index level on its date asks: "how many units of the market did I give up, and how many did I get back?" Formula from Kaplan and Schoar [S453] [Confirmed]; all numbers illustrative [Inferred].</figcaption>
+</figure>
+
+<h3>Vintage years and quartiles</h3>
+<p>A fund's <b>vintage</b> is the year it started investing. Funds of the same vintage bought in the same market, so they are ranked against each other, not against funds from other years. A <b>quartile</b> splits that peer group into four: "top quartile" means the best 25% of funds of that vintage on a chosen measure (net IRR, TVPI or PME). Two traps follow. First, the same number can rank very differently in two vintages. Second, a young fund's quartile is mostly RVPI, so it can move a lot before the fund is finished [Inferred].</p>
+
+<figure>
+<svg viewBox="0 0 680 250" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10.5">
+<g stroke="#D5DAE3" stroke-width="0.8"><line x1="100" y1="40" x2="100" y2="200"/><line x1="200" y1="40" x2="200" y2="200"/><line x1="300" y1="40" x2="300" y2="200"/><line x1="400" y1="40" x2="400" y2="200"/><line x1="500" y1="40" x2="500" y2="200"/></g>
+<g fill="#4A5160" font-size="10" text-anchor="middle"><text x="100" y="216">0%</text><text x="200" y="216">5%</text><text x="300" y="216">10%</text><text x="400" y="216">15%</text><text x="500" y="216">20%</text></g>
+<text x="300" y="234" fill="#4A5160" font-size="10" text-anchor="middle">Net IRR of funds in each vintage (illustrative)</text>
+<g fill="#1B1F27" font-weight="700" font-size="11"><text x="12" y="64">Vintage A</text><text x="12" y="104">Vintage B</text><text x="12" y="144">Vintage C</text><text x="12" y="184">Vintage D</text></g>
+<g fill="#E8EDF5" stroke="#24467A"><rect x="260" y="50" width="220" height="20"/><rect x="220" y="90" width="200" height="20"/><rect x="280" y="130" width="240" height="20"/><rect x="180" y="170" width="180" height="20"/></g>
+<g stroke="#13294B" stroke-width="2"><line x1="360" y1="48" x2="360" y2="72"/><line x1="320" y1="88" x2="320" y2="112"/><line x1="380" y1="128" x2="380" y2="152"/><line x1="280" y1="168" x2="280" y2="192"/></g>
+<g fill="#C8792B"><circle cx="380" cy="140" r="6"/><circle cx="380" cy="180" r="6"/></g>
+<g fill="#1B1F27" font-size="10">
+<text x="100" y="30">Box = bottom-quartile to top-quartile cut-off. Dark tick = median. Dot = a fund at 14%.</text>
+<text x="530" y="144">Fund X: median here</text>
+<text x="394" y="184">Fund Y: top quartile here</text>
+</g>
+</svg>
+<figcaption><span class="fig-num"></span> <b>Same 14% IRR, different verdict.</b> Each box spans the bottom-quartile to the top-quartile cut-off for one vintage; the dark tick is the median. A 14% fund is merely median in vintage C but top quartile in vintage D. All numbers illustrative [Inferred].</figcaption>
+</figure>
+
+<h3>Why DPI dominates in 2025-26</h3>
+<p>For a decade, LPs ranked managers mainly on IRR and TVPI. Since 2022 exits have slowed, cash has not come back, and DPI has become the most-watched number [S262] [Confirmed]. The evidence, provider by provider (each defines the base differently, so do not add them up):</p>
+<ul>
+<li>Bain: distributions as a share of NAV were about 14% in 2025, below 15% for four years running [S262] [Confirmed].</li>
+<li>McKinsey's 2026 report, via Dakota: distributions fell to 6% of AUM versus a 2015 to 2019 average of 16% [S261] [Reported].</li>
+<li>PitchBook: almost $5 trillion sits in funds 7 or more years old, 39% of total NAV (December 2025) [S260] [Reported]. Bain counts about 32,000 unsold portfolio companies worth about $3.8tn [S262, S326] [Confirmed].</li>
+<li>Bain cites an ILPA survey: 53% of LPs said undrawn commitments limit new PE commitments [S262] [Confirmed].</li>
+</ul>
+
+<figure>
+<svg viewBox="0 0 680 240" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10.5">
+<g stroke="#D5DAE3" stroke-width="0.8"><line x1="270" y1="20" x2="270" y2="200"/><line x1="370" y1="20" x2="370" y2="200"/><line x1="470" y1="20" x2="470" y2="200"/><line x1="570" y1="20" x2="570" y2="200"/></g>
+<g fill="#4A5160" font-size="10" text-anchor="middle"><text x="270" y="216">0%</text><text x="370" y="216">10%</text><text x="470" y="216">20%</text><text x="570" y="216">30%</text></g>
+<g fill="#1B1F27" font-size="10.5">
+<text x="10" y="40">KKR: historical range, private</text><text x="10" y="53" fill="#4A5160" font-size="9.5">strategies, % of NAV [S436]</text>
+<text x="10" y="80">PitchBook: closed-end private</text><text x="10" y="93" fill="#4A5160" font-size="9.5">debt, distribution rate [S260]</text>
+<text x="10" y="120">McKinsey: 2015-2019 average</text><text x="10" y="133" fill="#4A5160" font-size="9.5">% of AUM [S261]</text>
+<text x="10" y="160">Bain: 2025, % of NAV</text><text x="10" y="173" fill="#4A5160" font-size="9.5">[S262]</text>
+<text x="10" y="196">McKinsey: latest, % of AUM [S261]</text>
+</g>
+<rect x="370" y="30" width="200" height="22" fill="#2a78d6" opacity="0.35"/><rect x="370" y="30" width="200" height="22" fill="none" stroke="#2a78d6"/>
+<rect x="270" y="70" width="241" height="22" fill="#2a78d6"/>
+<rect x="270" y="110" width="160" height="22" fill="#2a78d6"/>
+<rect x="270" y="150" width="140" height="22" fill="#2a78d6"/>
+<rect x="270" y="184" width="60" height="16" fill="#e34948"/>
+<g fill="#1B1F27" font-size="10.5" font-weight="700"><text x="578" y="46">10% to 30%</text><text x="518" y="86">24.1%</text><text x="438" y="126">16%</text><text x="418" y="166">about 14%</text><text x="338" y="197">6%</text></g>
+</svg>
+<figcaption><span class="fig-num"></span> <b>Distributions: the long-run norm versus now.</b> Bases differ (NAV, AUM, fund type), so compare each bar only with its own history: the McKinsey pair is the cleanest before-and-after. Sources: KKR GMAA Jul 2026 [S436] [Confirmed]; PitchBook 2025 data [S260] [Reported]; McKinsey 2026 via Dakota [S261] [Reported]; Bain Feb 2026 [S262] [Confirmed].</figcaption>
+</figure>
+
+<p>What this means at KKR: an exit is now a client-service event as much as an investment one. When Aon agreed to buy USI Insurance Services from KKR and co-investors for about $17bn including debt in August 2026, coverage put the price at about 6x KKR's original equity [S354] [Reported]. A realisation like that turns RVPI into DPI for every LP in the fund, and becomes evidence in the next fundraise [Inferred]. The KCS question to ask is not "what is the IRR?" but "how much of the TVPI is cash?"</p>
+
+<div class="two">
+<div class="box key"><span class="lbl">What you will learn</span><p>To compute IRR by trial and error and spot timing and credit-line effects; to split TVPI into DPI and RVPI; to walk gross to net through fees and carry; to compute a Kaplan-Schoar PME; and to rank a fund correctly within its vintage.</p></div>
+<div class="box term"><span class="lbl">Where you meet it at KKR</span><p>ILPA DDQ 2.0 sections 14 (Track Record) and 15 (Accounting/Valuation) [S444] [Confirmed]; the ILPA Performance Template for funds starting from 1 January 2026, with first delivery four full quarters later [S445] [Confirmed]; and every fundraise update after an exit such as USI [S354] [Reported].</p></div>
+</div>
+<div class="box opinion"><span class="lbl">Only at KKR</span><p>KKR reports performance for both drawdown funds (IRR, multiples) and evergreen K-Series vehicles (total returns by share class) [S420, S421] [Confirmed]. A KCS junior has to explain both families to the same clients, sometimes in the same meeting. That pushes you to understand what each number measures, not just to quote it [Inferred].</p></div>
+<div class="box say"><span class="lbl">Say it in one line</span><p>"I want to learn to read a track record the way an LP's due diligence team does: IRR next to DPI, gross next to net, and every number against a public market equivalent."</p></div>
+
+<!-- ============ SECTION 5 ============ -->
+<h2 id="l3-evergreen">Evergreen performance: a different clock</h2>
+
+<p>KKR's K-Series funds have no end date. Investors buy in monthly at NAV and can ask to sell quarterly, up to a cap (5% of NAV per quarter for K-PEC) [S420] [Confirmed]. There are no capital calls and no final distribution, so IRR and DPI do not fit. Evergreen funds report a <b>total return</b> per share class instead.</p>
+
+<div class="box term"><span class="lbl">Three formulas</span>
+<p><b>Total return</b> for a period = (NAV per share at end + distributions paid − NAV per share at start) ÷ NAV per share at start.</p>
+<p><b>Chain-linking:</b> a yearly return is built from monthly ones: (1 + r<sub>Jan</sub>) × (1 + r<sub>Feb</sub>) × ... × (1 + r<sub>Dec</sub>) − 1. This is a <b>time-weighted return</b>: it ignores when investors added or withdrew money, so it measures the manager, not the investor's timing.</p>
+<p><b>Distribution rate</b> = annualised distribution per share ÷ current NAV per share. It is a cash yield, not a return.</p></div>
+
+<p><b>Worked example 10 (illustrative).</b> Three months of NAV moves: +1.0%, −0.5%, +2.0%. Quarter return = 1.010 × 0.995 × 1.020 − 1 = <b>2.505%</b>, slightly more than the 2.5% you get by adding; over twelve months the gap grows. Now an infrastructure-style share class: NAV starts the year at £25.00, pays £0.30 a quarter, ends at £24.60. Distribution rate = (4 × 0.30) ÷ 24.60 = <b>4.9%</b>. Total return = (24.60 + 1.20 − 25.00) ÷ 25.00 = <b>3.2%</b>. A 4.9% payout on a 3.2% return means part of the cash came from capital. K-INFRA's own 10-K warns that its distributions "may and are expected to exceed our earnings and cash flow from operating activities" and may be paid from borrowings or offering proceeds [S421] [Confirmed].</p>
+
+<h3>The real numbers: K-PEC and K-INFRA in 2025</h3>
+<table class="tight">
+<thead><tr><th>Vehicle (NAV, 31 Dec 2025)</th><th>Share class</th><th>2025 total return</th><th>Since inception, a year</th><th>Distributions</th></tr></thead>
+<tbody>
+<tr><td rowspan="4"><b>K-PEC</b>, private equity ($9.93bn)</td><td>I</td><td>16.81%</td><td>12.94% (since Sep 2023)</td><td rowspan="4">None ever paid</td></tr>
+<tr><td>R-I (early-bird)</td><td>16.79%</td><td>13.22% (since Aug 2023)</td></tr>
+<tr><td>U</td><td>15.78%</td><td>n/a</td></tr>
+<tr><td>D</td><td>14.80%</td><td>n/a</td></tr>
+<tr><td rowspan="3"><b>K-INFRA</b>, infrastructure ($6.47bn)</td><td>I</td><td>10.13%</td><td>10.06%</td><td rowspan="3">Quarterly since Jan 2024</td></tr>
+<tr><td>R</td><td>10.17%</td><td>n/a</td></tr>
+<tr><td>S</td><td>9.15%</td><td>n/a</td></tr>
+</tbody></table>
+<p>Source: K-PEC 10-K FY2025 [S420] and K-INFRA 10-K FY2025 [S421] [Confirmed]. "n/a" means not extracted in the research, not zero.</p>
+<p>Why do classes of the same fund earn different returns? Mainly fees. Classes S and U pay an ongoing 0.85% of NAV a year to the dealer-manager (0.60% distribution plus 0.25% servicing), class D pays 0.25%, and class I pays none [S420] [Confirmed]. The I-minus-U gap in K-PEC is 16.81 − 15.78 = 1.03 points, close to the 0.85% trail plus its knock-on effect on the performance fee [Inferred]. The I-minus-D gap (2.01 points) is larger than D's 0.25% trail can explain; the timing of when D shares were first issued may matter, and the 10-K would need reading class by class [Inferred]. Lesson: always quote the class.</p>
+
+<h3>Why evergreen returns and drawdown IRRs are apples and oranges</h3>
+<p>A drawdown fund's IRR is <b>money-weighted</b>: it measures only the money the fund has called, while it is invested. An evergreen total return is <b>time-weighted</b> and applies to all the money from day one, including a liquidity sleeve held in cash and credit (up to about 20% for K-PEC, about 15% for K-INFRA) [S420, S421] [Confirmed]. A drawdown LP's uncalled commitment sits elsewhere earning less, and the IRR ignores that.</p>
+<p><b>Worked example 11 (illustrative).</b> The same assets grow 10% a year. Investor 1 commits £100 to the drawdown fund from the pacing section and holds the uncalled money and distributions in cash at 4%. Investor 2 puts £100 into an evergreen fund holding the same assets. After five years:</p>
+<ul>
+<li>Drawdown: NAV £88.6 + cash £48.5 = <b>£137.1</b>. The fund's IRR on called capital is a perfect <b>10.0%</b>, but the committed £100 grew only <b>6.5% a year</b>.</li>
+<li>Evergreen, fully invested: 100 × 1.10<sup>5</sup> = <b>£161.1</b> (10.0% a year).</li>
+<li>Evergreen with a 15% liquidity sleeve at 4%: 100 × (0.85 × 1.10<sup>5</sup> + 0.15 × 1.04<sup>5</sup>) = <b>£155.1</b> (9.2% a year).</li>
+</ul>
+
+<figure>
+<svg viewBox="0 0 680 280" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10.5">
+<g stroke="#D5DAE3" stroke-width="0.8"><line x1="70" y1="182.9" x2="480" y2="182.9"/><line x1="70" y1="125.7" x2="480" y2="125.7"/><line x1="70" y1="68.6" x2="480" y2="68.6"/></g>
+<line x1="70" y1="240" x2="480" y2="240" stroke="#4A5160"/>
+<g fill="#4A5160" font-size="10" text-anchor="end"><text x="62" y="244">£100</text><text x="62" y="187">£120</text><text x="62" y="130">£140</text><text x="62" y="73">£160</text></g>
+<g fill="#4A5160" font-size="10" text-anchor="middle"><text x="80" y="258">Y0</text><text x="160" y="258">Y1</text><text x="240" y="258">Y2</text><text x="320" y="258">Y3</text><text x="400" y="258">Y4</text><text x="480" y="258">Y5</text></g>
+<polyline fill="none" stroke="#2a78d6" stroke-width="2.4" points="80,240 160,211.4 240,180 320,145.6 400,107.6 480,65.4"/>
+<polyline fill="none" stroke="#1baf7a" stroke-width="2.4" points="80,240 160,214 240,185.4 320,154.3 400,120.3 480,82.6"/>
+<polyline fill="none" stroke="#eb6834" stroke-width="2.4" points="80,240 160,228.6 240,212.3 320,191.1 400,164.3 480,134.3"/>
+<g fill="#1B1F27" font-size="10.5">
+<text x="490" y="62" font-weight="700">Evergreen, fully</text><text x="490" y="76">invested: £161.1</text>
+<text x="490" y="96" font-weight="700">Evergreen, 15%</text><text x="490" y="110">liquidity sleeve: £155.1</text>
+<text x="490" y="132" font-weight="700">Drawdown, commitment</text><text x="490" y="146">plus cash: £137.1</text>
+</g>
+<rect x="90" y="24" width="250" height="52" rx="4" fill="#FBF1E6" stroke="#C8792B"/>
+<g fill="#1B1F27" font-size="10.5"><text x="100" y="42">Drawdown fund IRR: 10.0% (on called money)</text><text x="100" y="58">Growth of the committed £100: 6.5% a year</text><text x="100" y="71" fill="#4A5160" font-size="9.5">Same assets, same 10% growth in all three</text></g>
+</svg>
+<figcaption><span class="fig-num"></span> <b>Same assets, three results.</b> The drawdown fund reports the highest-looking return (10.0% IRR) while its investor ends with the least money, because uncalled cash earned 4%. Evergreen returns are lower than the asset return only by the drag of the liquidity sleeve and fees. Illustrative numbers, gross of fees [Inferred].</figcaption>
+</figure>
+
+<p>Four more differences to name when a client compares the two: fees are charged on NAV in evergreen funds but often on commitments in drawdown funds [S420] [Confirmed for K-PEC; drawdown norm Inferred]; evergreen NAVs are set monthly by the manager under board-approved policies, which is why operational due diligence focuses on valuation governance "where transactions are based on the fund's NAV" [S458] [Confirmed]; liquidity is real but capped, and in Q1 2026 K-FIT received requests for 6.3% of shares and paid about 80% of them, then paid in full in Q2 [S338] [Reported]; and evergreen investors who join late buy at today's NAV, so they do not get the early J-curve but also do not get the early discount [Inferred].</p>
+
+<div class="two">
+<div class="box key"><span class="lbl">What you will learn</span><p>To compute time-weighted total returns and distribution rates, to read share-class returns net of trail fees, and to explain to a client why a 10% IRR and a 10% evergreen return do not deliver the same wealth.</p></div>
+<div class="box term"><span class="lbl">Where you meet it at KKR</span><p>K-Series AUM reached $42bn at 30 June 2026, up from $25bn a year earlier [S330, S332] [Confirmed]. K-PEC and K-INFRA publish class-by-class returns in their 10-Ks [S420, S421] [Confirmed]. In London, Matt Yates is responsible for "ongoing product management of KKR's Evergreen Private Equity vehicles, K-PRIME and K-PEC" [S133] [Confirmed].</p></div>
+</div>
+<div class="box opinion"><span class="lbl">Only at KKR</span><p>KKR's evergreen vehicles hold the same deals as its flagships through joint ventures: K-PEC is co-general partner alongside funds such as North America Fund XIII or XIV [S420] [Confirmed]. So a KCS junior can compare a drawdown fund and an evergreen fund that own overlapping companies, and see the measurement difference cleanly, without the noise of different portfolios [Inferred].</p></div>
+<div class="box say"><span class="lbl">Say it in one line</span><p>"I want to learn to explain evergreen and drawdown performance on a like-for-like basis, so a client comparing a K-Series return with a flagship IRR understands what each number actually measures."</p></div>
+
+<!-- ============ SECTION 6 ============ -->
+<h2 id="l3-insurance">Insurance clients: capital, matching and Global Atlantic</h2>
+
+<p>Insurers are a third of KKR's AUM when Global Atlantic's balance sheet (22%) and third-party insurers (11%) are added together (31 Dec 2025) [S71] [Confirmed; sum Inferred]. They think about investments differently from anyone else, because every asset uses up regulatory capital.</p>
+
+<h3>How a life insurer makes money, from zero</h3>
+<p>A customer pays a lump sum for an <b>annuity</b>: a promise of fixed payments for years. The insurer invests the money in bonds and loans. Its profit is the <b>spread</b>: asset yield minus the rate it credits to the customer minus costs. Three constraints bind every investment decision [Inferred]:</p>
+<ol>
+<li><b>Matching.</b> Asset cash flows should arrive when the annuity payments are due (asset-liability management, ALM). Self-amortising assets help: KKR describes asset-based finance (ABF) investors receiving "front-loaded principal payments plus interest, similar to the way homeowners make their mortgage payments" [S434] [Confirmed].</li>
+<li><b>Capital.</b> US life insurers hold risk-based capital (RBC) against each asset. "The determination of RBC is based on the NAIC designation of the assets"; and the designation "depends on the applicable NRSRO rating" (a recognised credit rating) [S425] [Confirmed]. The NAIC moved from 6 to 20 bond designation categories with year-end 2021 factors [S461] [Reported].</li>
+<li><b>Liquidity.</b> Enough to pay claims and surrenders without forced selling [Inferred].</li>
+</ol>
+<p>So an insurer wants assets that are investment-grade rated (low capital charge) but pay more than public bonds with the same rating. Private investment-grade credit and ABF are built for that [S425 for the rule] [Inferred for the preference].</p>
+
+<figure>
+<svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10.5">
+<defs><marker id="l3arrC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#24467A"/></marker></defs>
+<text x="20" y="22" font-weight="700" fill="#13294B" font-size="12">ASSETS</text><text x="250" y="22" font-weight="700" fill="#13294B" font-size="12">LIABILITIES AND CAPITAL</text>
+<rect x="20" y="32" width="200" height="56" fill="#2a78d6"/><rect x="20" y="90" width="200" height="56" fill="#1baf7a"/><rect x="20" y="148" width="200" height="40" fill="#eda100"/><rect x="20" y="190" width="200" height="40" fill="#6250d6"/>
+<g fill="#FFFFFF" font-weight="700"><text x="30" y="56">Public IG bonds</text><text x="30" y="114">Private IG credit and ABF</text><text x="30" y="172">Senior CLO tranches</text><text x="30" y="214">Mortgages and other</text></g>
+<g fill="#FFFFFF" font-size="10"><text x="30" y="72">liquid, lower yield</text><text x="30" y="130">higher yield, same rating</text></g>
+<rect x="250" y="32" width="200" height="174" fill="#E8EDF5" stroke="#13294B"/>
+<rect x="250" y="208" width="200" height="22" fill="#13294B"/>
+<g fill="#13294B" font-weight="700"><text x="260" y="56">Annuity reserves</text></g>
+<g fill="#1B1F27" font-size="10"><text x="260" y="72">fixed payments for 10 to 30</text><text x="260" y="86">years: what must be matched</text></g>
+<text x="260" y="223" fill="#FFFFFF" font-weight="700">Capital: sized by RBC factors</text>
+<g stroke="#24467A" stroke-width="1.4" fill="none" marker-end="url(#l3arrC)"><path d="M220,120 C235,120 235,120 248,120"/></g>
+<line x1="20" y1="232" x2="450" y2="232" stroke="#4A5160"/>
+<rect x="470" y="32" width="200" height="198" rx="5" fill="#FBF1E6" stroke="#C8792B"/>
+<g fill="#1B1F27" font-size="10.5">
+<text x="480" y="52" font-weight="700" fill="#13294B">Three tests for each asset</text>
+<text x="480" y="74" font-weight="700">1. Match</text><text x="480" y="89">Does its cash arrive when</text><text x="480" y="103">the annuity payments fall due?</text>
+<text x="480" y="125" font-weight="700">2. Capital</text><text x="480" y="140">Which NAIC designation, so</text><text x="480" y="154">which RBC charge?</text>
+<text x="480" y="176" font-weight="700">3. Spread per unit of capital</text><text x="480" y="191">(yield − credited rate − costs)</text><text x="480" y="205">÷ capital it consumes</text>
+</g>
+<text x="20" y="256" fill="#4A5160" font-size="10">Block sizes are illustrative. RBC = risk-based capital; NAIC = US insurance regulators' association;</text>
+<text x="20" y="270" fill="#4A5160" font-size="10">IG = investment grade; ABF = asset-based finance; CLO = collateralised loan obligation.</text>
+</svg>
+<figcaption><span class="fig-num"></span> <b>An insurer's balance sheet and the three tests.</b> Capital is a thin slice under large liabilities, so an asset's capital charge matters as much as its yield. The NAIC-designation rule is from KKR's 10-K [S425] [Confirmed]; layout and sizes are illustrative [Inferred].</figcaption>
+</figure>
+
+<h3>Worked example 12: capital charges with real NAIC numbers</h3>
+<p>KKR's digest of the NAIC's Spring 2026 meeting (Andrew Phillips, 7 April 2026) gives these factors [S439] [Confirmed]. Multiply each by $100m to see the capital an insurer would hold:</p>
+
+<figure>
+<svg viewBox="0 0 680 250" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10.5">
+<g stroke="#D5DAE3" stroke-width="0.8"><line x1="270" y1="20" x2="270" y2="215"/><line x1="350" y1="20" x2="350" y2="215"/><line x1="430" y1="20" x2="430" y2="215"/><line x1="510" y1="20" x2="510" y2="215"/><line x1="590" y1="20" x2="590" y2="215"/></g>
+<g fill="#4A5160" font-size="10" text-anchor="middle"><text x="270" y="230">$0m</text><text x="350" y="230">$10m</text><text x="430" y="230">$20m</text><text x="510" y="230">$30m</text><text x="590" y="230">$40m</text></g>
+<g fill="#1B1F27" font-size="10.5">
+<text x="10" y="38">CLO senior, Aaa to A2 (proposed)</text>
+<text x="10" y="76">CLO A3 to Baa3 (proposed)</text>
+<text x="10" y="114">Collateral loans, life (current)</text>
+<text x="10" y="152">Thin Baa3 CLO tranche (proposed)</text>
+<text x="10" y="184">Loans backed by JV/LLC or</text><text x="10" y="197">residual interests (underlying)</text>
+</g>
+<rect x="270" y="26" width="2" height="18" fill="#2a78d6"/>
+<rect x="284.4" y="64" width="7.2" height="18" fill="#2a78d6"/><rect x="270" y="64" width="14.4" height="18" fill="#2a78d6" opacity="0.35"/>
+<rect x="270" y="102" width="54.4" height="18" fill="#2a78d6"/>
+<rect x="270" y="140" width="100" height="18" fill="#2a78d6"/>
+<rect x="510" y="178" width="120" height="18" fill="#2a78d6"/><rect x="270" y="178" width="240" height="18" fill="#2a78d6" opacity="0.35"/>
+<g fill="#1B1F27" font-size="10.5" font-weight="700">
+<text x="280" y="40">$0.03m to $0.14m (0.03% to 0.14%)</text>
+<text x="300" y="78">$1.8m to $2.7m (1.8% to 2.7%)</text>
+<text x="332" y="116">$6.8m (6.8%)</text>
+<text x="378" y="154">$12.5m (12.5%)</text>
+<text x="452" y="173">$30m to $45m (30% to 45%)</text>
+</g>
+</svg>
+<figcaption><span class="fig-num"></span> <b>Capital held per $100m invested, by asset.</b> Solid bars mark the range; pale bars show the floor of the range. A thin Baa3 tranche "thinner than 4%" would face "a 12.5% charge"; NAIC targets year-end 2026 for CLO factors and likely year-end 2027 for a look-through on collateral loans. Source: KKR, NAIC Spring 2026 highlights, 7 Apr 2026 [S439] [Confirmed].</figcaption>
+</figure>
+
+<p>Now the decision. Suppose (illustrative yields) a private ABF note designated in an A3-to-Baa3-type band pays 2.0% over the insurer's liability cost and needs about 2.7% capital, while a loan backed by a residual interest pays 4.0% over liability cost but needs 30% capital. <b>Spread per unit of capital</b>: 2.0 ÷ 2.7 = <b>0.74</b> versus 4.0 ÷ 30 = <b>0.13</b>. The lower-yielding asset is more than five times better use of capital. This is why KKR's insurance content leads with capital, and why the NAIC's stated principle of "equal capital for equal risk" [S439] [Confirmed] matters commercially: each factor change re-ranks the menu [Inferred].</p>
+
+<h3>What insurers say they want: the 2026 KKR Insurance CIO Survey</h3>
+<p>Published 2 October 2026, the survey covers about 50 US insurers with nearly $2.6tn of AUM [S438] [Confirmed]. "Nearly 80% expect to maintain or accelerate their pace of private capital investment, while 91% plan to maintain or increase credit exposure", and "Every major Private Credit category is a net add in the survey, led by Asset-Based Finance" [S438] [Confirmed]. Their concerns: "Asset-liability matching, illiquidity limits, regulatory capital, reinvestment risk" [S438] [Confirmed]. The full deck is available via "your Relationship Manager", i.e. through KCS [S438] [Confirmed]. KKR's NAIC digest similarly ends with "reach out to your relationship manager or kkrinsurance@kkr.com" [S439] [Confirmed]: regulatory analysis is used as a client-coverage tool.</p>
+
+<h3>Global Atlantic: client, capital source and laboratory</h3>
+<p>Global Atlantic (GA) is KKR's retirement and life insurer, fully owned since KKR bought the remaining 37% for about $2.7bn, completed 2 January 2024 [S2, S11] [Confirmed]. At 30 June 2026 it had $220bn of AUM, of which $164bn was credit [S1] [Confirmed]. For KCS it plays three roles at once [Inferred from S425, S440]:</p>
+<ul>
+<li><b>A client of KKR's investing teams:</b> GA's balance sheet is 22% of KKR's AUM [S71] [Confirmed].</li>
+<li><b>A source of products KCS sells:</b> GA-sponsored sidecars raise third-party capital (below), and GA generates capital markets fees [S440] [Confirmed]. CFO Robert Lewin described the Arctos acquisition as a way to "create flow for Global Atlantic" [S440] [Confirmed].</li>
+<li><b>A source of insight for insurer clients:</b> KKR's Global Insurance Client Solutions team offers "fully integrated balance sheet solutions" combining origination, capital markets access, "liability structuring solutions" and regulatory expertise [S104] [Confirmed]. Lewin on the cycle: in volatile markets "spreads are going to expand ... less competition on the liability side", and KKR has "real linkage between liability origination and asset origination" [S440] [Confirmed].</li>
+</ul>
+
+<h3>The Ivy vehicles, explained simply</h3>
+<p>KKR's 10-K: "we also sponsor investment vehicles raised from third-party capital, such as the Ivy investment vehicles, to participate alongside Global Atlantic's institutional and individual market activities ... As of December 31, 2025, $58 billion of Global Atlantic AUM is provided by these Global Atlantic sponsored vehicles" [S425] [Confirmed]. They are "commitment-based structures with third-party investors" that participate "through reinsurance" in business GA writes during the vehicles' investment periods, and they are regulated by the Bermuda Monetary Authority [S425] [Confirmed]. By Q2 2026 IV-related AUM was "$62 billion ... up from approximately $50 billion just a year ago", with "$6 billion of dry powder that we think translates to north of $60 billion of buying power on the liability side" [S440] [Confirmed].</p>
+
+<figure>
+<svg viewBox="0 0 680 330" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10.5">
+<defs><marker id="l3arrD" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#24467A"/></marker></defs>
+<rect x="10" y="20" width="190" height="78" rx="5" fill="#E8EDF5" stroke="#24467A"/>
+<g fill="#13294B"><text x="20" y="40" font-weight="700">Third-party investors</text></g>
+<g fill="#1B1F27" font-size="10"><text x="20" y="57">e.g. sovereigns, pensions</text><text x="20" y="71">commit equity; capital raised</text><text x="20" y="85">by KCS insurance teams</text></g>
+<rect x="250" y="20" width="180" height="78" rx="5" fill="#13294B"/>
+<g fill="#FFFFFF"><text x="260" y="40" font-weight="700">Ivy sidecar vehicle</text><text x="260" y="57" font-size="10">Bermuda, BMA-regulated</text><text x="260" y="71" font-size="10">$62bn IV-related AUM</text><text x="260" y="85" font-size="10">(Q2 2026)</text></g>
+<rect x="490" y="20" width="180" height="78" rx="5" fill="#E3F4F1" stroke="#0E8F7E"/>
+<g fill="#13294B"><text x="500" y="40" font-weight="700">Global Atlantic</text></g>
+<g fill="#1B1F27" font-size="10"><text x="500" y="57">writes annuities and</text><text x="500" y="71">reinsures other insurers'</text><text x="500" y="85">blocks of policies</text></g>
+<g stroke="#24467A" stroke-width="1.6" fill="none" marker-end="url(#l3arrD)">
+<line x1="200" y1="50" x2="248" y2="50"/>
+<line x1="488" y1="50" x2="432" y2="50"/>
+<line x1="340" y1="98" x2="340" y2="148"/>
+</g>
+<g fill="#4A5160" font-size="9.5"><text x="206" y="44">equity</text><text x="436" y="44">share of</text><text x="436" y="66">blocks</text></g>
+<rect x="190" y="150" width="300" height="60" rx="5" fill="#FBF1E6" stroke="#C8792B"/>
+<g fill="#1B1F27"><text x="200" y="170" font-weight="700">Assets backing the reinsured liabilities</text><text x="200" y="186" font-size="10">managed by KKR: private credit, ABF and bonds</text><text x="200" y="200" font-size="10">KKR earns fees on the vehicle and on the assets</text></g>
+<rect x="10" y="232" width="660" height="88" rx="5" fill="#F7F9FC" stroke="#D5DAE3"/>
+<g fill="#1B1F27" font-size="10.5">
+<text x="20" y="252" font-weight="700" fill="#13294B">The leverage, worked (illustrative except the $6bn and $60bn [S440])</text>
+<text x="20" y="270">$6bn of equity supports over $60bn of liabilities: about $1 of equity per $10 of liabilities.</text>
+<text x="20" y="287">If the assets earn 1.0% a year more than the liability cost, $10 × 1.0% = $0.10 on each $1 of equity:</text>
+<text x="20" y="304">about 10% a year before costs, plus what the equity's own assets earn: pay for underwriting risk.</text>
+</g>
+</svg>
+<figcaption><span class="fig-num"></span> <b>How an Ivy sidecar works.</b> The investor's equity lets Global Atlantic write more business than its own capital allows; the vehicle takes a share of each block through reinsurance. Facts from KKR's 10-K [S425] and Q2 2026 call [S440] [Confirmed]; the 1.0% spread and return arithmetic are illustrative [Inferred].</figcaption>
+</figure>
+
+<p>The risk the investor takes is real: the 10-K notes a vehicle may "fail or refuse to fund their portion", and GA's remedy is against the vehicle, "but not directly against their shareholders or lenders" [S425] [Confirmed]. For KKR the economics are fees from "IV-related vehicles" plus GA-related capital markets fees "which we think can reach hundreds of millions annually over time"; total insurance economics were $2bn net of compensation over the last twelve months [S440] [Confirmed].</p>
+
+<div class="two">
+<div class="box key"><span class="lbl">What you will learn</span><p>To think like an insurance CIO: match liability cash flows, look up the capital charge, and rank assets by spread per unit of capital. To explain a reinsurance sidecar and its 10-to-1 leverage in plain words.</p></div>
+<div class="box term"><span class="lbl">Where you meet it at KKR</span><p>Darryl Herrick, Head of Global Insurance Client Solutions and President of Global Atlantic Re, "helping manage the third-party reinsurance sidecar platform" [S127] [Confirmed]; Whitney Sparks's team raises "third-party capital to support KKR's Insurance business" [S128] [Confirmed]; the 2026 Insurance CIO Survey [S438] and NAIC updates [S439].</p></div>
+</div>
+<div class="box opinion"><span class="lbl">Only at KKR</span><p>Few managers own a large insurer outright, write its liabilities, originate the assets that back them, and raise third-party sidecar capital alongside it. At KKR a KCS insurance conversation can draw on all four. You learn insurance capital from the inside of a working insurer, not from a textbook [Inferred from S425, S440].</p></div>
+<div class="box say"><span class="lbl">Say it in one line</span><p>"I want to learn why an insurer will take a lower yield for a lower capital charge, and how Global Atlantic and the Ivy vehicles turn that logic into products KCS raises money for."</p></div>
+
+<!-- ============ SECTION 7 ============ -->
+<h2 id="l3-capstone">Capstone: a private markets plan for a UK DC megafund</h2>
+
+<p>This exercise pulls the module together. It is the kind of analysis a London KCS team could prepare before meeting a large UK workplace pension. The scheme is hypothetical and all its numbers are illustrative; the rules and KKR facts are sourced.</p>
+
+<h3>Step 1: the client and its constraints</h3>
+<p><b>Scheme M</b> (hypothetical) is a multi-employer defined contribution master trust. Its default fund is £30bn in 2027, growing to an assumed £40bn by 2030 from contributions and returns. Members are young on average, so contributions exceed withdrawals (illustrative). Its constraints:</p>
+<ul>
+<li><b>Scale rule.</b> Under the Pension Schemes Act 2026 (Royal Assent 29 April 2026), large multi-employer DC schemes need at least one default fund of £25bn or more by 2030, with a transition route for schemes of £10bn that can reach £25bn by 2035 [S346] [Confirmed]. Scheme M already qualifies.</li>
+<li><b>Allocation pledge and reserve power.</b> The voluntary Mansion House Accord (13 May 2025): 17 providers pledged at least 10% of DC default funds in private markets by 2030, with at least 5% in the UK [S315] [Confirmed]. The Act's reserve power, usable once and not before 1 January 2028, could require up to 10% in "qualifying assets", no more than 5% UK-specific, with a trustee opt-out where compliance is "likely not to be in the best interests of members" [S346] [Confirmed].</li>
+<li><b>Liquidity.</b> The default fund is priced and dealt daily [Inferred]. So private assets must sit in a vehicle that the daily fund can hold.</li>
+<li><b>Vehicle rules.</b> The UK Long-Term Asset Fund (LTAF) was opened to DC default and self-select use when PS23/7 recategorised LTAF units from 3 July 2023 [S305, S306] [Confirmed]. LTAFs deal no more often than monthly with at least 90 days' notice for redemptions [S451] [Reported]. LTAF AUM was about £7.5bn in May 2026 [S452] [Reported].</li>
+<li><b>Fees and value.</b> DC fees are closely scrutinised, so low-fee routes (co-investment, SMAs, evergreen at scale) matter [Inferred].</li>
+</ul>
+
+<h3>Step 2: the allocation (illustrative)</h3>
+<table class="tight">
+<thead><tr><th>Sleeve (of the £4.0bn private target in 2030)</th><th>Share</th><th>£bn</th><th>Why, in liability terms</th><th>Possible KKR building blocks</th></tr></thead>
+<tbody>
+<tr><td>Infrastructure</td><td>35%</td><td>1.40</td><td>Inflation-linked, contracted cash flows; long horizon matches young members</td><td>GII V, Core+, North America and Western Europe [S430]; KKR's 50% of Norfolk Vanguard offshore wind, 3.1GW, agreed Jan 2026 [S357] [Reported]</td></tr>
+<tr><td>Private credit incl. ABF</td><td>30%</td><td>1.20</td><td>Income, amortising cash flows, lower volatility</td><td>ABF Partners II, $6.5bn incl. SMAs [S433] [Reported]</td></tr>
+<tr><td>Private equity</td><td>25%</td><td>1.00</td><td>Long-run growth for members decades from retirement</td><td>Flagship funds and co-investment; UK take-privates such as the DCC approach with ECP [S356] [Reported]</td></tr>
+<tr><td>Real estate and other</td><td>10%</td><td>0.40</td><td>Diversification; land is a "qualifying asset" [S346]</td><td>Real estate strategies (not detailed in this research)</td></tr>
+<tr><td colspan="2"><b>UK-specific: 50% of the sleeve</b></td><td><b>2.00</b></td><td colspan="2">= 5% of a £40bn fund: meets the Accord's "at least 5% UK" and sits within the Act's 5% UK cap [S315, S346] [Inferred arithmetic]</td></tr>
+</tbody></table>
+
+<h3>Step 3: vehicle choice and pacing</h3>
+<p>KKR has no confirmed UK LTAF or EU ELTIF in the research [S429, S464] (gap), so the route has to be built [Inferred]. A realistic structure: Scheme M (or its provider) runs its own LTAF; KKR manages a <b>segregated mandate</b> (a separately managed account) inside it, which commits to KKR drawdown funds and takes co-investments; a portion goes into semi-liquid or evergreen-style exposure that is invested from day one. KKR's 10-K notes institutions' "increased preference for ... separately managed accounts or specialized investment vehicles" [S70] [Confirmed].</p>
+<p><b>Pacing, worked.</b> Split the 2030 target: 40% (£1.6bn) through evergreen-style exposure built by subscriptions, 60% (£2.4bn) through drawdown commitments. Using the single-commitment model from the pacing section, a commitment made each year from 2027 to 2030 will, at end-2030, be at ages 4, 3, 2 and 1, worth 91.0 + 79.4 + 52.0 + 25.0 = 247.4% of one year's commitment. Annual commitment needed = 2.4 ÷ 2.474 = <b>about £0.97bn a year</b>, so roughly £3.9bn committed in four years to hold £2.4bn of NAV, with about £1.6bn still uncalled (paid-in by then: 87.5% + 75% + 50% + 25% of one year's commitment). That is over-commitment in action (illustrative).</p>
+
+<figure>
+<svg viewBox="0 0 680 400" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10.5">
+<defs><marker id="l3arrE" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#24467A"/></marker></defs>
+<rect x="10" y="14" width="180" height="56" rx="5" fill="#E8EDF5" stroke="#24467A"/>
+<g fill="#13294B"><text x="20" y="36" font-weight="700">Members' contributions</text><text x="20" y="54" font-size="10" fill="#1B1F27">inflows exceed outflows</text></g>
+<rect x="250" y="14" width="200" height="56" rx="5" fill="#13294B"/>
+<g fill="#FFFFFF"><text x="260" y="36" font-weight="700">Default fund £40bn (2030)</text><text x="260" y="54" font-size="10">priced and dealt daily</text></g>
+<g stroke="#24467A" stroke-width="1.5" fill="none" marker-end="url(#l3arrE)"><line x1="190" y1="42" x2="248" y2="42"/><line x1="300" y1="70" x2="150" y2="104"/><line x1="400" y1="70" x2="500" y2="104"/></g>
+<rect x="10" y="106" width="280" height="64" rx="5" fill="#E8EDF5" stroke="#24467A"/>
+<g fill="#13294B"><text x="20" y="128" font-weight="700">Listed and liquid: 90% (£36bn)</text></g>
+<g fill="#1B1F27" font-size="10"><text x="20" y="145">equities, bonds, cash: pays daily dealing</text><text x="20" y="160">and absorbs the denominator effect</text></g>
+<rect x="330" y="106" width="340" height="64" rx="5" fill="#E3F4F1" stroke="#0E8F7E"/>
+<g fill="#13294B"><text x="340" y="128" font-weight="700">Private sleeve via an LTAF: 10% (£4.0bn)</text></g>
+<g fill="#1B1F27" font-size="10"><text x="340" y="145">monthly dealing at most, 90+ days' notice [S451]</text><text x="340" y="160">UK-specific £2.0bn = 5% of the fund</text></g>
+<g stroke="#24467A" stroke-width="1.5" fill="none" marker-end="url(#l3arrE)"><line x1="400" y1="170" x2="360" y2="196"/><line x1="500" y1="170" x2="500" y2="196"/><line x1="600" y1="170" x2="630" y2="196"/></g>
+<rect x="300" y="198" width="120" height="78" rx="4" fill="#FFFFFF" stroke="#0E8F7E"/>
+<rect x="430" y="198" width="120" height="78" rx="4" fill="#FFFFFF" stroke="#0E8F7E"/>
+<rect x="560" y="198" width="110" height="78" rx="4" fill="#FFFFFF" stroke="#0E8F7E"/>
+<g fill="#13294B" font-weight="700"><text x="310" y="216">Evergreen-style</text><text x="440" y="216">KKR mandate:</text><text x="570" y="216">Co-investment</text></g>
+<g fill="#1B1F27" font-size="10">
+<text x="310" y="232">40% = £1.6bn</text><text x="310" y="246">invested at once,</text><text x="310" y="260">no J-curve</text>
+<text x="440" y="232">drawdown funds</text><text x="440" y="246">60% = £2.4bn NAV</text><text x="440" y="260">~£0.97bn a year</text>
+<text x="570" y="232">inside the 60%</text><text x="570" y="246">lower fees,</text><text x="570" y="260">deal by deal</text>
+</g>
+<rect x="10" y="198" width="270" height="78" rx="5" fill="#FBF1E6" stroke="#C8792B"/>
+<g fill="#1B1F27" font-size="10">
+<text x="20" y="216" font-weight="700" fill="#13294B">Asset mix of the £4.0bn</text>
+<text x="20" y="232">Infrastructure 35% · Private credit 30%</text>
+<text x="20" y="246">Private equity 25% · Real estate/other 10%</text>
+<text x="20" y="260">UK assets: half of every sleeve</text>
+</g>
+<rect x="10" y="292" width="660" height="98" rx="5" fill="#F7F9FC" stroke="#D5DAE3"/>
+<g fill="#1B1F27" font-size="10.5">
+<text x="20" y="312" font-weight="700" fill="#13294B">Stress checks KCS would show</text>
+<text x="20" y="330">Denominator: listed −25%, private −8%: private share 10.0% → 3.68 ÷ (27.0 + 3.68) = 12.0%.</text>
+<text x="20" y="347">Liquidity: 90% is daily-liquid, and net inflows mean no forced LTAF sales in a normal year.</text>
+<text x="20" y="364">Unfunded: about £1.6bn of commitments uncalled at end-2030, covered many times by listed assets.</text>
+<text x="20" y="381">Reporting: ILPA Performance Template, gross and net, with and without credit lines [S445]; plus PME.</text>
+</g>
+</svg>
+<figcaption><span class="fig-num"></span> <b>Scheme M's private markets plan on one page.</b> The default fund stays daily-dealt; the private 10% sits in an LTAF holding three routes to exposure. Rules from [S346, S315, S451]; scheme, mix, sizes and stresses are illustrative [Inferred].</figcaption>
+</figure>
+
+<figure>
+<svg viewBox="0 0 680 250" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial" font-size="10.5">
+<g stroke="#D5DAE3" stroke-width="0.8"><line x1="80" y1="155" x2="600" y2="155"/><line x1="80" y1="110" x2="600" y2="110"/><line x1="80" y1="65" x2="600" y2="65"/></g>
+<line x1="80" y1="200" x2="600" y2="200" stroke="#4A5160"/>
+<g fill="#4A5160" font-size="10" text-anchor="end"><text x="72" y="204">£0bn</text><text x="72" y="159">£1bn</text><text x="72" y="114">£2bn</text><text x="72" y="69">£3bn</text><text x="72" y="24">£4bn</text></g>
+<line x1="80" y1="20" x2="600" y2="20" stroke="#B23A48" stroke-dasharray="6 3" stroke-width="1.3"/>
+<text x="84" y="14" fill="#B23A48" font-size="10" font-weight="700">2030 target: 10% of £40bn = £4.0bn</text>
+<g fill="#2a78d6"><rect x="120" y="173" width="70" height="27"/><rect x="240" y="132.5" width="70" height="67.5"/><rect x="360" y="83" width="70" height="117"/><rect x="480" y="20" width="70" height="180"/></g>
+<g fill="#1B1F27" font-size="10.5" font-weight="700" text-anchor="middle"><text x="155" y="167">£0.6bn</text><text x="275" y="126">£1.5bn</text><text x="395" y="77">£2.6bn</text><text x="515" y="44" fill="#FFFFFF">£4.0bn</text></g>
+<g fill="#4A5160" font-size="10" text-anchor="middle">
+<text x="155" y="216">2027</text><text x="275" y="216">2028</text><text x="395" y="216">2029</text><text x="515" y="216">2030</text>
+<text x="155" y="230">2% of £30bn</text><text x="275" y="230">4.5% of £33bn</text><text x="395" y="230">7% of £36.5bn</text><text x="515" y="230">10% of £40bn</text>
+</g>
+<text x="300" y="246" fill="#4A5160" font-size="9.5" text-anchor="middle">Reserve power cannot be used before 1 Jan 2028 [S346]; the Accord's 10% target date is 2030 [S315]</text>
+</svg>
+<figcaption><span class="fig-num"></span> <b>Scheme M's glide path to 10%.</b> The private sleeve must grow faster than the fund itself, which is why a mix of immediate (evergreen-style) and paced (drawdown) exposure is used. Fund sizes and percentages are illustrative [Inferred].</figcaption>
+</figure>
+
+<h3>Step 4: what KCS would actually present</h3>
+<table class="tight">
+<thead><tr><th>Slide</th><th>Content</th><th>Technique from this module</th></tr></thead>
+<tbody>
+<tr><td>1. Your objectives</td><td>Member outcomes, 10%/5% UK targets, daily dealing, fee budget</td><td>Liabilities first; "enough return" for a 40-year saver</td></tr>
+<tr><td>2. Portfolio fit</td><td>What each sleeve replaces in the listed portfolio and its hurdle</td><td>TPA funding rule; KKR's 30% private model portfolios as a reference point [S437]</td></tr>
+<tr><td>3. Structure</td><td>LTAF plus KKR mandate, evergreen-style and co-invest routes</td><td>Vehicle rules [S305, S451]; SMA preference [S70]</td></tr>
+<tr><td>4. Pacing</td><td>Commitment schedule 2027-2030, NAV build, unfunded</td><td>Takahashi-Alexander model; over-commitment</td></tr>
+<tr><td>5. Stress tests</td><td>Denominator, liquidity, redemption queue</td><td>Denominator worked example; evergreen caps [S420]</td></tr>
+<tr><td>6. Reporting</td><td>Net IRR, TVPI, DPI, PME; evergreen total returns by class</td><td>Performance section; ILPA template [S445]</td></tr>
+<tr><td>7. Why KKR</td><td>UK and European assets, infrastructure scale, ABF, TPA work</td><td>About $120bn of infrastructure equity managed [S430] [Confirmed]; TPA papers [S435, S436]</td></tr>
+</tbody></table>
+
+<div class="two">
+<div class="box key"><span class="lbl">What you will learn</span><p>To combine liabilities, allocation, vehicle rules, pacing and stress testing into one client plan, and to turn it into a seven-slide story a relationship manager can take into a trustee meeting.</p></div>
+<div class="box term"><span class="lbl">Where you meet it at KKR</span><p>The UK client universe is consolidating into a few £25bn+ DC megafunds and six LGPS pools holding over £400bn [S346, S347] [Confirmed/Reported]. KKR's London platform includes the DCC approach and Norfolk Vanguard [S356, S357] [Reported]; Daniel Celeghin leads New Markets and Sales Partnerships including Defined Contribution retirement [S136] [Confirmed].</p></div>
+</div>
+<div class="box opinion"><span class="lbl">Only at KKR</span><p>The plan needs infrastructure at scale, private credit including ABF, private equity, a TPA framework and both drawdown and evergreen know-how. KKR has all of these on one platform, and its US work with Capital Group on a target-date fund for defined contribution plans [S363] [Reported] is a live template for putting private assets into daily-dealt retirement money. Whether that template transfers to UK LTAFs is an open question worth asking in interview [Inferred].</p></div>
+<div class="box say"><span class="lbl">Say it in one line</span><p>"I want to learn how to build a private markets plan for a UK DC megafund under the Pension Schemes Act, from liabilities to pacing to the LTAF wrapper, because that is where London's next decade of client demand will come from."</p></div>
+
+<div class="box key"><span class="lbl">Module 2 in one paragraph</span><p>Start from liabilities to find "enough" return and liquidity. Decide weights on a total-portfolio basis, asking what each investment replaces. Turn NAV targets into commitments with a pacing model, and watch the denominator. Read performance as an LP: IRR with DPI, gross with net, every number against a PME and its vintage. Treat evergreen returns as a different clock. For insurers, rank assets by spread per unit of capital. Then put it all on seven slides for one client.</p></div>
+</section>
