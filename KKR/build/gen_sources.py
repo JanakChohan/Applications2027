@@ -5,8 +5,8 @@ R = pathlib.Path(__file__).resolve().parent.parent / "research"
 NAMES = {"WS1_kcs_function": "WS1 · KCS function (S70-S139)", "WS1B_team_map": "WS1B · Team map (S140-S199)",
          "WS2_firm": "WS2 · The firm (S1-S69)", "WS3_competitors": "WS3 · Competitors (S200-S259)",
          "WS4_industry_regulation": "WS4 · Industry and regulation (S260-S329)", "WS5_news": "WS5 · Live news (S330-S369)",
-         "WS6_interview": "WS6 · Interview intelligence (S370-S419)"}
-order = ["WS2_firm", "WS1_kcs_function", "WS1B_team_map", "WS3_competitors", "WS4_industry_regulation", "WS5_news", "WS6_interview"]
+         "WS6_interview": "WS6 · Interview intelligence (S370-S419)", "WS7_technical": "WS7 · Technical mechanics (S420-S489)"}
+order = ["WS2_firm", "WS1_kcs_function", "WS1B_team_map", "WS3_competitors", "WS4_industry_regulation", "WS5_news", "WS6_interview", "WS7_technical"]
 out = ['<h2 id="src-how">How to read this table</h2><p>Every <span class="src">[Sxx]</span> marker in the text resolves to a row below. '
        'Status: FETCHED means the full page or document was read; SNIPPET means only a search-result extract was seen (treat as weaker); '
        'PAYWALLED means the article itself was not read. All sources accessed between 11 and 12 October 2026. Each workstream had its own ID range, so gaps in numbering are expected.</p>']
