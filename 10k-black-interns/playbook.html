@@ -1,0 +1,821 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>10,000 Black Interns Playbook</title>
+<style>
+@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+:root{
+  --ink:#14213d; --body:#2b2d42; --muted:#5c6378; --line:#d9dde7;
+  --navy:#14213d; --gold:#e09f3e; --teal:#2a9d8f; --plum:#6d597a; --red:#c8553d;
+  --bg1:#f4f6fb; --bg2:#fff7ea; --bg3:#eaf6f4; --bg4:#f3eff6; --bg5:#fdeeea;
+}
+*{box-sizing:border-box}
+html,body{background:#fff}
+body{font-family:"Inter",sans-serif;color:var(--body);font-size:9.7pt;line-height:1.45;margin:0}
+h1,h2,h3,h4{color:var(--ink);line-height:1.2;margin:0}
+h1{font-size:26pt;font-weight:800;letter-spacing:-.5px}
+h2{font-size:17pt;font-weight:800;margin:0 0 4mm;padding-bottom:2mm;border-bottom:2.5px solid var(--gold)}
+h3{font-size:12pt;font-weight:700;margin:5mm 0 2mm}
+h4{font-size:10pt;font-weight:700;margin:3mm 0 1mm}
+p{margin:0 0 2.5mm}
+ul,ol{margin:0 0 2.5mm;padding-left:5mm}
+li{margin-bottom:1mm}
+.page{break-before:page}
+.kicker{font-size:8pt;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:1.5mm}
+.lead{font-size:11pt;color:var(--ink)}
+.muted{color:var(--muted)}
+.small{font-size:8.5pt}
+.box{border-radius:3mm;padding:3mm 3.5mm;margin:2.5mm 0;break-inside:avoid}
+.box h4:first-child,.box h3:first-child{margin-top:0}
+.b1{background:var(--bg1)} .b2{background:var(--bg2)} .b3{background:var(--bg3)} .b4{background:var(--bg4)} .b5{background:var(--bg5)}
+.key{border-left:4px solid var(--gold);background:var(--bg2)}
+.warn{border-left:4px solid var(--red);background:var(--bg5)}
+.good{border-left:4px solid var(--teal);background:var(--bg3)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:3mm}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3mm}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:2.5mm}
+.grid2>.box,.grid3>.box,.grid4>.box{margin:0}
+.grid2,.grid3,.grid4{margin:2.5mm 0}
+table{width:100%;border-collapse:collapse;margin:2mm 0 3mm;font-size:9pt;break-inside:avoid}
+th{background:var(--navy);color:#fff;text-align:left;padding:1.8mm 2mm;font-weight:600}
+td{padding:1.1mm 2mm;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:#fafbfd}
+.tag{display:inline-block;font-size:7.5pt;font-weight:700;padding:.5mm 2mm;border-radius:5mm;background:var(--navy);color:#fff;margin-right:1mm}
+.t-gold{background:var(--gold)} .t-teal{background:var(--teal)} .t-plum{background:var(--plum)} .t-red{background:var(--red)}
+/* flow diagrams */
+.flow{display:flex;align-items:stretch;gap:0;margin:3mm 0;break-inside:avoid}
+.flow .step{flex:1;background:var(--bg1);border:1.5px solid var(--navy);border-radius:2.5mm;padding:2.5mm;font-size:8.5pt;text-align:center}
+.flow .step b{display:block;color:var(--ink);font-size:9pt;margin-bottom:1mm}
+.flow .arr{width:6mm;display:flex;align-items:center;justify-content:center;color:var(--gold);font-weight:800;font-size:14pt}
+.part{border-radius:3mm;padding:3mm;color:#fff;break-inside:avoid}
+.part h4{color:#fff;margin:0 0 1.5mm;font-size:10pt}
+.part ul{padding-left:4mm;margin:0;font-size:8.5pt}
+.part .who{font-size:8pt;opacity:.9;margin-top:1.5mm;border-top:1px solid rgba(255,255,255,.35);padding-top:1.5mm}
+.p-navy{background:var(--navy)} .p-gold{background:#b8771f} .p-teal{background:#23867a} .p-plum{background:var(--plum)}
+.hl{outline:3px solid var(--gold);outline-offset:1.5mm}
+.formula{display:flex;align-items:center;justify-content:center;gap:3mm;margin:3mm 0;font-weight:700;color:var(--ink);break-inside:avoid}
+.formula .f{background:var(--bg1);border:1.5px solid var(--navy);border-radius:2mm;padding:2.5mm 4mm;text-align:center;font-size:10pt}
+.formula .f small{display:block;font-weight:400;font-size:7.5pt;color:var(--muted)}
+.formula .op{font-size:16pt;color:var(--gold)}
+.timeline{position:relative;margin:4mm 0 2mm;padding-left:7mm;break-inside:avoid}
+.timeline:before{content:"";position:absolute;left:2.2mm;top:1mm;bottom:1mm;width:2px;background:var(--line)}
+.tl{position:relative;margin-bottom:2.2mm}
+.tl:before{content:"";position:absolute;left:-6.2mm;top:1.2mm;width:3mm;height:3mm;border-radius:50%;background:var(--navy)}
+.tl.you:before{background:var(--gold)}
+.tl .d{font-weight:700;color:var(--ink);display:inline-block;min-width:34mm}
+.draft{background:#fff;border:1.5px dashed var(--muted);border-radius:3mm;padding:4mm;font-size:9.6pt;line-height:1.55;break-inside:avoid}
+.draft .ph{background:#fff1d6;padding:0 1mm;border-radius:1mm;color:#8a5a12;font-weight:600}
+.wc{font-size:8pt;color:var(--muted);text-align:right;margin-top:1mm}
+.budget{display:flex;height:11mm;border-radius:2mm;overflow:hidden;margin:3mm 0 1mm;font-size:7.8pt;color:#fff;font-weight:600;break-inside:avoid}
+.budget div{display:flex;align-items:center;justify-content:center;text-align:center;padding:0 1mm}
+.cover{height:262mm;display:flex;flex-direction:column;justify-content:space-between;background:var(--navy);color:#fff;margin:-16mm -15mm 0;padding:22mm 18mm}
+.cover h1{color:#fff;font-size:34pt;line-height:1.05}
+.cover .sub{font-size:13pt;color:#d6dbe8;margin-top:5mm;max-width:150mm}
+.cover .stat{display:grid;grid-template-columns:repeat(4,1fr);gap:4mm}
+.cover .stat div{border-top:2px solid var(--gold);padding-top:2mm;font-size:8.5pt;color:#d6dbe8}
+.cover .stat b{display:block;color:#fff;font-size:17pt}
+.toc li{margin-bottom:1.6mm}
+.toc b{color:var(--ink)}
+.funnel{display:flex;flex-direction:column;align-items:center;gap:1.2mm;margin:3mm 0;break-inside:avoid}
+.funnel div{color:#fff;text-align:center;padding:1.8mm;border-radius:1.5mm;font-size:8.5pt;font-weight:600}
+.cols{columns:2;column-gap:6mm}
+.cols .box{break-inside:avoid}
+.gloss dt{font-weight:700;color:var(--ink);float:left;clear:left;width:32mm}
+.gloss dd{margin:0 0 1mm 33mm}
+.gloss{font-size:8.8pt;margin:2mm 0;overflow:hidden}
+.foot{font-size:7.5pt;color:var(--muted)}
+.center{text-align:center}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="cover">
+  <div>
+    <div class="kicker" style="color:var(--gold)">Application playbook · Class of 2027</div>
+    <h1>10,000 Black Interns<br>from zero to strongest applicant</h1>
+    <p class="sub">What the programme is, how it is funded, what happens to your application after you press submit, and a working guide to Investment Management, Sales and Public Relations, so your three 250-word answers read like they were written by someone who already understands the job.</p>
+  </div>
+  <div>
+    <div class="stat">
+      <div><b>1 Nov 2026</b>Applications close</div>
+      <div><b>23 Nov 2026</b>Employers get their candidate lists</div>
+      <div><b>25–50</b>Candidates per role, on average</div>
+      <div><b>250 words</b>Is your cover letter for each workstream</div>
+    </div>
+    <p class="small" style="color:#aab2c8;margin-top:8mm">Prepared 11 October 2026 from the 10,000 Interns Foundation's own student and employer FAQs, the Charity Commission register and press coverage. Sources are listed on the last page. Fee and industry figures are rounded, typical ranges for understanding, not quotes.</p>
+  </div>
+</section>
+
+<!-- TOC + TL;DR -->
+<section class="page">
+  <div class="kicker">Start here</div>
+  <h2>The six things that matter most</h2>
+  <div class="box key">
+    <ol style="margin:0">
+      <li><b>Your 250-word answer is your cover letter.</b> The employer FAQ says candidates apply to up to three workstreams, "each with a CV and a cover letter of 250 words maximum". Each workstream answer is a cover letter, so write it like one.</li>
+      <li><b>Nobody at 10K ranks you.</b> After an eligibility check, an algorithm matches you to employers <i>at random</i> within your chosen workstream and location. The employer then does all of the selecting.</li>
+      <li><b>One allocation goes to one firm.</b> Your CV and that workstream's answer go to a single organisation, which sees you alongside roughly 25–50 other candidates for the same role. You might get several allocations, one, or none.</li>
+      <li><b>You can't choose the firm, so you can't name the firm.</b> Write for the whole workstream: show that you understand how <i>any</i> firm in that industry works and makes money. That is the specificity that wins.</li>
+      <li><b>Each answer is read by a different kind of reader.</b> A PR agency reading your PR answer does not care that Investment Management was your first choice. Every answer has to stand on its own.</li>
+      <li><b>Your CV is locked at submission.</b> Finalise it before 1 November. You can only send an updated version to a firm that contacts you afterwards.</li>
+    </ol>
+  </div>
+
+  <h3>Contents</h3>
+  <ol class="toc">
+    <li><b>The programme from zero.</b> What it is, who started it, how a charity like this is funded, and who takes part.</li>
+    <li><b>What happens when you press submit.</b> The allocation algorithm, the timeline and what it means for you.</li>
+    <li><b>Who actually reads your 250 words.</b> The reader you are writing for.</li>
+    <li><b>Investment Management.</b> The four parts of an asset manager, how it makes money, and a detailed look at the client-facing side.</li>
+    <li><b>Sales.</b> The four parts of a sales organisation, the funnel, the economics, and how your experience transfers.</li>
+    <li><b>Public Relations.</b> The disciplines, agency versus in-house, how PR earns money, and the financial PR bridge.</li>
+    <li><b>Writing the answers.</b> A 250-word structure, a specificity ladder and three draft templates.</li>
+    <li><b>Strategy beyond the form.</b> Location, speed of response, interviews, and a plan from today to 1 November.</li>
+  </ol>
+
+  <div class="box good">
+    <h4>Your edge in one sentence</h4>
+    <p style="margin:0">Most applicants will write "I'm passionate about finance and want to develop my skills." You already have asset-management experience, so you can write about <i>how the business actually works</i>, e.g. AUM, fees, distribution, client retention. That is the gap between a generic answer and one a hiring manager forwards to an interview list.</p>
+  </div>
+</section>
+
+<!-- PART 1 -->
+<section class="page">
+  <div class="kicker">Part 1</div>
+  <h2>The programme from zero</h2>
+
+  <h3>What it is</h3>
+  <p><b>10,000 Black Interns</b> is the flagship programme of the <b>10,000 Interns Foundation</b>, a UK registered charity (no. 1199061). It does not employ you and it is not a recruitment agency. It is a <b>matchmaker plus training provider</b>. Employers pledge paid internships, Black students and graduates apply once, and the Foundation's system routes applications to those employers. It also runs training, mentoring and an alumni network around that process.</p>
+
+  <div class="grid2">
+    <div class="box b1">
+      <h4>What employers must commit to</h4>
+      <ul class="small" style="margin:0">
+        <li>Paid at least the <b>Real Living Wage</b> for the location, for the whole internship</li>
+        <li>At least <b>6 weeks</b>, usually in summer (internships run May–September 2027)</li>
+        <li>UK-based (remote or hybrid allowed)</li>
+        <li>A dedicated line manager <i>and</i> a mentor from inside the organisation</li>
+      </ul>
+    </div>
+    <div class="box b1">
+      <h4>What you get beyond the internship</h4>
+      <ul class="small" style="margin:0">
+        <li>Pre-application CV and cover-letter workshops and sector deep dives</li>
+        <li>Interview training, then pre-internship training (April–June 2027)</li>
+        <li>1:1 mentoring and networking</li>
+        <li>The 10,000 Alumni Programme (events, jobs board, mentoring)</li>
+        <li>Wellbeing support (Black Minds Matter, Turn2Us)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Where it came from</h3>
+  <p>It started <b>in investment management</b>, which matters for you. In 2020 a group of senior industry figures ran the <b>#100BlackInterns</b> pilot to tackle the near-absence of Black talent in UK fund management. Around 80 firms, including M&amp;G, Schroders and St James's Place, offered paid front-office internships. The founders were:</p>
+  <ul>
+    <li><b>Dawid Konotey-Ahulu</b>: co-founder of Redington (an investment consultancy advising pension funds) and Mallowstreet</li>
+    <li><b>Jonathan Sorrell</b>: President of Capstone Investment Advisors (a hedge fund that funded the launch)</li>
+    <li><b>Wol Kolade</b>: Managing Partner of Livingbridge (private equity)</li>
+    <li><b>Michael Barrington-Hibbert</b>: founder of Barrington Hibbert Associates (executive search)</li>
+  </ul>
+  <div class="timeline">
+    <div class="tl"><span class="d">2020</span>#100BlackInterns pilot in investment management</div>
+    <div class="tl"><span class="d">2021</span>10,000 Black Interns launches across sectors; 700+ firms and 2,000+ applications in year one</div>
+    <div class="tl"><span class="d">2022</span>10,000 Able Interns (disabled students) launches; expands into insurance, banking, tech, real estate</div>
+    <div class="tl"><span class="d">2023–24</span>Arts &amp; Culture strand; first impact report</div>
+    <div class="tl"><span class="d">2025</span>10,000 internship milestone reached; Alumni Programme launched</div>
+    <div class="tl you"><span class="d">2026/27 (you)</span>"Beyond 10,000": 1,300+ employers engaged across 35+ sectors and 47 workstreams</div>
+  </div>
+  <div class="box key small"><b>Why this matters for your answers:</b> investment management is the programme's home sector. The founders' networks are asset managers, consultants and private equity, and the IM workstream is likely to be one of the deepest pools of hosts.</div>
+</section>
+
+<section class="page">
+  <div class="kicker">Part 1 continued</div>
+  <h2>How the Foundation makes money</h2>
+  <p>It is a <b>charity, not a business</b>, so it doesn't make a profit. It needs income to cover staff, the Pinpoint application system, training and events. Crucially, <b>employers pay nothing to host</b>. The employer FAQ says "there is no fee to join the programme. The only required expense is intern salaries." That keeps the barrier low enough for 1,300+ organisations to take part.</p>
+
+  <!-- money flow diagram -->
+  <svg viewBox="0 0 680 270" width="100%" style="margin:2mm 0" font-family="Inter" font-size="11">
+    <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#e09f3e"/></marker>
+    <marker id="b" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#2a9d8f"/></marker></defs>
+    <!-- sources -->
+    <rect x="5" y="10" width="190" height="52" rx="8" fill="#fff7ea" stroke="#e09f3e"/>
+    <text x="100" y="31" text-anchor="middle" font-weight="700" fill="#14213d">Strategic partners</text>
+    <text x="100" y="48" text-anchor="middle" fill="#5c6378" font-size="9.5">Capstone, Permira, Ares, Bloomberg…</text>
+    <rect x="5" y="72" width="190" height="52" rx="8" fill="#fff7ea" stroke="#e09f3e"/>
+    <text x="100" y="93" text-anchor="middle" font-weight="700" fill="#14213d">Corporate members</text>
+    <text x="100" y="110" text-anchor="middle" fill="#5c6378" font-size="9.5">Premier members, community donors</text>
+    <rect x="5" y="134" width="190" height="52" rx="8" fill="#fff7ea" stroke="#e09f3e"/>
+    <text x="100" y="155" text-anchor="middle" font-weight="700" fill="#14213d">Donations</text>
+    <text x="100" y="172" text-anchor="middle" fill="#5c6378" font-size="9.5">Individuals, foundations, events</text>
+    <rect x="5" y="196" width="190" height="52" rx="8" fill="#fff7ea" stroke="#e09f3e"/>
+    <text x="100" y="217" text-anchor="middle" font-weight="700" fill="#14213d">Pioneer partners (in-kind)</text>
+    <text x="100" y="234" text-anchor="middle" fill="#5c6378" font-size="9.5">Training, venues, tech, legal help</text>
+    <line x1="197" y1="36" x2="262" y2="118" stroke="#e09f3e" stroke-width="2" marker-end="url(#a)"/>
+    <line x1="197" y1="98" x2="262" y2="126" stroke="#e09f3e" stroke-width="2" marker-end="url(#a)"/>
+    <line x1="197" y1="160" x2="262" y2="134" stroke="#e09f3e" stroke-width="2" marker-end="url(#a)"/>
+    <line x1="197" y1="222" x2="262" y2="142" stroke="#e09f3e" stroke-width="2" marker-end="url(#a)"/>
+    <!-- foundation -->
+    <rect x="265" y="85" width="160" height="90" rx="10" fill="#14213d"/>
+    <text x="345" y="115" text-anchor="middle" fill="#fff" font-weight="800" font-size="12">10,000 Interns</text>
+    <text x="345" y="131" text-anchor="middle" fill="#fff" font-weight="800" font-size="12">Foundation</text>
+    <text x="345" y="152" text-anchor="middle" fill="#e09f3e" font-size="9.5">charity · no profit</text>
+    <!-- outputs -->
+    <line x1="427" y1="115" x2="487" y2="60" stroke="#2a9d8f" stroke-width="2" marker-end="url(#b)"/>
+    <line x1="427" y1="130" x2="487" y2="130" stroke="#2a9d8f" stroke-width="2" marker-end="url(#b)"/>
+    <line x1="427" y1="145" x2="487" y2="200" stroke="#2a9d8f" stroke-width="2" marker-end="url(#b)"/>
+    <rect x="490" y="30" width="185" height="56" rx="8" fill="#eaf6f4" stroke="#2a9d8f"/>
+    <text x="582" y="52" text-anchor="middle" font-weight="700" fill="#14213d">Matching system</text>
+    <text x="582" y="69" text-anchor="middle" fill="#5c6378" font-size="9.5">Pinpoint ATS, staff, outreach</text>
+    <rect x="490" y="102" width="185" height="56" rx="8" fill="#eaf6f4" stroke="#2a9d8f"/>
+    <text x="582" y="124" text-anchor="middle" font-weight="700" fill="#14213d">Training &amp; mentoring</text>
+    <text x="582" y="141" text-anchor="middle" fill="#5c6378" font-size="9.5">300+ sessions delivered</text>
+    <rect x="490" y="174" width="185" height="56" rx="8" fill="#eaf6f4" stroke="#2a9d8f"/>
+    <text x="582" y="196" text-anchor="middle" font-weight="700" fill="#14213d">Alumni programme</text>
+    <text x="582" y="213" text-anchor="middle" fill="#5c6378" font-size="9.5">1,900+ alumni members</text>
+    <text x="345" y="262" text-anchor="middle" fill="#5c6378" font-size="9.5">Host employers pay their interns' salaries directly. No fee flows to the Foundation for hosting.</text>
+  </svg>
+
+  <table>
+    <tr><th style="width:32%">Charity Commission data</th><th>Year to 31 Dec 2022</th><th>2023</th><th>2024</th></tr>
+    <tr><td>Total income (all donations &amp; legacies)</td><td>£1.07m</td><td>£0.91m</td><td>£0.82m</td></tr>
+    <tr><td>Total spending</td><td>n/a</td><td>n/a</td><td>£1.26m (≈£1.0m on charitable activities)</td></tr>
+  </table>
+  <p class="small muted">It spent more than it raised in 2024, which is common for a charity drawing on reserves. It is a small organisation running a very large marketplace, and the employers do the expensive part (paying and training interns).</p>
+
+  <h3>Why firms take part (useful for your interviews)</h3>
+  <div class="grid3">
+    <div class="box b1 small"><b>Talent pipeline.</b> A cheap, pre-screened route to diverse candidates who may convert to graduate hires.</div>
+    <div class="box b1 small"><b>Diversity targets.</b> Firms report on ethnicity, and regulators such as the FCA scrutinise culture and inclusion in financial services.</div>
+    <div class="box b1 small"><b>Low cost, low admin.</b> No fee. The firm pays the salary and runs its own selection.</div>
+  </div>
+
+  <h3>Who partners with them</h3>
+  <p><b>Funders and partners listed by the Foundation:</b> Ares, Bloomberg, Buttinghill Foundation, BVCA (British Private Equity &amp; Venture Capital Association), Cappfinity, Capstone, Christie's, GAIN UK, IBM, LinkedIn, Mayor of London, Permira, Q5, Royal Academy of Arts, Russell Group, Smart Works, The Money Charity, Twilio and the University of Oxford. Pinpoint provides the application system and Montfort (a financial PR firm) provides PR support.</p>
+  <p><b>Host employers named in public coverage over the years:</b> M&amp;G, Schroders, St James's Place, LGIM, HSBC, Goldman Sachs, Morgan Stanley, Investec, Allianz, Deutsche Bank, RWC Partners, Capstone, Canaccord Genuity Wealth Management, Trillium, OneFamily, Pinsent Masons and Framestore, plus Bar chambers via the Bar Council.</p>
+  <div class="box warn small"><b>Be realistic:</b> there is no public, current list of 2027 hosts, and the roster changes every year. Hosts pledged roles between 28 September and 30 October 2026. It also doesn't matter much, because you <b>cannot choose your employer</b>. Firms you want specifically should also get a <b>direct</b> application.</div>
+</section>
+
+<!-- PART 2 -->
+<section class="page">
+  <div class="kicker">Part 2</div>
+  <h2>What happens when you press submit</h2>
+  <p class="lead">You asked whether 10K sends everything to every firm, or narrows it down and sends the best. <b>It does neither.</b> It runs a random, rules-based match. Firms do all the judging.</p>
+
+  <div class="flow">
+    <div class="step"><b>1 · You apply</b>CV, cover letter, 3 workstreams (250 words each), preferred location</div>
+    <div class="arr">›</div>
+    <div class="step"><b>2 · Eligibility check</b>Heritage, right to work, student/graduate status. No quality ranking.</div>
+    <div class="arr">›</div>
+    <div class="step"><b>3 · Algorithm</b>Randomly matches you to pledged roles in your workstreams and location</div>
+    <div class="arr">›</div>
+    <div class="step" style="background:var(--bg2);border-color:var(--gold)"><b>4 · Allocation</b>One firm receives your CV and that workstream's answer on its "slate"</div>
+    <div class="arr">›</div>
+    <div class="step"><b>5 · Firm selects</b>Its own process: CV screen, tests, video or interview</div>
+  </div>
+
+  <div class="grid2">
+    <div class="box b1">
+      <h4>The rules, straight from the FAQs</h4>
+      <ul class="small" style="margin:0">
+        <li>Matching uses <b>only workstream + location</b>. Employers are told candidates are "not filtered by other factors".</li>
+        <li>Each allocation = <b>one organisation</b>. You may get several, one, or none.</li>
+        <li>An employer receives <b>25–50 candidates per role</b> on average, and can request more.</li>
+        <li>If your first-choice workstream is full, you may be placed in an <b>adjacent workstream</b>.</li>
+        <li>You <b>can't swap</b> allocations or ask for extra ones. A rejection is not reallocated.</li>
+        <li>New allocations can arrive <b>up to June</b> as new roles are added.</li>
+        <li>Firms see <b>only their own slate</b>. Everyone else should apply direct.</li>
+        <li>Emails come from <b>Pinpoint</b> or the firm itself. They are genuine, so check your spam folder.</li>
+      </ul>
+    </div>
+    <div class="box key">
+      <h4>What this means for you</h4>
+      <ul class="small" style="margin:0">
+        <li><b>All three answers count equally.</b> Your third choice could be the one that gets allocated. Don't write it lazily.</li>
+        <li><b>You compete inside a slate of ~25–50</b>, not against thousands. Being clearly the best-informed person in that pile is very achievable.</li>
+        <li><b>Some firms decide on paper alone.</b> The FAQ warns that some reject from the CV and cover letter without an interview, so the writing has to carry you.</li>
+        <li><b>Location is a lever.</b> More roles in a location means more chances of an allocation. Pick somewhere you can genuinely get to.</li>
+        <li><b>Speed matters.</b> First contact is 24 Nov–4 Dec. Missing a firm's deadline can lose the allocation.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>The 2026/27 timeline</h3>
+  <div class="timeline">
+    <div class="tl"><span class="d">28 Sep – 30 Oct 2026</span>Employers pledge roles</div>
+    <div class="tl you"><span class="d">Today → 1 Nov 2026</span><b>Write, proofread and submit.</b> Applications close 1 November.</div>
+    <div class="tl"><span class="d">By end Nov 2026</span>Everyone gets an email with their allocation information</div>
+    <div class="tl"><span class="d">23 Nov 2026</span>Employer slates released in Pinpoint</div>
+    <div class="tl you"><span class="d">24 Nov – 4 Dec 2026</span>First contact from firms. <b>Respond fast.</b></div>
+    <div class="tl"><span class="d">By 19 Feb 2027</span>Recommended deadline for interviews and assessments</div>
+    <div class="tl"><span class="d">By 19 Mar 2027</span>Recommended deadline for offers</div>
+    <div class="tl"><span class="d">By 31 May 2027</span>Hires confirmed (late allocations possible until June)</div>
+    <div class="tl"><span class="d">Apr – Jun 2027</span>Pre-internship training</div>
+    <div class="tl you"><span class="d">May – Sep 2027</span>Internships (minimum 6 weeks, Real Living Wage or above)</div>
+  </div>
+  <p class="foot">Employer dates are the Foundation's "recommended" milestones. Individual firms run their own timelines, so some will be faster and some slower.</p>
+</section>
+
+<!-- PART 3 -->
+<section class="page">
+  <div class="kicker">Part 3</div>
+  <h2>Who actually reads your 250 words</h2>
+  <p>Picture the reader. Late November: a hiring manager or early-careers recruiter at <b>one firm</b> opens Pinpoint and sees a slate of about 40 people. For each candidate they see a CV and a 250-word answer. They might spend <b>one to two minutes</b> per person. They are asking four questions:</p>
+  <div class="grid4">
+    <div class="box b1 small center"><b style="font-size:10pt">1. Motivation</b><br>Is this a real choice or a box ticked?</div>
+    <div class="box b1 small center"><b style="font-size:10pt">2. Understanding</b><br>Do they know what we actually do?</div>
+    <div class="box b1 small center"><b style="font-size:10pt">3. Evidence</b><br>Have they done anything that proves it?</div>
+    <div class="box b1 small center"><b style="font-size:10pt">4. Fit</b><br>Could I put them in front of a colleague or client in week one?</div>
+  </div>
+
+  <h3>The "random firm" problem, solved</h3>
+  <p>You can't tailor to one company because you don't know which one you'll get. "Investment Management" might mean a £1 trillion global manager, a 30-person boutique, a wealth manager or an insurer's in-house investment arm. The answer is to <b>tailor to the workstream's common core</b>, meaning the things that are true at every firm in that pool:</p>
+  <table>
+    <tr><th style="width:22%">Workstream</th><th>Common core every host shares</th><th style="width:30%">Phrases that show understanding</th></tr>
+    <tr><td><b>Investment Management</b></td><td>They manage other people's money for a fee based on assets. Growth comes from performance plus winning and keeping clients.</td><td>"assets under management", "net flows", "client retention", "explaining the investment process"</td></tr>
+    <tr><td><b>Sales</b></td><td>Revenue depends on finding, converting and keeping customers. Results are measured in pipeline, conversion and targets.</td><td>"understanding the client's problem", "pipeline", "account management", "repeat business"</td></tr>
+    <tr><td><b>Public Relations</b></td><td>They protect and build reputation through earned media and messaging. Agencies sell expertise by the hour or on retainer.</td><td>"key messages", "media relations", "coverage", "issues and crisis", "stakeholders"</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>The golden rule</h4>
+    <p style="margin:0">Specific about the <b>industry</b>, specific about <b>you</b>, neutral about the <b>firm</b>. Never write a firm's name, "your firm's values" or "your graduate scheme". You don't know who will read it, and a generic flattering line wastes words.</p>
+  </div>
+
+  <h3>Should you tailor Investment Management to the client-facing side?</h3>
+  <p><b>Yes, as your spine, but leave the door open.</b> The allocation is random within the workstream, so the role you're matched to could be in an investment team, operations or distribution. If your answer says "I only want sales" you may put off an investment-team reader. If it says "I want to work on the client-facing side, <i>and to do that well I want to understand how portfolios are built</i>", every reader in the pool can say yes. Your previous asset-management experience makes that line believable.</p>
+  <div class="box b3 small"><b>A note on coherence:</b> your three choices don't need to be connected. Each is a separate lottery ticket read by a different reader. But there is a natural thread you <i>can</i> use in your head: <b>IM distribution</b> is a form of B2B <b>sales</b>, and asset managers rely heavily on <b>financial PR</b>. Use that thread for your own understanding. Don't make the Sales or PR answers about finance only, because that reader might be a software company or a consumer PR agency.</div>
+</section>
+
+<!-- PART 4 IM -->
+<section class="page">
+  <div class="kicker">Part 4 · First choice</div>
+  <h2>Investment Management</h2>
+  <p class="lead">An asset manager pools money from savers (through pensions, ISAs and insurance policies) and invests it in shares, bonds, property and private assets on their behalf, for a fee. The UK industry manages around <b>£9 trillion</b>, second only to the US.</p>
+
+  <h3>Pre-knowledge: where it sits in the money system</h3>
+  <svg viewBox="0 0 680 190" width="100%" font-family="Inter" font-size="10.5">
+    <defs><marker id="c" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#14213d"/></marker></defs>
+    <rect x="5" y="55" width="110" height="70" rx="8" fill="#f4f6fb" stroke="#14213d"/>
+    <text x="60" y="82" text-anchor="middle" font-weight="700" fill="#14213d">Savers</text>
+    <text x="60" y="99" text-anchor="middle" fill="#5c6378" font-size="9">you, workers,</text>
+    <text x="60" y="111" text-anchor="middle" fill="#5c6378" font-size="9">retirees</text>
+    <rect x="150" y="10" width="140" height="52" rx="8" fill="#fff7ea" stroke="#e09f3e"/>
+    <text x="220" y="31" text-anchor="middle" font-weight="700" fill="#14213d">Institutions</text>
+    <text x="220" y="47" text-anchor="middle" fill="#5c6378" font-size="9">pension funds, insurers</text>
+    <rect x="150" y="118" width="140" height="52" rx="8" fill="#fff7ea" stroke="#e09f3e"/>
+    <text x="220" y="139" text-anchor="middle" font-weight="700" fill="#14213d">Intermediaries</text>
+    <text x="220" y="155" text-anchor="middle" fill="#5c6378" font-size="9">wealth managers, IFAs, platforms</text>
+    <rect x="325" y="55" width="150" height="70" rx="8" fill="#14213d"/>
+    <text x="400" y="85" text-anchor="middle" font-weight="800" fill="#fff">ASSET MANAGER</text>
+    <text x="400" y="103" text-anchor="middle" fill="#e09f3e" font-size="9">the "buy-side"</text>
+    <rect x="510" y="10" width="165" height="52" rx="8" fill="#eaf6f4" stroke="#2a9d8f"/>
+    <text x="592" y="31" text-anchor="middle" font-weight="700" fill="#14213d">Markets</text>
+    <text x="592" y="47" text-anchor="middle" fill="#5c6378" font-size="9">shares, bonds, property, private</text>
+    <rect x="510" y="118" width="165" height="52" rx="8" fill="#eaf6f4" stroke="#2a9d8f"/>
+    <text x="592" y="139" text-anchor="middle" font-weight="700" fill="#14213d">Banks ("sell-side")</text>
+    <text x="592" y="155" text-anchor="middle" fill="#5c6378" font-size="9">research, trading, execution</text>
+    <line x1="117" y1="80" x2="148" y2="45" stroke="#14213d" stroke-width="1.6" marker-end="url(#c)"/>
+    <line x1="117" y1="100" x2="148" y2="135" stroke="#14213d" stroke-width="1.6" marker-end="url(#c)"/>
+    <line x1="292" y1="40" x2="323" y2="75" stroke="#14213d" stroke-width="1.6" marker-end="url(#c)"/>
+    <line x1="292" y1="142" x2="323" y2="108" stroke="#14213d" stroke-width="1.6" marker-end="url(#c)"/>
+    <line x1="477" y1="75" x2="508" y2="40" stroke="#14213d" stroke-width="1.6" marker-end="url(#c)"/>
+    <line x1="508" y1="142" x2="477" y2="108" stroke="#14213d" stroke-width="1.6" marker-end="url(#c)"/>
+    <text x="400" y="185" text-anchor="middle" fill="#5c6378" font-size="9">Investment consultants (Mercer, WTW, Aon, Redington, LCP…) advise institutions on which managers to hire.</text>
+  </svg>
+
+  <dl class="gloss">
+    <dt>AUM</dt><dd>Assets under management: the total money a firm manages. The single most important number, because fees are a percentage of it.</dd>
+    <dt>bps (basis points)</dt><dd>1 bp = 0.01%. A fee of 50 bps = 0.50% a year. Fees are always discussed in bps.</dd>
+    <dt>Active vs passive</dt><dd>Active: managers pick investments to beat a benchmark. Passive: track an index cheaply (e.g. an ETF tracking the FTSE 100).</dd>
+    <dt>Benchmark / alpha</dt><dd>The index a fund is measured against. Alpha is return above that benchmark, which is what active managers sell.</dd>
+    <dt>Net flows</dt><dd>New client money in minus money withdrawn. Positive flows mean the business is winning.</dd>
+    <dt>Fund vs mandate</dt><dd>Fund: a pooled product many investors buy into (OEIC, unit trust, ETF, investment trust). Mandate: a bespoke portfolio run for one large client.</dd>
+    <dt>DB vs DC pensions</dt><dd>Defined benefit: guaranteed pension, so the scheme carries the risk. Defined contribution: your pot depends on investment returns. DC is where the growth is.</dd>
+    <dt>Private markets</dt><dd>Investments not on a stock exchange: private equity, private credit, infrastructure, real estate. Higher fees and a fast-growing area.</dd>
+    <dt>RFP</dt><dd>Request for proposal: a formal questionnaire a client or consultant sends when choosing a manager.</dd>
+  </dl>
+  <h3>Types of firm you could be allocated to</h3>
+  <div class="grid3 small">
+    <div class="box b1"><b>Global "traditional" managers</b><br>Large active and passive ranges: e.g. LGIM, Schroders, M&amp;G, abrdn, BlackRock, Fidelity.</div>
+    <div class="box b1"><b>Boutiques</b><br>Small, specialist, often owned by their partners. You'll see a bit of everything.</div>
+    <div class="box b1"><b>Alternatives</b><br>Hedge funds (e.g. Capstone), private equity (Permira, Livingbridge), private credit (Ares).</div>
+    <div class="box b1"><b>Wealth managers</b><br>Manage money for individuals and families: St James's Place, Canaccord, Rathbones.</div>
+    <div class="box b1"><b>Insurers / pension investors</b><br>In-house teams at insurers and big pension schemes, i.e. asset owners.</div>
+    <div class="box b1"><b>Consultants / platforms</b><br>Advise on or distribute managers. Close cousins that sometimes sit in this workstream.</div>
+  </div>
+
+</section>
+
+<section class="page">
+  <div class="kicker">Part 4 · Investment Management</div>
+  <h2>The four parts of an asset manager</h2>
+  <div class="grid4">
+    <div class="part p-navy">
+      <h4>1. Investment<br>(front office)</h4>
+      <ul><li>Portfolio managers</li><li>Research analysts</li><li>Dealers / traders</li><li>Strategists, economists</li></ul>
+      <div class="who"><b>Goal:</b> generate returns that beat the benchmark within agreed risk limits.</div>
+    </div>
+    <div class="part p-gold hl">
+      <h4>2. Distribution<br>(client-facing)</h4>
+      <ul><li>Institutional sales / BD</li><li>Wholesale sales</li><li>Client relationship mgmt</li><li>Consultant relations</li><li>Product specialists</li><li>RFP, marketing</li></ul>
+      <div class="who"><b>Goal:</b> win new assets and keep existing clients. This is where the revenue is won.</div>
+    </div>
+    <div class="part p-teal">
+      <h4>3. Operations, risk &amp; tech</h4>
+      <ul><li>Investment risk</li><li>Performance measurement</li><li>Fund operations, trade settlement</li><li>Data and technology</li></ul>
+      <div class="who"><b>Goal:</b> run portfolios accurately, safely and efficiently.</div>
+    </div>
+    <div class="part p-plum">
+      <h4>4. Corporate functions</h4>
+      <ul><li>Compliance and legal</li><li>Finance</li><li>HR</li><li>Responsible investment / stewardship</li></ul>
+      <div class="who"><b>Goal:</b> keep the firm regulated (FCA), solvent and well-governed.</div>
+    </div>
+  </div>
+  <p class="small muted center">Gold outline = the client-facing side you're most interested in.</p>
+
+  <h3>How an asset manager makes money</h3>
+  <div class="formula">
+    <div class="f">Revenue<small>per year</small></div><div class="op">=</div>
+    <div class="f">AUM<small>money managed</small></div><div class="op">×</div>
+    <div class="f">Fee rate<small>in bps</small></div><div class="op">+</div>
+    <div class="f">Performance fees<small>some products only</small></div>
+  </div>
+  <div class="grid2">
+    <div class="box b1 small">
+      <h4>Worked example</h4>
+      A pension fund gives a manager a <b>£500m</b> mandate at <b>40 bps</b>.<br>
+      £500,000,000 × 0.40% = <b>£2m of revenue a year</b>, every year the client stays.<br>
+      If the client leaves after a bad meeting, £2m a year walks out. <b>That is why client relationship teams exist.</b>
+    </div>
+    <div class="box b1 small">
+      <h4>So AUM grows in only two ways</h4>
+      <b>1. Markets / performance:</b> the investments rise in value (partly luck, partly skill, and the investment team's job).<br>
+      <b>2. Net flows:</b> clients add money or new clients arrive (the distribution team's job).<br>
+      Costs are mostly people, so once a fund is running, extra AUM is very profitable.
+    </div>
+  </div>
+
+  <table>
+    <tr><th>Product type</th><th>Typical annual fee (rough)</th><th>Why</th></tr>
+    <tr><td>Passive index fund / ETF</td><td>0.03% – 0.25%</td><td>Simple, automated, and very price-competitive</td></tr>
+    <tr><td>Active equity or bond, institutional</td><td>0.25% – 0.75%</td><td>Large clients negotiate hard</td></tr>
+    <tr><td>Active fund, retail / wholesale</td><td>0.60% – 1.00%</td><td>Smaller tickets and more servicing</td></tr>
+    <tr><td>Hedge fund</td><td>~1–2% + ~20% of profits</td><td>Specialist skill, performance-based</td></tr>
+    <tr><td>Private equity / private credit</td><td>~1–2% + ~20% "carry"</td><td>Illiquid, long-term, labour-intensive</td></tr>
+  </table>
+
+</section>
+
+<section class="page">
+  <div class="kicker">Part 4 · Investment Management</div>
+  <h2>Close-up: the client-facing side</h2>
+  <p>In asset management, the client side is usually called <b>distribution</b>. It splits by <b>who the client is</b>:</p>
+
+  <div class="grid3">
+    <div class="box b2">
+      <h4>Institutional</h4>
+      <p class="small"><b>Clients:</b> DB and DC pension schemes, local government pension pools (LGPS), insurers, sovereign wealth funds, charities, university endowments.</p>
+      <p class="small"><b>How they buy:</b> slowly and formally. Usually an investment consultant shortlists managers, then RFPs, then a pitch to the trustees. Sales cycles take months, and mandates are worth hundreds of millions.</p>
+    </div>
+    <div class="box b2">
+      <h4>Wholesale / intermediary</h4>
+      <p class="small"><b>Clients:</b> wealth managers, discretionary fund managers (DFMs), independent financial advisers (IFAs), private banks, and platforms such as Hargreaves Lansdown.</p>
+      <p class="small"><b>How they buy:</b> fund selectors research funds and add them to "buy lists". More meetings, smaller tickets, and a lot of regional travel.</p>
+    </div>
+    <div class="box b2">
+      <h4>Retail / direct</h4>
+      <p class="small"><b>Clients:</b> individual investors buying funds or ISAs directly.</p>
+      <p class="small"><b>How they buy:</b> through marketing, digital channels and brand. They are driven by FCA <b>Consumer Duty</b>, which requires firms to show good outcomes and fair value.</p>
+    </div>
+  </div>
+
+  <h3>The roles, and what an intern would do in each</h3>
+  <table>
+    <tr><th style="width:24%">Role</th><th>What they do</th><th style="width:34%">Intern-level tasks</th></tr>
+    <tr><td><b>Business development / sales</b></td><td>Win new clients and mandates; build the pipeline</td><td>Prospect research, CRM updates, pitch-book preparation</td></tr>
+    <tr><td><b>Client relationship manager</b></td><td>Own existing clients, keep them happy, spot cross-sell opportunities</td><td>Prepare meeting packs, take notes, track client requests</td></tr>
+    <tr><td><b>Consultant relations</b></td><td>Manage the relationship with consultants such as Mercer and WTW, who influence which managers get hired</td><td>Answer consultant databases, collate performance data</td></tr>
+    <tr><td><b>Product specialist / investment director</b></td><td>Explain a strategy in depth: the bridge between the fund manager and the client</td><td>Draft market commentary, update factsheets and presentations</td></tr>
+    <tr><td><b>Client service / reporting</b></td><td>Accurate quarterly reports, onboarding, queries</td><td>Check reports, reconcile data, handle simple queries</td></tr>
+    <tr><td><b>RFP / proposals</b></td><td>Write the formal answers that win or lose tenders</td><td>Update the answer library, draft standard sections</td></tr>
+    <tr><td><b>Marketing</b></td><td>Brand, campaigns, thought leadership, events</td><td>Content drafts, event support, campaign analytics</td></tr>
+  </table>
+
+  <h3>What's happening in the industry right now (use <i>one</i>, in a single sentence)</h3>
+  <div class="grid3 small">
+    <div class="box b1"><b>Fee compression and passive growth.</b> Cheap index funds keep taking share, so active managers must justify their fees. Clear explanation of value becomes the job of distribution.</div>
+    <div class="box b1"><b>Private markets go mainstream.</b> Managers are launching private-market products for pensions and wealthy individuals (e.g. LTAFs). There is a lot of client education involved.</div>
+    <div class="box b1"><b>UK pension reform.</b> DC schemes and LGPS pools are consolidating into fewer, larger "megafunds", and the government is pushing more investment into UK assets. Fewer, bigger, more demanding clients.</div>
+    <div class="box b1"><b>Consolidation and cost pressure.</b> Mergers, job cuts and AI-driven automation. Firms want people who add value quickly.</div>
+    <div class="box b1"><b>Sustainability and stewardship.</b> Clients ask how managers vote and engage with companies. FCA sustainability labels (SDR) shape how funds are marketed.</div>
+
+  </div>
+
+</section>
+
+<!-- PART 5 SALES -->
+<section class="page">
+  <div class="kicker">Part 5 · Second choice</div>
+  <h2>Sales</h2>
+  <p class="lead">Sales connects a product or service with the customer who needs it, and turns that need into revenue. The Foundation notes that about <b>1 in 6 UK employees</b> work in sales-related roles. The Sales workstream can include technology and software, consumer goods, business services, media, telecoms and financial services.</p>
+
+  <h3>Pre-knowledge</h3>
+  <dl class="gloss">
+    <dt>B2B vs B2C</dt><dd>Business-to-business (selling to companies: longer cycles, several decision-makers) vs business-to-consumer (selling to individuals: faster, higher volume).</dd>
+    <dt>Pipeline</dt><dd>All the potential deals in progress, at each stage, with an estimated value.</dd>
+    <dt>Conversion rate</dt><dd>The share of prospects that move to the next stage, or that eventually buy.</dd>
+    <dt>Quota / target</dt><dd>The revenue a salesperson is expected to bring in. Pay is often base salary plus commission ("OTE", on-target earnings).</dd>
+    <dt>ARR / recurring revenue</dt><dd>Revenue that repeats (subscriptions, contracts). It is highly valued, because keeping customers is cheaper than finding new ones.</dd>
+    <dt>Churn</dt><dd>Customers lost over a period. Low churn means healthy account management.</dd>
+    <dt>CAC and LTV</dt><dd>Cost to acquire a customer vs their lifetime value. LTV should be well above CAC. Every deal is logged in a <b>CRM</b> (e.g. Salesforce).</dd>
+
+  </dl>
+
+  <h3>The four parts of a sales organisation</h3>
+  <div class="grid4">
+    <div class="part p-navy"><h4>1. Lead generation</h4><ul><li>SDR / BDR roles</li><li>Research prospects</li><li>Cold outreach, calls, emails</li><li>Book first meetings</li></ul><div class="who"><b>Goal:</b> fill the top of the pipeline</div></div>
+    <div class="part p-gold"><h4>2. New business</h4><ul><li>Account executives</li><li>Discovery meetings</li><li>Proposals and demos</li><li>Negotiation and closing</li></ul><div class="who"><b>Goal:</b> convert prospects into paying customers</div></div>
+    <div class="part p-teal"><h4>3. Account management</h4><ul><li>Key account managers</li><li>Customer success</li><li>Renewals and upselling</li><li>Relationship building</li></ul><div class="who"><b>Goal:</b> keep and grow existing customers</div></div>
+    <div class="part p-plum"><h4>4. Sales ops &amp; strategy</h4><ul><li>Pipeline data and CRM</li><li>Forecasting</li><li>Pricing and territories</li><li>Sales enablement and training</li></ul><div class="who"><b>Goal:</b> make the whole engine more efficient</div></div>
+  </div>
+
+  <div class="grid2" style="margin-top:3mm">
+    <div>
+      <h3 style="margin-top:0">The funnel (illustrative B2B)</h3>
+      <div class="funnel">
+        <div style="width:100%;background:#14213d">1,000 leads identified</div>
+        <div style="width:80%;background:#2e3f63">200 contacted and responsive</div>
+        <div style="width:60%;background:#2a9d8f">60 discovery meetings</div>
+        <div style="width:42%;background:#b8771f">20 proposals</div>
+        <div style="width:26%;background:#c8553d">6 deals won</div>
+      </div>
+      <p class="small muted center">Improve any one stage and revenue rises. That is why sales is so data-driven.</p>
+    </div>
+    <div>
+      <h3 style="margin-top:0">How sales makes money</h3>
+      <div class="formula" style="flex-wrap:wrap">
+        <div class="f">Revenue</div><div class="op">=</div>
+        <div class="f">Deals won<small>pipeline × conversion</small></div><div class="op">×</div>
+        <div class="f">Deal size</div><div class="op">×</div>
+        <div class="f">Retention<small>how long they stay</small></div>
+      </div>
+      <p class="small">6 deals × £30k a year × an average stay of 4 years = <b>£720k lifetime value</b> from one quarter's work. Losing a client early wipes that out, which is why <b>account management</b> is as important as closing.</p>
+    </div>
+  </div>
+
+  <div class="box good">
+    <h4>Your bridge into Sales</h4>
+    <p class="small" style="margin:0">Asset-management distribution <b>is</b> consultative B2B sales: long cycles, several decision-makers (trustees, consultants), formal proposals (RFPs), and revenue that depends on retention. If you saw any of that in your previous role, you have watched high-value sales up close. In the Sales answer, describe it in <b>sales language</b> (prospect, pipeline, relationship, follow-up, objection) so a software or consumer-goods reader recognises it. Then add one non-finance example of persuading or serving people (a part-time job, a society, fundraising) to show range. For interviews, know <b>consultative selling</b> and <b>SPIN</b> questioning. If asked to "sell me this pen", ask about the buyer before you pitch.</p>
+  </div>
+
+</section>
+
+<!-- PART 6 PR -->
+<section class="page">
+  <div class="kicker">Part 6 · Third choice</div>
+  <h2>Public Relations</h2>
+  <p class="lead">PR manages how an organisation or person is <b>seen</b> by the media, customers, investors, regulators, politicians and employees. Advertising is space you pay for. PR is mostly about <b>earned</b> attention, which you have to persuade a journalist or audience to give you.</p>
+
+  <h3>Pre-knowledge: the PESO model</h3>
+  <div class="grid4">
+    <div class="box b1 small center"><b style="font-size:11pt;color:var(--navy)">P</b>aid<br>Adverts, sponsored content, paid social</div>
+    <div class="box b2 small center hl"><b style="font-size:11pt;color:#b8771f">E</b>arned<br>Press coverage, interviews, reviews. <b>The core of PR.</b></div>
+    <div class="box b3 small center"><b style="font-size:11pt;color:var(--teal)">S</b>hared<br>Social media, influencers, word of mouth</div>
+    <div class="box b4 small center"><b style="font-size:11pt;color:var(--plum)">O</b>wned<br>Website, blog, reports, newsletters</div>
+  </div>
+  <dl class="gloss">
+    <dt>Press release</dt><dd>A formal announcement written like a news story, sent to journalists.</dd>
+    <dt>Media list</dt><dd>A database of relevant journalists, outlets and their interests. Building these is classic intern work.</dd>
+    <dt>Pitch</dt><dd>A short, tailored email persuading a journalist that a story or expert is worth their time.</dd>
+    <dt>Key messages</dt><dd>The three or four points an organisation wants every audience to remember.</dd>
+    <dt>Share of voice</dt><dd>Your coverage compared with competitors'. A standard PR success measure.</dd>
+    <dt>Thought leadership</dt><dd>Positioning executives as experts through comment pieces, research and interviews.</dd>
+    <dt>Public affairs</dt><dd>Influencing policy and regulation by engaging politicians, civil servants and regulators.</dd>
+  </dl>
+
+  <h3>The main parts of PR</h3>
+  <div class="grid4">
+    <div class="part p-navy"><h4>1. Corporate &amp; financial</h4><ul><li>Company results</li><li>M&amp;A, IPOs</li><li>Investor relations</li><li>CEO profile</li></ul><div class="who"><b>Goal:</b> protect value and trust with investors and the City</div></div>
+    <div class="part p-gold"><h4>2. Consumer &amp; brand</h4><ul><li>Product launches</li><li>Campaigns and stunts</li><li>Influencers and social</li><li>Events</li></ul><div class="who"><b>Goal:</b> make customers notice, like and buy</div></div>
+    <div class="part p-teal"><h4>3. Crisis &amp; issues</h4><ul><li>Scandals, failures</li><li>Data breaches</li><li>Holding statements</li><li>Spokesperson prep</li></ul><div class="who"><b>Goal:</b> limit damage, fast and honestly</div></div>
+    <div class="part p-plum"><h4>4. Public affairs &amp; internal</h4><ul><li>Policy and lobbying</li><li>Stakeholder engagement</li><li>Employee comms</li><li>ESG messaging</li></ul><div class="who"><b>Goal:</b> shape the rules and keep staff aligned</div></div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="kicker">Part 6 · Public Relations</div>
+  <h2>How PR makes money, and your bridge</h2>
+  <div class="grid2">
+    <div class="box b2">
+      <h4>Agency side (most PR internships)</h4>
+      <p class="small">An agency sells <b>people's time and judgement</b> to clients:</p>
+      <ul class="small">
+        <li><b>Retainers:</b> a monthly fee for ongoing work (e.g. £10k–£50k+ a month for a large corporate client)</li>
+        <li><b>Projects:</b> one-off fees for a launch, campaign or deal</li>
+        <li><b>Crisis work:</b> billed at high hourly rates when something goes wrong</li>
+      </ul>
+      <p class="small" style="margin:0">Profit = fees − staff costs, so agencies track <b>billable hours</b> and win new clients through pitches, which is sales again. An intern who saves a senior consultant time is directly valuable.</p>
+    </div>
+    <div class="box b3">
+      <h4>In-house side</h4>
+      <p class="small">A communications team inside a company, such as a bank, retailer, charity or asset manager. It is a <b>cost centre</b>: it doesn't bill anyone, so its value is shown through:</p>
+      <ul class="small" style="margin:0">
+        <li>quality and quantity of coverage, and share of voice</li>
+        <li>reputation and trust scores</li>
+        <li>crises avoided or contained</li>
+        <li>support for sales, recruitment and investor confidence</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>A day in a PR internship</h3>
+  <div class="flow">
+    <div class="step"><b>08:30</b>Morning media monitoring: what's been written about clients</div><div class="arr">›</div>
+    <div class="step"><b>10:00</b>Update media lists, research journalists</div><div class="arr">›</div>
+    <div class="step"><b>12:00</b>Draft a press release or social post</div><div class="arr">›</div>
+    <div class="step"><b>15:00</b>Help prepare a client meeting or event</div><div class="arr">›</div>
+    <div class="step"><b>17:00</b>Coverage report: what landed and where</div>
+  </div>
+
+  <div class="box good">
+    <h4>Your bridge into PR: financial communications</h4>
+    <p class="small">Asset managers spend heavily on communications. Fund managers are quoted in the <b>FT, Bloomberg, Citywire, Investment Week, Money Marketing and Professional Pensions</b>. Firms publish market outlooks, and a single bad story can trigger client withdrawals. The 2019 suspension of the Woodford Equity Income fund is the classic example of reputation turning into lost assets almost overnight. Financial and corporate PR firms in the UK include Brunswick, FGS Global, Teneo, Headland, Lansons, Instinctif, Citigate Dewe Rogerson and Montfort (which supports 10K itself). Consumer and broad agencies include Edelman, Weber Shandwick, MHP and Freuds.</p>
+    <p class="small" style="margin:0"><b>How to use this:</b> say you've seen first-hand that in finance <i>trust is the product</i>, and that clear communication protects it. Then show you can write, research and work to deadlines. Keep it broad enough that a consumer agency reader still nods along. Mention the financial angle once, not throughout.</p>
+  </div>
+
+  <div class="box b1 small"><b>What PR readers look for that other workstreams don't:</b> <b>writing quality</b> (your 250 words <i>are</i> the writing sample, so any typo is fatal), <b>news sense</b> (follow the news and be able to name a recent campaign or crisis you found interesting and why), <b>organisation under pressure</b>, and <b>confidence on the phone</b>.</div>
+</section>
+
+<!-- PART 7 WRITING -->
+<section class="page">
+  <div class="kicker">Part 7</div>
+  <h2>Writing the answers</h2>
+  <p>The form asks for <b>100–250 words</b> and says to "maximise the word count". Aim for <b>230–250</b>. Use this five-part structure for every answer:</p>
+  <div class="budget">
+    <div style="width:12%;background:#14213d">Hook<br>~30</div>
+    <div style="width:24%;background:#2e3f63">Understanding of the industry ~60</div>
+    <div style="width:36%;background:#b8771f">Evidence: your specific story ~90</div>
+    <div style="width:20%;background:#2a9d8f">What you'll contribute and learn ~50</div>
+    <div style="width:8%;background:#c8553d">Close<br>~20</div>
+  </div>
+  <table>
+    <tr><th style="width:20%">Part</th><th>What it does</th><th style="width:38%">Test</th></tr>
+    <tr><td><b>Hook</b></td><td>One sharp sentence on why <i>this</i> industry, based on an insight, not a feeling</td><td>Could another applicant have written it? If yes, rewrite.</td></tr>
+    <tr><td><b>Understanding</b></td><td>Show that you know how the business works and makes money, plus one live issue</td><td>Does it use the industry's own terms correctly?</td></tr>
+    <tr><td><b>Evidence</b></td><td>One concrete example: what you did, how, and the result. Numbers where honest.</td><td>Is there a verb you did, not just something you "were exposed to"?</td></tr>
+    <tr><td><b>Contribute / learn</b></td><td>What you bring from week one, and what you want to learn there</td><td>Is it believable for an intern?</td></tr>
+    <tr><td><b>Close</b></td><td>A forward-looking line tying it together</td><td>No "thank you for your consideration". It wastes words.</td></tr>
+  </table>
+
+  <h3>The specificity ladder</h3>
+  <table>
+    <tr><th style="width:12%">Level</th><th>Example line (Investment Management)</th></tr>
+    <tr><td><span class="tag t-red">Weak</span></td><td>"I am passionate about finance and want to develop my skills in a fast-paced environment."</td></tr>
+    <tr><td><span class="tag t-gold">OK</span></td><td>"My internship in asset management showed me how investment teams work and sparked my interest in the industry."</td></tr>
+    <tr><td><span class="tag t-teal">Strong</span></td><td>"At [firm], helping prepare quarterly reports for pension clients showed me that assets are kept through trust as much as performance: a £500m mandate at 40 basis points is £2m a year that depends on every meeting going well."</td></tr>
+  </table>
+
+  <div class="grid2">
+    <div class="box good small">
+      <h4>Do</h4>
+      <ul style="margin:0">
+        <li>One main story per answer, told properly</li>
+        <li>Use <b>different</b> stories across the three answers where you can</li>
+        <li>Use industry vocabulary <i>correctly</i>, a few terms, not a glossary</li>
+        <li>British spelling, short sentences, active voice</li>
+        <li>Read it aloud, then get one other person to proofread it</li>
+        <li>Write it in a doc first and count the words there</li>
+      </ul>
+    </div>
+    <div class="box warn small">
+      <h4>Don't</h4>
+      <ul style="margin:0">
+        <li>Name a firm, or write "your company"</li>
+        <li>Say "this is my second / third choice"</li>
+        <li>Copy and paste a paragraph across answers</li>
+        <li>List adjectives ("hard-working, passionate, driven")</li>
+        <li>Over-claim (e.g. "I managed a portfolio" when you supported one)</li>
+        <li>Paste in AI text unchanged. Readers spot it, and it sounds like everyone else.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="kicker">Part 7 · Templates</div>
+  <h2>Draft 1: Investment Management</h2>
+  <p class="small muted">Highlighted brackets are where your real details go. Replace every one with something true and specific, then cut or add to land between 230 and 250 words. These are scaffolds, not answers to submit as they are.</p>
+  <div class="draft">
+    Every pension, ISA and insurance policy ultimately relies on an asset manager, so how that money is invested, and how clearly it is explained, shapes whether people can retire with confidence. That responsibility is why I want to build a career in investment management.<br><br>
+    During my internship at <span class="ph">[firm]</span>, I saw that strong performance alone does not grow a business. Revenue is a percentage of assets under management, so it depends on winning and keeping clients who understand and trust the investment process. I <span class="ph">[specific task, e.g. helped prepare quarterly reports for institutional clients / updated fund factsheets / supported an RFP response]</span>, which taught me <span class="ph">[specific lesson, e.g. how much accuracy matters when a pension trustee reads your numbers]</span>.<br><br>
+    I am most drawn to the client-facing side of the industry, including relationship management, institutional and wholesale sales, and product specialist roles, but to do that well I want to understand how portfolios are built and how decisions are made across asset classes. With fee pressure, the growth of passive funds and UK pension consolidation creating fewer, larger and more demanding clients, explaining value clearly has never mattered more.<br><br>
+    I would bring <span class="ph">[skills, e.g. strong Excel and PowerPoint, research experience from my degree in X]</span>, the professionalism I developed at <span class="ph">[firm]</span>, and a daily habit of <span class="ph">[e.g. following markets through the FT and Citywire]</span>. I want to contribute from my first week and finish the internship knowing exactly where I can add the most value.
+  </div>
+  <div class="wc">≈ 245 words with placeholders filled briefly</div>
+
+  <div class="box key small" style="margin-top:4mm"><b>Why this works:</b> the hook is an insight rather than a feeling. Paragraph 2 proves understanding (AUM-based revenue) <i>through</i> your experience. Paragraph 3 states the client-facing interest while keeping investment-team readers on side. A live industry issue appears in one sentence. There is no firm name anywhere.</div>
+</section>
+
+<section class="page">
+  <div class="kicker">Part 7 · Templates</div>
+  <h2>Draft 2: Sales</h2>
+  <div class="draft">
+    The best salespeople I have watched rarely pitch first. They ask questions until they understand a client's problem better than the client expected, and only then explain how they can help. I want a sales internship to learn that skill properly, because every business depends on it.<br><br>
+    At <span class="ph">[firm]</span>, I supported the team responsible for winning and retaining clients. I <span class="ph">[specific task, e.g. researched prospective clients before meetings / prepared pitch materials / logged follow-ups in the CRM]</span> and saw that long sales cycles are won through preparation, persistent follow-up and trust built over many conversations. Outside finance, <span class="ph">[non-finance example, e.g. my part-time retail role, where I consistently exceeded my weekly target / raising £X in sponsorship for my society]</span> taught me to handle rejection, adapt my approach to different people and keep going.<br><br>
+    I understand that sales drives revenue directly. A healthy pipeline, strong conversion and, above all, retaining existing customers decide whether a business hits its targets, because every client lost has to be replaced. That is why I am especially interested in B2B sales and account management, where relationships compound over time.<br><br>
+    During an internship I want to shadow experienced professionals, learn how they qualify opportunities and handle objections, and use sales data to understand where deals are won or lost. I would bring <span class="ph">[skills]</span>, confidence speaking with senior people, and a genuine curiosity about what customers need.
+  </div>
+  <div class="wc">≈ 240 words with placeholders filled briefly</div>
+
+  <div class="kicker" style="margin-top:6mm">Part 7 · Templates</div>
+  <h2>Draft 3: Public Relations</h2>
+  <div class="draft">
+    A reputation can take decades to build and a single headline to damage. I want to work in public relations because I have seen how directly an organisation's success depends on what people believe about it, and how much skill it takes to shape that belief honestly.<br><br>
+    At <span class="ph">[firm]</span>, I saw how carefully an investment business communicates. Market commentary, client updates and comments in the financial press all exist to maintain trust, because in finance trust is the product and a poorly handled story can lead clients to withdraw. <span class="ph">[Specific task, e.g. I helped draft a client update / summarised market news each morning]</span>, which showed me the value of writing that is clear, accurate and quick.<br><br>
+    I understand PR covers media relations, corporate and financial communications, consumer campaigns, crisis management and public affairs, and that success is measured in coverage, message and reputation rather than effort. I am particularly interested in <span class="ph">[corporate and financial communications / crisis work]</span>, and I follow how organisations handle <span class="ph">[a recent campaign or crisis you found interesting]</span>.<br><br>
+    I would bring strong writing, shown through <span class="ph">[e.g. articles for my student paper / society social media that grew to X followers]</span>, careful research, and calm organisation under deadlines. I am ready to build media lists, draft press releases and monitor coverage from day one, while learning how experienced practitioners turn a client's goals into stories journalists want to tell.
+  </div>
+  <div class="wc">≈ 245 words with placeholders filled briefly</div>
+</section>
+
+<!-- PART 8 -->
+<section class="page">
+  <div class="kicker">Part 8</div>
+  <h2>Strategy beyond the form</h2>
+  <div class="grid2">
+    <div class="box b1 small">
+      <h4>1. Pick your location deliberately</h4>
+      Matching is by workstream <b>and</b> location. London has the most host roles in all three of your workstreams, especially IM and PR. If you can do London, choose it. If you can't, choose the nearest major hub where you could genuinely live for 6+ weeks (Edinburgh, Manchester, Leeds, Birmingham and Bristol all have asset managers).
+    </div>
+    <div class="box b1 small">
+      <h4>2. Lock the CV before 1 November</h4>
+      It can't be edited later. Make your asset-management bullets results-focused ("prepared X for Y clients", "reduced Z"), and put it first. It is your biggest differentiator on a slate of 40.
+    </div>
+    <div class="box b1 small">
+      <h4>3. Treat the cover letter field seriously</h4>
+      The FAQ says your CV <i>and cover letter</i> go to each allocated organisation. Keep the general cover letter firm-neutral, one page, and consistent with your three answers.
+    </div>
+    <div class="box b1 small">
+      <h4>4. Respond within 24 hours, 24 Nov – 4 Dec</h4>
+      That is when firms make first contact. Set a Gmail filter for "Pinpoint" and "10,000", check spam daily, and diarise each firm's deadline. Missing one can lose the allocation, and 10K cannot reopen it.
+    </div>
+    <div class="box b1 small">
+      <h4>5. Prepare for the firm's own process</h4>
+      Expect any of: online tests or psychometrics, a HireVue video, a written exercise, interviews. For IM, be ready for: "Pitch me a fund or stock", "How does an asset manager make money?", "What's happening in markets?", "Why the client side?"
+    </div>
+    <div class="box b1 small">
+      <h4>6. Don't rely on 10K alone</h4>
+      Allocations aren't guaranteed and are random. Apply <b>directly</b> to the asset managers you most want (the 10K employer FAQ itself tells unallocated candidates to do this), and use the 10K training sessions. They count towards applications outside the programme too.
+    </div>
+  </div>
+
+  <h3>Your plan: 11 October → 1 November</h3>
+  <table>
+    <tr><th style="width:22%">When</th><th>Do this</th></tr>
+    <tr><td><b>This week (by 17 Oct)</b></td><td>Re-read Parts 4–6. Write down 3–4 true stories from your AM experience and one non-finance story. Finalise location. Update CV.</td></tr>
+    <tr><td><b>18 – 24 Oct</b></td><td>Draft all three answers from the templates. Leave them for a day, then cut every generic sentence. Check that each answer stands alone.</td></tr>
+    <tr><td><b>25 – 28 Oct</b></td><td>Get two readers: one who knows finance, one who doesn't. Fix anything either finds confusing. Read each answer aloud. Check word counts (230–250).</td></tr>
+    <tr><td><b>29 – 30 Oct</b></td><td><b>Submit early.</b> Don't leave it to 1 November, when forms crash and you rush. Screenshot or save your answers.</td></tr>
+    <tr><td><b>Nov → Mar</b></td><td>Respond fast, prepare per firm, keep applying directly, and attend 10K interview training.</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>Final pre-submit checklist</h4>
+    <div class="grid2 small">
+      <ul style="margin:0">
+        <li>☐ Each answer 230–250 words</li>
+        <li>☐ No firm names, no "my second choice"</li>
+        <li>☐ Each answer has one concrete story with a result</li>
+        <li>☐ Each uses 2–3 correct industry terms</li>
+      </ul>
+      <ul style="margin:0">
+        <li>☐ Different stories across the three answers</li>
+        <li>☐ British spelling, zero typos (read aloud)</li>
+        <li>☐ CV final; location chosen deliberately</li>
+        <li>☐ Right-to-work status in place and correct</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="kicker">Appendix</div>
+  <h2>Sources</h2>
+  <ul class="small">
+    <li>10,000 Interns Foundation: 10,000 Black Interns programme page and workstream descriptions: 10000internsfoundation.com/students-graduates/10000-black-interns/</li>
+    <li>10,000 Interns Foundation: Students &amp; Graduates FAQs (closing date, allocation, reallocation, CV, timeline): 10000internsfoundation.com/students-graduates/students-graduates-faqs/</li>
+    <li>10,000 Interns Foundation: Employer FAQs (random matching by workstream and location, 25–50 candidates per role, no hosting fee, pay and length requirements, 2026/27 recruitment timeline, 250-word cover letters): 10000internsfoundation.com/employers/employers-faqs/</li>
+    <li>10,000 Interns Foundation: Employers, Become a Member, Funders/Partners and home page (milestones, 1,300+ employers, partner list)</li>
+    <li>Charity Commission register: The 10,000 Interns Foundation, charity no. 1199061, financial history</li>
+    <li>Investment Week: "Leading investment management figures launch Black interns campaign" (founders, pilot hosts)</li>
+    <li>Insurance Business: "Almost 500 firms have joined 10,000 Black Interns campaign"; DiversityQ; eFinancialCareers coverage of the pilot</li>
+    <li>Trillium, Canaccord Genuity Wealth Management, OneFamily, Pinsent Masons and Framestore pages on their participation; Bar Council 10,000 Black Interns pages</li>
+    <li>Montfort: PRWeek UK Industry Initiative Award for the 10,000 Black Interns campaign</li>
+  </ul>
+  <p class="small muted">Industry figures (UK AUM of around £9trn, fee ranges, PR retainer sizes, funnel numbers) are rounded, typical figures for understanding. Don't quote them as precise statistics in your application. Host employers named in press coverage come from past cycles and are not a confirmed 2027 list.</p>
+</section>
+
+</body>
+</html>
