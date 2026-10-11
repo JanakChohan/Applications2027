@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>10K Allocation Deep Dive</title>
+<style>
+@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+:root{
+  --ink:#14213d; --body:#2b2d42; --muted:#5c6378; --line:#d9dde7;
+  --navy:#14213d; --gold:#e09f3e; --teal:#2a9d8f; --plum:#6d597a; --red:#c8553d;
+  --bg1:#f4f6fb; --bg2:#fff7ea; --bg3:#eaf6f4; --bg4:#f3eff6; --bg5:#fdeeea;
+}
+*{box-sizing:border-box}
+html,body{background:#fff}
+body{font-family:"Inter",sans-serif;color:var(--body);font-size:9.7pt;line-height:1.45;margin:0}
+h1,h2,h3,h4{color:var(--ink);line-height:1.2;margin:0}
+h1{font-size:26pt;font-weight:800;letter-spacing:-.5px}
+h2{font-size:17pt;font-weight:800;margin:0 0 4mm;padding-bottom:2mm;border-bottom:2.5px solid var(--gold)}
+h3{font-size:12pt;font-weight:700;margin:5mm 0 2mm}
+h4{font-size:10pt;font-weight:700;margin:3mm 0 1mm}
+p{margin:0 0 2.5mm}
+ul,ol{margin:0 0 2.5mm;padding-left:5mm}
+li{margin-bottom:1mm}
+.page{break-before:page}
+.kicker{font-size:8pt;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:1.5mm}
+.lead{font-size:11pt;color:var(--ink)}
+.muted{color:var(--muted)}
+.small{font-size:8.5pt}
+.box{border-radius:3mm;padding:3mm 3.5mm;margin:2.5mm 0;break-inside:avoid}
+.box h4:first-child,.box h3:first-child{margin-top:0}
+.b1{background:var(--bg1)} .b2{background:var(--bg2)} .b3{background:var(--bg3)} .b4{background:var(--bg4)} .b5{background:var(--bg5)}
+.key{border-left:4px solid var(--gold);background:var(--bg2)}
+.warn{border-left:4px solid var(--red);background:var(--bg5)}
+.good{border-left:4px solid var(--teal);background:var(--bg3)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:3mm}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3mm}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:2.5mm}
+.grid2>.box,.grid3>.box,.grid4>.box{margin:0}
+.grid2,.grid3,.grid4{margin:2.5mm 0}
+table{width:100%;border-collapse:collapse;margin:2mm 0 3mm;font-size:9pt;break-inside:avoid}
+th{background:var(--navy);color:#fff;text-align:left;padding:1.8mm 2mm;font-weight:600}
+td{padding:1.1mm 2mm;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:#fafbfd}
+.tag{display:inline-block;font-size:7.5pt;font-weight:700;padding:.5mm 2mm;border-radius:5mm;background:var(--navy);color:#fff;margin-right:1mm}
+.t-gold{background:var(--gold)} .t-teal{background:var(--teal)} .t-plum{background:var(--plum)} .t-red{background:var(--red)}
+/* flow diagrams */
+.flow{display:flex;align-items:stretch;gap:0;margin:3mm 0;break-inside:avoid}
+.flow .step{flex:1;background:var(--bg1);border:1.5px solid var(--navy);border-radius:2.5mm;padding:2.5mm;font-size:8.5pt;text-align:center}
+.flow .step b{display:block;color:var(--ink);font-size:9pt;margin-bottom:1mm}
+.flow .arr{width:6mm;display:flex;align-items:center;justify-content:center;color:var(--gold);font-weight:800;font-size:14pt}
+.part{border-radius:3mm;padding:3mm;color:#fff;break-inside:avoid}
+.part h4{color:#fff;margin:0 0 1.5mm;font-size:10pt}
+.part ul{padding-left:4mm;margin:0;font-size:8.5pt}
+.part .who{font-size:8pt;opacity:.9;margin-top:1.5mm;border-top:1px solid rgba(255,255,255,.35);padding-top:1.5mm}
+.p-navy{background:var(--navy)} .p-gold{background:#b8771f} .p-teal{background:#23867a} .p-plum{background:var(--plum)}
+.hl{outline:3px solid var(--gold);outline-offset:1.5mm}
+.formula{display:flex;align-items:center;justify-content:center;gap:3mm;margin:3mm 0;font-weight:700;color:var(--ink);break-inside:avoid}
+.formula .f{background:var(--bg1);border:1.5px solid var(--navy);border-radius:2mm;padding:2.5mm 4mm;text-align:center;font-size:10pt}
+.formula .f small{display:block;font-weight:400;font-size:7.5pt;color:var(--muted)}
+.formula .op{font-size:16pt;color:var(--gold)}
+.timeline{position:relative;margin:4mm 0 2mm;padding-left:7mm;break-inside:avoid}
+.timeline:before{content:"";position:absolute;left:2.2mm;top:1mm;bottom:1mm;width:2px;background:var(--line)}
+.tl{position:relative;margin-bottom:2.2mm}
+.tl:before{content:"";position:absolute;left:-6.2mm;top:1.2mm;width:3mm;height:3mm;border-radius:50%;background:var(--navy)}
+.tl.you:before{background:var(--gold)}
+.tl .d{font-weight:700;color:var(--ink);display:inline-block;min-width:34mm}
+.draft{background:#fff;border:1.5px dashed var(--muted);border-radius:3mm;padding:4mm;font-size:9.6pt;line-height:1.55;break-inside:avoid}
+.draft .ph{background:#fff1d6;padding:0 1mm;border-radius:1mm;color:#8a5a12;font-weight:600}
+.wc{font-size:8pt;color:var(--muted);text-align:right;margin-top:1mm}
+.budget{display:flex;height:11mm;border-radius:2mm;overflow:hidden;margin:3mm 0 1mm;font-size:7.8pt;color:#fff;font-weight:600;break-inside:avoid}
+.budget div{display:flex;align-items:center;justify-content:center;text-align:center;padding:0 1mm}
+.cover{height:262mm;display:flex;flex-direction:column;justify-content:space-between;background:var(--navy);color:#fff;margin:-16mm -15mm 0;padding:22mm 18mm}
+.cover h1{color:#fff;font-size:34pt;line-height:1.05}
+.cover .sub{font-size:13pt;color:#d6dbe8;margin-top:5mm;max-width:150mm}
+.cover .stat{display:grid;grid-template-columns:repeat(4,1fr);gap:4mm}
+.cover .stat div{border-top:2px solid var(--gold);padding-top:2mm;font-size:8.5pt;color:#d6dbe8}
+.cover .stat b{display:block;color:#fff;font-size:17pt}
+.toc li{margin-bottom:1.6mm}
+.toc b{color:var(--ink)}
+.funnel{display:flex;flex-direction:column;align-items:center;gap:1.2mm;margin:3mm 0;break-inside:avoid}
+.funnel div{color:#fff;text-align:center;padding:1.8mm;border-radius:1.5mm;font-size:8.5pt;font-weight:600}
+.cols{columns:2;column-gap:6mm}
+.cols .box{break-inside:avoid}
+.gloss dt{font-weight:700;color:var(--ink);float:left;clear:left;width:32mm}
+.gloss dd{margin:0 0 1mm 33mm}
+.gloss{font-size:8.8pt;margin:2mm 0;overflow:hidden}
+.foot{font-size:7.5pt;color:var(--muted)}
+.center{text-align:center}
+</style>
+</head>
+<body>
+
+<section class="cover">
+  <div>
+    <div class="kicker" style="color:var(--gold)">Deep dive · 10,000 Black Interns 2026/27</div>
+    <h1>Inside the algorithm<br>and how to rank highly</h1>
+    <p class="sub">The systems your application passes through, how the "random match" actually works, what you can and cannot influence, and how to finish at the top of a firm's candidate list, whether a human or an AI is reading it.</p>
+  </div>
+  <div>
+    <div class="stat">
+      <div><b>0</b>Quality checks before matching</div>
+      <div><b>2</b>Matching inputs: workstream + location</div>
+      <div><b>25–50</b>Candidates per role, on average</div>
+      <div><b>1–10</b>Pinpoint AI Match Score, if a firm uses it</div>
+    </div>
+    <p class="small" style="color:#aab2c8;margin-top:8mm">Prepared 11 October 2026. Anything quoted comes from the 10,000 Interns Foundation's student and employer FAQs or Pinpoint's own product pages. Anything marked <b style="color:#e09f3e">INFERENCE</b> is my best reading of how the system probably works. The Foundation has not published its matching code.</p>
+  </div>
+</section>
+
+<section class="page">
+  <div class="kicker">Start here</div>
+  <h2>The honest answer first</h2>
+  <div class="box key">
+    <p style="margin:0" class="lead"><b>You cannot rank highly in the algorithm, because it doesn't rank.</b> The employer FAQ says: <i>"Candidates are randomly allocated to pledging organisations based on the selected workstream and location"</i> and <i>"Aside from the candidates' selected workstream, and location we do not filter candidates based on additional factors."</i></p>
+  </div>
+  <p>That splits the process into <b>two separate games</b>. You play them differently:</p>
+  <div class="grid2">
+    <div class="box b1">
+      <span class="tag">Game 1</span> <b>Get allocated</b>
+      <p class="small" style="margin-top:2mm">A game of <b>probability</b>. The computer doesn't read your answers. You can't be "better" here. You can only <b>put more tickets in bigger draws</b>, through your workstream and location choices.</p>
+      <p class="small" style="margin:0"><b>Run by:</b> the Foundation's matching process<br><b>Decides:</b> how many firms see you</p>
+    </div>
+    <div class="box b2">
+      <span class="tag t-gold">Game 2</span> <b>Rise to the top of the slate</b>
+      <p class="small" style="margin-top:2mm">A game of <b>quality</b>. A recruiter (and possibly an AI score) compares you with the other 25–50 people allocated to the same role. Here, ranking is real, and it is all about your CV and answers.</p>
+      <p class="small" style="margin:0"><b>Run by:</b> each firm, inside Pinpoint<br><b>Decides:</b> whether you get an interview</p>
+    </div>
+  </div>
+  <p class="small muted">Most applicants confuse the two. They polish answers hoping to "beat the algorithm" (impossible), then pick a location and workstreams without thinking (which is where Game 1 is actually won).</p>
+
+  <h3>The systems your application passes through</h3>
+  <div class="flow">
+    <div class="step"><b>1 · Alchemer</b>The online application form (survey.alchemer.eu). It collects eligibility answers, workstreams, location, CV, cover letter and the 250-word answers.</div>
+    <div class="arr">›</div>
+    <div class="step"><b>2 · Foundation processing</b>Applications are processed as a batch after 1 Nov. Eligibility is based on <i>your declarations</i>, which are not independently verified.</div>
+    <div class="arr">›</div>
+    <div class="step" style="background:var(--bg2);border-color:var(--gold)"><b>3 · Random allocation</b>Matches candidates to pledged roles using workstream + location only</div>
+    <div class="arr">›</div>
+    <div class="step"><b>4 · Pinpoint</b>10K's own instance (pinpoint-10kbi.com). Each firm gets a "job slate" of allocated candidates.</div>
+    <div class="arr">›</div>
+    <div class="step"><b>5 · Firm's own process</b>Some firms stay in Pinpoint. Others move you to their own system (Workday, Oleeo etc.) for tests and interviews.</div>
+  </div>
+  <table>
+    <tr><th style="width:18%">System</th><th>What it is</th><th style="width:40%">What it means for you</th></tr>
+    <tr><td><b>Alchemer</b></td><td>A survey and form platform. 10K uses it for both the employer pledge form and your application.</td><td>It's a form, not a screener. Nothing is scored here. <b>What you upload is final:</b> you can't edit your CV after submitting.</td></tr>
+    <tr><td><b>Pinpoint</b></td><td>A UK applicant tracking system (ATS). The Foundation credits it on its site ("ATS powered by Pinpoint") and runs a dedicated 10K instance.</td><td>Employers review you here. Its emails to you are genuine (the FAQ confirms this), so whitelist them and check spam.</td></tr>
+    <tr><td><b>Firm's ATS</b></td><td>Large firms often ask allocated candidates to re-register in their own system. Pinsent Masons, for example, uses a registration form, an application form and an online "blended assessment".</td><td>A second application with a <b>deadline set by the firm</b>. Miss it and the allocation is lost; 10K cannot reopen it.</td></tr>
+  </table>
+</section>
+
+<section class="page">
+  <div class="kicker">Game 1</div>
+  <h2>How the random allocation works</h2>
+  <p>The Foundation hasn't published its code. Putting together every official statement, this is the most likely mechanism:</p>
+
+  <svg viewBox="0 0 680 300" width="100%" font-family="Inter" font-size="10.5">
+    <defs><marker id="m" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#14213d"/></marker></defs>
+    <!-- grid cells -->
+    <text x="10" y="18" font-weight="700" fill="#14213d" font-size="11">① Every applicant is sorted into "cells": workstream × location</text>
+    <g font-size="9">
+      <rect x="10" y="30" width="120" height="26" fill="#14213d"/><text x="70" y="47" fill="#fff" text-anchor="middle" font-weight="700">Workstream ↓ / Loc →</text>
+      <rect x="130" y="30" width="90" height="26" fill="#14213d"/><text x="175" y="47" fill="#fff" text-anchor="middle">London</text>
+      <rect x="220" y="30" width="90" height="26" fill="#14213d"/><text x="265" y="47" fill="#fff" text-anchor="middle">Manchester</text>
+      <rect x="310" y="30" width="90" height="26" fill="#14213d"/><text x="355" y="47" fill="#fff" text-anchor="middle">Edinburgh</text>
+      <rect x="10" y="56" width="120" height="26" fill="#f4f6fb" stroke="#d9dde7"/><text x="16" y="73" fill="#14213d" font-weight="700">Investment Mgmt</text>
+      <rect x="130" y="56" width="90" height="26" fill="#fff7ea" stroke="#e09f3e" stroke-width="2"/><text x="175" y="73" text-anchor="middle" fill="#14213d" font-weight="700">YOU ★</text>
+      <rect x="220" y="56" width="90" height="26" fill="#fff" stroke="#d9dde7"/>
+      <rect x="310" y="56" width="90" height="26" fill="#fff" stroke="#d9dde7"/>
+      <rect x="10" y="82" width="120" height="26" fill="#f4f6fb" stroke="#d9dde7"/><text x="16" y="99" fill="#14213d" font-weight="700">Sales</text>
+      <rect x="130" y="82" width="90" height="26" fill="#fff7ea" stroke="#e09f3e" stroke-width="2"/><text x="175" y="99" text-anchor="middle" fill="#14213d" font-weight="700">YOU ★</text>
+      <rect x="220" y="82" width="90" height="26" fill="#fff" stroke="#d9dde7"/>
+      <rect x="310" y="82" width="90" height="26" fill="#fff" stroke="#d9dde7"/>
+      <rect x="10" y="108" width="120" height="26" fill="#f4f6fb" stroke="#d9dde7"/><text x="16" y="125" fill="#14213d" font-weight="700">Public Relations</text>
+      <rect x="130" y="108" width="90" height="26" fill="#fff7ea" stroke="#e09f3e" stroke-width="2"/><text x="175" y="125" text-anchor="middle" fill="#14213d" font-weight="700">YOU ★</text>
+      <rect x="220" y="108" width="90" height="26" fill="#fff" stroke="#d9dde7"/>
+      <rect x="310" y="108" width="90" height="26" fill="#fff" stroke="#d9dde7"/>
+    </g>
+    <text x="10" y="155" font-size="9" fill="#5c6378">You sit in up to 3 cells (one per workstream) in your chosen location.</text>
+    <!-- roles -->
+    <text x="430" y="18" font-weight="700" fill="#14213d" font-size="11">② Each pledged role draws</text>
+    <text x="430" y="32" font-weight="700" fill="#14213d" font-size="11">from its matching cell</text>
+    <rect x="430" y="45" width="240" height="40" rx="6" fill="#eaf6f4" stroke="#2a9d8f"/>
+    <text x="440" y="62" fill="#14213d" font-weight="700" font-size="9.5">Role: "IM intern, London" (Firm A)</text>
+    <text x="440" y="77" fill="#5c6378" font-size="9">→ random draw of ~25–50 from IM × London</text>
+    <rect x="430" y="93" width="240" height="40" rx="6" fill="#eaf6f4" stroke="#2a9d8f"/>
+    <text x="440" y="110" fill="#14213d" font-weight="700" font-size="9.5">Role: "IM intern, London" (Firm B)</text>
+    <text x="440" y="125" fill="#5c6378" font-size="9">→ another random draw from the same cell</text>
+    <rect x="430" y="141" width="240" height="40" rx="6" fill="#eaf6f4" stroke="#2a9d8f"/>
+    <text x="440" y="158" fill="#14213d" font-weight="700" font-size="9.5">Role: "PR intern, London" (Agency C)</text>
+    <text x="440" y="173" fill="#5c6378" font-size="9">→ random draw from PR × London</text>
+    <line x1="222" y1="69" x2="428" y2="65" stroke="#14213d" stroke-width="1.4" marker-end="url(#m)"/>
+    <line x1="222" y1="69" x2="428" y2="113" stroke="#14213d" stroke-width="1.4" marker-end="url(#m)"/>
+    <line x1="222" y1="121" x2="428" y2="161" stroke="#14213d" stroke-width="1.4" marker-end="url(#m)"/>
+    <!-- step 3 -->
+    <text x="10" y="205" font-weight="700" fill="#14213d" font-size="11">③ Top-ups and fallbacks</text>
+    <rect x="10" y="215" width="210" height="72" rx="6" fill="#f4f6fb" stroke="#14213d"/>
+    <text x="20" y="233" fill="#14213d" font-weight="700" font-size="9.5">Cell too small?</text>
+    <text x="20" y="249" fill="#5c6378" font-size="9">Candidates from an "adjacent</text>
+    <text x="20" y="262" fill="#5c6378" font-size="9">workstream" can be allocated</text>
+    <text x="20" y="275" fill="#5c6378" font-size="9">(e.g. Markets, Insurance → IM)</text>
+    <rect x="235" y="215" width="210" height="72" rx="6" fill="#f4f6fb" stroke="#14213d"/>
+    <text x="245" y="233" fill="#14213d" font-weight="700" font-size="9.5">Firm wants more?</text>
+    <text x="245" y="249" fill="#5c6378" font-size="9">"Request Additional Candidates"</text>
+    <text x="245" y="262" fill="#5c6378" font-size="9">button: a fresh draw from the</text>
+    <text x="245" y="275" fill="#5c6378" font-size="9">same cell, at any time</text>
+    <rect x="460" y="215" width="210" height="72" rx="6" fill="#f4f6fb" stroke="#14213d"/>
+    <text x="470" y="233" fill="#14213d" font-weight="700" font-size="9.5">New firm or role joins?</text>
+    <text x="470" y="249" fill="#5c6378" font-size="9">Reallocation round. New slates</text>
+    <text x="470" y="262" fill="#5c6378" font-size="9">can arrive any time up to June.</text>
+    <text x="470" y="275" fill="#5c6378" font-size="9">You can't request this yourself.</text>
+  </svg>
+
+  <table>
+    <tr><th style="width:44%">Confirmed by the Foundation</th><th><span class="tag t-gold">INFERENCE</span> Probable, not confirmed</th></tr>
+    <tr><td>Random matching on workstream + location only; no other filtering</td><td>The "algorithm" is a random draw within each workstream × location cell, run per pledged role</td></tr>
+    <tr><td>25–50 candidates per role on average; firms can request more</td><td>Slate size scales with how many roles a firm pledges</td></tr>
+    <tr><td>You may get several, one or no allocations</td><td>You can sit on several firms' slates in the same workstream at once</td></tr>
+    <tr><td>Adjacent workstreams used if your first choice has limited openings</td><td>Your <b>first</b> choice probably gets priority, with adjacent workstreams used as top-ups. Order your choices with that in mind.</td></tr>
+    <tr><td>Reallocation only when new roles or firms appear, never after a rejection</td><td>Late reallocations draw from candidates not yet on that firm's slate</td></tr>
+    <tr><td>Premier Members can explore "bespoke allocation options"</td><td>A minority of large firms may receive a differently filtered list (for example by degree or year). Your CV quality matters there too.</td></tr>
+  </table>
+</section>
+
+<section class="page">
+  <div class="kicker">Game 1</div>
+  <h2>How to maximise your allocations</h2>
+  <p>Because the draw is random, your <b>expected number of allocations</b> in each workstream behaves roughly like this:</p>
+  <div class="formula">
+    <div class="f">Expected allocations<small>per workstream</small></div><div class="op">≈</div>
+    <div class="f">Roles in your cell<small>workstream × location</small></div><div class="op">×</div>
+    <div class="f">Slate size<small>~25–50</small></div><div class="op">÷</div>
+    <div class="f">Applicants in your cell<small>your competition</small></div>
+  </div>
+  <div class="box b1 small"><b>Illustration only (made-up numbers).</b> If IM × London has 60 roles, each drawing 35 candidates, and 1,500 applicants chose IM + London, then 60 × 35 ÷ 1,500 ≈ <b>1.4 expected allocations</b>. If PR × Manchester has 3 roles × 35 and 200 applicants, that's ≈ <b>0.5</b>. The real numbers aren't published, but the levers are clear: <b>more roles in your cell</b> and <b>fewer people competing for them</b>.</div>
+
+  <h3>The six levers you control</h3>
+  <table>
+    <tr><th style="width:4%">#</th><th style="width:22%">Lever</th><th>What to do</th><th style="width:16%">Impact</th></tr>
+    <tr><td>1</td><td><b>Location</b></td><td>Location is half the match key. London has by far the most roles in IM, PR and Sales. If the form offers several locations, or a "flexible / remote / open to relocating" option, take every one you could genuinely accept. Each extra location adds you to more cells.</td><td><span class="tag t-teal">Highest</span></td></tr>
+    <tr><td>2</td><td><b>Use all 3 workstreams</b></td><td>Three workstreams means three separate draws. Never leave one empty, and write the third answer as carefully as the first.</td><td><span class="tag t-teal">High</span></td></tr>
+    <tr><td>3</td><td><b>Workstream depth</b></td><td>Investment Management is the programme's founding sector, so it likely has many hosts. Sales is a broad workstream with many company types. PR is probably a smaller pool. Your mix of one deep finance pool plus two broad ones is sensible.</td><td><span class="tag t-teal">High</span></td></tr>
+    <tr><td>4</td><td><b>Choice order</b></td><td>If first choice gets priority, put your strongest-fit, deepest pool first. That's Investment Management, which matches your current plan.</td><td><span class="tag t-gold">Medium</span></td></tr>
+    <tr><td>5</td><td><b>Stay "allocatable" until June</b></td><td>Late roles trigger new draws. Keep your email address active, keep checking spam, and don't accept a weak offer elsewhere without knowing whether 10K has more coming.</td><td><span class="tag t-gold">Medium</span></td></tr>
+    <tr><td>6</td><td><b>Accurate eligibility answers</b></td><td>The Foundation doesn't verify your declarations, but employers must check right to work. A wrong answer can cost you an offer late in the process.</td><td><span class="tag t-red">Protects you</span></td></tr>
+  </table>
+
+  <div class="box warn small"><b>Things that do <u>not</u> help in Game 1:</b> submitting first (applications are processed as one batch after 1 November, though you should still submit a few days early for safety), longer answers, keywords, or contacting 10K to ask for more allocations (the FAQ says such requests are not accepted).</div>
+
+  <div class="box good small"><b>One trade-off to think about:</b> choosing a location only to increase your odds is pointless if you can't take the job. Internships last at least 6 weeks, paid at the Real Living Wage, and hosts may (but needn't) help with travel or accommodation. Pick locations you would actually accept.</div>
+</section>
+
+<section class="page">
+  <div class="kicker">Game 2</div>
+  <h2>Inside Pinpoint: what the firm sees</h2>
+  <p>When slates are released (23 Nov 2026), a recruiter at each firm opens a "job slate" in Pinpoint. Here is what is confirmed about that screen, and what Pinpoint is <i>capable</i> of. Each firm's settings are its own, so prepare for all of it.</p>
+
+  <div class="grid2">
+    <div class="box b1 small">
+      <h4>Confirmed (Foundation FAQs)</h4>
+      <ul style="margin:0">
+        <li>Your profile carries your <b>CV, cover letter and the 250-word answer</b> for that workstream</li>
+        <li>Firms are told to review CVs and cover letters in Pinpoint <i>before</i> asking you for more information</li>
+        <li>Firms move you through <b>statuses</b> (e.g. Applied → in progress → hired / rejected). Statuses "do not negatively impact an applicant's profile", so a rejection from one firm doesn't follow you to another.</li>
+        <li>Rejection sends you an automated or personalised email</li>
+        <li>Firms see <b>only</b> candidates on their own slate</li>
+      </ul>
+    </div>
+    <div class="box b2 small">
+      <h4>Pinpoint features a firm <i>can</i> switch on</h4>
+      <ul style="margin:0">
+        <li><b>AI Match Score</b> (new in 2026): the recruiter answers questions about the role, Pinpoint generates up to <b>10 criteria</b> marked <i>must-have / preferred / nice-to-have</i>, and every applicant gets a <b>1–10 score</b> with a verdict, strengths, concerns and suggested interview topics. Pinpoint says it helps put "your strongest candidates… at the top".</li>
+        <li><b>Anonymised screening:</b> names, contact details, location, dates and gender signals are removed for early review.</li>
+        <li><b>Scorecards:</b> structured ratings by each reviewer.</li>
+        <li><b>Automations:</b> e.g. auto-rejecting someone missing a core requirement.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="box warn small"><b>Unknown:</b> whether the 10K instance has AI Match Score or anonymised screening turned on, and for which firms. Pinpoint says its AI is opt-in and that "the goal isn't to make hiring decisions". A human makes the final call. <b>The smart move is to write something that scores well with both</b>, and the next page shows how.</div>
+
+  <h3>What a recruiter does with a slate of 40</h3>
+  <div class="flow">
+    <div class="step"><b>Sort / triage</b>By AI score (if on), or simply top to bottom</div><div class="arr">›</div>
+    <div class="step"><b>10-second skim</b>CV top third and the first 2 lines of the answer</div><div class="arr">›</div>
+    <div class="step"><b>Shortlist ~5–10</b>Read the answer properly and check for evidence</div><div class="arr">›</div>
+    <div class="step"><b>Next stage</b>Tests, video, interview, or the firm's own ATS</div>
+  </div>
+  <p class="small"><b>The implication:</b> you're ranked on what's visible in the first few seconds and on whether each likely criterion is <b>clearly evidenced</b>. That applies to the AI too, because it scores against criteria, not against how good the writing sounds.</p>
+</section>
+
+<section class="page">
+  <div class="kicker">Game 2</div>
+  <h2>How to rank at the top of the slate</h2>
+  <h3>1. Reverse-engineer the criteria</h3>
+  <p>A recruiter setting up an AI Match Score, or just mentally screening, for an <b>"Investment Management summer intern"</b> will land on criteria much like these. Make sure each one is <b>explicitly evidenced</b> somewhere they'll see it:</p>
+  <table>
+    <tr><th style="width:30%">Likely criterion</th><th style="width:14%">Weight</th><th>Where you evidence it</th></tr>
+    <tr><td>Genuine interest in investment management and markets</td><td><span class="tag t-red">Must</span></td><td>Answer: opening insight + one live industry issue. CV: interests line (e.g. investment society, following markets).</td></tr>
+    <tr><td>Relevant experience / exposure</td><td><span class="tag t-red">Must</span></td><td>CV: your asset-management role <b>first</b>, with results-focused bullets. Answer: the evidence paragraph.</td></tr>
+    <tr><td>Understanding of the industry / role</td><td><span class="tag t-gold">Preferred</span></td><td>Answer: AUM-based revenue, client retention, distribution (used correctly, not as buzzwords)</td></tr>
+    <tr><td>Analytical and numerical skills</td><td><span class="tag t-gold">Preferred</span></td><td>CV: degree modules, Excel, a quantified bullet</td></tr>
+    <tr><td>Written and verbal communication</td><td><span class="tag t-gold">Preferred</span></td><td>Answer quality itself, plus a client-facing or presenting example</td></tr>
+    <tr><td>Teamwork, initiative, reliability</td><td><span class="tag t-plum">Nice</span></td><td>CV: society role, part-time job, a result you drove</td></tr>
+    <tr><td>Academic record</td><td><span class="tag t-plum">Nice</span></td><td>CV: grade or predicted grade, clearly stated</td></tr>
+  </table>
+  <p class="small muted">Do the same exercise for Sales (target-driven, resilience, persuasion, relationship-building) and PR (writing, news awareness, organisation, research, media interest). Then check that each answer explicitly hits the must-haves.</p>
+
+  <h3>2. Write for the skim <i>and</i> the scorer</h3>
+  <div class="grid2">
+    <div class="box good small">
+      <h4>Do</h4>
+      <ul style="margin:0">
+        <li><b>Front-load.</b> Your first two sentences should contain the insight and the proof (your AM experience).</li>
+        <li><b>Name things plainly:</b> "asset management internship", "client reporting", "RFP", "Excel". AI criteria and humans both look for explicit evidence.</li>
+        <li><b>Quantify</b> wherever it's honest: numbers of clients, reports, £ raised, % improved.</li>
+        <li><b>Keep the CV, cover letter and answer consistent.</b> The same story told from three angles reads as credible.</li>
+        <li><b>Use the workstream's own language.</b> The 10K description of IM mentions "portfolios", "clients… pension funds, universities, insurance companies" and "long-term value".</li>
+      </ul>
+    </div>
+    <div class="box warn small">
+      <h4>Don't</h4>
+      <ul style="margin:0">
+        <li>Rely on your name, university or location to impress. Anonymised screening may strip them out, so the <i>content</i> must carry you.</li>
+        <li>Put key info in CV headers, footers, text boxes, tables or images. ATS parsers often skip them.</li>
+        <li>Keyword-stuff. Criteria-based AI looks for evidence of a criterion, not repeated words, and humans hate it.</li>
+        <li>Leave a must-have only implied ("I've always loved finance" is not evidence).</li>
+        <li>Upload a scanned or image-based PDF. Use a text-based PDF or Word file.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>3. A CV that parses cleanly in Pinpoint</h3>
+  <div class="grid3 small">
+    <div class="box b1"><b>Layout</b><br>Single column, standard headings (Education, Experience, Skills, Interests), consistent dates (Jun 2025 – Aug 2025), 1 page.</div>
+    <div class="box b1"><b>Order</b><br>Education → <b>Experience with your AM role first</b> → Leadership/Activities → Skills. Bullets start with a verb and end with a result.</div>
+    <div class="box b1"><b>File</b><br>Text-based PDF named <i>Firstname-Lastname-CV.pdf</i>. Open it, select the text and copy-paste it into Notepad. If it comes out jumbled, an ATS will see it jumbled too.</div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="kicker">After allocation</div>
+  <h2>Converting an allocation into an offer</h2>
+  <div class="timeline">
+    <div class="tl"><span class="d">By end Nov</span>10K emails everyone with allocation information, then periodic status updates</div>
+    <div class="tl you"><span class="d">24 Nov – 4 Dec</span>First contact from firms, by Pinpoint email or the firm directly. <b>Reply within 24 hours.</b></div>
+    <div class="tl"><span class="d">Dec – Feb</span>Firm stages: online tests, video interviews (HireVue etc.), written tasks, interviews</div>
+    <div class="tl"><span class="d">By 19 Mar</span>Recommended offer deadline</div>
+    <div class="tl"><span class="d">To June</span>Late allocations can still arrive as new roles are pledged</div>
+  </div>
+  <div class="grid2">
+    <div class="box b1 small">
+      <h4>Your system</h4>
+      <ul style="margin:0">
+        <li>Gmail filter: from contains "pinpoint" OR subject contains "10,000" → star and label it</li>
+        <li>Check spam daily in late November and early December</li>
+        <li>A tracker with columns for firm, workstream, date contacted, next step, deadline and status</li>
+        <li>Have an <b>updated CV</b> ready. You can't edit the one on 10K, but you can send a new one to firms that contact you.</li>
+      </ul>
+    </div>
+    <div class="box b1 small">
+      <h4>When a firm contacts you</h4>
+      <ul style="margin:0">
+        <li>Research <i>that</i> firm properly now. This is the first point where firm-specific tailoring pays off.</li>
+        <li>If they move you to their own ATS, complete it well before <i>their</i> deadline</li>
+        <li>Missed a deadline? Contact the firm directly. 10K can't reopen it.</li>
+        <li>Rejected? Ask once, politely, for feedback (most give it only after interview)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Myths vs facts</h3>
+  <table>
+    <tr><th style="width:38%">Myth</th><th>Fact</th></tr>
+    <tr><td>"10K picks the best applicants and sends them on."</td><td>No. It checks eligibility and allocates at random. Firms do all the selecting.</td></tr>
+    <tr><td>"Submitting early ranks you higher."</td><td>No evidence. Applications are processed together after 1 Nov. Submit a few days early only to avoid last-minute problems.</td></tr>
+    <tr><td>"Better answers get more allocations."</td><td>No. Allocations depend only on workstream + location. Better answers get more <i>interviews</i>.</td></tr>
+    <tr><td>"A rejection marks you down for other firms."</td><td>No. Statuses "do not negatively impact an applicant's profile".</td></tr>
+    <tr><td>"I can ask 10K for more firms or a different one."</td><td>No. Changes and extra allocations aren't accepted. Apply to other firms directly.</td></tr>
+    <tr><td>"The AI decides."</td><td>Only if a firm switches it on, and even then Pinpoint positions it as decision <i>support</i>. A human reads your answer.</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>Summary: where to spend your effort</h4>
+    <p class="small" style="margin:0"><b>Game 1 (about 20% of your effort):</b> choose your location(s) to maximise roles you'd accept, fill all three workstreams with IM first, and answer eligibility questions accurately. <b>Game 2 (about 80%):</b> a CV that parses cleanly with your AM role at the top, and three answers that clearly evidence every must-have in the first lines. <b>After allocation:</b> speed, organisation and firm-specific research.</p>
+  </div>
+
+  <h3 style="margin-top:4mm">Sources</h3>
+  <ul class="small muted" style="margin:0">
+    <li>10,000 Interns Foundation: Employer FAQs (random allocation, filtering, slates, statuses, Request Additional Candidates, Premier bespoke allocation, verification) and Student FAQs (batch processing, allocations to June, adjacent workstreams, Pinpoint emails, CV edits)</li>
+    <li>10,000 Interns Foundation employer page ("ATS powered by Pinpoint"); application and pledge forms hosted on survey.alchemer.eu; dedicated Pinpoint instance at pinpoint-10kbi.com</li>
+    <li>Pinpoint: AI Match Score feature page; Anonymised Screening page; Our Approach to AI in Recruitment</li>
+    <li>Pinsent Masons: 10,000 Black Interns careers page (allocation via Pinpoint, firm's own process and deadlines)</li>
+  </ul>
+</section>
+
+</body>
+</html>
