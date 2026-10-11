@@ -1,0 +1,18 @@
+# "What previous internship experience do you have that will be useful for this internship?" (1,000 characters)
+
+Three drafts based on your six weeks in Pictet Asset Management's client group (servicing, onboarding, relationship management). Counts include spaces. Sources for every claim are in Part 0 of `KKR_KCS_Previous_Experience_Pictet_Guide.pdf`.
+
+**Honesty rule:** delete any task you did not personally do (for example KYC documents, share class eligibility, CRM records, platform queries) and swap in what you did. Public sources do not use the name "Global Client Group"; use the name on your own paperwork.
+
+## Version A: the technical bridge (recommended) (960 characters)
+
+At Pictet Asset Management I spent six weeks in the client group, working across client servicing, onboarding and relationship management for institutions and intermediaries investing in Pictet's Luxembourg UCITS funds. Onboarding taught me that nothing happens until the detail is right: classifying the client, checking KYC documents and share class eligibility, and chasing each step until the account could trade. Servicing taught me speed with accuracy: answering client queries and keeping CRM records clean, so the next conversation starts from the right place. Above all, I saw that a relationship rests on the teams behind it: sales, product specialists, operations and compliance. KCS is built the same way, around products that work differently. A UCITS fund deals daily; KKR's K-PEC strikes NAV monthly and limits repurchases to 5% a quarter. Explaining that difference clearly to a private bank is where my Pictet experience gives me a head start.
+
+## Version B: the personal and partnership angle (894 characters)
+
+My six weeks in Pictet Asset Management's client group were my first look at how a fund manager earns a client's trust day to day. I worked on onboarding, servicing and relationship management, and learned that the unglamorous parts matter most: a missing KYC document stops an account, a wrong figure in a reply undoes a good meeting, an untidy CRM record costs the next person time. I also saw how a partnership thinks long term. Pictet has been owned by its partners since 1805, and its client group is built for relationships that last decades, which is why KKR's "like and trust" resonates with me. What I want to add is the private markets side. Pictet is moving that way itself, with an ELTIF and a $1.5bn co-investment fund, while KKR is bringing private assets to wealth clients through the K-Series. I would bring a traditional manager's client discipline to a team doing the reverse.
+
+## Version C: three skills, cleanly structured (930 characters)
+
+Three things from my six weeks in Pictet Asset Management's client group carry straight into KCS. First, onboarding: how a new client becomes investable, from KYC and client categorisation to share class eligibility, and why one missing document holds up everything. KCS onboards LPs and wealth distributors with the same discipline, using subscription documents and investor eligibility tests. Second, servicing: answering client and platform queries quickly and accurately, and keeping CRM records clean, the daily rhythm of any client team. Third, working across teams: seeing sales, product specialists, operations and compliance serve one client, which is what KCS means by bringing all of KKR to a client. The big difference is the product. Pictet's UCITS funds deal daily; KKR's evergreen funds price monthly with quarterly repurchase limits, and drawdown funds call capital over years. That is the side I am keen to learn.
+
