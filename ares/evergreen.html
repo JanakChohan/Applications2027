@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Evergreen Funds and Ares — From Zero</title>
+<style>
+@page { size: A4; margin: 14mm 13mm 16mm 13mm; }
+:root{--navy:#0d2340;--navy2:#16355e;--body:#33414f;--mute:#6b7a8a;--line:#dfe5ec;
+ --soft:#f4f7fb;--gold:#c8963e;--teal:#1f7a72;--red:#b4413c;--green:#2f7d55;--violet:#5b4b8a;--amber:#d18b1e;}
+*{box-sizing:border-box;}
+body{font-family:"Segoe UI",-apple-system,"Helvetica Neue",Arial,sans-serif;
+ color:var(--body);font-size:9.6pt;line-height:1.5;margin:0;background:#fff;}
+h1,h2,h3,h4{color:var(--navy);margin:0 0 .4em;line-height:1.22;font-weight:650;}
+h1{font-size:23pt;letter-spacing:-.4px;} h2{font-size:15.5pt;} h3{font-size:11.6pt;} h4{font-size:10pt;color:var(--navy2);}
+p{margin:0 0 .7em;} small{font-size:8pt;}
+.page-break{page-break-before:always;} .avoid{page-break-inside:avoid;}
+.cover{height:297mm;margin-bottom:-30mm;display:flex;flex-direction:column;justify-content:space-between;
+ background:linear-gradient(155deg,#0d2340 0%,#16355e 50%,#1f4570 100%);color:#fff;
+ margin-left:-13mm;margin-right:-13mm;margin-top:-14mm;padding:24mm 18mm 30mm 18mm;page-break-after:always;}
+.cover h1{color:#fff;font-size:31pt;line-height:1.08;letter-spacing:-.9px;}
+.cover .kicker{font-size:9.5pt;letter-spacing:3.2px;text-transform:uppercase;color:#9dc0e8;font-weight:600;margin-bottom:13mm;}
+.cover .sub{font-size:12.5pt;color:#cfe0f2;font-weight:300;max-width:138mm;line-height:1.5;margin-top:7mm;}
+.cover .rule{width:64mm;height:3px;background:var(--gold);margin:8mm 0;}
+.cover .qs{margin-top:8mm;}
+.cover .qs div{font-size:9.6pt;color:#dce8f5;padding:2.1mm 0;border-top:1px solid rgba(255,255,255,.17);}
+.cover footer{font-size:8.2pt;color:#8fb0d6;border-top:1px solid rgba(255,255,255,.2);padding-top:4mm;}
+.part{background:var(--navy);color:#fff;padding:5mm 6mm;margin:0 0 6mm;border-radius:3px;
+ page-break-inside:avoid;page-break-after:avoid;}
+.part .n{font-size:7.8pt;letter-spacing:2.6px;text-transform:uppercase;color:var(--gold);font-weight:600;}
+.part h2{color:#fff;margin:1.5mm 0 0;} .part p{margin:1.5mm 0 0;color:#c3d5ea;font-size:9pt;}
+section{margin-bottom:6mm;} .lead{font-size:10.6pt;color:var(--navy2);line-height:1.55;}
+.card{border:1px solid var(--line);border-radius:4px;padding:4.5mm 5mm;margin:0 0 4mm;background:#fff;page-break-inside:avoid;}
+.card.soft{background:var(--soft);border-color:#d8e2ee;} .card h4{margin-bottom:2mm;}
+.callout{border-left:3.5px solid var(--gold);background:#fdf8ef;padding:4mm 5mm;margin:0 0 4mm;
+ border-radius:0 4px 4px 0;page-break-inside:avoid;}
+.callout.edge{border-left-color:var(--teal);background:#eff7f6;}
+.callout.warn{border-left-color:var(--red);background:#fcf2f1;}
+.callout.key{border-left-color:var(--navy2);background:#eef3fa;}
+.callout .tag{display:block;font-size:7.4pt;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:var(--gold);margin-bottom:1.5mm;}
+.callout.edge .tag{color:var(--teal);} .callout.warn .tag{color:var(--red);} .callout.key .tag{color:var(--navy2);}
+.callout p:last-child{margin-bottom:0;}
+table{width:100%;border-collapse:collapse;font-size:8.3pt;margin:0 0 4mm;}
+tr{page-break-inside:avoid;}
+thead{display:table-header-group;}
+th{background:var(--navy);color:#fff;text-align:left;padding:2.4mm 2.6mm;font-weight:600;font-size:7.7pt;letter-spacing:.4px;text-transform:uppercase;}
+td{padding:2.2mm 2.6mm;border-bottom:1px solid var(--line);vertical-align:top;}
+tr:nth-child(even) td{background:#fafcfe;}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;}
+.tbl-note{font-size:7.6pt;color:var(--mute);margin:-2mm 0 4mm;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:4mm;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:4mm;}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm;}
+.stat{border:1px solid var(--line);border-top:3px solid var(--navy2);border-radius:3px;padding:3mm 3.5mm;background:#fff;}
+.stat b{display:block;font-size:15pt;color:var(--navy);font-weight:650;line-height:1.15;}
+.stat span{display:block;font-size:7.5pt;color:var(--mute);text-transform:uppercase;letter-spacing:.9px;margin-top:1mm;}
+.stat i{display:block;font-style:normal;font-size:7.8pt;color:var(--body);margin-top:1.5mm;}
+.stat.g{border-top-color:var(--green);} .stat.r{border-top-color:var(--red);}
+.stat.t{border-top-color:var(--teal);} .stat.a{border-top-color:var(--amber);}
+figure{margin:0 0 5mm;page-break-inside:avoid;}
+figcaption{font-size:7.8pt;color:var(--mute);margin-top:2mm;line-height:1.45;} figcaption b{color:var(--navy2);}
+svg{display:block;max-width:100%;}
+ul,ol{margin:0 0 .7em;padding-left:4.5mm;} li{margin-bottom:1.6mm;} .tight li{margin-bottom:.8mm;}
+.src{font-size:7.4pt;color:var(--mute);font-style:italic;}
+.pill{display:inline-block;font-size:7pt;font-weight:700;letter-spacing:.7px;text-transform:uppercase;
+ padding:.8mm 2mm;border-radius:2px;color:#fff;background:var(--navy2);}
+.pill.gold{background:var(--gold);} .pill.red{background:var(--red);} .pill.green{background:var(--green);} .pill.teal{background:var(--teal);}
+.qa{border:1px solid var(--line);border-radius:4px;margin-bottom:3.5mm;page-break-inside:avoid;overflow:hidden;}
+.qa .q{background:#eef3fa;padding:3mm 4mm;font-weight:650;color:var(--navy);font-size:9.3pt;}
+.qa .a{padding:3mm 4mm;}
+.qa .a .lbl{font-size:7.2pt;letter-spacing:1.6px;text-transform:uppercase;color:var(--teal);font-weight:700;display:block;margin-bottom:1.2mm;}
+.defn{background:#f4f7fb;border:1px dashed #b9c6d5;border-radius:3px;padding:2.6mm 3.4mm;margin:0 0 3mm;font-size:8.8pt;}
+.defn b{color:var(--navy);}
+</style></head>
+<body>
+
+<div class="cover">
+  <div>
+    <div class="kicker">From zero to technical</div>
+    <h1>Evergreen funds<br>&amp; why Ares<br>is built on them</h1>
+    <div class="rule"></div>
+    <div class="sub">The fund structure that has changed the private markets industry — explained
+    from nothing, then taken as deep as it goes. Includes the 2026 stress test, the honest
+    criticisms, and Ares' full evergreen shelf.</div>
+  </div>
+  <div class="qs">
+    <div><b>1</b> &nbsp;The problem evergreen funds exist to solve</div>
+    <div><b>2</b> &nbsp;Drawdown versus evergreen, side by side</div>
+    <div><b>3</b> &nbsp;How one actually works: NAV, tenders, caps and the liquidity sleeve</div>
+    <div><b>4</b> &nbsp;The wrappers: BDCs, interval funds, ELTIFs, LTAFs, REITs</div>
+    <div><b>5</b> &nbsp;Ares' evergreen shelf, fund by fund</div>
+    <div><b>6</b> &nbsp;Why the manager wants this so badly &#8212; the economics</div>
+    <div><b>7</b> &nbsp;The 2026 stress test and what it proved</div>
+    <div><b>8</b> &nbsp;The criticisms, taken seriously</div>
+    <div><b>9</b> &nbsp;What this means for the role you're applying to</div>
+    <div><b>10</b> &nbsp;Glossary and sources</div>
+  </div>
+  <footer>
+    Ares figures from the FY2025 Form 10-K (SEC EDGAR, CIK 1176948) and Q1&#8211;Q2 2026 earnings
+    materials. Market data from Morningstar/PitchBook, MSCI and HSBC. Structural detail from
+    ASIF filings and ELTIF/LTAF regulatory sources.<br>
+    Compiled 12 October 2026. Fund figures as at 31 December 2025 unless stated. Ares reports Q3 2026 on 29 October.
+  </footer>
+</div>
+
+<div class="part">
+  <div class="n">Part 1</div>
+  <h2>The problem these funds exist to solve</h2>
+  <p>Start here. Everything else is engineering built on top of one awkward mismatch.</p>
+</div>
+
+<section>
+<p class="lead">Private assets — loans to companies, warehouses, data centres — take years to pay
+off. People who want to invest in them increasingly want their money back on reasonable notice.
+Those two facts do not fit together, and <b>an evergreen fund is the structure built to make
+them fit.</b></p>
+
+<div class="defn">
+<b>Evergreen fund.</b> A fund with <b>no end date</b>. Money comes in continuously, stays
+invested, and is reinvested indefinitely. Investors can ask to leave periodically, but only a
+limited amount per period. Also called <b>perpetual</b>, <b>semi-liquid</b>, or <b>open-ended</b>.
+These words are used almost interchangeably.
+</div>
+
+<h3>1.1 Why the old structure excluded most people</h3>
+<p>For forty years, private markets ran on one model: the <b>drawdown fund</b>. You promised
+£10m, the manager called it in pieces over five years, invested it, sold the assets over the
+following five, and gave you your money back. Then the fund closed and you did it again with
+the next one.</p>
+<p>That model works fine if you are a £50bn pension scheme. It is close to impossible if you are
+a dentist with £200,000 to invest, for four reasons:</p>
+
+<figure>
+<svg viewBox="0 0 760 210" role="img" aria-label="Four barriers that excluded individual investors from traditional drawdown funds">
+  <text x="0" y="13" font-size="10.5" font-weight="700" fill="#0d2340">Why an individual could not use a traditional private fund</text>
+  <rect x="0" y="26" width="183" height="104" rx="5" fill="#fcf2f1" stroke="#b4413c" stroke-width="1.3"/>
+  <text x="91" y="48" text-anchor="middle" font-size="10" font-weight="700" fill="#b4413c">1. THE MINIMUM</text>
+  <text x="91" y="68" text-anchor="middle" font-size="8.6" fill="#33414f">Typical commitment:</text>
+  <text x="91" y="82" text-anchor="middle" font-size="11" font-weight="700" fill="#0d2340">&#163;5m&#8211;&#163;25m</text>
+  <text x="91" y="100" text-anchor="middle" font-size="8.6" fill="#6b7a8a">Most individuals are</text>
+  <text x="91" y="112" text-anchor="middle" font-size="8.6" fill="#6b7a8a">excluded immediately</text>
+
+  <rect x="193" y="26" width="183" height="104" rx="5" fill="#fcf2f1" stroke="#b4413c" stroke-width="1.3"/>
+  <text x="284" y="48" text-anchor="middle" font-size="10" font-weight="700" fill="#b4413c">2. THE CAPITAL CALL</text>
+  <text x="284" y="68" text-anchor="middle" font-size="8.6" fill="#33414f">You must hold cash ready</text>
+  <text x="284" y="82" text-anchor="middle" font-size="8.6" fill="#33414f">for years, to be called</text>
+  <text x="284" y="96" text-anchor="middle" font-size="8.6" fill="#33414f">on ~10 days&#8217; notice.</text>
+  <text x="284" y="114" text-anchor="middle" font-size="8.6" fill="#6b7a8a">Miss one and you default.</text>
+
+  <rect x="386" y="26" width="183" height="104" rx="5" fill="#fcf2f1" stroke="#b4413c" stroke-width="1.3"/>
+  <text x="477" y="48" text-anchor="middle" font-size="10" font-weight="700" fill="#b4413c">3. THE LOCK-UP</text>
+  <text x="477" y="68" text-anchor="middle" font-size="8.6" fill="#33414f">Your money is tied up for</text>
+  <text x="477" y="82" text-anchor="middle" font-size="11" font-weight="700" fill="#0d2340">10&#8211;12 years</text>
+  <text x="477" y="100" text-anchor="middle" font-size="8.6" fill="#6b7a8a">with no exit except</text>
+  <text x="477" y="112" text-anchor="middle" font-size="8.6" fill="#6b7a8a">selling at a discount</text>
+
+  <rect x="579" y="26" width="181" height="104" rx="5" fill="#fcf2f1" stroke="#b4413c" stroke-width="1.3"/>
+  <text x="669" y="48" text-anchor="middle" font-size="10" font-weight="700" fill="#b4413c">4. THE J-CURVE</text>
+  <text x="669" y="68" text-anchor="middle" font-size="8.6" fill="#33414f">Returns are <tspan font-style="italic">negative</tspan> for</text>
+  <text x="669" y="82" text-anchor="middle" font-size="8.6" fill="#33414f">the first 2&#8211;4 years, because</text>
+  <text x="669" y="96" text-anchor="middle" font-size="8.6" fill="#33414f">fees are charged before</text>
+  <text x="669" y="110" text-anchor="middle" font-size="8.6" fill="#33414f">gains arrive.</text>
+
+  <line x1="0" y1="150" x2="760" y2="150" stroke="#dfe5ec"/>
+  <text x="0" y="169" font-size="9" fill="#33414f">The evergreen structure removes all four. Minimums fall to a few thousand pounds. Money is invested immediately rather than called later.</text>
+  <text x="0" y="185" font-size="9" fill="#33414f">There is a periodic exit. And because the fund is already fully invested when you buy in, <tspan font-weight="700">you skip the J-curve entirely</tspan> &#8212; you are buying into a</text>
+  <text x="0" y="201" font-size="9" fill="#33414f">mature portfolio that is already producing income, not an empty fund that will take four years to find its feet.</text>
+</svg>
+<figcaption><b>The J-curve point is the one most people miss.</b> In a drawdown fund your early
+years look bad on paper. In an evergreen fund you buy a slice of a portfolio that is already
+seasoned, so income starts almost immediately. For an individual investor that difference is
+often more persuasive than the liquidity.</figcaption>
+</figure>
+
+<div class="defn">
+<b>J-curve.</b> The shape of a drawdown fund's return chart over time. It dips below zero early
+(fees are charged, investments have not yet appreciated) then rises as assets are sold. Drawn
+out, it looks like the letter J.
+</div>
+</section>
+
+<div class="part">
+  <div class="n">Part 2</div>
+  <h2>Drawdown versus evergreen, side by side</h2>
+  <p>The single comparison that explains the industry's last ten years.</p>
+</div>
+
+<section>
+<table>
+<tr><th style="width:19%">Feature</th><th style="width:40%">Drawdown fund <span class="pill">traditional</span></th><th>Evergreen fund <span class="pill teal">modern</span></th></tr>
+<tr><td><b>Life</b></td><td>Fixed. Typically 10 years plus extensions. Then it dies.</td><td><b>None.</b> It continues indefinitely.</td></tr>
+<tr><td><b>Getting in</b></td><td>Only at a "close" — a window during fundraising. Miss it and you wait for the next fund.</td><td><b>Monthly</b>, at net asset value. Continuous.</td></tr>
+<tr><td><b>Your money</b></td><td><b>Committed</b>, then called over years. You hold cash waiting.</td><td><b>Fully invested from day one.</b> No capital calls.</td></tr>
+<tr><td><b>Getting out</b></td><td>When the manager sells assets, on their schedule. Or sell your stake second-hand at a discount.</td><td><b>Quarterly tender offer</b>, usually capped at ~5% of the fund.</td></tr>
+<tr><td><b>Minimum</b></td><td>Millions.</td><td>Often <b>$2,500</b> for retail share classes.</td></tr>
+<tr><td><b>Return pattern</b></td><td>J-curve: negative early, positive late.</td><td><b>Steadier</b> — you buy into a seasoned portfolio.</td></tr>
+<tr><td><b>Fee base</b></td><td>Committed capital first, then invested capital. <b>Steps down</b> after the investment period.</td><td><b>NAV</b>, continuously. Never steps down, never ends.</td></tr>
+<tr><td><b>Who it suits</b></td><td>Large institutions with dedicated teams.</td><td>Individuals, smaller institutions, insurers wanting continuous deployment.</td></tr>
+<tr><td><b>The catch</b></td><td>Illiquidity, complexity, administrative burden.</td><td><b>The exit is rationed.</b> In stress, you may not get all your money when you ask.</td></tr>
+</table>
+
+<figure>
+<svg viewBox="0 0 760 240" role="img" aria-label="Chart comparing the return path of a drawdown fund against an evergreen fund over ten years">
+  <text x="0" y="13" font-size="10.5" font-weight="700" fill="#0d2340">The shape of the two experiences &#8212; illustrative, not actual returns</text>
+  <line x1="46" y1="150" x2="730" y2="150" stroke="#b9c6d5" stroke-width="1" stroke-dasharray="3 3"/>
+  <text x="38" y="153" text-anchor="end" font-size="8" fill="#6b7a8a">0</text>
+  <line x1="46" y1="40" x2="46" y2="210" stroke="#33414f" stroke-width="1.1"/>
+  <line x1="46" y1="210" x2="730" y2="210" stroke="#33414f" stroke-width="1.1"/>
+  <text x="388" y="228" text-anchor="middle" font-size="8.5" fill="#6b7a8a">years since investing &#8594;</text>
+
+  <path d="M46 150 C 110 186, 160 192, 220 180 S 340 120, 450 92 S 620 58, 730 50"
+        fill="none" stroke="#b4413c" stroke-width="2.4"/>
+  <text x="150" y="203" font-size="8.6" font-weight="700" fill="#b4413c">the J-curve dip</text>
+  <text x="600" y="42" font-size="9" font-weight="700" fill="#b4413c">DRAWDOWN FUND</text>
+
+  <path d="M46 150 C 150 138, 300 122, 450 104 S 640 76, 730 66"
+        fill="none" stroke="#1f7a72" stroke-width="2.4"/>
+  <text x="600" y="80" font-size="9" font-weight="700" fill="#1f7a72">EVERGREEN FUND</text>
+
+  <line x1="46" y1="40" x2="46" y2="210" stroke="#33414f" stroke-width="1.1"/>
+  <text x="20" y="100" text-anchor="middle" font-size="8.5" fill="#6b7a8a" transform="rotate(-90 20 100)">value &#8594;</text>
+
+  <line x1="0" y1="222" x2="760" y2="222" stroke="#dfe5ec"/>
+  <text x="0" y="237" font-size="8.3" fill="#33414f"><tspan font-weight="700">Note the trade-off honestly:</tspan> the drawdown line ends <tspan font-style="italic">higher</tspan>. Evergreen funds typically hold cash for redemptions, which drags on returns &#8212; see Part 8.</text>
+</svg>
+<figcaption>The evergreen line is smoother and starts producing sooner. The drawdown line is
+bumpier but, for a good manager, often finishes ahead. <b>Evergreen is a trade of some return
+for a lot of accessibility.</b></figcaption>
+</figure>
+</section>
+
+<div class="part">
+  <div class="n">Part 3</div>
+  <h2>How one actually works</h2>
+  <p>The machinery, piece by piece. This is the part worth genuinely understanding.</p>
+</div>
+
+<section>
+<h3>3.1 What is inside the fund</h3>
+<p>An evergreen fund is not one portfolio. It is <b>two</b>, deliberately, and the split is the
+central design decision the manager makes.</p>
+
+<figure>
+<svg viewBox="0 0 760 250" role="img" aria-label="Diagram of an evergreen fund split between a liquidity sleeve and private assets">
+  <text x="0" y="13" font-size="10.5" font-weight="700" fill="#0d2340">Inside the fund: the engine and the shock absorber</text>
+
+  <rect x="0" y="28" width="196" height="118" rx="5" fill="#eff7f6" stroke="#1f7a72" stroke-width="1.5"/>
+  <text x="98" y="50" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1f7a72">LIQUIDITY SLEEVE</text>
+  <text x="98" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="#0d2340">~5&#8211;20%</text>
+  <text x="98" y="86" text-anchor="middle" font-size="8.5" fill="#33414f">Cash, money market funds,</text>
+  <text x="98" y="99" text-anchor="middle" font-size="8.5" fill="#33414f">short-dated public credit,</text>
+  <text x="98" y="112" text-anchor="middle" font-size="8.5" fill="#33414f">broadly syndicated loans</text>
+  <text x="98" y="132" text-anchor="middle" font-size="8.5" font-style="italic" fill="#1f7a72">Pays for redemptions</text>
+
+  <rect x="212" y="28" width="340" height="118" rx="5" fill="#0d2340"/>
+  <text x="382" y="50" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fff">THE PRIVATE ASSETS</text>
+  <text x="382" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="#c8963e">~80&#8211;95%</text>
+  <text x="382" y="86" text-anchor="middle" font-size="8.5" fill="#c3d5ea">Directly originated loans, property, infrastructure.</text>
+  <text x="382" y="99" text-anchor="middle" font-size="8.5" fill="#c3d5ea">Illiquid, higher-yielding, cannot be sold quickly</text>
+  <text x="382" y="112" text-anchor="middle" font-size="8.5" fill="#c3d5ea">without accepting a discount.</text>
+  <text x="382" y="132" text-anchor="middle" font-size="8.5" font-style="italic" fill="#9dc0e8">Produces the return</text>
+
+  <rect x="568" y="28" width="192" height="118" rx="5" fill="#fdf8ef" stroke="#c8963e" stroke-width="1.5"/>
+  <text x="664" y="50" text-anchor="middle" font-size="10.5" font-weight="700" fill="#c8963e">CREDIT LINE</text>
+  <text x="664" y="70" text-anchor="middle" font-size="8.5" fill="#33414f">A borrowing facility the fund</text>
+  <text x="664" y="83" text-anchor="middle" font-size="8.5" fill="#33414f">can draw on to meet</text>
+  <text x="664" y="96" text-anchor="middle" font-size="8.5" fill="#33414f">redemptions without selling.</text>
+  <text x="664" y="116" text-anchor="middle" font-size="8.3" fill="#b4413c">Risk: lenders may pull back</text>
+  <text x="664" y="128" text-anchor="middle" font-size="8.3" fill="#b4413c">exactly when redemptions peak</text>
+
+  <line x1="0" y1="166" x2="760" y2="166" stroke="#dfe5ec"/>
+  <text x="0" y="185" font-size="9.5" font-weight="700" fill="#0d2340">The trade-off the manager cannot escape</text>
+  <text x="0" y="203" font-size="9" fill="#33414f"><tspan font-weight="700">Bigger sleeve</tspan> = safer in a redemption wave, but cash earns less than private loans, so returns suffer. This is called <tspan font-weight="700">cash drag</tspan>.</text>
+  <text x="0" y="219" font-size="9" fill="#33414f"><tspan font-weight="700">Smaller sleeve</tspan> = better returns, but a redemption wave forces you to sell good assets cheaply, or to gate.</text>
+  <text x="0" y="237" font-size="8.3" fill="#6b7a8a">Sleeve sizing estimates vary by source: one institutional source cites 5&#8211;15% of NAV; Morgan Stanley suggests 10&#8211;20% in normal conditions. Neither is a standard.</text>
+</svg>
+</figure>
+
+<h3>3.2 Getting in: net asset value</h3>
+<div class="defn"><b>NAV (net asset value).</b> The value of everything the fund owns, minus what
+it owes, divided by the number of shares. It is the price at which you buy in and the price at
+which you are bought out.</div>
+<p>For a stock market fund, NAV is easy — the market prices everything every second. For a fund
+holding private loans, <b>there is no market price</b>. The fund must <i>estimate</i> what each
+loan is worth, typically using discounted cash flow and comparable market yields, reviewed by
+independent valuation firms and the auditor. Most private credit evergreen funds strike NAV
+<b>monthly</b>.</p>
+<p>This matters enormously, and we return to it in Part 8: <b>every investor buys and sells at a
+price the manager calculated.</b></p>
+
+<h3>3.3 Getting out: the tender offer</h3>
+<p>This is the heart of the structure. Each quarter, the fund <i>offers</i> to buy back a
+limited number of shares. The standard cap is <b>5% of shares outstanding per quarter</b> —
+roughly 20% a year if used fully.</p>
+
+<figure>
+<svg viewBox="0 0 760 290" role="img" aria-label="Flow diagram of a quarterly tender offer including pro-ration">
+  <text x="0" y="13" font-size="10.5" font-weight="700" fill="#0d2340">One quarterly tender, step by step &#8212; using Ares&#8217; ASIF, Q1 2026</text>
+
+  <rect x="0" y="26" width="140" height="62" rx="4" fill="#eef3fa" stroke="#16355e" stroke-width="1.3"/>
+  <text x="70" y="45" text-anchor="middle" font-size="9" font-weight="700" fill="#16355e">1. THE OFFER</text>
+  <text x="70" y="62" text-anchor="middle" font-size="8.3" fill="#33414f">Fund offers to buy</text>
+  <text x="70" y="74" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0d2340">up to 5%</text>
+
+  <rect x="155" y="26" width="140" height="62" rx="4" fill="#eef3fa" stroke="#16355e" stroke-width="1.3"/>
+  <text x="225" y="45" text-anchor="middle" font-size="9" font-weight="700" fill="#16355e">2. REQUESTS IN</text>
+  <text x="225" y="62" text-anchor="middle" font-size="8.3" fill="#33414f">Investors asked for</text>
+  <text x="225" y="74" text-anchor="middle" font-size="9.5" font-weight="700" fill="#b4413c">11.6%</text>
+
+  <rect x="310" y="26" width="140" height="62" rx="4" fill="#fcf2f1" stroke="#b4413c" stroke-width="1.5"/>
+  <text x="380" y="45" text-anchor="middle" font-size="9" font-weight="700" fill="#b4413c">3. OVERSUBSCRIBED</text>
+  <text x="380" y="62" text-anchor="middle" font-size="8.3" fill="#33414f">Demand exceeds cap</text>
+  <text x="380" y="74" text-anchor="middle" font-size="8.3" fill="#33414f">by more than 2x</text>
+
+  <rect x="465" y="26" width="140" height="62" rx="4" fill="#fdf8ef" stroke="#c8963e" stroke-width="1.5"/>
+  <text x="535" y="45" text-anchor="middle" font-size="9" font-weight="700" fill="#c8963e">4. PRO-RATION</text>
+  <text x="535" y="62" text-anchor="middle" font-size="8.3" fill="#33414f">Everyone scaled by</text>
+  <text x="535" y="74" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0d2340">43.1%</text>
+
+  <rect x="620" y="26" width="140" height="62" rx="4" fill="#eff7f6" stroke="#1f7a72" stroke-width="1.3"/>
+  <text x="690" y="45" text-anchor="middle" font-size="9" font-weight="700" fill="#1f7a72">5. PAID OUT</text>
+  <text x="690" y="62" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0d2340">$523.5m</text>
+  <text x="690" y="75" text-anchor="middle" font-size="8.3" fill="#33414f">rest must re-apply</text>
+
+  <g stroke="#6b7a8a" stroke-width="1.4">
+    <line x1="142" y1="57" x2="152" y2="57"/><line x1="297" y1="57" x2="307" y2="57"/>
+    <line x1="452" y1="57" x2="462" y2="57"/><line x1="607" y1="57" x2="617" y2="57"/>
+  </g>
+
+  <rect x="0" y="104" width="760" height="64" rx="4" fill="#f4f7fb" stroke="#dfe5ec"/>
+  <text x="14" y="124" font-size="9.5" font-weight="700" fill="#16355e">What pro-ration means for one person</text>
+  <text x="14" y="142" font-size="9" fill="#33414f">An investor asked to withdraw <tspan font-weight="700">&#163;100,000</tspan>. Because requests were more than double the cap, each request was scaled to <tspan font-weight="700">43.1%</tspan>.</text>
+  <text x="14" y="158" font-size="9" fill="#33414f">They received <tspan font-weight="700">&#163;43,100</tspan>. The remaining &#163;56,900 stays invested, and they must submit a fresh request next quarter.</text>
+
+  <rect x="0" y="182" width="760" height="58" rx="4" fill="#eef3fa" stroke="#16355e" stroke-width="1.3"/>
+  <text x="14" y="202" font-size="9.5" font-weight="700" fill="#16355e">Why the cap exists &#8212; and why it is a protection, not a trap</text>
+  <text x="14" y="220" font-size="9" fill="#33414f">Without it, the fund would have to dump illiquid loans at fire-sale prices to raise cash. That would crystallise losses for <tspan font-style="italic">everyone</tspan>, including</text>
+  <text x="14" y="234" font-size="9" fill="#33414f">the investors who stayed. <tspan font-weight="700">The cap protects the people who did not ask to leave</tspan> from the people who did.</text>
+
+  <text x="0" y="262" font-size="9" fill="#33414f"><tspan font-weight="700">One more charge to know: the early repurchase deduction.</tspan> ASIF repurchases shares held under one year at <tspan font-weight="700">98% of NAV</tspan> &#8212; a 2% deduction.</text>
+  <text x="0" y="276" font-size="9" fill="#33414f">It discourages short-term money in a long-term fund. It does not apply to shares bought through dividend reinvestment, and can be waived in defined cases.</text>
+  <text x="0" y="288" font-size="8" fill="#6b7a8a">Sources: Ares Q1 2026 disclosures on the ASIF tender; ASIF offering documents. Check the current prospectus for live terms before relying on them.</text>
+</svg>
+<figcaption><b>"Gating" is the word you will see in headlines.</b> It usually describes exactly
+this: requests exceeded the cap, so everyone got a proportion. It is the structure working as
+designed — though that is cold comfort to someone who wanted their money.</figcaption>
+</figure>
+
+<div class="callout key">
+<span class="tag">The one sentence that captures the whole structure</span>
+<p style="margin-bottom:0"><b>An evergreen fund is a liquidity transformation engine.</b> It takes
+assets that take three to seven years to repay and turns them into a product offering quarterly,
+partial, rationed liquidity — managed with a cash sleeve, a credit line and a cap. Every
+argument about these funds is ultimately an argument about whether that transformation is
+honestly explained and prudently sized.</p>
+</div>
+</section>
+
+
+<div class="part">
+  <div class="n">Part 4</div>
+  <h2>The wrappers</h2>
+  <p>The same idea, in five different legal costumes, depending on the country and the investor.</p>
+</div>
+
+<section>
+<p>"Evergreen" describes the <i>economics</i>. The legal structure is a separate choice, driven by
+where the investor lives and what the regulator permits. Ares uses most of these.</p>
+
+<table>
+<tr><th style="width:17%">Wrapper</th><th style="width:9%">Where</th><th style="width:26%">What it is</th><th>Key mechanics &#8212; and which Ares vehicle uses it</th></tr>
+<tr><td><b>Non-traded BDC</b></td><td>US</td><td>A business development company that lends to mid-sized companies but is not listed on an exchange.</td><td>Must distribute most income. Quarterly repurchases typically up to 5% of NAV. <b>Ares: ASIF</b> — $24.3bn AUM, 10.9% annualised net return since 2023 inception.</td></tr>
+<tr><td><b>Listed BDC</b></td><td>US</td><td>The same, but traded on an exchange. Technically perpetual, with daily liquidity via the market.</td><td>You sell to another investor, not back to the fund — so the price can differ from NAV. <b>Ares: ARCC</b>, Nasdaq-listed since 2004, $35.9bn.</td></tr>
+<tr><td><b>Non-traded REIT</b></td><td>US</td><td>A real estate investment trust, not exchange-listed.</td><td>Same tender mechanics applied to property. <b>Ares: Diversified non-traded REIT</b> ($7.4bn) and <b>Industrial non-traded REIT</b> ($7.6bn).</td></tr>
+<tr><td><b>Interval fund</b></td><td>US</td><td>A registered closed-end fund that <i>must</i> offer repurchases at set intervals by regulation.</td><td>Typically 5% of NAV per quarter as an SEC minimum. The difference from a tender-offer fund is that the window is <b>mandated</b>, not discretionary. Ares has said it is developing interval fund structures for mass-affluent investors.</td></tr>
+<tr><td><b>ELTIF</b><br><small>European Long-Term Investment Fund</small></td><td>EU</td><td>An EU-wide wrapper designed explicitly to let retail investors access long-term private assets.</td><td><b>ELTIF 2.0</b> (the 2024 overhaul) cut the minimum in eligible long-term assets from 70% to <b>55%</b>, permitted funds-of-funds, and raised the debt limit from 30% to 50%. ELTIF assets reached <b>€20.5bn by end-2024</b>. <b>Ares: the Open-Ended European Direct Lending ELTIF</b>.</td></tr>
+<tr><td><b>LTAF</b><br><small>Long-Term Asset Fund</small></td><td>UK</td><td>The FCA's equivalent, aimed partly at opening UK pension money to private assets.</td><td>Open-ended, typically monthly dealing with notice periods. Newer and smaller than the ELTIF market.</td></tr>
+<tr><td><b>J-REIT</b></td><td>Japan</td><td>A Tokyo-listed property trust.</td><td><b>Ares runs one</b> — $7.5bn, 13.3% annualised net since 2012, the best long-run return of Ares' perpetual real estate set.</td></tr>
+</table>
+<p class="tbl-note">Ares AUM and returns as at 31 December 2025, from the FY2025 Form 10-K. Returns are annualised since inception, net of fees. Past performance is not indicative of future results.</p>
+
+<div class="callout edge">
+<span class="tag">Worth knowing · why Ares runs an ELTIF specifically</span>
+<p style="margin-bottom:0">Ares has <b>$84.7bn of European direct lending</b> — one of the two or
+three genuinely scaled European platforms. An ELTIF is the only efficient way to sell that
+strategy to European individual investors across borders. <b>The wrapper exists to match the
+distribution opportunity to the asset Ares already has</b>, which is the general rule: managers
+do not build evergreen funds because the structure is elegant, they build them because a
+specific channel cannot buy the drawdown version.</p>
+</div>
+</section>
+
+<div class="part">
+  <div class="n">Part 5</div>
+  <h2>Ares' evergreen shelf</h2>
+  <p>Twelve vehicles, with what each charges and how each has performed.</p>
+</div>
+
+<section>
+<p>This table is assembled from the fee schedules and fund performance tables in the FY2025
+10-K. <b>Nobody applying for this role will have put it together</b>, because it requires
+cross-referencing two separate disclosures.</p>
+
+<table>
+<tr><th style="width:23%">Vehicle</th><th style="width:15%">Strategy</th><th class="num" style="width:8%">Since</th><th class="num" style="width:9%">AUM</th><th style="width:16%">Base fee</th><th style="width:14%">Performance fee</th><th class="num">Net return<br>since inception</th></tr>
+<tr><td><b>ARCC</b> <small>listed BDC</small></td><td>US direct lending</td><td class="num">2004</td><td class="num">$35.9bn</td><td>1.50% of total assets ex-cash</td><td>Part I: 20% above 1.75%/qtr</td><td class="num"><b>12.0%</b></td></tr>
+<tr><td><b>ASIF</b> <small>non-traded BDC</small></td><td>US direct lending</td><td class="num">2023</td><td class="num">$24.3bn</td><td>1.25% of NAV</td><td>Part I: 12.5% above 1.25%/qtr</td><td class="num"><b>10.9%</b></td></tr>
+<tr><td><b>CADC</b></td><td>US direct lending</td><td class="num">2017</td><td class="num">$8.7bn</td><td>1.25%</td><td>Part I: 15% above 1.50%/qtr</td><td class="num">7.0%</td></tr>
+<tr><td><b>Industrial non-traded REIT</b></td><td>Real estate</td><td class="num">2017</td><td class="num">$7.6bn</td><td>1.25% of NAV</td><td>12.5% above 5% hurdle</td><td class="num">8.5%</td></tr>
+<tr><td><b>J-REIT</b> <small>Tokyo-listed</small></td><td>Real estate</td><td class="num">2012</td><td class="num">$7.5bn</td><td>Three-part formula</td><td>&#8212;</td><td class="num"><b>13.3%</b></td></tr>
+<tr><td><b>Open-ended core alternative credit fund</b></td><td>Asset-based finance</td><td class="num">2021</td><td class="num">$7.5bn</td><td>0.50%&#8211;1.50%</td><td>15% above 6% hurdle</td><td class="num">8.8%</td></tr>
+<tr><td><b>Diversified non-traded REIT</b></td><td>Real estate</td><td class="num">2012</td><td class="num">$7.4bn</td><td>1.10% of NAV</td><td>12.5% above 5% hurdle</td><td class="num">6.5%</td></tr>
+<tr><td><b>Open-ended European direct lending fund</b></td><td>European DL</td><td class="num">2024</td><td class="num">$6.4bn</td><td>1.25% of NAV</td><td>Part I: 12.5% above 1.25%/qtr</td><td class="num">9.6%</td></tr>
+<tr><td><b>APMF</b></td><td>PE secondaries</td><td class="num">2022</td><td class="num">$5.0bn</td><td>1.40% of total assets</td><td>12.5% quarterly</td><td class="num"><b>14.2%</b></td></tr>
+<tr><td><b>Open-ended European DL ELTIF</b></td><td>European DL</td><td class="num">&#8212;</td><td class="num">&#8212;</td><td>1.25% of NAV</td><td>Part I: 12.5% above 1.25%/qtr</td><td class="num">&#8212;</td></tr>
+<tr><td><b>Open-ended core infrastructure fund</b></td><td>Infrastructure</td><td class="num">&#8212;</td><td class="num">&#8212;</td><td>1.25% of NAV</td><td>Part I: 12.5% above 1.25%/qtr</td><td class="num">&#8212;</td></tr>
+<tr><td><b>Open-ended Sports, Media &amp; Entertainment Opportunities Fund</b></td><td>US direct lending</td><td class="num">&#8212;</td><td class="num">&#8212;</td><td><b>1.40% of NAV</b><br><small>the highest base fee on the shelf</small></td><td>&#8212;</td><td class="num">&#8212;</td></tr>
+</table>
+<p class="tbl-note">Dashes indicate the vehicle appears in the 10-K fee schedule but not in the significant-fund performance tables, which only cover funds above a materiality threshold. ACRE (listed REIT, 1.50% of stockholders' equity) and ARDC (listed, 1.00%) also sit in the perpetual set. Source: Ares FY2025 Form 10-K; returns as at 31 December 2025, annualised, net of fees.</p>
+
+<div class="callout edge">
+<span class="tag">Three things to notice in this table</span>
+<p><b>1. The non-traded vehicle is cheaper than the listed one.</b> ARCC charges 1.50% on total
+assets with a 20% Part I fee; ASIF charges 1.25% on NAV with a 12.5% Part I fee. The retail
+product is the <i>better-priced</i> one — the opposite of what most people assume.</p>
+<p><b>2. The longest-running vehicles have the best returns.</b> ARCC (2004) at 12.0% and the
+J-REIT (2012) at 13.3% have compounded through multiple cycles. That is the core argument for
+perpetual structures: time in the market, uninterrupted by fund wind-downs.</p>
+<p style="margin-bottom:0"><b>3. The sports fund charges the most.</b> At 1.40% of NAV it carries
+the highest base fee of any Ares open-ended vehicle — specialist, scarce access commands a
+premium.</p>
+</div>
+
+<h3>5.1 How much of Ares is perpetual</h3>
+<figure>
+<svg viewBox="0 0 760 210" role="img" aria-label="Breakdown of Ares perpetual capital by type at Q2 2026">
+  <text x="0" y="13" font-size="10.5" font-weight="700" fill="#0d2340">Ares perpetual capital, Q2 2026 &#8212; $223.3bn, up 34% year on year</text>
+  <rect x="0" y="28" width="260" height="46" fill="#1f7a72"/>
+  <text x="130" y="48" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">PERPETUAL WEALTH VEHICLES</text>
+  <text x="130" y="64" text-anchor="middle" font-size="9.5" font-weight="700" fill="#cfe8e5">$76.5bn</text>
+  <rect x="264" y="28" width="209" height="46" fill="#16355e"/>
+  <text x="368" y="48" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">PRIVATE COMMINGLED</text>
+  <text x="368" y="64" text-anchor="middle" font-size="9.5" font-weight="700" fill="#9dc0e8">$61.5bn</text>
+  <rect x="477" y="28" width="159" height="46" fill="#5b4b8a"/>
+  <text x="556" y="48" text-anchor="middle" font-size="9.5" font-weight="700" fill="#fff">PUBLICLY-TRADED</text>
+  <text x="556" y="64" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ddd6ee">$46.8bn</text>
+  <rect x="640" y="28" width="120" height="46" fill="#c8963e"/>
+  <text x="700" y="48" text-anchor="middle" font-size="9.5" font-weight="700" fill="#fff">MANAGED ACCTS</text>
+  <text x="700" y="64" text-anchor="middle" font-size="9.5" font-weight="700" fill="#fdf3e2">$38.5bn</text>
+
+  <line x1="0" y1="96" x2="760" y2="96" stroke="#dfe5ec"/>
+  <text x="0" y="116" font-size="9.5" font-weight="700" fill="#b4413c">The correction almost everyone needs</text>
+  <text x="0" y="134" font-size="9" fill="#33414f">&#8220;Evergreen&#8221; is not a synonym for &#8220;retail&#8221;. <tspan font-weight="700">Only about a third of Ares&#8217; perpetual capital sits in wealth vehicles.</tspan> The rest is institutional:</text>
+  <text x="0" y="150" font-size="9" fill="#33414f">private commingled funds, listed vehicles, and separately managed accounts for single institutions &#8212; many of them <tspan font-weight="700">insurers</tspan>, who want capital</text>
+  <text x="0" y="166" font-size="9" fill="#33414f">continuously deployed against thirty-year liabilities rather than returned to them every ten years.</text>
+  <text x="0" y="188" font-size="9" fill="#33414f"><tspan font-weight="700">The scale of it:</tspan> <tspan font-weight="700" fill="#0d2340">93% of Ares&#8217; management fees come from perpetual capital or long-dated funds.</tspan> This is not a side business. It is the business.</text>
+  <text x="0" y="204" font-size="8" fill="#6b7a8a">Source: Ares Q2 2026 earnings materials; the 93% figure from the FY2025 Form 10-K, &#8220;Management Fees By Type&#8221;.</text>
+</svg>
+</figure>
+</section>
+
+<div class="part">
+  <div class="n">Part 6</div>
+  <h2>Why the manager wants this so badly</h2>
+  <p>Follow the economics and the entire industry strategy becomes obvious.</p>
+</div>
+
+<section>
+<p>Evergreen funds are usually explained as a favour to investors — access, lower minimums, no
+capital calls. All true. But the manager's motivation is simpler and worth stating plainly.</p>
+
+<figure>
+<svg viewBox="0 0 760 250" role="img" aria-label="Comparison of fee revenue over time between a drawdown fund and an evergreen fund">
+  <text x="0" y="13" font-size="10.5" font-weight="700" fill="#0d2340">The same &#163;1bn, as a fee stream &#8212; illustrative</text>
+
+  <text x="0" y="36" font-size="9" font-weight="700" fill="#b4413c">DRAWDOWN FUND</text>
+  <g>
+    <rect x="130" y="26" width="46" height="18" fill="#e4b9b7"/><rect x="180" y="26" width="46" height="18" fill="#d49995"/>
+    <rect x="230" y="26" width="46" height="18" fill="#b4413c"/><rect x="280" y="26" width="46" height="18" fill="#b4413c"/>
+    <rect x="330" y="26" width="46" height="18" fill="#b4413c"/><rect x="380" y="26" width="46" height="18" fill="#c97a76"/>
+    <rect x="430" y="26" width="46" height="18" fill="#d49995"/><rect x="480" y="26" width="46" height="18" fill="#e4b9b7"/>
+    <rect x="530" y="26" width="46" height="18" fill="#efd4d3"/><rect x="580" y="26" width="46" height="18" fill="#f7eae9"/>
+  </g>
+  <text x="640" y="40" font-size="8.6" fill="#b4413c">then <tspan font-weight="700">zero</tspan></text>
+  <text x="130" y="58" font-size="8.3" fill="#6b7a8a">fee rises as capital is called, then falls as the fee base steps down and assets are sold &#8212; and the fund ends</text>
+
+  <text x="0" y="92" font-size="9" font-weight="700" fill="#1f7a72">EVERGREEN FUND</text>
+  <g>
+    <rect x="130" y="82" width="46" height="18" fill="#1f7a72"/><rect x="180" y="82" width="46" height="18" fill="#1f7a72"/>
+    <rect x="230" y="82" width="46" height="18" fill="#1f7a72"/><rect x="280" y="82" width="46" height="18" fill="#1f7a72"/>
+    <rect x="330" y="82" width="46" height="18" fill="#1f7a72"/><rect x="380" y="82" width="46" height="18" fill="#1f7a72"/>
+    <rect x="430" y="82" width="46" height="18" fill="#1f7a72"/><rect x="480" y="82" width="46" height="18" fill="#1f7a72"/>
+    <rect x="530" y="82" width="46" height="18" fill="#1f7a72"/><rect x="580" y="82" width="46" height="18" fill="#1f7a72"/>
+  </g>
+  <text x="640" y="96" font-size="8.6" font-weight="700" fill="#1f7a72">and onward&#8230;</text>
+  <text x="130" y="114" font-size="8.3" fill="#6b7a8a">fee charged on NAV, never steps down, never ends &#8212; and NAV grows as income is reinvested</text>
+
+  <g font-size="8" fill="#6b7a8a">
+    <text x="153" y="130" text-anchor="middle">Yr1</text><text x="253" y="130" text-anchor="middle">Yr3</text>
+    <text x="353" y="130" text-anchor="middle">Yr5</text><text x="453" y="130" text-anchor="middle">Yr7</text>
+    <text x="553" y="130" text-anchor="middle">Yr9</text>
+  </g>
+
+  <line x1="0" y1="146" x2="760" y2="146" stroke="#dfe5ec"/>
+  <text x="0" y="166" font-size="9.5" font-weight="700" fill="#0d2340">What this buys the manager &#8212; three things</text>
+  <text x="0" y="184" font-size="9" fill="#33414f"><tspan font-weight="700">1. No fundraising treadmill.</tspan> A drawdown manager must raise a successor fund every 2&#8211;3 years or revenue collapses. An evergreen fund compounds instead.</text>
+  <text x="0" y="200" font-size="9" fill="#33414f"><tspan font-weight="700">2. A growing fee base.</tspan> The fee is charged on NAV, and NAV rises as income is reinvested. <tspan font-style="italic">The fee base grows without anyone selling anything.</tspan></text>
+  <text x="0" y="216" font-size="9" fill="#33414f"><tspan font-weight="700">3. Predictable earnings.</tspan> Ares earns 93% of management fees from perpetual or long-dated vehicles, which is why its fee-related earnings are valued like a subscription business.</text>
+  <text x="0" y="240" font-size="9" fill="#33414f"><tspan font-weight="700">And the price paid for it:</tspan> perpetual does not mean permanent. Investors can leave each quarter, so the manager must <tspan font-weight="700">keep earning the money every quarter</tspan>.</text>
+</svg>
+<figcaption><b>That last line is the whole reason client service matters here.</b> In a drawdown
+fund an unhappy investor is locked in until the fund winds up. In an evergreen fund they can
+file a redemption request in ninety days. <b>The structure converts client satisfaction from a
+soft virtue into a hard revenue variable.</b></figcaption>
+</figure>
+
+<div class="grid3">
+<div class="stat t"><b>$68bn</b><span>Ares wealth AUM</span><i>At Q1 2026, up 54% year on year.</i></div>
+<div class="stat a"><b>$125bn</b><span>Stated target</span><i>By 2028 — roughly a doubling from end-2025's ~$66bn.</i></div>
+<div class="stat"><b>8</b><span>Semi-liquid products</span><i>On 80+ global platforms, though nearly half of partners carry only one.</i></div>
+</div>
+</section>
+
+<div class="part">
+  <div class="n">Part 7</div>
+  <h2>The 2026 stress test</h2>
+  <p>The structure's first real examination. Here is what happened and what it actually proved.</p>
+</div>
+
+<section>
+<p class="lead">Evergreen funds grew up in a benign decade. 2026 was the first year they were
+properly tested — and the results are more interesting than either the cheerleaders or the
+critics will tell you.</p>
+
+<h3>7.1 What triggered it</h3>
+<ul class="tight">
+<li><b>Two fraud-driven collapses in late 2025.</b> Tricolor pledged the same auto-loan
+collateral to multiple lenders. First Brands failed with $11.6bn of liabilities amid allegations
+of fabricated receivables. Neither was a credit-cycle event, but both shook confidence.</li>
+<li><b>The AI thesis.</b> Investors decided artificial intelligence might destroy the mid-market
+software companies that private credit funds lend to. Ares shares fell roughly 32% in Q1 2026.</li>
+<li><b>The result:</b> a wave of redemption requests across the industry's non-traded vehicles.</li>
+</ul>
+
+<h3>7.2 What happened, across the industry</h3>
+<figure>
+<svg viewBox="0 0 760 215" role="img" aria-label="Comparison of 2026 redemption requests across non-traded credit funds against the 5 percent cap">
+  <text x="0" y="13" font-size="10.5" font-weight="700" fill="#0d2340">2026 redemption requests as a share of fund shares, against the standard 5% quarterly cap</text>
+  <line x1="190" y1="30" x2="190" y2="176" stroke="#b4413c" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="194" y="40" font-size="8.5" font-weight="700" fill="#b4413c">the 5% cap</text>
+  <g font-size="9">
+    <text x="0" y="60" font-weight="700" fill="#0d2340">Blue Owl tech fund</text>
+    <rect x="190" y="49" width="420" height="15" fill="#b4413c"/><text x="618" y="61" font-size="9.5" font-weight="700" fill="#b4413c">41%</text>
+    <text x="0" y="88" font-weight="700" fill="#0d2340">Blue Owl OCIC</text>
+    <rect x="190" y="77" width="225" height="15" fill="#d18b1e"/><text x="423" y="89" font-size="9.5" font-weight="700" fill="#d18b1e">22%</text>
+    <text x="0" y="116" font-weight="700" fill="#0d2340">Ares ASIF <tspan font-weight="400" font-size="8">(Q2)</tspan></text>
+    <rect x="190" y="105" width="148" height="15" fill="#0d2340"/><text x="346" y="117" font-size="9.5" font-weight="700" fill="#0d2340">14.4%</text>
+    <text x="0" y="144" font-weight="700" fill="#0d2340">Ares ASIF <tspan font-weight="400" font-size="8">(Q1)</tspan></text>
+    <rect x="190" y="133" width="119" height="15" fill="#4f6b8c"/><text x="317" y="145" font-size="9.5" font-weight="700" fill="#4f6b8c">11.6%</text>
+    <text x="0" y="172" font-weight="700" fill="#0d2340">Apollo</text>
+    <rect x="190" y="161" width="115" height="15" fill="#7d93ad"/><text x="313" y="173" font-size="9.5" font-weight="700" fill="#7d93ad">11.2%</text>
+  </g>
+  <line x1="0" y1="188" x2="760" y2="188" stroke="#dfe5ec"/>
+  <text x="0" y="204" font-size="8.5" fill="#33414f"><tspan font-weight="700">All five funds pro-rated.</tspan> Ares sat in the middle of the pack &#8212; materially better than Blue Owl, roughly level with Apollo. This was a sector event, not an Ares event.</text>
+</svg>
+</figure>
+
+<h3>7.3 What the detail showed</h3>
+<div class="grid2">
+<div class="card"><h4 style="color:var(--green)">Evidence the structure held</h4>
+<ul class="tight" style="margin-bottom:0">
+<li><b>Over 95% of ASIF investors did not request redemption</b> at all.</li>
+<li>Requests from the <b>US private wealth channel were only 2.4% of shares</b> — below the cap — and fell more than 35% quarter on quarter.</li>
+<li>Nearly <b>half</b> of all requests came from smaller non-US institutions and family offices representing <b>under 1% of the fund's 20,000+ shareholders</b>.</li>
+<li>No fund was forced into a fire sale. The caps did their job.</li>
+<li>Ares still raised a <b>record $36.4bn in Q2 2026</b> and closed Pathfinder III oversubscribed at $8.5bn against a $6.5bn target.</li>
+</ul></div>
+<div class="card"><h4 style="color:var(--red)">Evidence the critics have a point</h4>
+<ul class="tight" style="margin-bottom:0">
+<li><b>Two consecutive quarters of pro-ration</b> at ASIF. Investors who wanted out got 43.1% in Q1, then had to queue again.</li>
+<li>The promise of "quarterly liquidity" proved to be <b>quarterly <i>partial</i> liquidity</b> precisely when people wanted it most.</li>
+<li>Industry-wide, <b>non-traded BDC fundraising fell 82%</b> year on year in Q2 2026, to $2bn.</li>
+<li>US evergreen <b>private credit net assets fell about $1bn in Q1 2026</b> — the segment Ares leads is the one losing momentum, while private equity and venture evergreen funds gained.</li>
+<li>In April 2026, House Financial Services Committee Democrats sent inquiries to Ares and six peers covering marketing, valuation, fees, leverage and BDC handling.</li>
+</ul></div>
+</div>
+
+<div class="callout key">
+<span class="tag">The honest verdict</span>
+<p style="margin-bottom:0"><b>The structure worked mechanically and failed reputationally.</b> No
+fund collapsed, no fire sale occurred, the caps protected remaining investors exactly as
+designed. But a large number of people discovered, at the worst moment, that "semi-liquid" meant
+something more restrictive than they had understood. <b>That gap — between the mechanism and the
+expectation — is the single biggest unresolved issue in this corner of the industry</b>, and it
+is a communication problem before it is a structural one.</p>
+</div>
+</section>
+
+
+<div class="part">
+  <div class="n">Part 8</div>
+  <h2>The criticisms, taken seriously</h2>
+  <p>Five real objections. You should be able to state each one better than a sceptic would.</p>
+</div>
+
+<section>
+<table>
+<tr><th style="width:5%">#</th><th style="width:22%">The criticism</th><th style="width:36%">The argument against</th><th>The defence &#8212; and what remains true</th></tr>
+<tr><td><b>1</b></td><td><b>Liquidity mismatch</b></td>
+<td>The fund promises quarterly liquidity while holding assets that take years to repay. Critics argue that when markets turn, the tension resolves one way: the fund gates.</td>
+<td>The cap is disclosed up front and protects remaining investors from forced selling. <b>Still true:</b> the marketing emphasises the liquidity far more prominently than the cap, and 2026 proved the cap binds in exactly the conditions people most want out.</td></tr>
+<tr><td><b>2</b></td><td><b>NAV staleness</b></td>
+<td>Private assets are valued by periodic appraisal, not by a market. The reported NAV may lag reality — so investors buy and sell at a price the manager calculated.</td>
+<td>Valuations use discounted cash flow and market-comparable yields, with independent third-party review and annual audit. <b>Still true:</b> there is genuine judgement involved, and a lagging NAV advantages whoever transacts first. This is why clear explanation of valuation method is the <b>top trust driver</b> in LP surveys.</td></tr>
+<tr><td><b>3</b></td><td><b>Cash drag</b></td>
+<td>The liquidity sleeve — perhaps 5&#8211;20% of the fund — sits in cash and short-dated credit yielding far less than private loans. Investors pay private-market fees on public-market assets.</td>
+<td>The sleeve is what makes any liquidity possible; it is the cost of the wrapper. <b>Still true:</b> an evergreen fund will generally trail an equivalent drawdown fund over a full cycle, and investors should expect that trade.</td></tr>
+<tr><td><b>4</b></td><td><b>Fees on unrealised marks</b></td>
+<td>Performance fees can be charged on gains that exist only as valuations, not as cash. The manager both calculates the mark and is paid on it.</td>
+<td>Hurdles, high-water marks and loss carry-forwards limit this, and Part I fees at Ares are charged on <i>net investment income</i> — actual earnings — rather than appreciation. <b>Still true:</b> the conflict is structural and cannot be fully designed away, only disclosed and governed.</td></tr>
+<tr><td><b>5</b></td><td><b>Suitability</b></td>
+<td>Are individual investors equipped to judge an illiquid, complex, hard-to-value product? Regulators are asking exactly this.</td>
+<td>Suitability standards, minimums and adviser gatekeeping exist. ASIF's stated standards, for instance, require minimum income and net-worth thresholds. <b>Still true:</b> the April 2026 congressional inquiries indicate the question is live, and distribution standards may tighten.</td></tr>
+</table>
+
+<div class="callout warn">
+<span class="tag">How to handle these in an interview</span>
+<p style="margin-bottom:0"><b>Do not defend the structure reflexively.</b> The strongest thing you
+can do is state the criticism accurately and then add the nuance — "the liquidity mismatch is
+real, and 2026 showed the cap binds exactly when people want out; what the data also showed is
+that over 95% of ASIF holders didn't ask to leave and the US wealth channel's requests were
+under the cap at 2.4%." <b>That is a person who understands the product, not a person selling
+it.</b> Someone who claims there are no downsides will not be believed by anyone who works in
+the industry.</p>
+</div>
+</section>
+
+<div class="part">
+  <div class="n">Part 9</div>
+  <h2>What this means for the role</h2>
+  <p>Why evergreen funds make Client Solutions a harder and better job than it was a decade ago.</p>
+</div>
+
+<section>
+<p>The shift from drawdown to evergreen changes the client-facing job in four concrete ways.
+These are worth understanding because they are the actual texture of the work.</p>
+
+<div class="grid2">
+<div class="card"><h4><span class="pill teal">1</span> The relationship never ends</h4>
+<p style="margin-bottom:0">A drawdown fund has a beginning, middle and end — you raise it, then
+you raise the next one. An evergreen fund has <b>a client who can leave every ninety days,
+forever</b>. There is no "closed" moment. Retention stops being a periodic campaign and becomes a
+continuous obligation.</p></div>
+<div class="card"><h4><span class="pill teal">2</span> Flows are the scoreboard</h4>
+<p style="margin-bottom:0">The relevant metric becomes <b>net flow</b> — subscriptions minus
+redemptions — reported monthly. Ares' wealth channel generated $3.9bn of gross equity
+commitments in Q2 2026, up 15%. You would see that number constantly, and your work would move
+it in both directions.</p></div>
+</div>
+<div class="grid2">
+<div class="card"><h4><span class="pill teal">3</span> You explain the same thing to two audiences</h4>
+<p style="margin-bottom:0">Ares runs the <i>same</i> direct lending strategy for a sovereign
+wealth fund via a bespoke mandate and for an individual via ASIF. The asset is identical; the
+vocabulary, the regulatory wrapper and the concerns are completely different. <b>Very few seats
+teach you both.</b></p></div>
+<div class="card"><h4><span class="pill teal">4</span> The hardest conversation is now routine</h4>
+<p style="margin-bottom:0">Explaining pro-ration to someone who wanted their money is not an edge
+case in 2026 — it is a recurring task. Doing it accurately, without defensiveness, while
+explaining <i>why</i> the cap protects them, is the most transferable skill the structure
+produces.</p></div>
+</div>
+
+<div class="callout">
+<span class="tag">Say this &#8212; if evergreen funds come up</span>
+<p style="margin-bottom:0">"What interests me about the evergreen shift is that it changes what
+client service <i>is</i>. In a drawdown fund an unhappy investor is locked in until the wind-down.
+In a perpetual vehicle they can file a redemption request every quarter, so satisfaction turns
+into a revenue variable you can actually measure. Ares has about $223bn of perpetual capital and
+earns 93% of management fees from perpetual or long-dated vehicles, so that dynamic sits right at
+the centre of the firm. And 2026 tested it properly — ASIF pro-rated two tenders, which was
+uncomfortable, but over ninety-five percent of holders didn't ask to leave and the US wealth
+channel came in under the cap. I'd rather learn the job in that environment."</p>
+</div>
+
+<h3>9.1 Twelve terms, defined</h3>
+<table>
+<tr><th style="width:21%">Term</th><th>Plain meaning</th></tr>
+<tr><td><b>Evergreen / perpetual</b></td><td>A fund with no end date. Money stays and is reinvested indefinitely.</td></tr>
+<tr><td><b>Semi-liquid</b></td><td>The same thing, named after what it offers investors: some liquidity, not full liquidity.</td></tr>
+<tr><td><b>NAV</b></td><td>Net asset value. What the fund owns minus what it owes, per share. The buy and sell price.</td></tr>
+<tr><td><b>Tender offer</b></td><td>The fund's periodic offer to buy back shares. Usually quarterly, usually capped at 5%.</td></tr>
+<tr><td><b>Pro-ration</b></td><td>Scaling everyone's request down by the same factor when requests exceed the cap.</td></tr>
+<tr><td><b>Gating</b></td><td>Informal term for limiting redemptions. Usually describes pro-ration in practice.</td></tr>
+<tr><td><b>Liquidity sleeve</b></td><td>The portion held in cash and liquid assets to fund redemptions. Roughly 5&#8211;20%.</td></tr>
+<tr><td><b>Cash drag</b></td><td>The return lost because the sleeve earns less than the private assets.</td></tr>
+<tr><td><b>Early repurchase deduction</b></td><td>A penalty — commonly 2% — on shares sold within a year. ASIF repurchases these at 98% of NAV.</td></tr>
+<tr><td><b>Part I fee</b></td><td>A quarterly fee on net investment income above a hurdle. Ares counts it as a management fee because it recurs.</td></tr>
+<tr><td><b>J-curve</b></td><td>The early dip in a drawdown fund's returns. Evergreen funds largely avoid it.</td></tr>
+<tr><td><b>Net flow</b></td><td>Subscriptions minus redemptions. The health metric for any evergreen vehicle.</td></tr>
+</table>
+</section>
+
+<div class="part">
+  <div class="n">Part 10</div>
+  <h2>Sources and honesty notes</h2>
+</div>
+
+<section>
+<table>
+<tr><th style="width:30%">Source</th><th>Used for</th></tr>
+<tr><td><b>Ares FY2025 Form 10-K</b><br><small>SEC EDGAR, CIK 1176948</small></td><td>The complete evergreen shelf in Part 5 — fee rates, fee bases, Part I hurdles and catch-ups for every perpetual vehicle; AUM and net since-inception returns as at 31 Dec 2025; the 93% of management fees from perpetual or long-dated funds; the perpetual capital definition.</td></tr>
+<tr><td><b>Ares Q1 2026 earnings call</b></td><td>The ASIF Q1 tender detail (11.6% requested, 43.1% honoured, $523.5m paid); &gt;95% of holders not redeeming; the 2.4% US wealth channel figure; wealth AUM of $68bn, up 54%.</td></tr>
+<tr><td><b>Ares Q2 2026 materials</b></td><td>Perpetual capital of $223.3bn and its four-way split; the 14.4% Q2 tender; record $36.4bn raised; $3.9bn wealth gross commitments.</td></tr>
+<tr><td><b>Ares 2025 Annual Shareholder Letter</b></td><td>Eight semi-liquid products on 80+ platforms; the single-product distribution partner statistic.</td></tr>
+<tr><td><b>ASIF offering documents and supplements</b></td><td>The 5% quarterly repurchase plan, pro-rata treatment, the 2% early repurchase deduction at 98% of NAV, DRIP exemption and waiver categories, share class minimums and suitability standards.</td></tr>
+<tr><td><b>Morningstar / PitchBook, 2026</b></td><td>US evergreen market of $607bn across 567 funds as at 31 March 2026; the ~$1bn Q1 decline in evergreen private credit net assets; the $1.1tn by 2029 projection.</td></tr>
+<tr><td><b>MSCI and HSBC</b></td><td>Annual flows rising from ~$10bn in 2020 to a projected ~$74bn in 2025; global indefinite-life AUM of ~$2.7tn at end-2024 projected to ~$4.4tn by end-2029.</td></tr>
+<tr><td><b>ELTIF 2.0 regulatory sources</b></td><td>The 55% eligible-asset minimum (reduced from 70%), funds-of-funds permission, the 30%&#8594;50% debt change, and €20.5bn of ELTIF AUM at end-2024.</td></tr>
+<tr><td><b>CAIA, Morgan Stanley and industry commentary</b></td><td>Liquidity sleeve sizing ranges and the cash-drag/credit-line trade-off; the NAV staleness critique.</td></tr>
+<tr><td><b>Bloomberg and trade press</b></td><td>Peer redemption comparisons; the April 2026 House Financial Services inquiries; the 82% fall in non-traded BDC fundraising.</td></tr>
+</table>
+
+<div class="callout warn">
+<span class="tag">Read before quoting</span>
+<ul class="tight" style="margin-bottom:0">
+<li><b>Market-size figures are not comparable across sources.</b> The $607bn is US-only; the $2.7tn&#8211;$4.4tn figures are global and include broader indefinite-life structures; the $1.1tn projection covers wealth-focused vehicles. Say which basis you mean.</li>
+<li><b>Liquidity sleeve percentages are ranges, not standards.</b> One institutional source cites 5&#8211;15% of NAV, Morgan Stanley suggests 10&#8211;20%. Ares does not publish a figure for its own vehicles, so <b>do not attribute a sleeve size to Ares</b>.</li>
+<li><b>ASIF terms should be checked against the current prospectus.</b> Some of the share-class minimums and suitability standards come from older filings and investor summaries. The 5% cap, pro-rata treatment and 2% deduction are well corroborated; the specific minimums are less so.</li>
+<li><b>The congressional item was written inquiries, not testimony.</b></li>
+<li><b>The return comparison chart in Part 2 is illustrative</b>, not based on specific funds.</li>
+<li><b>Fund returns are as at 31 December 2025</b>, annualised and net of fees. Past performance is not indicative of future results. <b>Ares reports Q3 2026 on 29 October 2026</b> — the redemption and wealth figures here may move.</li>
+<li><b>The Part 5 shelf table is my own assembly</b>, cross-referencing the 10-K's fee schedules against its fund performance tables. Dashes mean the vehicle appears in one disclosure but not the other, not that data is hidden.</li>
+</ul>
+</div>
+
+<div class="card soft" style="margin-top:5mm">
+<h4>The six things to carry away</h4>
+<ol class="tight" style="margin-bottom:0">
+<li><b>An evergreen fund has no end date.</b> Money comes in monthly at NAV; it leaves via a quarterly tender capped at about 5%.</li>
+<li><b>It is a liquidity transformation engine</b> — illiquid assets, rationed liquidity, managed with a cash sleeve and a cap.</li>
+<li><b>When requests exceed the cap, everyone is scaled down.</b> ASIF honoured 43.1% of each Q1 2026 request, paying $523.5m. The cap protects those who stayed.</li>
+<li><b>"Evergreen" is not "retail".</b> Only about a third of Ares' $223.3bn of perpetual capital sits in wealth vehicles; the rest is institutional, including insurers.</li>
+<li><b>It is the business, not a side business.</b> 93% of Ares' management fees come from perpetual or long-dated vehicles.</li>
+<li><b>The real criticisms are liquidity mismatch, NAV staleness and cash drag.</b> State them accurately — you will be more credible than someone who claims there are none.</li>
+</ol>
+</div>
+</section>
+
+</body>
+</html>
