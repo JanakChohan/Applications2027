@@ -21,3 +21,8 @@ No interview date, interviewer names, coordinator or insider intelligence were s
 - `Evergreen_Private_Credit_Brief.pdf` (15 pages, 11 of content plus sources): what evergreen / semi-liquid funds are from zero, the 5% rule, the Sept 2025 to Sept 2026 timeline, cases on Blue Owl, Partners Group and Blackstone, regulator and J.P. Morgan positions, the FT reading list, 71 sources, and the HireVue answer with timings and screen notes. Built by `evergreen.html.py` (diagrams in `diagrams3.py`, renderer `topdf_short.js`).
 - `HireVue_Evergreen_Answer.md`: the script on its own for editing and rehearsal.
 - Research notes: `../research/07_evergreen_mechanics_and_stress.md`, `08_partners_group_blue_owl_jpm.md`, `09_blackstone_and_landscape.md`.
+
+## Event brief: Inside Private Banking, London, 19 October 2026 (added 15 October 2026)
+
+- `Inside_Private_Banking_London_Event_Brief.pdf` (32 pages; 25 of content plus sources): Part 0 the day and logistics; Part 1 beginner (what a private bank is, where it sits, the five seats, how it earns, glossary); Part 2 intermediate (the International Private Bank from London, org chart and people, client journey, the client scenario with a worked example, numbers); Part 3 advanced (strategy, six tensions, the month to 15 October, competitors); Part 4 questions by host type and a thirty-second introduction; Part 5 one-page cheat sheet; Part 6 sources. Built by `build_event.py` from `event_parts/p0..p5.html`, `diagrams4.py`, `event_sources.py`.
+- Research notes: `../research/10_ipb_london_people_org_event.md`, `11_latest_news_numbers_oct2026.md`, `12_how_pb_works_scenario_strategy.md`. Note 10 was renumbered by its author after citation; the version cited is pinned inside `event_sources.py`.
