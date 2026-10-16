@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Commercial Bank RM Role, From Zero</title>
+<style>
+/* ---------- Theme tokens ---------- */
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#eef1f5; --text:#1c2126;
+  --muted:#5b6470; --border:#d8dee6; --accent:#c8102e; --accent-2:#8a0b20;
+  --link:#0b5cad; --shadow:0 1px 3px rgba(20,30,45,.08),0 6px 24px rgba(20,30,45,.06);
+  --p-official-bg:#e4f4ea; --p-official-fg:#116338; --p-official-bd:#8fd3ab;
+  --p-corrob-bg:#e5eefb; --p-corrob-fg:#1554a6; --p-corrob-bd:#9dc0ef;
+  --p-anec-bg:#fdf0dc; --p-anec-fg:#8a5a09; --p-anec-bd:#eec98a;
+  --p-infer-bg:#efe7fb; --p-infer-fg:#5b309e; --p-infer-bd:#c9b1ef;
+  --p-flag-bg:#eceff3; --p-flag-fg:#4a5563; --p-flag-bd:#c4ccd6;
+  --mark:#fff3a3;
+}
+:root[data-theme="dark"]{
+  --bg:#0f1318; --surface:#161c24; --surface-2:#1e2731; --text:#e6eaef;
+  --muted:#9aa6b2; --border:#2b3542; --accent:#ff5a72; --accent-2:#ff8095;
+  --link:#6db3ff; --shadow:0 1px 3px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35);
+  --p-official-bg:#123528; --p-official-fg:#7fe0ab; --p-official-bd:#1f5c42;
+  --p-corrob-bg:#122b47; --p-corrob-fg:#8fbdf7; --p-corrob-bd:#22497a;
+  --p-anec-bg:#3a2c11; --p-anec-fg:#f0c583; --p-anec-bd:#6a4f1d;
+  --p-infer-bg:#2a1f45; --p-infer-fg:#c7abf5; --p-infer-bd:#4a3576;
+  --p-flag-bg:#222b35; --p-flag-fg:#aeb9c5; --p-flag-bd:#39444f;
+  --mark:#6b5d00;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1318; --surface:#161c24; --surface-2:#1e2731; --text:#e6eaef;
+    --muted:#9aa6b2; --border:#2b3542; --accent:#ff5a72; --accent-2:#ff8095;
+    --link:#6db3ff; --shadow:0 1px 3px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35);
+    --p-official-bg:#123528; --p-official-fg:#7fe0ab; --p-official-bd:#1f5c42;
+    --p-corrob-bg:#122b47; --p-corrob-fg:#8fbdf7; --p-corrob-bd:#22497a;
+    --p-anec-bg:#3a2c11; --p-anec-fg:#f0c583; --p-anec-bd:#6a4f1d;
+    --p-infer-bg:#2a1f45; --p-infer-fg:#c7abf5; --p-infer-bd:#4a3576;
+    --p-flag-bg:#222b35; --p-flag-fg:#aeb9c5; --p-flag-bd:#39444f;
+    --mark:#6b5d00;
+  }
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-text-size-adjust:100%;
+}
+.skip{position:absolute;left:-999px;top:0;background:var(--accent);color:#fff;padding:8px 14px;z-index:200;border-radius:0 0 6px 0}
+.skip:focus{left:0}
+
+/* ---------- Top bar ---------- */
+.topbar{
+  position:sticky;top:0;z-index:100;display:flex;align-items:center;gap:12px;
+  background:var(--surface);border-bottom:1px solid var(--border);
+  padding:10px 16px;box-shadow:var(--shadow);
+}
+.brand{font-weight:700;font-size:15px;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand::before{content:"";display:inline-block;width:10px;height:16px;background:var(--accent);margin-right:8px;vertical-align:-2px;border-radius:1px}
+.topbar-tools{margin-left:auto;display:flex;align-items:center;gap:8px}
+#search{
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  border-radius:20px;padding:7px 14px;font-size:14px;width:min(38vw,260px);
+}
+#search:focus{outline:2px solid var(--link);outline-offset:1px}
+.iconbtn{
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  border-radius:8px;width:38px;height:36px;font-size:16px;cursor:pointer;line-height:1;
+}
+.iconbtn:hover{border-color:var(--accent)}
+#menuBtn{display:none}
+
+/* ---------- Layout ---------- */
+.layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:0;max-width:1240px;margin:0 auto}
+.sidebar{
+  position:sticky;top:57px;align-self:start;height:calc(100vh - 57px);overflow-y:auto;
+  padding:18px 14px 40px;border-right:1px solid var(--border);background:var(--bg);
+}
+.content{padding:26px clamp(16px,4vw,48px) 80px;min-width:0}
+
+/* readable column */
+.content > section, .doc-foot{max-width:72ch}
+.content h2{max-width:72ch}
+
+/* ---------- Filters ---------- */
+.filters{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:16px}
+.filters-title{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:8px;font-weight:700}
+.pill-toggle{display:flex;align-items:center;gap:8px;padding:4px 2px;cursor:pointer;user-select:none}
+.pill-toggle input{accent-color:var(--accent);width:15px;height:15px}
+.pill-toggle input:not(:checked) ~ .pill{opacity:.35;text-decoration:line-through}
+.legend-note{font-size:12px;color:var(--muted);margin-top:8px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+
+/* ---------- ToC / scroll-spy ---------- */
+.toc ul{list-style:none;margin:0;padding:0}
+.toc li{margin:1px 0}
+.toc a{display:block;text-decoration:none;color:var(--muted);padding:5px 10px;border-radius:7px;font-size:13.5px;border-left:2px solid transparent;line-height:1.35}
+.toc a:hover{background:var(--surface-2);color:var(--text)}
+.toc-l3 a{padding-left:22px;font-size:12.5px}
+.toc a.active{color:var(--accent);background:var(--surface-2);border-left-color:var(--accent);font-weight:600}
+
+/* ---------- Typography ---------- */
+h1,h2,h3,h4{line-height:1.25;color:var(--text)}
+.content h2{font-size:26px;margin:38px 0 6px;padding-bottom:8px;border-bottom:2px solid var(--border);scroll-margin-top:70px}
+.content section:first-child h2{margin-top:6px}
+.content h3{font-size:19px;margin:26px 0 4px;color:var(--accent-2);scroll-margin-top:70px}
+.content p{margin:10px 0}
+.content a{color:var(--link)}
+.content ul,.content ol{margin:8px 0 8px;padding-left:24px}
+.content li{margin:5px 0}
+strong{font-weight:700}
+code{background:var(--surface-2);border:1px solid var(--border);border-radius:5px;padding:1px 5px;font-size:.88em}
+hr{border:none;border-top:1px solid var(--border);margin:26px 0}
+
+/* first paragraph after H1 area (intro) */
+#intro > p:first-of-type{font-size:17px;color:var(--muted)}
+
+/* golden-rule / callout blockquotes */
+blockquote{
+  margin:16px 0;padding:12px 16px;background:var(--surface);
+  border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;
+}
+blockquote p{margin:6px 0}
+
+/* ---------- Pills ---------- */
+.pill{
+  display:inline-block;font-size:11px;font-weight:800;letter-spacing:.03em;
+  padding:1px 8px;border-radius:999px;border:1px solid;vertical-align:1px;white-space:nowrap;
+}
+.pill-official{background:var(--p-official-bg);color:var(--p-official-fg);border-color:var(--p-official-bd)}
+.pill-corroborated{background:var(--p-corrob-bg);color:var(--p-corrob-fg);border-color:var(--p-corrob-bd)}
+.pill-anecdotal{background:var(--p-anec-bg);color:var(--p-anec-fg);border-color:var(--p-anec-bd)}
+.pill-inferred{background:var(--p-infer-bg);color:var(--p-infer-fg);border-color:var(--p-infer-bd)}
+.pill-flag{background:var(--p-flag-bg);color:var(--p-flag-fg);border-color:var(--p-flag-bd)}
+.qual{font-size:.92em;color:var(--muted)}
+.pill.dim{opacity:.28}
+
+/* ---------- Citations ---------- */
+sup.cite{font-size:11px;line-height:0}
+sup.cite a{color:var(--link);text-decoration:none;font-weight:700;padding:0 1px}
+sup.cite a:hover{text-decoration:underline}
+a.reflink{font-weight:600}
+.src-item:target,.tgt-flash{animation:flash 1.8s ease}
+@keyframes flash{0%,40%{background:var(--mark)}100%{background:transparent}}
+.srcback{text-decoration:none;color:var(--muted);font-weight:700;margin-left:4px}
+.srcback:hover{color:var(--accent)}
+.exturl{word-break:break-all;font-size:.92em}
+
+/* ---------- Tables ---------- */
+.content table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;display:block;overflow-x:auto}
+.content th,.content td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+.content thead th{background:var(--surface-2);font-weight:700}
+.content tbody tr:nth-child(even){background:var(--surface)}
+
+/* ---------- Details / verbatim ---------- */
+details{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin:14px 0;padding:0 14px}
+details[open]{padding-bottom:8px}
+summary{cursor:pointer;padding:12px 0;font-weight:600;color:var(--accent-2);list-style-position:inside}
+summary:hover{color:var(--accent)}
+details.verbatim blockquote{border-left-color:var(--p-anec-bd)}
+
+/* ---------- filtered / hidden ---------- */
+.claim.hide-claim{display:none !important}
+section.search-hidden{display:none !important}
+.toc li.search-hidden{display:none}
+
+/* ---------- back to top ---------- */
+.totop{position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;
+  border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:18px;
+  cursor:pointer;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .2s;z-index:90}
+.totop.show{opacity:1;pointer-events:auto}
+.totop:hover{border-color:var(--accent);color:var(--accent)}
+
+.scrim{display:none}
+.print-toc{display:none}
+.doc-foot{margin-top:40px;padding-top:16px;border-top:1px solid var(--border);color:var(--muted);font-size:13px}
+
+/* ---------- Responsive: hamburger under 768px ---------- */
+@media (max-width:768px){
+  #menuBtn{display:inline-block}
+  .layout{grid-template-columns:1fr}
+  .sidebar{
+    position:fixed;top:0;left:0;height:100vh;width:min(84vw,320px);z-index:120;
+    transform:translateX(-100%);transition:transform .25s ease;border-right:1px solid var(--border);
+    box-shadow:var(--shadow);padding-top:64px;
+  }
+  body.nav-open .sidebar{transform:translateX(0)}
+  body.nav-open .scrim{display:block;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:110}
+  #search{width:44vw}
+  .brand{font-size:13px}
+}
+@media (max-width:480px){
+  #search{width:38vw}
+  .content h2{font-size:22px}
+}
+
+/* ---------- Print ---------- */
+@media print{
+  .topbar,.sidebar,.totop,#scrim,.skip,.srcback,.filters{display:none !important}
+  .layout{display:block;max-width:none}
+  .content{padding:0;max-width:none}
+  .content > section,.content h2{max-width:none}
+  body{background:#fff;color:#000;font-size:11.5pt}
+  /* expand everything regardless of filter/search/collapse */
+  .claim.hide-claim{display:revert !important}
+  section.search-hidden{display:revert !important}
+  .pill.dim{opacity:1 !important}
+  details{border:1px solid #bbb;break-inside:avoid}
+  details > *:not(summary){display:revert !important}   /* reveal collapsed content */
+  summary{color:#000}
+  a{color:#000;text-decoration:none}
+  .exturl{color:#333}
+  table,tr,td,th,blockquote,details{break-inside:avoid}
+  h2,h3{break-after:avoid}
+  .content h2{border-bottom:1px solid #000}
+  /* contents page */
+  .print-toc{display:block !important;break-after:page}
+  .print-cover{padding:40px 0 28px;border-bottom:3px solid var(--accent);margin-bottom:24px}
+  .print-kicker{display:block;font-size:10pt;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+  .print-title{font-size:24pt;margin:8px 0 0;line-height:1.15}
+  .print-contents-h{font-size:15pt;border:none;margin:0 0 8px}
+  .print-toc ul{list-style:none;padding:0;margin:0}
+  .print-toc li{margin:3px 0;font-size:11pt}
+  .print-toc .pt-l3{padding-left:22px;font-size:10pt;color:#333}
+  .print-toc a{color:#000;text-decoration:none}
+  .content > section{scroll-margin-top:0}
+  @page{margin:16mm 15mm 18mm}
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <button id="menuBtn" class="iconbtn" aria-label="Toggle contents" aria-expanded="false">☰</button>
+  <span class="brand">The Commercial Bank RM Role, From Zero</span>
+  <div class="topbar-tools">
+    <input id="search" type="search" placeholder="Search sections…" aria-label="Search sections">
+    <button id="themeBtn" class="iconbtn" aria-label="Toggle dark/light">◐</button>
+  </div>
+</header>
+<div class="layout">
+  <aside id="sidebar" class="sidebar" aria-label="Sidebar">
+    <div class="filters">
+      <div class="filters-title">Evidence filter</div>
+      <label class="pill-toggle"><input type="checkbox" data-filter="official" checked><span class="pill pill-official">OFFICIAL</span></label>
+      <label class="pill-toggle"><input type="checkbox" data-filter="corroborated" checked><span class="pill pill-corroborated">CORROBORATED</span></label>
+      <label class="pill-toggle"><input type="checkbox" data-filter="anecdotal" checked><span class="pill pill-anecdotal">ANECDOTAL</span></label>
+      <label class="pill-toggle"><input type="checkbox" data-filter="inferred" checked><span class="pill pill-inferred">INFERRED</span></label>
+      <div class="legend-note"><span class="pill pill-flag">FLAG</span> = disagreement / gap / caveat (always shown)</div>
+    </div>
+    <nav class="toc" aria-label="Table of contents"><ul>
+<li class="toc-l2"><a href="#stop-check-the-small-print-before-you-fall-in-love">Stop — check the small print before you fall in love</a></li>
+<li class="toc-l2"><a href="#start-from-zero-what-a-bank-actually-does-for-a-business">Start from zero: what a bank actually does for a business</a></li>
+<li class="toc-l2"><a href="#what-a-relationship-manager-actually-is">What a Relationship Manager actually is</a></li>
+<li class="toc-l2"><a href="#the-job-description-decoded-line-by-line">The job description, decoded line by line</a></li>
+<li class="toc-l3"><a href="#the-credit-paper-the-document-the-whole-job-revolves-around">The credit paper — the document the whole job revolves around</a></li>
+<li class="toc-l2"><a href="#the-balancing-act-the-whole-career-rests-on">The balancing act the whole career rests on</a></li>
+<li class="toc-l2"><a href="#what-you-d-actually-do-day-to-day">What you&#x27;d actually do day to day</a></li>
+<li class="toc-l2"><a href="#the-skills-ranked-with-the-most-important-one-named">The skills — ranked, with the most important one named</a></li>
+<li class="toc-l2"><a href="#how-you-re-measured">How you&#x27;re measured</a></li>
+<li class="toc-l2"><a href="#assumptions-i-ve-made-told-straight-as-requested">Assumptions I&#x27;ve made (told straight, as requested)</a></li>
+<li class="toc-l2"><a href="#glossary-every-term-in-one-place">Glossary — every term in one place</a></li>
+<li class="toc-l2"><a href="#source-list-where-every-claim-comes-from">Source list — where every claim comes from</a></li>
+</ul></nav>
+  </aside>
+  <div id="scrim" class="scrim"></div>
+  <main id="main" class="content" tabindex="-1">
+    <nav class="print-toc" aria-hidden="true"><div class="print-cover"><span class="print-kicker">Candidate briefing · 16 October 2026</span><h1 class="print-title">The Commercial Bank RM Role, From Zero</h1></div><h2 class="print-contents-h">Contents</h2><ul><li class="pt-l2"><a href="#stop-check-the-small-print-before-you-fall-in-love">Stop — check the small print before you fall in love</a></li><li class="pt-l2"><a href="#start-from-zero-what-a-bank-actually-does-for-a-business">Start from zero: what a bank actually does for a business</a></li><li class="pt-l2"><a href="#what-a-relationship-manager-actually-is">What a Relationship Manager actually is</a></li><li class="pt-l2"><a href="#the-job-description-decoded-line-by-line">The job description, decoded line by line</a></li><li class="pt-l3"><a href="#the-credit-paper-the-document-the-whole-job-revolves-around">The credit paper — the document the whole job revolves around</a></li><li class="pt-l2"><a href="#the-balancing-act-the-whole-career-rests-on">The balancing act the whole career rests on</a></li><li class="pt-l2"><a href="#what-you-d-actually-do-day-to-day">What you&#x27;d actually do day to day</a></li><li class="pt-l2"><a href="#the-skills-ranked-with-the-most-important-one-named">The skills — ranked, with the most important one named</a></li><li class="pt-l2"><a href="#how-you-re-measured">How you&#x27;re measured</a></li><li class="pt-l2"><a href="#assumptions-i-ve-made-told-straight-as-requested">Assumptions I&#x27;ve made (told straight, as requested)</a></li><li class="pt-l2"><a href="#glossary-every-term-in-one-place">Glossary — every term in one place</a></li><li class="pt-l2"><a href="#source-list-where-every-claim-comes-from">Source list — where every claim comes from</a></li></ul></nav>
+<section class="doc-section" id="intro"><style>figure.diagram{break-inside:avoid;margin:18px 0;text-align:center;background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 8px}figure.diagram svg{max-width:100%;height:auto}figure.diagram figcaption{font-size:12.5px;color:var(--muted);margin-top:6px}</style><p><em>Prepared for Janak — 16 October 2026. This decodes the "Relationship Management – Commercial Bank" job you pasted: what the work actually is, the skills that matter most, how you're measured, and a realistic picture of the day-to-day. Written for a complete beginner: every banking word is explained the first time it appears, and there's a glossary at the back.</em></p></section>
+<section class="doc-section" id="stop-check-the-small-print-before-you-fall-in-love"><h2 id="stop-check-the-small-print-before-you-fall-in-love-h">Stop — check the small print before you fall in love</h2><p class="claim" data-labels="official"><span class="pill pill-official" data-label="official">OFFICIAL</span> The posting you pasted is the <strong>Internship</strong> version, and its eligibility box rules you out twice over: you must be "in your penultimate year of undergraduate study" and "will have completed studies by July <strong>2028</strong>." You are a final-year student graduating June <strong>2027</strong> — one year too late. <sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup></p>
+<p class="claim" data-labels="official"><span class="pill pill-official" data-label="official">OFFICIAL</span> The good news: everything else in this document still matters, because HSBC runs a <strong>Graduate</strong> version of the exact same role — <em>Relationship Management – Commercial Bank – Graduate</em> — open to people whose studies finish by July 2027. Same business area, same day-to-day content, same skills; just 24 months instead of 10 weeks, structured as two six-month product placements plus a twelve-month coverage placement, in regional cohorts (Reading is the nearest to London — there is no London cohort). <sup class="cite"><a data-cite="2" href="#s2">[2]</a></sup></p>
+<p class="claim" data-labels="official"><span class="pill pill-official" data-label="official">OFFICIAL</span> <strong>The deadline collision you need to see today: both the internship AND the graduate version close on 18 October 2026 — two days from now — with rolling review.</strong> And HSBC's one-application-per-cycle rule means if you apply to this, you cannot also apply to the Private Bank Graduate role (which closes 29 October). <sup class="cite"><a data-cite="2" href="#s2">[2]</a></sup><sup class="cite"><a data-cite="3" href="#s3">[3]</a></sup> So this document is really answering: <em>is this the job I want to spend my one application on?</em> Read it with that question in mind.</p>
+<p class="claim" data-labels="official"><span class="pill pill-official" data-label="official">OFFICIAL</span> One more hard fact: the Commercial Bank routes carry <strong>no visa sponsorship</strong> — the posting is explicit that the graduate programme it converts into "does not satisfy the Home Office eligibility criteria for visa sponsorship." If you have the permanent right to work in the UK, this doesn't affect you; it just explains why the posting spends two paragraphs on it. <sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup></p></section>
+<section class="doc-section" id="start-from-zero-what-a-bank-actually-does-for-a-business"><h2 id="start-from-zero-what-a-bank-actually-does-for-a-business-h">Start from zero: what a bank actually does for a business</h2><p>Forget banking for a second. Picture a company — say, a furniture maker in Manchester with 80 staff. It has money problems that have nothing to do with being badly run; they're just what running a business <em>is</em>:</p>
+<ul>
+<li>It pays for wood from Poland <strong>today</strong>, but its customers pay for the finished furniture <strong>90 days later</strong>. For three months, cash is going out faster than it comes in.</li>
+<li>It wants a new £2 million cutting machine but doesn't have £2 million sitting around.</li>
+<li>It sells to a buyer in Dubai it has never met. Ship the furniture first and hope to be paid? Or demand payment first and lose the sale?</li>
+<li>It earns dollars from American customers but pays its staff in pounds. If the dollar weakens, its profit shrinks through no fault of its own.</li>
+<li>Every week it needs to pay 200 suppliers, in several currencies, without mistakes.</li>
+</ul>
+<p>A <strong>commercial bank</strong> is the business that solves exactly these problems, for a fee. Each problem has a named product:</p>
+<figure class="diagram">
+<svg width="740" height="330" viewBox="0 0 740 330" font-family="system-ui,-apple-system,Segoe UI,sans-serif">
+<rect x="0" y="0" width="740" height="330" fill="#ffffff"/>
+<text x="185" y="26" text-anchor="middle" font-size="14" font-weight="700" fill="#1c2126">The business's problem</text>
+<text x="560" y="26" text-anchor="middle" font-size="14" font-weight="700" fill="#1c2126">The bank's product that solves it</text>
+<g font-size="12.5">
+<rect x="15" y="42" width="340" height="44" rx="8" fill="#eef3fa" stroke="#9dc0ef"/>
+<text x="185" y="60" text-anchor="middle" fill="#1c2126">Cash goes out 90 days before it comes in</text>
+<text x="185" y="77" text-anchor="middle" fill="#5b6470" font-size="11.5">(paying suppliers before customers pay you)</text>
+<rect x="390" y="42" width="335" height="44" rx="8" fill="#e4f4ea" stroke="#8fd3ab"/>
+<text x="557" y="60" text-anchor="middle" fill="#116338" font-weight="600">Working-capital finance</text>
+<text x="557" y="77" text-anchor="middle" fill="#1c2126" font-size="11.5">an overdraft or short-term loan to bridge the gap</text>
+<rect x="15" y="98" width="340" height="44" rx="8" fill="#eef3fa" stroke="#9dc0ef"/>
+<text x="185" y="116" text-anchor="middle" fill="#1c2126">Needs a £2m machine, hasn't got £2m</text>
+<text x="185" y="133" text-anchor="middle" fill="#5b6470" font-size="11.5">(big one-off purchase to grow)</text>
+<rect x="390" y="98" width="335" height="44" rx="8" fill="#e4f4ea" stroke="#8fd3ab"/>
+<text x="557" y="116" text-anchor="middle" fill="#116338" font-weight="600">Term lending / asset finance</text>
+<text x="557" y="133" text-anchor="middle" fill="#1c2126" font-size="11.5">a multi-year loan repaid from future profits</text>
+<rect x="15" y="154" width="340" height="44" rx="8" fill="#eef3fa" stroke="#9dc0ef"/>
+<text x="185" y="172" text-anchor="middle" fill="#1c2126">Selling abroad to a buyer you've never met</text>
+<text x="185" y="189" text-anchor="middle" fill="#5b6470" font-size="11.5">(who moves first — the goods or the money?)</text>
+<rect x="390" y="154" width="335" height="44" rx="8" fill="#e4f4ea" stroke="#8fd3ab"/>
+<text x="557" y="172" text-anchor="middle" fill="#116338" font-weight="600">Trade finance</text>
+<text x="557" y="189" text-anchor="middle" fill="#1c2126" font-size="11.5">the bank guarantees both sides, so trust isn't needed</text>
+<rect x="15" y="210" width="340" height="44" rx="8" fill="#eef3fa" stroke="#9dc0ef"/>
+<text x="185" y="228" text-anchor="middle" fill="#1c2126">Earns dollars, pays wages in pounds</text>
+<text x="185" y="245" text-anchor="middle" fill="#5b6470" font-size="11.5">(exchange-rate moves eat the profit)</text>
+<rect x="390" y="210" width="335" height="44" rx="8" fill="#e4f4ea" stroke="#8fd3ab"/>
+<text x="557" y="228" text-anchor="middle" fill="#116338" font-weight="600">Foreign exchange (FX) hedging</text>
+<text x="557" y="245" text-anchor="middle" fill="#1c2126" font-size="11.5">locking today's exchange rate for future payments</text>
+<rect x="15" y="266" width="340" height="44" rx="8" fill="#eef3fa" stroke="#9dc0ef"/>
+<text x="185" y="284" text-anchor="middle" fill="#1c2126">200 suppliers, several currencies, weekly</text>
+<text x="185" y="301" text-anchor="middle" fill="#5b6470" font-size="11.5">(payments must be fast, cheap and error-free)</text>
+<rect x="390" y="266" width="335" height="44" rx="8" fill="#e4f4ea" stroke="#8fd3ab"/>
+<text x="557" y="284" text-anchor="middle" fill="#116338" font-weight="600">Global payments &amp; accounts</text>
+<text x="557" y="301" text-anchor="middle" fill="#1c2126" font-size="11.5">multi-currency accounts, cards, payment rails</text>
+<g stroke="#5b6470" stroke-width="1.6" marker-end="none">
+<line x1="357" y1="64" x2="388" y2="64"/><line x1="357" y1="120" x2="388" y2="120"/>
+<line x1="357" y1="176" x2="388" y2="176"/><line x1="357" y1="232" x2="388" y2="232"/>
+<line x1="357" y1="288" x2="388" y2="288"/>
+</g>
+<g fill="#5b6470"><polygon points="388,60 396,64 388,68"/><polygon points="388,116 396,120 388,124"/>
+<polygon points="388,172 396,176 388,180"/><polygon points="388,228 396,232 388,236"/>
+<polygon points="388,284 396,288 388,292"/></g>
+</g>
+</svg>
+<figcaption>Diagram 1 — Every commercial-banking product exists because of an ordinary business problem. This is the whole industry in one picture.</figcaption>
+</figure>
+<p class="claim" data-labels="official"><span class="pill pill-official" data-label="official">OFFICIAL</span> HSBC's own one-line version of this: "We provide expert advice and essential services dependent on business needs… trade finance, global payments, multi-currency accounts, commercial cards and insurance, alongside many others." <sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup> Now you can read that sentence and see the five problems hiding behind it.</p>
+<p class="claim" data-labels="inferred official"><strong>Who the clients are:</strong> <span class="pill pill-official" data-label="official">OFFICIAL</span> "businesses of all sizes… from small enterprises to large multinationals." <sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup> In practice that's a ladder — a family-run firm with £2m of sales, a mid-market company with £50m, a corporate with £500m operating in ten countries. The job is the same at every rung; what changes is complexity: more countries, more currencies, more products, bigger loans, more people involved in every decision. <span class="pill pill-inferred" data-label="inferred">INFERRED</span></p></section>
+<section class="doc-section" id="what-a-relationship-manager-actually-is"><h2 id="what-a-relationship-manager-actually-is-h">What a Relationship Manager actually is</h2><p>Here is the key idea, and it's worth slowing down for.</p>
+<p>The bank has all those products, each run by deep specialists — trade-finance experts, payments experts, foreign-exchange desks, lending teams. But the furniture maker's finance director does not want seven phone numbers. They want <strong>one person at the bank who knows their business</strong> — someone who understands that the Dubai order is why they suddenly need trade finance <em>and</em> currency hedging <em>and</em> a bigger overdraft, because those three needs are one story.</p>
+<p>That one person is the <strong>Relationship Manager (RM)</strong>.</p>
+<p class="claim" data-labels="inferred"><span class="pill pill-inferred" data-label="inferred">INFERRED</span> The best everyday analogy: an RM is like a <strong>general practitioner (GP) doctor</strong>. The GP doesn't perform surgery — but they know your history, spot what you need, refer you to the right specialist, and stay responsible for you across every visit. The specialists change; the GP is constant. Swap "patient" for "business client" and "surgeons" for "product specialists" and you have the job:</p>
+<figure class="diagram">
+<svg width="740" height="360" viewBox="0 0 740 360" font-family="system-ui,-apple-system,Segoe UI,sans-serif">
+<rect x="0" y="0" width="740" height="360" fill="#ffffff"/>
+<rect x="20" y="130" width="170" height="90" rx="10" fill="#eef3fa" stroke="#1554a6" stroke-width="1.5"/>
+<text x="105" y="165" text-anchor="middle" font-size="14" font-weight="700" fill="#1554a6">THE CLIENT</text>
+<text x="105" y="185" text-anchor="middle" font-size="11.5" fill="#1c2126">a business with needs</text>
+<text x="105" y="201" text-anchor="middle" font-size="11.5" fill="#1c2126">that keep changing</text>
+<rect x="272" y="130" width="206" height="90" rx="10" fill="#fdeef1" stroke="#c8102e" stroke-width="2"/>
+<text x="375" y="160" text-anchor="middle" font-size="14" font-weight="700" fill="#c8102e">THE RM</text>
+<text x="375" y="180" text-anchor="middle" font-size="11.5" fill="#1c2126">one trusted point of contact</text>
+<text x="375" y="196" text-anchor="middle" font-size="11.5" fill="#1c2126">knows the client's whole story</text>
+<line x1="192" y1="175" x2="283" y2="175" stroke="#5b6470" stroke-width="2"/>
+<text x="238" y="165" text-anchor="middle" font-size="10.5" fill="#5b6470">trust, built over years</text>
+<g font-size="11">
+<rect x="540" y="20" width="185" height="42" rx="8" fill="#e4f4ea" stroke="#8fd3ab"/><text x="632" y="46" text-anchor="middle" fill="#116338" font-weight="600">Trade finance team</text>
+<rect x="540" y="74" width="185" height="42" rx="8" fill="#e4f4ea" stroke="#8fd3ab"/><text x="632" y="100" text-anchor="middle" fill="#116338" font-weight="600">Payments &amp; accounts team</text>
+<rect x="540" y="128" width="185" height="42" rx="8" fill="#e4f4ea" stroke="#8fd3ab"/><text x="632" y="154" text-anchor="middle" fill="#116338" font-weight="600">Foreign-exchange desk</text>
+<rect x="540" y="182" width="185" height="42" rx="8" fill="#e4f4ea" stroke="#8fd3ab"/><text x="632" y="208" text-anchor="middle" fill="#116338" font-weight="600">Lending specialists</text>
+<rect x="540" y="236" width="185" height="42" rx="8" fill="#e4f4ea" stroke="#8fd3ab"/><text x="632" y="262" text-anchor="middle" fill="#116338" font-weight="600">Insurance &amp; cards</text>
+</g>
+<g stroke="#8a9199" stroke-width="1.4">
+<line x1="467" y1="150" x2="543" y2="44"/><line x1="467" y1="160" x2="543" y2="96"/>
+<line x1="467" y1="172" x2="543" y2="150"/><line x1="467" y1="185" x2="543" y2="203"/>
+<line x1="467" y1="197" x2="543" y2="257"/>
+</g>
+<rect x="150" y="285" width="450" height="56" rx="8" fill="#fdf0dc" stroke="#eec98a"/>
+<text x="375" y="308" text-anchor="middle" font-size="12" font-weight="700" fill="#8a5a09">The internal guardians: Credit · Risk · Legal</text>
+<text x="375" y="326" text-anchor="middle" font-size="11.5" fill="#1c2126">every deal the RM proposes must get past them — they protect the bank</text>
+<line x1="375" y1="222" x2="375" y2="283" stroke="#8a9199" stroke-width="1.4" stroke-dasharray="4 3"/>
+</svg>
+<figcaption>Diagram 2 — The RM sits between one client and many specialists: a general practitioner with a bank attached. The job description's phrase "see how HSBC brings together the right expertise" is this picture.</figcaption>
+</figure>
+<p class="claim" data-labels="official"><span class="pill pill-official" data-label="official">OFFICIAL</span> Match this against the posting's own words: "you'll work with Relationship Managers and specialist teams… help build an understanding of each client's business, goals and challenges, and see how HSBC brings together the right expertise to respond." <sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup> And the guardians at the bottom are there too: "you'll also work with colleagues across Legal, Credit and Risk." <sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup></p>
+<p class="claim" data-labels="inferred"><strong>Why this role exists commercially</strong> <span class="pill pill-inferred" data-label="inferred">INFERRED</span>: the specialists each see one product; the RM sees the whole client, so the RM is the one who notices the Dubai expansion means three new products, not one. Banks call this cross-selling; clients, when it's done well, call it being understood. It's also the moat — a competitor can match a loan price in an afternoon, but not ten years of earned trust.</p></section>
+<section class="doc-section" id="the-job-description-decoded-line-by-line"><h2 id="the-job-description-decoded-line-by-line-h">The job description, decoded line by line</h2><p class="claim" data-labels="inferred official">The "What you'll do" paragraph is dense. Here is each phrase in plain English, with what you'd physically be doing at your desk — the quoted phrases are <span class="pill pill-official" data-label="official">OFFICIAL</span>, the decode is <span class="pill pill-inferred" data-label="inferred">INFERRED</span>:</p>
+<ul>
+<li><strong>"Support client presentations, reports"</strong> — building PowerPoint decks and Word documents for client meetings: a page on how the client's industry is moving, a summary of their accounts with the bank, a proposal for what HSBC could do next. You draft; your RM edits; the client sees the polished version.</li>
+<li><strong>"…and credit papers"</strong> — the big one; it gets its own section below.</li>
+<li><strong>"Help with strategic reviews"</strong> — once a year (or when something changes) the team steps back and asks: what is this client trying to become in five years, and what will they need from a bank to get there? You'd pull the client's published accounts, news about them, industry data, and help turn it into that forward-looking view.</li>
+<li><strong>"…and pitches"</strong> — the same work, aimed at companies that <em>aren't</em> HSBC clients yet: researching a target company and helping build the argument for why they should switch banks.</li>
+<li><strong>"Carry out financial analysis and risk assessments on portfolios and transactions"</strong> — a <strong>portfolio</strong> just means "all the clients this team looks after." You'd work in Excel on their numbers: are revenues growing, is debt rising, can each company comfortably pay its interest, which clients are drifting toward trouble. "Transactions" means doing that same analysis for one specific proposed deal.</li>
+<li><strong>"Work with colleagues across Legal, Credit and Risk"</strong> — shepherding your team's proposals through the bank's internal checks, and learning why those checks exist.</li>
+</ul>
+<h3 id="the-credit-paper-the-document-the-whole-job-revolves-around">The credit paper — the document the whole job revolves around</h3>
+<p>This phrase will mean nothing to you now and everything later, so let's define it properly.</p>
+<p class="claim" data-labels="inferred"><span class="pill pill-inferred" data-label="inferred">INFERRED</span><span class="qual"> — standard banking practice, consistent with the JD</span> A <strong>credit paper</strong> is the written argument for why the bank should lend money to a particular client. When the furniture maker asks for £2 million, the RM's team cannot just say yes — the bank's money is at risk. So the team writes a structured document that typically covers:</p>
+<ol>
+<li><strong>The business</strong> — what the company does, who runs it, who its customers are.</li>
+<li><strong>The numbers</strong> — revenues, profits, existing debts, and above all <strong>cash flow</strong> (the actual money moving in and out — because loans are repaid with cash, not with accounting profits).</li>
+<li><strong>The ask</strong> — how much, for how long, for what purpose.</li>
+<li><strong>Repayment</strong> — exactly where the money to pay the bank back will come from, and what happens if the plan goes wrong.</li>
+<li><strong>Security</strong> (also called <strong>collateral</strong>) — what the bank can claim if the client can't pay (property, machinery, invoices owed to the client).</li>
+<li><strong>The risks, stated honestly</strong> — what could sink this (losing a big customer, raw-material costs, the economy) and why the bank should still be comfortable.</li>
+<li><strong>The recommendation</strong> — lend / don't lend / lend with conditions.</li>
+</ol>
+<p>That paper then goes to the <strong>Credit team</strong> — professional sceptics whose entire job is to challenge it. They don't know the client and don't want to; their independence is the point. The RM team argues <em>for</em> the client; Credit stress-tests the argument; the tension between them is how the bank makes good loans.</p>
+<figure class="diagram">
+<svg width="740" height="190" viewBox="0 0 740 190" font-family="system-ui,-apple-system,Segoe UI,sans-serif">
+<rect x="0" y="0" width="740" height="190" fill="#ffffff"/>
+<g font-size="11">
+<rect x="10" y="40" width="130" height="78" rx="9" fill="#eef3fa" stroke="#9dc0ef"/>
+<text x="75" y="64" text-anchor="middle" font-weight="700" fill="#1554a6">1. The ask</text>
+<text x="75" y="83" text-anchor="middle" fill="#1c2126">client: "we need</text>
+<text x="75" y="99" text-anchor="middle" fill="#1c2126">£2m for machines"</text>
+<rect x="160" y="40" width="130" height="78" rx="9" fill="#eef3fa" stroke="#9dc0ef"/>
+<text x="225" y="64" text-anchor="middle" font-weight="700" fill="#1554a6">2. The analysis</text>
+<text x="225" y="83" text-anchor="middle" fill="#1c2126">accounts, cash flow,</text>
+<text x="225" y="99" text-anchor="middle" fill="#1c2126">risks — your Excel work</text>
+<rect x="310" y="40" width="130" height="78" rx="9" fill="#fdeef1" stroke="#c8102e" stroke-width="1.5"/>
+<text x="375" y="64" text-anchor="middle" font-weight="700" fill="#c8102e">3. Credit paper</text>
+<text x="375" y="83" text-anchor="middle" fill="#1c2126">the written argument</text>
+<text x="375" y="99" text-anchor="middle" fill="#1c2126">to lend — you help draft</text>
+<rect x="460" y="40" width="130" height="78" rx="9" fill="#fdf0dc" stroke="#eec98a"/>
+<text x="525" y="64" text-anchor="middle" font-weight="700" fill="#8a5a09">4. Credit team</text>
+<text x="525" y="83" text-anchor="middle" fill="#1c2126">independent sceptics</text>
+<text x="525" y="99" text-anchor="middle" fill="#1c2126">approve / push back</text>
+<rect x="610" y="40" width="122" height="78" rx="9" fill="#e4f4ea" stroke="#8fd3ab"/>
+<text x="671" y="64" text-anchor="middle" font-weight="700" fill="#116338">5. The loan lives</text>
+<text x="671" y="83" text-anchor="middle" fill="#1c2126">money moves; reviews</text>
+<text x="671" y="99" text-anchor="middle" fill="#1c2126">every year after</text>
+</g>
+<g fill="#5b6470"><polygon points="142,75 152,79 142,83"/><polygon points="292,75 302,79 292,83"/>
+<polygon points="442,75 452,79 442,83"/><polygon points="592,75 602,79 592,83"/></g>
+<text x="370" y="155" text-anchor="middle" font-size="11.5" fill="#5b6470">If Credit pushes back, the paper is revised — smaller amount, more security, tighter conditions — and resubmitted.</text>
+<text x="370" y="173" text-anchor="middle" font-size="11.5" fill="#5b6470">A loan being approved is a document surviving an argument. That document is the credit paper.</text>
+</svg>
+<figcaption>Diagram 3 — The life of a loan. The intern's fingerprints are on steps 2 and 3.</figcaption>
+</figure></section>
+<section class="doc-section" id="the-balancing-act-the-whole-career-rests-on"><h2 id="the-balancing-act-the-whole-career-rests-on-h">The balancing act the whole career rests on</h2><p class="claim" data-labels="official"><span class="pill pill-official" data-label="official">OFFICIAL</span> Buried in the "What you'll learn" paragraph is the most important sentence in the posting: you'll learn "how client needs, profitability and risk are balanced in real situations." <sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup> That triangle <em>is</em> relationship management:</p>
+<figure class="diagram">
+<svg width="620" height="365" viewBox="0 0 620 365" font-family="system-ui,-apple-system,Segoe UI,sans-serif">
+<rect x="0" y="0" width="620" height="365" fill="#ffffff"/>
+<polygon points="310,55 95,265 525,265" fill="#f6f7f9" stroke="#8a9199" stroke-width="1.5"/>
+<rect x="215" y="20" width="190" height="40" rx="9" fill="#eef3fa" stroke="#1554a6"/>
+<text x="310" y="45" text-anchor="middle" font-size="13" font-weight="700" fill="#1554a6">CLIENT NEEDS</text>
+<rect x="18" y="262" width="190" height="52" rx="9" fill="#e4f4ea" stroke="#116338"/>
+<text x="113" y="283" text-anchor="middle" font-size="13" font-weight="700" fill="#116338">PROFITABILITY</text>
+<text x="113" y="301" text-anchor="middle" font-size="11" fill="#1c2126">the deal must pay the bank</text>
+<rect x="415" y="262" width="190" height="52" rx="9" fill="#fdf0dc" stroke="#8a5a09"/>
+<text x="510" y="283" text-anchor="middle" font-size="13" font-weight="700" fill="#8a5a09">RISK</text>
+<text x="510" y="301" text-anchor="middle" font-size="11" fill="#1c2126">the bank must get paid back</text>
+<rect x="222" y="160" width="176" height="52" rx="9" fill="#fdeef1" stroke="#c8102e" stroke-width="1.5"/>
+<text x="310" y="182" text-anchor="middle" font-size="12.5" font-weight="700" fill="#c8102e">THE RM'S JUDGEMENT</text>
+<text x="310" y="200" text-anchor="middle" font-size="11" fill="#1c2126">lives in the middle, every day</text>
+<g font-size="10.5" fill="#5b6470">
+<text x="150" y="140" text-anchor="middle">say yes to everything →</text>
+<text x="150" y="154" text-anchor="middle">loved, but unprofitable</text>
+<text x="475" y="140" text-anchor="middle">← say no to everything:</text>
+<text x="475" y="154" text-anchor="middle">safe, but no business</text>
+<text x="310" y="345" text-anchor="middle">squeeze clients for fees → profitable this year, gone next year</text>
+</g>
+</svg>
+<figcaption>Diagram 4 — Pull too hard toward any corner and the other two punish you. The posting names this balance explicitly as the first thing you'll learn.</figcaption>
+</figure>
+<p class="claim" data-labels="inferred">Decode the corners <span class="pill pill-inferred" data-label="inferred">INFERRED</span>:</p>
+<ul>
+<li><strong>Client needs</strong> — what actually helps the business. Sometimes that's a product the bank earns little on; sometimes it's advising them <em>not</em> to borrow.</li>
+<li><strong>Profitability</strong> — the bank earns the gap between what it pays for money and what it charges for it (the <strong>margin</strong>), plus fees. Every client relationship has a cost (people's time, capital set aside against the loans), so each relationship must earn more than it costs.</li>
+<li><strong>Risk</strong> — mostly <strong>credit risk</strong>: the chance the client can't pay the money back. A loan that defaults can wipe out the profit from fifty good loans, which is why the Credit team gets a veto and why the posting mentions Risk colleagues twice.</li>
+</ul>
+<p>The reason relationship banking is a <em>career</em> rather than a sales job: the triangle only balances over years. Trust lets the RM say "no, and here's why" without losing the client — and a client who's heard an honest no believes the next yes.</p></section>
+<section class="doc-section" id="what-you-d-actually-do-day-to-day"><h2 id="what-you-d-actually-do-day-to-day-h">What you'd actually do day to day</h2><p class="claim" data-labels="inferred">The posting gives the ingredients; here's the realistic week they cook into. <span class="pill pill-inferred" data-label="inferred">INFERRED</span><span class="qual"> — built from the JD's own task list plus intern accounts; the shape is reliable, the proportions vary by team</span></p>
+<ul>
+<li><strong>Morning:</strong> scan news on the portfolio's clients and their industries. A client in the news (won a contract, lost a CEO, hit by tariffs) changes what the team does that day.</li>
+<li><strong>Most hours, honestly: Excel and PowerPoint.</strong> Updating portfolio spreadsheets, spreading client accounts (banker-speak for typing a company's financial statements into the bank's analysis format), drafting slides for reviews and pitches, assembling inputs for credit papers. This is not glamorous and it is exactly where you learn how businesses work from the inside.</li>
+<li><strong>Meetings you shadow:</strong> client calls and visits with your RM (mostly listening, taking notes, owning the follow-ups), internal huddles with product specialists, credit discussions where a paper is argued.</li>
+<li data-labels="corroborated"><strong>The long-running project:</strong> interns typically carry one substantial piece of work across the ten weeks — a portfolio review, a sector study, a prospect pitch — presented to the team at the end. <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span> HSBC internship job descriptions describe exactly this project work and final assessments. <sup class="cite"><a data-cite="4" href="#s4">[4]</a></sup></li>
+<li data-labels="anecdotal"><span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span> A past HSBC corporate-banking intern's own summary of the role, which matches the JD almost word for word: "Creating and updating documents regarding the bank's client relations. Participated in client calls, researched clients and kept up to date with their news." <sup class="cite"><a data-cite="5" href="#s5">[5]</a></sup></li>
+</ul>
+<p>What you would <strong>not</strong> do: lend anyone money, give a client advice, or sign anything. Ten-week interns (and first-year graduates) are the analytical engine behind the people who do. The value of the seat is proximity — you watch trust being built in real meetings, years before you're the one building it.</p></section>
+<section class="doc-section" id="the-skills-ranked-with-the-most-important-one-named"><h2 id="the-skills-ranked-with-the-most-important-one-named-h">The skills — ranked, with the most important one named</h2><p>You asked for the single most important skill. Here it is, then the supporting cast.</p>
+<p class="claim" data-labels="inferred"><strong>#1 — Turning mess into a clear, accurate document someone senior can rely on.</strong> <span class="pill pill-inferred" data-label="inferred">INFERRED</span><span class="qual"> — my call, and I'd defend it</span> Every task in the JD — credit papers, presentations, reports, analysis — is the same underlying act: take scattered raw material (accounts, news, a client conversation, a spreadsheet) and produce something short, correct and decision-ready. For the intern/graduate stage this beats charisma, beats maths, beats market knowledge. An RM who trusts your documents gives you client exposure; one who has to re-check your numbers doesn't. Note that <em>accuracy is the trust currency inside the bank</em> exactly as reliability is the trust currency with clients — same skill, two audiences.</p>
+<p class="claim" data-labels="inferred official">The supporting skills, mapped straight from the posting's "Who you are" paragraph — the traits are <span class="pill pill-official" data-label="official">OFFICIAL</span>, my ranking and mapping are <span class="pill pill-inferred" data-label="inferred">INFERRED</span>:</p>
+<table>
+<thead>
+<tr>
+<th>Posting's words</th>
+<th>What it really means day-to-day</th>
+<th>Where you've already shown it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"Communicate clearly, build relationships naturally"</td>
+<td>Write short; speak so a non-expert follows; be someone colleagues <em>want</em> to hand work to</td>
+<td>Pictet — being the person twenty specialist teams routed client answers through</td>
+</tr>
+<tr>
+<td>"Pay attention to detail"</td>
+<td>Numbers that reconcile, names spelt right, zero sloppy slides — see skill #1</td>
+<td>Pictet performance reporting; Box operations</td>
+</tr>
+<tr>
+<td>"Stay organised when things move quickly… adapt when priorities shift"</td>
+<td>Running follow-up lists from client calls; juggling three deadlines when a client call blows up your afternoon</td>
+<td>Box placement year; chasing 50 market openings in parallel</td>
+</tr>
+<tr>
+<td>"Take ownership, look for solutions"</td>
+<td>Closing loops without being chased; bringing an answer, not a question</td>
+<td>Head Boy; Oakwood — building the research process, not just using it</td>
+</tr>
+<tr>
+<td>"Curiosity… motivated to keep growing"</td>
+<td>Genuinely wanting to know how businesses make money — the fuel for everything above</td>
+<td>Oakwood equity research; the fact you're reading a 13-page decode of a job posting</td>
+</tr>
+</tbody>
+</table>
+<p class="claim" data-labels="corroborated"><span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span> You've seen this five-trait pattern before: it's the same published success profile (curiosity, communication, collaboration, ownership, self-awareness) that HSBC's Cappfinity assessment scores — which means your existing job-simulation and video-interview prep is already aimed at exactly what this role screens for. <sup class="cite"><a data-cite="4" href="#s4">[4]</a></sup><sup class="cite"><a data-cite="6" href="#s6">[6]</a></sup></p>
+<p class="claim" data-labels="official"><strong>What you do NOT need</strong> <span class="pill pill-official" data-label="official">OFFICIAL</span>: banking knowledge. The posting says it twice — "you don't need to know everything about banking yet" and HSBC separately reports that over 60% of its graduates come from non-finance backgrounds. <sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup><sup class="cite"><a data-cite="6" href="#s6">[6]</a></sup> The internship's stated purpose is to teach the content; the selection is on the traits.</p></section>
+<section class="doc-section" id="how-you-re-measured"><h2 id="how-you-re-measured-h">How you're measured</h2><p>Two different scoreboards — one for you as an intern/graduate, one for the RMs you'd be supporting. Knowing both makes you sound five years older in interviews.</p>
+<p class="claim" data-labels="corroborated inferred"><strong>Scoreboard 1: you.</strong> <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span> HSBC internships are explicit conversion machines: the programme "is considered a conversion route to the Commercial Banking Graduate Programme" <sup class="cite"><a data-cite="1" href="#s1">[1]</a></sup>, and intern JDs describe "structured assessments aligned to securing a graduate role" — project work, presentations, interviews and skills-based evaluations across the ten weeks. <sup class="cite"><a data-cite="4" href="#s4">[4]</a></sup> In practice that means you're assessed on: the quality and accuracy of what you produce (skill #1 again), how you behave against HSBC's four values (value difference, succeed together, take responsibility, get it done), the final project presentation, and — unofficially but decisively — whether the team would want you back at the desk next year. <span class="pill pill-inferred" data-label="inferred">INFERRED</span> On the graduate scheme the same logic runs for 24 months, ending in a permanent client-facing seat. <sup class="cite"><a data-cite="2" href="#s2">[2]</a></sup></p>
+<p class="claim" data-labels="inferred"><strong>Scoreboard 2: the RMs around you.</strong> <span class="pill pill-inferred" data-label="inferred">INFERRED</span><span class="qual"> — standard industry practice; HSBC doesn't publish its scorecard</span> A working RM is typically measured on:</p>
+<ul>
+<li><strong>Portfolio income</strong> — total revenue from their clients across <em>all</em> products (so the payments and FX referrals count, not just loans — this is why the quarterback model is also the incentive model).</li>
+<li><strong>Credit quality</strong> — do their clients repay? A book of loans going bad erases years of revenue; prudence is paid for.</li>
+<li><strong>Client growth and retention</strong> — new clients won, existing ones kept and deepened.</li>
+<li><strong>Risk and compliance hygiene</strong> — client files current, <strong>KYC</strong> (know your customer — the identity and legitimacy checks regulators require) up to date, no corners cut. At HSBC, which operates under the memory of its 2012 money-laundering settlement, this is a first-class metric, not paperwork. <sup class="cite"><a data-cite="7" href="#s7">[7]</a></sup></li>
+</ul>
+<p>Notice what the two scoreboards share: nothing on either rewards flash. Both pay reliability, accuracy and trust — compounding assets, which is rather the theme of this bank.</p></section>
+<section class="doc-section" id="assumptions-i-ve-made-told-straight-as-requested"><h2 id="assumptions-i-ve-made-told-straight-as-requested-h">Assumptions I've made (told straight, as requested)</h2><ol>
+<li data-labels="official"><span class="pill pill-official" data-label="official">OFFICIAL</span> That you cannot apply to this specific internship posting — the penultimate-year/graduate-2028 requirement is unambiguous and HSBC verifies study dates at screening. The decode is written to serve the graduate twin and your general understanding.</li>
+<li data-labels="inferred"><span class="pill pill-inferred" data-label="inferred">INFERRED</span> That the day-to-day picture generalises from the JD's task list, one dated intern review, and standard commercial-banking practice. Team-by-team reality varies: a team covering tech scale-ups feels different from one covering manufacturers.</li>
+<li data-labels="inferred"><span class="pill pill-inferred" data-label="inferred">INFERRED</span> The credit-paper structure and RM scorecard are industry-standard reconstructions, not HSBC internal documents — no bank publishes those. Treat the shape as reliable and the details as approximate.</li>
+<li data-labels="official"><span class="pill pill-official" data-label="official">OFFICIAL</span> Deadlines are as posted on 1 October 2026 and re-checked against your pasted posting; rolling review means they're ceilings, not promises.</li>
+<li>That you hold permanent UK right-to-work, making the no-sponsorship clause irrelevant to you. If that's wrong, it changes the answer entirely — tell me.</li>
+</ol></section>
+<section class="doc-section" id="glossary-every-term-in-one-place"><h2 id="glossary-every-term-in-one-place-h">Glossary — every term in one place</h2><ul>
+<li><strong>Commercial banking</strong> — the part of a bank that serves businesses (not individuals, not giant institutional investors).</li>
+<li><strong>Relationship Manager (RM)</strong> — the single named banker who owns a client relationship and coordinates all the bank's specialists for them.</li>
+<li><strong>Portfolio</strong> — all the clients (or all the loans) one team or banker looks after.</li>
+<li><strong>Coverage</strong> — banker-speak for the client-facing, relationship-owning side of the bank (as opposed to product teams). The graduate scheme's "coverage placement" means sitting with RM teams.</li>
+<li><strong>Credit</strong> — lending money; also the name of the independent team that approves or rejects lending.</li>
+<li><strong>Credit paper</strong> — the written case for a specific loan: the business, the numbers, the repayment plan, the risks, the recommendation.</li>
+<li><strong>Cash flow</strong> — actual money moving in and out of a business; loans are repaid from this, not from paper profits.</li>
+<li><strong>Collateral / security</strong> — assets the bank can claim if a loan isn't repaid.</li>
+<li><strong>Working capital</strong> — the money tied up in running a business day to day (stock bought, invoices not yet paid); working-capital finance bridges that gap.</li>
+<li><strong>Trade finance</strong> — bank products that let strangers trade internationally by having the bank guarantee payment and delivery.</li>
+<li><strong>Foreign exchange (FX)</strong> — converting one currency to another; <strong>hedging</strong> means locking an exchange rate now to remove uncertainty later.</li>
+<li><strong>Margin</strong> — the gap between the bank's cost of money and what it charges — the core of lending profit.</li>
+<li><strong>Default</strong> — a borrower failing to repay.</li>
+<li><strong>KYC (know your customer)</strong> — the regulator-required checks that a client is who they claim to be and their money is legitimate.</li>
+<li><strong>Pitch / prospect</strong> — a presentation to win a company that isn't yet a client / that target company.</li>
+<li><strong>2:1</strong> — UK degree classification, upper second class; HSBC's minimum everywhere.</li>
+<li><strong>Penultimate year</strong> — second-to-last year of your degree. The internship's eligibility gate, and the reason this particular posting isn't yours.</li>
+</ul></section>
+<section class="doc-section" id="source-list-where-every-claim-comes-from"><h2 id="source-list-where-every-claim-comes-from-h">Source list — where every claim comes from</h2><ol>
+<li class="src-item" id="s1">The job posting you pasted: Relationship Management – Commercial Bank – Internship, London E14 5HQ, opens 1 Oct 2026, closes 18 Oct 2026, start 7 Jun 2027 (req 1373604457) — business-area description, "Who you are", "What you'll do", eligibility and sponsorship wording all quoted from it. <a class="exturl" href="https://apply.careers.hsbc.com/emergingtalent/job/London-Relationship-Management-Commercial-Bank-Internship-E14-5HQ/1373604457/" rel="noopener" target="_blank">https://apply.careers.hsbc.com/emergingtalent/job/London-Relationship-Management-Commercial-Bank-Internship-E14-5HQ/1373604457/</a> <span class="pill pill-official" data-label="official">OFFICIAL</span><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s2">Relationship Management – Commercial Bank – Graduate job descriptions, five regional cohorts, closing 18 Oct 2026 — 24-month product-then-coverage structure, July-2027 completion eligibility, permanent client-facing destination. <a class="exturl" href="https://apply.careers.hsbc.com/emergingtalent/job/Manchester-Relationship-Management-Commercial-Bank-Graduate-M2-7HD/1373601257/" rel="noopener" target="_blank">https://apply.careers.hsbc.com/emergingtalent/job/Manchester-Relationship-Management-Commercial-Bank-Graduate-M2-7HD/1373601257/</a> — Accessed 1 Oct 2026. <span class="pill pill-official" data-label="official">OFFICIAL</span><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s3">HSBC Students and Graduates FAQ — one application per recruitment cycle; internships as the conversion route to graduate places. <a class="exturl" href="https://www.hsbc.com/careers/students-and-graduates/faqs" rel="noopener" target="_blank">https://www.hsbc.com/careers/students-and-graduates/faqs</a> — Accessed 1 Oct 2026. <span class="pill pill-official" data-label="official">OFFICIAL</span><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s4">HSBC 2027 internship job descriptions (CIB RM, Private Bank, Markets) — "structured assessments aligned to securing a graduate role"; identical relationship-management duty wording across CIB and CB RM postings. apply.careers.hsbc.com/emergingtalent — Accessed 1 Oct 2026. <span class="pill pill-official" data-label="official">OFFICIAL</span><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s5">Higherin (formerly RateMyPlacement) review, HSBC Corporate Banking intern, May 2022 — day-to-day description quoted; pre-2025-reorganisation, used for colour only. <a class="exturl" href="https://higherin.com/review/4717/hsbc/corporate-banking-intern" rel="noopener" target="_blank">https://higherin.com/review/4717/hsbc/corporate-banking-intern</a> <span class="pill pill-anecdotal" data-label="anecdotal">ANECDOTAL</span><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s6">HSBC published success-profile traits (curiosity, communication, collaboration, ownership, self-awareness) across 2026–27 emerging-talent postings, matching the Cappfinity assessment dimensions; targetjobs HSBC hub — "over 60% of our graduates come from non-finance backgrounds." <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+<li class="src-item" id="s7">HSBC–US Department of Justice deferred prosecution agreement, December 2012 (~$1.9bn) — the institutional reason KYC and compliance hygiene are first-class RM metrics at HSBC. Covered in your relationship-manager deep-dive PDF with full citations. <span class="pill pill-corroborated" data-label="corroborated">CORROBORATED</span><a aria-label="Back to citation" class="srcback" href="#" title="Back to where you were reading"> ↩</a></li>
+</ol></section>
+    <footer class="doc-foot">
+      <p>Self-contained briefing · rendered from <code>hsbc-cb-rm-role-explained.md</code> · 1 October 2026. Reliability labels reflect the evidence at that date; live postings and deadlines change — the portal is authoritative.</p>
+    </footer>
+  </main>
+</div>
+<button id="toTop" class="totop" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+(function(){
+  "use strict";
+  var root = document.documentElement;
+
+  /* ---------- Theme ---------- */
+  var themeBtn = document.getElementById("themeBtn");
+  try {
+    var saved = localStorage.getItem("hsbc-theme");
+    if (saved) root.setAttribute("data-theme", saved);
+  } catch(e){}
+  function currentTheme(){
+    var t = root.getAttribute("data-theme");
+    if (t) return t;
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme:dark)").matches ? "dark" : "light";
+  }
+  themeBtn.addEventListener("click", function(){
+    var next = currentTheme() === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("hsbc-theme", next); } catch(e){}
+  });
+
+  /* ---------- Hamburger / drawer ---------- */
+  var menuBtn = document.getElementById("menuBtn");
+  var scrim = document.getElementById("scrim");
+  function closeNav(){ document.body.classList.remove("nav-open"); menuBtn.setAttribute("aria-expanded","false"); }
+  menuBtn.addEventListener("click", function(){
+    var open = document.body.classList.toggle("nav-open");
+    menuBtn.setAttribute("aria-expanded", open ? "true":"false");
+  });
+  scrim.addEventListener("click", closeNav);
+
+  /* ---------- Scroll-spy ---------- */
+  var tocLinks = Array.prototype.slice.call(document.querySelectorAll(".toc a"));
+  var linkById = {};
+  tocLinks.forEach(function(a){ linkById[a.getAttribute("href").slice(1)] = a; });
+  var heads = Array.prototype.slice.call(document.querySelectorAll(".content h2, .content h3"));
+  function setActive(id){
+    tocLinks.forEach(function(a){ a.classList.remove("active"); });
+    var link = linkById[id];
+    if (link){ link.classList.add("active");
+      // keep active link in view within sidebar
+      var sb = document.getElementById("sidebar");
+      var lr = link.getBoundingClientRect(), sr = sb.getBoundingClientRect();
+      if (lr.top < sr.top || lr.bottom > sr.bottom) link.scrollIntoView({block:"nearest"});
+    }
+  }
+  if ("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          var id = en.target.id.replace(/-h$/, "");
+          // for h2 the anchor id is section id; map from heading id
+          var secId = en.target.id.endsWith("-h") ? en.target.id.slice(0,-2) : en.target.id;
+          setActive(secId);
+        }
+      });
+    }, {rootMargin:"-64px 0px -70% 0px", threshold:0});
+    heads.forEach(function(h){ io.observe(h); });
+  }
+  // clicking a toc link closes drawer on mobile
+  tocLinks.forEach(function(a){ a.addEventListener("click", function(){ if (window.innerWidth<=768) closeNav(); }); });
+
+  /* ---------- Evidence filters ---------- */
+  var filterBoxes = Array.prototype.slice.call(document.querySelectorAll("[data-filter]"));
+  function applyFilters(){
+    var active = {};
+    filterBoxes.forEach(function(b){ active[b.getAttribute("data-filter")] = b.checked; });
+    // dim/undim individual pills
+    document.querySelectorAll(".content .pill[data-label]").forEach(function(p){
+      var l = p.getAttribute("data-label");
+      if (l==="flag") return;
+      p.classList.toggle("dim", !active[l]);
+    });
+    // hide a claim block only if ALL its labels are inactive
+    document.querySelectorAll(".content .claim[data-labels]").forEach(function(el){
+      var labels = el.getAttribute("data-labels").split(/\s+/).filter(Boolean);
+      var anyActive = labels.some(function(l){ return active[l]; });
+      el.classList.toggle("hide-claim", !anyActive);
+    });
+  }
+  filterBoxes.forEach(function(b){ b.addEventListener("change", applyFilters); });
+
+  /* ---------- Search (section-level) ---------- */
+  var search = document.getElementById("search");
+  var sections = Array.prototype.slice.call(document.querySelectorAll(".content > section"));
+  function runSearch(){
+    var q = (search.value||"").trim().toLowerCase();
+    sections.forEach(function(sec){
+      var hit = !q || sec.textContent.toLowerCase().indexOf(q) !== -1;
+      sec.classList.toggle("search-hidden", !hit);
+      var link = linkById[sec.id];
+      if (link) link.parentElement.classList.toggle("search-hidden", !hit);
+    });
+  }
+  var t;
+  search.addEventListener("input", function(){ clearTimeout(t); t=setTimeout(runSearch,120); });
+  search.addEventListener("keydown", function(e){ if(e.key==="Escape"){ search.value=""; runSearch(); } });
+
+  /* ---------- Citations: jump to source + remember for "back" ---------- */
+  var lastCiteId = null;
+  document.querySelectorAll("sup.cite a, a.reflink").forEach(function(a){
+    a.addEventListener("click", function(){
+      lastCiteId = "cite-anchor";
+      // drop a temporary marker where we clicked
+      var old = document.getElementById("cite-anchor");
+      if (old) old.removeAttribute("id");
+      a.id = "cite-anchor";
+      var tgt = document.getElementById(a.getAttribute("href").slice(1));
+      if (tgt){ tgt.classList.remove("tgt-flash"); void tgt.offsetWidth; tgt.classList.add("tgt-flash"); }
+    });
+  });
+  document.querySelectorAll(".srcback").forEach(function(b){
+    b.addEventListener("click", function(e){
+      e.preventDefault();
+      var anchor = document.getElementById("cite-anchor");
+      if (anchor) anchor.scrollIntoView({behavior:"smooth", block:"center"});
+      else window.scrollTo({top:0,behavior:"smooth"});
+    });
+  });
+
+  /* ---------- Back to top ---------- */
+  var toTop = document.getElementById("toTop");
+  window.addEventListener("scroll", function(){
+    toTop.classList.toggle("show", window.scrollY > 600);
+  }, {passive:true});
+  toTop.addEventListener("click", function(){ window.scrollTo({top:0,behavior:"smooth"}); });
+
+  /* ---------- Print: expand all details, remember state ---------- */
+  var toggled = [];
+  window.addEventListener("beforeprint", function(){
+    toggled = [];
+    document.querySelectorAll("details:not([open])").forEach(function(d){ d.open=true; toggled.push(d); });
+  });
+  window.addEventListener("afterprint", function(){
+    toggled.forEach(function(d){ d.open=false; }); toggled=[];
+  });
+
+  applyFilters();
+})();
+
+</script>
+</body>
+</html>
