@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>What Makes It Different</title>
+<style>
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+:root{
+  --ink:#14213d; --body:#2b2d42; --muted:#5c6378; --line:#d9dde7;
+  --navy:#14213d; --gold:#e09f3e; --gold-d:#b8771f; --teal:#2a9d8f; --teal-d:#1f7a6f; --plum:#6d597a; --plum-d:#54435f; --red:#c8553d; --blue:#3a6ea5;
+  --bg1:#f4f6fb; --bg2:#fff7ea; --bg3:#eaf6f4; --bg4:#f3eff6; --bg5:#fdeeea; --bg6:#eaf1f9;
+  --accent:var(--gold); --accent-d:var(--gold-d); --accent-bg:var(--bg2);
+}
+*{box-sizing:border-box}
+html,body{background:#fff}
+body{font-family:"Inter",sans-serif;color:var(--body);font-size:9.7pt;line-height:1.45;margin:0}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{color:var(--ink);line-height:1.2;margin:0}
+h1{font-size:26pt;font-weight:800;letter-spacing:-.5px}
+h2{font-size:16pt;font-weight:800;margin:0 0 3.5mm;padding-bottom:2mm;border-bottom:2.5px solid var(--accent)}
+h3{font-size:11.5pt;font-weight:700;margin:4.5mm 0 2mm}
+h4{font-size:9.8pt;font-weight:700;margin:2.5mm 0 1mm}
+p{margin:0 0 2.2mm}
+ul,ol{margin:0 0 2.2mm;padding-left:5mm}
+li{margin-bottom:.8mm}
+.page{break-before:page}
+.kicker{display:flex;justify-content:space-between;font-size:7.5pt;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent);margin-bottom:1.5mm}
+.kicker a{color:var(--muted);letter-spacing:.5px;text-transform:none;font-weight:600}
+.lead{font-size:10.8pt;color:var(--ink)}
+.muted{color:var(--muted)} .small{font-size:8.6pt} .tiny{font-size:7.8pt}
+.center{text-align:center}
+.box{border-radius:3mm;padding:3mm 3.5mm;margin:2.5mm 0;break-inside:avoid}
+.box h4:first-child,.box h3:first-child{margin-top:0}
+.box p:last-child,.box ul:last-child{margin-bottom:0}
+.b1{background:var(--bg1)} .b2{background:var(--bg2)} .b3{background:var(--bg3)} .b4{background:var(--bg4)} .b5{background:var(--bg5)} .b6{background:var(--bg6)}
+.key{border-left:4px solid var(--gold);background:var(--bg2)}
+.warn{border-left:4px solid var(--red);background:var(--bg5)}
+.good{border-left:4px solid var(--teal);background:var(--bg3)}
+.zero{border-left:4px solid var(--blue);background:var(--bg6)}
+.zero:before{content:"ZERO-KNOWLEDGE EXPLAINER";display:block;font-size:7pt;font-weight:800;letter-spacing:1.2px;color:var(--blue);margin-bottom:1mm}
+.expert,.zero{border-radius:3mm;padding:2.6mm 3.5mm;margin:2.5mm 0;break-inside:avoid}
+.expert{border-left:4px solid var(--plum);background:var(--bg4)}
+.expert:before{content:"EXPERT INSIGHT";display:block;font-size:7pt;font-weight:800;letter-spacing:1.2px;color:var(--plum);margin-bottom:1mm}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin:2.5mm 0}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3mm;margin:2.5mm 0}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:2.5mm;margin:2.5mm 0}
+.grid2>.box,.grid3>.box,.grid4>.box{margin:0}
+table{width:100%;border-collapse:collapse;margin:2mm 0 3mm;font-size:8.6pt;break-inside:avoid}
+th{background:var(--navy);color:#fff;text-align:left;padding:1.6mm 2mm;font-weight:600}
+td{padding:1.1mm 2mm;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:#fafbfd}
+.tag{display:inline-block;font-size:7.2pt;font-weight:700;padding:.4mm 1.8mm;border-radius:5mm;background:var(--navy);color:#fff}
+.t-gold{background:var(--gold-d)} .t-teal{background:var(--teal)} .t-plum{background:var(--plum)} .t-red{background:var(--red)} .t-blue{background:var(--blue)}
+.flow{display:flex;align-items:stretch;margin:3mm 0;break-inside:avoid}
+.flow .step{flex:1;background:var(--bg1);border:1.5px solid var(--navy);border-radius:2.5mm;padding:2.2mm;font-size:8.2pt;text-align:center}
+.flow .step b{display:block;color:var(--ink);font-size:8.8pt;margin-bottom:.8mm}
+.flow .arr{width:5mm;display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:800;font-size:13pt}
+.part{border-radius:3mm;padding:3mm;color:#fff;break-inside:avoid}
+.part h4{color:#fff;margin:0 0 1.5mm;font-size:9.8pt}
+.part ul{padding-left:4mm;margin:0;font-size:8.3pt}
+.part .who{font-size:7.9pt;opacity:.92;margin-top:1.5mm;border-top:1px solid rgba(255,255,255,.35);padding-top:1.5mm}
+.p-navy{background:var(--navy)} .p-gold{background:var(--gold-d)} .p-teal{background:var(--teal-d)} .p-plum{background:var(--plum)} .p-blue{background:var(--blue)} .p-red{background:var(--red)}
+.formula{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:2.5mm;margin:3mm 0;font-weight:700;color:var(--ink);break-inside:avoid}
+.formula .f{background:var(--bg1);border:1.5px solid var(--navy);border-radius:2mm;padding:2.2mm 3.5mm;text-align:center;font-size:9.5pt}
+.formula .f small{display:block;font-weight:400;font-size:7.3pt;color:var(--muted)}
+.formula .op{font-size:15pt;color:var(--accent)}
+.gloss{display:grid;grid-template-columns:1fr 1fr;gap:0 5mm;font-size:8.3pt;margin:2mm 0}
+.gloss div{break-inside:avoid;padding:1.1mm 0;border-bottom:1px solid var(--line)}
+.gloss b{color:var(--ink)}
+.cover{height:267mm;display:flex;flex-direction:column;justify-content:space-between;background:var(--navy);color:#fff;margin:-15mm -15mm 0;padding:22mm 18mm}
+.cover h1{color:#fff;font-size:34pt;line-height:1.05}
+.cover .sub{font-size:12.5pt;color:#d6dbe8;margin-top:5mm;max-width:155mm}
+.chapter{height:267mm;display:flex;flex-direction:column;justify-content:center;margin:-15mm -15mm 0;padding:20mm 20mm;color:#fff;break-before:page}
+.chapter .num{font-size:60pt;font-weight:800;opacity:.25;line-height:1}
+.chapter h1{color:#fff;font-size:32pt;margin:2mm 0 4mm}
+.chapter p{font-size:11.5pt;color:rgba(255,255,255,.88);max-width:150mm}
+.chapter ol{font-size:10.5pt;color:#fff;margin-top:6mm}
+.chapter ol a{color:#fff;border-bottom:1px solid rgba(255,255,255,.4)}
+.ch-a{background:var(--blue)} .ch-im{background:var(--navy)} .ch-s{background:var(--teal-d)} .ch-pr{background:var(--plum)} .ch-x{background:#3d3d4e}
+.toc{font-size:9.4pt}
+.toc .sec{display:flex;justify-content:space-between;font-weight:700;color:var(--ink);margin-top:2.6mm;padding:1.4mm 2mm;border-radius:1.5mm}
+.toc .sub{display:block;padding:.7mm 2mm .7mm 7mm;border-bottom:1px dotted var(--line);color:var(--body)}
+.toc .sub:after{content:" ›";color:var(--accent)}
+.tocgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 7mm}
+.funnel{display:flex;flex-direction:column;align-items:center;gap:1.2mm;margin:3mm 0;break-inside:avoid}
+.funnel div{color:#fff;text-align:center;padding:1.6mm;border-radius:1.5mm;font-size:8.3pt;font-weight:600}
+.ladder{display:flex;align-items:flex-end;gap:2mm;height:44mm;margin:3mm 0 1mm;break-inside:avoid}
+.ladder div{flex:1;border-radius:2mm 2mm 0 0;color:#fff;font-size:7.8pt;font-weight:600;text-align:center;padding:1.5mm;display:flex;align-items:flex-start;justify-content:center}
+.qa{counter-reset:q}
+.qa .box{position:relative;padding-left:10mm}
+.qa .box:before{counter-increment:q;content:counter(q);position:absolute;left:3mm;top:3mm;width:5mm;height:5mm;border-radius:50%;background:var(--accent);color:#fff;font-size:7.5pt;font-weight:800;display:flex;align-items:center;justify-content:center}
+svg text{font-family:Inter}
+.im{--accent:var(--gold);--accent-d:var(--gold-d)}
+.sl{--accent:var(--teal);--accent-d:var(--teal-d)}
+.prr{--accent:var(--plum);--accent-d:var(--plum-d)}
+.ab{--accent:var(--blue)}
+.lines{height:var(--h,22mm);background:repeating-linear-gradient(to bottom,transparent 0,transparent 6.6mm,#c9cfdc 6.6mm,#c9cfdc 6.9mm);margin:1.5mm 0 3mm;break-inside:avoid}
+.prompt{font-weight:600;color:var(--ink);font-size:9pt;margin-top:2.5mm}
+.chips{display:flex;flex-wrap:wrap;gap:1.6mm;margin:2mm 0}
+.chips span{border:1.2px solid var(--line);border-radius:5mm;padding:.8mm 2.6mm;font-size:8.4pt;background:#fff}
+.chips span:before{content:"☐ ";color:var(--muted)}
+.angle{border:1.5px solid var(--line);border-radius:2.5mm;padding:2mm 2.8mm;margin:0;break-inside:avoid}
+.angle h4{margin:0 0 .6mm;font-size:9.6pt}
+.angle .row{display:grid;grid-template-columns:15mm 1fr;gap:1.2mm;font-size:7.9pt;line-height:1.35;margin-top:.7mm}
+.angle .row b{color:var(--muted);font-size:6.8pt;text-transform:uppercase;letter-spacing:.6px;padding-top:.4mm}
+.angle .line{font-style:italic;color:var(--ink)}
+.ph{background:#fff1d6;padding:0 1mm;border-radius:1mm;color:#8a5a12;font-weight:600;font-style:normal}
+</style>
+</head>
+<body>
+<section class="cover">
+  <div>
+    <div class="kicker" style="color:var(--gold)">10,000 Black Interns · Class of 2027 · Guide</div>
+    <h1>What makes it different</h1>
+    <p class="sub">How Investment Management, Sales and Public Relations stand apart from the industries next to them, what a genuinely compelling "why this one?" sounds like, and what you need to show to make it believable.</p>
+  </div>
+  <div>
+    <div class="grid3" style="gap:5mm">
+      <div style="border-top:3px solid var(--gold);padding-top:2mm"><b style="color:#fff;font-size:12pt">Investment Management</b><br><span style="color:#c8cee0;font-size:9pt">vs investment banking, trading, wealth, private equity, insurance, consulting</span></div>
+      <div style="border-top:3px solid var(--teal);padding-top:2mm"><b style="color:#fff;font-size:12pt">Sales</b><br><span style="color:#c8cee0;font-size:9pt">vs marketing, customer success, consulting, recruitment, business development</span></div>
+      <div style="border-top:3px solid #b79ec8;padding-top:2mm"><b style="color:#fff;font-size:12pt">Public Relations</b><br><span style="color:#c8cee0;font-size:9pt">vs marketing, advertising, journalism, public affairs, social media, investor relations</span></div>
+    </div>
+    <p class="small" style="color:#aab2c8;margin-top:9mm">Use this with the Industry Guide (what each industry is) and the Finding Your Why workbook (your personal reasons). This guide covers the middle step: <b>why this industry rather than its nearest alternative</b>. Comparisons are general. Individual firms and roles vary. Prepared October 2026.</p>
+  </div>
+</section>
+
+<section class="page" id="contents">
+  <div class="kicker"><span>Navigation</span><span></span></div>
+  <h2>Contents</h2>
+  <div class="toc" style="max-width:155mm">
+    <a class="sec" style="background:var(--bg6)" href="#d0"><span>Start · The "why this, not that?" test</span></a>
+    <a class="sec" style="background:var(--bg2)" href="#d1"><span>1 · Investment Management</span></a>
+    <a class="sub" href="#d1a">1A · IM vs its neighbours</a>
+    <a class="sub" href="#d1b">1B · Seven things only (or mostly) true of IM</a>
+    <a class="sub" href="#d1c">1C · Weak vs compelling reasons, and "why not X?"</a>
+    <a class="sec" style="background:var(--bg3)" href="#d2"><span>2 · Sales</span></a>
+    <a class="sub" href="#d2a">2A · Sales vs its neighbours, and what makes it unique</a>
+    <a class="sub" href="#d2b">2B · Weak vs compelling reasons, and "why not X?"</a>
+    <a class="sec" style="background:var(--bg4)" href="#d3"><span>3 · Public Relations</span></a>
+    <a class="sub" href="#d3a">3A · PR vs its neighbours, and what makes it unique</a>
+    <a class="sub" href="#d3b">3B · Weak vs compelling reasons, and "why not X?"</a>
+    <a class="sec" style="background:#ececf1" href="#d4"><span>4 · All three side by side</span></a>
+    <a class="sec" style="background:var(--bg5)" href="#d5"><span>5 · What's needed: evidence and skills checklist</span></a>
+    <a class="sec" style="background:var(--bg2)" href="#d6"><span>6 · Putting distinctiveness into 250 words</span></a>
+  </div>
+</section>
+
+<section class="page" id="d0">
+  <div class="kicker"><span>Start</span><a href="#contents">↑ Contents</a></div>
+  <h2>The "why this, not that?" test</h2>
+  <p class="lead">Every reader has a silent question: <b>"Could this person have written the same answer for a different industry?"</b> If your reason for Investment Management works just as well for investment banking, it isn't a reason for Investment Management. It's a reason for "finance".</p>
+
+  <h3>The distinctiveness ladder</h3>
+  <svg viewBox="0 0 680 190" width="100%">
+    <g font-size="10">
+      <rect x="10" y="150" width="660" height="34" rx="5" fill="#fdeeea"/><text x="20" y="171" font-weight="800" fill="#c8553d">Level 1 · Any job</text><text x="200" y="171" fill="#2b2d42">"I want a challenging, fast-paced role where I can develop my skills."</text>
+      <rect x="10" y="112" width="660" height="34" rx="5" fill="#fff7ea"/><text x="20" y="133" font-weight="800" fill="#b8771f">Level 2 · The sector</text><text x="200" y="133" fill="#2b2d42">"I'm interested in finance and the markets."</text>
+      <rect x="10" y="74" width="660" height="34" rx="5" fill="#eaf6f4"/><text x="20" y="95" font-weight="800" fill="#1f7a6f">Level 3 · The industry</text><text x="200" y="95" fill="#2b2d42">"I'm drawn to managing savings over decades, where the client relationship lasts years."</text>
+      <rect x="10" y="36" width="660" height="34" rx="5" fill="#14213d"/><text x="20" y="57" font-weight="800" fill="#e09f3e">Level 4 · The role + you</text><text x="200" y="57" fill="#fff">"…and I want to be the person who explains that process to clients, as I saw at [firm]."</text>
+      <text x="340" y="22" text-anchor="middle" font-weight="700" fill="#14213d" font-size="10.5">↑ Aim for Levels 3–4 in every answer</text>
+    </g>
+  </svg>
+
+  <h3>The five ingredients of a compelling reason</h3>
+  <div class="grid3">
+    <div class="box b1 small"><b>1 · Distinctive.</b> A feature that is true of <i>this</i> industry, or truer here than anywhere else (Sections 1–3 list these).</div>
+    <div class="box b1 small"><b>2 · Personal.</b> It connects to something you value or experienced (Finding Your Why workbook).</div>
+    <div class="box b1 small"><b>3 · Evidenced.</b> Something you did shows the interest is real, not theoretical.</div>
+    <div class="box b1 small"><b>4 · Informed.</b> It uses the industry's real mechanics correctly (how it makes money, who the client is).</div>
+    <div class="box b1 small"><b>5 · Forward-looking.</b> It points to what you'll contribute and become, not just what you like.</div>
+    <div class="box key small"><b>The quick check:</b> replace the industry name in your sentence with its nearest neighbour. If the sentence still works, it isn't distinctive. Rewrite it.</div>
+  </div>
+
+  <div class="box expert small"><b>Why this matters more for 10,000 Black Interns:</b> you're matched to a firm at random within the workstream. That firm's reader knows you also chose two other workstreams, and may wonder whether you really want <i>their</i> industry. A clearly distinctive reason in each answer removes that doubt.</div>
+</section>
+
+<!-- IM -->
+<section class="chapter ch-im" id="d1">
+  <div class="num">1</div>
+  <h1>Investment Management</h1>
+  <p>It sits next to several "finance" industries that candidates often blur together. Knowing exactly how it differs is the fastest way to sound like an insider.</p>
+  <ol>
+    <li><a href="#d1a">IM vs its neighbours</a></li>
+    <li><a href="#d1b">Seven things only (or mostly) true of IM</a></li>
+    <li><a href="#d1c">Weak vs compelling reasons, and "why not X?"</a></li>
+  </ol>
+</section>
+
+<section class="page im" id="d1a">
+  <div class="kicker"><span>1 · Investment Management</span><a href="#contents">↑ Contents</a></div>
+  <h2>1A · IM vs its neighbours</h2>
+  <table style="font-size:8pt">
+    <tr><th style="width:15%">Industry</th><th style="width:21%">What it does</th><th style="width:16%">Client</th><th style="width:18%">How it makes money</th><th style="width:12%">Time horizon</th><th>How IM is different</th></tr>
+    <tr style="background:#fff7ea"><td><b>Investment Management</b></td><td>Invests pooled savings in shares, bonds and other assets for clients</td><td>Pension funds, insurers, wealth managers, individuals</td><td><b>Recurring</b> % fee on assets managed</td><td><b>Years to decades</b></td><td>—</td></tr>
+    <tr><td><b>Investment banking (IB)</b></td><td>Advises companies on mergers and raising money</td><td>Companies, governments</td><td>One-off fees when deals complete</td><td>Weeks to months, deal by deal</td><td>IB is <b>transactional</b> and advises. IM is <b>ongoing</b> and owns the investment decision and its outcome.</td></tr>
+    <tr><td><b>Markets / sales &amp; trading</b></td><td>Buys and sells securities for clients; makes markets</td><td>Asset managers, hedge funds (IM firms are <i>their</i> clients)</td><td>Trading spreads, commissions</td><td>Seconds to days</td><td>S&amp;T is the <b>sell-side</b> serving IM. IM is the <b>buy-side</b>, the client with the money.</td></tr>
+    <tr><td><b>Wealth management</b></td><td>Holistic financial advice and portfolios for individuals and families</td><td>Wealthy individuals</td><td>% fee on assets, plus advice fees</td><td>Long term</td><td>Wealth is <b>one person's whole financial life</b>. IM builds the investment strategies and funds, often <i>used by</i> wealth managers.</td></tr>
+    <tr><td><b>Private equity (PE)</b></td><td>Buys and runs whole private companies, then sells them</td><td>Pension funds, SWFs, endowments (as LPs)</td><td>Management fee + share of profits (carry)</td><td>5–10 years per fund</td><td>PE is a <b>narrow, concentrated</b> part of the wider IM world. IM spans every asset class and millions of savers.</td></tr>
+    <tr><td><b>Insurance</b></td><td>Pools risk; pays claims; provides annuities</td><td>Individuals and businesses</td><td>Premiums minus claims, plus investment returns</td><td>Long term</td><td>Insurers <b>take on</b> risk. Asset managers <b>manage</b> other people's risk and money (and insurers are often IM clients).</td></tr>
+    <tr><td><b>Consulting</b></td><td>Advises organisations on strategy and problems</td><td>Companies, public sector</td><td>Project fees / day rates</td><td>Weeks to months</td><td>Consultants <b>recommend</b>. Asset managers <b>decide and are accountable</b> for results, daily and publicly.</td></tr>
+    <tr><td><b>Retail / commercial banking</b></td><td>Deposits, loans, payments</td><td>Individuals, businesses</td><td>Interest margin, fees</td><td>Ongoing</td><td>Banks <b>lend</b> deposits. IM <b>invests</b> savings in markets on clients' behalf, and clients own the assets.</td></tr>
+  </table>
+
+  <h3>Where IM sits</h3>
+  <svg viewBox="0 0 680 140" width="88%" style="display:block;margin:0 auto">
+    <g font-size="9.5">
+      <text x="10" y="18" font-weight="700" fill="#5c6378">SHORT-TERM / TRANSACTIONAL</text>
+      <text x="670" y="18" text-anchor="end" font-weight="700" fill="#5c6378">LONG-TERM / RELATIONSHIP</text>
+      <line x1="10" y1="70" x2="670" y2="70" stroke="#d9dde7" stroke-width="3"/>
+      <circle cx="60" cy="70" r="8" fill="#5c6378"/><text x="60" y="95" text-anchor="middle" fill="#14213d" font-weight="700">Trading</text>
+      <circle cx="175" cy="70" r="8" fill="#5c6378"/><text x="175" y="95" text-anchor="middle" fill="#14213d" font-weight="700">Investment banking</text>
+      <circle cx="295" cy="70" r="8" fill="#5c6378"/><text x="295" y="95" text-anchor="middle" fill="#14213d" font-weight="700">Consulting</text>
+      <circle cx="410" cy="70" r="8" fill="#5c6378"/><text x="410" y="95" text-anchor="middle" fill="#14213d" font-weight="700">Private equity</text>
+      <circle cx="530" cy="70" r="11" fill="#e09f3e"/><text x="530" y="45" text-anchor="middle" fill="#b8771f" font-weight="800">Investment Mgmt</text>
+      <circle cx="630" cy="70" r="8" fill="#5c6378"/><text x="630" y="95" text-anchor="middle" fill="#14213d" font-weight="700">Pensions /</text><text x="630" y="108" text-anchor="middle" fill="#14213d" font-weight="700">wealth</text>
+      <text x="340" y="132" text-anchor="middle" fill="#5c6378" font-size="8.5">Simplified. IM's defining trait is long-horizon, recurring relationships built on trust and measured performance.</text>
+    </g>
+  </svg>
+</section>
+
+<section class="page im" id="d1b">
+  <div class="kicker"><span>1 · Investment Management</span><a href="#contents">↑ Contents</a></div>
+  <h2>1B · Seven things only (or mostly) true of IM</h2>
+  <p class="small">These are your raw material for a distinctive answer. Pick the one or two that genuinely resonate, and back them with your own experience.</p>
+  <div class="grid2">
+    <div class="angle"><h4>1 · You're the buy-side: the decision-maker</h4><p class="small" style="margin:0">Banks advise and execute; asset managers <b>decide</b> where trillions go and live with the result. The client side represents that decision-making to the people whose money it is. <b>Distinctive vs:</b> IB, consulting, S&amp;T.</p></div>
+    <div class="angle"><h4>2 · Relationships measured in years, not deals</h4><p class="small" style="margin:0">Revenue is a recurring fee for every year a client stays, so the business is built on <b>retention and trust</b>, not one-off wins. A mandate can last a decade or more. <b>Distinctive vs:</b> IB, trading, consulting.</p></div>
+    <div class="angle"><h4>3 · The end client is ordinary savers</h4><p class="small" style="margin:0">Behind every pension scheme are thousands of teachers, nurses and shop workers. IM's <b>fiduciary duty</b> links daily work to whether real people retire comfortably. <b>Distinctive vs:</b> IB, PE, trading (where clients are institutions or companies).</p></div>
+    <div class="angle"><h4>4 · Results are visible and measured constantly</h4><p class="small" style="margin:0">Funds are priced daily and compared with benchmarks and peers. There's nowhere to hide, which demands honesty and humility when explaining performance. <b>Distinctive vs:</b> consulting and advisory, where outcomes are harder to measure.</p></div>
+    <div class="angle"><h4>5 · Breadth: the whole economy is your subject</h4><p class="small" style="margin:0">A global portfolio touches every industry, country and economic trend. Few careers make you think about technology, energy, healthcare and interest rates in the same week. <b>Distinctive vs:</b> sector-specific industries.</p></div>
+    <div class="angle"><h4>6 · Influence through ownership (stewardship)</h4><p class="small" style="margin:0">As shareholders, asset managers vote and engage with company boards on strategy, pay and climate. That is long-term influence over how companies behave. <b>Distinctive vs:</b> banking, consulting, insurance.</p></div>
+    <div class="angle"><h4>7 · Compounding: patience is the strategy</h4><p class="small" style="margin:0">The industry rewards long-term thinking, both in investments (compounding returns) and in relationships (compounding trust). In a short-term world that's genuinely unusual. <b>Distinctive vs:</b> trading, deal-driven roles.</p></div>
+    <div class="angle"><h4>Bonus · Translating complexity into confidence</h4><p class="small" style="margin:0">Client-facing IM roles exist to turn complex processes (attribution, risk, private markets) into clear explanations for trustees and advisers, a skill increasingly central under Consumer Duty. <b>Distinctive vs:</b> back-office or purely technical finance roles.</p></div>
+  </div>
+  <div class="box expert small"><b>The strongest IM reasons combine #2 and #3:</b> a business built on <i>long-term trust</i> with clients whose money ultimately belongs to <i>ordinary people</i>. That combination doesn't exist in IB, trading or consulting, and it's the natural justification for wanting the client-facing side.</div>
+</section>
+
+<section class="page im" id="d1c">
+  <div class="kicker"><span>1 · Investment Management</span><a href="#contents">↑ Contents</a></div>
+  <h2>1C · Weak vs compelling reasons, and "why not X?"</h2>
+  <table>
+    <tr><th style="width:30%">Weak reason</th><th style="width:28%">Why it's weak</th><th>Compelling version</th></tr>
+    <tr><td>"I'm interested in the stock market."</td><td>Equally true of trading, equity research or personal investing</td><td>"I'm interested in how long-term investment decisions are explained to and trusted by the people whose savings they are."</td></tr>
+    <tr><td>"Finance is fast-paced and challenging."</td><td>Also IB, S&amp;T, consulting</td><td>"I want to be measured on long-term outcomes. Every fund is judged daily against its benchmark, so honesty with clients is essential."</td></tr>
+    <tr><td>"It's well paid and prestigious."</td><td>Never say this, and it's true of IB too</td><td>(Don't use pay. Use purpose, responsibility or relationships.)</td></tr>
+    <tr><td>"I want to help people with their money."</td><td>Sounds like financial advice or wealth</td><td>"I want to help institutions like pension schemes invest well, because their decisions shape how thousands of members retire."</td></tr>
+    <tr><td>"I enjoyed my internship."</td><td>A feeling, not a reason</td><td>"My internship showed me that revenue depends on assets clients keep, so the trust built in every client meeting matters as much as returns."</td></tr>
+  </table>
+
+  <h3>Ready answers to "why not…?"</h3>
+  <div class="grid2">
+    <div class="box b2 small"><b>…investment banking?</b><br>"Banking is transactional: each deal ends. I'm drawn to IM because relationships and results build over years, and the firm is accountable for outcomes that affect ordinary savers."</div>
+    <div class="box b2 small"><b>…sales &amp; trading?</b><br>"Trading is short-term and serves the buy-side. I want to be on the buy-side, where decisions are made with a long horizon and explained directly to the end client."</div>
+    <div class="box b2 small"><b>…wealth management?</b><br>"Wealth is about one individual's whole financial life. I'm more interested in how investment strategies are built and distributed at scale, to pensions and to the wealth managers themselves."</div>
+    <div class="box b2 small"><b>…the investment team (PM / analyst)?</b><br>"I'm fascinated by investing, but what I enjoyed most was the client side: understanding what a client needs and explaining the process so they trust it. I want to understand portfolios deeply in order to do that well."</div>
+    <div class="box b2 small"><b>…private equity?</b><br>"PE is concentrated in a few companies. I like IM's breadth across asset classes, and that its clients reach millions of savers."</div>
+    <div class="box b2 small"><b>…consulting?</b><br>"Consultants recommend; asset managers decide and are measured every day. I want that accountability."</div>
+  </div>
+  <div class="box key small"><b>What's needed to make the IM reason believable:</b> (1) your AM experience described as a specific task and lesson; (2) one correct mechanic (fees on AUM, retention, institutional vs wholesale); (3) one live trend (Guide B13); (4) a signal of commitment, e.g. following markets in the FT or Citywire, an investment society, or starting the IMC.</div>
+</section>
+
+<!-- SALES -->
+<section class="chapter ch-s" id="d2">
+  <div class="num">2</div>
+  <h1>Sales</h1>
+  <p>Sales is often confused with marketing, customer service or "being good with people". What actually makes it different is that it is the <b>most directly measurable link between a person and revenue</b> in any business.</p>
+  <ol>
+    <li><a href="#d2a">Sales vs its neighbours, and what makes it unique</a></li>
+    <li><a href="#d2b">Weak vs compelling reasons, and "why not X?"</a></li>
+  </ol>
+</section>
+
+<section class="page sl" id="d2a">
+  <div class="kicker"><span>2 · Sales</span><a href="#contents">↑ Contents</a></div>
+  <h2>2A · Sales vs its neighbours, and what makes it unique</h2>
+  <table>
+    <tr><th style="width:17%">Function</th><th style="width:28%">What it does</th><th style="width:20%">Measured by</th><th>How Sales is different</th></tr>
+    <tr style="background:#eaf6f4"><td><b>Sales</b></td><td>Converts specific prospects into customers through one-to-one conversations; grows accounts</td><td>Revenue closed vs quota, pipeline, retention</td><td>—</td></tr>
+    <tr><td><b>Marketing</b></td><td>Creates awareness and demand across many people at once</td><td>Leads, brand awareness, campaign ROI</td><td>Marketing speaks to <b>many</b>; sales persuades <b>one decision-maker at a time</b> and owns the final yes.</td></tr>
+    <tr><td><b>Customer service / success</b></td><td>Supports existing customers; solves problems</td><td>Satisfaction, resolution, churn</td><td>Service <b>responds</b>; sales <b>initiates</b> and carries a revenue target (though account management overlaps).</td></tr>
+    <tr><td><b>Consulting</b></td><td>Diagnoses problems and recommends solutions</td><td>Utilisation, client outcomes</td><td>Both diagnose. Sales must also <b>win commitment</b> and is paid on the result.</td></tr>
+    <tr><td><b>Recruitment</b></td><td>Places candidates in jobs (itself a sales job)</td><td>Placements, fees</td><td>Recruitment is one specialised kind of sales; the Sales workstream spans every product and industry.</td></tr>
+    <tr><td><b>Business development (finance)</b></td><td>Wins clients for banks or asset managers</td><td>Mandates, net flows</td><td>The same skills in a regulated, long-cycle setting: IM distribution <i>is</i> sales.</td></tr>
+    <tr><td><b>Retail work</b></td><td>Serves walk-in customers</td><td>Store sales</td><td>Retail is mostly transactional B2C; professional sales is often <b>consultative B2B</b> with long cycles.</td></tr>
+  </table>
+
+  <h3>Six things only (or mostly) true of Sales</h3>
+  <div class="grid3">
+    <div class="angle"><h4>1 · The clearest line to impact</h4><p class="small" style="margin:0">Few roles can point to a number and say "I brought that revenue in". Your contribution is visible.</p></div>
+    <div class="angle"><h4>2 · Instant, honest feedback</h4><p class="small" style="margin:0">Every call, meeting and proposal gives a yes, no or not yet. You learn faster because the market tells you immediately.</p></div>
+    <div class="angle"><h4>3 · Meritocratic</h4><p class="small" style="margin:0">Results are measured and rewarded directly (commission, OTE, promotion), largely independent of background or connections.</p></div>
+    <div class="angle"><h4>4 · You learn the whole business</h4><p class="small" style="margin:0">To sell, you must understand the product, the customer's industry, pricing and competitors. That's why so many leaders started in sales.</p></div>
+    <div class="angle"><h4>5 · Human at its core</h4><p class="small" style="margin:0">Even as AI automates outreach, the decisive moments (trust, negotiation, reading a room) stay deeply human.</p></div>
+    <div class="angle"><h4>6 · Transferable everywhere</h4><p class="small" style="margin:0">Every organisation needs revenue, so sales skills move across industries, including back into finance.</p></div>
+  </div>
+  <div class="box expert small"><b>Your most distinctive Sales reason is #1 plus #4:</b> a role where your impact is <i>measurable</i>, and where you have to understand a client's business deeply in order to help them. It also links naturally to what you saw in asset management distribution, without making the answer about finance.</div>
+</section>
+
+<section class="page sl" id="d2b">
+  <div class="kicker"><span>2 · Sales</span><a href="#contents">↑ Contents</a></div>
+  <h2>2B · Weak vs compelling reasons, and "why not X?"</h2>
+  <table>
+    <tr><th style="width:28%">Weak reason</th><th style="width:28%">Why it's weak</th><th>Compelling version</th></tr>
+    <tr><td>"I'm outgoing and love talking to people."</td><td>Great sales is mostly listening</td><td>"What draws me to sales is the questioning: understanding a client's problem well enough that the solution becomes obvious to them."</td></tr>
+    <tr><td>"I'm competitive and money-motivated."</td><td>Sounds self-serving</td><td>"I like being measured on results I can see. Sales is one of the few roles where your contribution shows up directly in the numbers."</td></tr>
+    <tr><td>"I'm persuasive."</td><td>A claim, and a slightly risky one</td><td>"I've learned that persuasion lasts only when it's built on genuine value, which is why I'm drawn to account management and repeat business."</td></tr>
+    <tr><td>"Sales is a fast-paced industry."</td><td>Sales is a function, not an industry, and the phrase is generic</td><td>"Sales gives faster, more honest feedback than almost any role. Every conversation tells you what's working."</td></tr>
+    <tr><td>"I want to develop my communication skills."</td><td>About you, not them</td><td>"I want to learn how experienced salespeople qualify opportunities and handle objections, and contribute by researching prospects and analysing pipeline data."</td></tr>
+  </table>
+
+  <h3>Ready answers to "why not…?"</h3>
+  <div class="grid2">
+    <div class="box b3 small"><b>…marketing?</b><br>"Marketing creates interest across many people. I'm drawn to the one-to-one part: understanding a specific client and earning their commitment."</div>
+    <div class="box b3 small"><b>…consulting?</b><br>"I like diagnosing problems, but I want to be accountable for the outcome too, both winning the client's yes and being measured on it."</div>
+    <div class="box b3 small"><b>…customer service?</b><br>"I enjoy helping customers, but I want to proactively create value: finding new clients and growing relationships, with a clear target."</div>
+    <div class="box b3 small"><b>…finance, given your AM background?</b><br>"Asset management showed me that winning and keeping clients is a skill in itself. I want to build that skill rigorously, wherever it's practised best."</div>
+  </div>
+  <div class="box key small"><b>What's needed to make the Sales reason believable:</b> (1) a real example of persuading, selling or fundraising, with a number if possible; (2) evidence of resilience (rejection handled); (3) one correct mechanic (pipeline, conversion, retention, discovery); (4) the AM sales cycle described in sales language; (5) curiosity about customers, not just about selling.</div>
+  <div class="box warn small"><b>Watch out:</b> the Sales workstream reader could be a software firm, a consumer brand or a media company. If your answer only works for financial services, rewrite the industry-specific parts in general sales language.</div>
+</section>
+
+<!-- PR -->
+<section class="chapter ch-pr" id="d3">
+  <div class="num">3</div>
+  <h1>Public Relations</h1>
+  <p>PR is regularly confused with marketing, social media and journalism. What sets it apart is that it manages <b>reputation with every stakeholder</b>, through attention it has to <b>earn</b>, including when the news is bad.</p>
+  <ol>
+    <li><a href="#d3a">PR vs its neighbours, and what makes it unique</a></li>
+    <li><a href="#d3b">Weak vs compelling reasons, and "why not X?"</a></li>
+  </ol>
+</section>
+
+<section class="page prr" id="d3a">
+  <div class="kicker"><span>3 · Public Relations</span><a href="#contents">↑ Contents</a></div>
+  <h2>3A · PR vs its neighbours, and what makes it unique</h2>
+  <table>
+    <tr><th style="width:17%">Field</th><th style="width:28%">What it does</th><th style="width:19%">Audience</th><th>How PR is different</th></tr>
+    <tr style="background:#f3eff6"><td><b>Public relations</b></td><td>Builds and protects reputation through earned media and stakeholder communication</td><td><b>All</b> stakeholders</td><td>—</td></tr>
+    <tr><td><b>Marketing</b></td><td>Drives demand for products</td><td>Customers</td><td>Marketing sells products to customers. PR manages trust with <b>everyone</b>: investors, staff, regulators, media, communities.</td></tr>
+    <tr><td><b>Advertising</b></td><td>Buys space to deliver controlled messages</td><td>Customers</td><td>Advertising is <b>paid and controlled</b>. PR must <b>earn</b> coverage by persuading independent gatekeepers, which makes it more credible.</td></tr>
+    <tr><td><b>Journalism</b></td><td>Reports news independently</td><td>The public</td><td>Journalists serve readers. PR serves an organisation, so it needs a journalist's news sense <b>plus</b> strategic advocacy.</td></tr>
+    <tr><td><b>Public affairs</b></td><td>Influences policy and regulation</td><td>Politicians, officials</td><td>A specialist branch of PR. PR overall covers the media, the public and other stakeholders too.</td></tr>
+    <tr><td><b>Social media management</b></td><td>Runs a brand's social channels</td><td>Followers</td><td>Social is one channel. PR is the strategy across all channels, including crisis and corporate reputation.</td></tr>
+    <tr><td><b>Investor relations</b></td><td>Communicates with shareholders and analysts</td><td>Investors</td><td>IR is a focused, regulated cousin. Financial PR works alongside IR on the wider media.</td></tr>
+  </table>
+
+  <h3>Six things only (or mostly) true of PR</h3>
+  <div class="grid3">
+    <div class="angle"><h4>1 · It handles the bad news</h4><p class="small" style="margin:0">Marketing goes quiet in a crisis. PR is the function that steps <b>forward</b>: results misses, job cuts, failures, scandals.</p></div>
+    <div class="angle"><h4>2 · Earned, not bought</h4><p class="small" style="margin:0">Success depends on persuading independent people (journalists, creators) that something is worth their audience's attention.</p></div>
+    <div class="angle"><h4>3 · Every stakeholder</h4><p class="small" style="margin:0">One week: customers, employees, investors, government, communities. PR thinks about how one message lands with all of them.</p></div>
+    <div class="angle"><h4>4 · Close to leadership</h4><p class="small" style="margin:0">Senior PR people advise CEOs at the most sensitive moments. Reputation is a board-level concern.</p></div>
+    <div class="angle"><h4>5 · Live to the news cycle</h4><p class="small" style="margin:0">The work reacts to the world in real time, so news sense and speed are core skills.</p></div>
+    <div class="angle"><h4>6 · Writing as the core craft</h4><p class="small" style="margin:0">Statements, releases, messages, speeches. Precise words under time pressure are the product.</p></div>
+  </div>
+  <div class="box expert small"><b>Your most distinctive PR reason is #1 plus #2:</b> the discipline that earns trust it can't buy, and protects it when things go wrong. Linked to your observation that in finance "trust is the product", it's a reason no marketing-focused candidate can match.</div>
+</section>
+
+<section class="page prr" id="d3b">
+  <div class="kicker"><span>3 · Public Relations</span><a href="#contents">↑ Contents</a></div>
+  <h2>3B · Weak vs compelling reasons, and "why not X?"</h2>
+  <table>
+    <tr><th style="width:28%">Weak reason</th><th style="width:28%">Why it's weak</th><th>Compelling version</th></tr>
+    <tr><td>"I love social media."</td><td>Social is one channel, and the reason sounds like a consumer habit</td><td>"I'm interested in how organisations earn credibility across channels, and how quickly that changes when something goes wrong."</td></tr>
+    <tr><td>"I'm creative."</td><td>PR is also strategy, research and judgement</td><td>"I enjoy the problem-solving side of creativity: finding the angle that makes a journalist care about a story."</td></tr>
+    <tr><td>"I like fashion / celebrities / brands."</td><td>Fan interest, not professional interest</td><td>"What interests me about consumer brands is how they turn a moment, like a launch or even a mistake, into a story people want to share."</td></tr>
+    <tr><td>"I'm good with people."</td><td>Generic</td><td>"I like building relationships based on reliability, which is what makes a journalist trust a PR source."</td></tr>
+    <tr><td>"I want to shape public opinion."</td><td>Can sound manipulative</td><td>"I want to help organisations communicate clearly and honestly, because trust built on accuracy lasts longer than spin."</td></tr>
+  </table>
+
+  <h3>Ready answers to "why not…?"</h3>
+  <div class="grid2">
+    <div class="box b4 small"><b>…marketing?</b><br>"Marketing focuses on customers and products. I'm drawn to PR's broader responsibility for reputation with every stakeholder, especially when the news is difficult."</div>
+    <div class="box b4 small"><b>…journalism?</b><br>"I share a journalist's curiosity about what makes a story, but I want to apply it strategically, helping organisations communicate well and advising on what to say and when."</div>
+    <div class="box b4 small"><b>…advertising?</b><br>"Advertising is powerful but paid for. I'm more interested in earning attention, because third-party credibility is harder to win and worth more."</div>
+    <div class="box b4 small"><b>…finance, given your AM background?</b><br>"Asset management showed me that reputation directly drives client trust and flows. I want to specialise in how that reputation is built and protected."</div>
+  </div>
+  <div class="box key small"><b>What's needed to make the PR reason believable:</b> (1) proof of writing ability (the answer itself, plus an example such as articles, society comms or blogs); (2) a news habit: name what you read and a campaign or crisis you followed; (3) one correct mechanic (earned media, key messages, stakeholders, crisis response); (4) evidence of organisation under pressure; (5) flawless spelling and grammar, because in PR a typo is disqualifying.</div>
+</section>
+
+<!-- ALL THREE -->
+<section class="page" id="d4">
+  <div class="kicker"><span>4 · All three side by side</span><a href="#contents">↑ Contents</a></div>
+  <h2>4 · All three side by side</h2>
+  <table>
+    <tr><th style="width:20%"></th><th>Investment Management</th><th>Sales</th><th>Public Relations</th></tr>
+    <tr><td><b>Core purpose</b></td><td>Grow and protect other people's savings over time</td><td>Turn customer needs into revenue</td><td>Build and protect reputation and trust</td></tr>
+    <tr><td><b>Who you serve</b></td><td>Pension funds, insurers, wealth managers, savers</td><td>Business or consumer buyers</td><td>Every stakeholder: media, public, investors, staff, government</td></tr>
+    <tr><td><b>How money is made</b></td><td>Recurring % of assets managed</td><td>Deals × size × retention</td><td>Retainers and fees (agency) / protecting value (in-house)</td></tr>
+    <tr><td><b>Time horizon</b></td><td>Years to decades</td><td>Days to months per deal; years per account</td><td>Hours (news, crisis) to years (reputation)</td></tr>
+    <tr><td><b>How success is measured</b></td><td>Performance vs benchmark; net flows; retention</td><td>Quota attainment; pipeline; churn</td><td>Coverage quality, message pick-up, trust, impact</td></tr>
+    <tr><td><b>The core skill</b></td><td>Judgement and clear explanation of complex decisions</td><td>Discovery: listening and questioning</td><td>Writing and news judgement</td></tr>
+    <tr><td><b>The emotional reward</b></td><td>Responsibility; long-term relationships; intellectual breadth</td><td>Visible impact; winning; instant feedback</td><td>Influence; variety; calm in a storm</td></tr>
+    <tr><td><b>The hard part</b></td><td>Explaining underperformance; fee pressure</td><td>Rejection; targets</td><td>Lack of control; unpredictable hours</td></tr>
+    <tr><td><b>Distinctive "why"</b></td><td>Long-term trust with clients whose money belongs to ordinary people</td><td>Measurable impact, earned by understanding clients deeply</td><td>Earning trust you can't buy, and protecting it when things go wrong</td></tr>
+  </table>
+
+  <h3>The common thread, and the differences that keep answers separate</h3>
+  <svg viewBox="0 0 680 120" width="100%">
+    <g font-size="10">
+      <rect x="230" y="40" width="220" height="44" rx="8" fill="#14213d"/><text x="340" y="60" text-anchor="middle" fill="#fff" font-weight="800">Common thread: TRUST</text><text x="340" y="75" text-anchor="middle" fill="#e09f3e" font-size="8.5">use in your head, not in every answer</text>
+      <rect x="5" y="40" width="200" height="44" rx="8" fill="#fff7ea" stroke="#e09f3e"/><text x="105" y="58" text-anchor="middle" fill="#14213d" font-weight="700">IM: trust kept over decades</text><text x="105" y="74" text-anchor="middle" fill="#5c6378" font-size="8.5">stewardship of savings</text>
+      <rect x="475" y="5" width="200" height="44" rx="8" fill="#eaf6f4" stroke="#2a9d8f"/><text x="575" y="23" text-anchor="middle" fill="#14213d" font-weight="700">Sales: trust earned per client</text><text x="575" y="39" text-anchor="middle" fill="#5c6378" font-size="8.5">turned into commitment</text>
+      <rect x="475" y="72" width="200" height="44" rx="8" fill="#f3eff6" stroke="#6d597a"/><text x="575" y="90" text-anchor="middle" fill="#14213d" font-weight="700">PR: trust earned publicly</text><text x="575" y="106" text-anchor="middle" fill="#5c6378" font-size="8.5">and defended in a crisis</text>
+      <line x1="207" y1="62" x2="228" y2="62" stroke="#5c6378" stroke-width="1.5"/><line x1="452" y1="55" x2="473" y2="30" stroke="#5c6378" stroke-width="1.5"/><line x1="452" y1="70" x2="473" y2="94" stroke="#5c6378" stroke-width="1.5"/>
+    </g>
+  </svg>
+  <p class="small center muted">Same value, three different expressions. That's how you stay consistent without repeating yourself.</p>
+</section>
+
+<!-- NEEDED -->
+<section class="page" id="d5">
+  <div class="kicker"><span>5 · What's needed</span><a href="#contents">↑ Contents</a></div>
+  <h2>5 · What's needed: evidence and skills checklist</h2>
+  <p class="small">A compelling reason is only believable if your CV and answer contain evidence for it. Tick what you can already show and plan how to show the rest.</p>
+  <table>
+    <tr><th style="width:22%">Requirement</th><th>Investment Management</th><th>Sales</th><th>Public Relations</th><th style="width:20%">Where it goes</th></tr>
+    <tr><td><b>Genuine, specific motivation</b></td><td>☐ Long-term trust / savers angle</td><td>☐ Measurable impact / discovery angle</td><td>☐ Earned trust / crisis angle</td><td>Answer opening</td></tr>
+    <tr><td><b>Relevant experience</b></td><td>☐ AM role: task + lesson</td><td>☐ AM sales cycle + a non-finance selling example</td><td>☐ AM comms observation + a writing example</td><td>CV first + answer proof</td></tr>
+    <tr><td><b>Industry knowledge</b></td><td>☐ AUM fees, channels, one trend</td><td>☐ Pipeline, retention, one trend</td><td>☐ PESO, key messages, one trend</td><td>Answer middle</td></tr>
+    <tr><td><b>Core skill evidence</b></td><td>☐ Analysis + clear explanation</td><td>☐ Listening / persuasion with a result</td><td>☐ Writing, plus organisation under pressure</td><td>CV bullet + answer</td></tr>
+    <tr><td><b>Commitment signal</b></td><td>☐ FT / Citywire habit, society, IMC</td><td>☐ Targets hit, fundraising, side hustle</td><td>☐ Named publications, PRWeek, campaigns followed</td><td>CV interests + answer</td></tr>
+    <tr><td><b>Resilience</b></td><td>☐ Handling pressure or deadlines</td><td>☐ Handling rejection</td><td>☐ Handling last-minute change</td><td>Answer proof or interview</td></tr>
+    <tr><td><b>Professional standards</b></td><td>☐ Accuracy, discretion</td><td>☐ Ethical selling</td><td>☐ Flawless writing, honesty</td><td>Whole application</td></tr>
+  </table>
+
+  <h3>The skills each industry values most</h3>
+  <div class="grid3">
+    <div class="box b2 small"><b>Investment Management</b><ul style="margin:1mm 0 0"><li>Analytical thinking and numeracy</li><li>Clear written and spoken explanation</li><li>Attention to detail and accuracy</li><li>Long-term relationship building</li><li>Curiosity about markets and the economy</li><li>Integrity and discretion</li></ul></div>
+    <div class="box b3 small"><b>Sales</b><ul style="margin:1mm 0 0"><li>Active listening and questioning</li><li>Resilience and persistence</li><li>Commercial awareness</li><li>Organisation (pipeline, follow-ups)</li><li>Confidence with senior people</li><li>Comfort with targets and data</li></ul></div>
+    <div class="box b4 small"><b>Public Relations</b><ul style="margin:1mm 0 0"><li>Excellent writing and editing</li><li>News sense and curiosity</li><li>Judgement and calm under pressure</li><li>Relationship building (media)</li><li>Research and organisation</li><li>Adaptability to fast change</li></ul></div>
+  </div>
+  <div class="box warn small"><b>Gaps are normal.</b> If you can't evidence something yet, don't invent it. Either choose a different angle, or create quick evidence before applying (e.g. start reading PRWeek, write a short LinkedIn post about a market trend, or note the targets you hit in a part-time job).</div>
+</section>
+
+<!-- 250 -->
+<section class="page" id="d6">
+  <div class="kicker"><span>6 · Into 250 words</span><a href="#contents">↑ Contents</a></div>
+  <h2>6 · Putting distinctiveness into 250 words</h2>
+  <p class="small">You don't need to compare industries in your answer. Never write "unlike banking…". Instead, include <b>one sentence that could only be true of this industry</b>, and make it carry your personal reason.</p>
+  <div class="formula">
+    <div class="f">Personal value<small>from the workbook</small></div><div class="op">+</div>
+    <div class="f">Distinctive feature<small>from Sections 1–3</small></div><div class="op">+</div>
+    <div class="f">Proof<small>what you did</small></div><div class="op">=</div>
+    <div class="f">Compelling why</div>
+  </div>
+  <table>
+    <tr><th style="width:15%"></th><th>The "only here" sentence (adapt it, using your own details)</th></tr>
+    <tr><td><b>IM</b></td><td>"What sets investment management apart for me is that its relationships are measured in years, not transactions: firms are paid for every year a client trusts them with savings that ultimately belong to ordinary people."</td></tr>
+    <tr><td><b>Sales</b></td><td>"Sales appeals to me because it's one of the few roles where your contribution is visible in the numbers, yet the results depend entirely on understanding another person's problem."</td></tr>
+    <tr><td><b>PR</b></td><td>"Public relations is the discipline that earns trust it cannot buy, and is the one that steps forward, rather than goes quiet, when things go wrong."</td></tr>
+  </table>
+
+  <h3>Where it sits in the answer structure</h3>
+  <div class="budget" style="display:flex;height:11mm;border-radius:2mm;overflow:hidden;margin:3mm 0 1mm;font-size:7.8pt;color:#fff;font-weight:600">
+    <div style="width:16%;background:#3a6ea5;display:flex;align-items:center;justify-content:center;text-align:center">Value / hook</div>
+    <div style="width:22%;background:#b8771f;display:flex;align-items:center;justify-content:center;text-align:center">★ "Only here" sentence + mechanic</div>
+    <div style="width:36%;background:#2a9d8f;display:flex;align-items:center;justify-content:center;text-align:center">Proof: your experience</div>
+    <div style="width:18%;background:#6d597a;display:flex;align-items:center;justify-content:center;text-align:center">Contribution &amp; learning</div>
+    <div style="width:8%;background:#c8553d;display:flex;align-items:center;justify-content:center;text-align:center">Close</div>
+  </div>
+  <p class="tiny muted center">The distinctive sentence goes straight after your hook, so the reader knows within 15 seconds that you understand what makes their industry different.</p>
+
+  <h3>Final check for each answer</h3>
+  <div class="grid2">
+    <div class="box key small"><ul style="margin:0"><li>☐ Swap in the neighbouring industry's name. Does the answer break? (It should.)</li><li>☐ Is there one "only here" sentence?</li><li>☐ Is it tied to a personal value or moment?</li></ul></div>
+    <div class="box key small"><ul style="margin:0"><li>☐ Is there proof from my own experience?</li><li>☐ Is there one correct industry mechanic?</li><li>☐ Could I answer "why not [neighbour]?" in an interview?</li></ul></div>
+  </div>
+  <div class="box good small"><b>Next step:</b> send me your workbook answers (values, money story, moments, AM observations), and say which distinctive feature resonates most for each industry. I'll draft all three answers in your voice, with the "only here" sentence built in.</div>
+  <div class="box b1 small center"><a href="#contents" style="font-weight:700">↑ Back to contents</a></div>
+</section>
+
+</body>
+</html>

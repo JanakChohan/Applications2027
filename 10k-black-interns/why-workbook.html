@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Finding Your Why</title>
+<style>
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+:root{
+  --ink:#14213d; --body:#2b2d42; --muted:#5c6378; --line:#d9dde7;
+  --navy:#14213d; --gold:#e09f3e; --gold-d:#b8771f; --teal:#2a9d8f; --teal-d:#1f7a6f; --plum:#6d597a; --plum-d:#54435f; --red:#c8553d; --blue:#3a6ea5;
+  --bg1:#f4f6fb; --bg2:#fff7ea; --bg3:#eaf6f4; --bg4:#f3eff6; --bg5:#fdeeea; --bg6:#eaf1f9;
+  --accent:var(--gold); --accent-d:var(--gold-d); --accent-bg:var(--bg2);
+}
+*{box-sizing:border-box}
+html,body{background:#fff}
+body{font-family:"Inter",sans-serif;color:var(--body);font-size:9.7pt;line-height:1.45;margin:0}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{color:var(--ink);line-height:1.2;margin:0}
+h1{font-size:26pt;font-weight:800;letter-spacing:-.5px}
+h2{font-size:16pt;font-weight:800;margin:0 0 3.5mm;padding-bottom:2mm;border-bottom:2.5px solid var(--accent)}
+h3{font-size:11.5pt;font-weight:700;margin:4.5mm 0 2mm}
+h4{font-size:9.8pt;font-weight:700;margin:2.5mm 0 1mm}
+p{margin:0 0 2.2mm}
+ul,ol{margin:0 0 2.2mm;padding-left:5mm}
+li{margin-bottom:.8mm}
+.page{break-before:page}
+.kicker{display:flex;justify-content:space-between;font-size:7.5pt;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent);margin-bottom:1.5mm}
+.kicker a{color:var(--muted);letter-spacing:.5px;text-transform:none;font-weight:600}
+.lead{font-size:10.8pt;color:var(--ink)}
+.muted{color:var(--muted)} .small{font-size:8.6pt} .tiny{font-size:7.8pt}
+.center{text-align:center}
+.box{border-radius:3mm;padding:3mm 3.5mm;margin:2.5mm 0;break-inside:avoid}
+.box h4:first-child,.box h3:first-child{margin-top:0}
+.box p:last-child,.box ul:last-child{margin-bottom:0}
+.b1{background:var(--bg1)} .b2{background:var(--bg2)} .b3{background:var(--bg3)} .b4{background:var(--bg4)} .b5{background:var(--bg5)} .b6{background:var(--bg6)}
+.key{border-left:4px solid var(--gold);background:var(--bg2)}
+.warn{border-left:4px solid var(--red);background:var(--bg5)}
+.good{border-left:4px solid var(--teal);background:var(--bg3)}
+.zero{border-left:4px solid var(--blue);background:var(--bg6)}
+.zero:before{content:"ZERO-KNOWLEDGE EXPLAINER";display:block;font-size:7pt;font-weight:800;letter-spacing:1.2px;color:var(--blue);margin-bottom:1mm}
+.expert,.zero{border-radius:3mm;padding:2.6mm 3.5mm;margin:2.5mm 0;break-inside:avoid}
+.expert{border-left:4px solid var(--plum);background:var(--bg4)}
+.expert:before{content:"EXPERT INSIGHT";display:block;font-size:7pt;font-weight:800;letter-spacing:1.2px;color:var(--plum);margin-bottom:1mm}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin:2.5mm 0}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3mm;margin:2.5mm 0}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:2.5mm;margin:2.5mm 0}
+.grid2>.box,.grid3>.box,.grid4>.box{margin:0}
+table{width:100%;border-collapse:collapse;margin:2mm 0 3mm;font-size:8.6pt;break-inside:avoid}
+th{background:var(--navy);color:#fff;text-align:left;padding:1.6mm 2mm;font-weight:600}
+td{padding:1.1mm 2mm;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:#fafbfd}
+.tag{display:inline-block;font-size:7.2pt;font-weight:700;padding:.4mm 1.8mm;border-radius:5mm;background:var(--navy);color:#fff}
+.t-gold{background:var(--gold-d)} .t-teal{background:var(--teal)} .t-plum{background:var(--plum)} .t-red{background:var(--red)} .t-blue{background:var(--blue)}
+.flow{display:flex;align-items:stretch;margin:3mm 0;break-inside:avoid}
+.flow .step{flex:1;background:var(--bg1);border:1.5px solid var(--navy);border-radius:2.5mm;padding:2.2mm;font-size:8.2pt;text-align:center}
+.flow .step b{display:block;color:var(--ink);font-size:8.8pt;margin-bottom:.8mm}
+.flow .arr{width:5mm;display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:800;font-size:13pt}
+.part{border-radius:3mm;padding:3mm;color:#fff;break-inside:avoid}
+.part h4{color:#fff;margin:0 0 1.5mm;font-size:9.8pt}
+.part ul{padding-left:4mm;margin:0;font-size:8.3pt}
+.part .who{font-size:7.9pt;opacity:.92;margin-top:1.5mm;border-top:1px solid rgba(255,255,255,.35);padding-top:1.5mm}
+.p-navy{background:var(--navy)} .p-gold{background:var(--gold-d)} .p-teal{background:var(--teal-d)} .p-plum{background:var(--plum)} .p-blue{background:var(--blue)} .p-red{background:var(--red)}
+.formula{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:2.5mm;margin:3mm 0;font-weight:700;color:var(--ink);break-inside:avoid}
+.formula .f{background:var(--bg1);border:1.5px solid var(--navy);border-radius:2mm;padding:2.2mm 3.5mm;text-align:center;font-size:9.5pt}
+.formula .f small{display:block;font-weight:400;font-size:7.3pt;color:var(--muted)}
+.formula .op{font-size:15pt;color:var(--accent)}
+.gloss{display:grid;grid-template-columns:1fr 1fr;gap:0 5mm;font-size:8.3pt;margin:2mm 0}
+.gloss div{break-inside:avoid;padding:1.1mm 0;border-bottom:1px solid var(--line)}
+.gloss b{color:var(--ink)}
+.cover{height:267mm;display:flex;flex-direction:column;justify-content:space-between;background:var(--navy);color:#fff;margin:-15mm -15mm 0;padding:22mm 18mm}
+.cover h1{color:#fff;font-size:34pt;line-height:1.05}
+.cover .sub{font-size:12.5pt;color:#d6dbe8;margin-top:5mm;max-width:155mm}
+.chapter{height:267mm;display:flex;flex-direction:column;justify-content:center;margin:-15mm -15mm 0;padding:20mm 20mm;color:#fff;break-before:page}
+.chapter .num{font-size:60pt;font-weight:800;opacity:.25;line-height:1}
+.chapter h1{color:#fff;font-size:32pt;margin:2mm 0 4mm}
+.chapter p{font-size:11.5pt;color:rgba(255,255,255,.88);max-width:150mm}
+.chapter ol{font-size:10.5pt;color:#fff;margin-top:6mm}
+.chapter ol a{color:#fff;border-bottom:1px solid rgba(255,255,255,.4)}
+.ch-a{background:var(--blue)} .ch-im{background:var(--navy)} .ch-s{background:var(--teal-d)} .ch-pr{background:var(--plum)} .ch-x{background:#3d3d4e}
+.toc{font-size:9.4pt}
+.toc .sec{display:flex;justify-content:space-between;font-weight:700;color:var(--ink);margin-top:2.6mm;padding:1.4mm 2mm;border-radius:1.5mm}
+.toc .sub{display:block;padding:.7mm 2mm .7mm 7mm;border-bottom:1px dotted var(--line);color:var(--body)}
+.toc .sub:after{content:" ›";color:var(--accent)}
+.tocgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 7mm}
+.funnel{display:flex;flex-direction:column;align-items:center;gap:1.2mm;margin:3mm 0;break-inside:avoid}
+.funnel div{color:#fff;text-align:center;padding:1.6mm;border-radius:1.5mm;font-size:8.3pt;font-weight:600}
+.ladder{display:flex;align-items:flex-end;gap:2mm;height:44mm;margin:3mm 0 1mm;break-inside:avoid}
+.ladder div{flex:1;border-radius:2mm 2mm 0 0;color:#fff;font-size:7.8pt;font-weight:600;text-align:center;padding:1.5mm;display:flex;align-items:flex-start;justify-content:center}
+.qa{counter-reset:q}
+.qa .box{position:relative;padding-left:10mm}
+.qa .box:before{counter-increment:q;content:counter(q);position:absolute;left:3mm;top:3mm;width:5mm;height:5mm;border-radius:50%;background:var(--accent);color:#fff;font-size:7.5pt;font-weight:800;display:flex;align-items:center;justify-content:center}
+svg text{font-family:Inter}
+.im{--accent:var(--gold);--accent-d:var(--gold-d)}
+.sl{--accent:var(--teal);--accent-d:var(--teal-d)}
+.prr{--accent:var(--plum);--accent-d:var(--plum-d)}
+.ab{--accent:var(--blue)}
+.lines{height:var(--h,22mm);background:repeating-linear-gradient(to bottom,transparent 0,transparent 6.6mm,#c9cfdc 6.6mm,#c9cfdc 6.9mm);margin:1.5mm 0 3mm;break-inside:avoid}
+.prompt{font-weight:600;color:var(--ink);font-size:9pt;margin-top:2.5mm}
+.chips{display:flex;flex-wrap:wrap;gap:1.6mm;margin:2mm 0}
+.chips span{border:1.2px solid var(--line);border-radius:5mm;padding:.8mm 2.6mm;font-size:8.4pt;background:#fff}
+.chips span:before{content:"☐ ";color:var(--muted)}
+.angle{border:1.5px solid var(--line);border-radius:2.5mm;padding:2mm 2.8mm;margin:0;break-inside:avoid}
+.angle h4{margin:0 0 .6mm;font-size:9.6pt}
+.angle .row{display:grid;grid-template-columns:15mm 1fr;gap:1.2mm;font-size:7.9pt;line-height:1.35;margin-top:.7mm}
+.angle .row b{color:var(--muted);font-size:6.8pt;text-transform:uppercase;letter-spacing:.6px;padding-top:.4mm}
+.angle .line{font-style:italic;color:var(--ink)}
+.ph{background:#fff1d6;padding:0 1mm;border-radius:1mm;color:#8a5a12;font-weight:600;font-style:normal}
+</style>
+</head>
+<body>
+<section class="cover">
+  <div>
+    <div class="kicker" style="color:var(--gold)">10,000 Black Interns · Class of 2027 · Reflective workbook</div>
+    <h1>Finding your why</h1>
+    <p class="sub">A guided way to turn your values, upbringing and experiences into a motivation for Investment Management, Sales and Public Relations that nobody else could have written, and that you can talk about confidently in any interview.</p>
+  </div>
+  <div>
+    <div class="grid3" style="gap:5mm">
+      <div style="border-top:3px solid var(--gold);padding-top:2mm"><b style="color:#fff;font-size:12pt">1 · Dig</b><br><span style="color:#c8cee0;font-size:9pt">Exercises to surface your real values, memories and moments</span></div>
+      <div style="border-top:3px solid var(--teal);padding-top:2mm"><b style="color:#fff;font-size:12pt">2 · Connect</b><br><span style="color:#c8cee0;font-size:9pt">Link each value to how the industry actually works</span></div>
+      <div style="border-top:3px solid #b79ec8;padding-top:2mm"><b style="color:#fff;font-size:12pt">3 · Write</b><br><span style="color:#c8cee0;font-size:9pt">Original angles, a cliché detector and assembly templates</span></div>
+    </div>
+    <p class="small" style="color:#aab2c8;margin-top:9mm">This is a workbook. Print it or write your answers in a notes app. Nothing here assumes anything about your background: every prompt is optional, and you choose what to share. Highlighted <span class="ph">[brackets]</span> mark where only your real details can go. Section references like "Guide B10" point to the Industry Guide PDF. Prepared October 2026.</p>
+  </div>
+</section>
+
+<section class="page" id="contents">
+  <div class="kicker"><span>Navigation</span><span></span></div>
+  <h2>Contents</h2>
+  <div class="toc" style="max-width:150mm">
+    <a class="sec" style="background:var(--bg2)" href="#w0"><span>Start · What a great "why" actually is</span></a>
+    <a class="sec" style="background:var(--bg6)" href="#w1"><span>Part 1 · Dig: values discovery exercises</span></a>
+    <a class="sub" href="#w1a">1A · Your money story</a>
+    <a class="sub" href="#w1b">1B · Your values</a>
+    <a class="sub" href="#w1c">1C · Moments, people and frustrations</a>
+    <a class="sub" href="#w1d">1D · Mining your asset management experience</a>
+    <a class="sec" style="background:var(--bg3)" href="#w2"><span>Part 2 · Connect: values → industry map</span></a>
+    <a class="sec" style="background:var(--bg2)" href="#w3"><span>Part 3 · Outside-the-box angles</span></a>
+    <a class="sub" href="#w3a">3A · Investment Management angles</a>
+    <a class="sub" href="#w3b">3B · Sales angles</a>
+    <a class="sub" href="#w3c">3C · Public Relations angles</a>
+    <a class="sec" style="background:var(--bg5)" href="#w4"><span>Part 4 · Cliché detector</span></a>
+    <a class="sec" style="background:var(--bg4)" href="#w5"><span>Part 5 · Assemble: one template per industry</span></a>
+    <a class="sec" style="background:#ececf1" href="#w6"><span>Part 6 · The authenticity test and interview follow-ups</span></a>
+  </div>
+  <div class="box key small" style="margin-top:6mm"><b>How long this takes:</b> give Part 1 about an hour, in one sitting, and write fast without editing. Part 2 takes 15 minutes. Then pick angles from Part 3 and assemble in Part 5. The deadline is 1 November, so do Part 1 today.</div>
+</section>
+
+<section class="page" id="w0">
+  <div class="kicker"><span>Start</span><a href="#contents">↑ Contents</a></div>
+  <h2>What a great "why" actually is</h2>
+  <p class="lead">Most applicants say <i>what</i> they want ("I want to work in investment management"). Good applicants say <i>why</i> in general terms ("because I'm interested in markets"). The best applicants show a <b>personal reason that connects to how the industry actually works</b>, and prove it with something they did.</p>
+
+  <svg viewBox="0 0 680 120" width="100%">
+    <defs><marker id="wa" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#e09f3e"/></marker></defs>
+    <g font-size="10">
+      <rect x="5" y="20" width="150" height="80" rx="10" fill="#3a6ea5"/><text x="80" y="50" text-anchor="middle" fill="#fff" font-weight="800">1 · A VALUE OR</text><text x="80" y="65" text-anchor="middle" fill="#fff" font-weight="800">MEMORY</text><text x="80" y="84" text-anchor="middle" fill="#fff" font-size="8.5">something true about you</text>
+      <rect x="178" y="20" width="150" height="80" rx="10" fill="#2a9d8f"/><text x="253" y="50" text-anchor="middle" fill="#fff" font-weight="800">2 · WHAT YOU</text><text x="253" y="65" text-anchor="middle" fill="#fff" font-weight="800">NOTICED</text><text x="253" y="84" text-anchor="middle" fill="#fff" font-size="8.5">the insight it gave you</text>
+      <rect x="351" y="20" width="150" height="80" rx="10" fill="#14213d"/><text x="426" y="50" text-anchor="middle" fill="#fff" font-weight="800">3 · THE INDUSTRY</text><text x="426" y="65" text-anchor="middle" fill="#fff" font-weight="800">TRUTH</text><text x="426" y="84" text-anchor="middle" fill="#fff" font-size="8.5">how it really works</text>
+      <rect x="524" y="20" width="150" height="80" rx="10" fill="#b8771f"/><text x="599" y="50" text-anchor="middle" fill="#fff" font-weight="800">4 · PROOF &amp;</text><text x="599" y="65" text-anchor="middle" fill="#fff" font-weight="800">AMBITION</text><text x="599" y="84" text-anchor="middle" fill="#fff" font-size="8.5">what you did, what you'll do</text>
+    </g>
+    <g stroke="#e09f3e" stroke-width="2.5" marker-end="url(#wa)"><line x1="156" y1="60" x2="176" y2="60"/><line x1="329" y1="60" x2="349" y2="60"/><line x1="502" y1="60" x2="522" y2="60"/></g>
+  </svg>
+  <p class="small center muted">The "motivation chain". A value with no industry truth is just a nice story. Industry knowledge with no value is a textbook. You need both, joined.</p>
+
+  <h3>What "outside the box" means here</h3>
+  <p class="small">It does <b>not</b> mean gimmicky, dramatic or exaggerated. It means <b>an angle that's true but unexpected</b>, a link the reader hasn't seen 30 times that day. The surprise usually comes from connecting something ordinary from your life to something specific about the industry:</p>
+  <div class="grid3">
+    <div class="box b5 small"><span class="tag t-red">Expected</span><br>"I've always been interested in finance and the stock market."</div>
+    <div class="box b3 small"><span class="tag t-teal">Unexpected but true</span><br>"The most important financial decision in my family was never about the stock market. It was about whether to keep money in a savings account that was quietly losing to inflation."</div>
+    <div class="box b2 small"><span class="tag t-gold">Why it works</span><br>Personal, specific and humble, and it leads straight into the real purpose of investment management (Guide A2, B1).</div>
+  </div>
+
+  <h3>Three rules for writing about values and upbringing</h3>
+  <div class="grid3">
+    <div class="box b1 small"><b>1 · Lesson, not life story.</b> One moment, then what it taught you. Spend at most 30–40 words of 250 on the memory, and the rest on what it means now.</div>
+    <div class="box b1 small"><b>2 · Show, don't label.</b> "I'm resilient" is a claim. "I sent 40 emails before I got my first reply" is proof.</div>
+    <div class="box b1 small"><b>3 · Only what you're happy to expand on.</b> Interviewers often say "tell me more about that". Share only what you'd be comfortable talking about for two minutes. You never have to disclose anything personal you'd rather keep private.</div>
+  </div>
+</section>
+
+<!-- PART 1 -->
+<section class="chapter ch-a" id="w1">
+  <div class="num">1</div>
+  <h1>Dig</h1>
+  <p>Four short exercise sets. Write quickly and honestly, and don't edit yet. You're mining for raw material. Most of it won't be used, but one or two lines will become the spine of your answers.</p>
+  <ol>
+    <li><a href="#w1a">Your money story</a></li>
+    <li><a href="#w1b">Your values</a></li>
+    <li><a href="#w1c">Moments, people and frustrations</a></li>
+    <li><a href="#w1d">Mining your asset management experience</a></li>
+  </ol>
+</section>
+
+<section class="page" id="w1a">
+  <div class="kicker"><span>Part 1 · Dig</span><a href="#contents">↑ Contents</a></div>
+  <h2>1A · Your money story</h2>
+  <p class="small">Everyone grows up with messages about money: spoken or unspoken, positive or difficult. These are some of the most powerful raw materials for an investment management answer, because the industry exists to answer one question: <b>how do ordinary people's savings grow and stay safe over a lifetime?</b></p>
+
+  <div class="prompt">1. What's your earliest memory involving money, whether saving, spending, worrying or celebrating?</div><div class="lines"></div>
+  <div class="prompt">2. Growing up, what did the adults around you say or believe about money? (e.g. "save for a rainy day", "don't trust banks", "property is the only safe investment", "never borrow")</div><div class="lines"></div>
+  <div class="prompt">3. Who in your family or community was "good with money"? What did they do differently?</div><div class="lines"></div>
+  <div class="prompt">4. Did you ever see a money decision go well, or badly, for someone close to you? What made the difference?</div><div class="lines"></div>
+  <div class="prompt">5. When did you first realise that money could <i>grow</i> (interest, investing, a business), and not just be earned and spent?</div><div class="lines"></div>
+  <div class="prompt">6. Have you noticed prices rising, at home, at the shops or on rent, and what it meant for people's choices?</div><div class="lines"></div>
+  <div class="prompt">7. Did anyone in your life save into a pension, an ISA or a property, or send money to family elsewhere? What did that teach you about responsibility and the long term?</div><div class="lines"></div>
+  <div class="box zero small"><b>What to look for in your answers:</b> phrases about <b>patience</b>, <b>security</b>, <b>responsibility for others</b>, <b>trust or distrust of institutions</b>, <b>the long term</b>, <b>small habits adding up</b>, or <b>knowledge gaps</b> (people not knowing their options). Each of these maps directly onto a real truth about investment management (see <a href="#w2" style="color:var(--blue);font-weight:600">Part 2</a>).</div>
+</section>
+
+<section class="page" id="w1b">
+  <div class="kicker"><span>Part 1 · Dig</span><a href="#contents">↑ Contents</a></div>
+  <h2>1B · Your values</h2>
+  <p class="small"><b>Step 1:</b> tick every value that genuinely describes how you were raised or how you try to live. Aim for 10–15.</p>
+  <div class="chips">
+    <span>Responsibility</span><span>Family</span><span>Faith</span><span>Hard work</span><span>Patience</span><span>Discipline</span><span>Honesty</span><span>Integrity</span><span>Loyalty</span><span>Respect</span><span>Service to others</span><span>Community</span><span>Independence</span><span>Ambition</span><span>Curiosity</span><span>Learning</span><span>Excellence</span><span>Resilience</span><span>Courage</span><span>Fairness</span><span>Opportunity</span><span>Gratitude</span><span>Humility</span><span>Generosity</span><span>Reliability</span><span>Keeping promises</span><span>Representation</span><span>Creativity</span><span>Competitiveness</span><span>Calm under pressure</span><span>Making people feel heard</span><span>Long-term thinking</span><span>Building something</span><span>Being trusted</span><span>Clarity</span><span>Pride in where I'm from</span><span>Helping others understand</span><span>Leaving things better</span>
+  </div>
+  <p class="small"><b>Step 2:</b> cut it down to your <b>top 5</b>. <b>Step 3:</b> for each one, write <b>where it came from</b> (a person, a saying, a moment) and <b>one time you acted on it</b>.</p>
+  <table>
+    <tr><th style="width:20%">Top value</th><th style="width:40%">Where it came from (who / what / when)</th><th>One time I acted on it</th></tr>
+    <tr><td style="height:13mm"></td><td></td><td></td></tr>
+    <tr><td style="height:13mm"></td><td></td><td></td></tr>
+    <tr><td style="height:13mm"></td><td></td><td></td></tr>
+    <tr><td style="height:13mm"></td><td></td><td></td></tr>
+    <tr><td style="height:13mm"></td><td></td><td></td></tr>
+  </table>
+  <div class="prompt">Step 4: Is there a phrase you heard over and over growing up, a saying from a parent, grandparent, coach, teacher or faith leader, that still guides you?</div><div class="lines" style="--h:14mm"></div>
+  <div class="prompt">Step 5: What do people who know you well rely on you for?</div><div class="lines" style="--h:14mm"></div>
+  <div class="box expert small"><b>Values become credible when they have an origin and an action.</b> "I value responsibility" is empty. "My mum <span class="ph">[or whoever it really was]</span> used to say <span class="ph">[the actual phrase]</span>, and I saw what it meant when <span class="ph">[moment]</span>" is a story. One origin plus one action is enough.</div>
+</section>
+
+<section class="page" id="w1c">
+  <div class="kicker"><span>Part 1 · Dig</span><a href="#contents">↑ Contents</a></div>
+  <h2>1C · Moments, people and frustrations</h2>
+  <div class="grid2">
+    <div>
+      <h3 style="margin-top:0">Moments of pride</h3>
+      <div class="prompt">A time you persuaded someone to change their mind. How did you do it?</div><div class="lines" style="--h:15mm"></div>
+      <div class="prompt">A time you kept going after being rejected or told no</div><div class="lines" style="--h:15mm"></div>
+      <div class="prompt">A time you explained something complicated so someone finally understood it</div><div class="lines" style="--h:15mm"></div>
+      <div class="prompt">A time you stayed calm when others didn't</div><div class="lines" style="--h:15mm"></div>
+      <div class="prompt">Something you sold, organised, raised money for or built</div><div class="lines" style="--h:15mm"></div>
+    </div>
+    <div>
+      <h3 style="margin-top:0">People and frustrations</h3>
+      <div class="prompt">Who do you trust most, and why? What do they do that earns trust?</div><div class="lines" style="--h:15mm"></div>
+      <div class="prompt">Who's the best communicator you know? What do they do differently?</div><div class="lines" style="--h:15mm"></div>
+      <div class="prompt">What annoys you about how things are explained, sold or reported, to you or your family?</div><div class="lines" style="--h:15mm"></div>
+      <div class="prompt">When did you see someone or something misrepresented (in the news, online, at school), and how did it feel?</div><div class="lines" style="--h:15mm"></div>
+      <div class="prompt">What do you lose track of time doing?</div><div class="lines" style="--h:15mm"></div>
+    </div>
+  </div>
+  <div class="box zero small"><b>Why frustrations are gold:</b> a strong "why" often starts with something you noticed was <i>wrong</i> or <i>missing</i>. For example: people not understanding their pension, a salesperson who didn't listen, a story told unfairly. Industries exist to fix problems, and a frustration shows you've noticed one. Keep the tone constructive: "I saw a gap, and I want to be part of closing it."</div>
+</section>
+
+<section class="page" id="w1d">
+  <div class="kicker"><span>Part 1 · Dig</span><a href="#contents">↑ Contents</a></div>
+  <h2>1D · Mining your asset management experience</h2>
+  <p class="small">Your previous asset management role is your biggest asset. But "I did an internship" is a fact, not a motivation. The motivation lies in <b>what you noticed and felt</b> while you were there. Answer these as specifically as you can.</p>
+  <div class="grid2">
+    <div>
+      <div class="prompt">What was the moment you thought "this is interesting"? Where were you and what was happening?</div><div class="lines" style="--h:15mm"></div>
+      <div class="prompt">What surprised you about how the firm actually worked, compared with what you expected?</div><div class="lines" style="--h:15mm"></div>
+      <div class="prompt">Who impressed you most, and what exactly did they do? (e.g. how they handled a client, explained a fund, ran a meeting)</div><div class="lines" style="--h:15mm"></div>
+      <div class="prompt">What was the hardest task you did, and how did you approach it?</div><div class="lines" style="--h:15mm"></div>
+    </div>
+    <div>
+      <div class="prompt">What did you produce or contribute that someone actually used?</div><div class="lines" style="--h:15mm"></div>
+      <div class="prompt">Did you see anything client-facing: a pitch, a report, an RFP, a client meeting? What struck you?</div><div class="lines" style="--h:15mm"></div>
+      <div class="prompt">Did you see how the firm communicated externally (press, commentary, social media)? What did you notice?</div><div class="lines" style="--h:15mm"></div>
+      <div class="prompt">What do you want to learn next that you didn't get to?</div><div class="lines" style="--h:15mm"></div>
+    </div>
+  </div>
+  <table>
+    <tr><th style="width:30%">If your answer mentions…</th><th>…it's raw material for</th></tr>
+    <tr><td>Client meetings, reports, explaining performance</td><td><b>IM</b> (client-facing angle) and <b>Sales</b> (consultative selling)</td></tr>
+    <tr><td>Pitches, RFPs, winning or losing business</td><td><b>Sales</b> (the B2B cycle, Guide C6) and <b>IM</b> distribution</td></tr>
+    <tr><td>Market commentary, press, how the firm "sounded"</td><td><b>PR</b> (financial communications, Guide D6)</td></tr>
+    <tr><td>Analysis, data, Excel, research</td><td><b>IM</b> (investment literacy) and <b>Sales</b> (pipeline analysis)</td></tr>
+    <tr><td>A person whose behaviour you admired</td><td>Any of the three, as your "role model moment"</td></tr>
+  </table>
+</section>
+
+<!-- PART 2 -->
+<section class="page" id="w2">
+  <div class="kicker"><span>Part 2 · Connect</span><a href="#contents">↑ Contents</a></div>
+  <h2>Part 2 · Values → industry map</h2>
+  <p class="small">Find your top 5 values in the left column. Each one already has a genuine counterpart in each industry, and that counterpart is your bridge from "who I am" to "why this industry".</p>
+  <table>
+    <tr><th style="width:17%">Value</th><th>Investment Management</th><th>Sales</th><th>Public Relations</th></tr>
+    <tr><td><b>Responsibility for others</b></td><td>Fiduciary duty: managing other people's retirements (Guide A4)</td><td>Selling only what genuinely helps; accountability for a number</td><td>Protecting a client's reputation as if it were your own</td></tr>
+    <tr><td><b>Patience / long-term thinking</b></td><td>Compounding; long-horizon pension investing (Guide A3)</td><td>Long B2B sales cycles; relationships that pay off over years</td><td>Reputation built over years; long-term media relationships</td></tr>
+    <tr><td><b>Honesty / integrity</b></td><td>Consumer Duty, fair value, clear reporting (Guide B12)</td><td>Ethical selling; the lessons of mis-selling (Guide C4)</td><td>Never lie in a crisis; credibility with journalists (Guide D5)</td></tr>
+    <tr><td><b>Family / community</b></td><td>DC pensions and savings decide how families live in retirement</td><td>Understanding people's real needs; earning referrals</td><td>How communities are represented and spoken to</td></tr>
+    <tr><td><b>Hard work / resilience</b></td><td>Performance pressure; markets don't care about excuses</td><td>Rejection is daily; pipeline is earned call by call</td><td>Deadlines, breaking news, rejected pitches</td></tr>
+    <tr><td><b>Curiosity / learning</b></td><td>Research, markets, constantly changing economics</td><td>Discovery: asking better questions than competitors</td><td>News sense; understanding audiences and trends</td></tr>
+    <tr><td><b>Helping others understand</b></td><td>Product specialists and client managers translate complexity</td><td>Explaining value so the buyer sees it themselves</td><td>Turning complex messages into clear stories</td></tr>
+    <tr><td><b>Being trusted / reliability</b></td><td>Client retention: trust is the product (Guide B5)</td><td>Account management, renewals and NRR</td><td>Becoming a source journalists rely on</td></tr>
+    <tr><td><b>Fairness / opportunity</b></td><td>Widening access to investing; diverse decision-making</td><td>Meritocracy: results speak for themselves</td><td>Fair representation; countering misinformation</td></tr>
+    <tr><td><b>Calm under pressure</b></td><td>Talking clients through market falls</td><td>Negotiation; handling objections</td><td>Crisis communications in the "golden hour"</td></tr>
+    <tr><td><b>Ambition / building</b></td><td>Growing assets and client relationships</td><td>Quotas, OTE, a fast career ladder</td><td>Winning clients, campaigns and awards</td></tr>
+    <tr><td><b>Faith / gratitude / humility</b></td><td>Stewardship: looking after what has been entrusted to you</td><td>Service mindset: success through serving others</td><td>Owning mistakes honestly (e.g. KFC "FCK", Guide D5)</td></tr>
+  </table>
+  <div class="box key small"><b>Your output from Part 2:</b> for each industry, circle the <b>one</b> value with the strongest true story behind it. That becomes the opening of that answer. Ideally, use a different value for each industry so the three answers don't read the same.</div>
+  <table>
+    <tr><th style="width:24%">Industry</th><th style="width:28%">My chosen value</th><th>The true story / moment behind it</th></tr>
+    <tr><td><b>Investment Management</b></td><td style="height:12mm"></td><td></td></tr>
+    <tr><td><b>Sales</b></td><td style="height:12mm"></td><td></td></tr>
+    <tr><td><b>Public Relations</b></td><td style="height:12mm"></td><td></td></tr>
+  </table>
+</section>
+
+<!-- PART 3 -->
+<section class="chapter ch-im" id="w3">
+  <div class="num">3</div>
+  <h1>Outside-the-box angles</h1>
+  <p>Seven or eight original motivation angles for each industry. Each one shows the industry truth behind it, the kind of personal story it needs, a sample line with your details left blank, and when <i>not</i> to use it. Pick the one or two that are genuinely true for you, and ignore the rest.</p>
+  <ol>
+    <li><a href="#w3a">Investment Management angles</a></li>
+    <li><a href="#w3b">Sales angles</a></li>
+    <li><a href="#w3c">Public Relations angles</a></li>
+  </ol>
+</section>
+
+<section class="page im" id="w3a">
+  <div class="kicker"><span>Part 3 · Investment Management</span><a href="#contents">↑ Contents</a></div>
+  <h2>3A · Investment Management angles</h2>
+  <div class="grid2">
+    <div class="angle">
+      <h4>1 · Inflation at the kitchen table</h4>
+      <div class="row"><b>Truth</b><span>Cash loses real value when interest is below inflation. That's the whole reason investing exists (Guide A2).</span></div>
+      <div class="row"><b>Needs</b><span>A memory of prices rising, saving in cash, or a family money conversation</span></div>
+      <div class="row"><b>Line</b><span class="line">"Watching <span class="ph">[who]</span> save carefully into an account that paid less than inflation taught me that being responsible with money isn't enough on its own. It has to be invested well."</span></div>
+      <div class="row"><b>Avoid if</b><span>You'd rather not discuss family finances in an interview</span></div>
+    </div>
+    <div class="angle">
+      <h4>2 · Compounding as a life philosophy</h4>
+      <div class="row"><b>Truth</b><span>Small, consistent gains snowball, and so do small fee differences (Guide A3)</span></div>
+      <div class="row"><b>Needs</b><span>A habit you built over time: training, study, saving, practising a skill</span></div>
+      <div class="row"><b>Line</b><span class="line">"<span class="ph">[Your habit]</span> taught me that small, consistent effort compounds, which is exactly what drew me to an industry where decades of patient decisions shape whether millions retire comfortably."</span></div>
+      <div class="row"><b>Avoid if</b><span>The habit is trivial or you can't describe the payoff</span></div>
+    </div>
+    <div class="angle">
+      <h4>3 · The invisible custodian</h4>
+      <div class="row"><b>Truth</b><span>Almost everyone is an asset manager's client through their pension, yet few know it (Guide B1)</span></div>
+      <div class="row"><b>Needs</b><span>Noticing that you or people around you didn't know where your pension or savings were invested</span></div>
+      <div class="row"><b>Line</b><span class="line">"Until my internship, I didn't know that my own workplace pension <span class="ph">[or a family member's]</span> was managed by firms like the one I was sitting in. Most people never find out."</span></div>
+      <div class="row"><b>Avoid if</b><span>You can't link it to wanting to make the client side clearer</span></div>
+    </div>
+    <div class="angle">
+      <h4>4 · The translator</h4>
+      <div class="row"><b>Truth</b><span>Client-facing roles translate complex investment processes into confidence (Guide B5)</span></div>
+      <div class="row"><b>Needs</b><span>A time you translated between worlds: generations, languages, cultures, school and home, experts and beginners</span></div>
+      <div class="row"><b>Line</b><span class="line">"I grew up <span class="ph">[translating letters for / explaining forms to / tutoring]</span> <span class="ph">[who]</span>, so I've always noticed the gap between how experts speak and what people need to hear."</span></div>
+      <div class="row"><b>Avoid if</b><span>It isn't genuinely part of your life</span></div>
+    </div>
+    <div class="angle">
+      <h4>5 · Ownership and a voice</h4>
+      <div class="row"><b>Truth</b><span>Investors own companies and vote on how they're run. This is stewardship (Guide B7).</span></div>
+      <div class="row"><b>Needs</b><span>An interest in how companies behave, or the realisation that "a share is ownership"</span></div>
+      <div class="row"><b>Line</b><span class="line">"What changed my view of the industry was realising that a fund doesn't just hold shares. It holds a voice in how hundreds of companies are run."</span></div>
+      <div class="row"><b>Avoid if</b><span>You can't talk about stewardship or voting in an interview</span></div>
+    </div>
+    <div class="angle">
+      <h4>6 · Keeping trust is harder than earning it</h4>
+      <div class="row"><b>Truth</b><span>Retention protects recurring fee revenue; one bad meeting can lose a mandate (Guide B5, B10)</span></div>
+      <div class="row"><b>Needs</b><span>A part-time job, team or role where you kept a customer's or a group's trust over time</span></div>
+      <div class="row"><b>Line</b><span class="line">"At <span class="ph">[job]</span> I learned that regulars came back because of how we treated them, not one great day. It's the same reason a client stays with an asset manager through a bad year."</span></div>
+      <div class="row"><b>Avoid if</b><span>The example has no element of long-term relationships</span></div>
+    </div>
+    <div class="angle">
+      <h4>7 · Widening the circle of investors</h4>
+      <div class="row"><b>Truth</b><span>DC pensions and ISAs are pushing millions more people towards investing, and many lack confidence (Guide B13)</span></div>
+      <div class="row"><b>Needs</b><span>A genuine observation: friends who don't invest, family who distrust it, your own learning curve</span></div>
+      <div class="row"><b>Line</b><span class="line">"Many people I grew up around <span class="ph">[kept savings in cash / didn't trust investing]</span>. Not because they were careless, but because nobody explained it to them in a way that made sense."</span></div>
+      <div class="row"><b>Avoid if</b><span>It becomes a speech. Keep it to one observation, then the industry.</span></div>
+    </div>
+    <div class="angle">
+      <h4>8 · Patience in a world of instant results</h4>
+      <div class="row"><b>Truth</b><span>Institutions invest over decades, while markets and social media reward short-termism (Guide B4)</span></div>
+      <div class="row"><b>Needs</b><span>A value of patience, faith, delayed gratification, or a long project you saw through</span></div>
+      <div class="row"><b>Line</b><span class="line">"In a world built around instant results, I'm drawn to an industry whose best decisions are judged over ten or twenty years."</span></div>
+      <div class="row"><b>Avoid if</b><span>You can't back it with something you did patiently</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="page sl" id="w3b">
+  <div class="kicker"><span>Part 3 · Sales</span><a href="#contents">↑ Contents</a></div>
+  <h2>3B · Sales angles</h2>
+  <div class="grid2">
+    <div class="angle">
+      <h4>1 · The first thing I ever sold</h4>
+      <div class="row"><b>Truth</b><span>Every business runs on someone finding a customer and earning their yes (Guide C1)</span></div>
+      <div class="row"><b>Needs</b><span>Selling something at school, reselling clothes or trainers, a family business, a market stall, a fundraiser</span></div>
+      <div class="row"><b>Line</b><span class="line">"The first thing I ever sold was <span class="ph">[what]</span>. I learned more from the <span class="ph">[number]</span> people who said no than from the ones who said yes."</span></div>
+      <div class="row"><b>Avoid if</b><span>It can't lead into a real lesson about customers</span></div>
+    </div>
+    <div class="angle">
+      <h4>2 · Listening is the product</h4>
+      <div class="row"><b>Truth</b><span>Discovery and consultative selling win; buyers arrive informed (Guide C3, C4)</span></div>
+      <div class="row"><b>Needs</b><span>Someone who earned your trust by listening, or a time listening changed an outcome</span></div>
+      <div class="row"><b>Line</b><span class="line">"The best salesperson I ever met barely talked about the product. <span class="ph">[What they did instead]</span>."</span></div>
+      <div class="row"><b>Avoid if</b><span>You can't describe the person or moment specifically</span></div>
+    </div>
+    <div class="angle">
+      <h4>3 · Rejection as training</h4>
+      <div class="row"><b>Truth</b><span>The funnel means most attempts fail, so resilience is structural (Guide C5)</span></div>
+      <div class="row"><b>Needs</b><span>Sport, auditions, applications or cold outreach where "no" was normal</span></div>
+      <div class="row"><b>Line</b><span class="line">"<span class="ph">[Sport / activity]</span> taught me that losing is information. Sales is the only job I know where that mindset is literally built into the numbers."</span></div>
+      <div class="row"><b>Avoid if</b><span>You'd be making the resilience sound bigger than it was</span></div>
+    </div>
+    <div class="angle">
+      <h4>4 · Sales is service</h4>
+      <div class="row"><b>Truth</b><span>Ethical, value-based selling builds repeat business; pushy selling destroys it (Guide C4)</span></div>
+      <div class="row"><b>Needs</b><span>A value of service or faith, or a bad experience of being "sold to"</span></div>
+      <div class="row"><b>Line</b><span class="line">"I was raised to believe <span class="ph">[the value / saying]</span>, which is why the sales I admire start with what the customer needs, not what the seller wants to hit."</span></div>
+      <div class="row"><b>Avoid if</b><span>You can't show you also respect targets and results</span></div>
+    </div>
+    <div class="angle">
+      <h4>5 · The numbers behind persuasion</h4>
+      <div class="row"><b>Truth</b><span>Modern sales is data-driven: pipeline, conversion, churn (Guide C5)</span></div>
+      <div class="row"><b>Needs</b><span>Liking data, a time you tracked results and improved them</span></div>
+      <div class="row"><b>Line</b><span class="line">"What surprised me about sales is how measurable persuasion is. Every stage of a pipeline tells you where trust was won or lost."</span></div>
+      <div class="row"><b>Avoid if</b><span>You'd struggle to explain a sales funnel in an interview</span></div>
+    </div>
+    <div class="angle">
+      <h4>6 · Relationships compound</h4>
+      <div class="row"><b>Truth</b><span>Account management and retention drive most revenue in recurring businesses (Guide C2)</span></div>
+      <div class="row"><b>Needs</b><span>Long relationships you've kept: regular customers, a mentoring role, a community</span></div>
+      <div class="row"><b>Line</b><span class="line">"In <span class="ph">[community / job]</span>, the people who did best were the ones everyone trusted after years, not the loudest in the room. That's the kind of salesperson I want to become."</span></div>
+      <div class="row"><b>Avoid if</b><span>It reads as avoiding the "closing" side; mention both</span></div>
+    </div>
+    <div class="angle">
+      <h4>7 · I watched a £multi-million sale up close</h4>
+      <div class="row"><b>Truth</b><span>Asset management distribution is consultative B2B sales (Guide C6)</span></div>
+      <div class="row"><b>Needs</b><span>Something client-facing you saw in your AM role</span></div>
+      <div class="row"><b>Line</b><span class="line">"Before my internship, I didn't think of fund management as sales. Then I watched <span class="ph">[pitch / RFP / client meeting]</span> and saw a months-long sale with five decision-makers."</span></div>
+      <div class="row"><b>Avoid if</b><span>The reader might be a consumer brand. Keep it in sales language.</span></div>
+    </div>
+    <div class="angle">
+      <h4>8 · Translator (sales version)</h4>
+      <div class="row"><b>Truth</b><span>Value selling means expressing a product in the buyer's terms (Guide C4)</span></div>
+      <div class="row"><b>Needs</b><span>A time you adapted how you spoke to different audiences</span></div>
+      <div class="row"><b>Line</b><span class="line">"Switching between <span class="ph">[two worlds]</span> taught me that the same idea needs different words for different people, which is the heart of good selling."</span></div>
+      <div class="row"><b>Avoid if</b><span>You used this angle for IM. Pick a different one here.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="page prr" id="w3c">
+  <div class="kicker"><span>Part 3 · Public Relations</span><a href="#contents">↑ Contents</a></div>
+  <h2>3C · Public Relations angles</h2>
+  <div class="grid2">
+    <div class="angle">
+      <h4>1 · Who gets to tell the story</h4>
+      <div class="row"><b>Truth</b><span>PR shapes how organisations, people and communities are understood (Guide D1)</span></div>
+      <div class="row"><b>Needs</b><span>A moment you saw someone (or a place, group or community) portrayed unfairly or one-dimensionally, or portrayed well</span></div>
+      <div class="row"><b>Line</b><span class="line">"I first noticed the power of framing when <span class="ph">[moment]</span>. The facts were the same, but the story told about them changed how people reacted."</span></div>
+      <div class="row"><b>Avoid if</b><span>It turns into a political statement. Stay on communication and fairness.</span></div>
+    </div>
+    <div class="angle">
+      <h4>2 · The reputation you carry</h4>
+      <div class="row"><b>Truth</b><span>Reputation is an intangible asset, slow to build and quick to lose (Guide D1)</span></div>
+      <div class="row"><b>Needs</b><span>Being raised to remember you represent your family, school, church, team or community</span></div>
+      <div class="row"><b>Line</b><span class="line">"Growing up, I was always reminded that <span class="ph">[the saying, e.g. 'you carry our name']</span>. It's why I understand instinctively that a reputation belongs to more than one person."</span></div>
+      <div class="row"><b>Avoid if</b><span>You can't link it to how organisations manage reputation</span></div>
+    </div>
+    <div class="angle">
+      <h4>3 · In finance, trust is the product</h4>
+      <div class="row"><b>Truth</b><span>For asset managers, reputational damage becomes outflows (Woodford, Guide D6)</span></div>
+      <div class="row"><b>Needs</b><span>Seeing how carefully your AM firm communicated</span></div>
+      <div class="row"><b>Line</b><span class="line">"At <span class="ph">[firm]</span> I saw that every market comment was checked carefully, because one careless sentence could cost clients' confidence."</span></div>
+      <div class="row"><b>Avoid if</b><span>The answer becomes all finance. Keep it broad for consumer agencies too.</span></div>
+    </div>
+    <div class="angle">
+      <h4>4 · The family WhatsApp problem</h4>
+      <div class="row"><b>Truth</b><span>Misinformation spreads in minutes, so credible communication is more valuable than ever (Guide D8)</span></div>
+      <div class="row"><b>Needs</b><span>Seeing a false story or rumour spread among people you know, and how hard it was to correct</span></div>
+      <div class="row"><b>Line</b><span class="line">"I've watched a false story travel round <span class="ph">[a family group chat / my school]</span> faster than any correction could. It showed me how much credible, quick communication matters."</span></div>
+      <div class="row"><b>Avoid if</b><span>You can't name a light, non-sensitive example</span></div>
+    </div>
+    <div class="angle">
+      <h4>5 · Calm in the storm</h4>
+      <div class="row"><b>Truth</b><span>Crisis comms rewards calm judgement, honesty and speed (Guide D5)</span></div>
+      <div class="row"><b>Needs</b><span>A time you were the calm one: at work, in a family moment, during an event going wrong</span></div>
+      <div class="row"><b>Line</b><span class="line">"When <span class="ph">[situation]</span> went wrong, I was the one who <span class="ph">[what you did]</span>. I've since realised that's what crisis communication is: deciding what people need to hear first."</span></div>
+      <div class="row"><b>Avoid if</b><span>The example is too personal to discuss comfortably</span></div>
+    </div>
+    <div class="angle">
+      <h4>6 · Words that changed a decision</h4>
+      <div class="row"><b>Truth</b><span>Key messages and framing change behaviour (Guide D3)</span></div>
+      <div class="row"><b>Needs</b><span>A speech, message, post or conversation (yours or someone else's) that changed people's minds</span></div>
+      <div class="row"><b>Line</b><span class="line">"The moment I became interested in communication was when <span class="ph">[who]</span> changed <span class="ph">[a decision]</span> with <span class="ph">[how few]</span> well-chosen words."</span></div>
+      <div class="row"><b>Avoid if</b><span>You can't describe what made the words work</span></div>
+    </div>
+    <div class="angle">
+      <h4>7 · Thinking like a journalist</h4>
+      <div class="row"><b>Truth</b><span>The core PR skill is understanding what makes news (Guide D4)</span></div>
+      <div class="row"><b>Needs</b><span>A news habit: what you read, a story you followed closely, writing you did</span></div>
+      <div class="row"><b>Line</b><span class="line">"I've always been the person who reads past the headline. Following <span class="ph">[story]</span> made me curious about who decides how a story is told."</span></div>
+      <div class="row"><b>Avoid if</b><span>You don't actually follow news. They'll test it.</span></div>
+    </div>
+    <div class="angle">
+      <h4>8 · Owning mistakes well</h4>
+      <div class="row"><b>Truth</b><span>Honest, human responses can rebuild trust (KFC "FCK", Guide D5)</span></div>
+      <div class="row"><b>Needs</b><span>A value of humility or integrity, or a time you owned a mistake and it improved things</span></div>
+      <div class="row"><b>Line</b><span class="line">"I was raised to <span class="ph">[own it when you get it wrong]</span>, and the campaigns I admire most do exactly that."</span></div>
+      <div class="row"><b>Avoid if</b><span>You can't name a real campaign or example to back it</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 4 -->
+<section class="page" id="w4">
+  <div class="kicker"><span>Part 4 · Cliché detector</span><a href="#contents">↑ Contents</a></div>
+  <h2>Part 4 · Cliché detector</h2>
+  <p class="small">Recruiters read the same phrases hundreds of times. If a sentence in your draft matches the left column, replace it using the method on the right.</p>
+  <table>
+    <tr><th style="width:34%">Cliché</th><th style="width:30%">Why it fails</th><th>Upgrade method</th></tr>
+    <tr><td>"I have always been passionate about…"</td><td>Unprovable, and everyone says it</td><td>Replace with the <b>moment</b> the interest started</td></tr>
+    <tr><td>"…a fast-paced, dynamic environment"</td><td>Describes every job</td><td>Name <b>one specific</b> thing about the industry's pace (e.g. a 7am results announcement)</td></tr>
+    <tr><td>"I want to develop my skills"</td><td>About you, not them</td><td>Say <b>what you'll contribute</b>, then what you'll learn</td></tr>
+    <tr><td>"I am a hard-working team player"</td><td>Adjectives without evidence</td><td>Give an <b>action plus a result</b> that shows it</td></tr>
+    <tr><td>"Since a young age…"</td><td>Vague and overused</td><td>Give the <b>actual age, place or event</b></td></tr>
+    <tr><td>"I want to make a difference"</td><td>Means nothing on its own</td><td>Name <b>the problem</b> and <b>who</b> it affects</td></tr>
+    <tr><td>"I'm a people person"</td><td>Unspecific</td><td>Describe <b>how</b> you build trust with people</td></tr>
+    <tr><td>"Finance has always fascinated me"</td><td>Generic</td><td>Name the <b>mechanism</b> that fascinates you (compounding, fees on AUM, stewardship)</td></tr>
+    <tr><td>"PR appeals to my creative side"</td><td>PR is also strategy, risk and research</td><td>Pair creativity with <b>judgement</b> or <b>news sense</b></td></tr>
+    <tr><td>"Sales suits my outgoing personality"</td><td>Great sales is mostly listening</td><td>Talk about <b>questions and listening</b></td></tr>
+    <tr><td>"I believe I would be a great asset"</td><td>A claim, not a demonstration</td><td>Delete it. Your evidence should already show it.</td></tr>
+    <tr><td>Values list: "integrity, resilience, ambition"</td><td>Labels with no story</td><td>Pick <b>one</b> value, give its origin and one action</td></tr>
+  </table>
+  <div class="box expert small"><b>The "anyone test":</b> read each sentence and ask, "Could any other applicant have written this?" If yes, it's either a cliché or a necessary fact. Keep necessary facts short and cut the clichés. Your aim is that at least half your sentences could <i>only</i> have been written by you.</div>
+</section>
+
+<!-- PART 5 -->
+<section class="page" id="w5">
+  <div class="kicker"><span>Part 5 · Assemble</span><a href="#contents">↑ Contents</a></div>
+  <h2>Part 5 · Assemble: one template per industry</h2>
+  <p class="small">Each template follows the motivation chain: value → noticed → industry truth → proof → ambition. Fill each slot with your Part 1 and Part 3 material, then smooth it into prose. Aim for 230–250 words.</p>
+  <table>
+    <tr><th style="width:23%">Slot (≈ words)</th><th>Investment Management</th><th>Sales</th><th>Public Relations</th></tr>
+    <tr><td><b>1 · Value or memory</b> (30–40)</td><td>Your money story / a value of responsibility or patience</td><td>The first thing you sold / a value of service or persistence</td><td>The reputation you carry / a moment of framing</td></tr>
+    <tr><td><b>2 · What you noticed</b> (20–30)</td><td>"…which taught me that…"</td><td>"…I learned that…"</td><td>"…showed me that…"</td></tr>
+    <tr><td><b>3 · Industry truth</b> (40–50)</td><td>Fees on AUM, retention, the client-facing side, one trend</td><td>Discovery, pipeline, retention, one trend</td><td>Earned media, key messages, crisis, one trend</td></tr>
+    <tr><td><b>4 · Proof</b> (60–80)</td><td>Your AM internship: a task and a lesson</td><td>The AM sales cycle in sales language, plus a non-finance example</td><td>AM communications, plus a writing or organising example</td></tr>
+    <tr><td><b>5 · Ambition</b> (30–40)</td><td>What you'll contribute and want to learn</td><td>What you'll contribute and want to learn</td><td>What you'll contribute and want to learn</td></tr>
+  </table>
+
+  <h3>Worked skeleton: how the chain reads (IM, angle 1)</h3>
+  <div class="box b1 small" style="line-height:1.6">
+    <b>[1 · Value]</b> Growing up, <span class="ph">[who]</span> taught me to <span class="ph">[the value, e.g. put something aside every month, however small]</span>. <b>[2 · Noticed]</b> But I later realised that money saved in cash was quietly losing value to inflation, and that being responsible with money is only half the job: it also has to be invested well. <b>[3 · Industry truth]</b> Investment management exists to solve exactly that problem for millions of people, through their pensions and savings. Because firms earn fees on the assets they keep, success depends on long-term trust as much as returns, which is why the client-facing side interests me most. <b>[4 · Proof]</b> At <span class="ph">[firm]</span>, I <span class="ph">[specific task]</span>, and saw how <span class="ph">[specific observation about clients]</span>. <b>[5 · Ambition]</b> I want to bring <span class="ph">[your strengths]</span> to a team that helps clients understand what they own, and to learn how portfolios are built so I can explain them with confidence.
+  </div>
+  <p class="tiny muted">The skeleton shows structure only. Every bracket must be replaced with something true, and the final wording should sound like you, not like this page.</p>
+
+  <h3>Make the three answers different</h3>
+  <table>
+    <tr><th style="width:28%"></th><th>Investment Management</th><th>Sales</th><th>Public Relations</th></tr>
+    <tr><td>Value used</td><td style="height:9mm"></td><td></td><td></td></tr>
+    <tr><td>Angle from Part 3</td><td style="height:9mm"></td><td></td><td></td></tr>
+    <tr><td>Main proof story</td><td style="height:9mm"></td><td></td><td></td></tr>
+    <tr><td>Trend mentioned</td><td style="height:9mm"></td><td></td><td></td></tr>
+  </table>
+  <p class="small">If any column repeats the same value, angle or story as another, change one. Different readers may compare notes, and each answer should show a different side of you.</p>
+</section>
+
+<!-- PART 6 -->
+<section class="page" id="w6">
+  <div class="kicker"><span>Part 6 · Authenticity test</span><a href="#contents">↑ Contents</a></div>
+  <h2>Part 6 · The authenticity test and interview follow-ups</h2>
+  <h3>Six questions to ask of every answer</h3>
+  <div class="qa small">
+    <div class="box b1"><b>Is every sentence true?</b> <span class="muted">No inflated roles, invented moments or borrowed stories. Interviewers probe.</span></div>
+    <div class="box b1"><b>Could anyone else have written it?</b> <span class="muted">At least half the sentences should be uniquely yours.</span></div>
+    <div class="box b1"><b>Does the value connect to how the industry actually works?</b> <span class="muted">Not just "I like it", but a mechanism (AUM fees, discovery, earned media).</span></div>
+    <div class="box b1"><b>Is the value shown, not labelled?</b> <span class="muted">An origin and an action, not a list of adjectives.</span></div>
+    <div class="box b1"><b>Would I happily talk about this for two minutes?</b> <span class="muted">If not, swap it for a story you're comfortable expanding on.</span></div>
+    <div class="box b1"><b>Does it end looking forward?</b> <span class="muted">What you'll contribute and learn, not a summary of the past.</span></div>
+  </div>
+
+  <h3>Prepare for "tell me more"</h3>
+  <p class="small">Whatever you write becomes interview material. For each answer, prepare a 60–90 second spoken version of the story, and answers to these likely follow-ups:</p>
+  <table>
+    <tr><th style="width:34%">If you wrote about…</th><th>Expect to be asked…</th></tr>
+    <tr><td>A family value or money memory</td><td>"How has that shaped decisions you've made?" "How would you explain investing to that person today?"</td></tr>
+    <tr><td>Your AM internship</td><td>"What did the firm do well or badly?" "What would you change about how they served clients?"</td></tr>
+    <tr><td>An industry trend</td><td>"What's your view on it?" "How should a firm like ours respond?"</td></tr>
+    <tr><td>Selling or persuading</td><td>"Sell me something." "Tell me about a time you failed to persuade someone."</td></tr>
+    <tr><td>Reputation or communication</td><td>"What's a recent PR campaign or crisis you found interesting, and why?"</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>Next step</h4>
+    <p class="small" style="margin:0">Do Part 1 today. Then send me your rough answers: even messy bullet points about your money story, top 5 values, the moments in 1C and your AM observations in 1D. I'll pick the strongest angle for each industry and draft all three 250-word answers in your voice, using only what's true.</p>
+  </div>
+  <div class="box b1 small center"><a href="#contents" style="font-weight:700">↑ Back to contents</a></div>
+</section>
+
+</body>
+</html>
