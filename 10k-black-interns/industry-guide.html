@@ -1,0 +1,1864 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Industry Guide: Zero to Expert</title>
+<style>
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+:root{
+  --ink:#14213d; --body:#2b2d42; --muted:#5c6378; --line:#d9dde7;
+  --navy:#14213d; --gold:#e09f3e; --gold-d:#b8771f; --teal:#2a9d8f; --teal-d:#1f7a6f; --plum:#6d597a; --plum-d:#54435f; --red:#c8553d; --blue:#3a6ea5;
+  --bg1:#f4f6fb; --bg2:#fff7ea; --bg3:#eaf6f4; --bg4:#f3eff6; --bg5:#fdeeea; --bg6:#eaf1f9;
+  --accent:var(--gold); --accent-d:var(--gold-d); --accent-bg:var(--bg2);
+}
+*{box-sizing:border-box}
+html,body{background:#fff}
+body{font-family:"Inter",sans-serif;color:var(--body);font-size:9.7pt;line-height:1.45;margin:0}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{color:var(--ink);line-height:1.2;margin:0}
+h1{font-size:26pt;font-weight:800;letter-spacing:-.5px}
+h2{font-size:16pt;font-weight:800;margin:0 0 3.5mm;padding-bottom:2mm;border-bottom:2.5px solid var(--accent)}
+h3{font-size:11.5pt;font-weight:700;margin:4.5mm 0 2mm}
+h4{font-size:9.8pt;font-weight:700;margin:2.5mm 0 1mm}
+p{margin:0 0 2.2mm}
+ul,ol{margin:0 0 2.2mm;padding-left:5mm}
+li{margin-bottom:.8mm}
+.page{break-before:page}
+.kicker{display:flex;justify-content:space-between;font-size:7.5pt;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent);margin-bottom:1.5mm}
+.kicker a{color:var(--muted);letter-spacing:.5px;text-transform:none;font-weight:600}
+.lead{font-size:10.8pt;color:var(--ink)}
+.muted{color:var(--muted)} .small{font-size:8.6pt} .tiny{font-size:7.8pt}
+.center{text-align:center}
+.box{border-radius:3mm;padding:3mm 3.5mm;margin:2.5mm 0;break-inside:avoid}
+.box h4:first-child,.box h3:first-child{margin-top:0}
+.box p:last-child,.box ul:last-child{margin-bottom:0}
+.b1{background:var(--bg1)} .b2{background:var(--bg2)} .b3{background:var(--bg3)} .b4{background:var(--bg4)} .b5{background:var(--bg5)} .b6{background:var(--bg6)}
+.key{border-left:4px solid var(--gold);background:var(--bg2)}
+.warn{border-left:4px solid var(--red);background:var(--bg5)}
+.good{border-left:4px solid var(--teal);background:var(--bg3)}
+.zero{border-left:4px solid var(--blue);background:var(--bg6)}
+.zero:before{content:"ZERO-KNOWLEDGE EXPLAINER";display:block;font-size:7pt;font-weight:800;letter-spacing:1.2px;color:var(--blue);margin-bottom:1mm}
+.expert,.zero{border-radius:3mm;padding:2.6mm 3.5mm;margin:2.5mm 0;break-inside:avoid}
+.expert{border-left:4px solid var(--plum);background:var(--bg4)}
+.expert:before{content:"EXPERT INSIGHT";display:block;font-size:7pt;font-weight:800;letter-spacing:1.2px;color:var(--plum);margin-bottom:1mm}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin:2.5mm 0}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3mm;margin:2.5mm 0}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:2.5mm;margin:2.5mm 0}
+.grid2>.box,.grid3>.box,.grid4>.box{margin:0}
+table{width:100%;border-collapse:collapse;margin:2mm 0 3mm;font-size:8.6pt;break-inside:avoid}
+th{background:var(--navy);color:#fff;text-align:left;padding:1.6mm 2mm;font-weight:600}
+td{padding:1.1mm 2mm;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:#fafbfd}
+.tag{display:inline-block;font-size:7.2pt;font-weight:700;padding:.4mm 1.8mm;border-radius:5mm;background:var(--navy);color:#fff}
+.t-gold{background:var(--gold-d)} .t-teal{background:var(--teal)} .t-plum{background:var(--plum)} .t-red{background:var(--red)} .t-blue{background:var(--blue)}
+.flow{display:flex;align-items:stretch;margin:3mm 0;break-inside:avoid}
+.flow .step{flex:1;background:var(--bg1);border:1.5px solid var(--navy);border-radius:2.5mm;padding:2.2mm;font-size:8.2pt;text-align:center}
+.flow .step b{display:block;color:var(--ink);font-size:8.8pt;margin-bottom:.8mm}
+.flow .arr{width:5mm;display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:800;font-size:13pt}
+.part{border-radius:3mm;padding:3mm;color:#fff;break-inside:avoid}
+.part h4{color:#fff;margin:0 0 1.5mm;font-size:9.8pt}
+.part ul{padding-left:4mm;margin:0;font-size:8.3pt}
+.part .who{font-size:7.9pt;opacity:.92;margin-top:1.5mm;border-top:1px solid rgba(255,255,255,.35);padding-top:1.5mm}
+.p-navy{background:var(--navy)} .p-gold{background:var(--gold-d)} .p-teal{background:var(--teal-d)} .p-plum{background:var(--plum)} .p-blue{background:var(--blue)} .p-red{background:var(--red)}
+.formula{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:2.5mm;margin:3mm 0;font-weight:700;color:var(--ink);break-inside:avoid}
+.formula .f{background:var(--bg1);border:1.5px solid var(--navy);border-radius:2mm;padding:2.2mm 3.5mm;text-align:center;font-size:9.5pt}
+.formula .f small{display:block;font-weight:400;font-size:7.3pt;color:var(--muted)}
+.formula .op{font-size:15pt;color:var(--accent)}
+.gloss{display:grid;grid-template-columns:1fr 1fr;gap:0 5mm;font-size:8.3pt;margin:2mm 0}
+.gloss div{break-inside:avoid;padding:1.1mm 0;border-bottom:1px solid var(--line)}
+.gloss b{color:var(--ink)}
+.cover{height:267mm;display:flex;flex-direction:column;justify-content:space-between;background:var(--navy);color:#fff;margin:-15mm -15mm 0;padding:22mm 18mm}
+.cover h1{color:#fff;font-size:34pt;line-height:1.05}
+.cover .sub{font-size:12.5pt;color:#d6dbe8;margin-top:5mm;max-width:155mm}
+.chapter{height:267mm;display:flex;flex-direction:column;justify-content:center;margin:-15mm -15mm 0;padding:20mm 20mm;color:#fff;break-before:page}
+.chapter .num{font-size:60pt;font-weight:800;opacity:.25;line-height:1}
+.chapter h1{color:#fff;font-size:32pt;margin:2mm 0 4mm}
+.chapter p{font-size:11.5pt;color:rgba(255,255,255,.88);max-width:150mm}
+.chapter ol{font-size:10.5pt;color:#fff;margin-top:6mm}
+.chapter ol a{color:#fff;border-bottom:1px solid rgba(255,255,255,.4)}
+.ch-a{background:var(--blue)} .ch-im{background:var(--navy)} .ch-s{background:var(--teal-d)} .ch-pr{background:var(--plum)} .ch-x{background:#3d3d4e}
+.toc{font-size:9.4pt}
+.toc .sec{display:flex;justify-content:space-between;font-weight:700;color:var(--ink);margin-top:2.6mm;padding:1.4mm 2mm;border-radius:1.5mm}
+.toc .sub{display:block;padding:.7mm 2mm .7mm 7mm;border-bottom:1px dotted var(--line);color:var(--body)}
+.toc .sub:after{content:" ›";color:var(--accent)}
+.tocgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 7mm}
+.funnel{display:flex;flex-direction:column;align-items:center;gap:1.2mm;margin:3mm 0;break-inside:avoid}
+.funnel div{color:#fff;text-align:center;padding:1.6mm;border-radius:1.5mm;font-size:8.3pt;font-weight:600}
+.ladder{display:flex;align-items:flex-end;gap:2mm;height:44mm;margin:3mm 0 1mm;break-inside:avoid}
+.ladder div{flex:1;border-radius:2mm 2mm 0 0;color:#fff;font-size:7.8pt;font-weight:600;text-align:center;padding:1.5mm;display:flex;align-items:flex-start;justify-content:center}
+.qa{counter-reset:q}
+.qa .box{position:relative;padding-left:10mm}
+.qa .box:before{counter-increment:q;content:counter(q);position:absolute;left:3mm;top:3mm;width:5mm;height:5mm;border-radius:50%;background:var(--accent);color:#fff;font-size:7.5pt;font-weight:800;display:flex;align-items:center;justify-content:center}
+svg text{font-family:Inter}
+.im{--accent:var(--gold);--accent-d:var(--gold-d)}
+.sl{--accent:var(--teal);--accent-d:var(--teal-d)}
+.prr{--accent:var(--plum);--accent-d:var(--plum-d)}
+.ab{--accent:var(--blue)}
+</style>
+</head>
+<body>
+<section class="cover">
+  <div>
+    <div class="kicker" style="color:var(--gold)">10,000 Black Interns · Class of 2027 · Industry guide</div>
+    <h1>Investment Management,<br>Sales &amp; Public Relations</h1>
+    <p class="sub">From absolute zero to industry-expert understanding. Each industry is broken into its parts, with how it makes money, the terminology, the diagrams, and what's happening right now, so that what you write shows you know what you're talking about.</p>
+  </div>
+  <div>
+    <div class="grid3" style="gap:5mm">
+      <div style="border-top:3px solid var(--gold);padding-top:2mm"><b style="font-size:13pt;color:#fff">1 · Investment Management</b><br><span style="color:#c8cee0;font-size:9pt">Clients → Distribution &amp; Sales → Investing → Support functions</span></div>
+      <div style="border-top:3px solid var(--teal);padding-top:2mm"><b style="font-size:13pt;color:#fff">2 · Sales</b><br><span style="color:#c8cee0;font-size:9pt">Lead generation → Closing → Account management → Sales operations</span></div>
+      <div style="border-top:3px solid #b79ec8;padding-top:2mm"><b style="font-size:13pt;color:#fff">3 · Public Relations</b><br><span style="color:#c8cee0;font-size:9pt">Corporate &amp; financial → Consumer → Crisis → Public affairs &amp; internal</span></div>
+    </div>
+    <p class="small" style="color:#aab2c8;margin-top:9mm">How to use: the contents page is clickable, and every page has a "↑ Contents" link in the top-right corner. Blue <b style="color:#8fb4dd">Zero-knowledge</b> boxes explain the basics, and purple <b style="color:#c9b3d8">Expert insight</b> boxes give you the nuance most candidates won't have. Figures are rounded and illustrative unless a source is given, so use them to understand rather than to quote. Prepared October 2026.</p>
+  </div>
+</section>
+
+<section class="page" id="contents">
+  <div class="kicker"><span>Navigation</span><span></span></div>
+  <h2>Contents</h2>
+  <div class="tocgrid toc">
+    <div>
+      <a class="sec" style="background:var(--bg6)" href="#a0"><span>Part A · Foundations: what you need to know first</span></a>
+      <a class="sub" href="#a1">A1 · How any business works: revenue, cost, profit</a>
+      <a class="sub" href="#a2">A2 · Shares, bonds, interest rates and inflation</a>
+      <a class="sub" href="#a3">A3 · Risk, return, diversification and compounding</a>
+      <a class="sub" href="#a4">A4 · Customers, B2B vs B2C and regulation</a>
+
+      <a class="sec" style="background:var(--bg2)" href="#im0"><span>Part B · Investment Management</span></a>
+      <a class="sub" href="#im1">B1 · What investment management is</a>
+      <a class="sub" href="#im2">B2 · The ecosystem: who's who</a>
+      <a class="sub" href="#im3">B3 · The four parts of an asset manager</a>
+      <a class="sub" href="#im4">B4 · Part 1: The clients</a>
+      <a class="sub" href="#im5">B5 · Part 2: Distribution &amp; sales</a>
+      <a class="sub" href="#im6">B6 · Part 3: Investing, the asset classes</a>
+      <a class="sub" href="#im7">B7 · Part 3: The investment process and styles</a>
+      <a class="sub" href="#im8">B8 · Part 4: Support functions &amp; the trade lifecycle</a>
+      <a class="sub" href="#im9">B9 · Products and fund vehicles</a>
+      <a class="sub" href="#im10">B10 · How an asset manager makes money</a>
+      <a class="sub" href="#im11">B11 · The industry landscape</a>
+      <a class="sub" href="#im12">B12 · Regulation you should know</a>
+      <a class="sub" href="#im13">B13 · What's happening now: key trends</a>
+      <a class="sub" href="#im14">B14 · Glossary</a>
+      <a class="sub" href="#im15">B15 · Expert check: test yourself</a>
+    </div>
+    <div>
+      <a class="sec" style="background:var(--bg3)" href="#s0"><span>Part C · Sales</span></a>
+      <a class="sub" href="#s1">C1 · What sales is, and types of selling</a>
+      <a class="sub" href="#s3">C2 · The four parts of a sales organisation</a>
+      <a class="sub" href="#s4">C3 · The sales process, step by step</a>
+      <a class="sub" href="#s5">C4 · Sales methodologies</a>
+      <a class="sub" href="#s6">C5 · How sales makes money: metrics</a>
+      <a class="sub" href="#s7">C6 · Sales across different industries</a>
+      <a class="sub" href="#s8">C7 · Tools, careers and trends</a>
+      <a class="sub" href="#s10">C8 · Glossary</a>
+      <a class="sub" href="#s11">C9 · Expert check: test yourself</a>
+
+      <a class="sec" style="background:var(--bg4)" href="#p0"><span>Part D · Public Relations</span></a>
+      <a class="sub" href="#p1">D1 · What PR is (and isn't)</a>
+      <a class="sub" href="#p2">D2 · The ecosystem and the parts of PR</a>
+      <a class="sub" href="#p4">D3 · How a PR campaign works</a>
+      <a class="sub" href="#p5">D4 · Media relations: how news works</a>
+      <a class="sub" href="#p6">D5 · Crisis communications</a>
+      <a class="sub" href="#p7">D6 · Corporate &amp; financial PR</a>
+      <a class="sub" href="#p8">D7 · How PR makes money, and careers</a>
+      <a class="sub" href="#p10">D8 · Landscape and trends</a>
+      <a class="sub" href="#p11">D9 · Glossary</a>
+      <a class="sub" href="#p12">D10 · Expert check: test yourself</a>
+
+      <a class="sec" style="background:#ececf1" href="#x0"><span>Part E · Bringing it together</span></a>
+      <a class="sub" href="#x1">E1 · How the three industries connect</a>
+      <a class="sub" href="#x2">E2 · Turning knowledge into your 250 words</a>
+    </div>
+  </div>
+  <div class="box key small" style="margin-top:5mm"><b>Reading plan:</b> read Part A first (about 20 minutes). Then read the whole industry for your <b>first</b> choice before you write that answer, and do the same for the other two. Finish each industry with its "Expert check". If you can answer those questions out loud without notes, you understand the industry better than almost everyone you're competing against.</div>
+</section>
+
+<!-- PART A -->
+<section class="chapter ch-a ab" id="a0">
+  <div class="num">A</div>
+  <h1>Foundations</h1>
+  <p>The handful of ideas every one of these industries assumes you already know. If you understand these four pages, nothing later will feel like jargon.</p>
+  <ol>
+    <li><a href="#a1">How any business works: revenue, cost, profit</a></li>
+    <li><a href="#a2">Shares, bonds, interest rates and inflation</a></li>
+    <li><a href="#a3">Risk, return, diversification and compounding</a></li>
+    <li><a href="#a4">Customers, B2B vs B2C and regulation</a></li>
+  </ol>
+</section>
+
+<section class="page ab" id="a1">
+  <div class="kicker"><span>Part A · Foundations</span><a href="#contents">↑ Contents</a></div>
+  <h2>A1 · How any business works</h2>
+  <p class="lead">Every company, whether an asset manager, a software firm or a PR agency, does the same thing at heart: it sells something for more than it costs to provide.</p>
+  <div class="formula">
+    <div class="f">Revenue<small>money coming in from customers</small></div><div class="op">−</div>
+    <div class="f">Costs<small>salaries, rent, tech, marketing</small></div><div class="op">=</div>
+    <div class="f">Profit<small>what's left for owners</small></div>
+  </div>
+  <div class="grid2">
+    <div class="box zero small">
+      <p><b>Revenue</b> (also "turnover", "sales" or "the top line") is the money a business earns from customers before any costs.</p>
+      <p><b>Profit</b> ("the bottom line") is what remains after all costs.</p>
+      <p><b>Margin</b> is profit as a percentage of revenue. £100 revenue and £30 profit is a <b>30% margin</b>. A high margin means each pound of revenue is very profitable.</p>
+    </div>
+    <div class="box zero small">
+      <p><b>Fixed costs</b> stay the same however much you sell (e.g. office rent, core staff). <b>Variable costs</b> rise with each sale (e.g. materials, commission).</p>
+      <p><b>Scale</b> is the idea that once fixed costs are covered, each extra sale is mostly profit. That's why big firms in all three industries chase growth.</p>
+    </div>
+  </div>
+
+  <h3>Four ways any business can grow revenue</h3>
+  <div class="grid4">
+    <div class="box b1 small center"><b>1. New customers</b><br>Win clients you didn't have</div>
+    <div class="box b1 small center"><b>2. Sell more</b><br>To existing customers (upsell, cross-sell)</div>
+    <div class="box b1 small center"><b>3. Charge more</b><br>Raise prices or sell premium products</div>
+    <div class="box b1 small center"><b>4. Keep customers</b><br>Every client lost must be replaced</div>
+  </div>
+  <p class="small">Keep these four in mind. Sales exists to do 1 and 2. Account management and client service exist to do 2 and 4. PR protects 3 and 4, because reputation lets you charge more and keeps customers loyal. Investment management is a special case: its revenue also grows when <i>markets</i> rise (see <a href="#im10" style="color:var(--blue);font-weight:600">B10</a>).</p>
+
+  <h3>Front office, middle office, back office</h3>
+  <p class="small">You'll hear these phrases constantly in finance. They describe how close a team is to the client and to revenue:</p>
+  <div class="grid3">
+    <div class="part p-navy"><h4>Front office</h4><ul><li>Generates revenue directly</li><li>e.g. fund managers, salespeople, client relationship managers</li></ul></div>
+    <div class="part p-blue"><h4>Middle office</h4><ul><li>Controls risk and checks the front office</li><li>e.g. risk, compliance, performance measurement</li></ul></div>
+    <div class="part p-teal"><h4>Back office</h4><ul><li>Processes and records everything</li><li>e.g. operations, settlement, accounting, IT</li></ul></div>
+  </div>
+
+  <h3>Cost centre vs profit centre</h3>
+  <p class="small">A <b>profit centre</b> brings in revenue (e.g. a sales team or an investment team). A <b>cost centre</b> supports the business but doesn't bill anyone directly (e.g. HR, in-house PR, compliance). Cost centres must constantly <i>show</i> their value. That's why in-house PR teams measure coverage and reputation so carefully (<a href="#p8" style="color:var(--blue);font-weight:600">D7</a>).</p>
+</section>
+
+<section class="page ab" id="a2">
+  <div class="kicker"><span>Part A · Foundations</span><a href="#contents">↑ Contents</a></div>
+  <h2>A2 · Shares, bonds, interest rates and inflation</h2>
+  <p class="lead">Companies and governments need money. They raise it in two basic ways: by selling a piece of ownership (<b>shares</b>) or by borrowing (<b>bonds</b>). Investors buy these to grow their savings.</p>
+  <div class="grid2">
+    <div class="box b2">
+      <h4>Shares (equities, stocks)</h4>
+      <p class="small">A share is a tiny slice of <b>ownership</b> in a company. If you own 1 share out of 1 million, you own one-millionth of the company.</p>
+      <ul class="small">
+        <li>You make money if the <b>share price rises</b> (capital growth) or the company pays you a slice of its profit (a <b>dividend</b>).</li>
+        <li>Higher potential return, but <b>higher risk</b>: if the company fails, shareholders are paid last and can lose everything.</li>
+        <li>Bought and sold on a <b>stock exchange</b> (e.g. the London Stock Exchange). The FTSE 100 is an <b>index</b> of the 100 largest UK-listed companies.</li>
+      </ul>
+    </div>
+    <div class="box b6">
+      <h4>Bonds (fixed income, debt)</h4>
+      <p class="small">A bond is a <b>loan</b> you make to a government or company. They promise to pay you interest (the <b>coupon</b>) and return your money on a set date (<b>maturity</b>).</p>
+      <ul class="small">
+        <li>UK government bonds are called <b>gilts</b>. Company bonds are <b>corporate bonds</b>.</li>
+        <li>Lower risk than shares, because bondholders are paid before shareholders. Returns are more predictable, hence "fixed income".</li>
+        <li><b>Credit rating</b> (AAA down to junk) shows how likely the borrower is to repay.</li>
+      </ul>
+    </div>
+  </div>
+
+  <svg viewBox="0 0 680 120" width="100%">
+    <rect x="5" y="20" width="150" height="70" rx="8" fill="#eaf1f9" stroke="#3a6ea5"/>
+    <text x="80" y="48" text-anchor="middle" font-weight="700" fill="#14213d" font-size="11">Company needs</text>
+    <text x="80" y="64" text-anchor="middle" font-weight="700" fill="#14213d" font-size="11">£10m to expand</text>
+    <rect x="265" y="5" width="150" height="45" rx="8" fill="#fff7ea" stroke="#e09f3e"/>
+    <text x="340" y="25" text-anchor="middle" font-weight="700" fill="#14213d" font-size="10.5">Sell shares</text>
+    <text x="340" y="40" text-anchor="middle" fill="#5c6378" font-size="9">give away ownership</text>
+    <rect x="265" y="65" width="150" height="45" rx="8" fill="#eaf1f9" stroke="#3a6ea5"/>
+    <text x="340" y="85" text-anchor="middle" font-weight="700" fill="#14213d" font-size="10.5">Issue bonds</text>
+    <text x="340" y="100" text-anchor="middle" fill="#5c6378" font-size="9">borrow, pay interest</text>
+    <line x1="157" y1="50" x2="262" y2="28" stroke="#14213d" stroke-width="1.5"/>
+    <line x1="157" y1="60" x2="262" y2="88" stroke="#14213d" stroke-width="1.5"/>
+    <rect x="525" y="20" width="150" height="70" rx="8" fill="#14213d"/>
+    <text x="600" y="48" text-anchor="middle" font-weight="700" fill="#fff" font-size="11">Investors</text>
+    <text x="600" y="64" text-anchor="middle" fill="#e09f3e" font-size="9">often via asset managers</text>
+    <line x1="417" y1="28" x2="523" y2="50" stroke="#14213d" stroke-width="1.5"/>
+    <line x1="417" y1="88" x2="523" y2="60" stroke="#14213d" stroke-width="1.5"/>
+  </svg>
+
+  <h3>Interest rates</h3>
+  <p class="small">The <b>interest rate</b> is the price of borrowing money. In the UK, the <b>Bank of England</b> sets the "base rate", which influences every other rate in the economy. Remember four things:</p>
+  <ul class="small">
+    <li><b>Rates up</b> → borrowing costs more, saving pays more, and economic growth tends to slow.</li>
+    <li><b>Bond prices move opposite to interest rates.</b> If new bonds pay 5%, an old bond paying 2% is worth less, so its price falls. This is the single most-tested fixed income idea in interviews.</li>
+    <li>Higher rates usually put pressure on share prices, because future profits are worth less today and companies pay more on their debt.</li>
+    <li>The <b>yield</b> is the return you'd earn on a bond at today's price. When prices fall, yields rise.</li>
+  </ul>
+
+  <h3>Inflation</h3>
+  <p class="small"><b>Inflation</b> is the rate at which prices rise. Measured in the UK by <b>CPI</b>, it means that £100 today buys less next year. Central banks aim for about <b>2%</b>. It matters because cash sitting in a bank loses <i>real</i> value whenever interest is below inflation. <b>That is the core reason people invest at all</b>, and it's a powerful opening idea for an investment management answer.</p>
+  <div class="formula">
+    <div class="f">Real return</div><div class="op">≈</div><div class="f">Nominal return<small>what you see</small></div><div class="op">−</div><div class="f">Inflation</div>
+  </div>
+  <p class="small center muted">A savings account paying 3% when inflation is 4% gives a <b>−1%</b> real return. You are getting poorer slowly.</p>
+</section>
+
+<section class="page ab" id="a3">
+  <div class="kicker"><span>Part A · Foundations</span><a href="#contents">↑ Contents</a></div>
+  <h2>A3 · Risk, return, diversification and compounding</h2>
+  <h3>Risk and return go together</h3>
+  <p class="small">The most basic rule of investing is that <b>to earn a higher return, you must accept more risk</b>. Risk here means uncertainty: how much the value can swing, and the chance of losing money. A professional investor's job is not to avoid risk but to take the <i>right</i> risks, and be paid properly for them.</p>
+  <div class="ladder">
+    <div style="height:18%;background:#8fb4dd">Cash</div>
+    <div style="height:30%;background:#3a6ea5">Gov't bonds</div>
+    <div style="height:42%;background:#2a9d8f">Corporate bonds</div>
+    <div style="height:55%;background:#1f7a6f">Property</div>
+    <div style="height:70%;background:#e09f3e">Shares</div>
+    <div style="height:85%;background:#c8553d">Emerging mkt shares</div>
+    <div style="height:100%;background:#6d597a">Private equity / venture</div>
+  </div>
+  <p class="tiny muted center">The risk–return ladder (illustrative). Higher bars mean more expected return over the long run, and more volatility and risk of loss along the way.</p>
+
+  <div class="grid2">
+    <div class="box zero small">
+      <p><b>Volatility</b> is how much an investment's price swings up and down. It's measured by <b>standard deviation</b>. A fund with 20% volatility swings much more than one with 5%.</p>
+      <p><b>Liquidity</b> is how quickly you can sell something for cash without moving the price. Shares in big companies are very liquid. Property and private companies are <b>illiquid</b>, which can take months or years.</p>
+    </div>
+    <div class="box zero small">
+      <p><b>Time horizon</b> is how long until you need the money. A 25-year-old saving for retirement can take more risk than a 64-year-old, because they have time to recover from falls.</p>
+      <p><b>Risk appetite</b> (or tolerance) is how much loss a client can emotionally and financially accept. Matching investments to a client's horizon and appetite is the heart of client-facing work.</p>
+    </div>
+  </div>
+
+  <h3>Diversification: "don't put all your eggs in one basket"</h3>
+  <p class="small">If you own one company and it fails, you lose everything. If you own 500 companies across countries and industries, one failure barely matters. <b>Diversification</b> reduces risk without necessarily reducing expected return. It's often called "the only free lunch in investing". It is why most people invest through <b>funds</b> (pooled portfolios of many investments) rather than buying individual shares.</p>
+  <p class="small"><b>Asset allocation</b> means deciding how much to put in each asset type (e.g. 60% shares / 40% bonds). It is the biggest driver of a portfolio's long-run result, more than picking individual shares.</p>
+
+  <h3>Compounding: why time matters so much</h3>
+  <p class="small">Compounding means earning returns on your previous returns. Growth snowballs:</p>
+  <table>
+    <tr><th>£10,000 invested at 6% a year</th><th>After 10 years</th><th>After 20 years</th><th>After 40 years</th></tr>
+    <tr><td>Value</td><td>≈ £17,900</td><td>≈ £32,100</td><td>≈ £102,900</td></tr>
+  </table>
+  <div class="expert small">Small fee differences compound too. On a pension pot over 40 years, paying 1.0% a year instead of 0.2% can reduce the final value by roughly a quarter or more. That's why fees are so fiercely debated in investment management, and why regulators push firms to prove "value for money" (<a href="#im12" style="color:var(--plum);font-weight:600">B12</a>).</div>
+
+  <h3>Active vs passive in one paragraph</h3>
+  <p class="small"><b>Passive</b> investing buys every company in an index (e.g. all of the FTSE 100) to match the market's return at very low cost. <b>Active</b> investing pays professionals to pick investments, aiming to <b>beat</b> the market, which is called generating <b>alpha</b>, for a higher fee. Much of the modern industry is shaped by the battle between the two (<a href="#im13" style="color:var(--blue);font-weight:600">B13</a>).</p>
+</section>
+
+<section class="page ab" id="a4">
+  <div class="kicker"><span>Part A · Foundations</span><a href="#contents">↑ Contents</a></div>
+  <h2>A4 · Customers, B2B vs B2C and regulation</h2>
+  <div class="grid2">
+    <div class="box b6">
+      <h4>B2B: business-to-business</h4>
+      <ul class="small">
+        <li>Selling to <b>organisations</b> (e.g. an asset manager selling to a pension fund, or software sold to a bank)</li>
+        <li>Few customers, but each is worth a lot</li>
+        <li>Many decision-makers, formal processes, long sales cycles (months)</li>
+        <li>Relationships and trust are everything</li>
+      </ul>
+    </div>
+    <div class="box b2">
+      <h4>B2C: business-to-consumer</h4>
+      <ul class="small">
+        <li>Selling to <b>individuals</b> (e.g. a fund sold to you via an app, or a supermarket product)</li>
+        <li>Many customers, each worth relatively little</li>
+        <li>Quick decisions, often emotional, driven by brand and marketing</li>
+        <li>Scale and reputation are everything</li>
+      </ul>
+    </div>
+  </div>
+  <p class="small">There's also <b>B2B2C</b>, where you sell through an intermediary to the end customer. Asset managers selling funds through financial advisers and investment platforms (who then serve the public) is a classic example. That's called the <b>wholesale</b> or <b>intermediary</b> channel (<a href="#im4" style="color:var(--blue);font-weight:600">B4</a>).</p>
+
+  <h3>Stakeholders</h3>
+  <p class="small">A <b>stakeholder</b> is anyone affected by, or able to affect, an organisation: customers, employees, shareholders/investors, regulators, government, suppliers, media and local communities. PR is essentially the management of relationships with stakeholders (<a href="#p1" style="color:var(--blue);font-weight:600">D1</a>).</p>
+
+  <h3>Regulation: why finance is different</h3>
+  <p class="small">Because financial firms look after other people's money, they're tightly regulated. In the UK:</p>
+  <table>
+    <tr><th style="width:26%">Body</th><th>What it does</th></tr>
+    <tr><td><b>FCA</b> (Financial Conduct Authority)</td><td>Regulates how financial firms behave, including asset managers, advisers and banks' conduct. Protects consumers and market integrity. It can fine firms and ban individuals.</td></tr>
+    <tr><td><b>PRA</b> (Prudential Regulation Authority)</td><td>Part of the Bank of England. Makes sure banks and insurers are financially safe (hold enough capital).</td></tr>
+    <tr><td><b>Bank of England</b></td><td>Sets interest rates and looks after overall financial stability.</td></tr>
+    <tr><td><b>The Pensions Regulator (TPR)</b></td><td>Oversees workplace pension schemes and their trustees.</td></tr>
+    <tr><td><b>CMA</b> (Competition and Markets Authority)</td><td>Competition and consumer protection across all industries, including misleading "green" claims in marketing.</td></tr>
+    <tr><td><b>ASA</b> (Advertising Standards Authority)</td><td>Rules on advertising and marketing honesty. Relevant to PR and sales.</td></tr>
+  </table>
+
+  <h3>Fiduciary duty</h3>
+  <p class="small">A <b>fiduciary</b> is someone legally obliged to act in another person's best interest. Asset managers and pension trustees have fiduciary-style duties to their clients. This idea, <i>"we look after other people's money and must put them first"</i>, sits underneath everything in investment management, and it is a strong theme to show you understand.</p>
+
+  <div class="box key small"><b>You now have the foundations.</b> Revenue, profit, margin, shares, bonds, interest rates, inflation, risk, diversification, compounding, active/passive, B2B/B2C, stakeholders and regulation. Every later page builds on these. <a href="#im0" style="font-weight:700;color:var(--gold-d)">Continue to Investment Management →</a></div>
+</section>
+<section class="chapter ch-im im" id="im0">
+  <div class="num">B</div>
+  <h1>Investment Management</h1>
+  <p>Also called <b>asset management</b> or <b>fund management</b>. This is the business of investing other people's money (pensions, savings, insurance premiums) for a fee. It's your first choice and the 10,000 Black Interns programme's founding sector.</p>
+  <ol style="columns:2">
+    <li><a href="#im1">What it is</a></li>
+    <li><a href="#im2">The ecosystem</a></li>
+    <li><a href="#im3">The four parts</a></li>
+    <li><a href="#im4">The clients</a></li>
+    <li><a href="#im5">Distribution &amp; sales</a></li>
+    <li><a href="#im6">Asset classes</a></li>
+    <li><a href="#im7">Investment process</a></li>
+    <li><a href="#im8">Support functions</a></li>
+    <li><a href="#im9">Products &amp; vehicles</a></li>
+    <li><a href="#im10">How it makes money</a></li>
+    <li><a href="#im11">Landscape</a></li>
+    <li><a href="#im12">Regulation</a></li>
+    <li><a href="#im13">Trends</a></li>
+    <li><a href="#im14">Glossary</a></li>
+    <li><a href="#im15">Expert check</a></li>
+  </ol>
+</section>
+
+<section class="page im" id="im1">
+  <div class="kicker"><span>Part B · Investment Management</span><a href="#contents">↑ Contents</a></div>
+  <h2>B1 · What investment management is</h2>
+  <p class="lead">An <b>asset manager</b> takes money from many savers, pools it, and invests it in shares, bonds, property and other assets, aiming to grow it in line with each client's goals. In return it charges a small yearly percentage of the money it looks after.</p>
+  <div class="box zero small"><b>Analogy:</b> imagine 10,000 people each have £1,000 to save. On their own, none can afford a professional or buy enough different investments to be safe. Pooled together they have £10 million. They can now hire a team of experts, own hundreds of companies, and pay each expert a tiny fraction of the pot. That pooled pot is a <b>fund</b>, and the firm running it is an <b>asset manager</b>.</div>
+
+  <h3>Where the money actually comes from</h3>
+  <p class="small">Most people never deal with an asset manager directly, but almost everyone in the UK is a client indirectly:</p>
+  <svg viewBox="0 0 680 210" width="100%">
+    <defs><marker id="ar1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#14213d"/></marker></defs>
+    <g font-size="10">
+      <rect x="5" y="5" width="165" height="38" rx="6" fill="#fff7ea" stroke="#e09f3e"/><text x="87" y="21" text-anchor="middle" font-weight="700" fill="#14213d">Your workplace pension</text><text x="87" y="35" text-anchor="middle" fill="#5c6378" font-size="8.5">you + employer pay in monthly</text>
+      <rect x="5" y="53" width="165" height="38" rx="6" fill="#fff7ea" stroke="#e09f3e"/><text x="87" y="69" text-anchor="middle" font-weight="700" fill="#14213d">ISA / investment app</text><text x="87" y="83" text-anchor="middle" fill="#5c6378" font-size="8.5">you choose a fund yourself</text>
+      <rect x="5" y="101" width="165" height="38" rx="6" fill="#fff7ea" stroke="#e09f3e"/><text x="87" y="117" text-anchor="middle" font-weight="700" fill="#14213d">Insurance policy premiums</text><text x="87" y="131" text-anchor="middle" fill="#5c6378" font-size="8.5">insurers invest to pay future claims</text>
+      <rect x="5" y="149" width="165" height="38" rx="6" fill="#fff7ea" stroke="#e09f3e"/><text x="87" y="165" text-anchor="middle" font-weight="700" fill="#14213d">Charities, universities</text><text x="87" y="179" text-anchor="middle" fill="#5c6378" font-size="8.5">endowments invested for the long run</text>
+      <rect x="250" y="70" width="170" height="70" rx="10" fill="#14213d"/><text x="335" y="98" text-anchor="middle" font-weight="800" fill="#fff" font-size="12">ASSET MANAGER</text><text x="335" y="116" text-anchor="middle" fill="#e09f3e" font-size="9">pools &amp; invests the money</text>
+      <rect x="505" y="20" width="170" height="38" rx="6" fill="#eaf6f4" stroke="#2a9d8f"/><text x="590" y="43" text-anchor="middle" font-weight="700" fill="#14213d">Shares in companies</text>
+      <rect x="505" y="68" width="170" height="38" rx="6" fill="#eaf6f4" stroke="#2a9d8f"/><text x="590" y="91" text-anchor="middle" font-weight="700" fill="#14213d">Government &amp; corporate bonds</text>
+      <rect x="505" y="116" width="170" height="38" rx="6" fill="#eaf6f4" stroke="#2a9d8f"/><text x="590" y="139" text-anchor="middle" font-weight="700" fill="#14213d">Property &amp; infrastructure</text>
+      <rect x="505" y="164" width="170" height="38" rx="6" fill="#eaf6f4" stroke="#2a9d8f"/><text x="590" y="187" text-anchor="middle" font-weight="700" fill="#14213d">Private companies &amp; loans</text>
+    </g>
+    <g stroke="#14213d" stroke-width="1.4" marker-end="url(#ar1)">
+      <line x1="172" y1="24" x2="248" y2="88"/><line x1="172" y1="72" x2="248" y2="98"/><line x1="172" y1="120" x2="248" y2="112"/><line x1="172" y1="168" x2="248" y2="125"/>
+      <line x1="422" y1="88" x2="503" y2="40"/><line x1="422" y1="100" x2="503" y2="88"/><line x1="422" y1="112" x2="503" y2="134"/><line x1="422" y1="124" x2="503" y2="180"/>
+    </g>
+  </svg>
+
+  <h3>Why it matters (your "why" material)</h3>
+  <div class="grid3">
+    <div class="box b2 small"><b>For savers:</b> it's how ordinary people beat inflation and afford retirement. The quality of investment decisions directly affects how millions of people live in old age.</div>
+    <div class="box b2 small"><b>For the economy:</b> it channels savings into companies, infrastructure and governments that need capital to grow. This is called <b>capital allocation</b>.</div>
+    <div class="box b2 small"><b>For companies:</b> as shareholders, asset managers vote and engage with company boards on strategy, pay and climate. This is called <b>stewardship</b>.</div>
+  </div>
+
+  <h3>Scale</h3>
+  <p class="small">The UK is the world's second-largest asset management centre after the US. The Investment Association reports roughly <b>£9 trillion</b> managed in the UK. Globally, the industry manages well over <b>$100 trillion</b>. The largest firm, BlackRock, manages more than $10 trillion on its own.</p>
+
+  <h3>Buy-side vs sell-side</h3>
+  <div class="grid2">
+    <div class="box b2 small"><b>Buy-side</b> means firms that <b>buy</b> investments with clients' money: asset managers, hedge funds, private equity, pension funds and insurers. You are buy-side.</div>
+    <div class="box b1 small"><b>Sell-side</b> means investment banks and brokers that <b>sell</b> services to the buy-side, such as research, trading, and new shares or bonds. Their clients are the buy-side.</div>
+  </div>
+  <div class="expert small">Asset managers and <b>wealth managers</b> are related but different. An asset manager builds funds and portfolios, usually for institutions or for sale through intermediaries. A wealth manager works with individual (often wealthy) clients on their whole financial picture and often <i>buys</i> asset managers' funds for those clients. In other words, wealth managers are often an asset manager's <b>client</b>.</div>
+</section>
+
+<section class="page im" id="im2">
+  <div class="kicker"><span>Part B · Investment Management</span><a href="#contents">↑ Contents</a></div>
+  <h2>B2 · The ecosystem: who's who</h2>
+  <p class="small">An asset manager sits in the middle of a web of other organisations. Knowing who each one is, and what they want, is what separates an expert from a beginner.</p>
+  <svg viewBox="0 0 680 330" width="100%">
+    <defs><marker id="ar2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#5c6378"/></marker></defs>
+    <rect x="255" y="135" width="170" height="60" rx="10" fill="#14213d"/>
+    <text x="340" y="160" text-anchor="middle" fill="#fff" font-weight="800" font-size="12">ASSET MANAGER</text>
+    <text x="340" y="177" text-anchor="middle" fill="#e09f3e" font-size="9">the hub</text>
+    <g font-size="9.5">
+      <rect x="10" y="10" width="190" height="50" rx="7" fill="#fff7ea" stroke="#e09f3e"/><text x="105" y="30" text-anchor="middle" font-weight="700" fill="#14213d">Asset owners (clients)</text><text x="105" y="46" text-anchor="middle" fill="#5c6378" font-size="8.5">pension funds, insurers, SWFs, charities</text>
+      <rect x="245" y="10" width="190" height="50" rx="7" fill="#fff7ea" stroke="#e09f3e"/><text x="340" y="30" text-anchor="middle" font-weight="700" fill="#14213d">Investment consultants</text><text x="340" y="46" text-anchor="middle" fill="#5c6378" font-size="8.5">Mercer, WTW, Aon, LCP, Redington</text>
+      <rect x="480" y="10" width="190" height="50" rx="7" fill="#fff7ea" stroke="#e09f3e"/><text x="575" y="30" text-anchor="middle" font-weight="700" fill="#14213d">Intermediaries</text><text x="575" y="46" text-anchor="middle" fill="#5c6378" font-size="8.5">wealth managers, IFAs, platforms</text>
+      <rect x="10" y="140" width="190" height="50" rx="7" fill="#eaf1f9" stroke="#3a6ea5"/><text x="105" y="160" text-anchor="middle" font-weight="700" fill="#14213d">Regulators</text><text x="105" y="176" text-anchor="middle" fill="#5c6378" font-size="8.5">FCA, The Pensions Regulator</text>
+      <rect x="480" y="140" width="190" height="50" rx="7" fill="#eaf6f4" stroke="#2a9d8f"/><text x="575" y="160" text-anchor="middle" font-weight="700" fill="#14213d">Sell-side banks &amp; brokers</text><text x="575" y="176" text-anchor="middle" fill="#5c6378" font-size="8.5">research, trading, new issues</text>
+      <rect x="10" y="265" width="190" height="50" rx="7" fill="#f3eff6" stroke="#6d597a"/><text x="105" y="285" text-anchor="middle" font-weight="700" fill="#14213d">Custodians &amp; administrators</text><text x="105" y="301" text-anchor="middle" fill="#5c6378" font-size="8.5">BNY, State Street, Northern Trust</text>
+      <rect x="245" y="265" width="190" height="50" rx="7" fill="#f3eff6" stroke="#6d597a"/><text x="340" y="285" text-anchor="middle" font-weight="700" fill="#14213d">Index &amp; data providers</text><text x="340" y="301" text-anchor="middle" fill="#5c6378" font-size="8.5">FTSE Russell, MSCI, Bloomberg, Morningstar</text>
+      <rect x="480" y="265" width="190" height="50" rx="7" fill="#eaf6f4" stroke="#2a9d8f"/><text x="575" y="285" text-anchor="middle" font-weight="700" fill="#14213d">Companies &amp; governments</text><text x="575" y="301" text-anchor="middle" fill="#5c6378" font-size="8.5">what the money is invested in</text>
+    </g>
+    <g stroke="#5c6378" stroke-width="1.3" marker-end="url(#ar2)" fill="none">
+      <line x1="140" y1="62" x2="280" y2="133"/><line x1="340" y1="62" x2="340" y2="133"/><line x1="540" y1="62" x2="400" y2="133"/>
+      <line x1="202" y1="165" x2="253" y2="165"/><line x1="427" y1="165" x2="478" y2="165"/>
+      <line x1="280" y1="197" x2="150" y2="263"/><line x1="340" y1="197" x2="340" y2="263"/><line x1="400" y1="197" x2="530" y2="263"/>
+    </g>
+  </svg>
+  <table>
+    <tr><th style="width:24%">Player</th><th>Role</th><th style="width:30%">What they want from the asset manager</th></tr>
+    <tr><td><b>Asset owners</b></td><td>Own the money: pension schemes, insurers, sovereign wealth funds (SWFs), endowments</td><td>Returns that meet their liabilities, low fees, trust and transparency</td></tr>
+    <tr><td><b>Investment consultants</b></td><td>Advise asset owners (especially pension trustees) on strategy and <b>which managers to hire</b>. They "rate" managers.</td><td>Detailed data, a consistent process, quick answers. They are <b>gatekeepers</b>.</td></tr>
+    <tr><td><b>Intermediaries</b></td><td>Wealth managers, financial advisers (IFAs) and platforms that pick funds for individuals</td><td>Good funds for their "buy lists", strong servicing, and support explaining funds to their clients</td></tr>
+    <tr><td><b>Sell-side</b></td><td>Banks providing research, trade execution and new bond or share issues</td><td>Trading business (commissions) and investor demand for new issues</td></tr>
+    <tr><td><b>Custodians</b></td><td>Safely hold the actual assets and keep records; fund administrators calculate fund prices</td><td>Accurate instructions and data</td></tr>
+    <tr><td><b>Index &amp; data providers</b></td><td>Create benchmarks (FTSE 100, MSCI World), ratings (Morningstar stars) and data</td><td>Licence fees. Their ratings influence fund sales.</td></tr>
+    <tr><td><b>Regulators</b></td><td>Set and enforce rules (FCA)</td><td>Fair treatment of clients, good governance, honest marketing</td></tr>
+  </table>
+  <div class="expert small"><b>Consultants are the hidden power in UK institutional sales.</b> A pension scheme's trustees are often volunteers or part-timers. They rely on a consultant like Mercer or WTW to shortlist managers. If a consultant doesn't rate your fund, you'll rarely win that scheme. That's why asset managers have whole <b>consultant relations</b> teams (<a href="#im5" style="color:var(--plum);font-weight:600">B5</a>).</div>
+</section>
+
+<section class="page im" id="im3">
+  <div class="kicker"><span>Part B · Investment Management</span><a href="#contents">↑ Contents</a></div>
+  <h2>B3 · The four parts of an asset manager</h2>
+  <p class="lead">Every asset manager, from a 20-person boutique to a global giant, can be understood as four connected parts.</p>
+  <svg viewBox="0 0 680 150" width="100%">
+    <defs><marker id="ar3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#e09f3e"/></marker></defs>
+    <rect x="5" y="30" width="150" height="80" rx="10" fill="#b8771f"/><text x="80" y="62" text-anchor="middle" fill="#fff" font-weight="800" font-size="12">1 · CLIENTS</text><text x="80" y="80" text-anchor="middle" fill="#fff" font-size="9">whose money it is</text><text x="80" y="94" text-anchor="middle" fill="#fff" font-size="9">and what they need</text>
+    <rect x="178" y="30" width="150" height="80" rx="10" fill="#e09f3e"/><text x="253" y="58" text-anchor="middle" fill="#fff" font-weight="800" font-size="11">2 · DISTRIBUTION</text><text x="253" y="73" text-anchor="middle" fill="#fff" font-weight="800" font-size="11">&amp; SALES</text><text x="253" y="92" text-anchor="middle" fill="#fff" font-size="9">win &amp; keep clients</text>
+    <rect x="351" y="30" width="150" height="80" rx="10" fill="#14213d"/><text x="426" y="62" text-anchor="middle" fill="#fff" font-weight="800" font-size="12">3 · INVESTING</text><text x="426" y="80" text-anchor="middle" fill="#fff" font-size="9">manage the money</text><text x="426" y="94" text-anchor="middle" fill="#fff" font-size="9">to beat the benchmark</text>
+    <rect x="524" y="30" width="150" height="80" rx="10" fill="#1f7a6f"/><text x="599" y="62" text-anchor="middle" fill="#fff" font-weight="800" font-size="12">4 · SUPPORT</text><text x="599" y="80" text-anchor="middle" fill="#fff" font-size="9">operations, risk, tech,</text><text x="599" y="94" text-anchor="middle" fill="#fff" font-size="9">compliance, finance</text>
+    <line x1="156" y1="70" x2="176" y2="70" stroke="#e09f3e" stroke-width="2.5" marker-end="url(#ar3)"/>
+    <line x1="329" y1="70" x2="349" y2="70" stroke="#e09f3e" stroke-width="2.5" marker-end="url(#ar3)"/>
+    <line x1="502" y1="70" x2="522" y2="70" stroke="#e09f3e" stroke-width="2.5" marker-end="url(#ar3)"/>
+    <path d="M 426 112 Q 426 140 253 140 Q 80 140 80 112" fill="none" stroke="#5c6378" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ar3)"/>
+    <text x="253" y="135" text-anchor="middle" fill="#5c6378" font-size="8.5">performance &amp; reporting flow back to clients, and good results help win more</text>
+    <text x="340" y="18" text-anchor="middle" fill="#5c6378" font-size="9">money flows in from clients →</text>
+  </svg>
+
+  <div class="grid4">
+    <div class="part p-gold">
+      <h4>1 · Clients</h4>
+      <ul><li>Institutional (pensions, insurers)</li><li>Wholesale (wealth managers, advisers, platforms)</li><li>Retail (individuals)</li></ul>
+      <div class="who"><b>Key idea:</b> each client type buys differently and wants different things.</div>
+    </div>
+    <div class="part" style="background:#e09f3e">
+      <h4>2 · Distribution &amp; sales</h4>
+      <ul><li>Sales / business development</li><li>Client relationship management</li><li>Consultant relations</li><li>Product specialists</li><li>RFP team, marketing, product</li></ul>
+      <div class="who"><b>Goal:</b> grow AUM through new money and keep existing clients.</div>
+    </div>
+    <div class="part p-navy">
+      <h4>3 · Investing</h4>
+      <ul><li>Portfolio managers</li><li>Research analysts</li><li>Dealers / traders</li><li>Economists, strategists</li><li>Stewardship</li></ul>
+      <div class="who"><b>Goal:</b> deliver returns that meet client objectives within risk limits.</div>
+    </div>
+    <div class="part p-teal">
+      <h4>4 · Support functions</h4>
+      <ul><li>Operations</li><li>Risk &amp; performance</li><li>Compliance &amp; legal</li><li>Technology &amp; data</li><li>Finance, HR</li></ul>
+      <div class="who"><b>Goal:</b> run everything accurately, safely and within the rules.</div>
+    </div>
+  </div>
+
+  <h3>How the parts depend on each other</h3>
+  <table>
+    <tr><th style="width:30%">If this part fails…</th><th>…this happens</th></tr>
+    <tr><td>Investing underperforms</td><td>Clients leave (outflows), consultants downgrade the fund, and sales get much harder</td></tr>
+    <tr><td>Distribution is weak</td><td>Even a great fund doesn't grow. Many excellent funds stay small because nobody sells them well.</td></tr>
+    <tr><td>Client service slips</td><td>Clients leave even when performance is fine. Trust is lost in a bad meeting or a wrong report.</td></tr>
+    <tr><td>Operations or compliance fail</td><td>Pricing errors, regulatory fines, reputational damage and, in the worst case, closure</td></tr>
+  </table>
+  <div class="expert small">Industry insiders say <b>"funds are bought, not sold"</b> for institutions, because the decision is formal and evidence-based. Yet they also say <b>"the best-performing fund doesn't always win; the best-explained one often does."</b> Both are true. That tension is exactly why the client-facing side is a skilled job: you must translate investment performance into confidence.</div>
+</section>
+
+<section class="page im" id="im4">
+  <div class="kicker"><span>Part B · Investment Management</span><a href="#contents">↑ Contents</a></div>
+  <h2>B4 · Part 1: The clients</h2>
+  <p class="small">Asset managers split clients into three <b>channels</b>. Each one is a different market with different buyers, sales cycles and needs.</p>
+  <div class="grid3">
+    <div class="box b2">
+      <h4><span class="tag t-gold">1</span> Institutional</h4>
+      <p class="small"><b>Who:</b> organisations investing large sums for a defined purpose.</p>
+      <p class="small"><b>Ticket size:</b> tens of millions to billions</p>
+      <p class="small"><b>Decides:</b> trustees or investment committees, usually advised by a consultant</p>
+      <p class="small"><b>Cares about:</b> meeting liabilities, risk control, fees, governance, ESG, reporting</p>
+    </div>
+    <div class="box b2">
+      <h4><span class="tag t-gold">2</span> Wholesale / intermediary</h4>
+      <p class="small"><b>Who:</b> professionals who pick funds <i>for</i> individual clients.</p>
+      <p class="small"><b>Ticket size:</b> thousands to tens of millions per firm</p>
+      <p class="small"><b>Decides:</b> fund selectors and research teams at wealth managers and platforms</p>
+      <p class="small"><b>Cares about:</b> consistent performance, a clear story, cost, and support materials for their clients</p>
+    </div>
+    <div class="box b2">
+      <h4><span class="tag t-gold">3</span> Retail / direct</h4>
+      <p class="small"><b>Who:</b> individuals investing themselves, via apps and platforms.</p>
+      <p class="small"><b>Ticket size:</b> small, but millions of people</p>
+      <p class="small"><b>Decides:</b> the individual, influenced by brand, ratings, media and price</p>
+      <p class="small"><b>Cares about:</b> simplicity, trust, low cost and good outcomes (FCA Consumer Duty)</p>
+    </div>
+  </div>
+
+  <h3>Institutional clients in detail</h3>
+  <table>
+    <tr><th style="width:26%">Client</th><th>What they are</th><th style="width:30%">What they need</th></tr>
+    <tr><td><b>Defined benefit (DB) pension schemes</b></td><td>Pay members a guaranteed income in retirement based on salary. The scheme (and employer) carries the risk. Most UK private DB schemes are now closed to new members.</td><td>Certainty of meeting future payments. Heavy use of <b>LDI</b> (liability-driven investment) and bonds. Many aim for a "buyout" with an insurer.</td></tr>
+    <tr><td><b>Defined contribution (DC) pensions</b></td><td>Your pot depends on what's paid in plus investment returns. Run by master trusts (e.g. Nest, L&amp;G, Aviva) and providers. <b>The big growth market.</b></td><td>Low-cost, long-term growth via a "default fund" for members who never choose. Increasingly, some private markets.</td></tr>
+    <tr><td><b>Local Government Pension Scheme (LGPS)</b></td><td>The pension for council and public-sector workers in England &amp; Wales. It's funded and being merged into fewer, larger <b>pools</b>.</td><td>Scale, low costs, and investment in UK and local projects</td></tr>
+    <tr><td><b>Insurers</b></td><td>Invest premiums so they can pay future claims and annuities</td><td>Steady income (lots of bonds) and meeting capital rules</td></tr>
+    <tr><td><b>Sovereign wealth funds (SWFs)</b></td><td>State-owned investment funds (e.g. Norway's, Abu Dhabi's, Singapore's GIC)</td><td>Very long-term growth. Huge mandates. Very demanding.</td></tr>
+    <tr><td><b>Endowments &amp; foundations</b></td><td>Universities and charities investing gifts so they can fund their work forever</td><td>Real returns of inflation + 4–5% to spend sustainably; ethical restrictions</td></tr>
+  </table>
+
+  <h3>Wholesale clients in detail</h3>
+  <div class="grid2">
+    <div class="box b1 small">
+      <p><b>Wealth managers / private banks</b> manage portfolios for wealthy individuals (e.g. St James's Place, Rathbones, Coutts). <b>Discretionary fund managers (DFMs)</b> can make investment decisions for clients without asking each time.</p>
+      <p><b>IFAs (independent financial advisers)</b> give regulated advice to individuals and recommend funds.</p>
+    </div>
+    <div class="box b1 small">
+      <p><b>Platforms</b> are online "supermarkets" for funds (e.g. Hargreaves Lansdown, AJ Bell, interactive investor). Being on their <b>best-buy list</b> can drive huge flows.</p>
+      <p><b>Fund of funds / multi-managers</b> build portfolios out of other managers' funds.</p>
+      <p><b>Fund selectors</b> are the analysts at these firms who decide which funds make the "buy list". They are the key buyers.</p>
+    </div>
+  </div>
+  <div class="expert small"><b>DB vs DC is the most useful distinction to drop into an answer.</b> DB is shrinking and "de-risking" (buying bonds, then transferring to insurers through buyouts). DC is growing fast, because auto-enrolment since 2012 put millions of workers into pensions. Asset managers are shifting resources towards DC and wealth accordingly.</div>
+</section>
+
+<section class="page im" id="im5">
+  <div class="kicker"><span>Part B · Investment Management</span><a href="#contents">↑ Contents</a></div>
+  <h2>B5 · Part 2: Distribution &amp; sales</h2>
+  <p class="lead">"Distribution" is the asset management word for everything involved in <b>winning, keeping and growing client money</b>. It's the client-facing side, and the part most directly tied to revenue.</p>
+
+  <h3>The teams</h3>
+  <table>
+    <tr><th style="width:24%">Team / role</th><th>What they do</th><th style="width:31%">What an intern might do</th></tr>
+    <tr><td><b>Institutional sales / business development (BD)</b></td><td>Hunt for new institutional clients and mandates; build relationships with prospects and consultants; lead pitches</td><td>Research prospects, update the CRM, prepare pitch books, sit in on meetings</td></tr>
+    <tr><td><b>Wholesale / intermediary sales</b></td><td>Cover wealth managers, IFAs and platforms; get funds onto buy lists; often regionally based (e.g. "Scotland &amp; North")</td><td>Prepare meeting materials, analyse which clients hold which funds</td></tr>
+    <tr><td><b>Client relationship management (CRM) / client directors</b></td><td>"Farmers": own existing clients, run review meetings, spot needs, defend against losses, cross-sell</td><td>Prepare quarterly review packs, take notes, track client requests</td></tr>
+    <tr><td><b>Consultant relations</b></td><td>Manage relationships with investment consultants who shortlist managers, and fill in their research databases</td><td>Update consultant databases, compile performance data</td></tr>
+    <tr><td><b>Product specialists / investment directors</b></td><td>Experts on a strategy who explain it to clients in depth: the bridge between portfolio managers and clients</td><td>Draft market commentary, update presentations and factsheets</td></tr>
+    <tr><td><b>RFP / proposals team</b></td><td>Write formal answers to Requests for Proposal and due diligence questionnaires (DDQs)</td><td>Update the answer library, draft standard sections</td></tr>
+    <tr><td><b>Client service / reporting</b></td><td>Onboarding, accurate client reports, day-to-day queries</td><td>Check reports, reconcile data, handle simple queries</td></tr>
+    <tr><td><b>Marketing &amp; product</b></td><td>Brand, campaigns, thought leadership, events; designing and launching new funds</td><td>Content drafts, event support, competitor analysis</td></tr>
+  </table>
+
+  <h3>How an institutional mandate is won (the sales cycle)</h3>
+  <div class="flow">
+    <div class="step"><b>1 · Profile</b>Build a relationship with the consultant; get the strategy <b>rated</b></div><div class="arr">›</div>
+    <div class="step"><b>2 · Search</b>The scheme decides to hire; the consultant runs a manager search</div><div class="arr">›</div>
+    <div class="step"><b>3 · RFP</b>Long questionnaire on team, process, performance, fees, ESG, risk</div><div class="arr">›</div>
+    <div class="step"><b>4 · Shortlist</b>Usually 3–5 managers make the "finals"</div><div class="arr">›</div>
+    <div class="step"><b>5 · Finals pitch</b>Present to trustees; Q&amp;A; fee negotiation</div><div class="arr">›</div>
+    <div class="step"><b>6 · Onboard</b>Legal agreements (IMA), transfer assets, set up reporting</div><div class="arr">›</div>
+    <div class="step"><b>7 · Retain</b>Quarterly reviews and years of servicing</div>
+  </div>
+  <p class="small muted center">This cycle typically takes 6–18 months. Wholesale is faster: get a meeting → present → due diligence → buy list → ongoing support.</p>
+
+  <h3>How distribution is measured</h3>
+  <div class="grid4">
+    <div class="box b2 small center"><b>Net flows / net new money</b><br>Inflows minus outflows. The headline sales number.</div>
+    <div class="box b2 small center"><b>Retention rate</b><br>The share of clients and AUM kept each year</div>
+    <div class="box b2 small center"><b>Pipeline</b><br>The value of prospects at each stage of the cycle</div>
+    <div class="box b2 small center"><b>Win rate / revenue</b><br>Finals won, and fee revenue added</div>
+  </div>
+  <div class="expert small"><b>Why retention is the most important (and underrated) number.</b> Winning a new £500m mandate takes perhaps a year of work. Losing one can happen in a single bad meeting. Each lost client must be replaced just to stand still. Strong client relationship teams protect the revenue base, and that is the core argument for why the client-facing side matters as much as investment performance.</div>
+</section>
+
+<section class="page im" id="im6">
+  <div class="kicker"><span>Part B · Investment Management</span><a href="#contents">↑ Contents</a></div>
+  <h2>B6 · Part 3: Investing, the asset classes</h2>
+  <p class="small">An <b>asset class</b> is a group of investments that behave similarly. Asset managers organise their investment teams around them. You need to know the main ones and what each is <i>for</i>.</p>
+  <table>
+    <tr><th style="width:18%">Asset class</th><th>What it is</th><th style="width:22%">Role in a portfolio</th><th style="width:16%">Risk / liquidity</th></tr>
+    <tr><td><b>Equities</b></td><td>Shares in listed companies. Split by region (UK, US, global, emerging markets), size (large, small cap) and style (growth, value)</td><td>Long-term growth</td><td>Higher risk; very liquid</td></tr>
+    <tr><td><b>Fixed income</b></td><td>Bonds: government (gilts, Treasuries), investment-grade corporate, high-yield ("junk"), emerging-market debt</td><td>Income and stability; protection in downturns</td><td>Lower to medium; mostly liquid</td></tr>
+    <tr><td><b>Multi-asset</b></td><td>Funds that combine equities, bonds and others, adjusting the mix over time</td><td>A one-stop diversified solution</td><td>Medium</td></tr>
+    <tr><td><b>Cash / money markets</b></td><td>Very short-term loans to governments and banks</td><td>Safety and liquidity</td><td>Very low</td></tr>
+    <tr><td><b>Real estate</b></td><td>Commercial property: offices, warehouses, shops, housing</td><td>Income, inflation link, diversification</td><td>Medium; illiquid</td></tr>
+    <tr><td><b>Infrastructure</b></td><td>Roads, airports, energy networks, wind farms, data centres</td><td>Long-term stable income, often inflation-linked</td><td>Medium; illiquid</td></tr>
+    <tr><td><b>Private equity</b></td><td>Buying whole private companies, improving them, then selling after 3–7 years</td><td>High long-term growth</td><td>High; very illiquid</td></tr>
+    <tr><td><b>Private credit</b></td><td>Lending directly to companies instead of through banks</td><td>Higher income than bonds</td><td>Medium–high; illiquid</td></tr>
+    <tr><td><b>Hedge funds</b></td><td>Flexible strategies that can bet on prices falling ("shorting") and use leverage</td><td>Returns that don't depend on markets rising</td><td>Varies; often less liquid</td></tr>
+  </table>
+
+  <h3>Public vs private markets</h3>
+  <div class="grid2">
+    <div class="box b1 small"><b>Public markets:</b> traded on exchanges, with prices every second, high transparency and easy buying and selling. This is where traditional asset managers grew up.</div>
+    <div class="box b2 small"><b>Private markets:</b> not exchange-traded and valued only occasionally. Money is locked up for years, but there is potential for higher returns and fees. This is the <b>fastest-growing area</b> of the industry, and traditional managers are racing to build or buy capabilities (<a href="#im13" style="color:var(--gold-d);font-weight:600">B13</a>).</div>
+  </div>
+
+  <h3>Investment styles</h3>
+  <div class="gloss">
+    <div><b>Active:</b> picks investments to beat a benchmark, for higher fees</div>
+    <div><b>Passive / index:</b> tracks a benchmark at very low cost</div>
+    <div><b>Growth:</b> companies expected to grow fast (e.g. tech), often expensive</div>
+    <div><b>Value:</b> companies that look cheap relative to their worth</div>
+    <div><b>Income:</b> companies or bonds paying high, steady dividends or coupons</div>
+    <div><b>Quantitative ("quant"):</b> investment decisions driven by data and models</div>
+    <div><b>Fundamental:</b> deep research into individual companies' businesses</div>
+    <div><b>Top-down vs bottom-up:</b> start from the economy vs start from individual companies</div>
+    <div><b>Sustainable / ESG:</b> considers environmental, social and governance factors</div>
+    <div><b>Smart beta / factor:</b> rules-based funds tilted to factors like value or quality, a hybrid of active and passive</div>
+  </div>
+  <div class="expert small">Ask any portfolio manager "what's your process?" and you'll hear a version of: <i>philosophy</i> (what we believe drives returns) → <i>process</i> (how we find and choose investments) → <i>portfolio construction</i> (how we size positions and control risk). Consultants judge managers on whether these three are clear, consistent and repeatable. Using that language shows real understanding.</div>
+</section>
+
+<section class="page im" id="im7">
+  <div class="kicker"><span>Part B · Investment Management</span><a href="#contents">↑ Contents</a></div>
+  <h2>B7 · Part 3: The investment process, and how performance is judged</h2>
+  <h3>The investment process, step by step</h3>
+  <div class="flow">
+    <div class="step"><b>1 · Mandate</b>Client objective, benchmark, risk limits and restrictions are agreed</div><div class="arr">›</div>
+    <div class="step"><b>2 · Ideas</b>Analysts screen and research companies, bonds and themes</div><div class="arr">›</div>
+    <div class="step"><b>3 · Research</b>Financial models, meetings with management, valuation</div><div class="arr">›</div>
+    <div class="step"><b>4 · Decide</b>The portfolio manager chooses what to own and how much</div><div class="arr">›</div>
+    <div class="step"><b>5 · Risk check</b>Risk and compliance confirm limits are respected</div><div class="arr">›</div>
+    <div class="step"><b>6 · Execute</b>Dealers trade in the market at the best price</div><div class="arr">›</div>
+    <div class="step"><b>7 · Monitor</b>Review positions; report performance to clients</div>
+  </div>
+
+  <h3>The investment team roles</h3>
+  <div class="grid3">
+    <div class="box b1 small"><b>Portfolio manager (PM) / fund manager</b><br>Makes the final investment decisions and is accountable for the fund's performance. Often meets major clients.</div>
+    <div class="box b1 small"><b>Research analyst</b><br>Covers a sector (e.g. banks, healthcare) or region and recommends buys and sells. "Buy-side analyst" is a common entry route.</div>
+    <div class="box b1 small"><b>Dealer / trader</b><br>Executes trades efficiently and quietly, so big orders don't push the price against the fund.</div>
+    <div class="box b1 small"><b>Economist / strategist</b><br>Views on the economy, interest rates and asset allocation.</div>
+    <div class="box b1 small"><b>Stewardship / responsible investment</b><br>Votes at company meetings and engages boards on governance, climate and pay.</div>
+    <div class="box b1 small"><b>Investment risk</b><br>Measures and challenges the risks the PM takes. Independent from the PM.</div>
+  </div>
+
+  <h3>How performance is judged</h3>
+  <div class="gloss">
+    <div><b>Benchmark:</b> the index a fund is compared with (e.g. MSCI World, FTSE All-Share)</div>
+    <div><b>Absolute return:</b> how much the fund made (e.g. +8%)</div>
+    <div><b>Relative return / excess return:</b> versus the benchmark (fund +8%, benchmark +6% = +2%)</div>
+    <div><b>Alpha:</b> return from the manager's skill, above what the market delivered</div>
+    <div><b>Beta:</b> how much a fund moves with the market. Beta 1 = moves in line.</div>
+    <div><b>Tracking error:</b> how far a fund's returns drift from its benchmark (a risk measure for active funds)</div>
+    <div><b>Sharpe ratio:</b> return per unit of risk taken. Higher is better.</div>
+    <div><b>Drawdown:</b> the fall from a peak to a trough. Clients remember big drawdowns.</div>
+    <div><b>Peer group / quartile:</b> how the fund ranks against similar funds. "Top quartile" means the best 25%.</div>
+    <div><b>Track record:</b> performance history. Consultants usually want 3–5+ years.</div>
+  </div>
+  <div class="box b2 small">
+    <h4>A worked example</h4>
+    <p>A global equity fund returns <b>+11%</b> this year. Its benchmark, the MSCI World, returned <b>+9%</b>. The fund charges 0.75%. Net of fees, the client got roughly +10.25%, an excess return of about <b>+1.25%</b>. The client relationship manager's job at the review meeting is to explain <i>why</i> (which decisions added value, and which detracted) and whether the process should keep working. If the fund had returned +11% while the benchmark did +14%, the conversation would be about <b>underperformance</b>, even though the client made money.</p>
+  </div>
+  <div class="expert small"><b>Performance attribution</b> breaks down <i>where</i> excess return came from: asset allocation (being in the right markets) vs stock selection (picking the right companies). Client-facing teams use attribution reports in every review meeting. Knowing the term signals that you understand what client conversations actually involve.</div>
+</section>
+
+<section class="page im" id="im8">
+  <div class="kicker"><span>Part B · Investment Management</span><a href="#contents">↑ Contents</a></div>
+  <h2>B8 · Part 4: Support functions &amp; the trade lifecycle</h2>
+  <p class="small">Often more than half of an asset manager's staff work outside investing and sales. These teams keep the firm accurate, safe and legal. Many great careers start here, and an intern who understands them stands out.</p>
+  <table>
+    <tr><th style="width:22%">Function</th><th>What it does</th><th style="width:34%">Why it matters</th></tr>
+    <tr><td><b>Investment operations</b></td><td>Processes and settles trades, reconciles positions with the custodian, handles corporate actions (dividends, mergers)</td><td>An unsettled or wrong trade costs money and trust</td></tr>
+    <tr><td><b>Fund accounting / administration</b></td><td>Calculates each fund's daily price (the <b>NAV</b>, net asset value), often outsourced to administrators</td><td>Investors buy and sell at the NAV, so it must be right</td></tr>
+    <tr><td><b>Risk management</b></td><td>Independent oversight of investment, liquidity, counterparty and operational risk</td><td>Prevents blow-ups. Regulators require it.</td></tr>
+    <tr><td><b>Performance &amp; analytics</b></td><td>Calculates returns and attribution for every portfolio</td><td>Feeds every client report and pitch</td></tr>
+    <tr><td><b>Compliance</b></td><td>Makes sure the firm follows FCA rules; checks marketing materials; monitors personal trading</td><td>Breaches mean fines and bans</td></tr>
+    <tr><td><b>Legal</b></td><td>Fund documents, client contracts (investment management agreements), regulation</td><td>Protects the firm and clients</td></tr>
+    <tr><td><b>Technology &amp; data</b></td><td>Trading systems (e.g. Aladdin, Charles River), data platforms, cyber security, AI tools</td><td>Efficiency, and a growing competitive edge</td></tr>
+    <tr><td><b>Finance, HR, corporate</b></td><td>The firm's own accounts, people, strategy, M&amp;A</td><td>Running the business itself</td></tr>
+  </table>
+
+  <h3>The trade lifecycle: what happens when a PM buys a share</h3>
+  <div class="flow">
+    <div class="step"><b>PM decides</b>"Buy 1m shares of Company X"</div><div class="arr">›</div>
+    <div class="step"><b>Pre-trade compliance</b>The system checks fund rules and limits automatically</div><div class="arr">›</div>
+    <div class="step"><b>Dealer executes</b>Trades via brokers or electronic venues</div><div class="arr">›</div>
+    <div class="step"><b>Confirmation</b>Both sides confirm the price and quantity</div><div class="arr">›</div>
+    <div class="step"><b>Settlement</b>Cash and shares swap via the custodian (UK shares: T+1 from October 2027, currently T+2)</div><div class="arr">›</div>
+    <div class="step"><b>Reconcile &amp; report</b>Records matched; the NAV and client reports updated</div>
+  </div>
+  <p class="tiny muted">"T+2" means settlement two business days after the trade date. The UK plans to move to T+1 in October 2027, following the US (May 2024).</p>
+
+  <h3>Outsourcing</h3>
+  <p class="small">Many asset managers outsource custody, fund administration and some operations to large providers (e.g. BNY, State Street, Northern Trust, HSBC). They keep "oversight" teams to supervise them. This is part of the industry's response to <b>cost pressure</b> (<a href="#im13" style="color:var(--gold-d);font-weight:600">B13</a>).</p>
+  <div class="expert small">If you're allocated to a role in operations rather than the client side, don't treat it as second best. Client service and reporting teams depend completely on operations data, and understanding the plumbing makes you a far better client-facing professional later. Saying in an interview that you understand <i>how the client report gets made</i> is rare and valued.</div>
+</section>
+
+<section class="page im" id="im9">
+  <div class="kicker"><span>Part B · Investment Management</span><a href="#contents">↑ Contents</a></div>
+  <h2>B9 · Products and fund vehicles</h2>
+  <p class="small">The <b>strategy</b> is <i>what</i> the manager does (e.g. "global equity income"). The <b>vehicle</b> is the legal wrapper clients buy it through. One strategy can be sold in several vehicles to different clients.</p>
+  <div class="grid2">
+    <div class="box b2 small">
+      <h4>Pooled funds (many investors share one portfolio)</h4>
+      <ul>
+        <li><b>OEIC / unit trust:</b> UK open-ended funds. Investors buy and sell at the daily NAV, and the fund grows or shrinks with demand.</li>
+        <li><b>UCITS:</b> the EU standard for retail funds, sellable across Europe (often Dublin or Luxembourg "SICAVs"). A strong investor-protection badge.</li>
+        <li><b>ETF (exchange-traded fund):</b> a fund that trades on a stock exchange like a share. Usually passive and cheap. A fast-growing vehicle.</li>
+        <li><b>Investment trust:</b> a UK company listed on the stock exchange that invests in other assets. Its shares can trade above (premium) or below (discount) the value of its assets.</li>
+        <li><b>LTAF (Long-Term Asset Fund):</b> a UK vehicle (since 2021) designed to let DC pensions access illiquid private assets.</li>
+      </ul>
+    </div>
+    <div class="box b1 small">
+      <h4>Segregated mandates (one client, own portfolio)</h4>
+      <p>A large client (e.g. a £1bn pension scheme) has a portfolio run just for them, with custom restrictions (e.g. no tobacco) and negotiated fees. Governed by an <b>investment management agreement (IMA)</b>.</p>
+      <h4>Private market funds</h4>
+      <p><b>Closed-ended</b> limited partnerships. Investors commit money that's "called" over time, locked up for 7–12 years, with fees on committed capital plus <b>carried interest</b>. The terms are <b>GP</b> (general partner, the manager) and <b>LP</b> (limited partner, the investor).</p>
+      <h4>Model portfolios</h4>
+      <p>Ready-made portfolios that wealth managers and advisers use for their clients. A big growth area in wholesale.</p>
+    </div>
+  </div>
+
+  <h3>Open-ended vs closed-ended</h3>
+  <table>
+    <tr><th></th><th>Open-ended (OEIC, unit trust, most UCITS, ETFs)</th><th>Closed-ended (investment trusts, private equity funds)</th></tr>
+    <tr><td><b>Size</b></td><td>Grows and shrinks as investors come and go</td><td>Fixed pool of capital</td></tr>
+    <tr><td><b>Liquidity</b></td><td>Daily dealing at NAV</td><td>Sell shares on an exchange (trusts) or wait until the fund ends (PE)</td></tr>
+    <tr><td><b>Best for</b></td><td>Liquid assets: listed shares and bonds</td><td>Illiquid assets: property, private companies, infrastructure</td></tr>
+    <tr><td><b>Danger</b></td><td>A "liquidity mismatch" if it holds illiquid assets but promises daily dealing</td><td>Trading at a discount when sentiment is poor</td></tr>
+  </table>
+  <div class="expert small"><b>The 2019 Woodford case is the classic lesson.</b> The Woodford Equity Income Fund was a daily-dealing open-ended fund that held hard-to-sell unlisted companies. When performance fell, investors rushed to withdraw, and the fund had to <b>suspend</b> dealing in June 2019, trapping investors. It then wound down. It's cited constantly as an example of liquidity mismatch, of reputational collapse, and of why the FCA scrutinises fund structures. It's useful in IM <i>and</i> PR conversations.</div>
+
+  <h3>Share classes and charges</h3>
+  <p class="small">One fund can have several <b>share classes</b> with different fees (e.g. a retail class, a cheaper "clean" class for platforms, and an institutional class for big investors). Retail funds show an <b>OCF</b> (ongoing charges figure): the annual cost as a percentage, including the management fee and running costs. Under the PRIIPs and UK consumer rules, investors must also receive standardised documents showing costs and risks (e.g. a KID / KIID).</p>
+</section>
+
+<section class="page im" id="im10">
+  <div class="kicker"><span>Part B · Investment Management</span><a href="#contents">↑ Contents</a></div>
+  <h2>B10 · How an asset manager makes money</h2>
+  <div class="formula">
+    <div class="f">Revenue<small>per year</small></div><div class="op">=</div>
+    <div class="f">Average AUM<small>assets under management</small></div><div class="op">×</div>
+    <div class="f">Fee rate<small>in basis points (bps)</small></div><div class="op">+</div>
+    <div class="f">Performance fees<small>some products only</small></div>
+  </div>
+  <div class="box zero small"><b>Basis points:</b> 1 bp = 0.01%. So 100 bps = 1%, and a 45 bps fee = 0.45% a year. On £1 billion, 45 bps = <b>£4.5 million a year</b>. Fees are taken automatically from the fund, usually daily or monthly, so the client doesn't write a cheque.</div>
+
+  <h3>AUM changes for only two reasons</h3>
+  <div class="formula">
+    <div class="f">AUM end of year</div><div class="op">=</div>
+    <div class="f">AUM start</div><div class="op">+</div>
+    <div class="f">Market movement<small>investment performance</small></div><div class="op">+</div>
+    <div class="f">Net flows<small>new money − withdrawals</small></div>
+  </div>
+  <p class="small">So an asset manager's revenue depends on <b>markets</b> (partly outside its control), <b>performance</b> (the investment team) and <b>flows</b> (the distribution team). This is why asset manager share prices rise and fall with the stock market, and why firms obsess over net flows.</p>
+
+  <h3>A simple P&amp;L for a mid-sized manager (illustrative)</h3>
+  <table>
+    <tr><th style="width:52%">Line</th><th>£m</th><th>Notes</th></tr>
+    <tr><td>Average AUM: £50bn at an average fee of 40 bps</td><td></td><td></td></tr>
+    <tr><td><b>Management fee revenue</b></td><td><b>200</b></td><td>£50bn × 0.40%</td></tr>
+    <tr><td>Performance fees</td><td>10</td><td>Volatile, so investors value it less</td></tr>
+    <tr><td>Staff costs (salaries + bonuses)</td><td>(95)</td><td>The biggest cost, often around half of revenue</td></tr>
+    <tr><td>Technology, data, premises, distribution, other</td><td>(55)</td><td>Data and tech costs rising fast</td></tr>
+    <tr><td><b>Operating profit</b></td><td><b>60</b></td><td><b>Operating margin ≈ 29%</b></td></tr>
+  </table>
+  <p class="small"><b>Operating margin</b> (operating profit ÷ revenue) and the <b>cost/income ratio</b> (costs ÷ revenue, here about 71%) are how analysts judge asset managers. A cost/income ratio above 75–80% usually means a firm is under pressure.</p>
+
+  <h3>Fee levels by product (typical, rough)</h3>
+  <table>
+    <tr><th>Product</th><th>Typical annual fee</th><th>Why</th></tr>
+    <tr><td>Passive index fund / ETF</td><td>0.03% – 0.25%</td><td>Automated, commoditised, competing on price</td></tr>
+    <tr><td>Active bonds, institutional</td><td>0.15% – 0.40%</td><td>Big clients negotiate</td></tr>
+    <tr><td>Active equities, institutional</td><td>0.35% – 0.75%</td><td>More research required</td></tr>
+    <tr><td>Active funds, retail / wholesale</td><td>0.60% – 1.00% (OCF)</td><td>Smaller tickets, more servicing and distribution cost</td></tr>
+    <tr><td>Hedge funds</td><td>~1–2% + ~15–20% of profits</td><td>Performance-based</td></tr>
+    <tr><td>Private equity / private credit</td><td>~1–2% + ~10–20% carried interest</td><td>Specialist, labour-intensive, long lock-ups</td></tr>
+  </table>
+  <div class="expert small"><b>Why scale matters so much:</b> managing £100bn doesn't need twice the people of £50bn. Extra AUM is mostly profit, which is why the industry is consolidating. But fees are falling ("fee compression") as clients move to passive and negotiate harder. So firms face a squeeze: revenue per £ is falling while tech, data and regulatory costs rise. Explaining that squeeze in one sentence is a strong signal of understanding.</div>
+</section>
+
+<section class="page im" id="im11">
+  <div class="kicker"><span>Part B · Investment Management</span><a href="#contents">↑ Contents</a></div>
+  <h2>B11 · The industry landscape</h2>
+  <p class="small">The Investment Management workstream could match you to any of these kinds of firm. Knowing the types means you won't be surprised whoever calls.</p>
+  <table>
+    <tr><th style="width:23%">Type</th><th>What makes them different</th><th style="width:35%">UK-relevant examples</th></tr>
+    <tr><td><b>Global giants</b></td><td>Huge scale, often strong in passive / ETFs, every asset class</td><td>BlackRock, Vanguard, State Street, Fidelity International, J.P. Morgan AM, Amundi</td></tr>
+    <tr><td><b>UK-headquartered majors</b></td><td>Large active and multi-asset ranges; strong UK pension and wholesale presence</td><td>Legal &amp; General (LGIM), Schroders, M&amp;G, abrdn (aberdeen), Aviva Investors, Royal London AM, Baillie Gifford, Columbia Threadneedle, Ninety One, Jupiter</td></tr>
+    <tr><td><b>Insurer / bank-owned</b></td><td>The investment arm of a larger group, managing group money plus external clients</td><td>Aviva Investors, M&amp;G, HSBC AM, Insight (BNY), Federated Hermes</td></tr>
+    <tr><td><b>Boutiques</b></td><td>Small, specialist and often partner-owned. Interns see more of the business.</td><td>Many: Artemis, Liontrust, Polar Capital, Ruffer, Troy and others</td></tr>
+    <tr><td><b>Alternatives</b></td><td>Hedge funds, private equity, private credit, real estate</td><td>Man Group, Capstone, Permira, CVC, Ares, ICG, Partners Group, Blackstone</td></tr>
+    <tr><td><b>Wealth managers</b></td><td>Individual clients; often buy other managers' funds</td><td>St James's Place, Rathbones, Brewin/RBC, Quilter, Canaccord, Evelyn</td></tr>
+    <tr><td><b>Asset owners with in-house teams</b></td><td>Pension funds or pools that manage money themselves</td><td>USS, Border to Coast, Railpen, LGPS pools, Nest (the government-backed DC scheme)</td></tr>
+  </table>
+  <p class="tiny muted">Examples are for orientation only. They are not a list of 10,000 Black Interns hosts.</p>
+
+  <h3>Where the jobs are</h3>
+  <div class="grid3">
+    <div class="box b2 small"><b>London</b> is the dominant hub: the City, Canary Wharf, Mayfair (hedge funds and PE).</div>
+    <div class="box b2 small"><b>Edinburgh</b> is a major second centre (Baillie Gifford, abrdn, many others), and <b>Glasgow</b> is growing in operations.</div>
+    <div class="box b2 small"><b>Manchester, Leeds, Birmingham, Bristol and Bournemouth</b> have wealth managers, operations centres and pension providers.</div>
+  </div>
+
+  <h3>Industry bodies worth knowing</h3>
+  <div class="gloss">
+    <div><b>The Investment Association (IA):</b> trade body for UK asset managers. Publishes industry data and sector classifications.</div>
+    <div><b>Pensions UK</b> (formerly the PLSA): trade body for pension schemes</div>
+    <div><b>CFA Institute / CFA Society UK:</b> the main investment qualification (CFA charter), plus the IMC (Investment Management Certificate), a common UK entry exam</div>
+    <div><b>BVCA:</b> British Private Equity &amp; Venture Capital Association (a 10K partner)</div>
+    <div><b>Diversity Project:</b> industry initiative on diversity in investment and savings</div>
+    <div><b>UK Stewardship Code:</b> standards for how investors engage with companies, overseen by the FRC</div>
+  </div>
+  <div class="expert small"><b>Qualifications as conversation points:</b> the <b>IMC</b> is the standard UK entry-level exam many graduates take in their first year. The <b>CFA</b> (three levels) is the gold standard for investment roles. The <b>CISI</b> runs exams common in wealth and operations. Mentioning that you're aware of the IMC, or have started studying it, is a concrete signal of commitment.</div>
+</section>
+
+<section class="page im" id="im12">
+  <div class="kicker"><span>Part B · Investment Management</span><a href="#contents">↑ Contents</a></div>
+  <h2>B12 · Regulation you should know</h2>
+  <p class="small">You don't need to be a lawyer, but knowing these by name and purpose shows maturity. Each is a one-line idea:</p>
+  <table>
+    <tr><th style="width:26%">Rule / regime</th><th>What it does, in plain English</th></tr>
+    <tr><td><b>FCA authorisation</b></td><td>Every UK asset manager must be authorised by the FCA, and key individuals must be approved</td></tr>
+    <tr><td><b>Consumer Duty</b> (from July 2023)</td><td>Firms must deliver <b>good outcomes</b> for retail customers: fair value, understandable communications, suitable products and proper support. A huge focus for retail and wholesale distribution and marketing.</td></tr>
+    <tr><td><b>Value for money / assessment of value</b></td><td>UK fund boards must annually assess whether each fund gives value for its fees. A growing value-for-money framework applies to DC pensions too.</td></tr>
+    <tr><td><b>SM&amp;CR</b> (Senior Managers &amp; Certification Regime)</td><td>Named senior individuals are personally accountable for areas of the business</td></tr>
+    <tr><td><b>MiFID II</b> (UK version)</td><td>Rules on investor protection, transparency, best execution and how research is paid for</td></tr>
+    <tr><td><b>UCITS / AIFMD</b></td><td>Rules for retail funds (UCITS) and alternative funds (AIFMD): diversification, liquidity, depositaries</td></tr>
+    <tr><td><b>SDR</b> (Sustainability Disclosure Requirements)</td><td>The FCA's rules on sustainability labels for funds (e.g. "Sustainability Focus") and an <b>anti-greenwashing rule</b>: claims must be fair, clear and not misleading</td></tr>
+    <tr><td><b>Financial promotions rules</b></td><td>Marketing must be fair, clear and not misleading, and approved by compliance. This directly affects client-facing and marketing teams.</td></tr>
+    <tr><td><b>Market abuse (UK MAR)</b></td><td>Bans insider dealing and market manipulation. Staff can't trade on confidential information.</td></tr>
+    <tr><td><b>Anti-money laundering (AML) / KYC</b></td><td>"Know your customer": verifying clients' identity and source of funds during onboarding</td></tr>
+  </table>
+  <div class="box b2 small">
+    <h4>Why regulation matters for the client side</h4>
+    <p>Every factsheet, presentation, email campaign and social post that a distribution or marketing team produces must pass <b>compliance sign-off</b> as a financial promotion. Under Consumer Duty, firms must <b>evidence</b> that customers understand what they're buying. Good client-facing people write clearly, simply and accurately. That's a skill you can claim and demonstrate in your 250 words.</p>
+  </div>
+  <div class="expert small">The phrase regulators and the industry use constantly is <b>"good outcomes"</b>. If you can say that a role "helps make sure clients understand what they own and get good outcomes", you are speaking the industry's current language.</div>
+</section>
+
+<section class="page im" id="im13">
+  <div class="kicker"><span>Part B · Investment Management</span><a href="#contents">↑ Contents</a></div>
+  <h2>B13 · What's happening now: key trends</h2>
+  <p class="small">Pick <b>one</b> of these for your answer and understand it deeply. The others are interview ammunition.</p>
+  <div class="grid2">
+    <div class="box b2 small">
+      <h4>1 · The passive shift and fee compression</h4>
+      <p>Cheap index funds and ETFs keep winning money from active funds, especially in equities. Average fees are falling. Active managers must prove they're worth paying for, through performance, specialist strategies or better client solutions.</p>
+      <p><b>So what for the client side:</b> explaining value clearly has never mattered more.</p>
+    </div>
+    <div class="box b2 small">
+      <h4>2 · Private markets go mainstream</h4>
+      <p>Private equity, private credit and infrastructure are growing much faster than traditional funds and carry higher fees. Traditional managers are buying private-markets firms or partnering with them. New vehicles (LTAFs, ELTIFs, semi-liquid "evergreen" funds) open them to DC pensions and wealthy individuals.</p>
+      <p><b>So what:</b> lots of client education, because these products are complex and illiquid.</p>
+    </div>
+    <div class="box b2 small">
+      <h4>3 · UK pension reform</h4>
+      <p>Government reforms (including the Pension Schemes Bill) push DC schemes to consolidate into fewer "megafunds" with large minimum sizes by around 2030, and LGPS assets into fewer, bigger pools. Under the 2025 <b>Mansion House Accord</b>, major DC providers pledged to put 10% of default funds into private markets by 2030, with at least half of that in the UK.</p>
+      <p><b>So what:</b> fewer, larger, more sophisticated clients. Distribution becomes more consultative and the competition fiercer.</p>
+    </div>
+    <div class="box b2 small">
+      <h4>4 · Consolidation and cost pressure</h4>
+      <p>Squeezed margins drive mergers, partnerships and job cuts. Firms outsource operations and invest in technology. Mid-sized active managers feel the most pressure, caught between giant passive firms and specialist boutiques.</p>
+      <p><b>So what:</b> firms want people who add value quickly, can use technology and understand clients.</p>
+    </div>
+    <div class="box b2 small">
+      <h4>5 · Wealth and DC as the growth engines</h4>
+      <p>Money is shifting from DB schemes to individuals: DC pots, ISAs and wealth managers. Model portfolios, platforms and digital investing are growing. The government also wants more people to invest rather than hold cash (e.g. ISA reforms announced in 2025).</p>
+      <p><b>So what:</b> retail and wholesale distribution, plus Consumer Duty, matter more each year.</p>
+    </div>
+    <div class="box b2 small">
+      <h4>6 · Sustainability: still important, now more nuanced</h4>
+      <p>ESG went through a boom, then a backlash (especially in the US) and greater scrutiny of "greenwashing". UK SDR labels now set standards. Clients still ask detailed questions about stewardship, climate and voting.</p>
+      <p><b>So what:</b> you need precise, evidence-based communication, not slogans.</p>
+    </div>
+    <div class="box b2 small">
+      <h4>7 · AI and data</h4>
+      <p>AI is used to summarise research, draft RFPs, personalise client reporting, analyse data and automate operations. Firms are investing heavily but carefully, because of accuracy and compliance concerns.</p>
+      <p><b>So what:</b> entry-level work is changing. Judgement, relationships and checking AI output become more valuable.</p>
+    </div>
+    <div class="box b2 small">
+      <h4>8 · ETFs and tokenisation</h4>
+      <p><b>Active ETFs</b> (active strategies in an ETF wrapper) are growing fast, and Europe is catching up with the US. Some firms are experimenting with <b>tokenised</b> funds recorded on blockchain to speed up settlement.</p>
+      <p><b>So what:</b> product and distribution teams are rethinking how funds reach investors.</p>
+    </div>
+  </div>
+  <div class="expert small"><b>A one-sentence synthesis you can adapt:</b> <i>"As fee pressure, the growth of passive investing and pension consolidation create fewer, larger and more demanding clients, the firms that win will be those that can explain their value clearly and build long-term trust."</i> That sentence links three trends to why client-facing work matters.</div>
+</section>
+
+<section class="page im" id="im14">
+  <div class="kicker"><span>Part B · Investment Management</span><a href="#contents">↑ Contents</a></div>
+  <h2>B14 · Investment Management glossary</h2>
+  <div class="gloss">
+    <div><b>Active management:</b> choosing investments to beat a benchmark</div>
+    <div><b>Alpha:</b> return above the benchmark from skill</div>
+    <div><b>Asset allocation:</b> the split between asset classes</div>
+    <div><b>Asset owner:</b> the organisation that owns the money (e.g. a pension fund)</div>
+    <div><b>AUM:</b> assets under management, the money a firm manages</div>
+    <div><b>Basis point (bp):</b> 0.01%</div>
+    <div><b>Benchmark:</b> the index a fund is measured against</div>
+    <div><b>Beta:</b> sensitivity to market movements</div>
+    <div><b>Bond / gilt:</b> a loan to a company / the UK government</div>
+    <div><b>Buy list:</b> a wealth manager's or platform's approved funds</div>
+    <div><b>Buy-side / sell-side:</b> investors / banks serving investors</div>
+    <div><b>Carried interest:</b> a PE manager's share of profits</div>
+    <div><b>Consultant:</b> an adviser who helps institutions choose managers</div>
+    <div><b>Custodian:</b> the bank that holds the assets safely</div>
+    <div><b>DB / DC:</b> defined benefit / defined contribution pensions</div>
+    <div><b>DDQ:</b> due diligence questionnaire</div>
+    <div><b>Default fund:</b> where DC savers' money goes if they don't choose</div>
+    <div><b>DFM:</b> discretionary fund manager</div>
+    <div><b>Dividend:</b> a share of profit paid to shareholders</div>
+    <div><b>Drawdown:</b> peak-to-trough fall in value</div>
+    <div><b>Duration:</b> a bond's sensitivity to interest rate changes</div>
+    <div><b>ESG:</b> environmental, social, governance</div>
+    <div><b>ETF:</b> exchange-traded fund</div>
+    <div><b>Fiduciary:</b> obliged to act in the client's best interest</div>
+    <div><b>Fund selector:</b> the analyst who picks funds for a buy list</div>
+    <div><b>IFA:</b> independent financial adviser</div>
+    <div><b>IMA:</b> investment management agreement (the contract)</div>
+    <div><b>Inflows / outflows:</b> money coming in / leaving</div>
+    <div><b>Institutional:</b> clients that are organisations</div>
+    <div><b>Investment trust:</b> a listed closed-ended fund</div>
+    <div><b>LDI:</b> liability-driven investment for DB schemes</div>
+    <div><b>LGPS:</b> Local Government Pension Scheme</div>
+    <div><b>Liquidity:</b> how easily something can be sold</div>
+    <div><b>LTAF:</b> Long-Term Asset Fund (UK, for illiquid assets)</div>
+    <div><b>Mandate:</b> the instruction and portfolio a client gives a manager</div>
+    <div><b>Master trust:</b> a multi-employer DC pension scheme</div>
+    <div><b>NAV:</b> net asset value, a fund's price per unit</div>
+    <div><b>Net flows:</b> inflows minus outflows</div>
+    <div><b>OCF:</b> ongoing charges figure (total annual cost)</div>
+    <div><b>OEIC / unit trust:</b> UK open-ended funds</div>
+    <div><b>Passive:</b> tracking an index</div>
+    <div><b>Performance attribution:</b> explaining where returns came from</div>
+    <div><b>Pipeline:</b> prospective business at each stage</div>
+    <div><b>Platform:</b> an online fund supermarket</div>
+    <div><b>Portfolio manager (PM):</b> makes investment decisions</div>
+    <div><b>Private markets:</b> PE, private credit, infrastructure, real estate</div>
+    <div><b>Product specialist:</b> explains strategies to clients</div>
+    <div><b>Quartile:</b> ranking vs peers (1st = top 25%)</div>
+    <div><b>Rebalancing:</b> resetting a portfolio back to its target mix</div>
+    <div><b>RFP / RFI:</b> request for proposal / information</div>
+    <div><b>Segregated mandate:</b> a bespoke portfolio for one client</div>
+    <div><b>Sharpe ratio:</b> return per unit of risk</div>
+    <div><b>Share class:</b> a version of a fund with different fees</div>
+    <div><b>Stewardship:</b> voting and engaging with companies</div>
+    <div><b>SWF:</b> sovereign wealth fund</div>
+    <div><b>Tracking error:</b> how far returns deviate from the benchmark</div>
+    <div><b>Trustee:</b> a person responsible for running a pension scheme</div>
+    <div><b>UCITS:</b> the EU retail fund standard</div>
+    <div><b>Volatility:</b> how much prices swing</div>
+    <div><b>Wholesale / intermediary:</b> selling via advisers and wealth managers</div>
+    <div><b>Yield:</b> income return on an investment</div>
+  </div>
+</section>
+
+<section class="page im" id="im15">
+  <div class="kicker"><span>Part B · Investment Management</span><a href="#contents">↑ Contents</a></div>
+  <h2>B15 · Expert check: can you answer these out loud?</h2>
+  <p class="small">If you can answer each in two or three sentences without notes, you understand investment management better than most applicants. A short model answer is given for each.</p>
+  <div class="qa small">
+    <div class="box b1"><b>How does an asset manager make money?</b><br><span class="muted">A percentage fee on assets under management, sometimes plus performance fees. Revenue grows through market performance and net flows, and costs are mainly people and technology.</span></div>
+    <div class="box b1"><b>What's the difference between institutional and wholesale clients?</b><br><span class="muted">Institutional clients are organisations such as pension schemes and insurers, investing large sums, usually via consultants and RFPs. Wholesale clients are intermediaries such as wealth managers, IFAs and platforms that select funds for individuals.</span></div>
+    <div class="box b1"><b>Why do investment consultants matter?</b><br><span class="muted">They advise pension trustees and shortlist managers, acting as gatekeepers. Without a positive consultant rating, winning institutional business is very difficult.</span></div>
+    <div class="box b1"><b>What's the difference between DB and DC pensions, and why does it matter?</b><br><span class="muted">DB guarantees an income and the scheme bears the risk. Most are closed and de-risking. In DC, members bear the risk. DC is growing fast and consolidating, so it's a key growth market.</span></div>
+    <div class="box b1"><b>Active vs passive: what's the debate?</b><br><span class="muted">Passive is cheaper and many active funds fail to beat their benchmark after fees, so money has moved to passive. Active managers argue for skill, risk management and access to areas passive can't reach, such as private markets.</span></div>
+    <div class="box b1"><b>Why might interest rates rising hurt bond prices?</b><br><span class="muted">Existing bonds pay fixed coupons. When new bonds offer higher rates, old ones become less attractive, so their prices fall until their yield matches the market.</span></div>
+    <div class="box b1"><b>What does a client relationship manager actually do?</b><br><span class="muted">Owns existing client relationships: runs review meetings explaining performance and positioning, handles requests, anticipates needs, and protects and grows the firm's revenue by retaining and expanding mandates.</span></div>
+    <div class="box b1"><b>Name a current industry trend and why it matters.</b><br><span class="muted">E.g. UK pension consolidation: fewer, bigger schemes with more bargaining power and interest in private markets, which raises the bar for distribution teams.</span></div>
+    <div class="box b1"><b>What is Consumer Duty?</b><br><span class="muted">An FCA rule since 2023 requiring firms to deliver good outcomes for retail customers, including fair value, clear communication and suitable products.</span></div>
+    <div class="box b1"><b>Why is retention as important as winning new business?</b><br><span class="muted">Fees recur every year a client stays, and new mandates take months to win. Each lost client must be replaced just to stand still, so servicing protects the revenue base.</span></div>
+  </div>
+  <div class="box key small"><a href="#s0" style="font-weight:700;color:var(--gold-d)">Continue to Sales →</a></div>
+</section>
+<section class="chapter ch-s sl" id="s0">
+  <div class="num">C</div>
+  <h1>Sales</h1>
+  <p>The function that turns a product into revenue by finding customers, understanding what they need, persuading them to buy and keeping them coming back. Around 1 in 6 UK employees work in sales-related roles. The Sales workstream can place you in technology, consumer goods, business services, media, telecoms or financial services.</p>
+  <ol style="columns:2">
+    <li><a href="#s1">What sales is</a></li>
+    <li><a href="#s3">The four parts</a></li>
+    <li><a href="#s4">The sales process</a></li>
+    <li><a href="#s5">Methodologies</a></li>
+    <li><a href="#s6">How it makes money</a></li>
+    <li><a href="#s7">Sales by industry</a></li>
+    <li><a href="#s8">Tools, careers, trends</a></li>
+    <li><a href="#s10">Glossary</a></li>
+    <li><a href="#s11">Expert check</a></li>
+  </ol>
+</section>
+
+<section class="page sl" id="s1">
+  <div class="kicker"><span>Part C · Sales</span><a href="#contents">↑ Contents</a></div>
+  <h2>C1 · What sales is, and the types of selling</h2>
+  <p class="lead">Sales is the part of a business responsible for <b>generating revenue</b>: identifying who might buy, understanding their problem, showing how the product solves it, agreeing a price, closing the deal, and growing the relationship.</p>
+  <div class="box zero small"><b>Sales vs marketing:</b> <b>marketing</b> creates awareness and interest across many people at once (adverts, content, campaigns). <b>Sales</b> converts that interest into actual customers, usually through one-to-one conversations. Marketing fills the top of the funnel; sales closes it. In modern companies they work as one "revenue" team.</div>
+
+  <svg viewBox="0 0 680 95" width="100%">
+    <defs><marker id="ar5" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#2a9d8f"/></marker></defs>
+    <g font-size="10">
+      <rect x="5" y="15" width="150" height="62" rx="8" fill="#eaf1f9" stroke="#3a6ea5"/><text x="80" y="40" text-anchor="middle" font-weight="700" fill="#14213d">Marketing</text><text x="80" y="56" text-anchor="middle" fill="#5c6378" font-size="8.5">awareness &amp; leads</text>
+      <rect x="178" y="15" width="150" height="62" rx="8" fill="#1f7a6f"/><text x="253" y="40" text-anchor="middle" font-weight="700" fill="#fff">Sales</text><text x="253" y="56" text-anchor="middle" fill="#fff" font-size="8.5">conversations &amp; closing</text>
+      <rect x="351" y="15" width="150" height="62" rx="8" fill="#eaf6f4" stroke="#2a9d8f"/><text x="426" y="40" text-anchor="middle" font-weight="700" fill="#14213d">Customer success</text><text x="426" y="56" text-anchor="middle" fill="#5c6378" font-size="8.5">onboarding &amp; retention</text>
+      <rect x="524" y="15" width="150" height="62" rx="8" fill="#fff7ea" stroke="#e09f3e"/><text x="599" y="40" text-anchor="middle" font-weight="700" fill="#14213d">Account growth</text><text x="599" y="56" text-anchor="middle" fill="#5c6378" font-size="8.5">renewals, upsell, referrals</text>
+    </g>
+    <g stroke="#2a9d8f" stroke-width="2" marker-end="url(#ar5)"><line x1="157" y1="46" x2="176" y2="46"/><line x1="330" y1="46" x2="349" y2="46"/><line x1="503" y1="46" x2="522" y2="46"/></g>
+  </svg>
+  <p class="tiny muted center">The customer journey. Revenue Operations ("RevOps") ties all four stages together with shared data.</p>
+
+  <h3>The main types of selling</h3>
+  <table>
+    <tr><th style="width:24%">Type</th><th>What it means</th><th style="width:32%">Example</th></tr>
+    <tr><td><b>B2B vs B2C</b></td><td>Selling to organisations vs individuals (<a href="#a4" style="color:var(--teal-d);font-weight:600">A4</a>)</td><td>Software to a bank vs a phone contract to you</td></tr>
+    <tr><td><b>Transactional</b></td><td>Simple, quick, price-driven, often one-off</td><td>Retail, basic subscriptions</td></tr>
+    <tr><td><b>Consultative / solution</b></td><td>Diagnose the client's problem first, then tailor a solution. Long cycles and high value.</td><td>Enterprise software, institutional asset management, consulting</td></tr>
+    <tr><td><b>Inside sales</b></td><td>Selling remotely by phone, email and video</td><td>Most tech SDR and AE roles</td></tr>
+    <tr><td><b>Field / outside sales</b></td><td>Meeting clients in person, often regionally</td><td>Medical devices, wholesale fund sales, FMCG</td></tr>
+    <tr><td><b>Hunter vs farmer</b></td><td>Hunters win new clients; farmers grow existing ones</td><td>New business AE vs account manager</td></tr>
+    <tr><td><b>Channel / partner</b></td><td>Selling through resellers, distributors or intermediaries</td><td>Software via consultancies; funds via platforms</td></tr>
+    <tr><td><b>Key account management (KAM)</b></td><td>Dedicated teams for the few biggest customers</td><td>A food brand's team for Tesco</td></tr>
+  </table>
+  <div class="expert small"><b>The modern view of sales:</b> buyers now research online before talking to a salesperson. Studies often suggest B2B buyers are well over halfway through their decision before engaging. So the salesperson's value is no longer information; it is <b>insight</b>, <b>diagnosis</b> and <b>trust</b>. "Helping clients buy" rather than "pushing products" is the idea to show in your answer.</div>
+</section>
+
+<section class="page sl" id="s3">
+  <div class="kicker"><span>Part C · Sales</span><a href="#contents">↑ Contents</a></div>
+  <h2>C2 · The four parts of a sales organisation</h2>
+  <div class="grid4">
+    <div class="part p-navy"><h4>1 · Lead generation</h4><ul><li>SDRs / BDRs</li><li>Research target accounts</li><li>Cold calls, emails, LinkedIn</li><li>Qualify interest</li><li>Book first meetings</li></ul><div class="who"><b>Goal:</b> fill the pipeline with qualified opportunities.<br><b>Measured by:</b> meetings booked, qualified leads</div></div>
+    <div class="part p-gold"><h4>2 · New business (closing)</h4><ul><li>Account executives (AEs)</li><li>Discovery meetings</li><li>Demos &amp; proposals</li><li>Negotiation</li><li>Closing</li></ul><div class="who"><b>Goal:</b> convert opportunities into customers.<br><b>Measured by:</b> revenue closed vs quota, win rate</div></div>
+    <div class="part p-teal"><h4>3 · Account management &amp; customer success</h4><ul><li>Account managers</li><li>Customer success managers</li><li>Onboarding</li><li>Renewals</li><li>Upsell / cross-sell</li></ul><div class="who"><b>Goal:</b> keep and grow customers.<br><b>Measured by:</b> retention, churn, net revenue retention</div></div>
+    <div class="part p-plum"><h4>4 · Sales operations &amp; enablement</h4><ul><li>CRM &amp; data</li><li>Forecasting</li><li>Territories &amp; pricing</li><li>Commission plans</li><li>Training</li></ul><div class="who"><b>Goal:</b> make the whole engine efficient.<br><b>Measured by:</b> forecast accuracy, productivity</div></div>
+  </div>
+  <p class="small"><b>Sales leadership</b> sits above all four: sales managers, regional heads, the VP of Sales and the Chief Revenue Officer (CRO). They set targets, hire, coach and forecast.</p>
+
+  <h3>The roles in detail</h3>
+  <table>
+    <tr><th style="width:24%">Role</th><th>A typical day</th><th style="width:30%">Skills that matter most</th></tr>
+    <tr><td><b>SDR / BDR</b> (sales or business development representative)</td><td>Researching companies; 50+ calls and emails; LinkedIn outreach; qualifying calls; booking meetings for AEs</td><td>Resilience, curiosity, concise writing, organisation</td></tr>
+    <tr><td><b>Account executive (AE)</b></td><td>Discovery calls; tailored demos; writing proposals; handling objections; negotiating terms; updating forecasts</td><td>Listening, questioning, business understanding, negotiation</td></tr>
+    <tr><td><b>Account manager / key account manager</b></td><td>Business reviews with clients; spotting new needs; renewals; resolving issues; coordinating internal teams</td><td>Relationship-building, problem-solving, commercial thinking</td></tr>
+    <tr><td><b>Customer success manager (CSM)</b></td><td>Onboarding new customers; training; tracking product usage; preventing churn</td><td>Empathy, product knowledge, proactivity</td></tr>
+    <tr><td><b>Sales operations analyst</b></td><td>CRM reporting; pipeline dashboards; territory planning; commission calculations</td><td>Excel/data, process thinking, accuracy</td></tr>
+    <tr><td><b>Sales engineer / solutions consultant</b></td><td>Technical demos and answers for complex products</td><td>Technical depth plus communication</td></tr>
+  </table>
+
+  <h3>What a sales intern typically does</h3>
+  <div class="grid3">
+    <div class="box b3 small"><b>Research</b><br>Build prospect lists, research target companies and decision-makers, and do market and competitor analysis</div>
+    <div class="box b3 small"><b>Support</b><br>Shadow calls and meetings, prepare pitch materials, update the CRM and draft follow-up emails</div>
+    <div class="box b3 small"><b>Analyse</b><br>Track sales performance, build pipeline reports and identify where deals are won or lost</div>
+  </div>
+  <div class="expert small"><b>Hunter vs farmer, and why farmers matter more than people think.</b> In subscription businesses, most revenue each year comes from <i>existing</i> customers. A company with strong account management can grow even with modest new sales. Saying you're drawn to <b>long-term relationships and account growth</b>, not just "closing deals", shows commercial maturity.</div>
+</section>
+
+<section class="page sl" id="s4">
+  <div class="kicker"><span>Part C · Sales</span><a href="#contents">↑ Contents</a></div>
+  <h2>C3 · The sales process, step by step</h2>
+  <p class="small">Every structured sales team follows a version of this. Each stage has a clear exit criterion before a deal moves on in the CRM.</p>
+  <div class="flow">
+    <div class="step"><b>1 · Prospect</b>Identify target companies and people who fit the <b>ideal customer profile (ICP)</b></div><div class="arr">›</div>
+    <div class="step"><b>2 · Outreach</b>Contact them by call, email, LinkedIn or referral</div><div class="arr">›</div>
+    <div class="step"><b>3 · Qualify</b>Do they have a real need, budget, authority and timing?</div><div class="arr">›</div>
+    <div class="step"><b>4 · Discovery</b>Deep questions: what problem, what impact, what success looks like</div><div class="arr">›</div>
+    <div class="step"><b>5 · Solution</b>Demo or presentation tailored to their problem</div>
+  </div>
+  <div class="flow">
+    <div class="step"><b>6 · Proposal</b>Written offer: scope, price, terms, business case</div><div class="arr">›</div>
+    <div class="step"><b>7 · Objections</b>Address concerns: price, timing, risk, competitors</div><div class="arr">›</div>
+    <div class="step"><b>8 · Negotiate</b>Agree on price, terms and contract length</div><div class="arr">›</div>
+    <div class="step"><b>9 · Close</b>Signed contract or purchase order</div><div class="arr">›</div>
+    <div class="step"><b>10 · Onboard &amp; grow</b>Successful start, then renewal, upsell and referrals</div>
+  </div>
+
+  <h3>Discovery: the most important stage</h3>
+  <p class="small">Great salespeople spend most of their time <b>asking and listening</b>, not presenting. Good discovery questions:</p>
+  <div class="grid2">
+    <div class="box b3 small"><ul style="margin:0"><li>"What prompted you to look at this now?"</li><li>"How are you handling this today?"</li><li>"What does that cost you, in time, money or risk?"</li></ul></div>
+    <div class="box b3 small"><ul style="margin:0"><li>"Who else is involved in this decision?"</li><li>"What would success look like in 12 months?"</li><li>"What's stopped you solving this before?"</li></ul></div>
+  </div>
+
+  <h3>Handling objections: a simple four-step technique</h3>
+  <div class="flow">
+    <div class="step"><b>Listen</b>Let them finish; don't interrupt or argue</div><div class="arr">›</div>
+    <div class="step"><b>Acknowledge</b>"That's a fair concern…"</div><div class="arr">›</div>
+    <div class="step"><b>Explore</b>"Can you tell me more about what's behind that?"</div><div class="arr">›</div>
+    <div class="step"><b>Respond</b>Evidence, a case study or a reframe, then check: "Does that address it?"</div>
+  </div>
+  <table>
+    <tr><th style="width:28%">Common objection</th><th>What it often really means</th><th style="width:36%">Good response direction</th></tr>
+    <tr><td>"It's too expensive."</td><td>Value isn't clear yet, or the budget is genuinely limited</td><td>Reconnect the price to the cost of the problem; explore options</td></tr>
+    <tr><td>"Now isn't a good time."</td><td>Low urgency or other priorities</td><td>Understand their timeline; agree on a next step</td></tr>
+    <tr><td>"We use a competitor."</td><td>Switching feels risky</td><td>Explore satisfaction gaps; reduce switching risk</td></tr>
+    <tr><td>"Send me some information."</td><td>A polite brush-off</td><td>Ask what specifically would be useful, and book a follow-up</td></tr>
+  </table>
+  <div class="expert small"><b>"Sell me this pen", the classic interview test.</b> The weak answer launches into the pen's features. The strong answer asks questions first: <i>"When did you last use a pen? What for? What frustrates you about the ones you have?"</i> Then it sells the specific benefit that matters to that person. It demonstrates discovery, which is what interviewers are actually testing.</div>
+</section>
+
+<section class="page sl" id="s5">
+  <div class="kicker"><span>Part C · Sales</span><a href="#contents">↑ Contents</a></div>
+  <h2>C4 · Sales methodologies</h2>
+  <p class="small">A methodology is a structured way of selling. You don't need to master them, but knowing the names and ideas immediately marks you as someone who has done their homework.</p>
+  <table>
+    <tr><th style="width:18%">Method</th><th>The core idea</th><th style="width:36%">How it works</th></tr>
+    <tr><td><b>BANT</b></td><td>A simple qualification check, originally from IBM</td><td><b>B</b>udget, <b>A</b>uthority, <b>N</b>eed, <b>T</b>iming. If one is missing, the deal is at risk.</td></tr>
+    <tr><td><b>MEDDIC / MEDDPICC</b></td><td>Rigorous qualification for complex B2B deals</td><td><b>M</b>etrics, <b>E</b>conomic buyer, <b>D</b>ecision criteria, <b>D</b>ecision process, (<b>P</b>aper process), <b>I</b>dentify pain, <b>C</b>hampion, (<b>C</b>ompetition)</td></tr>
+    <tr><td><b>SPIN Selling</b></td><td>Neil Rackham's research-based questioning model</td><td><b>S</b>ituation → <b>P</b>roblem → <b>I</b>mplication → <b>N</b>eed-payoff questions, leading the buyer to state the value themselves</td></tr>
+    <tr><td><b>Challenger Sale</b></td><td>The best salespeople teach, tailor and take control</td><td>Bring a new insight that challenges how the customer thinks about their business</td></tr>
+    <tr><td><b>Solution selling</b></td><td>Sell the solution to a diagnosed problem, not the product</td><td>Diagnose pain → build a vision of the solution → prove value</td></tr>
+    <tr><td><b>Consultative selling</b></td><td>Act as a trusted adviser</td><td>Deep listening, honest advice (even "we're not right for you") and long-term focus</td></tr>
+    <tr><td><b>Value selling</b></td><td>Everything is framed in the customer's business outcomes</td><td>Quantify ROI: "this saves you £X / earns you £Y"</td></tr>
+  </table>
+
+  <h3>SPIN in action (an example)</h3>
+  <div class="grid4">
+    <div class="box b3 small"><b>Situation</b><br>"How does your team currently produce client reports?"</div>
+    <div class="box b3 small"><b>Problem</b><br>"Where does that process cause difficulties?"</div>
+    <div class="box b3 small"><b>Implication</b><br>"What happens when a report goes out late or wrong?"</div>
+    <div class="box b3 small"><b>Need-payoff</b><br>"How valuable would it be if that took half the time?"</div>
+  </div>
+
+  <h3>The psychology of persuasion (Cialdini's principles)</h3>
+  <div class="gloss">
+    <div><b>Reciprocity:</b> people return favours, so give value first (insight, help)</div>
+    <div><b>Commitment &amp; consistency:</b> small agreements lead to bigger ones</div>
+    <div><b>Social proof:</b> "companies like yours use us" (case studies, references)</div>
+    <div><b>Authority:</b> expertise and credentials build trust</div>
+    <div><b>Liking:</b> we buy from people we like and relate to</div>
+    <div><b>Scarcity:</b> limited availability increases value (used ethically)</div>
+  </div>
+  <div class="warn box small"><b>Ethics matter.</b> In regulated industries (financial services especially), pressure selling and misleading claims are illegal. Mis-selling scandals such as UK PPI cost banks tens of billions of pounds in compensation. The modern standard is selling <b>only what genuinely helps the customer</b>, which is also what builds repeat business.</div>
+  <div class="expert small">If you can explain that <b>SPIN</b> and <b>consultative selling</b> are about helping the buyer discover the value themselves, and link that to your own experience of watching client conversations in asset management, you'll sound far more credible than someone who says "I'm persuasive and confident".</div>
+</section>
+
+<section class="page sl" id="s6">
+  <div class="kicker"><span>Part C · Sales</span><a href="#contents">↑ Contents</a></div>
+  <h2>C5 · How sales makes money: the metrics</h2>
+  <div class="formula">
+    <div class="f">Revenue</div><div class="op">=</div>
+    <div class="f">Leads</div><div class="op">×</div>
+    <div class="f">Conversion rate</div><div class="op">×</div>
+    <div class="f">Average deal size</div><div class="op">×</div>
+    <div class="f">Customer lifetime<small>how long they stay</small></div>
+  </div>
+  <p class="small center muted">Improve any one of these and revenue rises. That's why sales is so data-driven.</p>
+
+  <div class="grid2">
+    <div>
+      <h3 style="margin-top:0">The sales funnel (illustrative B2B)</h3>
+      <div class="funnel">
+        <div style="width:100%;background:#14213d">1,000 prospects contacted</div>
+        <div style="width:82%;background:#2e3f63">150 respond (15%)</div>
+        <div style="width:64%;background:#3a6ea5">60 qualified meetings (40%)</div>
+        <div style="width:46%;background:#2a9d8f">20 proposals (33%)</div>
+        <div style="width:30%;background:#b8771f">6 deals won (30%)</div>
+      </div>
+      <p class="tiny muted center">Each percentage is that stage's conversion rate. The overall conversion here is 0.6%.</p>
+    </div>
+    <div>
+      <h3 style="margin-top:0">Worked example: a software company</h3>
+      <p class="small">6 deals × £30,000 a year each = <b>£180k of new annual recurring revenue (ARR)</b>.</p>
+      <p class="small">If customers stay 4 years on average: lifetime value = £120k each, so <b>£720k in total</b>.</p>
+      <p class="small">If it cost £90k (salaries, tools, marketing) to win them, the acquisition cost is £15k per customer.</p>
+      <p class="small"><b>LTV : CAC = 120 : 15 = 8 : 1</b>. Very healthy (above 3:1 is generally considered good).</p>
+    </div>
+  </div>
+
+  <h3>The metrics every salesperson knows</h3>
+  <table>
+    <tr><th style="width:26%">Metric</th><th>Meaning</th><th style="width:30%">Why it matters</th></tr>
+    <tr><td><b>Pipeline</b></td><td>Total value of open opportunities</td><td>Future revenue visibility</td></tr>
+    <tr><td><b>Pipeline coverage</b></td><td>Pipeline ÷ target (aim ~3×)</td><td>Since most deals don't close, you need much more pipeline than target</td></tr>
+    <tr><td><b>Conversion / win rate</b></td><td>% of opportunities won</td><td>Shows sales skill and fit</td></tr>
+    <tr><td><b>Average deal size (ACV)</b></td><td>Average contract value</td><td>Bigger deals mean more revenue per effort</td></tr>
+    <tr><td><b>Sales cycle length</b></td><td>Days from first contact to close</td><td>Shorter cycles mean faster growth</td></tr>
+    <tr><td><b>Quota attainment</b></td><td>% of target achieved</td><td>The core measure of an individual</td></tr>
+    <tr><td><b>ARR / MRR</b></td><td>Annual / monthly recurring revenue</td><td>The key number in subscription businesses</td></tr>
+    <tr><td><b>Churn</b></td><td>% of customers or revenue lost in a period</td><td>A "leaky bucket" undermines growth</td></tr>
+    <tr><td><b>NRR</b> (net revenue retention)</td><td>Revenue from existing customers this year ÷ last year, including upsell and churn</td><td>Above 100% means you grow even without new customers</td></tr>
+    <tr><td><b>CAC</b></td><td>Customer acquisition cost</td><td>Efficiency of sales and marketing spend</td></tr>
+    <tr><td><b>LTV / CLV</b></td><td>Customer lifetime value</td><td>How much a customer is worth over the relationship</td></tr>
+  </table>
+
+  <h3>How salespeople are paid</h3>
+  <p class="small">Usually <b>base salary + commission</b>, adding up to "OTE" (on-target earnings). A typical split is 50/50 or 60/40 base/variable. Commission might be a percentage of revenue closed, with <b>accelerators</b> (higher rates) above 100% of quota. That's why sales attracts competitive, target-motivated people. In <b>financial services</b>, pay is more salary-plus-bonus, because regulators discourage incentives that could lead to mis-selling.</p>
+  <div class="expert small"><b>Pricing models you should recognise:</b> one-off purchase; subscription (per user or per month); usage-based (pay per use); tiered (good / better / best); and percentage of value (like asset management's % of AUM). The pricing model shapes how a sales team sells and how it's rewarded.</div>
+</section>
+
+<section class="page sl" id="s7">
+  <div class="kicker"><span>Part C · Sales</span><a href="#contents">↑ Contents</a></div>
+  <h2>C6 · Sales across different industries</h2>
+  <p class="small">The Sales workstream could match you with very different businesses. The fundamentals are the same, but the shape differs:</p>
+  <table>
+    <tr><th style="width:17%">Industry</th><th style="width:28%">What's sold, to whom</th><th>How it works</th><th style="width:20%">Key terms</th></tr>
+    <tr><td><b>Technology / SaaS</b></td><td>Software subscriptions to businesses</td><td>The SDR → AE → CSM model; recurring revenue; demos; free trials; highly metric-driven</td><td>ARR, churn, NRR, pipeline, demo</td></tr>
+    <tr><td><b>FMCG / consumer goods</b></td><td>Food, drink and household brands to retailers (Tesco, Sainsbury's, Amazon)</td><td>Key account managers negotiate shelf space, pricing and promotions with retailer buyers; data from till sales</td><td>Listings, ranging, promotions, category management, trade spend</td></tr>
+    <tr><td><b>Financial services</b></td><td>Funds, insurance, banking, payments, data to institutions and intermediaries</td><td>Consultative, regulated and relationship-driven; long cycles; compliance sign-off on materials</td><td>AUM, mandates, buy lists, brokers, Consumer Duty</td></tr>
+    <tr><td><b>Media &amp; advertising</b></td><td>Advertising space and audiences to brands and agencies</td><td>Sell audiences and campaigns; negotiate with media agencies; data-driven targeting</td><td>CPM, reach, impressions, inventory, programmatic</td></tr>
+    <tr><td><b>Professional / B2B services</b></td><td>Consulting, legal, recruitment, facilities</td><td>Selling expertise and trust; proposals and pitches; partners often sell</td><td>Pitch, tender, retainer, utilisation</td></tr>
+    <tr><td><b>Telecoms &amp; utilities</b></td><td>Connectivity, energy, contracts to homes and businesses</td><td>High-volume B2C plus enterprise B2B; contracts and renewals</td><td>Contract term, churn, ARPU</td></tr>
+    <tr><td><b>Medical / pharma</b></td><td>Devices and medicines to hospitals and the NHS</td><td>Highly regulated; technical; procurement frameworks</td><td>Formulary, tender, procurement</td></tr>
+    <tr><td><b>Recruitment</b></td><td>Hiring services to companies; roles to candidates</td><td>Two-sided sales (clients and candidates); fees as a % of salary</td><td>Placement fee, retained vs contingent search</td></tr>
+  </table>
+
+  <h3>Bridge: asset management distribution is consultative B2B sales</h3>
+  <table>
+    <tr><th style="width:30%">Sales concept</th><th>How it shows up in asset management</th></tr>
+    <tr><td>Ideal customer profile</td><td>Pension schemes of a certain size, or wealth managers with matching investment styles</td></tr>
+    <tr><td>Lead generation</td><td>Consultant relationships, conferences, research-led content</td></tr>
+    <tr><td>Qualification</td><td>Is there a live manager search? Do we fit the criteria?</td></tr>
+    <tr><td>Proposal</td><td>The RFP / DDQ</td></tr>
+    <tr><td>Demo / pitch</td><td>The finals presentation to trustees</td></tr>
+    <tr><td>Multiple decision-makers</td><td>Trustees, the investment committee, the consultant, the sponsoring employer</td></tr>
+    <tr><td>Account management</td><td>Client relationship managers, quarterly reviews</td></tr>
+    <tr><td>Recurring revenue and churn</td><td>Annual management fees and mandate losses</td></tr>
+  </table>
+  <div class="expert small">This table is your most powerful tool for the Sales answer. You can say truthfully that you've watched high-value consultative B2B sales up close, with long cycles, many stakeholders and recurring revenue that depends on retention, <b>using sales language</b> that a software or consumer-goods reader will instantly recognise.</div>
+</section>
+
+<section class="page sl" id="s8">
+  <div class="kicker"><span>Part C · Sales</span><a href="#contents">↑ Contents</a></div>
+  <h2>C7 · Tools, careers and trends</h2>
+  <h3>The tools</h3>
+  <table>
+    <tr><th style="width:24%">Category</th><th>Examples</th><th style="width:40%">Used for</th></tr>
+    <tr><td><b>CRM</b></td><td>Salesforce, HubSpot, Microsoft Dynamics</td><td>Recording every contact, opportunity and deal stage. The "single source of truth".</td></tr>
+    <tr><td><b>Prospecting &amp; data</b></td><td>LinkedIn Sales Navigator, ZoomInfo, Apollo</td><td>Finding target companies and contacts</td></tr>
+    <tr><td><b>Sales engagement</b></td><td>Outreach, Salesloft</td><td>Automated, personalised email and call sequences</td></tr>
+    <tr><td><b>Conversation intelligence</b></td><td>Gong, Chorus</td><td>Recording and analysing calls with AI for coaching</td></tr>
+    <tr><td><b>Proposals &amp; e-signature</b></td><td>PandaDoc, DocuSign</td><td>Sending proposals and signing contracts</td></tr>
+  </table>
+
+  <h3>The career ladder</h3>
+  <div class="flow">
+    <div class="step"><b>Intern / graduate</b>Learn the product and process</div><div class="arr">›</div>
+    <div class="step"><b>SDR / BDR</b>Typically 12–18 months</div><div class="arr">›</div>
+    <div class="step"><b>Account executive</b>Own a quota and close deals</div><div class="arr">›</div>
+    <div class="step"><b>Senior / enterprise AE or account director</b>Bigger, more complex clients</div><div class="arr">›</div>
+    <div class="step"><b>Sales manager → VP Sales → CRO</b>Lead teams and strategy</div>
+  </div>
+  <p class="small">Sales is one of the most transferable skill sets in business. Many CEOs started in sales, and the skills carry straight into asset management distribution, consulting, recruitment and entrepreneurship.</p>
+
+  <h3>Trends to know</h3>
+  <div class="grid2">
+    <div class="box b3 small"><b>1 · AI across the sales cycle.</b> AI drafts outreach, researches prospects, summarises calls and forecasts deals. Some firms use "AI SDRs" for first-touch outreach, so human value shifts to complex conversations, relationships and judgement.</div>
+    <div class="box b3 small"><b>2 · The informed buyer.</b> Buyers research independently and talk to sales later. Salespeople must add insight beyond what's online, which explains the rise of consultative and "Challenger" approaches.</div>
+    <div class="box b3 small"><b>3 · Product-led growth (PLG).</b> Users try a product free and upgrade themselves (e.g. Slack, Canva). Sales then focuses on expanding usage within companies.</div>
+    <div class="box b3 small"><b>4 · Customer success and retention.</b> In subscription businesses, keeping and expanding customers drives most growth. Net revenue retention is now a headline metric.</div>
+    <div class="box b3 small"><b>5 · Social selling.</b> Building credibility on LinkedIn through content and networks before ever making contact.</div>
+    <div class="box b3 small"><b>6 · Data-driven and RevOps.</b> Marketing, sales and customer success are united under shared data and targets, so analytical skills are increasingly valued.</div>
+    <div class="box b3 small"><b>7 · Hybrid selling.</b> A mix of video and in-person meetings. In-person is used deliberately for high-value moments.</div>
+    <div class="box b3 small"><b>8 · Ethics and trust.</b> Regulation (e.g. Consumer Duty in finance) and buyer cynicism reward honest, long-term, value-based selling.</div>
+  </div>
+  <div class="expert small">A strong one-sentence synthesis for your answer: <i>"As AI takes on more routine outreach and buyers arrive better informed, the value of a salesperson increasingly lies in understanding a client's problem deeply and building trust over time."</i></div>
+</section>
+
+<section class="page sl" id="s10">
+  <div class="kicker"><span>Part C · Sales</span><a href="#contents">↑ Contents</a></div>
+  <h2>C8 · Sales glossary</h2>
+  <div class="gloss">
+    <div><b>Account executive (AE):</b> the salesperson who closes deals</div>
+    <div><b>Account management:</b> looking after and growing existing clients</div>
+    <div><b>ACV:</b> annual contract value</div>
+    <div><b>ARR / MRR:</b> annual / monthly recurring revenue</div>
+    <div><b>B2B / B2C:</b> selling to businesses / consumers</div>
+    <div><b>BANT:</b> budget, authority, need, timing</div>
+    <div><b>CAC:</b> customer acquisition cost</div>
+    <div><b>Champion:</b> an internal supporter at the client who sells for you</div>
+    <div><b>Churn:</b> customers or revenue lost</div>
+    <div><b>Close:</b> the point where the customer commits</div>
+    <div><b>Cold outreach:</b> contacting someone with no prior relationship</div>
+    <div><b>Commission:</b> pay linked to sales achieved</div>
+    <div><b>CRM:</b> customer relationship management system</div>
+    <div><b>Cross-sell:</b> selling a different product to an existing client</div>
+    <div><b>Customer success:</b> making sure customers get value and stay</div>
+    <div><b>Decision-maker / economic buyer:</b> the person who controls the budget</div>
+    <div><b>Demo:</b> a product demonstration</div>
+    <div><b>Discovery:</b> questioning to understand the client's needs</div>
+    <div><b>Enablement:</b> training and materials that help salespeople sell</div>
+    <div><b>Forecast:</b> the prediction of what will close this period</div>
+    <div><b>Gatekeeper:</b> a person who controls access to the decision-maker</div>
+    <div><b>ICP:</b> ideal customer profile</div>
+    <div><b>Inbound / outbound:</b> leads that come to you / that you chase</div>
+    <div><b>KAM:</b> key account management</div>
+    <div><b>Lead / MQL / SQL:</b> potential customer / marketing-qualified / sales-qualified</div>
+    <div><b>LTV / CLV:</b> customer lifetime value</div>
+    <div><b>MEDDIC:</b> a qualification framework for complex deals</div>
+    <div><b>NRR:</b> net revenue retention</div>
+    <div><b>Objection:</b> a concern raised by the buyer</div>
+    <div><b>OTE:</b> on-target earnings (base + commission)</div>
+    <div><b>Pipeline:</b> open opportunities and their value</div>
+    <div><b>Pipeline coverage:</b> pipeline ÷ target</div>
+    <div><b>Procurement:</b> the client's purchasing department</div>
+    <div><b>Prospect:</b> a potential customer</div>
+    <div><b>Qualification:</b> checking whether a lead is worth pursuing</div>
+    <div><b>Quota:</b> the sales target</div>
+    <div><b>Renewal:</b> a customer extending their contract</div>
+    <div><b>RevOps:</b> revenue operations, aligning marketing, sales and success</div>
+    <div><b>RFP / tender:</b> a formal request for proposals from a buyer</div>
+    <div><b>SDR / BDR:</b> sales / business development representative</div>
+    <div><b>Sales cycle:</b> the time from first contact to close</div>
+    <div><b>SPIN:</b> situation, problem, implication, need-payoff</div>
+    <div><b>Stakeholder map:</b> everyone involved in a buying decision</div>
+    <div><b>Territory:</b> the region or client set a salesperson covers</div>
+    <div><b>Upsell:</b> selling more or a premium version to an existing client</div>
+    <div><b>Value proposition:</b> why the customer should buy from you</div>
+    <div><b>Win rate:</b> % of opportunities won</div>
+    <div><b>Warm lead:</b> a prospect who has already shown interest</div>
+  </div>
+</section>
+
+<section class="page sl" id="s11">
+  <div class="kicker"><span>Part C · Sales</span><a href="#contents">↑ Contents</a></div>
+  <h2>C9 · Expert check: can you answer these out loud?</h2>
+  <div class="qa small">
+    <div class="box b1"><b>What's the difference between sales and marketing?</b><br><span class="muted">Marketing creates awareness and interest across many people at once. Sales converts that interest into customers through one-to-one conversations, then helps retain and grow them.</span></div>
+    <div class="box b1"><b>Walk me through a B2B sales process.</b><br><span class="muted">Prospect → outreach → qualify (e.g. BANT) → discovery → tailored solution → proposal → handle objections → negotiate → close → onboard → renew and expand.</span></div>
+    <div class="box b1"><b>Why is discovery so important?</b><br><span class="muted">Because you can't sell value until you understand the buyer's problem and its impact. Good discovery lets the buyer articulate the need, which makes the solution compelling and the price justified.</span></div>
+    <div class="box b1"><b>What does an SDR do vs an AE?</b><br><span class="muted">SDRs generate and qualify opportunities and book meetings. AEs run the sales process from discovery to close and own a revenue quota.</span></div>
+    <div class="box b1"><b>What is churn, and why does it matter?</b><br><span class="muted">The rate at which customers or revenue are lost. High churn means you must keep replacing customers just to stand still, so retention and account management protect growth.</span></div>
+    <div class="box b1"><b>What's pipeline coverage, and why aim for about 3×?</b><br><span class="muted">Pipeline value divided by target. Since only a fraction of deals close, you need several times your target in pipeline to hit it reliably.</span></div>
+    <div class="box b1"><b>How would you handle "it's too expensive"?</b><br><span class="muted">Acknowledge it, explore what's behind it, reconnect the price to the value or the cost of the problem, consider options (scope, terms), and check that the concern is resolved.</span></div>
+    <div class="box b1"><b>What is SPIN selling?</b><br><span class="muted">A questioning approach (Situation, Problem, Implication, Need-payoff) that helps buyers recognise the impact of their problem and the value of solving it themselves.</span></div>
+    <div class="box b1"><b>How is AI changing sales?</b><br><span class="muted">It automates research, outreach and call analysis, so human value shifts towards complex conversations, judgement and long-term relationships.</span></div>
+    <div class="box b1"><b>How does asset management distribution resemble B2B sales?</b><br><span class="muted">Long cycles, many decision-makers (trustees, consultants), formal proposals (RFPs), pitches, and recurring fee revenue that depends on retention, all handled by sales and relationship teams.</span></div>
+  </div>
+  <div class="box key small"><a href="#p0" style="font-weight:700;color:var(--teal-d)">Continue to Public Relations →</a></div>
+</section>
+<section class="chapter ch-pr prr" id="p0">
+  <div class="num">D</div>
+  <h1>Public Relations</h1>
+  <p>The management of <b>reputation</b>: how an organisation or person is understood by the media, customers, investors, employees, politicians and the public. PR is mostly about <b>earned</b> attention, which you have to persuade people to give, rather than attention you pay for.</p>
+  <ol style="columns:2">
+    <li><a href="#p1">What PR is</a></li>
+    <li><a href="#p2">Ecosystem &amp; parts</a></li>
+    <li><a href="#p4">How a campaign works</a></li>
+    <li><a href="#p5">Media relations</a></li>
+    <li><a href="#p6">Crisis communications</a></li>
+    <li><a href="#p7">Corporate &amp; financial PR</a></li>
+    <li><a href="#p8">Business model &amp; careers</a></li>
+    <li><a href="#p10">Landscape &amp; trends</a></li>
+    <li><a href="#p11">Glossary</a></li>
+    <li><a href="#p12">Expert check</a></li>
+  </ol>
+</section>
+
+<section class="page prr" id="p1">
+  <div class="kicker"><span>Part D · Public Relations</span><a href="#contents">↑ Contents</a></div>
+  <h2>D1 · What PR is (and isn't)</h2>
+  <p class="lead">PR is the strategic management of communication between an organisation and the people who matter to it (its <b>stakeholders</b>), to build understanding, trust and reputation.</p>
+  <div class="box zero small"><b>The simplest distinction:</b> <b>advertising</b> is what you say about yourself in space you paid for. <b>PR</b> is getting <i>others</i>, such as journalists, experts, customers and influencers, to say it for you. Because it's third-party, it's more credible. Because you don't control it, it's harder.</div>
+
+  <table>
+    <tr><th style="width:18%"></th><th>Advertising</th><th>Marketing</th><th>Public relations</th></tr>
+    <tr><td><b>Goal</b></td><td>Drive sales or awareness</td><td>Drive demand for products</td><td>Build reputation, trust and understanding</td></tr>
+    <tr><td><b>Audience</b></td><td>Customers</td><td>Customers</td><td><b>All</b> stakeholders: media, investors, staff, government, communities, customers</td></tr>
+    <tr><td><b>Control</b></td><td>Full: you buy the space</td><td>High</td><td>Low: journalists decide what to write</td></tr>
+    <tr><td><b>Credibility</b></td><td>Lower ("they would say that")</td><td>Medium</td><td>Higher (third-party endorsement)</td></tr>
+    <tr><td><b>Includes bad news?</b></td><td>No</td><td>Rarely</td><td><b>Yes</b>: crisis, issues, results, job cuts</td></tr>
+  </table>
+
+  <h3>The PESO model: the four types of media</h3>
+  <div class="grid4">
+    <div class="box b1 small center"><b style="font-size:13pt;color:var(--navy)">P</b>aid<br>Adverts, sponsored content, paid social, advertorials</div>
+    <div class="box b4 small center" style="outline:2.5px solid var(--plum);outline-offset:1mm"><b style="font-size:13pt;color:var(--plum)">E</b>arned<br>Press coverage, interviews, reviews, awards. <b>The core of PR.</b></div>
+    <div class="box b3 small center"><b style="font-size:13pt;color:var(--teal-d)">S</b>hared<br>Social media, influencers, word of mouth, reposts</div>
+    <div class="box b2 small center"><b style="font-size:13pt;color:var(--gold-d)">O</b>wned<br>Website, blog, reports, newsletters, the company's own channels</div>
+  </div>
+  <p class="small">Modern PR works across all four ("integrated communications"). A research report (owned) can generate a news story (earned), be amplified on LinkedIn (shared) and be promoted with a paid boost (paid).</p>
+
+  <h3>Why reputation is worth money</h3>
+  <div class="grid3">
+    <div class="box b4 small"><b>Customers</b> pay more and stay loyal to brands they trust</div>
+    <div class="box b4 small"><b>Investors</b> value companies they understand and trust more highly, while scandals can wipe billions off share prices in a day</div>
+    <div class="box b4 small"><b>Employees, regulators and government</b>: a good reputation attracts talent, eases regulation and earns a "licence to operate"</div>
+  </div>
+  <div class="expert small">Warren Buffett's line is quoted constantly in PR: <i>"It takes 20 years to build a reputation and five minutes to ruin it."</i> Reputation is an <b>intangible asset</b>: you can't see it on a balance sheet, but it shows up in sales, share prices and hiring. PR people see themselves as its guardians. Framing PR as <b>protecting and growing a valuable asset</b>, not just "getting press", is the expert view.</div>
+</section>
+
+<section class="page prr" id="p2">
+  <div class="kicker"><span>Part D · Public Relations</span><a href="#contents">↑ Contents</a></div>
+  <h2>D2 · The ecosystem and the parts of PR</h2>
+  <svg viewBox="0 0 680 150" width="100%">
+    <defs><marker id="ar6" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#6d597a"/></marker></defs>
+    <g font-size="10">
+      <rect x="5" y="45" width="135" height="60" rx="8" fill="#14213d"/><text x="72" y="70" text-anchor="middle" fill="#fff" font-weight="700">Client / organisation</text><text x="72" y="86" text-anchor="middle" fill="#e09f3e" font-size="8.5">has news, a message, a problem</text>
+      <rect x="180" y="45" width="135" height="60" rx="8" fill="#6d597a"/><text x="247" y="70" text-anchor="middle" fill="#fff" font-weight="700">PR team or agency</text><text x="247" y="86" text-anchor="middle" fill="#fff" font-size="8.5">strategy, story, access</text>
+      <rect x="355" y="10" width="135" height="55" rx="8" fill="#f3eff6" stroke="#6d597a"/><text x="422" y="33" text-anchor="middle" fill="#14213d" font-weight="700">Journalists &amp; media</text><text x="422" y="49" text-anchor="middle" fill="#5c6378" font-size="8.5">editors, broadcasters, podcasts</text>
+      <rect x="355" y="85" width="135" height="55" rx="8" fill="#f3eff6" stroke="#6d597a"/><text x="422" y="108" text-anchor="middle" fill="#14213d" font-weight="700">Influencers &amp; platforms</text><text x="422" y="124" text-anchor="middle" fill="#5c6378" font-size="8.5">creators, LinkedIn, TikTok</text>
+      <rect x="530" y="45" width="145" height="60" rx="8" fill="#fff7ea" stroke="#e09f3e"/><text x="602" y="70" text-anchor="middle" fill="#14213d" font-weight="700">Audiences / stakeholders</text><text x="602" y="86" text-anchor="middle" fill="#5c6378" font-size="8.5">public, investors, staff, MPs</text>
+    </g>
+    <g stroke="#6d597a" stroke-width="1.6" marker-end="url(#ar6)"><line x1="142" y1="75" x2="178" y2="75"/><line x1="317" y1="70" x2="353" y2="42"/><line x1="317" y1="82" x2="353" y2="110"/><line x1="492" y1="40" x2="528" y2="68"/><line x1="492" y1="112" x2="528" y2="85"/></g>
+  </svg>
+
+  <h3>The main parts (disciplines) of PR</h3>
+  <table>
+    <tr><th style="width:21%">Discipline</th><th>What it covers</th><th style="width:31%">Typical clients / examples</th></tr>
+    <tr><td><b>Corporate &amp; financial</b></td><td>Reputation of the company itself; results announcements; M&amp;A; IPOs; investor relations; CEO profile; ESG reporting</td><td>Listed companies, banks, asset managers, private equity (<a href="#p7" style="color:var(--plum);font-weight:600">D6</a>)</td></tr>
+    <tr><td><b>Consumer &amp; brand</b></td><td>Getting products and brands talked about: launches, stunts, campaigns, influencers, events</td><td>Food and drink, fashion, beauty, retail, travel, entertainment</td></tr>
+    <tr><td><b>Crisis &amp; issues management</b></td><td>Preparing for and responding to scandals, accidents, data breaches, lawsuits and product recalls</td><td>Any organisation, often at high hourly rates (<a href="#p6" style="color:var(--plum);font-weight:600">D5</a>)</td></tr>
+    <tr><td><b>Public affairs</b></td><td>Influencing policy and regulation: engaging MPs, civil servants, regulators and think tanks. Often called lobbying.</td><td>Energy, tech, finance, healthcare, trade bodies</td></tr>
+    <tr><td><b>Internal communications</b></td><td>Communicating with employees: strategy, change, restructuring, culture</td><td>Large employers, especially during change</td></tr>
+    <tr><td><b>Digital, social &amp; influencer</b></td><td>Social media strategy, content, creator partnerships, online reputation</td><td>Consumer brands, increasingly B2B</td></tr>
+    <tr><td><b>Specialist sectors</b></td><td>Technology PR, healthcare PR, B2B PR, charity and campaigning</td><td>Specialist agencies and teams</td></tr>
+    <tr><td><b>Reputation &amp; litigation</b></td><td>Protecting individuals and companies during legal disputes</td><td>High-profile individuals, companies in court</td></tr>
+  </table>
+
+  <div class="grid2">
+    <div class="box b4 small">
+      <h4>Agency side</h4>
+      <p>An agency serves multiple clients at once, so you get variety, fast learning and pace. Agencies range from global networks to small specialists. <b>Most PR internships are agency-side.</b></p>
+    </div>
+    <div class="box b1 small">
+      <h4>In-house side</h4>
+      <p>The communications team inside one organisation (a bank, a retailer, a charity, an asset manager), often called "Corporate Communications" or "Press Office". You go deeper on one organisation and get closer to senior decision-making.</p>
+    </div>
+  </div>
+</section>
+
+<section class="page prr" id="p4">
+  <div class="kicker"><span>Part D · Public Relations</span><a href="#contents">↑ Contents</a></div>
+  <h2>D3 · How a PR campaign works</h2>
+  <p class="small">Good PR is strategic, not just "sending press releases". The standard planning model (often taught as <b>RACE</b> or <b>ROSIE</b>: research, objectives, strategy, implementation, evaluation) looks like this:</p>
+  <div class="flow">
+    <div class="step"><b>1 · Research</b>Situation, audience, media landscape, competitors, current perceptions</div><div class="arr">›</div>
+    <div class="step"><b>2 · Objectives</b>SMART goals: e.g. "raise awareness among UK DC pension decision-makers"</div><div class="arr">›</div>
+    <div class="step"><b>3 · Audiences</b>Who exactly must think, feel or do something different?</div><div class="arr">›</div>
+    <div class="step"><b>4 · Messages</b>The 3–4 key messages and the proof points behind each</div><div class="arr">›</div>
+    <div class="step"><b>5 · Tactics</b>Press releases, interviews, research, events, social, influencers</div><div class="arr">›</div>
+    <div class="step"><b>6 · Implement</b>Timeline, media pitching, spokespeople, content</div><div class="arr">›</div>
+    <div class="step"><b>7 · Evaluate</b>Outputs → outcomes → business impact</div>
+  </div>
+
+  <h3>Key messages and the message house</h3>
+  <svg viewBox="0 0 680 165" width="100%">
+    <polygon points="340,5 120,50 560,50" fill="#6d597a"/>
+    <text x="340" y="38" text-anchor="middle" fill="#fff" font-weight="800" font-size="11">UMBRELLA MESSAGE: the one thing to remember</text>
+    <rect x="130" y="55" width="130" height="75" fill="#f3eff6" stroke="#6d597a"/><text x="195" y="78" text-anchor="middle" font-weight="700" fill="#14213d" font-size="10">Key message 1</text><text x="195" y="96" text-anchor="middle" fill="#5c6378" font-size="8.5">proof points:</text><text x="195" y="110" text-anchor="middle" fill="#5c6378" font-size="8.5">data, examples</text>
+    <rect x="275" y="55" width="130" height="75" fill="#f3eff6" stroke="#6d597a"/><text x="340" y="78" text-anchor="middle" font-weight="700" fill="#14213d" font-size="10">Key message 2</text><text x="340" y="96" text-anchor="middle" fill="#5c6378" font-size="8.5">proof points:</text><text x="340" y="110" text-anchor="middle" fill="#5c6378" font-size="8.5">case study, quote</text>
+    <rect x="420" y="55" width="130" height="75" fill="#f3eff6" stroke="#6d597a"/><text x="485" y="78" text-anchor="middle" font-weight="700" fill="#14213d" font-size="10">Key message 3</text><text x="485" y="96" text-anchor="middle" fill="#5c6378" font-size="8.5">proof points:</text><text x="485" y="110" text-anchor="middle" fill="#5c6378" font-size="8.5">third-party endorsement</text>
+    <rect x="120" y="132" width="440" height="26" fill="#14213d"/><text x="340" y="149" text-anchor="middle" fill="#fff" font-size="9.5" font-weight="600">FOUNDATION: facts, values, evidence</text>
+  </svg>
+
+  <h3>How PR is measured</h3>
+  <table>
+    <tr><th style="width:18%">Level</th><th>What's measured</th><th style="width:38%">Examples</th></tr>
+    <tr><td><b>Outputs</b></td><td>What you produced and got</td><td>Number of articles, reach, share of voice, key message pick-up</td></tr>
+    <tr><td><b>Outtakes</b></td><td>What the audience took from it</td><td>Engagement, recall, understanding</td></tr>
+    <tr><td><b>Outcomes</b></td><td>Changes in attitude or behaviour</td><td>Trust scores, consideration, sign-ups, enquiries</td></tr>
+    <tr><td><b>Impact</b></td><td>Business results</td><td>Sales, recruitment, share price stability, policy change</td></tr>
+  </table>
+  <div class="expert small"><b>The Barcelona Principles</b> (from AMEC, the measurement industry body) say PR should be measured by outcomes and impact, not just volume, and they reject <b>AVEs</b> (advertising value equivalents, "this coverage would have cost £X as an advert") as a measure of value. Knowing this shows you understand the profession's standards, not just its activities.</div>
+</section>
+
+<section class="page prr" id="p5">
+  <div class="kicker"><span>Part D · Public Relations</span><a href="#contents">↑ Contents</a></div>
+  <h2>D4 · Media relations: how news works</h2>
+  <p class="small">To get coverage you must understand journalists: what they need, and what makes something <b>news</b>.</p>
+  <h3>News values: what makes a story</h3>
+  <div class="grid4">
+    <div class="box b4 small center"><b>New</b><br>Genuinely new information</div>
+    <div class="box b4 small center"><b>Relevant</b><br>Matters to that outlet's readers</div>
+    <div class="box b4 small center"><b>Timely</b><br>Linked to what's happening now</div>
+    <div class="box b4 small center"><b>Data</b><br>Original numbers and research</div>
+    <div class="box b4 small center"><b>Human</b><br>Real people and real stories</div>
+    <div class="box b4 small center"><b>Conflict / surprise</b><br>Tension or the unexpected</div>
+    <div class="box b4 small center"><b>Prominence</b><br>Well-known people or brands</div>
+    <div class="box b4 small center"><b>Exclusivity</b><br>"First" or "only here"</div>
+  </div>
+
+  <h3>The press release: inverted pyramid</h3>
+  <div class="grid2">
+    <div>
+      <div class="funnel">
+        <div style="width:100%;background:#6d597a">Headline + first paragraph: who, what, when, where, why</div>
+        <div style="width:80%;background:#7d6a8c">Key details and supporting facts</div>
+        <div style="width:62%;background:#8f7d9c">Quote from a spokesperson</div>
+        <div style="width:44%;background:#a493af">Background context</div>
+        <div style="width:28%;background:#b9abc2">"Notes to editors", contacts</div>
+      </div>
+    </div>
+    <div class="small">
+      <p>Journalists read the top and decide in seconds, and editors cut from the bottom. So the most important information goes <b>first</b>.</p>
+      <p><b>Notes to editors</b> hold background facts and a short company description (the <b>boilerplate</b>).</p>
+      <p>An <b>embargo</b> means "you can't publish until this date and time". It's used to give journalists time to prepare.</p>
+    </div>
+  </div>
+
+  <h3>Media relations vocabulary</h3>
+  <div class="gloss">
+    <div><b>Pitch:</b> a short, tailored email selling a story idea to a specific journalist</div>
+    <div><b>Exclusive:</b> giving one outlet a story first, in exchange for better coverage</div>
+    <div><b>On the record:</b> everything can be quoted and attributed</div>
+    <div><b>Off the record / background:</b> information not to be quoted or attributed (terms must be agreed beforehand)</div>
+    <div><b>Spokesperson:</b> the person authorised to speak for the organisation</div>
+    <div><b>Media training:</b> preparing spokespeople for interviews (staying on message, handling tough questions)</div>
+    <div><b>Bridging:</b> moving from a difficult question to a key message ("What's important here is…")</div>
+    <div><b>Media list:</b> a targeted list of relevant journalists and their interests</div>
+    <div><b>Newsjacking:</b> linking your expert commentary to a breaking news story</div>
+    <div><b>Forward features:</b> magazines' planned future topics, which create pitching opportunities</div>
+    <div><b>Wire service:</b> a distribution service for press releases (e.g. PA Media, Business Wire)</div>
+    <div><b>Coverage report:</b> a summary of what was published, where, reach and tone</div>
+  </div>
+  <div class="box b4 small">
+    <h4>Types of media</h4>
+    <p><b>National</b> (BBC, FT, The Times, Guardian, Sky), <b>regional</b> (Manchester Evening News), <b>trade / B2B</b> (specialist titles for one industry, e.g. Citywire, Investment Week and Professional Pensions for asset management; PRWeek for PR), <b>broadcast</b> (TV and radio), <b>online-only</b> and <b>podcasts</b>, and <b>creators/influencers</b>.</p>
+  </div>
+  <div class="expert small"><b>The relationship is give-and-take.</b> Journalists are under enormous time pressure, with fewer of them covering more topics. PR people who reliably provide <b>accurate information, good spokespeople, data and fast responses</b> become trusted sources. Those who spam irrelevant press releases get ignored. "Thinking like a journalist" is the core PR skill.</div>
+</section>
+
+<section class="page prr" id="p6">
+  <div class="kicker"><span>Part D · Public Relations</span><a href="#contents">↑ Contents</a></div>
+  <h2>D5 · Crisis communications</h2>
+  <p class="small">A <b>crisis</b> is an event that threatens an organisation's reputation, operations or finances and demands urgent communication. An <b>issue</b> is a slower-burning problem that could become a crisis if ignored.</p>
+  <div class="flow">
+    <div class="step"><b>1 · Prepare</b>Crisis plan, scenarios, holding statements, a trained team, a "dark site"</div><div class="arr">›</div>
+    <div class="step"><b>2 · Respond fast</b>First statement within the "golden hour": acknowledge, show concern, commit to action</div><div class="arr">›</div>
+    <div class="step"><b>3 · Manage</b>Regular updates, one voice, all stakeholders (staff, customers, regulators, media)</div><div class="arr">›</div>
+    <div class="step"><b>4 · Recover</b>Fix the cause, show change, rebuild trust over time</div><div class="arr">›</div>
+    <div class="step"><b>5 · Learn</b>A review: what worked, what to change</div>
+  </div>
+
+  <h3>The principles</h3>
+  <div class="grid3">
+    <div class="box b4 small"><b>Speed:</b> a silence gets filled by others, often with speculation</div>
+    <div class="box b4 small"><b>Empathy first:</b> show you care about the people affected before defending the organisation</div>
+    <div class="box b4 small"><b>Honesty:</b> never lie or speculate. Say what you know, what you don't and when you'll update.</div>
+    <div class="box b4 small"><b>Responsibility:</b> take ownership where appropriate; deflecting blame backfires</div>
+    <div class="box b4 small"><b>Consistency:</b> one agreed message across every channel and spokesperson</div>
+    <div class="box b4 small"><b>Action:</b> words must be backed by visible actions</div>
+  </div>
+  <div class="box b1 small"><b>Holding statement:</b> a short, pre-prepared first response. <i>"We are aware of [situation]. Our immediate priority is [the safety/wellbeing of those affected]. We are working urgently to understand what happened and will provide a further update by [time]."</i></div>
+
+  <h3>Case studies every PR candidate should know</h3>
+  <table>
+    <tr><th style="width:23%">Case</th><th>What happened</th><th style="width:33%">Lesson</th></tr>
+    <tr><td><b>KFC "FCK" (UK, 2018)</b></td><td>A delivery-supplier change left hundreds of restaurants without chicken. KFC ran a full-page apology ad with its bucket spelling "FCK", humorous and humble.</td><td>Owning a mistake with honesty and personality can <i>improve</i> reputation. Now a widely awarded campaign.</td></tr>
+    <tr><td><b>BP Deepwater Horizon (2010)</b></td><td>A huge Gulf of Mexico oil spill. The CEO's remark "I'd like my life back" caused outrage.</td><td>Empathy for victims must come first. One careless quote can define a crisis.</td></tr>
+    <tr><td><b>Woodford fund suspension (2019)</b></td><td>A star UK fund manager's flagship fund froze withdrawals, trapping investors. Then the business collapsed.</td><td>In finance, reputation is the product. Loss of trust becomes loss of assets almost immediately.</td></tr>
+    <tr><td><b>Johnson &amp; Johnson Tylenol (1982)</b></td><td>Poisoned capsules killed seven people in Chicago. J&amp;J recalled 31 million bottles at once and introduced tamper-proof packaging.</td><td>The textbook "public safety before profit" response, which restored trust.</td></tr>
+  </table>
+  <div class="expert small">In the social media era the "golden hour" is often minutes, and employees, customers and creators may break the story before the press does. Modern crisis teams monitor social channels 24/7 and coordinate legal, HR, operations and comms together. If you mention crisis work in your answer, emphasise <b>calm judgement under pressure</b> and <b>clear, honest writing at speed</b>.</div>
+</section>
+
+<section class="page prr" id="p7">
+  <div class="kicker"><span>Part D · Public Relations</span><a href="#contents">↑ Contents</a></div>
+  <h2>D6 · Corporate &amp; financial PR</h2>
+  <p class="small">This is the specialism closest to your asset-management experience, and one of the best-paid parts of the industry. <b>Financial PR</b> manages how listed companies, banks, investors and deals are seen by the City, the financial media and shareholders.</p>
+  <table>
+    <tr><th style="width:24%">Activity</th><th>What happens</th></tr>
+    <tr><td><b>Results announcements</b></td><td>Listed companies publish results (annual and half-year) via the <b>RNS</b> (the London Stock Exchange's Regulatory News Service) at 7:00am. Financial PR drafts the messages, briefs journalists, arranges CEO and CFO interviews, and monitors the reaction.</td></tr>
+    <tr><td><b>M&amp;A (mergers &amp; acquisitions)</b></td><td>Handling communications for takeovers, including hostile bids. Timing is governed by the <b>Takeover Code</b>, and leaks can move share prices.</td></tr>
+    <tr><td><b>IPOs</b></td><td>Building the story for a company listing on the stock exchange, and coordinating with banks and lawyers</td></tr>
+    <tr><td><b>Investor relations (IR) support</b></td><td>Communicating strategy to shareholders and analysts; annual reports; capital markets days</td></tr>
+    <tr><td><b>Activism &amp; special situations</b></td><td>Defending (or advising) when activist investors campaign for change at a company</td></tr>
+    <tr><td><b>Restructuring &amp; crisis</b></td><td>Profit warnings, debt problems, leadership exits, regulatory investigations</td></tr>
+  </table>
+  <div class="warn box small"><b>Regulation applies here too.</b> Under UK <b>MAR</b> (Market Abuse Regulation), "inside information" that could move a share price must be announced properly via the RNS and not leaked selectively. Financial PR people work under strict confidentiality and are often put on "insider lists".</div>
+
+  <h3>PR for asset managers: your bridge</h3>
+  <div class="grid2">
+    <div class="box b4 small">
+      <h4>What asset managers want from PR</h4>
+      <ul style="margin:0">
+        <li>Fund managers quoted as experts in the <b>FT, Bloomberg, Reuters, The Times</b> and on broadcast</li>
+        <li>Coverage in <b>trade press</b>: Citywire, Investment Week, Money Marketing, FT Adviser, Professional Pensions, Pensions &amp; Investments, IPE</li>
+        <li><b>Thought leadership</b>: market outlooks, research reports and commentary that build credibility with institutional clients</li>
+        <li>Fund launches, awards and senior hires</li>
+        <li>Crisis management: underperformance, fund closures, regulatory issues</li>
+      </ul>
+    </div>
+    <div class="box b4 small">
+      <h4>Why it matters commercially</h4>
+      <ul style="margin:0">
+        <li>Consultants, fund selectors and trustees read the trade press, so media visibility supports <b>distribution</b></li>
+        <li>Expert commentary builds the "brand" of individual fund managers</li>
+        <li>All marketing must comply with FCA financial promotions rules</li>
+        <li>Trust is the product: a reputational hit can trigger <b>outflows</b>, i.e. lost revenue</li>
+      </ul>
+    </div>
+  </div>
+  <div class="expert small"><b>The UK financial and corporate PR firms to know</b> (orientation only, not a 10K host list): Brunswick, FGS Global, Teneo, Headland, Lansons, Instinctif Partners, Citigate Dewe Rogerson, Powerscourt, Camarco, H/Advisors Maitland, Montfort (which provides PR support to the 10,000 Interns Foundation). Many asset managers also have strong in-house press teams.</div>
+</section>
+
+<section class="page prr" id="p8">
+  <div class="kicker"><span>Part D · Public Relations</span><a href="#contents">↑ Contents</a></div>
+  <h2>D7 · How PR makes money, and careers</h2>
+  <div class="grid2">
+    <div class="box b4 small">
+      <h4>Agency business model</h4>
+      <p>An agency sells <b>people's time and expertise</b>.</p>
+      <ul>
+        <li><b>Retainer:</b> a fixed monthly fee for ongoing work (from a few thousand pounds a month for a small client to £50k+ for large corporates)</li>
+        <li><b>Project fee:</b> a one-off campaign, launch or deal</li>
+        <li><b>Hourly / day rates:</b> especially for crisis and financial work, with senior advisers billing high rates</li>
+        <li><b>Success fees</b> (sometimes): e.g. on completed deals</li>
+      </ul>
+    </div>
+    <div class="box b1 small">
+      <h4>The agency economics</h4>
+      <div class="formula" style="margin:1mm 0"><div class="f">Profit</div><div class="op">=</div><div class="f">Fee income</div><div class="op">−</div><div class="f">Staff costs<small>~50–60%+</small></div><div class="op">−</div><div class="f">Overheads</div></div>
+      <ul>
+        <li><b>Utilisation:</b> the % of staff time that's billable. The key efficiency metric.</li>
+        <li><b>Client retention:</b> losing a big retainer hurts badly</li>
+        <li><b>New business:</b> agencies win clients through <b>pitches</b>, which is sales again (<a href="#s4" style="color:var(--plum);font-weight:600">C3</a>)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="box b1 small"><b>In-house:</b> the communications team is a <b>cost centre</b> (<a href="#a1" style="color:var(--plum);font-weight:600">A1</a>) funded from the company's budget. It proves value through coverage quality, reputation and trust scores, crises avoided, and support for sales, recruitment and investor confidence. In-house teams often hire and manage agencies.</div>
+
+  <h3>The career ladder</h3>
+  <table>
+    <tr><th>Agency title</th><th>Typical responsibility</th><th style="width:28%">In-house equivalent</th></tr>
+    <tr><td><b>Intern / Graduate trainee</b></td><td>Media monitoring, research, media lists, coverage reports, drafting</td><td>Comms assistant</td></tr>
+    <tr><td><b>Account Executive (AE)</b></td><td>Drafting releases, pitching journalists, managing day-to-day tasks</td><td>Press officer</td></tr>
+    <tr><td><b>Senior AE / Account Manager</b></td><td>Running campaigns, client contact, managing juniors</td><td>Communications manager</td></tr>
+    <tr><td><b>Account Director / Associate Director</b></td><td>Owning client relationships and strategy; budgets</td><td>Head of communications</td></tr>
+    <tr><td><b>Director / Partner / MD</b></td><td>Senior counsel to CEOs, new business, running the agency</td><td>Communications director / CCO</td></tr>
+  </table>
+
+  <h3>A day as a PR intern</h3>
+  <div class="flow">
+    <div class="step"><b>08:00</b>Media monitoring: summarise overnight news about clients and their sectors</div><div class="arr">›</div>
+    <div class="step"><b>09:30</b>Team meeting: priorities, news hooks</div><div class="arr">›</div>
+    <div class="step"><b>10:30</b>Build media lists; research journalists</div><div class="arr">›</div>
+    <div class="step"><b>13:00</b>Draft a press release, social posts or a briefing note</div><div class="arr">›</div>
+    <div class="step"><b>15:00</b>Help with an event, interview or client call</div><div class="arr">›</div>
+    <div class="step"><b>17:00</b>Coverage report: what landed, where, tone</div>
+  </div>
+
+  <h3>Professional bodies</h3>
+  <p class="small"><b>CIPR</b> (Chartered Institute of Public Relations) and <b>PRCA</b> (Public Relations and Communications Association) are the UK professional bodies. They run qualifications, ethics codes and the annual industry census. <b>PRWeek</b> is the industry's trade publication. Reading it for a few weeks before your application gives you current examples to mention.</p>
+</section>
+
+<section class="page prr" id="p10">
+  <div class="kicker"><span>Part D · Public Relations</span><a href="#contents">↑ Contents</a></div>
+  <h2>D8 · Landscape and trends</h2>
+  <h3>Types of UK PR firm</h3>
+  <table>
+    <tr><th style="width:24%">Type</th><th>Description</th><th style="width:36%">Examples (orientation only)</th></tr>
+    <tr><td><b>Global networks</b></td><td>Large, multi-discipline, often owned by advertising groups (WPP, Omnicom, IPG, Publicis)</td><td>Edelman (independent), Weber Shandwick, Burson (formed 2024 from BCW and Hill &amp; Knowlton), FleishmanHillard, Ketchum</td></tr>
+    <tr><td><b>Corporate &amp; financial specialists</b></td><td>City-focused: results, deals, crisis, reputation</td><td>Brunswick, FGS Global, Teneo, Headland, Lansons, Instinctif, Powerscourt</td></tr>
+    <tr><td><b>UK agencies &amp; consumer specialists</b></td><td>Creative consumer and brand work, or broad UK agencies</td><td>Freuds, MHP Group, Hope&amp;Glory, Hotwire (tech)</td></tr>
+    <tr><td><b>Public affairs</b></td><td>Policy, government and regulatory engagement</td><td>Hanover, Portland, Cicero, WA Communications</td></tr>
+  </table>
+
+  <h3>Trends to know</h3>
+  <div class="grid2">
+    <div class="box b4 small"><b>1 · AI and "AI search".</b> People increasingly get answers from AI chatbots. PR is asked how brands appear in AI answers (<b>GEO</b>, generative engine optimisation), and credible earned media matters more because AI draws on trusted sources.</div>
+    <div class="box b4 small"><b>2 · Misinformation and deepfakes.</b> Fake images, audio and video can spark a crisis in minutes, so monitoring and rapid verification are essential.</div>
+    <div class="box b4 small"><b>3 · The creator economy.</b> Influencers and creators (TikTok, YouTube, LinkedIn) rival traditional media for reach, especially with younger audiences. ASA rules require clear labelling (#ad).</div>
+    <div class="box b4 small"><b>4 · Shrinking newsrooms.</b> Fewer journalists covering more ground. PR must provide ready-to-use, accurate, data-led stories, and owned channels matter more.</div>
+    <div class="box b4 small"><b>5 · Greenwashing scrutiny.</b> The CMA's Green Claims Code, ASA rulings and the FCA anti-greenwashing rule mean sustainability claims must be evidenced. PR teams now work closely with legal and compliance.</div>
+    <div class="box b4 small"><b>6 · Purpose and polarisation.</b> Brands face pressure to take positions on social issues, and risk backlash from both sides. Knowing when to speak is a judgement call.</div>
+    <div class="box b4 small"><b>7 · Measurement and data.</b> Clients demand proof of impact (<a href="#p4" style="color:var(--plum);font-weight:600">D3</a>). Analytics and social listening tools are standard.</div>
+    <div class="box b4 small"><b>8 · Executive visibility.</b> CEOs and leaders building profiles on LinkedIn and podcasts. "Thought leadership" is a growing service, especially in B2B and finance.</div>
+  </div>
+  <div class="expert small">A one-sentence synthesis for your answer: <i>"As AI tools and social platforms reshape how people find information, and misinformation spreads faster than ever, credible, well-evidenced communication has become one of the most valuable things an organisation can invest in."</i></div>
+</section>
+
+<section class="page prr" id="p11">
+  <div class="kicker"><span>Part D · Public Relations</span><a href="#contents">↑ Contents</a></div>
+  <h2>D9 · PR glossary</h2>
+  <div class="gloss">
+    <div><b>Account Executive:</b> an entry-level agency role</div>
+    <div><b>AMEC:</b> the international measurement body</div>
+    <div><b>AVE:</b> advertising value equivalent (discredited measure)</div>
+    <div><b>Barcelona Principles:</b> PR measurement standards</div>
+    <div><b>Boilerplate:</b> the standard "about us" paragraph</div>
+    <div><b>Bridging:</b> moving from a question to a key message</div>
+    <div><b>Brief:</b> a client's description of what they want</div>
+    <div><b>Byline / op-ed:</b> an article written under an executive's name</div>
+    <div><b>CIPR / PRCA:</b> UK professional bodies</div>
+    <div><b>Coverage:</b> media articles or mentions achieved</div>
+    <div><b>Crisis comms:</b> communication during an emergency</div>
+    <div><b>Dark site:</b> a pre-built crisis webpage, published if needed</div>
+    <div><b>Earned media:</b> coverage you didn't pay for</div>
+    <div><b>Embargo:</b> a publication restriction until a set time</div>
+    <div><b>Exclusive:</b> a story given to one outlet first</div>
+    <div><b>Financial PR:</b> communications for listed companies and deals</div>
+    <div><b>Holding statement:</b> a first, short crisis response</div>
+    <div><b>Influencer / creator:</b> an individual with an online audience</div>
+    <div><b>Internal comms:</b> communication with employees</div>
+    <div><b>Issues management:</b> handling problems before they become crises</div>
+    <div><b>Key messages:</b> the core points you want remembered</div>
+    <div><b>Lobbying / public affairs:</b> influencing policymakers</div>
+    <div><b>Media list:</b> a targeted list of journalists</div>
+    <div><b>Media monitoring:</b> tracking coverage and news</div>
+    <div><b>Media training:</b> preparing spokespeople for interviews</div>
+    <div><b>Message house:</b> a framework for structuring messages</div>
+    <div><b>Newsjacking:</b> tying commentary to breaking news</div>
+    <div><b>Off / on the record:</b> unattributable / quotable</div>
+    <div><b>Owned media:</b> your own channels</div>
+    <div><b>PESO:</b> paid, earned, shared, owned</div>
+    <div><b>Pitch:</b> a story idea sent to a journalist (or an agency's bid to win a client)</div>
+    <div><b>Press release:</b> a formal news announcement</div>
+    <div><b>Reach / impressions:</b> potential audience size / times seen</div>
+    <div><b>Reputation management:</b> protecting and building how you're seen</div>
+    <div><b>Retainer:</b> an ongoing monthly agency fee</div>
+    <div><b>RNS:</b> the LSE Regulatory News Service (financial announcements)</div>
+    <div><b>Sentiment:</b> the tone of coverage (positive, neutral, negative)</div>
+    <div><b>Share of voice:</b> your coverage vs competitors'</div>
+    <div><b>Social listening:</b> monitoring online conversation</div>
+    <div><b>Spokesperson:</b> the authorised voice of the organisation</div>
+    <div><b>Stakeholder:</b> anyone affected by or affecting the organisation</div>
+    <div><b>Thought leadership:</b> positioning leaders as expert voices</div>
+    <div><b>Trade press:</b> specialist industry publications</div>
+    <div><b>Utilisation:</b> billable share of agency time</div>
+    <div><b>Wire service:</b> a press-release distribution network</div>
+  </div>
+</section>
+
+<section class="page prr" id="p12">
+  <div class="kicker"><span>Part D · Public Relations</span><a href="#contents">↑ Contents</a></div>
+  <h2>D10 · Expert check: can you answer these out loud?</h2>
+  <div class="qa small">
+    <div class="box b1"><b>What's the difference between PR, marketing and advertising?</b><br><span class="muted">Advertising is paid space you control. Marketing drives product demand. PR manages reputation with all stakeholders, mainly through earned, third-party coverage you don't control but which carries more credibility.</span></div>
+    <div class="box b1"><b>What is the PESO model?</b><br><span class="muted">Paid, Earned, Shared and Owned media. Modern campaigns integrate all four, with earned media at PR's core.</span></div>
+    <div class="box b1"><b>What makes a story newsworthy?</b><br><span class="muted">It's new, relevant to that audience, timely, backed by data or human stories, and has prominence, surprise or exclusivity.</span></div>
+    <div class="box b1"><b>How would you structure a press release?</b><br><span class="muted">An inverted pyramid: headline and a first paragraph answering who, what, when, where and why; then supporting details, a spokesperson quote, background, and notes to editors with the boilerplate and contacts.</span></div>
+    <div class="box b1"><b>What are the first steps in a crisis?</b><br><span class="muted">Establish the facts, issue a holding statement quickly showing empathy and action, align all spokespeople, update stakeholders regularly, and back words with action.</span></div>
+    <div class="box b1"><b>Give an example of good crisis handling.</b><br><span class="muted">E.g. KFC's 2018 "FCK" apology: honest, humble and on-brand, which turned a supply failure into a widely praised campaign.</span></div>
+    <div class="box b1"><b>How should PR be measured?</b><br><span class="muted">Beyond volume, by outcomes and business impact (the Barcelona Principles), such as message pick-up, share of voice, trust and behaviour change, not AVEs.</span></div>
+    <div class="box b1"><b>What does financial PR involve?</b><br><span class="muted">Communications for listed companies and financial firms: results via the RNS, M&amp;A, IPOs, investor relations and crisis, all under market-abuse rules on inside information.</span></div>
+    <div class="box b1"><b>How does a PR agency make money?</b><br><span class="muted">Retainers, project fees and hourly rates for expert time. Profitability depends on utilisation, client retention and winning new business through pitches.</span></div>
+    <div class="box b1"><b>Name a trend changing PR.</b><br><span class="muted">E.g. AI-driven search and misinformation: credible earned media becomes more valuable because AI tools draw on trusted sources, and false content can spread in minutes.</span></div>
+  </div>
+  <div class="box key small"><a href="#x0" style="font-weight:700;color:var(--plum)">Continue to Bringing it together →</a></div>
+</section>
+<section class="chapter ch-x" id="x0">
+  <div class="num">E</div>
+  <h1>Bringing it together</h1>
+  <p>How your three industries connect, and how to turn this knowledge into three 250-word answers that show you understand what you're applying to.</p>
+  <ol>
+    <li><a href="#x1">How the three industries connect</a></li>
+    <li><a href="#x2">Turning knowledge into your 250 words</a></li>
+  </ol>
+</section>
+
+<section class="page" id="x1">
+  <div class="kicker"><span>Part E · Bringing it together</span><a href="#contents">↑ Contents</a></div>
+  <h2>E1 · How the three industries connect</h2>
+  <p class="small">Your choices aren't random. Investment management depends on both sales and PR. Seeing these links helps you understand each industry, but <b>each answer must still stand alone</b>, because each will be read by a different firm.</p>
+  <svg viewBox="0 0 680 250" width="100%">
+    <circle cx="240" cy="105" r="92" fill="#e09f3e" fill-opacity=".18" stroke="#e09f3e" stroke-width="2"/>
+    <circle cx="440" cy="105" r="92" fill="#2a9d8f" fill-opacity=".16" stroke="#2a9d8f" stroke-width="2"/>
+    <circle cx="340" cy="170" r="92" fill="#6d597a" fill-opacity=".16" stroke="#6d597a" stroke-width="2"/>
+    <text x="185" y="70" text-anchor="middle" font-weight="800" fill="#b8771f" font-size="12">Investment</text>
+    <text x="185" y="85" text-anchor="middle" font-weight="800" fill="#b8771f" font-size="12">Management</text>
+    <text x="500" y="75" text-anchor="middle" font-weight="800" fill="#1f7a6f" font-size="12">Sales</text>
+    <text x="340" y="235" text-anchor="middle" font-weight="800" fill="#6d597a" font-size="12">Public Relations</text>
+    <text x="340" y="80" text-anchor="middle" fill="#14213d" font-size="9" font-weight="700">Distribution =</text>
+    <text x="340" y="93" text-anchor="middle" fill="#14213d" font-size="9" font-weight="700">consultative B2B sales</text>
+    <text x="262" y="165" text-anchor="middle" fill="#14213d" font-size="9" font-weight="700">Financial PR,</text>
+    <text x="262" y="178" text-anchor="middle" fill="#14213d" font-size="9" font-weight="700">thought leadership</text>
+    <text x="420" y="165" text-anchor="middle" fill="#14213d" font-size="9" font-weight="700">Pitching, persuasion,</text>
+    <text x="420" y="178" text-anchor="middle" fill="#14213d" font-size="9" font-weight="700">new business</text>
+    <text x="340" y="128" text-anchor="middle" fill="#14213d" font-size="10" font-weight="800">TRUST &amp;</text>
+    <text x="340" y="141" text-anchor="middle" fill="#14213d" font-size="10" font-weight="800">COMMUNICATION</text>
+  </svg>
+  <table>
+    <tr><th style="width:24%">Shared skill</th><th>In Investment Management</th><th>In Sales</th><th>In PR</th></tr>
+    <tr><td><b>Understanding the audience</b></td><td>Knowing what a pension trustee vs a wealth manager needs</td><td>Discovery: diagnosing the buyer's problem</td><td>Stakeholder mapping; knowing what a journalist needs</td></tr>
+    <tr><td><b>Clear, accurate communication</b></td><td>Explaining performance; compliant materials</td><td>Proposals, pitches and follow-ups</td><td>Press releases, key messages, statements</td></tr>
+    <tr><td><b>Building trust over time</b></td><td>Client retention over years</td><td>Account management and renewals</td><td>Media relationships and reputation</td></tr>
+    <tr><td><b>Commercial awareness</b></td><td>AUM × fees; net flows</td><td>Pipeline, conversion, retention</td><td>Retainers, utilisation; reputation as an asset</td></tr>
+    <tr><td><b>Working under pressure</b></td><td>Market falls, client deadlines</td><td>Targets and quarter-end</td><td>Breaking news and crises</td></tr>
+  </table>
+  <div class="expert small"><b>Your personal thread:</b> <i>"In every one of these industries, success depends on understanding an audience and earning its trust."</i> Use that idea in your head to stay consistent across the three answers. But never mention your other choices in an answer, and make each one specific to its own industry's language and economics.</div>
+</section>
+
+<section class="page" id="x2">
+  <div class="kicker"><span>Part E · Bringing it together</span><a href="#contents">↑ Contents</a></div>
+  <h2>E2 · Turning knowledge into your 250 words</h2>
+  <p class="small">You don't win by showing <i>all</i> of this knowledge. You win by showing the <b>right two or three pieces, used precisely</b>. Over-stuffing jargon reads as a glossary, not understanding. Use the playbook's five-part structure (hook → understanding → evidence → contribution → close), and pick from these:</p>
+  <table>
+    <tr><th style="width:16%"></th><th>Investment Management</th><th>Sales</th><th>Public Relations</th></tr>
+    <tr><td><b>Insight for your hook</b></td><td>Inflation erodes cash; asset managers decide whether millions retire comfortably (<a href="#a2" style="color:var(--blue);font-weight:600">A2</a>, <a href="#im1" style="color:var(--blue);font-weight:600">B1</a>)</td><td>Buyers arrive informed, so a salesperson's value is diagnosis and trust (<a href="#s1" style="color:var(--blue);font-weight:600">C1</a>)</td><td>Reputation is an intangible asset that takes years to build and minutes to lose (<a href="#p1" style="color:var(--blue);font-weight:600">D1</a>)</td></tr>
+    <tr><td><b>How it makes money</b></td><td>Fees on AUM; growth from performance plus net flows; retention (<a href="#im10" style="color:var(--blue);font-weight:600">B10</a>)</td><td>Pipeline × conversion × deal size × retention; churn (<a href="#s6" style="color:var(--blue);font-weight:600">C5</a>)</td><td>Agencies: retainers and utilisation. In-house: protecting value (<a href="#p8" style="color:var(--blue);font-weight:600">D7</a>)</td></tr>
+    <tr><td><b>A live trend (pick one)</b></td><td>Fee compression; pension consolidation; private markets (<a href="#im13" style="color:var(--blue);font-weight:600">B13</a>)</td><td>AI in sales; retention and NRR (<a href="#s8" style="color:var(--blue);font-weight:600">C7</a>)</td><td>AI search and misinformation; greenwashing scrutiny (<a href="#p10" style="color:var(--blue);font-weight:600">D8</a>)</td></tr>
+    <tr><td><b>2–3 terms to use correctly</b></td><td>assets under management, distribution, client retention, institutional / wholesale</td><td>discovery, pipeline, account management, consultative</td><td>earned media, key messages, stakeholders, media relations</td></tr>
+    <tr><td><b>Your evidence angle</b></td><td>What you did in your AM role and what it taught you about clients</td><td>The AM sales cycle in sales language, plus a non-finance persuasion example</td><td>How carefully an investment firm communicates, plus a writing example</td></tr>
+  </table>
+
+  <h3>Before and after: what this knowledge does to a sentence</h3>
+  <div class="grid3">
+    <div class="box b5 small"><span class="tag t-red">Before</span><br>"I am interested in investment management because I enjoy finance and markets."<br><br><span class="tag t-teal">After</span><br>"Because an asset manager's revenue rises and falls with the assets it keeps, I saw that client trust matters as much as returns."</div>
+    <div class="box b5 small"><span class="tag t-red">Before</span><br>"I am a confident and persuasive person who would be good at sales."<br><br><span class="tag t-teal">After</span><br>"The best salespeople I've watched spent most of each meeting asking questions, because a client who articulates their own problem is halfway to buying."</div>
+    <div class="box b5 small"><span class="tag t-red">Before</span><br>"I want to work in PR because I enjoy writing and social media."<br><br><span class="tag t-teal">After</span><br>"Earned coverage carries a credibility that advertising can't buy, which is why the skill of turning an organisation's goals into a story a journalist wants is so valuable."</div>
+  </div>
+
+  <h3>Final self-test before you write</h3>
+  <div class="grid2">
+    <div class="box key small">
+      <ul style="margin:0">
+        <li>☐ I can explain each industry's <b>four parts</b> in one breath</li>
+        <li>☐ I can explain <b>how each makes money</b> in one sentence</li>
+        <li>☐ I can name <b>one live trend</b> for each, and why it matters</li>
+      </ul>
+    </div>
+    <div class="box key small">
+      <ul style="margin:0">
+        <li>☐ I have answered every <b>Expert check</b> out loud</li>
+        <li>☐ I know which <b>2–3 terms</b> I'll use in each answer, and use them correctly</li>
+        <li>☐ Each answer has a <b>true, specific story</b> from my own experience</li>
+      </ul>
+    </div>
+  </div>
+  <p class="tiny muted" style="margin-top:4mm">Notes on sources and accuracy: programme facts come from the 10,000 Interns Foundation. Industry figures (UK AUM of about £9trn per the Investment Association; fee ranges; funnel, P&amp;L and retainer examples) are rounded or illustrative and meant for understanding, not quotation. Firm names are examples for orientation, not a list of 10,000 Black Interns hosts. Regulatory and policy points reflect the position as at October 2026 and may change.</p>
+  <div class="box b1 small center"><a href="#contents" style="font-weight:700">↑ Back to contents</a></div>
+</section>
+
+</body>
+</html>
