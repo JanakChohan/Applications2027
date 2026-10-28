@@ -1,0 +1,1425 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Industry Trends Briefing</title>
+<style>
+@page { size: A4; margin: 15mm 15mm 15mm 15mm; }
+:root{
+  --ink:#14213d; --body:#2b2d42; --muted:#5c6378; --line:#d9dde7;
+  --navy:#14213d; --gold:#e09f3e; --gold-d:#b8771f; --teal:#2a9d8f; --teal-d:#1f7a6f; --plum:#6d597a; --plum-d:#54435f; --red:#c8553d; --blue:#3a6ea5;
+  --bg1:#f4f6fb; --bg2:#fff7ea; --bg3:#eaf6f4; --bg4:#f3eff6; --bg5:#fdeeea; --bg6:#eaf1f9;
+  --accent:var(--gold); --accent-d:var(--gold-d); --accent-bg:var(--bg2);
+}
+*{box-sizing:border-box}
+html,body{background:#fff}
+body{font-family:"Inter",sans-serif;color:var(--body);font-size:9.7pt;line-height:1.45;margin:0}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{color:var(--ink);line-height:1.2;margin:0}
+h1{font-size:26pt;font-weight:800;letter-spacing:-.5px}
+h2{font-size:16pt;font-weight:800;margin:0 0 3.5mm;padding-bottom:2mm;border-bottom:2.5px solid var(--accent)}
+h3{font-size:11.5pt;font-weight:700;margin:4.5mm 0 2mm}
+h4{font-size:9.8pt;font-weight:700;margin:2.5mm 0 1mm}
+p{margin:0 0 2.2mm}
+ul,ol{margin:0 0 2.2mm;padding-left:5mm}
+li{margin-bottom:.8mm}
+.page{break-before:page}
+.kicker{display:flex;justify-content:space-between;font-size:7.5pt;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent);margin-bottom:1.5mm}
+.kicker a{color:var(--muted);letter-spacing:.5px;text-transform:none;font-weight:600}
+.lead{font-size:10.8pt;color:var(--ink)}
+.muted{color:var(--muted)} .small{font-size:8.6pt} .tiny{font-size:7.8pt}
+.center{text-align:center}
+.box{border-radius:3mm;padding:3mm 3.5mm;margin:2.5mm 0;break-inside:avoid}
+.box h4:first-child,.box h3:first-child{margin-top:0}
+.box p:last-child,.box ul:last-child{margin-bottom:0}
+.b1{background:var(--bg1)} .b2{background:var(--bg2)} .b3{background:var(--bg3)} .b4{background:var(--bg4)} .b5{background:var(--bg5)} .b6{background:var(--bg6)}
+.key{border-left:4px solid var(--gold);background:var(--bg2)}
+.warn{border-left:4px solid var(--red);background:var(--bg5)}
+.good{border-left:4px solid var(--teal);background:var(--bg3)}
+.zero{border-left:4px solid var(--blue);background:var(--bg6)}
+.zero:before{content:"ZERO-KNOWLEDGE EXPLAINER";display:block;font-size:7pt;font-weight:800;letter-spacing:1.2px;color:var(--blue);margin-bottom:1mm}
+.expert,.zero{border-radius:3mm;padding:2.6mm 3.5mm;margin:2.5mm 0;break-inside:avoid}
+.expert{border-left:4px solid var(--plum);background:var(--bg4)}
+.expert:before{content:"EXPERT INSIGHT";display:block;font-size:7pt;font-weight:800;letter-spacing:1.2px;color:var(--plum);margin-bottom:1mm}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin:2.5mm 0}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3mm;margin:2.5mm 0}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:2.5mm;margin:2.5mm 0}
+.grid2>.box,.grid3>.box,.grid4>.box{margin:0}
+table{width:100%;border-collapse:collapse;margin:2mm 0 3mm;font-size:8.6pt;break-inside:avoid}
+th{background:var(--navy);color:#fff;text-align:left;padding:1.6mm 2mm;font-weight:600}
+td{padding:1.1mm 2mm;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:#fafbfd}
+.tag{display:inline-block;font-size:7.2pt;font-weight:700;padding:.4mm 1.8mm;border-radius:5mm;background:var(--navy);color:#fff}
+.t-gold{background:var(--gold-d)} .t-teal{background:var(--teal)} .t-plum{background:var(--plum)} .t-red{background:var(--red)} .t-blue{background:var(--blue)}
+.flow{display:flex;align-items:stretch;margin:3mm 0;break-inside:avoid}
+.flow .step{flex:1;background:var(--bg1);border:1.5px solid var(--navy);border-radius:2.5mm;padding:2.2mm;font-size:8.2pt;text-align:center}
+.flow .step b{display:block;color:var(--ink);font-size:8.8pt;margin-bottom:.8mm}
+.flow .arr{width:5mm;display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:800;font-size:13pt}
+.part{border-radius:3mm;padding:3mm;color:#fff;break-inside:avoid}
+.part h4{color:#fff;margin:0 0 1.5mm;font-size:9.8pt}
+.part ul{padding-left:4mm;margin:0;font-size:8.3pt}
+.part .who{font-size:7.9pt;opacity:.92;margin-top:1.5mm;border-top:1px solid rgba(255,255,255,.35);padding-top:1.5mm}
+.p-navy{background:var(--navy)} .p-gold{background:var(--gold-d)} .p-teal{background:var(--teal-d)} .p-plum{background:var(--plum)} .p-blue{background:var(--blue)} .p-red{background:var(--red)}
+.formula{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:2.5mm;margin:3mm 0;font-weight:700;color:var(--ink);break-inside:avoid}
+.formula .f{background:var(--bg1);border:1.5px solid var(--navy);border-radius:2mm;padding:2.2mm 3.5mm;text-align:center;font-size:9.5pt}
+.formula .f small{display:block;font-weight:400;font-size:7.3pt;color:var(--muted)}
+.formula .op{font-size:15pt;color:var(--accent)}
+.gloss{display:grid;grid-template-columns:1fr 1fr;gap:0 5mm;font-size:8.3pt;margin:2mm 0}
+.gloss div{break-inside:avoid;padding:1.1mm 0;border-bottom:1px solid var(--line)}
+.gloss b{color:var(--ink)}
+.cover{height:267mm;display:flex;flex-direction:column;justify-content:space-between;background:var(--navy);color:#fff;margin:-15mm -15mm 0;padding:22mm 18mm}
+.cover h1{color:#fff;font-size:34pt;line-height:1.05}
+.cover .sub{font-size:12.5pt;color:#d6dbe8;margin-top:5mm;max-width:155mm}
+.chapter{height:267mm;display:flex;flex-direction:column;justify-content:center;margin:-15mm -15mm 0;padding:20mm 20mm;color:#fff;break-before:page}
+.chapter .num{font-size:60pt;font-weight:800;opacity:.25;line-height:1}
+.chapter h1{color:#fff;font-size:32pt;margin:2mm 0 4mm}
+.chapter p{font-size:11.5pt;color:rgba(255,255,255,.88);max-width:150mm}
+.chapter ol{font-size:10.5pt;color:#fff;margin-top:6mm}
+.chapter ol a{color:#fff;border-bottom:1px solid rgba(255,255,255,.4)}
+.ch-a{background:var(--blue)} .ch-im{background:var(--navy)} .ch-s{background:var(--teal-d)} .ch-pr{background:var(--plum)} .ch-x{background:#3d3d4e}
+.toc{font-size:9.4pt}
+.toc .sec{display:flex;justify-content:space-between;font-weight:700;color:var(--ink);margin-top:2.6mm;padding:1.4mm 2mm;border-radius:1.5mm}
+.toc .sub{display:block;padding:.7mm 2mm .7mm 7mm;border-bottom:1px dotted var(--line);color:var(--body)}
+.toc .sub:after{content:" ›";color:var(--accent)}
+.tocgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 7mm}
+.funnel{display:flex;flex-direction:column;align-items:center;gap:1.2mm;margin:3mm 0;break-inside:avoid}
+.funnel div{color:#fff;text-align:center;padding:1.6mm;border-radius:1.5mm;font-size:8.3pt;font-weight:600}
+.ladder{display:flex;align-items:flex-end;gap:2mm;height:44mm;margin:3mm 0 1mm;break-inside:avoid}
+.ladder div{flex:1;border-radius:2mm 2mm 0 0;color:#fff;font-size:7.8pt;font-weight:600;text-align:center;padding:1.5mm;display:flex;align-items:flex-start;justify-content:center}
+.qa{counter-reset:q}
+.qa .box{position:relative;padding-left:10mm}
+.qa .box:before{counter-increment:q;content:counter(q);position:absolute;left:3mm;top:3mm;width:5mm;height:5mm;border-radius:50%;background:var(--accent);color:#fff;font-size:7.5pt;font-weight:800;display:flex;align-items:center;justify-content:center}
+svg text{font-family:Inter}
+.im{--accent:var(--gold);--accent-d:var(--gold-d)}
+.sl{--accent:var(--teal);--accent-d:var(--teal-d)}
+.prr{--accent:var(--plum);--accent-d:var(--plum-d)}
+.ab{--accent:var(--blue)}
+.lines{height:var(--h,22mm);background:repeating-linear-gradient(to bottom,transparent 0,transparent 6.6mm,#c9cfdc 6.6mm,#c9cfdc 6.9mm);margin:1.5mm 0 3mm;break-inside:avoid}
+.prompt{font-weight:600;color:var(--ink);font-size:9pt;margin-top:2.5mm}
+.chips{display:flex;flex-wrap:wrap;gap:1.6mm;margin:2mm 0}
+.chips span{border:1.2px solid var(--line);border-radius:5mm;padding:.8mm 2.6mm;font-size:8.4pt;background:#fff}
+.chips span:before{content:"☐ ";color:var(--muted)}
+.angle{border:1.5px solid var(--line);border-radius:2.5mm;padding:2mm 2.8mm;margin:0;break-inside:avoid}
+.angle h4{margin:0 0 .6mm;font-size:9.6pt}
+.angle .row{display:grid;grid-template-columns:15mm 1fr;gap:1.2mm;font-size:7.9pt;line-height:1.35;margin-top:.7mm}
+.angle .row b{color:var(--muted);font-size:6.8pt;text-transform:uppercase;letter-spacing:.6px;padding-top:.4mm}
+.angle .line{font-style:italic;color:var(--ink)}
+.ph{background:#fff1d6;padding:0 1mm;border-radius:1mm;color:#8a5a12;font-weight:600;font-style:normal}
+.debate{display:grid;grid-template-columns:1fr 1fr;gap:2.5mm;margin:2.5mm 0;break-inside:avoid}
+.bull,.bear{border-radius:2.5mm;padding:2.4mm 3mm;font-size:8.4pt}
+.bull{background:#eaf6f4;border-top:3px solid #2a9d8f}.bear{background:#fdeeea;border-top:3px solid #c8553d}
+.bull b.h,.bear b.h{display:block;font-size:7.2pt;letter-spacing:1px;text-transform:uppercase;margin-bottom:.8mm}
+.bull b.h{color:#1f7a6f}.bear b.h{color:#c8553d}
+.predict{border-left:4px solid #14213d;background:#f4f6fb;border-radius:0 2.5mm 2.5mm 0;padding:2.4mm 3mm;margin:2.5mm 0;font-size:8.5pt;break-inside:avoid}
+.predict:before{content:"FORWARD VIEW";display:block;font-size:7pt;font-weight:800;letter-spacing:1.2px;color:#14213d;margin-bottom:.8mm}
+.watch{border-left:4px solid #e09f3e;background:#fff7ea;border-radius:0 2.5mm 2.5mm 0;padding:2.4mm 3mm;margin:2.5mm 0;font-size:8.4pt;break-inside:avoid}
+.watch:before{content:"LEADING INDICATORS TO WATCH";display:block;font-size:7pt;font-weight:800;letter-spacing:1.2px;color:#b8771f;margin-bottom:.8mm}
+.sowhat{border-left:4px solid #6d597a;background:#f3eff6;border-radius:0 2.5mm 2.5mm 0;padding:2.4mm 3mm;margin:2.5mm 0;font-size:8.4pt;break-inside:avoid}
+.sowhat:before{content:"SO WHAT FOR YOU";display:block;font-size:7pt;font-weight:800;letter-spacing:1.2px;color:#6d597a;margin-bottom:.8mm}
+.opinion{border:1.5px dashed #6d597a;border-radius:2.5mm;padding:2.4mm 3mm;margin:2.5mm 0;font-size:8.4pt;break-inside:avoid}
+.opinion:before{content:"FORM YOUR OPINION";display:block;font-size:7pt;font-weight:800;letter-spacing:1.2px;color:#6d597a;margin-bottom:.8mm}
+.src{font-size:7pt;color:#5c6378;margin-top:1.5mm;line-height:1.35}
+.src a{color:#3a6ea5;text-decoration:underline}
+.stat{display:grid;grid-template-columns:repeat(4,1fr);gap:2.5mm;margin:2.5mm 0;break-inside:avoid}
+.stat div{background:#14213d;color:#fff;border-radius:2.5mm;padding:2.2mm;font-size:7.6pt;line-height:1.3}
+.stat div b{display:block;font-size:13pt;color:#e09f3e;margin-bottom:.6mm}
+</style>
+</head>
+<body>
+<section class="cover">
+  <div>
+    <div class="kicker" style="color:var(--gold)">10,000 Black Interns · Class of 2027 · Trends briefing</div>
+    <h1>Where the industries<br>are going</h1>
+    <p class="sub">A technical, evidence-based briefing on the real structural trends in Investment Management, Sales and Public Relations as of October 2026. It covers how each one works mechanically, what the data and recent events show, what the optimists and sceptics argue, and what's likely to happen next. It's written from zero, so you can start forming your own opinions like someone who works in the industry.</p>
+  </div>
+  <div>
+    <div class="grid3" style="gap:5mm">
+      <div style="border-top:3px solid var(--gold);padding-top:2mm"><b style="color:#fff;font-size:12pt">Investment Management</b><br><span style="color:#c8cee0;font-size:9pt">Evergreen funds and the 2026 gating wave, megafunds, active ETFs, tokenisation, Nuveen–Schroders, AI economics</span></div>
+      <div style="border-top:3px solid var(--teal);padding-top:2mm"><b style="color:#fff;font-size:12pt">Sales</b><br><span style="color:#c8cee0;font-size:9pt">AI SDRs, the rep-free buyer paradox, outcome pricing, the efficiency regime, the collapsing entry rung</span></div>
+      <div style="border-top:3px solid #b79ec8;padding-top:2mm"><b style="color:#fff;font-size:12pt">Public Relations</b><br><span style="color:#c8cee0;font-size:9pt">AI answer engines and GEO, newsroom collapse, "hushing", deepfakes, agency consolidation, activism</span></div>
+    </div>
+    <p class="small" style="color:#aab2c8;margin-top:9mm">Built from 2025–26 reports (BCG, PwC, McKinsey, Gartner, Forrester, Edelman, Reuters Institute, Cision, Muck Rack, Bridge Group and others), regulators (FCA, CMA, Ofcom, TPR) and trade press. Every page ends with clickable sources. Figures marked "secondary" come from a write-up of the original report, and "unverified" means sources conflicted. Predictions are reasoned views, not facts. Prepared 28 October 2026.</p>
+  </div>
+</section>
+
+<section class="page" id="contents">
+  <div class="kicker"><span>Navigation</span><span></span></div>
+  <h2>Contents</h2>
+  <div class="tocgrid toc">
+    <div>
+      <a class="sec" style="background:var(--bg6)" href="#a1"><span>Part A · How to think like an insider</span></a>
+      <a class="sub" href="#a1">A1 · Six habits of industry thinking</a>
+      <a class="sub" href="#a2">A2 · How to read a trend report</a>
+      <a class="sec" style="background:var(--bg2)" href="#b0"><span>Part B · Investment Management</span></a>
+      <a class="sub" href="#bctx">B0 · The big picture in five numbers</a>
+      <a class="sub" href="#b1">B1 · Private markets for everyone</a>
+      <a class="sub" href="#b2">B2 · Private credit's stress test</a>
+      <a class="sub" href="#b3">B3 · Public meets private: the deals</a>
+      <a class="sub" href="#b4">B4 · Fee squeeze, flows &amp; consolidation</a>
+      <a class="sub" href="#b5">B5 · The ETF takeover</a>
+      <a class="sub" href="#b6">B6 · UK pensions: megafunds</a>
+      <a class="sub" href="#b7">B7 · Wealth, models &amp; the retail push</a>
+      <a class="sub" href="#b8">B8 · Tokenisation &amp; settlement</a>
+      <a class="sub" href="#b9">B9 · AI, specifically</a>
+      <a class="sub" href="#b10">B10 · Trust: valuations, ESG, stewardship</a>
+      <a class="sub" href="#b11">B11 · Markets: concentration, oil, gilts</a>
+      <a class="sub" href="#b12">B12 · Operating models &amp; trust activism</a>
+      <a class="sub" href="#b13">B13 · Synthesis &amp; predictions</a>
+    </div>
+    <div>
+      <a class="sec" style="background:var(--bg3)" href="#s0"><span>Part C · Sales</span></a>
+      <a class="sub" href="#s1">C1 · AI SDRs &amp; deliverability</a>
+      <a class="sub" href="#s2">C2 · The rep-free buyer paradox</a>
+      <a class="sub" href="#s3">C3 · The assembly line breaks</a>
+      <a class="sub" href="#s4">C4 · The efficiency regime</a>
+      <a class="sub" href="#s5">C5 · Seats → usage → outcomes</a>
+      <a class="sub" href="#s6">C6 · Signals, PLG &amp; RevOps</a>
+      <a class="sub" href="#s7">C7 · Customer success becomes revenue</a>
+      <a class="sub" href="#s8">C8 · Trust &amp; UK/EU regulation</a>
+      <a class="sub" href="#s9">C9 · Selling funds: gatekeepers</a>
+      <a class="sub" href="#s10">C10 · Synthesis &amp; predictions</a>
+      <a class="sec" style="background:var(--bg4)" href="#p0"><span>Part D · Public Relations</span></a>
+      <a class="sub" href="#p1">D1 · AI answer engines &amp; GEO</a>
+      <a class="sub" href="#p2">D2 · The shrinking news media</a>
+      <a class="sub" href="#p3">D3 · Insularity &amp; "hushing"</a>
+      <a class="sub" href="#p4">D4 · Deepfakes &amp; provenance</a>
+      <a class="sub" href="#p5">D5 · Creators &amp; executive visibility</a>
+      <a class="sub" href="#p6">D6 · Measurement: Barcelona 4.0</a>
+      <a class="sub" href="#p7">D7 · The agency model under pressure</a>
+      <a class="sub" href="#p8">D8 · Financial &amp; corporate PR</a>
+      <a class="sub" href="#p9">D9 · Internal comms &amp; geopolitics</a>
+      <a class="sub" href="#p10">D10 · Synthesis &amp; predictions</a>
+      <a class="sec" style="background:#ececf1" href="#e1"><span>Part E · The patterns across all three</span></a>
+      <a class="sub" href="#e1">E1 · Six cross-industry patterns</a>
+      <a class="sub" href="#e2">E2 · Build your own view + staying current</a>
+    </div>
+  </div>
+  <div class="box key small" style="margin-top:4mm"><b>How each theme page is built:</b> a blue <b>From zero</b> explainer → the technical mechanics → hard data and real events → a <span style="color:#1f7a6f;font-weight:700">bull</span> vs <span style="color:#c8553d;font-weight:700">bear</span> debate → a <b>forward view</b> (1–3 and 5+ years) → <b>leading indicators</b> to watch → <b>so what for you</b> → a prompt to <b>form your opinion</b> → sources.</div>
+</section>
+
+<section class="page" id="a1">
+  <div class="kicker"><span>Part A · Thinking like an insider</span><a href="#contents">↑ Contents</a></div>
+  <h2>A1 · Six habits of industry thinking</h2>
+  <p class="lead">Industry professionals don't know the future either. What they have is a set of habits for turning news into a view. Learn these and every page that follows becomes easier, and you'll sound like an insider in interviews.</p>
+  <div class="grid2">
+    <div class="box b6 small"><h4>1 · Follow the money</h4>For any trend, ask: <b>who earns more, and who earns less, if this happens?</b> Private markets grow because managers earn ~4× more profit per $bn there (B1). Outcome pricing spreads because AI shrinks seat revenue (C5). The money usually explains the motive.</div>
+    <div class="box b6 small"><h4>2 · Think in second-order effects</h4>First order: "AI writes emails faster." Second order: "everyone sends more emails, so inboxes flood, so providers tighten spam rules, so volume stops working, so human relevance becomes scarce" (C1). The interesting insights are usually two or three steps out.</div>
+    <div class="box b6 small"><h4>3 · Separate structural from cyclical</h4><b>Cyclical</b> trends reverse when conditions change (e.g. a bad year for markets). <b>Structural</b> ones persist (e.g. passive's share rising for 20 years). The key question is always: "will this still be true in five years if conditions normalise?"</div>
+    <div class="box b6 small"><h4>4 · Steelman both sides</h4>Every theme here has a bull and a bear case. Before forming a view, be able to state the <i>strongest</i> version of the side you disagree with. Interviewers love "the bull case is X, but I lean towards Y because…"</div>
+    <div class="box b6 small"><h4>5 · Watch leading indicators</h4>Headlines are lagging. Insiders watch the numbers that move <i>first</i>: redemption requests before gates (B2), reply rates before pipeline (C1), click-through before newsroom cuts (D2). Each theme lists what to watch.</div>
+    <div class="box b6 small"><h4>6 · Hold views loosely</h4>A strong opinion is a <b>position + evidence + what would change your mind</b>. "I think X because of A and B; I'd change my mind if C happened." That's how professionals talk, and it sounds far more credible than certainty.</div>
+  </div>
+  <h3>Recurring concepts you'll meet in all three industries</h3>
+  <div class="gloss">
+    <div><b>Disintermediation:</b> cutting out the middleman (e.g. buyers skipping salespeople; AI answers replacing clicks to news sites)</div>
+    <div><b>Concentration:</b> a market dominated by a few players (megafunds, model portfolio gatekeepers, holding companies)</div>
+    <div><b>Barbell:</b> a market splitting into giants and specialists, with a squeezed middle</div>
+    <div><b>Commoditisation:</b> a product becoming interchangeable, so price becomes the only differentiator (passive funds, basic outreach, press releases)</div>
+    <div><b>Unit economics:</b> the revenue and cost of one unit (one client, one deal, one hour) that determines profitability</div>
+    <div><b>Operating leverage:</b> when costs are mostly fixed, extra revenue is mostly profit, and lost revenue hurts badly</div>
+    <div><b>Regulatory arbitrage:</b> structuring a product to fall under lighter rules (e.g. a 5% gate as convention rather than law)</div>
+    <div><b>Value capture:</b> who in the chain keeps the profit: the manufacturer, the distributor or the platform</div>
+  </div>
+</section>
+
+<section class="page" id="a2">
+  <div class="kicker"><span>Part A · Thinking like an insider</span><a href="#contents">↑ Contents</a></div>
+  <h2>A2 · How to read a trend report (critically)</h2>
+  <p class="small">Most "trends" come from consultancies, vendors and surveys. They're useful, but every source has an angle. Professionals read them with five questions:</p>
+  <table>
+    <tr><th style="width:26%">Question</th><th>Why it matters</th><th style="width:30%">Example from this briefing</th></tr>
+    <tr><td><b>Who published it, and what do they sell?</b></td><td>Vendors publish research that supports buying their product</td><td>Salesforce's AI survey (C1); Muck Rack's "earned media feeds AI" (D1)</td></tr>
+    <tr><td><b>Is it a measurement or an expectation?</b></td><td>"Sellers <i>expect</i> AI to save 34% of research time" is not "AI saved 34%"</td><td>Salesforce State of Sales (C1)</td></tr>
+    <tr><td><b>What's the sample and definition?</b></td><td>Cold-email reply rates vary 7× by method; "evergreen AUM" may include insurance balance sheets</td><td>C1; B1</td></tr>
+    <tr><td><b>Is it a forecast?</b></td><td>Forecasts from people selling the future are usually optimistic</td><td>Tokenisation: $715bn–$14tn by 2030 vs ~$12bn today (B8)</td></tr>
+    <tr><td><b>Does the opposite data exist?</b></td><td>Most trends have contradicting evidence in the same dataset</td><td>67% prefer rep-free vs 69% validate with reps (C2)</td></tr>
+  </table>
+  <div class="box zero small"><b>The source hierarchy:</b> (1) <b>Primary data</b>: regulator statistics, company results, official filings. (2) <b>Independent research</b>: academic papers, Reuters Institute, Morningstar, BIS. (3) <b>Consultancy reports</b>: BCG, McKinsey, PwC (rigorous but selling advice). (4) <b>Vendor surveys</b>: useful signals with a commercial angle. (5) <b>Commentary and opinion</b>. Quote higher tiers when you can.</div>
+
+  <h3>The three industries in one picture</h3>
+  <svg viewBox="0 0 680 200" width="100%">
+    <g font-size="9.5">
+      <rect x="10" y="10" width="205" height="180" rx="10" fill="#fff7ea" stroke="#e09f3e" stroke-width="1.5"/>
+      <text x="112" y="32" text-anchor="middle" font-weight="800" fill="#b8771f" font-size="11">INVESTMENT MGMT</text>
+      <text x="112" y="56" text-anchor="middle" fill="#14213d">Record AUM, flat margins</text>
+      <text x="112" y="76" text-anchor="middle" fill="#14213d">Growth from markets, not flows</text>
+      <text x="112" y="96" text-anchor="middle" fill="#14213d">→ private markets</text>
+      <text x="112" y="116" text-anchor="middle" fill="#14213d">→ consolidation</text>
+      <text x="112" y="136" text-anchor="middle" fill="#14213d">→ distribution wins</text>
+      <text x="112" y="166" text-anchor="middle" fill="#5c6378" font-style="italic">"Distribution now defines</text>
+      <text x="112" y="180" text-anchor="middle" fill="#5c6378" font-style="italic">who wins" (BCG)</text>
+      <rect x="237" y="10" width="205" height="180" rx="10" fill="#eaf6f4" stroke="#2a9d8f" stroke-width="1.5"/>
+      <text x="340" y="32" text-anchor="middle" font-weight="800" fill="#1f7a6f" font-size="11">SALES</text>
+      <text x="340" y="56" text-anchor="middle" fill="#14213d">AI floods outreach</text>
+      <text x="340" y="76" text-anchor="middle" fill="#14213d">Buyers self-educate with AI</text>
+      <text x="340" y="96" text-anchor="middle" fill="#14213d">→ rep as validator</text>
+      <text x="340" y="116" text-anchor="middle" fill="#14213d">→ outcome pricing</text>
+      <text x="340" y="136" text-anchor="middle" fill="#14213d">→ retention economics</text>
+      <text x="340" y="166" text-anchor="middle" fill="#5c6378" font-style="italic">"More AI does not mean more</text>
+      <text x="340" y="180" text-anchor="middle" fill="#5c6378" font-style="italic">productivity" (Gartner)</text>
+      <rect x="464" y="10" width="205" height="180" rx="10" fill="#f3eff6" stroke="#6d597a" stroke-width="1.5"/>
+      <text x="566" y="32" text-anchor="middle" font-weight="800" fill="#6d597a" font-size="11">PUBLIC RELATIONS</text>
+      <text x="566" y="56" text-anchor="middle" fill="#14213d">Newsrooms shrink</text>
+      <text x="566" y="76" text-anchor="middle" fill="#14213d">AI reads earned media</text>
+      <text x="566" y="96" text-anchor="middle" fill="#14213d">→ GEO / AI visibility</text>
+      <text x="566" y="116" text-anchor="middle" fill="#14213d">→ verification &amp; crisis</text>
+      <text x="566" y="136" text-anchor="middle" fill="#14213d">→ claims = legal risk</text>
+      <text x="566" y="166" text-anchor="middle" fill="#5c6378" font-style="italic">"Run to stand still"</text>
+      <text x="566" y="180" text-anchor="middle" fill="#5c6378" font-style="italic">(PRWeek on UK agencies)</text>
+    </g>
+  </svg>
+  <div class="box key small"><b>Reading plan:</b> start with your first choice (Part B), then Sales (Part C), then PR (Part D). Finish with Part E, which connects them. Spend 10 minutes on each "Form your opinion" box, writing one line in your own words. By the end you'll have 30+ opinions, each backed by evidence.</div>
+</section>
+<section class="chapter ch-im im" id="b0">
+  <div class="num">B</div>
+  <h1>Investment Management: the trends</h1>
+  <p>The industry is at a record size ($147 trillion globally, £11.1 trillion managed in the UK), yet margins have been stuck for 15 years, and almost all recent growth came from rising markets rather than new money. That tension drives everything on the following pages.</p>
+  <ol style="columns:2">
+    <li><a href="#b1">Private markets for everyone</a></li>
+    <li><a href="#b2">Private credit's stress test</a></li>
+    <li><a href="#b3">Public meets private: the deals</a></li>
+    <li><a href="#b4">Fee squeeze, flows &amp; consolidation</a></li>
+    <li><a href="#b5">The ETF takeover</a></li>
+    <li><a href="#b6">UK pensions: megafunds</a></li>
+    <li><a href="#b7">Wealth, models &amp; the retail push</a></li>
+    <li><a href="#b8">Tokenisation &amp; settlement</a></li>
+    <li><a href="#b9">AI, specifically</a></li>
+    <li><a href="#b10">Trust: valuations, ESG, stewardship</a></li>
+    <li><a href="#b11">Markets: concentration, oil, gilts</a></li>
+    <li><a href="#b12">Operating models &amp; trust activism</a></li>
+    <li><a href="#b13">Synthesis: think like an insider</a></li>
+  </ol>
+</section>
+
+<section class="page im" id="bctx">
+  <div class="kicker"><span>Part B · Investment Management · Context</span><a href="#contents">↑ Contents</a></div>
+  <h2>B0 · The big picture in five numbers</h2>
+  <div class="stat">
+    <div><b>$147tn</b>global AUM in 2025, up 11% (BCG 2026)</div>
+    <div><b>~80%</b>of 2025 revenue growth came from markets rising, not net new money (BCG)</div>
+    <div><b>~30%</b>industry operating margin, flat for ~15 years; costs grew 5.4% a year vs revenue 5.1% (BCG)</div>
+    <div><b>£11.1tn</b>managed in the UK at end-2025, up 11%; 53% for overseas clients (IA, via trade press)</div>
+  </div>
+  <div class="box zero small"><b>Why "80% from markets" is the most important number in the industry:</b> an asset manager's revenue is a percentage of the assets it manages (Guide B10). If markets rise 10%, revenue rises about 10% without winning a single new client. So a record year can hide a weak business. If markets fall, revenue falls with them, and costs don't. BCG co-author Johannes Burkhardt's summary: <b>"Distribution now defines who wins."</b> His colleague Renaud Fages: <b>"Performance alone is no longer enough."</b></div>
+
+  <h3>The forces in one diagram</h3>
+  <svg viewBox="0 0 680 230" width="100%">
+    <rect x="250" y="85" width="180" height="60" rx="10" fill="#14213d"/><text x="340" y="112" text-anchor="middle" fill="#fff" font-weight="800" font-size="11">THE MARGIN SQUEEZE</text><text x="340" y="129" text-anchor="middle" fill="#e09f3e" font-size="9">revenue/£ falling, costs rising</text>
+    <g font-size="9.3">
+      <rect x="5" y="5" width="200" height="50" rx="7" fill="#fdeeea" stroke="#c8553d"/><text x="105" y="25" text-anchor="middle" font-weight="700" fill="#14213d">Passive &amp; ETFs</text><text x="105" y="41" text-anchor="middle" fill="#5c6378">pull fees down (B4, B5)</text>
+      <rect x="5" y="90" width="200" height="50" rx="7" fill="#fdeeea" stroke="#c8553d"/><text x="105" y="110" text-anchor="middle" font-weight="700" fill="#14213d">Concentrated buyers</text><text x="105" y="126" text-anchor="middle" fill="#5c6378">megafunds, model portfolios (B6, B7)</text>
+      <rect x="5" y="175" width="200" height="50" rx="7" fill="#fdeeea" stroke="#c8553d"/><text x="105" y="195" text-anchor="middle" font-weight="700" fill="#14213d">Rising tech &amp; data costs</text><text x="105" y="211" text-anchor="middle" fill="#5c6378">index data, platforms (B9, B12)</text>
+      <rect x="475" y="5" width="200" height="50" rx="7" fill="#eaf6f4" stroke="#2a9d8f"/><text x="575" y="25" text-anchor="middle" font-weight="700" fill="#14213d">Private markets</text><text x="575" y="41" text-anchor="middle" fill="#5c6378">higher fees, new buyers (B1–B3)</text>
+      <rect x="475" y="90" width="200" height="50" rx="7" fill="#eaf6f4" stroke="#2a9d8f"/><text x="575" y="110" text-anchor="middle" font-weight="700" fill="#14213d">Scale &amp; mergers</text><text x="575" y="126" text-anchor="middle" fill="#5c6378">spread fixed costs (B4)</text>
+      <rect x="475" y="175" width="200" height="50" rx="7" fill="#eaf6f4" stroke="#2a9d8f"/><text x="575" y="195" text-anchor="middle" font-weight="700" fill="#14213d">AI &amp; new plumbing</text><text x="575" y="211" text-anchor="middle" fill="#5c6378">cut 25–35% of costs? (B8, B9)</text>
+    </g>
+    <g stroke="#c8553d" stroke-width="1.8"><line x1="207" y1="30" x2="250" y2="95"/><line x1="207" y1="115" x2="248" y2="115"/><line x1="207" y1="200" x2="250" y2="135"/></g>
+    <g stroke="#2a9d8f" stroke-width="1.8"><line x1="473" y1="30" x2="430" y2="95"/><line x1="473" y1="115" x2="432" y2="115"/><line x1="473" y1="200" x2="430" y2="135"/></g>
+    <text x="105" y="70" text-anchor="middle" fill="#c8553d" font-size="8.5" font-weight="700">PRESSURES ↓</text>
+    <text x="575" y="70" text-anchor="middle" fill="#1f7a6f" font-size="8.5" font-weight="700">RESPONSES ↑</text>
+  </svg>
+  <table>
+    <tr><th>Forecaster</th><th>Prediction</th></tr>
+    <tr><td><b>PwC</b> (Nov 2025)</td><td>Industry AUM about $200tn by 2030. Private markets reach <b>more than half of industry revenue</b> ($432bn). 89% of managers report profit pressure.</td></tr>
+    <tr><td><b>McKinsey</b> (Sep 2025)</td><td>Pre-tax margins fell 3 points in North America and 5 in Europe (2019–23). 60–80% of tech budgets just "run the business".</td></tr>
+    <tr><td><b>Oliver Wyman / Morgan Stanley</b> (Oct 2025)</td><td>Up to <b>20% of wealth and asset managers acquired by 2029</b>. 200+ significant deals a year since 2022.</td></tr>
+  </table>
+  <div class="src">Sources: <a href="https://www.bcg.com/press/5may2026-gestion-dactifs-une-croissance-a-reinventer">BCG Global Asset Management 2026</a> · <a href="https://www.investmentnews.com/practice-management/asset-managers-face-tougher-growth-race-as-distribution-and-ai-reshape-industry/266335">InvestmentNews on BCG</a> · <a href="https://www.pwc.com/gx/en/news-room/press-releases/2025/pwc-2025-global-asset-wealth-management-report.html">PwC AWM 2025</a> · <a href="https://www.marketsmedia.com/uk-investment-management-industry-hits-record-11-1tr-aum/">IA £11.1tn (trade press)</a> · <a href="https://www.moneymanagement.com.au/news/funds-management/inter-sector-ma-see-20-fewer-asset-and-wealth-managers-2029">Oliver Wyman/Morgan Stanley</a></div>
+</section>
+
+<section class="page im" id="b1">
+  <div class="kicker"><span>Part B · Investment Management · Theme 1</span><a href="#contents">↑ Contents</a></div>
+  <h2>B1 · Private markets for everyone: evergreen and semi-liquid funds</h2>
+  <div class="box zero small"><b>From zero:</b> private equity, private credit and infrastructure were traditionally sold only to institutions through <b>closed-ended "drawdown" funds</b>. The investor commits money, the manager "calls" it over 3–5 years, it's locked up for 10+ years, and cash comes back only when assets are sold. <b>"Democratisation"</b> means repackaging these assets for wealthy individuals, retail investors and pension savers through <b>"evergreen"</b> (no end date) or <b>"semi-liquid"</b> funds. Why? Private markets earn managers far higher fees: PwC estimates <b>about 4× more profit per $bn</b> than traditional funds.</div>
+
+  <h3>How an evergreen fund works, technically</h3>
+  <div class="flow">
+    <div class="step"><b>Subscribe</b>Monthly, at NAV. Money is invested immediately, not "called".</div><div class="arr">›</div>
+    <div class="step"><b>Value</b>NAV set by the manager's own valuations of unlisted assets, often checked by third parties</div><div class="arr">›</div>
+    <div class="step"><b>Request exit</b>Usually quarterly</div><div class="arr">›</div>
+    <div class="step" style="background:#fff7ea;border-color:#e09f3e"><b>The gate</b>Pays out up to ~5% of NAV a quarter. If requests exceed that, everyone gets a pro-rata share.</div><div class="arr">›</div>
+    <div class="step"><b>Liquidity tools</b>A 10–20% liquid "sleeve", credit lines, loan repayments, secondaries sales</div>
+  </div>
+  <p class="small"><b>The crucial detail:</b> in US non-traded BDCs (business development companies, the main retail private credit vehicle), the 5% is a <b>convention, not a law</b>. Managers can restrict redemptions indefinitely. US <b>interval funds</b> must offer periodic repurchases. Unfilled requests generally <b>aren't carried forward</b> and must be resubmitted, which inflates headline "request" numbers.</p>
+  <table>
+    <tr><th style="width:18%">Wrapper</th><th>Where</th><th>Key rules</th></tr>
+    <tr><td><b>LTAF</b></td><td>UK (FCA)</td><td>Open-ended fund for illiquid assets. Dealing no more than monthly, at least 90 days' notice to redeem. Designed for DC pension default funds.</td></tr>
+    <tr><td><b>ELTIF 2.0</b></td><td>EU</td><td>Rules in force October 2024. Open-ended retail versions redeem at most quarterly. <b>189 ELTIFs registered by 97 managers</b> (Jan 2024–Feb 2026, Morningstar), but mass-retail adoption is "still in an early phase" (EFAMA).</td></tr>
+    <tr><td><b>401(k) access</b></td><td>US</td><td>Executive Order 14330 (7 Aug 2025) to open DC plans to alternatives. The DOL proposed a "safe harbor" rule on 30 Mar 2026, not yet final. In 2024 only 4% of DC plans offered alternatives.</td></tr>
+  </table>
+  <div class="stat">
+    <div><b>$3.2tn → $5.2tn</b>evergreen AUM, 2025 to 2030 forecast (PitchBook; includes insurance balance sheets)</div>
+    <div><b>$226bn</b>record secondaries volume in 2025, up 41% (Evercore): the "exit valve"</div>
+    <div><b>1.57%</b>record-low average management fee on 2026-vintage buyout funds (Preqin)</div>
+    <div><b>$1bn</b>Goldman stake in T. Rowe Price for joint private-markets retirement products (Sep 2025)</div>
+  </div>
+  <div class="debate">
+    <div class="bull"><b class="h">Bull case</b>Wealth is a huge, under-penetrated pool of "sticky" money. Evergreen funds solve the J-curve and cash-drag problems of drawdown funds. Gates are "a feature, not a bug" (Goldman's private credit chief, 2026). BCG sizes a $3tn private-markets opportunity in wealth.</div>
+    <div class="bear"><b class="h">Bear case</b>A <b>structural liquidity mismatch</b>: quarterly exits promised on assets that don't trade. Valuations are set by the manager, and fees are high. Morningstar: these funds "suit only investors who can go years without needing their money back."</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> the final DOL rule, and the first private-markets sleeves inside US target-date funds. More LTAFs inside UK DC defaults. The <b>redemption-request ratio</b> becomes the key health metric. <b>5+ years:</b> evergreen about $5tn; secondaries the standard liquidity backstop; standardised liquidity and valuation disclosure.</div>
+  <div class="sowhat">Learn the liquidity terms cold: dealing frequency, notice period, gate %, liquidity sleeve, and what happens to unfilled requests. A pension consultant's first questions are: <i>"How is NAV set, who values it, how often, and what's your redemption history?"</i></div>
+  <div class="src">Sources: <a href="https://www.morningstar.com.au/funds/blue-owl-offers-harsh-lesson-semiliquid-fund-investors">Morningstar on semi-liquid funds</a> · <a href="https://www.ropesgray.com/-/media/files/alerts/2026/08/the-principal-view---trends-shaping-private-markets---august-2026.pdf">Ropes &amp; Gray / PitchBook, Aug 2026</a> · <a href="https://www.ipe.com/news/fca-finalises-rules-for-long-term-asset-fund-regime/10055846.article">IPE on LTAF</a> · <a href="https://www.mayerbrown.com/en/insights/publications/2025/08/president-trump-signs-executive-order-seeking-to-expand-availability-of-alternative-assets-in-401k-plans">Mayer Brown on EO 14330</a> · <a href="https://www.mofo.com/resources/insights/260403-dol-proposed-rule-401-k-alternative-assets">MoFo on DOL rule</a> · <a href="https://www.privateequitywire.co.uk/private-secondaries-volumes-hit-record-226bn/">Secondaries $226bn</a> · <a href="https://www.pwc.com/gx/en/news-room/press-releases/2025/pwc-2025-global-asset-wealth-management-report.html">PwC</a></div>
+</section>
+
+<section class="page im" id="b2">
+  <div class="kicker"><span>Part B · Investment Management · Theme 2</span><a href="#contents">↑ Contents</a></div>
+  <h2>B2 · Private credit's stress test: the 2026 gating wave</h2>
+  <div class="box zero small"><b>From zero:</b> <b>private credit</b> means funds, rather than banks, lending directly to mid-sized companies, often ones owned by private equity. Loans are usually floating-rate. Retail investors access it through vehicles that value loans at "fair value" and offer limited quarterly exits (B1). In 2026 the theory met reality: many investors asked for their money back at once, and the gates came down.</div>
+  <table>
+    <tr><th style="width:30%">Fund (2026)</th><th>Requests (% of NAV)</th><th>Paid</th></tr>
+    <tr><td>BlackRock HPS Corporate Lending ($26bn), March</td><td>9.3%</td><td>Capped at 5% (~$620m of ~$1.2bn)</td></tr>
+    <tr><td>Apollo Debt Solutions</td><td>~11%, later ~15%</td><td>Capped at 5%, several quarters running</td></tr>
+    <tr><td>Blackstone BCRED, Q2</td><td>~10%</td><td>Capped at 5%</td></tr>
+    <tr><td>Cliffwater lending fund</td><td>~17%</td><td>Capped at 5%</td></tr>
+    <tr><td><b>Blue Owl OBDC II</b></td><td colspan="2">Redemptions stopped Sept 2025. A merger with a listed fund at ~20% below NAV was announced, then cancelled. Redemptions <b>halted permanently</b> on 18 Feb 2026 and the fund became a wind-down. An investor lawsuit followed.</td></tr>
+  </table>
+  <p class="small">Bloomberg tallied about <b>$13bn of requests across more than a dozen funds in one quarter, with only about two-thirds paid out</b>.</p>
+  <h3>Why it happened: the "SaaSpocalypse"</h3>
+  <p class="small">The Bank for International Settlements (March 2026) found loans to software (SaaS) companies exceeded <b>$500bn, about 19% of direct lending</b>. Investors feared AI would disrupt those software businesses, and software stocks fell almost <b>30%</b> between October 2025 and February 2026. Yet BDCs held software loans at an average of about <b>97.8% of face value</b> (Octus), which raised the question of whether the valuations ("marks") were stale. On the other side, Blue Owl sold $1.4bn of loans at <b>99.7% of par</b>, evidence the marks were broadly fair.</p>
+  <div class="box b1 small"><b>Technical concept: the listed "second opinion".</b> Some BDCs are listed on an exchange, so the market prices them every day. When listed BDCs trade at a discount to their reported NAV, the market is saying it thinks the loans are worth less than the manager's valuation. Non-traded funds don't get that daily check, which is exactly the valuation-trust problem.</div>
+  <div class="debate">
+    <div class="bull"><b class="h">Bull case</b>The gates worked as designed: no fire sales. Loans sold near par support the valuations. Floating-rate yields remain attractive, and some funds (e.g. KKR's K-FITS, Blackstone's BREIT) had inflows exceeding outflows.</div>
+    <div class="bear"><b class="h">Bear case</b>Retail investors didn't understand that 5% is a <b>ceiling, not a promise</b>. Marks near par on AI-threatened software loans look stale. Unfilled requests compound quarter after quarter, and a "semi-liquid" fund became a multi-year wind-down.</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> more transparency on redemption queues; product redesign (longer notice periods, bigger liquid sleeves, interval funds over BDCs); likely regulatory scrutiny of retail suitability. <b>5+ years:</b> private credit keeps growing (Preqin forecasts $4.5tn by 2030), but retail wrappers are priced and regulated more like listed closed-end funds.</div>
+  <div class="watch">Quarterly redemption requests vs the 5% cap · listed BDC discounts to NAV · software loan "non-accruals" (loans that stopped paying) · share of income paid in kind (PIK) rather than cash · secondary prices for credit portfolios</div>
+  <div class="opinion">Was this a <b>product failure</b> or a <b>communication failure</b>? The structure behaved exactly as the documents said. Investors were surprised anyway. That gap is precisely the client-facing job.</div>
+  <div class="sowhat">"What's your redemption-request history?" and "What's your software exposure?" are now standard due-diligence questions. Be ready to answer "what happened at Blue Owl, and could it happen here?" with calm facts about structure, not marketing.</div>
+  <div class="src">Sources: <a href="https://www.thinkadvisor.com/amp/2026/03/06/blackrock-26b-private-credit-fund-limits-withdrawals">ThinkAdvisor on HPS</a> · <a href="https://news.bloomberglaw.com/banking-law/private-credit-funds-trap-5-billion-as-investors-rush-for-exit">Bloomberg Law</a> · <a href="https://www.bis.org/publ/qtrpdf/r_qt2603v.htm">BIS Quarterly Review Mar 2026</a> · <a href="https://octus.com/?p=41296">Octus</a> · <a href="https://www.investmentnews.com/ria-news/blue-owl-faces-investor-suit-over-bdc-redemptions-liquidity-merger/263501">Blue Owl lawsuit</a> · <a href="https://news.bloomberglaw.com/banking-law/goldman-private-credit-chief-says-gating-is-feature-not-bug-1">Goldman "feature not bug"</a></div>
+</section>
+
+<section class="page im" id="b3">
+  <div class="kicker"><span>Part B · Investment Management · Theme 3</span><a href="#contents">↑ Contents</a></div>
+  <h2>B3 · Public meets private: the convergence deals</h2>
+  <div class="box zero small"><b>From zero:</b> "traditional" managers (shares and bonds) have <b>distribution</b>, relationships with advisers, wealth managers and pension schemes, but face falling fees. "Alternative" managers (private markets) have <b>high-fee products</b> but historically lacked access to individual investors. <b>Convergence</b> means combining the two, by buying each other or partnering, to sell blended "public + private" products such as target-date funds or model portfolios with a private-markets sleeve.</div>
+  <table>
+    <tr><th style="width:26%">Deal</th><th>What happened</th><th style="width:26%">The logic</th></tr>
+    <tr><td><b>BlackRock</b> + GIP, Preqin, HPS</td><td>Bought Global Infrastructure Partners (2024), data firm Preqin (2024) and private credit manager HPS (closed July 2025), creating a ~$190bn private credit platform. Linked iCapital's alternatives platform to Aladdin Wealth (March 2026).</td><td>Own the private-markets product, the data <i>and</i> the distribution technology</td></tr>
+    <tr><td><b>Nuveen → Schroders</b> (12 Feb 2026)</td><td>The biggest UK deal: ~<b>£9.9bn</b> cash, a 29% premium. Combined AUM ~$2.5tn. The Schroders brand is kept and London becomes the non-US HQ. Completion expected Q4 2026.</td><td>Schroders' UK and wealth reach + Nuveen's private-markets and real-assets scale</td></tr>
+    <tr><td><b>Goldman Sachs → T. Rowe Price</b></td><td>Up to a 3.5% stake ($1bn), Sep 2025. Plans for co-branded retirement funds with private sleeves.</td><td>Private markets into the US retirement channel</td></tr>
+    <tr><td><b>SS&amp;C → Calastone</b></td><td>£766m purchase of the UK fund-dealing network (4,500+ firms), completed October 2025</td><td>Owning the fund "plumbing"</td></tr>
+    <tr><td><b>Permira &amp; Warburg Pincus → Clearwater</b></td><td>$8.4bn take-private of investment-accounting software, completed June 2026</td><td>Infrastructure consolidation</td></tr>
+  </table>
+  <p class="small">Asset management deal value rose <b>116%</b> in 2025 versus 2024, and deal count rose 14% (Ropes &amp; Gray). Before the Nuveen bid, Schroders had already set a <b>£150m annual cost-savings target</b> and cut about 7% of roles in one quarter of 2025, a sign of the squeeze on mid-sized active managers.</p>
+  <div class="debate">
+    <div class="bull"><b class="h">Bull case</b>Distribution + private-markets manufacturing is the winning model. "Who owns the client relationship owns the industry" (BCG commentary). Clients want one conversation covering public and private.</div>
+    <div class="bear"><b class="h">Bear case</b>Culture clashes and key-person risk. Buyers pay private-markets prices for retail flows that 2026 proved are cyclical. Blended products can combine the worst of both: liquidity promises sitting on illiquid assets.</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> more mid-sized traditional managers sell, merge or partner; model portfolios and target-date funds with 5–15% private sleeves become standard. <b>5+ years:</b> a <b>barbell</b> of giant platforms at one end and specialist boutiques at the other, with the "squeezed middle" shrinking.</div>
+  <div class="watch">Deal announcements (who's next after Schroders?) · private markets as a share of listed managers' revenue · launches of blended public-private products · how Nuveen integrates Schroders</div>
+  <div class="opinion">A UK icon founded in 1804 was bought by a US group. Is that a sign of UK weakness, or of London's strength as a global hub (Schroders keeps its brand and London becomes the non-US HQ)? Insiders disagree, and both views are defensible.</div>
+  <div class="sowhat">Learn your firm's private-markets shelf and its partners. Clients increasingly want one conversation across public and private assets. Corporate deals also create client anxiety, which is when relationship managers matter most.</div>
+  <div class="src">Sources: <a href="https://businesswire.com/news/home/20250630920349/en/BlackRock-Completes-Acquisition-of-HPS-Investment-Partners">BlackRock–HPS</a> · <a href="https://www.investmentnews.com/mergers-acquisitions/nuveen-to-acquire-schroders-in-135-billion-cash-deal-to-create-25t-aum-business/265256">Nuveen–Schroders</a> · <a href="https://www.investmentnews.com/retirement-planning/goldman-sachs-to-acquire-1-b-stake-in-t-rowe-price-plots-joint-private-market-offerings-for-retirement-clients/261968">Goldman–T. Rowe</a> · <a href="https://www.ssctech.com/acquisitions/calastone">SS&amp;C–Calastone</a> · <a href="https://www.permira.com/news-and-insights/announcements/clearwater-analytics-completes-84-billion-take-private-acquisition-by-permira-and-warburg-pincus">Clearwater</a> · <a href="https://portfolio-adviser.com/schroders-announces-150m-annual-cost-savings-target-in-strategic-shift/">Schroders savings</a></div>
+</section>
+
+<section class="page im" id="b4">
+  <div class="kicker"><span>Part B · Investment Management · Theme 4</span><a href="#contents">↑ Contents</a></div>
+  <h2>B4 · Fee squeeze, active outflows and consolidation</h2>
+  <div class="box zero small"><b>From zero:</b> fees are an annual percentage of assets. Index (passive) funds charge a fraction of what active funds charge. As money moves to passive and to cheaper share classes, the industry earns less per £ managed. That's <b>fee compression</b>. Costs (technology, data, regulation) keep rising, so margins get squeezed, and smaller firms merge or get bought.</div>
+  <div class="stat">
+    <div><b>0.32%</b>average US fund fee (asset-weighted), from 0.80% in 2006. Passive 0.10%, active 0.57% (Morningstar)</div>
+    <div><b>~25%</b>of UK fund assets now in trackers, up from 18% five years earlier (IA)</div>
+    <div><b>−£18.9bn</b>UK active equity fund outflows in 2025, while passive equity took in £12.2bn (Calastone)</div>
+    <div><b>£54bn</b>outflows from UK equity funds over a decade (Calastone)</div>
+  </div>
+  <p class="small">In 2025, passive global equity funds outsold active for the first time since 2015 (Calastone), and £5.8bn went into money market funds as savers sought safety. February 2026 marked the ninth consecutive month of equity fund outflows. Meanwhile, fees on <i>newly launched</i> US mutual funds topped 1% for the first time since 2015. The new launches are specialist products, where pricing power still exists.</p>
+  <h3>Recent UK and European consolidation</h3>
+  <table>
+    <tr><th style="width:28%">Deal / event</th><th>Detail</th></tr>
+    <tr><td><b>Nuveen–Schroders</b></td><td>£9.9bn (Feb 2026); see B3</td></tr>
+    <tr><td><b>Hargreaves Lansdown</b></td><td>The UK's largest investment platform, taken private by CVC, Nordic Capital and ADIA for ~£5.4bn (completed March 2025)</td></tr>
+    <tr><td><b>Liontrust / Jupiter</b></td><td>Liontrust buying River Global's business (Mar 2026); Jupiter hiring Liontrust's UK small-cap team (Sep 2026). Team "lift-outs" are a cheap form of M&amp;A.</td></tr>
+    <tr><td><b>Fund mergers</b></td><td>e.g. Premier Miton proposing to merge a UK smaller companies fund (Sep 2026). Sub-scale funds are being closed or merged.</td></tr>
+    <tr><td><b>Europe</b></td><td>BNP Paribas–AXA IM (€5.1bn) and Generali–Natixis (a proposed ~€1.9tn JV): current status should be checked before quoting</td></tr>
+  </table>
+  <div class="debate">
+    <div class="bull"><b class="h">Bull case</b>Scale lowers unit costs, and AI may cut 25–35% of costs (BCG). Active survives where markets are less efficient (small caps, emerging markets, bonds) and in new wrappers (active ETFs, B5).</div>
+    <div class="bear"><b class="h">Bear case</b>Mid-sized UK active equity houses face a <b>structural, not cyclical</b>, decline. Mergers destroy value through key-person departures and culture clashes.</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> more UK takeovers, likely by US or European buyers or private equity; more fund mergers and closures; fee cuts on old share classes driven by "Assessment of Value" reviews. <b>5+ years:</b> passive could plausibly reach a third or more of UK fund assets (an extrapolation of current trends, not a published forecast).</div>
+  <div class="watch">IA monthly tracker share · Calastone Fund Flow Index · valuations of listed UK managers (cheap ones are bid targets) · fee cuts in annual Assessment of Value reports</div>
+  <div class="opinion"><b>My take:</b> "active vs passive" is the wrong frame. The real question is <b>where active can still earn its fee</b>: less-covered markets, private assets, and outcomes such as income or retirement solutions. A strong candidate can say where they think active adds value, and why.</div>
+  <div class="sowhat">"Why should I pay for active?" is the default client question. Know your funds' fees versus passive and active peers, and be able to explain what the client gets for the difference.</div>
+  <div class="src">Sources: <a href="https://www.morningstar.com/en-gb/business/insights/blog/us-fund-fee-study">Morningstar Fee Study</a> · <a href="https://www.theia.org/news/press-releases/fund-outflows-slashed-2024-cautious-optimism-prevails-among-investors-2">IA</a> · <a href="https://www.calastone.com/insights/equity-funds-suffered-record-outflows-in-2025-though-post-budget-certainty-cut-net-selling-sharply-in-december/">Calastone 2025</a> · <a href="https://quoteddata.com/2026/01/calastone-banner-year-for-ftse-100-does-not-stop-investor-exodus-as-uk-equity-fund-outflows-hit-54bn-over-a-decade/">Calastone decade</a> · <a href="https://www.cvc.com/media/news/2025/cvc-nordic-capital-and-adia-complete-acquisition-of-hargreaves-lansdown/">Hargreaves Lansdown</a> · <a href="https://www.scottishfinancialnews.com/articles/jupiter-poaches-liontrust-small-cap-team">Jupiter–Liontrust team</a></div>
+</section>
+
+<section class="page im" id="b5">
+  <div class="kicker"><span>Part B · Investment Management · Theme 5</span><a href="#contents">↑ Contents</a></div>
+  <h2>B5 · The ETF takeover: active ETFs and ETF share classes</h2>
+  <div class="box zero small"><b>From zero:</b> an <b>ETF</b> (exchange-traded fund) is a fund listed on a stock exchange and traded during the day like a share. An <b>active ETF</b> uses the same wrapper, but a portfolio manager picks the investments rather than tracking an index. An <b>ETF share class</b> lets a traditional mutual fund add an ETF version of the <i>same</i> portfolio, so a manager can offer ETF access without launching a separate clone fund.</div>
+  <h3>How an ETF stays close to its true value: creation and redemption</h3>
+  <svg viewBox="0 0 680 120" width="100%">
+    <defs><marker id="ea" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#14213d"/></marker></defs>
+    <g font-size="9.3">
+      <rect x="5" y="30" width="150" height="60" rx="8" fill="#eaf6f4" stroke="#2a9d8f"/><text x="80" y="55" text-anchor="middle" font-weight="700" fill="#14213d">Investors trade</text><text x="80" y="71" text-anchor="middle" fill="#5c6378">ETF shares on exchange</text>
+      <rect x="265" y="30" width="150" height="60" rx="8" fill="#14213d"/><text x="340" y="55" text-anchor="middle" font-weight="700" fill="#fff">Authorised</text><text x="340" y="71" text-anchor="middle" font-weight="700" fill="#fff">participant (AP)</text>
+      <rect x="525" y="30" width="150" height="60" rx="8" fill="#fff7ea" stroke="#e09f3e"/><text x="600" y="55" text-anchor="middle" font-weight="700" fill="#14213d">ETF issuer</text><text x="600" y="71" text-anchor="middle" fill="#5c6378">creates/redeems units</text>
+    </g>
+    <g stroke="#14213d" stroke-width="1.5" marker-end="url(#ea)"><line x1="157" y1="50" x2="263" y2="50"/><line x1="263" y1="72" x2="157" y2="72"/><line x1="417" y1="50" x2="523" y2="50"/><line x1="523" y1="72" x2="417" y2="72"/></g>
+    <text x="210" y="44" text-anchor="middle" font-size="8" fill="#5c6378">buys/sells</text>
+    <text x="470" y="44" text-anchor="middle" font-size="8" fill="#5c6378">basket of securities ⇄ ETF units</text>
+    <text x="340" y="112" text-anchor="middle" font-size="8.5" fill="#5c6378">If the ETF price drifts above NAV, APs create units and sell them; if below, they buy and redeem. That arbitrage keeps price ≈ NAV.</text>
+  </svg>
+  <div class="stat">
+    <div><b>$23.1tn</b>global ETF assets, end-July 2026, a record (ETFGI)</div>
+    <div><b>$2.59tn</b>global active ETF assets; $590bn inflows in 7 months vs $323bn a year earlier</div>
+    <div><b>$3.97tn</b>European ETF assets, end-Aug 2026, up ~23% this year</div>
+    <div><b>39%</b>iShares' share of the European ETF market; J.P. Morgan dominates European active ETFs</div>
+  </div>
+  <p class="small"><b>The US share-class breakthrough:</b> the SEC granted Dimensional relief on <b>17 Nov 2025</b> to add ETF share classes to mutual funds, signalled approval for about 30 more firms in December 2025, and the remaining trading and listing approvals followed by April 2026. Law firm K&amp;L Gates said share-class ETFs were "ready to go live". In Europe, 36 active ETF launches and zero closures in Q1 2026 show US managers piling in.</p>
+  <div class="debate">
+    <div class="bull"><b class="h">Bull case</b>The active ETF is the "rescue wrapper" for active management: cheaper, transparent, and easy to use in platforms and model portfolios. Share classes let incumbents defend their assets.</div>
+    <div class="bear"><b class="h">Bear case</b>In Europe the big US tax advantage of ETFs largely doesn't apply. Active ETFs cannibalise higher-fee funds. The market is concentrated (the top 3 hold ~30% of active ETF assets), and many launches won't reach scale.</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> European active ETF launches accelerate; US share-class conversions begin, with pressure for UK/European equivalents; model portfolios built increasingly from ETFs. <b>5+ years:</b> the ETF becomes the <b>default retail wrapper in Europe</b> as platforms and app-based brokers grow.</div>
+  <div class="watch">Active share of European ETF flows · iShares vs J.P. Morgan market share · any FCA statement on ETF share classes (none found yet)</div>
+  <div class="sowhat">Expect wealth managers and model-portfolio builders to ask "is there an ETF version?" Understand primary vs secondary market liquidity and bid-offer spreads.</div>
+  <div class="src">Sources: <a href="https://marketsmedia.com/global-etf-assets-reach-record-23-1-trillion/">ETFGI global</a> · <a href="https://www.marketsmedia.com/active-etf-assets-reach-record/">ETFGI active</a> · <a href="https://www.marketsmedia.com/etf-assets-in-europe-approach-4-trillion/">European ETFs</a> · <a href="https://www.morningstar.com/en-gb/business/insights/blog/european-active-etf-market-trends">Morningstar European active ETFs</a> · <a href="https://40actblog.sewkis.com/blog/sec-issues-order-for-dfa-exemptive-application-opening-the-door-to-etf-share-classes">SEC–DFA order</a> · <a href="https://natlawreview.com/article/united-states-last-leg-sec-extends-trading-relief-share-class-etfs">K&amp;L Gates</a></div>
+</section>
+
+<section class="page im" id="b6">
+  <div class="kicker"><span>Part B · Investment Management · Theme 6</span><a href="#contents">↑ Contents</a></div>
+  <h2>B6 · UK pensions: megafunds, the Mansion House Accord and LGPS pools</h2>
+  <div class="box zero small"><b>From zero:</b> most UK workers save in a <b>DC</b> workplace pension, usually invested in the provider's "default fund". The government believes the market has too many small schemes, focused too much on low cost, and that the 86 council pension funds (the <b>LGPS</b>) are too small. It wants <b>bigger schemes investing more in UK private assets</b> (infrastructure, housing, growing companies). For asset managers, this changes who their clients are.</div>
+  <table>
+    <tr><th style="width:24%">Policy</th><th>What it does</th></tr>
+    <tr><td><b>Pension Schemes Act 2026</b> (Royal Assent 29 Apr 2026)</td><td>Multi-employer DC schemes need <b>£25bn in a single main default fund by 2030</b> (to 2035 if £10bn+ with a credible plan). Small pots are consolidated automatically. A reserve <b>"mandation" power</b> could require up to 10% in private markets (5% UK), usable no earlier than 1 Jan 2028.</td></tr>
+    <tr><td><b>Mansion House Accord</b> (13 May 2025)</td><td>17 providers (including Aviva, L&amp;G, Nest, Royal London, Phoenix) pledged <b>at least 10% of DC defaults in private markets by 2030, with at least 5% in the UK</b>, subject to fiduciary duty.</td></tr>
+    <tr><td><b>LGPS "Fit for the Future"</b></td><td>Eight pools cut to <b>six</b>. ACCESS and Brunel were rejected and their funds moved. Pools had to be FCA-authorised and take over asset management by 31 Mar 2026.</td></tr>
+    <tr><td><b>Value for Money framework</b> (consultation Jan 2026)</td><td>Public <b>red / amber / light green / dark green</b> ratings of DC schemes on cost, performance and service. First assessments targeted for 2028.</td></tr>
+  </table>
+  <div class="stat">
+    <div><b>3.3%</b>UK private-market allocation at end-2025 (£11.1bn) vs the 5% target (first Accord report, 21 Oct 2026)</div>
+    <div><b>£25bn</b>L&amp;G's Lifetime Advantage Funds hit the megafund size and passed 10% private markets (May 2026)</div>
+    <div><b>−15%</b>occupational DC schemes fell to 790 while assets rose 22% to £249bn (TPR, May 2026)</div>
+    <div><b>83%</b>of those assets sit in master trusts (£208bn)</div>
+  </div>
+  <p class="small">Fidelity's FutureWise also passed £25bn (from £6.5bn in 2022). Of the UK private assets in the first Accord report, most is <b>property (£8bn)</b>, with infrastructure £1.3bn, private credit £0.9bn and private equity only £0.5bn. Venture and growth capital, the government's real aim, is the smallest piece.</p>
+  <div class="debate">
+    <div class="bull"><b class="h">Bull case</b>Scale lowers costs and lets schemes build in-house teams and access private markets, as in Australia and Canada. L&amp;G and Fidelity reached £25bn quickly.</div>
+    <div class="bear"><b class="h">Bear case</b>Mandation threatens fiduciary duty. The UK may lack enough good investable deals. A handful of giant buyers creates a "massive concentration of power" and brutal fee negotiations. LGPS transition costs exceed £100m by one estimate.</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> master trust mergers; Value for Money rules finalised before 2028; UK allocation creeping from 3.3% towards 5%; LGPS pools cutting external managers. A possible use of mandation after 1 Jan 2028 if progress stalls. <b>5+ years:</b> perhaps 10–20 DC megafunds, with a standard 5%+ UK private-assets sleeve.</div>
+  <div class="watch">The annual Accord progress report · TPR scheme counts · LGPS pool manager-selection news · final VFM rules · any government move towards mandation</div>
+  <div class="opinion">Should government be able to direct where your pension is invested, even partly? This is one of the most contested questions in UK finance. Have a reasoned view: e.g. "voluntary targets backed by better deal supply are better than mandation, because fiduciary duty must come first."</div>
+  <div class="sowhat">Institutional distribution is now a <b>"few big doors"</b> game. Each mandate won or lost is huge. Learn the six LGPS pools, the ~10 leading master trusts and the consultants (Mercer, Aon, LCP, Isio, Hymans Robertson).</div>
+  <div class="src">Sources: <a href="https://gateleyplc.com/insight/article/landmark-pension-schemes-bill-receives-royal-assent/">Pension Schemes Act</a> · <a href="https://www.investmentweek.co.uk/news/4413503/pension-providers-target-allocation-private-markets-mansion-house-accord">Mansion House Accord</a> · <a href="https://www.insurancebusinessmag.com/uk/news/breaking-news/mansion-house-signatories-hold-11-1-billion-in-uk-private-markets-594288.aspx">First Accord report</a> · <a href="https://group.legalandgeneral.com/newsroom/press-releases/2026/5/lgs-lifetime-advantage-funds-hits-25bn-and-surpasses-10-private-markets-allocation/">L&amp;G £25bn</a> · <a href="https://www.professionalpensions.com/news/4527073/master-trusts-dominate-dc-market-tpr">TPR data</a> · <a href="https://www.osborneclarke.com/insights/uk-government-responds-fit-future-consultation-local-government-pension-scheme">LGPS pooling</a> · <a href="https://www.mayerbrown.com/en/insights/publications/2026/01/value-for-money-better-retirement-outcomes-and-greater-transparency-further-consultation-on-new-framework-for-dc-pension-schemes">VFM</a></div>
+</section>
+
+<section class="page im" id="b7">
+  <div class="kicker"><span>Part B · Investment Management · Theme 7</span><a href="#contents">↑ Contents</a></div>
+  <h2>B7 · Wealth, model portfolios and the UK retail-investing push</h2>
+  <div class="box zero small"><b>From zero:</b> UK individuals increasingly invest through (a) financial advisers who outsource to <b>model portfolio services (MPS)</b>, ready-made portfolios run centrally on platforms; (b) investment <b>platforms</b> such as Hargreaves Lansdown and AJ Bell; and (c) app-based brokers. The government wants more people to move savings from cash into investments, and 2025–27 brings a wave of reforms to make that happen.</div>
+  <div class="stat">
+    <div><b>£190bn</b>UK MPS assets, up 32% in a year, heading past £200bn (NextWealth)</div>
+    <div><b>25%</b>of MPS assets held by just two firms, Quilter WealthSelect and Tatton</div>
+    <div><b>61%</b>of global AUM growth 2020–25 came from individual investors (BCG)</div>
+    <div><b>18m</b>people could be offered "targeted support" within a decade (FCA estimate)</div>
+  </div>
+  <h3>The UK reform stack</h3>
+  <table>
+    <tr><th style="width:26%">Reform</th><th>What it does</th><th style="width:15%">When</th></tr>
+    <tr><td><b>Targeted support</b></td><td>A new regulated activity: firms can make ready-made suggestions to <i>groups</i> of similar consumers without full personalised advice. Aims to close the "advice gap".</td><td>Live 6 Apr 2026</td></tr>
+    <tr><td><b>Cash ISA limit</b></td><td>For under-65s, the cash ISA limit falls to <b>£12,000</b> within the unchanged £20,000 ISA allowance (Budget, Nov 2025). The rest can go into stocks &amp; shares.</td><td>6 Apr 2027</td></tr>
+    <tr><td><b>Risk warnings review</b></td><td>An IA-led review (April 2026) recommends contextual risk explanations instead of scary boilerplate warnings</td><td>2026</td></tr>
+    <tr><td><b>Consumer Composite Investments (CCI)</b></td><td>Replaces PRIIPs/UCITS key information documents with a new UK disclosure format</td><td>From 6 Apr 2026; transition to Jun 2027</td></tr>
+  </table>
+  <div class="debate">
+    <div class="bull"><b class="h">Bull case</b>Targeted support + cash ISA reform + better disclosure + friendlier risk warnings could finally shift UK cash savers into investing. Platforms and MPS give scalable distribution, and fund groups that get onto model portfolios win big flows.</div>
+    <div class="bear"><b class="h">Bear case</b>MPS concentration means a handful of gatekeepers squeeze fees and favour passive/ETF building blocks. Targeted support may be slow to take off (capital requirements, complaint liability). The cash ISA change is modest, and over-65s are exempt.</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> the first targeted-support propositions from banks, platforms and pension providers; more asset managers launching their <i>own</i> model portfolios; private assets entering MPS and ISAs via LTAFs. <b>5+ years:</b> model portfolios become the dominant retail route, and asset managers that don't own models risk becoming mere <b>"component suppliers"</b>.</div>
+  <div class="watch">NextWealth MPS data · the cash vs stocks &amp; shares ISA split after April 2027 · targeted-support authorisations · platform "best buy" list inclusions</div>
+  <div class="opinion">If two model portfolio firms control a quarter of the market, who has the power: the fund manager or the gatekeeper? What should a mid-sized fund manager do: fight for shelf space, or build its own models?</div>
+  <div class="sowhat">"Gatekeepers" now means DFM/MPS research teams and platform shortlist teams, not just individual advisers. Understand the Consumer Duty value narrative: wholesale clients need evidence that your fund is fair value.</div>
+  <div class="src">Sources: <a href="https://www.professionaladviser.com/news/4522944/mps-assets-set-surpass-200bn-growth-continues">NextWealth MPS</a> · <a href="https://www.freeths.co.uk/insights-events/legal-articles/2026/targeted-support-and-the-advice-gap-what-the-new-regime-means-for-pensions-and-investment-firms/">Targeted support</a> · <a href="https://moneyweek.com/personal-finance/cash-isas/cash-isa-limit-allowance-changes">Cash ISA change</a> · <a href="https://www.theia.org/industry-policy-and-current-initiatives/risk-warnings-review">IA risk warnings review</a> · <a href="https://www.pwc.co.uk/industries/financial-services/understanding-regulatory-developments/regulatory-insights-snapshot-briefings/transcript-fca-sets-out-measures-to-boost-retail-investment.html">PwC on CCI</a></div>
+</section>
+
+<section class="page im" id="b8">
+  <div class="kicker"><span>Part B · Investment Management · Theme 8</span><a href="#contents">↑ Contents</a></div>
+  <h2>B8 · Tokenisation and the new fund plumbing</h2>
+  <div class="box zero small"><b>From zero:</b> <b>tokenisation</b> means recording ownership of fund units (or bonds, or cash) on a blockchain-style shared ledger, as a digital "token". The promise: near-instant settlement, 24/7 transfers, lower admin costs, and "programmable" features, e.g. using a tokenised money market fund as collateral. Tokenised <b>money market funds</b> (MMFs) are the first real use case, because they act like interest-earning digital cash.</div>
+  <div class="grid2">
+    <div class="box b1 small"><b>Traditional fund dealing:</b> investor → platform → transfer agent → fund register, with each step reconciled separately and settlement taking days.<br><br><b>Tokenised / "Direct-to-Fund":</b> the investor's holding is a token on a shared ledger, and the register <i>is</i> the ledger. Fewer intermediaries and faster settlement.</div>
+    <div class="box b1 small"><b>Why it matters:</b> settlement speed, collateral efficiency (a tokenised MMF can be pledged instantly) and cheaper registers. <b>Why it's hard:</b> legal ownership, custody rules, interoperability between different blockchains, and liquidity split across platforms.</div>
+  </div>
+  <h3>UK developments</h3>
+  <table>
+    <tr><th style="width:26%">Event</th><th>Detail</th></tr>
+    <tr><td><b>FCA PS26/7</b> (30 Apr 2026)</td><td>Allows an optional <b>Direct-to-Fund</b> dealing model and guidance on keeping fund registers on a ledger. Part of a wider tokenisation roadmap.</td></tr>
+    <tr><td><b>L&amp;G</b></td><td>Tokenised its <b>£50bn</b> money market fund range via Calastone, live 15 Apr 2026</td></tr>
+    <tr><td><b>Schroders</b></td><td>Tokenised USD money market share class approved in Ireland (June 2026), using J.P. Morgan's Kinexys</td></tr>
+    <tr><td><b>Aviva Investors</b></td><td>Tokenised USD liquidity fund class launched July 2026</td></tr>
+    <tr><td><b>DIGIT</b></td><td>The UK's first digital government bond: lead banks appointed 6 Oct 2026; first issue expected Q1 2027</td></tr>
+    <tr><td><b>T+1 settlement</b></td><td>UK shares move from two-day to <b>one-day settlement on 11 Oct 2027</b>, aligned with the EU. This forces automation of fund dealing and FX funding.</td></tr>
+  </table>
+  <div class="stat">
+    <div><b>~$12bn</b>tokenised Treasury/MMF assets in 2026 (rwa.xyz-based estimates, secondary)</div>
+    <div><b>$715bn</b>tokenised fund AUM by 2030 (PwC forecast)</div>
+    <div><b>$14tn</b>tokenised real-world assets by 2030 (BCG forecast)</div>
+    <div><b>4 of top 5</b>UK managers have taken concrete tokenisation steps (Markets Media)</div>
+  </div>
+  <div class="debate">
+    <div class="bull"><b class="h">Bull case</b>Cheaper transfer agency and operations, new distribution to digital wallets and crypto-native investors, money market tokens as collateral, and fractional access to private markets.</div>
+    <div class="bear"><b class="h">Bear case</b>Tiny so far (~$12bn against $147tn of industry AUM). It largely replicates what existing networks like Calastone already do. Use cases beyond money market funds are unproven, and liquidity is fragmented.</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> Direct-to-Fund pilots, more tokenised MMF share classes, the DIGIT issue, and T+1 operational changes in 2027. <b>5+ years:</b> tokenised registers could become standard for <i>new</i> funds; fractional private-markets access is possible.</div>
+  <div class="opinion">Notice the gap between forecasts ($715bn–$14tn by 2030) and reality (~$12bn today). How would you judge whether tokenisation is a revolution or a slow plumbing upgrade? Hint: watch whether money market tokens get accepted as collateral by major clearing houses.</div>
+  <div class="sowhat">Know whether your firm has tokenised share classes. Treasury and institutional cash clients may ask. Be ready to explain what T+1 means for dealing and settlement.</div>
+  <div class="src">Sources: <a href="https://www.fca.org.uk/publications/policy-statements/ps26-7-progressing-fund-tokenisation">FCA PS26/7</a> · <a href="https://www.ledgerinsights.com/uks-legal-general-asset-management-tokenizes-mmfs-via-calastone/">L&amp;G tokenisation</a> · <a href="https://www.marketsmedia.com/u-k-asset-managers-progress-fund-tokenization/">UK managers</a> · <a href="https://www.fow.com/insights/uk-to-pilot-digit-issuance-in-q1-2027-along-with-hsbc-lseg">DIGIT</a> · <a href="https://www.thetradenews.com/uk-taskforce-publishes-blueprint-for-t1-transition/">T+1 blueprint</a></div>
+</section>
+
+<section class="page im" id="b9">
+  <div class="kicker"><span>Part B · Investment Management · Theme 9</span><a href="#contents">↑ Contents</a></div>
+  <h2>B9 · AI in asset management, specifically</h2>
+  <div class="box zero small"><b>From zero:</b> "AI" is too vague to be useful, so be precise. <b>Generative AI</b> drafts, summarises and codes. <b>Agentic AI</b> plans and carries out multi-step tasks using tools, e.g. "generate a trading signal, code it, test it on historical data, write it up". In asset management, most of the money from AI is in <b>operations, distribution and reporting</b>, not in picking winning stocks.</div>
+  <table>
+    <tr><th style="width:30%">Where AI is being applied</th><th>Evidence / example</th></tr>
+    <tr><td><b>Investment research (quant)</b></td><td><b>Man Group's "AlphaGPT"</b>: an agentic system that generates, codes and backtests quant signals. "Several dozen" signals approved for live trading with human checkpoints (Bloomberg, Jul 2025). Man itself flags hallucination and "drift" risks.</td></tr>
+    <tr><td><b>Operations</b></td><td>BCG: <b>55–65% of operations capacity</b> could be freed by agentic AI. Reconciliations, data quality, KYC and onboarding are prime targets.</td></tr>
+    <tr><td><b>Distribution &amp; reporting</b></td><td>RFP and DDQ drafting, client reporting, fund commentary. Secondary reports of BCG analysis suggest 35–50% of distribution capacity could be freed (unverified).</td></tr>
+    <tr><td><b>Whole firm</b></td><td>BCG: <b>25–35% cost reduction within 3–5 years</b>, serving 3–5× more clients per person. McKinsey: 25–40% savings for an illustrative $500bn manager, but <b>only with end-to-end workflow redesign</b>, not scattered experiments.</td></tr>
+  </table>
+  <div class="stat">
+    <div><b>73%</b>of firms use AI for operational efficiency; 68% in the investment process (Mercer, May 2026)</div>
+    <div><b>−9%</b>Man Group headcount (excluding acquisitions) while building AI</div>
+    <div><b>26×</b>some firms pay 26 times more than peers for comparable index data (Substantive Research)</div>
+    <div><b>80%</b>of buy-side firms expect market-data spending to rise (Coalition Greenwich)</div>
+  </div>
+  <p class="small"><b>The hidden constraint is data cost.</b> AI needs clean, licensed data, and the big index providers (MSCI, FTSE Russell, S&amp;P) have pricing power. <b>The second-order effect</b> is that AI disrupting software companies became a <i>credit risk</i> in private credit (B2). AI shows up in asset management both as a tool and as an investment risk.</p>
+  <div class="debate">
+    <div class="bull"><b class="h">Bull case</b>A once-in-a-generation margin reset: 25–40% of costs. Personalisation at scale, and faster RFP and reporting turnaround, so smaller teams serve more clients.</div>
+    <div class="bear"><b class="h">Bear case</b>Past tech spending didn't raise productivity (McKinsey). Savings get competed away into lower fees. Hallucinations in client-facing material breach Consumer Duty and marketing rules. Junior roles hollow out, damaging the talent pipeline.</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> agentic tools in RFPs, client reporting, fund commentary, onboarding and reconciliations; flat or falling headcount in operations, client service and junior research. <b>5+ years:</b> operating models rebuilt around a smaller core; distribution roles shift to <b>relationships plus judgement</b>.</div>
+  <div class="watch">Cost/income ratios · headcount disclosures · AI mentioned alongside <i>specific</i> savings in results · FCA statements on AI in advice and marketing</div>
+  <div class="opinion"><b>My take:</b> the juniors most exposed are those whose job is "assemble the pitch book, fill in the DDQ, write the factsheet commentary". The ones who thrive will <b>use the tools, check their output and own the client relationship</b>. Ask yourself which side of that line your skills sit on.</div>
+  <div class="sowhat">In interviews, avoid saying "AI will change everything". Say instead: "AI is cutting the cost of producing client materials, so the value moves to accuracy, judgement and the relationship itself."</div>
+  <div class="src">Sources: <a href="https://web-assets.bcg.com/0a/ee/205f2e4f4265ae746ce204323a1f/executive-perspectives-ai-first-companies-asset-management-2.pdf">BCG AI-first asset management</a> · <a href="https://www.bloomberg.com/news/articles/2025-07-10/man-group-says-agentic-ai-is-now-devising-quant-trading-signals">Bloomberg on Man AlphaGPT</a> · <a href="https://www.man.com/insights/what-ai-can-do-for-alpha">Man Group</a> · <a href="https://www.marketsmedia.com/fund-managers-tech-spending-may-not-lead-to-higher-productivity">McKinsey via Markets Media</a> · <a href="https://www.finextra.com/newsarticle/41935/some-firms-are-paying-over-26-times-more-than-peers-for-index-data">Index data costs</a> · <a href="https://www.efinancialcareers.co.uk/news/man-group-pay-ai">Man headcount</a></div>
+</section>
+
+<section class="page im" id="b10">
+  <div class="kicker"><span>Part B · Investment Management · Theme 10</span><a href="#contents">↑ Contents</a></div>
+  <h2>B10 · Trust: valuations, ESG and stewardship</h2>
+  <div class="box zero small"><b>From zero:</b> trust is the product in investment management (Guide B5). Right now trust is being tested in four places: <b>Are private-asset prices real?</b> <b>Are fees fair?</b> <b>Are "sustainable" funds what they claim?</b> And <b>should asset managers take positions on climate at all</b>, given the political backlash, especially in the US?</div>
+  <table>
+    <tr><th style="width:24%">Issue</th><th>What happened</th></tr>
+    <tr><td><b>Private-market valuations</b></td><td>The FCA reviewed 36 firms (March 2025). It found conflicts of interest not fully identified, <b>especially where fees depend on valuations</b> (higher valuations mean higher fees), weak record-keeping and poor ad hoc revaluation processes. A follow-up review of private-markets conflicts is planned.</td></tr>
+    <tr><td><b>Fair value</b></td><td>Consumer Duty and annual Assessment of Value reports force firms to justify fees. The FCA is now simplifying the reporting ("Consumer Duty 2.0").</td></tr>
+    <tr><td><b>Sustainability labels (SDR)</b></td><td>About <b>150 labelled funds</b> by October 2025, short of the 200+ expected. All are active funds.</td></tr>
+    <tr><td><b>ESG flows</b></td><td>Global sustainable funds had <b>$84bn net outflows in 2025</b>, the first annual outflow since tracking began (Morningstar). Europe returned to inflows in Q1 2026, but the US saw its 14th straight quarter of outflows.</td></tr>
+    <tr><td><b>Net Zero Asset Managers</b></td><td>Suspended January 2025 after BlackRock left. Relaunched February 2026 with 250 signatories (down from ~330), dropping references to 2050 and 1.5°C. None of the nine largest managers are members.</td></tr>
+    <tr><td><b>US anti-ESG litigation</b></td><td><b>Texas v. BlackRock</b>: antitrust claims that big managers used climate commitments to restrict coal output. Vanguard settled (Feb 2026); BlackRock and State Street continue.</td></tr>
+    <tr><td><b>UK Stewardship Code 2026</b></td><td>In force 1 Jan 2026. Principles cut from 12 to 6, with less reporting and a refocus on "value creation". About 300 signatories representing ~£50tn.</td></tr>
+  </table>
+  <div class="debate">
+    <div class="bull"><b class="h">Bull case</b>The UK and EU are keeping their sustainability regimes, and labels add credibility. Europe has returned to ESG inflows. Valuation scrutiny will make private markets more trustworthy, and that will help them grow.</div>
+    <div class="bear"><b class="h">Bear case</b>US legal risk makes collective climate action an antitrust exposure. Labels are under-used, and ESG is becoming a niche product. Fee-linked valuation conflicts and stale marks (B2) undermine confidence in private markets.</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> FCA private-markets conflicts review; simpler Assessment of Value; DC Value for Money ratings from 2028; continued US litigation. ESG <b>rebranded</b> as "transition", "resilience" or "stewardship". <b>5+ years:</b> standardised valuation disclosure for retail private funds; stewardship judged on outcomes rather than pledges.</div>
+  <div class="opinion">Insiders now argue about whether ESG was ever a <b>product category</b> or simply a <b>risk-management discipline</b> that every fund should use. Where do you stand? Either answer is fine if you can defend it.</div>
+  <div class="sowhat">Never overclaim on sustainability or liquidity. The FCA's anti-greenwashing rule and Consumer Duty apply to what you say in meetings and emails. Know your fund's SDR label, or why it doesn't have one.</div>
+  <div class="src">Sources: <a href="https://www.fca.org.uk/publications/multi-firm-reviews/private-market-valuation-practices/printable/print">FCA valuation review</a> · <a href="https://www.morningstar.com/sustainable-investing/esg-funds-2025-closes-with-continued-outflows-amid-persistent-headwinds">Morningstar ESG flows</a> · <a href="https://www.investmentweek.co.uk/news/4526140/net-zero-asset-managers-initiative-relaunches-250-signatories">NZAM relaunch</a> · <a href="https://www.climatecasechart.com/collections/texas-v-blackrock-inc-_c94f1f">Texas v. BlackRock</a> · <a href="https://frc.org.uk/news-and-events/news/frc-overhauls-the-investor-stewardship-code-to-focus-on-value-creation-reducing-burdens-and-enhanced-engagement-between-market-participants">FRC Stewardship Code</a> · <a href="https://www.rsmr.co.uk/rsmr-connected/industry-insights/fidelity/one-year-on-how-sdr-has-reshaped-the-uk-market-for-sustainable-funds">SDR one year on</a></div>
+</section>
+
+<section class="page im" id="b11">
+  <div class="kicker"><span>Part B · Investment Management · Theme 11</span><a href="#contents">↑ Contents</a></div>
+  <h2>B11 · Markets: concentration, the dollar, oil and gilts</h2>
+  <div class="box zero small"><b>From zero:</b> because ~80% of recent revenue growth came from markets (B0), what happens in markets <i>is</i> the business outlook. Four market stories dominate client conversations in 2026. Each connects to a concept from Guide Part A.</div>
+  <div class="grid2">
+    <div class="box b2 small"><h4>1 · US concentration</h4>The top 10 stocks make up roughly <b>37–41% of the S&amp;P 500</b>, a record above the ~27% dot-com peak. A "global tracker" fund is roughly 70% US and heavily exposed to about 10 technology companies. Concept: <b>diversification</b> (Guide A3). A passive fund can be far less diversified than it looks.</div>
+    <div class="box b2 small"><h4>2 · The dollar</h4>The US dollar index fell <b>10.8% in the first half of 2025</b>, its worst first half since 1973, after the tariff shock ("Sell America"). For a UK investor, a falling dollar shrinks US returns in pounds. Concept: <b>currency risk</b>, and why "hedged share classes" exist.</div>
+    <div class="box b2 small"><h4>3 · The 2026 oil shock</h4>The Middle East conflict and Strait of Hormuz disruption cut flows through the strait from ~21.6m to ~4.9m barrels a day (EIA). Brent crude peaked at about <b>$126</b> in April 2026 and was back above $100 in September. Concept: <b>inflation</b> (Guide A2). Energy shocks raise prices and interest-rate expectations.</div>
+    <div class="box b2 small"><h4>4 · UK gilts</h4>The 10-year gilt yield touched <b>5.295% in September 2026</b>, the highest since 2007. The 30-year passed <b>6%</b> (single source), the highest since 1998. The Bank of England held rates at 3.75% with CPI at 3.1%. Concept: <b>bond prices fall when yields rise</b> (Guide A2).</div>
+  </div>
+  <div class="box b1 small"><b>Why gilts matter to pension clients:</b> DB pension schemes hold lots of gilts to match future payments (Guide B4, LDI). Higher yields <i>reduce</i> the value placed on their future liabilities, improving funding, but sudden spikes can trigger collateral calls, as in the <b>2022 LDI crisis</b>. Schemes hold more collateral now, but rapid long-end moves revive that comparison. Fewer DB schemes buying long gilts also means structurally weaker demand for them.</div>
+  <h3>What managers are doing about it</h3>
+  <ul class="small">
+    <li>Pushing <b>diversification away from the US</b>: international and European equity funds, "equal-weight" products, currency-hedged share classes.</li>
+    <li>Selling <b>"income is back"</b>: locking in ~5% gilt yields; money market and short-duration bond funds (£5.8bn into UK MMFs in 2025).</li>
+    <li>Pitching <b>real assets and infrastructure</b> as inflation hedges.</li>
+  </ul>
+  <div class="debate">
+    <div class="bull"><b class="h">Opportunity</b>High yields make bonds attractive for the first time in a decade. Volatility rewards active managers and good advice. Diversified, global and real-asset products have a strong story.</div>
+    <div class="bear"><b class="h">Risk</b>A stagflationary energy shock plus a fiscal risk premium on gilts. Passive trackers concentrated in a few US stocks. Industry revenue is highly exposed to a market fall.</div>
+  </div>
+  <div class="watch">The Bank of England's next rate decisions · Brent crude · top-10 weight of the S&amp;P 500 · the dollar index · gilt auction demand ("cover ratios") · the market's reaction to the UK Budget</div>
+  <div class="sowhat">Be able to explain in plain English: why a global tracker is a concentrated US tech bet; what a 6% 30-year gilt means for a pension client; and the case for diversifiers. That's real client conversation material.</div>
+  <div class="src">Sources: <a href="https://www.apolloacademy.com/wp-content/uploads/2026/01/011326-MarketConcentration.pdf">Apollo on concentration</a> · <a href="https://finance.yahoo.com/news/dollar-posted-worst-first-half-153518559.html">Dollar H1 2025</a> · <a href="https://www.spglobal.com/energy/en/news-research/latest-news/crude-oil/081126-us-eia-raises-brent-outlook-to-87b-on-hormuz-shipping-constraints">S&amp;P Global / EIA on Hormuz</a> · <a href="https://www.globalbankingandfinance.com/bank-england-hold-rates-energy-shock-stirs-talk-hike/">BoE hold</a> · <a href="https://www.fxstreet.com/analysis/uk-30-year-gilts-hit-578-the-highest-since-1998-what-is-being-priced-in-202605051937">30-year gilts</a> · <a href="https://www.aberdeeninvestments.com/en-gb/professional/insights-and-research/ultra-long-gilts-are-under-pension-scheme-scrutiny">aberdeen on ultra-long gilts</a></div>
+</section>
+
+<section class="page im" id="b12">
+  <div class="kicker"><span>Part B · Investment Management · Theme 12</span><a href="#contents">↑ Contents</a></div>
+  <h2>B12 · Operating models, outsourcing and investment trust activism</h2>
+  <div class="box zero small"><b>From zero:</b> historically, each asset manager ran its own patchwork of systems for trading, risk, accounting and reporting (Guide B8). Now firms buy <b>"front-to-back" platforms</b>, one integrated system from portfolio management to accounting, or outsource middle and back office to custodians. The aim is lower cost and a <b>single source of clean data</b>, which AI depends on.</div>
+  <table>
+    <tr><th style="width:24%">Platform / move</th><th>Detail</th></tr>
+    <tr><td><b>BlackRock Aladdin</b></td><td>Technology revenue about $2bn in 2025 (+24% including Preqin). Annual contract value growing 12–16%. BlackRock says clients are consolidating onto fewer integrated platforms. It is both a <b>competitor and a supplier</b> to other managers.</td></tr>
+    <tr><td><b>State Street Alpha</b></td><td>A front-to-back platform combining custody and investment technology</td></tr>
+    <tr><td><b>Infrastructure M&amp;A</b></td><td>SS&amp;C–Calastone (£766m) and Clearwater's $8.4bn take-private: the plumbing is consolidating too</td></tr>
+    <tr><td><b>Cost programmes</b></td><td>Schroders £150m savings; BlackRock three rounds of cuts in 18 months; Man Group headcount −9%</td></tr>
+  </table>
+  <div class="debate">
+    <div class="bull"><b class="h">Bull case</b>Standard platforms cut cost, give clean data for AI, and make it faster to launch ETFs and tokenised share classes.</div>
+    <div class="bear"><b class="h">Bear case</b>Vendor lock-in (relying on a competitor's technology), migration projects that overrun, loss of in-house know-how, and rising data costs.</div>
+  </div>
+
+  <h3>UK investment trusts: the activist battle</h3>
+  <p class="small"><b>From zero:</b> an <b>investment trust</b> is a listed company that invests in other assets (Guide B9). Its shares can trade below the value of its assets: a <b>discount</b>. In early 2025, US hedge fund <b>Saba Capital</b> (Boaz Weinstein) requisitioned meetings at seven UK trusts, arguing that boards weren't fixing wide discounts. Shareholders voted the proposals down. At Edinburgh Worldwide, 98.4% (2025) and 92.7% (2026) of non-Saba votes went against. A second wave pushed for conversion to open-ended funds, and a July 2026 requisition targeted Gore Street Energy Storage.</p>
+  <div class="debate">
+    <div class="bull"><b class="h">Activists are right</b>They force boards to tackle discounts through buybacks, tenders and mergers, which ultimately helps all shareholders.</div>
+    <div class="bear"><b class="h">Activists are wrong</b>Short-term arbitrage that destroys permanent capital, the ideal structure for illiquid assets, and a natural home for UK private-markets exposure.</div>
+  </div>
+  <div class="opinion">Connect the dots: Woodford (2019) showed open-ended funds holding illiquid assets can break. Activists now push closed-ended trusts to <i>become</i> open-ended. What's the risk? Insiders who make this link sound genuinely expert.</div>
+  <div class="sowhat">Due diligence questionnaires ask about operational resilience, outsourcing and data governance, so understand your firm's technology stack at a high level. If your firm runs trusts, discount control and board engagement are client-facing topics.</div>
+  <div class="src">Sources: <a href="https://www.fundssociety.com/en/news/business/blackrocks-aladdin-revenues-increase-by-13-driven-by-public-and-private-market-tech-solutions/">BlackRock Aladdin revenue</a> · <a href="https://www.businesswire.com/news/home/20241210112395/en/State-Street-Announces-Partnership-with-Harris-Oakmark-for-State-Street-Alpha">State Street Alpha</a> · <a href="https://americanbazaaronline.com/2026/06/17/blackrock-cuts-200-jobs-after-three-rounds-of-layoffs-in-18-months-482960/">BlackRock cuts</a> · <a href="https://moneyweek.com/investments/investment-trusts/saba-comes-for-edinburgh-worldwides-board-again">Saba vs Edinburgh Worldwide</a> · <a href="https://investmentweek.co.uk/news/4409048/saba-capital-launches-round-trust-activism-targeting-transitions-open-structure">Saba second wave</a></div>
+</section>
+
+<section class="page im" id="b13">
+  <div class="kicker"><span>Part B · Investment Management · Synthesis</span><a href="#contents">↑ Contents</a></div>
+  <h2>B13 · Synthesis: think like an asset management insider</h2>
+  <h3>The calendar insiders are watching</h3>
+  <table>
+    <tr><th style="width:24%">Date</th><th>Event</th></tr>
+    <tr><td>Q4 2026</td><td>Nuveen–Schroders completion expected</td></tr>
+    <tr><td>Q1 2027</td><td>First DIGIT digital gilt issue</td></tr>
+    <tr><td>6 Apr 2027</td><td>Cash ISA limit falls to £12,000 for under-65s</td></tr>
+    <tr><td>Jun 2027</td><td>End of transition to Consumer Composite Investments disclosures</td></tr>
+    <tr><td>11 Oct 2027</td><td>UK moves to T+1 settlement</td></tr>
+    <tr><td>From 1 Jan 2028</td><td>Earliest possible use of the pension "mandation" power</td></tr>
+    <tr><td>2028</td><td>First DC Value for Money ratings</td></tr>
+    <tr><td>2030</td><td>£25bn DC megafund deadline; Mansion House Accord targets</td></tr>
+  </table>
+  <h3>Six predictions to test (and argue with)</h3>
+  <div class="qa small">
+    <div class="box b2"><b>Distribution beats performance.</b> With ~80% of growth coming from markets, the managers that win net new money will be those that own or partner with distribution: models, platforms and megafund relationships.</div>
+    <div class="box b2"><b>Private markets grow, but get "listed-fund-style" rules.</b> 2026's gating wave leads to standardised liquidity and valuation disclosure for retail products.</div>
+    <div class="box b2"><b>The squeezed middle disappears.</b> Mid-sized UK active houses get bought, merge or specialise. Expect more Schroders-style deals.</div>
+    <div class="box b2"><b>Active survives in new wrappers.</b> Active ETFs and model-portfolio-friendly share classes become the main growth route for active strategies.</div>
+    <div class="box b2"><b>Client-facing work becomes more consultative.</b> Fewer, larger, more sophisticated clients (megafunds, LGPS pools, MPS gatekeepers) demand expertise, not just relationships.</div>
+    <div class="box b2"><b>AI hollows out production, not judgement.</b> Pitch books, DDQs and commentary get automated, and value shifts to accuracy, trust and the relationship.</div>
+  </div>
+  <div class="box key small"><b>One sentence for your Investment Management answer:</b> <i>"With most of the industry's recent growth coming from rising markets rather than new money, and clients consolidating into fewer, larger buyers, I think the firms that win will be those that understand clients best, which is why the client-facing side interests me most."</i></div>
+  <div class="opinion">Pick the prediction you find most convincing and the one you doubt most. For each, name one piece of evidence from this section. That's the habit of an industry professional: <b>a view, a reason, and the humility to update it</b>.</div>
+</section>
+<section class="chapter ch-s sl" id="s0">
+  <div class="num">C</div>
+  <h1>Sales: the trends</h1>
+  <p>Professional selling is going through its biggest change since the "SDR → AE" assembly line was invented around 2010. AI agents, buyers who don't want to talk to you, new pricing models and a squeeze on efficiency are reshaping who sells, how and how they're paid.</p>
+  <ol style="columns:2">
+    <li><a href="#s1">AI SDRs &amp; the deliverability squeeze</a></li>
+    <li><a href="#s2">The rep-free buyer paradox</a></li>
+    <li><a href="#s3">The assembly line breaks</a></li>
+    <li><a href="#s4">The efficiency regime</a></li>
+    <li><a href="#s5">Seats → usage → outcomes pricing</a></li>
+    <li><a href="#s6">Signals, product-led sales, RevOps</a></li>
+    <li><a href="#s7">Customer success becomes revenue</a></li>
+    <li><a href="#s8">Trust &amp; UK/EU regulation</a></li>
+    <li><a href="#s9">Selling funds: gatekeepers &amp; models</a></li>
+    <li><a href="#s10">Synthesis: think like an insider</a></li>
+  </ol>
+</section>
+
+<section class="page sl" id="s1">
+  <div class="kicker"><span>Part C · Sales · Theme 1</span><a href="#contents">↑ Contents</a></div>
+  <h2>C1 · AI SDRs and the deliverability squeeze</h2>
+  <div class="box zero small"><b>From zero:</b> an <b>SDR</b> (sales development rep) is the entry-level seller who finds prospects, contacts them cold and books meetings for senior sellers (<b>AEs</b>, account executives). An <b>"AI SDR"</b> is software built on a large language model that tries to do that whole loop itself: pull a target list, research each company, write personalised emails, send follow-ups, read replies and book meetings. <b>"Agentic"</b> means it plans and carries out several steps on its own, rather than just drafting text for a human.</div>
+
+  <h3>How it works technically</h3>
+  <div class="flow">
+    <div class="step"><b>Data layer</b>Company and contact data, buying "intent" signals, the CRM</div><div class="arr">›</div>
+    <div class="step"><b>LLM</b>Researches the account and writes personalised copy</div><div class="arr">›</div>
+    <div class="step"><b>Sending engine</b>Rotates many mailboxes and domains to stay under per-inbox limits</div><div class="arr">›</div>
+    <div class="step"><b>Reply classifier</b>Detects interest and books meetings or routes to humans</div>
+  </div>
+  <p class="small"><b>The catch is deliverability.</b> AI SDR economics depend on cheap volume, and the email providers have shut that door. Since <b>February 2024</b>, Google and Yahoo require anyone sending 5,000+ emails a day to authenticate their domain (<b>SPF</b>, <b>DKIM</b> and <b>DMARC</b>, technical records proving the email really comes from you), offer one-click unsubscribe, and keep spam complaints below <b>0.3%</b>. Microsoft announced the same rules for Outlook.com in April 2025, sending non-compliant mail to junk from 5 May 2025. Mass, low-quality outbound now damages the sender's reputation, and that drags down every email the company sends.</p>
+
+  <div class="stat">
+    <div><b>87%</b>of sales organisations use AI (Salesforce State of Sales, Feb 2026)</div>
+    <div><b>10 : 1</b>AI agents vs sellers by 2028, Gartner predicts…</div>
+    <div><b>&lt; 40%</b>…yet fewer than 40% of sellers will say agents improved productivity</div>
+    <div><b>3.4%</b>average cold email reply rate (Instantly 2026 benchmark; others measure under 1%)</div>
+  </div>
+
+  <h3>Real events</h3>
+  <ul class="small">
+    <li><b>11x</b> (a heavily funded AI SDR start-up): TechCrunch reported in March 2025 that it listed customers that had only trialled the product, and that former staff spoke of losing 70–80% of customers. ZoomInfo said it "performed significantly worse than our SDR employees". The CEO stepped down in May 2025.</li>
+    <li><b>Salesforce:</b> rebranded Sales Cloud as "Agentforce Sales" (Dreamforce, October 2025). At Dreamforce 2026 it launched named agents: <b>Piper</b> (an inbound SDR agent) and <b>Hunter</b> (outbound). Agentforce passed a $1.5bn annual run-rate by August 2026 (on a widened definition). HubSpot's "24/7 BDR" Prospecting Agent has 10,000+ activated customers.</li>
+  </ul>
+
+  <div class="debate">
+    <div class="bull"><b class="h">Bull case</b>Agents can work every lead, including the millions nobody ever calls back, at a fraction of the cost. Salesforce's revenue from agents is real money, and high performers are 1.7× more likely to use prospecting agents (Salesforce).</div>
+    <div class="bear"><b class="h">Bear case</b>Gartner's "value ceiling": "beyond a certain point, more AI does not mean more productivity". Bridge Group found 10 of 11 AI use cases rated "hit or miss". Mass AI outbound burns domains and buyer trust. The winners are <i>AI-assisted humans</i>, not autonomous spam.</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> agents shift from cold outbound to <b>inbound response</b> (answering people who already showed interest), research and deal follow-up. Email authentication becomes basic hygiene. <b>5+ years:</b> buyers' AI agents negotiate with sellers' AI agents for routine purchases (Gartner expects agents to intermediate $15 trillion of B2B spending by 2028). Humans concentrate on complex, high-trust, many-stakeholder deals. <b>Watch:</b> agent retention data, Gartner's productivity survey, reply-rate benchmarks.</div>
+  <div class="opinion"><b>My take:</b> the evidence points to <b>augmentation beating automation</b> in outbound sales. The firms getting value use AI to make a human far better prepared, not to replace the human with volume. Ask yourself: if every competitor can send 10,000 "personalised" emails, what becomes scarce? (Genuine relevance and trust.)</div>
+  <div class="sowhat">The cold-email volume game is closing. Your edge is judgement: choosing which accounts and signals matter, writing like a human, and checking what the agents produce. Learn SPF/DKIM/DMARC and CRM hygiene, and you become the person who runs the tools.</div>
+  <div class="src">Sources: <a href="https://www.salesforce.com/news/stories/state-of-sales-report-announcement-2026/">Salesforce State of Sales 2026</a> · <a href="https://www.gartner.com/en/newsroom/press-releases/2025-11-18-gartner-predicts-by-2028-ai-agents-will-outnumber-sellers-by-10x-yet-fewer-than-40-percent-of-sellers-will-report-ai-agents-improved-productivity">Gartner, Nov 2025</a> · <a href="https://techcrunch.com/2025/03/24/a16z-and-benchmark-backed-11x-has-been-claiming-customers-it-doesnt-have">TechCrunch on 11x</a> · <a href="https://techcommunity.microsoft.com/blog/outlook/strengthening-email-ecosystem-outlook%E2%80%99s-new-requirements-for-high%E2%80%90volume-senders/4399730">Microsoft Outlook sender rules</a> · <a href="https://www.salesforce.com/blog/dreamforce-2026-announcements/">Dreamforce 2026</a> · <a href="https://www.bridgegroupinc.com/research/2026-ae-models-motions-metrics">Bridge Group 2026</a></div>
+</section>
+
+<section class="page sl" id="s2">
+  <div class="kicker"><span>Part C · Sales · Theme 2</span><a href="#contents">↑ Contents</a></div>
+  <h2>C2 · The rep-free buyer paradox</h2>
+  <div class="box zero small"><b>From zero:</b> business buyers now research mostly on their own, increasingly by asking ChatGPT-style tools, and many say they'd rather not talk to a salesperson at all. Yet purchases involve more people than ever, and buyers turn to a human to check whether what the AI told them is true. Both statements are backed by data. That contradiction is the paradox.</div>
+
+  <div class="stat">
+    <div><b>61% → 67%</b>of B2B buyers prefer a rep-free experience (Gartner surveys published 2025 and 2026)</div>
+    <div><b>69%</b>turn to a sales rep to <i>validate</i> AI-generated insights (Gartner, May 2026)</div>
+    <div><b>7 → 14</b>buying group size doubles for purchases with genAI features (Forrester 2026)</div>
+    <div><b>54%</b>say AI chatbots are the top influence on their shortlist (G2, March 2026, secondary)</div>
+  </div>
+
+  <h3>The mechanics of the new buying journey</h3>
+  <div class="flow">
+    <div class="step"><b>1 · Ask AI</b>About half of software buyers now start research in an AI chatbot (G2)</div><div class="arr">›</div>
+    <div class="step"><b>2 · Shortlist forms</b>Before any seller is contacted</div><div class="arr">›</div>
+    <div class="step"><b>3 · Committee</b>13 internal stakeholders + 9 external influencers on average (Forrester)</div><div class="arr">›</div>
+    <div class="step"><b>4 · Validate</b>Reps used to check AI claims, proof and ROI</div><div class="arr">›</div>
+    <div class="step"><b>5 · Consensus</b>Procurement decides in 53% of cycles</div>
+  </div>
+  <div class="grid2">
+    <div class="box b3 small"><b>Digital sales room (DSR):</b> a shared microsite for each deal holding the proposal, a joint action plan, security documents and recorded demos, with analytics on who viewed what. It's a tool to help a large buying group agree <i>without</i> the seller being in the room. Gartner published a market guide to DSRs in February 2025.</div>
+    <div class="box b3 small"><b>Answer engine optimisation (AEO):</b> vendors now try to make sure AI chatbots mention and recommend them, because shortlists form before first contact. Gartner advises "modular, agent-ready content" that AI tools can read and quote.</div>
+  </div>
+  <p class="small"><b>The risk of going rep-free:</b> older Gartner data found 43% of buyers reported high regret when buying through self-service, against 26% when a rep was involved. And 73% actively avoid suppliers who send irrelevant outreach, so badly targeted contact is worse than none.</p>
+
+  <div class="debate">
+    <div class="bull"><b class="h">"Rep-free" camp</b>The preference keeps rising (61% → 67%). 94% of buyers use AI in the process (Forrester). Invest in self-serve, DSRs and AEO, and cut field sales.</div>
+    <div class="bear"><b class="h">"Reps matter more" camp</b>69% validate with reps; self-serve buyers regret more; AI-feature purchases <i>double</i> buying groups. Complexity is rising, not falling.</div>
+  </div>
+  <div class="box expert small"><b>The insider synthesis:</b> <i>fewer but higher-stakes human touches</i>. The rep stops being an <b>information source</b> (AI does that) and becomes a <b>validator</b> and <b>consensus builder</b>, the person who reconciles conflicting information and gets 14 people to agree.</div>
+  <div class="predict"><b>1–3 years:</b> sellers are coached to handle buyers who arrive with an AI-generated view. Companies spend on AEO and DSRs. <b>5+ years:</b> buyers' procurement agents query suppliers' agents directly, and the human seller handles exceptions, risk and executive agreement.</div>
+  <div class="opinion">Which do you believe: will buyers <i>need</i> salespeople less, or need a <i>different kind</i> of salesperson? A strong position: "AI commoditises information, so the value of a seller shifts from <b>knowing things</b> to <b>being trusted to verify them</b>."</div>
+  <div class="sowhat">Practise "validation selling": evidence, case studies, ROI maths, and mapping 10+ stakeholders. In interviews, saying "buyers arrive already informed by AI, so my job is to add judgement and build consensus" shows you understand where the job is going.</div>
+  <div class="src">Sources: <a href="https://www.gartner.com/en/newsroom/press-releases/2026-03-09-gartner-sales-survey-finds-67-percent-of-b2b-buyers-prefer-a-rep-free-experience">Gartner, Mar 2026</a> · <a href="https://www.gartner.com/en/newsroom/press-releases/2026-05-20-gartner-survey-finds-sixty-nine-percent-of-b-two-b-buyers-turn-to-sales-reps-to-validate-ai-generated-insights">Gartner, May 2026</a> · <a href="https://gartner.com/en/newsroom/press-releases/2025-06-25-gartner-sales-survey-finds-61-percent-of-b2b-buyers-prefer-a-rep-free-buying-experience">Gartner, Jun 2025</a> · <a href="http://www.forrester.com/blogs/state-of-business-buying-2026/">Forrester State of Business Buying 2026</a> · <a href="https://demandgenreport.com/industry-news/news-brief/half-of-b2b-software-buyers-now-start-their-research-with-ai-chatbots-g2/52737">G2 via Demand Gen Report</a></div>
+</section>
+
+<section class="page sl" id="s3">
+  <div class="kicker"><span>Part C · Sales · Theme 3</span><a href="#contents">↑ Contents</a></div>
+  <h2>C3 · The assembly line breaks, and the entry rung narrows</h2>
+  <div class="box zero small"><b>From zero:</b> since around 2010, software sales has run like a factory line (the "Predictable Revenue" model). Marketing creates leads, SDRs qualify them, AEs close them, and customer success renews them. Each role is specialised, and juniors climb from SDR to AE in about 18 months. That line is now under strain: fewer SDRs, AEs prospecting for themselves ("full-cycle"), targets rising, and new technical roles appearing.</div>
+
+  <h3>The key metrics (learn these formulas)</h3>
+  <div class="gloss">
+    <div><b>Quota attainment</b> = bookings ÷ quota. "% at quota" is the share of reps at 100% or more.</div>
+    <div><b>Pipeline coverage</b> = open pipeline ÷ remaining quota. The target is often 3× or more.</div>
+    <div><b>Sales velocity</b> = (opportunities × win rate × average deal size) ÷ sales cycle in days</div>
+    <div><b>Ramp</b> = months until a new rep is fully productive</div>
+    <div><b>Quota : OTE ratio</b> = annual quota ÷ on-target earnings. Higher means a harder plan.</div>
+    <div><b>Promotion rate</b> = the share of SDRs promoted to AE each year</div>
+  </div>
+
+  <table>
+    <tr><th>Metric (Bridge Group)</th><th>Earlier</th><th>Latest</th><th>What it tells you</th></tr>
+    <tr><td>SDRs hitting quota</td><td>—</td><td><b>60%</b> (2025, lowest on record)</td><td>Harder to book meetings</td></tr>
+    <tr><td>SDR → AE promotion rate</td><td>34% (2020)</td><td><b>16%</b> (2024)</td><td>The classic ladder has halved</td></tr>
+    <tr><td>AEs hitting quota</td><td>51% (2024)</td><td><b>48%</b> (2026)</td><td>Roughly half of sellers miss</td></tr>
+    <tr><td>AE ramp time</td><td>—</td><td><b>6.2 months</b> (record)</td><td>Expensive to train new sellers</td></tr>
+    <tr><td>Experience required for AE hire</td><td>2.7 years (2022)</td><td><b>3.7 years</b></td><td>Entry route narrowing</td></tr>
+    <tr><td>Quota : OTE ratio</td><td>4.2×</td><td><b>4.6×</b></td><td>Quotas rising faster than pay</td></tr>
+    <tr><td>AEs owning renewals / expansion</td><td>~half today's share (2024)</td><td><b>38%</b></td><td>The "full-cycle" seller</td></tr>
+  </table>
+  <p class="small">Elsewhere: a survey of 560+ software companies found <b>36% cut SDR headcount</b> in the past year and only 19% grew it (Emergence Capital via SaaStr, secondary). Stanford researchers (August 2025, payroll data) found a <b>13% relative employment decline for 22–25-year-olds</b> in the most AI-exposed occupations, while older workers were stable. Meanwhile, new hybrid roles are booming: <b>GTM engineers</b> (people who build automated, data-driven prospecting workflows with tools like Clay) and <b>forward-deployed engineers</b> (technical staff embedded with customers).</p>
+
+  <div class="debate">
+    <div class="bull"><b class="h">"The SDR is dead"</b>AI does research and first-touch outreach. Full-cycle AEs plus agents are leaner (Jason Lemkin, Emergence data).</div>
+    <div class="bear"><b class="h">"Only this version of the SDR is dead"</b>Pipeline generated per SDR is <i>up</i> (from $2.83m to $3.78m). Hiring is down across all jobs, not just because of AI. Falling attainment may reflect <b>quota inflation</b> rather than worse sellers.</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> smaller SDR teams working signal-led outbound; more full-cycle AEs; SDRs retraining as GTM engineers; AEs owning expansion. <b>5+ years:</b> a "pod" model of AE + technical specialist + AI agents. The entry rung moves towards technical or operations roles and account management.</div>
+  <div class="watch">Bridge Group's 2027 SDR report · RepVue's quarterly quota-attainment index (around 43% across cloud companies in 2025) · GTM engineer job postings</div>
+  <div class="sowhat">Differentiate with technical go-to-market skills (CRM automation, data, prompt workflows) or deep knowledge of one sector. In interviews, ask: what share of reps hit quota? What is the ramp? How are renewals paid? Those questions signal you understand the business.</div>
+  <div class="src">Sources: <a href="https://www.bridgegroupinc.com/research/2025-sdr-models-metrics-report-the-bridge-group">Bridge Group SDR 2025</a> · <a href="https://www.bridgegroupinc.com/research/2026-ae-models-motions-metrics">Bridge Group AE 2026</a> · <a href="https://repvue.com/cloud-index/2025/Q3">RepVue Cloud Index</a> · <a href="https://keyt.com/stacker-business-economy/2026/08/11/ai-is-reshaping-gtm-careers-especially-at-entry-level/">Emergence/SaaStr (secondary)</a> · <a href="https://www.thestar.com.my/tech/tech-news/2025/08/29/ai-is-already-cutting-jobs---but-only-one-age-group-is-paying-the-price-stanford-study-finds">Stanford "Canaries" (secondary)</a></div>
+</section>
+
+<section class="page sl" id="s4">
+  <div class="kicker"><span>Part C · Sales · Theme 4</span><a href="#contents">↑ Contents</a></div>
+  <h2>C4 · The efficiency regime: growth isn't enough any more</h2>
+  <div class="box zero small"><b>From zero:</b> until 2021, cheap money meant investors rewarded software companies for growing fast, whatever it cost. When interest rates rose in 2022, that flipped. Now companies are judged on <b>how much it costs to win £1 of revenue</b> and <b>how much revenue they keep</b>. This decides how many salespeople get hired, what their targets are and how they're paid.</div>
+
+  <h3>The investor's dashboard (formulas)</h3>
+  <table>
+    <tr><th style="width:24%">Metric</th><th style="width:42%">Formula</th><th>Good benchmark / meaning</th></tr>
+    <tr><td><b>CAC payback</b></td><td>Sales &amp; marketing cost to acquire ÷ (new ARR × gross margin ÷ 12)</td><td>Months to earn back the cost of winning a customer. Median about 16 months.</td></tr>
+    <tr><td><b>Magic number</b></td><td>(Change in quarterly revenue × 4) ÷ prior-quarter S&amp;M spend</td><td>Above ~0.75 is usually "efficient"</td></tr>
+    <tr><td><b>NRR</b></td><td>(Starting ARR + expansion − contraction − churn) ÷ starting ARR</td><td>Above 100% means existing customers alone grow revenue</td></tr>
+    <tr><td><b>GRR</b></td><td>As NRR but without expansion (max 100%)</td><td>Pure retention. The median fell from 88% to 84%.</td></tr>
+    <tr><td><b>Rule of 40</b></td><td>Revenue growth % + profit margin %</td><td>40 or more is "healthy"</td></tr>
+    <tr><td><b>ARR per employee</b></td><td>ARR ÷ full-time staff</td><td>Up 29% to about $193k: firms are doing more with fewer people</td></tr>
+  </table>
+  <div class="box b1 small"><b>Worked example:</b> a company spends £600k on sales and marketing to win £400k of new ARR at an 80% gross margin. Monthly gross profit from those customers = £400k × 0.8 ÷ 12 ≈ £26.7k. CAC payback = £600k ÷ £26.7k ≈ <b>22.5 months</b>, worse than the ~16-month median. That company would cut expensive channels, raise prices or improve conversion.</div>
+
+  <div class="stat">
+    <div><b>20%</b>median SaaS growth, down from 26% (Benchmarkit 2026)</div>
+    <div><b>25%</b>median Rule of 40, up from 15%: more profitable, slower</div>
+    <div><b>87%</b>of enterprises missed 2025 revenue targets despite record AI spend (Clari Labs, secondary)</div>
+    <div><b>~38%</b>leaner go-to-market teams at high-AI-adoption small firms (ICONIQ 2025)</div>
+  </div>
+  <div class="debate">
+    <div class="bull"><b class="h">Bull case</b>AI enables "leaner, flatter" sales organisations with far more revenue per person (ICONIQ: about 2× net new revenue per go-to-market employee at AI-forward firms). Profitability has improved.</div>
+    <div class="bear"><b class="h">Bear case</b>The efficiency came mostly from <b>cuts</b> (R&amp;D fell from 35% to 27% of revenue; headcount down). Growth slowed, and retention (GRR) fell. AI spend isn't yet showing up in revenue (Clari's 87%).</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> boards track ARR per employee and CAC payback over headcount growth. Fewer, more expensive, more productive reps. <b>5+ years:</b> if AI-native firms sustain about 2× revenue per employee, staffing ratios reset permanently, and "how many salespeople do we need?" gets a smaller answer.</div>
+  <div class="watch">Benchmarkit and KeyBanc annual medians · ARR per employee · NRR split by pricing model</div>
+  <div class="sowhat">Learn these formulas. Interviewers increasingly test whether candidates can reason about payback, NRR and pipeline coverage. Your value is measured in <b>efficient pipeline</b>, not activity counts.</div>
+  <div class="src">Sources: <a href="https://www.getaleph.com/blog/2026-saas-benchmarks-takeaways">Benchmarkit 2026 via Aleph</a> · <a href="https://www.joinpavilion.com/resource/b2b-saas-performance-benchmarks">Pavilion benchmarks</a> · <a href="https://www.iconiqcapital.com/growth/reports/state-of-go-to-market-2025">ICONIQ State of GTM 2025</a> · <a href="https://am590theanswer.com/news/business/new-clari-labs-research-reveals-87-of-enterprises-missed-revenue-targets-in-2025/f9d29ac19d3e43eda6171d1182666936">Clari Labs (syndicated)</a></div>
+</section>
+
+<section class="page sl" id="s5">
+  <div class="kicker"><span>Part C · Sales · Theme 5</span><a href="#contents">↑ Contents</a></div>
+  <h2>C5 · Seats → usage → outcomes: the pricing revolution</h2>
+  <div class="box zero small"><b>From zero:</b> software used to be priced "per user per month" (a <b>seat</b>). But if AI agents do the work, customers need fewer human users, so seat revenue shrinks. Vendors are moving to <b>usage</b> pricing (pay per action or credit), <b>outcome</b> pricing (pay per resolved ticket or qualified lead) and <b>hybrid</b> pricing (a base fee plus usage). This changes <i>what</i> a salesperson sells (a business result, not licences) and <i>how they're paid</i> (partly on whether the customer actually uses it).</div>
+
+  <table>
+    <tr><th style="width:20%">Company</th><th>What they did</th><th style="width:30%">Pricing unit</th></tr>
+    <tr><td><b>Salesforce Agentforce</b></td><td>Launched at $2 per conversation (2024). Switched to "Flex Credits" in May 2025, then added pay-as-you-go in August 2025. Pricing changed three times in about a year.</td><td>$0.10 per agent action (20 credits)</td></tr>
+    <tr><td><b>Intercom Fin</b></td><td>An AI customer service agent priced per resolution. Reportedly nearing $100m ARR (secondary).</td><td>$0.99 per resolution; $9.99 per qualified sales lead</td></tr>
+    <tr><td><b>Zendesk</b></td><td>Claimed the first outcome-based pricing in customer service software (August 2024)</td><td>Per automated resolution</td></tr>
+    <tr><td><b>HubSpot</b> (April 2026)</td><td>Moved agents to outcome pricing. CEO: "there is a huge gap between AI output and AI outcomes."</td><td>$0.50 per resolved conversation; $1 per recommended lead</td></tr>
+  </table>
+  <div class="stat">
+    <div><b>21% → 15%</b>companies using seat-based pricing over 12 months (Growth Unhinged 2025)</div>
+    <div><b>27% → 41%</b>hybrid pricing over the same period</div>
+    <div><b>5% → 25%</b>outcome pricing as primary model: today vs expected by 2028</div>
+    <div><b>108% vs 98%</b>NRR for usage-based vs seat-based companies (Benchmarkit)</div>
+  </div>
+  <h3>The mechanics that change a seller's job</h3>
+  <ul class="small">
+    <li><b>Committed-spend contracts:</b> customers pre-buy a pool of credits at a discount, and overage is charged at a higher rate.</li>
+    <li><b>Outcome definitions get contested.</b> What counts as a "resolution"? Intercom counts a conversation as resolved if the customer doesn't reply within 24 hours. That's open to argument.</li>
+    <li><b>Revenue becomes variable after signing</b>, so finance teams need consumption forecasting.</li>
+    <li><b>Commission changes:</b> about 30% of companies set quota on forecast consumption, and 45–50% have <b>clawbacks</b> (commission returned if usage falls short) (ICONIQ, secondary).</li>
+  </ul>
+  <div class="debate">
+    <div class="bull"><b class="h">Bull case</b>Price matches value. Customers pay for results, so usage-based firms keep and grow customers better (108% NRR). It's the natural model for AI agents.</div>
+    <div class="bear"><b class="h">Bear case</b>Bills become unpredictable, and CFOs hate variable costs. "Outcome" definitions can be gamed. Seat compression threatens incumbents' revenue base. Constant re-pricing (Agentforce) confuses buyers.</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> hybrid (a platform fee plus credits) becomes the default. Sellers sell committed credit pools and are paid partly on consumption. <b>5+ years:</b> pure outcome pricing for well-measured workflows (support, lead qualification), and <b>value engineering</b>, building the ROI case, becomes a core sales skill.</div>
+  <div class="watch">Next Growth Unhinged pricing survey · Salesforce and HubSpot pricing changes · share of commission plans paid on consumption</div>
+  <div class="opinion">Asset management has always used outcome-linked pricing: a percentage of assets, plus performance fees. Is software converging on the asset management model? What lessons on fee pressure might transfer?</div>
+  <div class="sowhat">Be able to build an ROI case: "an AI resolution costs £0.80 against £6 for a human-handled ticket". Expect part of your pay to depend on whether customers use what you sold, which rewards honest selling.</div>
+  <div class="src">Sources: <a href="https://www.salesforce.com/news/press-releases/2025/05/15/agentforce-flexible-pricing-news/">Salesforce Flex Credits</a> · <a href="https://www.intercom.com/learning-center/intercom-pricing">Intercom pricing</a> · <a href="https://www.zendesk.com/newsroom/articles/zendesk-outcome-based-pricing">Zendesk</a> · <a href="https://www.constellationr.com/insights/news/hubspot-price-breeze-customer-agent-breeze-prospecting-agent-outcomes">HubSpot pricing</a> · <a href="https://www.growthunhinged.com/p/2025-state-of-b2b-monetization">Growth Unhinged 2025</a></div>
+</section>
+
+<section class="page sl" id="s6">
+  <div class="kicker"><span>Part C · Sales · Theme 6</span><a href="#contents">↑ Contents</a></div>
+  <h2>C6 · Signals, product-led sales and the RevOps stack</h2>
+  <div class="box zero small"><b>From zero:</b> three connected ideas. <b>Signal-based selling</b> means prioritising accounts using live evidence of buying interest (website visits, hiring, funding rounds, product usage, "intent data") instead of static lists. <b>Product-led sales (PLS)</b> means users try a product free, and salespeople step in when usage data shows an account is ready to buy or expand. <b>Revenue operations (RevOps)</b> is the team that joins up the data, tools and processes across marketing, sales and customer success.</div>
+
+  <svg viewBox="0 0 680 120" width="100%">
+    <defs><marker id="sa" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#2a9d8f"/></marker></defs>
+    <g font-size="9.5">
+      <rect x="5" y="25" width="125" height="66" rx="8" fill="#eaf6f4" stroke="#2a9d8f"/><text x="67" y="48" text-anchor="middle" font-weight="700" fill="#14213d">Signals</text><text x="67" y="63" text-anchor="middle" fill="#5c6378" font-size="8.3">usage, visits, hiring,</text><text x="67" y="76" text-anchor="middle" fill="#5c6378" font-size="8.3">funding, intent</text>
+      <rect x="150" y="25" width="125" height="66" rx="8" fill="#eaf6f4" stroke="#2a9d8f"/><text x="212" y="48" text-anchor="middle" font-weight="700" fill="#14213d">Data warehouse</text><text x="212" y="63" text-anchor="middle" fill="#5c6378" font-size="8.3">cleaned and joined</text><text x="212" y="76" text-anchor="middle" fill="#5c6378" font-size="8.3">"reverse ETL" → CRM</text>
+      <rect x="295" y="25" width="125" height="66" rx="8" fill="#1f7a6f"/><text x="357" y="48" text-anchor="middle" font-weight="700" fill="#fff">Scoring</text><text x="357" y="63" text-anchor="middle" fill="#fff" font-size="8.3">e.g. product-qualified</text><text x="357" y="76" text-anchor="middle" fill="#fff" font-size="8.3">lead score &gt; X</text>
+      <rect x="440" y="25" width="110" height="66" rx="8" fill="#eaf6f4" stroke="#2a9d8f"/><text x="495" y="48" text-anchor="middle" font-weight="700" fill="#14213d">Next-best</text><text x="495" y="63" text-anchor="middle" font-weight="700" fill="#14213d">action</text><text x="495" y="78" text-anchor="middle" fill="#5c6378" font-size="8.3">AI suggests</text>
+      <rect x="570" y="25" width="105" height="66" rx="8" fill="#fff7ea" stroke="#e09f3e"/><text x="622" y="48" text-anchor="middle" font-weight="700" fill="#14213d">Human /</text><text x="622" y="63" text-anchor="middle" font-weight="700" fill="#14213d">agent acts</text><text x="622" y="78" text-anchor="middle" fill="#5c6378" font-size="8.3">call, email, offer</text>
+    </g>
+    <g stroke="#2a9d8f" stroke-width="2" marker-end="url(#sa)"><line x1="131" y1="58" x2="148" y2="58"/><line x1="276" y1="58" x2="293" y2="58"/><line x1="421" y1="58" x2="438" y2="58"/><line x1="551" y1="58" x2="568" y2="58"/></g>
+  </svg>
+
+  <div class="stat">
+    <div><b>2.6×</b>more likely to achieve growth if sellers get AI next-best actions (Gartner CSO survey, May 2026)</div>
+    <div><b>95%</b>of seller research workflows to start with AI by 2027, up from &lt;20% in 2024 (Gartner)</div>
+    <div><b>48%</b>say their revenue data isn't "AI-ready" (Clari Labs)</div>
+    <div><b>&gt;60%</b>of buyers bought a trial, but only about a third planned to convert with that provider (Forrester 2026)</div>
+  </div>
+  <h3>Market moves</h3>
+  <ul class="small">
+    <li><b>Clari + Salesloft</b> merged (announced August 2025; combined ARR around $450m per Forrester). This is the sales-tool stack consolidating.</li>
+    <li><b>Attio</b>, an "AI-native CRM", raised a $52m Series B led by GV (August 2025): a challenger to Salesforce and HubSpot.</li>
+    <li>Salesforce found that 79% of high performers prioritise <b>data hygiene</b>, against 54% of underperformers.</li>
+  </ul>
+  <div class="debate">
+    <div class="bull"><b class="h">Incumbents win</b>Salesforce and HubSpot own the data ("data gravity"), and AI is only as good as the data. Bundles like Agentforce + Data 360 lock customers in.</div>
+    <div class="bear"><b class="h">Challengers win</b>AI-native CRMs are built for agents from day one. Specialist tools stitched together by GTM engineers out-innovate the suites. Intent data is often noise.</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> AI "next-best action" built into CRMs; more mergers among sales-tool vendors; trials need human follow-up to convert. <b>5+ years:</b> the CRM stops being a database reps update by hand and becomes a <b>system of action</b> run by agents, with humans supervising.</div>
+  <div class="sowhat">CRM fluency and clean data are now <b>performance differentiators</b>, not admin. Learn to read product usage data and turn it into a conversation: "I noticed your team added 40 users last month…"</div>
+  <div class="src">Sources: <a href="https://www.gartner.com/en/newsroom/press-releases/2026-05-20-gartner-survey-finds-sales-organizations-that-provide-ai-enabled-next-best-actions-are-two-point-six-times-more-likely-to-achieve-commercial-growth">Gartner CSO survey 2026</a> · <a href="https://www.forrester.com/blogs/clari-salesloft-merger-a-bold-high-stakes-bid-for-market-dominance/">Forrester on Clari–Salesloft</a> · <a href="https://tech.eu/2025/08/26/attio-raises-52m-series-b-to-scale-crm-platform/">Attio Series B</a> · <a href="http://www.forrester.com/blogs/state-of-business-buying-2026/">Forrester 2026</a></div>
+</section>
+
+<section class="page sl" id="s7">
+  <div class="kicker"><span>Part C · Sales · Theme 7</span><a href="#contents">↑ Contents</a></div>
+  <h2>C7 · Customer success becomes a revenue function</h2>
+  <div class="box zero small"><b>From zero:</b> <b>customer success (CS)</b> teams were built to keep customers happy so they'd renew, and were usually measured on satisfaction rather than revenue. Under efficiency pressure, firms are making CS <b>commercial</b>: giving it quotas and expansion targets, moving renewals and upsells to AEs or account managers, and automating low-value accounts with AI. The metric everyone now watches is <b>NRR</b> (net revenue retention).</div>
+  <div class="stat">
+    <div><b>52%</b>of revenue growth came from expanding existing customers (Ebsta × Pavilion 2025)</div>
+    <div><b>52 vs 91 days</b>expansion deals close almost twice as fast as new-business deals</div>
+    <div><b>75%</b>of software firms saw NRR decline even as ~60% raised CS spend (Bain 2024)</div>
+    <div><b>38%</b>of AEs now own renewals or expansion, nearly double 2024 (Bridge Group)</div>
+  </div>
+  <p class="small">Other signals: in one survey, 44% of companies cut CSM roles and 42% froze hiring (Customer Success Collective, secondary). Half of Salesforce's Agentforce and Data 360 bookings came from existing customers. New-customer acquisition cost is rising faster than blended cost, so <b>growing existing customers is now the cheapest growth</b>.</p>
+  <div class="debate">
+    <div class="bull"><b class="h">Merge it</b>No handoffs; one owner of NRR, the number investors watch most; expansion is faster and cheaper than new logos.</div>
+    <div class="bear"><b class="h">Keep it separate</b>A quota turns the trusted adviser into a seller, and customers notice. Hunters neglect renewals. Gainsight argues merging suits small-business segments more than enterprise.</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> AI agents handle low-touch accounts; humans run <b>commercial account management</b> with NRR targets. <b>5+ years:</b> a single "customer revenue" function, with pay linked to consumption (connecting to C5).</div>
+  <div class="watch">Share of AEs owning renewals · GRR and NRR trends · whether CS reports to the Chief Revenue Officer</div>
+  <div class="opinion">This mirrors asset management exactly: keeping a mandate is cheaper than winning one, and client relationship managers protect recurring fees. If you're asked "hunter or farmer?", you can argue that the economics now favour farmers.</div>
+  <div class="sowhat">Account management and expansion roles may be a <b>more stable entry point</b> than pure new-business hunting. Learn renewal mechanics, account health scores and upsell plays.</div>
+  <div class="src">Sources: <a href="https://benchmarks.ebsta.com/hubfs/V3%202025%20Benchmark%20Report/gtm_benchmarks_digital_report.pdf?hsLang=en">Ebsta × Pavilion 2025</a> · <a href="https://bain.com/insights/why-software-companies-customer-success-is-failing-tech-report-2024">Bain Tech Report 2024</a> · <a href="https://www.bridgegroupinc.com/research/2026-ae-models-motions-metrics">Bridge Group 2026</a> · <a href="https://www.gainsight.com/blog/why-customer-success-should-and-shouldnt-own-account-management/">Gainsight</a></div>
+</section>
+
+<section class="page sl" id="s8">
+  <div class="kicker"><span>Part C · Sales · Theme 8</span><a href="#contents">↑ Contents</a></div>
+  <h2>C8 · Trust, authenticity and UK/EU regulation</h2>
+  <div class="box zero small"><b>From zero:</b> as AI makes outreach cheap and generic, buyers trust it less, and regulators are tightening the rules. In the UK, marketing emails and calls are governed by <b>PECR</b> (Privacy and Electronic Communications Regulations) and <b>UK GDPR</b>, both updated by the <b>Data (Use and Access) Act 2025</b>. The EU AI Act adds duties to disclose AI. And anyone selling financial products in the UK faces the FCA's <b>Consumer Duty</b>.</div>
+  <table>
+    <tr><th style="width:26%">Rule</th><th>What it means for selling</th></tr>
+    <tr><td><b>PECR: B2B email</b></td><td>Marketing emails to <i>companies and LLPs</i> don't need prior consent but must identify the sender and offer an opt-out. <b>Sole traders and partnerships count as individuals</b>, so they need consent. Calls must be screened against the TPS (Telephone Preference Service).</td></tr>
+    <tr><td><b>Data (Use and Access) Act 2025</b></td><td>Royal Assent June 2025. It raises maximum PECR fines from £500,000 to UK GDPR levels: <b>£17.5m or 4% of global turnover</b> (exact start date to be confirmed).</td></tr>
+    <tr><td><b>ICO enforcement</b></td><td>2025 examples include £90,000 (95,277 calls to TPS-registered numbers) and £50,000 (194,110 calls). Expect bigger fines under the new ceiling.</td></tr>
+    <tr><td><b>EU AI Act, Article 50</b></td><td>From <b>2 August 2026</b>, people interacting with an AI system must be told it's AI unless that's obvious. This directly affects AI chat and voice sales agents selling into the EU.</td></tr>
+    <tr><td><b>FCA Consumer Duty</b></td><td>Financial firms must evidence fair value and customer understanding. Sales conversations must show the product suits the customer.</td></tr>
+  </table>
+  <div class="stat">
+    <div><b>73%</b>of buyers avoid suppliers who send irrelevant outreach (Gartner)</div>
+    <div><b>51% / 49%</b>expect misleading info from GenAI / from sales reps (Gartner, secondary)</div>
+    <div><b>26%</b>say obviously AI-written outreach actively undermines their interest (Adience, secondary)</div>
+    <div><b>94%</b>of buyers who researched with AI still fact-checked it (TrustRadius, vendor)</div>
+  </div>
+  <p class="small"><b>The "authenticity premium":</b> as automated contact floods inboxes, trusted channels gain value: referrals, communities, events, human video. Event data is mixed, though. Bizzabo found 78% of organisers call in-person events their most impactful channel, while Forrester found 69% of events leaders had flat or falling budgets, shifting to smaller, invitation-only events.</p>
+  <div class="debate">
+    <div class="bull"><b class="h">Scale wins</b>Compliant AI outreach at scale, properly disclosed and authenticated, still generates pipeline more cheaply than humans.</div>
+    <div class="bear"><b class="h">Trust wins</b>Regulation, deliverability rules and buyer cynicism make volume self-defeating. Expertise, honesty and referrals are what AI can't fake.</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> ICO enforcement tests the new fine ceiling; AI disclosure becomes standard in agent scripts; referral, community and event channels gain share. <b>5+ years:</b> provenance labelling of AI-generated content is common, and "human-verified" becomes a selling point.</div>
+  <div class="sowhat">Know the UK basics (corporate vs individual subscribers, TPS, AI disclosure). Compliance literacy is a hiring plus, especially in financial services, and integrity is the one thing buyers say they can't get from AI.</div>
+  <div class="src">Sources: <a href="https://www.addleshawgoddard.com/en/insights/insights-briefings/2025/data-protection/data-use-and-access-act-2025-top-7-changes/">Addleshaw Goddard on DUAA</a> · <a href="https://www.freevacy.com/news/ico/ico-fines-compensation-company-ps90000-for-pecr-violations/6329">ICO fines</a> · <a href="https://www.cmswire.com/customer-experience/is-your-contact-center-ready-for-europes-chatbot-disclosure-rules/">EU AI Act Art. 50</a> · <a href="https://www.marketingweek.com/b2b-events-budgets-flat-decrease/">Forrester on events</a> · <a href="https://www.bizzabo.com/blog/get-2025-events-benchmark-report">Bizzabo</a></div>
+</section>
+
+<section class="page sl" id="s9">
+  <div class="kicker"><span>Part C · Sales · Theme 9</span><a href="#contents">↑ Contents</a></div>
+  <h2>C9 · Selling funds: gatekeepers, models and "targeted support"</h2>
+  <div class="box zero small"><b>From zero:</b> this is where Sales meets your first choice. Fund managers rarely sell to individual investors. They sell to <b>gatekeepers</b>: wealth managers, advice platforms and especially <b>model portfolio service (MPS)</b> providers. These firms build ready-made portfolios that thousands of financial advisers then use for their clients. One "yes" from a model provider can bring in hundreds of millions, and one "no" can take it away.</div>
+  <svg viewBox="0 0 680 110" width="100%">
+    <defs><marker id="sb" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#14213d"/></marker></defs>
+    <g font-size="9.5">
+      <rect x="5" y="25" width="140" height="60" rx="8" fill="#14213d"/><text x="75" y="52" text-anchor="middle" fill="#fff" font-weight="700">Fund manager</text><text x="75" y="68" text-anchor="middle" fill="#e09f3e" font-size="8.3">wholesale sales team</text>
+      <rect x="185" y="25" width="140" height="60" rx="8" fill="#fff7ea" stroke="#e09f3e"/><text x="255" y="48" text-anchor="middle" fill="#14213d" font-weight="700">MPS / wealth</text><text x="255" y="62" text-anchor="middle" fill="#14213d" font-weight="700">investment committee</text><text x="255" y="76" text-anchor="middle" fill="#5c6378" font-size="8.3">the real buyer</text>
+      <rect x="365" y="25" width="140" height="60" rx="8" fill="#eaf6f4" stroke="#2a9d8f"/><text x="435" y="52" text-anchor="middle" fill="#14213d" font-weight="700">Thousands of</text><text x="435" y="66" text-anchor="middle" fill="#14213d" font-weight="700">financial advisers</text>
+      <rect x="545" y="25" width="130" height="60" rx="8" fill="#eaf1f9" stroke="#3a6ea5"/><text x="610" y="52" text-anchor="middle" fill="#14213d" font-weight="700">End investors</text><text x="610" y="66" text-anchor="middle" fill="#5c6378" font-size="8.3">ISAs, pensions</text>
+    </g>
+    <g stroke="#14213d" stroke-width="1.6" marker-end="url(#sb)"><line x1="146" y1="55" x2="183" y2="55"/><line x1="326" y1="55" x2="363" y2="55"/><line x1="506" y1="55" x2="543" y2="55"/></g>
+  </svg>
+  <div class="stat">
+    <div><b>Record</b>UK retail gross fund sales in FY2025, yet net sales fell ~£10bn (ISS MI Pridham)</div>
+    <div><b>90%</b>of platform gross sales come from adviser firms using at least one model (ISS MI)</div>
+    <div><b>$9.3tn → $18.6tn</b>US model portfolio assets, end-2025 to projected 2030 (Broadridge)</div>
+    <div><b>54%</b>of US model assets are in ETFs (Broadridge)</div>
+  </div>
+  <h3>The new UK channel: targeted support</h3>
+  <p class="small">The FCA confirmed <b>"targeted support"</b> rules on 26 February 2026, effective <b>6 April 2026</b>. It's a new regulated activity: firms such as banks, platforms and pension providers can give <i>suggestions to groups of consumers in similar circumstances</i> (for example, "people like you with cash savings and no pension top-ups often consider…") without full personalised advice. It's designed to close the "advice gap" and could open new mass-market routes for funds.</p>
+  <div class="debate">
+    <div class="bull"><b class="h">Bull case</b>Model portfolios and targeted support bring millions of new savers into investing. Data-driven "digital distribution" lets sales teams target the right advisers precisely.</div>
+    <div class="bear"><b class="h">Bear case</b>Gatekeeper concentration squeezes fees. Model providers favour cheap passive and ETFs. Relationship-led wholesale sellers are partly replaced by data and platform analytics.</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> more model portfolio partnerships and "big win, big loss" flows; banks and platforms launch targeted-support propositions. <b>5+ years:</b> ETFs and active ETFs keep rising inside models, and fund sales becomes as much about <b>data and evidence</b> (performance, fees, Consumer Duty value assessments) as relationships.</div>
+  <div class="sowhat">In asset management sales, your customer is an investment committee. You need product, performance and fee-evidence fluency more than prospecting volume, which is a strong, specific insight for your Investment Management <i>and</i> Sales answers.</div>
+  <div class="src">Sources: <a href="https://www.issmarketintelligence.com/resources/tag/the-pridham-report">ISS MI Pridham Report</a> · <a href="https://issgovernance.com/market-intelligence/uk-model-portfolio-sales-report">ISS MI model portfolios</a> · <a href="https://www.wealthmanagement.com/investing-strategies/model-portfolios-projected-to-reach-186t-by-2030">Broadridge via WealthManagement</a> · <a href="https://www.fca.org.uk/firms/advice-guidance-boundary-review/printable/print">FCA advice-guidance boundary review</a></div>
+</section>
+
+<section class="page sl" id="s10">
+  <div class="kicker"><span>Part C · Sales · Synthesis</span><a href="#contents">↑ Contents</a></div>
+  <h2>C10 · Synthesis: think like a sales insider</h2>
+  <h3>The six arguments insiders are actually having</h3>
+  <table>
+    <tr><th style="width:26%">Debate</th><th>Side A</th><th>Side B</th></tr>
+    <tr><td><b>Agents vs humans</b></td><td>Autonomous agents will do most prospecting (Benioff, Lemkin)</td><td>A "value ceiling": AI-assisted humans win (Gartner)</td></tr>
+    <tr><td><b>The rep-free paradox</b></td><td>67% prefer rep-free</td><td>69% still validate with reps; buying groups doubled</td></tr>
+    <tr><td><b>The entry rung</b></td><td>The SDR is dead</td><td>Only the volume SDR is dead; GTM engineers rise</td></tr>
+    <tr><td><b>Efficiency</b></td><td>AI makes teams 2× more productive</td><td>Gains came from cuts; 87% missed targets</td></tr>
+    <tr><td><b>Pricing</b></td><td>Outcome pricing aligns value</td><td>Variable bills and gamed definitions</td></tr>
+    <tr><td><b>Trust</b></td><td>Scale with compliance</td><td>Authenticity and referrals win</td></tr>
+  </table>
+  <h3>Five predictions to test against reality</h3>
+  <div class="qa small">
+    <div class="box b3">By 2028, <b>most outbound first-touches will be machine-generated</b>, so human-written, highly relevant outreach and referrals will carry a premium.</div>
+    <div class="box b3"><b>Hybrid pricing</b> (platform fee + usage) becomes the norm, and commission plans increasingly pay on <b>consumption and retention</b>, rewarding honest selling.</div>
+    <div class="box b3">The seller's job shifts from <b>information provider</b> to <b>validator and consensus builder</b> for buying groups of 10–20 people.</div>
+    <div class="box b3">Entry-level sales jobs become more <b>technical</b> (data, CRM, automation) or more <b>account-management</b> based, with fewer pure cold-calling roles.</div>
+    <div class="box b3">In financial services, distribution concentrates on <b>gatekeepers and models</b>; data and Consumer Duty evidence become as important as relationships.</div>
+  </div>
+  <div class="opinion">Pick one prediction and decide whether you agree. Then find one piece of evidence <i>against</i> it. That's how insiders form views: a position, held with reasons, and updated when the data changes.</div>
+  <div class="box key small"><b>One sentence for your Sales answer:</b> <i>"As AI makes information and outreach abundant, the scarce skill in sales is becoming judgement: understanding which customers genuinely need you and earning the trust of everyone involved in the decision."</i></div>
+</section>
+<section class="chapter ch-pr prr" id="p0">
+  <div class="num">D</div>
+  <h1>Public Relations: the trends</h1>
+  <p>Earned media is becoming scarcer, as newsrooms shrink, and more valuable, because AI systems read and cite it. Trust has retreated inwards, regulation is turning communications claims into legal risk, and the agency model built on junior hours is being squeezed.</p>
+  <ol style="columns:2">
+    <li><a href="#p1">AI answer engines &amp; "GEO"</a></li>
+    <li><a href="#p2">The shrinking news media</a></li>
+    <li><a href="#p3">Insularity, trust &amp; "hushing"</a></li>
+    <li><a href="#p4">Deepfakes &amp; provenance</a></li>
+    <li><a href="#p5">Creators &amp; executive visibility</a></li>
+    <li><a href="#p6">Measurement: Barcelona 4.0</a></li>
+    <li><a href="#p7">The agency model under pressure</a></li>
+    <li><a href="#p8">Financial &amp; corporate PR</a></li>
+    <li><a href="#p9">Internal comms &amp; geopolitics</a></li>
+    <li><a href="#p10">Synthesis: think like an insider</a></li>
+  </ol>
+</section>
+
+<section class="page prr" id="p1">
+  <div class="kicker"><span>Part D · Public Relations · Theme 1</span><a href="#contents">↑ Contents</a></div>
+  <h2>D1 · AI answer engines: earned media gets a second audience</h2>
+  <div class="box zero small"><b>From zero:</b> people increasingly ask an AI (ChatGPT, Google's AI Overviews, Perplexity, Claude, Gemini) instead of clicking through search results. The AI writes one answer, sometimes with small source links. Whatever the AI "reads" shapes what it says about your company. It turns out that PR's traditional product, <b>coverage in credible outlets</b>, is one of the main things these systems read. Earned media now informs machines as well as people.</div>
+  <h3>How AI answers are built: retrieval-augmented generation (RAG)</h3>
+  <div class="flow">
+    <div class="step"><b>1 · Fan-out</b>The model rewrites your question into several search queries</div><div class="arr">›</div>
+    <div class="step"><b>2 · Retrieve</b>Pulls candidate pages from a web index or licensed content</div><div class="arr">›</div>
+    <div class="step"><b>3 · Rank</b>Scores them on relevance, authority and freshness</div><div class="arr">›</div>
+    <div class="step"><b>4 · Generate</b>Writes an answer from those passages, citing some sources</div>
+  </div>
+  <p class="small">There are two routes into an AI's answer. <b>Training memory</b> (what the model learned) is slow to change. <b>Live retrieval</b> (what it fetches now) can be influenced. Retrieval favours well-structured, quotable, recent pages on trusted domains. <b>GEO</b> (generative engine optimisation) comes from a 2023 academic paper, which found content changes such as adding citations, quotations and statistics could boost visibility in AI answers by up to 40%. A new metric, <b>"share of model"</b>, measures how often a brand appears across a fixed set of AI prompts compared with competitors.</p>
+  <div class="stat">
+    <div><b>~82–85%</b>of AI citations come from earned media (Muck Rack "What Is AI Reading?", 2025)</div>
+    <div><b>5×</b>growth in press-release citations by AI, July–Dec 2025 (Muck Rack)</div>
+    <div><b>8% vs 15%</b>click-through when Google shows an AI summary vs when it doesn't (Pew, 2025)</div>
+    <div><b>900m</b>ChatGPT weekly users (Feb 2026)</div>
+  </div>
+  <p class="small"><b>Market signals:</b> Adobe agreed to buy Semrush for $1.9bn (Nov 2025); "AI visibility" start-ups raised large rounds; Bing added GEO to its guidelines (Feb 2026). The UK competition regulator (CMA) gave Google Search "strategic market status" (Oct 2025), with AI Overviews in scope. Note the caveats: Muck Rack sells PR software, and its "earned" category is broad. Different AI models also favour different outlets: The Guardian is cited most by ChatGPT, Yahoo Finance by Claude.</p>
+  <div class="debate">
+    <div class="bull"><b class="h">Bull case</b>Earned media has been re-valued: credible third-party coverage feeds both humans and machines and is hard to fake. PR can claim the "AI reputation" budget ahead of SEO and ad agencies.</div>
+    <div class="bear"><b class="h">Bear case</b>"GEO" is just SEO rebadged (Google says so). AI results are unstable: platforms disagree on 61.9% of recommendations. And if AI answers mean nobody clicks, the outlets that supply citations lose money and shrink, sawing off the branch PR sits on.</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> "AI visibility audits" become a standard agency deliverable; press releases rewritten as structured, fact-dense, machine-readable pages; "share of model" added beside share of voice. <b>5+ years:</b> AI agents research and buy on people's behalf, and reputation becomes partly a <b>data-supply problem</b>.</div>
+  <div class="watch">Reuters Institute AI-news use (10% globally in 2026; 16% of under-35s) · Muck Rack's earned-media share · CMA interventions on Google · acquisitions of AI-visibility tools</div>
+  <div class="sowhat">Learn how RAG works and how to run a prompt audit: ask ChatGPT, Gemini, Claude and Perplexity the same 20 questions about a brand and record what they say and cite. That's a concrete, modern skill few graduates have.</div>
+  <div class="src">Sources: <a href="https://arxiv.org/abs/2311.09735">GEO paper (Aggarwal et al.)</a> · <a href="https://martechseries.com/predictive-ai/ai-platforms-machine-learning/earned-media-still-drives-generative-ai-citations-as-press-release-visibility-grows/">Muck Rack Dec 2025</a> · <a href="https://prsay.prsa.org/2025/07/28/news-articles-and-who-they-quote-influence-ai-generated-content-study-finds/">Muck Rack Jul 2025</a> · <a href="https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/">Pew Research</a> · <a href="https://www.gov.uk/government/news/cma-confirms-google-has-strategic-market-status-in-search-services">CMA on Google</a> · <a href="https://www.conductor.com/academy/share-of-model">Share of model</a></div>
+</section>
+
+<section class="page prr" id="p2">
+  <div class="kicker"><span>Part D · Public Relations · Theme 2</span><a href="#contents">↑ Contents</a></div>
+  <h2>D2 · The shrinking news media: fewer journalists, more PR</h2>
+  <div class="box zero small"><b>From zero:</b> news publishers made money from advertising and subscriptions, driven by traffic from Google and social media. When AI summaries answer the question on Google's own page (<b>"zero-click"</b>), fewer people visit news sites. Revenue falls, jobs are cut, and each remaining journalist faces more PR pitches with less time. Surviving outlets increasingly earn money from <b>AI licensing deals</b>, subscriptions and events.</div>
+  <div class="stat">
+    <div><b>−33%</b>Google search traffic to 2,500+ news sites, Nov 2024 → Nov 2025 (Chartbeat, via Reuters Institute)</div>
+    <div><b>~3,440</b>UK and US journalism job cuts tracked in 2025 (Press Gazette); BBC plans ~2,000 more</div>
+    <div><b>~6 : 1</b>PR specialists per journalist in the US (BLS data; method-dependent)</div>
+    <div><b>50+</b>pitches a week for most journalists; 72% find at most a quarter relevant (Cision 2026)</div>
+  </div>
+  <h3>What journalists actually want (Cision State of the Media 2026, 1,899 journalists)</h3>
+  <table>
+    <tr><th>Finding</th><th>%</th><th>So what</th></tr>
+    <tr><td>Rely on PR-provided content as a top source of story ideas</td><td><b>66%</b></td><td>PR's leverage is <i>rising</i> as newsrooms shrink</td></tr>
+    <tr><td>Want more data and research</td><td>47%</td><td>Original data beats opinions</td></tr>
+    <tr><td>Want more embargoes / expert access</td><td>45% / 42%</td><td>Time to prepare and real experts</td></tr>
+    <tr><td>Want more press releases</td><td>only 22%</td><td>The classic release is the least wanted asset</td></tr>
+    <tr><td>Oppose AI-generated pitches</td><td>53%</td><td>Human, relevant pitching matters</td></tr>
+  </table>
+  <h3>Ownership and licensing: the Telegraph saga</h3>
+  <p class="small">A UAE-backed bid for the Telegraph was blocked (2024) under a new law on foreign-state influence over newspapers. After several failed deals, Germany's <b>Axel Springer</b> agreed £575m (March 2026), was approved in April and completed in June 2026. Meanwhile AI licensing deals multiplied: News Corp–OpenAI (reported $250m+ over 5 years), the FT with Google, Reach with Amazon. Press Gazette tracks 19 such deals since May 2025, but small publishers are largely shut out.</p>
+  <div class="debate">
+    <div class="bull"><b class="h">Bull for PR</b>Stretched newsrooms need ready-to-use assets: data, experts, embargoes. 66% already lean on PR content. Owned and creator channels fill the gaps.</div>
+    <div class="bear"><b class="h">Bear for PR</b>Fewer specialist reporters means shallower, harder-to-win coverage. "Churnalism" (reprinted press releases) erodes the credibility that makes earned media valuable to AI. At 6:1, the inbox is a lottery.</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> more newsroom cuts and a <b>two-tier press</b>: licensed giants vs starved small outlets. Pitching becomes asset-led (datasets, video, expert access). <b>5+ years:</b> possibly a small core of "verification brands" (FT, Reuters, BBC) that AI systems and audiences lean on, plus a long tail of creators.</div>
+  <div class="watch">Press Gazette's job-cut tracker · Chartbeat referral data · AI licensing deal tracker · news sites' direct reach (down 12 points since 2021)</div>
+  <div class="sowhat">Build relationships with fewer reporters and know their beats precisely. Offer data, experts and embargoes, not press releases. Relevance is everything when 72% of pitches are judged irrelevant.</div>
+  <div class="src">Sources: <a href="https://www.prnewswire.com/content/dam/prnewswire/resources/white-papers/Cision_2026_State_of_the_Media_Report.pdf">Cision State of the Media 2026</a> · <a href="https://pressgazette.co.uk/publishers/journalism-job-cuts-2025-tracked/">Press Gazette job cuts</a> · <a href="https://pressgazette.co.uk/?p=248606">Chartbeat via Press Gazette</a> · <a href="https://everything-pr.com/6-pr-people-for-every-journalist-the-epr-newsroom-contraction-index-2026">PR:journalist ratio</a> · <a href="https://www.irishtimes.com/business/2026/03/06/axel-springer-buys-telegraph-in-575m-deal">Axel Springer–Telegraph</a> · <a href="https://digiday.com/media/a-timeline-of-the-major-deals-between-publishers-and-ai-tech-companies-in-2025/">AI licensing deals</a></div>
+</section>
+
+<section class="page prr" id="p3">
+  <div class="kicker"><span>Part D · Public Relations · Theme 3</span><a href="#contents">↑ Contents</a></div>
+  <h2>D3 · Insularity, trust and the "hushing" retreat</h2>
+  <div class="box zero small"><b>From zero:</b> the <b>Edelman Trust Barometer</b> (~34,000 people, 28 countries, every January) is the industry's most-quoted trust study. It says society moved from <b>"grievance"</b> (2025) to <b>"insularity"</b> (2026): people increasingly trust only those like them. Business, especially "my employer", is relatively trusted. But speaking out on contested issues (DEI, climate, Pride, tariffs) now invites attack from one side or the other. Many companies have gone quiet, and silence is itself a communications choice.</div>
+  <div class="stat">
+    <div><b>~7 in 10</b>unwilling or hesitant to trust people with different values (Edelman 2026)</div>
+    <div><b>78%</b>of employees trust their employer, the most trusted institution (Edelman 2026)</div>
+    <div><b>30%</b>UK trust in news, down 5 points; global 37%, the lowest since 2015 (Reuters Institute 2026)</div>
+    <div><b>59%</b>of S&amp;P 500 firms changed or removed DEI wording in filings; only 19% removed it entirely (Orrick)</div>
+  </div>
+  <h3>The vocabulary of retreat</h3>
+  <div class="grid3">
+    <div class="box b4 small"><b>Greenhushing</b><br>Doing climate work but saying less about it. About 70% of ~1,400 firms surveyed deliberately reduced climate communication while three-quarters spent <i>more</i> on decarbonisation (South Pole).</div>
+    <div class="box b4 small"><b>DEI hushing</b><br>"Reframe, not abandon". Use of the term "DEI" fell from 90% to 34% of S&amp;P 500 filings, but 78% still disclose diversity information.</div>
+    <div class="box b4 small"><b>Sponsorship retreat</b><br>Three-quarters of 100+ UK Pride organisers saw corporate partnerships decline in 2025, and a quarter saw sponsorship fall by more than half.</div>
+  </div>
+  <h3>Case studies insiders discuss</h3>
+  <ul class="small">
+    <li><b>Cracker Barrel (Aug 2025):</b> a new minimalist logo, buried in a press release about the autumn menu, triggered a culture-war backlash. The company reversed it within a week, and shares rose ~8% the next day. Lesson: even a logo is now a political event.</li>
+    <li><b>Amazon tariff display (Apr 2025):</b> a report that Amazon's Haul store would show tariff costs drew a White House accusation of a "hostile and political act". Amazon said it "was never approved and is not going to happen" within hours.</li>
+  </ul>
+  <div class="debate">
+    <div class="bull"><b class="h">The case for quiet</b>Employees, not the public, are the trusted audience, so communicate inward, do the work and say less externally. Hushing reduces legal and political risk.</div>
+    <div class="bear"><b class="h">The case against</b>Silence reads as capitulation to staff and younger stakeholders. UK and EU rules still require disclosure. Hushing hides genuine progress, and Edelman argues CEOs are expected to be "trust brokers".</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> <b>"values-quiet, operations-loud"</b> becomes the default. Issue triage decides where a company has the standing and evidence to speak. US and UK diverge. <b>5+ years:</b> a possible snap-back if politics shifts. Companies that kept their programmes but changed the labels will be best placed.</div>
+  <div class="opinion">Should a company comment on a social issue? Insiders use a test: <b>Does it affect our business, our people or our customers directly? Do we have the evidence and track record to speak credibly? What's the cost of silence?</b> Practise applying it to a current news story.</div>
+  <div class="sowhat">Learn issue mapping and stakeholder materiality. Know the difference between "not saying" and "not doing". Expect interviewers to ask, "Should Company X have commented on Y?", and have a framework for answering.</div>
+  <div class="src">Sources: <a href="https://www.edelman.com/news-awards/2026-edelman-trust-barometer-society-slides-into-insularity">Edelman 2026</a> · <a href="https://pressgazette.co.uk/?p=253776">Reuters Institute DNR 2026 via Press Gazette</a> · <a href="https://corpgov.law.harvard.edu/2025/06/10/evolving-dei-disclosure-practices-in-sec-filings/">Orrick DEI disclosure</a> · <a href="https://grist.org/regulation/greenhushing-report-companies-hiding-climate-progress/">Greenhushing</a> · <a href="https://www.insurancejournal.com/news/international/2025/06/04/826294.htm">UK Pride sponsorship</a> · <a href="https://www.cbsnews.com/amp/news/amazon-tariffs-tariff-price-karoline-leavitt-trump-hostile-political-act">Amazon tariff episode</a></div>
+</section>
+
+<section class="page prr" id="p4">
+  <div class="kicker"><span>Part D · Public Relations · Theme 4</span><a href="#contents">↑ Contents</a></div>
+  <h2>D4 · Deepfakes, synthetic media and proving what's real</h2>
+  <div class="box zero small"><b>From zero:</b> AI can now convincingly fake a CEO's face and voice. Criminals use this to steal money, and bad actors use it to start crises. And when anything <i>could</i> be fake, real evidence can be dismissed as fake too: the <b>"liar's dividend"</b>. Companies need ways to prove what's genuine, and crisis plans for when a fake goes viral.</div>
+  <div class="grid2">
+    <div class="box b4 small"><h4>The reference case: Arup (2024)</h4>An employee at the UK engineering firm's Hong Kong office joined a video call where the "CFO" and several colleagues were all deepfakes. They made 15 transfers totalling about <b>$25.6m</b>. It's still the case every crisis team cites.</div>
+    <div class="box b4 small"><h4>The scale (Resemble AI)</h4>More than <b>$1.28bn</b> in deepfake fraud losses in 2025. In the corporate section: 41 incidents, $74.9m documented, the largest single loss $35m. Over 80% of incidents didn't disclose losses at all.</div>
+  </div>
+  <h3>How content provenance works: C2PA "Content Credentials"</h3>
+  <div class="flow">
+    <div class="step"><b>1 · Capture</b>Camera or app creates a "manifest": who made it, with what tool, what edits, whether AI was used</div><div class="arr">›</div>
+    <div class="step"><b>2 · Hash</b>A cryptographic fingerprint of the content is recorded</div><div class="arr">›</div>
+    <div class="step"><b>3 · Sign</b>The manifest is signed with a private key, often in secure hardware</div><div class="arr">›</div>
+    <div class="step"><b>4 · Verify</b>Anyone can recompute the fingerprint. Any change breaks the match ("tamper-evident").</div>
+  </div>
+  <p class="small"><b>Limits:</b> many platforms strip this metadata on upload; credentials prove <i>origin</i>, not <i>truth</i>; and adoption is patchy. Google's Pixel 10 reportedly signs all photos by default, while Apple's iOS 26 can view credentials but doesn't create them at capture. The <b>EU AI Act's transparency duties</b> apply from August 2026.</p>
+  <p class="small"><b>UK regulation in action:</b> Ofcom opened a formal Online Safety Act investigation into X (January 2026) over its Grok AI being used to create sexualised "undressed" images. Potential fines reach 10% of global revenue.</p>
+  <div class="debate">
+    <div class="bull"><b class="h">Bull case</b>Provenance standards, verified owned channels and pre-registered "authentic" spokesperson content will make debunking fast. Technology plus speed can solve these crises.</div>
+    <div class="bear"><b class="h">Bear case</b>Detection is an arms race, and most people never check credentials. The faster threat may be <b>AI systems confidently repeating falsehoods</b> (D1) rather than fake videos.</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> crisis plans add deepfake scenarios, verification protocols (call-back codes, finance controls) and "pre-bunking" (warning audiences before fakes appear). Content credentials appear on official corporate imagery. <b>5+ years:</b> corporate communications <b>authenticated by default</b>.</div>
+  <div class="watch">Ofcom's decision on X · EU AI Act enforcement · whether iPhones create Content Credentials at capture · annual deepfake loss data</div>
+  <div class="sowhat">Add verification to your crisis basics (holding statements, escalation trees, dark sites): reverse image search, checking Content Credentials, open-source intelligence. Know the Online Safety Act and Ofcom's role.</div>
+  <div class="src">Sources: <a href="https://abc17news.com/money/cnn-business-consumer/2024/05/16/british-engineering-giant-arup-revealed-as-25-million-deepfake-scam-victim/">Arup case (CNN)</a> · <a href="https://resemble.ai/2025-deepfake-threat-report">Resemble AI 2025 report</a> · <a href="https://softwareseni.com/c2pa-adoption-in-2026-hardware-platforms-and-verification-reality">C2PA adoption 2026</a> · <a href="https://www.advanced-television.com/2026/01/12/ofcom-investigates-x-over-grok-deepfakes/">Ofcom vs X</a></div>
+</section>
+
+<section class="page prr" id="p5">
+  <div class="kicker"><span>Part D · Public Relations · Theme 5</span><a href="#contents">↑ Contents</a></div>
+  <h2>D5 · Creators, platforms and executive visibility</h2>
+  <div class="box zero small"><b>From zero:</b> younger audiences increasingly get news from TikTok, YouTube, podcasts and individual creators, not newspapers or TV. So PR now pitches <b>creators, podcasters and newsletter writers</b> as well as journalists, and helps executives build their <b>own audiences</b>, especially on LinkedIn.</div>
+  <div class="stat">
+    <div><b>52%</b>of 18–24s say platforms or AI are their main news source (Reuters Institute 2026)</div>
+    <div><b>32% → 42%</b>TikTok news use among 18–24s in one year</div>
+    <div><b>18% vs 32%</b>weekly reach of news creators: UK vs US</div>
+    <div><b>70%</b>of C-suite executives reconsidered a supplier after a competitor's thought leadership (Edelman–LinkedIn)</div>
+  </div>
+  <div class="grid2">
+    <div class="box b4 small"><h4>Journalists become creators</h4>The top reason journalists use social media is to promote their own work (54%), and LinkedIn is their #1 platform in North America (Cision 2026). Many publishers are training journalists to behave like creators, and fear losing talent to Substack and YouTube.</div>
+    <div class="box b4 small"><h4>Executive thought leadership</h4>In B2B, 75% of decision-makers researched a product they hadn't considered because of thought leadership (Edelman–LinkedIn 2025). CEO and expert "personal brand" programmes are now a core agency service, especially in finance.</div>
+  </div>
+  <div class="box b1 small"><b>The rules:</b> the UK <b>ASA</b> (Advertising Standards Authority) requires paid influencer posts to be clearly labelled as ads (e.g. "#ad"). "#aff" alone isn't enough, and the ASA publicly names non-compliant influencers. The CMA's new consumer-protection powers (D8) also cover hidden advertising. Once a creator is paid, the content is legally <b>advertising</b>, not earned media.</div>
+  <div class="debate">
+    <div class="bull"><b class="h">Bull case</b>Creators have trust and reach with young audiences that legacy media has lost. AI tools make finding and measuring creators scalable.</div>
+    <div class="bear"><b class="h">Bear case</b>Audiences rank influencers among the biggest misinformation threats. Only 6% of Brits say creators meet all their news needs. Paid creator content is advertising, and creators are cited less by AI than established outlets (D1).</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> creator relations merge with media relations, and journalist-creators on Substack and YouTube get pitched like outlets. The UK moves more slowly than the US. <b>5+ years:</b> the line between earned, shared and paid creator content is regulated more tightly.</div>
+  <div class="opinion">Here's a tension to think about: creators win <b>young human audiences</b>, but traditional outlets win <b>AI citations</b> (D1). If you had a limited budget for a financial services client, where would you put it, and why?</div>
+  <div class="sowhat">Be fluent in short video, newsletters and podcasts. Learn the ASA/CAP rules on disclosure. Know how to build an executive's LinkedIn presence: what to post, how often, and in what voice.</div>
+  <div class="src">Sources: <a href="https://pressgazette.co.uk/?p=253776">Reuters Institute DNR 2026 via Press Gazette</a> · <a href="https://reutersinstitute.politics.ox.ac.uk/sites/default/files/2025-06/Digital_News-Report_2025.pdf">DNR 2025</a> · <a href="https://www.prnewswire.com/content/dam/prnewswire/resources/white-papers/Cision_2026_State_of_the_Media_Report.pdf">Cision 2026</a> · <a href="https://www.demandgenreport.com/industry-news/news-brief/marketers-need-to-gear-content-to-hidden-b2b-buyers-edelman-linkedin/49901/">Edelman–LinkedIn</a> · <a href="https://www.ofcom.org.uk/media-use-and-attitudes/attitudes-to-news/news-consumption">Ofcom news consumption</a></div>
+</section>
+
+<section class="page prr" id="p6">
+  <div class="kicker"><span>Part D · Public Relations · Theme 6</span><a href="#contents">↑ Contents</a></div>
+  <h2>D6 · Measurement: from clippings to outcomes, and now AI visibility</h2>
+  <div class="box zero small"><b>From zero:</b> PR has long been criticised for "counting clippings": measuring how much coverage it got rather than whether it changed anything. The industry standard says to measure whether people's <b>awareness, attitudes or behaviour</b> changed, and what that did for the business (Guide D3). The new problem: how do you measure appearing inside an AI answer that nobody clicks?</div>
+  <h3>AMEC Barcelona Principles 4.0 (launched June 2025, Vienna)</h3>
+  <table>
+    <tr><th style="width:6%">#</th><th style="width:22%">Principle</th><th>What it means</th></tr>
+    <tr><td>1</td><td><b>Objectives</b></td><td>Set clear goals, and revisit them as things change</td></tr>
+    <tr><td>2</td><td><b>Stakeholders</b></td><td>Listen to fragmented, polarised audiences</td></tr>
+    <tr><td>3</td><td><b>Channels</b></td><td>Measure everywhere, now explicitly including newsletters, Discord and <b>AI search outputs</b></td></tr>
+    <tr><td>4</td><td><b>Analysis</b></td><td>Mixed qualitative and quantitative methods, with human insight alongside AI</td></tr>
+    <tr><td>5</td><td><b>Invalid measures</b></td><td>Don't use <b>AVEs</b> (advertising value equivalents, "this coverage was worth £X of adverts")</td></tr>
+    <tr><td>6</td><td><b>Outputs → outcomes → impact</b></td><td>Report all three levels, not just volume</td></tr>
+    <tr><td>7</td><td><b>Ethics &amp; transparency</b></td><td>Be open about data, methods and the use of AI</td></tr>
+  </table>
+  <h3>The new measurement dashboard</h3>
+  <div class="grid4">
+    <div class="box b4 small center"><b>Share of voice</b><br>Your coverage vs competitors'</div>
+    <div class="box b4 small center"><b>Share of model</b><br>Your mentions across AI answers vs competitors'</div>
+    <div class="box b4 small center"><b>Sentiment</b><br>Tone in coverage <i>and</i> in AI answers</div>
+    <div class="box b4 small center"><b>Business KPIs</b><br>Leads, trust scores, hiring, share price stability</div>
+  </div>
+  <p class="small">About 40% of communicators already use AI for research and analytics (USC Annenberg 2025). AI-powered media intelligence tools (Cision, Muck Rack, Meltwater, CARMA) make outcome measurement cheaper. But AMEC hasn't yet standardised an AI-visibility metric.</p>
+  <div class="debate">
+    <div class="bull"><b class="h">Bull case</b>AI-powered monitoring plus AI-visibility trackers finally make proper outcome measurement cheap enough for every client.</div>
+    <div class="bear"><b class="h">Bear case</b>AVEs persist in practice. AI-visibility tools are unstable. Attribution (proving PR caused a sale) remains weak, and vendors define the metrics they sell.</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> dashboards combining share of voice, share of model, AI-answer sentiment and business KPIs. <b>5+ years:</b> marketing-mix models that properly include earned media alongside paid advertising.</div>
+  <div class="sowhat">Be able to set SMART communications objectives, explain why AVEs are invalid, and describe outputs → outcomes → impact. In an interview, "I'd measure this by…" with a proper answer is a standout moment.</div>
+  <div class="src">Sources: <a href="https://www.prnewsonline.com/barcelona-principles-4-0-reinventing-pr-measurement-for-a-new-era/">Barcelona Principles 4.0</a> · <a href="https://amecorg.com/wp-content/uploads/2025/06/AMEC-Barcelona-Principles-4.0-Launch-Presentation-Final.pdf">AMEC launch presentation</a> · <a href="https://worldcomgroup.com/insights/ais-impact-on-pr-usa-annenberg-2025-report/">USC Annenberg 2025</a></div>
+</section>
+
+<section class="page prr" id="p7">
+  <div class="kicker"><span>Part D · Public Relations · Theme 7</span><a href="#contents">↑ Contents</a></div>
+  <h2>D7 · The agency model under pressure: AI, mergers and pricing</h2>
+  <div class="box zero small"><b>From zero:</b> agencies traditionally sold <b>hours</b>, many of them junior hours spent on media lists, monitoring, coverage reports and first drafts (Guide D7). AI now does much of that in minutes. Meanwhile the big advertising holding companies that own famous PR brands are merging, cutting costs or selling. Clients ask: why pay for hours AI saves?</div>
+  <div class="stat">
+    <div><b>+5–6%</b>global PR agency fee growth in 2025; top 250 firms over $18bn (PRovoke)</div>
+    <div><b>$205k</b>revenue per head, the first time above $200k: more output per person</div>
+    <div><b>76%</b>of PR pros use generative AI, a plateau (Muck Rack 2026); only 12% use AI agents</div>
+    <div><b>"Run to stand still"</b>PRWeek's verdict on UK agencies in its 2026 Top 150</div>
+  </div>
+  <h3>Holding-company shake-up</h3>
+  <table>
+    <tr><th style="width:22%">Group</th><th>What happened</th></tr>
+    <tr><td><b>Omnicom + IPG</b></td><td>Merger completed November 2025, creating the world's largest ad holding company. PR networks combined into Omnicom Public Relations; <b>Golin and Ketchum merged</b> (Feb 2026); Porter Novelli folded into FleishmanHillard. Famous brands disappear.</td></tr>
+    <tr><td><b>WPP</b></td><td>A £500m savings plan to 2028; ~11,000 jobs lost since early 2025, and up to 1,000 more (FT, Sep 2026). Reportedly hired Goldman Sachs to explore <b>selling Burson</b> (not confirmed). Precedent: KKR bought a majority of FGS Global from WPP (~$1.7bn, 2024).</td></tr>
+    <tr><td><b>The irony</b></td><td>Burson won the <b>2026 Cannes PR Lions Grand Prix</b> ("The KitKat Heist") and PR Agency of the Year while its owner considered selling it.</td></tr>
+  </table>
+  <h3>The pricing problem, in one calculation</h3>
+  <div class="box b1 small">The average US agency billing rate is about <b>$278/hour</b> (PR Council 2025). If AI compresses a 40-hour task into 4 hours and the client price stays the same, the implied rate exceeds <b>$2,700/hour</b> on the remaining time, and one commentator calculates $7,000+ on certain tasks. Either prices fall, or agencies switch to <b>value-based or outcome pricing</b>. This is the same shift happening in software sales (Part C5).</div>
+  <p class="small"><b>The junior squeeze:</b> one UK dataset showed graduate vacancies down ~46% year on year (Adzuna, July 2026, unverified), and the Big Four cut graduate intakes. A CIPR <i>Influence</i> article (June 2026) warned "the bottom rungs of the career ladder have been kicked away". No PR-specific junior data was found.</p>
+  <div class="debate">
+    <div class="bull"><b class="h">Bull case</b>Fees are still growing, and revenue per head is a record. Strategic advisory firms (Brunswick, FGS, Teneo) are thriving. AI frees people for strategy, and private equity money is circling the sector.</div>
+    <div class="bear"><b class="h">Bear case</b>UK firms "run to stand still". Holding companies treat PR as non-core and sell it. Storied brands are erased, the billable hour is deflating, and the junior pyramid that trained the profession is collapsing.</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> Burson's fate; agencies "productise" AI services (GEO audits, AI monitoring) and shift to retainers or outcome fees; fewer, more technical junior hires. <b>5+ years:</b> a <b>barbell</b> of top-end strategic and financial advisory firms plus tech-enabled platforms, with a squeezed generalist middle. That's the same shape predicted for asset management (B3).</div>
+  <div class="sowhat">Entry roles will expect AI fluency from day one. Your value is judgement, writing, relationships and data, not list-building. Target firms by direction of travel: advisory boutiques, financial PR, or tech-enabled agencies.</div>
+  <div class="src">Sources: <a href="https://www.provokemedia.com/latest/article/two-thirds-of-top-300-pr-agencies-grew-in-2025">PRovoke rankings</a> · <a href="https://www.prweek.co.uk/article/1956770/prweek-uk-top-150-agencies-run-stand-tough-year">PRWeek UK Top 150</a> · <a href="https://www.matternow.com/blog/examining-muck-racks-state-of-ai-in-pr-2026-report/">Muck Rack State of AI in PR 2026</a> · <a href="https://campaignlive.com/article/omnicom-completes-acquisition-ipg-creating-worlds-largest-ad-holding-company/1941216">Omnicom–IPG</a> · <a href="https://www.campaignlive.com/article/wpp-hires-advisors-potential-burson-sale/1954521">WPP / Burson</a> · <a href="https://www.odwyerpr.com/story/public/24554/2026-04-02/should-pr-agencies-be-charging-7000-per-hour.html">$7,000/hour argument</a> · <a href="https://influenceonline.co.uk/2026/06/12/the-future-of-jobs-in-pr-will-we-get-the-third-technology-shift-wrong-too">CIPR Influence</a></div>
+</section>
+
+<section class="page prr" id="p8">
+  <div class="kicker"><span>Part D · Public Relations · Theme 8</span><a href="#contents">↑ Contents</a></div>
+  <h2>D8 · Financial and corporate PR: IPOs, activists and legal claims</h2>
+  <div class="box zero small"><b>From zero:</b> financial PR (IPOs, results, takeovers, activist fights) is the best-paid and most regulated corner of PR (Guide D6). Three big stories: London's <b>listings drought</b> and tentative revival, <b>record shareholder activism</b> (with the UK the most-targeted market in Europe), and new UK rules that turn marketing and green claims into <b>legal risk</b>, not just reputational risk.</div>
+  <div class="grid2">
+    <div class="box b4 small"><h4>London IPOs</h4>2025 was the weakest year for London listings in more than 35 years: only <b>£184m</b> raised in nine months, against ~£17bn in 2021. CRH, Flutter and Wise moved their main listings to New York, and delistings have outnumbered listings every year since 2022. <b>Signs of a thaw:</b> H1 2026 saw 7 IPOs raising £577m, up 215% (EY), helped by a stamp-duty holiday on new listings and simpler FCA listing rules. The Iran war paused plans earlier in the year.</div>
+    <div class="box b4 small"><h4>Record activism</h4><b>255</b> global activist campaigns in 2025, a record (Barclays). Elliott was the most active, with 18 campaigns and ~$20bn deployed, including <b>BP</b>. 61% of Q4 campaigns pushed for M&amp;A. The UK was <b>Europe's most-targeted market</b>, with record US activist pressure. See also Saba vs UK investment trusts (B12).</div>
+  </div>
+  <h3>Claims become legal exposure</h3>
+  <table>
+    <tr><th style="width:24%">Rule</th><th>What it means for communications</th></tr>
+    <tr><td><b>DMCC Act</b> (CMA powers live April 2025)</td><td>The CMA can now fine directly for misleading consumer practices, up to <b>10% of global turnover</b>. First substantive fine: <b>the AA, £4.2m</b> for "drip pricing" (April 2026), plus refunds to 80,000+ customers. StubHub was fined £889k, and 100 firms received advisory letters.</td></tr>
+    <tr><td><b>Green claims</b></td><td>The CMA's Green Claims Code and, for financial firms, the FCA anti-greenwashing rule. Every sustainability claim must be evidenced.</td></tr>
+    <tr><td><b>UK Sustainability Reporting Standards</b></td><td>Final UK SRS (based on the global ISSB standards) published February 2026. The FCA consulted on requiring them for listed companies from 2027.</td></tr>
+    <tr><td><b>Market abuse (UK MAR)</b></td><td>Inside information must be released properly via RNS. Leaks or selective briefing are illegal.</td></tr>
+  </table>
+  <p class="small"><b>Tariff communications:</b> "tariff" appeared on 238 S&amp;P 500 earnings calls in Q3 2025, a third fewer than the previous quarter, as executives hedged their language to avoid political reaction. Some firms withdrew financial guidance altogether. Choosing <i>how much to say</i> about political risk is now a core financial-PR judgement.</p>
+  <div class="debate">
+    <div class="bull"><b class="h">Bull case</b>Listing reforms and the 2026 pickup build an IPO pipeline. Record activism and M&amp;A keep financial PR busy, and sustainability reporting creates new work.</div>
+    <div class="bear"><b class="h">Bear case</b>Weak post-IPO performance (2025's top five IPOs were down ~26% on average), New York's pull, and geopolitics keep closing IPO windows. Greenhushing becomes rational under the threat of fines.</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> late 2026–27 tests whether the London IPO rebound is real; UK SRS becomes mandatory for listed firms; more CMA fines, possibly the first green-claims fine. <b>5+ years:</b> combined financial and sustainability narratives become <b>audited</b> territory, and "claims compliance" becomes a core PR skill.</div>
+  <div class="sowhat">Learn the basics of inside information, how an RNS works, takeover-code timing and how to substantiate a claim. This links directly to your asset management experience: the same discipline of accuracy applies.</div>
+  <div class="src">Sources: <a href="https://www.ey.com/en_uk/newsroom/2026/07/uk-ipo-market-recovery-2026">EY UK IPO H1 2026</a> · <a href="https://global.morningstar.com/en-gb/stocks/uk-companies-shirk-ipos-while-delistings-mount">Morningstar on delistings</a> · <a href="https://uk.marketscreener.com/news/2025-was-a-record-year-for-activism-barclays-ce7e58d2d18ef125">Barclays activism</a> · <a href="https://www.investmentweek.co.uk/news/4523826/us-activist-investors-target-uk-companies-record-levels-2025">UK activism</a> · <a href="https://www.osborneclarke.com/insights/cma-issues-first-fines-under-its-new-uk-direct-consumer-enforcement-powers">CMA DMCC fines</a> · <a href="https://sustainablefutures.linklaters.com/post/102mkje/uk-government-publishes-final-versions-of-uk-srs">UK SRS</a> · <a href="https://www.intelligize.com/companies-shrug-at-tariffs-in-latest-quarterly-reports">Tariff mentions</a></div>
+</section>
+
+<section class="page prr" id="p9">
+  <div class="kicker"><span>Part D · Public Relations · Theme 9</span><a href="#contents">↑ Contents</a></div>
+  <h2>D9 · Internal comms moves centre stage, and geopolitics arrives</h2>
+  <div class="box zero small"><b>From zero:</b> two trends pulling communications teams in new directions. <b>Inwards:</b> employees are the most trusting audience (78% trust their employer), but they also leak, post and organise, and AI restructuring, layoffs and return-to-office rules all need careful messaging. <b>Outwards:</b> trade wars and real wars mean companies face political risk that communications must handle.</div>
+  <div class="grid2">
+    <div>
+      <h3 style="margin-top:0">Internal communications</h3>
+      <div class="stat" style="grid-template-columns:1fr 1fr">
+        <div><b>61%</b>have no formal change-communication strategy (Gallagher 2026)</div>
+        <div><b>69%</b>of comms teams have fewer than six people</div>
+        <div><b>73% vs 18%</b>want to be strategic advisers vs say they actually are</div>
+        <div><b>~88,000</b>2026 job cuts linked to AI (Challenger, secondary)</div>
+      </div>
+      <p class="small"><b>Return to office:</b> Barclays delayed its three-day mandate to 2027 after a union-coordinated open letter; HSBC tied UK retail bonuses to office attendance; BlackRock requires managing directors in five days a week. Every internal memo is effectively public.</p>
+    </div>
+    <div>
+      <h3 style="margin-top:0">Geopolitics</h3>
+      <div class="stat" style="grid-template-columns:1fr 1fr">
+        <div><b>$25bn+</b>estimated cost of the 2026 Iran war to global companies (Reuters analysis, secondary)</div>
+        <div><b>279+</b>firms cited the war when raising prices, cutting output or suspending buybacks</div>
+        <div><b>~2/3</b>of tariff costs passed to consumers (Oxford Economics, secondary)</div>
+        <div><b>2/3</b>of employees fear trade policy will hurt their employer (Edelman 2026)</div>
+      </div>
+      <p class="small">"Corporate diplomacy" means communicating through tariffs, sanctions and conflicts where governments respond publicly to corporate decisions (see Amazon, D3). No neutral position exists.</p>
+    </div>
+  </div>
+  <h3>Awards as signals: what the industry rewards</h3>
+  <div class="grid2">
+    <div class="box b4 small"><b>Cannes 2025 PR Grand Prix: "Lucky Yatra"</b> (FCB India, Mumbai railways). Every train ticket became a lottery entry, to reduce fare-dodging. The jury rewarded <b>redesigning a service to solve a business problem</b>, not a stunt.</div>
+    <div class="box b4 small"><b>Cannes 2026 PR Grand Prix: "The KitKat Heist"</b> (Burson London + VML). After a real theft of ~413,793 KitKat bars (about 12 tonnes) between Italy and Poland, Nestlé responded with humour around "have a break", reassured customers there were no safety or supply concerns, and invited the public to trace stolen batches. <b>Fast, witty crisis judgement</b>.</div>
+  </div>
+  <div class="debate">
+    <div class="bull"><b class="h">Bull case</b>Internal comms and public affairs gain a seat at the top table during AI transformation and geopolitical upheaval. Employees are the best ambassadors.</div>
+    <div class="bear"><b class="h">Bear case</b>Teams are tiny and unfunded, and information overload is rising. AI layoffs strain the "trusted employer" premium. Any geopolitical statement can trigger a government backlash.</div>
+  </div>
+  <div class="predict"><b>1–3 years:</b> AI-transformation change communication becomes the dominant internal brief, and internal and external messages must be identical (assume everything leaks). Scenario-based geopolitical risk communication becomes standard. <b>5+ years:</b> internal and external comms converge into one <b>"stakeholder communications"</b> function.</div>
+  <div class="sowhat">Internal comms is an under-supplied, growing specialism and a strong entry route. Public affairs is another. Read the FT daily and learn to trace how a policy shock moves through costs, pricing and messaging. The KitKat Heist is a perfect case to discuss in an interview.</div>
+  <div class="src">Sources: <a href="https://www.ajg.com/ca/news-and-insights/2026-employee-communications-report/">Gallagher 2026</a> · <a href="https://remoteworkeurope.eu/news/2026/barclays-delays-three-day-office-mandate-2027/">Barclays RTO</a> · <a href="https://www.i24news.tv/en/news/international/economy/artc-the-iran-war-has-cost-global-companies-at-least-25-billion-report">Iran war corporate costs (secondary)</a> · <a href="https://bursonglobal.com/newsroom/global/burson-named-pr-agency-of-the-year-at-the-2026-cannes-lions-festival-of-creativity">Burson Cannes 2026</a> · <a href="https://www.contagious.com/news-and-views/cannes-lions-2025-the-grand-prix-winning-campaigns">Cannes 2025 Grand Prix</a></div>
+</section>
+
+<section class="page prr" id="p10">
+  <div class="kicker"><span>Part D · Public Relations · Synthesis</span><a href="#contents">↑ Contents</a></div>
+  <h2>D10 · Synthesis: think like a PR insider</h2>
+  <h3>The five big shifts in one table</h3>
+  <table>
+    <tr><th style="width:30%">Shift</th><th>What it means</th></tr>
+    <tr><td><b>Earned media re-priced twice</b></td><td><b>Scarcer</b> (newsrooms shrinking) and <b>more valuable</b> (AI cites it). The risk: AI's zero-click behaviour starves the outlets it depends on.</td></tr>
+    <tr><td><b>Trust moved inward</b></td><td>Employer trust 78%, news trust 37%. That elevates internal comms and makes external "hushing" tempting.</td></tr>
+    <tr><td><b>Claims became legal exposure</b></td><td>DMCC fines, UK SRS, the Online Safety Act, EU AI Act, ASA/CMA. Communications people need compliance literacy.</td></tr>
+    <tr><td><b>Consolidating while growing</b></td><td>Fees up 5–6%, but UK firms "run to stand still", holding companies merge or sell, and junior roles shrink.</td></tr>
+    <tr><td><b>Verification is the new craft</b></td><td>Deepfakes and AI falsehoods make proving what's real a core PR skill.</td></tr>
+  </table>
+  <h3>Five predictions to test</h3>
+  <div class="qa small">
+    <div class="box b4">By 2028, <b>"AI visibility"</b> (how a brand appears in ChatGPT, Gemini and others) will be a standard line in every PR retainer, measured alongside share of voice.</div>
+    <div class="box b4">The press release survives, but as a <b>structured, fact-dense, machine-readable</b> source document rather than a pitch.</div>
+    <div class="box b4">Agencies move away from billable hours towards <b>retainers, products and outcome fees</b>, because AI makes hours meaningless.</div>
+    <div class="box b4"><b>Financial and corporate PR</b> outgrows consumer PR in the UK as activism, M&amp;A and regulated disclosure (UK SRS) expand.</div>
+    <div class="box b4">Every major crisis plan includes a <b>deepfake scenario</b> and verification protocol within two years.</div>
+  </div>
+  <div class="box key small"><b>One sentence for your PR answer:</b> <i>"As AI systems increasingly decide what people read about an organisation, and draw heavily on credible earned coverage, the craft of building trusted, accurate stories has become more valuable, not less."</i></div>
+  <div class="opinion">Choose one prediction you'd bet on and one you'd bet against. For each, name the evidence on this page. Then ask: <b>what would change my mind?</b> That last question is what separates a real opinion from a guess.</div>
+</section>
+<section class="chapter ch-x" id="e0">
+  <div class="num">E</div>
+  <h1>The patterns across all three</h1>
+  <p>Read side by side, Investment Management, Sales and PR are being reshaped by the same handful of forces. Spotting the pattern is what lets you form views quickly about trends you haven't read about yet.</p>
+  <ol>
+    <li><a href="#e1">Six cross-industry patterns</a></li>
+    <li><a href="#e2">Build your own view, and staying current</a></li>
+  </ol>
+</section>
+
+<section class="page" id="e1">
+  <div class="kicker"><span>Part E · Patterns</span><a href="#contents">↑ Contents</a></div>
+  <h2>E1 · Six cross-industry patterns</h2>
+  <table>
+    <tr><th style="width:21%">Pattern</th><th>Investment Management</th><th>Sales</th><th>Public Relations</th></tr>
+    <tr><td><b>1 · AI cuts the cost of production, so value moves to judgement</b></td><td>Pitch books, DDQs and commentary automated; BCG sees 25–35% cost cuts (B9)</td><td>AI SDRs and research agents; Gartner's "value ceiling" (C1)</td><td>Media lists, monitoring and drafts automated; revenue per head over $200k (D7)</td></tr>
+    <tr><td><b>2 · Gatekeepers concentrate</b></td><td>DC megafunds, LGPS pools, MPS firms (B6, B7)</td><td>Bigger buying committees, procurement in 53% of deals (C2)</td><td>Fewer journalists, AI answer engines, a few holding companies (D1, D2, D7)</td></tr>
+    <tr><td><b>3 · Pricing shifts from inputs to outcomes</b></td><td>Fee compression; performance and value-for-money scrutiny (B4, B10)</td><td>Seat → usage → outcome pricing (C5)</td><td>Billable hours → retainers and value pricing (D7)</td></tr>
+    <tr><td><b>4 · Retention beats acquisition</b></td><td>Recurring AUM fees; keeping mandates through bad years (B0)</td><td>NRR, expansion is 52% of growth (C7)</td><td>Retainer clients; employer trust 78% (D3, D9)</td></tr>
+    <tr><td><b>5 · Trust becomes regulated</b></td><td>Consumer Duty, valuation reviews, SDR, Value for Money (B10)</td><td>PECR fines up to £17.5m/4%, EU AI disclosure (C8)</td><td>DMCC fines, Online Safety Act, ASA rules (D4, D8)</td></tr>
+    <tr><td><b>6 · The barbell and the squeezed middle</b></td><td>Mega-platforms vs boutiques; mid-sized UK houses sold (B3, B4)</td><td>Leaner, more senior teams; the SDR entry rung narrows (C3)</td><td>Strategic advisory vs tech platforms; the generalist middle squeezed (D7)</td></tr>
+  </table>
+
+  <svg viewBox="0 0 680 150" width="100%">
+    <defs><marker id="xa" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#14213d"/></marker></defs>
+    <g font-size="9.5">
+      <rect x="5" y="45" width="150" height="60" rx="8" fill="#14213d"/><text x="80" y="70" text-anchor="middle" fill="#fff" font-weight="700">AI makes output</text><text x="80" y="86" text-anchor="middle" fill="#fff" font-weight="700">abundant &amp; cheap</text>
+      <rect x="180" y="45" width="150" height="60" rx="8" fill="#eaf1f9" stroke="#3a6ea5"/><text x="255" y="70" text-anchor="middle" fill="#14213d" font-weight="700">Volume stops</text><text x="255" y="86" text-anchor="middle" fill="#14213d" font-weight="700">differentiating</text>
+      <rect x="355" y="45" width="150" height="60" rx="8" fill="#fff7ea" stroke="#e09f3e"/><text x="430" y="70" text-anchor="middle" fill="#14213d" font-weight="700">Trust, judgement &amp;</text><text x="430" y="86" text-anchor="middle" fill="#14213d" font-weight="700">accuracy get scarce</text>
+      <rect x="530" y="45" width="145" height="60" rx="8" fill="#eaf6f4" stroke="#2a9d8f"/><text x="602" y="70" text-anchor="middle" fill="#14213d" font-weight="700">Scarce = valuable</text><text x="602" y="86" text-anchor="middle" fill="#5c6378" font-size="8.5">relationships win</text>
+    </g>
+    <g stroke="#14213d" stroke-width="2" marker-end="url(#xa)"><line x1="157" y1="75" x2="178" y2="75"/><line x1="332" y1="75" x2="353" y2="75"/><line x1="507" y1="75" x2="528" y2="75"/></g>
+    <text x="340" y="135" text-anchor="middle" font-size="9" fill="#5c6378">The single most useful mental model for all three industries in 2026–2030.</text>
+  </svg>
+  <div class="box expert small"><b>Why this helps your application:</b> all three of your workstreams share a thesis. <i>As AI makes information and output abundant, the human value shifts to understanding clients, judging what's true and earning trust.</i> You can express that idea differently in each answer, using each industry's specific evidence, and it will read as a coherent, informed point of view.</div>
+</section>
+
+<section class="page" id="e2">
+  <div class="kicker"><span>Part E · Your view</span><a href="#contents">↑ Contents</a></div>
+  <h2>E2 · Build your own view, and stay current</h2>
+  <h3>The opinion template (fill one in per industry)</h3>
+  <table>
+    <tr><th style="width:26%">Step</th><th>Investment Management</th><th>Sales</th><th>Public Relations</th></tr>
+    <tr><td><b>The trend I find most important</b></td><td style="height:10mm"></td><td></td><td></td></tr>
+    <tr><td><b>My view (one sentence)</b></td><td style="height:10mm"></td><td></td><td></td></tr>
+    <tr><td><b>Evidence for it (2 data points)</b></td><td style="height:10mm"></td><td></td><td></td></tr>
+    <tr><td><b>The strongest counter-argument</b></td><td style="height:10mm"></td><td></td><td></td></tr>
+    <tr><td><b>What would change my mind</b></td><td style="height:10mm"></td><td></td><td></td></tr>
+    <tr><td><b>So what for the role I want</b></td><td style="height:10mm"></td><td></td><td></td></tr>
+  </table>
+  <div class="box b1 small"><b>Worked example (IM):</b> <i>Trend:</i> UK pension consolidation. <i>View:</i> "Megafunds will make institutional distribution more consultative and more concentrated." <i>Evidence:</i> L&amp;G and Fidelity defaults passed £25bn; DC scheme numbers fell 15% while assets rose 22%. <i>Counter:</i> scale could commoditise managers into low-fee passive suppliers. <i>Change my mind:</i> if megafunds bring most management in-house. <i>So what:</i> client-facing staff need deep product and private-markets knowledge, not just relationships.</div>
+
+  <h3>How insiders stay current (20 minutes a day)</h3>
+  <table>
+    <tr><th style="width:20%"></th><th>Investment Management</th><th>Sales</th><th>Public Relations</th></tr>
+    <tr><td><b>Daily</b></td><td>FT (Markets, FT Adviser), Citywire, Investment Week</td><td>LinkedIn sales leaders, SaaStr, Pavilion</td><td>PRWeek, PRovoke, Press Gazette</td></tr>
+    <tr><td><b>Weekly</b></td><td>Professional Pensions, IPE, Portfolio Adviser, Calastone flow index</td><td>Gong Labs, Growth Unhinged (pricing), RepVue</td><td>Muck Rack, Cision blogs, CIPR Influence</td></tr>
+    <tr><td><b>Annual reports</b></td><td>BCG Global Asset Management, PwC AWM, IA survey, Morningstar fee study</td><td>Gartner, Forrester State of Business Buying, Salesforce State of Sales, Bridge Group</td><td>Edelman Trust Barometer (Jan), Reuters Institute Digital News Report (Jun), PRCA Census</td></tr>
+    <tr><td><b>Podcasts</b></td><td>FT Unhedged, Money Talks (Economist)</td><td>30 Minutes to President's Club, SaaStr</td><td>PRWeek podcast, PRovoke podcast</td></tr>
+  </table>
+
+  <div class="box key small"><b>Turn this into your 250 words:</b> use <b>one</b> trend per answer, in one sentence, linked to why the client-facing side matters. The "one sentence for your answer" boxes at the end of each industry (B13, C10, D10) are ready-made starting points. Make them your own, and never stack several trends in one answer.</div>
+  <div class="box warn small"><b>A note on accuracy:</b> these are fast-moving stories. Before quoting a figure in an interview, check the latest version: deals complete or collapse, and forecasts change. Items marked "secondary" or "unverified" should be checked against the original before you quote them as fact. If you're unsure, say "around" or "reportedly"; that's how professionals hedge too.</div>
+  <div class="box b1 small center"><a href="#contents" style="font-weight:700">↑ Back to contents</a></div>
+</section>
+
+</body>
+</html>
