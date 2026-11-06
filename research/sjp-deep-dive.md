@@ -452,13 +452,77 @@ I find the bull case **more convincing on survival** and the bear case **more co
 
 ---
 
+## 8. The role itself: Wealth Management Graduate Programme (London, Lombard Street, Sept 2027)
+
+### What this job actually is (read this first)
+
+**This is not an adviser role.** You won't be a Partner and you won't join the Academy. You'll sit in SJP's **head-office Wealth Management function**: the part of SJP that supports the Partners and their clients. For two years you'll rotate through its teams, then stay permanently in the division. In practice that means:
+
+- **Proposition and services:** what Partners can offer clients, and how.
+- **Adviser support, technology and tools:** SJP is trialling AI tools to cut Partners' admin (PRIMARY, FY2024 and FY2025 releases).
+- **Data and insight:** analysing flows, retention, adviser productivity and client outcomes.
+- **Strategic projects,** including time in the **Wealth Management Chief Executive Office**, the team that runs the division's strategy and priorities.
+
+**The Level 4 Diploma in Regulated Financial Planning** (usually taken through the CII as the "DipPFS") is the minimum qualification the FCA requires to give retail investment advice. You'll get the adviser's technical knowledge (tax, pensions, investments, regulation) without being an adviser. [Interpretation] That's a real asset: you'd be a head-office person who understands the advice process from the inside, and later moving to advise would remain possible. Don't present the role as a back door to becoming an adviser, though. They want people who will build a career in the division.
+
+### How the research maps to the job description
+
+| JD says | What it means at SJP right now | What to show them |
+|---|---|---|
+| "Support our network of financial advisers (Partners) and more than one million clients" | The Partnership is SJP's core asset (section 5). Partner retention and productivity are what drive net flows. | That you understand the Partners are self-employed businesses and SJP's internal "customers", not employees. |
+| "Analyse data and produce insights to support business decision-making" | The numbers that matter: net inflows as a % of FUM, retention (~95%), gross vs net gap, adviser productivity, complaint volumes (section 4). | That you'd look at the *gap* between gross and net inflows, not just headline FUM. |
+| "Contribute to projects that enhance the adviser and client experience" | Post-charging-change bedding-in; AI and admin tools for Partners; Polaris Multi-Index; evidencing ongoing service under Consumer Duty (sections 2–3). | A concrete example, e.g. "making it easy for Partners to *evidence* ongoing reviews, which is the lesson of the OSE review". |
+| "Support strategic initiatives across the Wealth Management function" / CEO Office | Moving from "Strengthen" (2024–26) to **"Amplify" (2027+)**; the £100m cost programme lands by 2027 (sections 2 and 7). | That you know the firm is at a turning point: you'd join in Sept 2027, the first year of Amplify. |
+| "Delivering positive client outcomes" | Consumer Duty is the FCA's lens (section 3). | Use the words "client outcomes" and "fair value" naturally. They're SJP's current vocabulary for a reason. |
+| "Comfortable working with data … presenting findings clearly" / "reports for senior leaders" | | Your own evidence: a dataset you analysed, a recommendation you made, a presentation you gave. |
+
+### Likely video interview questions and the angle for each
+
+These are angles, not scripts. A strong answer needs your own examples (degree, work, societies).
+
+1. **"Why St James's Place?"**
+   - **Angle:** SJP is the UK's largest advice business, with ~5,000 Partners and over a million clients.
+   - **Angle:** it's at an inflection point. The charging change is done and the Amplify phase starts the year you'd join.
+   - **Angle:** a head-office role here shapes how advice is delivered at scale.
+   - **Avoid:** generic "prestigious firm" lines.
+2. **"Why this programme rather than becoming an adviser / going into asset management?"**
+   - **Angle:** you're interested in the *system* behind advice: proposition, data, strategy.
+   - **Angle:** the rotations give breadth, and the Level 4 gives technical depth.
+   - **Angle:** your asset-management fee knowledge is useful context, but you want to be closer to the client journey.
+3. **"What do you know about our business?"**
+   - **Angle:** the Partnership; vertical integration (advice, product, funds).
+   - **Angle:** the simple, comparable charging structure from August 2025.
+   - **Angle:** record FUM (~£240bn); 95% retention.
+   - Keep it to three facts and one insight (e.g. the gross vs net flow point).
+4. **"What challenges or opportunities face SJP / the industry?"**
+   - **Opportunities:** the advice gap; pensions in IHT from 2027; ageing wealth.
+   - **Challenges:** AI and targeted support at the lower end; competition from platforms (Quilter, AJ Bell); keeping the best Partners.
+   - **Don't skip the regulatory angle:** Consumer Duty and evidencing value. Mention the OSE review factually and briefly (see "avoid" #4 below).
+5. **"Tell us about a time you used data to solve a problem / influenced a decision."**
+   - Structure the answer as STAR (Situation, Task, Action, Result).
+   - Quantify the result.
+   - Mirror the JD: "insight", "decision-making", "presented to".
+6. **"Tell us about managing competing priorities / adapting to change."**
+   - This maps directly to the JD's "fast-paced" and "adaptability".
+   - The rotation structure means you'll change teams every few months, so show you thrive on that.
+7. **"How would you explain [a financial concept] to a client?"** For example, why advice costs what it does, or what an ISA is.
+   - **Angle:** plain English, no jargon. That's how they test the "communication" requirement.
+
+### Practical points
+
+- **The closing date (16 Oct 2026) has passed.** Your invite came on 4 Nov, so you're through the CV screen. Check the email for the deadline to complete the video interview.
+- **Right to work:** the programme can't sponsor visas. You're presumably fine, but be ready to confirm it.
+- **Logistics:** London, Lombard Street; hybrid with at least three office days a week; occasional UK travel. If asked, show you're comfortable with that.
+
+---
+
 ## Five things to say in an interview
 
 1. **"SJP's real asset is its distribution: about 5,000 advisers and roughly 95% client retention. The products sit behind that."** This shows you understand that the moat is the Partnership and the relationship, not fund performance.
 2. **"The 2025 charging change swapped higher short-term margin for cleaner, comparable pricing. New business is profitable from day one, and the six-year gestation book unwinds over time, which is why management expects earnings to accelerate from 2027."** This shows you understand the mechanics, not just the headline.
 3. **"Consumer Duty moved the standard from 'was it disclosed?' to 'is it fair value, and can you evidence it?'. That's what exposed charging for annual reviews that weren't delivered. It's an industry-wide issue, but SJP was the biggest and went first."** This is balanced, accurate and shows regulatory awareness.
 4. **"The number I'd watch is net inflows as a percentage of opening FUM. Gross inflows are strong, but with 95% retention SJP has to raise about £11bn a year just to stand still."** This shows commercial and analytical maturity.
-5. **"The structural tailwinds for advice are real: pension freedoms, frozen thresholds, and pensions coming into inheritance tax from 2027. I'm drawn to SJP because the job is the long-term planning relationship, and the Academy route builds that from day one."** This links the firm's strategy to why you want the role. Check the IHT timing again before saying it.
+5. **"The structural tailwinds for advice are real: pension freedoms, frozen thresholds, and pensions coming into inheritance tax from 2027. SJP is now entering its 'Amplify' phase, and a lot of that depends on making ~5,000 Partners more productive. That's the work the Wealth Management function does, and it's what I'd want to contribute to."** This links the firm's strategy to the actual role (see section 8). Check the IHT timing again before saying it.
 
 ## Five things to avoid saying, and why
 
