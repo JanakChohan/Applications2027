@@ -22,6 +22,67 @@ Check all of these again the week before any live interview.
 
 ---
 
+## One-page cheat sheet
+
+**The role.** Wealth Management Graduate Programme, London (Lombard Street), starting Sept 2027. It is a two-year **head-office** rotation supporting the Partners: data and insight, adviser and client experience, strategic projects, and the Wealth Management CEO Office. It includes the Level 4 Diploma in Regulated Financial Planning. It is **not** an adviser role.
+
+**SJP in one breath.** The UK's largest advice business:
+
+- **~£242bn** FUM (funds under management) and **1.06m** clients
+- **~5,000** self-employed advisers called **Partners**
+- **Restricted** advice: the advisers recommend SJP's own products and funds
+- **Vertically integrated:** SJP owns the advice, the wrappers (ISA, pension, bond) and the funds, and appoints external managers to run the money
+- Average client holds **~£226k** with SJP. It is **not** a private bank.
+
+**Key numbers**
+
+| Measure | Figure |
+|---|---|
+| Gross inflows | 2025 **£21.9bn**; H1 2026 £10.5bn |
+| Net inflows | 2025 **£6.2bn**; H1 2026 £2.7bn; Q3 2026 £0.57bn |
+| Retention | **~95%** |
+| Underlying cash result | 2025 **£462m** |
+| Dividend | **18p** a year (cut from 52.78p in 2022) |
+| Shareholder payout | **70%** of profit from 2026 |
+
+**Fees since 26 Aug 2025**
+
+| Charge | Rate |
+|---|---|
+| Initial advice | 3% / 2% / 1% tiers, capped at £30k |
+| Ongoing advice | **0.8%** a year |
+| Product | 0.27–0.35% a year |
+| Fund | e.g. 0.52% a year |
+
+- That makes about **1.6–1.7% a year all-in**.
+- **On £500k:** about **£7,950 a year**, plus £12,500 up front.
+- The early withdrawal (exit) charge is **scrapped for new money**.
+
+**The controversy**
+
+- **Oct 2023:** the FT reports on exit fees and opaque charges.
+- **Feb 2024:** a **£426m provision** (money set aside) to refund ongoing advice fees, charged since 2018, where SJP couldn't show the service was delivered.
+  - The dividend was cut and the shares fell about 30%.
+  - **No FCA fine.**
+- **June 2026:** £110m of the provision is left. SJP expects to finish the review in 2026, and has been releasing the unused money to shareholders through buybacks.
+
+**Strategy and people**
+
+- **Strategy:** CEO **Mark FitzPatrick** (since Dec 2023) runs "Strengthen" (2024–26), then **"Amplify" (2027+)**, the year you'd join.
+- **Other leaders:** CFO **Caroline Waddington**; Chair **Paul Manduca**.
+
+**Peers**
+
+- **Quilter:** the closest integrated rival, with about 9% net flows.
+- **Rathbones:** a discretionary investment manager with outflows.
+- **Evelyn:** now owned by NatWest.
+- **Hargreaves Lansdown:** a self-directed (D2C) platform, now privately owned.
+- **AJ Bell:** a low-cost D2C platform, with about 9% net flows.
+
+**The one insight to use.** At ~95% retention, SJP loses about £11bn a year to withdrawals. Gross inflows are strong, but net inflows are the number to watch, especially as SJP enters Amplify.
+
+---
+
 ## 1. The business model
 
 ### What SJP actually is
