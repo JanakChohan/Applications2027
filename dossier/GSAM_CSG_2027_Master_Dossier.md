@@ -3394,10 +3394,767 @@ No part of this project has been published or hosted. The HTML file is a local f
 
 # Appendix A: Teams and coverage
 
+### Client Solutions Group (CSG) `T-csg`
+
+- **Evidence status:** Verified
+- **Where the name comes from:** Goldman Sachs's own name. Campus and experienced-hire listings use 'Client Solutions Group', 'Global Client Solutions Group', 'Client Solutions Group / Sales' and 'Client Solutions Group (Sales)' [R1-S10][R1-S04][R1-S09][R1-S13].
+- **Kind of unit:** Umbrella client organisation of Goldman Sachs Asset Management (global)
+- **In one paragraph:** The part of Goldman Sachs Asset Management that develops client relationships and delivers investment solutions to institutional and third-party wealth clients worldwide, across public and private asset classes. Goldman's own listings gloss it as 'Sales' and call it 'the sales organization', but at least one London CSG team is also described as managing existing relationships, so it is not new-business-only.
+- **Former intern's account:** An umbrella term for everyone who speaks to clients, 'the equivalent of saying sales', covering sales, client relationship management and consultant relations, cut by coverage team, then client type, then sales versus relationship management. He also used 'CSG' for the sales side inside a team. [Unverified account]
+- **What public sources establish:** Goldman describes CSG as developing client relationships and delivering investment solutions 'for institutional and third-party wealth clients across the globe' [R1-S10]. Listing titles equate it with sales [R1-S04][R1-S09][R1-S14]. It has a named head (Matt Gibson) [R6-S19] and its own management, strategy and finance team that runs sales budgeting, fundraising projections and Salesforce data governance [R1-S13][R1-S14]. A Goldman job advert lists the distribution channels as third party wealth, institutional, consultant, insurance and retirement [R4-S09]. CSG roles are advertised in London, Frankfurt, Paris, Dubai, Doha, Stockholm, Milan and outside EMEA [R1-S05][R1-S06][R1-S07][R1-S08][R5-S16][R5-S17].
+- **Clients:** Institutional investors (pension funds, endowments, foundations, sovereign wealth funds, insurers) and wealth intermediaries (private banks, wealth managers, advisers, platforms, multi-managers) [R1-S20][R1-S17].
+- **Who decides on the client side:** Varies by client type: see each team.
+- **Investment needs:** Varies by client type: see each team.
+- **Products and strategies:** Goldman lists 'fixed income, equities, liquid alternatives, private equity, private credit, infrastructure and real estate' [R1-S10].
+- **Distribution channels:** Direct institutional coverage, consultant relations, third-party wealth intermediaries, insurance and retirement channels [R4-S09].
+- **Commercial process:** Not one process. Institutional business is usually won through consultant-led tenders and long due diligence; wealth business through approval by a gatekeeper and then adoption by advisers. [Supported inference]
+- **Specialist dependencies:** Portfolio management, product specialists, marketing, compliance, operations, legal, performance measurement and risk, accounting and billing [R1-S10][R1-S01].
+- **How the business model differs:** CSG does not manage money. It is how the investment teams' strategies reach clients and how clients' needs reach the investment teams. Goldman does not disclose revenue, assets, flows or headcount for CSG or for any EMEA client team [R2-S01].
+- **Languages (job-description evidence only):** None at group level. Requirements are set team by team in job descriptions.
+- **Recruitment evidence:** The 2027 London Summer Analyst listing is filed under this group and contains no team-specific text [R1-S02]. The 2026 cycle used sub-track titles such as 'Client Solutions Group, UK Institutional Sales' (search result only) [R1-S31]. An applicant may apply to at most four business and location combinations a year [R1-S02].
+- **Unresolved questions:** How London applicants are allocated to a team. Whether the Client Coverage Group sits inside CSG or beside it. Whether London teams use 'CSG' to mean the sales side of a team.
+- **Relationships:** 
+  - 
+    - **Type:** Reports to
+    - **Target:** Goldman Sachs Asset Management leadership within Asset & Wealth Management (exact line not published)
+    - **Status:** Not publicly established
+    - **Note:** A head of CSG is named publicly; the reporting line above that post is not stated in the sources read.
+    - **Sources:** 
+      - R6-S19
+  - 
+    - **Type:** Works with
+    - **Target:** Portfolio management, trading, operations, performance measurement and risk, legal, compliance, accounting and billing
+    - **Status:** Verified
+    - **Note:** Not publicly disclosed
+    - **Sources:** 
+      - R1-S10
+  - 
+    - **Type:** Works with
+    - **Target:** Client Coverage Group (CCG)
+    - **Status:** Verified
+    - **Note:** CCG is described as 'partnering closely with the sales team'. No reporting line between the two is published.
+    - **Sources:** 
+      - R1-S11
+  - 
+    - **Type:** Distributes products for
+    - **Target:** Goldman Sachs Asset Management investment teams across public and private markets
+    - **Status:** Verified
+    - **Note:** Not publicly disclosed
+    - **Sources:** 
+      - R1-S10
+- **Sources:** R1-S10, R1-S04, R1-S09, R1-S13, R1-S14, R1-S02, R4-S09, R6-S19, R2-S01
+
+### Client Coverage Group (CCG) `T-ccg`
+
+- **Evidence status:** Verified
+- **Where the name comes from:** Goldman Sachs's own name, defined in a Hong Kong advert for 'the global CCG team' [R1-S11]. London CCG titles were seen in search results only [R1-S32]. A 'CCG Analyst' title is used for The Hague [R5-S14].
+- **Kind of unit:** Function: service and retention of existing clients
+- **In one paragraph:** The group 'dedicated to retaining, expanding and supporting existing client relationships' through client service, operational support and risk management. It is the nearest public match to what the former intern called the relationship-management side.
+- **Former intern's account:** 'CCG (Client Coverage Group)' is the label for the relationship-management side of each team: keeps existing clients, analyst base pay £48k against £52k for sales, more seats, sits opposite sales and does much the same work at analyst level. [Unverified account]
+- **What public sources establish:** The name and definition are confirmed [R1-S11]. Official tasks: main point of contact for the client across portfolio management, trading, operations, legal and compliance; client queries; reporting; coordinating account openings, restructures and terminations; questionnaires and audit requests [R1-S11]. Whether CCG sits inside CSG, and whether every London team has a CCG side, is not established. [Not publicly established] The pay figures have no public support. [Unverified account]
+- **Clients:** Existing asset-management clients.
+- **Who decides on the client side:** The client's investment staff, operations staff and, for reporting, trustees or committees. [Supported inference]
+- **Investment needs:** Accurate reporting, quick and correct answers, smooth account changes, early warning of problems. [Supported inference]
+- **Products and strategies:** 'Equities, fixed income, and alternative - through various distribution vehicles' [R1-S11].
+- **Distribution channels:** Existing mandates and fund holdings.
+- **Commercial process:** Onboarding, periodic reviews, query handling, account life-cycle events (openings, restructures, terminations), due-diligence questionnaires and audit requests [R1-S11].
+- **Specialist dependencies:** Strategic Client Services, Client Implementation, portfolio management, trading, operations, controllers, risk, legal, compliance, accounting and billing [R1-S11].
+- **How the business model differs:** Protects and grows revenue that already exists. Retained revenue is not new revenue, and the official wording itself includes 'expanding', so the sales and relationship-management split is not clean.
+- **Languages (job-description evidence only):** None stated in the advert read.
+- **Recruitment evidence:** The Hong Kong Analyst/Associate advert asks for 3 to 5 or more years' experience, so it is not evidence of campus hiring into CCG [R1-S11].
+- **Unresolved questions:** Where CCG sits relative to CSG. Whether London campus hires are placed in CCG. Whether 'CCG' covers third-party wealth as well as institutional clients.
+- **Relationships:** 
+  - 
+    - **Type:** Works with
+    - **Target:** Sales teams in the Client Solutions Group
+    - **Status:** Verified
+    - **Note:** 'Partnering closely with the sales team, keeping them abreast of recent interactions with clients.'
+    - **Sources:** 
+      - R1-S11
+  - 
+    - **Type:** Reports to
+    - **Target:** Client Solutions Group
+    - **Status:** Not publicly established
+    - **Note:** No published reporting line. Do not draw one.
+    - **Sources:** Not publicly disclosed
+- **Sources:** R1-S11, R1-S32, R5-S14
+
+### UK coverage (grouping) `T-uk`
+
+- **Evidence status:** Unverified account
+- **Where the name comes from:** The former intern's label for the largest London coverage team. Public sources use 'UK and Ireland' for both the institutional and the third-party wealth businesses [R6-S05][R4-S08].
+- **Kind of unit:** Regional grouping (explanatory)
+- **In one paragraph:** A grouping used here to hold the UK-facing units together. Public evidence supports UK (and Ireland) institutional and third-party wealth businesses and a London-led UK fiduciary management business. It does not show a single 'UK team' with one head, and the OCIO business sits in an investment group, not in a regional sales team.
+- **Former intern's account:** The largest team by far, bringing in the most money, split into Institutional, Third Party Wealth and OCIO, each split again into sales and relationship management. [Unverified account]
+- **What public sources establish:** 'Head of the UK and Ireland institutional business' was a public title until the holder became co-head of EMEA institutional client coverage [R6-S05][R6-S02]. A 'UK & Ireland Third Party Wealth team' is named in a Goldman advert seen through an aggregator [R4-S08]. The UK fiduciary management business is led from London [R3-S16]. Goldman publishes no UK assets, revenue or headcount, so 'largest' and 'most money' cannot be tested [R2-S01]. [Not publicly established]
+- **Clients:** See UK Institutional, UK Third Party Wealth and OCIO.
+- **Who decides on the client side:** See the three UK units.
+- **Investment needs:** See the three UK units.
+- **Products and strategies:** See the three UK units.
+- **Distribution channels:** Direct, consultant-led and intermediary.
+- **Commercial process:** See the three UK units.
+- **Specialist dependencies:** See the three UK units.
+- **How the business model differs:** Three different businesses that happen to share a geography: winning mandates from institutions, getting funds used by intermediaries, and taking delegated responsibility for whole portfolios.
+- **Languages (job-description evidence only):** A UK Third Party Wealth sales-support advert required a native English speaker and no other language [R1-S17].
+- **Recruitment evidence:** The former intern thinks the UK team is the most likely destination for an English-only London candidate. [Unverified account] Every continental coverage advert read required a local language, which is consistent in direction [R5-S05][R5-S07].
+- **Unresolved questions:** Whether a single UK head exists. Whether the three units recruit separately from the London summer programme.
+- **Relationships:** 
+  - 
+    - **Type:** Covers clients in
+    - **Target:** United Kingdom and Ireland
+    - **Status:** Supported inference
+    - **Note:** Ireland appears in the public names of both the institutional and third-party wealth businesses.
+    - **Sources:** 
+      - R6-S05
+      - R4-S08
+- **Sources:** R6-S05, R6-S02, R4-S08, R3-S16, R1-S17, R2-S01
+
+### UK Institutional `T-uk-inst`
+
+- **Evidence status:** Supported inference
+- **Where the name comes from:** The former intern's label. The 2026-cycle London listing was titled 'Client Solutions Group, UK Institutional Sales' (search result only; page expired) [R1-S31]. Senior public titles: 'head of the UK and Ireland institutional business', then 'co-head of EMEA Institutional Client Coverage' [R6-S05][R6-S02].
+- **Kind of unit:** Client segment within the UK grouping
+- **In one paragraph:** Coverage of UK institutional investors. The former intern describes pension funds as dominant, with endowments and foundations and sovereign wealth funds also covered. Public evidence of named UK clients is almost entirely defined benefit pension schemes reached through OCIO or fiduciary mandates, plus older Local Government Pension Scheme mandates.
+- **Former intern's account:** His own team, on the sales side. 'The main team' and the one most likely to be hiring. Pension funds dominate; his project was client research on endowments and foundations. [Unverified account]
+- **What public sources establish:** Goldman's EMEA institutional marketing defines the institutional business as pension funds, endowments, foundations, sovereign wealth funds and insurers [R1-S20]. The co-head of EMEA Institutional Client Coverage is quoted in the Shell OCIO announcement [R3-S04][R6-S02]. A head of EMEA defined contribution within CSG was reported appointed in June 2025 (search result only) [R6-S26]. Public UK mandates outside OCIO are sparse: a Border to Coast emerging-markets equity sleeve (2023) and older local-authority mandates, some later terminated [R7-S44][R7-S46]. No public source names a current head of a 'UK Institutional sales' team. [Not publicly established]
+- **Clients:** Defined benefit pension schemes, defined contribution master trusts and providers, Local Government Pension Scheme funds and pools, endowments, foundations and charities, and official institutions. Which of these the London team actually covers beyond pension schemes is not publicly established.
+- **Who decides on the client side:** Trustee boards and their investment sub-committees, the scheme's in-house investment staff or chief investment officer where one exists, the sponsoring employer on some decisions, and the investment consultant who advises the trustees and often runs the selection. For LGPS assets, increasingly the pool rather than the individual fund [R3-S21].
+- **Investment needs:** For closed defined benefit schemes: paying pensions as they fall due, hedging interest-rate and inflation risk, generating cash flow, and reaching an endgame (insurer buyout or run-on). Aggregate funding is strong: the PPF 7800 funding ratio was 133.7% at end October 2026 [R3-S29]. For defined contribution: default-fund design under cost constraints and a push toward private markets [R3-S20][R3-S23].
+- **Products and strategies:** Liability-driven and cashflow-driven investment, credit and fixed income, multi-asset, equity, private markets, and OCIO where the client wants to delegate. Goldman cited about $300bn globally in LDI and CDI in September 2025 [R3-S04].
+- **Distribution channels:** Direct coverage of schemes and coverage of the consultants who advise them.
+- **Commercial process:** Typically: a consultant or trustee identifies a need, a shortlist is drawn, managers answer a request for proposal and due-diligence questionnaire, a final presentation is held, then legal negotiation, onboarding and transition. Cycles are long and the consultant's view of the manager matters throughout. [Supported inference]
+- **Specialist dependencies:** Consultant relations; the UK LDI and CDI pensions solutions team in fixed income [R3-S13]; the OCIO and Multi-Asset Solutions teams; product specialists; request-for-proposal and marketing teams; legal and client implementation.
+- **How the business model differs:** Few clients, large tickets, slow decisions, formal governance and published advisers. Revenue arrives as a management fee on a mandate or fund holding, at institutional rates. The structural trend (schemes maturing, buying out with insurers, or delegating to OCIO) means the same client may shrink, leave to an insurer, or hand everything to one provider.
+- **Languages (job-description evidence only):** No UK institutional job description with a language requirement was read. [Not publicly established]
+- **Recruitment evidence:** The 2026 London campus track carried the title 'UK Institutional Sales' (search result only) [R1-S31]. The former intern says it is the team most likely to be hiring. [Unverified account]
+- **Unresolved questions:** Current head of UK institutional sales. Whether the team covers endowments, charities, LGPS, DC and sovereign institutions in practice. Whether it is split into sales and relationship management as described.
+- **Relationships:** 
+  - 
+    - **Type:** Covers clients in
+    - **Target:** United Kingdom (public titles add Ireland)
+    - **Status:** Supported inference
+    - **Note:** Not publicly disclosed
+    - **Sources:** 
+      - R6-S05
+      - R1-S31
+  - 
+    - **Type:** Reports to
+    - **Target:** EMEA Institutional Client Coverage leadership
+    - **Status:** Not publicly established
+    - **Note:** The EMEA co-head title is public; the line from a UK team to it is not stated.
+    - **Sources:** 
+      - R6-S02
+  - 
+    - **Type:** Works with
+    - **Target:** Consultant Relations
+    - **Status:** Verified
+    - **Note:** Consultant relations 'creates a pipeline of business for the sales teams'.
+    - **Sources:** 
+      - R1-S21
+  - 
+    - **Type:** Works with
+    - **Target:** OCIO / UK fiduciary management team
+    - **Status:** Verified
+    - **Note:** The EMEA institutional co-head and the OCIO head are quoted together on UK OCIO announcements.
+    - **Sources:** 
+      - R3-S04
+      - R3-S07
+  - 
+    - **Type:** Works with
+    - **Target:** UK LDI and CDI pensions solutions team (fixed income)
+    - **Status:** Supported inference
+    - **Note:** An investment and specialist team, not a coverage team.
+    - **Sources:** 
+      - R3-S13
+  - 
+    - **Type:** Distributes products for
+    - **Target:** Goldman Sachs Asset Management public and private strategies
+    - **Status:** Supported inference
+    - **Note:** Not publicly disclosed
+    - **Sources:** 
+      - R1-S10
+- **Sources:** R1-S31, R1-S20, R6-S05, R6-S02, R6-S26, R3-S04, R3-S13, R3-S29, R3-S21, R7-S44, R7-S46
+
+### UK Third Party Wealth (TPW) `T-uk-tpw`
+
+- **Evidence status:** Verified
+- **Where the name comes from:** Goldman Sachs's own name: a job advert refers to the 'UK Third Party Wealth (TPW) Sales Team' [R1-S17]; another, seen through an aggregator, to the 'UK & Ireland Third Party Wealth team' [R4-S08]. A press release names the 'EMEA Third Party Wealth Business' [R4-S01].
+- **Kind of unit:** Client segment within the UK grouping
+- **In one paragraph:** Sells Goldman Sachs Asset Management funds, exchange-traded funds and alternatives to other firms that then use them for their own clients: private banks, wealth managers, financial advisers and multi-managers. The client is an intermediary, not the end investor.
+- **Former intern's account:** Sells Goldman funds to other wealth managers and private banks, who offer them to their own private clients. A friend interned on the relationship side. [Unverified account] His named example of a fund sold to another bank's private bank is not publicly established. [Not publicly established]
+- **What public sources establish:** The UK TPW Sales Team 'is responsible for new business development' with 'private banks, wealth managers, financial advisors and multi-managers' [R1-S17]. The UK & Ireland team's stated clients are private banks, wealth managers, fund of funds and independent financial advisers, offered traditional and alternative strategies as funds, ETFs or separately managed accounts [R4-S08]. A UK head of ETF distribution is named publicly [R6-S31]. The EMEA head from 2021 left in spring 2026 and no successor had been named in the sources found [R4-S02]. A formal split into sales and relationship management is not publicly established. [Not publicly established]
+- **Clients:** Private banks, wealth managers and discretionary fund managers, advice networks and independent financial advisers, multi-managers and funds of funds, and the platforms through which they deal.
+- **Who decides on the client side:** The fund selector or research team (the gatekeeper), the investment committee that approves the buy list or model portfolio, then individual portfolio managers and advisers who decide whether to use an approved fund. The end investor rarely chooses the fund directly.
+- **Investment needs:** Funds that fit a model portfolio or buy list, at a share-class price that passes value assessment, with reliable reporting and someone who can explain performance to advisers. Under the Consumer Duty the distributor must be able to show fair value for retail customers [R4-S31].
+- **Products and strategies:** UCITS funds, active and index UCITS ETFs (active equity range from April 2025, further fixed-income ETFs in April 2026) [R4-S01][R4-S17], and evergreen private-markets funds and ELTIFs for eligible investors [R4-S19][R4-S20]. No Goldman Sachs Long-Term Asset Fund or UK model portfolio service was identified. [Not publicly established]
+- **Distribution channels:** Gatekeeper approval, buy lists and model portfolios, fund platforms, and adviser-facing sales support.
+- **Commercial process:** Research and gatekeeper meetings, due diligence, approval, making the share class available on the platforms the firm uses, then adviser-by-adviser adoption and ongoing monitoring. Approval is permission to buy; it does not produce assets by itself. [Supported inference]
+- **Specialist dependencies:** Product specialists and client portfolio managers, the ETF distribution team, the Third Party Wealth Alternatives team [R4-S11], marketing, and compliance for financial promotions.
+- **How the business model differs:** Many clients, smaller tickets, flows that build gradually and can reverse quickly. Revenue is the fund's management fee on assets that arrive only when advisers allocate. Buying power is concentrating in model portfolio services and consolidated wealth groups, so fewer decisions move more money.
+- **Languages (job-description evidence only):** 'Native English speaker is essential'; no other language required [R1-S17].
+- **Recruitment evidence:** A UK TPW sales-support analyst advert (closed, undated) [R1-S17] and an experienced-hire vice president advert seen through aggregators [R4-S08]. No campus evidence specific to this team.
+- **Unresolved questions:** Head of the UK & Ireland team. Successor to the EMEA head. Whether a separate relationship-management side exists.
+- **Relationships:** 
+  - 
+    - **Type:** Covers clients in
+    - **Target:** United Kingdom (the aggregator-sourced team name adds Ireland)
+    - **Status:** Verified
+    - **Note:** Not publicly disclosed
+    - **Sources:** 
+      - R1-S17
+      - R4-S08
+  - 
+    - **Type:** Reports to
+    - **Target:** EMEA Third Party Wealth Business
+    - **Status:** Supported inference
+    - **Note:** Inferred from the team naming in a Goldman advert; the line is not stated in a primary source read directly.
+    - **Sources:** 
+      - R4-S08
+  - 
+    - **Type:** Works with
+    - **Target:** Third Party Wealth Alternatives business in EMEA
+    - **Status:** Supported inference
+    - **Note:** A specialist overlay for private-markets products sold through wealth firms.
+    - **Sources:** 
+      - R4-S11
+  - 
+    - **Type:** Works with
+    - **Target:** ETF distribution
+    - **Status:** Supported inference
+    - **Note:** Not publicly disclosed
+    - **Sources:** 
+      - R4-S17
+  - 
+    - **Type:** Distributes products for
+    - **Target:** Goldman Sachs Asset Management funds and ETFs; Goldman Sachs Alternatives G-Series
+    - **Status:** Verified
+    - **Note:** Not publicly disclosed
+    - **Sources:** 
+      - R4-S19
+      - R1-S17
+- **Sources:** R1-S17, R4-S08, R4-S01, R4-S02, R4-S11, R4-S17, R4-S19, R4-S20, R4-S31, R6-S31
+
+### OCIO / fiduciary management `T-ocio`
+
+- **Evidence status:** Verified
+- **Where the name comes from:** Goldman Sachs's own names: 'UK fiduciary management business', 'International OCIO and UK Fiduciary Management Team', 'Outsourced Chief Investment Officer business', 'EMEA OCIO Institutional Business' [R3-S16][R3-S01][R3-S10][R3-S11].
+- **Kind of unit:** Delegated-portfolio business within Multi-Asset Solutions (an investing group); global
+- **In one paragraph:** The business that takes delegated responsibility for running all or part of an institution's portfolio. It is global, not UK-only, and it sits in Multi-Asset Solutions, an investment group, not in a regional sales team. Client coverage works alongside it.
+- **Former intern's account:** One of three UK sub-teams. 'Pretty sure' it exists only in the UK team. Goldman can bring the client's in-house investment team into the firm. Recently won an award. 'Already over-hired'. [Unverified account]
+- **What public sources establish:** Not UK-only: Goldman reported $480bn of OCIO assets under supervision at 31 March 2026 and '$540+ billion' at 30 June 2026, with large US mandates and stated growth in the Netherlands, Germany and Switzerland [R3-S09][R8-S22][R3-S10]. [Conflicting evidence] The fiduciary and OCIO teams sit within Multi-Asset Solutions [R6-S18][R1-S15], supported by a team of more than 300 people that was still growing in November 2025 [R3-S07]. UK history: a leader hired from a consultant in late 2021 [R3-S16], Short Brothers (£1.6bn, 2022) [R3-S15], BAE Systems (about £23bn, 2023, in-house team transferred) [R3-S01], Shell entities (about $40bn across countries, 2025) [R3-S04]. Team transfer is reported only in some of the largest deals [R7-S04]. Fee rates are not disclosed. [Not publicly established] 'Over-hired' has no public support. [Not publicly established]
+- **Clients:** Corporate defined benefit pension schemes of all sizes; also a captive insurer and, in the United States, defined contribution plan advisory. Public UK names include the BAE Systems schemes, Shell UK pension entities, the Short Brothers Common Investment Fund, the Calor plan and the Northern Foods scheme (see the mandates register).
+- **Who decides on the client side:** Trustee boards, advised by an independent consultant or evaluator who runs the tender; the sponsoring employer where it bears the cost or its in-house team is affected. In the public UK cases the advisers were Redington, Isio, PwC and Barnett Waddingham [R3-S02][R3-S04][R3-S15].
+- **Investment needs:** Governance capacity the trustees do not have in house, faster implementation, access to managers and private markets, integrated liability hedging, and a credible path to the scheme's endgame. Goldman's stated view is that sponsors increasingly ask whether running a pension scheme is core business [R3-S07].
+- **Products and strategies:** Delegated management: strategy advice (in full fiduciary management), asset allocation, manager selection using internal and external managers, liability hedging and reporting [R3-S15][R3-S08].
+- **Distribution channels:** Competitive tender. UK trust-based schemes must invite bids from at least three unconnected providers before fiduciary managers run 20% or more of assets [R3-S24].
+- **Commercial process:** Tender run by a third-party evaluator, scored proposals and standardised performance data, trustee decision, then a long transition of assets and, in a few very large cases, of people.
+- **Specialist dependencies:** Multi-Asset Solutions portfolio managers, the External Investing Group for manager selection, LDI and CDI specialists, transition management, legal and operations.
+- **How the business model differs:** The fee is for running the whole portfolio, usually a low rate on a large base, with underlying managers' fees charged separately. A public UK scheme report (scheme name withheld) shows an asset-based fiduciary fee on the return-seeking and cashflow-driven portfolios with the LDI manager invoicing separately [R3-S17]. In Goldman's filings, advisory and OCIO alternative accounts averaged 17 basis points in 2025, a firm-wide blend and not a mandate price [R2-S01]. One appointment can be very large, but each is rare, slow and re-tendered.
+- **Languages (job-description evidence only):** None found for UK roles. The OCIO Insurance advert in The Hague states none in the text read [R1-S15].
+- **Recruitment evidence:** Senior hiring continued in September 2025 [R3-S07]. A 'Client Relationship Manager (OCIO)' London title was seen in search results only [R1-S33]. No analyst-level campus evidence.
+- **Unresolved questions:** Goldman's UK-only OCIO assets and market rank. Its OCIO fee rates. Whether CSG summer analysts are placed with OCIO client coverage. Which of two 2026 awards the former intern saw.
+- **Relationships:** 
+  - 
+    - **Type:** Reports to
+    - **Target:** Multi-Asset Solutions (investment group)
+    - **Status:** Verified
+    - **Note:** Public sources place the fiduciary and OCIO teams within Multi-Asset Solutions. This is 'sits within', as stated publicly; individual reporting lines are not published.
+    - **Sources:** 
+      - R6-S18
+      - R1-S15
+  - 
+    - **Type:** Works with
+    - **Target:** EMEA Institutional Client Coverage and UK institutional coverage
+    - **Status:** Verified
+    - **Note:** Not publicly disclosed
+    - **Sources:** 
+      - R3-S04
+      - R3-S07
+  - 
+    - **Type:** Works with
+    - **Target:** Trustees' independent advisers and tender evaluators
+    - **Status:** Verified
+    - **Note:** Redington, Isio, PwC and Barnett Waddingham in the public UK cases.
+    - **Sources:** 
+      - R3-S02
+      - R3-S04
+      - R3-S15
+  - 
+    - **Type:** Covers clients in
+    - **Target:** United Kingdom, Ireland, Netherlands, Germany, Switzerland, United States and Canada
+    - **Status:** Verified
+    - **Note:** Mandates or stated activity in each; the business is global.
+    - **Sources:** 
+      - R3-S09
+      - R3-S10
+      - R3-S04
+  - 
+    - **Type:** Distributes products for
+    - **Target:** Goldman Sachs internal strategies and external managers selected for client portfolios
+    - **Status:** Verified
+    - **Note:** Not publicly disclosed
+    - **Sources:** 
+      - R3-S15
+- **Sources:** R3-S01, R3-S04, R3-S07, R3-S08, R3-S09, R3-S10, R3-S11, R3-S15, R3-S16, R3-S17, R3-S24, R6-S18, R1-S15, R8-S22, R2-S01, R7-S04
+
+### Consultant Relations `T-consultant`
+
+- **Evidence status:** Verified
+- **Where the name comes from:** Goldman Sachs's own name: 'Consultant Relations' and 'Global Consultant Relations' [R1-S21][R6-S25].
+- **Kind of unit:** Function: coverage of investment consultants
+- **In one paragraph:** Covers the investment consulting firms that advise institutional investors, rate managers and run selections. It does not win mandates directly; it builds the consultants' understanding of the firm so that sales teams are considered.
+- **Former intern's account:** One of the three functions inside CSG: 'covering the investment consultants who steer clients toward managers'. [Unverified account]
+- **What public sources establish:** An older London advert describes the team as working with the regional institutional sales teams and creating 'a pipeline of business for the sales teams', with UK and continental European travel [R1-S21]. A managing director was reported as joining in September 2024 as head of international, global consultant relations, based in London [R6-S25]. A Goldman advert lists 'institutional, third-party wealth, insurance and consultant relations teams' side by side [R5-S42]. Whether the function formally sits inside CSG today is not established from a primary source read directly.
+- **Clients:** Investment consulting firms: for UK pensions, firms such as WTW, Mercer, Aon, LCP, Hymans Robertson, Isio, XPS, Redington and Barnett Waddingham.
+- **Who decides on the client side:** Consultants' manager-research teams (who rate strategies) and field consultants (who advise specific clients).
+- **Investment needs:** Deep, consistent information on strategies, people and process; early notice of changes; access to portfolio managers.
+- **Products and strategies:** No product of its own. It supports ratings across the firm's strategies.
+- **Distribution channels:** Research meetings, data submissions to consultant databases, strategy reviews.
+- **Commercial process:** Maintain ratings, respond to research requests, brief consultants on changes, and pass intelligence on searches to the sales teams.
+- **Specialist dependencies:** Portfolio managers and product specialists for research meetings; the request-for-proposal team for data.
+- **How the business model differs:** No direct revenue. Its value shows up as shortlists and ratings that make a sale possible. The consulting sector is consolidating, which concentrates this influence in fewer firms [R3-S34].
+- **Languages (job-description evidence only):** 'A second European language' was listed as an advantage in the older advert [R1-S21].
+- **Recruitment evidence:** Older associate advert (undated); vice president and analyst titles seen in search results only [R1-S34].
+- **Unresolved questions:** Current structure and exact place within CSG. Size of the London team.
+- **Relationships:** 
+  - 
+    - **Type:** Works with
+    - **Target:** Regional institutional sales teams
+    - **Status:** Verified
+    - **Note:** Not publicly disclosed
+    - **Sources:** 
+      - R1-S21
+  - 
+    - **Type:** Covers clients in
+    - **Target:** UK, continental Europe, Middle East, Africa and Asia (international head's remit as reported)
+    - **Status:** Supported inference
+    - **Note:** Not publicly disclosed
+    - **Sources:** 
+      - R6-S25
+  - 
+    - **Type:** Reports to
+    - **Target:** Client Solutions Group
+    - **Status:** Not publicly established
+    - **Note:** Listed alongside CSG channels in an advert summary; no reporting line is published.
+    - **Sources:** 
+      - R5-S42
+- **Sources:** R1-S21, R1-S34, R6-S25, R5-S42, R3-S34
+
+### Middle East `T-me`
+
+- **Evidence status:** Supported inference
+- **Where the name comes from:** The former intern's label. No public team name was found. A former head's public title was 'head of MENA client business and new markets' [R6-S14]. Listings: 'Client Solutions Group - Third Party Wealth' (Dubai) and 'Alternatives Capital Formation, Client Solutions Group' (Doha) [R1-S07][R1-S08].
+- **Kind of unit:** Regional coverage
+- **In one paragraph:** Coverage of Gulf and wider Middle East clients. Public evidence shows CSG hiring in Dubai and Doha, a growing set of local offices, and that the former regional head's team was spread across London, Riyadh, Dubai, Abu Dhabi and Doha. The split the former intern described is not established.
+- **Former intern's account:** Arabic is not required. He thinks it is split into Third Party Wealth and Institutional. His own assessment centre was for this team. [Unverified account]
+- **What public sources establish:** A former head of MENA client business left in September 2025; his team was based in London, Riyadh, Dubai, Abu Dhabi and Doha [R6-S14]. The current head is not publicly established. [Not publicly established] 2027 off-cycle roles are listed in Dubai (CSG Third Party Wealth) and Doha (Alternatives Capital Formation, CSG), with no language requirement stated [R1-S07][R1-S08]. Goldman has offices in Dubai, Doha and Riyadh, announced an Abu Dhabi office in 2023 [R5-S29], opened Kuwait in October 2025 [R5-S30] and officially opened a Riyadh regional headquarters in December 2025 [R5-S28]. Whether Arabic is required and whether an 'Institutional' sub-team exists by name are not established. [Not publicly established]
+- **Clients:** Sovereign wealth funds and other official institutions, public pension funds, family offices, and local banks and wealth distributors. [Supported inference]
+- **Who decides on the client side:** Small senior investment teams and investment committees at state investors; family principals and their offices; product heads at local banks. [Supported inference]
+- **Investment needs:** Partnership-style relationships: separately managed accounts, co-investment, private markets access, knowledge transfer and local presence. [Supported inference]
+- **Products and strategies:** Publicly documented examples are alternatives: a $1bn private-credit separately managed account with Mubadala (2024) [R5-S04] and other sovereign partnerships in the mandates register.
+- **Distribution channels:** Direct senior coverage; alternatives capital formation; third-party wealth distribution through regional banks.
+- **Commercial process:** Long, relationship-led and senior. Deals are often structured as partnerships with the alternatives business, not won through a consultant-run tender. [Supported inference]
+- **Specialist dependencies:** Goldman Sachs Alternatives (private credit, private equity), alternatives capital formation, and the firm's wider regional franchise.
+- **How the business model differs:** Very few clients, each potentially enormous, with bespoke terms. A commitment or partnership announcement is not the same as funded, fee-paying assets, and a fundraising target is not a commitment.
+- **Languages (job-description evidence only):** No language requirement stated in the Dubai or Doha listings [R1-S07][R1-S08]. Arabic: not publicly established either way.
+- **Recruitment evidence:** 2027 off-cycle internships in Dubai and Doha [R1-S07][R1-S08]. That London assessment centres are run for a Middle East team is the former intern's account only. [Unverified account]
+- **Unresolved questions:** Current head. Whether London still houses Middle East coverage staff after the 2025 departures. The internal split.
+- **Relationships:** 
+  - 
+    - **Type:** Covers clients in
+    - **Target:** Middle East and North Africa
+    - **Status:** Verified
+    - **Note:** From the former head's public title and team locations.
+    - **Sources:** 
+      - R6-S14
+  - 
+    - **Type:** Works with
+    - **Target:** Goldman Sachs Alternatives on sovereign partnerships
+    - **Status:** Supported inference
+    - **Note:** Not publicly disclosed
+    - **Sources:** 
+      - R5-S04
+  - 
+    - **Type:** Reports to
+    - **Target:** Client Solutions Group
+    - **Status:** Supported inference
+    - **Note:** Dubai and Doha roles are listed under CSG; the regional reporting line is not published.
+    - **Sources:** 
+      - R1-S07
+      - R1-S08
+- **Sources:** R6-S14, R1-S07, R1-S08, R5-S04, R5-S28, R5-S29, R5-S30, R5-S18
+
+### Nordics `T-nordics`
+
+- **Evidence status:** Supported inference
+- **Where the name comes from:** Job-advert names: 'Nordics Institutional Sales Support' (London) and 'TPW Nordic Client Coverage' (Copenhagen), both from search summaries [R5-S08][R5-S46]. A 2020 report describes one integrated Nordic team [R5-S26].
+- **Kind of unit:** Regional coverage
+- **In one paragraph:** Coverage of Sweden, Denmark, Norway and Finland from Stockholm, Copenhagen and London. In 2020 institutional sales and third-party distribution were merged into one Nordic organisation, which shows a region need not be split the way the UK is described.
+- **Former intern's account:** A coverage team that needs a local language. [Unverified account]
+- **What public sources establish:** In May 2020 Goldman Sachs Asset Management merged third-party distribution and institutional sales into one Nordic organisation selling all asset classes to all client types, with staff in Stockholm, Copenhagen and London [R5-S26]. A London Nordics Institutional Sales Support Analyst advert requires native Swedish and describes work with pension funds and sovereign wealth funds (search summary) [R5-S08]. A 2027 Stockholm CSG off-cycle role is listed [R5-S17]. Whether the 2020 structure still holds is not confirmed.
+- **Clients:** Pension institutions and sovereign funds [R5-S08]; insurers, described as part of 'the core' in older press [R5-S47]; discretionary and advisory wealth managers, private banks and fund platforms on the wealth side [R5-S46].
+- **Who decides on the client side:** Large professional in-house investment teams with their own manager-research staff. [Supported inference]
+- **Investment needs:** Specialist strategies that in-house teams do not run themselves, at institutional fees, with strong sustainability standards. [Supported inference]
+- **Products and strategies:** All asset classes [R5-S26].
+- **Distribution channels:** Direct to institutions; intermediaries for wealth.
+- **Commercial process:** Direct selection by professional buyers; formal public procurement for some state funds. [Supported inference]
+- **Specialist dependencies:** Product specialists; sustainable-investing capability inherited through NN Investment Partners.
+- **How the business model differs:** Sophisticated, fee-sensitive buyers who can manage assets internally, so the manager is hired for what the client cannot do itself.
+- **Languages (job-description evidence only):** Native Swedish for the London institutional sales-support seat (search summary) [R5-S08].
+- **Recruitment evidence:** 2027 Stockholm off-cycle CSG analyst [R5-S17].
+- **Unresolved questions:** Current head and whether the integrated 2020 structure persists. No Nordic mandate after 2001 was found in public sources.
+- **Relationships:** 
+  - 
+    - **Type:** Covers clients in
+    - **Target:** Nordic countries
+    - **Status:** Verified
+    - **Note:** Not publicly disclosed
+    - **Sources:** 
+      - R5-S26
+- **Sources:** R5-S08, R5-S17, R5-S26, R5-S46, R5-S47
+
+### Switzerland `T-ch`
+
+- **Evidence status:** Verified
+- **Where the name comes from:** Job-advert name 'TPW Switzerland team' [R1-S18]; press name 'Swiss Third Party Wealth business' [R4-S07].
+- **Kind of unit:** Regional coverage (publicly evidenced for Third Party Wealth)
+- **In one paragraph:** Publicly evidenced as a third-party wealth business with its own head since early 2025, with a sales-support seat in London and a role in Zurich. Swiss institutional coverage was searched for and not found.
+- **Former intern's account:** A coverage team that needs a local language. [Unverified account]
+- **What public sources establish:** A London-based sales-support analyst was hired for the 'TPW Switzerland team' serving 'the Swiss client base' [R1-S18]. The Swiss Third Party Wealth business has had a dedicated head since the start of 2025 [R4-S07]. A Zurich third-party wealth alternatives role requires German, with other European languages preferred [R5-S11], while the London advert mirror listed no language requirement. [Conflicting evidence]
+- **Clients:** Private banks and wealth managers whose private clients are the end investors [R4-S07].
+- **Who decides on the client side:** Fund selection teams and chief investment offices at private banks; then relationship managers and discretionary portfolio managers who decide whether to use an approved fund. [Supported inference]
+- **Investment needs:** Funds and private-markets vehicles suitable for international private clients, available in the right share classes and jurisdictions. [Supported inference]
+- **Products and strategies:** Public and private asset offerings; alternatives for wealth through intermediaries [R5-S11].
+- **Distribution channels:** Private-bank gatekeepers and their advisory and discretionary desks.
+- **Commercial process:** As for third-party wealth generally: approval first, usage second.
+- **Specialist dependencies:** Third Party Wealth Alternatives; product specialists.
+- **How the business model differs:** A concentrated set of very large private banks, so a single approval can open a large adviser base, and a single removal can close it.
+- **Languages (job-description evidence only):** Mixed evidence: German required for a Zurich role [R5-S11]; none listed on the London advert mirror [R5-S06].
+- **Recruitment evidence:** Closed London sales-support posting [R5-S06].
+- **Unresolved questions:** Whether a Swiss institutional team exists and where it sits.
+- **Relationships:** 
+  - 
+    - **Type:** Covers clients in
+    - **Target:** Switzerland
+    - **Status:** Verified
+    - **Note:** Not publicly disclosed
+    - **Sources:** 
+      - R1-S18
+  - 
+    - **Type:** Reports to
+    - **Target:** EMEA Third Party Wealth Business
+    - **Status:** Not publicly established
+    - **Note:** A Swiss head is named; the line above is not stated in the sources read.
+    - **Sources:** 
+      - R4-S07
+- **Sources:** R1-S18, R4-S07, R5-S06, R5-S11
+
+### Benelux `T-benelux`
+
+- **Evidence status:** Verified
+- **Where the name comes from:** Goldman Sachs's own names: 'BeNeLux Client Solutions Group' and, earlier, 'BeNeLux Institutional Sales Team' for the same London role [R1-S01][R1-S19].
+- **Kind of unit:** Regional coverage
+- **In one paragraph:** Coverage of Belgium, the Netherlands and Luxembourg. The best-documented continental team: a live London advert describes one team doing both new business and existing relationships, and local offices in The Hague, Amsterdam and Brussels carry third-party wealth and client-coverage seats.
+- **Former intern's account:** A coverage team (Belgium, Luxembourg, Netherlands) that needs a local language. [Unverified account]
+- **What public sources establish:** The London-based BeNeLux Client Solutions Group 'is responsible for new business development and managing existing institutional client relationships' [R1-S01]. Official junior tasks: prepare and follow up client and prospect meetings, answer day-to-day client queries, work with product specialists, marketing, compliance and operations, and support the Country Head [R1-S01]. Third-party wealth sales roles are advertised in The Hague or Amsterdam and Brussels, and a 'CCG Analyst' title is used for The Hague (search summaries) [R5-S12][R5-S13][R5-S14]. Goldman acquired NN Investment Partners in April 2022 [R5-S23].
+- **Clients:** Institutional clients in the three countries, notably Dutch pension funds and insurers; wealth intermediaries.
+- **Who decides on the client side:** Pension fund boards and their fiduciary managers, who often select underlying managers on the fund's behalf. [Supported inference]
+- **Investment needs:** Dutch pension funds are moving to the new contribution-based system, with entitlements to transfer by 1 January 2028, which is rewriting hedging and return portfolios [R5-S35].
+- **Products and strategies:** 'Traditional Public Markets to Private Assets' [R1-S01]; former NN Investment Partners capabilities.
+- **Distribution channels:** Direct institutional coverage; fiduciary managers; wealth intermediaries.
+- **Commercial process:** For Dutch pensions, often through a fiduciary manager acting as the fund's gatekeeper. [Supported inference]
+- **Specialist dependencies:** Product specialists, marketing, compliance, operations [R1-S01].
+- **How the business model differs:** A market where Goldman is both a seller to fiduciary managers and, through the former NN business, a fiduciary manager itself.
+- **Languages (job-description evidence only):** London institutional role: 'Native Dutch speaker is essential (written and oral fluency) with French an advantage' [R1-S01].
+- **Recruitment evidence:** London Analyst/Associate advert posted October 2026 and live on 14 November 2026 [R1-S01].
+- **Unresolved questions:** Whether the team is formally split by channel. Where the 'external sales team' named in the advert sits.
+- **Relationships:** 
+  - 
+    - **Type:** Covers clients in
+    - **Target:** Belgium, Netherlands, Luxembourg
+    - **Status:** Verified
+    - **Note:** Not publicly disclosed
+    - **Sources:** 
+      - R1-S01
+  - 
+    - **Type:** Works with
+    - **Target:** Product specialists; marketing, compliance and operations; the Country Head
+    - **Status:** Verified
+    - **Note:** Not publicly disclosed
+    - **Sources:** 
+      - R1-S01
+- **Sources:** R1-S01, R1-S19, R5-S12, R5-S13, R5-S14, R5-S23, R5-S35
+
+### Germany & Austria `T-dach`
+
+- **Evidence status:** Verified
+- **Where the name comes from:** Listing and advert names: 'Client Solutions Group - Institutional Sales' (Frankfurt) [R1-S05]; 'Institutional Sales Team for Germany & Austria' and 'German TPW team' (search summaries) [R5-S15][R5-S07].
+- **Kind of unit:** Regional coverage (Frankfurt)
+- **In one paragraph:** Not mentioned by the former intern. Covered from Frankfurt, which is why it would not appear in a London team list. Institutional sales, third-party wealth and insurance seats are all evidenced there.
+- **Former intern's account:** Never came up. He said his list was 'everyone'. [Unverified account]
+- **What public sources establish:** The 2027 Frankfurt off-cycle listing is 'Client Solutions Group - Institutional Sales' for a German speaker [R1-S05]; the 2026 Frankfurt new-analyst listing was 'Client Solutions Group / Sales' [R1-S04]. A head of Third-Party Wealth for Germany and Austria took up the post on 1 July 2026 [R6-S08]. An Insurance Client Solutions Group associate seat was advertised in Frankfurt [R5-S21].
+- **Clients:** Institutional clients; private banks, wealth managers, financial advisers and multi-managers; insurers [R5-S07][R5-S21].
+- **Who decides on the client side:** In-house investment teams at insurers and pension institutions; fund selectors at banks. [Supported inference]
+- **Investment needs:** Not researched to source.
+- **Products and strategies:** The Goldman Sachs Asset Management range; no team-specific list.
+- **Distribution channels:** Direct institutional; bank and wealth intermediaries; insurance.
+- **Commercial process:** Not researched to source.
+- **Specialist dependencies:** Insurance Asset Management; product specialists.
+- **How the business model differs:** A local-language market served locally.
+- **Languages (job-description evidence only):** German speaker (in the Frankfurt listing title) [R1-S05]; native German and English for the German TPW team (search summary) [R5-S07].
+- **Recruitment evidence:** 2027 Frankfurt off-cycle internship; 2026 Frankfurt new analyst [R1-S05][R1-S04].
+- **Unresolved questions:** Named head of institutional coverage for Germany and Austria.
+- **Relationships:** 
+  - 
+    - **Type:** Covers clients in
+    - **Target:** Germany and Austria
+    - **Status:** Supported inference
+    - **Note:** Not publicly disclosed
+    - **Sources:** 
+      - R5-S15
+      - R6-S08
+- **Sources:** R1-S05, R1-S04, R5-S07, R5-S15, R5-S21, R6-S08
+
+### France `T-fr`
+
+- **Evidence status:** Verified
+- **Where the name comes from:** Listing name 'Client Solutions Group - Third Party Wealth' (Paris) [R1-S06]; 'EMEA French Sales Team' in an advert summary [R5-S10].
+- **Kind of unit:** Regional coverage (Paris, with a London support seat)
+- **In one paragraph:** Not mentioned by the former intern. A 2027 Paris listing places French third-party wealth coverage in Paris; a London sales-support seat for the French region has also been advertised.
+- **Former intern's account:** Never came up. [Unverified account]
+- **What public sources establish:** The 2027 Paris off-cycle listing is 'Client Solutions Group - Third Party Wealth' for a French speaker [R1-S06]. A London sales-support role in the 'EMEA French Sales Team' required fluent French and English (search summary) [R5-S10]. Institutional coverage of France was not established. [Not publicly established]
+- **Clients:** Third-party wealth clients (per the advert summary).
+- **Who decides on the client side:** Not researched to source.
+- **Investment needs:** Not researched to source.
+- **Products and strategies:** Not specified; ETFs are sold from Paris [R5-S45].
+- **Distribution channels:** Bank, insurer and private-bank distribution. [Supported inference]
+- **Commercial process:** Not researched to source.
+- **Specialist dependencies:** ETF distribution.
+- **How the business model differs:** A local-language intermediary market.
+- **Languages (job-description evidence only):** French speaker (Paris listing title) [R1-S06]; French and English fluency for the London support seat (search summary) [R5-S10].
+- **Recruitment evidence:** 2027 Paris off-cycle internship [R1-S06].
+- **Unresolved questions:** Institutional coverage; named head.
+- **Relationships:** 
+  - 
+    - **Type:** Covers clients in
+    - **Target:** France
+    - **Status:** Supported inference
+    - **Note:** Not publicly disclosed
+    - **Sources:** 
+      - R5-S10
+      - R1-S06
+- **Sources:** R1-S06, R5-S10, R5-S45
+
+### Italy `T-it`
+
+- **Evidence status:** Supported inference
+- **Where the name comes from:** No public team name found. A 'country head for Italy' title is public [R6-S11]; Milan CSG and third-party wealth roles are listed (search summaries) [R5-S16][R5-S44].
+- **Kind of unit:** Regional coverage (Milan)
+- **In one paragraph:** Not mentioned by the former intern. Covered from Milan under a long-standing country head.
+- **Former intern's account:** Never came up. [Unverified account]
+- **What public sources establish:** A country head for Italy is named publicly and based in Milan [R6-S11]. A 2027 Milan CSG off-cycle analyst role and a Milan third-party wealth sales associate role are listed (search summaries) [R5-S16][R5-S44]. 2025 reporting describes third-party wealth relationships with private banks, asset managers and insurers [R5-S43].
+- **Clients:** Private banks, asset managers and insurance companies as distributors [R5-S43].
+- **Who decides on the client side:** Not researched to source.
+- **Investment needs:** Not researched to source.
+- **Products and strategies:** Not specified.
+- **Distribution channels:** Bank and insurer distribution networks. [Supported inference]
+- **Commercial process:** Not researched to source.
+- **Specialist dependencies:** Not researched.
+- **How the business model differs:** Distribution through large bank and insurance networks.
+- **Languages (job-description evidence only):** No advert text read. [Not publicly established]
+- **Recruitment evidence:** 2027 Milan off-cycle CSG analyst (search summary) [R5-S16].
+- **Unresolved questions:** Institutional coverage; language requirement.
+- **Relationships:** 
+  - 
+    - **Type:** Covers clients in
+    - **Target:** Italy
+    - **Status:** Supported inference
+    - **Note:** Not publicly disclosed
+    - **Sources:** 
+      - R6-S11
+      - R5-S16
+- **Sources:** R6-S11, R5-S16, R5-S43, R5-S44
+
+### Iberia `T-iberia`
+
+- **Evidence status:** Supported inference
+- **Where the name comes from:** Public titles: 'Managing Director for Iberia' and, earlier, 'head of Distribution for Iberia' [R6-S12][R6-S13].
+- **Kind of unit:** Regional coverage (Madrid)
+- **In one paragraph:** Not mentioned by the former intern. The Iberia distribution head and her London team moved to Madrid in June 2021, which explains why Iberia is absent from a London team list.
+- **Former intern's account:** Never came up. [Unverified account]
+- **What public sources establish:** Goldman Sachs Asset Management moved its Iberia distribution head and her London team to Madrid in June 2021 [R6-S13]. A managing director for Iberia is named publicly [R6-S12]. Team structure and client segments are not established. [Not publicly established]
+- **Clients:** Not established.
+- **Who decides on the client side:** Not established.
+- **Investment needs:** Not established.
+- **Products and strategies:** Not established.
+- **Distribution channels:** Private banks and bank networks. [Supported inference]
+- **Commercial process:** Not established.
+- **Specialist dependencies:** An alternatives specialist for Spain is named publicly [R6-S12].
+- **How the business model differs:** Not researched to source.
+- **Languages (job-description evidence only):** No job advert found. [Not publicly established]
+- **Recruitment evidence:** No 2027 Madrid CSG listing was seen.
+- **Unresolved questions:** Structure, segments and languages. Iberia-specific searches were cut short when the search allowance ran out.
+- **Relationships:** 
+  - 
+    - **Type:** Covers clients in
+    - **Target:** Spain and Portugal
+    - **Status:** Verified
+    - **Note:** From the public title and the 2021 relocation report.
+    - **Sources:** 
+      - R6-S13
+      - R6-S12
+- **Sources:** R6-S12, R6-S13
+
+### Liquidity Solutions `T-liq`
+
+- **Evidence status:** Verified
+- **Where the name comes from:** Goldman Sachs's own name: 'Liquidity Solutions', with a 'Global Head, Liquidity Solutions Client Business' [R5-S01]; a London advert refers to an 'EMEA Liquidity Solutions' sales channel (search summary) [R5-S09].
+- **Kind of unit:** Product-line client business (global)
+- **In one paragraph:** A client business organised around a product, not a region: money market funds and short-duration strategies for clients with operating or strategic cash. It has global leadership shared with Insurance Asset Management and an EMEA sales seat in London.
+- **Former intern's account:** A product line with its own team 'because the product is strong'. He did not know how it is split. He said an English-only candidate could go there, then said everyone in it speaks French. [Unverified account]
+- **What public sources establish:** 'Our Liquidity Solutions team oversees $1.2+ trillion in money market and short-term assets' as at 30 September 2026 (global) [R5-S01]; firm-wide liquidity assets under supervision were $1,051bn at the same date [R2-S02]. Clients: 'financial institution, hedge fund, institutional, corporate, and wealth management clients' [R5-S01]. A London 'EMEA Liquidity Solutions Sales (UK Corporates)' seat covers UK corporate and insurance clients (search summary) [R5-S09]. No evidence that French is required: the one French-speaker advert found belongs to the French sales team. [Not publicly established] Its placement inside CSG is the former intern's account; public sources show its own global client-business head.
+- **Clients:** Corporate treasurers, financial institutions, hedge funds, private equity and venture firms, public institutions, insurers, pension schemes holding collateral, and wealth clients.
+- **Who decides on the client side:** Treasurers and treasury committees working to a board-approved investment policy; chief financial officers; collateral and operations managers at funds and schemes. [Supported inference]
+- **Investment needs:** Safety of capital first, same-day or next-day access second, yield third. Counterparty diversification, credit ratings and operational ease (portals, cut-off times) often decide the choice. [Supported inference]
+- **Products and strategies:** Money market funds: GS US$ Liquid Reserves and GS Euro Liquid Reserves (low-volatility net asset value), GS US$ Treasury Liquid Reserves (public debt constant net asset value); short-duration accounts and funds; fixed income ETFs; the Mosaic portal [R5-S01].
+- **Distribution channels:** Direct treasury coverage and dealing portals.
+- **Commercial process:** Onboarding and counterparty approval, then daily subscriptions and redemptions with no sales event attached. The 'mandate' is permission to place cash; the balance moves every day.
+- **Specialist dependencies:** Money market portfolio managers and credit analysts; operations and portal support.
+- **How the business model differs:** Thin fee on a very large, very mobile balance. The investor earns the portfolio yield net of the fund charge; the manager earns that charge on average balances. Firm-wide, liquidity products earned an average 14 basis points in 2025 [R2-S01]. Balances can leave in a day for reasons unrelated to service.
+- **Languages (job-description evidence only):** None seen in the UK Corporates advert summary [R5-S09]. French requirement: not publicly established.
+- **Recruitment evidence:** Experienced-hire London postings only; no student-programme evidence specific to liquidity.
+- **Unresolved questions:** Internal split; whether CSG summer analysts are placed here; EMEA head.
+- **Relationships:** 
+  - 
+    - **Type:** Distributes products for
+    - **Target:** Fixed Income and Liquidity Solutions (money market and short-duration portfolio management)
+    - **Status:** Verified
+    - **Note:** Not publicly disclosed
+    - **Sources:** 
+      - R5-S01
+  - 
+    - **Type:** Works with
+    - **Target:** Insurance Asset Management (shared global head)
+    - **Status:** Verified
+    - **Note:** Not publicly disclosed
+    - **Sources:** 
+      - R5-S01
+      - R5-S02
+  - 
+    - **Type:** Covers clients in
+    - **Target:** EMEA from London, including UK corporates
+    - **Status:** Supported inference
+    - **Note:** Not publicly disclosed
+    - **Sources:** 
+      - R5-S09
+  - 
+    - **Type:** Reports to
+    - **Target:** Client Solutions Group
+    - **Status:** Unverified account
+    - **Note:** Placement inside CSG is the former intern's account. Public sources show a global head of the liquidity client business.
+    - **Sources:** 
+      - R5-S01
+- **Sources:** R5-S01, R5-S02, R5-S09, R2-S01, R2-S02, R5-S32
+
+### Insurance `T-ins`
+
+- **Evidence status:** Verified
+- **Where the name comes from:** Goldman Sachs's own names: 'Insurance Asset Management' and, in advert titles, 'Insurance Client Solutions Group' [R5-S02][R5-S21].
+- **Kind of unit:** Client vertical (global)
+- **In one paragraph:** A global client vertical for insurance companies' own balance-sheet assets. It has named global heads and seats in London and Frankfurt, and was extended in Europe by the NN Investment Partners acquisition.
+- **Former intern's account:** Its own client base, mentioned as an afterthought. Where it sits is unclear. [Unverified account]
+- **What public sources establish:** Goldman Sachs Asset Management states it manages '$651 billion in general account assets on behalf of insurance clients' as at 31 December 2025 [R5-S02]. Its offer is partial to full outsourcing across fixed income, alternatives and equities, plus advice on asset-liability management, strategic asset allocation and capital-efficient strategies [R5-S02]. 'Insurance Client Solutions Group' roles have been advertised in London and Frankfurt (search summaries) [R5-S21][R5-S22]. A CSG advert lists insurance beside institutional and third-party wealth as a peer channel (search summary) [R5-S42]. Whether EMEA insurance staff report regionally or to the global vertical is not established. [Not publicly established]
+- **Clients:** Life, health, property and casualty, and reinsurance companies [R5-S21].
+- **Who decides on the client side:** The insurer's chief investment officer and chief financial officer, with actuarial, risk and capital-management teams involved in every decision.
+- **Investment needs:** Assets that match liabilities, earn spread, and use regulatory capital efficiently. The rulebook is changing: amended EU Solvency II rules apply from 30 January 2027 [R5-S39]; the UK regulator has consulted on faster access to matching-adjustment benefits [R5-S38]. In Goldman's 2026 survey of 434 insurance investment and finance chiefs, 62% planned to increase private-asset allocations [R5-S03].
+- **Products and strategies:** Investment-grade fixed income, private credit and asset-backed finance, and full or partial outsourcing of the general account [R5-S02].
+- **Distribution channels:** Direct coverage by insurance specialists.
+- **Commercial process:** Solution design around the insurer's balance sheet, with constraints on capital charges, accounting treatment, book yield and realised gains written into guidelines.
+- **Specialist dependencies:** Insurance strategists, the OCIO Insurance team within Multi-Asset Solutions [R1-S15], fixed income and private credit teams.
+- **How the business model differs:** Large, sticky, low-fee fixed-income mandates where the manager is judged on yield, capital use and accounting outcomes as much as on return against an index.
+- **Languages (job-description evidence only):** Not read in a job description. [Not publicly established]
+- **Recruitment evidence:** Experienced-hire postings in London and Frankfurt (search summaries) [R5-S21][R5-S22].
+- **Unresolved questions:** Reporting structure in EMEA; EMEA head; whether CSG summer analysts are placed here.
+- **Relationships:** 
+  - 
+    - **Type:** Works with
+    - **Target:** Liquidity Solutions (shared global head)
+    - **Status:** Verified
+    - **Note:** Not publicly disclosed
+    - **Sources:** 
+      - R5-S01
+      - R5-S02
+  - 
+    - **Type:** Works with
+    - **Target:** OCIO Insurance team within Multi-Asset Solutions
+    - **Status:** Verified
+    - **Note:** Not publicly disclosed
+    - **Sources:** 
+      - R1-S15
+  - 
+    - **Type:** Works with
+    - **Target:** Institutional, third-party wealth and consultant relations teams
+    - **Status:** Supported inference
+    - **Note:** Not publicly disclosed
+    - **Sources:** 
+      - R5-S42
+  - 
+    - **Type:** Reports to
+    - **Target:** Global Insurance Asset Management leadership or regional CSG leadership
+    - **Status:** Not publicly established
+    - **Note:** Which applies in EMEA is not published.
+    - **Sources:** Not publicly disclosed
+- **Sources:** R5-S02, R5-S03, R5-S21, R5-S22, R5-S23, R5-S38, R5-S39, R5-S42, R1-S15
+
 ## Coverage matrix
 
 | Geography | Segment | Evidence | Note | Sources |
 |---|---|---|---|---|
+| UK & Ireland | Institutional | Supported inference | 2026 London listing titled 'UK Institutional Sales' (search result only); 'UK and Ireland institutional business' was a senior public title. | R1-S31, R6-S05 |
+| UK & Ireland | Third Party Wealth | Verified | Goldman advert names the 'UK Third Party Wealth (TPW) Sales Team'. | R1-S17 |
+| UK & Ireland | OCIO / fiduciary | Verified | UK fiduciary management business led from London; BAE Systems, Shell and other public mandates. | R3-S16, R3-S01, R3-S04 |
+| UK & Ireland | Insurance | Supported inference | 'Insurance Client Solutions Group' role advertised in London (search summary). | R5-S22 |
+| UK & Ireland | Liquidity Solutions | Supported inference | London 'EMEA Liquidity Solutions Sales (UK Corporates)' seat (search summary). | R5-S09 |
+| Middle East | Institutional | Supported inference | A MENA client business with London and Gulf staff is public; an 'Institutional' sub-team by name is the former intern's account only. | R6-S14, R1-S08 |
+| Middle East | Third Party Wealth | Verified | 2027 Dubai listing: 'Client Solutions Group - Third Party Wealth'. | R1-S07 |
+| Middle East | OCIO / fiduciary | Not publicly established | No Middle East OCIO client or seat found in the sources read; not searched for specifically. |  |
+| Middle East | Insurance | Not publicly established | No Middle East insurance seat found. Insurance is run as a global vertical. |  |
+| Middle East | Liquidity Solutions | Not publicly established | No Middle East liquidity seat found. Liquidity is run as a global product line. |  |
+| Nordics | Institutional | Supported inference | London 'Nordics Institutional Sales Support' advert, native Swedish (search summary); integrated Nordic team reported in 2020. | R5-S08, R5-S26 |
+| Nordics | Third Party Wealth | Supported inference | Copenhagen 'TPW Nordic Client Coverage' roles (search summary). | R5-S46 |
+| Nordics | OCIO / fiduciary | Not publicly established | No Nordic OCIO mandate or seat found. |  |
+| Nordics | Insurance | Supported inference | Older press calls pension and insurance companies 'the core' Nordic client base; no dedicated Nordic insurance seat found. | R5-S47 |
+| Nordics | Liquidity Solutions | Not publicly established | No Nordic liquidity seat found. |  |
+| Switzerland | Institutional | Not publicly established | Searched for; no Swiss institutional coverage team or head found. |  |
+| Switzerland | Third Party Wealth | Verified | 'TPW Switzerland team' in a Goldman advert; dedicated head since early 2025. | R1-S18, R4-S07 |
+| Switzerland | OCIO / fiduciary | Supported inference | Goldman cites Switzerland among markets where its OCIO business is growing; no Swiss mandate is named. | R3-S10 |
+| Switzerland | Insurance | Not publicly established | No Swiss insurance seat found. |  |
+| Switzerland | Liquidity Solutions | Not publicly established | No Swiss liquidity seat found. |  |
+| Benelux | Institutional | Verified | London 'BeNeLux Client Solutions Group': new business and existing institutional relationships; native Dutch. | R1-S01 |
+| Benelux | Third Party Wealth | Supported inference | Third-party wealth sales roles in The Hague, Amsterdam and Brussels (search summaries); a Benelux TPW head reported. | R5-S12, R5-S13, R6-S10 |
+| Benelux | OCIO / fiduciary | Verified | OCIO Insurance team in The Hague within Multi-Asset Solutions; Dutch fiduciary heritage. | R1-S15, R6-S18 |
+| Benelux | Insurance | Supported inference | NN Group strategic partnership after the NN Investment Partners acquisition (partnership terms from secondary reporting). | R5-S23, R5-S24 |
+| Benelux | Liquidity Solutions | Not publicly established | No Benelux liquidity seat found. |  |
+| Germany & Austria | Institutional | Verified | 2027 Frankfurt listing: 'Client Solutions Group - Institutional Sales', German speaker. | R1-S05 |
+| Germany & Austria | Third Party Wealth | Verified | Head of Third-Party Wealth for Germany and Austria named from 1 July 2026. | R6-S08 |
+| Germany & Austria | OCIO / fiduciary | Verified | The Shell OCIO mandate includes about $2.8bn in Germany. | R3-S04 |
+| Germany & Austria | Insurance | Supported inference | Frankfurt 'Insurance Client Solutions Group' associate advert (search summary). | R5-S21 |
+| Germany & Austria | Liquidity Solutions | Not publicly established | No German or Austrian liquidity seat found. |  |
+| France | Institutional | Not publicly established | Searched for; no French institutional coverage team or head found. |  |
+| France | Third Party Wealth | Verified | 2027 Paris listing: 'Client Solutions Group - Third Party Wealth', French speaker. | R1-S06 |
+| France | OCIO / fiduciary | Not publicly established | No French OCIO mandate or seat found. |  |
+| France | Insurance | Not publicly established | No French insurance seat found. |  |
+| France | Liquidity Solutions | Not publicly established | No French liquidity seat found. The former intern's remark that liquidity staff speak French has no public support. |  |
+| Italy | Institutional | Not publicly established | A country head for Italy is public; institutional coverage is not separately evidenced. | R6-S11 |
+| Italy | Third Party Wealth | Supported inference | Milan third-party wealth sales role (search summary); 2025 reporting on Italian wealth distribution. | R5-S44, R5-S43 |
+| Italy | OCIO / fiduciary | Not publicly established | No Italian OCIO mandate or seat found. |  |
+| Italy | Insurance | Not publicly established | Insurers appear as distributors in Italy; no general-account insurance seat found. | R5-S43 |
+| Italy | Liquidity Solutions | Not publicly established | No Italian liquidity seat found. |  |
+| Iberia | Institutional | Not publicly established | Not established. Iberia-specific searches were cut short. |  |
+| Iberia | Third Party Wealth | Supported inference | An Iberia 'distribution' head and team moved from London to Madrid in 2021; the channel split is not stated. | R6-S13, R6-S12 |
+| Iberia | OCIO / fiduciary | Not publicly established | No Iberian OCIO mandate or seat found. |  |
+| Iberia | Insurance | Not publicly established | No Iberian insurance seat found. |  |
+| Iberia | Liquidity Solutions | Not publicly established | No Iberian liquidity seat found. |  |
 
 # Appendix B: Public people directory
 
@@ -7846,6 +8603,7 @@ The same commitment charged on invested value earns far less in year one. Using 
 - **Corporate treasury**: The team in a company that manages its cash, funding and financial risks. *Mechanics:* Invests operating cash under a board-approved policy that puts safety and access ahead of return. *Why it matters:* The core client for liquidity and money market products.
 - **Covenant** (Employer covenant): How able and willing the employer is to support its pension scheme. *Mechanics:* A strong covenant allows more investment risk and a longer horizon; a weak one pushes towards caution. *Why it matters:* Explains why two schemes with the same funding level can want different things.
 - **Coverage**: Responsibility for a defined set of clients, by region, type or both. *Mechanics:* A coverage team is the firm's point of accountability for those clients. *Why it matters:* The organising idea behind how client teams are divided.
+- **CPM** (Client portfolio manager): A person who sits close to an investment team and explains its strategy to clients in depth. Also called a product specialist or investment specialist. *Mechanics:* Represents the strategy in pitches, reviews and due-diligence meetings and answers detailed portfolio questions. Does not usually make the buy and sell decisions, which stay with the portfolio managers. *Why it matters:* Coverage teams bring a client portfolio manager into a meeting when the questions go beyond what a salesperson or relationship manager should answer.
 - **Credit spread**: The extra yield a borrower pays compared with the government, to compensate for the risk it will not repay. *Mechanics:* Widens when investors worry about defaults. The return source in credit strategies. *Why it matters:* Explains what a client earns, and risks, in a credit mandate.
 - **CRM system** (Client relationship management system): The database where a firm records its clients, contacts, meetings and sales opportunities. *Mechanics:* Salesforce is a widely used example. Quality depends on people logging accurately. *Why it matters:* Turns one person's knowledge into the firm's knowledge; juniors maintain much of it.
 - **Cross-sell**: Providing an existing client with a further product or service. *Mechanics:* Appropriate only when it answers a real client need; relationship breadth is not a goal in itself. *Why it matters:* A commercial objective that must be tested against suitability.
@@ -7870,6 +8628,7 @@ The same commitment charged on invested value earns far less in year one. Using 
 - **Equities**: Shares: part-ownership of companies. *Mechanics:* Higher long-term expected return with larger falls along the way. *Why it matters:* The growth engine in DC and endowment portfolios.
 - **ESG** (Environmental, social and governance): Considering how companies treat the environment, people and their own management when investing. *Mechanics:* Ranges from exclusions to integration to impact strategies. Client requirements and regulation differ sharply by region. *Why it matters:* A standard section of RFPs and DDQs; clients' positions vary and must not be assumed.
 - **ETF** (Exchange-traded fund): A fund you buy and sell on a stock exchange like a share. *Mechanics:* Most track an index cheaply; active ETFs are growing. Trades throughout the day at market price, close to NAV. *Why it matters:* A major channel for low-cost investing and a source of fee pressure on traditional funds.
+- **Executive Director** (Working title used outside the United States for the Vice President level): The same level of seniority as Vice President, under a different name. *Mechanics:* Goldman listings titled Executive Director carry the corporate title Vice President, and the firm announces one combined Vice President and Executive Director class. *Why it matters:* It is one rung, not two. Do not assume an Executive Director outranks a Vice President.
 - **Family office**: A private firm that manages the wealth of one very rich family, or a few. *Mechanics:* Sits between institutional and wealth clients: professional staff, flexible mandate, interest in private deals. *Why it matters:* Coverage may sit in either an institutional or a wealth team.
 - **FCA** (Financial Conduct Authority): The UK regulator of how financial firms behave towards customers and markets. *Mechanics:* Authorises asset managers and funds; sets conduct rules including the Consumer Duty. *Why it matters:* Its rules shape what can be said and sold to whom.
 - **Fiduciary duty**: A legal duty to act in someone else's best interests, not your own. *Mechanics:* Trustees owe it to beneficiaries. Managers owe contractual and regulatory duties to clients. It is why trust never replaces due diligence. *Why it matters:* Frames what a client may properly decide and why process matters.
@@ -7927,6 +8686,7 @@ The same commitment charged on invested value earns far less in year one. Using 
 - **MMF** (Money market fund): A fund that holds very short-term, high-quality debt to keep cash safe and available. *Mechanics:* An investment, not a deposit, with no deposit guarantee. Low fees, very large balances. UK and EU rules recognise three structures. *Why it matters:* The core product of a liquidity solutions business.
 - **MPS** (Model portfolio service): A ready-made portfolio of funds that advisers can apply to many clients at once. *Mechanics:* Run by a DFM or asset manager. One decision by the model's manager moves money for thousands of clients. *Why it matters:* Being selected into a model is often worth more than being on a buy list.
 - **Multi-asset**: A portfolio that mixes shares, bonds and other investments under one manager. *Mechanics:* The manager also decides the mix. Used in DC defaults, wealth portfolios and OCIO. *Why it matters:* A solutions product that depends on asset allocation skill.
+- **Multi-Asset Solutions** (Goldman Sachs Asset Management's multi-asset investing group): The investment group that builds and runs whole portfolios across asset classes, including outsourced (OCIO) mandates. *Mechanics:* An investing group, separate from the sales organisation. Its OCIO teams work with sales and client relationship professionals. *Why it matters:* OCIO clients are served by this group, so not every client-facing person sits in the Client Solutions Group.
 - **NAV** (Net asset value): What a fund is worth: its assets minus what it owes. Divided by the number of units, it gives the price of one unit. *Mechanics:* Calculated daily for most public funds and quarterly, by estimate, for most private funds. Dealing in a pooled fund happens at NAV per unit. *Why it matters:* Fund fees, performance and client statements are all based on it.
 - **NAV-based fee**: A fee calculated as a percentage of the current value of the client's investment. *Mechanics:* Standard for public-market funds and mandates. The fee rises and falls with markets as well as with flows. *Why it matters:* Explains why a market fall cuts revenue even when no client leaves.
 - **Net flows**: New client money coming in minus client money going out over a period. *Mechanics:* Gross inflows minus redemptions and withdrawals. Reported separately from market movements, so it shows whether clients are adding or leaving regardless of what markets did. *Why it matters:* It is the cleanest public measure of whether a client business is winning and keeping assets.
@@ -7977,6 +8737,7 @@ The same commitment charged on invested value earns far less in year one. Using 
 - **Sub-advisory**: One firm hires another to manage the investments of a fund sold under the first firm's name. *Mechanics:* The sub-adviser earns a negotiated fee; the brand owner keeps the client relationship. *Why it matters:* A way to win assets from wealth firms without selling a branded fund.
 - **Sub-custodian**: A local bank that holds assets in a particular country on behalf of the main custodian. *Mechanics:* Each market a segregated account will trade in needs an account opened through the local sub-custodian, with local documentation. *Why it matters:* Market account openings are a common critical path item before a mandate can trade.
 - **Suitability**: Whether an investment fits the client's objectives, constraints and understanding. *Mechanics:* A regulatory requirement when advising retail clients and a professional standard everywhere. *Why it matters:* The test for when not to sell.
+- **Superday** (Goldman Sachs's name for its final-round interviews): The last stage of campus recruitment: a series of interviews with people from the business. *Mechanics:* Goldman says it typically holds between two and five interviews for campus hires, depending on the division. *Why it matters:* It is the stage at which you meet members of a specific team.
 - **Swap**: A contract to exchange one stream of payments for another, such as fixed interest for floating. *Mechanics:* Interest rate and inflation swaps are used to hedge liabilities without buying bonds outright. *Why it matters:* A core LDI instrument.
 - **SWF** (Sovereign wealth fund): A state-owned investment fund, often built from oil, gas or trade surpluses. *Mechanics:* Very large, long-horizon, staffed by professionals. Often invests directly and through co-investments as well as through managers. *Why it matters:* A central client type in Middle East coverage.
 - **Switching costs**: The cost and disruption of moving from one provider to another. *Mechanics:* Transition costs, governance time, legal work, operational risk. Can keep a client in place for reasons unrelated to quality. *Why it matters:* Retention caused by inertia is not the same as a satisfied client.
@@ -8000,11 +8761,77 @@ The same commitment charged on invested value earns far less in year one. Using 
 
 | Claim | Status | Finding | Sources |
 |---|---|---|---|
+| Client Solutions Group is an umbrella term inside Asset Management for everyone who speaks to clients; it is the equivalent of saying "sales". | Verified | Goldman's own campus titles read "Client Solutions Group / Sales" (Frankfurt) and "Client Solutions Group (Sales)" (Tokyo), and an internal role refers to "the sales organization" [R1-S04] [R1-S09] [R1-S14]. Goldman's one-paragraph definition says the group develops client relationships and delivers investment solutions for institutional and third-party wealth clients [R1-S10]. Limit: not everyone who speaks to clients is in it. OCIO investment staff in Multi-Asset Solutions meet clients and sit outside the sales organisation [R1-S15]. | R1-S04, R1-S09, R1-S14, R1-S10, R1-S15 |
+| It covers three functions: sales, client relationship management and consultant relations. | Supported inference | All three functions exist in Goldman advertisements. A London CSG team does both new business and existing relationships [R1-S01]; consultant relations works with the regional institutional sales teams [R1-S21]; a job advertisement lists the channels as third party wealth, institutional, consultant, insurance and retirement [R4-S09]. No public source gives this exact three-way list as the group's formal structure. | R1-S01, R1-S21, R4-S09 |
+| The group is cut by coverage team (mostly regional), then by client type, then by sales versus relationship management. | Supported inference | Job advertisements show country or regional teams crossed with channel: for example Institutional Sales in Frankfurt and Third Party Wealth in Paris and Dubai as named CSG sub-tracks [R1-S05] [R1-S06] [R1-S07]. That supports the first two cuts as a matrix. No source shows them as an ordered hierarchy, and no reporting lines are published. The third cut (sales versus relationship management inside each client-type team) is not shown by any public source. | R1-S05, R1-S06, R1-S07 |
+| Most regional teams split into Third Party Wealth and Institutional, like the UK. | Supported inference | Consistent with advertisements for Germany and Austria (Frankfurt institutional sales and a German third-party wealth team) [R1-S05] [R5-S07] and Benelux [R1-S01]. The Nordics are an exception on the public record: in May 2020 third-party distribution and institutional sales were merged into one Nordic organisation [R5-S26]. Whether that is still so in 2026 was not established. | R1-S05, R5-S07, R1-S01, R5-S26 |
+| The coverage teams are UK, Middle East, Nordics, Switzerland, Benelux, Liquidity Solutions and Insurance, and that list is "everyone". Germany, France, Italy and Iberia were not mentioned. | Conflicting evidence | The list is incomplete for EMEA. Germany and Austria are covered from Frankfurt and France from Paris, both recruiting CSG analysts for 2027 with a local language [R1-S05] [R1-S06]. Italy has a country head and Iberia a managing director whose team moved from London to Madrid in 2021 [R6-S11] [R6-S12] [R6-S13]. The likeliest reading is that he listed the teams with seats in London, which is an inference. | R1-S05, R1-S06, R6-S11, R6-S12, R6-S13 |
+| The UK team is the largest by far, brings in the most money and so should have the best bonus. | Not publicly established | Goldman discloses no revenue, assets, flows or headcount for the UK or for any client team. The only regional figure is EMEA assets under supervision of $799bn at 30 September 2026 [R2-S01] [R2-S02]. Nothing public supports a ranking of teams or any statement about bonuses. | R2-S01, R2-S02 |
+| The UK team is split by client type into Institutional and Third Party Wealth (and OCIO). | Supported inference | "UK Third Party Wealth (TPW) Sales Team" is Goldman's own wording in a closed London advertisement [R1-S17]. A 2026-cycle London listing titled "Client Solutions Group, UK Institutional Sales" appears in search results but the page had expired [R1-S31]. The senior public title is EMEA-wide: "co-head of EMEA Institutional Client Coverage" [R6-S02]. Whether "UK Institutional" is a formal team name today is not established. | R1-S17, R1-S31, R6-S02 |
+| OCIO is the third client-type team inside the UK team. | Conflicting evidence | Public sources place OCIO and fiduciary management in Multi-Asset Solutions, an investing group, not inside a regional sales team [R1-S15] [R6-S18]. Its head is titled "Head of International OCIO and UK Fiduciary Management Team" [R6-S04]. OCIO appears to have its own client relationship managers at senior level (snippet only) [R1-S33]. A CSG-side sales seat for fiduciary management may still exist; that is not established either way. | R1-S15, R6-S18, R6-S04, R1-S33 |
+| He is "pretty sure" OCIO exists only in the UK team. | Conflicting evidence | Goldman's OCIO business is global: $480bn of OCIO assets under supervision at 31 March 2026, with large United States mandates announced in July 2026 [R3-S09], a $40bn multi-country appointment in September 2025 that included Germany as well as the UK [R3-S06], and an Irish fiduciary award in November 2026 [R3-S11]. An OCIO insurance team works across The Hague, London and New York [R1-S15]. What may be true is narrower: the UK is where the trustee-led "fiduciary management" market is most developed. | R3-S09, R3-S06, R3-S11, R1-S15 |
+| In OCIO, Goldman can bring the client's in-house investment team into the firm. | Verified | True of the BAE Systems appointment: Goldman's press release says the schemes' in-house investment management team would join the firm [R3-S01] [R3-S02]. It is a feature of some very large mandates, not of the model in general: no transfer is reported for smaller UK fiduciary appointments [R7-S15] [R7-S16]. | R3-S01, R3-S02, R7-S15, R7-S16 |
+| OCIO is already over-hired. | Not publicly established | No public support. The only public staffing evidence points the other way: a senior hire in September 2025 [R6-S01] and a statement in November 2025 that the supporting multi-asset team of more than 300 was still growing [R3-S07]. Neither says anything about analyst seats. | R6-S01, R3-S07 |
+| Goldman recently won an OCIO award; he saw it in a LinkedIn post by a managing director. | Supported inference | Two 2026 awards fit: Fiduciary Management / OCIO at the European Pensions Awards (2 July 2026) [R3-S10] and Fiduciary Management / OCIO of the Year at the Irish Pensions Awards (4 November 2026) [R3-S11]. Which one he saw is not established, and the managing director was not identified. Goldman did not win the fiduciary category at the 2026 UK Pensions Awards [R3-S14]. An industry award shows that a judging panel rated an entry; it is not evidence of client outcomes. | R3-S10, R3-S11, R3-S14 |
+| BAE Systems is an OCIO client, and that is confidential. | Verified | The relationship is public, not confidential. Goldman's own press release of 6 September 2023 announced the appointment by the trustees of the BAE Systems pension schemes for about £23bn of defined benefit assets, after a competitive tender in which Redington advised the trustees [R3-S01] [R3-S02]. See [the mandate entry](#M-R7-01). | R3-S01, R3-S02 |
+| A second named company is also an OCIO client, also described as confidential. | Not publicly established | No public source links Goldman to that company's pension schemes. The schemes' own latest annual reports name a different firm as fiduciary manager [R3-S17] [R3-S18]. The name is withheld from every output of this project. | R3-S17, R3-S18 |
+| Arabic is not required for the Middle East team. | Supported inference | The 2027 Dubai (CSG Third Party Wealth) and Doha (Alternatives Capital Formation, CSG) campus listings state no language requirement [R1-S07] [R1-S08]. No advertisement for London-based Middle East coverage was found, so the requirement for a London seat is not established. | R1-S07, R1-S08 |
+| He thinks the Middle East team is split into Third Party Wealth and Institutional. | Not publicly established | A Third Party Wealth sub-track is verified for Dubai [R1-S07]. An institutional counterpart and any formal split were not found. The former head of the regional client business left in September 2025 and no successor was identified; his team was spread across London and Gulf offices [R6-S14]. | R1-S07, R6-S14 |
+| The Nordics team needs a local language. | Supported inference | A London-based Nordics institutional sales support advertisement is reported as requiring native Swedish, but the page was seen only as a search summary [R5-S08]. | R5-S08 |
+| The Switzerland team needs a local language. | Conflicting evidence | Mixed. A Zurich third-party wealth role is reported as requiring German [R5-S11]. A London-based sales support advertisement for the Swiss client base shows no language requirement in the copy read [R5-S06] [R1-S18]. | R5-S11, R5-S06, R1-S18 |
+| The Benelux team needs a local language. | Verified | "Native Dutch speaker is essential (written and oral fluency) with French an advantage", in the London-based BeNeLux Client Solutions Group advertisement live in October and November 2026 [R1-S01]. | R1-S01 |
+| Liquidity Solutions is a product line, not a region, with its own team because the product is strong. He did not know how it is split inside. | Verified | Goldman presents Liquidity Solutions as a global business overseeing more than $1.2 trillion in money market and short-term assets, with global rather than regional leadership [R5-S01] [R5-S02]. An EMEA sales seat covering UK corporates is reported from a search summary [R5-S09]. Its internal split is not published. | R5-S01, R5-S02, R5-S09 |
+| Everyone in Liquidity Solutions speaks French. | Not publicly established | No public evidence. The one French-speaker London advertisement found belongs to a French sales team, not to Liquidity Solutions [R5-S10]. The transcript was garbled at this point, so the claim itself is uncertain. | R5-S10 |
+| Insurance is its own team with its own client base; where it sits in the structure is unclear. | Supported inference | Goldman states it manages $651bn of general account assets for insurers and names global heads for the insurance business [R5-S02]. Advertisement titles show an "Insurance Client Solutions Group" (snippet only) [R1-S35]. It reads as a global client vertical that cuts across regions, not a regional team. | R5-S02, R1-S35 |
+| An English-only candidate is realistically limited to UK, Middle East and Liquidity Solutions. | Supported inference | Directionally supported: every continental coverage advertisement read or summarised asked for a local language, while the UK third-party wealth advertisement asked for native English only [R1-S17] [R1-S01] [R1-S05] [R1-S06]. Insurance and consultant relations were not tested and may also be open to English-only candidates. | R1-S17, R1-S01, R1-S05, R1-S06 |
+| UK Institutional covers pension funds, endowments and foundations and sovereign wealth funds; pension funds dominate the work. | Supported inference | Goldman's EMEA institutional marketing advertisement defines the institutional business as pension funds, endowments, foundations, sovereign wealth funds and insurers [R1-S20]. That pension funds dominate the UK work is plausible given the size of UK pension assets but is not stated by any Goldman source. | R1-S20 |
+| Third Party Wealth sells Goldman funds to other wealth managers and private banks, which offer them to their own clients. His example was a fund sold to a named private bank. | Verified | The description matches Goldman's wording: the UK TPW Sales Team is responsible for new business development with "private banks, wealth managers, financial advisors and multi-managers" [R1-S17], and a press release names an "EMEA Third Party Wealth Business" [R4-S01]. His named example is his own illustration and has no public source. | R1-S17, R4-S01 |
+| Goldman's own Private Wealth Management buys other managers' funds, which makes it a third-party wealth client for firms like Pictet. | Supported inference | Goldman's Private Wealth Management site describes an open-architecture alternatives platform that includes external managers [R4-S27]. So the general point holds for alternatives. Whether any particular external manager is on that platform is not public. | R4-S27 |
+| Within each team the sales side is called CSG and the relationship-management side is called CCG (Client Coverage Group). | Conflicting evidence | "Client Coverage Group (CCG)" is a real Goldman name, defined as the group "dedicated to retaining, expanding and supporting existing client relationships" [R1-S11]. But a London CSG team is described as doing both new business and existing relationships [R1-S01], and no public source shows London teams using the two acronyms for two sides of one desk, or shows whether CCG sits inside CSG. London CCG titles were seen in snippets only [R1-S32]. | R1-S11, R1-S01, R1-S32 |
+| "CSG" means two things: the whole umbrella group and the sales side within a team. | Supported inference | The first meaning is verified ("Global Client Solutions Group") [R1-S13]. The loose use as a synonym for sales is verified in titles [R1-S09]. The specific second meaning he gave, a label for one side of a team, is not shown publicly. | R1-S13, R1-S09 |
+| Analyst base salary is £52k on the sales side and £48k on the relationship side; sales bonuses are larger and the gap widens with seniority. | Unverified account | No credible public source gives London pay for these roles. Goldman's careers listings leave the salary field empty for the EMEA roles read. The only official figures are United States pay-transparency ranges for non-client-facing CSG roles [R1-S13] [R1-S30], which cannot be read across. | R1-S13, R1-S30 |
+| Sales has fewer seats and is harder to get; relationship management has more. | Not publicly established | No headcount by function is published. In the public people sample, explicitly sales-titled people outnumber explicitly relationship-titled people, but that reflects which appointments get announced, not staffing [R6-S17] [R6-S27]. | R6-S17, R6-S27 |
+| The two sides sit opposite each other, work the same hours and operate as one team; at analyst level the work is basically the same. | Unverified account | Nothing public describes seating or hours. It is consistent with the BeNeLux advertisement, where one junior role supports both new business and existing relationships [R1-S01]. | R1-S01 |
+| Sales is seen as more prestigious; many relationship people want to move across; internal moves are bureaucratic. | Unverified account | One person's impression of culture. Nothing public supports or contradicts it. |  |
+| A managing director posted about the OCIO award; a partner told him assessment centres are moving in person and will ask more about AI. | Not publicly established | Neither person could be identified from public sources and no identity is suggested here. The Partner Class of 2026 lists Asset & Wealth Management partners in London but does not say which business each works in [R1-S27]. | R1-S27 |
+| The first stage is a recorded video interview. | Verified | Goldman's own steps page: "you will be asked to participate in a video interview, which will take approximately 30 minutes to complete", referred to as the HireVue interview [R1-S23]. | R1-S23 |
+| An associate on the team reviews the recorded video, sometimes at double speed. | Unverified account | Nothing public says who reviews recordings or how. |  |
+| What you say in the recorded interview decides which team you are "drafted" to: region, client type, and sales or relationship management. | Unverified account | The mechanism is not published. The 2027 London listing names no sub-track while Frankfurt, Paris and Dubai listings do [R1-S05] [R1-S06] [R1-S07], so some allocation must happen after applying, but how is unknown. | R1-S05, R1-S06, R1-S07 |
+| The assessment centre is three back-to-back interviews with the team and no group task: analyst and associate together, then a vice president or similar, then the managing director who runs the team. | Unverified account | Officially the final round ("Superday") is "between two and five interviews for campus hires, depending on the division" with "a cross-section of people whom you could possibly work with" [R1-S23]. Three interviews fits inside that range. The number, order, interviewers and absence of a group task are his experience of one team in one year. "Vice president or similar" fits the fact that Executive Director is the same level as Vice President in EMEA [R1-S26]. | R1-S23, R1-S26 |
+| Assessment centres are now in person and will ask more about AI. | Not publicly established | Official pages read are silent on both. Press coverage was not searched because the search allowance ran out, so this is "not investigated" beyond official sources. Recruiters' published guidance says questions are "situational or behavioral" and that they weigh "attitude and aptitude" [R1-S24]. | R1-S24 |
+| Each team hires one analyst per open seat, so a candidate competes only against others drafted to the same team. | Unverified account | Nothing public describes seat numbers or how candidates are compared. No hiring probability can be inferred. |  |
+| Each team runs its own hiring timeline, so offers on one team say nothing about another. | Supported inference | Goldman says it evaluates applications throughout the season and that candidates "may hear back regarding different roles at different times" [R1-S23]. That is about roles, not teams within one listing, so it is consistent with the claim without confirming it. | R1-S23 |
+| Asset management is about 30% of Goldman's revenue and valued for stable fee income. | Conflicting evidence | The figure matches the Asset & Wealth Management segment, which was 28.6% of firmwide net revenues in 2025. The Asset Management business on its own was 11.6% [R2-S01]. Management and other fees were $11,538m, 69% of the segment, which is the fee income the "stable" point refers to. Fees recur while clients stay and markets hold; they are not guaranteed. Nothing is disclosed for the Client Solutions Group. | R2-S01 |
+| Goldman recently restricted staff use of Claude Code. | Supported inference | Bloomberg reported on 2 November 2026 that Goldman restricted traders and bankers from some AI tools; outlets relaying it say internal guidance limited Claude Code and GitHub's AI coding tools to engineers [R2-S10] [R2-S08] [R2-S09]. The Bloomberg article itself could not be read. It is one report, it concerns coding tools for non-engineers, it is not a firm-wide ban on AI, and nothing says how it applies to asset-management client staff. A separate April 2026 report concerned Hong Kong bankers' access to one model [R2-S12]. | R2-S10, R2-S08, R2-S09, R2-S12 |
+| Details about the former intern's own background, his friend's internship and a candidate he knows. | Unverified account | Not researched, by design. These are private individuals and nothing about them is needed to understand the business. |  |
+| An English-only UK candidate is most likely to be sent to the UK team, with the Middle East possible if the answers mention the Middle East. | Unverified account | No public information on allocation. See IC-36. |  |
 
 # Appendix M: Coverage register
 
 | Section | Topic | Evidence found | Unresolved | Status |
 |---|---|---|---|---|
+| 2 | Three layers kept apart (A verified fact, B interpretation, C personal fit) | Layer labels and six evidence statuses are defined in research/CONVENTIONS.md and applied in every chapter, card and register. Chapter 2 separates programme-wide wording, role-specific wording and inference. | Layer labels on individual paragraphs depend on each author's judgement; they were not independently reviewed line by line. | Complete |
+| 2 | Industry and role explanations stand on their own, without personal anchoring | Chapters 1 to 7 and 9 contain no personal material. Personal fit is confined to chapter 8 and the why-trees. | None. | Complete |
+| 2 | Personal records: employer names, role titles and dates (the Pictet / MaRNJ conflict, the Box role) | Withdrawn at the user's instruction during the project. No personal records are used and the personal evidence ledger is a blank template with reflection questions. | The conflict between earlier drafts is not resolved here. Only the candidate's own records can settle it. | Not investigated |
+| 3 | Evidence standard: the former intern's account and earlier AI drafts treated as leads | Every distinct claim from the call is audited in data/intern_claims.json (44 rows) with a status, a finding and sources. Earlier AI drafts were not used as sources. | Claims about recruitment mechanics and pay cannot be tested from public sources. | Complete |
+| 3 | Research date, cutoff and dating of figures | Cutoff 14 November 2026 recorded in conventions, sources (accessed and published dates) and claims (event date and period). | Some sources have no publication date and are marked n.d. | Complete |
+| 3 | Source and status on material claims | Source and claim registers cover streams R1 to R8 and the writing streams, each claim with a status and supporting passage. | The shared web-search allowance ran out part-way. A share of sources were seen as search summaries only; they are flagged "snippet only" and capped at Supported inference. | Partial |
+| 3 | Confidentiality: the two client names the former intern called confidential | One relationship (BAE Systems) is confirmed by Goldman's own 2023 press release and is named. No public source confirms the other; scheme reports name a different fiduciary manager. That name is removed from every generated output by the build. | None. | Complete |
+| 3 | Public professional information only; no logins or private contact details | People research used official pages, press and public snippets. Pages that refused access were recorded as unreadable, not worked around. | None. | Complete |
+| 3 | Staged execution, saved dossier and coverage register | Evidence notes per stream in research/evidence, structured data in data/, chapters in content/, one build script for dossier, application and PDF, and this register. | Searches that were planned but not run are listed in each stream's notes. | Complete |
+| 5 | Exact programme: title, division, location, year, length, eligibility, application limit | Read on a job-board mirror of the official listing and on Goldman's programme page: nine to ten weeks, summer 2027, penultimate or final year, rolling review, four-application limit. | The listing was not live on Goldman's site on the research date; its role number and closing date were not established. | Partial |
+| 5 | Application deadline and salary | Neither is published in any source read. | Both. | Searched, not established |
+| 5 | Programme-wide wording separated from role-specific and experienced-hire wording | The London listing is shown to be boilerplate shared with the Tokyo CSG and London Quantitative Strats listings. Role detail comes from two junior London advertisements (BeNeLux CSG; UK Third Party Wealth sales support). | No current advertisement for a UK institutional junior role was readable. | Complete |
+| 5 | Meaning and position of Client Solutions Group | Official definition, titles equating it with sales, evidence of a global unit with its own strategy staff, named head, channel list. | EMEA head of the group and its internal reporting lines. | Partial |
+| 5 | Meaning and position of Client Coverage Group | Official definition and task list from a Hong Kong advertisement. London titles seen in search snippets. | Whether it sits inside or beside the Client Solutions Group, and how London teams use the label. | Searched, not established |
+| 5 | Test of "CSG means sales, CCG means relationship management" | Six-part test in chapter 2: two parts verified, one contradicted by a London advertisement, two not publicly established. | Team-level usage in London. | Complete |
+| 5 | Institutional sales, client relationship management, third-party wealth, consultant relations | Goldman wording for each from advertisements, with place and date. Consultant relations wording is from an older undated advertisement. | Current London consultant-relations and relationship-manager advertisements had expired. | Partial |
+| 5 | Investment and product specialists, client service, RFP support | Named as partner functions in advertisements; separate client service and implementation teams named; RFP work shared with investment teams. | How these functions are organised in London; no London advertisement was live. | Searched, not established |
+| 5 | What a Summer Analyst contributes compared with Analyst, Associate and senior coverage staff | Nothing CSG-specific is published for interns. Decision-rights table and role cards are built from the junior advertisements and general industry practice, labelled as inference. | Actual intern tasks on any given London team. | Partial |
+| 5 | Role cards: purpose, tasks, work products, stakeholders, decision rights, measures of success | Thirteen role cards in data/roles.json, shown in the Role comparison view and Appendix G. | They describe industry practice, not Goldman's job architecture. | Complete |
+| 5 | Distinction from investment banking, markets, portfolio management, research, private wealth, operations and consulting | Compact table in chapter 6 and prose with one example each in chapter 2. | None. | Complete |
+| 5 | Concrete work products for important responsibilities | Four in chapter 2 (client profile, contact report, query log, fund comparison) and six in chapter 6, all fictional and labelled. | None. | Complete |
+| 5 | How titles are used (Vice President, Executive Director, Managing Director, Partner) | Executive Director carries the Vice President corporate title in EMEA; partners are invited into a class (109 in the 2026 class). | None. | Complete |
 | 7 | Public people directory (name, exact title, office, coverage, segment, function, history, evidence date, sources, confidence) | 42 people from 44 sources: group and division leadership, EMEA institutional, OCIO and fiduciary management, Third Party Wealth country heads, Middle East, Nordics (2020 snapshot), Benelux. Public title kept separate from interpreted function. | Weighted to heads and new hires. Junior and mid-level profiles, class lists and conference programmes not investigated because the search allowance ran out. Not exhaustive. | Partial |
 | 7 | Current leaders of each relevant unit, without presupposing the holder | Verified: head of CSG (2025), global co-heads of Third-Party Wealth (Apr 2026), co-head of EMEA Institutional Client Coverage (Nov 2025), head of International OCIO and UK Fiduciary Management (Sep 2024), TPW heads for Germany/Austria, Switzerland, Italy, Iberia. | No 2026 sighting read for the OCIO head; Benelux TPW head and consultant-relations heads are snippet only. | Partial |
 | 7 | Posts with no publicly established holder | Searched: second EMEA institutional co-head; separate UK institutional head; UK & Ireland TPW head; EMEA TPW head after Apr 2026; Middle East head after Sep 2025; current Nordic head; Swiss, German and French institutional heads. | All remain not publicly established. EMEA Liquidity Solutions and Insurance client heads had one search each and no follow-up. | Searched, not established |
