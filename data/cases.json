@@ -1,0 +1,110 @@
+{
+  "note": "Every case is an illustrative example. Fee rates and sizes are round numbers chosen to make the arithmetic visible. They are not Goldman Sachs fees, not market quotes and not internal revenue attribution.",
+  "cases": [
+    {
+      "id": "CASE-500-full",
+      "group": "£500m fixed-income mandate",
+      "title": "£500m at 20bp, fully funded on day one",
+      "teaches": "The base arithmetic: assets x fee rate. 1 basis point = 0.01%, so 20bp = 0.20%.",
+      "params": {"size": 500000000, "fee_bps": 20, "months": 12}
+    },
+    {
+      "id": "CASE-500-tranche",
+      "group": "£500m fixed-income mandate",
+      "title": "£500m at 20bp, half funded in month 1 and half in month 7",
+      "teaches": "Timing: an awarded mandate is not fee-paying until the money arrives. Same headline size, 25% less first-year revenue.",
+      "params": {"size": 500000000, "funded_pct_initial": 50, "remaining_funded_month": 7, "fee_bps": 20, "months": 12}
+    },
+    {
+      "id": "CASE-500-market",
+      "group": "£500m fixed-income mandate",
+      "title": "£500m at 20bp, markets fall 8% over the year",
+      "teaches": "Fees follow the value of the assets, so revenue moves with markets even when no client does anything.",
+      "params": {"size": 500000000, "fee_bps": 20, "annual_return_pct": -8, "months": 12}
+    },
+    {
+      "id": "CASE-500-feecut",
+      "group": "£500m fixed-income mandate",
+      "title": "£500m, fee renegotiated from 20bp to 16bp from month 7",
+      "teaches": "Pricing pressure: a retained mandate can still earn less. Retained revenue is not the same as stable revenue.",
+      "params": {"size": 500000000, "fee_bps": 20, "fee_change_month": 7, "new_fee_bps": 16, "months": 12}
+    },
+    {
+      "id": "CASE-1bn-stay",
+      "group": "£1bn client considering withdrawal",
+      "title": "£1bn at 15bp, client stays",
+      "teaches": "The baseline against which a withdrawal is measured. Keeping the client adds nothing new: it avoids a loss.",
+      "params": {"size": 1000000000, "fee_bps": 15, "months": 24}
+    },
+    {
+      "id": "CASE-1bn-partial",
+      "group": "£1bn client considering withdrawal",
+      "title": "£1bn at 15bp, client withdraws £400m in month 7",
+      "teaches": "A partial withdrawal: the relationship continues but the fee base shrinks from that month onwards.",
+      "params": {"size": 1000000000, "fee_bps": 15, "flow_amount": -400000000, "flow_month": 7, "months": 24}
+    },
+    {
+      "id": "CASE-1bn-exit",
+      "group": "£1bn client considering withdrawal",
+      "title": "£1bn at 15bp, client leaves entirely in month 7",
+      "teaches": "Full termination. Recurring fees are recurring only while the client chooses to stay.",
+      "params": {"size": 1000000000, "fee_bps": 15, "flow_amount": -1000000000, "flow_month": 7, "months": 24}
+    },
+    {
+      "id": "CASE-300-flat",
+      "group": "Relationship expanding from £300m to £600m",
+      "title": "£300m growing to £600m in month 7, flat 22bp",
+      "teaches": "If the fee rate is flat, doubling the assets doubles the run-rate fee from the funding month.",
+      "params": {"size": 300000000, "fee_bps": 22, "flow_amount": 300000000, "flow_month": 7, "months": 24}
+    },
+    {
+      "id": "CASE-300-tiered",
+      "group": "Relationship expanding from £300m to £600m",
+      "title": "£300m growing to £600m in month 7, tiered fee (25bp to £250m, 20bp to £500m, 15bp above)",
+      "teaches": "Breakpoints: larger mandates pay a lower marginal rate, so doubling assets does not double fees. The client's average rate falls as they grow.",
+      "params": {"size": 300000000, "fee_mode": "tiered", "tiers": [{"upto": 250000000, "bps": 25}, {"upto": 500000000, "bps": 20}, {"upto": null, "bps": 15}], "flow_amount": 300000000, "flow_month": 7, "months": 24}
+    },
+    {
+      "id": "CASE-tpw-list",
+      "group": "Wealth intermediary adds a fund to its approved list",
+      "title": "Approved in month 1, first flows in month 5, then £4m a month, 60bp management fee",
+      "teaches": "Approval is permission to buy, not a purchase. Assets arrive adviser by adviser, so first-year revenue is small even when the listing is a real win.",
+      "params": {"size": 0, "monthly_flow": 4000000, "monthly_flow_start": 5, "fee_bps": 60, "months": 36}
+    },
+    {
+      "id": "CASE-tpw-none",
+      "group": "Wealth intermediary adds a fund to its approved list",
+      "title": "Approved, but advisers do not adopt it",
+      "teaches": "The failure case that looks identical on the day of approval: listed, zero flows, zero fees.",
+      "params": {"size": 0, "monthly_flow": 0, "fee_bps": 60, "months": 36}
+    },
+    {
+      "id": "CASE-ocio",
+      "group": "Different business models",
+      "title": "OCIO: £2bn scheme, tiered fee on total assets (10bp to £1bn, 6bp above)",
+      "teaches": "An OCIO fee is typically charged on the whole portfolio for running it, at a low rate, with underlying managers' fees charged separately. The provider is paid for delegated responsibility, not for one product.",
+      "params": {"size": 2000000000, "fee_mode": "tiered", "tiers": [{"upto": 1000000000, "bps": 10}, {"upto": null, "bps": 6}], "months": 12}
+    },
+    {
+      "id": "CASE-liquidity",
+      "group": "Different business models",
+      "title": "Liquidity: £750m in a money market fund at 10bp, £500m redeemed in month 4",
+      "teaches": "Cash balances are operating money. They can leave in a day for reasons that have nothing to do with service, so average balance matters more than the opening figure.",
+      "params": {"size": 750000000, "fee_bps": 10, "flow_amount": -500000000, "flow_month": 4, "months": 12}
+    },
+    {
+      "id": "CASE-private-committed",
+      "group": "Different business models",
+      "title": "Private markets: £100m commitment, 100bp charged on committed capital",
+      "teaches": "Many closed-end private funds charge on committed capital during the investment period, so the fee does not depend on how much has been drawn or on valuations. Always check the fund's actual fee base.",
+      "params": {"size": 100000000, "fee_bps": 100, "fee_base": "committed", "months": 12}
+    },
+    {
+      "id": "CASE-private-nav",
+      "group": "Different business models",
+      "title": "Private markets: £100m commitment, 100bp charged on invested value, 30% drawn then the rest in month 7",
+      "teaches": "The same commitment charged on invested value earns far less in year one. Using NAV by default would misstate either structure.",
+      "params": {"size": 100000000, "funded_pct_initial": 30, "remaining_funded_month": 7, "fee_bps": 100, "months": 12}
+    }
+  ]
+}
