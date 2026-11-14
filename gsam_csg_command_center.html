@@ -162,6 +162,9 @@ button.g:focus-visible{outline:3px solid var(--focus)}
 .score-grid label{display:flex;justify-content:space-between;align-items:center;gap:.5rem;background:var(--soft);border-radius:6px;padding:.35rem .6rem;font-size:.9rem}
 .results li{margin:.5rem 0}.results mark{background:#fde68a;color:#111}
 .toast{position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:.5rem 1rem;border-radius:8px;z-index:60}
+[role=tab][aria-selected=true]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+main:focus{outline:none}
+.card:focus{outline:3px solid var(--focus);outline-offset:2px}
 </style>
 </head>
 <body class="view-both">
@@ -209,7 +212,7 @@ button.g:focus-visible{outline:3px solid var(--focus)}
     <p>A research and learning project for the <strong>2027 | EMEA | London | Asset Management, Client Solutions Group | Summer Analyst</strong> programme. It is built to help you understand the business, test your own motivation and practise explaining both. It does not predict interview questions and it cannot guarantee an outcome.</p>
     <p><strong>Three layers are kept apart everywhere:</strong> <span class="layer layer-a">Layer A · verified fact</span> what credible sources establish; <span class="layer layer-b">Layer B · interpretation</span> what those facts suggest, with reasoning and limits; <span class="layer layer-c">Layer C · personal fit</span> what might appeal to you, which only your own evidence can settle.</p>
     <ul class="stats" aria-label="Size of the evidence base">
-      <li><b>33,058</b>words of explanation</li><li><b>379</b>sources</li><li><b>360</b>audited claims</li>
+      <li><b>34,501</b>words of explanation</li><li><b>379</b>sources</li><li><b>360</b>audited claims</li>
       <li><b>0</b>team profiles</li><li><b>42</b>people (public)</li><li><b>32</b>commercial events</li>
       <li><b>35</b>awareness cards</li><li><b>192</b>glossary terms</li>
     </ul>
@@ -228,7 +231,7 @@ button.g:focus-visible{outline:3px solid var(--focus)}
     <button type="button" id="resetBtn">Reset saved progress</button>
     <span class="muted" id="saveState" role="status">Nothing is saved unless you tick the box. Nothing ever leaves this device.</span>
   </div>
-  <div class="grid"></div>
+  <div class="grid"><article class="card route" id="route-overview"><h3 class="card-title">Route 1 · Initial overview</h3><p class="card-sub">About two to three hours</p><p>Enough to explain the business and the role accurately to a friend, with the main corrections to the starting account in hand.</p><ol><li><label><input type="checkbox" class="route-step" data-step="route-overview:0"> <a href="#/read/ch00">How to read this dossier</a></label><span class="muted"> Layers, evidence statuses, and what the research changed.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-overview:1"> <a href="#/read/ch01">Foundations (Beginner view)</a></label><span class="muted"> Assets, liabilities, funds, mandates, fees, intermediaries.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-overview:2"> <a href="#/read/ch02">The role: what it is and is not</a></label><span class="muted"> Programme facts and each function.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-overview:3"> <a href="#/teams">Teams and coverage matrix</a></label><span class="muted"> Geography by client segment, with evidence status per cell.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-overview:4"> <a href="#/calculator">Fee calculator: the £500m case</a></label><span class="muted"> How a mandate becomes revenue.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-overview:5"> <a href="#/lifecycle">Client lifecycle, stage by stage</a></label><span class="muted"> Who does what from first research to exit.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-overview:6"> <a href="#/sources">Audit of the former intern&#x27;s account</a></label><span class="muted"> Which starting claims held up.</span></li></ol></article><article class="card route" id="route-interview"><h3 class="card-title">Route 2 · Focused interview preparation</h3><p class="card-sub">About six to eight hours over several days</p><p>Build answers from arguments and test them under follow-up questions. Do this only after Route 1.</p><ol><li><label><input type="checkbox" class="route-step" data-step="route-interview:0"> <a href="#/read/ch06">Sales versus relationship management</a></label><span class="muted"> What differs in practice, with sample work products.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-interview:1"> <a href="#/read/ch07">What a client relationship actually means</a></label><span class="muted"> Trust as behaviour, and when a client should leave.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-interview:2"> <a href="#/read/ch05">Mandates and economics</a></label><span class="muted"> Real cases and Goldman&#x27;s own disclosures.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-interview:3"> <a href="#/awareness">Commercial awareness cards for your likely teams</a></label><span class="muted"> One causal chain per development.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-interview:4"> <a href="#/why">Why-trees: answer each level before opening it</a></label><span class="muted"> Find where your reasons become circular.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-interview:5"> <a href="#/read/ch08">Fill in the personal evidence ledger</a></label><span class="muted"> Only your own evidence makes a first-person answer honest.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-interview:6"> <a href="#/read/ch10">Interview practice chapter</a></label><span class="muted"> How to build and judge an answer.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-interview:7"> <a href="#/practice">Practice mode: ten timed questions</a></label><span class="muted"> Score accuracy, specificity, logic, judgement, clarity, evidence.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-interview:8"> <a href="#/practice">Practice cases</a></label><span class="muted"> Performance, fees, suitability, an unknown answer, a delay, a cheaper rival.</span></li></ol></article><article class="card route" id="route-full"><h3 class="card-title">Route 3 · Comprehensive study</h3><p class="card-sub">Twenty hours or more</p><p>Everything, in dependency order, switching to the Technical view on the second pass.</p><ol><li><label><input type="checkbox" class="route-step" data-step="route-full:0"> <a href="#/read/ch00">Chapters 0 to 2 in Both view</a></label><span class="muted"> Frame, foundations, role.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-full:1"> <a href="#/read/ch03">Chapter 3 with the team profiles open alongside</a></label><span class="muted"> Each client type and business model.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-full:2"> <a href="#/read/ch04">People directory and chapter 4</a></label><span class="muted"> Public leadership, movement log, recruitment audit.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-full:3"> <a href="#/read/ch05">Mandates register and chapter 5</a></label><span class="muted"> Every public event, then the economics.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-full:4"> <a href="#/calculator">Every worked fee case, reproduced by hand</a></label><span class="muted"> Timing, tiers, withdrawals, fee bases.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-full:5"> <a href="#/read/ch06">Chapters 6 and 7</a></label><span class="muted"> The work and the relationship.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-full:6"> <a href="#/roles">Role comparison across three roles</a></label><span class="muted"> Decision rights side by side.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-full:7"> <a href="#/read/ch08">Chapter 8 and all nine why-trees</a></label><span class="muted"> Values in conflict, counterfactual tests.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-full:8"> <a href="#/read/ch09">Chapter 9 and every awareness card</a></label><span class="muted"> Theses, competitors, future of the work.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-full:9"> <a href="#/read/ch10">Chapter 10 and the full question bank</a></label><span class="muted"> Weak answers and what they lack.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-full:10"> <a href="#/read/ch11">Chapter 11: acceptance test and open questions</a></label><span class="muted"> What is still unresolved.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-full:11"> <a href="#/glossary">Glossary self-test</a></label><span class="muted"> Define each term before reading its entry.</span></li><li><label><input type="checkbox" class="route-step" data-step="route-full:12"> <a href="#/sources">Source and claim registers</a></label><span class="muted"> Open the sources behind anything you plan to quote.</span></li></ol></article></div>
   <h2>What this platform cannot tell you</h2>
   <ul>
     <li>Goldman Sachs's internal structure, fees, headcount, scoring criteria or future interview questions. Where the only source is the former intern's call, the claim is marked <em>Unverified account</em>.</li>
@@ -240,7 +243,214 @@ button.g:focus-visible{outline:3px solid var(--focus)}
 <section class="view" id="view-read" hidden aria-labelledby="h-read">
   <h1 id="h-read" class="skip">Read the dossier</h1>
   <div class="reader">
-    <div id="chapters"><article class="chapter" id="art-ch01" data-chapter="ch01"><h1 id="ch01">Foundations from first principles</h1>
+    <div id="chapters"><article class="chapter" id="art-ch00" data-chapter="ch00"><h1 id="ch00">How to read this dossier</h1>
+<p>This is a research and learning project for one application: the <strong>2027 | EMEA | London | Asset Management, Client Solutions Group | Summer Analyst</strong> programme at Goldman Sachs. It sets out to answer six questions. What is this business? What does the role involve? Why does the work create value? What are its limits? What would you be choosing by entering it? Why might you enjoy the work itself, as distinct from the title?</p>
+<p>It is not a set of scripts. The interview material sits in the last chapter on purpose, because an answer you can defend comes from understanding the business, and a memorised answer falls apart at the second follow-up question.</p>
+<section class="sec" data-search data-kind="chapter" data-sec="ch00-the-three-layers"><h2 id="ch00-the-three-layers">The three layers</h2>
+<p>Everything in the project belongs to one of three layers, and they are labelled wherever confusing them would matter.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>What it holds</th>
+<th>How to treat it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="layer layer-a">Layer A · verified fact</span></td>
+<td>What Goldman Sachs, clients, regulators and other credible sources establish</td>
+<td>Quote it with its source and date</td>
+</tr>
+<tr>
+<td><span class="layer layer-b">Layer B · interpretation</span></td>
+<td>What those facts suggest about client needs, the work and the economics</td>
+<td>An argument. Know its reasoning and where it could be wrong</td>
+</tr>
+<tr>
+<td><span class="layer layer-c">Layer C · personal fit</span></td>
+<td>What might appeal to you about the work</td>
+<td>A hypothesis about yourself that only your own evidence can test</td>
+</tr>
+</tbody>
+</table></div>
+<p>A Layer B argument is never a disclosed Goldman Sachs fact. A Layer C statement is never proof of your personality. The chapters on the industry and the role stand on their own and are not tied to your background.</p>
+</section><section class="sec" data-search data-kind="chapter" data-sec="ch00-evidence-statuses"><h2 id="ch00-evidence-statuses">Evidence statuses</h2>
+<p>Every material claim carries one of six statuses.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>How far to rely on it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="badge badge-v" title="The supporting passage was read on a primary or credible source."><span aria-hidden="true">✔</span> Verified</span></td>
+<td>The supporting passage was read on a primary or credible source</td>
+<td>Usable, with the date</td>
+</tr>
+<tr>
+<td><span class="badge badge-si" title="Reasoned from verified facts or general industry practice; not itself a disclosed fact."><span aria-hidden="true">≈</span> Supported inference</span></td>
+<td>Reasoned from verified facts or general industry practice, or seen only in a search summary</td>
+<td>Usable as "this suggests", never as "Goldman says"</td>
+</tr>
+<tr>
+<td><span class="badge badge-ua" title="Known only from one person&#x27;s account (for example the former intern&#x27;s call)."><span aria-hidden="true">?</span> Unverified account</span></td>
+<td>Known only from one person's account</td>
+<td>A lead to test. Do not repeat it as fact</td>
+</tr>
+<tr>
+<td><span class="badge badge-il" title="Invented to teach a mechanism. Not a real client, fee or event."><span aria-hidden="true">✎</span> Illustrative example</span></td>
+<td>Invented to teach a mechanism</td>
+<td>Never quote as real</td>
+</tr>
+<tr>
+<td><span class="badge badge-ce" title="Credible sources disagree, or the account conflicts with a source."><span aria-hidden="true">⇄</span> Conflicting evidence</span></td>
+<td>Credible sources disagree, or an account conflicts with a source</td>
+<td>State both sides</td>
+</tr>
+<tr>
+<td><span class="badge badge-npe" title="Searched for and not found in public sources."><span aria-hidden="true">∅</span> Not publicly established</span></td>
+<td>Looked for and not found in public sources</td>
+<td>Say "not public", and do not guess</td>
+</tr>
+</tbody>
+</table></div>
+<p>Three rules sit behind the labels. Another AI's draft is not a source. Several articles repeating one press release count once. Where a figure is not published, the dossier says "not publicly disclosed" and leaves the gap visible.</p>
+</section><section class="sec" data-search data-kind="chapter" data-sec="ch00-where-the-starting-account-came-from-and-what-the-research-d"><h2 id="ch00-where-the-starting-account-came-from-and-what-the-research-d">Where the starting account came from, and what the research did to it</h2>
+<p>The project began with notes from one call with a former intern on the sales side of the UK Institutional team. His account is useful and specific, and it is one person's view of one summer. Every statement from it was treated as a lead and tested. The full audit is in the Sources view of the application and in Appendix L of the PDF. The findings that most change the starting picture are these.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>The starting account said</th>
+<th>What the research found</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"Client Solutions Group" is the equivalent of saying "sales"</td>
+<td>Goldman's own listings pair the name with "Sales", and one advertisement calls it the sales organisation. A London advertisement for a Client Solutions Group role also gives it work on existing relationships, so the name does not exclude relationship management <a class="cite" href="#src-R1-S04" data-src="R1-S04" title="Goldman Sachs (higher.gs.com careers site): 2026 | EMEA | Frankfurt | Asset Management, Client Solutions Group / Sales | New Analyst (role 150769)">R1-S04</a><a class="cite" href="#src-R1-S01" data-src="R1-S01" title="Goldman Sachs (higher.gs.com careers site): Goldman Sachs Asset &amp; Wealth Management - Client Solutions Group (Dutch Speaking) - Analyst/Associate - London (role 186495)">R1-S01</a></td>
+<td><span class="badge badge-v" title="The supporting passage was read on a primary or credible source."><span aria-hidden="true">✔</span> Verified</span></td>
+</tr>
+<tr>
+<td>"CCG" (Client Coverage Group) is the relationship-management side</td>
+<td>"Client Coverage Group" is a real Goldman name, defined in one advertisement as the group for retaining, expanding and supporting existing relationships. How it sits relative to the Client Solutions Group in London is not published <a class="cite" href="#src-R1-S11" data-src="R1-S11" title="Goldman Sachs (higher.gs.com careers site): Asset &amp; Wealth Management, Asset Management, Client Coverage Group - Korea Market, Analyst/Associate, Hong Kong (role 167034)">R1-S11</a></td>
+<td><span class="badge badge-v" title="The supporting passage was read on a primary or credible source."><span aria-hidden="true">✔</span> Verified</span> for the name, <span class="badge badge-npe" title="Searched for and not found in public sources."><span aria-hidden="true">∅</span> Not publicly established</span> for the structure</td>
+</tr>
+<tr>
+<td>OCIO exists only in the UK</td>
+<td>It is a global business. Goldman reported $480 billion of OCIO assets at 31 March 2026 and has announced large mandates in the United States and across Europe <a class="cite" href="#src-R7-S13" data-src="R7-S13" title="Goldman Sachs Asset Management: Goldman Sachs Asset Management Secures $70 Billion in Retirement Asset Mandates (Verizon and Lockheed Martin)">R7-S13</a><a class="cite" href="#src-R3-S09" data-src="R3-S09" title="Goldman Sachs Asset Management (press release): Goldman Sachs Asset Management Secures $70 Billion in Retirement Asset Mandates (Verizon, Lockheed Martin)">R3-S09</a></td>
+<td><span class="badge badge-ce" title="Credible sources disagree, or the account conflicts with a source."><span aria-hidden="true">⇄</span> Conflicting evidence</span></td>
+</tr>
+<tr>
+<td>Two named companies are confidential OCIO clients</td>
+<td>One, BAE Systems, is public: Goldman announced it by press release on 6 September 2023. The other is not confirmed by any public source, and its schemes' published reports name a different fiduciary manager. Its name is left out of this project <a class="cite" href="#src-R3-S01" data-src="R3-S01" title="Goldman Sachs Asset Management (press release): BAE Systems Pension Schemes Trustees Appoint Goldman Sachs Asset Management for Approximately £23 Billion UK Pension Schemes Mandate">R3-S01</a></td>
+<td><span class="badge badge-v" title="The supporting passage was read on a primary or credible source."><span aria-hidden="true">✔</span> Verified</span> and <span class="badge badge-npe" title="Searched for and not found in public sources."><span aria-hidden="true">∅</span> Not publicly established</span></td>
+</tr>
+<tr>
+<td>Goldman recently won an OCIO award</td>
+<td>Two 2026 awards fit: the European Pensions Awards (2 July) and the Irish Pensions Awards (4 November). Which one he saw is not established <a class="cite" href="#src-R3-S10" data-src="R3-S10" title="Goldman Sachs Asset Management (awards page): European Pensions Fiduciary Management / OCIO Award 2026">R3-S10</a><a class="cite" href="#src-R3-S11" data-src="R3-S11" title="Goldman Sachs Asset Management (awards page): Irish Pensions Awards 2026: Fiduciary Management / OCIO of the Year">R3-S11</a></td>
+<td><span class="badge badge-si" title="Reasoned from verified facts or general industry practice; not itself a disclosed fact."><span aria-hidden="true">≈</span> Supported inference</span></td>
+</tr>
+<tr>
+<td>Asset management is about 30% of Goldman's revenue</td>
+<td>The Asset &amp; Wealth Management segment was 28.6% of net revenues in 2025. Asset management alone was 11.6%. Nothing is disclosed for the Client Solutions Group <a class="cite" href="#src-R2-S01" data-src="R2-S01" title="Goldman Sachs (SEC filing; PDF on GS Investor Relations): The Goldman Sachs Group, Inc. Annual Report on Form 10-K for the fiscal year ended December 31, 2025">R2-S01</a></td>
+<td><span class="badge badge-ce" title="Credible sources disagree, or the account conflicts with a source."><span aria-hidden="true">⇄</span> Conflicting evidence</span></td>
+</tr>
+<tr>
+<td>Germany, France, Italy and Iberia "never came up"</td>
+<td>Job advertisements show Germany and Austria covered from Frankfurt and France from Paris, in German and French. They are covered, mostly from local offices <a class="cite" href="#src-R1-S05" data-src="R1-S05" title="Goldman Sachs (higher.gs.com careers site): 2027 | EMEA | Frankfurt | Asset Management, Client Solutions Group - Institutional Sales | Seasonal/Off-Cycle (German Speaker) (role 184028)">R1-S05</a><a class="cite" href="#src-R1-S06" data-src="R1-S06" title="Goldman Sachs (higher.gs.com careers site): 2027 | EMEA | Paris | Asset Management, Client Solutions Group - Third Party Wealth | Seasonal/Off-Cycle (French Speaker) (role 184029)">R1-S06</a></td>
+<td><span class="badge badge-v" title="The supporting passage was read on a primary or credible source."><span aria-hidden="true">✔</span> Verified</span> for Frankfurt and Paris</td>
+</tr>
+<tr>
+<td>Analyst base pay is £52k in sales and £48k in relationship management</td>
+<td>No credible public source gives London analyst base pay for this business <a class="cite" href="#src-R1-S41" data-src="R1-S41" title="Private account supplied by the candidate: Call with a former Goldman Sachs Asset Management intern (candidate&#x27;s own notes, auto-transcribed)">R1-S41</a></td>
+<td><span class="badge badge-ua" title="Known only from one person&#x27;s account (for example the former intern&#x27;s call)."><span aria-hidden="true">?</span> Unverified account</span></td>
+</tr>
+<tr>
+<td>Goldman restricted staff use of Claude Code</td>
+<td>Secondary reports of a Bloomberg article say internal guidance in October 2026 limited AI coding tools to engineers. That is narrower than a ban, and nothing public covers asset-management staff specifically <a class="cite" href="#src-R2-S08" data-src="R2-S08" title="PYMNTS: Goldman Sachs Bars Bankers From Using Claude Code and GitHub">R2-S08</a></td>
+<td><span class="badge badge-si" title="Reasoned from verified facts or general industry practice; not itself a disclosed fact."><span aria-hidden="true">≈</span> Supported inference</span></td>
+</tr>
+</tbody>
+</table></div>
+</section><section class="sec" data-search data-kind="chapter" data-sec="ch00-two-teaching-levels"><h2 id="ch00-two-teaching-levels">Two teaching levels</h2>
+<p>Each topic is taught twice. <strong>Level 1</strong> explains it from first principles in plain English with one concrete example. <strong>Level 2</strong> adds the institutional mechanics: contracts, incentives, calculations, decision rights and exceptions. In the application you can show either level or both. Caveats sit outside both levels, so the beginner view never hides a limitation.</p>
+</section><section class="sec" data-search data-kind="chapter" data-sec="ch00-what-has-been-left-out-on-purpose"><h2 id="ch00-what-has-been-left-out-on-purpose">What has been left out on purpose</h2>
+<ul>
+<li><strong>Your own records.</strong> No CV, email or personal document is used anywhere. The personal evidence ledger in chapter 8 is a blank template with reflection questions, and no experience, feeling or motive has been written for you.</li>
+<li><strong>One client name.</strong> As explained above.</li>
+<li><strong>Private information about people.</strong> The directory holds public professional information only: names, public titles, offices and public career history, each with a source and an evidence date.</li>
+<li><strong>Recruitment tactics built on rumour.</strong> Unverified claims about how candidates are screened or allocated are audited, and nothing here recommends tailoring answers to them.</li>
+</ul>
+</section><section class="sec" data-search data-kind="chapter" data-sec="ch00-how-the-research-was-done-and-its-limits"><h2 id="ch00-how-the-research-was-done-and-its-limits">How the research was done, and its limits</h2>
+<p>Research date and information cutoff: 14 November 2026. Nothing later is used.</p>
+<p>Nine research streams covered the programme and recruitment process, Goldman's disclosures, the UK institutional and OCIO market, third-party wealth, the rest of the EMEA coverage map with liquidity and insurance, people, mandates, and competitors and trends. Each stream recorded its sources, the passage supporting each claim, its search queries and what it looked for without finding.</p>
+<p>Four limits matter when you rely on the result.</p>
+<ol>
+<li><strong>The search allowance ran out.</strong> Several streams stopped searching before their plan was complete. The coverage register in chapter 11 separates "searched, not established" from "not investigated", topic by topic.</li>
+<li><strong>Goldman's careers site could not be read directly.</strong> Most job-advertisement evidence comes from mirrors of the listings or from search summaries, and is capped at "supported inference" unless the exact passage was seen.</li>
+<li><strong>Public profiles are a biased sample.</strong> Senior and externally visible people are over-represented. The directory is not a headcount and cannot support a ratio, a conversion rate or an estimate of hiring odds.</li>
+<li><strong>Things change.</strong> Titles, policies, rates and figures are correct to the evidence date shown beside them, and no later.</li>
+</ol>
+</section><section class="sec" data-search data-kind="chapter" data-sec="ch00-a-map-of-the-chapters"><h2 id="ch00-a-map-of-the-chapters">A map of the chapters</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Chapter</th>
+<th>Question it answers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Foundations</td>
+<td>What are the basic ideas, from assets and liabilities to fees and intermediaries?</td>
+</tr>
+<tr>
+<td>2. The role</td>
+<td>What is the programme, what does each function do, and what is it not?</td>
+</tr>
+<tr>
+<td>3. Teams and structure</td>
+<td>How is the client business organised, and how do the client types differ?</td>
+</tr>
+<tr>
+<td>4. People and recruitment</td>
+<td>Who is publicly visible, and what is established about hiring?</td>
+</tr>
+<tr>
+<td>5. Mandates and economics</td>
+<td>What has Goldman publicly won and lost, and how does the money work?</td>
+</tr>
+<tr>
+<td>6. Sales versus relationship management</td>
+<td>What differs in practice, and what is the same?</td>
+</tr>
+<tr>
+<td>7. The client relationship</td>
+<td>What do "relationship" and "trust" mean in observable terms?</td>
+</tr>
+<tr>
+<td>8. Motivation and career fit</td>
+<td>Do your reasons survive repeated questioning?</td>
+</tr>
+<tr>
+<td>9. Commercial awareness</td>
+<td>What is changing for each client type, and what follows?</td>
+</tr>
+<tr>
+<td>10. Interview practice</td>
+<td>How do you turn understanding into answers you can defend?</td>
+</tr>
+<tr>
+<td>11. Acceptance test and limits</td>
+<td>Does the project meet its own standard, and where does it fall short?</td>
+</tr>
+</tbody>
+</table></div></section></article><article class="chapter" id="art-ch01" data-chapter="ch01"><h1 id="ch01">Foundations from first principles</h1>
 <p>This chapter teaches the minimum you need before any other chapter makes sense. It assumes no finance background. Each idea is taught once: a plain-English version first, then the mechanics a professional would use. Later chapters build on these ideas without repeating them.</p>
 <p>Every number in an example is invented to show the arithmetic and is tagged <span class="badge badge-il" title="Invented to teach a mechanism. Not a real client, fee or event."><span aria-hidden="true">✎</span> Illustrative example</span>. Nothing in this chapter describes Goldman Sachs's actual fees, clients or contracts.</p>
 <p>For each important idea the chapter answers the same seven questions: what is it, why does it exist, who uses it, what actually happens, how does money move, what can go wrong, and why does it matter to a client coverage role.</p>
@@ -2975,7 +3185,7 @@ button.g:focus-visible{outline:3px solid var(--focus)}
 <li>Can I complete "I know…, I think…, I want to find out…" using only entries from my ledger?</li>
 </ol>
 </div></section></article><div class="chapter-pager"><button type="button" id="prevCh">Previous chapter</button><button type="button" id="nextCh">Next chapter</button></div></div>
-    <nav class="toc" aria-label="Chapters"><p class="box-title">Chapters</p><ul id="chapterNav"><li><a href="#/read/ch01" data-chapter-link="ch01">Foundations from first principles</a><ul><li><a href="#/read/ch01/ch01-1-assets-liabilities-and-why-anyone-invests">1. Assets, liabilities and why anyone invests</a></li><li><a href="#/read/ch01/ch01-2-the-asset-manager-and-the-people-around-it">2. The asset manager and the people around it</a></li><li><a href="#/read/ch01/ch01-3-how-money-is-handed-over-funds-mandates-and-the-contract">3. How money is handed over: funds, mandates and the contract</a></li><li><a href="#/read/ch01/ch01-4-measuring-the-job-benchmarks-risk-liquidity-and-time">4. Measuring the job: benchmarks, risk, liquidity and time</a></li><li><a href="#/read/ch01/ch01-5-how-the-manager-gets-paid-basis-points-and-fees">5. How the manager gets paid: basis points and fees</a></li><li><a href="#/read/ch01/ch01-6-who-the-clients-are-and-why-coverage-exists">6. Who the clients are, and why coverage exists</a></li><li><a href="#/read/ch01/ch01-7-four-client-problems-you-will-meet-constantly">7. Four client problems you will meet constantly</a></li><li><a href="#/read/ch01/ch01-8-putting-it-together">8. Putting it together</a></li></ul></li><li><a href="#/read/ch06" data-chapter-link="ch06">Sales versus relationship management: what actually differs</a><ul><li><a href="#/read/ch06/ch06-how-to-read-this-chapter">How to read this chapter</a></li><li><a href="#/read/ch06/ch06-the-short-version">The short version</a></li><li><a href="#/read/ch06/ch06-where-the-labels-come-from-and-why-they-are-unreliable">Where the labels come from, and why they are unreliable</a></li><li><a href="#/read/ch06/ch06-what-the-two-sides-have-in-common">What the two sides have in common</a></li><li><a href="#/read/ch06/ch06-the-comparison-in-detail">The comparison in detail</a></li><li><a href="#/read/ch06/ch06-why-sales-wins-rm-retains-is-only-a-first-approximation">Why &quot;sales wins, RM retains&quot; is only a first approximation</a></li><li><a href="#/read/ch06/ch06-how-the-split-varies-by-firm-and-team">How the split varies by firm and team</a></li><li><a href="#/read/ch06/ch06-adjacent-roles-what-this-job-is-not">Adjacent roles: what this job is not</a></li><li><a href="#/read/ch06/ch06-what-each-level-of-seniority-realistically-contributes">What each level of seniority realistically contributes</a></li><li><a href="#/read/ch06/ch06-five-illustrative-working-days">Five illustrative working days</a></li><li><a href="#/read/ch06/ch06-sample-work-products">Sample work products</a></li><li><a href="#/read/ch06/ch06-the-lifecycle-in-brief">The lifecycle in brief</a></li><li><a href="#/read/ch06/ch06-five-misconceptions-examined">Five misconceptions, examined</a></li><li><a href="#/read/ch06/ch06-the-difficult-parts">The difficult parts</a></li><li><a href="#/read/ch06/ch06-regulatory-guardrails-that-shape-both-roles">Regulatory guardrails that shape both roles</a></li><li><a href="#/read/ch06/ch06-self-test">Self-test</a></li></ul></li><li><a href="#/read/ch07" data-chapter-link="ch07">What a client relationship actually means</a><ul><li><a href="#/read/ch07/ch07-1-five-different-things-people-call-a-relationship">1. Five different things people call a &quot;relationship&quot;</a></li><li><a href="#/read/ch07/ch07-2-who-the-client-actually-is">2. Who &quot;the client&quot; actually is</a></li><li><a href="#/read/ch07/ch07-3-what-a-relationship-reveals-that-a-factsheet-cannot-and-th">3. What a relationship reveals that a factsheet cannot, and the reverse</a></li><li><a href="#/read/ch07/ch07-4-trust-translated-into-behaviour">4. Trust, translated into behaviour</a></li><li><a href="#/read/ch07/ch07-5-the-economics-of-a-relationship-without-reducing-clients-t">5. The economics of a relationship, without reducing clients to targets</a></li><li><a href="#/read/ch07/ch07-6-the-relationship-over-time-branches-not-a-success-story">6. The relationship over time: branches, not a success story</a></li><li><a href="#/read/ch07/ch07-7-where-a-junior-fits">7. Where a junior fits</a></li><li><a href="#/read/ch07/ch07-8-translation-table-from-abstract-words-to-observable-facts">8. Translation table: from abstract words to observable facts</a></li></ul></li><li><a href="#/read/ch08" data-chapter-link="ch08">Motivation and career fit: arguments that survive questioning</a><ul><li><a href="#/read/ch08/ch08-how-to-use-the-why-trees">How to use the why-trees</a></li><li><a href="#/read/ch08/ch08-a-valuable-role-is-not-the-same-as-a-role-i-would-enjoy">A valuable role is not the same as a role I would enjoy</a></li><li><a href="#/read/ch08/ch08-five-counterfactual-tests">Five counterfactual tests</a></li><li><a href="#/read/ch08/ch08-values-in-the-work-and-where-they-collide">Values in the work, and where they collide</a></li><li><a href="#/read/ch08/ch08-personal-evidence-ledger">Personal evidence ledger</a></li><li><a href="#/read/ch08/ch08-what-choosing-this-career-could-mean">What choosing this career could mean</a></li><li><a href="#/read/ch08/ch08-adjacent-careers-compared-without-ranking">Adjacent careers, compared without ranking</a></li><li><a href="#/read/ch08/ch08-evidence-that-would-change-my-mind">Evidence that would change my mind</a></li><li><a href="#/read/ch08/ch08-stating-motivation-honestly">Stating motivation honestly</a></li></ul></li></ul></nav>
+    <nav class="toc" aria-label="Chapters"><p class="box-title">Chapters</p><ul id="chapterNav"><li><a href="#/read/ch00" data-chapter-link="ch00">How to read this dossier</a><ul><li><a href="#/read/ch00/ch00-the-three-layers">The three layers</a></li><li><a href="#/read/ch00/ch00-evidence-statuses">Evidence statuses</a></li><li><a href="#/read/ch00/ch00-where-the-starting-account-came-from-and-what-the-research-d">Where the starting account came from, and what the research did to it</a></li><li><a href="#/read/ch00/ch00-two-teaching-levels">Two teaching levels</a></li><li><a href="#/read/ch00/ch00-what-has-been-left-out-on-purpose">What has been left out on purpose</a></li><li><a href="#/read/ch00/ch00-how-the-research-was-done-and-its-limits">How the research was done, and its limits</a></li><li><a href="#/read/ch00/ch00-a-map-of-the-chapters">A map of the chapters</a></li></ul></li><li><a href="#/read/ch01" data-chapter-link="ch01">Foundations from first principles</a><ul><li><a href="#/read/ch01/ch01-1-assets-liabilities-and-why-anyone-invests">1. Assets, liabilities and why anyone invests</a></li><li><a href="#/read/ch01/ch01-2-the-asset-manager-and-the-people-around-it">2. The asset manager and the people around it</a></li><li><a href="#/read/ch01/ch01-3-how-money-is-handed-over-funds-mandates-and-the-contract">3. How money is handed over: funds, mandates and the contract</a></li><li><a href="#/read/ch01/ch01-4-measuring-the-job-benchmarks-risk-liquidity-and-time">4. Measuring the job: benchmarks, risk, liquidity and time</a></li><li><a href="#/read/ch01/ch01-5-how-the-manager-gets-paid-basis-points-and-fees">5. How the manager gets paid: basis points and fees</a></li><li><a href="#/read/ch01/ch01-6-who-the-clients-are-and-why-coverage-exists">6. Who the clients are, and why coverage exists</a></li><li><a href="#/read/ch01/ch01-7-four-client-problems-you-will-meet-constantly">7. Four client problems you will meet constantly</a></li><li><a href="#/read/ch01/ch01-8-putting-it-together">8. Putting it together</a></li></ul></li><li><a href="#/read/ch06" data-chapter-link="ch06">Sales versus relationship management: what actually differs</a><ul><li><a href="#/read/ch06/ch06-how-to-read-this-chapter">How to read this chapter</a></li><li><a href="#/read/ch06/ch06-the-short-version">The short version</a></li><li><a href="#/read/ch06/ch06-where-the-labels-come-from-and-why-they-are-unreliable">Where the labels come from, and why they are unreliable</a></li><li><a href="#/read/ch06/ch06-what-the-two-sides-have-in-common">What the two sides have in common</a></li><li><a href="#/read/ch06/ch06-the-comparison-in-detail">The comparison in detail</a></li><li><a href="#/read/ch06/ch06-why-sales-wins-rm-retains-is-only-a-first-approximation">Why &quot;sales wins, RM retains&quot; is only a first approximation</a></li><li><a href="#/read/ch06/ch06-how-the-split-varies-by-firm-and-team">How the split varies by firm and team</a></li><li><a href="#/read/ch06/ch06-adjacent-roles-what-this-job-is-not">Adjacent roles: what this job is not</a></li><li><a href="#/read/ch06/ch06-what-each-level-of-seniority-realistically-contributes">What each level of seniority realistically contributes</a></li><li><a href="#/read/ch06/ch06-five-illustrative-working-days">Five illustrative working days</a></li><li><a href="#/read/ch06/ch06-sample-work-products">Sample work products</a></li><li><a href="#/read/ch06/ch06-the-lifecycle-in-brief">The lifecycle in brief</a></li><li><a href="#/read/ch06/ch06-five-misconceptions-examined">Five misconceptions, examined</a></li><li><a href="#/read/ch06/ch06-the-difficult-parts">The difficult parts</a></li><li><a href="#/read/ch06/ch06-regulatory-guardrails-that-shape-both-roles">Regulatory guardrails that shape both roles</a></li><li><a href="#/read/ch06/ch06-self-test">Self-test</a></li></ul></li><li><a href="#/read/ch07" data-chapter-link="ch07">What a client relationship actually means</a><ul><li><a href="#/read/ch07/ch07-1-five-different-things-people-call-a-relationship">1. Five different things people call a &quot;relationship&quot;</a></li><li><a href="#/read/ch07/ch07-2-who-the-client-actually-is">2. Who &quot;the client&quot; actually is</a></li><li><a href="#/read/ch07/ch07-3-what-a-relationship-reveals-that-a-factsheet-cannot-and-th">3. What a relationship reveals that a factsheet cannot, and the reverse</a></li><li><a href="#/read/ch07/ch07-4-trust-translated-into-behaviour">4. Trust, translated into behaviour</a></li><li><a href="#/read/ch07/ch07-5-the-economics-of-a-relationship-without-reducing-clients-t">5. The economics of a relationship, without reducing clients to targets</a></li><li><a href="#/read/ch07/ch07-6-the-relationship-over-time-branches-not-a-success-story">6. The relationship over time: branches, not a success story</a></li><li><a href="#/read/ch07/ch07-7-where-a-junior-fits">7. Where a junior fits</a></li><li><a href="#/read/ch07/ch07-8-translation-table-from-abstract-words-to-observable-facts">8. Translation table: from abstract words to observable facts</a></li></ul></li><li><a href="#/read/ch08" data-chapter-link="ch08">Motivation and career fit: arguments that survive questioning</a><ul><li><a href="#/read/ch08/ch08-how-to-use-the-why-trees">How to use the why-trees</a></li><li><a href="#/read/ch08/ch08-a-valuable-role-is-not-the-same-as-a-role-i-would-enjoy">A valuable role is not the same as a role I would enjoy</a></li><li><a href="#/read/ch08/ch08-five-counterfactual-tests">Five counterfactual tests</a></li><li><a href="#/read/ch08/ch08-values-in-the-work-and-where-they-collide">Values in the work, and where they collide</a></li><li><a href="#/read/ch08/ch08-personal-evidence-ledger">Personal evidence ledger</a></li><li><a href="#/read/ch08/ch08-what-choosing-this-career-could-mean">What choosing this career could mean</a></li><li><a href="#/read/ch08/ch08-adjacent-careers-compared-without-ranking">Adjacent careers, compared without ranking</a></li><li><a href="#/read/ch08/ch08-evidence-that-would-change-my-mind">Evidence that would change my mind</a></li><li><a href="#/read/ch08/ch08-stating-motivation-honestly">Stating motivation honestly</a></li></ul></li></ul></nav>
   </div>
 </section>
 

@@ -21,7 +21,7 @@ body.print .card-title{break-after:avoid;font-size:11pt}
 body.print dl.kv{grid-template-columns:38mm minmax(0,1fr);gap:.1rem .6rem}
 body.print dl.kv dl.kv{grid-template-columns:30mm minmax(0,1fr)}
 body.print table{font-size:8.6pt;font-family:var(--font)}
-body.print th,body.print td{padding:.2rem .35rem;overflow-wrap:anywhere}
+body.print th,body.print td{padding:.2rem .35rem;overflow-wrap:break-word;word-break:normal}
 body.print thead{display:table-header-group}body.print tr{break-inside:avoid}
 body.print .table-wrap{overflow:visible}
 body.print details{border:0;border-left:2px solid var(--line);border-radius:0;padding:.05rem 0 .05rem .6rem;margin:.3rem 0}
@@ -33,3 +33,11 @@ body.print table.sources td:nth-child(2){max-width:70mm}
 body.print pre{font-size:7.8pt}
 body.print .org-box{break-inside:avoid}
 body.print .route-step{display:none}
+body.print table.sources,body.print table.claims,body.print table.audit,body.print table.coverage,body.print table.people,body.print table.ledger{table-layout:fixed}
+body.print table.sources th:nth-child(1){width:9%}body.print table.sources th:nth-child(2){width:31%}body.print table.sources th:nth-child(3){width:10%}body.print table.sources th:nth-child(4){width:11%}body.print table.sources th:nth-child(5){width:39%}
+body.print table.claims th:nth-child(1){width:8%}body.print table.claims th:nth-child(2){width:54%}body.print table.claims th:nth-child(3){width:14%}body.print table.claims th:nth-child(4){width:10%}body.print table.claims th:nth-child(5){width:14%}
+body.print table.audit th:nth-child(1){width:24%}body.print table.audit th:nth-child(2){width:14%}body.print table.audit th:nth-child(3){width:38%}body.print table.audit th:nth-child(4){width:24%}
+body.print table.coverage th:nth-child(1){width:7%}body.print table.coverage th:nth-child(2){width:19%}body.print table.coverage th:nth-child(3){width:34%}body.print table.coverage th:nth-child(4){width:26%}body.print table.coverage th:nth-child(5){width:14%}
+body.print table.people th:nth-child(1){width:15%}body.print table.people th:nth-child(2){width:25%}body.print table.people th:nth-child(3){width:18%}body.print table.people th:nth-child(4){width:15%}body.print table.people th:nth-child(5){width:14%}body.print table.people th:nth-child(6){width:13%}
+body.print td .cite,body.print td.idtag{word-break:break-all}
+body.print table.sources a{word-break:break-word}
