@@ -5,15 +5,15 @@ var DATA=JSON.parse(document.getElementById('data').textContent);
 var $=function(s,r){return (r||document).querySelector(s)};
 var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
 var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
-var VIEWS=['home','read','teams','people','mandates','awareness','roles','lifecycle','calculator','why','practice','glossary','sources','search'];
+var VIEWS=['home','intel','numbers','arcade','read','teams','people','mandates','awareness','roles','lifecycle','calculator','why','practice','glossary','sources','search'];
 var reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ---------- optional local progress ---------- */
-var KEY='gsamcsg.v1',store={save:false,steps:{},history:[]};
+var KEY='gsamcsg.v1',store={save:false,steps:{},history:[],xp:0,learned:{},read:{},known:{}};
 function lsGet(){try{var v=localStorage.getItem(KEY);return v?JSON.parse(v):null}catch(e){return null}}
 function lsSet(){if(!store.save)return;try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}}
 function lsClear(){try{localStorage.removeItem(KEY)}catch(e){}}
-(function(){var s=lsGet();if(s&&s.save){store=s;store.steps=store.steps||{};store.history=store.history||[]}})();
+(function(){var s=lsGet();if(s&&s.save){store=s;['steps','learned','read','known'].forEach(function(k){store[k]=store[k]||{}});store.history=store.history||[];store.xp=store.xp||0}})();
 function toast(msg){var t=document.createElement('div');t.className='toast';t.setAttribute('role','status');t.textContent=msg;document.body.appendChild(t);setTimeout(function(){t.remove()},2600)}
 
 /* ---------- fee model (mirror of build/calc.py) ---------- */
@@ -58,6 +58,7 @@ function showChapter(id,sec){
 function focusCard(view,id){var el=document.getElementById(id);if(!el)return;
   var list=el.parentElement;$$('[data-filtered]',list).forEach(function(x){x.removeAttribute('data-filtered')});
   $$('.filters[data-filter-for="'+list.id+'"] select').forEach(function(s){s.value=''});
+  if(el.tagName==='DETAILS'){el.open=true;el.scrollIntoView({block:'center'});return}
   el.scrollIntoView({behavior:reduceMotion?'auto':'smooth',block:'start'});el.setAttribute('tabindex','-1');el.focus({preventScroll:true})}
 var firstRoute=true;
 function route(){
@@ -84,8 +85,7 @@ $('#menuBtn').addEventListener('click',function(){var n=$('#sidenav');var o=n.cl
 /* ---------- level + theme ---------- */
 $$('[data-level]').forEach(function(b){b.addEventListener('click',function(){document.body.classList.remove('view-l1','view-l2','view-both');document.body.classList.add('view-'+b.dataset.level);
   $$('[data-level]').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')})})});
-$('#themeBtn').addEventListener('click',function(){var r=document.documentElement,cur=r.getAttribute('data-theme');
-  var dark=cur?cur==='dark':(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);r.setAttribute('data-theme',dark?'light':'dark');drawCube()});
+$('#themeBtn').addEventListener('click',function(){var r=document.documentElement;if(r.getAttribute('data-theme')==='light')r.removeAttribute('data-theme');else r.setAttribute('data-theme','light');drawCube()});
 
 /* ---------- glossary popovers ---------- */
 var G=DATA.glossary.filter(function(g){return g.term&&g.term.length>1}),gByKey={};
@@ -131,7 +131,7 @@ function buildIndex(){index=[];$$('[data-search]').forEach(function(el){var view
   else href='#/'+v;
   if(el.dataset.kind==='team-card'||el.classList.contains('team-card'))href='#/teams/'+el.id;
   var text=el.textContent.replace(/\s+/g,' ');index.push({kind:el.dataset.kind||v,title:title,text:text,low:text.toLowerCase(),tlow:title.toLowerCase(),href:href})})}
-var KIND={chapter:'Dossier',person:'Person','card person':'Person',glossary:'Glossary',source:'Source',claim:'Claim','claim-audit':'Intern-claim audit',interview:'Interview question','practice-case':'Practice case','why-tree':'Why-tree','fee-case':'Fee case',coverage:'Coverage register',personal:'Personal ledger'};
+var KIND={intel:'Intel',number:'Key number',chart:'Chart',chapter:'Dossier',person:'Person','card person':'Person',glossary:'Glossary',source:'Source',claim:'Claim','claim-audit':'Intern-claim audit',interview:'Interview question','practice-case':'Practice case','why-tree':'Why-tree','fee-case':'Fee case',coverage:'Coverage register',personal:'Personal ledger'};
 function kindLabel(k){if(KIND[k])return KIND[k];if(/team/.test(k))return 'Team';if(/person/.test(k))return 'Person';if(/mandate/.test(k))return 'Mandate';if(/dev/.test(k))return 'Awareness card';if(/comp/.test(k))return 'Competitor';if(/role/.test(k))return 'Role';if(/stage/.test(k))return 'Lifecycle stage';if(/gloss/.test(k))return 'Glossary';return 'Item'}
 function runSearch(q){if(!index)buildIndex();q=(q||'').trim();$('#q').value=q;var out=$('#searchResults');out.innerHTML='';
   var toks=q.toLowerCase().split(/\s+/).filter(Boolean);if(!toks.length){$('#searchSummary').textContent='Type in the search box to search every chapter, team, person, mandate, glossary entry, claim and source.';return}
@@ -273,17 +273,99 @@ function renderHistory(){var h=store.history,box=$('#pHistory');if(!h.length){bo
   box.innerHTML='<h3>Attempts this '+(store.save?'device':'session')+'</h3><div class="table-wrap"><table><thead><tr><th>Question</th><th>Time</th>'+CRIT.map(function(c){return '<th>'+esc(c)+'</th>'}).join('')+'<th>Total</th></tr></thead><tbody>'+
   h.slice().reverse().map(function(a){return '<tr><td>'+esc(a.q)+'</td><td>'+fmt(a.t)+'</td>'+a.s.map(function(v){return '<td>'+(v==null?'–':v)+'</td>'}).join('')+'<td>'+a.s.reduce(function(x,y){return x+(y||0)},0)+' / '+(CRIT.length*3)+'</td></tr>'}).join('')+'</tbody></table></div>'}
 $('#pSave').addEventListener('click',function(){if(!curQ)return;stopTimer();var s=$$('#pScores select').map(function(x){return x.value===''?null:Number(x.value)});
-  store.history.push({id:curQ.id,q:curQ.q,t:elapsed,s:s});lsSet();renderHistory();$('#pSaved').textContent=store.save?'Recorded and saved on this device.':'Recorded for this session only.'});
+  store.history.push({id:curQ.id,q:curQ.q,t:elapsed,s:s});addXP(15,'Practice attempt recorded');lsSet();renderHistory();$('#pSaved').textContent=store.save?'Recorded and saved on this device.':'Recorded for this session only.'});
 renderHistory();
 
 /* ---------- progress controls ---------- */
 var saveToggle=$('#saveToggle');saveToggle.checked=!!store.save;
 function syncSteps(){$$('.route-step').forEach(function(c){c.checked=!!store.steps[c.dataset.step]})}
 syncSteps();
-$$('.route-step').forEach(function(c){c.addEventListener('change',function(){store.steps[c.dataset.step]=c.checked;lsSet()})});
-saveToggle.addEventListener('change',function(){store.save=saveToggle.checked;if(store.save){lsSet();$('#saveState').textContent='Saving in this browser only. Untick or reset to remove it.'}else{lsClear();$('#saveState').textContent='Saving is off. Saved data has been removed from this browser.'}renderHistory()});
-$('#resetBtn').addEventListener('click',function(){store={save:saveToggle.checked,steps:{},history:[]};lsClear();lsSet();syncSteps();renderHistory();toast('Progress reset.')});
-if(store.save)$('#saveState').textContent='Saving in this browser only. Untick or reset to remove it.';
+$$('.route-step').forEach(function(c){c.addEventListener('change',function(){var first=!(c.dataset.step in store.steps);store.steps[c.dataset.step]=c.checked;if(c.checked&&first)addXP(2,'Route step done');lsSet()})});
+saveToggle.addEventListener('change',function(){store.save=saveToggle.checked;if(store.save){lsSet();$('#saveState').textContent='On: saved in this browser only. Untick or reset to remove it.'}else{lsClear();$('#saveState').textContent='Off: saved data has been removed from this browser.'}renderHistory()});
+$('#resetBtn').addEventListener('click',function(){store={save:saveToggle.checked,steps:{},history:[],xp:0,learned:{},read:{},known:{}};lsClear();lsSet();syncSteps();syncLearn();syncRead();renderHistory();updateXP();toast('Progress reset.')});
+if(store.save)$('#saveState').textContent='On: saved in this browser only. Untick or reset to remove it.';
 
-route();
+/* ---------- XP, levels, celebrations ---------- */
+var LEVELS=['New recruit','Briefed','Desk-ready','Client-ready','Trusted adviser','Coverage lead','Command Centre master'],PER=150;
+function updateXP(){var xp=store.xp||0,lvl=Math.min(LEVELS.length,Math.floor(xp/PER)+1),into=lvl>=LEVELS.length?PER:xp%PER,pct=Math.round(into/PER*100);
+  $('#xpNum').textContent=xp+' XP';$('#xpLevel').textContent='Level '+lvl;$('#xpFill').style.width=pct+'%';
+  $('#ring').style.setProperty('--p',pct);$('#ringLvl').textContent=lvl;$('#lvlName').textContent='Level '+lvl+' · '+LEVELS[lvl-1];
+  $('#lvlNext').textContent=lvl>=LEVELS.length?'Top level reached. Keep the drills going so it stays fresh.':(PER-into)+' XP to "'+LEVELS[lvl]+'". Earn XP in the Arcade, in practice mode, by marking intel as learned and by finishing chapters.'}
+function burst(){if(reduceMotion)return;var b=document.createElement('div');b.className='burst';b.setAttribute('aria-hidden','true');var em=['⭐','🎉','✨','🏆','💡'];
+  for(var i=0;i<26;i++){var e=document.createElement('i');e.textContent=em[i%em.length];e.style.left=(Math.random()*100)+'%';e.style.animationDelay=(Math.random()*.5)+'s';b.appendChild(e)}
+  document.body.appendChild(b);setTimeout(function(){b.remove()},2400)}
+function addXP(n,msg){var before=Math.floor((store.xp||0)/PER);store.xp=(store.xp||0)+n;lsSet();updateXP();
+  if(Math.floor(store.xp/PER)>before&&before+1<LEVELS.length){toast('Level up: '+LEVELS[before+1]+'!');burst()}else if(msg)toast('+'+n+' XP · '+msg)}
+window.__store=function(){return store};
+updateXP();
+
+/* ---------- intel: mark as learned ---------- */
+function syncLearn(){$$('.learn').forEach(function(b){var on=!!store.learned[b.dataset.learn];b.setAttribute('aria-pressed',on?'true':'false');b.innerHTML='<span aria-hidden="true">'+(on?'★':'☆')+'</span> '+(on?'Learned':'Mark as learned')})}
+$$('.learn').forEach(function(b){b.addEventListener('click',function(){var id=b.dataset.learn,first=!(id in store.learned);store.learned[id]=!store.learned[id];if(store.learned[id]&&first)addXP(5,'Intel learned');lsSet();syncLearn()})});
+syncLearn();
+
+/* ---------- numbers wall ---------- */
+$('#testMe').addEventListener('click',function(){var on=$('#numWall').classList.toggle('testme');this.setAttribute('aria-pressed',on?'true':'false');if(on)$$('#numWall details').forEach(function(d){d.open=false})});
+$('#openNums').addEventListener('click',function(){$$('#numWall details').forEach(function(d){d.open=true})});
+$('#closeNums').addEventListener('click',function(){$$('#numWall details').forEach(function(d){d.open=false})});
+
+/* ---------- chapters: mark as read ---------- */
+function syncRead(){var id=chapters[curCh]&&chapters[curCh].dataset.chapter,done=!!store.read[id];$('#doneCh').textContent=done?'✓ Chapter read':'✓ Mark chapter as read (+20 XP)';$('#doneCh').disabled=done;
+  $$('#chapterNav > li > a').forEach(function(a){var d=store.read[a.dataset.chapterLink];a.textContent=a.textContent.replace(/^✓ /,'');if(d)a.textContent='✓ '+a.textContent})}
+$('#doneCh').addEventListener('click',function(){var id=chapters[curCh].dataset.chapter;if(!store.read[id]){store.read[id]=true;addXP(20,'Chapter finished');lsSet();syncRead()}});
+window.addEventListener('hashchange',function(){setTimeout(syncRead,0)});
+
+/* ---------- arcade ---------- */
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function srcLinks(ids){return (ids||[]).filter(function(i){return DATA.sources[i]}).map(function(i){return '<a class="cite" href="#src-'+esc(i)+'">'+esc(i)+'</a>'}).join(' ')}
+var fDeck=[],fI=0,fKnown=0,rDeck=[],rI=0,rScore=0,nDeck=[],nI=0,nScore=0;
+$$('[data-game]').forEach(function(b){b.addEventListener('click',function(){$$('[data-game]').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');$('#g-'+x.dataset.game).hidden=x!==b});
+  if(b.dataset.game==='flash'&&!fDeck.length)fStart();if(b.dataset.game==='rumour'&&!rDeck.length)rStart();if(b.dataset.game==='recall'&&!nDeck.length)nStart()})});
+// quick-fire quiz
+var TOPIC={foundations:'Foundations',role:'The role',teams:'Teams',ocio:'OCIO',tpw:'Third Party Wealth',liquidity:'Liquidity',insurance:'Insurance',economics:'Economics and fees','sales-rm':'Sales vs RM',relationship:'Client relationships',awareness:'Commercial awareness',competitors:'Competitors','people-process':'People and process',glossary:'Glossary'};
+(function(){var t={};DATA.quiz.forEach(function(q){t[q.topic]=(t[q.topic]||0)+1});Object.keys(t).sort().forEach(function(k){var o=document.createElement('option');o.value=k;o.textContent=(TOPIC[k]||k)+' ('+t[k]+')';$('#zTopic').appendChild(o)})})();
+var zSet=[],zI=0,zScore=0,zStreak=0,zMiss={};
+$('#zStart').addEventListener('click',function(){var tp=$('#zTopic').value,lv=$('#zLevel').value;var pool=DATA.quiz.filter(function(q){return (!tp||q.topic===tp)&&(!lv||String(q.level)===lv)});
+  if(!pool.length){toast('No questions match that choice.');return}zSet=shuffle(pool).slice(0,Number($('#zLen').value));zI=0;zScore=0;zStreak=0;zMiss={};$('#zEnd').hidden=true;$('#zPlay').hidden=false;zShow()});
+function zShow(){var q=zSet[zI];$('#zProg').textContent='Question '+(zI+1)+' of '+zSet.length+' · '+(TOPIC[q.topic]||q.topic);$('#zScore').textContent=zScore;$('#zStreak').textContent=zStreak>1?'🔥 '+zStreak+' in a row':'';
+  $('#zQ').textContent=q.q;$('#zFb').hidden=true;$('#zNext').hidden=true;var box=$('#zOpts');box.innerHTML='';
+  q.options.forEach(function(o,i){var b=document.createElement('button');b.type='button';b.textContent=String.fromCharCode(65+i)+'. '+o;b.addEventListener('click',function(){zAnswer(i)});box.appendChild(b)});$('#zQ').focus()}
+function zAnswer(i){var q=zSet[zI],btns=$$('#zOpts button'),ok=i===q.answer;btns.forEach(function(b,k){b.disabled=true;if(k===q.answer){b.classList.add('right');b.textContent='✔ '+b.textContent}else if(k===i){b.classList.add('wrong');b.textContent='✘ '+b.textContent}});
+  if(ok){zScore++;zStreak++;addXP(10)}else{zStreak=0;zMiss[q.topic]=(zMiss[q.topic]||0)+1}
+  $('#zScore').textContent=zScore;$('#zStreak').textContent=zStreak>1?'🔥 '+zStreak+' in a row':'';
+  $('#zFb').innerHTML='<strong>'+(ok?'Correct.':'Not quite. The answer is '+String.fromCharCode(65+q.answer)+'.')+'</strong> '+esc(q.explain||'')+' '+srcLinks(q.sources);$('#zFb').hidden=false;
+  var n=$('#zNext');n.hidden=false;n.textContent=zI===zSet.length-1?'See the result →':'Next question →';n.focus()}
+$('#zNext').addEventListener('click',function(){zI++;if(zI<zSet.length){zShow();return}
+  $('#zPlay').hidden=true;var pct=Math.round(zScore/zSet.length*100),weak=Object.keys(zMiss).sort(function(a,b){return zMiss[b]-zMiss[a]}).slice(0,3);
+  $('#zEnd').innerHTML='<p class="bignum">'+zScore+' / '+zSet.length+' ('+pct+'%)</p><p>'+(pct>=80?'Strong round.':pct>=50?'Solid. Go back over the misses.':'Worth another pass through the material first.')+'</p>'+
+    (weak.length?'<p><strong>Revisit:</strong> '+weak.map(function(w){return esc(TOPIC[w]||w)}).join(', ')+'</p>':'')+'<p><button type="button" class="primary" id="zAgain">Play again</button></p>';
+  $('#zEnd').hidden=false;$('#zAgain').addEventListener('click',function(){$('#zStart').click()});if(pct>=80){addXP(20,'Round bonus');burst()}});
+// flashcards
+function fStart(){fDeck=shuffle(DATA.glossary.filter(function(g){return g.plain&&!store.known[g.id]}));if(!fDeck.length)fDeck=shuffle(DATA.glossary.filter(function(g){return g.plain}));fI=0;fShow()}
+function fShow(){if(!fDeck.length){$('#fTerm').textContent='No cards.';return}var g=fDeck[fI%fDeck.length];$('#fProg').textContent=fDeck.length+' cards left in this deck';$('#fKnown').textContent=fKnown;
+  $('#fTerm').textContent=g.term;$('#fDef').hidden=true;$('#fDef').innerHTML=(g.expansion&&g.expansion!==g.term?'<p><strong>'+esc(g.expansion)+'</strong></p>':'')+'<p>'+esc(g.plain)+'</p>';$('#fFlip').hidden=false;$('#fYes').hidden=true;$('#fNo').hidden=true}
+$('#fFlip').addEventListener('click',function(){$('#fDef').hidden=false;this.hidden=true;$('#fYes').hidden=false;$('#fNo').hidden=false;$('#fYes').focus()});
+$('#fYes').addEventListener('click',function(){var g=fDeck[fI%fDeck.length];if(!store.known[g.id]){store.known[g.id]=true;addXP(5)}fKnown++;fDeck.splice(fI%fDeck.length,1);if(!fDeck.length){toast('Deck cleared!');burst();fStart();return}fShow();$('#fFlip').focus()});
+$('#fNo').addEventListener('click',function(){fI++;fShow();$('#fFlip').focus()});
+// verified or rumour?
+function rStart(){rDeck=shuffle(DATA.rumour);rI=0;rScore=0;rShow()}
+function rShow(){if(!rDeck.length){$('#rClaim').textContent='No claims loaded.';return}var c=rDeck[rI];$('#rProg').textContent='Claim '+(rI+1)+' of '+rDeck.length;$('#rScore').textContent=rScore;$('#rClaim').textContent='“'+c.claim+'”';$('#rFb').hidden=true;$('#rNext').hidden=true;
+  var box=$('#rOpts');box.innerHTML='';DATA.statuses.forEach(function(st){var b=document.createElement('button');b.type='button';b.textContent=st;b.dataset.st=st;b.addEventListener('click',function(){
+    var ok=st===c.status;$$('#rOpts button').forEach(function(x){x.disabled=true;if(x.dataset.st===c.status){x.classList.add('right');x.textContent='✔ '+x.textContent}else if(x===b){x.classList.add('wrong');x.textContent='✘ '+x.textContent}});
+    if(ok){rScore++;addXP(10)}$('#rScore').textContent=rScore;$('#rFb').innerHTML='<strong>'+(ok?'Correct: ':'The research says: ')+esc(c.status)+'.</strong> '+esc(c.finding);$('#rFb').hidden=false;$('#rNext').hidden=false;$('#rNext').focus()});box.appendChild(b)})}
+$('#rNext').addEventListener('click',function(){rI++;if(rI>=rDeck.length){toast('All claims reviewed: '+rScore+' correct.');burst();rStart();return}rShow();$('#rClaim').focus()});
+// number recall
+function nStart(){nDeck=shuffle(DATA.numbers);nI=0;nScore=0;nShow()}
+function nShow(){if(!nDeck.length){$('#nLabel').textContent='No numbers loaded.';return}var k=nDeck[nI%nDeck.length];$('#nProg').textContent='Number '+((nI%nDeck.length)+1)+' of '+nDeck.length;$('#nScore').textContent=nScore;
+  $('#nLabel').textContent=k.label+(k.as_of?' ('+k.as_of+')':'');$('#nVal').textContent='?';$('#nSay').textContent='';$('#nReveal').hidden=false;$('#nYes').hidden=true;$('#nNo').hidden=true}
+$('#nReveal').addEventListener('click',function(){var k=nDeck[nI%nDeck.length];$('#nVal').textContent=k.value;$('#nSay').textContent=k.say||'';this.hidden=true;$('#nYes').hidden=false;$('#nNo').hidden=false;$('#nYes').focus()});
+$('#nYes').addEventListener('click',function(){nScore++;addXP(5);nI++;nShow();$('#nReveal').focus()});
+$('#nNo').addEventListener('click',function(){nI++;nShow();$('#nReveal').focus()});
+
+/* ---------- surprise me ---------- */
+$('#surprise').addEventListener('click',function(){var pools=[$$('#intelList .edge').map(function(e){return '#/intel/'+e.id}),$$('#numWall .num-tile').map(function(e){return '#/numbers/'+e.id}),DATA.teams.map(function(t){return '#/teams/'+t.id}),
+  $$('#devList .dev').map(function(e){return '#/awareness/'+e.id}),$$('#glossList .gloss').map(function(e){return '#/glossary/'+e.id}),$$('#mandateList .mandate').map(function(e){return '#/mandates/'+e.id})].filter(function(p){return p.length});
+  if(!pools.length)return;var p=pools[Math.floor(Math.random()*pools.length)];location.hash=p[Math.floor(Math.random()*p.length)]});
+
+route();syncRead();
 })();

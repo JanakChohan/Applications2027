@@ -161,6 +161,12 @@ def _load_all():
     D["routes"] = jload(DATA / "routes.json", [])
     D["search_strings"] = jload(DATA / "search_strings.json", [])
     D["personal"] = jload(DATA / "personal_ledger.json", None)
+    D["key_numbers"] = jload(DATA / "key_numbers.json", []) or []
+    D["edge"] = jload(DATA / "edge.json", []) or []
+    D["quiz"] = jload(DATA / "quiz.json", []) or []
+    D["charts"] = jload(DATA / "charts.json", []) or []
+    D["team_briefs"] = jload(DATA / "team_briefs.json", {}) or {}
+    D["section_intros"] = jload(DATA / "section_intros.json", {}) or {}
     for c in D["cases"]["cases"]:
         c["result"] = fee_model(c["params"])
     return D
@@ -262,7 +268,7 @@ def strip_tags(h):
 
 
 # ---------------------------------------------------------------- generic cards
-def card(e, D, title_key, fields, sub=None, status_key="status", data_attrs=None, cls="card", tag="h3", extra=""):
+def card(e, D, title_key, fields, sub=None, status_key="status", data_attrs=None, cls="card", tag="h3", extra="", pre=""):
     attrs = ""
     for k in (data_attrs or []):
         v = e.get(k)
@@ -281,7 +287,7 @@ def card(e, D, title_key, fields, sub=None, status_key="status", data_attrs=None
     return (f'<article class="{cls}" id="{esc(e.get("id", ""))}" data-search data-kind="{cls}"{attrs}>'
             f'<{tag} class="card-title">{esc(e.get(title_key) or "(unnamed)")}</{tag}>'
             f'<p class="card-sub">{esc(subs)} {st} <span class="idtag">{esc(e.get("id", ""))}</span></p>'
-            f'<dl class="kv">{"".join(rows)}</dl>{extra}</article>')
+            f'{pre}<dl class="kv">{"".join(rows)}</dl>{extra}</article>')
 
 
 F_PEOPLE = [("title_class", "Title class"), ("coverage", "Covers clients in"), ("segment", "Client segment"),
@@ -425,7 +431,7 @@ def render_team(t, D):
             for r in rels) + "</ul>")
     e = dict(t)
     e["status"] = t.get("name_status") or t.get("status")
-    return card(e, D, "name", F_TEAM, sub=["kind"], cls="card team-card", extra="".join(extra))
+    return card(e, D, "name", F_TEAM, sub=["kind"], cls="card team-card", extra="".join(extra), pre=render_team_brief(t, D))
 
 
 def render_tree_node(n, D, depth=1, open_=False):
@@ -624,6 +630,195 @@ def people_stats(D):
             f'<div class="cols2"><div><h4>By function (interpretation)</h4><ul>{lines}</ul></div><div><h4>By client segment</h4><ul>{seg}</ul></div></div>')
 
 
+# ---------------------------------------------------------------- theme: sections, heroes, intel, numbers, charts
+# (key, icon, nav label, page title, hue, nav group)
+SECTIONS = [
+    ("home", "🛰️", "Mission control", "Mission control", 45, "Start"),
+    ("intel", "🔎", "Intel: the edge", "Intel: the sharpest findings", 280, "Start"),
+    ("numbers", "🔢", "Numbers to know", "Numbers to know", 190, "Start"),
+    ("read", "📖", "Read the dossier", "Read the dossier", 212, "Start"),
+    ("teams", "🧭", "Teams and coverage", "Teams and coverage", 170, "The business"),
+    ("people", "👥", "People directory", "People directory", 262, "The business"),
+    ("mandates", "🏆", "Mandates and events", "Mandates and commercial events", 150, "The business"),
+    ("awareness", "📡", "Commercial awareness", "Commercial awareness", 24, "The business"),
+    ("roles", "🎭", "Role comparison", "Role comparison", 328, "The work"),
+    ("lifecycle", "🔄", "Client lifecycle", "Client lifecycle", 96, "The work"),
+    ("calculator", "🧮", "Fee calculator", "Fee calculator", 198, "The work"),
+    ("why", "🌳", "Why-trees", "Why-trees", 350, "You"),
+    ("practice", "🎤", "Interview practice", "Interview practice", 38, "You"),
+    ("arcade", "🎮", "Arcade: test yourself", "Arcade: test yourself", 300, "You"),
+    ("glossary", "📚", "Glossary", "Glossary", 240, "Reference"),
+    ("sources", "🗂️", "Sources and evidence", "Sources and evidence", 215, "Reference"),
+]
+SEC = {k: {"icon": i, "nav": n, "title": t, "hue": h, "group": g} for k, i, n, t, h, g in SECTIONS}
+VIEW_AREAS = {
+    "teams": ["teams", "uk-inst", "ocio", "tpw", "liquidity", "insurance", "middle-east", "continental"],
+    "people": ["people", "recruitment"], "mandates": ["economics", "ocio"], "awareness": ["awareness", "competitors", "future"],
+    "roles": ["role", "sales-rm"], "lifecycle": ["relationship", "sales-rm"], "calculator": ["economics"],
+    "why": ["relationship", "role"], "practice": ["interview", "recruitment"],
+}
+AREA_LABEL = {"role": "The role", "teams": "Structure", "uk-inst": "UK Institutional", "ocio": "OCIO", "tpw": "Third Party Wealth",
+              "liquidity": "Liquidity", "insurance": "Insurance", "middle-east": "Middle East", "continental": "Continental Europe",
+              "people": "People", "recruitment": "Recruitment", "economics": "Economics", "sales-rm": "Sales vs RM",
+              "relationship": "Relationships", "awareness": "Markets and policy", "competitors": "Competitors", "future": "Future of the work",
+              "interview": "Interview"}
+
+
+def render_nav():
+    out, grp = [], None
+    for k, icon, nav, _t, hue, g in SECTIONS:
+        if g != grp:
+            out.append(f'<li class="grp">{esc(g)}</li>')
+            grp = g
+        out.append(f'<li><a href="#/{k}" style="--h:{hue}"><span class="nav-ic" aria-hidden="true">{icon}</span><span>{esc(nav)}</span></a></li>')
+    return "".join(out)
+
+
+def render_hero(view, D):
+    m, intro = SEC[view], (D["section_intros"].get(view) or {})
+    do = "".join(f"<li>{inline(x, D)}</li>" for x in intro.get("do_this") or [])
+    return (f'<header class="sec-hero"><div class="sec-hero-ic" aria-hidden="true">{m["icon"]}</div><div class="sec-hero-body">'
+            f'<h1 id="h-{view}">{esc(m["title"])}</h1>'
+            + (f'<p class="sec-tag">{inline(intro.get("tagline"), D)}</p>' if intro.get("tagline") else "")
+            + (f'<p class="sec-why"><strong>Why it matters:</strong> {inline(intro.get("why_it_matters"), D)}</p>' if intro.get("why_it_matters") else "")
+            + (f'<div class="sec-do"><strong>Do this here</strong><ol>{do}</ol></div>' if do else "")
+            + "</div></header>")
+
+
+def render_edge_card(e, D, embedded=False):
+    head = (f'<article class="card edge" data-area="{esc(e.get("area"))}">' if embedded else
+            f'<article class="card edge" id="{esc(e.get("id"))}" data-search data-kind="intel" data-area="{esc(AREA_LABEL.get(e.get("area"), e.get("area")))}">')
+    star = "" if embedded else (f'<button type="button" class="learn" data-learn="{esc(e.get("id"))}" aria-pressed="false">'
+                                '<span aria-hidden="true">☆</span> Mark as learned</button>')
+    return (head + f'<p class="edge-area">{esc(AREA_LABEL.get(e.get("area"), e.get("area") or ""))} {badge(e.get("status"))}</p>'
+            f'<h3 class="card-title">{esc(e.get("title"))}</h3><p>{inline(e.get("insight"), D)}</p>'
+            f'<p class="edge-miss"><strong>What a quick read gets wrong:</strong> {inline(e.get("why_most_miss_it"), D)}</p>'
+            f'<p class="edge-use"><strong>Use it:</strong> {inline(e.get("use_it"), D)}</p>'
+            f'<p class="card-sub">{cites(e.get("sources"), D)} <span class="idtag">{esc(e.get("id"))}</span></p>{star}</article>')
+
+
+def render_edge(D):
+    return "".join(render_edge_card(e, D) for e in D["edge"]) or '<p class="na">No intel cards yet.</p>'
+
+
+def render_edge_strip(view, D, n=6):
+    areas = VIEW_AREAS.get(view) or []
+    picks = [e for e in D["edge"] if e.get("area") in areas][:n]
+    if not picks:
+        return ""
+    return (f'<details class="intel-strip"><summary><span aria-hidden="true">🔎</span> Intel for this section ({len(picks)} cards)</summary>'
+            f'<div class="grid">{"".join(render_edge_card(e, D, embedded=True) for e in picks)}</div>'
+            f'<p><a href="#/intel">Open all intel</a></p></details>')
+
+
+def render_numbers(D, embedded=False, limit=None, open_=False):
+    out, grp = [], None
+    items = D["key_numbers"][:limit] if limit else D["key_numbers"]
+    for k in items:
+        if k.get("group") != grp and not embedded:
+            if grp is not None:
+                out.append("</div>")
+            grp = k.get("group")
+            out.append(f'<h2>{esc(grp)}</h2><div class="num-grid">')
+        ida = "" if embedded else f' id="{esc(k.get("id"))}" data-search data-kind="number"'
+        out.append(
+            f'<details class="num-tile"{ida}{" open" if open_ else ""}><summary><span class="num-label">{esc(k.get("label"))}</span>'
+            f'<span class="num-val">{esc(k.get("value"))}</span><span class="num-asof">{esc(k.get("as_of") or "")}</span></summary>'
+            f'<p>{inline(k.get("plain"), D)}</p><p class="edge-use"><strong>Say it:</strong> {inline(k.get("say_it"), D)}</p>'
+            f'<p class="edge-miss"><strong>It does not show:</strong> {inline(k.get("caveat"), D)}</p>'
+            f'<p class="card-sub">{badge(k.get("status"))} {cites(k.get("sources"), D)}</p></details>')
+    if grp is not None and not embedded:
+        out.append("</div>")
+    if embedded:
+        return '<div class="num-grid">' + "".join(out) + "</div>"
+    return "".join(out) or '<p class="na">No key numbers yet.</p>'
+
+
+def fmt_val(v, unit):
+    s = f"{v:,.1f}".rstrip("0").rstrip(".") if isinstance(v, float) and v != int(v) else f"{int(v):,}"
+    if unit in ("$bn", "£bn", "€bn"):
+        return f"{unit[0]}{s}bn"
+    if unit in ("$m", "£m"):
+        return f"{unit[0]}{s}m"
+    return f"{s}{unit or ''}"
+
+
+def render_chart(c, D):
+    """Single-series horizontal bars: one hue, direct value labels in text ink, a table view, per-bar hover title."""
+    series = [x for x in (c.get("series") or []) if isinstance(x.get("value"), (int, float))]
+    if not series:
+        return ""
+    unit, mx = c.get("unit") or "", max(x["value"] for x in series) or 1
+    row_h, lab_w, W, bar_max = 30, 250, 760, 380
+    H = row_h * len(series) + 8
+    bars = []
+    for i, x in enumerate(series):
+        y = i * row_h + 6
+        w = max(8, x["value"] / mx * bar_max)
+        val = fmt_val(x["value"], unit)
+        bars.append(
+            f'<g class="bar"><title>{esc(x["label"])}: {esc(val)}</title>'
+            f'<rect x="0" y="{y - 4}" width="{W}" height="{row_h - 2}" class="bar-hit"/>'
+            f'<text x="{lab_w - 10}" y="{y + 13}" text-anchor="end" class="bar-label">{esc(x["label"])}</text>'
+            f'<path d="M{lab_w},{y} h{w - 4:.1f} a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-{w - 4:.1f} z" class="bar-mark"/>'
+            f'<text x="{lab_w + w + 8:.1f}" y="{y + 13}" class="bar-val">{esc(val)}</text></g>')
+    table = "".join(f"<tr><td>{esc(x['label'])}</td><td>{esc(fmt_val(x['value'], unit))}</td></tr>" for x in series)
+    return (f'<figure class="chart viz-root" id="{esc(c.get("id"))}" data-search data-kind="chart"><figcaption><strong>{esc(c.get("title"))}</strong>'
+            f'<span class="muted"> · {esc(c.get("as_of") or "")} {badge(c.get("status"))} {cites(c.get("sources"), D)}</span></figcaption>'
+            f'<svg viewBox="0 0 {W} {H}" role="img" aria-label="{esc(c.get("title"))}. Data in the table below." preserveAspectRatio="xMinYMin meet">'
+            f'<line x1="{lab_w}" y1="0" x2="{lab_w}" y2="{H}" class="axis"/>{"".join(bars)}</svg>'
+            f'<p class="muted">{inline(c.get("note"), D)}</p>'
+            f'<details><summary>Table view</summary><div class="table-wrap"><table><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody>{table}</tbody></table></div></details></figure>')
+
+
+def render_quiz_print(D):
+    out, topic = [], None
+    for q in sorted(D["quiz"], key=lambda q: (str(q.get("topic")), str(q.get("id")))):
+        if q.get("topic") != topic:
+            if topic is not None:
+                out.append("</ol>")
+            topic = q.get("topic")
+            out.append(f"<h2>{esc(label(str(topic).replace('-', ' ')))}</h2><ol class=\"quiz\">")
+        opts = "".join(f"<li>{esc(o)}</li>" for o in q.get("options") or [])
+        ans = q.get("answer") or 0
+        out.append(f'<li><strong>{esc(q.get("q"))}</strong><ol type="A">{opts}</ol>'
+                   f'<p class="muted">Answer: {"ABCD"[ans] if isinstance(ans, int) and 0 <= ans < 4 else "?"}. {inline(q.get("explain"), D)} {cites(q.get("sources"), D)}</p></li>')
+    if topic is not None:
+        out.append("</ol>")
+    return "".join(out) or '<p class="na">No quiz questions yet.</p>'
+
+
+def render_charts(D):
+    return "".join(render_chart(c, D) for c in D["charts"]) or '<p class="na">No charts yet.</p>'
+
+
+def render_team_brief(t, D):
+    b = D["team_briefs"].get(t["id"])
+    if not b:
+        return ""
+    return (f'<div class="brief"><p class="brief-one">{inline(b.get("one_liner"), D)}</p><div class="cols3">'
+            f'<div><h4><span aria-hidden="true">💬</span> Talking points</h4>{value_html(b.get("talking_points"), D)}</div>'
+            f'<div><h4><span aria-hidden="true">❓</span> Questions to ask</h4>{value_html(b.get("questions_to_ask"), D)}</div>'
+            f'<div><h4><span aria-hidden="true">⚠️</span> Watch-outs</h4>{value_html(b.get("watch_outs"), D)}</div></div></div>')
+
+
+def render_tiles(D, counts):
+    sub = {"intel": f'{len(D["edge"])} cards', "numbers": f'{len(D["key_numbers"])} figures, {len(D["charts"])} charts', "read": f'{counts["words"]:,} words',
+           "teams": f'{counts["teams"]} units', "people": f'{counts["people"]} people', "mandates": f'{counts["mandates"]} events',
+           "awareness": f'{counts["developments"]} cards', "roles": f'{len(D["roles"])} roles', "lifecycle": f'{len(D["lifecycle"].get("stages", []))} stages',
+           "calculator": f'{len(D["cases"]["cases"])} worked cases', "why": f'{len(D["why"].get("trees", []))} trees',
+           "practice": f'{len(D["interview"].get("questions", []))} questions', "arcade": f'{len(D["quiz"])} quiz questions',
+           "glossary": f'{counts["glossary"]} terms', "sources": f'{counts["sources"]} sources'}
+    out = []
+    for k, icon, nav, _t, hue, _g in SECTIONS:
+        if k == "home":
+            continue
+        tag = (D["section_intros"].get(k) or {}).get("tagline") or ""
+        out.append(f'<a class="tile" href="#/{k}" style="--h:{hue}"><span class="tile-ic" aria-hidden="true">{icon}</span>'
+                   f'<span class="tile-name">{esc(nav)}</span><span class="tile-tag">{esc(tag)}</span><span class="tile-n">{esc(sub.get(k, ""))}</span></a>')
+    return "".join(out)
+
+
 # ---------------------------------------------------------------- chapters
 def preprocess_md(md, chname):
     out, stack, in_code = [], [], False
@@ -802,7 +997,7 @@ def build_dossier_md(chapters, D):
          "Citations appear as source IDs in square brackets, for example `[R2-S01]`, and resolve in Appendix O.", "", "## Contents", ""]
     for c in chapters:
         L.append(f"- {c['title']}")
-    L += ["- Appendices A to P: teams, people, mandates, developments, competitors, lifecycle, roles, why-trees, interview bank, fee cases, glossary, claim audit, coverage register, search strings, sources, claims", ""]
+    L += ["- Appendices A to T: teams, people, mandates, developments, competitors, lifecycle, roles, why-trees, interview bank, fee cases, glossary, claim audit, coverage register, search strings, sources, intel cards, numbers and charts, team briefs, quiz bank, claims", ""]
     for c in chapters:
         L += [md_export_chapter(c["md"]), "", "---", ""]
     T = D["teams"]
@@ -884,6 +1079,24 @@ def build_dossier_md(chapters, D):
     L += ["# Appendix O: Source register", "", "| ID | Source | Publisher | Published | Type | URL |", "|---|---|---|---|---|---|"]
     for sid, s in sorted(D["sources"].items()):
         L.append(f"| {sid} | {(s.get('title') or '').replace('|', '/')} | {(s.get('publisher') or '').replace('|', '/')} | {s.get('published') or 'n.d.'} | {s.get('type') or ''}{'' if s.get('fetched', True) else ' (snippet only)'} | {s.get('url') or ''} |")
+    L += ["", "# Appendix Q: Intel cards", ""]
+    for e in D["edge"]:
+        L.append(md_entity(e, "title", [("area", "Area"), ("insight", "Insight"), ("why_most_miss_it", "What a quick read gets wrong"), ("use_it", "Use it")]))
+    L += ["# Appendix R: Numbers to know and chart data", ""]
+    for k in D["key_numbers"]:
+        L.append(md_entity(k, "label", [("value", "Value"), ("as_of", "As at"), ("plain", "What it means"), ("say_it", "Say it"), ("caveat", "It does not show")]))
+    for c in D["charts"]:
+        L += [f"### {c.get('title')} `{c.get('id')}`", "", f"{c.get('as_of') or ''}. {md_value(c.get('note'))} Sources: {', '.join(c.get('sources') or [])}", "", "| Item | Value |", "|---|---|"]
+        L += [f"| {x.get('label')} | {fmt_val(x.get('value'), c.get('unit'))} |" for x in c.get("series") or [] if isinstance(x.get("value"), (int, float))]
+        L.append("")
+    L += ["# Appendix S: Team briefs", ""]
+    names = {t["id"]: t["name"] for t in T["teams"]}
+    for tid, b in D["team_briefs"].items():
+        L.append(md_entity(dict(b, id=tid, name=names.get(tid, tid)), "name", [("one_liner", "In one line"), ("talking_points", "Talking points"), ("questions_to_ask", "Questions to ask"), ("watch_outs", "Watch-outs")]))
+    L += ["# Appendix T: Quiz bank with answers", ""]
+    for q in D["quiz"]:
+        ans = q.get("answer") if isinstance(q.get("answer"), int) else 0
+        L += [f"- **{q.get('q')}** " + " ".join(f"({'ABCD'[i]}) {o}" for i, o in enumerate(q.get("options") or [])) + f" **Answer: {'ABCD'[ans]}.** {md_value(q.get('explain'))}"]
     L += ["", "# Appendix P: Claim register", "", "| ID | Claim | Status | Sources |", "|---|---|---|---|"]
     for c in D["claims"]:
         L.append(f"| {c.get('id')} | {md_value(c.get('claim')).replace('|', '/')} | {c.get('status')} | {', '.join(c.get('sources') or [])} |")
@@ -957,6 +1170,18 @@ def build_views(chapters, D, print_mode=False):
         sc[c.get("status")] = sc.get(c.get("status"), 0) + 1
     V["status_counts"] = "".join(f"<li>{badge(k)} {v} claims</li>" for k, v in sorted(sc.items(), key=lambda kv: -kv[1]))
     V["legend"] = "".join(f"<li>{badge(k)} {esc(v)}</li>" for k, v in STATUS_HELP.items())
+    V["nav"] = render_nav()
+    for k in SEC:
+        V[f"hero_{k}"] = render_hero(k, D)
+        V[f"strip_{k}"] = render_edge_strip(k, D)
+    V["edge"] = render_edge(D)
+    V["edge_top"] = "".join(render_edge_card(e, D, embedded=True) for e in D["edge"][:6])
+    V["numbers"] = render_numbers(D, open_=op)
+    V["quiz_print"] = render_quiz_print(D) if op else ""
+    V["numbers_top"] = render_numbers(D, embedded=True, limit=8)
+    V["charts"] = render_charts(D)
+    V["tiles"] = render_tiles(D, counts)
+    V["hues"] = "".join(f'#view-{k}{{--h:{m["hue"]}}}' for k, m in SEC.items())
     V["counts"] = counts
     return V
 
@@ -993,6 +1218,12 @@ def main():
         "cases": [{"id": c["id"], "group": c["group"], "title": c["title"], "teaches": c["teaches"], "params": c["params"],
                    "expected_total": c["result"]["total_fees"]} for c in D["cases"]["cases"]],
         "criteria": D["interview"].get("criteria", []),
+        "quiz": [{"id": q.get("id"), "topic": q.get("topic"), "level": q.get("level"), "q": q.get("q"), "options": q.get("options"), "answer": q.get("answer"),
+                  "explain": RE_CITE.sub("", q.get("explain") or "").strip(), "sources": q.get("sources") or []} for q in D["quiz"]],
+        "rumour": [{"id": c.get("id"), "claim": RE_CITE.sub("", c.get("claim") or ""), "status": c.get("status"),
+                    "finding": re.sub(r"\s+", " ", RE_CITE.sub("", c.get("finding") or "")).strip()} for c in D["intern_claims"] if c.get("status") in STATUS],
+        "numbers": [{"id": k.get("id"), "label": k.get("label"), "value": k.get("value"), "as_of": k.get("as_of"), "say": RE_CITE.sub("", k.get("say_it") or "")} for k in D["key_numbers"]],
+        "statuses": list(STATUS),
         "sources": {k: {"t": s.get("title"), "p": s.get("publisher"), "u": s.get("url"), "d": s.get("published")} for k, s in D["sources"].items()},
     }
     mapping = dict(V)

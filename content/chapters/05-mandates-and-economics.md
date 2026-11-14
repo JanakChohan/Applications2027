@@ -117,9 +117,9 @@ The AWM segment's 2025 revenue came from four lines. {{V}} [@R2-S01]
 | $ million, 2025 | Asset management | Wealth management | AWM total |
 |---|---|---|---|
 | Management and other fees | 4,990 | 6,548 | 11,538 |
-| Incentive fees | 489 | 0 | 489 |
-| Private banking and lending | 0 | 3,347 | 3,347 |
-| Investments | 1,305 | 0 | 1,305 |
+| Incentive fees | 489 | none reported | 489 |
+| Private banking and lending | none reported | 3,347 | 3,347 |
+| Investments | 1,305 | none reported | 1,305 |
 | Total | 6,784 | 9,895 | 16,679 |
 
 Two of those lines are not fees for managing client money. Private banking and lending is interest income. "Investments" is the return on Goldman's own capital. Management and incentive fees together were $12,027 million, so treating all $16.7 billion as fee income would overstate it by almost 40%.

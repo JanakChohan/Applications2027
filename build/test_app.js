@@ -26,7 +26,7 @@ const ok = (name, cond, detail) => { results.push({ name, pass: !!cond, detail: 
     !document.querySelector('script[src],link[rel=stylesheet],img[src^="http"],iframe') && !/url\(\s*['"]?https?:/.test(document.querySelector('style').textContent)));
 
   // navigation: every view opens and exactly one is visible
-  const views = ['home', 'read', 'teams', 'people', 'mandates', 'awareness', 'roles', 'lifecycle', 'calculator', 'why', 'practice', 'glossary', 'sources'];
+  const views = ['home', 'intel', 'numbers', 'read', 'arcade', 'teams', 'people', 'mandates', 'awareness', 'roles', 'lifecycle', 'calculator', 'why', 'practice', 'glossary', 'sources'];
   let navOk = true;
   for (const v of views) {
     await page.click(`nav.side a[href="#/${v}"]`);
@@ -36,7 +36,7 @@ const ok = (name, cond, detail) => { results.push({ name, pass: !!cond, detail: 
     const cur = await page.getAttribute(`nav.side a[href="#/${v}"]`, 'aria-current');
     if (cur !== 'page') navOk = false;
   }
-  ok('navigation: all 13 views open, one at a time, with aria-current', navOk);
+  ok('navigation: all 16 views open, one at a time, with aria-current', navOk);
 
   // unavailable values never rendered as zero / undefined / NaN
   const bad = await page.evaluate(() => { const out = []; const t = document.body.innerText; const m = t.match(/\bundefined\b|\bNaN\b|\[object Object\]/g); if (m) out.push(...m.slice(0, 5));
@@ -48,6 +48,58 @@ const ok = (name, cond, detail) => { results.push({ name, pass: !!cond, detail: 
   ok('every citation resolves to a source in the register', missing === 0, missing + ' unresolved');
   const citeTargets = await page.evaluate(() => { const ids = new Set(Array.from(document.querySelectorAll('a.cite')).map((a) => a.getAttribute('href').slice(1))); let miss = 0; ids.forEach((i) => { if (!document.getElementById(i)) miss++; }); return { n: ids.size, miss }; });
   ok('every cited source has a row in the source register', citeTargets.miss === 0, `${citeTargets.n} distinct sources cited`);
+
+  // intel, numbers, arcade
+  await page.goto(FILE + '#/intel');
+  const nEdge = await page.$$eval('#intelList .edge', (e) => e.length);
+  const iSel = await page.$('.filters[data-filter-for="intelList"] select');
+  if (iSel && nEdge) {
+    const opt = await iSel.$$eval('option', (o) => o.map((x) => x.value).filter(Boolean)[0]);
+    await iSel.selectOption(opt);
+    const shown = await page.$$eval('#intelList .edge', (els) => els.filter((e) => e.offsetParent !== null).length);
+    ok('intel cards filter by area', shown > 0 && shown < nEdge, `${shown} of ${nEdge} for "${opt}"`);
+    await page.click('.filters[data-filter-for="intelList"] button');
+  } else ok('intel cards filter by area', false, 'no intel cards');
+  await page.click('#intelList .learn');
+  ok('marking intel as learned awards XP', (await page.evaluate(() => window.__store().xp)) === 5 && (await page.getAttribute('#intelList .learn', 'aria-pressed')) === 'true');
+  const edgeOk = await page.$$eval('#intelList .edge', (els) => els.every((e) => e.querySelector('.badge') && e.querySelector('a.cite')));
+  ok('every intel card shows an evidence badge and at least one source', edgeOk);
+  await page.goto(FILE + '#/numbers');
+  const nNum = await page.$$eval('#numWall .num-tile', (e) => e.length);
+  await page.click('#testMe');
+  const hidden = await page.$eval('#numWall .num-val', (e) => getComputedStyle(e).color);
+  ok('numbers wall: "Test me" hides values until a tile is opened', nNum > 20 && /rgba\(0, 0, 0, 0\)|transparent/.test(hidden), `${nNum} tiles`);
+  await page.click('#numWall .num-tile summary');
+  ok('numbers wall: opening a tile reveals value, caveat and source', await page.$eval('#numWall .num-tile', (d) => d.open && !!d.querySelector('a.cite')));
+  const charts = await page.$$eval('.chart', (els) => ({ n: els.length, ok: els.every((c) => c.querySelector('svg .bar-mark') && c.querySelector('table') && c.querySelector('a.cite')) }));
+  ok('charts render with bars, a table view and a source', charts.n >= 5 && charts.ok, charts.n + ' charts');
+  await page.goto(FILE + '#/arcade');
+  const quizData = await page.evaluate(() => { const d = JSON.parse(document.getElementById('data').textContent); return { n: d.quiz.length, bad: d.quiz.filter((q) => !Array.isArray(q.options) || q.options.length !== 4 || !(q.answer >= 0 && q.answer < 4)).length }; });
+  ok('quiz bank is well formed (four options, valid answer index)', quizData.n >= 80 && quizData.bad === 0, `${quizData.n} questions`);
+  await page.selectOption('#zLen', '5'); await page.click('#zStart');
+  const xp0 = await page.evaluate(() => window.__store().xp);
+  for (let i = 0; i < 5; i++) {
+    const ans = await page.evaluate(() => { const q = document.getElementById('zQ').textContent; const d = JSON.parse(document.getElementById('data').textContent); return d.quiz.find((x) => x.q === q).answer; });
+    await page.click(`#zOpts button:nth-child(${ans + 1})`);
+    if (i === 0) ok('quiz: answering shows feedback with the explanation', await page.isVisible('#zFb') && (await page.$$eval('#zOpts button.right', (e) => e.length)) === 1);
+    await page.click('#zNext');
+  }
+  ok('quiz: a perfect round reports 5 / 5', /5 \/ 5/.test(await page.textContent('#zEnd')));
+  ok('quiz: correct answers and the round bonus award XP', (await page.evaluate(() => window.__store().xp)) === xp0 + 70);
+  await page.click('[data-game="flash"]'); await page.click('#fFlip');
+  ok('flashcards: flipping shows the definition', await page.isVisible('#fDef'));
+  await page.click('#fYes');
+  await page.click('[data-game="rumour"]');
+  const st = await page.evaluate(() => { const c = document.getElementById('rClaim').textContent.slice(1, -1); const d = JSON.parse(document.getElementById('data').textContent); return d.rumour.find((x) => x.claim === c).status; });
+  await page.click(`#rOpts button[data-st="${st}"]`);
+  ok('"Verified or rumour?" reveals the research finding', await page.isVisible('#rFb') && (await page.$$eval('#rOpts button.right', (e) => e.length)) === 1);
+  await page.click('[data-game="recall"]'); await page.click('#nReveal');
+  ok('number recall reveals the figure', (await page.textContent('#nVal')).trim() !== '?');
+  await page.goto(FILE + '#/home');
+  ok('XP shows in the header and on mission control', /XP/.test(await page.textContent('#xpNum')) && (await page.evaluate(() => window.__store().xp)) > 0);
+  await page.click('#surprise');
+  ok('"Surprise me" jumps to a random item', (await page.evaluate(() => location.hash)) !== '#/home');
+  ok('games keep nothing in storage unless saving is switched on', (await page.evaluate(() => localStorage.getItem('gsamcsg.v1'))) === null);
 
   // reader + level toggle
   await page.goto(FILE + '#/read');
@@ -216,7 +268,7 @@ const ok = (name, cond, detail) => { results.push({ name, pass: !!cond, detail: 
   // mobile layout
   const m = await browser.newContext({ ...devices['iPhone 13'] });
   const mp = await m.newPage();
-  for (const v of ['home', 'read', 'teams', 'people', 'calculator', 'practice', 'sources']) {
+  for (const v of ['home', 'intel', 'numbers', 'arcade', 'read', 'teams', 'people', 'calculator', 'practice', 'sources']) {
     await mp.goto(FILE + '#/' + v); await mp.waitForTimeout(120);
     const over = await mp.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     ok(`mobile: no horizontal page scroll on ${v}`, over <= 1, over + 'px overflow');
@@ -233,6 +285,8 @@ const ok = (name, cond, detail) => { results.push({ name, pass: !!cond, detail: 
   const rp = await rm.newPage(); await rp.goto(FILE + '#/teams');
   ok('reduced-motion: smooth scrolling is off', (await rp.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior)) === 'auto');
   await rp.screenshot({ path: path.join(SHOTS, 'dark-teams.png') });
+  await rp.goto(FILE + '#/arcade'); await rp.selectOption('#zLen', '5'); await rp.click('#zStart');
+  ok('reduced-motion: no celebration animation is created', (await rp.$$eval('.burst', (e) => e.length)) === 0);
 
   await browser.close();
   const failed = results.filter((r) => !r.pass);
