@@ -89,7 +89,11 @@ The tables below split the comparison into groups so they stay readable. "Where 
 | Progression | Larger territories, bigger prospects, team leadership | Larger or more complex clients, senior client director roles, team leadership | People move between the two, and senior roles usually combine them |
 | Compensation | See the evidence note below | See the evidence note below | Depends on firm, seniority and credit rules |
 
-<!-- COMPENSATION-EVIDENCE -->
+**Compensation evidence.** {{L:A}} London pay for these roles is not publicly established. Goldman Sachs's London, Frankfurt, Paris and Dubai listings leave the salary field empty [@R1-S02][@R1-S01]. {{V}} The only figures for London come from the former intern's call: an analyst base of £52,000 on the sales side and £48,000 on the relationship side, with a larger bonus in sales and a gap that widens with seniority [@R1-S41]. {{UA}} That is one person's account of one year, and second-hand for any seat other than his own.
+
+Two official reference points exist, both from the United States, where pay-transparency rules require disclosure: a New York CSG Management & Strategy analyst listing shows a base range of $85,000 to $110,000, and a CSG business-strategy vice-president listing shows $125,000 to $250,000 [@R1-S13][@R1-S30]. {{V}} Neither is a client-facing role and neither is in London. A Chicago listing for the US adviser channel describes "a commission based role in addition to the base salary" [@R1-S12] {{V}}, which shows that pay structure varies by channel. Nothing public shows how London institutional or Third Party Wealth roles are paid. Self-reported salary websites could not be read and do not separate asset-management sales from relationship management.
+
+{{L:B}} So the reported £4,000 gap may be accurate, but it cannot be checked, and it should not be quoted in an interview or used to rank the two roles. The fuller table of sources and their reliability is in the People and recruitment chapter.
 
 :::warn Reading compensation claims
 Pay differences between two roles tell you how one firm prices two sets of tasks in one period. They are not evidence about which role is more valuable, more skilled or a better fit for you. A difference in base salary at junior level, if it exists, may reflect seat scarcity, a variable-pay philosophy or simple history. Do not build a preference for sales or RM on an unverified pay figure.

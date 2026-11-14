@@ -10,9 +10,13 @@ Citations appear as source IDs in square brackets, for example `[R2-S01]`, and r
 
 - How to read this dossier
 - Foundations from first principles
+- The official role: what it is, and what it is not
+- People, staffing and recruitment
+- Mandates, products and commercial economics
 - Sales versus relationship management: what actually differs
 - What a client relationship actually means
 - Motivation and career fit: arguments that survive questioning
+- Acceptance test, open questions and limits
 - Appendices A to P: teams, people, mandates, developments, competitors, lifecycle, roles, why-trees, interview bank, fee cases, glossary, claim audit, coverage register, search strings, sources, claims
 
 # How to read this dossier
@@ -724,6 +728,1050 @@ That last line is deliberate. Understanding this business includes understanding
 
 ---
 
+# The official role: what it is, and what it is not
+
+## How to read this chapter
+
+This chapter answers one question: what job is actually on offer? It starts from the exact listing, then works outwards to Goldman's own job advertisements, and only then to inference.
+
+Three kinds of text are kept apart throughout, because they carry different weight:
+
+- **Programme-wide wording.** Text that appears in every Summer Analyst listing, whatever the business.
+- **Role-specific wording.** Text written for one team's vacancy. Almost all of it comes from experienced-hire advertisements, not from the summer listing.
+- **Inference.** What the first two suggest a summer analyst would do. This is labelled *[Layer B · interpretation]* and never presented as something Goldman has said.
+
+The former intern's account is treated as a lead. Each of his claims is tested in the audit table in the Sources view ([audit of the former intern's account](#audit)).
+
+## The programme: what the listing says, and what it leaves out
+
+*[Layer A · verified fact]* The listing is titled "2027 | EMEA | London | Asset Management, Client Solutions Group | Summer Analyst". It is filed under the Asset & Wealth Management division and located in London. *[Verified]* [R1-S02]
+
+| Field | What is established | Status |
+|---|---|---|
+| Length and timing | A "nine to ten week summer internship", summer 2027 | *[Verified]* [R1-S22] |
+| Eligibility | Studying for a Bachelor's or Master's degree, in the penultimate or final year | *[Verified]* [R1-S22] |
+| Review | Applications are reviewed on a rolling basis | *[Verified]* [R1-S22] |
+| Application limit | Up to four business and location combinations per recruiting year; extra applications are withdrawn automatically | *[Verified]* [R1-S02] [R1-S16] |
+| Deadline | Not published in any source read | *[Not publicly established]* |
+| Salary | Not published | *[Not publicly established]* |
+| Duties specific to the Client Solutions Group | None in the listing | *[Verified]* [R1-S02] |
+
+
+> **[Level 1 · First principles]**
+>
+> **The listing describes a programme, not a job.** It has three blocks: about the programme, how to apply, and about the division. The same blocks appear word for word in the Tokyo "Client Solutions Group (Sales)" summer listing, and the programme parts appear in the London Quantitative Strats listing, which is a different business altogether. *[Verified]* [R1-S09] [R1-S16]
+> 
+> So the listing tells you that you would attend orientation, receive training and "work on real responsibilities alongside fellow interns and our people". *[Verified]* [R1-S22] It does not tell you which team you would join, whether the work is sales or relationship management, which clients you would see, or whether a language is needed.
+
+
+
+> **[Level 2 · Institutional mechanics]**
+>
+> **Why this matters for preparation.** Any sentence that begins "as a CSG summer analyst I would..." cannot be sourced to the listing. It has to be built from the nearest official proxies, which are full-time advertisements for junior London roles, and it should be worded as an expectation, not a fact. Two proxies were read in full:
+> 
+> - The London-based BeNeLux Client Solutions Group Analyst/Associate advertisement, live in October and November 2026, which calls itself a "sales support position". *[Verified]* [R1-S01]
+> - A closed London advertisement for a UK Third Party Wealth Sales Support Analyst. *[Verified]* [R1-S17]
+> 
+> **Comparison with other offices and the previous cycle.** The 2027 Frankfurt, Paris and Dubai listings name a sub-track in the title: "Institutional Sales (German Speaker)", "Third Party Wealth (French Speaker)" and "Third Party Wealth". *[Verified]* [R1-S05] [R1-S06] [R1-S07] The London 2027 summer listing names none. Search results show that a 2026-cycle London listing was titled "Client Solutions Group, UK Institutional Sales", but that page had expired and could not be read. *[Supported inference]* [R1-S31] If that is right, Goldman named a London sub-track in one cycle and not in the next, which means allocation to a team happens somewhere after the application. How it happens is not published. *[Not publicly established]*
+
+
+
+> **[Limits and caveats: Status of the listing on the research date]**
+>
+> On 14 November 2026 the London listing was not among the 194 live campus listings on Goldman's careers site, and the role numbers tried returned "role not found". *[Verified]* [R1-S03] The text above was read on a job-board mirror of the official listing. The programme page still said applications were open for the EMEA programme as a whole. No closing date or reason is published, so do not infer one.
+
+
+## Where the Client Solutions Group sits
+
+
+> **[Level 1 · First principles]**
+>
+> Start from the outside and work in.
+> 
+> 1. **The firm** reports three business segments. One of them is Asset & Wealth Management, usually shortened to AWM. *[Verified]* [R2-S01]
+> 2. **AWM** contains two businesses: Asset Management, which manages money for institutions and for other firms' clients, and Wealth Management, which serves wealthy individuals and families directly.
+> 3. **Goldman Sachs Asset Management** is the asset management business. Inside it there are investment teams, who decide what portfolios hold, and there is a client organisation, who deal with the clients.
+> 4. **The Client Solutions Group**, or CSG, is the name of that client organisation. Goldman's own description is that it "works to develop meaningful client relationships and execute on thoughtful investment solutions for institutional and third-party wealth clients across the globe". *[Verified]* [R1-S10]
+> 
+> A useful picture: the investment teams are the kitchen and the Client Solutions Group is front of house. The picture stops being accurate quickly, because front of house in a restaurant does not help design the menu, whereas client teams here bring back what clients need and that shapes which products get built.
+
+
+
+> **[Level 2 · Institutional mechanics]**
+>
+> **Scale, and the limits of what is disclosed.** *[Layer A · verified fact]* Assets under supervision (AUS, Goldman's reporting term for client assets it manages or advises on) were $4,097 billion at 30 September 2026. *[Verified]* [R2-S02] AWM produced 28.6% of firmwide net revenues in 2025. The Asset Management business alone produced 11.6%. *[Verified]* [R2-S01] Goldman discloses no revenue, assets, flows, headcount or fee rates for the Client Solutions Group, for any EMEA client team or for the UK. *[Not publicly established]* [R2-S01] Any number attached to "CSG" in an interview answer would therefore be invented.
+> 
+> **Leadership.** [Marc Nachmann](#P-R6-01) is global head of Asset & Wealth Management. *[Verified]* [R6-S02] [Matt Gibson](#P-R6-02) is publicly described as head of the Client Solutions Group. *[Verified]* [R6-S19] The public title used for the senior EMEA institutional post is "co-head of EMEA Institutional Client Coverage", held by [Chloe Kipling](#P-R6-10) in September 2025. *[Verified]* [R6-S02] Titles change; check the evidence date in the people directory before using a name.
+> 
+> **Channels inside the group.** Job advertisements list the distribution channels as third party wealth, institutional, consultant, insurance and retirement. *[Verified]* [R4-S09] Named sub-tracks seen in listing titles include Institutional Sales, Third Party Wealth and Alternatives Capital Formation. *[Verified]* [R1-S05] [R1-S06] [R1-S08] The group also has its own management and strategy staff who run the "annual sales budgeting process", "sales and fundraising projections", weekly business summaries and the governance of client data in Salesforce. *[Verified]* [R1-S13] [R1-S14] That is direct evidence that pipeline and client-data work exists around the sales teams.
+> 
+> **What sits outside the group.** *[Layer A · verified fact]* The OCIO business (outsourced chief investment officer: running a client's whole portfolio on their behalf) is delivered by Multi-Asset Solutions, which is an investing group. An advertisement for its insurance OCIO team says it works with "sales and client relationship professionals" across The Hague, London and New York. *[Verified]* [R1-S15] Institutional marketing in EMEA is also a separate function. *[Verified]* [R1-S20] *[Layer B · interpretation]* So "client-facing" and "in the Client Solutions Group" are not the same set of people. An OCIO client meets investment staff who are not in the sales organisation at all.
+
+
+## The vocabulary, name by name
+
+Names in this business are used loosely, change over time and differ by office. The table gives Goldman's own wording where it exists. The paragraphs after it explain each term from first principles.
+
+| Name | Goldman's own wording | Source, place, date | Status |
+|---|---|---|---|
+| Client Solutions Group (CSG) | Titles read "Client Solutions Group / Sales" and "Client Solutions Group (Sales)"; an internal role refers to "the sales organization" | Frankfurt and Tokyo campus listings, 2026 to 2027 | *[Verified]* [R1-S04] [R1-S09] [R1-S14] |
+| Client Coverage Group (CCG) | "dedicated to retaining, expanding and supporting existing client relationships" | Hong Kong advertisement for the Korea market, live November 2026 | *[Verified]* [R1-S11] |
+| Third Party Wealth (TPW) | The UK TPW Sales Team "is responsible for new business development" with "private banks, wealth managers, financial advisors and multi-managers" | Closed London advertisement, read on a mirror | *[Verified]* [R1-S17] |
+| Consultant Relations | "responsible for working with the investment consultants that advise institutional investors" | Older, undated London advertisement on a mirror | *[Verified]* [R1-S21] |
+| Institutional Sales | Used as a sub-track of CSG in a listing title | Frankfurt, 2027 off-cycle | *[Verified]* [R1-S05] |
+
+### Client Solutions Group
+
+
+> **[Level 1 · First principles]**
+>
+> **What it is.** The part of the asset manager that finds clients, proposes how the firm could manage their money, and looks after them once they have appointed it. **Why it exists.** Portfolio managers are employed to invest. Someone else has to understand each client's situation, bring the right specialists to the conversation and keep the relationship working. **Who uses it.** Pension schemes, insurers, sovereign funds, endowments, and the wealth firms that choose funds for their own customers.
+
+
+
+> **[Level 2 · Institutional mechanics]**
+>
+> **Two levels of meaning.** The name is used for the whole global organisation ("Global Client Solutions Group") and, more loosely, as a synonym for sales. *[Verified]* [R1-S13] [R1-S09] **Not new business only.** The London-based BeNeLux advertisement says "The BeNeLux Client Solutions Group is responsible for new business development and managing existing institutional client relationships". *[Verified]* [R1-S01] **Labels move.** A mirror of that same advertisement dated 12 October 2026 calls the team "The BeNeLux Institutional Sales Team" and keeps an earlier title, "Institutional Sales Support (Dutch Speaking)". The live official page now says "Client Solutions Group". *[Verified]* [R1-S19] One team, two labels, within weeks.
+
+
+### Client Coverage Group
+
+
+> **[Level 1 · First principles]**
+>
+> **What it is.** A named group focused on clients the firm already has. Its job is to make sure an existing client is served accurately and on time, and that problems reach the right internal team. **What actually happens.** Queries are answered, reports are delivered, new accounts are set up, accounts are restructured or closed, and questionnaires and audit requests are completed.
+
+
+
+> **[Level 2 · Institutional mechanics]**
+>
+> Goldman's definition continues: "by ensuring exceptional client service, operational support, and risk management. This involves partnering closely with the sales team, keeping them abreast of recent interactions with clients". The advertisement makes the holder the main point of contact across "Portfolio Management, Trading, Operations, Legal, and Compliance", and its own name for the job is "Client Experience Manager". *[Verified]* [R1-S11] That advertisement is for Hong Kong. For London, the label appears only in search-result titles: a "CCG Client Relationship Manager" at Vice President level and a "Client Coverage Group Analyst", with a snippet saying the role is "responsible for the management and retention of our existing client relationships". Those pages had expired. *[Supported inference]* [R1-S32] A "CCG Analyst" title has also been seen for The Hague. *[Supported inference]* [R5-S14]
+
+
+### Institutional sales and client relationship management
+
+
+> **[Level 1 · First principles]**
+>
+> **Institutional sales** means winning mandates from large organisations that invest on behalf of others. **Client relationship management** means looking after those organisations once they are clients: explaining results, handling changes, and noticing when their needs shift. In plain terms, one side opens the door and the other keeps the house in order. Chapter 6 explains why that neat division is only a first approximation.
+
+
+
+> **[Level 2 · Institutional mechanics]**
+>
+> *[Layer B · interpretation]* The public evidence does not show a single way of dividing these two jobs. The BeNeLux team does both under one name. [R1-S01] The Hong Kong definition gives the coverage group "expanding" as well as "retaining", which is commercial work, and has it "partnering closely with the sales team". [R1-S11] A relationship manager who grows an existing mandate is doing something a salesperson would recognise. Expect the split to depend on the team, the client segment and the seniority of the people involved.
+
+
+### Third-party wealth distribution
+
+
+> **[Level 1 · First principles]**
+>
+> **What it is.** Selling funds to firms that then place them with their own customers: private banks, wealth managers, financial advisers and multi-managers. **Why it exists.** An asset manager cannot reach thousands of individual savers one by one. The wealth firm already has them. **What can go wrong.** A fund can be approved by the wealth firm and then never bought, because approval only makes a purchase possible.
+
+
+
+> **[Level 2 · Institutional mechanics]**
+>
+> "Third Party Wealth" is a real public name, not the former intern's shorthand: a Goldman press release names an "EMEA Third Party Wealth Business". *[Verified]* [R4-S01] Third Party Wealth appears as a named CSG sub-track in the 2027 Paris and Dubai listings. *[Verified]* [R1-S06] [R1-S07] A London-based analyst has been hired to support the "TPW Switzerland team", so at least some support for continental clients sits in London. *[Verified]* [R1-S18] The firm's filings report the channel firmwide as "third-party distributed" and give no UK figure.
+
+
+### Consultant relations
+
+
+> **[Level 1 · First principles]**
+>
+> **What it is.** A team that deals with investment consultants, the advisory firms that help pension trustees decide which managers to hire. **Why it exists.** In many institutional searches the consultant draws up the shortlist. If the consultant's researchers do not know and rate a strategy, the manager may never be invited to compete. **How value moves.** The consultant is paid by the client, not by the manager. The team's work produces no fee directly; it "creates a pipeline of business for the sales teams".
+
+
+
+> **[Level 2 · Institutional mechanics]**
+>
+> The older advertisement says the team should "work closely with the regional institutional sales teams" and project-manages "operational due diligence requests across all GSAM products". *[Verified]* [R1-S21] It describes the past: the page is undated and uses the older "GSAM" abbreviation. A snippet for a newer "Global Consultant Relations" Vice President role in London mentions covering "over 100 investment consultant firms worldwide", but that page could not be read. *[Supported inference]* [R1-S34]
+
+
+### Product specialists, client service and RFP support
+
+
+> **[Level 1 · First principles]**
+>
+> Three supporting functions are easy to confuse with the coverage role.
+> 
+> - **A product specialist**, also called an investment specialist or client portfolio manager, sits close to one investment team and explains its strategy to clients in depth. They speak for the strategy. They do not usually decide what it buys.
+> - **Client service** handles reporting, account set-up and day-to-day operational requests.
+> - **RFP support** writes the formal answers when a prospect issues a request for proposal (RFP) or a due-diligence questionnaire (DDQ).
+
+
+
+> **[Level 2 · Institutional mechanics]**
+>
+> *[Layer A · verified fact]* What Goldman's advertisements show: the junior London sales-support role is told to "partner with product specialists on a wide range of Goldman Sachs Asset Management products". *[Verified]* [R1-S01] The coverage-group advertisement lists "Strategic Client Services" and "Client Implementation" as separate teams. *[Verified]* [R1-S11] RFP work is shared with investment teams: the OCIO insurance role includes responses to "RFIs, RFPs and site-visits". *[Verified]* [R1-S15] Client portfolio manager titles appear in the site's search for the United States and India. No London client-portfolio-manager or RFP-team advertisement was live on the research date, so how those functions are organised in London is *[Not publicly established]*.
+
+
+## Testing "CSG means sales, CCG means relationship management"
+
+The former intern said that within each team the sales side is called CSG and the relationship side is called CCG. Parts of that hold and parts do not.
+
+| Part of the claim | What the advertisements show | Status |
+|---|---|---|
+| CSG is an umbrella that roughly means "sales" | Goldman's own titles say so | *[Verified]* [R1-S04] [R1-S09] |
+| "CCG" stands for Client Coverage Group | Yes, and it is a real group name | *[Verified]* [R1-S11] |
+| CCG is the existing-client side | The official definition matches, and adds "expanding" | *[Verified]* for Hong Kong; London wording seen in snippets only |
+| CSG means winning new clients only | Contradicted: a London CSG team also manages existing relationships | *[Conflicting evidence]* [R1-S01] |
+| Inside each London team, "CSG" labels sales and "CCG" labels relationships | No public source read shows this | *[Not publicly established]* |
+| CCG sits inside the CSG umbrella | Not shown; the definition says "within Asset Management" | *[Not publicly established]* |
+
+*[Layer B · interpretation]* A defensible working view: "CSG" names the whole sales organisation and is also used loosely to mean sales. "CCG" is a separate, named group that looks after existing clients and works alongside sales. How the line is drawn inside any one London team is team-dependent until someone on that team says otherwise. In an interview, describe the two kinds of work and ask how the team you are meeting divides them. Do not assert the acronyms as a fact about their desk.
+
+## What a Summer Analyst can realistically contribute
+
+
+> **[Level 1 · First principles]**
+>
+> A summer analyst is there for about ten weeks, has no client relationships of their own and is not authorised to speak for the firm. What they can do is make the people who do hold those relationships better prepared and faster. That is real work. A meeting goes differently when the senior person has read an accurate one-page summary of the client's latest annual report than when they have not.
+
+
+*[Layer A · verified fact]* Goldman publishes nothing about what a London CSG summer analyst does. *[Not publicly established]* [R1-S22] The nearest official proxy is the task list in the two junior London advertisements, which are full-time roles at a higher level. *[Verified]* [R1-S01] [R1-S17] Their tasks are:
+
+- preparing for and following up client and prospect meetings;
+- answering day-to-day client queries on products and services;
+- working with product specialists, marketing, compliance and operations;
+- supporting the country head with "presentations focusing on market intelligence, business development, financial analysis and planning".
+
+*[Layer B · interpretation]* A summer analyst would plausibly help with parts of these under supervision. The table below sets out who decides what. It describes general industry practice and is an inference, not a Goldman job architecture. *[Supported inference]*
+
+| Level | Can do alone | Can recommend | Needs approval or belongs to others |
+|---|---|---|---|
+| [Summer Analyst](#ROLE-SUMMER-ANALYST) | Research from public documents; first drafts; data checks; meeting notes | Which facts matter for a meeting; a question worth asking | Anything sent to a client; any statement about a product; all commercial terms |
+| [Analyst](#ROLE-ANALYST) | Maintain pipeline and client records; assemble meeting packs; route queries | Who to target; what to include in a pitch | Client-facing material goes through review and compliance; pricing belongs to seniors |
+| [Associate](#ROLE-ASSOCIATE) | Run parts of a tender response; handle routine client contact | Proposal structure; follow-up strategy | Fee proposals; non-standard terms; investment content belongs to the investment team |
+| [Senior coverage professional](#ROLE-VP-ED) | Lead meetings; own the relationship day to day | Fee concessions; resourcing; whether to bid | Portfolio decisions belong to portfolio managers; legal terms to legal; large concessions to the team head |
+
+
+> **[Level 2 · Institutional mechanics]**
+>
+> **Three boundaries that apply at every level.**
+> 
+> 1. **Investment decisions belong to the investment team.** A coverage professional can explain why a portfolio manager bought something. They cannot promise that the manager will buy or sell anything. In an OCIO mandate, the delegated decisions sit with Multi-Asset Solutions, not with sales. [R1-S15]
+> 2. **What a client is told is controlled.** UK rules require communications to clients to be fair, clear and not misleading, so material is reviewed before it goes out. Chapter 6 covers the detail in its [regulatory guardrails section](#ch06-regulatory-guardrails-that-shape-both-roles).
+> 3. **Suitability is the client's decision, taken with its advisers.** Institutional clients have trustees, investment committees and consultants. The coverage team proposes; the client's governance disposes.
+> 
+> The app's [Role comparison view](#/roles) puts any two or three of these roles side by side, including the functional roles (institutional sales, relationship management, third-party wealth, consultant relations, product specialist, client service and RFP).
+
+
+## How titles work
+
+
+> **[Level 1 · First principles]**
+>
+> The ladder visible in Goldman's own listings and announcements runs: Summer Analyst, Analyst, Associate, Vice President, Managing Director, Partner. *[Verified]* [R1-S26] [R1-S27] [R1-S29] Two points catch people out.
+> 
+> - **Executive Director is the same level as Vice President.** Outside the United States, people at Vice President level are commonly called Executive Director. It is one rung with two names, not two rungs.
+> - **Partner is not the next automatic step after Managing Director.** People are invited into a partner class.
+
+
+
+> **[Level 2 · Institutional mechanics]**
+>
+> The evidence: listings titled "Executive Director" in London and Singapore carry the corporate title "Vice President", and the firm announces a single "Vice President and Executive Director Class". *[Verified]* [R1-S10] [R1-S26] The Partner Class of 2026 is "a group of 109 individuals who have been invited to become partners of Goldman Sachs as of January 1, 2027". *[Verified]* [R1-S27] That release lists name, division and office only, so nobody can be placed in the Client Solutions Group from it. Several advertisements are titled "Analyst/Associate" or "Associate/Executive Director", which means one seat can be filled at more than one level. *[Verified]* [R1-S01] [R1-S29]
+> 
+> For the interview format this means the people the former intern said you would meet (an analyst and associate, then a vice president "or similar", then a managing director) are plausible as levels, and "or similar" is very likely Executive Director. The sequence itself is his account only. *[Unverified account]*
+
+
+## What this job is not: boundaries with adjacent careers
+
+Chapter 6 has a compact table of adjacent roles ([Adjacent roles: what this job is not](#ch06-adjacent-roles-what-this-job-is-not)). This section explains where each one overlaps with client coverage and where the boundary falls, with one example each. All examples are fictional. *[Illustrative example]*
+
+**Investment banking.** *Overlap:* both involve senior client relationships and pitching. *Boundary:* a banker advises a company on a transaction and is paid once when it completes. A coverage professional asks a client to delegate money for years and the firm is paid for as long as the money stays. *Example:* a water company's finance director hires a bank to arrange a bond issue. The trustees of that company's pension scheme, a legally separate body, hire an asset manager to run a credit portfolio. Same company name, different client, different decision-makers, different fee.
+
+**Markets sales and trading.** *Overlap:* the word "sales", and knowledge of the same securities. *Boundary:* markets sales helps a client execute a trade today and the bank earns a spread. Asset management sales never executes anything; the product is ongoing management. *Example:* an insurer's dealing desk rings a bank's sales desk to buy £50 million of gilts. The same insurer's chief investment officer meets an asset manager's coverage team to decide whether to outsource a private credit allocation. The first conversation takes minutes, the second can take a year.
+
+**Portfolio management.** *Overlap:* both need to understand the strategy and markets. *Boundary:* the portfolio manager decides what the fund owns and is accountable for performance. The coverage professional explains those decisions and carries the client's reaction back. *Example:* a fund lags its benchmark for three quarters. The portfolio manager decides whether to change positions. The relationship manager decides how and when the client hears about it, and who should be in the room.
+
+**Investment research.** *Overlap:* reading, analysis, forming a view. *Boundary:* a research analyst studies securities or economies to inform investment decisions. A coverage analyst studies clients: their liabilities, governance, advisers and existing managers. *Example:* a research analyst models a utility's cash flows. A coverage analyst reads a pension scheme's annual report to find its funding level, its consultant and when its manager arrangements were last reviewed.
+
+**Private wealth advice.** *Overlap:* long relationships built on confidence. *Boundary:* a private wealth adviser advises an individual on that individual's whole financial position. A coverage professional represents one manager to a professional client that has its own advisers. *Example:* a family's adviser recommends how to split the family's money across asset classes and managers. An asset manager's third-party wealth salesperson tries to get one fund onto that advisory firm's approved list. The adviser is the salesperson's client, and the family is the adviser's.
+
+**Fund operations.** *Overlap:* onboarding, reporting and query handling touch both. *Boundary:* operations makes sure trades settle, assets are valued and records are correct. Coverage owns the client conversation about those things. *Example:* a client's custodian reports a different holding from the manager's report. Operations finds and fixes the break. The relationship side tells the client what happened and by when it will be resolved.
+
+**Investment consulting.** *Overlap:* both spend their days with trustees and investment committees. *Boundary:* the consultant is paid by the client to be impartial between managers. The coverage professional is paid by one manager. *Example:* trustees ask their consultant which three managers should pitch for a mandate. The consultant-relations team at one of those managers spent the previous year making sure the consultant's researchers understood the strategy. Being open about which side you are on is part of being believed.
+
+## Four junior work products, and what each one changes
+
+Chapter 6 shows a meeting preparation note, a pipeline update, a questionnaire extract, a performance-review outline and a follow-up plan. The four below are different documents, chosen because a junior person can plausibly draft them and because each links to a client outcome and a commercial consequence. The client, people and figures are invented. *[Illustrative example]*
+
+
+> **[Sample work product (fictional): 1. Client profile from public documents]**
+>
+> **Prospect:** Halden Water Pension Scheme (fictional). **Prepared for:** coverage lead, before a first meeting. **Sources:** scheme annual report, statement of investment principles, implementation statement.
+> 
+> - **Size and type:** £1.4bn, closed defined benefit scheme. **Funding:** 104% on the scheme's own measure at the last valuation.
+> - **Stated objective:** reach a position to buy out with an insurer "within five to eight years".
+> - **Advisers:** investment consultant named in the report; a professional independent trustee chairs the investment sub-committee.
+> - **Current managers:** five, of which two run credit. Manager arrangements "last reviewed" three years ago.
+> - **Not stated:** fees paid; whether a review is planned; views on illiquid assets. *Do not assume.*
+> - **Two questions worth asking:** How does the buy-out timetable limit what the scheme can hold? Who leads on manager review, the sub-committee or the consultant?
+> 
+> **Client outcome:** the meeting starts from the scheme's own stated aims, so the trustees do not spend twenty minutes explaining what they have already published. **Commercial consequence:** the team can decide early whether it has anything relevant to offer. Finding out that it does not is also a result: it saves months of effort on both sides.
+
+
+
+> **[Sample work product (fictional): 2. Contact report after a meeting]**
+>
+> **Client:** Halden Water Pension Scheme. **Attendees:** chair of trustees, pensions manager, consultant; coverage lead, product specialist, analyst (notes).
+> 
+> - **What they said:** the buy-out target is firm. Illiquid assets are "a problem to be run off, not added to". The credit managers will be reviewed next spring.
+> - **What we said:** outlined the short-dated credit capability. *Did not* discuss fees.
+> - **Commitments made by us:** send the credit team's approach to buy-out-ready portfolios by Friday (owner: product specialist). Confirm whether weekly liquidity is available (owner: analyst to obtain answer from the investment team; **not yet known**).
+> - **Commitments made by them:** the consultant will share the review timetable.
+> - **Next contact:** after the timetable arrives.
+> 
+> **Client outcome:** every promise made in the room has an owner and a date, so nothing depends on memory. **Commercial consequence:** the record sits in the client system where the next person can read it. If the coverage lead moves on, the firm still knows what was said. Chapter 7 explains why knowledge trapped with one person is a risk to the relationship.
+
+
+
+> **[Sample work product (fictional): 3. Query log entry for an existing client]**
+>
+> **Client:** Northmoor Endowment (fictional). **Query received:** Tuesday, from the finance officer. "The quarterly report shows a different year-to-date return from the figure your colleague quoted at the meeting."
+> 
+> - **Checked:** the report shows the return after fees; the figure quoted in the meeting was before fees. Both are correct on their own basis. Difference: 0.3 percentage points.
+> - **Confirmed with:** performance team (owner of the numbers).
+> - **Draft reply for the relationship manager to review:** two sentences stating both figures, which basis each uses, and that future meeting materials will show both side by side.
+> - **Root cause noted:** the meeting slide did not label the basis.
+> 
+> **Client outcome:** the finance officer gets an accurate answer within two days and can report to the investment committee without a discrepancy hanging over it. **Commercial consequence:** small unexplained differences are how confidence erodes. Fixing the label removes a recurring source of doubt. The analyst drafted the reply but did not send it: client communications are reviewed first.
+
+
+
+> **[Sample work product (fictional): 4. Fund comparison for a wealth gatekeeper]**
+>
+> **Intermediary:** Castlebrook Wealth (fictional), fund research team. **Request:** "How does your global bond fund differ from the two we already hold?"
+> 
+> | | Our fund | Fund A | Fund B |
+> |---|---|---|---|
+> | Benchmark | Global aggregate, hedged | Same | Unconstrained |
+> | Typical number of issuers | From factsheet | From factsheet | From factsheet |
+> | Ongoing charge | From factsheet | From factsheet | From factsheet |
+> | Largest loss in the last five years | From factsheet | From factsheet | From factsheet |
+> 
+> - **Where ours is weaker:** higher ongoing charge than Fund A.
+> - **What only the investment team can answer:** why duration was cut last year. Routed to the product specialist.
+> - **Compliance status:** draft; not for distribution until reviewed.
+> 
+> **Client outcome:** the gatekeeper gets a like-for-like comparison built from public documents, including the point that counts against the fund, which they would have found anyway. **Commercial consequence:** a fund gets onto an approved list when the research team can defend the choice to its own investment committee. A comparison that hides the weak point makes that harder, not easier.
+
+
+## What remains unknown
+
+These points were searched for and not found in public sources. They are open questions to ask, not gaps to fill with a guess.
+
+- Which London team a 2027 summer analyst joins, and how that is decided. *[Not publicly established]*
+- Whether London teams literally call their sales side "CSG" and their relationship side "CCG", and whether the Client Coverage Group sits inside or beside the Client Solutions Group. *[Not publicly established]*
+- How London organises product specialists, client service and RFP support. *[Not publicly established]*
+- London analyst pay. The figures in the former intern's account have no public support and no conclusion about role quality should be drawn from them. *[Unverified account]*
+- Whether final-round interviews are now in person. Official pages are silent. *[Not publicly established]*
+
+
+> **[Check your understanding]**
+>
+> 1. The 2027 London listing contains no duties. Where, then, does any description of the summer analyst's work come from, and how should you word it?
+> 2. Give one piece of evidence that CSG means "sales" and one piece of evidence that a CSG team also manages existing clients.
+> 3. A client asks a relationship manager whether the fund will sell a holding that has fallen sharply. Who decides, and what can the relationship manager properly say?
+> 4. Why is the investment consultant not the asset manager's client, and why does the manager still have a team devoted to consultants?
+> 5. An "Executive Director" and a "Vice President" interview you on the same day. Which is more senior?
+> 6. In work product 1, which finding would lead the team to conclude it should not pursue the prospect, and why is that a useful outcome?
+
+
+---
+
+# People, staffing and recruitment
+
+This chapter answers four questions. Who, according to public sources, leads the parts of Goldman Sachs Asset Management (GSAM) that a London Client Solutions Group (CSG) summer analyst might join? What do public sources show about the balance between sales and relationship management? Which languages do real job descriptions ask for? And how much of the former intern's account of recruitment survives a check against what Goldman Sachs publishes?
+
+Three rules apply throughout. The **public title** is what the source says, word for word. The **function** (sales, relationship management, leadership, specialist) is our interpretation and is labelled as such. Every sighting carries an **evidence date**, because people move and a title seen in 2024 may not be current in November 2026. The full directory, with one entry per person, is in the People directory of the application and Appendix B of the PDF.
+
+
+> **[Limits and caveats: What this chapter cannot do]**
+>
+> It cannot tell you who will interview you, how many people work in any team, or how likely an offer is. It is a sample of people the trade press chose to write about, checked against a small number of official pages. Treat names as context for understanding the business, not as a contact list.
+
+
+## 1. Method and its limits
+
+### What was searched
+
+*[Layer A · verified fact]* The people research used four kinds of public source:
+
+- **Official Goldman Sachs material**: press releases, GSAM insight pages that carry an author's title, the careers site's listing titles, and class announcements for partners and for vice presidents and executive directors.
+- **Trade press**: Professional Pensions, Investment Week, Funds Europe, Funds Society, Citywire-type move stories, and national outlets such as finews.ch (Switzerland), FundResearch (Germany), Realtid (Sweden) and Investment Officer (Netherlands).
+- **Conference and author biographies**: speaker pages for industry events, and writer profiles on distributor websites.
+- **Search-result snippets**: the short text a search engine shows for a page that could not be opened. These are recorded as "snippet only" and never rated above Supported inference.
+
+The exact query strings are listed at the end of the chapter so the work can be repeated or extended.
+
+### Why the directory is thinner than planned
+
+Three constraints shaped the result, and each is a limit on the evidence, not a finding about Goldman Sachs.
+
+1. **The search allowance ran out.** The people stream ran 28 searches before a shared limit was reached. Junior and mid-level profiles, managing-director class lists, conference programmes and publicly indexed professional-profile snippets were **not investigated**. That is different from "searched and not found".
+2. **Goldman's own sites could not be read by the fetch tool.** Pages on the firm's main site and careers site returned an error or needed a browser to render. No workaround was used for the people stream. Where an official page is cited from its search snippet, the source is marked "snippet only".
+3. **Paywalls.** Investment Week, Investment Officer, IPE and Global Trading showed a headline or first sentences only.
+
+### Why snippets and biographies go stale
+
+- A speaker biography is written by the speaker and is true on the day it was submitted. It is rarely taken down when the person moves.
+- Search engines sometimes attach today's date to an old article because the site prints the current date in its banner. Two such cases were caught on opening the page: a Nordic team article that reads as recent is from May 2020 [R6-S17], and a "senior team shake-up" story is from January 2022 [R6-S37].
+- Trade press reports arrivals far more often than departures, and reports heads of teams far more often than their staff. The directory therefore over-represents senior people and new hires.
+
+
+> **[Note: How to read "still in post at the cutoff?"]**
+>
+> **Yes** means a source dated 2026 shows the person in the role. **Likely** means the latest sighting is recent and nothing reports a move. **Unknown** means the sighting is old or undated. **No** means a departure or move has been reported. None of these is a confirmation from Goldman Sachs.
+
+
+## 2. Who leads what, as publicly evidenced
+
+### Division and group leadership
+
+| Post | Name | Exact public wording | Evidence date and status in post | Evidence |
+|---|---|---|---|---|
+| Asset & Wealth Management | [Marc Nachmann](#P-R6-01) | "Global head of Asset & Wealth Management" | 10 Sep 2025; Likely | *[Verified]* [R6-S02] |
+| Client Solutions Group | [Matt Gibson](#P-R6-02) | "head of the Client Solutions Group within Goldman Sachs Asset Management" | 2025 biography; Feb 2026 snippet; Likely | *[Verified]* for 2025 [R6-S19][R6-S41] |
+| Third-Party Wealth (global) | [Bryon Lake](#P-R6-04) and [Padideh Raphael](#P-R6-05) | "Global Co-Head of Third-Party Wealth" | 8 Apr 2026; Likely | *[Verified]* [R6-S08] |
+| GSAM International (the EMEA legal entity) | [James Reynolds](#P-R6-08) | CEO of Goldman Sachs Asset Management International | 26 Jan 2026; Likely | *[Verified]* [R6-S23] |
+| Consultant relations (global) | [Lauren Oakes](#P-R6-18) and [Patrick O'Donnell](#P-R6-19) | Global co-heads of consultant relations | Sep 2024 snippet; Unknown | *[Supported inference]* [R6-S25] |
+
+Three points are worth understanding rather than memorising.
+
+**The head of CSG came from investment banking.** Matt Gibson moved from a senior banking role to the asset-management client business in early 2023, in a move Bloomberg described as leading "sales" [R6-S20]. He first worked alongside Chris Kojima, whose departure was reported in October 2023 [R6-S21]. *[Verified]* His own biography records managing director in 2008 and partner in 2010 [R6-S19]. *[Layer B · interpretation]* A reasonable reading is that the firm wanted the client business run by someone with deep corporate relationships across Goldman Sachs. That is an interpretation of one appointment, not a stated strategy.
+
+**Third-Party Wealth has its own global leadership inside the client group.** Bryon Lake joined in July 2024 from J.P. Morgan Asset Management as chief transformation officer for the Client Solutions Group [R6-S22] and by April 2026 was described as global co-head of Third-Party Wealth with Padideh Raphael [R6-S08]. *[Verified]* A separate research stream found the business described as sitting in CSG under those two co-heads *[Supported inference]* (see the Teams chapter).
+
+**CSG appears to hold more than client coverage.** A March 2026 leadership update, seen as a snippet only, places an Alternatives Product Strategy & Development group inside CSG, co-led by [Kristin Olson](#P-R6-06) and [Stephanie Rader](#P-R6-07) [R6-S24]. *[Supported inference]* If accurate, "CSG" covers product strategy for alternatives as well as the people who speak to clients.
+
+### EMEA and UK institutional
+
+- **[Chloe Kipling](#P-R6-10)** is the best-evidenced leader of the EMEA institutional business. GSAM's own wording in September 2025 was "co-head of the EMEA Institutional Client Coverage at Goldman Sachs Asset Management" [R6-S02]. Professional Pensions on 28 November 2025 called her "GSAM co-head of Europe, the Middle East and Africa institutional business" [R6-S01]. In November 2021 she was described as head of the UK and Ireland institutional business [R6-S03]. *[Verified]* Status in post: Likely.
+- **Her co-head is not publicly established.** [Hester Borrie](#P-R6-11) was named co-head in August 2022, after the NN Investment Partners acquisition [R6-S05]. *[Verified]* for 2022. An unverified crowd-sourced profile places her elsewhere since 2025 [R6-S35], which is too weak to state as fact. *[Not publicly established]*
+- **[Tim Horne](#P-R6-16)** was reported in June 2025 as managing director and head of EMEA defined contribution, "with the firm's client solutions group" [R6-S26]. *[Supported inference]* Snippet only.
+- **[Claire Felgate](#P-R6-17)** was reported in September 2024 as managing director, head of international, global consultant relations, in London [R6-S25]. A careers listing for that post describes it as reporting to the global co-heads and covering the UK, Continental Europe, the Middle East, Africa and Asia [R6-S42]. *[Supported inference]* Snippet only.
+
+*[Layer B · interpretation]* Two things follow, both with limits. First, GSAM's own title uses the words "Client Coverage" for the whole EMEA institutional business, which sits awkwardly with the former intern's shorthand that "client coverage" means the relationship-management side only. Second, consultant relations looks like a global function with an international head in London, not a sub-team of UK Institutional. Neither point tells you how a London team divides work day to day.
+
+### OCIO and fiduciary management
+
+- **[Ed Francis](#P-R6-12)** was hired in November 2021 as a managing director to lead UK fiduciary management [R6-S03]. GSAM's title for him on a September 2024 publication was "Head of International OCIO and UK Fiduciary Management Team" [R6-S04]. *[Verified]* for September 2024. Status in post: Likely, but no 2026 source was read.
+- **[Carolyn Schuster-Woldan](#P-R6-13)** was described in November 2025 as "a managing director in its UK fiduciary management/OCIO team", hired that September [R6-S01]. *[Verified]* Her function is left as Unclear because the source gives team and rank only.
+- **[Christy Jesudasan](#P-R6-14)** (reported January 2022 as leading sales and distribution for UK fiduciary management) and **[Cyprian Njamma](#P-R6-15)** (reported June 2022 as an executive director in the fiduciary business) are known from snippets only [R6-S27][R6-S28]. *[Supported inference]* Status in post: Unknown.
+
+*[Layer A · verified fact]* Where the outsourced chief investment officer (OCIO) business sits matters for understanding it. GSAM's own release on a Dutch insurance mandate says the fiduciary team is "within Multi-Asset Solutions", with staff in The Hague [R6-S18]. *[Verified]* Multi-Asset Solutions is an investment group; its global co-head is [Timothy Braude](#P-R6-41) [R6-S33]. So the people who run OCIO portfolios are investors, and the title "International OCIO" shows the business is not confined to the UK. A careers listing for a "Client Relationship Manager (OCIO)" at vice-president level in London was seen as a snippet [R1-S33] *[Supported inference]*, which suggests OCIO has dedicated senior relationship managers of its own.
+
+### Third Party Wealth in EMEA
+
+| Remit | Name | Public wording and date | In post at cutoff? | Evidence |
+|---|---|---|---|---|
+| EMEA head, 2021 to 2026 | [Hilary Lopez](#P-R6-23) | Head of EMEA Third Party Wealth; move to BlackRock reported 21 Apr 2026 | No (left) | *[Verified]* [R6-S06][R6-S07] |
+| Germany and Austria | [Max Bock](#P-R6-24) | Head of Third-Party Wealth, Germany and Austria, from 1 Jul 2026 | Yes | *[Verified]* [R6-S08] |
+| Switzerland | [Patrik Zumstein](#P-R6-25) | Leads the Swiss Third Party Wealth business since the start of 2025 | Likely | *[Verified]* [R6-S09] |
+| Benelux | [Gert-Jan Verhagen](#P-R6-26) | Head of Benelux Third Party Wealth from 1 Feb 2025 | Likely | *[Supported inference]* [R6-S10] |
+| Italy | [Loredana La Pace](#P-R6-27) | Country head for Italy, in Milan | Likely | *[Verified]* [R6-S11] |
+| Iberia | [Lucía Catalán](#P-R6-28) | Managing Director for Iberia, in Madrid | Yes | *[Verified]* [R6-S12][R6-S13] |
+| UK ETF distribution | [Joseph Bello](#P-R6-22) | Head of UK ETF distribution, joined June 2025 | Likely | *[Verified]* [R6-S31] |
+
+- The successor to Hilary Lopez as EMEA head is *[Not publicly established]*. A paywalled article's opening lines say the team "will continue to be led by" the two global co-heads, and describe Lopez as a partner overseeing about 100 professionals [R6-S06]. *[Supported inference]* Treat the headcount as one outlet's figure for the whole EMEA wealth business, not a London number.
+- The head of the **UK and Ireland Third Party Wealth** team is *[Not publicly established]*. The team name appears in careers-listing titles [R6-S42], and three searches, one extended, found no named leader.
+- **Iberia is not covered from London.** GSAM moved Lucía Catalán and her London team to Madrid in June 2021 [R6-S13]. *[Verified]* This is one concrete reason the former intern's list of London teams did not include Spain.
+
+### Middle East, Nordics and Benelux
+
+**Middle East.** [Ali Zaidi](#P-R6-32), "managing director, head of MENA client business and new markets, Dubai", left in mid-September 2025. The same report says he "led a team of client coverage professionals based in London, Riyadh, Dubai, Abu Dhabi, and Doha" [R6-S14]. *[Verified]* That sentence is the best public support for the former intern's statement that a Middle East team has London seats. [Khalid Albdah](#P-R6-33) left in late 2024 [R6-S15] and [Fadi Abuali](#P-R6-09)'s retirement was reported in September 2025 [R6-S16]. *[Verified]* The current head of the Middle East client business is *[Not publicly established]* after two searches.
+
+**Nordics.** The only readable description is from May 2020: an integrated Nordic team "led by Thomas Kønig" across Stockholm, Copenhagen and London, with [Daniel Lundin](#P-R6-35) responsible for sales to Swedish institutions [R6-S17]. *[Verified]* as at 2020 only. Whether [Thomas Kønig](#P-R6-34) still leads it is *[Not publicly established]*.
+
+**Benelux.** [Gerald Cartigny](#P-R6-39) was "co-CEO of Goldman Sachs Asset Management Benelux" in June 2025 [R6-S18]. *[Verified]* The other co-CEO was not identified.
+
+### Other publicly visible people
+
+- [Victoria Baker-Duly](#P-R6-20): "Managing Director and Head of EMEA Private Equity Capital Formation" on a 2026 conference page [R6-S29]. *[Verified]* Capital formation is fundraising for private-markets funds, so we interpret the function as sales.
+- [James Ashley](#P-R6-21): a managing director in the Client Solutions Group who leads an international strategy team, per an April 2025 writer profile [R6-S30]. *[Verified]* We interpret this as a specialist role, not client coverage.
+- [Alessandro Verdirrame](#P-R6-31): Reuters described him as an "executive director in the EMEA client solutions group" when he left for Ares in June 2025 [R6-S32]. *[Verified]*
+
+## 3. Posts whose holder is not publicly established
+
+Each row was searched for. None of these is a claim that the post is vacant.
+
+| Post | What was tried | Result |
+|---|---|---|
+| Co-head of EMEA Institutional Client Coverage alongside Chloe Kipling | One targeted search | *[Not publicly established]* |
+| A separate head of UK (or UK and Ireland) institutional | Two searches | *[Not publicly established]* |
+| Head of UK and Ireland Third Party Wealth | Three searches, one extended | *[Not publicly established]* |
+| Head of EMEA Third Party Wealth after April 2026 | One search | *[Not publicly established]* |
+| Head of Middle East client business after September 2025 | Two searches | *[Not publicly established]* |
+| Current head of Nordics | Two searches | *[Not publicly established]* |
+| Institutional heads for Switzerland, Germany and Austria, France | One search each | *[Not publicly established]* |
+| EMEA heads of Liquidity Solutions and Insurance client coverage | One search each; follow-up not run | Partly investigated |
+| The split of people between sales and relationship management in any London team | No source states it | *[Not publicly established]* |
+
+**Not investigated at all** because the search allowance ran out: partner and managing-director class lists for the Asset & Wealth Management division in London, junior and summer-analyst profiles that name a CSG team, and conference programmes other than two event pages.
+
+## 4. Movement log, 2021 to the cutoff
+
+Each row is one press-reported event. Hires, internal moves, appointments and departures are kept apart. This is not a measure of turnover, and it contains no interns or analysts because none were found.
+
+| Date | Person | Kind of event | Detail | Evidence |
+|---|---|---|---|---|
+| Mar 2021 | Hilary Lopez | External hire | Head of EMEA retail business, starting June 2021 | *[Verified]* [R6-S07] |
+| Jun 2021 | Lucía Catalán and team | Relocation | London to Madrid | *[Verified]* [R6-S13] |
+| Oct 2021 | Paola Delgado | External hire | Iberia distribution team | *[Verified]* [R6-S13] |
+| Nov 2021 | Ed Francis | External hire | Managing director, UK fiduciary management | *[Verified]* [R6-S03] |
+| Jan 2022 | Nine senior posts | Reorganisation | Reported senior reshuffle; detail paywalled | *[Verified]* headline only [R6-S37] |
+| Jan 2022 | Christy Jesudasan | External hire | Sales and distribution, UK fiduciary management | *[Supported inference]* [R6-S27] |
+| Jun 2022 | Cyprian Njamma | External hire | Executive director, fiduciary business | *[Supported inference]* [R6-S28] |
+| Aug 2022 | Hester Borrie, Chloe Kipling | Appointment | Co-heads, EMEA institutional client business | *[Verified]* [R6-S05] |
+| Feb 2023 | Matt Gibson | Internal transfer | Investment banking to the asset-management client business | *[Verified]* [R6-S20] |
+| Oct 2023 | Chris Kojima | Departure | Reported departing after 28 years | *[Verified]* [R6-S21] |
+| Jul 2024 | Bryon Lake | External hire | Chief transformation officer, CSG | *[Verified]* [R6-S22] |
+| Sep 2024 | Claire Felgate | External hire | Head of international, global consultant relations | *[Supported inference]* [R6-S25] |
+| Nov 2024 | Khalid Albdah | Departure | Left for another manager, effective January 2025 | *[Verified]* [R6-S15] |
+| Jan 2025 | Patrik Zumstein | Internal transfer | From the markets division to lead Swiss Third Party Wealth | *[Verified]* [R6-S09] |
+| Feb 2025 | Gert-Jan Verhagen | External hire | Head of Benelux Third Party Wealth | *[Supported inference]* [R6-S10] |
+| Jun 2025 | Tim Horne | External hire | Head of EMEA defined contribution | *[Supported inference]* [R6-S26] |
+| Jun 2025 | Joseph Bello | External hire | Head of UK ETF distribution | *[Verified]* [R6-S31] |
+| Jun 2025 | Alessandro Verdirrame | Departure | Executive director, EMEA CSG, to Ares | *[Verified]* [R6-S32] |
+| Sep 2025 | Carolyn Schuster-Woldan | External hire | Managing director, UK fiduciary management/OCIO team | *[Verified]* [R6-S01] |
+| Sep 2025 | Ali Zaidi | Departure | Head of MENA client business | *[Verified]* [R6-S14] |
+| Sep 2025 | Fadi Abuali | Retirement reported | Co-CEO for MENA; former CEO of GSAM International | *[Verified]* [R6-S16] |
+| Feb 2026 | Álvaro Apraiz Calderón | External hire | Executive director, alternatives specialist, Spain | *[Verified]* [R6-S12] |
+| Mar 2026 | Kristin Olson, Stephanie Rader | Appointment | Co-leads of a product strategy group in CSG | *[Supported inference]* [R6-S24] |
+| Apr 2026 | Hilary Lopez | Departure reported | To BlackRock | *[Verified]* [R6-S06] |
+| Jul 2026 | Max Bock | External hire (returner) | Head of Third-Party Wealth, Germany and Austria | *[Verified]* [R6-S08] |
+
+*[Layer B · interpretation]* What the log can and cannot support:
+
+- **It can support** a narrow observation: publicly reported hiring in 2021 to 2026 was concentrated in OCIO and fiduciary management, in Third Party Wealth country leadership, and in new channel heads (defined contribution, exchange-traded funds, alternatives for wealth). Those are the areas the firm chose to announce.
+- **It cannot support** any statement about net headcount, about junior hiring, or about which team "is hiring" this cycle. A press-reported senior hire says nothing about analyst seats.
+- **It does show** that several regional leadership posts changed hands or became unclear in 2025 and 2026 (EMEA Third Party Wealth, the Middle East). A sensible candidate does not name a regional head in an interview without checking the date.
+
+## 5. How titles work
+
+
+> **[Level 1 · First principles]**
+>
+> A bank's "corporate title" is a rank, such as Analyst or Managing Director. A "role title" says what the person does, such as "head of UK ETF distribution". The same person has both, and public sources often give only one. Two people with the same rank can do very different jobs.
+
+
+*[Layer A · verified fact]* What Goldman Sachs's own material shows:
+
+- **The ranks visible in official listings and announcements** are Summer Analyst, Analyst, Associate, Vice President or Executive Director, Managing Director and Partner [R1-S26][R1-S27][R1-S29]. *[Verified]*
+- **Executive Director and Vice President are the same level.** Listings titled "Executive Director" in London carry the corporate title "Vice President", and the firm announces a single "Vice President and Executive Director Class" each year [R1-S26][R1-S29][R1-S10]. *[Verified]* "Executive Director" is the working title used outside the United States. It is not the step after Vice President.
+- **Partner is a selected class, not simply the next rung.** People are "invited to become partners"; the class announced on 5 November 2026 has 109 people, effective 1 January 2027 [R1-S27]. *[Verified]* Matt Gibson's biography records managing director in 2008 and partner in 2010 as separate events [R6-S19]. A partner is also a managing director; most managing directors are not partners.
+- **A role can be filled at more than one rank.** Several listings are titled "Analyst/Associate" or "Associate/Executive Director" [R1-S29]. *[Verified]*
+
+
+> **[Level 2 · Institutional mechanics]**
+>
+> For the directory this has three consequences. First, the "title class" field is left as **Unclear** for 23 of 42 people, because the source gave a role title ("head of…") and no rank. We did not infer rank from seniority of role. Second, the partner-class release lists name, division and office only, so it cannot place anyone in the Client Solutions Group. Third, a generic title such as "Asset Management Analyst" says nothing about team, so no one was assigned to a team on that basis.
+
+
+## 6. The sales versus relationship-management balance
+
+<!-- DATA:people-summary -->
+
+*[Layer A · verified fact]* The box above is calculated from the directory each time the project is built. At the time of writing the directory holds 42 people. Six have a title that states a sales, distribution or capital-formation role. **None** has a title that states relationship management. One is blended, four are product or investment specialists, and the remaining 31 are heads of teams or cannot be classified from the title.
+
+
+> **[Limits and caveats: Why no ratio is offered]**
+>
+> - **Numerator and denominator.** Six explicit sales titles and zero explicit relationship-management titles, out of 42 public profiles. Thirty-one of the 42 cannot be placed on either side.
+> - **Selection bias.** Trade press announces heads of sales and new hires. It almost never announces a relationship manager. The zero reflects what gets reported, not who is employed.
+> - **Missing layer.** The junior and mid-level profiles that would show the real mix were not investigated.
+> - **Conclusion.** The sample cannot support a sales-to-relationship-management ratio, a team size, a conversion rate from internship to offer, or any estimate of how competitive a seat is. None is given.
+
+
+What job descriptions add, which is better evidence than the people sample:
+
+- **A named relationship-side group exists.** Goldman defines the Client Coverage Group (CCG) as "dedicated to retaining, expanding and supporting existing client relationships", partnering "closely with the sales team" [R1-S11]. *[Verified]* for the global definition, from a Hong Kong listing. London titles using "CCG" and "Client Coverage Group" were seen in search snippets only [R1-S32]. *[Supported inference]*
+- **Some teams do both jobs.** The London-based BeNeLux Client Solutions Group listing says the team "is responsible for new business development and managing existing institutional client relationships" [R1-S01]. *[Verified]* A Nordics sales-support listing describes that team in similar terms [R5-S08]. *[Supported inference]*
+- **The former intern's statements** that every team has a sales side and a relationship side sitting opposite each other, and that sales has fewer seats, are an *[Unverified account]*. Nothing public confirms or contradicts the seating or the seat count.
+
+*[Layer B · interpretation]* The defensible position: both functions exist at Goldman Sachs and have names; how they are divided varies by team; and no public source lets anyone count them.
+
+## 7. Language requirements, from job descriptions only
+
+Language ability is never inferred from a person's name or nationality. The table uses only what a job description or listing title states.
+
+| Coverage | What the listing says | Evidence |
+|---|---|---|
+| UK Third Party Wealth (London sales support) | "Native English speaker is essential"; no second language | *[Verified]* [R1-S17] |
+| BeNeLux (London-based CSG analyst or associate) | "Native Dutch speaker is essential", French an advantage | *[Verified]* [R1-S01][R5-S05] |
+| Benelux Third Party Wealth (The Hague, Amsterdam, Brussels) | Dutch and English; Brussels adds French | *[Supported inference]* [R5-S12][R5-S13] |
+| Nordics (London-based institutional sales support) | Native Swedish | *[Supported inference]* [R5-S08] |
+| Germany and Austria (Frankfurt institutional sales) | "German Speaker" in the 2027 listing title | *[Verified]* [R1-S05] |
+| France (Paris Third Party Wealth; a London French sales-support seat) | "French Speaker" in the Paris title; fluent French for the London seat | *[Verified]* Paris [R1-S06]; *[Supported inference]* London [R5-S10] |
+| Switzerland | Zurich role asks for German; a London Swiss sales-support mirror showed no language section | *[Conflicting evidence]* [R5-S11][R1-S18] |
+| Middle East (Dubai Third Party Wealth; Doha capital formation) | No language stated in title or body | *[Verified]* absence in two listings [R1-S07][R1-S08] |
+| Liquidity Solutions (London, UK corporates) | No language requirement in the summary read | *[Not publicly established]* [R5-S09] |
+| Consultant relations (older London ad) | "a second European language" an advantage | *[Verified]* historical [R1-S21] |
+| UK Institutional | No job description could be read | *[Not publicly established]* |
+
+How this bears on the former intern's account:
+
+- "Nordics, Switzerland and Benelux need a local language." **Confirmed for Benelux** *[Verified]*, **supported for the Nordics** by a snippet *[Supported inference]*, **mixed for Switzerland** *[Conflicting evidence]*.
+- "Arabic is not required for the Middle East." No listing read asks for Arabic, which is consistent, but two listings are not proof of a policy. Whether Arabic is ever required is *[Not publicly established]* [R5-S18].
+- "Everyone in Liquidity Solutions speaks French." **Not supported.** The one French-speaker advertisement found belongs to a French sales team covering wealth clients, not to Liquidity Solutions [R5-S10]. *[Not publicly established]*
+- "An English-only candidate is realistically limited to the UK, the Middle East and Liquidity Solutions." Every continental coverage listing read or summarised asked for a local language, so the direction of the claim is supported. *[Supported inference]* It remains an inference about seats, not a published rule.
+- Germany, France, Italy and Iberia "never came up" because they are staffed mainly from Frankfurt, Paris, Milan and Madrid, with local-language requirements. *[Supported inference]* That explains the gap in the former intern's list without making his list wrong about London.
+
+## 8. Audit of the former intern's recruitment claims
+
+### What Goldman Sachs officially states
+
+*[Layer A · verified fact]* These points come from the firm's own careers pages, read on the research date.
+
+- **The programme** is a "nine to ten week summer internship" for students "in their penultimate or final year of study", and applications are reviewed "on a rolling basis" [R1-S22]. *[Verified]*
+- **Application limit:** "up to 4 separate business / location combinations in any given recruiting year" [R1-S02]. *[Verified]*
+- **First interview:** "you will be asked to participate in a video interview, which will take approximately 30 minutes to complete." The next step calls it "your HireVue interview" [R1-S23]. *[Verified]*
+- **Final round ("Superday"):** "Typically, we conduct between two and five interviews for campus hires, depending on the division. You can expect to meet a cross-section of people whom you could possibly work with." [R1-S23] *[Verified]*
+- **Timing:** "We evaluate applications throughout the recruiting season, which means you may hear back regarding different roles at different times." [R1-S23] *[Verified]*
+- **What recruiters say they look for,** in a general careers video dated June 2026: questions are "situational or behavioral"; "Attitude and aptitude: these are two aspects that Goldman looks at"; "They are really trying to follow your thought process" [R1-S24]. *[Verified]* This is general guidance with a disclaimer. It is not a scoring rubric and is not specific to asset management.
+- **The London listing itself** names no sub-team, no duties, no language and no deadline [R1-S02]. *[Verified]* Listings for Frankfurt, Paris and Dubai do name a sub-track in the title [R1-S05][R1-S06][R1-S07].
+
+### Claim by claim
+
+The former intern's account is one person's experience of an earlier cycle [R1-S41]. "Unverified" below means no public source addresses the point. It does not mean the claim is false.
+
+| What the former intern said | What public sources show | Status |
+|---|---|---|
+| A recorded video interview comes first | Official: a video interview of about 30 minutes, called HireVue | *[Verified]* [R1-S23] |
+| An associate on the team reviews it, sometimes at double speed | Nothing public on who reviews recordings or how | *[Unverified account]* |
+| What you say in the video decides which team you are "drafted" to | Nothing public. The London listing names no sub-team, so some allocation must happen after applying, but the mechanism is not published | *[Unverified account]*; mechanism *[Not publicly established]* |
+| The assessment centre is three back-to-back interviews with the team, no group task | Official: two to five final interviews, depending on division, with people you could work with. Number, order and the absence of a group task are not published | Partly consistent; detail *[Unverified account]* |
+| Analyst and associate first, then a vice president, then the managing director who runs the team | Nothing public | *[Unverified account]* |
+| Assessment centres are moving in person and will ask more about AI | Official pages read are silent on both. Press coverage was not searched | *[Not publicly established]*; not investigated |
+| One analyst per open seat; you compete only within your team | Nothing public | *[Unverified account]* |
+| Each team runs its own timeline | Official wording refers to hearing back about "different roles at different times", which is about roles, not teams | Partly consistent; *[Unverified account]* |
+| His own assessment centre was on Zoom and for the Middle East team | His personal history; cannot be checked and need not be | *[Unverified account]* |
+
+### Historical experience versus current policy
+
+- **Historical experience** (his cycle): Zoom interviews, the three-interview sequence, who was in each interview, allocation to the Middle East team.
+- **Current official policy** (2027 cycle, as published): a HireVue first round; a final round of two to five interviews with a cross-section of the people you might work with; rolling review.
+- **Second-hand forecast:** the in-person move and the AI questions were things a partner told him. That is a report of a conversation, two steps from any official source.
+
+On AI specifically, the only official statement found concerns interns at work, not candidates in interviews: the chief executive's welcome to 2026 interns encouraged "experimenting with our AI solutions to enhance your teams' workflows" [R1-S28]. *[Verified]* Goldman's rules on candidates using AI during interviews were not found on the pages read. *[Not publicly established]*
+
+
+> **[Limits and caveats: No keyword tactics]**
+>
+> Nothing in this project recommends saying particular words in a recorded interview to steer allocation to a team. The claim that answers determine the team is unverified, the mechanism is unpublished, and an answer built around a keyword instead of a reason will not survive a follow-up question. The preparation point that does stand is narrower and rests on the official wording: the final round is with people from a specific team, so you should be able to explain, with real reasons, why a given client segment interests you, whichever team it turns out to be. This material is for preparation beforehand, not for use during a live or recorded interview.
+
+
+## 9. Compensation evidence and its reliability
+
+| Evidence | What it says | Reliability |
+|---|---|---|
+| The former intern's call | London analyst base of £52,000 on the sales side and £48,000 on the relationship side; bonus larger in sales; gap widens with seniority | *[Unverified account]* One person, one year, second-hand for any role other than his own [R1-S41] |
+| Goldman's London, Frankfurt, Paris and Dubai listings | Salary fields are empty | *[Verified]* absence [R1-S02][R1-S01] |
+| Goldman's New York listings (pay-transparency disclosure) | Base $85,000 to $110,000 for a CSG Management & Strategy analyst; $125,000 to $250,000 for a CSG business-strategy vice president | *[Verified]* but United States, and not client-facing roles [R1-S13][R1-S30] |
+| Goldman's Chicago wealth-channel listing | "a commission based role in addition to the base salary" | *[Verified]* but the US adviser channel, a different model [R1-S12] |
+| Self-reported salary websites | Could not be read, and none separates asset-management sales from relationship management | Not usable |
+
+*[Layer B · interpretation]* The honest summary is that **London analyst pay in this group is not publicly established**. The £4,000 difference may be accurate for one year and one pair of teams. Even if it is, it says how one firm priced two sets of tasks in one period. It is not evidence about which role is more skilled, more valued or a better fit, and the former intern's remark that sales is "more prestigious" is his opinion. Do not quote either figure in an interview.
+
+## 10. The two unnamed people from the call
+
+**The managing director who posted about an OCIO award.** The research established which awards could be meant: GSAM received a Fiduciary Management / OCIO award at the European Pensions Awards on 2 July 2026 [R3-S10] and was named Fiduciary Management / OCIO of the Year at the Irish Pensions Awards on 4 November 2026 [R3-S11]. *[Verified]* It also did **not** win the fiduciary category at the 2026 UK Pensions Awards [R3-S14]. *[Verified]* Which award the post referred to is a *[Supported inference]* at best, and **who posted it is *[Not publicly established]***. No public post was found and no name is suggested. An award shows that a judging panel rated an entry in one year. It does not establish investment performance, client satisfaction or market share.
+
+**The partner he met.** A private catch-up between an intern and a partner leaves no public record. The person is **not identified and no identification is attempted**. What can be said is general: partners are a small, selected group [R1-S27], and the partner-class releases do not state which business within Asset & Wealth Management a person works in. Guessing from a short list would be speculation about a named individual, which this project does not do.
+
+*[Layer B · interpretation]* Neither gap matters for preparation. What matters is the content of what they reportedly said, and that content is already handled above as an unverified account.
+
+## 11. Reproducing and extending the search
+
+The strings below are the ones actually run, the ones planned but not run, and the starting strings from the project brief. Search engines differ: some ignore the `site:` operator, some treat `OR` only in capitals, and some drop quotation marks on long phrases. Adapt the syntax and record what you ran, so that "searched and not found" stays distinguishable from "not searched".
+
+<!-- DATA:search-strings -->
+
+
+> **[Check your understanding]**
+>
+> 1. A 2024 speaker biography calls someone "head of UK institutional". What two things must you check before describing them that way in November 2026?
+> 2. Why does a directory with six explicit sales titles and no explicit relationship-management titles tell you nothing about the real ratio?
+> 3. An interviewer's email signature says "Executive Director". Is that more senior than "Vice President" at Goldman Sachs in London? What is your evidence?
+> 4. Which parts of the former intern's description of the process match what Goldman publishes, and which are his account only?
+> 5. You are English-only. What does the job-description evidence support saying about where you could plausibly work, and what does it not support?
+
+
+---
+
+# Mandates, products and commercial economics
+
+This chapter does three things. It shows what is publicly known about the business Goldman Sachs Asset Management (GSAM) has won and lost, and how to read an announcement without over-reading it. It explains how assets turn into revenue, using Goldman Sachs's own filings for the vocabulary and the numbers. Then it works through five illustrative cases end to end, so that you can connect a junior task to a client outcome and to a line of revenue.
+
+Two warnings apply throughout. First, every fee rate in a worked example is an invented round number *[Illustrative example]*. Goldman Sachs does not publish mandate-level fees, and nothing here is one. Second, the public record is a sample chosen by whoever issued the press release. It over-represents large wins and under-represents quiet losses, small mandates and anything a client preferred to keep private.
+
+## 1. Reading public commercial evidence
+
+### What the register contains
+
+The mandates register (the Mandates view in the application, Appendix C in the PDF) holds 32 publicly documented events. They are not all "wins", and they are not all the same kind of thing.
+
+| Kind of event | Entries | Example |
+|---|---|---|
+| OCIO or fiduciary appointment | 10 | [BAE Systems, 2023](#M-R7-01) |
+| Loss or termination | 6 | [Pensioenfonds Vervoer, 2010](#M-R7-26) |
+| Acquisition or partnership | 5 | [NN Group, 2021 to 2022](#M-R7-11) |
+| Product launch | 4 | [Active equity UCITS ETFs, 2025](#M-R7-18) |
+| Awarded mandate (single strategy) | 3 | [Border to Coast, 2023](#M-R7-21) |
+| Commitment, target, distribution deal, regulatory action | 4 | [Qatar Investment Authority, 2026](#M-R7-14) |
+
+Twenty-six entries are verified from a page that was read. Six are supported inference, because the primary page could not be opened and the entry rests on a search-result passage or a secondary report. Each entry says which.
+
+
+> **[Level 1 · First principles]**
+>
+> **An OCIO appointment** means a client hands the running of its whole portfolio to an outside firm. OCIO stands for outsourced chief investment officer. In the United Kingdom the same service is usually called fiduciary management. A **mandate** is an instruction to manage a specific pot of money under agreed rules. Chapter 1 explains both.
+
+
+
+> **[Limits and caveats: Selection bias in the register]**
+>
+> The register is what was announced, reported and still findable on 14 November 2026. Trade press reports terminations far less often than appointments, and clients rarely announce that they are leaving. A register with ten appointments and six losses does not mean GSAM wins five mandates for every three it loses. No win rate, retention rate or market share can be calculated from it.
+
+
+### Five things that sound alike and are not
+
+Headlines use the words "wins", "raises", "commits" and "launches" loosely. The commercial meaning differs a great deal, because only one of the five stages below is certain to produce a fee.
+
+| Stage | What it is | Does it pay a fee yet? | Register example |
+|---|---|---|---|
+| Fund launch | A product becomes available to buy | No. A new fund can hold nothing | [M-R7-18](#M-R7-18) |
+| Fundraising target | An intention to raise or invest up to an amount | No | [M-R7-14](#M-R7-14) |
+| Commitment | A legal promise to provide capital when called | Sometimes, depending on the fee base | [M-R7-12](#M-R7-12) |
+| Awarded mandate | The client has chosen the manager | Not until contracts are signed and assets arrive | [M-R7-01](#M-R7-01) |
+| Funded, fee-paying assets | Money is invested and being charged | Yes | Reported in aggregate only |
+
+**Fund launch.** On 28 April 2025 GSAM announced its entry into active equity exchange-traded funds (ETFs) in Europe, starting with a US equity fund and naming four more to follow. *[Verified]* [R7-S31] The release discloses no assets, because at launch there are none to disclose. A launch is an item for the sales team to take to clients. It is not evidence that any client bought.
+
+**Fundraising target.** On 20 January 2026 the Qatar Investment Authority and Goldman Sachs signed a memorandum of understanding under which the authority would *target* $25 billion of combined commitments to GSAM-managed funds and co-investments. *[Verified]* [R7-S28] One trade headline turned this into "Qatar Commits $25B". [R7-S30] The joint wording is "target", subject to "terms, conditions and deliverables", so the register records it as a target. *[Conflicting evidence]* The 2025 memorandum with Saudi Arabia's Public Investment Fund is one step further back: it is non-binding and names no amount at all. *[Verified]* [R7-S26]
+
+**Commitment.** In February 2024 Mubadala and Goldman Sachs signed a $1 billion private credit partnership, structured as a separately managed account to be invested over time across Asia Pacific. *[Verified]* [R7-S25] The $1 billion is capital to be deployed, not capital already invested. Goldman's own annual report shows why that matters: of $438 billion of third-party alternatives commitments raised from 2020 to 2025, $105 billion sat in "non-fee-earning alternative assets", and about $81 billion of that "will begin to earn fees (and become AUS) if and when the commitments are drawn and assets are invested". *[Verified]* [R2-S01]
+
+**Awarded mandate.** The BAE Systems announcement of 6 September 2023 said the trustees had appointed GSAM for approximately £23 billion of defined benefit assets, with the transition "expected" towards the end of that year. *[Verified]* [R7-S01] Between award and funding sit legal negotiation, operational set-up and the physical transfer of assets. The scheme's later documents confirm the mandate did fund and remains in force. *[Verified]* [R7-S06]
+
+**Funded, fee-paying assets.** Goldman reports these only in aggregate, as assets under supervision. No public document gives fee-paying assets for a single client. The nearest thing is the July 2026 Verizon and Lockheed Martin release, which separates $30 billion of OCIO "assets under management" from $40 billion of "assets under advisement". *[Verified]* [R7-S13] Managed and advised assets normally earn different fees, so "over $70 billion" is not one fee base.
+
+
+> **[Illustrative example: Checking a headline number]**
+>
+> The March 2026 release on GSAM's evergreen European private credit range quotes "over $8 billion". The footnote defines this as the fair value of investments plus unfunded commitments, *including leverage* and excluding cash. [R7-S33] It is not investors' net assets and it is not the size of the newly launched fund. The habit to build: before repeating any figure, find the sentence that says what it measures and on what date. *[Verified]*
+
+
+### Eight cases worth knowing properly
+
+**1. BAE Systems, 2023: the largest UK appointment and a team transfer.** Client: the trustees of the BAE Systems Pension Scheme and the Executive Pension Scheme. Amount: about £23 billion, which is the schemes' defined benefit assets at announcement, not a fee figure. Strategy: OCIO, including liability-driven and cashflow-driven portfolios. The in-house investment team moved to GSAM and continued to serve the schemes. Stated rationale: the sponsor said "reducing the cost and improving the efficiency of asset management are essential"; the award followed "a highly competitive tender process". Advisers: Redington advised the trustees and PwC advised the sponsor. Decision-makers: the trustee boards. *[Verified]* [R7-S01] [R7-S02] What is public about the Goldman side: the release quotes the head of International OCIO and UK Fiduciary Management and two firm-wide leaders. Nothing says who originated or ran the pitch. The scheme still retains a separate investment adviser, so outsourcing the portfolio did not remove independent oversight. *[Verified]* [R7-S06] This is the one client the former intern named that public sources confirm. See [M-R7-01](#M-R7-01).
+
+**2. Shell, 2025: one sponsor, many decisions.** In September 2025 various Shell-related pension funds and a captive insurer appointed GSAM for $40 billion of OCIO and advisory work, of which about $15.6 billion was UK and $2.8 billion German. *[Verified]* [R7-S08] Isio ran the tender. Shell described itself as co-ordinator and said decisions were made by the individual funds. [R7-S11] The Dutch Shell fund is not part of it, having appointed a different provider. *[Verified]* [R7-S09] The lesson is that "the client" was a set of separate trustee boards with separate duties. One relationship with the sponsor would not have been enough. See [M-R7-02](#M-R7-02).
+
+**3. Calor, 2024: winning from an incumbent.** The £240 million Calor Group Retirement Benefits Plan appointed GSAM as fiduciary manager after a tender overseen by Barnett Waddingham. The plan had been under fiduciary management with another firm since 2019. *[Verified]* [R7-S16] [R7-S18] Fiduciary mandates are re-tendered, and UK rules require trustees to run a competitive tender with at least three bidders before delegating 20% or more of scheme assets. *[Verified]* [W2-S04] The other side of this fact is that GSAM's own mandates face the same test. See [M-R7-04](#M-R7-04).
+
+**4. Pensioenfonds Vervoer, 2006 to 2010: won and then lost on performance.** GSAM won fiduciary management of all €5.4 billion of this Dutch industry fund in 2006, one of the first such appointments in the Netherlands. *[Verified]* [R7-S48] Four years later the fund terminated the mandate, by then €7 billion, citing underperformance. Its chief investment officer said the manager "did not produce any outperformance". *[Verified]* [R7-S49] A whole-portfolio relationship is not safer than a single-strategy one. It concentrates responsibility, so when results disappoint there is no one else to point to. See [M-R7-25](#M-R7-25) and [M-R7-26](#M-R7-26).
+
+**5. Local government pensions: mandates that end because the client's structure changes.** Kent County Council ended a £350 million equity mandate in 2006 in a strategic reallocation. *[Verified]* [R7-S46] In 2023 GSAM was reported as one of two managers for the emerging markets sleeve of a fund run by Border to Coast, a pool that invests for several local authority funds, and a 2025 article confirms it was managing that allocation. *[Supported inference]* [R7-S43] [R7-S44] In 2026 a trade report noted that Goldman Sachs no longer appeared on the factsheet of the pool's global equity fund. *[Supported inference]* [R7-S45] No reason was published, and "terminated" is an inference from the factsheet. The pattern is that the buyer has moved from the individual council fund to the pool, so one decision now moves more money in either direction. See [M-R7-21](#M-R7-21) and [M-R7-22](#M-R7-22).
+
+**6. Gulf sovereign investors: partnerships, not fund subscriptions.** The Mubadala account, the Public Investment Fund memorandum and the Qatar target are all structured as bespoke partnerships with anchor roles, co-investment and local office commitments. *[Verified]* [R7-S25] [R7-S26] [R7-S28] The amounts are intentions or capital to be deployed. They show the shape of the relationship more reliably than they show revenue.
+
+**7. The wealth channel: many small tickets.** GSAM's first European private markets fund for wealthy individuals raised more than $200 million at its close in 2023. *[Verified]* [R7-S34] Beside a £23 billion pension appointment that looks small, and it illustrates the economics of the channel: money arrives through intermediaries in many small amounts, at higher fee rates, over a long time. The 2013 agreement under which True Potential distributed Goldman Sachs multi-asset funds through more than 800 adviser firms shows the chain: the platform decided what advisers could access, and the advisers' clients were the investors. *[Verified]* [R7-S53] See [M-R7-19](#M-R7-19) and [M-R7-30](#M-R7-30).
+
+**8. A regulatory action: why due diligence asks about process.** In November 2022 the US Securities and Exchange Commission charged Goldman Sachs Asset Management, L.P. with failing to follow its own policies for two funds and one separately managed account strategy marketed as environmental, social and governance investments, covering April 2017 to February 2020. The firm paid a $4 million penalty without admitting or denying the findings. *[Verified]* [R7-S54] A client's due diligence questionnaire asks whether written procedures exist and are followed. This case is why, and anyone answering such a question for a client needs to know that it is on the record. See [M-R7-31](#M-R7-31).
+
+### Why no announcement can be attributed to a London team or person
+
+
+> **[Limits and caveats: Attribution]**
+>
+> No source in the register says which sales or relationship team, or which individual, originated or won a mandate. The people quoted in releases are business heads speaking for the firm. An OCIO appointment of the BAE or Shell kind involves a tender run by an adviser, a solutions and portfolio management team that designs the proposal, legal, operations, risk and transition specialists, and senior sponsorship. Saying "the UK Institutional team won BAE" would be a reconstruction, not a fact, and it should not be said in an interview. What can be said is that the release named the head of the OCIO business and, for Shell, the co-head of EMEA Institutional Client Coverage. [R7-S01] [R7-S08]
+
+
+## 2. How revenue actually works
+
+### Assets under management and assets under supervision
+
+
+> **[Level 1 · First principles]**
+>
+> **Assets under management (AUM)** is the usual industry term for the money a manager invests on behalf of clients. Goldman Sachs reports a wider measure, **assets under supervision (AUS)**. AUS includes money Goldman manages with discretion, and also money where it earns a fee for advice or other services without making the investment decisions. When you quote a Goldman Sachs figure, use "AUS", because that is the number the firm publishes.
+
+
+
+> **[Level 2 · Institutional mechanics]**
+>
+> Goldman's definition: AUS "includes our institutional clients' assets, assets sourced through third-party distributors and high-net-worth clients' assets where we earn a fee for managing assets on a discretionary basis". It "also includes client assets invested with third-party managers, private bank deposits and advisory relationships where we earn a fee for advisory and other services, but do not have investment discretion". It excludes clients' self-directed brokerage assets. *[Verified]* [R2-S01] Two consequences follow. The liquidity line includes private bank deposits as well as money market funds, so it is not a clean figure for the Liquidity Solutions fund business. And AUS is not all charged at a management-fee rate, because advisory assets are in it.
+
+
+Total AUS was $3,606 billion at 31 December 2025 and $4,097 billion at 30 September 2026. *[Verified]* [R2-S01] [R2-S02]
+
+
+> **[Limits and caveats: Two published figures for the same date]**
+>
+> The GSAM UK institutional website shows "$3.7+ Trillion" of AUS with a footnote dated 30 September 2026. The quarterly filing for the same date gives $4,097 billion. The website does not explain the difference, which may be a narrower perimeter. *[Conflicting evidence]* [R2-S07] [R2-S02] Quote the filing, with its date.
+
+
+### Goldman's segments and what "about 30%" describes
+
+Goldman Sachs reports three segments: Global Banking & Markets, Asset & Wealth Management (AWM) and Platform Solutions. *[Verified]* [R2-S01] Asset Management is not a segment. It is one of two businesses inside AWM.
+
+| Net revenues, $ million | Full year 2025 | Share of firm | Q3 2026 |
+|---|---|---|---|
+| Whole firm | 58,283 | 100% | 18,679 |
+| AWM segment | 16,679 | 28.6% | 5,051 |
+| of which Asset management | 6,784 | 11.6% | 2,194 |
+| of which Wealth management | 9,895 | 17.0% | 2,857 |
+
+Figures are from the 2025 annual report and the Q3 2026 quarterly report; the percentages are arithmetic on them. *[Verified]* [R2-S01] [R2-S02] [R2-S03]
+
+The former intern said asset management is about 30% of Goldman's revenue. That figure fits the AWM segment in 2025 (28.6%). It does not fit Asset Management alone (11.6%). And it says nothing about the Client Solutions Group, for which Goldman publishes no revenue, assets, flows, headcount or fee rate. *[Not publicly established]* [R2-S01] The smallest units disclosed are the global client channel and the EMEA region.
+
+The AWM segment's 2025 revenue came from four lines. *[Verified]* [R2-S01]
+
+| $ million, 2025 | Asset management | Wealth management | AWM total |
+|---|---|---|---|
+| Management and other fees | 4,990 | 6,548 | 11,538 |
+| Incentive fees | 489 | 0 | 489 |
+| Private banking and lending | 0 | 3,347 | 3,347 |
+| Investments | 1,305 | 0 | 1,305 |
+| Total | 6,784 | 9,895 | 16,679 |
+
+Two of those lines are not fees for managing client money. Private banking and lending is interest income. "Investments" is the return on Goldman's own capital. Management and incentive fees together were $12,027 million, so treating all $16.7 billion as fee income would overstate it by almost 40%.
+
+Management and other fees were 69% of AWM net revenues in 2025. That is the basis for describing the segment as a source of steadier income. Goldman's own wording is more careful: the fees "are affected by investment performance, as well as asset inflows and redemptions". *[Verified]* [R2-S01]
+
+### Where the assets are, by asset class and by channel
+
+| AUS, $ billion | 31 Dec 2025 | 30 Sep 2026 |
+|---|---|---|
+| Alternative investments | 420 | 491 |
+| Equity | 951 | 1,150 |
+| Fixed income | 1,334 | 1,405 |
+| Liquidity products | 901 | 1,051 |
+| Total | 3,606 | 4,097 |
+
+Long-term AUS (everything except liquidity) is also reported by three client channels. *[Verified]* [R2-S01] [R2-S02]
+
+| Long-term AUS, $ billion | 31 Dec 2025 | 30 Sep 2026 | Net inflows, 9 months 2026 |
+|---|---|---|---|
+| Institutional | 1,193 | 1,245 | 65 |
+| Wealth management | 945 | 1,087 | 88 |
+| Third-party distributed | 567 | 714 | 97 |
+| Total long-term | 2,705 | 3,046 | 250 |
+
+These three channels are global. "Institutional" is the channel institutional coverage teams serve. "Third-party distributed" is the channel the Third Party Wealth teams serve. "Wealth management" is Goldman's own private wealth business. *[Layer B · interpretation]* That mapping is our reading of the labels; the filings do not name the teams. By region, EMEA held $799 billion at 30 September 2026, against $3,021 billion in the Americas. *[Verified]* [R2-S02] There is no UK figure and no table of channel by region.
+
+
+> **[Level 2 · Institutional mechanics]**
+>
+> **Reading the flow numbers.** *Gross inflows* are all the money that came in. *Gross outflows* are all the money that left. *Net flows* are the difference. Goldman reports net flows only, so a net inflow of $65 billion in the institutional channel can hide large wins and large losses in the same period. Three further points from the filings. *[Verified]* [R2-S02]
+> 
+> - Acquired assets count as inflows. The nine-month 2026 figure includes $31 billion from the purchase of Innovator, an ETF provider, and $5 billion from Industry Ventures, less $15 billion from the sale of a Polish fund company. The third-party distributed channel's $97 billion is therefore not all organic selling.
+> - Markets move the total without any client acting. In Q3 2026 net market depreciation took $27 billion off AUS, mostly in fixed income.
+> - Liquidity products can move the other way from long-term assets. Q3 2026 saw $97 billion of long-term net inflows and a $14 billion net outflow from liquidity.
+
+
+### Effective fee rates are blends, not prices
+
+Goldman publishes an "average effective management fee" by asset class, in basis points. One basis point (bp) is one hundredth of one per cent, so 20bp is 0.20%.
+
+| Basis points | 2024 | 2025 | 9 months 2026 |
+|---|---|---|---|
+| Alternative investments | 60 | 58 | 60 |
+| Equity | 55 | 54 | 52 |
+| Fixed income | 17 | 17 | 16 |
+| Liquidity products | 15 | 14 | 13 |
+| Total | 31 | 31 | 30 |
+
+*[Verified]* [R2-S01] [R2-S02]
+
+
+> **[Limits and caveats: These are not what any client pays]**
+>
+> Each figure averages every client, region, vehicle and size, worldwide. A large UK pension mandate, a retail share class and an advisory account are all inside the same number. Do not present 17bp as "what Goldman charges for fixed income". The figures teach two things only. The first is the mix effect: a pound in equity earns about three times as much as a pound in fixed income. The second is direction. Goldman's own risk factors say that if clients keep moving to lower-fee products, "our average effective management fee will decline further". [R2-S01]
+
+
+A cross-check shows how the pieces fit. Thirty-one basis points on average AUS of $3,328 billion is about $10.3 billion, a little below the reported $11.5 billion of management and other fees, because that line also includes fees that are not charged on assets. *[Supported inference]* [R2-S01]
+
+### What is and is not disclosed about OCIO
+
+Three public figures exist, and they measure different things.
+
+- In its filings Goldman reports OCIO only inside alternatives, combined with advisory accounts: an average of $112 billion in 2025, earning 17bp, against 77bp on funds and discretionary alternative accounts. *[Verified]* [R2-S01]
+- A July 2026 press release gives $480 billion of OCIO AUS globally at 31 March 2026. *[Verified]* [R3-S09]
+- GSAM's OCIO web page gives "$540+ billion" at 30 June 2026. *[Verified]* [R8-S22]
+
+No UK or EMEA figure is published, and no OCIO fee rate. *[Not publicly established]* The 17bp in the filing applies to the alternatives slice of advisory and OCIO accounts. It is not "the OCIO fee". A public annual report for a UK scheme run by a different provider shows a typical structure: a fiduciary fee based on the value of the return-seeking and cashflow-driven portfolios, with the hedging manager invoicing the scheme separately and the fiduciary manager negotiating the underlying managers' fees. *[Verified]* [R3-S17] Industry surveys report that UK fiduciary fees fell about 27% over five years, driven by competition for mandates above £500 million. *[Verified]* [R8-S10]
+
+### From assets to revenue, step by step
+
+
+> **[Level 1 · First principles]**
+>
+> A manager's fee income for a period is, at its simplest:
+> 
+> **average fee-paying assets × fee rate × fraction of the year**
+> 
+> Everything else is detail about what counts as fee-paying, which rate applies, and what gets subtracted afterwards. The base case used in this chapter is £500 million × 0.20% = £1 million a year. *[Illustrative example]*
+
+
+
+> **[Level 2 · Institutional mechanics]**
+>
+> **The asset bridge.** Closing assets = opening assets + net flows + market movement (+ acquisitions − disposals). Fees are earned on the *average* through the period, so the date money arrives matters as much as the amount.
+> 
+> **Fee base.** Goldman's accounting policy states the base by vehicle. Mutual fund fees are a percentage of daily net asset value (NAV). Separately managed account fees are a percentage of daily or monthly NAV, generally received quarterly. Private equity fund fees are a percentage of "monthly invested capital or committed capital". *[Verified]* [R2-S01] So a private markets fee base has to be read from the fund terms. Assuming NAV is a common mistake.
+> 
+> **Breakpoints.** Large mandates usually have tiered schedules: one rate on the first slice of assets, a lower rate on the next. The marginal rate falls as the client grows, so doubling assets does not double fees.
+> 
+> **Management fees, incentive fees and carried interest.** A management fee is charged on assets whatever the result. An incentive (performance) fee is a share of return, or of return above a benchmark or target. Goldman recognises incentive fees only when a significant reversal is not probable, and life-of-fund fees can be clawed back. *[Verified]* [R2-S01] In private funds the manager's share of profits is commonly called carried interest; Goldman calls its enhanced share on private equity and credit funds "overrides". Incentive fees were $489 million in 2025 against $11,538 million of management and other fees, so they are a small and lumpy part of the total.
+> 
+> **Distribution costs.** When a fund is sold through an intermediary, the manager may pay for placement. Goldman describes distribution fees paid "to brokers and advisors related to the placement of the firm's investment funds", calculated on the management fee, NAV or committed capital, and booked as an expense. *[Verified]* [R2-S01] No amount is broken out. Gross management fee is therefore not net revenue.
+> 
+> **Operating profitability.** The AWM segment's pre-tax margin was 25% in 2025, with a stated target of about 30% in the medium term. *[Verified]* [R2-S01] [R2-S02] Across the industry, one consultancy's 2026 report puts margins near 30% and notes that from 2010 to 2025 costs grew slightly faster than revenues. *[Verified]* [R8-S38] *[Layer B · interpretation]* Read together, these suggest that roughly 70 to 75 pence of each pound of fee goes on people, systems and distribution before any profit.
+
+
+### Three cautions about counting revenue
+
+**Retained revenue is not incremental revenue.** Keeping a £1 billion client adds nothing new to the firm's income. It prevents a loss. Both matter, and they should not be added together as "revenue generated".
+
+**No function can claim sole credit.** A mandate exists because portfolio managers produced a strategy worth buying, a specialist explained it, a coverage person understood the client and ran the process, operations made it work and the firm's name passed due diligence. Goldman publishes no revenue attribution by team. *[Not publicly established]* Any statement of the form "sales generated X" is an internal accounting convention, not a fact about causation.
+
+**Recurring is not guaranteed.** A management fee recurs for as long as the client stays, markets hold and the price is not renegotiated. The Vervoer termination, the Kent reallocation and the fee trend in UK fiduciary management are each an example of one of those three conditions failing.
+
+## 3. Worked examples, end to end
+
+The five cases below use fictional clients. The tables are calculated by the same model as the fee calculator in the application, and the method is set out in Appendix J: flows land at the start of a month, the month's fee is one twelfth of the annual fee on that month's balance, and market movement is applied at month end. Who leads each stage is described as general industry practice *[Supported inference]*, not as Goldman's internal process. At every stage the junior person prepares, checks and records. Decisions on price, suitability of the proposal and investment content belong to senior coverage staff, portfolio managers and the client.
+
+### Case A: a £500 million fixed-income mandate
+
+**Client problem.** The fictional Harrow Vale Pension Scheme is a closed defined benefit scheme. It pays pensions every month and wants a bond portfolio whose income and maturities line up with those payments, to rely less on selling assets at uncertain prices.
+
+**Discovery.** The scheme's investment consultant issues a request for proposal (RFP) to five managers. Before any proposal is written, the coverage lead needs to know the cashflow profile, the funding level, what the trustees already hold, who sits on the investment committee and what worried them about their previous manager. Much of this comes from the consultant and from the scheme's public documents.
+
+**Internal collaboration and proposal.** The fixed-income portfolio managers design the portfolio and own every investment statement. A product specialist turns it into a proposal. Risk and legal review the guidelines. The coverage lead decides how to present it and what price to propose, within limits set by the business.
+
+**Due diligence and negotiation.** The consultant sends a due diligence questionnaire covering people, process, risk controls, operations and regulatory history. The trustees then interview a shortlist. If selected, the parties negotiate the investment management agreement: guidelines, reporting, fees, termination notice.
+
+**Onboarding and funding.** Accounts are opened with the scheme's custodian, identity checks are completed and the assets are transferred, often in stages managed by a transition specialist.
+
+**Ongoing coverage.** Quarterly reports, review meetings, answers to trustee questions and early warning when anything changes.
+
+**What the junior person produces.** A briefing on the scheme from its report and accounts. First drafts of standard RFP answers from the content library, each checked against the current source. A tracker of outstanding due diligence items. Meeting notes and a follow-up list. During onboarding, a checklist of documents chased to completion.
+
+<!-- DATA:case:£500m fixed-income mandate -->
+
+**Reading the four results.** Fully funded for a year, £500 million at 20bp earns £1 million. *[Illustrative example]* If half arrives in month 1 and half in month 7, the average balance is £375 million and the first-year fee is £750,000: the same headline mandate, a quarter less revenue. If markets fall 8% across the year the fee is about £962,800, although no one did anything wrong. If the fee is renegotiated to 16bp from month 7 the year earns £900,000 and every later year earns £800,000.
+
+**Failure points.** The proposal answers the RFP but not the trustees' real concern. A due diligence answer is out of date. The consultant rates a competitor more highly. Legal terms take months. Funding slips into the next financial year. Each of these is ordinary, and several are affected by how carefully the junior work was done.
+
+### Case B: a £1 billion client considering withdrawal
+
+**Client problem.** The fictional Northmoor Staff Pension Fund has £1 billion in a multi-asset mandate at 15bp. *[Illustrative example]* Its funding level has improved and the trustees are considering buying annuities from an insurer for part of their liabilities, which would mean taking money out.
+
+**Discovery.** The relationship manager's first task is to find out what is driving the review. Is it the endgame plan, performance, cost, a new consultant or a change of trustee chair? The answers lead to different honest responses.
+
+**Internal collaboration.** Portfolio managers explain performance and what the portfolio could look like if the scheme's needs change. A solutions specialist can model a lower-risk version. Senior management decides whether any fee change is on offer.
+
+**Proposal.** There are three possible positions. One is to show the trustees information that genuinely changes the decision, if any exists. A second is to redesign the mandate to fit the new objective, which may mean a smaller or cheaper mandate. The third is to accept that withdrawal is right for the members and to make the exit orderly. Chapter 7 discusses why the third is sometimes the correct professional answer.
+
+**Due diligence, negotiation, onboarding and funding in reverse.** A withdrawal has its own process: notice under the agreement, a transition plan, sale or transfer of assets, final reporting and fee reconciliation. Done well, it is the last impression the client keeps.
+
+**What the junior person produces.** A timeline of the relationship and every commitment made. An accurate performance and fee history. A note of each trustee meeting. If the client leaves, a transition checklist.
+
+<!-- DATA:case:£1bn client considering withdrawal -->
+
+**Reading the results.** If the client stays, two years earn £3 million. *[Illustrative example]* If it withdraws £400 million in month 7, the monthly fee falls from £125,000 to £75,000 and two years earn £2.1 million. If it leaves entirely in month 7, the total is £750,000 and the second year earns nothing. The £2.25 million difference between staying and leaving is revenue that was at risk, not revenue that was created.
+
+**Failure points.** Learning about the review from the consultant instead of from the client. Defending performance when the real issue is the endgame. Offering a fee cut that does not address the reason for leaving. Arguing against a decision that is plainly in the members' interest, which costs credibility with the trustees and with their adviser.
+
+### Case C: a relationship growing from £300 million to £600 million
+
+**Client problem.** The fictional Calder Foundation, an endowment, holds £300 million in a global credit mandate. After a strategy review its investment committee wants to move another £300 million out of cash and passive bonds.
+
+**Discovery.** The question is what the additional money is for. If it has the same objective as the existing mandate, the mandate can simply grow. If it has a different purpose, it may need a different strategy, or a different manager.
+
+**Internal collaboration and proposal.** The portfolio managers confirm the strategy has capacity. The coverage lead prepares a proposal for the enlarged mandate, including the fee schedule that would apply. Concentration matters to the client too: a committee may not want half its assets with one firm, and saying so first is better than waiting to be asked.
+
+**Negotiation.** Larger size is the client's strongest argument on price. A tiered schedule is the usual answer.
+
+**Onboarding and funding.** An amendment to the existing agreement, then the transfer.
+
+**What the junior person produces.** A comparison of the client's current and proposed allocation. A fee illustration under each schedule, checked line by line. An updated account plan.
+
+<!-- DATA:case:Relationship expanding from £300m to £600m -->
+
+**Reading the results.** At a flat 22bp, £300 million earns £660,000 a year and £600 million earns £1.32 million: double the assets, double the fee. *[Illustrative example]* Under the tiered schedule (25bp on the first £250 million, 20bp on the next £250 million, 15bp above) £300 million earns £725,000 a year, an effective 24.2bp, and £600 million earns £1.275 million, an effective 21.25bp. Assets doubled and the fee rose by 76%. Over the two years shown, the flat schedule totals £2.31 million and the tiered one £2.275 million.
+
+**Failure points.** Treating the expansion as won before the committee has voted. Proposing more of the same when the new money has a different job. Fee illustrations that do not reconcile to the agreement.
+
+### Case D: a wealth intermediary adds a fund to its approved list
+
+**Client problem.** The fictional Fenwick Vale Wealth is a discretionary wealth manager with several hundred advisers. Its fund research team wants an additional global bond fund for its model portfolios.
+
+**Discovery.** The first audience is the fund selector, sometimes called the gatekeeper. The sales person needs to know the selection criteria, which funds are already on the list, how the investment committee works, which platforms the firm uses and which share classes those platforms carry.
+
+**Internal collaboration and proposal.** A product specialist and, at the right moment, the portfolio manager present the fund. The fund has to be available on the intermediary's platforms at an acceptable share class, which is an operational task, not a sales one.
+
+**Due diligence.** The research team completes its own review and takes the fund to committee.
+
+**Appointment.** The fund is added to the approved list. This is permission for advisers and portfolio managers to buy it. It is not a purchase.
+
+**Funding.** Money arrives adviser by adviser and portfolio by portfolio. That needs a second campaign: explaining the fund to the people who actually allocate.
+
+**Ongoing coverage.** Regular updates to the research team, because a fund can be removed from the list as easily as it was added.
+
+**What the junior person produces.** A profile of the intermediary and its existing list. A pack of fund materials checked for the right jurisdiction and share class. A log of which advisers have been briefed. A monthly flow report by intermediary.
+
+<!-- DATA:case:Wealth intermediary adds a fund to its approved list -->
+
+**Reading the results.** In the adoption case, flows begin in month 5 at £4 million a month and the fund charges 60bp. *[Illustrative example]* Year one earns £72,000 on an average balance of £12 million. Year two earns £348,000 and year three £636,000, by which time £128 million is invested. In the second case the fund is approved and nobody uses it: three years, no assets, no fee. On the day of approval the two cases look identical.
+
+**Failure points.** The fund is approved but missing from the platform the advisers use. The research team is convinced and the advisers never hear about it. Performance dips in the first year and the fund is put "on watch". The gatekeeper who championed it moves firm.
+
+### Case E: three different business models
+
+The last group puts an OCIO appointment, a liquidity balance and a private markets commitment side by side, because each earns money on a different basis.
+
+**OCIO.** The fictional Wexcombe Group Pension Scheme has £2 billion of assets and a small in-house team. The trustees appoint a provider to run the whole portfolio within a strategy they set. Discovery here is long and involves the trustees, the sponsor and an independent adviser running the tender. The proposal covers strategy advice, manager selection, hedging, reporting and governance. Due diligence examines conflicts of interest closely, since the provider may place money in its own funds. The fee is charged on total assets at a low rate, and underlying managers' fees are normally separate. In the illustration, 10bp on the first £1 billion and 6bp above gives £1.6 million a year, an effective 8bp. *[Illustrative example]* Staff transfers, as at BAE Systems, appear only in the largest public cases and are not a standard feature. [R7-S01] [R7-S04]
+
+**Liquidity.** The fictional Dunmore Industries keeps £750 million of operating cash in a money market fund at 10bp. *[Illustrative example]* In month 4 it redeems £500 million to pay for an acquisition. The decision has nothing to do with service or performance: the cash had a job to do. The year earns £375,000, half of what the opening balance implied. Coverage in this business is about understanding the treasurer's cash cycle, daily dealing and operational reliability. Balances can leave in a day.
+
+**Private markets.** The fictional Aldbury Family Office commits £100 million to a closed-end fund. If the fee is 100bp on *committed* capital, year one earns £1 million whatever has been drawn. If the fee is 100bp on *invested* capital, with 30% drawn at the start and the rest in month 7, year one earns £650,000. *[Illustrative example]* The commitment is identical. The fee base is a term of the fund, and Goldman's own policy lists both bases as in use. [R2-S01] Using NAV by default would be wrong for either structure, because NAV also moves with valuations.
+
+<!-- DATA:case:Different business models -->
+
+**What the junior person produces across these.** For OCIO, large sections of a tender response and, after appointment, trustee reporting packs. For liquidity, daily balance and flow reports and operational queries resolved the same day. For private markets, subscription document tracking, capital call notices checked against commitments, and a schedule showing which commitments have started to pay fees.
+
+**Failure points.** OCIO: a conflict that was not disclosed clearly, or a transition that goes badly in the first quarter. Liquidity: a dealing error or a missed cut-off. Private markets: telling a client or a colleague that a commitment is "revenue" before it is drawn, under a fee base that charges on invested capital.
+
+## 4. What this chapter lets you say, and not say
+
+- You can explain how £500 million at 20bp becomes £1 million, and what timing, markets, withdrawals, breakpoints and renegotiation each do to that number.
+- You can distinguish a launch, a target, a commitment, an award and funded assets, with a real example of each.
+- You can describe Goldman's disclosures accurately: three segments, AWM at 28.6% of 2025 net revenues, Asset Management at 11.6%, $4,097 billion of AUS at 30 September 2026, and no figures at all for the Client Solutions Group.
+- You should not quote an effective fee rate as a price, attribute any mandate to a team or person, or describe retained fees as new revenue.
+
+
+> **[Check your understanding]**
+>
+> 1. A press release says a sovereign fund will "target $25 billion" of commitments. Name three things that must happen before any of it earns a management fee.
+> 2. A £500 million mandate at 20bp is funded half in month 1 and half in month 7. What is the first-year fee, and why is it not £1 million?
+> 3. Why is Goldman's 17bp average effective fee for fixed income not evidence of what a UK pension scheme pays?
+> 4. A £300 million mandate doubles under a tiered schedule and the fee rises by 76%. Explain the gap.
+> 5. Give one reason a client leaving can be the right outcome, and say what good work looks like in that case.
+> 6. Which two lines of AWM revenue are not fees for managing client assets?
+> 7. A fund is added to a wealth manager's approved list. What has to happen next, and who has to do it?
+
+
+---
+
 # Sales versus relationship management: what actually differs
 
 ## How to read this chapter
@@ -821,7 +1869,11 @@ The tables below split the comparison into groups so they stay readable. "Where 
 | Progression | Larger territories, bigger prospects, team leadership | Larger or more complex clients, senior client director roles, team leadership | People move between the two, and senior roles usually combine them |
 | Compensation | See the evidence note below | See the evidence note below | Depends on firm, seniority and credit rules |
 
-<!-- COMPENSATION-EVIDENCE -->
+**Compensation evidence.** *[Layer A · verified fact]* London pay for these roles is not publicly established. Goldman Sachs's London, Frankfurt, Paris and Dubai listings leave the salary field empty [R1-S02][R1-S01]. *[Verified]* The only figures for London come from the former intern's call: an analyst base of £52,000 on the sales side and £48,000 on the relationship side, with a larger bonus in sales and a gap that widens with seniority [R1-S41]. *[Unverified account]* That is one person's account of one year, and second-hand for any seat other than his own.
+
+Two official reference points exist, both from the United States, where pay-transparency rules require disclosure: a New York CSG Management & Strategy analyst listing shows a base range of $85,000 to $110,000, and a CSG business-strategy vice-president listing shows $125,000 to $250,000 [R1-S13][R1-S30]. *[Verified]* Neither is a client-facing role and neither is in London. A Chicago listing for the US adviser channel describes "a commission based role in addition to the base salary" [R1-S12] *[Verified]*, which shows that pay structure varies by channel. Nothing public shows how London institutional or Third Party Wealth roles are paid. Self-reported salary websites could not be read and do not separate asset-management sales from relationship management.
+
+*[Layer B · interpretation]* So the reported £4,000 gap may be accurate, but it cannot be checked, and it should not be quoted in an interview or used to rank the two roles. The fuller table of sources and their reliability is in the People and recruitment chapter.
 
 
 > **[Limits and caveats: Reading compensation claims]**
@@ -2281,6 +3333,65 @@ An honest statement of what I want to explore is preferable to an invented lifel
 
 ---
 
+# Acceptance test, open questions and limits
+
+This chapter holds the project to its own standard. It answers the nine acceptance questions from the brief, lists what is still unresolved, and shows topic by topic what was investigated and what was not.
+
+## The nine acceptance questions
+
+Each answer says where the evidence is and where the project falls short. "Yes" is only claimed where you can check it yourself by doing the test described.
+
+| Question | Honest answer | How to check it yourself |
+|---|---|---|
+| Can a beginner explain the business without memorising jargon? | The material is there: chapter 1 teaches each idea from first principles before any acronym is used, and the glossary defines every term in plain English. Whether you can explain it is a test only you can run | Close the file and explain to someone outside finance how a pension scheme's money reaches an asset manager and how the manager is paid |
+| Can the reader distinguish sales, relationship management and adjacent roles without oversimplifying? | Yes for the general industry picture (chapters 2 and 6, role comparison). For Goldman specifically, the published evidence shows the labels overlap, and the internal split is not public | Compare any two roles in the Role comparison view and say what each can decide alone |
+| Can the reader connect a junior task to a client outcome and a commercial consequence? | Yes. Every lifecycle stage lists what the junior person produces and what good execution changes, and the sample work products show the documents | Pick the meeting preparation note in chapter 7 and trace it to the mandate's fee in the calculator |
+| Are the organisational claims, people and mandates supported, not invented? | Supported where sources exist, and marked where they do not. Several posts have no publicly established holder, and no mandate is attributed to a London team because no source does so | Open any team, person or mandate and follow its source link |
+| Can every statement about trust, relationships, value or passion be translated into an action, a difficult choice or a concrete preference? | Chapter 7 ends with a translation table that does this word by word. Passion is deliberately not asserted anywhere | Take any sentence containing "trust" in your own draft answers and replace it using the table |
+| Can the motivation arguments withstand repeated questioning without becoming circular? | The nine why-trees are built so that each question challenges the previous answer and each tree ends in a stated preference, assumption or uncertainty. Your own answers are untested until you give them | Answer each level aloud before opening it. Note where you repeat yourself |
+| Does the material distinguish a strong business argument from evidence of personal fit? | Yes, structurally. Layer B and Layer C are labelled apart, and the personal ledger is empty by design | Check that nothing in your answers uses "the role is valuable" as proof that you would enjoy it |
+| Does it explain when a client should not buy, when a mandate should shrink and when a different career might fit better? | Yes: chapter 7 on when a relationship should end, the withdrawal cases in chapter 5, and the "different role" signal at the end of each why-tree | Find the three passages and summarise each in two sentences |
+| Do the dossier, website and PDF agree, and are their limits explicit? | They are generated from the same files by one script, so they cannot drift apart. Limits are stated in chapter 0 and below | Run `python3 build/build.py --pdf` and compare any entity ID across the three outputs |
+
+## What was verified, and what stayed open
+
+The audit of the former intern's account, claim by claim:
+
+<!-- DATA:intern-claims -->
+
+## Research coverage register
+
+Each row is a topic from the brief. "Complete" means the planned sources were read. "Partial" means some evidence was found and more exists. "Searched, not established" means it was looked for and not found in public sources. "Not investigated" means nobody has looked yet.
+
+<!-- DATA:coverage-register -->
+
+## Open questions worth resolving before an interview
+
+These are the gaps most likely to matter in conversation, with the fastest way to close each.
+
+1. **The current London listing.** The exact 2027 London listing carried only programme-wide wording when it was read on a mirror, and it was no longer among the live campus listings on 14 November 2026 [R1-S03]. Check your own application portal for the wording and any team information it shows you.
+2. **How Client Solutions Group and Client Coverage Group relate in London.** Both names are real. Their reporting relationship is not published. A neutral question to ask an interviewer: "How do the sales and client coverage roles divide the work on your team?"
+3. **Who leads UK institutional coverage and UK & Ireland third-party wealth today.** Neither post has a publicly established current holder. A departure from the EMEA third-party wealth leadership was reported in April 2026, with no successor found in public sources.
+4. **Which OCIO award the former intern saw.** Two 2026 awards fit. Do not name one as fact.
+5. **Analyst pay.** The two figures in the starting account have no public support. Do not build any argument on them.
+6. **The interview format this cycle.** Goldman publishes the general shape of its process. Whether this team's final round is in person, and what it asks about AI, is not established. Prepare for both.
+
+## Limits of this project
+
+- **It is not exhaustive.** The people directory is a sample of publicly visible professionals. The mandates register holds what was found in the time and search allowance available. Neither should be described as complete.
+- **It is dated.** Every figure is correct to the date beside it. The rates backdrop changed in the week before the cutoff, which shows how quickly a commercial-awareness point can go stale.
+- **It contains interpretation.** Layer B passages are arguments. A well-informed interviewer may disagree with some of them, and a reasoned disagreement is a good conversation to have.
+- **It cannot assess you.** Practice scores are self-assessed against a proposed framework. Goldman Sachs has not published scoring criteria, and nobody outside the firm knows the questions.
+- **It was partly written by automated research and drafting.** Every claim carries a source or a label so that you can check it. Open the source for anything you intend to say aloud.
+
+## What was tested
+
+The application and PDF were checked by an automated script and by inspecting rendered pages. The README lists every check and its result. In brief: navigation, search, filters, expandable sections, the fee calculator's arithmetic against an independent implementation, keyboard access, mobile layout, reduced-motion behaviour, and that the file makes no network requests. The PDF was rendered and its pages inspected for clipped text and broken tables.
+
+No part of this project has been published or hosted. The HTML file is a local file. If you choose to share it, check the source register and the people directory first and decide what you are comfortable circulating.
+
+---
+
 # Appendix A: Teams and coverage
 
 ## Coverage matrix
@@ -2463,9 +3574,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Basis for that interpretation:** Named co-head with Kipling after NN IP acquisition
 - **Career history (public):** Chief client officer of NN Investment Partners before the acquisition
 - **Evidence date:** 2022-08-09
-- **Still in post at cutoff?:** No (left/moved)
+- **Still in post at cutoff?:** Unknown
 - **Classification confidence:** Low
-- **Notes:** Departure rests on an unverified crowd-sourced profile placing her at MN since 2025. Successor not established.
+- **Notes:** A departure is suggested only by an unverified crowd-sourced profile placing her elsewhere since 2025, which is too weak to record as a move; status left Unknown. Successor or current co-head not established.
 - **Sources:** R6-S05, R6-S35
 
 ### Ed Francis `P-R6-12`
@@ -3162,7 +4273,7 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Kind of event:** Fund commitment
 - **Strategy:** Separately managed account co-investing in private credit across Asia Pacific, with a focus on India; managed by Private Credit at Goldman Sachs Alternatives
 - **Amount as disclosed:** $1 billion
-- **What the amount measures:** Size of the separately managed account to be deployed over time ('long-term capital'), not drawn or fee-paying capital at signing
+- **What the amount measures:** Size of the separately managed account to be deployed over time ('long-term capital'), not drawn or fee-paying capital at signing. Classified as a commitment: capital promised to an account, to be invested over time.
 - **Stated rationale:** Mubadala building Asia Pacific private debt exposure; Goldman expanding its Asia credit platform
 - **Consultant involvement:** Not publicly disclosed
 - **Decision-makers:** Mubadala (Omar Eraiqat, Deputy CEO of Diversified Investments; Fabrizio Bocciardi, Head of Credit Investments)
@@ -3184,7 +4295,7 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Consultant involvement:** Not publicly disclosed
 - **Decision-makers:** PIF (Yazeed A. Al-Humied, Deputy Governor and Head of MENA Investments)
 - **Public attribution to a GS team:** Marc Nachmann named. No coverage team named.
-- **Notes:** An MoU is an intention, not a funded mandate. Subject to regulatory and internal approvals. No launched fund or close was found before the cutoff.
+- **Notes:** An MoU is an intention, not a funded mandate. Subject to regulatory and internal approvals. No launched fund or close was found before the cutoff. Classified as a partnership because it is a non-binding MoU with no amount: it is not a commitment, an awarded mandate or funded assets.
 - **Sources:** R7-S26, R7-S27
 
 ### Qatar Investment Authority (QIA) `M-R7-14`
@@ -3532,6 +4643,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **8 · Risks and counterarguments:** The Bank said the move should not be read as the start of a long run of rises, yet also that it is unlikely to be the last unless the Middle East conflict is resolved. Yields could fall back, reversing funding gains for unhedged schemes. A rate rise driven by an energy shock can hurt growth assets and sponsor covenants at the same time.
 - **A question to ask a client:** If gilt yields moved another 100 basis points in either direction, what would happen to your funding level and your collateral position, and who would have to act?
 - **Indicators to watch:** MPC decision on 17 December 2026; CPI prints; 10- and 30-year gilt yields; PPF 7800 monthly funding ratio.
+- **Base case:** Forecast, not fact: gilt yields stay high enough that most DB schemes remain in surplus on a low-dependency basis, so trustees' main questions are endgame choice, hedge ratio and collateral, not deficit repair.
+- **Plausible alternatives:** (1) Yields fall materially and under-hedged schemes lose part of their surplus. (2) A disorderly rise in yields forces collateral calls; post-2022 buffers are tested for the first time.
+- **Evidence that would change the view:** PPF 7800 funding ratio falling for several consecutive months; regulator statements about collateral buffers being drawn on; a client's own hedge ratio turning out lower than reported.
 - **Sources:** R3-S31, R3-S32, R3-S33
 
 ### DB schemes are in aggregate surplus and the buy-in market is busy but smaller in value `D-R3-02`
@@ -3553,6 +4667,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **8 · Risks and counterarguments:** The s179 measure is less demanding than buyout cost, so surplus on this basis does not mean every scheme can afford an insurer. Isio found fiduciary mandate numbers fell for the first time since 2008 as schemes exited through insurance.
 - **A question to ask a client:** Is your target buyout, run-on or still open, and which of your current holdings would be hardest to hand to an insurer?
 - **Indicators to watch:** Half-year bulk annuity volumes from LCP, Hymans Robertson and Aon; insurer pricing; PPF 7800.
+- **Base case:** Forecast, not fact: the number of buy-ins stays high and is dominated by small schemes, while more large, well-funded schemes actively compare run-on with buyout instead of treating buyout as the default.
+- **Plausible alternatives:** (1) Insurer pricing improves and large schemes transact quickly, shrinking the asset pool managers can serve. (2) Funding levels fall and endgame decisions are postponed.
+- **Evidence that would change the view:** Half-year bulk annuity volumes by deal size; the share of schemes telling surveys they target run-on; insurer capacity statements; movement in the PPF 7800 funding ratio.
 - **Sources:** R3-S29, R3-S30, R3-S27, R3-S28, R3-S25
 
 ### Pension Schemes Act 2026: DB surplus release and superfunds `D-R3-03`
@@ -3573,6 +4690,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **8 · Risks and counterarguments:** Detailed rules were not in force at the cutoff. Member representatives may resist releases. A future fall in yields or a credit event could remove the surplus after it has been paid out.
 - **A question to ask a client:** What would have to be true about funding, covenant and member protection before your trustees would agree to release any surplus?
 - **Indicators to watch:** DWP consultation and draft regulations on surplus; TPR guidance; first publicised surplus releases.
+- **Base case:** Forecast, not fact: surplus-release regulations arrive in 2027 and a minority of well-funded schemes with strong sponsors use them, with trustees asking for member protections first.
+- **Plausible alternatives:** (1) Trustees prove reluctant and release remains rare, so the Act changes little in practice. (2) Release becomes common and run-on turns into the mainstream choice for large schemes.
+- **Evidence that would change the view:** The final regulations and Pensions Regulator guidance; the first public examples of release and the conditions trustees attached; member-body or union challenges.
 - **Sources:** R3-S20
 
 ### Pension Schemes Act 2026 and Mansion House Accord: DC scale and private markets `D-R3-04`
@@ -3592,6 +4712,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **8 · Risks and counterarguments:** The Accord is voluntary and conditional on suitable assets. The reserve power had not been used. Higher-cost private assets must show value under the value-for-money framework. Scale targets may be met by a handful of incumbents, leaving little room for new managers.
 - **A question to ask a client:** How will you reach your private-market target inside your charge budget, and what would make you remove a manager from the default?
 - **Indicators to watch:** DWP regulations on scale and value for money; master trust mergers; LTAF launches; Accord progress reports.
+- **Base case:** Forecast, not fact: UK DC default money concentrates in a small number of very large providers that buy private-market exposure in bulk and on tight cost budgets.
+- **Plausible alternatives:** (1) The reserve power is used and allocations are mandated, which turns a voluntary target into a compliance exercise. (2) Private-market targets slip because suitable vehicles, daily-dealing mechanics or value-for-money evidence are lacking.
+- **Evidence that would change the view:** Any use of the reserve power; published progress against the Mansion House Accord; default-fund charges moving up or down; announced provider mergers.
 - **Sources:** R3-S20, R3-S23
 
 ### LGPS 'Fit for the Future': six pools and delegated implementation `D-R3-05`
@@ -3611,6 +4734,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **8 · Risks and counterarguments:** Full asset transfer is running behind the original March 2026 target. Internal management by pools reduces the external-manager opportunity. Whether GS holds LGPS mandates was not established.
 - **A question to ask a client:** Which capabilities do you intend to build in-house over the next three years, and where will you still want an external partner?
 - **Indicators to watch:** Pool onboarding progress; 31 March 2027 investment strategy statements; 30 September 2027 authorisation deadline; pool tenders.
+- **Base case:** Forecast, not fact: the six pools become the buyers that matter in the LGPS, bring more management in-house over time and keep fewer, larger external mandates for things they cannot run themselves.
+- **Plausible alternatives:** (1) Pools stay reliant on external managers for longer than planned because building internal teams is slow. (2) Further pool mergers reduce the number of buyers again.
+- **Evidence that would change the view:** Pool business plans and hiring; the share of assets managed internally; published mandate awards and terminations; progress of asset transfers.
 - **Sources:** R3-S21, R3-S22
 
 ### OCIO moves up-market while the UK fiduciary market total stays flat `D-R3-06`
@@ -3631,6 +4757,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **8 · Risks and counterarguments:** The pool of schemes shrinks as they buy out. Concentration risk in a few large clients. Conflict-of-interest scrutiny when an OCIO allocates to in-house products. Other providers also win awards and mandates (Shell's Dutch fund chose BlackRock; the 2026 UK Pensions Awards fiduciary category went to Van Lanschot Kempen).
 - **A question to ask a client:** Which decisions do you want to keep, which do you want to delegate, and how would you get them back if you changed your mind?
 - **Indicators to watch:** Isio's next fiduciary management survey; further large in-house teams outsourcing; mandate re-tenders.
+- **Base case:** Forecast, not fact: a small number of very large sponsors continue to outsource whole pension investment functions, and those few decisions drive most asset growth in the market.
+- **Plausible alternatives:** (1) The supply of very large schemes willing to outsource runs out and growth stalls. (2) Sponsors choose insurance buyout over OCIO once pricing allows.
+- **Evidence that would change the view:** New multi-billion appointments and who wins them; the next Isio or IC Select survey; whether in-house teams transfer or are wound down; published fee data.
 - **Sources:** R3-S01, R3-S04, R3-S07, R3-S09, R3-S25, R3-S14
 
 ### Fiduciary manager tendering rules shape every OCIO sale `D-R3-07`
@@ -3680,7 +4809,11 @@ Public professional information only. Titles are as publicly stated on the evide
   - Switzerland
   - Benelux
   - Nordics
-- **Event date:** 2025-01 to 2026-04
+  - Germany/Austria
+  - France
+  - Italy
+  - Iberia
+- **Event date:** January 2025 to 24 April 2026
 - **Publication date:** 2026-04-24
 - **1 · What happened:** GSAM launched its first European active UCITS ETFs in January 2025 (fixed income), an active equity range from 28 April 2025 (GQUS at 0.20% TER) and two more active fixed income ETFs on 24 April 2026. It says it launched 13 active ETFs in 2025 and has about $90bn of ETF assets globally.
 - **2 · How it affects the client:** Wealth managers and model-portfolio builders can hold an active strategy in a wrapper that trades intraday, is easy to use on platforms and typically costs less than the equivalent mutual fund share class.
@@ -3692,6 +4825,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **8 · Risks and counterarguments:** Cannibalisation of higher-fee share classes; UK platform support for ETFs (fractional dealing, trading charges) is uneven; a low TER leaves little margin; low tracking error means outperformance, if any, is small.
 - **A question to ask a client:** Where an active ETF and a fund share class of the same strategy both exist, which would your portfolio process choose, and what on your platform decides that?
 - **Indicators to watch:** European active ETF assets and flows; number of GS UCITS ETFs and their assets; whether UK platforms add ETF model portfolio functionality; TER moves by competitors.
+- **Base case:** Forecast, not fact: active ETFs keep taking share of new money in European wealth portfolios from a small base, mainly in low-tracking-error building blocks used by model-portfolio teams.
+- **Plausible alternatives:** (1) UK platform frictions keep adoption low in the UK even as it grows on the continent. (2) Fee competition among issuers pushes charges down until the wrapper is no cheaper to run than a fund share class is worth.
+- **Evidence that would change the view:** Quarterly European active ETF asset and flow data; UK platforms changing ETF dealing terms; concentration of share among issuers; evidence of fund-to-ETF switching in the same strategy.
 - **Sources:** R4-S01, R4-S17, R4-S38
 
 ### Evergreen private-markets funds and ELTIF 2.0 reach the wealth channel `D-R4-02`
@@ -3703,7 +4839,11 @@ Public professional information only. Titles are as publicly stated on the evide
   - Benelux
   - Nordics
   - Middle East
-- **Event date:** 2023-07 to 2026-03
+  - Germany/Austria
+  - France
+  - Italy
+  - Iberia
+- **Event date:** July 2023 to 11 March 2026
 - **Publication date:** 2026-03-11
 - **1 · What happened:** Goldman Sachs Alternatives built a 'G-Series' of open-ended private-markets funds for qualified investors (G-PE launched 2 April 2025) and on 11 March 2026 added an ELTIF range starting with the G-European Credit ELTIF, its first evergreen product under ELTIF 2.0. G-Series funds are sold through GS Private Wealth Management and select third-party distributors.
 - **2 · How it affects the client:** Private banks and wealth managers can offer private equity, private credit and infrastructure to eligible individuals with periodic subscriptions and limited redemptions instead of ten-year drawdown funds.
@@ -3715,6 +4855,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **8 · Risks and counterarguments:** Liquidity mismatch if many investors redeem together; valuation opacity; higher fees; suitability risk under the Consumer Duty; UK retail access differs from the EEA (ELTIF is an EEA label).
 - **A question to ask a client:** What share of a typical client portfolio could you put in assets that can only be redeemed quarterly, and who in your firm signs that off?
 - **Indicators to watch:** G-Series assets if disclosed; redemption requests across the semi-liquid sector; FCA and ESMA statements on semi-liquid funds; number of distributors named in GS releases.
+- **Base case:** Forecast, not fact: evergreen private-market funds keep growing in the wealth channel, but gatekeepers ration them with small position limits and scrutinise liquidity terms more closely after 2026 redemption pressure.
+- **Plausible alternatives:** (1) A visible gating episode damages adviser confidence and flows reverse. (2) Regulatory change widens access and semi-liquid funds become standard in model portfolios.
+- **Evidence that would change the view:** Redemption queues or gates in large funds; regulator statements on suitability; net flows reported by the largest wealth-channel private-market managers; adoption of ELTIF 2.0 vehicles by distributors.
 - **Sources:** R4-S18, R4-S19, R4-S20, R4-S21
 
 ### UK product disclosure is rewritten: Consumer Composite Investments regime `D-R4-03`
@@ -3791,6 +4934,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **8 · Risks and counterarguments:** Fee cuts reduce revenue on assets already held; cheapest is not always best value; a manager's own value assessment is not independent evidence.
 - **A question to ask a client:** When you last reviewed value across your buy list, what made a fund fail?
 - **Indicators to watch:** FCA Consumer Duty reviews; published assessment-of-value outcomes; ETF TERs (GS active ETFs at 0.20%-0.25% are data points).
+- **Base case:** Forecast, not fact: value scrutiny remains a standing part of fund selection, so price and evidence of what a fee buys are tested at every review, not only at launch.
+- **Plausible alternatives:** (1) Scrutiny hardens into explicit cost caps in model portfolios, which favours index funds. (2) Regulatory attention moves elsewhere and practice settles into a documentation routine.
+- **Evidence that would change the view:** FCA supervisory findings on fair value; distributors publishing cost budgets; share-class repricing announcements; the share of buy-list removals attributed to value.
 - **Sources:** R4-S31, R4-S32, R4-S01
 
 ### Fund tokenisation rules finalised in the UK `D-R4-07`
@@ -3818,8 +4964,8 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Evidence status:** Supported inference
 - **Teams:** 
   - Third Party Wealth
-- **Event date:** Not publicly disclosed
-- **Publication date:** Not publicly disclosed
+- **Event date:** Date not established (figure seen in a search result only)
+- **Publication date:** Not established
 - **1 · What happened:** A wealth manager's commentary reports the UK model portfolio service (MPS) market at about £190bn, up 32% year on year. More adviser money is run through centrally built model portfolios.
 - **2 · How it affects the client:** Advisers outsource fund selection to a discretionary manager's model, so one investment team's decision moves money for thousands of end clients.
 - **3 · What decision changes:** The decision moves from many individual advisers to a small number of MPS investment committees with tight cost budgets.
@@ -3885,7 +5031,7 @@ Public professional information only. Titles are as publicly stated on the evide
 - **6 · Sales responsibility:** For a candidate: know who publicly leads the channel globally and do not name an EMEA head without checking for a newer announcement.
 - **7 · Relationship-management responsibility:** Shows why relationship knowledge has to sit with the institution, not one person.
 - **8 · Risks and counterarguments:** Destination reported by trade press, not confirmed by either firm in sources read; a successor may have been announced after the searches run here.
-- **A question to ask a client:** Not a client question.
+- **A question to ask a client:** Not a reason to ask a client anything. If a client raises it: "What would you want to stay the same in how we cover you while the team changes?"
 - **Indicators to watch:** Any GSAM announcement naming a new EMEA TPW head; changes to country heads.
 - **Sources:** R4-S02, R4-S03, R4-S04
 
@@ -3907,6 +5053,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **8 · Risks and counterarguments:** The January 2026 wave passed calmly, so the 'forced selling' story may be overdone; estimates of future hedge reduction come from interested parties and carry wide uncertainty. Some funds keep higher hedging than the market expected. Many Dutch funds delegate to fiduciary managers, so the real buyer may be the fiduciary, not the fund.
 - **A question to ask a client:** Which of your age cohorts will hold less interest-rate hedging after conversion, and what will replace it in their return portfolio?
 - **Indicators to watch:** DNB quarterly counts of converted funds and assets; conversion dates of the largest remaining funds; long-end euro swap spreads around 1 January 2027 and 2028; insurer demand for long duration ahead of January 2027 Solvency II changes.
+- **Base case:** Forecast, not fact: the remaining Dutch funds convert on or before 1 January 2028 and hedging demand at the long end falls gradually, cohort by cohort, with return portfolios redesigned as they go.
+- **Plausible alternatives:** (1) Conversions are delayed and the old system's hedging persists longer. (2) Several large funds reduce hedges at the same time and long-dated euro rates move sharply.
+- **Evidence that would change the view:** The number and size of funds converting on 1 January 2027; the Dutch central bank's transition reporting; long-dated euro swap rates around conversion dates; funds' published lifecycle designs.
 - **Sources:** R5-S35, R5-S36, R5-S37
 
 ### UK and EU money market fund rules: higher expected liquidity, no forced fees or gates `D-R5-02`
@@ -3928,6 +5077,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **8 · Risks and counterarguments:** Final FCA rules were not published at the cutoff, and the equivalence decision could attach conditions. Balances are driven far more by interest rates and bank deposit pricing than by regulation. Fees are thin, so a small yield difference moves large balances quickly in either direction.
 - **A question to ask a client:** Does your treasury policy still refer to liquidity fees and redemption gates as triggers, and how would you want your cash split if stable-value funds yield a little less?
 - **Indicators to watch:** FCA policy statement and interim guidance on weekly liquid assets; HM Treasury legislation; equivalence decision for EU MMFs (indicated for 2027); central bank rate path; industry sterling MMF assets.
+- **Base case:** Forecast, not fact: the UK replaces its inherited money market fund regulation with FCA rules on roughly the stated timetable, stable-value funds hold more weekly liquidity, and EU-domiciled funds stay available to UK investors.
+- **Plausible alternatives:** (1) The equivalence decision is delayed or conditional and UK investors face a narrower choice. (2) Higher liquidity requirements cut yields enough that treasurers move part of their cash to deposits or short-duration accounts.
+- **Evidence that would change the view:** The final FCA rules; the Treasury's equivalence decision; the yield gap between stable-value funds and bank deposits; flows between fund types reported by trade bodies.
 - **Sources:** R5-S32, R5-S33, R5-S34, R5-S01
 
 ### Tokenised money market fund shares: collateral use, not yet a new product for treasurers `D-R5-03`
@@ -3956,6 +5108,9 @@ Public professional information only. Titles are as publicly stated on the evide
   - Insurance
   - Benelux
   - Nordics
+  - Germany/Austria
+  - France
+  - Italy
 - **Event date:** EU: 30 January 2027; UK consultation 8 April 2025
 - **Publication date:** 2025-04-08
 - **1 · What happened:** Amended EU Solvency II rules (Directive (EU) 2025/2) take effect on 30 January 2027. In the UK, the PRA consulted in April 2025 on a Matching Adjustment Investment Accelerator that lets insurers add self-assessed eligible assets to matching-adjustment portfolios before formal approval, within the lower of 5% of liabilities or GBP 2bn and a 24-month regularisation window.
@@ -3968,6 +5123,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **8 · Risks and counterarguments:** The final UK policy statement and the detailed EU changes were not read in this research, so details must be checked before quoting. Regulators are also wary of private-asset concentration at annuity writers. Survey intentions to raise private assets may not turn into allocations.
 - **A question to ask a client:** Which assets in your portfolio become more or less capital-efficient under the January 2027 rules?
 - **Indicators to watch:** PRA policy statement on the accelerator; EIOPA and Commission delegated acts before January 2027; insurers' reported private-asset allocations.
+- **Base case:** Forecast, not fact: capital rules in the EU and UK move modestly in the direction of making long-dated and private assets easier for insurers to hold, and insurers add them selectively.
+- **Plausible alternatives:** (1) Supervisors tighten their stance on private-asset concentration at annuity writers and allocations stall. (2) A credit event makes insurers pull back regardless of the rules.
+- **Evidence that would change the view:** The final UK policy statement and EU delegated rules; supervisory letters on private assets; insurers' reported allocations a year after survey intentions; credit losses in asset-backed finance.
 - **Sources:** R5-S38, R5-S39, R5-S02
 
 ### Insurers say they will keep adding private assets (GSAM Global Insurance Survey 2026) `D-R5-05`
@@ -4006,6 +5164,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **8 · Risks and counterarguments:** The office openings are firm-wide; public sources do not say which house asset-management client coverage. A 2027 Dubai CSG student role is listed, so not all Middle East coverage sits in London. Concentration risk: a handful of clients, whose priorities can shift with oil revenue and domestic spending plans.
 - **A question to ask a client:** How do you weigh a manager's local presence against its global investment platform when you award a strategic mandate?
 - **Indicators to watch:** Further local licences and hires; announced sovereign partnerships; oil price and Gulf fiscal balances; domestic-investment mandates of sovereign funds.
+- **Base case:** Forecast, not fact: Gulf sovereign investors continue to reward managers that are licensed, staffed and investing locally, and prefer partnerships and co-investment to buying funds.
+- **Plausible alternatives:** (1) Lower energy revenues or domestic spending needs reduce the capital available to external managers. (2) Regional conflict or policy change makes local presence harder to sustain.
+- **Evidence that would change the view:** Oil-price-driven changes to fund deployment plans; announced partnerships and whether they are funded; licensing and headcount announcements; public statements by the funds about external-manager use.
 - **Sources:** R5-S04, R5-S28, R5-S29, R5-S30, R5-S31, R5-S18
 
 ### Policy rates are rising again: Bank Rate up to 4% in November 2026 `D-R8-01`
@@ -4030,6 +5191,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **8 · Risks and counterarguments:** The inflation projection may prove wrong and policy could reverse; schemes that are well hedged may need to do nothing; higher cash yields compete with every fee-bearing product.
 - **A question to ask a client:** How did your funding level and collateral headroom move this month, and has that changed your timetable or your liquidity needs?
 - **Indicators to watch:** 17 December 2026 MPC; gilt yields and index-linked breakevens; CPI prints; any LDI collateral stress reports.
+- **Base case:** Forecast, not fact: policy rates stay at or above current levels into 2027 while UK inflation runs above target, so cash and short bonds keep paying a visible yield and every other asset is judged against that.
+- **Plausible alternatives:** (1) Inflation falls faster than the Bank projects and rates are cut again, which lowers cash yields and raises liability values. (2) A sharper rise in long gilt yields that tests LDI collateral and semi-liquid funds at the same time.
+- **Evidence that would change the view:** A Bank of England vote split moving towards cuts; UK CPI prints well below the projected path; long gilt yields falling back below 4.5%; evidence that LDI collateral buffers were drawn on.
 - **Sources:** R8-S49, R8-S50, R8-S51
 
 ### Nuveen completes £9.9bn acquisition of Schroders `D-R8-02`
@@ -4090,6 +5254,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **8 · Risks and counterarguments:** Fees are observable and value is not, so pressure is structural; for small UK schemes fiduciary fees have actually risen, so the trend is not uniform.
 - **A question to ask a client:** When you last reviewed what you pay us, what did you compare it with, and what would you need to see to judge it good value?
 - **Indicators to watch:** Morningstar and BCG annual fee studies; UK value-for-money framework for DC; consultant fee surveys.
+- **Base case:** Forecast, not fact: average fee rates keep drifting down and revenue growth keeps depending on markets and on mix shifting towards higher-fee private assets.
+- **Plausible alternatives:** (1) A prolonged market fall exposes cost bases built in rising markets and accelerates consolidation. (2) Fee rates stabilise as product mix moves to alternatives and solutions.
+- **Evidence that would change the view:** Published average fee rates by asset class in managers' filings; fee surveys in fiduciary management and funds; industry cost-to-income ratios; the pace of mergers.
 - **Sources:** R8-S38, R8-S37, R8-S10
 
 ### AI moves into RFPs, meeting notes and reporting in distribution teams `D-R8-05`
@@ -4109,6 +5276,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **8 · Risks and counterarguments:** Survey figures are self-reported and partly vendor-sponsored; errors in AI-drafted answers create liability; no evidence yet on junior hiring effects; BCG's 25-35% cost-saving figure is an estimate.
 - **A question to ask a client:** What do you want to know about how we use AI in the material we send you, and where would you want a named person accountable?
 - **Indicators to watch:** Regulatory guidance on AI in client communications; Cerulli/Mercer follow-up surveys; reported headcount changes in distribution.
+- **Base case:** Forecast, not fact: AI becomes standard for first drafts of RFP answers, notes and routine reports, with a named person still accountable for what is sent to a client.
+- **Plausible alternatives:** (1) Adoption spreads to prospecting and client prioritisation, changing how coverage time is allocated. (2) An error in AI-drafted client material leads to regulatory or client pushback and tighter controls.
+- **Evidence that would change the view:** Survey data on adoption beyond drafting; regulator guidance on accountability for AI-assisted communications; firms' published policies; credible data on entry-level hiring in distribution.
 - **Sources:** R8-S41, R8-S42, R8-S10, R8-S38, R8-S43
 
 ### Private credit under strain: elevated redemptions in retail semi-liquid funds `D-R8-06`
@@ -4132,6 +5302,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **8 · Risks and counterarguments:** Stress is concentrated in particular funds and borrowers; private wealth inflows continue (Blackstone BXPE record quarter); the BoE judges households and corporates resilient in aggregate.
 - **A question to ask a client:** If you could not redeem for four quarters, would this allocation still be the right size for your clients?
 - **Indicators to watch:** BoE December 2026 FSR; redemption data from large evergreen funds; default rates; FCA/ESMA action on semi-liquid funds.
+- **Base case:** Forecast, not fact: stress stays concentrated in particular funds and borrowers while overall flows into private credit continue, and buyers ask harder questions about liquidity and valuation.
+- **Plausible alternatives:** (1) Redemption limits spread and wealth-channel demand for semi-liquid funds falls sharply. (2) Rates stabilise, defaults stay contained and the episode is remembered as a liquidity test that the structures passed.
+- **Evidence that would change the view:** The next Bank of England Financial Stability Report; redemption request and fulfilment data from large funds; default and non-accrual rates; insurer and pension disclosures of private-credit marks.
 - **Sources:** R8-S52, R8-S34, R8-S53
 
 ### UK fiduciary management: fewer mandates, larger ones, falling fees at the top `D-R8-07`
@@ -4152,6 +5325,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **8 · Risks and counterarguments:** Goldman's UK share is not public; consultant-heritage providers hold about half of mandates by number; run-on with surplus release could slow buyouts (scenario).
 - **A question to ask a client:** Is your endgame buyout or run-on, and how should your fiduciary manager be paid in a way that does not reward delaying it?
 - **Indicators to watch:** Isio, IC Select, XPS and Quantum annual surveys; large mandate announcements; Pension Schemes Act surplus rules (see R3).
+- **Base case:** Forecast, not fact: the UK fiduciary market keeps growing in assets and shrinking in mandate count, with fee pressure concentrated in the largest mandates and continued provider consolidation.
+- **Plausible alternatives:** (1) Surplus-release rules make run-on attractive and extend mandate lives. (2) Faster buyouts shrink the market in assets as well as mandates.
+- **Evidence that would change the view:** Mandate numbers rising again; fee surveys showing stabilisation above £500m; regulatory action on conflicts where a fiduciary manager uses in-house funds; further provider exits.
 - **Sources:** R8-S10, R8-S09, R8-S11, R8-S26
 
 ### Public-private alliances and active ETFs reshape products for wealth intermediaries `D-R8-08`
@@ -4159,6 +5335,11 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Evidence status:** Supported inference
 - **Teams:** 
   - Third Party Wealth
+  - Switzerland
+  - Germany/Austria
+  - France
+  - Italy
+  - Iberia
 - **Event date:** 2026-07-22
 - **Publication date:** 2026-07-22
 - **1 · What happened:** Wellington, Vanguard and Blackstone launched two public-private funds (US, July 2026); Capital Group and KKR took a public-private credit fund to Europe and Asia-Pacific via HSBC Private Bank (May 2026); Goldman agreed a T. Rowe Price partnership (Sept 2025). European active ETF assets reached about EUR 117bn at end Q3 2026, with J.P. Morgan holding about 41%; passive ETFs took about 57% of Q3 2026 European fund flows.
@@ -4190,6 +5371,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **8 · Risks and counterarguments:** Regional conflict in 2026 has affected sentiment (BoE refers to the Middle East conflict); headline commitment figures are not funded assets; Goldman-specific Gulf evidence is outside this stream (see R5).
 - **A question to ask a client:** Beyond returns, what do you want a manager to build with you locally?
 - **Indicators to watch:** ADGM/DIFC/Riyadh licence announcements; sovereign fund annual reports; anchor mandates.
+- **Base case:** Forecast, not fact: competition among global managers for a handful of Gulf sovereign relationships intensifies, and local presence becomes a condition of entry instead of an advantage.
+- **Plausible alternatives:** (1) Sovereign funds build more capability in-house and use fewer external managers. (2) Headline commitments are announced but funded slowly, so the commercial value arrives later than the press suggests.
+- **Evidence that would change the view:** Funded amounts against announced targets; the number of managers licensed in Abu Dhabi and Riyadh; sovereign funds' own hiring; statements about fees or terms from the funds.
 - **Sources:** R8-S57, R8-S58, R8-S52
 
 ### Tokenised money market fund shares as collateral `D-R8-10`
@@ -4219,14 +5403,14 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Assets:** Above $15.5tn (reported $15.49tn)
 - **As at:** 2026-09-30
 - **Relevant to which client problem:** 
-  - Low-cost index and ETF exposure
-  - UK fiduciary management / OCIO
+  - Index and ETFs
+  - UK DB endgame and OCIO
   - LDI
   - Liquidity
-  - Insurance general accounts
-  - Private markets for institutions and wealth
-  - Gulf sovereign partnerships
-  - Risk technology (Aladdin)
+  - Insurance
+  - Private markets for wealth
+  - Sovereign investors
+  - Institutional active mandates
 - **Capabilities:** iShares ETFs ($135bn net inflows in Q3 2026); Aladdin technology; over $400bn/£300bn OCIO and fiduciary assets worldwide (31 Mar 2026); private markets built through GIP and HPS; most frequently named unaffiliated manager by US insurers.
 - **Recent events:** Appointed fiduciary manager of the £8bn British Coal Staff Superannuation Scheme (1 Jul 2026). Reported cut of about 1% of staff across investment and sales teams (Jan 2026). Reported plan to steer up to $100bn through a Gulf platform.
 - **Where it may be stronger than GSAM:** (Layer B) Index and ETF scale, technology sold to clients, a longer list of very large UK fiduciary mandates, and breadth of insurer relationships.
@@ -4239,10 +5423,10 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Assets:** $5.2tn AUM (segment, includes wealth management); standalone JPMAM figure not established
 - **As at:** 2026-09-30
 - **Relevant to which client problem:** 
-  - Active ETFs for wealth intermediaries
-  - Liquidity / money market funds
-  - Multi-asset and fixed income for institutions
-  - Insurance general accounts
+  - Wealth intermediaries
+  - Liquidity
+  - Institutional active mandates
+  - Insurance
 - **Capabilities:** Market leader in European active ETFs (about 40.8% share); large global liquidity business; bank-owned manager with a comparable 'one firm' structure.
 - **Recent events:** Segment AUM up 13% year on year at Q3 2026.
 - **Where it may be stronger than GSAM:** (Layer B) Active ETF franchise in Europe and a larger fund-distribution footprint with wealth intermediaries.
@@ -4255,10 +5439,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Assets:** $2.29tn, of which $1.90tn third-party
 - **As at:** 2026-09-30
 - **Relevant to which client problem:** 
-  - Active fixed income mandates
-  - Insurance general accounts
-  - LDI-adjacent credit
-  - Private credit and asset-based finance
+  - Institutional active mandates
+  - Insurance
+  - LDI
 - **Capabilities:** Fixed-income specialist owned by Allianz; 24 offices; named among leading unaffiliated insurance managers in the US.
 - **Recent events:** AUM slipped from $2.33tn at 30 Jun 2026 to $2.29tn at 30 Sep 2026 (firm documents, search results).
 - **Where it may be stronger than GSAM:** (Layer B) Brand and depth in active fixed income; the default shortlist name for a core bond mandate.
@@ -4271,9 +5454,8 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Assets:** $2,046bn
 - **As at:** 2026-09-30
 - **Relevant to which client problem:** 
-  - Active equity and fixed income
-  - Private markets
-  - Wealth-channel products
+  - Institutional active mandates
+  - Wealth intermediaries
 - **Capabilities:** Bank-owned manager with a very large affiliated wealth channel (firm client assets about $10.5tn across wealth and investment management).
 - **Recent events:** Investment Management revenue fell year on year in Q3 2026 on a reversal of accrued carried interest; firm cut about 3% of staff in March 2026.
 - **Where it may be stronger than GSAM:** (Layer B) Captive wealth distribution in the US.
@@ -4286,10 +5468,10 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Assets:** £867.8bn (Schroders, incl. JVs and associates); combined Nuveen-Schroders about $2.6tn
 - **As at:** 2026-06-30 (Schroders); 2026-10 (combined)
 - **Relevant to which client problem:** 
-  - UK DB fiduciary management
+  - UK DB endgame and OCIO
   - LDI
-  - UK wealth and charities (Cazenove)
-  - Private markets (Schroders Capital)
+  - Wealth intermediaries
+  - Institutional active mandates
   - Insurance
 - **Capabilities:** UK-rooted institutional franchise; Schroders Solutions provides fiduciary management and LDI; large UK wealth arm.
 - **Recent events:** £9.9bn acquisition announced 12 Feb 2026, completed early Oct 2026; London becomes the combined firm's non-US HQ; agreed sale of Benchmark advice business.
@@ -4303,9 +5485,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Assets:** Not publicly disclosed
 - **As at:** Not publicly disclosed
 - **Relevant to which client problem:** 
-  - UK workplace DC
-  - Wealth platforms and fund distribution
-  - Active equity
+  - UK DC and LGPS
+  - Wealth intermediaries
+  - Institutional active mandates
 - **Capabilities:** FutureWise UK DC default strategy above £25bn; direct platform and adviser distribution.
 - **Recent events:** Not established in this stream (searched once or not reached before the shared search budget ran out)
 - **Where it may be stronger than GSAM:** (Layer B) UK DC default and platform ownership.
@@ -4318,9 +5500,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Assets:** $3.6tn+
 - **As at:** 2026-06-30
 - **Relevant to which client problem:** 
-  - Active equity for wealth intermediaries
-  - Public-private solutions for wealth
-  - Gulf presence
+  - Wealth intermediaries
+  - Private markets for wealth
+  - Sovereign investors
 - **Capabilities:** Privately owned active manager; public-private funds with KKR (US, and since May 2026 Europe/Asia-Pacific via HSBC Private Bank); ADGM licence.
 - **Recent events:** Launched Capital Group KKR Global Multi-Sector+ for Europe and Asia-Pacific (May 2026).
 - **Where it may be stronger than GSAM:** (Layer B) Long-record active equity funds and private ownership (no quarterly earnings pressure).
@@ -4333,9 +5515,8 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Assets:** USD 354bn
 - **As at:** 2026-06-30
 - **Relevant to which client problem:** 
-  - Thematic and specialist equity for wealth intermediaries
-  - Emerging markets
-  - Swiss and European institutions
+  - Wealth intermediaries
+  - Institutional active mandates
 - **Capabilities:** Focused European manager: thematics, emerging markets, alternatives, multi-asset; partnership-owned group (group AUM or custody CHF 810bn).
 - **Recent events:** Record group client assets at H1 2026.
 - **Where it may be stronger than GSAM:** (Layer B) Thematic equity brand with European fund selectors and partnership ownership.
@@ -4348,9 +5529,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Assets:** More than $1.35tn
 - **As at:** 2026-04-30
 - **Relevant to which client problem:** 
-  - Sub-advisory and institutional active mandates
-  - Insurance general accounts
-  - Public-private solutions
+  - Institutional active mandates
+  - Insurance
+  - Private markets for wealth
 - **Capabilities:** Private partnership; sub-adviser to many fund ranges; among the most frequently named unaffiliated insurance managers in the US.
 - **Recent events:** Launched two public-private funds with Vanguard and Blackstone (22 Jul 2026); agreed to buy Hartford Funds for a reported $1.9bn.
 - **Where it may be stronger than GSAM:** (Layer B) Independent partnership with research-led active management and insurer relationships.
@@ -4363,9 +5544,8 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Assets:** $6,306bn
 - **As at:** 2026-09-30
 - **Relevant to which client problem:** 
-  - Low-cost index exposure
-  - ETFs (SPDR)
-  - Cash and securities-lending-linked solutions
+  - Index and ETFs
+  - Liquidity
 - **Capabilities:** Index and ETF scale; six consecutive quarters of organic net inflows reported at Q3 2026.
 - **Recent events:** Record AUM and ETF flows in Q3 2026.
 - **Where it may be stronger than GSAM:** (Layer B) Passive scale and pricing.
@@ -4379,9 +5559,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **As at:** 2026-06-30
 - **Relevant to which client problem:** 
   - LDI
-  - UK DB endgame and buyout pathway
-  - UK DC default
-  - Index
+  - UK DB endgame and OCIO
+  - UK DC and LGPS
+  - Index and ETFs
   - Liquidity
 - **Capabilities:** Largest UK-rooted institutional manager alongside BlackRock; LDI and index heritage; UK DC assets £236bn; sister insurance business writes bulk annuities.
 - **Recent events:** H1 2026: £25bn net outflows concentrated in lower-margin institutional mandates; private markets AUM £79bn.
@@ -4396,7 +5576,7 @@ Public professional information only. Titles are as publicly stated on the evide
 - **As at:** 2026 (date not captured)
 - **Relevant to which client problem:** 
   - LDI
-  - Buy-and-maintain credit
+  - Institutional active mandates
   - Liquidity
 - **Capabilities:** LDI and risk-management specialist (EUR 444.6bn at 31 Mar 2025); has registered as a fiduciary manager.
 - **Recent events:** Entered the fiduciary management register.
@@ -4411,7 +5591,7 @@ Public professional information only. Titles are as publicly stated on the evide
 - **As at:** Not publicly disclosed
 - **Relevant to which client problem:** 
   - LDI
-  - UK institutional
+  - Institutional active mandates
 - **Capabilities:** LDI provider; has exited fiduciary management.
 - **Recent events:** Exited the UK fiduciary management market (reported April 2026).
 - **Where it may be stronger than GSAM:** (Layer B) Not assessed.
@@ -4424,7 +5604,7 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Assets:** Not publicly disclosed
 - **As at:** Not publicly disclosed
 - **Relevant to which client problem:** 
-  - UK fiduciary management
+  - UK DB endgame and OCIO
   - Investment consulting (gatekeeper)
 - **Capabilities:** Consultant-heritage fiduciary manager; also an adviser that rates and selects managers such as Goldman Sachs.
 - **Recent events:** Not established in this stream (searched once or not reached before the shared search budget ran out)
@@ -4438,8 +5618,7 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Assets:** $669.9bn outsourced AUM (Chestnut, 2025 vintage)
 - **As at:** 2025
 - **Relevant to which client problem:** 
-  - UK fiduciary management
-  - Global OCIO
+  - UK DB endgame and OCIO
   - Investment consulting (gatekeeper)
 - **Capabilities:** Largest global OCIO by one 2025 survey; consultant heritage; added Cardano's UK fiduciary and LDI capability.
 - **Recent events:** Acquired Cardano and Secor Asset Management.
@@ -4453,7 +5632,7 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Assets:** Not publicly disclosed
 - **As at:** Not publicly disclosed
 - **Relevant to which client problem:** 
-  - UK fiduciary management
+  - UK DB endgame and OCIO
   - Investment consulting (gatekeeper)
 - **Capabilities:** Consultant-heritage fiduciary manager.
 - **Recent events:** Not established in this stream (searched once or not reached before the shared search budget ran out)
@@ -4467,9 +5646,8 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Assets:** $354.8bn outsourced AUM (Chestnut, 2025 vintage)
 - **As at:** 2025
 - **Relevant to which client problem:** 
-  - UK fiduciary management
-  - Global OCIO
-  - Multi-manager funds
+  - UK DB endgame and OCIO
+  - Wealth intermediaries
 - **Capabilities:** Multi-manager and implementation specialist.
 - **Recent events:** Pending change of ownership (reported).
 - **Where it may be stronger than GSAM:** (Layer B) Pure-play open-architecture positioning.
@@ -4482,7 +5660,7 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Assets:** Not publicly disclosed
 - **As at:** Not publicly disclosed
 - **Relevant to which client problem:** 
-  - UK and Dutch fiduciary management
+  - UK DB endgame and OCIO
 - **Capabilities:** Dutch fiduciary manager active in UK DB; cites the £2-5bn scheme segment.
 - **Recent events:** Selected by Holcim Group for a £2.5bn fiduciary mandate (Jan 2026).
 - **Where it may be stronger than GSAM:** (Layer B) Specialist fiduciary focus without a large proprietary product shelf.
@@ -4495,8 +5673,8 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Assets:** Not publicly disclosed
 - **As at:** Not publicly disclosed
 - **Relevant to which client problem:** 
-  - Liquidity / money market funds
-  - Stewardship-led equity and credit
+  - Liquidity
+  - Institutional active mandates
 - **Capabilities:** Large MMF manager; participates in the BNY-Goldman tokenised MMF programme.
 - **Recent events:** Not established in this stream (searched once or not reached before the shared search budget ran out)
 - **Where it may be stronger than GSAM:** (Layer B) Not assessed.
@@ -4509,7 +5687,7 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Assets:** Not publicly disclosed
 - **As at:** Not publicly disclosed
 - **Relevant to which client problem:** 
-  - Liquidity / money market funds
+  - Liquidity
 - **Capabilities:** Bank-owned liquidity provider.
 - **Recent events:** Not established in this stream (searched once or not reached before the shared search budget ran out)
 - **Where it may be stronger than GSAM:** (Layer B) Not assessed.
@@ -4521,8 +5699,8 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Assets:** Not publicly disclosed
 - **As at:** Not publicly disclosed
 - **Relevant to which client problem:** 
-  - Liquidity / money market funds
-  - UK insurance-linked credit
+  - Liquidity
+  - Insurance
 - **Capabilities:** Insurer-owned manager with sterling liquidity funds.
 - **Recent events:** Not established in this stream (searched once or not reached before the shared search budget ran out)
 - **Where it may be stronger than GSAM:** (Layer B) Not assessed.
@@ -4534,7 +5712,7 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Assets:** Not publicly disclosed
 - **As at:** Not publicly disclosed
 - **Relevant to which client problem:** 
-  - Insurance general accounts
+  - Insurance
 - **Capabilities:** Insurance-specialist manager; among the most frequently named by US insurers.
 - **Recent events:** Not established in this stream (searched once or not reached before the shared search budget ran out)
 - **Where it may be stronger than GSAM:** (Layer B) Insurance-only focus and regulatory/accounting specialism.
@@ -4547,8 +5725,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Assets:** Not publicly disclosed
 - **As at:** Not publicly disclosed
 - **Relevant to which client problem:** 
-  - Insurance general accounts
-  - European fund distribution (Xtrackers)
+  - Insurance
+  - Wealth intermediaries
+  - Index and ETFs
 - **Capabilities:** Named among leading unaffiliated insurance managers in the US.
 - **Recent events:** Not established in this stream (searched once or not reached before the shared search budget ran out)
 - **Where it may be stronger than GSAM:** (Layer B) Not assessed.
@@ -4561,8 +5740,8 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Assets:** Not publicly disclosed
 - **As at:** Not publicly disclosed
 - **Relevant to which client problem:** 
-  - Insurance general accounts
-  - Infrastructure
+  - Insurance
+  - Institutional active mandates
 - **Capabilities:** Infrastructure and private-markets manager.
 - **Recent events:** Not established in this stream (searched once or not reached before the shared search budget ran out)
 - **Where it may be stronger than GSAM:** (Layer B) Not assessed.
@@ -4575,8 +5754,8 @@ Public professional information only. Titles are as publicly stated on the evide
 - **As at:** 2026-09-30
 - **Relevant to which client problem:** 
   - Private markets for wealth
-  - Insurance private credit
-  - Institutional private markets
+  - Insurance
+  - Institutional active mandates
 - **Capabilities:** Largest private-wealth alternatives franchise (BREIT, BCRED, BXPE); partner in Wellington-Vanguard-Blackstone funds.
 - **Recent events:** Record BXPE quarter ($2.9bn) while BCRED redemption requests stayed elevated (Q3 2026).
 - **Where it may be stronger than GSAM:** (Layer B) Brand, track record and distribution reach in semi-liquid private funds.
@@ -4589,8 +5768,9 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Assets:** Not publicly disclosed
 - **As at:** Not publicly disclosed
 - **Relevant to which client problem:** 
-  - Private credit for insurers and wealth
-  - Gulf sovereign partnerships
+  - Insurance
+  - Private markets for wealth
+  - Sovereign investors
 - **Capabilities:** Reported private-credit partner of Mubadala and ADIA.
 - **Recent events:** Not established in this stream (searched once or not reached before the shared search budget ran out)
 - **Where it may be stronger than GSAM:** (Layer B) Private credit origination scale tied to an insurance balance sheet (Athene).
@@ -4605,7 +5785,7 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Relevant to which client problem:** 
   - Private markets for wealth
   - Insurance
-  - Gulf sovereign partnerships
+  - Sovereign investors
 - **Capabilities:** Public-private funds with Capital Group; reported partner of Gulf sovereign funds.
 - **Recent events:** Extended Capital Group partnership to Europe and Asia-Pacific (May 2026).
 - **Where it may be stronger than GSAM:** (Layer B) Private markets brand and insurance-linked credit.
@@ -4618,8 +5798,8 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Assets:** Not publicly disclosed
 - **As at:** Not publicly disclosed
 - **Relevant to which client problem:** 
-  - Private markets for wealth (evergreen funds)
-  - European institutions
+  - Private markets for wealth
+  - Institutional active mandates
 - **Capabilities:** Long-standing evergreen private-markets provider in Europe.
 - **Recent events:** $16bn new client commitments in H1 2026; full-year guidance $26-32bn.
 - **Where it may be stronger than GSAM:** (Layer B) European evergreen track record and bespoke mandates.
@@ -4632,7 +5812,7 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Assets:** $13bn evergreen AUM (dated)
 - **As at:** 2025-08-31
 - **Relevant to which client problem:** 
-  - Private markets for wealth (evergreen funds)
+  - Private markets for wealth
 - **Capabilities:** Private-markets solutions specialist with evergreen funds.
 - **Recent events:** Not established in this stream (searched once or not reached before the shared search budget ran out)
 - **Where it may be stronger than GSAM:** (Layer B) Specialist secondaries and co-investment data.
@@ -4645,8 +5825,8 @@ Public professional information only. Titles are as publicly stated on the evide
 - **Assets:** Not publicly disclosed
 - **As at:** Not publicly disclosed
 - **Relevant to which client problem:** 
-  - Private markets for wealth (evergreen funds)
-  - Secondaries
+  - Private markets for wealth
+  - Institutional active mandates
 - **Capabilities:** Private-markets fund-of-funds and secondaries specialist.
 - **Recent events:** Not established in this stream (searched once or not reached before the shared search budget ran out)
 - **Where it may be stronger than GSAM:** (Layer B) Not assessed.
@@ -6825,8 +8005,190 @@ The same commitment charged on invested value earns far less in year one. Using 
 
 | Section | Topic | Evidence found | Unresolved | Status |
 |---|---|---|---|---|
+| 7 | Public people directory (name, exact title, office, coverage, segment, function, history, evidence date, sources, confidence) | 42 people from 44 sources: group and division leadership, EMEA institutional, OCIO and fiduciary management, Third Party Wealth country heads, Middle East, Nordics (2020 snapshot), Benelux. Public title kept separate from interpreted function. | Weighted to heads and new hires. Junior and mid-level profiles, class lists and conference programmes not investigated because the search allowance ran out. Not exhaustive. | Partial |
+| 7 | Current leaders of each relevant unit, without presupposing the holder | Verified: head of CSG (2025), global co-heads of Third-Party Wealth (Apr 2026), co-head of EMEA Institutional Client Coverage (Nov 2025), head of International OCIO and UK Fiduciary Management (Sep 2024), TPW heads for Germany/Austria, Switzerland, Italy, Iberia. | No 2026 sighting read for the OCIO head; Benelux TPW head and consultant-relations heads are snippet only. | Partial |
+| 7 | Posts with no publicly established holder | Searched: second EMEA institutional co-head; separate UK institutional head; UK & Ireland TPW head; EMEA TPW head after Apr 2026; Middle East head after Sep 2025; current Nordic head; Swiss, German and French institutional heads. | All remain not publicly established. EMEA Liquidity Solutions and Insurance client heads had one search each and no follow-up. | Searched, not established |
+| 7 | Hiring and movement evidence 2021 to cutoff (hires, transfers, appointments, departures kept separate and dated) | 25 press-reported events in a dated movement log, each with source and status. | Senior moves only. No internships, analyst hires or conversion evidence found; no net headcount can be derived. | Partial |
+| 7 | Sales versus relationship-management balance | Observed sample only: 6 explicit sales titles, 0 explicit relationship-management titles, 31 of 42 unclassifiable; selection bias stated. Job ads show a named Client Coverage Group and at least one team doing both jobs. | No ratio, team size or seat count is publicly established. The former intern's 'fewer sales seats' claim is unverified. | Searched, not established |
+| 7 | Summer analyst and junior profiles naming CSG teams; cohort denominators | None collected. | Profile-site searches were planned but not run. No credible cohort denominator exists, so no conversion rate is calculated. | Not investigated |
+| 7 | Language requirements from job descriptions | Verified: Dutch for BeNeLux (London seat), German (Frankfurt), French (Paris), English only for UK TPW sales support, none stated for Dubai and Doha. Snippet: Swedish for a London Nordics seat. Switzerland mixed. | UK Institutional, Liquidity Solutions and any Arabic requirement not established. 'Everyone in Liquidity speaks French' not supported. | Partial |
+| 7 | How titles are used (VP, Executive Director, Managing Director, Partner) | Verified from Goldman sources: Executive Director is the EMEA working title for Vice President (one class, one level); Partner is an invited class (109 people in the class effective 1 Jan 2027); roles can span two ranks. | Rank not stated for 23 of 42 directory entries; not inferred. | Complete |
+| 7 | Audit of the former intern's recruitment claims (video screen, reviewer, team allocation, interview format and sequence, in-person move, AI questions, timelines, one seat per team) | Official: ~30-minute HireVue first round; Superday of two to five interviews with potential colleagues; rolling review; four-application limit; London listing names no sub-team. | Reviewer, allocation mechanism, interview sequence, group-task absence and per-team seats are the former intern's account only. In-person and AI-question changes not established; press coverage not searched. | Partial |
+| 7 | Compensation claims (£52k sales, £48k relationship management) and mobility | No Goldman source publishes EMEA pay. US pay-transparency ranges found for two non-client-facing CSG roles; a US wealth-channel role is base plus commission. | London analyst pay and the sales/relationship gap are not publicly established. Internal mobility claims not investigated. | Searched, not established |
+| 7 | The unnamed managing director (award post) and the unnamed partner | Two 2026 awards the post could refer to are verified (European Pensions, 2 Jul; Irish Pensions Awards, 4 Nov). | Neither person is identified and no identification is attempted. | Searched, not established |
+| 7 | Reproducible search strings | Every string run by the people and programme streams, the strings planned but not run, and the careers-site search terms are recorded in data/search_strings.json. | Results change over time; snippets may be outdated. | Complete |
+| 8 | Public commercial evidence: UK and EMEA mandate wins, OCIO appointments, partnerships and product launches | 32 register entries (26 Verified, 6 Supported inference), including BAE Systems (2023), Shell (2025), Calor (2024), Short Brothers (2022), Northern Foods (2025), the Gulf sovereign agreements (2024 to 2026), NN Group (2021 to 2022) and European ETF and ELTIF launches (2023 to 2026). Told as eight cases in Chapter 5. | Charity and endowment mandates, post-2022 Dutch fiduciary clients, UK DC master trust appointments and procurement notices were not investigated because the search allowance ran out. Six entries rest on snippets or secondary reports. | Partial |
+| 8 | Losses, terminations and controversies | Six losses or terminations (Pensioenfonds Vervoer 2010, Kent 2006 and 2025, Border to Coast 2026, Kingfisher 2009, LACERA 2011) and one regulatory action (SEC, 2022). | The 2025 Kent recommendation and the 2026 Border to Coast change are inferences from a council paper summary and a factsheet; neither termination is confirmed by the client. Losses are under-reported in public sources generally. | Partial |
+| 8 | Attribution of any mandate to a London team or individual | No source attributes origination. Releases quote business heads only (head of International OCIO and UK Fiduciary Management for BAE; co-head of EMEA Institutional Client Coverage for Shell). | Which team or person originated any deal. | Searched, not established |
+| 8 | The two companies the former intern named as confidential OCIO clients | One is confirmed by Goldman's own press release and the scheme's 2026 implementation statement and is named. For the other, the schemes' latest annual reports name a different fiduciary manager and never mention Goldman; its name is withheld from all outputs. | Whether any relationship of another kind exists with the second company. | Searched, not established |
+| 8 | Launch versus target versus commitment versus awarded mandate versus funded fee-paying assets | Each stage illustrated with a register entry, plus the 10-K disclosure that $105bn of 2020 to 2025 alternatives commitments were non-fee-earning at end-2025. | Funded fee-paying assets are not disclosed for any single client. | Complete |
+| 8 | Goldman Sachs segments, AWM revenue lines and the 'about 30% of revenue' claim | FY2025 10-K, Q3 2026 10-Q and earnings release read directly: AWM 28.6% of 2025 net revenues, Asset management 11.6%, Wealth management 17.0%; four AWM revenue lines; pre-tax margin 25% and medium-term target of about 30%. | No revenue for the Client Solutions Group, any EMEA client team or the UK. | Complete |
+| 8 | AUS definition, AUS by asset class, client channel and region, and net flows | Definition quoted from the 10-K; AUS $4,097bn at 30 Sep 2026; channel split Institutional $1,245bn, Wealth management $1,087bn, Third-party distributed $714bn; EMEA $799bn; nine-month net inflows by channel, including the effect of acquisitions. | Gross flows, a UK figure and channel-by-region data are not published. The GSAM website's $3.7tn for the same date is unreconciled (Conflicting evidence). | Complete |
+| 8 | Fee rates: effective management fees, OCIO fees, mandate-level pricing | Firm-wide average effective fees by asset class for 2024, 2025 and nine months 2026; the alternatives 'advisory and OCIO' slice ($112bn at 17bp in 2025); UK fiduciary fee trend from an industry survey; fee structure of another provider's UK mandate from a scheme report. | Goldman's OCIO fee rates, UK or EMEA OCIO assets and every mandate-level fee. | Searched, not established |
+| 8 | Fee mechanics: fee base by vehicle, breakpoints, incentive fees and carried interest, distribution costs, profitability | Goldman's revenue-recognition policy (NAV for funds and separate accounts; invested or committed capital for private equity funds), incentive fee recognition and clawback, distribution fees as an expense, AWM margin, and an industry margin benchmark. | Distribution fee amounts and any revenue attribution by function are not disclosed. | Complete |
+| 8 | Worked examples (£500m mandate, £1bn withdrawal, £300m to £600m expansion, approved-list addition, OCIO, liquidity, private markets fee base) | Fifteen illustrative cases computed by build/calc.py, narrated end to end in Chapter 5 and reproducible in the fee calculator; timing, partial funding, withdrawals, market movement, fee changes and breakpoints are each tested. | All rates are invented for illustration. Performance fees, rebates and costs are left out of the model by design. | Complete |
 
 # Appendix N: Reproducible search strings
+
+**How to adapt the syntax. The strings in this register were written for a general web search engine. Engines differ: some ignore site:, some need OR in capitals, some drop quotation marks on long phrases, and professional-profile sites often show only a snippet. If an operator is ignored, move the site name into the query as a plain word, shorten quoted phrases to two or three words, and run one query per name instead of chaining OR. Record every string you run and whether the page itself could be opened, so that 'searched and not found' stays separate from 'not searched'. The three lines below show one query rewritten three ways.**
+
+```
+site:linkedin.com/in/ "Goldman Sachs" "Client Solutions" London
+linkedin "Goldman Sachs Asset Management" "Client Solutions Group" London
+"Goldman Sachs Asset Management" "Client Solutions Group" London analyst OR associate
+```
+
+**Starter strings from the project brief (section 7). Not all were run: the search allowance ran out before the profile and speaker searches.**
+
+```
+site:linkedin.com/in/ "Goldman Sachs" "Client Solutions" London
+site:linkedin.com/in/ "Goldman Sachs" "institutional" "client relationship"
+site:linkedin.com/in/ "Goldman Sachs" "third party wealth"
+"Goldman Sachs Asset Management" "UK institutional" speaker
+"Goldman Sachs" "consultant relations" London
+"Goldman Sachs" "summer analyst" "client solutions" 2025
+```
+
+**People research: group, EMEA and UK leadership (run on 14 November 2026)**
+
+```
+Goldman Sachs Asset Management "head of UK institutional" OR "head of UK and Ireland institutional" client business
+Goldman Sachs Asset Management "Client Solutions Group" EMEA head appointed
+Goldman Sachs Asset Management Chris Kojima Heather Kennedy Miner "Client Solutions Group" global head
+Goldman Sachs "Client Solutions Group" "global head" OR "co-head" asset management Matt Gibson 2025 OR 2026
+Goldman Sachs alumni "leadership updates" March 2026 "Client Solutions Group" Kristin Olson Stephanie Rader "co-lead"
+"Hester Borrie" Goldman Sachs Asset Management 2025 OR 2026 "co-head" EMEA institutional
+```
+
+**People research: OCIO, fiduciary management and consultant relations (run)**
+
+```
+Goldman Sachs Asset Management "fiduciary management" OR OCIO UK head EMEA "multi-asset solutions"
+Goldman Sachs Asset Management Ed Francis "fiduciary management" appointed Willis Towers Watson 2021 "head of UK fiduciary management"
+Goldman Sachs Asset Management "head of sales" UK fiduciary management appointed corporate adviser Carolyn Schuster-Woldan OR "fiduciary" 2025
+"Goldman Sachs Asset Management" "consultant relations" head EMEA OR UK OR global
+Claire Felgate Goldman Sachs Asset Management "head of international" "global consultant relations" Lauren Oakes Patrick O'Donnell
+```
+
+**People research: Third Party Wealth, UK and EMEA (run; the fourth was an extended search)**
+
+```
+Goldman Sachs Asset Management "head of UK third party wealth" OR "head of UK wholesale" OR "UK third party distribution"
+"Goldman Sachs Asset Management" "third party wealth" EMEA head Hilary Lopez OR "head of EMEA third party wealth" 2025 OR 2026
+"Goldman Sachs Asset Management" "UK third party wealth" OR "UK & Ireland third party wealth" head managing director
+"Goldman Sachs Asset Management" "head of UK" "third party wealth" OR "third-party wealth" OR wholesale OR "discretionary" citywire OR "investment week" 2024 OR 2025 OR 2026
+Gert-Jan Verhagen "head of Benelux Third Party Wealth" Goldman Sachs Asset Management
+```
+
+**People research: regional and country coverage (run)**
+
+```
+"Goldman Sachs Asset Management" Middle East head client business appointed "Client Solutions" OR "institutional" MENA 2024 OR 2025 OR 2026
+Goldman Sachs Asset Management Middle East "head of" client business 2026 Dubai OR Riyadh OR "Abu Dhabi" appointed successor Zaidi
+"Goldman Sachs Asset Management" Nordics head client business institutional Stockholm appointed
+Goldman Sachs Asset Management Nordics head 2025 OR 2026 "Nordic" client business "Goldman Sachs Asset Management" Kønig OR appointed OR "head of Nordics"
+"Goldman Sachs Asset Management" Benelux head client business Hester Borrie Gerald Cartigny 2025 OR 2026
+"Goldman Sachs Asset Management" Deutschland OR Germany "Leiter" OR "head of" "Third Party Wealth" OR "institutional" Germany Austria client business Frankfurt
+"Goldman Sachs Asset Management" Italy OR Italia "head of" "Third Party Wealth" OR "client business" Milan Loredana La Pace
+"Goldman Sachs Asset Management" Iberia "head of" Lucía Catalán OR "responsable" client business Madrid 2025 OR 2026
+"Goldman Sachs Asset Management" France "responsable" OR "head of" "Third Party Wealth" OR "clientèle institutionnelle" Paris nomination
+Goldman Sachs Asset Management Switzerland institutional head "Goldman Sachs Asset Management" Schweiz Leiter institutionelle Kunden Zürich
+```
+
+**People research: Liquidity Solutions and Insurance client leadership (run once each; follow-up not run)**
+
+```
+"Goldman Sachs Asset Management" "liquidity solutions" EMEA OR international head managing director London money market
+"Goldman Sachs Asset Management" insurance EMEA head "insurance asset management" OR "insurance client" London managing director
+```
+
+**People research: planned but NOT run because the search allowance ran out. Start here to extend the directory to junior and mid-level profiles, class lists, speakers and the award post.**
+
+```
+Goldman Sachs partner class 2024 Asset & Wealth Management London "Client Solutions Group" OR "client business" partners named EMEA
+site:linkedin.com/in/ "Goldman Sachs" "Client Solutions" London
+site:linkedin.com/in/ "Goldman Sachs Asset Management" "UK institutional"
+site:linkedin.com/in/ "Goldman Sachs" "third party wealth" London
+site:linkedin.com/in/ "Goldman Sachs" "Client Coverage Group" OR "CCG" asset management
+"Goldman Sachs Asset Management" "UK institutional" speaker PLSA OR LAPF OR "Professional Pensions"
+"Goldman Sachs" "summer analyst" "client solutions" 2025 OR 2026 London
+"Goldman Sachs Asset Management" OCIO award 2025 OR 2026 "fiduciary manager of the year" OR "OCIO of the year"
+"Goldman Sachs Asset Management" "head of UK" institutional 2026
+"Goldman Sachs Asset Management" "liquidity solutions" EMEA head 2025 OR 2026
+"Goldman Sachs Asset Management" EMEA insurance "head of" client 2025 OR 2026
+Goldman Sachs managing director class 2025 asset wealth management London
+```
+
+**Programme, terminology and recruitment: web searches run**
+
+```
+Goldman Sachs 2027 EMEA London Asset Management Client Solutions Group Summer Analyst
+"2026 | EMEA | London | Asset Management, Client Solutions Group, UK Institutional Sales" Goldman Sachs
+Goldman Sachs "Client Solutions Group" "Third Party Wealth" London Summer Analyst OR "New Analyst" OR "Off-Cycle" EMEA Asset Management listing
+Goldman Sachs Asset Management "Client Coverage Group" London "client relationship" job description
+Goldman Sachs Asset Management London "consultant relations" OR "UK Institutional" OR "Liquidity Solutions" "Client Solutions Group" job description responsibilities
+```
+
+**Programme, terminology and recruitment: planned but NOT run (allowance ran out), plus suggested follow-ups on in-person interviews, candidate AI rules and pay**
+
+```
+site:jobs.anitab.org goldman-sachs "asset-wealth-management" london client coverage OR "client relationship" OR institutional OR "consultant relations" OR liquidity
+"Goldman Sachs Asset & Wealth Management" London analyst OR associate "UK Institutional" sales OR "client relationship" "pension" job
+Goldman Sachs Asset Management "Liquidity Solutions" London sales analyst OR associate job "money market" French OR language
+Goldman Sachs Asset Management job London "Nordic" OR "Swedish" OR "Arabic" OR "Middle East" "Client Solutions Group" OR "sales support" speaker
+Goldman Sachs in-person interviews superday 2026 campus
+Goldman Sachs candidates AI interview policy HireVue 2025 OR 2026
+Goldman Sachs asset management analyst salary London 2026
+"Goldman Sachs" "Client Coverage Group" London
+```
+
+**Search terms entered in the search box of Goldman Sachs's own careers site (higher.gs.com) on 14 November 2026. Campus listings were also listed in full (194 listings). Professional results were filtered to EMEA offices and asset-management client roles.**
+
+```
+Client Solutions Group
+Asset Management
+Summer Analyst London
+2027 EMEA London
+Client Coverage
+Client Coverage Group
+Third Party Wealth
+Consultant Relations
+Client Relationship Management
+Client Relationship
+RFP
+Request for Proposal
+Liquidity Solutions
+Institutional Sales
+Institutional Client
+OCIO
+Fiduciary
+Fiduciary Management
+Client Portfolio Management
+Client Portfolio Manager
+Product Specialist
+Investment Specialist
+Client Service
+Client Experience
+Strategic Client Services
+Client Implementation
+Insurance Asset Management
+Insurance
+Alternatives Capital Formation
+Asset Management Sales
+Client Solutions
+CSG
+CCG
+Wholesale
+Distribution
+Speaking
+Client Business
+Nordic
+Middle East
+Benelux
+Switzerland
+Pension
+Marketing
+```
 
 # Appendix O: Source register
 

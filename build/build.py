@@ -83,11 +83,12 @@ def merge(kind):
             if not isinstance(row, dict):
                 continue
             rid = row.get("id")
-            if rid in seen:
+            if rid is not None and rid in seen:
                 if kind != "glossary":  # glossary overlap between streams is expected; first definition wins
                     warn(f"duplicate id {rid} in {f.name}")
                 continue
-            seen.add(rid)
+            if rid is not None:
+                seen.add(rid)
             row["_stream"] = f.stem.split(".", 1)[1]
             out.append(row)
     return out
