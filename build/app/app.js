@@ -59,7 +59,9 @@ function focusCard(view,id){var el=document.getElementById(id);if(!el)return;
   var list=el.parentElement;$$('[data-filtered]',list).forEach(function(x){x.removeAttribute('data-filtered')});
   $$('.filters[data-filter-for="'+list.id+'"] select').forEach(function(s){s.value=''});
   el.scrollIntoView({behavior:reduceMotion?'auto':'smooth',block:'start'});el.setAttribute('tabindex','-1');el.focus({preventScroll:true})}
+var firstRoute=true;
 function route(){
+  var initial=firstRoute;firstRoute=false;
   var h=location.hash||'#/home';
   if(h.indexOf('#/')!==0){ // plain anchor: source rows, headings
     var el=document.getElementById(decodeURIComponent(h.slice(1)));
@@ -73,7 +75,7 @@ function route(){
   else if(name==='search'){runSearch(parts.slice(1).join('/'))}
   else if(parts[1]){setTimeout(function(){focusCard(name,parts[1])},0)}
   else{window.scrollTo(0,0)}
-  if(!parts[1]&&name!=='search'){var m=$('#main');m.focus({preventScroll:true})}}
+  if(!initial&&!parts[1]&&name!=='search'){var m=$('#main');m.focus({preventScroll:true})}}
 window.addEventListener('hashchange',route);
 $('#prevCh').addEventListener('click',function(){if(curCh>0)location.hash='#/read/'+chapters[curCh-1].dataset.chapter});
 $('#nextCh').addEventListener('click',function(){if(curCh<chapters.length-1)location.hash='#/read/'+chapters[curCh+1].dataset.chapter});

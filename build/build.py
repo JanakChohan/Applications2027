@@ -92,7 +92,35 @@ def merge(kind):
     return out
 
 
+# The former intern named two companies as confidential clients. One relationship is confirmed by the
+# manager's own press release and is named. The other has no public confirmation, so its name is removed
+# from every generated output (the raw research notes in research/evidence keep the audit trail).
+REDACT = re.compile(r"Jaguar Land Rover|Jaguar and Land Rover|Land Rover|Jaguar|\bJLR\b", re.I)
+REDACT_TEXT = "[second company named by the former intern; name withheld because no public source confirms the relationship]"
+
+
+def redact(o):
+    if isinstance(o, str):
+        return REDACT.sub(REDACT_TEXT, o)
+    if isinstance(o, list):
+        return [redact(x) for x in o]
+    if isinstance(o, dict):
+        if any(isinstance(v, str) and REDACT.search(v) for k, v in o.items() if k in ("url", "title", "publisher")):
+            o = dict(o)
+            if "url" in o:
+                o["url"] = ""
+            if "title" in o and "published" in o:
+                o["title"] = "Pension scheme annual report (scheme name withheld)"
+                o["publisher"] = "Scheme trustee (name withheld)"
+        return {k: redact(v) for k, v in o.items()}
+    return o
+
+
 def load_all(public=False):
+    return redact(_load_all())
+
+
+def _load_all():
     D = {}
     src = {}
     for f in sorted((DATA / "sources").glob("*.json")):
@@ -125,7 +153,8 @@ def load_all(public=False):
     D["why"] = jload(DATA / "why_trees.json", {"trees": []})
     D["interview"] = jload(DATA / "interview.json", {"criteria": [], "questions": [], "cases": []})
     D["cases"] = jload(DATA / "cases.json", {"cases": []})
-    D["coverage"] = jload(DATA / "coverage_register.json", [])
+    D["coverage"] = (jload(DATA / "coverage_register.json", []) or []) + merge("coverage")
+    D["coverage"].sort(key=lambda c: [int(x) if x.isdigit() else x for x in re.split(r"(\d+)", str(c.get("section") or ""))])
     D["intern_claims"] = jload(DATA / "intern_claims.json", [])
     D["routes"] = jload(DATA / "routes.json", [])
     D["search_strings"] = jload(DATA / "search_strings.json", [])
@@ -659,6 +688,9 @@ def fill_placeholders(h, D):
 def render_chapter(path, D):
     chid = "ch" + path.name[:2]
     md = path.read_text(encoding="utf-8")
+    if REDACT.search(md):
+        warn(f"{path.name}: withheld client name found in chapter text; redacted")
+        md = REDACT.sub(REDACT_TEXT, md)
     pre = preprocess_md(md, path.name)
     h = markdown.markdown(pre, extensions=["tables", "md_in_html", "sane_lists", "fenced_code"])
     h = fill_placeholders(h, D)
