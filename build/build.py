@@ -485,7 +485,7 @@ def render_icase(c, D, open_=False):
             f'<details{op}><summary>Follow-ups</summary>{value_html(c.get("followups"), D)}</details></article>')
 
 
-def render_case_table(c):
+def render_case_table(c, embedded=False):
     r = c["result"]
     p = r["params"]
     cur = p["currency"]
@@ -494,23 +494,24 @@ def render_case_table(c):
         f'<td>{money(y["avg_fee_base"], cur)}</td><td>{money(y["fees"], cur)}</td>'
         f'<td>{"n/a (no fee-bearing assets)" if y["effective_bps_annualised"] is None else format(y["effective_bps_annualised"], ".1f") + "bp"}</td>'
         f'<td>{money(y["end_balance"], cur)}</td></tr>' for y in r["years"])
-    return (f'<div class="case" id="{esc(c["id"])}" data-search data-kind="fee-case"><h4>{esc(c["title"])} {badge("Illustrative example")}</h4>'
+    head = f'<div class="case" id="in-{esc(c["id"])}">' if embedded else f'<div class="case" id="{esc(c["id"])}" data-search data-kind="fee-case">'
+    return (head + f'<h4>{esc(c["title"])} {badge("Illustrative example")}</h4>'
             f'<p>{esc(c["teaches"])}</p><div class="table-wrap"><table><thead><tr><th>Period</th><th>Average fee base</th><th>Gross management fee</th>'
             f'<th>Effective annual rate</th><th>Assets at period end</th></tr></thead><tbody>{rows}</tbody>'
             f'<tfoot><tr><th colspan="2">Total over {p["months"]} months</th><th colspan="3">{money(r["total_fees"], cur)}</th></tr></tfoot></table></div></div>')
 
 
-def render_cases(D, group=None, cid=None):
+def render_cases(D, group=None, cid=None, embedded=False):
     out, last = [], None
     for c in D["cases"]["cases"]:
         if group and c["group"] != group:
             continue
         if cid and c["id"] != cid:
             continue
-        if c["group"] != last and not cid:
+        if c["group"] != last and not cid and not embedded:
             out.append(f'<h3>{esc(c["group"])}</h3>')
             last = c["group"]
-        out.append(render_case_table(c))
+        out.append(render_case_table(c, embedded))
     return "".join(out) or '<p class="na">Case not found.</p>'
 
 
@@ -665,7 +666,7 @@ def fill_placeholders(h, D):
         if name == "personal-ledger":
             return render_personal(D)
         if name == "case":
-            return render_cases(D, cid=arg) if arg.startswith("CASE-") else render_cases(D, group=arg)
+            return render_cases(D, cid=arg, embedded=True) if arg.startswith("CASE-") else render_cases(D, group=arg, embedded=True)
         if name == "cases":
             return render_cases(D)
         if name == "teams-matrix":
