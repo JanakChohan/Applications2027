@@ -260,3 +260,29 @@ td.idtag{white-space:nowrap}
 :root[data-theme="light"] .view,:root[data-theme="light"] .tile,:root[data-theme="light"] nav.side a,:root[data-theme="light"] .cta .btn,:root[data-theme="light"] .cta button{--sec:hsl(var(--h) 80% 29%);--sec-soft:hsl(var(--h) 85% 95%);--sec-line:hsl(var(--h) 55% 70%);--grad:linear-gradient(135deg,hsl(var(--h) 85% 93%),hsl(calc(var(--h) + 45) 85% 90%))}
 .opts button:disabled{opacity:1;color:var(--muted)}.opts button.right,.opts button.wrong{color:var(--ink)}
 .level-card>div:last-child{font-size:.9rem}
+
+/* diagrams */
+.diagram{margin:1.3rem 0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:.8rem 1rem}
+.diagram svg{width:100%;height:auto;max-width:860px;display:block;margin:.4rem auto}
+.dg-title{font-weight:800;font-size:1.05rem}
+.dg-box{fill:var(--panel);stroke:var(--sec);stroke-width:2}
+.dg-b{fill:var(--sec-soft)}
+.dg-c{stroke-dasharray:6 5;stroke:var(--muted)}
+.diagram svg{letter-spacing:0;word-spacing:0}
+.dg-h{font:700 15.5px var(--font);fill:var(--ink)}
+.dg-t{font:15.5px var(--font);fill:var(--ink)}
+.dg-s{font:600 14.5px var(--font);fill:var(--muted)}
+.dg-big{font:800 34px var(--font);fill:var(--ink)}
+.dg-arrow{stroke:var(--ink);stroke-width:2}
+.dg-dash{stroke-dasharray:6 5}
+.dg-head{fill:var(--ink)}
+.dg-words{font-size:.95rem;background:var(--soft);border-radius:8px;padding:.5rem .8rem;margin:.4rem 0 0;max-width:none}
+/* easy-read mode: wider spacing, no italics, no capitals-only labels */
+body.easy{letter-spacing:.035em;word-spacing:.14em;line-height:1.85}
+body.easy p,body.easy li,body.easy dd{max-width:64ch}
+body.easy em,body.easy i,body.easy .na,body.easy blockquote{font-style:normal}
+body.easy em{font-weight:600}
+body.easy .box-title,body.easy nav.side .grp,body.easy .edge-area,body.easy .mission .kicker{text-transform:none;letter-spacing:.02em}
+body.easy .box-dialogue{font-family:var(--font)}
+body.easy .chapter{font-size:1.1rem}
+:root[data-theme="light"] body.easy{background:#fbf5e6}

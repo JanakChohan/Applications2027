@@ -23,6 +23,7 @@ import markdown
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from calc import fee_model, money  # noqa: E402
+from diagrams import diagram  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
@@ -860,6 +861,8 @@ def fill_placeholders(h, D):
         name, arg = m.group(1).lower(), (m.group(2) or "").strip()
         if name == "personal-ledger":
             return render_personal(D)
+        if name == "diagram":
+            return diagram(arg)
         if name == "case":
             return render_cases(D, cid=arg, embedded=True) if arg.startswith("CASE-") else render_cases(D, group=arg, embedded=True)
         if name == "cases":
@@ -944,6 +947,7 @@ def md_export_chapter(md):
             continue
         out.append((">" * len(stack) + " " + ln) if stack else ln)
     t = "\n".join(out)
+    t = re.sub(r"<!--\s*DATA:diagram:([a-z\-]+)\s*-->", lambda m: "*[Diagram: " + strip_tags(diagram(m.group(1))) + "]*", t)
     t = RE_BADGE.sub(lambda m: f"*[{CODE2STATUS[m.group(1)]}]*", t)
     t = RE_LAYER.sub(lambda m: f"*[{LAYER[m.group(1)]}]*", t)
     t = RE_CITE.sub(lambda m: f"[{m.group(1)}]", t)
@@ -1202,7 +1206,9 @@ def main():
     a = ap.parse_args()
     OUT.mkdir(parents=True, exist_ok=True)
     D = load_all()
-    chapters = [render_chapter(p, D) for p in sorted((ROOT / "content" / "chapters").glob("[0-9][0-9]-*.md"))]
+    # "0A-start-here" is the beginner primer and always comes first; the numbered chapters follow in order.
+    files = sorted((ROOT / "content" / "chapters").glob("[0-9][0-9A-Z]-*.md"), key=lambda f: (not f.name.startswith("0A"), f.name))
+    chapters = [render_chapter(p, D) for p in files]
     suffix = ""
 
     (ROOT / "dossier").mkdir(exist_ok=True)

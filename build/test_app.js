@@ -101,6 +101,18 @@ const ok = (name, cond, detail) => { results.push({ name, pass: !!cond, detail: 
   ok('"Surprise me" jumps to a random item', (await page.evaluate(() => location.hash)) !== '#/home');
   ok('games keep nothing in storage unless saving is switched on', (await page.evaluate(() => localStorage.getItem('gsamcsg.v1'))) === null);
 
+  // primer, diagrams, easy-read mode
+  await page.goto(FILE + '#/read/ch0A');
+  const dg = await page.$$eval('#art-ch0A .diagram', (els) => ({ n: els.length, ok: els.every((d) => d.querySelector('svg[role=img][aria-label]') && d.querySelector('.dg-words')) }));
+  ok('beginner primer opens first and holds nine diagrams, each with an "In words" line', dg.n === 9 && dg.ok, dg.n + ' diagrams');
+  ok('the primer is the first chapter in the reader', await page.$eval('#chapters .chapter', (c) => c.dataset.chapter === 'ch0A'));
+  const boxFit = await page.$$eval('#art-ch0A .diagram svg', (svgs) => svgs.every((s) => { const vb = s.viewBox.baseVal; return Array.from(s.querySelectorAll('text')).every((t) => { const b = t.getBBox(); return b.x >= -2 && b.x + b.width <= vb.width + 2 && b.y >= -2 && b.y + b.height <= vb.height + 2; }); }));
+  ok('no diagram text runs outside its picture', boxFit);
+  await page.click('#easyBtn');
+  const easy = await page.evaluate(() => ({ on: document.body.classList.contains('easy'), ls: getComputedStyle(document.body).letterSpacing, em: getComputedStyle(document.querySelector('em') || document.body).fontStyle }));
+  ok('easy-read mode widens spacing and removes italics', easy.on && easy.ls !== 'normal' && easy.ls !== '0px' && easy.em === 'normal', JSON.stringify(easy));
+  await page.click('#easyBtn'); await page.click('#themeBtn');
+
   // reader + level toggle
   await page.goto(FILE + '#/read');
   const chCount = await page.$$eval('#chapters .chapter', (e) => e.length);

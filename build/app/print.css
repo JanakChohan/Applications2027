@@ -52,3 +52,35 @@ body.print .brief{break-inside:avoid}
 body.print .cols3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem}
 body.print ol.quiz>li{margin:.5rem 0;break-inside:avoid}
 body.print .edge{break-inside:avoid}
+
+/* ---- easier reading in print: sans-serif, larger, wider spacing, cream page, no italics, no capitals-only labels ---- */
+html{background:#fdf7e7}
+body.print{background:#fdf7e7;color:#1c1c1c;font:11.5pt/1.7 Inter,Verdana,Arial,sans-serif;letter-spacing:.02em;word-spacing:.1em;text-align:left;--bg:#fdf7e7;--panel:#fffdf6;--soft:#f3ecd9;--sec-soft:#efe7d2;--ink:#1c1c1c;--muted:#3f3f3f}
+body.print p,body.print li,body.print dd{max-width:68ch}
+body.print td p,body.print td li,body.print .card p,body.print .card li,body.print dd{max-width:none}
+body.print p{margin:.7em 0}
+body.print li{margin:.3em 0}
+body.print h1{font-size:22pt;line-height:1.3;margin-bottom:.6em}
+body.print h2{font-size:16pt;margin-top:1.6em;border-bottom:2px solid #b9ad8c}
+body.print h3{font-size:13pt;margin-top:1.3em}
+body.print h4{font-size:11.5pt}
+body.print em,body.print i,body.print .na,body.print blockquote,body.print cite{font-style:normal}
+body.print em{font-weight:600}
+body.print .box-title,body.print .cover-kicker,body.print .edge-area{text-transform:none;letter-spacing:.02em;font-size:10pt}
+body.print .box-dialogue,body.print .passage{font-family:Inter,Verdana,Arial,sans-serif;font-size:11pt}
+body.print .box,body.print .lvl{border-left-width:5px;padding:.4rem .9rem}
+body.print table{font-size:9.6pt;letter-spacing:.01em;word-spacing:.05em}
+body.print th{background:#efe7d2}
+body.print .appendix{font-size:10.2pt;line-height:1.6}
+body.print .appendix table{font-size:8.8pt}
+body.print .appendix table.sources,body.print .appendix table.claims{font-size:8.2pt;letter-spacing:0;word-spacing:0}
+body.print .diagram{break-inside:avoid;border:1px solid #b9ad8c;background:#fffdf6;margin:1rem 0}
+body.print .diagram svg{max-width:100%}
+body.print .dg-words{background:#f3ecd9;font-size:10.5pt}
+body.print .dg-box{stroke:#0b3d6e}
+body.print .dg-b{fill:#e3ecf7}
+body.print .cover{background:none}
+body.print .toc{font-size:10pt;letter-spacing:.01em}
+body.print .part-note{border:2px solid #0b3d6e;border-radius:8px;padding:.6rem 1rem;background:#fffdf6;break-inside:avoid}
+body.print .chapter:not(.appendix) table{font-size:10.4pt;break-inside:avoid}
+body.print .chapter:not(.appendix) td,body.print .chapter:not(.appendix) th{padding:.3rem .5rem}

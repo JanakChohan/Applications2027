@@ -39,5 +39,6 @@ print(json.dumps(out))`;
   }, map);
   await page.pdf(opts);
   await browser.close();
+  try { console.log(execFileSync('python3', [path.join(__dirname, 'page_background.py'), out]).toString().trim()); } catch (e) { console.error('background step failed:', e.message); }
   console.log(`PDF written: ${out} (${(fs.statSync(out).size / 1e6).toFixed(1)} MB), contents entries numbered: ${filled}`);
 })();

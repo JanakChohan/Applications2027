@@ -87,6 +87,8 @@ $$('[data-level]').forEach(function(b){b.addEventListener('click',function(){doc
   $$('[data-level]').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')})})});
 $('#themeBtn').addEventListener('click',function(){var r=document.documentElement;if(r.getAttribute('data-theme')==='light')r.removeAttribute('data-theme');else r.setAttribute('data-theme','light');drawCube()});
 
+$('#easyBtn').addEventListener('click',function(){var on=document.body.classList.toggle('easy');this.setAttribute('aria-pressed',on?'true':'false');if(on)document.documentElement.setAttribute('data-theme','light');drawCube()});
+
 /* ---------- glossary popovers ---------- */
 var G=DATA.glossary.filter(function(g){return g.term&&g.term.length>1}),gByKey={};
 G.forEach(function(g){gByKey[g.term.toLowerCase()]=g});
