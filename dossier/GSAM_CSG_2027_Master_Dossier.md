@@ -9516,7 +9516,7 @@ The six criteria used here are a proposed practice framework written for this pr
   - 
     - **Q:** Would you still want this job if it were at a firm nobody had heard of?
     - **Pressure:** Separates interest in the work from interest in the name.
-    - **How to think:** Answer the counterfactual honestly. If the work is the draw, most of the appeal survives and you can say what would be lost concretely (range of client types, training). If little survives, the motive is the brand, and it is better to discover that now. See the why-tree WT-gs.
+    - **How to think:** Answer the counterfactual honestly. If the work is the draw, most of the appeal survives and you can say what would be lost concretely (range of client types, training). If little survives, the motive is the brand, and it is better to discover that now.
   - 
     - **Q:** What is the weakest part of your reason for choosing us?
     - **Pressure:** Self-awareness and honesty under pressure.
@@ -10843,7 +10843,7 @@ The same commitment charged on invested value earns far less in year one. Using 
 | Section | Topic | Evidence found | Unresolved | Status |
 |---|---|---|---|---|
 | 2 | Three layers kept apart (A verified fact, B interpretation, C personal fit) | Layer labels and six evidence statuses are defined in research/CONVENTIONS.md and applied in every chapter, card and register. Chapter 2 separates programme-wide wording, role-specific wording and inference. | Layer labels on individual paragraphs depend on each author's judgement; they were not independently reviewed line by line. | Complete |
-| 2 | Industry and role explanations stand on their own, without personal anchoring | Chapters 1 to 7 and 9 contain no personal material. Personal fit is confined to chapter 8 and the why-trees. | None. | Complete |
+| 2 | Industry and role explanations stand on their own, without personal anchoring | Chapters 1 to 7 and 9 contain no personal material. Personal fit was confined to a motivation chapter, since removed at the user's request, and the earlier why-tree exercises (removed). | None. | Complete |
 | 2 | Personal records: employer names, role titles and dates (the Pictet / MaRNJ conflict, the Box role) | Withdrawn at the user's instruction during the project. No personal records are used and the personal evidence ledger is a blank template with reflection questions. | The conflict between earlier drafts is not resolved here. Only the candidate's own records can settle it. | Not investigated |
 | 3 | Evidence standard: the former intern's account and earlier AI drafts treated as leads | Every distinct claim from the call is audited in data/intern_claims.json (44 rows) with a status, a finding and sources. Earlier AI drafts were not used as sources. | Claims about recruitment mechanics and pay cannot be tested from public sources. | Complete |
 | 3 | Research date, cutoff and dating of figures | Cutoff 14 November 2026 recorded in conventions, sources (accessed and published dates) and claims (event date and period). | Some sources have no publication date and are marked n.d. | Complete |
