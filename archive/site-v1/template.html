@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>GSAM CSG Command Centre</title>
+<style>[[css]]
+[[hues]]</style>
+</head>
+<body class="view-both">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top" role="banner">
+  <button id="menuBtn" aria-expanded="false" aria-controls="sidenav">Menu</button>
+  <div class="brand"><span class="dot" aria-hidden="true"></span>CSG Command Centre <small>· research to [[research_date]]</small></div>
+  <label class="skip" for="q">Search everything</label>
+  <input type="search" id="q" placeholder="Search everything (press /)" autocomplete="off" aria-label="Search all chapters, intel, people, teams, mandates, glossary and sources">
+  <div class="xp" title="Experience points earned in quizzes, practice and reading routes"><span id="xpLevel">Level 1</span><span class="xp-bar" aria-hidden="true"><span class="xp-fill" id="xpFill"></span></span><b id="xpNum">0 XP</b></div>
+  <div class="seg" role="group" aria-label="Teaching level">
+    <button type="button" data-level="l1" aria-pressed="false" title="Level 1: first principles only">Beginner</button>
+    <button type="button" data-level="both" aria-pressed="true" title="Both levels">Both</button>
+    <button type="button" data-level="l2" aria-pressed="false" title="Level 2: institutional mechanics only">Technical</button>
+  </div>
+  <button type="button" id="easyBtn" aria-pressed="false" title="Wider spacing, no italics, cream background">Easy read</button>
+  <button type="button" id="themeBtn" aria-label="Switch between dark and light theme">Theme</button>
+</header>
+<div class="shell">
+<nav class="side" id="sidenav" aria-label="Sections"><ul>[[nav]]</ul></nav>
+<main id="main" tabindex="-1">
+
+<section class="view" id="view-home" aria-labelledby="h-home">
+  <div class="mission">
+    <p class="kicker">Goldman Sachs Asset Management · Client Solutions Group · London 2027</p>
+    <h1 id="h-home">Mission control</h1>
+    <p>Everything for the <strong>2027 | EMEA | London | Asset Management, Client Solutions Group | Summer Analyst</strong> programme in one place: the business from first principles, every team, the people, the mandates, the numbers, and practice that pushes back. Every claim shows its evidence, so you know what you can say with confidence and what is only a lead.</p>
+    <div class="cta">
+      <a class="btn primary" href="#/arcade" style="--h:300">🎮 Start a 5-minute drill</a>
+      <a class="btn" href="#/intel">🔎 Open the intel</a>
+      <a class="btn" href="#/numbers">🔢 Numbers to know</a>
+      <a class="btn" href="#/read">📖 Read the dossier</a>
+      <button type="button" id="surprise">🎲 Surprise me</button>
+    </div>
+    <div class="level-card">
+      <div class="ring" id="ring"><span id="ringLvl">1</span></div>
+      <div><strong id="lvlName">Level 1 · New recruit</strong><br><span class="muted" id="lvlNext">Earn XP in the Arcade, in practice mode, by marking intel as learned and by ticking route steps.</span></div>
+      <div style="margin-left:auto"><label class="muted"><input type="checkbox" id="saveToggle"> Keep my XP and progress in this browser</label><br><button type="button" id="resetBtn">Reset progress</button> <span class="muted" id="saveState" role="status">Off: progress lasts until you close the tab. Nothing ever leaves this device.</span></div>
+    </div>
+    <ul class="stats" aria-label="Size of the evidence base">
+      <li><b>[[n_words]]</b>words explained</li><li><b>[[n_sources]]</b>sources</li><li><b>[[n_claims]]</b>audited claims</li>
+      <li><b>[[n_teams]]</b>team profiles</li><li><b>[[n_people]]</b>people (public)</li><li><b>[[n_mandates]]</b>commercial events</li>
+      <li><b>[[n_developments]]</b>awareness cards</li><li><b>[[n_glossary]]</b>glossary terms</li>
+    </ul>
+  </div>
+  <h2>Jump in</h2>
+  <div class="tiles">[[tiles]]</div>
+  <h2>Top intel</h2>
+  <p>The sharpest evidence-backed findings, each with how to use it. <a href="#/intel">See all of them.</a></p>
+  <div class="grid">[[edge_top]]</div>
+  <h2>Numbers to know</h2>
+  <p>Open a tile for what it means, how to say it and what it does not show. <a href="#/numbers">See the full wall and charts.</a></p>
+  [[numbers_top]]
+  <h2>Learning routes</h2>
+  <p>Three ways through the same research. Tick steps as you go; each tick earns XP.</p>
+  <div class="grid">[[routes]]</div>
+  <h2>How to read the evidence badges</h2>
+  <p>Every substantive claim carries one of six statuses. Each badge has a symbol, a border style and a written label, so it never depends on colour.</p>
+  <ul class="legend">[[legend]]</ul>
+  <h3>How the audited claims break down</h3>
+  <ul class="legend">[[status_counts]]</ul>
+  <h2>What this cannot tell you</h2>
+  <ul>
+    <li>Goldman Sachs's internal structure, fees, headcount, scoring criteria or future interview questions. Where the only source is the former intern's call, the claim is marked <em>Unverified account</em>.</li>
+    <li>Whether another candidate has found the same public facts. The edge here is accuracy and depth you can defend, not secrecy.</li>
+    <li>Whether you would enjoy the work. The why-trees and the blank personal ledger help you find out.</li>
+    <li>Anything after [[research_date]]. Check a source and its date before quoting it. [[public_note]]</li>
+  </ul>
+  <p class="muted">This file works offline: it loads nothing from the network. Source links open the original pages and need a connection.</p>
+</section>
+
+<section class="view" id="view-intel" hidden aria-labelledby="h-intel">
+  [[hero_intel]]
+  <p>Each card is a specific finding from the research with its evidence status, what a quick read usually gets wrong, and how to use it in conversation. Mark cards as learned to earn XP. These are public facts read carefully: say them accurately and with their dates.</p>
+  <div class="filters" data-filter-for="intelList" data-filter-keys="area"></div>
+  <div class="grid" id="intelList">[[edge]]</div>
+</section>
+
+<section class="view" id="view-numbers" hidden aria-labelledby="h-numbers">
+  [[hero_numbers]]
+  <div class="filters"><button type="button" id="testMe" aria-pressed="false">🙈 Test me: hide the values</button><button type="button" id="openNums">Open all</button><button type="button" id="closeNums">Close all</button></div>
+  <div id="numWall">[[numbers]]</div>
+  <h2>Charts</h2>
+  <p>Simple pictures of Goldman's own disclosures. Hover a bar for its value; every chart has a table view.</p>
+  [[charts]]
+</section>
+
+<section class="view" id="view-read" hidden aria-labelledby="h-read">
+  <h1 id="h-read" class="skip">Read the dossier</h1>
+  <div class="reader">
+    <div id="chapters">[[chapters]]<div class="chapter-pager"><button type="button" id="prevCh">← Previous chapter</button><button type="button" id="doneCh" class="primary">✓ Mark chapter as read (+20 XP)</button><button type="button" id="nextCh">Next chapter →</button></div></div>
+    <nav class="toc" aria-label="Chapters"><p class="box-title">Chapters</p><ul id="chapterNav">[[chapter_nav]]</ul></nav>
+  </div>
+</section>
+
+<section class="view" id="view-teams" hidden aria-labelledby="h-teams">
+  [[hero_teams]]
+  <p>The group can be cut by client geography, by client segment, by product line and by job function, and those cuts overlap. The default view is a matrix because a single hierarchy would claim more than the evidence supports. Team names that come only from the former intern's call are marked as an unverified account.</p>
+  [[strip_teams]]
+  <div class="tabs" role="tablist" aria-label="Team views">
+    <button type="button" role="tab" id="tab-matrix" aria-selected="true" aria-controls="pane-matrix" data-pane="matrix">Coverage matrix</button>
+    <button type="button" role="tab" id="tab-org" aria-selected="false" aria-controls="pane-org" data-pane="org" tabindex="-1">Organisational map</button>
+    <button type="button" role="tab" id="tab-cube" aria-selected="false" aria-controls="pane-cube" data-pane="cube" tabindex="-1">3D explorer (optional)</button>
+  </div>
+  <div role="tabpanel" id="pane-matrix" aria-labelledby="tab-matrix">[[matrix]]</div>
+  <div role="tabpanel" id="pane-org" aria-labelledby="tab-org" hidden>[[orgmap]]</div>
+  <div role="tabpanel" id="pane-cube" aria-labelledby="tab-cube" hidden>
+    <p>An optional view of the same matrix as a cube: geography across, client segment up, job function (sales or relationship management) in depth. Every point is a matrix cell; nothing is added to make it look complete. Drag to rotate, or focus the canvas and use the arrow keys. The list below opens each team. It does not move by itself.</p>
+    <canvas id="cube" tabindex="0" role="img" aria-label="Three-dimensional view of the coverage matrix. The same information is in the Coverage matrix tab and in the list below."></canvas>
+    <ul id="cubeList" class="muted"></ul>
+  </div>
+  <h2 id="team-detail-h">Team briefings</h2>
+  <p>Each briefing opens with talking points, questions to ask and watch-outs, then the full evidence.</p>
+  <div class="filters"><label>Show team <select id="teamSel"><option value="">All teams</option></select></label></div>
+  <div class="team-panel" id="teamPanel" aria-live="polite">[[teams]]</div>
+</section>
+
+<section class="view" id="view-people" hidden aria-labelledby="h-people">
+  [[hero_people]]
+  <p>Public professional information only, from official biographies, conference programmes, trade press and publicly indexed profiles. The <em>public title</em> is what the source says. The <em>function</em> is our interpretation and is marked unclear where the title does not settle it. Check the evidence date: people move.</p>
+  [[strip_people]]
+  [[people_stats]]
+  <div class="filters" data-filter-for="peopleList" data-filter-keys="segment,title-class,function-interpretation,confidence,current-as-of-cutoff"></div>
+  <div class="grid" id="peopleList">[[people]]</div>
+</section>
+
+<section class="view" id="view-mandates" hidden aria-labelledby="h-mandates">
+  [[hero_mandates]]
+  <p>Publicly documented wins, losses, appointments, partnerships and launches. A fund launch, a fundraising target, a commitment, an awarded mandate and funded fee-paying assets are different things, and the "kind" field keeps them apart. Public announcements rarely say which team or person originated a deal, so attribution is left as "not publicly established" unless a source states it.</p>
+  [[strip_mandates]]
+  <div class="filters" data-filter-for="mandateList" data-filter-keys="kind,client-type,country,status"></div>
+  <div id="mandateList">[[mandates]]</div>
+</section>
+
+<section class="view" id="view-awareness" hidden aria-labelledby="h-awareness">
+  [[hero_awareness]]
+  <p>Each card follows one chain: what happened, how it affects the client, what decision changes, what it means for existing investments, a possible response, the sales and relationship-management responsibilities, and the counterarguments. Not every market change is a reason to sell something.</p>
+  [[strip_awareness]]
+  <div class="filters" data-filter-for="devList" data-filter-keys="teams,status"></div>
+  <div id="devList">[[developments]]</div>
+  <h2>Competitors, by client problem</h2>
+  <div class="filters" data-filter-for="compList" data-filter-keys="relevant-to"></div>
+  <div id="compList">[[competitors]]</div>
+</section>
+
+<section class="view" id="view-roles" hidden aria-labelledby="h-roles">
+  [[hero_roles]]
+  <p>Choose two or three roles to compare side by side. These describe general industry practice, not a Goldman Sachs job architecture, and responsibilities overlap in real teams.</p>
+  [[strip_roles]]
+  <div class="filters">
+    <label>Role A <select class="roleSel" id="roleA"></select></label>
+    <label>Role B <select class="roleSel" id="roleB"></select></label>
+    <label>Role C (optional) <select class="roleSel" id="roleC"></select></label>
+  </div>
+  <div class="table-wrap" id="roleCompare" aria-live="polite"></div>
+  <h2>All role cards</h2>
+  <div id="roleList">[[roles]]</div>
+</section>
+
+<section class="view" id="view-lifecycle" hidden aria-labelledby="h-lifecycle">
+  [[hero_lifecycle]]
+  <p>Follow one client from first research to renewal or exit. At each stage: who leads, who supports, what the junior person produces, and what good execution changes for the client.</p>
+  [[strip_lifecycle]]
+  <div class="seg" role="group" aria-label="Lifecycle path">
+    <button type="button" data-path="inst" aria-pressed="true">Institutional mandate</button>
+    <button type="button" data-path="tpw" aria-pressed="false">Wealth intermediary</button>
+  </div>
+  <ol class="stepper" id="stepper" aria-label="Stages"></ol>
+  <div class="chapter-pager"><button type="button" id="prevStage">← Previous stage</button><button type="button" id="allStages" aria-pressed="false">Show all stages</button><button type="button" id="nextStage">Next stage →</button></div>
+  <div id="stages-inst" aria-live="polite">[[lifecycle]]</div>
+  <div id="stages-tpw" hidden aria-live="polite">[[lifecycle_tpw]]</div>
+</section>
+
+<section class="view" id="view-calculator" hidden aria-labelledby="h-calculator">
+  [[hero_calculator]]
+  <div class="box box-warn"><p class="box-title">Illustrative only</p><p>This shows how management-fee arithmetic works. Every rate is an input you choose. Nothing here is a Goldman Sachs fee, and the result is gross management fee before costs, rebates, distribution payments, performance fees and every other adjustment. It is not profit and it is not revenue attributable to any one team.</p></div>
+  <div class="filters"><label>Load a worked case <select id="caseSel"><option value="">Custom inputs</option></select></label><p id="caseTeach" class="muted" style="flex:1 1 20rem;margin:0"></p></div>
+  <div class="calc">
+    <form id="calcForm" onsubmit="return false" aria-label="Fee calculator inputs">
+      <fieldset><legend>Assets</legend>
+        <label>Mandate or commitment size (£) <input type="number" id="c_size" min="0" step="1000000" value="500000000"></label>
+        <label>Funded at the start (%) <input type="number" id="c_funded" min="0" max="100" step="5" value="100"></label>
+        <label>Month the rest is funded (blank = never) <input type="number" id="c_remmonth" min="2" max="120" step="1"></label>
+        <label>Market return (% a year) <input type="number" id="c_ret" step="0.5" value="0"></label>
+        <label>Period (months) <input type="number" id="c_months" min="1" max="120" step="1" value="12"></label>
+      </fieldset>
+      <fieldset><legend>Client flows</legend>
+        <label>One-off flow (£, negative = withdrawal) <input type="number" id="c_flow" step="1000000" value="0"></label>
+        <label>Month of that flow <input type="number" id="c_flowmonth" min="1" max="120" step="1"></label>
+        <label>Recurring net flow (£ a month) <input type="number" id="c_mflow" step="500000" value="0"></label>
+        <label>Recurring flow starts in month <input type="number" id="c_mflowstart" min="1" max="120" step="1"></label>
+      </fieldset>
+      <fieldset><legend>Fee terms</legend>
+        <label>Fee base <select id="c_base"><option value="market_value">Market value of assets</option><option value="committed">Committed capital</option></select></label>
+        <label>Fee schedule <select id="c_mode"><option value="flat">Flat rate</option><option value="tiered">Tiered (breakpoints)</option></select></label>
+        <label>Flat rate (basis points a year) <input type="number" id="c_bps" min="0" step="0.5" value="20"></label>
+        <label>Rate changes in month (blank = no change) <input type="number" id="c_chgmonth" min="2" max="120" step="1"></label>
+        <label>New rate (basis points) <input type="number" id="c_newbps" min="0" step="0.5"></label>
+        <div id="tierBox" hidden>
+          <p class="muted">Tiers apply to slices of the fee base, lowest first. Leave the last "up to" blank for "everything above".</p>
+          <label>Tier 1 up to (£) <input type="number" id="t1u" step="1000000" value="250000000"></label><label>Tier 1 rate (bp) <input type="number" id="t1b" step="0.5" value="25"></label>
+          <label>Tier 2 up to (£) <input type="number" id="t2u" step="1000000" value="500000000"></label><label>Tier 2 rate (bp) <input type="number" id="t2b" step="0.5" value="20"></label>
+          <label>Tier 3 up to (£) <input type="number" id="t3u" step="1000000"></label><label>Tier 3 rate (bp) <input type="number" id="t3b" step="0.5" value="15"></label>
+        </div>
+      </fieldset>
+    </form>
+    <div aria-live="polite" id="calcOut">
+      <p class="muted">Total illustrative gross management fee over the period</p>
+      <p class="bignum" id="calcTotal"></p>
+      <div class="formula" id="calcFormula"></div>
+      <div class="table-wrap"><table id="calcYears"><caption>By year</caption><thead><tr><th>Period</th><th>Average fee base</th><th>Gross management fee</th><th>Effective annual rate</th><th>Assets at period end</th></tr></thead><tbody></tbody></table></div>
+      <details><summary>Month-by-month working</summary><div class="table-wrap"><table id="calcMonths"><thead><tr><th>Month</th><th>Flow at start</th><th>Balance after flow</th><th>Fee base</th><th>Fee for the month</th><th>Balance at end</th></tr></thead><tbody></tbody></table></div></details>
+      <details><summary>How the model works, and what it leaves out</summary>
+        <ol><li>Flows land at the start of a month. A withdrawal cannot take the balance below zero.</li><li>The month's fee is the annual fee on that month's fee base, divided by twelve. With tiers, each slice of the base is charged at its own rate.</li><li>The market return is applied at the end of the month, compounded monthly.</li><li>Fees are assumed to be invoiced separately, not deducted from the assets.</li></ol>
+        <p>Left out on purpose: performance fees and carried interest, rebates and distribution payments, the manager's costs, daily accrual conventions, minimum fees, most-favoured-nation clauses and tax. For private-markets funds, read the fund terms to find the real fee base before using either option.</p></details>
+    </div>
+  </div>
+  [[strip_calculator]]
+  <h2>All worked cases</h2>
+  <p>The same cases, calculated when this file was built. The calculator above must reproduce each total exactly.</p>
+  [[cases]]
+</section>
+
+<section class="view" id="view-why" hidden aria-labelledby="h-why">
+  [[hero_why]]
+  <p>Each tree starts from a motivation and keeps challenging it until it reaches a concrete preference, an explicit assumption or an admitted uncertainty. Open one level at a time and try to answer before you read. A tree shows whether an argument holds. It cannot show that you would enjoy the work.</p>
+  <div class="filters"><button type="button" id="whyOpen">Expand all</button><button type="button" id="whyClose">Collapse all</button></div>
+  <div id="whyList">[[why]]</div>
+  <h2>Personal evidence ledger</h2>
+  <div id="personal">[[personal]]</div>
+</section>
+
+<section class="view" id="view-practice" hidden aria-labelledby="h-practice">
+  [[hero_practice]]
+  <div class="box box-warn"><p class="box-title">A practice framework, not Goldman's criteria</p><p>[[framework_note]] This is for preparation beforehand. It uses a silent on-screen timer only: it does not record audio, does not ask for the microphone and sends nothing anywhere.</p></div>
+  [[strip_practice]]
+  <h2>Practice mode</h2>
+  <div class="filters">
+    <label>Question set <select id="pCat"><option value="">All categories</option></select></label>
+    <label>Answer length <select id="pLen"><option value="30">30 seconds</option><option value="90" selected>90 seconds</option><option value="120">2 minutes</option></select></label>
+    <button type="button" class="primary" id="pNext">🎲 Draw a question</button>
+  </div>
+  <div class="game" id="pCard" hidden>
+    <p class="card-sub" id="pMeta"></p>
+    <h3 class="game-q" id="pQ" tabindex="-1"></h3>
+    <p><span class="timer" id="pTimer" role="timer" aria-live="off">0:00</span> <button type="button" id="pStart">Start timer</button> <button type="button" id="pStop">Stop</button> <span id="pTimeMsg" role="status" class="muted"></span></p>
+    <p>Answer aloud. Then score yourself honestly on each criterion (0 = absent, 3 = strong). There are no points for sounding confident.</p>
+    <div class="score-grid" id="pScores"></div>
+    <p><button type="button" id="pReveal">Reveal the reasoning for this question</button> <button type="button" id="pSave">Record this attempt (+15 XP)</button> <span id="pSaved" role="status" class="muted"></span></p>
+    <div id="pAnswer" hidden></div>
+  </div>
+  <div id="pHistory"></div>
+  <h2>How answers are judged here</h2>
+  <ul>[[criteria]]</ul>
+  <h2>Question bank</h2>
+  <div class="filters" data-filter-for="qList" data-filter-keys="category"></div>
+  <div id="qList">[[questions]]</div>
+  <h2>Practice cases</h2>
+  <div id="icaseList">[[icases]]</div>
+</section>
+
+<section class="view" id="view-arcade" hidden aria-labelledby="h-arcade">
+  [[hero_arcade]]
+  <div class="tabs" role="group" aria-label="Game">
+    <button type="button" data-game="quiz" aria-pressed="true">⚡ Quick-fire quiz</button>
+    <button type="button" data-game="flash" aria-pressed="false">🃏 Flashcards</button>
+    <button type="button" data-game="rumour" aria-pressed="false">🕵️ Verified or rumour?</button>
+    <button type="button" data-game="recall" aria-pressed="false">🔢 Number recall</button>
+  </div>
+
+  <div class="game" id="g-quiz">
+    <div class="filters">
+      <label>Topic <select id="zTopic"><option value="">All topics</option></select></label>
+      <label>Level <select id="zLevel"><option value="">Both</option><option value="1">Level 1 · foundations</option><option value="2">Level 2 · mechanics</option></select></label>
+      <label>Length <select id="zLen"><option value="5">5 questions</option><option value="10" selected>10 questions</option><option value="20">20 questions</option></select></label>
+      <button type="button" class="primary" id="zStart">Start round</button>
+    </div>
+    <div id="zPlay" hidden>
+      <div class="game-top"><span id="zProg"></span><span>Score <b id="zScore">0</b></span><span class="streak" id="zStreak"></span></div>
+      <p class="game-q" id="zQ" tabindex="-1"></p>
+      <div class="opts" id="zOpts"></div>
+      <div class="feedback" id="zFb" hidden role="status"></div>
+      <p><button type="button" id="zNext" hidden class="primary">Next question →</button></p>
+    </div>
+    <div id="zEnd" hidden role="status"></div>
+  </div>
+
+  <div class="game" id="g-flash" hidden>
+    <p class="game-top"><span id="fProg"></span><span>Known this session <b id="fKnown">0</b></span></p>
+    <div class="flash"><div><div class="term" id="fTerm"></div><div id="fDef" hidden></div></div></div>
+    <p><button type="button" class="primary" id="fFlip">Show definition</button> <button type="button" id="fYes" hidden>✓ Knew it (+5 XP)</button> <button type="button" id="fNo" hidden>↻ Not yet, show again later</button></p>
+  </div>
+
+  <div class="game" id="g-rumour" hidden>
+    <p>Something the former intern said on the call. What did the research conclude about it? Pick the evidence status.</p>
+    <p class="game-top"><span id="rProg"></span><span>Correct <b id="rScore">0</b></span></p>
+    <p class="game-q" id="rClaim" tabindex="-1"></p>
+    <div class="opts" id="rOpts"></div>
+    <div class="feedback" id="rFb" hidden role="status"></div>
+    <p><button type="button" id="rNext" hidden class="primary">Next claim →</button></p>
+  </div>
+
+  <div class="game" id="g-recall" hidden>
+    <p>Say the figure and its date aloud, then reveal it.</p>
+    <p class="game-top"><span id="nProg"></span><span>Recalled <b id="nScore">0</b></span></p>
+    <p class="game-q" id="nLabel" tabindex="-1"></p>
+    <div class="flash"><div><div class="term" id="nVal">?</div><div id="nSay" class="muted"></div></div></div>
+    <p><button type="button" class="primary" id="nReveal">Reveal</button> <button type="button" id="nYes" hidden>✓ Had it (+5 XP)</button> <button type="button" id="nNo" hidden>✗ Missed it</button></p>
+  </div>
+</section>
+
+<section class="view" id="view-glossary" hidden aria-labelledby="h-glossary">
+  [[hero_glossary]]
+  <div class="filters"><label>Filter terms <input type="search" id="gq" placeholder="Type a term or acronym" autocomplete="off"></label><span class="count" id="gCount" role="status"></span><a class="btn" href="#/arcade">🃏 Drill these as flashcards</a></div>
+  <div class="grid" id="glossList">[[glossary]]</div>
+</section>
+
+<section class="view" id="view-sources" hidden aria-labelledby="h-sources">
+  [[hero_sources]]
+  <p>Research date and information cutoff: [[research_date]]. Another AI's draft is not treated as a source, and several articles repeating one announcement count once.</p>
+  <h2 id="audit">Audit of the former intern's account</h2>
+  [[intern_claims]]
+  <h2 id="coverage">Research coverage register</h2>
+  <p>"Searched, not established" means it was looked for and not found in public sources. "Not investigated" means nobody has looked yet. They are different.</p>
+  [[coverage]]
+  <h2 id="claims">Claim register</h2>
+  <div class="filters" data-filter-for="claimsWrap" data-filter-keys="status" data-filter-rows="tbody tr"></div>
+  <div id="claimsWrap">[[claims]]</div>
+  <h2 id="register">Source register</h2>
+  <div class="filters" data-filter-for="sourcesWrap" data-filter-keys="type,stream" data-filter-rows="tbody tr"></div>
+  <div id="sourcesWrap">[[sources]]</div>
+  <h2 id="strings">Reproducible search strings</h2>
+  [[search_strings]]
+</section>
+
+<section class="view" id="view-search" hidden aria-labelledby="h-search">
+  <h1 id="h-search">Search results</h1>
+  <p id="searchSummary" role="status"></p>
+  <ol class="results" id="searchResults"></ol>
+</section>
+
+</main>
+</div>
+<div id="pop" role="dialog" aria-label="Definition" hidden></div>
+<script type="application/json" id="data">[[data_json]]</script>
+<script>[[js]]</script>
+</body>
+</html>

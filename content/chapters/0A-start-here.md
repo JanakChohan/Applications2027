@@ -91,7 +91,7 @@ A **mandate** is the name for one job a client gives a manager: "invest this £5
 
 For a sense of real levels: across everything it manages, Goldman's average management fee in 2025 was 31 basis points. It was 17 for bonds and 58 for private investments. {{V}} [@R2-S01] These are averages across the whole firm. They are not the price of any one mandate.
 
-The fee calculator in the app lets you change each input and watch the result.
+The fee calculator lets you change each input and watch the result.
 
 ## 5. What the Client Solutions Group does all day
 
@@ -174,7 +174,7 @@ A few things in this picture surprise people.
 - **The win is the start.** After step 5 the firm has made a set of promises. Steps 6 to 8 are about keeping them, year after year.
 - **Step 8 has three honest outcomes.** The client may give more money, take some back, or leave. Sometimes leaving is the right decision for the client, and a good relationship manager helps them do it well.
 
-The Client lifecycle section of the app shows who does what at every step.
+The Sales and relationship management page shows who does what at every step.
 
 ## 8. How trust really grows
 
@@ -266,39 +266,13 @@ A forty-year career will see the industry change several times. These are the sh
 
 The work changes with all of these. The need for someone to stand between the client and the investors does not go away.
 
-## 10. From understanding to "why I want this"
+## 10. What "relationships" really means
 
-An interviewer will ask why you want this job. A strong answer cannot be borrowed. It has to come from you.
+Sections 7 and 8 gave the outline. The Relationships page goes through it properly: who the relationship is with, what starts it, what keeps it going, what builds it, how it ends, and what it looks like after one year, ten years and forty.
 
-Here is a way to build one that is honest.
+The Sales and relationship management page then walks through how a client is won, step by step, and what happens after the win.
 
-<!-- DATA:diagram:why-funnel -->
-
-**Step 1. Know what the job is.** You now do. It is helping large organisations choose and keep the right investments, by understanding their problem, bringing the right people to it, and keeping every promise afterwards.
-
-**Step 2. Pick out what might suit you.** Read this list slowly. Notice which lines you react to. A reaction either way is useful.
-
-- Working out what someone needs, when it differs from what they first asked for.
-- Explaining something complicated so that a non-expert can decide.
-- Being the person who makes sure nothing is dropped.
-- Learning how pensions, insurers and markets work, and keeping on learning.
-- Building something slowly, over years, with the same people.
-- Being measured, eventually, on money won and kept.
-- Hearing "no" often and carrying on.
-
-**Step 3. Test each one against your own life.** For each line that drew you, find one real time you did something like it. Then ask the harder question. Did you enjoy the doing, or only the result?
-
-**Step 4. Keep what survives.** A reason that has passed step 3 is one you can defend when an interviewer pushes.
-
-Two sentence frames may help. Fill them only with things that are true.
-
-> "The part of this work that draws me is [ ... ]. I know that because [ ... ]. What I have not tested yet is [ ... ]."
-
-> "I understand the job is mostly [ ... ] in the first years. That suits me because [ ... ]."
-
-If you have no evidence for something yet, say so. "I want to find out whether I enjoy this, and here is how the internship would test it" is a stronger answer than a confident story with nothing behind it.
-
-The Why-trees section of the app pushes each reason through six or seven harder questions. The blank personal ledger in chapter 8 is where your own evidence goes.
+Read those two next. They are the heart of this job.
 
 ## 11. What happens next in the process
 
@@ -320,10 +294,11 @@ What is not published: how candidates are matched to teams, whether this team's 
 | Each team and its clients | Chapter 3, and Teams in the app |
 | How the money works, with worked cases | Chapter 5, and the Fee calculator |
 | Sales compared with relationship management | Chapter 6 |
-| Trust, in full | Chapter 7 |
-| Whether your reasons hold up | Chapter 8, and Why-trees |
+| Relationships: who, what, how, where, why | The Relationships page |
+| How a client is won and kept | The Sales and relationship management page |
+| Trust, in full detail | Chapter 7 |
 | What is changing for each client type | Chapter 9 |
-| How to practise answers | Chapter 10, and the Arcade |
+| How to practise answers | Chapter 10, and Practise |
 
 :::check Can you explain it?
 Close this guide and say these aloud, in your own words.

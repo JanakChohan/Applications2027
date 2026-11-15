@@ -33,7 +33,7 @@ Compare two candidates asked "Why Goldman Sachs?". The first says the firm has a
 The difference is not vocabulary or confidence. The second candidate did three things before the interview:
 
 1. Learned what the business does and how it is paid (Chapter 1 and the chapters on the role, the teams and the economics).
-2. Worked out which of their own claims are supported and which are hopes (the why-trees and the ledger in [Chapter 8](#ch08)).
+2. Worked out which of their own claims are supported and which are hopes (by testing each one against a real example from their own life).
 3. Practised saying it aloud, in time, to the standard below.
 
 :::l1
@@ -141,7 +141,7 @@ This is the example where the better answer is shorter and plainer than the weak
 "Fair challenge. Important and enjoyable aren't the same. The parts I think I'd enjoy are specific: working out how an unfamiliar organisation makes decisions, and getting a piece of written work exactly right for someone else to use. My evidence is [my own example]. The part I expect to find hard is repetition, the fifth quarterly pack. I can't prove I'd enjoy it until I've done it, which is partly why I'm applying."
 :::
 
-**Why it is better.** It accepts the distinction, names tasks, offers evidence, names a cost and admits uncertainty. It contains no adjective about the speaker. If the slot is empty, the answer still works: "I don't have strong evidence yet. Here is why I expect to, and here is what would tell me I was wrong." Full treatment: [IQ-31](#IQ-31), and the section "A valuable role is not the same as a role I would enjoy" in [Chapter 8](#ch08).
+**Why it is better.** It accepts the distinction, names tasks, offers evidence, names a cost and admits uncertainty. It contains no adjective about the speaker. If the slot is empty, the answer still works: "I don't have strong evidence yet. Here is why I expect to, and here is what would tell me I was wrong." Full treatment: [IQ-31](#IQ-31), and the section "A valuable role is not the same as a role I would enjoy" in the Relationships page.
 
 ## How to handle "I don't know"
 
@@ -206,24 +206,24 @@ The application's practice mode draws a question, runs a silent timer and asks y
 Work through the practice cases the same way. Each gives a situation, your realistic role in it, what good looks like and the traps. Say what you would do, then compare. In every case the junior's decision rights are limited on purpose: the skill being practised is noticing, checking, escalating and following through, not deciding for the client.
 
 :::note On the personal slots
-Before practising the motivation questions, fill in the personal ledger and reflection questions in [Chapter 8](#ch08). A slot answered with a small true example ("I kept a weekly report accurate for ten weeks and here is what I noticed") beats one answered with a large vague one.
+Before practising the motivation questions, write down one real example from your own life for each claim you plan to make. A slot answered with a small true example ("I kept a weekly report accurate for ten weeks and here is what I noticed") beats one answered with a large vague one.
 :::
 
 ## Map: where each kind of question is fed from
 
-| Question category | Bank IDs | Chapters that feed it | Why-trees |
-|---|---|---|---|
-| Why Goldman Sachs | IQ-01 to IQ-04 | The role; Teams and structure; Mandates and economics; Commercial awareness (competitors) | [WT-gs](#WT-gs) |
-| Why asset management | IQ-05 to IQ-07 | [Foundations](#ch01); Mandates and economics | [WT-am](#WT-am) |
-| Why CSG | IQ-08, IQ-10 | The role; [Sales versus relationship management](#ch06) | [WT-csg](#WT-csg), [WT-understand](#WT-understand) |
-| Sales or RM | IQ-11 to IQ-13 | [Sales versus relationship management](#ch06); People and recruitment | [WT-sales](#WT-sales), [WT-rm](#WT-rm) |
-| The role | IQ-14 to IQ-16 | The role; Teams and structure; client lifecycle; role cards | [WT-csg](#WT-csg) |
-| Clients | IQ-17 to IQ-20 | [Foundations](#ch01); Teams and structure; [The client relationship](#ch07) | [WT-inst](#WT-inst) |
-| Commercial awareness | IQ-21 to IQ-24 | Commercial awareness; awareness cards; Mandates and economics | none directly |
-| Trust and relationships | IQ-25 to IQ-27 | [The client relationship](#ch07) | [WT-trust](#WT-trust), [WT-ltr](#WT-ltr) |
-| Difficult conversations | IQ-28 to IQ-30 | [The client relationship](#ch07); [Motivation and career fit](#ch08) (values in conflict) | [WT-trust](#WT-trust) |
-| Long-term motivation | IQ-32, IQ-33 | [Motivation and career fit](#ch08) | [WT-ltr](#WT-ltr), all "different role" signals |
-| Challenge questions | IQ-09, IQ-31, IQ-34 | [Sales versus relationship management](#ch06); [Motivation and career fit](#ch08) | [WT-understand](#WT-understand), [WT-trust](#WT-trust) |
+| Question category | Bank IDs | Chapters that feed it |
+|---|---|---|
+| Why Goldman Sachs | IQ-01 to IQ-04 | The role; Teams and structure; Mandates and economics; Commercial awareness (competitors) |
+| Why asset management | IQ-05 to IQ-07 | [Foundations](#ch01); Mandates and economics |
+| Why CSG | IQ-08, IQ-10 | The role; [Sales versus relationship management](#ch06) |
+| Sales or RM | IQ-11 to IQ-13 | [Sales versus relationship management](#ch06); People and recruitment |
+| The role | IQ-14 to IQ-16 | The role; Teams and structure; client lifecycle; role cards |
+| Clients | IQ-17 to IQ-20 | [Foundations](#ch01); Teams and structure; [The client relationship](#ch07) |
+| Commercial awareness | IQ-21 to IQ-24 | Commercial awareness; awareness cards; Mandates and economics |
+| Trust and relationships | IQ-25 to IQ-27 | [The client relationship](#ch07) |
+| Difficult conversations | IQ-28 to IQ-30 | [The client relationship](#ch07); the Relationships page |
+| Long-term motivation | IQ-32, IQ-33 | the Relationships page |
+| Challenge questions | IQ-09, IQ-31, IQ-34 | [Sales versus relationship management](#ch06); the Relationships page |
 
 The six practice cases draw on the same material: PC-01 and PC-02 on the economics and on Chapter 7's treatment of honesty; PC-03 on suitability and decision rights; PC-04 on admitting limits; PC-05 on responsiveness against accuracy; PC-06 on the wealth-intermediary chain.
 

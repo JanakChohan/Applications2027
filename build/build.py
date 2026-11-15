@@ -23,6 +23,7 @@ import markdown
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from calc import fee_model, money  # noqa: E402
+import diagrams  # noqa: E402
 from diagrams import diagram  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -798,9 +799,9 @@ def render_team_brief(t, D):
     if not b:
         return ""
     return (f'<div class="brief"><p class="brief-one">{inline(b.get("one_liner"), D)}</p><div class="cols3">'
-            f'<div><h4><span aria-hidden="true">💬</span> Talking points</h4>{value_html(b.get("talking_points"), D)}</div>'
-            f'<div><h4><span aria-hidden="true">❓</span> Questions to ask</h4>{value_html(b.get("questions_to_ask"), D)}</div>'
-            f'<div><h4><span aria-hidden="true">⚠️</span> Watch-outs</h4>{value_html(b.get("watch_outs"), D)}</div></div></div>')
+            f'<div><h4>Talking points</h4>{value_html(b.get("talking_points"), D)}</div>'
+            f'<div><h4>Questions to ask</h4>{value_html(b.get("questions_to_ask"), D)}</div>'
+            f'<div><h4>Watch-outs</h4>{value_html(b.get("watch_outs"), D)}</div></div></div>')
 
 
 def render_tiles(D, counts):
@@ -871,8 +872,8 @@ def fill_placeholders(h, D):
             return render_matrix(D)
         if name == "org-map":
             return render_orgmap(D)
-        if name == "intern-claims":
-            return render_intern_claims(D)
+        if name == "intern-claims":   # embedded copy inside a chapter: no ids, so the ids stay unique to the main list
+            return re.sub(r' id="IC-[0-9]+" data-search data-kind="claim-audit"', "", render_intern_claims(D))
         if name == "coverage-register":
             return render_coverage(D)
         if name == "people-summary":
@@ -1040,7 +1041,7 @@ def build_dossier_md(chapters, D):
         r2 = dict(r)
         r2["status"] = r.get("evidence_status")
         L.append(md_entity(r2, "name", F_ROLE))
-    L += ["# Appendix H: Why-trees", ""]
+    L += ["# Appendix H: (removed)", "", "The why-tree exercises were removed at the user's request.", ""]
     for t in D["why"].get("trees", []):
         L += [f"### {t.get('title')} `{t.get('id')}`", "", f"**Opening claim:** {md_value(t.get('opening_claim'))}", "",
               f"**What this does not prove:** {md_value(t.get('warning'))}", ""]
@@ -1207,16 +1208,33 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     D = load_all()
     # "0A-start-here" is the beginner primer and always comes first; the numbered chapters follow in order.
-    files = sorted((ROOT / "content" / "chapters").glob("[0-9][0-9A-Z]-*.md"), key=lambda f: (not f.name.startswith("0A"), f.name))
+    diagrams.reset()
+    files = sorted((ROOT / "content" / "chapters").glob("[0-9][0-9A-Z]-*.md"), key=lambda f: (not f.name[1].isalpha(), f.name))
     chapters = [render_chapter(p, D) for p in files]
+    guides = {c["id"]: c for c in chapters if c["id"][3].isalpha()}
+    library = [c for c in chapters if not c["id"][3].isalpha()]
     suffix = ""
 
     (ROOT / "dossier").mkdir(exist_ok=True)
     (ROOT / "dossier" / f"GSAM_CSG_2027_Master_Dossier{suffix}.md").write_text(build_dossier_md(chapters, D), encoding="utf-8")
 
     app = ROOT / "build" / "app"
-    V = build_views(chapters, D)
+    V = build_views(library, D)
     counts = V.pop("counts")
+    counts["words"] = sum(c["words"] for c in chapters)
+    for slot, cid in (("role", "ch0A"), ("rel", "ch0B"), ("sales", "ch0C")):
+        g = guides.get(cid)
+        V[f"guide_{slot}"] = f'<article class="chapter guide-page" id="art-{cid}" data-chapter="{cid}">{g["html"]}</article>' if g else '<p class="na">Page not written yet.</p>'
+        V[f"toc_{slot}"] = "".join(f'<li><a href="#{o["id"]}">{esc(o["title"])}</a></li>' for o in (g["outline"] if g else []) if o["level"] == 2)
+
+    def stage_details(stages):
+        out = []
+        for i, st in enumerate(stages, 1):
+            rows = "".join(f"<dt>{esc(lab)}</dt><dd>{value_html(st.get(k), D)}</dd>" for k, lab in F_STAGE if st.get(k))
+            out.append(f'<details class="stage" id="{esc(st.get("id"))}" data-search data-kind="stage"><summary><span>{i}. {esc(st.get("name"))}</span></summary><dl class="kv">{rows}</dl></details>')
+        return "".join(out)
+    V["lifecycle_details"] = stage_details(D["lifecycle"].get("stages", []))
+    V["lifecycle_tpw_details"] = stage_details(D["lifecycle"].get("tpw_variant", []))
     js_data = {
         "matrix": D["teams"]["matrix"], "axes": D["teams"]["axes"],
         "teams": [{"id": t["id"], "name": t["name"], "status": t.get("name_status") or t.get("status")} for t in D["teams"]["teams"]],

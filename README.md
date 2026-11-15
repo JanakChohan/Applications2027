@@ -1,4 +1,4 @@
-# GSAM Client Solutions Group 2027: research dossier and study platform
+# GSAM Client Solutions Group 2027: guide and research dossier
 
 Preparation material for the **2027 | EMEA | London | Asset Management, Client Solutions Group | Summer Analyst** programme at Goldman Sachs. Independent work: not produced by, endorsed by or affiliated with Goldman Sachs.
 
@@ -8,34 +8,31 @@ Research date and information cutoff: **14 November 2026**.
 
 | File | What it is |
 |---|---|
-| `gsam_csg_command_center.html` | The interactive study application. One file, works offline, makes no network requests |
-| `GSAM_CSG_2027_Dossier.pdf` | Printable study guide, 630 pages, with linked contents and page numbers. Opens with a beginner part, "Start here: the whole thing from zero", with nine diagrams. Set for easier reading: sans-serif, larger text, wider spacing, cream pages, no italics or capitals-only labels. Contains everything in the application with every panel opened |
-| `dossier/GSAM_CSG_2027_Master_Dossier.md` | The master dossier in Markdown: the beginner primer, twelve chapters and appendices A to T |
-| `content/chapters/` | The chapter sources (about 93,000 words). `0A-start-here.md` is the beginner primer and always comes first |
-| `data/` | The structured evidence base: sources, claims, teams, people, mandates, developments, glossary, why-trees, interview bank, quiz, key numbers, charts |
-| `research/evidence/` | Raw research notes per stream, with search logs and "searched, not established" lists |
-| `research/CONVENTIONS.md` | Schemas, evidence vocabulary and writing conventions |
-| `build/` | Generation and test scripts |
+| `gsam_csg_command_center.html` | The website. One file, works offline, makes no network requests, stores nothing |
+| `GSAM_CSG_2027_Dossier.pdf` | Printable guide, 591 pages, with linked contents and page numbers. Opens with the three beginner pages and their diagrams. Set for easier reading: sans-serif, larger text, wider spacing, cream pages, no italics |
+| `dossier/GSAM_CSG_2027_Master_Dossier.md` | Everything in Markdown |
+| `content/chapters/` | The text. `0A`, `0B` and `0C` are the three beginner guide pages; `00` to `11` are the deeper chapters |
+| `data/` | The evidence base: sources, checked claims, teams, people, mandates, market changes, glossary, interview bank, quiz, numbers, charts |
+| `research/evidence/` | Raw research notes per stream, with search logs |
+| `build/` | Scripts that generate and test everything |
+| `archive/` | Removed material: the earlier site design, the why-tree exercises and the motivation chapter |
 
-All three outputs are generated from `content/` and `data/` by one script, so the website, PDF and dossier cannot disagree. Entities carry stable IDs (for example `R2-S01` for a source, `M-R7-01` for a mandate, `P-R6-01` for a person) that are the same in every output.
+The website, the PDF and the Markdown dossier are generated from `content/` and `data/` by one script, so they cannot disagree.
 
-## The application
+## The website
 
-Open `gsam_csg_command_center.html` in any modern browser. Sections:
+Open `gsam_csg_command_center.html` in a browser. It is deliberately plain: one typeface, one accent colour, no points or games.
 
-- **Mission control**: dashboard, section tiles, top intel, numbers, learning routes, XP level.
-- **Intel**: 62 evidence-backed findings, each with what a quick read gets wrong and how to use it.
-- **Numbers to know**: 45 figures with caveats, a "Test me" mode, and nine charts of Goldman's own disclosures.
-- **Read the dossier**: the beginner primer with diagrams, then twelve chapters, with Beginner, Technical or Both views and glossary pop-ups. An **Easy read** button in the header widens spacing, removes italics and switches to a cream page.
-- **Teams and coverage**: coverage matrix (default), organisational map, optional 3D explorer, and a briefing per team with talking points, questions to ask and watch-outs.
-- **People directory**, **Mandates and events**, **Commercial awareness** (with competitors): filterable cards with sources.
-- **Role comparison**, **Client lifecycle**, **Fee calculator** (with fifteen worked cases).
-- **Why-trees**, **Interview practice** (34 questions, six cases, silent timer, self-scoring) and **Arcade** (quiz of 110 questions, glossary flashcards, "Verified or rumour?", number recall).
-- **Glossary** and **Sources and evidence** (source register, claim register, audit of the former intern's account, coverage register, search strings).
+- **Home**: three pages to read in order.
+- **The role**: what you are applying to, from zero. Whose money it is, how the firm is paid, what a junior person does.
+- **Relationships**: who a client relationship is with, what starts it, what continues it, what builds it, how it ends, where the work happens, why it matters, what it looks like over 1 to 40 years and in year one, and how to talk about it.
+- **Sales and RM**: how a client is won step by step, how the relationship is kept, how the two jobs differ, with every step expandable.
+- **Teams**: each team's clients, talking points, questions to ask and watch-outs, plus the coverage map.
+- **Facts**: numbers with caveats, key findings, charts, and the check of the former intern's account.
+- **Practise**: interview questions with reasoning, a silent timer, a quick quiz and cases.
+- **Library**: the deeper chapters, people, mandates, market changes, roles, fee calculator, glossary and sources.
 
-Every claim carries one of six evidence statuses, shown as a badge with a symbol and a written label: Verified, Supported inference, Unverified account, Illustrative example, Conflicting evidence, Not publicly established.
-
-Progress and XP are kept in memory only. Ticking "Keep my XP and progress in this browser" stores them in that browser's local storage; unticking or "Reset progress" removes them. Nothing is sent anywhere. Practice mode uses an on-screen timer only: no microphone, no recording.
+Every fact shows its evidence: Verified, Supported inference, Unverified account, Illustrative example, Conflicting evidence or Not publicly established.
 
 ## Rebuilding
 
@@ -51,38 +48,33 @@ python3 build/build.py --pdf
 node build/test_app.js
 ```
 
-The PDF step and the tests need Node with Playwright and Chromium. `build/build.py` without `--pdf` regenerates the dossier and the HTML only. `build/diagrams.py` draws the primer's diagrams, and `build/page_background.py` paints the cream page background across whole PDF pages. `build/calc.py` is the fee model; the same algorithm is implemented in JavaScript in `build/app/app.js`, and the tests check that the two agree on every worked case.
+The PDF step and the tests need Node with Playwright and Chromium.
 
-## What was tested (14 November 2026)
+## What was tested (15 November 2026)
 
-`node build/test_app.js` ran 91 checks and all 91 passed. They cover:
+`node build/test_app.js` ran 78 checks and all 78 passed. They cover:
 
-- Loads with no network requests; no external scripts, stylesheets, images or fonts.
-- All 16 sections open one at a time with correct navigation state.
-- Full-text search returns results, links through, and reports zero results honestly.
-- Filters on intel, people and mandates; team selection; matrix cell links; tabs by keyboard; 3D explorer draws.
-- The primer opens first with nine diagrams, each with an "In words" line; no diagram text runs outside its picture; Easy read widens spacing and removes italics.
-- Beginner view hides Level 2 blocks and keeps caveats visible; glossary pop-up opens and closes with Escape.
-- Calculator: £500m at 20bp = £1,000,000; tranche funding = £750,000; tiered £600m = £1,275,000; committed-capital base ignores drawdown and markets; a withdrawal cannot go below zero; JavaScript equals Python on all fifteen cases.
-- Lifecycle stepping and both paths; why-trees expand, collapse and open from the keyboard.
-- Practice timer, reveal, scoring and history; quiz round scoring and XP; flashcards; "Verified or rumour?"; number recall.
-- Nothing stored unless saving is switched on; reset and switch-off clear it; no microphone or recording code in the page.
-- No unresolved citations; every cited source has a register row; no "undefined", "NaN" or missing value shown as zero; no blank matrix cells.
-- The one client name without public confirmation appears nowhere.
-- Skip link is the first Tab stop; "/" focuses search; landmarks, language, one h1 per section, labelled controls; badges carry text.
-- No horizontal page scroll on ten sections at phone width; mobile menu opens and closes; reduced-motion disables smooth scrolling and celebration animation.
+- Loads with no network requests; nothing written to browser storage; no microphone or recording code.
+- Home and all seven sections open; the home page leads with the three guide pages.
+- The Relationships page contains every topic asked for and its diagrams; the Sales page has the step-by-step process with expandable steps.
+- Why-trees, points, levels and game tiles are gone.
+- Diagrams: none has text outside its picture; each has a text description; no duplicate ids.
+- Links inside pages, links to mandates and source codes all open the right place.
+- Search, filters, team selection, the coverage map, numbers "test me", charts, timed practice, quiz scoring, chapter reader, reading level, glossary definitions.
+- Calculator arithmetic against an independent Python implementation on all fifteen examples.
+- Every citation resolves; no missing values shown as text; the one unconfirmed client name appears nowhere.
+- Keyboard: skip link, "/" for search; labelled controls; no italic text; body text at least 17px with 1.6 line height.
+- No sideways scrolling on eleven pages at phone width; reduced-motion and dark device settings respected.
 
-The PDF was rendered and pages inspected by eye: all fifteen pages of the primer including every diagram, and samples from the contents, later chapters, matrix, people table, fee cases, source register, numbers and charts, quiz bank and claim register. Tables fit the page, contents entries carry page numbers (154 numbered), links on the contents page survive the background step, and no clipped text was seen. Not every one of the 630 pages was inspected.
-
-Not tested: screen readers, browsers other than Chromium, and printing the HTML directly from a browser.
+The PDF was rendered and sample pages were inspected by eye. Not every page was inspected. Not tested: screen readers and browsers other than Chromium.
 
 ## Known limits
 
-- **The search allowance ran out during research.** Several streams stopped before their plan was complete. The coverage register (Sources view, Appendix M) separates "searched, not established" from "not investigated".
-- **Goldman's careers site could not be read directly.** Most job-advertisement evidence comes from mirrors or search summaries and is capped at "Supported inference".
-- **The people directory is a sample of publicly visible professionals**, not a headcount. It cannot support a sales-to-relationship-management ratio or any estimate of hiring odds.
-- **No mandate is attributed to a London team or person**, because no public source does so.
-- **One client named in the starting account has no public confirmation** and is withheld from every generated output by the build (`REDACT` in `build/build.py`). The raw notes in `research/evidence/` keep the audit trail, so check those before sharing the repository itself.
-- **No personal records are used.** The personal evidence ledger is a blank template.
-- **Nothing has been published or hosted.** The HTML is a local file. To host it, upload the single file to any static host; check the people directory and source register first and decide what you are comfortable circulating.
-- **Interpretation is labelled, not proven.** Layer B passages are arguments; practice criteria are a proposed framework, not Goldman's.
+- The search allowance ran out during research, so some topics are marked "not investigated" in the coverage list (Library, Sources).
+- Goldman's careers site could not be read directly; most job-advertisement evidence is from mirrors and is marked as inference.
+- The people directory is a sample of publicly visible professionals, not a headcount.
+- No mandate is attributed to a London team or person, because no public source does so.
+- Most of the Relationships and Sales pages describe general industry practice. Those parts are labelled "Supported inference". They are not published Goldman procedures.
+- One client named in the starting account has no public confirmation and is withheld from every generated output. The raw notes in `research/evidence/` still contain it, so check those before sharing the repository.
+- No personal records are used.
+- Nothing has been published or hosted. The HTML is a local file.

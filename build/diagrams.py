@@ -244,12 +244,74 @@ def why_funnel():
     return d.html()
 
 
+def who_map():
+    d = Dia("who", 400, "Who the relationship is with",
+            "The sales or relationship person stands in the middle. On one side are the client's people: the trustees who decide, the investment staff, "
+            "the operations staff and the sponsoring employer. On the other side are the investment consultant, who advises the trustees, and colleagues "
+            "inside the manager: the portfolio manager, the product specialist, and the operations and legal teams.")
+    d.text(120, 28, "The client's side", "dg-h")
+    d.text(380, 28, "You, in the middle", "dg-h")
+    d.text(640, 28, "Advisers and your own firm", "dg-h")
+    left = [("Trustees", "decide"), ("Investment staff", "test the detail"), ("Operations and finance", "need reports on time"), ("Sponsoring employer", "pays into the scheme")]
+    right = [("Investment consultant", "advises the trustees", "c"), ("Portfolio manager", "runs the money", "a"), ("Product specialist", "explains the strategy", "a"), ("Operations and legal", "reports and contracts", "a")]
+    d.box(280, 150, 200, 130, "Sales and relationship management", "keeps everyone informed and every promise kept", "b")
+    for i, (a, b) in enumerate(left):
+        y = 48 + i * 86
+        d.box(10, y, 220, 66, a, b)
+        d.arrow(280, 215, 232, y + 33)
+    for i, (a, b, k) in enumerate(right):
+        y = 48 + i * 86
+        d.box(530, y, 220, 66, a, b, k)
+        d.arrow(480, 215, 528, y + 33)
+    return d.html()
+
+
+def relationship_years():
+    d = Dia("years", 370, "One relationship, and one career, over forty years",
+            "Top row: one client relationship. Year one is set-up. Years two to five bring the first poor period. Between five and ten years people change on both sides. "
+            "Between ten and twenty the client's needs change. After twenty the scheme may merge, hand over to an insurer, or renew. "
+            "Bottom row: your own career. First accurate work, then people calling you directly, then owning relationships, then a network built over decades, then passing it on.")
+    cols = ["Year 1", "Years 2 to 5", "Years 5 to 10", "Years 10 to 20", "Years 20 to 40"]
+    top = ["Set-up and first reports", "First poor period, explained plainly", "People change on both sides", "Needs change. The mandate is reshaped", "Merger, hand-over to an insurer, or renewal"]
+    bot = ["Accurate work for your own team", "Client staff start calling you", "You own client relationships", "A network built over a career", "You pass relationships on"]
+    d.text(15, 62, "One client", "dg-h", "start")
+    d.text(15, 214, "Your career", "dg-h", "start")
+    for i in range(5):
+        x = 10 + i * 150
+        d.text(x + 70, 28, cols[i], "dg-s")
+        d.box(x, 76, 140, 100, top[i], "", "b" if i % 2 == 0 else "a")
+        d.box(x, 228, 140, 100, bot[i], "", "a" if i % 2 == 0 else "b")
+        if i:
+            d.arrow(x - 10, 126, x, 126)
+            d.arrow(x - 10, 278, x, 278)
+    d.text(380, 356, "Timings are a general pattern, not a rule. Few single mandates last forty years; reputations do.", "dg-s")
+    return d.html()
+
+
 DIAGRAMS = {
     "money-chain": money_chain, "where-csg-sits": where_csg_sits, "two-routes": two_routes, "fee-arithmetic": fee_arithmetic,
     "lifecycle": lifecycle, "trust-steps": trust_steps, "career-path": career_path, "sales-rm": sales_rm, "why-funnel": why_funnel,
+    "who-map": who_map, "relationship-years": relationship_years,
 }
 
 
+_USES = {}
+
+
+def reset():
+    _USES.clear()
+
+
 def diagram(name):
+    """Render a diagram. A second use of the same diagram in one build gets its own element ids."""
     fn = DIAGRAMS.get(name)
-    return fn() if fn else f'<p class="na">Diagram "{esc(name)}" not found.</p>'
+    if not fn:
+        return f'<p class="na">Diagram "{esc(name)}" not found.</p>'
+    h = fn()
+    n = _USES.get(name, 0)
+    _USES[name] = n + 1
+    if n:
+        import re
+        key = re.search(r'id="dg-([a-z]+)"', h).group(1)
+        h = h.replace(f'id="dg-{key}"', f'id="dg-{key}-{n + 1}"').replace(f'ah-{key}', f'ah-{key}-{n + 1}')
+    return h

@@ -53,7 +53,8 @@ Each topic is taught twice. **Level 1** explains it from first principles in pla
 
 ## What has been left out on purpose
 
-- **Your own records.** No CV, email or personal document is used anywhere. The personal evidence ledger in chapter 8 is a blank template with reflection questions, and no experience, feeling or motive has been written for you.
+- **Your own records.** No CV, email or personal document is used anywhere, and no experience, feeling or motive has been written for you.
+- **The "why-tree" exercises and the motivation chapter.** Removed at your request. The Relationships page and the Sales and relationship management page now carry that ground in concrete terms.
 - **One client name.** As explained above.
 - **Private information about people.** The directory holds public professional information only: names, public titles, offices and public career history, each with a source and an evidence date.
 - **Recruitment tactics built on rumour.** Unverified claims about how candidates are screened or allocated are audited, and nothing here recommends tailoring answers to them.
@@ -75,6 +76,9 @@ Four limits matter when you rely on the result.
 
 | Chapter | Question it answers |
 |---|---|
+| Start here | What am I applying to, from zero? |
+| Relationships | Who, what, how, where and why, and what it looks like over decades |
+| Sales and relationship management | How is a client won, and how is it kept? |
 | 1. Foundations | What are the basic ideas, from assets and liabilities to fees and intermediaries? |
 | 2. The role | What is the programme, what does each function do, and what is it not? |
 | 3. Teams and structure | How is the client business organised, and how do the client types differ? |
@@ -82,7 +86,6 @@ Four limits matter when you rely on the result.
 | 5. Mandates and economics | What has Goldman publicly won and lost, and how does the money work? |
 | 6. Sales versus relationship management | What differs in practice, and what is the same? |
 | 7. The client relationship | What do "relationship" and "trust" mean in observable terms? |
-| 8. Motivation and career fit | Do your reasons survive repeated questioning? |
 | 9. Commercial awareness | What is changing for each client type, and what follows? |
 | 10. Interview practice | How do you turn understanding into answers you can defend? |
 | 11. Acceptance test and limits | Does the project meet its own standard, and where does it fall short? |
