@@ -1,0 +1,1137 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>AlphaSights: the plain-English guide</title>
+<style>
+@font-face { font-family: "Lexend"; font-weight: 400; src: url("../fonts/Lexend-Regular.ttf"); }
+@font-face { font-family: "Lexend"; font-weight: 500; src: url("../fonts/Lexend-Medium.ttf"); }
+@font-face { font-family: "Lexend"; font-weight: 600; src: url("../fonts/Lexend-SemiBold.ttf"); }
+@font-face { font-family: "Lexend"; font-weight: 700; src: url("../fonts/Lexend-Bold.ttf"); }
+
+:root {
+  --paper: #FBF6EA;
+  --ink: #252A33;
+  --soft-ink: #4A5261;
+  --navy: #1D3B63;
+  --teal: #0E6F66;
+  --amber: #9A4A05;
+  --blue-tint: #E6EEF7;
+  --teal-tint: #DFF1EC;
+  --amber-tint: #FBE9CC;
+  --rose-tint: #F8E1DC;
+  --rose: #9B2C1C;
+  --line: #D9CFB8;
+  --white: #FFFDF7;
+}
+@page { size: A4; margin: 17mm 17mm 19mm 17mm; }
+* { box-sizing: border-box; }
+html { background: var(--paper); }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: "Lexend", Verdana, Arial, sans-serif;
+  font-size: 12pt; line-height: 1.56; letter-spacing: 0.012em; word-spacing: 0.06em;
+  text-align: left; font-weight: 400;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+p { margin: 0 0 9.5pt 0; orphans: 3; widows: 3; }
+strong { font-weight: 600; color: #171B22; }
+h1, h2, h3, h4 { font-weight: 700; color: var(--navy); line-height: 1.3; break-after: avoid; letter-spacing: 0; }
+h1 { font-size: 25pt; margin: 0 0 6pt 0; }
+h2 { font-size: 16pt; margin: 18pt 0 7pt 0; }
+h3 { font-size: 13.5pt; margin: 16pt 0 6pt 0; color: var(--teal); }
+section.chapter { break-before: page; }
+.chapnum {
+  display: inline-block; background: var(--navy); color: var(--white); font-weight: 600;
+  font-size: 11pt; padding: 3pt 11pt; border-radius: 20pt; margin-bottom: 9pt;
+}
+ul, ol { margin: 0 0 11pt 0; padding-left: 20pt; }
+li { margin-bottom: 5pt; padding-left: 3pt; }
+li::marker { color: var(--teal); font-weight: 700; }
+
+/* Boxes */
+.box { border-radius: 9pt; padding: 10pt 14pt; margin: 10pt 0 12pt 0; break-inside: avoid; }
+.box p:last-child, .box ul:last-child, .box ol:last-child { margin-bottom: 0; }
+.box .label { display: block; font-weight: 700; font-size: 11.5pt; margin-bottom: 4pt; }
+.key { background: var(--teal-tint); border-left: 6pt solid var(--teal); }
+.key .label { color: var(--teal); }
+.say { background: var(--blue-tint); border-left: 6pt solid var(--navy); }
+.say .label { color: var(--navy); }
+.care { background: var(--amber-tint); border-left: 6pt solid var(--amber); }
+.care .label { color: var(--amber); }
+.eg { background: var(--white); border: 1.4pt solid var(--line); }
+.eg .label { color: var(--soft-ink); }
+
+/* Confidence tags */
+.tag { display: inline-block; font-size: 9.3pt; font-weight: 600; padding: 1pt 7pt; border-radius: 10pt; white-space: nowrap; letter-spacing: 0; vertical-align: 1pt; }
+.t-aud { background: #CFE8DF; color: #0A5048; }
+.t-co { background: #D5E3F4; color: #173B6B; }
+.t-est { background: #F6DDB4; color: #7A3A02; }
+.t-me { background: #E8DCEF; color: #55306E; }
+
+/* Tables */
+table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 8pt 0 12pt 0; font-size: 11pt; line-height: 1.45; break-inside: avoid; }
+table.long { break-inside: auto; }
+thead { display: table-header-group; }
+th { text-align: left; background: var(--navy); color: var(--white); font-weight: 600; padding: 6.5pt 9pt; vertical-align: bottom; }
+th:first-child { border-top-left-radius: 7pt; } th:last-child { border-top-right-radius: 7pt; }
+td { padding: 6.5pt 9pt; vertical-align: top; border-bottom: 1pt solid var(--line); background: var(--white); }
+tr { break-inside: avoid; }
+td.num, th.num { text-align: right; white-space: nowrap; }
+td.first { font-weight: 600; color: var(--navy); }
+tr.hl td { background: var(--teal-tint); }
+
+/* Figures */
+figure { margin: 11pt 0 13pt 0; padding: 11pt 14pt 10pt 14pt; background: var(--white); border: 1.4pt solid var(--line); border-radius: 10pt; break-inside: avoid; }
+figure .ftitle { font-weight: 700; color: var(--navy); font-size: 12pt; margin-bottom: 9pt; }
+figcaption { margin-top: 10pt; padding-top: 8pt; border-top: 1pt dashed var(--line); font-size: 11pt; line-height: 1.55; color: var(--ink); }
+figcaption b { color: var(--teal); font-weight: 700; }
+svg text { font-family: "Lexend", Verdana, sans-serif; }
+
+/* Steps */
+.vs { display: flex; gap: 11pt; align-items: flex-start; background: var(--blue-tint); border-radius: 8pt; padding: 8pt 12pt; margin-bottom: 6pt; font-size: 11.2pt; line-height: 1.45; }
+.vs .n { flex: none; width: 23pt; height: 23pt; line-height: 23pt; text-align: center; border-radius: 50%; background: var(--navy); color: #fff; font-weight: 700; font-size: 12pt; }
+.vs b { color: var(--navy); font-weight: 700; }
+.vs.money { background: var(--teal-tint); margin-bottom: 0; } .vs.money .n { background: var(--teal); } .vs.money b { color: var(--teal); }
+
+/* $100 bar */
+.bar100 { display: flex; height: 54pt; border-radius: 8pt; overflow: hidden; font-weight: 700; color: #fff; font-size: 14pt; }
+.bar100 div { display: flex; align-items: center; justify-content: center; }
+.legend { margin-top: 9pt; font-size: 11.2pt; line-height: 1.45; }
+.legend div { display: flex; gap: 9pt; align-items: flex-start; margin-bottom: 5pt; }
+.legend i { flex: none; width: 13pt; height: 13pt; border-radius: 3pt; margin-top: 2pt; }
+
+/* Revenue streams */
+.streams { display: flex; gap: 8pt; align-items: stretch; }
+.stream { border-radius: 8pt; padding: 10pt 11pt; font-size: 11pt; line-height: 1.45; }
+.stream b { display: block; font-size: 11.6pt; margin-bottom: 3pt; }
+.stream .size { display: inline-block; margin-top: 6pt; font-size: 9.6pt; font-weight: 700; padding: 1pt 7pt; border-radius: 10pt; background: rgba(255,255,255,.75); }
+
+/* Bars chart */
+.chart { display: flex; align-items: flex-end; gap: 26pt; height: 150pt; padding: 0 20pt; border-bottom: 2pt solid var(--navy); }
+.col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+.col .v { font-weight: 700; color: var(--navy); font-size: 12.5pt; margin-bottom: 3pt; }
+.col .b { width: 100%; background: var(--navy); border-radius: 6pt 6pt 0 0; }
+.chartx { display: flex; gap: 26pt; padding: 5pt 20pt 0 20pt; font-size: 10.6pt; line-height: 1.4; }
+.chartx div { flex: 1; text-align: center; }
+.chartx b { display: block; font-size: 11.5pt; color: var(--navy); }
+
+/* Ladder */
+.ladder { display: flex; gap: 8pt; align-items: flex-end; }
+.rung { flex: 1; border-radius: 8pt 8pt 0 0; background: var(--blue-tint); padding: 9pt 10pt; font-size: 11pt; line-height: 1.42; }
+.rung b { display: block; color: var(--navy); font-size: 11.6pt; }
+.rung .yr { font-weight: 600; color: var(--teal); display: block; margin-bottom: 3pt; }
+
+/* Cover */
+.cover { height: 252mm; display: flex; flex-direction: column; justify-content: space-between; break-after: page; }
+.cover .band { background: var(--navy); color: var(--white); border-radius: 14pt; padding: 30pt 28pt; }
+.cover .band .kicker { font-size: 12pt; font-weight: 500; opacity: .9; margin-bottom: 10pt; }
+.cover .band h1 { color: var(--white); font-size: 34pt; line-height: 1.2; margin: 0 0 12pt 0; }
+.cover .band p { font-size: 14pt; margin: 0; line-height: 1.5; }
+.facts { display: grid; grid-template-columns: 1fr 1fr; gap: 9pt; }
+.fact { background: var(--white); border: 1.4pt solid var(--line); border-radius: 9pt; padding: 10pt 13pt; font-size: 11.2pt; line-height: 1.45; }
+.fact b { display: block; color: var(--teal); font-size: 10.4pt; font-weight: 700; }
+.toc { columns: 2; column-gap: 22pt; font-size: 11.2pt; padding-left: 0; list-style: none; margin: 0; }
+.toc li { break-inside: avoid; margin-bottom: 5pt; padding-left: 0; }
+.toc .n { display: inline-block; width: 21pt; font-weight: 700; color: var(--teal); }
+
+.tiles { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 9pt; margin: 8pt 0 10pt 0; break-inside: avoid; }
+.tile { background: var(--white); border: 1.4pt solid var(--line); border-radius: 9pt; padding: 10pt 12pt; font-size: 11pt; line-height: 1.45; }
+.tile b { display: block; font-size: 20pt; line-height: 1.25; color: var(--navy); font-weight: 700; margin-bottom: 2pt; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 10pt; }
+.two .box { margin: 0; }
+.qa { break-inside: avoid; margin-bottom: 9pt; }
+.qa .q { font-weight: 700; color: var(--navy); margin-bottom: 3pt; }
+.gloss dt { font-weight: 700; color: var(--navy); margin-top: 8pt; }
+.gloss dd { margin: 0 0 2pt 0; }
+.src { font-size: 10.2pt; line-height: 1.5; }
+.src li { margin-bottom: 4.5pt; }
+.small { font-size: 10.6pt; color: var(--soft-ink); }
+</style>
+</head>
+<body>
+
+<!-- ================= COVER ================= -->
+<div class="cover">
+  <div class="band">
+    <div class="kicker">Interview preparation pack</div>
+    <h1>AlphaSights:<br>the plain-English guide</h1>
+    <p>What the firm is, how it makes money, who pays it and why. Written for a complete beginner. No corporate jargon.</p>
+  </div>
+
+  <div>
+    <div class="facts">
+      <div class="fact"><b>Your interview</b>Preliminary phone screen, Insight Days 2027</div>
+      <div class="fact"><b>When</b>Thursday 19 November 2026, 2:30pm to 2:45pm (GMT)</div>
+      <div class="fact"><b>Who and where</b>Eve Taylor, Talent Acquisition. Google Meet video call.</div>
+      <div class="fact"><b>What it covers</b>How AlphaSights works as a business, why you applied, your past experiences</div>
+    </div>
+  </div>
+
+  <div>
+    <h2 style="margin-top:0">What is inside</h2>
+    <ol class="toc">
+      <li><span class="n">1</span>The ten things to remember</li>
+      <li><span class="n">2</span>AlphaSights in 60 seconds</li>
+      <li><span class="n">3</span>The problem it solves</li>
+      <li><span class="n">4</span>How it works, step by step</li>
+      <li><span class="n">5</span>What it sells</li>
+      <li><span class="n">6</span>How it makes money</li>
+      <li><span class="n">7</span>The real numbers</li>
+      <li><span class="n">8</span>The clients</li>
+      <li><span class="n">9</span>History and founders</li>
+      <li><span class="n">10</span>People, roles and the Associate job</li>
+      <li><span class="n">11</span>Competitors</li>
+      <li><span class="n">12</span>Commercial awareness</li>
+      <li><span class="n">13</span>Your interview: questions and answers</li>
+      <li><span class="n">14</span>Jargon buster</li>
+      <li><span class="n">15</span>Sources</li>
+    </ol>
+  </div>
+
+  <div class="small">Prepared 16 November 2026. Figures come from AlphaSights’ filed accounts, its careers pages and industry sources. Each number is labelled so you know how far to trust it.</div>
+</div>
+
+<!-- ================= HOW TO USE ================= -->
+<section>
+  <span class="chapnum">Before you start</span>
+  <h1>How to use this guide</h1>
+  <p>You do not need to memorise all of this. The call is 15 minutes. Read chapter 1 and chapter 13 first. Then dip into the rest to build real understanding.</p>
+
+  <div class="box care">
+    <span class="label">Important rule for the call</span>
+    <p>Your invite says that AI assistants and other third-party tools are <strong>not allowed during the interview</strong>. Use this guide to learn beforehand. On the day, close everything and speak from memory. A single page of your own handwritten notes is the safest aid.</p>
+  </div>
+
+  <h3>How sure is each fact?</h3>
+  <p>AlphaSights is a private company. It does not have to publish much. So this guide labels where each number comes from.</p>
+  <table>
+    <tr><th style="width:27%">Label</th><th>What it means</th><th style="width:26%">Safe to quote?</th></tr>
+    <tr><td><span class="tag t-aud">Audited</span></td><td>From the accounts AlphaSights Ltd filed at Companies House. Checked by the auditor, PwC.</td><td>Yes. The strongest facts you have.</td></tr>
+    <tr><td><span class="tag t-co">Company says</span></td><td>From AlphaSights’ own website, careers pages or job adverts.</td><td>Yes.</td></tr>
+    <tr><td><span class="tag t-est">Industry estimate</span></td><td>From industry analysts or other firms. Often a rough guess.</td><td>Say “roughly” or “reportedly”.</td></tr>
+    <tr><td><span class="tag t-me">My reading</span></td><td>My own working or interpretation of the facts.</td><td>Use as your own opinion.</td></tr>
+  </table>
+
+  <div class="box eg">
+    <span class="label">Two things I could not check directly</span>
+    <ul>
+      <li>AlphaSights’ website blocks automated access. I used search results of its pages plus other sources. Skim <strong>alphasights.com</strong> yourself for ten minutes before the call.</li>
+      <li>Eve’s email links to an <strong>Associate Interview Guide</strong>. I could not open that link. Read it. It is the firm telling you what it wants you to know.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 1. TEN THINGS ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 1</span>
+  <h1>The ten things to remember</h1>
+  <p>If you only have five minutes, read this page.</p>
+  <ol>
+    <li><strong>What it is.</strong> AlphaSights is an “expert network”. It connects busy professionals who need to understand something fast with people who have real, first-hand experience of that subject.</li>
+    <li><strong>What it sells.</strong> Mainly a one-hour phone call between a client and an expert. It sells access to knowledge. It is a service, not a physical product.</li>
+    <li><strong>Who pays.</strong> Private equity firms, hedge funds, strategy consultancies, investment banks, venture capital firms and large companies.</li>
+    <li><strong>How it makes money.</strong> The client pays AlphaSights for each call. AlphaSights pays the expert a fee. AlphaSights keeps the difference.</li>
+    <li><strong>Why clients pay.</strong> They are about to make a decision worth millions. One hour with the right person can stop a very expensive mistake. And they need it in days, not months.</li>
+    <li><strong>What makes it different.</strong> It finds fresh experts for each project instead of only searching a fixed list. It is known for speed. One Associate team runs the whole project.</li>
+    <li><strong>How big it is.</strong> Revenue of $652.6 million in 2025, up 12%. Profit before tax of $242.8 million. That is a 37% margin. <span class="tag t-aud">Audited</span></li>
+    <li><strong>Where it came from.</strong> Founded in London in 2008 by Max Cartellieri and Andrew Heath. They still run it as Co-CEOs. Over 2,000 people in nine cities. <span class="tag t-co">Company says</span></li>
+    <li><strong>Who it competes with.</strong> GLG, Guidepoint, Third Bridge, AlphaSense (which owns Tegus) and Dialectica.</li>
+    <li><strong>What could change its future.</strong> Artificial intelligence, how many deals are happening in the world, and strict rules on what experts are allowed to say.</li>
+  </ol>
+
+  <div class="box say">
+    <span class="label">Your 30-second answer to “What does AlphaSights do?”</span>
+    <p>“AlphaSights is a knowledge-on-demand business. Investors, consultants and companies often have to make big decisions about industries they do not know well. AlphaSights finds people with first-hand experience of that industry, checks they are suitable and allowed to speak, and sets up a call, often within hours. The client pays per call, the expert is paid for their time, and AlphaSights earns the difference. The Client Service team runs that whole process.”</p>
+  </div>
+  <p class="small">Put this into your own words. It will sound more natural, and you will remember it better.</p>
+
+  <h2>Six numbers to keep in your head</h2>
+  <div class="tiles">
+    <div class="tile"><b>$652.6m</b>Revenue in 2025, up 12% <span class="tag t-aud">Audited</span></div>
+    <div class="tile"><b>37%</b>Profit margin before tax <span class="tag t-aud">Audited</span></div>
+    <div class="tile"><b>2008</b>Founded in London</div>
+    <div class="tile"><b>9 cities</b>Offices around the world <span class="tag t-co">Company says</span></div>
+    <div class="tile"><b>2,000+</b>People at the firm <span class="tag t-co">Company says</span></div>
+    <div class="tile"><b>3 million+</b>Client-to-expert interactions delivered <span class="tag t-co">Company says</span></div>
+  </div>
+  <p class="small">You do not need exact figures in the call. “About $650 million” and “a margin of nearly 40%” are fine.</p>
+</section>
+
+<!-- ================= 2. 60 SECONDS ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 2</span>
+  <h1>AlphaSights in 60 seconds</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>AlphaSights is a matchmaker. On one side are people who need knowledge. On the other side are people who have it. AlphaSights finds the right match quickly and charges for the introduction.</p>
+  </div>
+
+  <h2>A simple way to picture it</h2>
+  <p>Think of the “phone a friend” lifeline on a quiz show. You have a hard question. You call the one person most likely to know the answer.</p>
+  <p>Now imagine you are an investor about to spend £300 million buying a company. You have a hard question. But you do not have a friend who knows. AlphaSights finds that person for you, anywhere in the world, and puts them on the phone.</p>
+
+  <h2>The firm describes itself like this</h2>
+  <ul>
+    <li>Its tagline is <strong>“Knowledge on demand”</strong>. <span class="tag t-co">Company says</span></li>
+    <li>Its accounts say it “unlocks human knowledge to power progress for professionals, businesses and society”. <span class="tag t-aud">Audited</span></li>
+    <li>The official legal description of its activity is “the provision of business information services to corporate clients”. <span class="tag t-aud">Audited</span></li>
+  </ul>
+
+  <h2>What kind of company is it?</h2>
+  <p>The industry is called <strong>expert networks</strong>. The work is called <strong>primary research</strong>. That means getting information straight from a person, instead of reading a report someone else wrote.</p>
+  <table>
+    <tr><th style="width:34%">It is...</th><th>It is not...</th></tr>
+    <tr><td>A service business that sells access to people’s knowledge</td><td>A bank, an investment fund or a consultancy. It does not invest money or give advice.</td></tr>
+    <tr><td>A middleman between clients and experts</td><td>The expert itself. AlphaSights staff do not answer the client’s question. They find the person who can.</td></tr>
+    <tr><td>A fast, sales-driven, people-heavy business supported by technology</td><td>A pure software company, although it is building more software each year.</td></tr>
+  </table>
+
+  <div class="box care">
+    <span class="label">Do not mix these two up</span>
+    <p><strong>AlphaSights</strong> and <strong>AlphaSense</strong> are different companies and are rivals. AlphaSense is a US research software firm. The names are so close that AlphaSights is suing AlphaSense over it (see chapter 12). Getting this wrong in the call would be a bad slip.</p>
+  </div>
+</section>
+
+<!-- ================= 3. PROBLEM ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 3</span>
+  <h1>The problem it solves</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>Clients must make huge decisions, quickly, about subjects they do not know well. The knowledge they need is inside people’s heads, not on the internet.</p>
+  </div>
+
+  <h2>A worked example</h2>
+  <div class="box eg">
+    <span class="label">Example (made up, but typical)</span>
+    <p>A private equity firm is thinking about buying a chain of dental clinics in Germany for €400 million. It has three weeks to decide.</p>
+    <p>The team can read the company’s financial reports. But the reports cannot answer questions like these:</p>
+    <ul>
+      <li>Do patients stay loyal, or do they switch to cheaper clinics?</li>
+      <li>Is it hard to hire dentists in Germany right now?</li>
+      <li>What do rival chains think of this company?</li>
+      <li>Are new rules coming that would hurt profits?</li>
+    </ul>
+    <p>The people who know are a former regional manager of a rival chain, a dentist who left the company, and a supplier who sells to the whole industry. The investors do not know these people. They have no time to find them.</p>
+    <p><strong>AlphaSights finds them, checks them, and books the calls within days.</strong></p>
+  </div>
+
+  <h2>Why clients cannot just do it themselves</h2>
+  <table>
+    <tr><th style="width:30%">The client’s problem</th><th>Why it is hard</th><th style="width:31%">What AlphaSights does</th></tr>
+    <tr><td class="first">Finding the right person</td><td>The ideal expert might be one of 50 people in the world. They are not advertising themselves.</td><td>Searches, contacts and recruits them for that specific project.</td></tr>
+    <tr><td class="first">Speed</td><td>Deals and consulting projects run on deadlines of days or weeks.</td><td>Often offers suitable experts within hours.</td></tr>
+    <tr><td class="first">Checking quality</td><td>Someone’s job title does not prove they know the answer.</td><td>Asks screening questions first, so the client only speaks to relevant people.</td></tr>
+    <tr><td class="first">Staying legal</td><td>If an expert shares secret company information, the client can break the law (see below).</td><td>Runs compliance checks on every expert and every call.</td></tr>
+    <tr><td class="first">Admin</td><td>Contracts, scheduling across time zones, payment.</td><td>Handles all of it.</td></tr>
+  </table>
+
+  <h2>The legal risk, in plain English</h2>
+  <p>This part matters a lot in this industry. Experts are allowed to share their general knowledge and experience. They are <strong>not</strong> allowed to share secrets.</p>
+  <p>The key term is <strong>MNPI</strong>. It stands for “material non-public information”. It means secret information that could move a company’s share price. Trading shares using it is called insider trading. It is a crime.</p>
+  <p>AlphaSights’ rules for experts come down to four points: <span class="tag t-est">Industry estimate</span></p>
+  <ul>
+    <li>Do not discuss the details of your current employer.</li>
+    <li>Do not share confidential information or MNPI.</li>
+    <li>Do not take part if you have a conflict of interest.</li>
+    <li>Keep the conversation itself confidential.</li>
+  </ul>
+  <p>The firm reportedly has more than 60 legal and compliance staff. <span class="tag t-est">Industry estimate</span> For a client, this protection is a big part of what they are paying for.</p>
+</section>
+
+<!-- ================= 4. HOW IT WORKS ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 4</span>
+  <h1>How it works, step by step</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>There are three parties: the client, AlphaSights and the expert. Knowledge flows one way. Money flows the other way.</p>
+  </div>
+
+  <figure>
+    <div class="ftitle">Diagram 1: Who gives what to whom</div>
+    <svg viewBox="0 0 600 300" width="100%" role="img" aria-label="Flow between client, AlphaSights and expert">
+      <defs>
+        <marker id="aN" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#1D3B63"/></marker>
+        <marker id="aT" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#0E6F66"/></marker>
+      </defs>
+      <path d="M517,104 C470,34 130,34 86,98" fill="none" stroke="#0E6F66" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#aT)"/>
+      <rect x="168" y="16" width="264" height="34" rx="17" fill="#DFF1EC"/>
+      <text x="300" y="38.500" text-anchor="middle" font-size="15" font-weight="600" fill="#0E6F66">Knowledge: a one-hour call</text>
+
+      <rect x="6" y="108" width="154" height="96" rx="12" fill="#E6EEF7" stroke="#1D3B63" stroke-width="2"/>
+      <text x="83" y="143" text-anchor="middle" font-size="20" font-weight="700" fill="#1D3B63">Client</text>
+      <text x="83" y="167" text-anchor="middle" font-size="14" fill="#252A33">Needs to learn</text>
+      <text x="83" y="186" text-anchor="middle" font-size="14" fill="#252A33">something fast</text>
+
+      <rect x="214" y="108" width="172" height="96" rx="12" fill="#1D3B63"/>
+      <text x="300" y="143" text-anchor="middle" font-size="20" font-weight="700" fill="#FFFDF7">AlphaSights</text>
+      <text x="300" y="167" text-anchor="middle" font-size="14" fill="#FFFDF7">Finds, checks</text>
+      <text x="300" y="186" text-anchor="middle" font-size="14" fill="#FFFDF7">and connects</text>
+
+      <rect x="440" y="108" width="154" height="96" rx="12" fill="#E6EEF7" stroke="#1D3B63" stroke-width="2"/>
+      <text x="517" y="143" text-anchor="middle" font-size="20" font-weight="700" fill="#1D3B63">Expert</text>
+      <text x="517" y="167" text-anchor="middle" font-size="14" fill="#252A33">Has first-hand</text>
+      <text x="517" y="186" text-anchor="middle" font-size="14" fill="#252A33">experience</text>
+
+      <line x1="162" y1="156" x2="208" y2="156" stroke="#1D3B63" stroke-width="3.2" marker-end="url(#aN)"/>
+      <line x1="388" y1="156" x2="434" y2="156" stroke="#1D3B63" stroke-width="3.2" marker-end="url(#aN)"/>
+      <line x1="187" y1="222" x2="187" y2="166" stroke="#1D3B63" stroke-width="1.2" stroke-dasharray="3 3"/>
+      <line x1="413" y1="222" x2="413" y2="166" stroke="#1D3B63" stroke-width="1.2" stroke-dasharray="3 3"/>
+      <text x="150" y="240" text-anchor="middle" font-size="14" font-weight="600" fill="#1D3B63">Money: the client</text>
+      <text x="150" y="259" text-anchor="middle" font-size="14" font-weight="600" fill="#1D3B63">pays for each call</text>
+      <text x="450" y="240" text-anchor="middle" font-size="14" font-weight="600" fill="#1D3B63">Money: the expert</text>
+      <text x="450" y="259" text-anchor="middle" font-size="14" font-weight="600" fill="#1D3B63">is paid for their time</text>
+      <rect x="225" y="270" width="150" height="26" rx="13" fill="#1D3B63"/>
+      <text x="300" y="288" text-anchor="middle" font-size="13" font-weight="600" fill="#FFFDF7">Keeps the gap</text>
+    </svg>
+    <figcaption><b>How to read this.</b> The solid arrows show money. It moves left to right: from the client, through AlphaSights, to the expert. The dashed arrow shows knowledge. It moves from the expert back to the client. AlphaSights sits in the middle of both flows. It keeps the gap between what the client pays and what the expert receives. That middle position is the whole business.</figcaption>
+  </figure>
+
+  <div style="break-inside: avoid">
+  <h2>The life of one project</h2>
+  <p>This is what an Associate on the Client Service team actually does. A project can go from start to first call in under a day.</p>
+
+  <figure>
+    <div class="ftitle">Diagram 2: From client request to paid call</div>
+    <div class="vs"><span class="n">1</span><div><b>Brief.</b> The client explains what they need to learn and by when.</div></div>
+    <div class="vs"><span class="n">2</span><div><b>Research.</b> The Associate learns the industry quickly and works out who would know.</div></div>
+    <div class="vs"><span class="n">3</span><div><b>Recruit.</b> The Associate contacts those people, persuades them and screens them.</div></div>
+    <div class="vs"><span class="n">4</span><div><b>Present.</b> The client receives short profiles and picks who to speak to.</div></div>
+    <div class="vs money"><span class="n">5</span><div><b>Call.</b> The call happens. This is the point where AlphaSights earns its fee.</div></div>
+    <figcaption><b>How to read this.</b> Read from top to bottom. Steps 1 to 4 cost AlphaSights time but earn nothing. Only step 5, the call, brings in money. So the job is about getting as many good calls to happen as possible, quickly. An Associate runs many projects like this at once.</figcaption>
+  </figure>
+  </div>
+
+  <div class="box eg">
+    <span class="label">Worth knowing: “BREAD”</span>
+    <p>Past candidates say AlphaSights uses a framework called <strong>BREAD</strong> for this process: Brief, Research, Engage and Assess, Deliver. Some were asked to explain it in later interview rounds. <span class="tag t-est">Industry estimate</span></p>
+    <p>This comes from candidate reports, not from AlphaSights. Check the Associate Interview Guide in Eve’s email for the official wording before you use the term.</p>
+  </div>
+
+  <h2>Why the Associate job is harder than it looks</h2>
+  <ul>
+    <li><strong>You are selling twice.</strong> You convince a stranger to become an expert. Then you convince the client that this expert is worth an hour.</li>
+    <li><strong>Most people do not reply.</strong> You need resilience. This is why the advert lists it.</li>
+    <li><strong>The clock is always running.</strong> A rival network may be working on the same request. The first good expert often wins the call.</li>
+    <li><strong>You must learn fast.</strong> Dental clinics on Monday, lithium mining on Tuesday.</li>
+  </ul>
+</section>
+
+<!-- ================= 5. WHAT IT SELLS ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 5</span>
+  <h1>What it sells</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>The main product is a paid conversation with an expert. Everything else is a different way of packaging expert knowledge.</p>
+  </div>
+
+  <p>Nothing here is a physical good. All of it is a service or a piece of software.</p>
+
+  <table class="long"><thead><tr><th style="width:26%">Product</th><th>What it is, in plain English</th><th style="width:25%">Who it suits</th></tr></thead>
+    <tr class="hl"><td class="first">Expert calls<br><span class="small">The core product</span></td><td>A private phone or video call, usually 30 to 60 minutes, between a client and one expert. Experts are found specially for that project.</td><td>Everyone. This is the heart of the firm.</td></tr>
+    <tr><td class="first">Surveys</td><td>The same questions sent to many experts at once, sometimes 200 or more. Gives numbers instead of opinions.</td><td>Clients who need data to back up a view.</td></tr>
+    <tr><td class="first">AlphaNow<br><span class="small">Research library</span></td><td>A searchable library of expert interview transcripts and one-page company summaries. The client reads past calls instead of booking a new one.</td><td>Clients who want a quick first look at a topic.</td></tr>
+    <tr><td class="first">AlphaGPT</td><td>An AI chat tool. The client types a question and it answers using the library’s expert content.</td><td>Clients who want fast answers from the library.</td></tr>
+    <tr><td class="first">Transcripts and AI summaries</td><td>A written record of each call, plus an automatic summary. Also a running summary across every call in a project.</td><td>Busy teams who cannot all join each call.</td></tr>
+    <tr><td class="first">Private Library</td><td>A secure place for a client to store and search its own past call transcripts.</td><td>Large firms with many teams.</td></tr>
+    <tr><td class="first">AI Interviewer</td><td>An AI tool that asks experts the client’s questions and returns the answers as text, audio, video or survey data.</td><td>Clients who need many answers quickly.</td></tr>
+    <tr><td class="first">Events and custom research</td><td>Group discussions on a theme, and larger research projects that mix calls and surveys.</td><td>Clients with a bigger question.</td></tr>
+  </table>
+  <p class="small">Product list from AlphaSights’ platform pages and industry directories. <span class="tag t-co">Company says</span> <span class="tag t-est">Industry estimate</span></p>
+
+  <h2>The technology behind it</h2>
+  <ul>
+    <li><strong>AlphaGraph.</strong> An internal system that maps more than 25 million links between people and the companies they have worked at. It helps staff find the right expert and spot conflicts. <span class="tag t-est">Industry estimate</span></li>
+    <li><strong>Connections to AI tools.</strong> Clients can pull AlphaSights content into their own AI software. The technical name is an “MCP connector”. You do not need to explain how it works.</li>
+  </ul>
+
+  <div class="box say">
+    <span class="label">The point to make in the interview</span>
+    <p>AlphaSights began by selling only calls. It is now adding a “platform”: a library, AI tools and summaries. Its 2025 accounts name this “expanded platform offering” as one of three reasons revenue grew. <span class="tag t-aud">Audited</span> So the firm is moving from “we arrange calls” towards “we are where you go for expert knowledge in any format”.</p>
+  </div>
+</section>
+
+<!-- ================= 6. HOW IT MAKES MONEY ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 6</span>
+  <h1>How it makes money</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>Revenue = number of calls × price per call. AlphaSights charges the client more than it pays the expert. The gap pays for its staff and leaves a large profit.</p>
+  </div>
+
+  <h2>One call, in numbers</h2>
+  <p>AlphaSights does not publish its prices. Large clients negotiate their own rates. But the industry as a whole works roughly like this: <span class="tag t-est">Industry estimate</span></p>
+  <table>
+    <tr><th>Step</th><th class="num" style="width:30%">Typical amount</th></tr>
+    <tr><td>The client pays the expert network for a one-hour call</td><td class="num"><strong>$1,000 to $1,400</strong></td></tr>
+    <tr><td>The network pays a mid-level expert for that hour</td><td class="num"><strong>$200 to $500</strong></td></tr>
+    <tr class="hl"><td>What is left for the network, before its own costs</td><td class="num"><strong>About $600 to $1,000</strong></td></tr>
+  </table>
+  <p>Very senior or rare experts, such as former chief executives or specialist doctors, can cost over $1,000 an hour. The client then pays more too.</p>
+  <p>That gap is not all profit. It has to pay for the Associates who ran the project, the compliance team, the technology and the offices.</p>
+
+  <h2>How clients are billed</h2>
+  <ul>
+    <li><strong>Per call.</strong> This is AlphaSights’ core model. The more calls a client takes, the more it pays. <span class="tag t-est">Industry estimate</span></li>
+    <li><strong>Pre-paid packages.</strong> Across the industry, many clients pay up front for a bundle of call “credits”, often $50,000 to $100,000 a year to start. A rare expert may cost more than one credit. <span class="tag t-est">Industry estimate</span></li>
+    <li><strong>Subscriptions.</strong> Library and software products are usually sold as ongoing access instead of one call at a time.</li>
+  </ul>
+
+  <h2>The revenue sources, biggest first</h2>
+  <figure>
+    <div class="ftitle">Diagram 3: Where the money comes from</div>
+    <div class="streams">
+      <div class="stream" style="flex:2.6; background:#1D3B63; color:#FFFDF7;"><b>Expert calls</b>One-to-one calls, charged per call. The original product and the main engine of the firm.<br><span class="size" style="color:#1D3B63">Largest by far</span></div>
+      <div class="stream" style="flex:1.25; background:#C9DAEE; color:#252A33;"><b style="color:#1D3B63">Surveys and custom research</b>Charged per project.<br><span class="size" style="color:#1D3B63">Smaller</span></div>
+      <div class="stream" style="flex:1.25; background:#DFF1EC; color:#252A33;"><b style="color:#0E6F66">Platform</b>Library, AI tools, transcripts.<br><span class="size" style="color:#0E6F66">Newer, growing</span></div>
+    </div>
+    <figcaption><b>How to read this.</b> The wider the block, the more important that source is. The widths are not exact percentages. AlphaSights does not publish a split of its revenue, so nobody outside the firm knows the precise figures. <span class="tag t-me">My reading</span></figcaption>
+  </figure>
+
+  <div class="box eg">
+    <span class="label">Why I am confident that calls are the biggest earner</span>
+    <ul>
+      <li>For most of its life, AlphaSights sold only calls. The library and AI tools are recent additions.</li>
+      <li>Associates’ performance pay is tied to the number of client-to-expert interactions they set up each month. <span class="tag t-co">Company says</span> A firm pays people for what earns it money.</li>
+      <li>The firm says it has delivered more than 3 million client-to-expert interactions. <span class="tag t-co">Company says</span></li>
+    </ul>
+    <p>If Eve asks what the biggest revenue source is, say “expert calls, as far as I can tell from public information”. That is honest and correct.</p>
+  </div>
+
+  <h2>Where each $100 of revenue goes</h2>
+  <figure>
+    <div class="ftitle">Diagram 4: Every $100 a client paid AlphaSights in 2025</div>
+    <div class="bar100">
+      <div style="width:48%; background:#1D3B63;">$48</div>
+      <div style="width:16%; background:#5C7FAE;">$16</div>
+      <div style="width:36%; background:#0E6F66;">$36</div>
+    </div>
+    <div class="legend">
+      <div><i style="background:#1D3B63"></i><span><strong>$48: delivering the service.</strong> The accounts call this “cost of sales”. Mainly the direct cost of making calls happen, such as paying experts.</span></div>
+      <div><i style="background:#5C7FAE"></i><span><strong>$16: running the firm.</strong> Offices, support teams and other overheads.</span></div>
+      <div><i style="background:#0E6F66"></i><span><strong>$36: profit.</strong> Operating profit, before interest and tax.</span></div>
+    </div>
+    <figcaption><b>How to read this.</b> The whole bar is $100 of revenue. Each block shows where part of it went. About $36 of every $100 was left over as profit. That is very high for a business built on people. Figures are rounded from the 2025 accounts. <span class="tag t-aud">Audited</span> The accounts do not list exactly what sits inside “cost of sales”, so that description is my reading. <span class="tag t-me">My reading</span></figcaption>
+  </figure>
+
+  <h2>Why the business model is so attractive</h2>
+  <ul>
+    <li><strong>No stock, no factories.</strong> It sells time and access. It needs people, laptops and phones.</li>
+    <li><strong>It mostly pays experts only when a call happens.</strong> So its biggest direct cost rises and falls with its sales. That lowers the risk.</li>
+    <li><strong>Clients come back.</strong> Every new deal or project creates new questions. The accounts list “growth of existing clients” first among the reasons revenue rose. <span class="tag t-aud">Audited</span></li>
+    <li><strong>Each call builds an asset.</strong> Every expert recruited and every transcript created can be useful again later.</li>
+    <li><strong>It funds itself.</strong> The firm ended 2025 with $72.3 million in cash. <span class="tag t-aud">Audited</span></li>
+  </ul>
+</section>
+
+<!-- ================= 7. NUMBERS ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 7</span>
+  <h1>The real numbers</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>AlphaSights is much bigger and more profitable than most websites say. In 2025 it made $652.6 million in revenue and kept 37% of it as profit before tax.</p>
+  </div>
+
+  <p>Most candidates will quote guesses from the internet, such as “around $330 million revenue”. Those are wrong. The figures below come from the accounts that AlphaSights Ltd filed at Companies House. Very few candidates will have read them. <span class="tag t-aud">Audited</span></p>
+
+  <figure>
+    <div class="ftitle">Diagram 5: Revenue for the last three years (US dollars)</div>
+    <div class="chart">
+      <div class="col"><div class="v">$487m</div><div class="b" style="height:74.7%; background:#5C7FAE;"></div></div>
+      <div class="col"><div class="v">$584m</div><div class="b" style="height:89.5%; background:#3F618F;"></div></div>
+      <div class="col"><div class="v">$653m</div><div class="b" style="height:100%;"></div></div>
+    </div>
+    <div class="chartx">
+      <div><b>2023</b>Profit margin 29%</div>
+      <div><b>2024</b>Up 20%. Margin 35%</div>
+      <div><b>2025</b>Up 12%. Margin 37%</div>
+    </div>
+    <figcaption><b>How to read this.</b> Each bar is one year of revenue. Taller means more money came in. Revenue rose every year. Under each bar is the profit margin: the share of revenue kept as profit before tax. Two things are happening at once. Growth is slowing, from 20% to 12%. But the firm is keeping more of each dollar.</figcaption>
+  </figure>
+
+  <h2>The full picture</h2>
+  <table>
+    <tr><th>Year</th><th class="num">Revenue</th><th class="num">Growth</th><th class="num">Profit before tax</th><th class="num">Margin</th></tr>
+    <tr><td class="first">2019</td><td class="num">£148.0m</td><td class="num">–</td><td class="num">£39.9m</td><td class="num">27%</td></tr>
+    <tr><td class="first">2020</td><td class="num">£196.3m</td><td class="num">+33%</td><td class="num">£64.4m</td><td class="num">33%</td></tr>
+    <tr><td class="first">2021</td><td class="num">£277.2m</td><td class="num">+41%</td><td class="num">£90.5m</td><td class="num">33%</td></tr>
+    <tr><td class="first">2022</td><td class="num">£352.2m</td><td class="num">+27%</td><td class="num">£87.3m</td><td class="num">25%</td></tr>
+    <tr><td class="first">2023</td><td class="num">$487.4m</td><td class="num">roughly +10%</td><td class="num">$143.3m</td><td class="num">29%</td></tr>
+    <tr><td class="first">2024</td><td class="num">$584.0m</td><td class="num">+20%</td><td class="num">$201.8m</td><td class="num">35%</td></tr>
+    <tr class="hl"><td class="first">2025</td><td class="num"><strong>$652.6m</strong></td><td class="num"><strong>+12%</strong></td><td class="num"><strong>$242.8m</strong></td><td class="num"><strong>37%</strong></td></tr>
+  </table>
+  <p class="small">Source: AlphaSights Ltd group accounts, years ending 31 December. <span class="tag t-aud">Audited</span> The firm reported in pounds until 2022 and in US dollars from 2023. The 2023 growth figure is my estimate, because of that currency change. <span class="tag t-me">My reading</span></p>
+
+  <h2>Other 2025 figures worth knowing</h2>
+  <table>
+    <tr><th style="width:36%">Figure</th><th class="num" style="width:22%">2025</th><th>What it means</th></tr>
+    <tr><td class="first">Gross profit</td><td class="num">$339.2m</td><td>Revenue minus the direct cost of delivering calls. 52% of revenue.</td></tr>
+    <tr><td class="first">Profit after tax</td><td class="num">$183.9m</td><td>What was left for the owners after everything, including tax.</td></tr>
+    <tr><td class="first">Total staff pay</td><td class="num">$185.7m</td><td>Wages, pensions and employer taxes for all staff.</td></tr>
+    <tr><td class="first">Average staff in the year</td><td class="num">1,741</td><td>Up from 1,653. The website says “2,000+”. See note below.</td></tr>
+    <tr><td class="first">Revenue per employee</td><td class="num">about $375,000</td><td>Very high for a people business. <span class="tag t-me">My reading</span></td></tr>
+    <tr><td class="first">Cash at year end</td><td class="num">$72.3m</td><td>Money in the bank.</td></tr>
+  </table>
+  <p class="small"><strong>Staff numbers.</strong> The accounts show an average of 1,741 employees for the AlphaSights Ltd group in 2025. The website says over 2,000. The gap is probably timing (an average over the year against a current total) or how group companies are counted. In the interview, use the firm’s own “over 2,000 people in nine cities”.</p>
+
+  <h2>What the numbers tell you</h2>
+  <ul>
+    <li><strong>It is one of the two biggest firms in its industry.</strong> One industry analyst calls AlphaSights and GLG “tied” as the largest. The whole market is about $3 billion a year, so AlphaSights has roughly a fifth of it. <span class="tag t-est">Industry estimate</span> <span class="tag t-me">My reading</span></li>
+    <li><strong>It boomed in 2020 and 2021.</strong> Global deal-making hit a record in 2021, and remote working made research by phone normal. <span class="tag t-me">My reading</span></li>
+    <li><strong>2022 was a harder year for profit.</strong> Revenue grew 27% but profit fell slightly. Costs grew faster than sales.</li>
+    <li><strong>Since then it has become far more efficient.</strong> Margin rose from 25% to 37% in three years. In 2025, revenue grew 12% while average staff numbers grew only about 5%. The accounts credit the platform and technology investment.</li>
+    <li><strong>Growth is slowing.</strong> 12% is healthy but it is the lowest in this period apart from 2023. The question for the future is where the next wave of growth comes from.</li>
+  </ul>
+
+  <div class="box say">
+    <span class="label">How to use this in the interview</span>
+    <p>Do not recite a table. Drop in one or two figures naturally. For example: “I looked at the accounts on Companies House. Revenue was about $650 million last year with a margin of 37%, which is unusually high for a service business. It made me curious about how the platform is changing the model.”</p>
+  </div>
+</section>
+
+<!-- ================= 8. CLIENTS ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 8</span>
+  <h1>The clients</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>The clients are professionals who make expensive decisions under time pressure. They need knowledge that is not public, they need it again and again, and they can afford to pay.</p>
+  </div>
+
+  <p>AlphaSights’ website lists six client groups. <span class="tag t-co">Company says</span></p>
+
+  <table class="long"><thead><tr><th style="width:23%">Client type</th><th>What they do, in plain English</th><th style="width:36%">Why they call an expert</th></tr></thead>
+    <tr><td class="first">Private equity firms</td><td>They buy whole companies, improve them and sell them a few years later for a profit.</td><td>To check a company before buying it. This checking is called “due diligence”. One deal can mean dozens of calls in a few weeks.</td></tr>
+    <tr><td class="first">Hedge funds and asset managers</td><td>They invest in shares and bonds of companies listed on the stock market.</td><td>To understand an industry better than other investors do. Compliance rules are strictest here.</td></tr>
+    <tr><td class="first">Strategy consultancies</td><td>Firms like McKinsey, Bain and BCG. Companies pay them for advice on big decisions.</td><td>Consultants are often dropped into an industry they do not know. They must sound credible within days.</td></tr>
+    <tr><td class="first">Investment banks and research</td><td>They advise on mergers and help companies raise money.</td><td>To build knowledge of a sector for a pitch or a deal.</td></tr>
+    <tr><td class="first">Venture capital firms</td><td>They invest in young, fast-growing start-ups.</td><td>To judge whether a new technology or market is real.</td></tr>
+    <tr><td class="first">Corporations</td><td>Large companies, such as the Fortune 500. Usually their strategy or acquisitions teams.</td><td>To enter a new market, launch a product, study a rival or buy a company.</td></tr>
+  </table>
+
+  <h2>Why AlphaSights chose these clients</h2>
+  <p>This is a good question to think about, because it shows you understand the business and not just the list.</p>
+  <ol>
+    <li><strong>The stakes are huge.</strong> When a decision is worth hundreds of millions, a call costing about $1,000 is tiny. Price is not the main worry. Being wrong is.</li>
+    <li><strong>They are always short of time.</strong> A deal has a deadline. That makes speed valuable, and speed is what AlphaSights is best at.</li>
+    <li><strong>They come back constantly.</strong> A private equity firm looks at many companies a year. Each one raises fresh questions. So one client produces a steady flow of projects.</li>
+    <li><strong>What they need cannot be Googled.</strong> If the answer were public, they would not pay for it.</li>
+    <li><strong>They already understand the product.</strong> The founders came from strategy consulting. They had felt this problem as customers.</li>
+    <li><strong>They pay their bills.</strong> The accounts say the risk of clients not paying is reduced by “the composition and quality of the company’s client base”. <span class="tag t-aud">Audited</span></li>
+  </ol>
+
+  <h2>Who spends the most?</h2>
+  <p>AlphaSights does not publish its own split. Across the whole expert network industry it looks like this: <span class="tag t-est">Industry estimate</span></p>
+  <table>
+    <tr><th>Client group</th><th class="num" style="width:36%">Share of industry spending</th></tr>
+    <tr><td class="first">Consultancies (including market research)</td><td class="num">Almost half</td></tr>
+    <tr><td class="first">Investors (hedge funds, asset managers and similar)</td><td class="num">About 42%</td></tr>
+    <tr><td class="first">Corporations</td><td class="num">About 10%</td></tr>
+  </table>
+  <p>Notice the corporations. They are about 45% of all clients by number, but only a tenth of the spending. Each one spends little. That makes them the big growth opportunity, and AlphaSights has said it sees rising demand from Fortune 500 companies.</p>
+
+  <h2>What is the service really worth to a client?</h2>
+  <div class="two">
+    <div class="box key"><span class="label">Speed</span><p>Weeks of searching become hours.</p></div>
+    <div class="box key"><span class="label">Access</span><p>People the client could never find or reach alone.</p></div>
+    <div class="box key"><span class="label">Confidence</span><p>A decision backed by people who have done the job.</p></div>
+    <div class="box key"><span class="label">Safety</span><p>Compliance checks that protect the client from legal trouble.</p></div>
+  </div>
+
+  <div class="box eg" style="margin-top:14pt">
+    <span class="label">About client names</span>
+    <p>AlphaSights does not name its clients. Client work is confidential. An older company article claimed 18 of the top 20 private equity firms, 8 of the top 10 hedge funds and 3 of the most prominent strategy consultancies as clients. <span class="tag t-co">Company says</span> That article is several years old, so say “most of the leading private equity firms and consultancies” instead of quoting the exact numbers.</p>
+  </div>
+</section>
+
+<!-- ================= 9. HISTORY ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 9</span>
+  <h1>History and founders</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>Two former strategy consultants started AlphaSights in a tiny London office in 2008. They built it into one of the two largest firms in the industry, and they still run it.</p>
+  </div>
+
+  <h2>The founders</h2>
+  <table>
+    <tr><th style="width:26%">Founder</th><th>Background</th></tr>
+    <tr><td class="first">Max Cartellieri<br><span class="small">Co-CEO</span></td><td>Co-founded Ciao, a European price comparison website. Microsoft bought it in 2008 in a deal reported at $486 million.</td></tr>
+    <tr><td class="first">Andrew Heath<br><span class="small">Co-CEO</span></td><td>Co-founded GoIndustry, an online marketplace for used industrial equipment. It listed on the London stock market in 2006.</td></tr>
+  </table>
+  <p>They met at Stanford business school in the United States. Both began their careers in strategy consulting. So they had been the customer: the person who needs to understand an industry by Friday.</p>
+  <p>Both had already built and sold companies before AlphaSights. They are the only two directors of the company, which is unusual for a firm this size. <span class="tag t-aud">Audited</span></p>
+
+  <h2>The big idea</h2>
+  <p>Expert networks already existed in 2008. The biggest was GLG, founded in New York in 1998. The older firms kept a fixed database of experts who had signed up.</p>
+  <p>AlphaSights started with no database at all. So it had to go out and find new experts for every single project. That weakness became its strength. Clients got experts who were a closer fit, because they were chosen for that exact question.</p>
+
+  <h2>Timeline</h2>
+  <table class="long"><thead><tr><th style="width:17%">Year</th><th>What happened</th></tr></thead>
+    <tr><td class="first">2008</td><td>Founded in London, in a serviced office reported to be about two metres by two metres. Early backing of about €3 million from the investor Acton Capital. <span class="tag t-est">Industry estimate</span></td></tr>
+    <tr><td class="first">2010</td><td>Reportedly profitable with about 30 staff.</td></tr>
+    <tr><td class="first">2011</td><td>Opens in New York and Hong Kong.</td></tr>
+    <tr><td class="first">2012</td><td>Opens in Dubai.</td></tr>
+    <tr><td class="first">2013</td><td>Named third fastest-growing UK company in the Sunday Times Fast Track 100.</td></tr>
+    <tr><td class="first">2015 to 2018</td><td>Opens in San Francisco, Seoul, Shanghai, Hamburg and Tokyo. That makes nine cities.</td></tr>
+    <tr><td class="first">2020 to 2021</td><td>Revenue grows 33% and then 41%. <span class="tag t-aud">Audited</span></td></tr>
+    <tr><td class="first">2024</td><td>Launches AI tools that summarise calls and projects.</td></tr>
+    <tr><td class="first">2025</td><td>Sues rival AlphaSense over the similarity of the names. Registered office moves to Thames Court, 1 Queenhithe, London. Named in the Financial Times list of Europe’s Long-Term Growth Champions 2026.</td></tr>
+    <tr><td class="first">2026</td><td>Reports 2025 revenue of $652.6 million. <span class="tag t-aud">Audited</span> Announces a partnership with the mentoring charity iMentor.</td></tr>
+  </table>
+  <p class="small">Sources disagree by a year on some office opening dates. The order is right. The exact years matter less.</p>
+
+  <h2>The nine offices</h2>
+  <p>London (headquarters), New York, San Francisco, Hamburg, Dubai, Hong Kong, Shanghai, Seoul and Tokyo. <span class="tag t-co">Company says</span></p>
+  <p>These are placed where the clients are: the world’s main centres for finance and consulting. Being in several time zones also means work on a project can continue around the clock.</p>
+
+  <h2>Who owns it?</h2>
+  <p>AlphaSights is private. It is not on the stock market. The trading company, AlphaSights Ltd, is owned by a parent called AlphaSights Holdings Ltd. <span class="tag t-aud">Audited</span></p>
+  <div class="box care">
+    <span class="label">Treat this one with care</span>
+    <p>Several industry websites report that AlphaSights raised about $400 million in September 2024, valuing the firm at about $4.2 billion, with the investors Carlyle and TA Associates named. I could not find this confirmed by AlphaSights or by a major news outlet. <span class="tag t-est">Industry estimate</span> Do not state it as fact in the interview.</p>
+  </div>
+
+  <h2>Giving back</h2>
+  <p>The firm runs a programme called <strong>Knowledge for Good</strong>. It gives social enterprises low-cost access to experts. The accounts mention it by name. <span class="tag t-aud">Audited</span> It is a nice detail to mention if you are asked what you like about the firm.</p>
+</section>
+
+<!-- ================= 10. PEOPLE ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 10</span>
+  <h1>People, roles and the Associate job</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>Most people at AlphaSights work in Client Service. The entry job is Associate. It is a commercial role with targets, fast promotion and pay linked to results.</p>
+  </div>
+
+  <h2>The main teams</h2>
+  <table>
+    <tr><th style="width:30%">Team</th><th>What it does</th></tr>
+    <tr class="hl"><td class="first">Client Service</td><td>Runs client projects from start to finish. Finds and recruits experts. Looks after client relationships. By far the largest team, and the one your Insight Days are about.</td></tr>
+    <tr><td class="first">Legal and Compliance</td><td>Makes sure every expert and every call follows the rules.</td></tr>
+    <tr><td class="first">Engineering and Product</td><td>Builds the technology: the library, the AI tools and the internal systems.</td></tr>
+    <tr><td class="first">Talent Acquisition and People</td><td>Hires and develops staff. Eve Taylor, your interviewer, is on this team.</td></tr>
+    <tr><td class="first">Finance, Marketing and others</td><td>Support the business.</td></tr>
+  </table>
+  <p>Client Service teams are organised by type of client. For example, one team serves private equity and another serves consultancies.</p>
+
+  <h2>What a Client Service Associate does</h2>
+  <ul>
+    <li>Takes a client’s request and works out what kind of person could answer it.</li>
+    <li>Searches for those people and contacts them by phone, email and LinkedIn.</li>
+    <li>Persuades them to take part, agrees a fee and checks they are suitable.</li>
+    <li>Writes up the best experts and presents them to the client.</li>
+    <li>Schedules the calls and keeps both sides happy.</li>
+    <li>Carries a monthly revenue target from the start. <span class="tag t-co">Company says</span></li>
+  </ul>
+
+  <div class="box eg">
+    <span class="label">What makes AlphaSights’ set-up different</span>
+    <p>At AlphaSights, the same Associate team handles expert recruiting, the client relationship and the selling. Rivals such as GLG and Third Bridge split these jobs between separate teams. <span class="tag t-est">Industry estimate</span></p>
+    <p>For you, that means more responsibility earlier. For the client, it means one person who understands the whole project.</p>
+  </div>
+
+  <h2>The career path</h2>
+  <figure>
+    <div class="ftitle">Diagram 6: The Client Service ladder</div>
+    <div class="ladder">
+      <div class="rung" style="height:104pt"><span class="yr">Years 0 to 2</span><b>Associate</b>Runs projects and recruits experts.</div>
+      <div class="rung" style="height:138pt; background:#C9DAEE;"><span class="yr">From about 2 to 2.5 years</span><b>Manager</b>Leads a team’s projects. Trains new joiners. Builds client relationships.</div>
+      <div class="rung" style="height:172pt; background:#1D3B63; color:#FFFDF7;"><span class="yr" style="color:#BFE5DC">From about 5 years</span><b style="color:#FFFDF7">Vice President</b>Owns client relationships and results. Runs a “business within the business”.</div>
+    </div>
+    <figcaption><b>How to read this.</b> Each step up is a promotion. The times are the firm’s stated targets, not guarantees. AlphaSights says promotion depends on performance, not on how long you have been there. <span class="tag t-co">Company says</span></figcaption>
+  </figure>
+
+  <h2>Pay in London</h2>
+  <p>The careers pages say a first-year Associate in London can earn <strong>£48,500 to £57,500</strong>. That includes a base salary of <strong>£41,500</strong>. The rest is performance pay with no upper limit, tied to the number of client-to-expert interactions you set up each month. <span class="tag t-co">Company says</span></p>
+  <p class="small">You will not be asked about pay in this call. It is useful to know because it shows how the firm thinks: rewards follow results.</p>
+
+  <h2>The five values</h2>
+  <p>AlphaSights lists five values. <span class="tag t-co">Company says</span> Have a short story from your own life ready for at least two of them.</p>
+  <table>
+    <tr><th style="width:28%">Value</th><th>What it means in practice</th></tr>
+    <tr><td class="first">Results-orientation</td><td>You care about the outcome, not just the effort.</td></tr>
+    <tr><td class="first">Drive</td><td>You chase ambitious goals and keep going when it is hard.</td></tr>
+    <tr><td class="first">Empathy</td><td>You understand what clients, experts and colleagues need.</td></tr>
+    <tr><td class="first">Adaptability</td><td>You cope well when things change quickly.</td></tr>
+    <tr><td class="first">Humility</td><td>You take feedback and accept that you can always improve.</td></tr>
+  </table>
+
+  <h2>What the Insight Days advert asks for</h2>
+  <p>The advert names five skills. Here is how each one links to the real job.</p>
+  <table>
+    <tr><th style="width:28%">Skill in the advert</th><th>Where it shows up in the Associate role</th></tr>
+    <tr><td class="first">Commercial confidence</td><td>Talking to senior clients and experts. Knowing how the firm earns money.</td></tr>
+    <tr><td class="first">Adaptability</td><td>A new industry and a new client every day.</td></tr>
+    <tr><td class="first">Resilience</td><td>Most people you contact will not reply. Targets every month.</td></tr>
+    <tr><td class="first">Negotiation</td><td>Agreeing fees with experts. Persuading busy people to give an hour.</td></tr>
+    <tr><td class="first">Critical thinking</td><td>Working out who really knows the answer to a client’s question.</td></tr>
+  </table>
+</section>
+
+<!-- ================= 11. COMPETITORS ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 11</span>
+  <h1>Competitors</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>AlphaSights competes on speed, tailored expert searches and hands-on service. Rivals compete on the size of their database, lower prices or bigger content libraries.</p>
+  </div>
+
+  <h2>The market</h2>
+  <ul>
+    <li>The expert network industry is worth about <strong>$3 billion a year</strong> and grew about 11% to 12% a year from 2023 to 2025. <span class="tag t-est">Industry estimate</span></li>
+    <li>About 11,200 firms now use expert networks. <span class="tag t-est">Industry estimate</span></li>
+    <li>GLG used to dominate. Its share has reportedly fallen from 51% to 24% in ten years as newer firms, led by AlphaSights, took business. <span class="tag t-est">Industry estimate</span></li>
+  </ul>
+
+  <h2>The main rivals</h2>
+  <table class="long"><thead><tr><th style="width:21%">Firm</th><th style="width:20%">Started</th><th>What it is known for</th><th style="width:27%">Against AlphaSights</th></tr></thead>
+    <tr><td class="first">GLG</td><td>1998, New York</td><td>The original and long the biggest. A huge database of around a million experts. Also runs events.</td><td>Bigger database. Seen as slower and less tailored.</td></tr>
+    <tr><td class="first">Guidepoint</td><td>2003, New York</td><td>Broad coverage, with a strong name in healthcare. Seen as good value.</td><td>Often cheaper. Less known for bespoke searches.</td></tr>
+    <tr><td class="first">Third Bridge</td><td>2007, London</td><td>Calls plus “Forum”, a large library of interviews led by its own analysts. Mostly serves investors.</td><td>Bigger ready-made library. AlphaSights is stronger on custom calls.</td></tr>
+    <tr><td class="first">AlphaSense (owns Tegus)</td><td>2011. Bought Tegus in 2024</td><td>A research software platform with AI search. Tegus added a huge transcript library. The deal was reported at about $930 million.</td><td>Technology first. AlphaSights is service first.</td></tr>
+    <tr><td class="first">Dialectica</td><td>2015, Athens</td><td>Founded by former AlphaSights staff. Uses a similar model of fresh searches for each project.</td><td>A younger, lower-cost copy of the same approach.</td></tr>
+  </table>
+  <p class="small">Details from industry directories and comparison guides. <span class="tag t-est">Industry estimate</span> Other names you may hear: Atheneum, proSapient, Arbolus, Capvision (China), and new AI-first start-ups.</p>
+
+  <p>One striking fact: several rivals were started by people who used to work at AlphaSights. These include Dialectica, Tegus and Arbolus. It shows how well the firm trains people in this business.</p>
+
+  <figure>
+    <div class="ftitle">Diagram 7: Where each firm sits</div>
+    <svg viewBox="0 0 600 345" width="100%" role="img" aria-label="Competitor positioning map">
+      <rect x="130" y="16" width="456" height="270" fill="#FBF6EA" stroke="#D9CFB8" stroke-width="1.5"/>
+      <rect x="130" y="16" width="228" height="135" fill="#DFF1EC"/>
+      <line x1="358" y1="16" x2="358" y2="286" stroke="#B9AE95" stroke-width="1.5" stroke-dasharray="5 5"/>
+      <line x1="130" y1="151" x2="586" y2="151" stroke="#B9AE95" stroke-width="1.5" stroke-dasharray="5 5"/>
+      <text x="120" y="40" text-anchor="end" font-size="14" font-weight="600" fill="#1D3B63">People do it</text>
+      <text x="120" y="59" text-anchor="end" font-size="14" font-weight="600" fill="#1D3B63">for you</text>
+      <text x="120" y="258" text-anchor="end" font-size="14" font-weight="600" fill="#1D3B63">You search</text>
+      <text x="120" y="277" text-anchor="end" font-size="14" font-weight="600" fill="#1D3B63">it yourself</text>
+      <text x="130" y="310" text-anchor="start" font-size="14" font-weight="600" fill="#1D3B63">Finds new experts</text>
+      <text x="130" y="329" text-anchor="start" font-size="14" font-weight="600" fill="#1D3B63">for each project</text>
+      <text x="586" y="310" text-anchor="end" font-size="14" font-weight="600" fill="#1D3B63">Uses a ready-made</text>
+      <text x="586" y="329" text-anchor="end" font-size="14" font-weight="600" fill="#1D3B63">database or library</text>
+      <circle cx="170" cy="62" r="12" fill="#0E6F66"/>
+      <text x="189" y="68" font-size="18" font-weight="700" fill="#0E6F66">AlphaSights</text>
+      <circle cx="215" cy="116" r="8" fill="#1D3B63"/>
+      <text x="230" y="121" font-size="14.5" font-weight="600" fill="#252A33">Dialectica</text>
+      <circle cx="450" cy="70" r="8" fill="#1D3B63"/>
+      <text x="465" y="75" font-size="14.5" font-weight="600" fill="#252A33">GLG</text>
+      <circle cx="412" cy="122" r="8" fill="#1D3B63"/>
+      <text x="427" y="127" font-size="14.5" font-weight="600" fill="#252A33">Guidepoint</text>
+      <circle cx="448" cy="186" r="8" fill="#1D3B63"/>
+      <text x="463" y="191" font-size="14.5" font-weight="600" fill="#252A33">Third Bridge</text>
+      <circle cx="555" cy="250" r="8" fill="#1D3B63"/>
+      <text x="540" y="255" text-anchor="end" font-size="14.5" font-weight="600" fill="#252A33">AlphaSense / Tegus</text>
+    </svg>
+    <figcaption><b>How to read this.</b> Left to right shows where the experts come from. Firms on the left search for new experts each time. Firms on the right lean on what they already hold. Top to bottom shows who does the work. At the top, staff do it for the client. At the bottom, the client uses software. AlphaSights sits in the shaded top-left corner: tailored and hands-on. This is my simplified view, not an official ranking. <span class="tag t-me">My reading</span></figcaption>
+  </figure>
+
+  <h2>How AlphaSights stands out</h2>
+  <ol>
+    <li><strong>Fresh experts for each project.</strong> It recruits to fit the exact question instead of only searching an old list. The firm calls this “custom recruiting”.</li>
+    <li><strong>Speed.</strong> Industry guides call it the speed pick, with experts often offered within hours.</li>
+    <li><strong>One team, whole project.</strong> The Associate who finds the experts also knows the client.</li>
+    <li><strong>Heavy investment in compliance.</strong> Reportedly more than 60 specialist staff.</li>
+    <li><strong>Growing technology.</strong> AlphaNow, AlphaGPT, AI summaries and the AI Interviewer.</li>
+    <li><strong>Financial strength.</strong> A 37% margin gives it money to invest. <span class="tag t-aud">Audited</span></li>
+  </ol>
+
+  <h2>Where it is weaker</h2>
+  <p>A balanced view impresses interviewers more than pure praise.</p>
+  <ul>
+    <li><strong>Price.</strong> A premium, hands-on service costs more than budget rivals.</li>
+    <li><strong>Library size.</strong> AlphaNow is newer and smaller than Third Bridge’s Forum or AlphaSense’s Tegus library.</li>
+    <li><strong>It relies on people.</strong> The model needs many Associates. That is harder to scale than software, and AI may change it.</li>
+  </ul>
+
+  <div class="box say">
+    <span class="label">If you are asked “Who are the competitors, and how is AlphaSights different?”</span>
+    <p>“The main ones are GLG, which is the oldest and has the biggest database, plus Guidepoint and Third Bridge. There is also AlphaSense, which bought Tegus and is more of a software and library business. As I understand it, AlphaSights stands out by recruiting experts fresh for each project instead of relying on a fixed database, by being very fast, and by having one Associate team own the whole project.”</p>
+  </div>
+
+  <h2>Three things that would make you sound like an insider</h2>
+  <ul>
+    <li><strong>GLG’s last public revenue figure was about $650 million, for 2021.</strong> AlphaSights reached $652.6 million in 2025. So the challenger has roughly caught the firm that invented the industry. <span class="tag t-est">Industry estimate</span> <span class="tag t-aud">Audited</span></li>
+    <li><strong>AlphaSights has grown by itself.</strong> I found no record of it buying other companies. Rivals such as AlphaSense have grown through large purchases. <span class="tag t-me">My reading</span></li>
+    <li><strong>The industry is splitting in two.</strong> One side sells a hands-on service. The other sells software and libraries. AlphaSights is trying to be strong at both.</li>
+  </ul>
+</section>
+
+<!-- ================= 12. COMMERCIAL AWARENESS ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 12</span>
+  <h1>Commercial awareness</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>AlphaSights does well when its clients are busy making deals and starting projects. Its biggest long-term question is what AI does to the value of an expert call.</p>
+  </div>
+
+  <p>Commercial awareness means understanding what in the outside world helps or hurts a business. For AlphaSights there are six forces to know.</p>
+
+  <h2>1. Deal activity</h2>
+  <p>When investors buy and sell more companies, they need more research, so they book more calls. When deals slow down, call volumes fall.</p>
+  <ul>
+    <li>Global mergers and acquisitions reached about $3.9 trillion in the first nine months of 2026. That is up 28% and the highest for that period since 2001. <span class="tag t-est">Industry estimate</span></li>
+    <li>But the third quarter fell about 41% from the quarter before, to roughly $993 billion, as borrowing costs rose. <span class="tag t-est">Industry estimate</span></li>
+    <li>Private equity firms are holding about $1.7 trillion they have raised but not yet spent. This is nicknamed “dry powder”. They are under pressure to invest it. <span class="tag t-est">Industry estimate</span></li>
+  </ul>
+  <p><strong>Why it matters:</strong> high interest rates make borrowing expensive. Private equity uses a lot of borrowed money. So high rates mean fewer deals, and fewer deals mean fewer calls.</p>
+
+  <div style="break-inside: avoid">
+  <h2>2. Artificial intelligence</h2>
+  <p>This is the biggest topic in the industry. It cuts both ways.</p>
+  <div class="two">
+    <div class="box care"><span class="label">The threat</span>
+      <ul>
+        <li>AI can answer basic questions that once needed a call.</li>
+        <li>Libraries let clients reuse old calls cheaply. This has squeezed call profits in parts of the market.</li>
+        <li>AI could do parts of an Associate’s work.</li>
+        <li>New AI-first rivals are raising money.</li>
+      </ul>
+    </div>
+    <div class="box key"><span class="label">The opportunity</span>
+      <ul>
+        <li>AI only knows what has been written down. Experts know what has not. That gets more valuable.</li>
+        <li>AI makes AlphaSights faster and cheaper to run.</li>
+        <li>New products: AlphaGPT, AI summaries, AI Interviewer.</li>
+        <li>AI companies themselves need experts.</li>
+      </ul>
+    </div>
+  </div>
+  </div>
+  <p style="margin-top:12pt">AlphaSights’ rising margin suggests that, so far, technology is helping it more than hurting it. <span class="tag t-me">My reading</span></p>
+
+  <div class="box say">
+    <span class="label">A strong commercial point to make</span>
+    <p>“The thing I find most interesting is AI. On the surface it looks like a threat, because an AI tool can answer simple questions. But AI only knows what is already written down. The value of AlphaSights is knowledge that is still in people’s heads. So I think demand for real experts could actually rise, and the firms that win will be the ones that combine both, which seems to be what AlphaSights is doing with its platform.”</p>
+  </div>
+
+  <h2>3. The shift from calls to content</h2>
+  <p>Rivals are betting that clients want a searchable library and software, not just calls. AlphaSense paid about $930 million for Tegus in 2024 to get its transcript library, and launched a new AI research agent in October 2026. AlphaSights has responded by building AlphaNow and AlphaGPT.</p>
+
+  <h2>4. Rules and compliance</h2>
+  <ul>
+    <li><strong>Insider trading.</strong> Around 2010 and 2011, staff and experts at a US network called Primary Global Research were convicted of passing secret company information to hedge funds. The whole industry tightened its rules afterwards. Trust is everything in this business.</li>
+    <li><strong>China.</strong> In 2023, Chinese police raided the expert network Capvision as part of an anti-spying campaign. AlphaSights has an office in Shanghai, so politics is a real risk for it.</li>
+  </ul>
+
+  <h2>5. Competition and price pressure</h2>
+  <p>More networks are chasing the same clients and the same experts. Popular experts get tired of being contacted by many firms. Cheaper rivals push prices down.</p>
+
+  <h2>6. Currency movements</h2>
+  <p>AlphaSights reports in US dollars but pays many costs in other currencies, such as pounds. Its accounts list exchange rates as a main financial risk. <span class="tag t-aud">Audited</span></p>
+
+  <h2>Recent news about AlphaSights</h2>
+  <table>
+    <tr><th style="width:24%">When</th><th>What</th></tr>
+    <tr><td class="first">January 2025</td><td>AlphaSights sued AlphaSense in New York, saying the similar name confuses clients. In August 2025 the court refused AlphaSense’s request to throw the case out. A second case was filed in Ireland in November 2025. The dispute is still running.</td></tr>
+    <tr><td class="first">October 2025</td><td>Named in the Financial Times list of Europe’s Long-Term Growth Champions 2026.</td></tr>
+    <tr><td class="first">April 2026</td><td>Directors signed off the 2025 accounts: revenue up 12% and margin up to 37%. <span class="tag t-aud">Audited</span></td></tr>
+    <tr><td class="first">May 2026</td><td>Announced a partnership with the mentoring charity iMentor.</td></tr>
+  </table>
+
+  <div style="break-inside: avoid">
+  <h2>“Deals” and “mandates”: an honest note</h2>
+  <p>You asked about recent deals or mandates the firm has won. Banks and law firms announce those. AlphaSights does not, for two reasons.</p>
+  <ul>
+    <li>Its client work is confidential. A private equity firm does not want the world to know which company it is researching.</li>
+    <li>It does not win one big contract at a time. It wins thousands of small projects from repeat clients.</li>
+  </ul>
+  <p>So if you are asked about recent developments, talk about the growth in its accounts, its new AI products and the AlphaSense case. Do not go looking for “deals”.</p>
+  </div>
+
+
+</section>
+
+<!-- ================= 13. INTERVIEW ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 13</span>
+  <h1>Your interview: questions and answers</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>Fifteen minutes. Three topics: how AlphaSights works, why you applied, and your experiences. Short, clear answers win.</p>
+  </div>
+
+  <h2>What to expect</h2>
+  <ul>
+    <li>Eve works in Talent Acquisition, not Client Service. She is checking that you understand the firm, want to be there and can communicate clearly.</li>
+    <li>In 15 minutes there is time for about five or six questions. Aim for answers of 45 to 60 seconds.</li>
+    <li>The invite says there is no expectation to have your camera on. Turning it on anyway usually helps you connect.</li>
+    <li>“Outstanding communication skills” is in the advert. How you speak is being judged as much as what you say.</li>
+  </ul>
+
+  <h2>Likely questions, with an answer plan</h2>
+
+  <div class="qa"><div class="q">1. What do you know about AlphaSights? What does it do?</div>
+    <p>Use the 30-second answer from chapter 1. Then add one detail that shows depth, such as the three client types or the 37% margin.</p></div>
+
+  <div class="qa"><div class="q">2. Who are AlphaSights’ clients?</div>
+    <p>Private equity firms, hedge funds, strategy consultancies, investment banks, venture capital firms and large corporations. Then say why: “What they share is big decisions, tight deadlines and a need for knowledge that is not public.”</p></div>
+
+  <div class="qa"><div class="q">3. How does AlphaSights make money?</div>
+    <p>“Clients pay for each interaction with an expert, mainly one-hour calls. AlphaSights pays the expert for their time and earns the difference. It is also building a platform with a research library and AI tools.”</p></div>
+
+  <div class="qa"><div class="q">4. Why did you apply for the Insight Days?</div>
+    <p>Give two or three real reasons. Strong options:</p>
+    <ul>
+      <li>You want to test a commercial, client-facing career by doing it, through the client brief simulation.</li>
+      <li>The role mixes things you enjoy: learning new industries quickly, persuading people, working to a target.</li>
+      <li>You are drawn to the early responsibility and promotion based on performance.</li>
+    </ul>
+    <p>Link each reason to something true about you.</p></div>
+
+  <div class="qa"><div class="q">5. Why AlphaSights and not another firm?</div>
+    <p>Pick points only AlphaSights can claim: still led by its founders, one of the two largest in its industry, built on finding fresh experts for each project, Associates own the whole project.</p></div>
+
+  <div class="qa"><div class="q">6. What does an Associate do? What would you find hardest?</div>
+    <p>Walk through the five steps in Diagram 2. For the hardest part, be honest. For example: “Persuading a senior stranger to give up an hour, and staying positive when most people do not reply.” Then say how you would handle it.</p></div>
+
+  <div class="qa"><div class="q">7. Tell me about a time you worked under pressure, showed resilience, persuaded someone, or failed.</div>
+    <p>Use the <strong>STAR</strong> structure. Keep it to one minute.</p>
+    <ul>
+      <li><strong>Situation:</strong> one sentence of background.</li>
+      <li><strong>Task:</strong> what you had to achieve.</li>
+      <li><strong>Action:</strong> what you did. Spend most of your time here. Say “I”, not “we”.</li>
+      <li><strong>Result:</strong> what happened, with a number if you can, and what you learned.</li>
+    </ul></div>
+
+  <div class="qa"><div class="q">8. Walk me through your CV. Tell me about yourself.</div>
+    <p>Three parts in 60 seconds: what you study, your two best experiences, and why that leads you to this.</p></div>
+
+  <h2>Stories to prepare</h2>
+  <p>Before Thursday, choose four real stories from your life. Sport, societies, part-time jobs and school all count. Each should prove at least one of these:</p>
+  <table>
+    <tr><th style="width:36%">Prove that you...</th><th>Good sources of stories</th></tr>
+    <tr><td class="first">Hit a target or got a result</td><td>Sales job, fundraising, competition, grades you worked for</td></tr>
+    <tr><td class="first">Kept going after a setback</td><td>A rejection, a failed attempt, an injury, a hard exam</td></tr>
+    <tr><td class="first">Persuaded someone</td><td>Sponsorship, recruiting members, negotiating, a debate</td></tr>
+    <tr><td class="first">Learned something fast</td><td>A new job, a project in an unfamiliar subject</td></tr>
+  </table>
+
+  <h2>Questions to ask Eve</h2>
+  <p>Have two ready. Asking good questions shows real interest. Choose ones Eve can answer from her role.</p>
+  <ul>
+    <li>“What do the strongest Insight Days attendees do differently from the rest?”</li>
+    <li>“How is the client brief simulation set up, and what skills is it designed to test?”</li>
+    <li>“I saw in the accounts that the expanded platform is a growth driver. Is that changing what Associates do day to day?”</li>
+    <li>“What do you think makes someone thrive in the Associate role in their first year?”</li>
+  </ul>
+
+  <h2>On the day</h2>
+  <div class="two">
+    <div class="box key"><span class="label">Before the call</span>
+      <ul>
+        <li>Read the Associate Interview Guide in Eve’s email.</li>
+        <li>Say your 30-second answer aloud three times.</li>
+        <li>Test the Google Meet link, sound and camera.</li>
+        <li>Check your spam folder for the calendar invite.</li>
+        <li>Close all AI tools and extra tabs.</li>
+      </ul>
+    </div>
+    <div class="box say"><span class="label">During the call</span>
+      <ul>
+        <li>Join two or three minutes early.</li>
+        <li>Slow down. Pause before you answer.</li>
+        <li>Answer the question first, then explain.</li>
+        <li>If you do not know, say so, then reason it out.</li>
+        <li>Thank Eve by name at the end.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 style="margin-top:20pt">Your Insight Days at a glance</h2>
+  <ul>
+    <li><strong>Dates:</strong> 23 and 24 March 2027, or 30 June and 1 July 2027.</li>
+    <li><strong>Place:</strong> the London headquarters. Travel and accommodation are paid for successful applicants.</li>
+    <li><strong>Content:</strong> workshops led by the Client Service team, a client brief simulation and case competition, and networking.</li>
+    <li><strong>The prize:</strong> attendees join a mailing list to be fast-tracked for 2028 graduate roles in Client Service.</li>
+    <li><strong>Languages:</strong> German, French, Italian, Spanish or Dutch are called “highly beneficial”. If you speak one, say so.</li>
+  </ul>
+</section>
+
+<!-- ================= 14. GLOSSARY ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 14</span>
+  <h1>Jargon buster</h1>
+  <p>Plain-English meanings for the terms you may hear.</p>
+  <dl class="gloss">
+    <dt>Expert network</dt><dd>A company that connects clients with people who have specialist knowledge, for a fee.</dd>
+    <dt>Primary research</dt><dd>Getting information directly from a person. The opposite is secondary research: reading reports and articles.</dd>
+    <dt>Expert (or advisor)</dt><dd>Someone with first-hand experience of an industry, such as a former manager, a customer or a supplier.</dd>
+    <dt>Interaction</dt><dd>AlphaSights’ word for one connection between a client and an expert, usually a call.</dd>
+    <dt>Private equity (PE)</dt><dd>Firms that buy whole companies, improve them and sell them later.</dd>
+    <dt>Hedge fund</dt><dd>An investment firm that buys and sells shares and other assets, often quickly.</dd>
+    <dt>Venture capital (VC)</dt><dd>Firms that invest in young start-ups.</dd>
+    <dt>Strategy consultancy</dt><dd>A firm that advises companies on big decisions. Examples: McKinsey, Bain, BCG.</dd>
+    <dt>Due diligence</dt><dd>The careful checking an investor does before buying a company.</dd>
+    <dt>M&amp;A</dt><dd>Mergers and acquisitions. Companies buying or combining with other companies.</dd>
+    <dt>Dry powder</dt><dd>Money that investors have raised but not yet spent.</dd>
+    <dt>MNPI</dt><dd>Material non-public information. Secret information that could move a share price. Illegal to trade on.</dd>
+    <dt>Compliance</dt><dd>Making sure the firm and its experts follow the law and the rules.</dd>
+    <dt>Transcript</dt><dd>A written record of what was said on a call.</dd>
+    <dt>Revenue (or turnover)</dt><dd>All the money a company brings in from sales.</dd>
+    <dt>Profit before tax</dt><dd>What is left after all costs, before the tax bill.</dd>
+    <dt>Margin</dt><dd>Profit as a share of revenue. A 37% margin means $37 of profit for every $100 of sales.</dd>
+    <dt>B2B</dt><dd>Business to business. Selling to companies, not to the public.</dd>
+    <dt>Mandate</dt><dd>A formal job that a client hires a bank or adviser to do. Not a term used much at AlphaSights.</dd>
+    <dt>Custom recruiting</dt><dd>Finding new experts specially for each project.</dd>
+  </dl>
+</section>
+
+<!-- ================= 15. SOURCES ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 15</span>
+  <h1>Sources</h1>
+  <p>Where the facts in this guide came from, strongest first.</p>
+
+  <h3>Audited accounts</h3>
+  <ul class="src">
+    <li>AlphaSights Ltd, group annual accounts for the years ending 31 December 2020, 2022, 2024 and 2025. Filed at Companies House, company number 06534480. Search “AlphaSights Ltd” at find-and-update.company-information.service.gov.uk and open “Filing history”.</li>
+  </ul>
+
+  <h3>AlphaSights’ own pages</h3>
+  <ul class="src">
+    <li>alphasights.com: home page, platform and library pages, careers and Client Service careers pages, job adverts for Associate roles.</li>
+    <li>The Insight Days 2027 advert and your interview invitation.</li>
+  </ul>
+
+  <h3>Industry sources</h3>
+  <ul class="src">
+    <li>Inex One: “Expert network market size in 2025”, “What does an expert network interview cost?”, and its AlphaSights directory page (inex.one).</li>
+    <li>ExpertNetworks.net: AlphaSights review, 2026.</li>
+    <li>Wikipedia: AlphaSights; Gerson Lehrman Group.</li>
+    <li>Spear’s: article on expert networks (expert pay rates).</li>
+    <li>Irish Times, 3 November 2025: report on the AlphaSights case against AlphaSense in Ireland.</li>
+    <li>LSEG data on global mergers and acquisitions, as reported in the press, October 2026. KPMG “Pulse of Private Equity”, Q4 2025.</li>
+    <li>Press coverage of the Primary Global Research convictions (2011) and the Capvision raid (2023).</li>
+    <li>Glassdoor and student study notes, for interview questions and the BREAD framework. Treat these as anecdotes.</li>
+  </ul>
+
+  <div class="box care">
+    <span class="label">A final word on accuracy</span>
+    <p>Anything marked <span class="tag t-aud">Audited</span> or <span class="tag t-co">Company says</span> is safe to rely on. Anything marked <span class="tag t-est">Industry estimate</span> is the best public information available but may be imprecise. Market news changes fast, so glance at the business headlines on Thursday morning.</p>
+  </div>
+</section>
+
+</body>
+</html>
