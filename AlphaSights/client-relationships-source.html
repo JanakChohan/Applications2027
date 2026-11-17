@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>AlphaSights: client relationships explained</title>
+<style>
+@font-face { font-family: "Lexend"; font-weight: 400; src: url("../fonts/Lexend-Regular.ttf"); }
+@font-face { font-family: "Lexend"; font-weight: 500; src: url("../fonts/Lexend-Medium.ttf"); }
+@font-face { font-family: "Lexend"; font-weight: 600; src: url("../fonts/Lexend-SemiBold.ttf"); }
+@font-face { font-family: "Lexend"; font-weight: 700; src: url("../fonts/Lexend-Bold.ttf"); }
+
+:root {
+  --paper: #FBF6EA;
+  --ink: #252A33;
+  --soft-ink: #4A5261;
+  --navy: #1D3B63;
+  --teal: #0E6F66;
+  --amber: #9A4A05;
+  --blue-tint: #E6EEF7;
+  --teal-tint: #DFF1EC;
+  --amber-tint: #FBE9CC;
+  --rose-tint: #F8E1DC;
+  --rose: #9B2C1C;
+  --line: #D9CFB8;
+  --white: #FFFDF7;
+}
+@page { size: A4; margin: 17mm 17mm 19mm 17mm; }
+* { box-sizing: border-box; }
+html { background: var(--paper); }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: "Lexend", Verdana, Arial, sans-serif;
+  font-size: 12pt; line-height: 1.56; letter-spacing: 0.012em; word-spacing: 0.06em;
+  text-align: left; font-weight: 400;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+p { margin: 0 0 9.5pt 0; orphans: 3; widows: 3; }
+strong { font-weight: 600; color: #171B22; }
+h1, h2, h3, h4 { font-weight: 700; color: var(--navy); line-height: 1.3; break-after: avoid; letter-spacing: 0; }
+h1 { font-size: 25pt; margin: 0 0 6pt 0; }
+h2 { font-size: 16pt; margin: 18pt 0 7pt 0; }
+h3 { font-size: 13.5pt; margin: 16pt 0 6pt 0; color: var(--teal); }
+section.chapter { break-before: page; }
+.chapnum {
+  display: inline-block; background: var(--navy); color: var(--white); font-weight: 600;
+  font-size: 11pt; padding: 3pt 11pt; border-radius: 20pt; margin-bottom: 9pt;
+}
+ul, ol { margin: 0 0 11pt 0; padding-left: 20pt; }
+li { margin-bottom: 5pt; padding-left: 3pt; }
+li::marker { color: var(--teal); font-weight: 700; }
+
+/* Boxes */
+.box { border-radius: 9pt; padding: 10pt 14pt; margin: 10pt 0 12pt 0; break-inside: avoid; }
+.box p:last-child, .box ul:last-child, .box ol:last-child { margin-bottom: 0; }
+.box .label { display: block; font-weight: 700; font-size: 11.5pt; margin-bottom: 4pt; }
+.key { background: var(--teal-tint); border-left: 6pt solid var(--teal); }
+.key .label { color: var(--teal); }
+.say { background: var(--blue-tint); border-left: 6pt solid var(--navy); }
+.say .label { color: var(--navy); }
+.care { background: var(--amber-tint); border-left: 6pt solid var(--amber); }
+.care .label { color: var(--amber); }
+.eg { background: var(--white); border: 1.4pt solid var(--line); }
+.eg .label { color: var(--soft-ink); }
+
+/* Confidence tags */
+.tag { display: inline-block; font-size: 9.3pt; font-weight: 600; padding: 1pt 7pt; border-radius: 10pt; white-space: nowrap; letter-spacing: 0; vertical-align: 1pt; }
+.t-aud { background: #CFE8DF; color: #0A5048; }
+.t-co { background: #D5E3F4; color: #173B6B; }
+.t-est { background: #F6DDB4; color: #7A3A02; }
+.t-me { background: #E8DCEF; color: #55306E; }
+
+/* Tables */
+table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 8pt 0 12pt 0; font-size: 11pt; line-height: 1.45; break-inside: avoid; }
+table.long { break-inside: auto; }
+thead { display: table-header-group; }
+th { text-align: left; background: var(--navy); color: var(--white); font-weight: 600; padding: 6.5pt 9pt; vertical-align: bottom; }
+th:first-child { border-top-left-radius: 7pt; } th:last-child { border-top-right-radius: 7pt; }
+td { padding: 6.5pt 9pt; vertical-align: top; border-bottom: 1pt solid var(--line); background: var(--white); }
+tr { break-inside: avoid; }
+td.num, th.num { text-align: right; white-space: nowrap; }
+td.first { font-weight: 600; color: var(--navy); }
+tr.hl td { background: var(--teal-tint); }
+
+/* Figures */
+figure { margin: 11pt 0 13pt 0; padding: 11pt 14pt 10pt 14pt; background: var(--white); border: 1.4pt solid var(--line); border-radius: 10pt; break-inside: avoid; }
+figure .ftitle { font-weight: 700; color: var(--navy); font-size: 12pt; margin-bottom: 9pt; }
+figcaption { margin-top: 10pt; padding-top: 8pt; border-top: 1pt dashed var(--line); font-size: 11pt; line-height: 1.55; color: var(--ink); }
+figcaption b { color: var(--teal); font-weight: 700; }
+svg text { font-family: "Lexend", Verdana, sans-serif; }
+
+/* Steps */
+.vs { display: flex; gap: 11pt; align-items: flex-start; background: var(--blue-tint); border-radius: 8pt; padding: 8pt 12pt; margin-bottom: 6pt; font-size: 11.2pt; line-height: 1.45; }
+.vs .n { flex: none; width: 23pt; height: 23pt; line-height: 23pt; text-align: center; border-radius: 50%; background: var(--navy); color: #fff; font-weight: 700; font-size: 12pt; }
+.vs b { color: var(--navy); font-weight: 700; }
+.vs.money { background: var(--teal-tint); margin-bottom: 0; } .vs.money .n { background: var(--teal); } .vs.money b { color: var(--teal); }
+
+/* $100 bar */
+.bar100 { display: flex; height: 54pt; border-radius: 8pt; overflow: hidden; font-weight: 700; color: #fff; font-size: 14pt; }
+.bar100 div { display: flex; align-items: center; justify-content: center; }
+.legend { margin-top: 9pt; font-size: 11.2pt; line-height: 1.45; }
+.legend div { display: flex; gap: 9pt; align-items: flex-start; margin-bottom: 5pt; }
+.legend i { flex: none; width: 13pt; height: 13pt; border-radius: 3pt; margin-top: 2pt; }
+
+/* Revenue streams */
+.streams { display: flex; gap: 8pt; align-items: stretch; }
+.stream { border-radius: 8pt; padding: 10pt 11pt; font-size: 11pt; line-height: 1.45; }
+.stream b { display: block; font-size: 11.6pt; margin-bottom: 3pt; }
+.stream .size { display: inline-block; margin-top: 6pt; font-size: 9.6pt; font-weight: 700; padding: 1pt 7pt; border-radius: 10pt; background: rgba(255,255,255,.75); }
+
+/* Bars chart */
+.chart { display: flex; align-items: flex-end; gap: 26pt; height: 150pt; padding: 0 20pt; border-bottom: 2pt solid var(--navy); }
+.col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+.col .v { font-weight: 700; color: var(--navy); font-size: 12.5pt; margin-bottom: 3pt; }
+.col .b { width: 100%; background: var(--navy); border-radius: 6pt 6pt 0 0; }
+.chartx { display: flex; gap: 26pt; padding: 5pt 20pt 0 20pt; font-size: 10.6pt; line-height: 1.4; }
+.chartx div { flex: 1; text-align: center; }
+.chartx b { display: block; font-size: 11.5pt; color: var(--navy); }
+
+/* Ladder */
+.ladder { display: flex; gap: 8pt; align-items: flex-end; }
+.rung { flex: 1; border-radius: 8pt 8pt 0 0; background: var(--blue-tint); padding: 9pt 10pt; font-size: 11pt; line-height: 1.42; }
+.rung b { display: block; color: var(--navy); font-size: 11.6pt; }
+.rung .yr { font-weight: 600; color: var(--teal); display: block; margin-bottom: 3pt; }
+
+/* Cover */
+.cover { height: 252mm; display: flex; flex-direction: column; justify-content: space-between; break-after: page; }
+.cover .band { background: var(--navy); color: var(--white); border-radius: 14pt; padding: 30pt 28pt; }
+.cover .band .kicker { font-size: 12pt; font-weight: 500; opacity: .9; margin-bottom: 10pt; }
+.cover .band h1 { color: var(--white); font-size: 34pt; line-height: 1.2; margin: 0 0 12pt 0; }
+.cover .band p { font-size: 14pt; margin: 0; line-height: 1.5; }
+.facts { display: grid; grid-template-columns: 1fr 1fr; gap: 9pt; }
+.fact { background: var(--white); border: 1.4pt solid var(--line); border-radius: 9pt; padding: 10pt 13pt; font-size: 11.2pt; line-height: 1.45; }
+.fact b { display: block; color: var(--teal); font-size: 10.4pt; font-weight: 700; }
+.toc { columns: 2; column-gap: 22pt; font-size: 11.2pt; padding-left: 0; list-style: none; margin: 0; }
+.toc li { break-inside: avoid; margin-bottom: 5pt; padding-left: 0; }
+.toc .n { display: inline-block; width: 21pt; font-weight: 700; color: var(--teal); }
+
+.tiles { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 9pt; margin: 8pt 0 10pt 0; break-inside: avoid; }
+.tile { background: var(--white); border: 1.4pt solid var(--line); border-radius: 9pt; padding: 10pt 12pt; font-size: 11pt; line-height: 1.45; }
+.tile b { display: block; font-size: 20pt; line-height: 1.25; color: var(--navy); font-weight: 700; margin-bottom: 2pt; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 10pt; }
+.two .box { margin: 0; }
+.qa { break-inside: avoid; margin-bottom: 9pt; }
+.qa .q { font-weight: 700; color: var(--navy); margin-bottom: 3pt; }
+.gloss dt { font-weight: 700; color: var(--navy); margin-top: 8pt; }
+.gloss dd { margin: 0 0 2pt 0; }
+.src { font-size: 10.2pt; line-height: 1.5; }
+.src li { margin-bottom: 4.5pt; }
+.small { font-size: 10.6pt; color: var(--soft-ink); }
+
+/* ---- deep dive additions ---- */
+.formula { display: flex; align-items: stretch; gap: 6pt; }
+.lever { flex: 1; background: var(--blue-tint); border-radius: 8pt; padding: 9pt 8pt; text-align: left; font-size: 10.8pt; line-height: 1.4; }
+.lever b { display: block; color: var(--navy); font-size: 13.5pt; font-weight: 700; margin-bottom: 2pt; }
+.op { flex: none; align-self: center; font-size: 20pt; font-weight: 700; color: var(--teal); }
+.equals { margin-top: 9pt; background: var(--navy); color: var(--white); border-radius: 8pt; padding: 8pt 12pt; font-weight: 600; font-size: 12pt; }
+.lanes { display: grid; grid-template-columns: 1fr 1fr; gap: 12pt; }
+.lanehead { color: #fff; font-weight: 700; font-size: 11.5pt; border-radius: 8pt; padding: 6pt 10pt; margin-bottom: 6pt; }
+.chip { background: var(--blue-tint); border-radius: 7pt; padding: 7pt 10pt; margin-bottom: 5pt; font-size: 11pt; line-height: 1.4; }
+.chip.t { background: var(--teal-tint); }
+.lanenote { font-size: 10.8pt; line-height: 1.4; font-weight: 600; color: var(--soft-ink); margin-top: 7pt; }
+table.why td.first { width: 25%; }
+table.why td { background: var(--white); }
+.models { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8pt; }
+.model { border: 1.6pt solid; border-radius: 9pt; overflow: hidden; font-size: 10.8pt; line-height: 1.42; display: flex; flex-direction: column; background: var(--white); }
+.model .mhead { color: #fff; font-weight: 700; font-size: 12pt; padding: 6pt 9pt; }
+.model p { margin: 6pt 9pt 0 9pt; }
+.model .who { margin-top: auto; padding: 7pt 9pt; font-weight: 600; font-size: 10.6pt; }
+.model p:last-of-type { margin-bottom: 8pt; }
+.cmp { font-size: 11pt; }
+.cmph { font-weight: 700; color: var(--navy); margin-bottom: 5pt; }
+.cmprow { display: flex; align-items: center; gap: 8pt; margin-bottom: 5pt; }
+.who2 { flex: none; width: 76pt; font-weight: 600; }
+.track { flex: 1; display: block; }
+.fill { display: block; color: #fff; font-weight: 700; padding: 6pt 10pt; border-radius: 6pt; font-size: 12pt; }
+
+/* ---- part 3 additions ---- */
+.levels { display: grid; grid-template-columns: 1fr auto 1fr; gap: 7pt 8pt; align-items: stretch; }
+.lvhead { font-weight: 700; color: var(--teal); font-size: 11pt; }
+.lv { background: var(--blue-tint); border-radius: 8pt; padding: 8pt 11pt; font-size: 11pt; line-height: 1.42; }
+.lv b { display: block; color: var(--navy); font-size: 12.5pt; font-weight: 700; margin-bottom: 1pt; }
+.lvmid { align-self: center; line-height: 0; }
+.tl { border-left: 3pt solid var(--line); margin-left: 4pt; padding-left: 0; }
+.tlrow { display: flex; gap: 10pt; align-items: flex-start; margin: 0 0 4.5pt -3pt; font-size: 10.9pt; line-height: 1.38; }
+.tlrow.last { margin-bottom: 0; }
+.when { flex: none; width: 78pt; white-space: nowrap; background: var(--navy); color: #fff; font-weight: 600; font-size: 10.2pt; border-radius: 0 12pt 12pt 0; padding: 3pt 8pt 3pt 9pt; margin-top: 1pt; }
+.tlrow.last .when { background: var(--teal); }
+.tlrow b { color: var(--navy); font-weight: 700; }
+.chip.r { background: var(--rose-tint); }
+.wallet { display: flex; height: 38pt; border-radius: 7pt; overflow: hidden; font-weight: 700; font-size: 11pt; color: #fff; }
+.wallet span { display: flex; align-items: center; padding: 0 9pt; line-height: 1.25; }
+.grow .g { margin-bottom: 8pt; }
+.grow .g:last-child { margin-bottom: 0; }
+.gb { display: block; color: #fff; font-weight: 700; font-size: 12pt; padding: 6pt 10pt; border-radius: 6pt; }
+.gt { display: block; font-size: 11pt; line-height: 1.42; margin-top: 2pt; }
+</style>
+</head>
+<body>
+<!-- ================= COVER ================= -->
+<div class="cover">
+  <div class="band">
+    <div class="kicker">Interview preparation pack · Part 3</div>
+    <h1>AlphaSights:<br>client relationships<br>explained</h1>
+    <p>What a “client” really is at this firm, what “client service” means here, and what a good relationship looks like hour by hour.</p>
+  </div>
+
+  <div>
+    <div class="facts">
+      <div class="fact"><b>Why this matters</b>The team is called Client Service. Your Insight Days include a client brief simulation. This is the heart of the job.</div>
+      <div class="fact"><b>What is new here</b>Who owns the client at each level, how trust is won and lost, and practice scenarios.</div>
+    </div>
+  </div>
+
+  <div>
+    <h2 style="margin-top:0">What is inside</h2>
+    <ol class="toc">
+      <li><span class="n">1</span>The short version</li>
+      <li><span class="n">2</span>What “client” means here</li>
+      <li><span class="n">3</span>What “client service” means here</li>
+      <li><span class="n">4</span>One project through the client’s eyes</li>
+      <li><span class="n">5</span>Why trust is re-earned every time</li>
+      <li><span class="n">6</span>What builds trust and what breaks it</li>
+      <li><span class="n">7</span>Who owns the relationship</li>
+      <li><span class="n">8</span>How client types differ</li>
+      <li><span class="n">9</span>How a relationship grows</li>
+      <li><span class="n">10</span>The other relationship: experts</li>
+      <li><span class="n">11</span>Using this in your interview</li>
+      <li><span class="n">12</span>Sources</li>
+    </ol>
+  </div>
+
+  <div class="small">Prepared 17 November 2026. Same labels as before:
+    <span class="tag t-aud">Audited</span> <span class="tag t-co">Company says</span> <span class="tag t-est">Industry estimate</span> <span class="tag t-me">My reading</span></div>
+</div>
+
+<!-- ================= 1. SHORT VERSION ================= -->
+<section>
+  <span class="chapnum">Chapter 1</span>
+  <h1>The short version</h1>
+  <p>Six ideas that explain what a client relationship means at AlphaSights.</p>
+  <ol>
+    <li><strong>A client is two things at once.</strong> It is a firm, such as a private equity fund. It is also a person at that firm who sends you a request. You serve the person. The firm pays the bill.</li>
+    <li><strong>The relationship is made of many small jobs.</strong> There is no single big contract to win. Trust is built one project at a time, often several times a week with the same person.</li>
+    <li><strong>It is never guaranteed.</strong> Most clients use more than one expert network. They can send the next request to a rival. So the relationship has to be earned again every time.</li>
+    <li><strong>“Client service” is not customer support.</strong> At AlphaSights it means running the client’s project, owning the result and carrying a revenue target. <span class="tag t-co">Company says</span></li>
+    <li><strong>You own client contact from the start.</strong> The firm says Associates “take on direct client responsibility and own commercial results from the outset”. <span class="tag t-co">Company says</span></li>
+    <li><strong>Relationships are where the growth comes from.</strong> The accounts list “growth of existing clients” first among the reasons revenue rose. <span class="tag t-aud">Audited</span></li>
+  </ol>
+
+  <div class="box say">
+    <span class="label">The one-sentence version</span>
+    <p>“At AlphaSights a client relationship is trust built through many fast, accurate deliveries, with people who could easily go elsewhere, so every project is a chance to win or lose the next one.”</p>
+  </div>
+
+  <div class="box eg">
+    <span class="label">How sure is this pack?</span>
+    <p>AlphaSights publishes less about its client relationships than about its money. What it says about roles comes from its careers pages. The picture of how clients behave comes from industry sources. Where I have joined the dots myself, it is marked <span class="tag t-me">My reading</span>. The worked examples are made up to show how things typically go.</p>
+  </div>
+</section>
+
+<!-- ================= 2. WHAT CLIENT MEANS ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 2</span>
+  <h1>What “client” means here</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>The word “client” covers three levels: the person who asks, the team they sit in, and the firm that pays. Each level wants something different.</p>
+  </div>
+
+  <h2>The person behind the word</h2>
+  <p>When someone at AlphaSights says “my client”, they usually mean a specific human being. Picture this person.</p>
+  <div class="box eg">
+    <span class="label">A typical client contact</span>
+    <ul>
+      <li>Two to five years into their career at a private equity firm, hedge fund or consultancy.</li>
+      <li>Very bright, very busy and under pressure from their own boss.</li>
+      <li>Has been told to understand an unfamiliar industry by the end of the week.</li>
+      <li>Sends a short email, often between meetings, and expects a fast reply.</li>
+      <li>Has two or three other expert networks they could email instead.</li>
+    </ul>
+    <p>This is my picture of the typical contact, built from how the firm and the industry describe their clients. <span class="tag t-me">My reading</span></p>
+  </div>
+  <p>That person is often not much older than a new Associate. So the relationship is frequently one young professional helping another young professional look good in front of their boss. That is a helpful way to think about it.</p>
+
+  <h2>One more person you rarely meet: compliance</h2>
+  <p>At investment firms, a compliance officer often has to approve a network before anyone can use it. On some projects they approve each expert before a call can be booked. <span class="tag t-est">Industry estimate</span></p>
+  <p>You may never speak to this person as an Associate. But they are part of the client. A relationship with an investor is partly a relationship with their rule book.</p>
+
+  <h2>The three levels</h2>
+  <figure>
+    <div class="ftitle">Diagram 1: The three levels of a client relationship</div>
+    <div class="levels">
+      <div class="lvhead">On the client’s side</div><div></div><div class="lvhead">On AlphaSights’ side</div>
+
+      <div class="lv" style="background:#1D3B63; color:#FFFDF7"><b style="color:#FFFDF7">The firm</b>Senior partners, the compliance team and whoever signs the contract.</div>
+      <div class="lvmid"><svg width="30" height="14" viewBox="0 0 30 14"><path d="M1,7 L8,1.500 L8,5 L22,5 L22,1.500 L29,7 L22,12.500 L22,9 L8,9 L8,12.500 z" fill="#0E6F66"/></svg></div>
+      <div class="lv" style="background:#1D3B63; color:#FFFDF7"><b style="color:#FFFDF7">Vice President</b>Owns client relationships and business results.</div>
+
+      <div class="lv" style="background:#C9DAEE"><b>The team</b>A deal team or project team, and the person who leads it.</div>
+      <div class="lvmid"><svg width="30" height="14" viewBox="0 0 30 14"><path d="M1,7 L8,1.500 L8,5 L22,5 L22,1.500 L29,7 L22,12.500 L22,9 L8,9 L8,12.500 z" fill="#0E6F66"/></svg></div>
+      <div class="lv" style="background:#C9DAEE"><b>Manager</b>Owns a set of dedicated accounts and a team of Associates.</div>
+
+      <div class="lv"><b>The user</b>The individual who sends the request and joins the calls.</div>
+      <div class="lvmid"><svg width="30" height="14" viewBox="0 0 30 14"><path d="M1,7 L8,1.500 L8,5 L22,5 L22,1.500 L29,7 L22,12.500 L22,9 L8,9 L8,12.500 z" fill="#0E6F66"/></svg></div>
+      <div class="lv"><b>Associate</b>The main contact on each project, day to day.</div>
+    </div>
+    <figcaption><b>How to read this.</b> The left column is the client. The right column is AlphaSights. Each row is one level, and the arrow shows who mainly talks to whom. The bottom row is where most of the daily contact happens. The top row is where contracts and prices are agreed. The job titles and their duties come from AlphaSights’ careers pages. <span class="tag t-co">Company says</span> Matching them to the three client levels is my own simplification. <span class="tag t-me">My reading</span></figcaption>
+  </figure>
+
+  <h2>What each level cares about</h2>
+  <table>
+    <tr><th style="width:17%">Level</th><th>What they want</th><th style="width:35%">What worries them</th></tr>
+    <tr><td class="first">The user</td><td>The right expert, fast, with no hassle. To look good to their boss.</td><td>Wasting an hour on a poor call. Missing their deadline.</td></tr>
+    <tr><td class="first">The team</td><td>Enough good calls to make a confident decision on the deal or project.</td><td>Gaps in what they know. Running out of time.</td></tr>
+    <tr><td class="first">The firm</td><td>A supplier that is safe, reliable and worth the money across all its teams.</td><td>A legal or compliance problem. Paying too much.</td></tr>
+  </table>
+  <p>A relationship is only really strong when all three levels are happy. A delighted user cannot keep using you if the firm’s compliance team has not approved you.</p>
+
+</section>
+
+<!-- ================= 3. WHAT CLIENT SERVICE MEANS ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 3</span>
+  <h1>What “client service” means here</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>In most companies “customer service” means answering complaints. At AlphaSights “Client Service” is the team that does the firm’s main work and earns its revenue.</p>
+  </div>
+
+  <h2>Do not be misled by the name</h2>
+  <p>This is an easy mistake to make. The words sound like a help desk. They are not. The Client Service team is the core of the business. It is the largest team, it runs every project, and it is where the money is made.</p>
+
+  <table>
+    <tr><th style="width:23%">Kind of job</th><th>What it involves</th><th style="width:38%">Is this AlphaSights Client Service?</th></tr>
+    <tr><td class="first">Customer support</td><td>Waiting for problems and fixing them.</td><td><strong>No.</strong> The job is active, not reactive.</td></tr>
+    <tr><td class="first">Pure sales</td><td>Finding strangers and persuading them to become customers.</td><td><strong>Not for Associates.</strong> One university guide notes that Associates serve “a dedicated set of clients” and do not prospect for new ones.</td></tr>
+    <tr><td class="first">Consulting</td><td>Giving the client advice and recommendations.</td><td><strong>No.</strong> AlphaSights gives access to knowledge. It does not advise.</td></tr>
+    <tr class="hl"><td class="first">Project delivery with a target</td><td>Taking a client’s request, delivering the result, and being measured on it.</td><td><strong>Yes.</strong> This is the closest description.</td></tr>
+  </table>
+  <p class="small">Sources: AlphaSights careers pages and a Tufts University careers guide to the firm. <span class="tag t-co">Company says</span></p>
+
+  <div style="break-inside: avoid">
+  <h2>The firm’s own words</h2>
+  <ul>
+    <li>Associates are “the primary point of contact for clients”. <span class="tag t-co">Company says</span></li>
+    <li>They “take on direct client responsibility and own commercial results from the outset”. <span class="tag t-co">Company says</span></li>
+    <li>They own projects “from handling incoming briefs and project setup to client communication”. <span class="tag t-co">Company says</span></li>
+    <li>The firm calls itself a “high-performance, client-first organization”. <span class="tag t-co">Company says</span></li>
+  </ul>
+  </div>
+
+  <h2>What “client-first” means in practice</h2>
+  <p>It is a phrase every company uses. Here it has real consequences.</p>
+  <ul>
+    <li><strong>The client’s clock is your clock.</strong> Work follows client demand. One guide says Associates must be “ready to respond to high-priority requests at all times” within the working day.</li>
+    <li><strong>Plans change without warning.</strong> The firm warns that projects “often change in scope or pivot entirely on short notice”, or are cancelled. <span class="tag t-co">Company says</span></li>
+    <li><strong>You adapt. The client does not.</strong> If they change the question at 4pm, you start again at 4pm, cheerfully.</li>
+  </ul>
+
+  <h2>The three jobs inside “client service”</h2>
+  <div class="tiles">
+    <div class="tile"><b style="font-size:14pt">Understand</b>Work out what the client really needs, which is often more than what they wrote.</div>
+    <div class="tile"><b style="font-size:14pt">Deliver</b>Find the experts, present them well and make the calls happen on time.</div>
+    <div class="tile"><b style="font-size:14pt">Deepen</b>Leave the client keen to send the next request to you.</div>
+  </div>
+  <p>A former AlphaSights employee wrote that the key skill learned in client service was <strong>listening</strong>. There is a temptation to jump in with a solution too early. They also warned that the work can become “purely transactional” unless you build rapport and trust. <span class="tag t-co">Company says</span></p>
+</section>
+
+<!-- ================= 4. ONE PROJECT ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 4</span>
+  <h1>One project through the client’s eyes</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>A relationship is not built in meetings and lunches. It is built in the small moments of a live project: how fast you reply, how well you listened, how honest you were.</p>
+  </div>
+
+  <p>Here is a made-up project, told from the client’s side. Meet Priya. She is an associate at a private equity firm. Her firm may buy a chain of vet clinics. Her boss wants a view by Friday.</p>
+
+  <figure>
+    <div class="ftitle">Diagram 2: A week in one client project</div>
+    <div class="tl">
+      <div class="tlrow"><span class="when">Tue 9:02</span><div><b>Priya emails her request.</b> She needs former managers of rival vet chains. She sends the same email to one other network.</div></div>
+      <div class="tlrow"><span class="when">Tue 9:10</span><div><b>The Associate replies.</b> “Got it. Two quick questions so I find the right people.” Priya notices the speed.</div></div>
+      <div class="tlrow"><span class="when">Tue 9:30</span><div><b>A five-minute call.</b> The Associate learns the real worry: can the chain keep its vets? That changes who to look for.</div></div>
+      <div class="tlrow"><span class="when">Tue 12:00</span><div><b>First experts arrive.</b> Two profiles, each with a short note on what the person can and cannot speak about.</div></div>
+      <div class="tlrow"><span class="when">Tue 3:00</span><div><b>An honest update.</b> Three more experts. One type of person is proving hard to find, and the Associate says so and suggests an alternative.</div></div>
+      <div class="tlrow"><span class="when">Wed</span><div><b>The first calls happen.</b> Afterwards the Associate asks: “Was that useful? Should I adjust the search?”</div></div>
+      <div class="tlrow"><span class="when">Wed 4:00</span><div><b>Priya changes direction.</b> Her boss now wants the pet owners’ view too. The Associate starts a new search straight away.</div></div>
+      <div class="tlrow"><span class="when">Thu</span><div><b>More calls.</b> Transcripts and summaries follow each one.</div></div>
+      <div class="tlrow last"><span class="when">Next week</span><div><b>The pay-off.</b> Priya’s colleague has a new project. Priya says: “Use my contact at AlphaSights.”</div></div>
+    </div>
+    <figcaption><b>How to read this.</b> Read from top to bottom. The left column is the time. The right column is what the client sees. This is an invented example, not AlphaSights data. <span class="tag t-me">My reading</span> Nothing here is dramatic. The relationship grows through small, well-handled moments.</figcaption>
+  </figure>
+
+  <h2>The moments that mattered</h2>
+  <table>
+    <tr><th style="width:27%">Moment</th><th>What the Associate did</th><th style="width:33%">What Priya concluded</th></tr>
+    <tr><td class="first">The first reply</td><td>Answered in minutes, not hours.</td><td>“They are on it.”</td></tr>
+    <tr><td class="first">The clarifying call</td><td>Asked why, not just what.</td><td>“They understand my problem.”</td></tr>
+    <tr><td class="first">The first profiles</td><td>Sent fewer, better-matched people.</td><td>“They do not waste my time.”</td></tr>
+    <tr><td class="first">The honest update</td><td>Admitted a gap and offered a way round it.</td><td>“I can believe what they tell me.”</td></tr>
+    <tr><td class="first">The check-in</td><td>Asked for feedback after the first call.</td><td>“They care whether it worked.”</td></tr>
+    <tr><td class="first">The change of plan</td><td>Restarted without complaint.</td><td>“They make my life easier.”</td></tr>
+  </table>
+
+  <div class="box say">
+    <span class="label">The lesson</span>
+    <p>None of these moments needed special knowledge of vets or private equity. They needed speed, curiosity, honesty and care. That is why AlphaSights hires for those qualities and teaches the rest.</p>
+  </div>
+</section>
+
+<!-- ================= 5. RE-EARNED ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 5</span>
+  <h1>Why trust is re-earned every time</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>A client is rarely “yours”. Most use several expert networks. What you really compete for is your share of the client’s requests.</p>
+  </div>
+
+  <h2>Clients keep more than one network</h2>
+  <p>Industry guides say investment firms and consultancies almost never rely on a single network. They keep accounts with several. <span class="tag t-est">Industry estimate</span> They do this for good reasons.</p>
+  <ul>
+    <li>No one network can find every kind of expert.</li>
+    <li>Having a back-up protects them when one network is slow.</li>
+    <li>Competition keeps prices and service sharp.</li>
+  </ul>
+  <p>One guide describes large funds opening accounts with three or four networks, comparing them for a few months, and then sending most work to the best one or two. <span class="tag t-est">Industry estimate</span></p>
+
+  <h2>The idea of “share of wallet”</h2>
+  <p>Business people use the phrase <strong>share of wallet</strong>. It means: of all the money this client spends on this kind of service, how much comes to us?</p>
+  <figure>
+    <div class="ftitle">Diagram 3: The same client, two different relationships</div>
+    <div class="cmp">
+      <div class="cmph">A new or weak relationship</div>
+      <div class="wallet"><span style="width:20%; background:#0E6F66">1 in 5</span><span style="width:80%; background:#B8C4D4; color:#252A33">Other networks get 4 in every 5 calls</span></div>
+      <div class="cmph" style="margin-top:12pt">A trusted relationship</div>
+      <div class="wallet"><span style="width:60%; background:#0E6F66">AlphaSights gets 3 in every 5 calls</span><span style="width:40%; background:#B8C4D4; color:#252A33">Others get 2 in 5</span></div>
+    </div>
+    <figcaption><b>How to read this.</b> Each bar is all the expert calls one client books in a year. The green part goes to AlphaSights. The grey part goes to rivals. The client is the same size in both bars. Only the relationship has changed, and AlphaSights’ revenue from that client has tripled. The numbers are invented to show the idea. <span class="tag t-me">My reading</span></figcaption>
+  </figure>
+
+  <h2>What this means for how you behave</h2>
+  <div class="two">
+    <div class="box eg"><span class="label">If clients were locked in</span><p>You could be slow on a quiet day. A weak match would not matter much. The client would still be there tomorrow.</p></div>
+    <div class="box key"><span class="label">Because they are not</span><p>Every request is a small contest. A slow or careless reply sends the next request to a rival. A great one brings more.</p></div>
+  </div>
+  <p style="margin-top:10pt">This is why the relationship is best seen as a <strong>running score</strong>, not a signed deal. It is also why growth mostly comes from existing clients: winning a bigger share from firms that already use you. <span class="tag t-aud">Audited</span></p>
+
+  <h2>But good relationships do last</h2>
+  <p>Do not read this as “clients are disloyal”. In this industry, trusted relationships are very long. GLG told investors that 22 of its top 25 clients had been clients for over ten years. <span class="tag t-aud">Audited</span></p>
+  <p>Clients stay because switching has a cost. A network they trust already knows how they work, has passed their compliance checks and has a record of delivering. The loyalty is real. It simply has to keep being deserved.</p>
+</section>
+
+<!-- ================= 6. BUILDS AND BREAKS ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 6</span>
+  <h1>What builds trust and what breaks it</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>Think of the relationship as a bank account. Every good moment is a small deposit. Every mistake is a withdrawal, and withdrawals are bigger.</p>
+  </div>
+
+  <figure>
+    <div class="ftitle">Diagram 4: The trust account</div>
+    <div class="lanes">
+      <div class="lane">
+        <div class="lanehead" style="background:#0E6F66">Deposits: what builds trust</div>
+        <div class="chip t">Replying fast, even just to say “on it”</div>
+        <div class="chip t">Asking a smart question about the brief</div>
+        <div class="chip t">Sending experts who truly fit</div>
+        <div class="chip t">Giving bad news early and honestly</div>
+        <div class="chip t">Getting every detail right</div>
+        <div class="chip t">Following up after the call</div>
+      </div>
+      <div class="lane">
+        <div class="lanehead" style="background:#9B2C1C">Withdrawals: what breaks it</div>
+        <div class="chip r">Silence, so the client has to chase you</div>
+        <div class="chip r">An expert who knew less than promised</div>
+        <div class="chip r">Promising a deadline and missing it</div>
+        <div class="chip r">A scheduling error, such as the wrong time zone</div>
+        <div class="chip r">A flood of weak profiles to look busy</div>
+        <div class="chip r">Any compliance slip</div>
+      </div>
+    </div>
+    <figcaption><b>How to read this.</b> The green column lists actions that add to a client’s trust. The red column lists actions that take it away. Each item is small. Trust is the total of many of them over time. One serious item on the right, especially a compliance problem, can undo months of good work on the left. <span class="tag t-me">My reading</span></figcaption>
+  </figure>
+
+  <h2>Five habits of a strong client relationship</h2>
+  <div style="break-inside: avoid">
+  <h3>1. Listen for the real question</h3>
+  <p>Clients write short briefs. “Former managers at vet chains” is what they ask for. “Can this company keep its vets?” is what they need. The Associate who finds the second question finds better experts. A good habit is to ask: “What decision is this helping you make?”</p>
+  </div>
+
+  <h3>2. Be fast, and be seen to be fast</h3>
+  <p>A quick “received, working on it” costs ten seconds and removes the client’s worry. Remember that a rival may have the same email.</p>
+
+  <h3>3. Choose quality over quantity</h3>
+  <p>Three experts who fit perfectly beat ten who roughly fit. Every weak profile you send teaches the client to trust your judgement a little less.</p>
+
+  <h3>4. Tell the truth early</h3>
+  <p>Sometimes the perfect expert cannot be found. Say so quickly and offer the nearest alternative. Clients forgive a gap. They do not forgive a surprise on deadline day.</p>
+
+  <h3>5. Protect the client</h3>
+  <p>Clients often do not want an expert to know who they are, or which company they are studying. A deal can be secret. Guarding that carefully is part of the relationship. So is following every compliance rule, every time. <span class="tag t-me">My reading</span></p>
+
+  <div class="box eg">
+    <span class="label">“Thought partner”</span>
+    <p>One business school case study described AlphaSights’ client service team as acting as a “thought partner”: someone who tries to understand what the client is solving, not just take an order. It also noted that the team checks in often and that clients rate each expert after a call. <span class="tag t-est">Industry estimate</span> That case study is from 2020 and was written by a student, so treat the details as a guide.</p>
+  </div>
+</section>
+
+<!-- ================= 7. WHO OWNS ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 7</span>
+  <h1>Who owns the relationship</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>The Associate owns the project. The Manager owns the account. The Vice President owns the business. As you rise, your client work moves from doing to growing.</p>
+  </div>
+
+  <table>
+    <tr><th style="width:17%">Role</th><th>Their part in the client relationship</th><th style="width:27%">Main contact</th></tr>
+    <tr><td class="first">Associate<br><span class="small">Years 0 to 2</span></td><td>Day-to-day contact on each project. Takes the brief, finds the experts, sends updates, schedules calls, follows up. Serves a dedicated set of clients.</td><td>The individual users</td></tr>
+    <tr><td class="first">Manager<br><span class="small">From about 2 years</span></td><td>Owns “a set of dedicated accounts” and a team of Associates. Grows “a book of business through client relationships, client insights, upselling, and revenue on projects”.</td><td>Team leaders and regular users across an account</td></tr>
+    <tr><td class="first">Vice President<br><span class="small">From about 5 years</span></td><td>Owns “client relationships and business outcomes”. Leads a “business-within-the-business”: winning new clients and growing existing accounts.</td><td>Senior people at the client firm</td></tr>
+  </table>
+  <p class="small">Quotes are from AlphaSights’ careers pages and job adverts. <span class="tag t-co">Company says</span> The “main contact” column is my simplification. <span class="tag t-me">My reading</span></p>
+
+  <h2>What this looks like in real numbers</h2>
+  <ul>
+    <li>One Client Service Manager described leading a team of four Associates, looking after a book of business worth several million, and speaking to clients every day. <span class="tag t-co">Company says</span></li>
+    <li>One Vice President described building a 40-person team and a business worth over $10 million. <span class="tag t-co">Company says</span></li>
+  </ul>
+  <p>So within about five years, a strong performer can be running client relationships worth millions. That is unusually early. It is one of the firm’s main selling points to graduates.</p>
+
+  <h2>How an Associate’s client work develops</h2>
+  <figure>
+    <div class="ftitle">Diagram 5: From supporting to owning</div>
+    <div class="vs"><span class="n">1</span><div><b>First weeks.</b> Mostly finding and speaking to experts. A more experienced colleague handles most client messages.</div></div>
+    <div class="vs"><span class="n">2</span><div><b>First months.</b> You start writing the client updates and presenting experts yourself.</div></div>
+    <div class="vs"><span class="n">3</span><div><b>Within the first year.</b> You own whole projects, “from handling incoming briefs and project setup to client communication”.</div></div>
+    <div class="vs money"><span class="n">4</span><div><b>Towards Manager.</b> You know certain clients well. They ask for you by name. You start thinking about the account, not only the project.</div></div>
+    <figcaption><b>How to read this.</b> Read from top to bottom. Each step adds more client responsibility. Step 3 is in the firm’s own words. <span class="tag t-co">Company says</span> Former employees say the early months are mostly expert outreach, with more client work after six to nine months. <span class="tag t-est">Industry estimate</span> The exact timings vary by team.</figcaption>
+  </figure>
+
+  <h2>The team behind each client</h2>
+  <ul>
+    <li><strong>Teams are grouped by client type.</strong> Sources describe teams for private equity, consulting, capital markets and corporations. <span class="tag t-est">Industry estimate</span> So you learn one kind of client deeply.</li>
+    <li><strong>Days start together.</strong> One Manager described a morning “board meeting” where the team reviews its live projects and sets priorities. <span class="tag t-co">Company says</span></li>
+    <li><strong>The client gets round-the-clock cover.</strong> With nine offices, a request sent late in one city can be picked up in another.</li>
+  </ul>
+</section>
+
+<!-- ================= 8. CLIENT TYPES ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 8</span>
+  <h1>How client types differ</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>The same service feels different to each kind of client. A good Associate adjusts their style to who is on the other end.</p>
+  </div>
+
+  <table class="long">
+    <thead><tr><th style="width:19%">Client</th><th>What their world is like</th><th style="width:26%">What they value most</th><th style="width:26%">How to serve them well</th></tr></thead>
+    <tr><td class="first">Private equity</td><td>Working on one deal with a hard deadline. The deal may be secret.</td><td>Speed. Many good calls in a few days. Discretion.</td><td>Move fast. Keep the target company confidential. Expect sudden changes.</td></tr>
+    <tr><td class="first">Strategy consultancy</td><td>A project team new to an industry, serving its own client. Often needs many views quickly.</td><td>Breadth. Experts from every angle. Reliability at volume.</td><td>Cover the whole market: customers, rivals, suppliers. Be very organised.</td></tr>
+    <tr><td class="first">Hedge fund</td><td>An analyst who follows a sector all year. Strict rules about what experts may say.</td><td>Depth. A fresh angle others have missed. Total compliance.</td><td>Know their sector over time. Never cut corners on the rules.</td></tr>
+    <tr><td class="first">Corporation</td><td>A strategy team that may use experts only now and then. Less used to the process.</td><td>Guidance. Being shown how to get the most from it.</td><td>Explain more. Be patient. Help them shape the question.</td></tr>
+  </table>
+  <p class="small">This table is my summary of how the industry describes each client type. AlphaSights does not publish a guide like this. <span class="tag t-me">My reading</span></p>
+
+  <h2>One example of adapting</h2>
+  <div class="two">
+    <div class="box eg"><span class="label">To a private equity associate</span><p>“Two strong matches attached. Both free tomorrow before 10am. More coming by 2pm.”</p><p class="small">Short. Assumes they know the process. Leads with times.</p></div>
+    <div class="box eg"><span class="label">To a corporate strategy manager</span><p>“I have found two people who ran this exact function at your competitors. Here is what each can cover, and how the call will work.”</p><p class="small">Warmer. Explains more. Guides the next step.</p></div>
+  </div>
+  <p style="margin-top:10pt">This is the “adaptability” and “empathy” the firm lists in its values. It is not acting. It is noticing what the other person needs.</p>
+</section>
+
+<!-- ================= 9. HOW IT GROWS ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 9</span>
+  <h1>How a relationship grows</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>A big account usually starts as one person trying the service on one project. Good work spreads from that person to their team, then to the whole firm.</p>
+  </div>
+
+  <figure>
+    <div class="ftitle">Diagram 6: How one user becomes a major account</div>
+    <div class="grow">
+      <div class="g"><span class="gb" style="width:26%; background:#C9DAEE; color:#1D3B63">One user</span><span class="gt">A single person tries AlphaSights on one project.</span></div>
+      <div class="g"><span class="gb" style="width:46%; background:#8FAFD4; color:#14294A">One team</span><span class="gt">They tell colleagues. The whole team starts to use it.</span></div>
+      <div class="g"><span class="gb" style="width:68%; background:#3F618F">Many teams</span><span class="gt">Other teams and offices at the firm follow.</span></div>
+      <div class="g"><span class="gb" style="width:100%; background:#1D3B63">The whole firm, buying more</span><span class="gt">A firm-wide agreement. Surveys, transcripts and the library are added.</span></div>
+    </div>
+    <figcaption><b>How to read this.</b> Read from top to bottom. Each bar is a stage, and a wider bar means more revenue from that client. The relationship grows in two directions: more people at the client using AlphaSights, and each of them buying more kinds of product. Business people call this “land and expand”. <span class="tag t-me">My reading</span></figcaption>
+  </figure>
+
+  <h2>Who drives each stage</h2>
+  <table>
+    <tr><th style="width:26%">Stage</th><th>What makes it happen</th><th style="width:24%">Mainly driven by</th></tr>
+    <tr><td class="first">One user to one team</td><td>Excellent work on the first few projects. The user recommends you.</td><td>The Associate</td></tr>
+    <tr><td class="first">One team to many teams</td><td>Getting to know the client’s structure. Asking for introductions. Showing results.</td><td>The Manager</td></tr>
+    <tr><td class="first">Firm-wide and more products</td><td>Agreeing terms with senior people. Suggesting surveys or the library where they fit.</td><td>The Vice President</td></tr>
+  </table>
+  <p>Notice where it starts. Every large account rests on an Associate doing excellent work for one person. That is how a new joiner affects the firm’s biggest relationships.</p>
+
+  <h2>People move, and relationships move with them</h2>
+  <p>Your contact will not stay in one job forever. This helps AlphaSights.</p>
+  <ul>
+    <li>A consultant who liked the service leaves to join a private equity firm, and brings AlphaSights in.</li>
+    <li>An AlphaSights executive wrote that former consulting clients have “proactively brought AlphaSights” with them to the corporations they moved to. <span class="tag t-co">Company says</span></li>
+    <li>A junior user becomes a senior decision-maker in ten years.</li>
+  </ul>
+  <p>So a relationship is really with the person, for the length of their career. Treating a junior contact well today can win a whole firm later.</p>
+
+  <div style="break-inside: avoid">
+  <h2>How the firm itself describes all this</h2>
+  <p>The accounts are a dry legal document. Even so, client relationships appear again and again. <span class="tag t-aud">Audited</span></p>
+  <ul>
+    <li>The main commercial risk is the ability to “add clients and expand its footprint across its existing client base, while maintaining the highest quality and standards in execution”.</li>
+    <li>The firm’s position is “a reflection of its reputation for performing to objectively high standards”.</li>
+    <li>The plan for the future is to “invest in its people and its relationships with clients”.</li>
+  </ul>
+  <div class="box say">
+    <span class="label">What that tells you</span>
+    <p>“Expand its footprint across its existing client base” is the official way of saying what Diagram 6 shows. The firm’s directors see deeper client relationships as the main route to growth, and they tie it directly to quality of work.</p>
+  </div>
+  </div>
+</section>
+
+<!-- ================= 10. EXPERTS ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 10</span>
+  <h1>The other relationship: experts</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>An Associate serves two groups at once. How you treat experts decides what you can deliver to clients.</p>
+  </div>
+
+  <p>The expert is a relationship too. One guide describes Associates as building “relationships with both clients and industry experts”. <span class="tag t-co">Company says</span></p>
+
+  <table>
+    <tr><th style="width:24%"></th><th>The client</th><th>The expert</th></tr>
+    <tr><td class="first">What they want</td><td>The right knowledge, fast</td><td>Respect, clear instructions, fair pay, an interesting talk</td></tr>
+    <tr><td class="first">How you win them</td><td>Speed, fit, honesty</td><td>A clear, polite approach and a smooth process</td></tr>
+    <tr><td class="first">If it goes wrong</td><td>They email a rival network</td><td>They ignore your next message, and maybe every network’s</td></tr>
+  </table>
+
+  <h2>Why this matters for clients</h2>
+  <ul>
+    <li><strong>A well-treated expert says yes again.</strong> That makes the next client project faster.</li>
+    <li><strong>A well-prepared expert gives a better call.</strong> The client judges you on that call.</li>
+    <li><strong>An expert who feels pestered stops replying.</strong> Then you have nothing to offer the client.</li>
+    <li><strong>The directors say so too.</strong> The accounts speak of strengthening relationships with “clients, knowledge holders and other suppliers”. <span class="tag t-aud">Audited</span> “Knowledge holders” means experts.</li>
+  </ul>
+
+  <div class="box eg">
+    <span class="label">The balancing act</span>
+    <p>Sometimes the two pull apart. The client wants a call tomorrow at 7am. The expert can only do next week. The skill is finding an answer that keeps both content. This is the “negotiation” in the Insight Days advert.</p>
+  </div>
+</section>
+
+<!-- ================= 11. INTERVIEW ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 11</span>
+  <h1>Using this in your interview</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>Show that you know client service here means owning a result for a demanding person, and back it with a real story of your own.</p>
+  </div>
+
+  <h2>If you are asked “What does client service mean to you?”</h2>
+  <div class="box say">
+    <span class="label">A 40-second answer</span>
+    <p>“To me it means taking ownership of someone else’s problem. From what I have read, at AlphaSights that is quite literal: an Associate is the client’s main contact on a project and is responsible for the result. I think good service comes down to a few things. Really understanding what the person needs, not just what they asked for. Being fast and keeping them informed. And being honest when something is not possible. Since clients can use other networks, I imagine you have to earn their trust again on every project.”</p>
+  </div>
+
+  <h2>Your own story</h2>
+  <p>You will probably be asked about your experiences. Pick a time you looked after a customer, a team-mate or anyone who relied on you. Use the STAR structure from Part 1. Then link it to one idea from this pack.</p>
+  <table>
+    <tr><th style="width:38%">If your story is about...</th><th>Link it to this idea</th></tr>
+    <tr><td class="first">A demanding customer in a part-time job</td><td>Staying calm and adapting to what the person needs</td></tr>
+    <tr><td class="first">Chasing a sponsor or organising an event</td><td>Persuading busy people and following up</td></tr>
+    <tr><td class="first">Fixing a mistake you made</td><td>Telling the truth early and putting it right</td></tr>
+    <tr><td class="first">Tutoring or helping someone learn</td><td>Listening for the real problem behind the question</td></tr>
+    <tr><td class="first">Juggling several commitments</td><td>Being organised when many people depend on you</td></tr>
+  </table>
+
+  <h2>Three practice scenarios</h2>
+  <p>Your Insight Days include a client brief simulation. Situations like these are likely to come up. There is no single right answer. What matters is your thinking.</p>
+
+  <div class="qa">
+    <div class="q">Scenario 1: The brief is vague</div>
+    <p>A client writes: “Need experts on electric vehicle charging in Europe. Calls this week.”</p>
+    <ul>
+      <li><strong>Weak response:</strong> Start searching straight away and send whoever you find.</li>
+      <li><strong>Strong response:</strong> Reply at once to confirm you are on it. Ask one or two sharp questions. Which countries? Charging at home or on motorways? What decision are they making? Then search.</li>
+    </ul>
+  </div>
+
+  <div class="qa">
+    <div class="q">Scenario 2: You cannot deliver in time</div>
+    <p>The client wants a former executive of one specific company by tomorrow. Nobody has replied.</p>
+    <ul>
+      <li><strong>Weak response:</strong> Stay quiet and hope someone answers.</li>
+      <li><strong>Strong response:</strong> Tell the client today. Explain what you have tried. Offer the nearest alternatives, such as someone from a direct rival, or the same person next week.</li>
+    </ul>
+  </div>
+
+  <div class="qa">
+    <div class="q">Scenario 3: The client is unhappy</div>
+    <p>After a call, the client says: “That expert knew nothing about what I needed.”</p>
+    <ul>
+      <li><strong>Weak response:</strong> Defend the expert, or apologise and move on.</li>
+      <li><strong>Strong response:</strong> Thank them for saying so. Ask what was missing. Take responsibility. Use the answer to find a better match quickly, and raise the question of the charge with your manager.</li>
+    </ul>
+  </div>
+
+  <div class="box key">
+    <span class="label">The pattern in all three</span>
+    <p>Respond fast. Ask before you assume. Be honest. Offer a way forward. If you remember only that, you can handle almost any client scenario they give you.</p>
+  </div>
+
+  <h2>Questions to ask</h2>
+  <ul>
+    <li>“How soon does a new Associate start speaking to clients directly?”</li>
+    <li>“What does a really strong client relationship look like on your teams?”</li>
+    <li>“In the client brief simulation, what separates a good response from a great one?”</li>
+  </ul>
+</section>
+
+<!-- ================= 12. SOURCES ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 12</span>
+  <h1>Sources</h1>
+
+  <h3>Official filings</h3>
+  <ul class="src">
+    <li>AlphaSights Ltd, group accounts for the year ending 31 December 2025 (Companies House, company number 06534480): strategic report, principal risks, future developments and the directors’ statement.</li>
+    <li>GLG, Form S-1 prospectus, 2021: length of client relationships.</li>
+  </ul>
+
+  <h3>AlphaSights’ own material</h3>
+  <ul class="src">
+    <li>alphasights.com careers pages, Client Service careers hub, “Your Path” and job adverts for Associate, Manager and Vice President roles, read through search results.</li>
+    <li>“Client Service Lessons That Can Help Move Any Deal Forward”, an article by a former Client Service employee on alphasights.com. About five years old.</li>
+    <li>“Transforming an industry”, an AlphaSights article on corporate clients.</li>
+    <li>Interviews with AlphaSights Client Service Managers published by Bright Network and Advizehub.</li>
+  </ul>
+
+  <h3>Other sources</h3>
+  <ul class="src">
+    <li>Tufts University Career Center, “Insider Guide to AlphaSights”.</li>
+    <li>Harvard Business School Digital Initiative, student case note “AlphaSights: Purveyors of Knowledge”, 2020.</li>
+    <li>Industry guides on how investors choose and use expert networks, and on compliance pre-approval.</li>
+    <li>Employee reviews on Indeed and Glassdoor, for how client work develops in the first year. Treat as anecdotes.</li>
+  </ul>
+
+  <div class="box care">
+    <span class="label">What is fact and what is my view</span>
+    <p>The job duties and quotes marked <span class="tag t-co">Company says</span> are AlphaSights’ own words. The story of Priya, the trust account, the share-of-wallet bars and the client-type table are my own explanations, marked <span class="tag t-me">My reading</span>. They are consistent with the sources, but AlphaSights has not published them. Use them to understand, and speak about them as your own view.</p>
+  </div>
+</section>
+
+</body>
+</html>
