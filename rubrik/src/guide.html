@@ -112,6 +112,9 @@
 
   <p>"Everything" used to mean files and databases. Today it also means the <strong>login system</strong> (who is allowed into what) and, most recently, the <strong>actions of AI assistants</strong> that do work on a company's behalf.</p>
 
+  <h3>The 30-second version for a friend</h3>
+  <p>"Big companies get hacked, and the hackers lock or wreck their systems. Rubrik keeps protected spare copies the hackers cannot touch, works out which copy is clean, and rebuilds the company from it. It now does the same for login systems and for AI assistants that make mistakes."</p>
+
   <h3>An everyday analogy</h3>
   <p><strong>Think of a save point in a video game.</strong> You save before the boss fight. If it goes badly, you reload and carry on from just before things went wrong.</p>
   <p>Rubrik is a save point for a whole company. The difference is that it keeps the saves in <strong>a safe the burglar cannot open</strong>, even if the burglar is already inside the building.</p>
@@ -805,6 +808,8 @@
     <p><strong>Why it lands:</strong> a domain controller is a server that runs the login system. Many backup tools check passwords against that same login system. So when it is down, the people who should restore it cannot sign in. Most teams have never tested this.</p>
     <p><strong>The technical depth:</strong> Rubrik's controls are hosted outside the customer's network with their own sign-in. Identity-First Recovery lifts only the directory database (a file called NTDS.dit) and its settings folder (SYSVOL) onto a freshly built Windows server.</p>
     <p>So anything hidden in the old server's operating system is not restored. You can then add the second question: "Do you want it back clean, or current?" That opens Roll Forward.</p>
+    <p><strong>Detail few applicants will know:</strong> by default the rebuilt directory has the records of every other domain controller stripped out. So it does not try to sync with servers that are dead or infected.</p>
+    <p><strong>An honest limit:</strong> the new server must run the same major version of Windows Server as the old one. Naming a limit shows you read past the brochure.</p>
     <p><strong>Why nobody else will say it:</strong> it names an actual file, a non-obvious buyer, and a trap the customer has not spotted.</p>
   </div>
 
@@ -814,6 +819,8 @@
     <div class="q">"If a coding agent force-pushed over your main branch and deleted the others at 2am, what would you restore from that the agent's own access could not also have deleted?"</div>
     <p><strong>Why it lands:</strong> a force-push overwrites shared code history. The normal undo lives in the same place as the damage, under the same permissions the agent used. Engineering leaders assume version control is their safety net.</p>
     <p><strong>The technical depth:</strong> Rubrik keeps unchangeable copies of GitHub and Azure DevOps outside the code store. It also tracks the files that steer the assistant (CLAUDE.md, settings, tool permissions) and flags unexpected changes to them.</p>
+    <p><strong>Detail few applicants will know:</strong> Agent Rewind records each agent's inputs, the tools it called and the chain of prompts behind an action. So a bad change can be traced to the instruction that caused it, and only that change reversed.</p>
+    <p><strong>An honest limit:</strong> one independent analyst notes it can only rewind agents whose actions it is able to observe.</p>
     <p><strong>Why nobody else will say it:</strong> you pitch to the person who wants agents to go faster, not the person who wants to block them. It also links neatly to the internship's AI project.</p>
   </div>
 
@@ -823,6 +830,7 @@
     <div class="q">"In your last recovery test, how much of the clock went on restoring data, and how much went on deciding which backup you could trust?"</div>
     <p><strong>Why it lands:</strong> almost nobody measures the second number, and it is usually the larger one. Banks must stay inside a stated maximum downtime, so that hidden time is a regulatory problem.</p>
     <p><strong>The technical depth:</strong> the usual method opens and scans each backup in turn. Rubrik stores a fingerprint of every file when the backup is taken, so the hunt is an index lookup. Rubrik's test figure is 75,000 backups in under a minute.</p>
+    <p><strong>Detail few applicants will know:</strong> the results are written back onto each backup's record, with a count of malicious files found. Infected backups can be quarantined so nobody restores one by accident.</p>
     <p><strong>The line to use:</strong> "Recovery is a search problem before it is a storage problem."</p>
   </div>
 
