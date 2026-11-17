@@ -1,0 +1,1170 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Rubrik: The Full Company Breakdown</title>
+<style>
+  :root {
+    --bg: #FBF4E4;
+    --panel: #F3E9D2;
+    --panel-2: #E6EFE6;
+    --panel-3: #F7E3D0;
+    --ink: #2A2A2A;
+    --head: #173B4F;
+    --teal: #0B6468;
+    --orange: #A8480F;
+    --line: #CDBF9F;
+  }
+  @page { size: A4; margin: 17mm 17mm 19mm 17mm; }
+  * { box-sizing: border-box; }
+  html, body { background: var(--bg); }
+  body {
+    margin: 0;
+    font-family: Verdana, "DejaVu Sans", Arial, "Liberation Sans", sans-serif;
+    font-size: 11.6pt;
+    line-height: 1.62;
+    letter-spacing: 0.012em;
+    word-spacing: 0.06em;
+    color: var(--ink);
+    text-align: left;
+  }
+  h1, h2, h3, h4 { color: var(--head); line-height: 1.3; break-after: avoid; margin: 0; }
+  h1 { font-size: 27pt; margin-bottom: 6mm; }
+  h2 { font-size: 20pt; margin: 0 0 5mm; padding-bottom: 2.5mm; border-bottom: 2.2pt solid var(--teal); }
+  h3 { font-size: 14.5pt; margin: 8mm 0 2.5mm; color: var(--teal); }
+  h4 { font-size: 12pt; margin: 5mm 0 1.5mm; }
+  p { margin: 0 0 3.6mm; orphans: 2; widows: 2; }
+  ul, ol { margin: 0 0 4mm; padding-left: 6.5mm; }
+  li { margin-bottom: 2.3mm; padding-left: 1mm; }
+  strong { color: #111; }
+  section { break-before: page; }
+  section.first { break-before: auto; }
+  .num { display: inline-block; background: var(--teal); color: #fff; border-radius: 3mm; padding: 0.3mm 3.2mm; margin-right: 2.5mm; font-size: 16pt; }
+  .box { background: var(--panel); border-left: 2.2mm solid var(--teal); border-radius: 2mm; padding: 4mm 5mm 1.2mm; margin: 4.5mm 0 5mm; break-inside: avoid; }
+  .box.key { background: var(--panel-2); }
+  .box.warn { background: var(--panel-3); border-left-color: var(--orange); }
+  .box .label { font-weight: bold; color: var(--head); display: block; margin-bottom: 1.5mm; }
+  .box.warn .label { color: var(--orange); }
+  figure { margin: 5mm 0 5mm; break-inside: avoid; }
+  figure svg { width: 100%; height: auto; display: block; border: 0.6pt solid var(--line); border-radius: 2mm; background: #FFFBF0; }
+  figcaption { margin-top: 3mm; background: var(--panel); border-radius: 2mm; padding: 3.5mm 4.5mm 0.6mm; font-size: 10.8pt; }
+  figcaption .label { font-weight: bold; color: var(--head); display: block; margin-bottom: 1mm; }
+  table { width: 100%; border-collapse: collapse; margin: 4mm 0 5mm; font-size: 10.2pt; line-height: 1.5; }
+  tr { break-inside: avoid; }
+  thead { display: table-header-group; }
+  table.keep { break-inside: avoid; }
+  th, td { text-align: left; vertical-align: top; padding: 2.4mm 2.6mm; border-bottom: 0.6pt solid var(--line); }
+  th { background: var(--head); color: #fff; font-weight: bold; }
+  tr:nth-child(even) td { background: #F6EEDB; }
+  .cover { min-height: 250mm; display: flex; flex-direction: column; justify-content: center; }
+  .cover .tag { font-size: 14pt; color: var(--teal); font-weight: bold; margin-bottom: 4mm; }
+  .cover .sub { font-size: 13pt; max-width: 150mm; }
+  .toc { list-style: none; padding: 0; margin: 8mm 0 0; }
+  .toc li { padding: 1.6mm 0; border-bottom: 0.6pt dotted var(--line); margin: 0; }
+  .toc b { color: var(--teal); display: inline-block; width: 9mm; }
+  .steps { list-style: none; padding: 0; counter-reset: step; }
+  .steps li { counter-increment: step; position: relative; padding: 0 0 0 13mm; margin-bottom: 3mm; break-inside: avoid; }
+  .steps li::before { content: counter(step); position: absolute; left: 0; top: 0.4mm; width: 8.5mm; height: 8.5mm; border-radius: 50%; background: var(--teal); color: #fff; font-weight: bold; text-align: center; line-height: 8.5mm; font-size: 11pt; }
+  .steps li b.t { display: block; color: var(--head); }
+  .idea { margin: 7mm 0 0; padding-top: 4mm; border-top: 1.6mm solid var(--teal); }
+  .idea h4 { margin-top: 0; font-size: 13pt; color: var(--teal); }
+  .idea h4 + p { break-after: avoid; break-inside: avoid; }
+  .idea .q { break-inside: avoid; break-after: avoid; background: #FFFBF0; border: 0.8pt solid var(--teal); border-radius: 2mm; padding: 3mm 4mm; margin: 2.5mm 0 3.5mm; font-weight: bold; color: var(--head); }
+  .small { font-size: 9.6pt; line-height: 1.5; }
+  .src li { margin-bottom: 1.4mm; word-break: break-word; }
+  a { color: var(--teal); text-decoration: none; }
+  svg text { font-family: Verdana, "DejaVu Sans", Arial, sans-serif; fill: #2A2A2A; }
+</style>
+</head>
+<body>
+
+<!-- ============================ COVER ============================ -->
+<section class="first">
+  <div class="cover">
+    <div class="tag">Company breakdown from scratch</div>
+    <h1>Rubrik: the full breakdown</h1>
+    <p class="sub">Eight areas in full detail: what it does, every product, how it earns money, who buys and why, its history, its rivals, its next moves and the forces around it.</p>
+    <p class="sub">Technical terms are used where they matter, and each one is translated into plain English straight away.</p>
+    <p class="sub"><strong>Prepared for:</strong> Sales Engineering Intern application, London, summer 2027.</p>
+    <p class="sub"><strong>Facts checked on:</strong> 17 November 2026.</p>
+
+    <ul class="toc">
+      <li><b>1</b> The bottom line</li>
+      <li><b>2</b> Full product and service breakdown</li>
+      <li><b>3</b> Business model and revenue engine</li>
+      <li><b>4</b> Target audience and customer psychology</li>
+      <li><b>5</b> History, scale and internal structure</li>
+      <li><b>6</b> Competitor research and market positioning</li>
+      <li><b>7</b> Future roadmap and upcoming moves</li>
+      <li><b>8</b> Commercial awareness and industry forces</li>
+      <li><b>9</b> The application question: technical answer ideas</li>
+      <li><b>10</b> Jargon buster, key numbers and sources</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================ 1 ============================ -->
+<section>
+  <h2><span class="num">1</span>The bottom line</h2>
+
+  <h3>What Rubrik actually does</h3>
+  <div class="box key">
+    <p><strong>Rubrik sells software that keeps protected spare copies of a large organisation's computer systems, checks those copies for signs of attack, and uses them to rebuild the organisation quickly after hackers strike.</strong></p>
+    <p>It started with files and databases. It now also protects the login systems that control who can access what, and it supervises AI assistants so their mistakes can be reversed.</p>
+  </div>
+
+  <h3>The 30-second version for a friend</h3>
+  <p>"Big companies get hacked, and the hackers lock or wreck their systems. Rubrik keeps spare copies the hackers cannot touch, works out which copy is clean, and rebuilds the company from it. It now does the same for login systems and for AI assistants that go wrong."</p>
+
+  <h3>Three things it protects</h3>
+  <ul>
+    <li><strong>Data:</strong> servers, databases, files, cloud systems and online apps such as Microsoft 365.</li>
+    <li><strong>Identity:</strong> the login systems that decide who is allowed into what. If these are down, nothing else can be fixed.</li>
+    <li><strong>AI agents:</strong> AI assistants that take actions on a company's behalf. Rubrik watches them, limits them and can undo what they did.</li>
+  </ul>
+
+  <figure>
+    <svg viewBox="0 0 720 300" role="img" aria-label="Loop showing company systems copied into a sealed vault and restored after an attack">
+      <defs>
+        <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#0B6468"/></marker>
+        <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#A8480F"/></marker>
+      </defs>
+      <rect x="24" y="60" width="210" height="180" rx="10" fill="#F3E9D2" stroke="#173B4F" stroke-width="1.5"/>
+      <text x="129" y="88" text-anchor="middle" font-size="16" font-weight="bold">The company</text>
+      <text x="129" y="120" text-anchor="middle" font-size="14">Files and databases</text>
+      <text x="129" y="146" text-anchor="middle" font-size="14">Cloud and email</text>
+      <text x="129" y="172" text-anchor="middle" font-size="14">Login system</text>
+      <text x="129" y="198" text-anchor="middle" font-size="14">AI assistants</text>
+
+      <rect x="486" y="60" width="210" height="180" rx="10" fill="#E6EFE6" stroke="#0B6468" stroke-width="2.5"/>
+      <text x="591" y="88" text-anchor="middle" font-size="16" font-weight="bold">Rubrik's sealed vault</text>
+      <text x="591" y="120" text-anchor="middle" font-size="14">Copies cannot be</text>
+      <text x="591" y="142" text-anchor="middle" font-size="14">changed or deleted</text>
+      <text x="591" y="176" text-anchor="middle" font-size="14">Each copy is checked</text>
+      <text x="591" y="198" text-anchor="middle" font-size="14">for signs of attack</text>
+
+      <line x1="240" y1="110" x2="478" y2="110" stroke="#0B6468" stroke-width="3" marker-end="url(#a1)"/>
+      <text x="360" y="98" text-anchor="middle" font-size="14" font-weight="bold" fill="#0B6468">1. Regular sealed copies</text>
+      <line x1="480" y1="196" x2="242" y2="196" stroke="#A8480F" stroke-width="3" marker-end="url(#a2)"/>
+      <text x="360" y="222" text-anchor="middle" font-size="14" font-weight="bold" fill="#A8480F">2. Clean copy put back</text>
+      <text x="360" y="242" text-anchor="middle" font-size="13">after an attack or mistake</text>
+      <text x="360" y="34" text-anchor="middle" font-size="16" font-weight="bold" fill="#173B4F">Rubrik in one picture</text>
+    </svg>
+    <figcaption>
+      <span class="label">How to read this diagram</span>
+      <p>The left box is the customer. The right box is Rubrik. The teal arrow shows copies flowing into the vault all the time. The orange arrow only fires on a bad day, when a clean copy flows back.</p>
+    </figcaption>
+  </figure>
+
+  <h3>Why it matters in one line</h3>
+  <p>Attackers now delete a victim's backups before demanding money, so the victim has no way out but to pay. <strong>Rubrik's whole design starts from the assumption that the attacker is already inside.</strong></p>
+
+  <div class="box">
+    <span class="label">Five facts to anchor everything else</span>
+    <p><strong>Founded</strong> 2014 in California. <strong>Listed</strong> on the New York Stock Exchange in April 2024 (ticker RBRK).</p>
+    <p><strong>Size:</strong> about 3,800 staff. Revenue forecast of about $1.69 billion for the year to January 2027.</p>
+    <p><strong>Growth:</strong> yearly subscription value of $1.66 billion at July 2026, up 33% in a year.</p>
+    <p><strong>Customers:</strong> large organisations. 3,084 pay more than $100,000 a year.</p>
+    <p><strong>London:</strong> named its regional headquarters in July 2026, with a £375 million UK investment pledge.</p>
+  </div>
+</section>
+
+<!-- ============================ 2 ============================ -->
+<section>
+  <h2><span class="num">2</span>Full product and service breakdown</h2>
+
+  <p>Rubrik sells <strong>software by subscription</strong>. Some customers also take storage hardware to hold copies on their own sites. Everything is grouped into two platforms.</p>
+
+  <figure>
+    <svg viewBox="0 0 720 400" role="img" aria-label="Map of Rubrik's two platforms and their parts">
+      <text x="360" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#173B4F">Rubrik's product map</text>
+      <rect x="24" y="44" width="672" height="46" rx="8" fill="#173B4F"/>
+      <text x="360" y="73" text-anchor="middle" font-size="15" font-weight="bold" style="fill:#fff">Rubrik AI: an assistant that runs both platforms for you</text>
+
+      <rect x="24" y="102" width="388" height="230" rx="10" fill="#E6EFE6" stroke="#0B6468" stroke-width="2"/>
+      <text x="218" y="128" text-anchor="middle" font-size="15" font-weight="bold">Rubrik Security Cloud</text>
+      <text x="218" y="148" text-anchor="middle" font-size="13">Protects data and logins</text>
+      <g font-size="13.5">
+        <rect x="40" y="162" width="172" height="72" rx="7" fill="#FFFBF0" stroke="#0B6468"/>
+        <text x="126" y="191" text-anchor="middle" font-weight="bold">A. Data</text>
+        <text x="126" y="211" text-anchor="middle" font-weight="bold">Protection</text>
+        <rect x="224" y="162" width="172" height="72" rx="7" fill="#FFFBF0" stroke="#0B6468"/>
+        <text x="310" y="191" text-anchor="middle" font-weight="bold">B. Attack</text>
+        <text x="310" y="211" text-anchor="middle" font-weight="bold">Recovery</text>
+        <rect x="40" y="246" width="172" height="72" rx="7" fill="#FFFBF0" stroke="#0B6468"/>
+        <text x="126" y="275" text-anchor="middle" font-weight="bold">C. Sensitive-Data</text>
+        <text x="126" y="295" text-anchor="middle" font-weight="bold">Mapping</text>
+        <rect x="224" y="246" width="172" height="72" rx="7" fill="#FFFBF0" stroke="#0B6468"/>
+        <text x="310" y="275" text-anchor="middle" font-weight="bold">D. Identity</text>
+        <text x="310" y="295" text-anchor="middle" font-weight="bold">Resilience</text>
+      </g>
+
+      <rect x="424" y="102" width="272" height="230" rx="10" fill="#F7E3D0" stroke="#A8480F" stroke-width="2"/>
+      <text x="560" y="128" text-anchor="middle" font-size="15" font-weight="bold">Rubrik Agent Cloud</text>
+      <text x="560" y="148" text-anchor="middle" font-size="13">Supervises AI assistants</text>
+      <g font-size="13.5">
+        <rect x="440" y="162" width="240" height="34" rx="7" fill="#FFFBF0" stroke="#A8480F"/>
+        <text x="560" y="184" text-anchor="middle" font-weight="bold">E1. Watch (Observability)</text>
+        <rect x="440" y="203" width="240" height="34" rx="7" fill="#FFFBF0" stroke="#A8480F"/>
+        <text x="560" y="225" text-anchor="middle" font-weight="bold">E2. Permit (Agent Identity)</text>
+        <rect x="440" y="244" width="240" height="34" rx="7" fill="#FFFBF0" stroke="#A8480F"/>
+        <text x="560" y="266" text-anchor="middle" font-weight="bold">E3. Stop (Runtime Security)</text>
+        <rect x="440" y="285" width="240" height="34" rx="7" fill="#FFFBF0" stroke="#A8480F"/>
+        <text x="560" y="307" text-anchor="middle" font-weight="bold">E4. Undo (Agent Rewind)</text>
+      </g>
+
+      <rect x="24" y="344" width="672" height="42" rx="8" fill="#F3E9D2" stroke="#173B4F"/>
+      <text x="360" y="370" text-anchor="middle" font-size="14" font-weight="bold">Underneath it all: sealed storage that cannot be altered</text>
+    </svg>
+    <figcaption>
+      <span class="label">How to read this diagram</span>
+      <p>Green is the older, bigger business. Orange is the new bet, launched in late 2025. The top bar is an AI helper for both. The bottom bar is the sealed storage everything depends on.</p>
+    </figcaption>
+  </figure>
+
+  <h3>First, how one protected copy is made</h3>
+  <p>Every product below depends on this one process. It is worth understanding once, properly.</p>
+
+  <figure>
+    <svg viewBox="0 0 720 262" role="img" aria-label="Four steps in making and using a protected copy">
+      <defs>
+        <marker id="k1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#173B4F"/></marker>
+      </defs>
+      <text x="360" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#173B4F">How one protected copy is made and used</text>
+      <g font-size="13">
+        <rect x="24" y="52" width="150" height="112" rx="9" fill="#F3E9D2" stroke="#173B4F" stroke-width="1.5"/>
+        <text x="99" y="80" text-anchor="middle" font-weight="bold" font-size="14">1. Read</text>
+        <text x="99" y="106" text-anchor="middle">Copy only what</text>
+        <text x="99" y="126" text-anchor="middle">has changed since</text>
+        <text x="99" y="146" text-anchor="middle">last time</text>
+
+        <rect x="198" y="52" width="150" height="112" rx="9" fill="#E6EFE6" stroke="#0B6468" stroke-width="1.5"/>
+        <text x="273" y="80" text-anchor="middle" font-weight="bold" font-size="14">2. Seal</text>
+        <text x="273" y="106" text-anchor="middle">Shrink it, scramble</text>
+        <text x="273" y="126" text-anchor="middle">it, write it where it</text>
+        <text x="273" y="146" text-anchor="middle">cannot be edited</text>
+
+        <rect x="372" y="52" width="150" height="112" rx="9" fill="#E6EFE6" stroke="#0B6468" stroke-width="1.5"/>
+        <text x="447" y="80" text-anchor="middle" font-weight="bold" font-size="14">3. Inspect</text>
+        <text x="447" y="106" text-anchor="middle">Fingerprint every</text>
+        <text x="447" y="126" text-anchor="middle">file. Compare with</text>
+        <text x="447" y="146" text-anchor="middle">the last copy</text>
+
+        <rect x="546" y="52" width="150" height="112" rx="9" fill="#F7E3D0" stroke="#A8480F" stroke-width="1.5"/>
+        <text x="621" y="80" text-anchor="middle" font-weight="bold" font-size="14">4. Restore</text>
+        <text x="621" y="106" text-anchor="middle">Run the system</text>
+        <text x="621" y="126" text-anchor="middle">from the copy, or</text>
+        <text x="621" y="146" text-anchor="middle">copy it back</text>
+      </g>
+      <g stroke="#173B4F" stroke-width="2.5">
+        <line x1="176" y1="108" x2="194" y2="108" marker-end="url(#k1)"/>
+        <line x1="350" y1="108" x2="368" y2="108" marker-end="url(#k1)"/>
+        <line x1="524" y1="108" x2="542" y2="108" marker-end="url(#k1)"/>
+      </g>
+      <rect x="24" y="186" width="672" height="56" rx="8" fill="#FFFBF0" stroke="#173B4F"/>
+      <text x="360" y="210" text-anchor="middle" font-size="13.5" font-weight="bold">The customer's rule drives all four steps</text>
+      <text x="360" y="230" text-anchor="middle" font-size="13">How often to copy, how long to keep it, where to hold a second copy</text>
+    </svg>
+    <figcaption>
+      <span class="label">How to read this diagram</span>
+      <p>Read the four boxes left to right. Steps 1 to 3 happen automatically, many times a day. Step 4 only happens when something has gone wrong. The bar underneath is the one thing the customer has to decide.</p>
+    </figcaption>
+  </figure>
+
+  <ul>
+    <li><strong>Step 1, Read.</strong> After the first full copy, Rubrik only collects what changed. The industry phrase is "incremental forever". It keeps each run small and fast.</li>
+    <li><strong>Step 2, Seal.</strong> Data is squeezed to save space, scrambled so outsiders cannot read it (encrypted), and written to storage that only accepts additions.</li>
+    <li><strong>Step 3, Inspect.</strong> Rubrik records a fingerprint of each file and a summary of what changed. This is the raw material for spotting attacks later.</li>
+    <li><strong>Step 4, Restore.</strong> Rubrik can copy data back. It can also start a system running directly from the copy, which it calls <strong>Live Mount</strong>, so staff are working again before the full copy-back finishes.</li>
+  </ul>
+  <p>The customer's rule is called an <strong>SLA Domain</strong>. It states the outcome wanted, such as "every four hours, keep one year, second copy abroad". There are no backup schedules to hand-build.</p>
+
+  <h3>The five locks that keep the copies safe</h3>
+  <p>These are what separate Rubrik from an ordinary backup tool. Each one answers a specific attacker move.</p>
+  <table class="keep">
+    <tr><th style="width:30%">Lock</th><th>Plain English</th><th style="width:30%">Attacker move it blocks</th></tr>
+    <tr><td><strong>Immutable storage</strong></td><td>Copies are written once and cannot be edited afterwards.</td><td>Scrambling the backups.</td></tr>
+    <tr><td><strong>Logical air gap</strong></td><td>Copies are not reachable through normal file-sharing routes on the network.</td><td>Finding the backups from a hacked server.</td></tr>
+    <tr><td><strong>Retention Lock</strong></td><td>Once set, the "keep for" period cannot be shortened.</td><td>Telling the system to expire the backups early.</td></tr>
+    <tr><td><strong>Quorum Authorization</strong></td><td>A two-person rule. Two named people must approve before protected data is deleted or kept for less time.</td><td>Using one stolen administrator login.</td></tr>
+    <tr><td><strong>Separate control plane</strong></td><td>The screen used to manage Rubrik is hosted by Rubrik, outside the customer's network, with its own extra sign-in checks.</td><td>Locking defenders out of their own recovery tool.</td></tr>
+  </table>
+
+  <h3>A. Data Protection</h3>
+  <p><strong>What it is:</strong> the process above, applied wherever a customer's systems live.</p>
+  <ul>
+    <li><strong>Own buildings:</strong> virtual servers (VMware, Microsoft Hyper-V, Nutanix), databases (Oracle, Microsoft SQL Server, SAP), large shared file stores.</li>
+    <li><strong>Rented cloud:</strong> Amazon Web Services, Microsoft Azure, Google Cloud. Google BigQuery was added in November 2026.</li>
+    <li><strong>Online apps:</strong> Microsoft 365, Salesforce, Jira.</li>
+    <li><strong>Code stores:</strong> GitHub and Azure DevOps.</li>
+  </ul>
+  <p><strong>Rubrik Cloud Vault</strong> is an optional extra copy held in an account that Rubrik owns and runs, with separate logins from the customer's. One fee covers storage and the cost of pulling data back out.</p>
+  <p><strong>Why Rubrik sells it:</strong> it is the entry ticket. It is also the source of the history that every security product further down relies on.</p>
+
+  <h3>B. Cyber Recovery and Threat Analytics</h3>
+  <p><strong>What it is:</strong> tools that inspect the copies and tell you which one is safe to restore.</p>
+
+  <h4>Anomaly Detection: spotting an attack from the backups</h4>
+  <ul>
+    <li>After each backup, a small file describing <strong>what changed</strong> is sent to Rubrik's hosted service. Only that description travels, not the customer's actual files.</li>
+    <li><strong>Check one</strong> compares the changes with that system's own normal pattern: how many files were added, deleted or altered.</li>
+    <li><strong>Check two</strong> looks for a sharp rise in randomness in the files. Scrambled files look random, so this is a strong sign of ransomware. The technical word is "entropy".</li>
+  </ul>
+  <div class="box">
+    <span class="label">Why this is clever, and where it is weak</span>
+    <p>It needs nothing extra installed on the machine being protected. So an attacker who switches off the security software on a server does not switch off this check.</p>
+    <p>A rival vendor argues that very slow, partial scrambling can stay under the alarm level. That is a competitor's claim, but worth knowing.</p>
+  </div>
+
+  <h4>Threat Hunting and Turbo Threat Hunting</h4>
+  <ul>
+    <li><strong>Threat Hunting</strong> searches the copies for known malicious files, using their fingerprints or pattern rules (called YARA rules).</li>
+    <li><strong>Turbo Threat Hunting</strong> uses the fingerprints already recorded in Step 3, so it looks them up in an index. Rubrik's test figure is 75,000 backups in under a minute.</li>
+    <li>Results are written onto each backup's record. Infected ones can be <strong>quarantined</strong> so nobody restores one by mistake.</li>
+  </ul>
+
+  <h4>Rebuilding in the right order</h4>
+  <ul>
+    <li><strong>Clean-room recovery:</strong> an isolated space to rebuild and test before reconnecting to the main network.</li>
+    <li><strong>Preemptive Recovery Engine:</strong> works out the last clean copy before an incident, so the answer is ready on the day.</li>
+    <li><strong>Autonomous Business Recovery:</strong> the customer tags one resource. Rubrik follows its connections to map the whole application, then restores network first, then computing, then data. The cloud version is in private preview.</li>
+  </ul>
+  <p><strong>Why Rubrik sells it:</strong> in a real attack, copying data back is rarely the slow part. Deciding which copy to trust is. This is the product that moves Rubrik from the IT budget to the security budget.</p>
+
+  <h3>C. Data Security Posture Management (DSPM)</h3>
+  <p><strong>What it is:</strong> a map of where sensitive information sits and who can reach it.</p>
+  <ul>
+    <li>It scans stored data and labels items such as card numbers, health records and passport details.</li>
+    <li>It shows which people and apps have access, and flags access that is wider than it should be.</li>
+    <li>The scanning runs inside the customer's own cloud account. Only the findings leave. The technology came from Laminar, bought in 2023.</li>
+  </ul>
+  <p><strong>Why Rubrik sells it:</strong> companies turning on AI helpers like Microsoft Copilot need to know what those helpers can read. After a break-in, it also answers "what did they get?"</p>
+
+  <h3>D. Identity Resilience</h3>
+  <p><strong>What it is:</strong> backup and recovery for login systems. The three covered are Microsoft Active Directory (on a company's own servers), Microsoft Entra ID and Okta (both online).</p>
+  <p><strong>Why it matters:</strong> the login system is the master key cabinet. If it is down, staff cannot sign in to anything, including the tools needed to recover.</p>
+
+  <h4>Active Directory recovery</h4>
+  <ul>
+    <li><strong>Forest recovery:</strong> a "forest" is a company's whole Active Directory. Rubrik rebuilds it through a five-step guided process. Rubrik says Microsoft's manual method is 29 steps across more than 100 pages.</li>
+    <li><strong>Identity-First Recovery:</strong> it lifts only the directory database (a file named <strong>NTDS.dit</strong>) and its settings folder (<strong>SYSVOL</strong>) out of the backup. It places them on a freshly built Windows server.</li>
+    <li>That leaves behind anything the attacker hid in the old server's operating system.</li>
+    <li>By default it also removes the records of every other login server, so the rebuilt one does not try to sync with dead or infected machines.</li>
+    <li><strong>Limit:</strong> the new server must run the same major version of Windows Server as the old one.</li>
+  </ul>
+
+  <h4>Entra ID and Okta recovery</h4>
+  <ul>
+    <li>Restores deleted or altered users, groups, apps and access rules straight into the live account.</li>
+    <li>Maps what depends on what. Restore a user, and the groups that user needs come back in the same step.</li>
+    <li>For Okta, it slows itself automatically to stay inside Okta's limits on how fast outside tools may make requests.</li>
+    <li>If a whole account is compromised, it can restore into a separate, clean account.</li>
+  </ul>
+
+  <h4>Roll Forward and Identity Continuity (both private preview)</h4>
+  <p>Old-style recovery forces a trade. Go back three weeks and you are clean but have lost every new starter, leaver and password change. Stay put and the attacker's hidden accounts stay too.</p>
+  <p><strong>Identity Roll Forward</strong> restores the clean copy, then replays only the legitimate changes and drops the attacker's.</p>
+
+  <figure>
+    <svg viewBox="0 0 720 290" role="img" aria-label="Timeline comparing roll back with roll forward">
+      <defs>
+        <marker id="b1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#173B4F"/></marker>
+      </defs>
+      <text x="360" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#173B4F">Clean or current? Roll Forward aims for both</text>
+      <line x1="40" y1="100" x2="690" y2="100" stroke="#173B4F" stroke-width="3" marker-end="url(#b1)"/>
+      <circle cx="120" cy="100" r="9" fill="#0B6468"/>
+      <text x="120" y="76" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#0B6468">Last clean copy</text>
+      <circle cx="260" cy="100" r="9" fill="#A8480F"/>
+      <text x="260" y="76" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#A8480F">Attacker gets in</text>
+      <circle cx="600" cy="100" r="9" fill="#173B4F"/>
+      <text x="600" y="76" text-anchor="middle" font-size="13.5" font-weight="bold">Attack found</text>
+      <text x="430" y="128" text-anchor="middle" font-size="13">3 weeks of mixed changes: good and bad</text>
+
+      <rect x="40" y="150" width="318" height="120" rx="9" fill="#F7E3D0" stroke="#A8480F" stroke-width="1.5"/>
+      <text x="199" y="176" text-anchor="middle" font-size="14.5" font-weight="bold">Roll back (the old way)</text>
+      <text x="199" y="202" text-anchor="middle" font-size="13">Return to the last clean copy.</text>
+      <text x="199" y="224" text-anchor="middle" font-size="13">Attacker gone, but so are</text>
+      <text x="199" y="246" text-anchor="middle" font-size="13">3 weeks of real work.</text>
+
+      <rect x="372" y="150" width="318" height="120" rx="9" fill="#E6EFE6" stroke="#0B6468" stroke-width="1.5"/>
+      <text x="531" y="176" text-anchor="middle" font-size="14.5" font-weight="bold">Roll forward (the new way)</text>
+      <text x="531" y="202" text-anchor="middle" font-size="13">Start from the clean copy.</text>
+      <text x="531" y="224" text-anchor="middle" font-size="13">Replay the good changes only.</text>
+      <text x="531" y="246" text-anchor="middle" font-size="13">Attacker's changes are dropped.</text>
+    </svg>
+    <figcaption>
+      <span class="label">How to read this diagram</span>
+      <p>The line is time, running left to right. The gap between the orange dot and the dark dot is when the attacker was inside unnoticed. The two boxes show the two ways to deal with what happened in that gap.</p>
+    </figcaption>
+  </figure>
+
+  <p><strong>Identity Continuity</strong> covers the gap while recovery runs. If the main login provider is down, it switches people to a standby. It comes from Strata, bought in June 2026.</p>
+  <p><strong>Microsoft Defender link (March 2026):</strong> Microsoft's security tool flags a compromised account, and Rubrik reverses just that account's changes.</p>
+  <p><strong>Why Rubrik sells it:</strong> most break-ins now start with a stolen or tricked login. No other system can be restored until logins work.</p>
+
+  <h3>E. Rubrik Agent Cloud</h3>
+  <p>An <strong>AI agent</strong> is an AI assistant that takes actions: it edits files, changes databases, sends messages. Agent Cloud, launched in October 2025, supervises agents built on other companies' AI.</p>
+  <ul>
+    <li><strong>Agent Observability (watch):</strong> a live list of every agent, what it can touch, and what it is doing.</li>
+    <li><strong>Agent Identity (permit, August 2026):</strong> each action gets its own short-lived pass, valid for that one action. No agent holds a permanent key. It plugs into the Okta or Entra set-up a firm already has.</li>
+    <li><strong>Agent Runtime Security (stop):</strong> a small AI model named SAGE judges the intent of each action before it runs, and blocks ones that break the rules.</li>
+    <li><strong>Agent Rewind (undo, August 2025):</strong> records each agent's inputs, the tools it used and the chain of instructions behind an action. A bad change can be traced to its cause and reversed on its own.</li>
+  </ul>
+
+  <figure>
+    <svg viewBox="0 0 720 250" role="img" aria-label="Flow of three checks on every AI agent action, followed by a record and an undo option">
+      <defs>
+        <marker id="c1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#173B4F"/></marker>
+      </defs>
+      <text x="360" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#173B4F">Every agent action passes three checks</text>
+      <g font-size="13">
+        <rect x="20" y="70" width="112" height="90" rx="9" fill="#F3E9D2" stroke="#173B4F" stroke-width="1.5"/>
+        <text x="76" y="104" text-anchor="middle" font-weight="bold">AI agent</text>
+        <text x="76" y="126" text-anchor="middle">wants to do</text>
+        <text x="76" y="146" text-anchor="middle">something</text>
+
+        <rect x="160" y="70" width="112" height="90" rx="9" fill="#F7E3D0" stroke="#A8480F" stroke-width="1.5"/>
+        <text x="216" y="98" text-anchor="middle" font-weight="bold">Check 1</text>
+        <text x="216" y="120" text-anchor="middle">Is the intent</text>
+        <text x="216" y="140" text-anchor="middle">sensible?</text>
+
+        <rect x="300" y="70" width="112" height="90" rx="9" fill="#F7E3D0" stroke="#A8480F" stroke-width="1.5"/>
+        <text x="356" y="98" text-anchor="middle" font-weight="bold">Check 2</text>
+        <text x="356" y="120" text-anchor="middle">Do the rules</text>
+        <text x="356" y="140" text-anchor="middle">allow it?</text>
+
+        <rect x="440" y="70" width="112" height="90" rx="9" fill="#F7E3D0" stroke="#A8480F" stroke-width="1.5"/>
+        <text x="496" y="98" text-anchor="middle" font-weight="bold">Check 3</text>
+        <text x="496" y="120" text-anchor="middle">Issue a pass</text>
+        <text x="496" y="140" text-anchor="middle">for one action</text>
+
+        <rect x="580" y="70" width="120" height="90" rx="9" fill="#E6EFE6" stroke="#0B6468" stroke-width="1.5"/>
+        <text x="640" y="104" text-anchor="middle" font-weight="bold">Action runs</text>
+        <text x="640" y="126" text-anchor="middle">and is</text>
+        <text x="640" y="146" text-anchor="middle">recorded</text>
+      </g>
+      <g stroke="#173B4F" stroke-width="2.5">
+        <line x1="134" y1="115" x2="156" y2="115" marker-end="url(#c1)"/>
+        <line x1="274" y1="115" x2="296" y2="115" marker-end="url(#c1)"/>
+        <line x1="414" y1="115" x2="436" y2="115" marker-end="url(#c1)"/>
+        <line x1="554" y1="115" x2="576" y2="115" marker-end="url(#c1)"/>
+      </g>
+      <rect x="160" y="186" width="392" height="44" rx="8" fill="#FFFBF0" stroke="#A8480F"/>
+      <text x="356" y="213" text-anchor="middle" font-size="13.5">Fail any check and the action is blocked</text>
+      <rect x="580" y="186" width="120" height="44" rx="8" fill="#FFFBF0" stroke="#0B6468"/>
+      <text x="640" y="213" text-anchor="middle" font-size="13.5" font-weight="bold">Undo if wrong</text>
+    </svg>
+    <figcaption>
+      <span class="label">How to read this diagram</span>
+      <p>Follow the arrows left to right. An agent's request must clear three orange gates before anything happens. The green box is the action itself. The bottom-right box is the safety net if a bad action still slips through.</p>
+    </figcaption>
+  </figure>
+
+  <p><strong>For Anthropic's Claude Code (June 2026):</strong> Rubrik keeps unchangeable copies of code stores outside the store itself. It also tracks the files that steer the assistant, such as CLAUDE.md, settings and tool permissions, and flags unexpected changes.</p>
+  <p><strong>"Fine-tuning for accuracy":</strong> the job advert uses this phrase. It refers to Predibase, bought in 2025, which trains small, specialised AI models on a company's own data so agents make fewer mistakes at lower cost.</p>
+  <p><strong>Limit:</strong> an independent analyst notes Agent Rewind can only undo agents whose actions it is able to observe.</p>
+  <p><strong>Why Rubrik sells it:</strong> "undo" is Rubrik's core skill, and agents are a new thing that needs undoing. It also opens the AI budget, which is far larger than the backup budget.</p>
+
+  <h3>F. Rubrik AI and Annapurna</h3>
+  <ul>
+    <li><strong>Rubrik AI (June 2026):</strong> the customer states a goal in plain words, such as "recover the payments system cleanly". The assistant plans and runs the steps across both platforms.</li>
+    <li><strong>Annapurna:</strong> feeds a company's stored documents to its own AI tools, while keeping the rules on who may see what.</li>
+  </ul>
+
+  <h3>G. Services</h3>
+  <ul>
+    <li><strong>Support and the Ransomware Response Team:</strong> experts who work with a customer during a live attack.</li>
+    <li><strong>Professional Services:</strong> paid installation and set-up.</li>
+    <li><strong>Recovery warranty:</strong> up to $10 million on the top plan, with conditions.</li>
+    <li><strong>UK Sovereign Cyber Recovery Cloud (March 2026):</strong> a rebuild space kept entirely inside the UK, run with Rackspace.</li>
+    <li><strong>Rubrik Zero Labs:</strong> a research team whose attack data also feeds the sales pitch.</li>
+  </ul>
+
+  <h3>The whole range on one page</h3>
+  <table class="keep">
+    <tr><th style="width:27%">Product</th><th>Problem it solves</th><th style="width:27%">Typical buyer</th></tr>
+    <tr><td><strong>Data Protection</strong></td><td>"Our backups could be deleted or scrambled."</td><td>Head of Infrastructure</td></tr>
+    <tr><td><strong>Cyber Recovery</strong></td><td>"We do not know which backup is clean."</td><td>Security chief</td></tr>
+    <tr><td><strong>DSPM</strong></td><td>"We do not know where our sensitive data is."</td><td>Data or privacy lead</td></tr>
+    <tr><td><strong>Identity Resilience</strong></td><td>"If logins go down, we cannot recover anything."</td><td>Identity lead</td></tr>
+    <tr><td><strong>Agent Cloud</strong></td><td>"We cannot see or reverse what our AI agents do."</td><td>Head of AI or Engineering</td></tr>
+  </table>
+</section>
+
+<!-- ============================ 3 ============================ -->
+<section>
+  <h2><span class="num">3</span>Business model and revenue engine</h2>
+
+  <h3>How money is made on one deal</h3>
+  <p>A customer signs a contract, usually for <strong>three years</strong>, for the right to use the software. Three levers set the price.</p>
+  <ul>
+    <li><strong>Volume.</strong> For servers and files, the amount of data protected. For apps like Microsoft 365, the number of users.</li>
+    <li><strong>Plan.</strong> Three tiers: Foundation, Business and Enterprise. Higher tiers unlock the attack-recovery tools and the warranty.</li>
+    <li><strong>Add-ons.</strong> Identity, cloud, online-app and AI-agent products.</li>
+  </ul>
+  <p>Prices are not published. Every deal is quoted and discounted. Outside price lists suggest about $130 to $230 per terabyte per month before discounts. Treat that as a rough guide.</p>
+
+  <div class="box key">
+    <span class="label">Where the profit comes from</span>
+    <p>Software is expensive to build and cheap to copy. Once it exists, each extra customer mostly adds revenue. The main running costs are staff, cloud hosting bills, and the margin given to partners.</p>
+  </div>
+
+  <h3>All revenue streams</h3>
+  <table class="keep">
+    <tr><th style="width:27%">Stream</th><th>What it is</th><th style="width:25%">Size</th></tr>
+    <tr><td><strong>Subscription</strong></td><td>Recurring fees for the software, hosted versions and support.</td><td><strong>About 95%</strong> ($407m of $427m last quarter)</td></tr>
+    <tr><td>Hardware and older licences</td><td>Storage boxes for copies kept on the customer's own sites.</td><td>Small and shrinking</td></tr>
+    <tr><td>Professional services</td><td>Paid set-up help and training.</td><td>Small</td></tr>
+  </table>
+
+  <div class="box key">
+    <span class="label">The single highest earner</span>
+    <p><strong>Subscriptions to Rubrik Security Cloud for protecting large companies' data.</strong> Of $1.66 billion in yearly subscription value, $1.48 billion is for cloud-delivered products. Identity and AI agents are growing quickly from a small base.</p>
+  </div>
+
+  <h3>The growth mechanics</h3>
+  <ul>
+    <li><strong>Subscription ARR</strong> (annual recurring revenue) is the yearly value of all live subscriptions. It is the number investors watch. $1.66 billion at July 2026, up 33%.</li>
+    <li><strong>Land and expand:</strong> win a customer with one product, then sell more. Nearly half of the 2,000 customers in Europe, the Middle East and Africa use three or more products.</li>
+    <li><strong>Data grows by itself.</strong> Customers store more every year, so a deal priced on volume tends to rise at renewal.</li>
+    <li><strong>Moving up the tiers.</strong> A customer who starts on Foundation can be upgraded once the security team gets involved.</li>
+  </ul>
+
+  <h3>Who the money passes through</h3>
+  <p>Rubrik rarely bills the customer directly. It sells through <strong>partners</strong>: resellers, distributors, consulting firms, and the online stores run by Amazon, Microsoft and Google.</p>
+
+  <figure>
+    <svg viewBox="0 0 720 378" role="img" aria-label="Diagram of money and value flowing between customer, partners, Rubrik and suppliers">
+      <defs>
+        <marker id="m1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#A8480F"/></marker>
+        <marker id="m2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#0B6468"/></marker>
+      </defs>
+      <text x="360" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#173B4F">How money and value move</text>
+
+      <rect x="24" y="80" width="170" height="110" rx="10" fill="#F3E9D2" stroke="#173B4F" stroke-width="1.5"/>
+      <text x="109" y="112" text-anchor="middle" font-size="15" font-weight="bold">Customer</text>
+      <text x="109" y="136" text-anchor="middle" font-size="12.5">Bank, hospital,</text>
+      <text x="109" y="156" text-anchor="middle" font-size="12.5">retailer, council</text>
+
+      <rect x="275" y="80" width="170" height="110" rx="10" fill="#F3E9D2" stroke="#173B4F" stroke-width="1.5"/>
+      <text x="360" y="112" text-anchor="middle" font-size="15" font-weight="bold">Partners</text>
+      <text x="360" y="136" text-anchor="middle" font-size="12.5">Resellers, distributors,</text>
+      <text x="360" y="156" text-anchor="middle" font-size="12.5">cloud stores</text>
+
+      <rect x="526" y="80" width="170" height="110" rx="10" fill="#E6EFE6" stroke="#0B6468" stroke-width="2.5"/>
+      <text x="611" y="112" text-anchor="middle" font-size="15" font-weight="bold">Rubrik</text>
+      <text x="611" y="136" text-anchor="middle" font-size="12.5">Builds and runs</text>
+      <text x="611" y="156" text-anchor="middle" font-size="12.5">the software</text>
+
+      <line x1="198" y1="112" x2="270" y2="112" stroke="#A8480F" stroke-width="3" marker-end="url(#m1)"/>
+      <text x="234" y="100" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#A8480F">pays</text>
+      <line x1="449" y1="112" x2="521" y2="112" stroke="#A8480F" stroke-width="3" marker-end="url(#m1)"/>
+      <text x="485" y="100" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#A8480F">pays</text>
+      <text x="485" y="72" text-anchor="middle" font-size="11.5" fill="#A8480F">(keeps a margin)</text>
+
+      <path d="M 611 196 L 611 232 L 109 232 L 109 196" fill="none" stroke="#0B6468" stroke-width="3" marker-end="url(#m2)"/>
+      <text x="360" y="254" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#0B6468">Software, updates, support, help in an attack</text>
+
+      <line x1="275" y1="166" x2="200" y2="166" stroke="#0B6468" stroke-width="3" marker-end="url(#m2)"/>
+      <text x="236" y="186" text-anchor="middle" font-size="12" fill="#0B6468">advice</text>
+
+      <rect x="386" y="274" width="310" height="86" rx="10" fill="#F7E3D0" stroke="#A8480F" stroke-width="1.5"/>
+      <text x="541" y="302" text-anchor="middle" font-size="15" font-weight="bold">Rubrik's suppliers</text>
+      <text x="541" y="324" text-anchor="middle" font-size="12.5">Amazon, Microsoft and Google (hosting)</text>
+      <text x="541" y="344" text-anchor="middle" font-size="12.5">Hardware makers (storage boxes)</text>
+      <line x1="640" y1="196" x2="640" y2="268" stroke="#A8480F" stroke-width="3" marker-end="url(#m1)"/>
+      <text x="680" y="250" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#A8480F">pays</text>
+
+      <rect x="24" y="274" width="330" height="86" rx="10" fill="#FFFBF0" stroke="#CDBF9F"/>
+      <line x1="42" y1="304" x2="92" y2="304" stroke="#A8480F" stroke-width="3" marker-end="url(#m1)"/>
+      <text x="104" y="309" font-size="13">Orange arrow = money</text>
+      <line x1="42" y1="336" x2="92" y2="336" stroke="#0B6468" stroke-width="3" marker-end="url(#m2)"/>
+      <text x="104" y="341" font-size="13">Teal arrow = product or help</text>
+    </svg>
+    <figcaption>
+      <span class="label">How to read this diagram</span>
+      <p>Money (orange) moves left to right: customer, partner, Rubrik. Product and help (teal) move back the other way. Rubrik then pays its own suppliers, bottom right.</p>
+    </figcaption>
+  </figure>
+
+  <p><strong>Why use partners?</strong> They already hold the customer relationship and a place on approved-supplier lists. Rubrik reaches thousands of buyers without hiring a salesperson for each.</p>
+
+  <h3>Is it profitable?</h3>
+  <ul>
+    <li><strong>In cash: yes.</strong> It took in $65.7 million more than it spent last quarter. It forecasts $323m to $333m for the year.</li>
+    <li><strong>In official accounting profit: no.</strong> It reported a $61.8 million loss last quarter. Much of the gap is staff pay given in shares, which uses no cash.</li>
+    <li><strong>Cushion:</strong> $1.75 billion in cash and short-term investments.</li>
+  </ul>
+</section>
+
+<!-- ============================ 4 ============================ -->
+<section>
+  <h2><span class="num">4</span>Target audience and customer psychology</h2>
+
+  <h3>The exact customers</h3>
+  <p><strong>Large organisations for whom being offline is very expensive or dangerous.</strong> Rubrik had over 6,000 customers when it listed in 2024.</p>
+  <ul>
+    <li><strong>Banks and insurers:</strong> regulators set limits on how long key services may be down.</li>
+    <li><strong>Hospitals and health bodies:</strong> downtime can harm patients. UK example: Northumbria Healthcare NHS Trust.</li>
+    <li><strong>Government and councils:</strong> UK example: Brent Council.</li>
+    <li><strong>Retailers and manufacturers:</strong> every hour offline is lost sales or a stopped production line.</li>
+  </ul>
+
+  <h3>Why Rubrik targets them</h3>
+  <ul>
+    <li><strong>Large data volumes</strong> mean large contracts, since price follows volume.</li>
+    <li><strong>Strict rules</strong> mean they must prove they can recover, not just claim it.</li>
+    <li><strong>Complex estates</strong> mean many systems, so more products to add later.</li>
+    <li><strong>They can pay a premium</strong> for lower risk.</li>
+  </ul>
+
+  <h3>The people inside the customer</h3>
+  <table class="keep">
+    <tr><th style="width:30%">Person</th><th>What they want</th><th style="width:30%">What they fear</th></tr>
+    <tr><td><strong>Head of Infrastructure</strong></td><td>Backups that are simple and reliable.</td><td>A restore that fails in front of everyone.</td></tr>
+    <tr><td><strong>Security chief (CISO)</strong></td><td>Proof of a fast, clean recovery.</td><td>Explaining to the board why it took a month.</td></tr>
+    <tr><td><strong>Technology chief (CIO)</strong></td><td>Fewer suppliers, lower cost, clear answers.</td><td>Being the person blamed for the outage.</td></tr>
+    <tr><td><strong>Identity lead</strong></td><td>A login system that can be rebuilt quickly.</td><td>Being the single point of failure.</td></tr>
+    <tr><td><strong>Head of AI or Engineering</strong></td><td>To roll out AI agents fast.</td><td>An agent wiping something important.</td></tr>
+  </table>
+
+  <h3>The pain that forces a purchase</h3>
+  <p><strong>Ransomware</strong> is software that scrambles a company's systems until money is paid. The downtime usually costs far more than the ransom.</p>
+  <ul>
+    <li><strong>Marks &amp; Spencer (2025):</strong> around £300 million off profit, with online orders stopped for weeks.</li>
+    <li><strong>Jaguar Land Rover (2025):</strong> production halted. The UK's Cyber Monitoring Centre estimated a £1.9 billion cost to the UK economy.</li>
+    <li><strong>Synnovis (2024):</strong> an attack on an NHS blood-testing supplier postponed thousands of London appointments.</li>
+  </ul>
+
+  <h3>The psychology behind the decision</h3>
+  <ul>
+    <li><strong>It is personal.</strong> After a major attack, named executives answer to the board, to regulators and sometimes to the press.</li>
+    <li><strong>"Could that be us?"</strong> A high-profile attack on a peer turns a vague worry into a board question with a deadline.</li>
+    <li><strong>Untested confidence.</strong> Most firms have backups. Few have ever rebuilt everything from them. The gap between the two is where Rubrik sells.</li>
+    <li><strong>Outside pressure.</strong> Regulators want evidence. Cyber insurers ask about backup protection before offering cover.</li>
+    <li><strong>Fear of slowing down.</strong> With AI agents, the worry is the opposite: saying no and falling behind competitors.</li>
+  </ul>
+
+  <h3>What makes the price worth it</h3>
+  <p>Rubrik is usually one of the dearer options. The case rests on simple arithmetic: <strong>hundreds of thousands of pounds a year against tens of millions per week offline.</strong></p>
+  <ul>
+    <li><strong>Time.</strong> Days to recover instead of weeks.</li>
+    <li><strong>Certainty.</strong> Knowing which copy is clean before restoring it.</li>
+    <li><strong>Fewer tools.</strong> One product replaces several older ones.</li>
+    <li><strong>Evidence.</strong> Recovery tests and reports to show regulators and insurers.</li>
+    <li><strong>The warranty.</strong> Money behind the promise.</li>
+  </ul>
+
+  <div class="box">
+    <span class="label">Three objections a Sales Engineer hears, and the honest replies</span>
+    <p><strong>"We already have backup."</strong> Reply: can it be deleted by one stolen login, and have you ever rebuilt from it?</p>
+    <p><strong>"Our cloud provider covers this."</strong> Reply: providers keep the service running. Protecting what you put in it is your job.</p>
+    <p><strong>"It costs too much."</strong> Reply: compared with what? Price one week offline first.</p>
+  </div>
+</section>
+
+<!-- ============================ 5 ============================ -->
+<section>
+  <h2><span class="num">5</span>History, scale and internal structure</h2>
+
+  <h3>When, why and by whom</h3>
+  <p>Rubrik was founded in <strong>January 2014 in Palo Alto, California</strong>, by Bipul Sinha, Arvind Jain, Soham Mazumdar and Arvind Nithrakashyap.</p>
+  <p>Sinha had been an investor at Lightspeed, which became the first backer. The founders saw that backup was old, fiddly and stitched together from many parts. Their answer was <strong>one box that could be set up in under an hour</strong>.</p>
+  <p>The turning point was around 2020 to 2022. Ransomware surged, and Rubrik repositioned from backup to security. It also switched from selling boxes to selling subscriptions.</p>
+
+  <h3>Timeline</h3>
+  <table>
+    <tr><th style="width:19%">When</th><th>What happened</th></tr>
+    <tr><td>2014</td><td>Founded. First product is a backup box nicknamed a "Brik".</td></tr>
+    <tr><td>2018 to 2021</td><td>Moves its controls into the cloud. Microsoft buys a stake in 2021.</td></tr>
+    <tr><td>2023</td><td>Buys Laminar, the source of its sensitive-data mapping.</td></tr>
+    <tr><td>April 2024</td><td>Lists on the New York Stock Exchange at $32 a share, raising $752 million.</td></tr>
+    <tr><td>2025</td><td>Buys Predibase (reported at around $100 million). Launches Agent Rewind, Okta recovery and Agent Cloud.</td></tr>
+    <tr><td>March 2026</td><td>Microsoft Defender link. UK Sovereign Cyber Recovery Cloud with Rackspace.</td></tr>
+    <tr><td>June 2026</td><td>Buys Strata. Launches Rubrik AI, Agent Cloud for Claude Code and Roll Forward.</td></tr>
+    <tr><td>July 2026</td><td>Pledges £375 million to the UK over five years. Names London its regional headquarters.</td></tr>
+    <tr><td>Late 2026</td><td>Agent Identity (August). Attack recovery for GitHub and Azure DevOps (November).</td></tr>
+  </table>
+
+  <h3>Ownership</h3>
+  <p><strong>Public and founder-led.</strong> Shares trade under the ticker RBRK. Bipul Sinha remains chief executive and chairman.</p>
+  <p>Founders and early investors hold a class of share carrying 20 votes each. They keep control of major decisions even though outside investors own much of the company. It is not owned by a private-equity firm.</p>
+
+  <h3>Scale</h3>
+  <ul>
+    <li><strong>Staff:</strong> about 3,800 (3,797 at 31 January 2026, up 19%).</li>
+    <li><strong>Revenue:</strong> $427.3 million last quarter, up 38%. About <strong>$1.69 billion</strong> forecast for the year to January 2027.</li>
+    <li><strong>Subscription ARR:</strong> $1.66 billion, forecast to reach about $1.88 billion by January 2027.</li>
+    <li><strong>Market value:</strong> roughly $23 to $26 billion in November 2026. This changes daily.</li>
+    <li><strong>Footprint:</strong> headquarters in Palo Alto, a large engineering base in Bengaluru, and London as regional headquarters for Europe, the Middle East and Africa.</li>
+  </ul>
+  <div class="box">
+    <span class="label">A quirk to know</span>
+    <p>Rubrik's financial year ends on 31 January. "Fiscal 2027" means February 2026 to January 2027. The next results are expected around 3 December 2026, though the date is not yet confirmed.</p>
+  </div>
+
+  <h3>The teams that make it run</h3>
+  <table>
+    <tr><th style="width:32%">Team</th><th>What it does</th></tr>
+    <tr><td><strong>Engineering and Product</strong></td><td>Build and improve the software.</td></tr>
+    <tr><td><strong>Account Executives</strong></td><td>Salespeople who own the customer relationship and the commercial deal.</td></tr>
+    <tr><td><strong>Sales Engineers (SEs)</strong></td><td>The technical half of the sales pair. They find the real problem, show the product, run trials and win the technical argument.</td></tr>
+    <tr><td><strong>Specialist teams</strong></td><td>Experts in one area, such as identity or AI agents, brought into deals when needed.</td></tr>
+    <tr><td><strong>Channel team</strong></td><td>Manages the resellers and consulting partners that carry most deals.</td></tr>
+    <tr><td><strong>Professional Services</strong></td><td>Install the product after the sale.</td></tr>
+    <tr><td><strong>Support and Ransomware Response</strong></td><td>Help when things break or an attack is live.</td></tr>
+    <tr><td><strong>Rubrik Zero Labs</strong></td><td>Research on attacks.</td></tr>
+  </table>
+
+  <div class="box key">
+    <span class="label">Where the internship sits</span>
+    <p>You would be with the Sales Engineers in London. Weeks 8 to 12 take you through Professional Services and Support, so you see the whole chain from first meeting to live customer.</p>
+  </div>
+
+  <h3>Recent deals, partnerships and milestones</h3>
+  <ul>
+    <li><strong>Anthropic's Claude Code:</strong> a dedicated Agent Cloud version, June 2026.</li>
+    <li><strong>Project Hourglass:</strong> alliance with Deloitte, Cognizant, HCLTech, NTT Data and Wipro to take Agent Cloud to their clients.</li>
+    <li><strong>Microsoft:</strong> shareholder since 2021, plus the Defender link in March 2026.</li>
+    <li><strong>Rackspace:</strong> the UK-only recovery service.</li>
+    <li><strong>Gartner:</strong> named a leader for the seventh year running in 2026, and rated furthest for vision.</li>
+    <li><strong>Amazon:</strong> a link with Amazon's agent-building service is described as upcoming.</li>
+  </ul>
+
+  <h3>Key people</h3>
+  <ul>
+    <li><strong>Bipul Sinha:</strong> co-founder, chief executive, chairman.</li>
+    <li><strong>Arvind Nithrakashyap:</strong> co-founder, chief technology officer.</li>
+    <li><strong>Anneka Gupta:</strong> chief product officer.</li>
+    <li><strong>Kiran Choudary:</strong> chief financial officer.</li>
+    <li><strong>Mike Tornincasa:</strong> chief business officer.</li>
+  </ul>
+</section>
+
+<!-- ============================ 6 ============================ -->
+<section>
+  <h2><span class="num">6</span>Competitor research and market positioning</h2>
+
+  <h3>The biggest competitors</h3>
+  <p>Gartner, an analyst firm, placed Rubrik, Veeam, Cohesity and Commvault close together as leaders in 2026. Rubrik was rated furthest for <strong>vision</strong>. Veeam was rated highest for <strong>ability to deliver</strong>.</p>
+
+  <table class="keep">
+    <tr><th style="width:15%">Company</th><th style="width:19%">Pricing</th><th>Quality</th><th>Speed</th><th style="width:20%">Target audience</th></tr>
+    <tr><td><strong>Rubrik</strong></td><td>Premium. Quoted per deal.</td><td>Strongest on attack recovery and login recovery.</td><td>Finds the clean copy fast. Can run systems from the copy.</td><td>Large and regulated organisations.</td></tr>
+    <tr><td><strong>Veeam</strong></td><td>Lower. Flexible licences.</td><td>Very broad and dependable. Runs on any hardware.</td><td>Long known for quick restores of virtual servers.</td><td>Mid-sized firms, moving up.</td></tr>
+    <tr><td><strong>Cohesity</strong></td><td>Premium.</td><td>Strong at very large scale. Good search across stored data.</td><td>Known for restoring many servers at once.</td><td>The very largest organisations.</td></tr>
+    <tr><td><strong>Commvault</strong></td><td>Mid to premium.</td><td>Widest range of systems covered.</td><td>Has tools to rebuild whole cloud set-ups.</td><td>Large firms with old and new systems mixed.</td></tr>
+    <tr><td><strong>Druva</strong></td><td>Mid. Pay for what you use.</td><td>Delivered entirely online. No hardware.</td><td>Quick to set up. Big restores depend on the internet link.</td><td>Cloud-first firms.</td></tr>
+  </table>
+
+  <h3>Size and ownership of each rival</h3>
+  <ul>
+    <li><strong>Veeam:</strong> private, owned by Insight Partners. Over $2.1 billion in yearly recurring revenue by its own count. The largest by market share. Bought Securiti AI for $1.7 billion in December 2025.</li>
+    <li><strong>Cohesity:</strong> private. About $1.5 billion in yearly recurring revenue after absorbing Veritas's backup business. A stock market listing is widely expected.</li>
+    <li><strong>Commvault:</strong> public. $1.10 billion subscription ARR at September 2026, growing 20%.</li>
+    <li><strong>Rubrik:</strong> $1.66 billion subscription ARR, growing 33%. The fastest grower of the public pair.</li>
+  </ul>
+
+  <h3>Rivals in the newer areas</h3>
+  <ul>
+    <li><strong>Login recovery:</strong> specialists such as Semperis and Quest. Commvault and Cohesity are adding their own.</li>
+    <li><strong>Sensitive-data mapping:</strong> Cyera, Varonis, Wiz, and Veeam through Securiti.</li>
+    <li><strong>AI agent safety:</strong> a new and crowded field. Palo Alto Networks, CrowdStrike, Microsoft and Okta are all building here.</li>
+  </ul>
+
+  <figure>
+    <svg viewBox="0 0 720 440" role="img" aria-label="Market positioning map with two axes">
+      <defs>
+        <marker id="p1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#173B4F"/></marker>
+        <marker id="p2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#777"/></marker>
+      </defs>
+      <text x="360" y="26" text-anchor="middle" font-size="16" font-weight="bold" fill="#173B4F">Where each rival sits (my reading)</text>
+      <rect x="90" y="46" width="600" height="320" fill="#FFFBF0" stroke="#CDBF9F"/>
+      <line x1="390" y1="46" x2="390" y2="366" stroke="#CDBF9F" stroke-dasharray="6 6"/>
+      <line x1="90" y1="206" x2="690" y2="206" stroke="#CDBF9F" stroke-dasharray="6 6"/>
+      <line x1="90" y1="366" x2="690" y2="366" stroke="#173B4F" stroke-width="2.5" marker-end="url(#p1)"/>
+      <line x1="90" y1="366" x2="90" y2="46" stroke="#173B4F" stroke-width="2.5" marker-end="url(#p1)"/>
+      <text x="100" y="392" font-size="13">Mainly a backup tool</text>
+      <text x="680" y="392" text-anchor="end" font-size="13">Security and AI-safety platform</text>
+      <text x="390" y="420" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#173B4F">What the product is trying to be</text>
+      <text transform="translate(34 206) rotate(-90)" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#173B4F">Price and customer size</text>
+      <text transform="translate(62 356) rotate(-90)" font-size="12.5">Lower, broader</text>
+      <text transform="translate(62 56) rotate(-90)" text-anchor="end" font-size="12.5">Premium, largest</text>
+
+      <circle cx="610" cy="92" r="22" fill="#0B6468"/>
+      <text x="610" y="134" text-anchor="middle" font-size="14" font-weight="bold" fill="#0B6468">Rubrik</text>
+
+      <circle cx="470" cy="104" r="17" fill="#6B7F8C"/>
+      <text x="470" y="142" text-anchor="middle" font-size="13.5" font-weight="bold">Cohesity</text>
+
+      <circle cx="372" cy="160" r="15" fill="#6B7F8C"/>
+      <text x="372" y="196" text-anchor="middle" font-size="13.5" font-weight="bold">Commvault</text>
+
+      <circle cx="190" cy="118" r="13" fill="#6B7F8C"/>
+      <text x="190" y="152" text-anchor="middle" font-size="13.5" font-weight="bold">Dell</text>
+
+      <circle cx="270" cy="296" r="20" fill="#6B7F8C"/>
+      <text x="270" y="338" text-anchor="middle" font-size="13.5" font-weight="bold">Veeam</text>
+      <line x1="296" y1="290" x2="392" y2="266" stroke="#777" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#p2)"/>
+      <text x="452" y="262" font-size="12">heading here after</text>
+      <text x="452" y="279" font-size="12">buying Securiti</text>
+
+      <circle cx="450" cy="318" r="11" fill="#6B7F8C"/>
+      <text x="450" y="350" text-anchor="middle" font-size="13.5" font-weight="bold">Druva</text>
+    </svg>
+    <figcaption>
+      <span class="label">How to read this diagram</span>
+      <p>Further right means the company is selling security and AI safety, not just backup. Further up means higher prices and bigger customers. Bigger dots mean bigger businesses. This is my own judgement from public sources, not an official chart.</p>
+    </figcaption>
+  </figure>
+
+  <h3>Rubrik's unique edge</h3>
+  <ul>
+    <li><strong>Built for attacks from the first product.</strong> Unchangeable copies were the starting design. Older rivals had to retrofit them.</li>
+    <li><strong>One system.</strong> Data, logins and AI agents share one screen and one rulebook.</li>
+    <li><strong>The history of the data.</strong> Holding copies over time lets Rubrik compare today with last week. That powers its attack detection.</li>
+    <li><strong>Pace.</strong> Okta recovery, Agent Cloud, Agent Identity and Roll Forward all arrived within about a year.</li>
+  </ul>
+
+  <h3>Why it chose this strategy</h3>
+  <p>Backup alone grows slowly, and buyers choose on price. Security and AI budgets are larger and growing. Moving right on the map lets Rubrik charge more and grow faster than rivals who stay put.</p>
+
+  <h3>How it defends the position</h3>
+  <ul>
+    <li><strong>More products per customer.</strong> A customer using four is very hard to dislodge.</li>
+    <li><strong>Buying to fill gaps:</strong> Laminar, Predibase, Strata.</li>
+    <li><strong>Alliances:</strong> Microsoft, CrowdStrike, Okta, Amazon, Google.</li>
+    <li><strong>The warranty</strong> and the public track record of recoveries.</li>
+  </ul>
+
+  <div class="box warn">
+    <span class="label">Honest weak spots</span>
+    <p><strong>Price:</strong> usually the dearest option.</p>
+    <p><strong>Profit:</strong> still an accounting loss.</p>
+    <p><strong>Preview features:</strong> several headline items are not yet on full sale.</p>
+    <p><strong>New markets:</strong> in AI agent safety it faces much larger security firms, and nobody has yet proved customers will pay at scale.</p>
+  </div>
+</section>
+
+<!-- ============================ 7 ============================ -->
+<section>
+  <h2><span class="num">7</span>Future roadmap and upcoming moves</h2>
+
+  <p>These are moves Rubrik has announced or clearly signalled for the next one to three years.</p>
+
+  <h3>Product launches</h3>
+  <ul>
+    <li><strong>Identity Roll Forward and Identity Continuity:</strong> private preview since June 2026. Full release is the next step.</li>
+    <li><strong>Autonomous Business Recovery for cloud apps:</strong> private preview on Amazon Web Services. Other clouds are the likely follow-on.</li>
+    <li><strong>Attack recovery for GitHub and Azure DevOps:</strong> announced November 2026, due "in the coming months".</li>
+    <li><strong>One recovery flow across Microsoft Entra ID and Microsoft 365:</strong> promised for late 2026.</li>
+    <li><strong>Wider Okta coverage:</strong> recovery for Okta Workflows and restoring into a separate account were scheduled for the second half of 2026.</li>
+  </ul>
+
+  <h3>Research and development bets</h3>
+  <ul>
+    <li><strong>AI agents.</strong> The biggest bet. More agent tools covered after Claude Code, starting with Amazon's.</li>
+    <li><strong>Rubrik running itself.</strong> Rubrik AI is meant to take over planning and recovery steps people do by hand today.</li>
+    <li><strong>Small specialised AI models.</strong> Predibase's technology is used inside Agent Cloud to judge and correct agent behaviour.</li>
+  </ul>
+
+  <h3>Geographic expansion</h3>
+  <ul>
+    <li><strong>UK:</strong> more than £375 million over five years, a new London office with a customer briefing centre, and more hiring in sales, marketing and support.</li>
+    <li><strong>In-country services:</strong> more "sovereign" options, where data and recovery stay inside one country. The UK service with Rackspace is the model.</li>
+  </ul>
+
+  <h3>Acquisitions and strategic shifts</h3>
+  <ul>
+    <li><strong>More purchases are likely.</strong> Three in three years, and $1.75 billion in the bank.</li>
+    <li><strong>The identity shift.</strong> From recovering logins after an attack to keeping them running during one.</li>
+    <li><strong>The big repositioning.</strong> Management wants Rubrik known as "the Security and AI Operations company", not a backup company.</li>
+    <li><strong>Selling through consultancies.</strong> Project Hourglass puts Agent Cloud into the hands of firms that already advise large companies on AI.</li>
+  </ul>
+
+  <h3>Financial targets</h3>
+  <ul>
+    <li><strong>By January 2027:</strong> about $1.88 billion subscription ARR and about $1.69 billion revenue.</li>
+    <li><strong>What investors watch next:</strong> whether the accounting loss keeps narrowing, and whether AI agent products produce real revenue.</li>
+  </ul>
+
+  <div class="box">
+    <span class="label">What this means for a summer 2027 intern</span>
+    <p>Several preview features should be on full sale by then. The London office will be mid-expansion. And the internship's AI project sits in the exact area Rubrik is betting on.</p>
+  </div>
+</section>
+
+<!-- ============================ 8 ============================ -->
+<section>
+  <h2><span class="num">8</span>Commercial awareness and industry forces</h2>
+
+  <h3>Opportunities</h3>
+  <ul>
+    <li><strong>Attackers log in, they do not break in.</strong> Groups such as Scattered Spider talk help desks into resetting passwords. That moves spending toward login recovery.</li>
+    <li><strong>AI agents are outrunning the controls.</strong> Rubrik's survey found only 23% of IT leaders can see every agent in their organisation, and 86% expect agents to outpace safety controls within a year.</li>
+    <li><strong>Regulators want evidence.</strong> See the box below.</li>
+    <li><strong>Supplier consolidation.</strong> Tight budgets favour one product doing four jobs.</li>
+    <li><strong>The VMware shake-up.</strong> After Broadcom bought VMware and raised prices, many firms are moving systems elsewhere. A move is a natural moment to rethink backup.</li>
+    <li><strong>Data sovereignty.</strong> More governments require data to stay in-country.</li>
+  </ul>
+
+  <div class="box">
+    <span class="label">The rules worth knowing by name</span>
+    <p><strong>DORA:</strong> an EU law for financial firms, in force since January 2025. It requires tested recovery plans.</p>
+    <p><strong>NIS2:</strong> an EU law extending cyber duties to many more sectors.</p>
+    <p><strong>UK Cyber Security and Resilience Bill:</strong> the UK's update. It was in its final House of Lords stages in late October 2026. Check whether it has become law.</p>
+    <p><strong>Bank of England resilience rules:</strong> since March 2025, UK banks must stay inside a stated maximum downtime for key services.</p>
+  </div>
+
+  <h3>Threats</h3>
+  <ul>
+    <li><strong>Everyone is converging.</strong> Veeam bought Securiti. Cohesity absorbed Veritas. Commvault sells login recovery. Rubrik's lead is narrowing.</li>
+    <li><strong>Security giants.</strong> CrowdStrike, Palo Alto Networks and Microsoft want the AI agent safety market, and already own the customer relationships.</li>
+    <li><strong>"Good enough" from cloud providers.</strong> Basic backup comes cheap or free with the cloud.</li>
+    <li><strong>A cooling AI market.</strong> If AI spending slows, the Agent Cloud bet pays off later.</li>
+    <li><strong>A demanding share price.</strong> It assumes fast growth continues. One weak quarter would be punished.</li>
+    <li><strong>Economic pressure.</strong> When budgets tighten, three-year premium contracts get harder scrutiny.</li>
+  </ul>
+
+  <h3>How Rubrik is adapting</h3>
+  <ul>
+    <li><strong>Widening what "recovery" means,</strong> from data to logins to AI actions, to stay out of a price war over backup.</li>
+    <li><strong>Partnering with would-be rivals.</strong> Its findings feed into CrowdStrike and Microsoft tools, so it is seen as a complement.</li>
+    <li><strong>Buying specialists</strong> to enter new areas quickly.</li>
+    <li><strong>Investing locally</strong> in the UK to meet in-country rules and sit close to regulated buyers.</li>
+  </ul>
+
+  <div class="box key">
+    <span class="label">Three opinions you could voice in an interview</span>
+    <p><strong>One.</strong> The risky part of the AI bet is timing. Rubrik must sell agent safety before the security giants bundle it in for free.</p>
+    <p><strong>Two.</strong> Identity may matter more than AI for the next two years, because it solves a problem customers already have budget for.</p>
+    <p><strong>Three.</strong> Choosing London over an EU capital is a statement about UK regulated industries, and about where the customers already are.</p>
+  </div>
+</section>
+
+<!-- ============================ 9 ============================ -->
+<section>
+  <h2><span class="num">9</span>The application question: technical answer ideas</h2>
+
+  <div class="box key">
+    <span class="label">The question</span>
+    <p><strong>"Pick one Rubrik product or capability. Who would you pitch it to, and what's the first question you'd ask them?"</strong></p>
+  </div>
+
+  <h3>What is really being tested</h3>
+  <p>The advert says Rubrik's SEs "shape the required capabilities a deal comes down to". In practice that means asking a question that makes the customer add a new requirement to their list, one Rubrik happens to meet.</p>
+  <p>So the first question is the answer. The product is only the set-up for it.</p>
+
+  <h3>What most applicants will write</h3>
+  <p>"Rubrik Security Cloud, to a security chief, asking how confident they are about ransomware." That names the whole company, the obvious buyer, and a question about feelings. Anyone can write it without knowing the product.</p>
+
+  <h3>The recipe</h3>
+  <ul>
+    <li><strong>One narrow capability.</strong> A named feature, not a platform.</li>
+    <li><strong>One specific person.</strong> Job title, industry, and why they care this month.</li>
+    <li><strong>One question with a factual answer.</strong> A number, a name, a place. Something they must go and check.</li>
+    <li><strong>One line on what the answer tells you.</strong></li>
+    <li><strong>One honest limit.</strong> It shows you read past the brochure.</li>
+  </ul>
+
+  <div class="idea">
+    <h4>Idea 1 (top pick): Identity-First Recovery</h4>
+    <p><strong>Pitch to:</strong> the Head of Infrastructure at a UK retailer, in the year after Marks &amp; Spencer.</p>
+    <div class="q">"If every domain controller were encrypted tonight, what would your backup admins log in with?"</div>
+    <p><strong>The trap it exposes:</strong> a domain controller is a server that runs the login system. Many backup tools check passwords against that same system. When it is down, the people meant to restore it cannot sign in.</p>
+    <p><strong>Product depth to show:</strong></p>
+    <ul>
+      <li>Rubrik's control screen is hosted outside the customer's network, with its own sign-in.</li>
+      <li>It lifts only NTDS.dit and SYSVOL from the backup onto a freshly built Windows server. Anything hidden in the old operating system stays behind.</li>
+      <li>It strips out the records of other domain controllers by default, so the rebuilt one does not sync with infected machines.</li>
+      <li>Login-server backups are checked for attack fingerprints before one is marked clean.</li>
+    </ul>
+    <p><strong>Honest limit:</strong> the new server must run the same major Windows Server version as the old one.</p>
+    <p><strong>The requirement it plants:</strong> "our recovery tool must be reachable when our login system is not".</p>
+  </div>
+
+  <div class="idea">
+    <h4>Idea 2 (simplest question): Quorum Authorization</h4>
+    <p><strong>Pitch to:</strong> the Head of IT Audit at a UK building society.</p>
+    <div class="q">"How many people here could delete every backup you hold, acting alone?"</div>
+    <p><strong>The trap it exposes:</strong> the answer is a number, and the only safe number is zero. In most firms it is at least one. An attacker needs just that one login.</p>
+    <p><strong>Product depth to show:</strong></p>
+    <ul>
+      <li>Backups are written to storage that only accepts additions.</li>
+      <li>Retention Lock stops the "keep for" period being shortened.</li>
+      <li>Quorum Authorization needs two named approvers before protected data is deleted or kept for less time.</li>
+      <li>A further copy can sit in Rubrik Cloud Vault, in an account Rubrik owns, with separate logins.</li>
+    </ul>
+    <p><strong>Why few will say it:</strong> the buyer is audit, not IT. And the question needs no technical knowledge to answer, which makes it land with a board.</p>
+    <p><strong>The requirement it plants:</strong> "no single person can destroy our backups".</p>
+  </div>
+
+  <div class="idea">
+    <h4>Idea 3 (best link to the AI project): Agent Rewind for Claude Code</h4>
+    <p><strong>Pitch to:</strong> the VP of Engineering at a software firm that has just given every developer an AI coding assistant.</p>
+    <div class="q">"If a coding agent force-pushed over your main branch and deleted the others at 2am, what would you restore from that the agent's own access could not also have deleted?"</div>
+    <p><strong>The trap it exposes:</strong> a force-push overwrites shared code history. The usual undo sits in the same place as the damage, under the same permissions the agent used.</p>
+    <p><strong>Product depth to show:</strong></p>
+    <ul>
+      <li>Unchangeable copies of GitHub and Azure DevOps are kept outside the code store.</li>
+      <li>The files that steer the assistant (CLAUDE.md, settings, tool permissions) are version-tracked, and unexpected changes are flagged.</li>
+      <li>Each agent's inputs, tool use and chain of instructions are recorded, so one bad change can be traced and reversed alone.</li>
+    </ul>
+    <p><strong>Honest limit:</strong> it can only rewind agents whose actions it is able to observe.</p>
+    <p><strong>The requirement it plants:</strong> "our undo must live somewhere our agents cannot reach".</p>
+  </div>
+
+  <div class="idea">
+    <h4>Idea 4: Anomaly Detection as a second alarm</h4>
+    <p><strong>Pitch to:</strong> the manager of the security monitoring team at a manufacturer.</p>
+    <div class="q">"If an attacker switched off the security software on a server before scrambling it, what would tell you it had happened?"</div>
+    <p><strong>The trap it exposes:</strong> attackers routinely disable security tools first. Most firms have no second source of truth.</p>
+    <p><strong>Product depth to show:</strong> after each backup, a small description of what changed goes to Rubrik's hosted service. Check one compares it with that system's normal pattern. Check two looks for the jump in randomness that scrambling causes.</p>
+    <p><strong>Honest limit:</strong> a rival argues very slow, partial scrambling can stay under the alarm level.</p>
+    <p><strong>Why few will say it:</strong> it pitches a backup product to the monitoring team, as an alarm.</p>
+  </div>
+
+  <div class="idea">
+    <h4>Idea 5: Turbo Threat Hunting</h4>
+    <p><strong>Pitch to:</strong> the Head of Operational Resilience at a UK bank.</p>
+    <div class="q">"In your last recovery test, how much of the clock went on restoring data, and how much on deciding which backup you could trust?"</div>
+    <p><strong>Product depth to show:</strong> the usual method opens and scans each backup in turn. Rubrik fingerprints every file when the backup is taken, so the hunt is an index lookup. Results are written onto each backup's record and infected ones quarantined.</p>
+    <p><strong>The line to use:</strong> "Recovery is a search problem before it is a storage problem."</p>
+  </div>
+
+  <div class="idea">
+    <h4>Idea 6: Okta recovery</h4>
+    <p><strong>Pitch to:</strong> the Head of IT at a fast-growing online business that runs everything through Okta and has no Active Directory.</p>
+    <div class="q">"If an administrator's access were misused this afternoon to delete your sign-in rules and groups, what would you restore them from?"</div>
+    <p><strong>Product depth to show:</strong> restores users, groups, apps and rules into the live account. Brings back what a restored user depends on in the same step. Slows itself to stay inside Okta's request limits. Can restore into a separate clean account.</p>
+    <p><strong>Why few will say it:</strong> it targets a firm that believes it has nothing to back up because "it is all in the cloud".</p>
+  </div>
+
+  <div class="idea">
+    <h4>Idea 7: Agent Identity</h4>
+    <p><strong>Pitch to:</strong> the Head of Identity at an insurer already using Okta or Microsoft Entra.</p>
+    <div class="q">"How many of your AI agents are holding a key right now that never expires?"</div>
+    <p><strong>Product depth to show:</strong> every action passes three checks. The last issues a pass valid for that single action. It uses the firm's existing Okta or Entra set-up.</p>
+    <p><strong>Watch out:</strong> Rubrik has not said clearly whether this is on full sale.</p>
+  </div>
+
+  <div class="idea">
+    <h4>Idea 8: UK Sovereign Cyber Recovery Cloud</h4>
+    <p><strong>Pitch to:</strong> the technology chief of an NHS trust.</p>
+    <div class="q">"If you had to rebuild your patient record system after an attack, where would you rebuild it while investigators still have your data centre sealed off?"</div>
+    <p><strong>Product depth to show:</strong> an isolated rebuild space inside UK borders, run with Rackspace since March 2026, switched on only during a recovery.</p>
+    <p><strong>Why few will say it:</strong> a UK-only service, for a London role, that most applicants will not know exists.</p>
+  </div>
+
+  <h3>Which one to choose</h3>
+  <table class="keep">
+    <tr><th style="width:42%">If you want to show...</th><th>Choose</th></tr>
+    <tr><td><strong>The deepest product knowledge</strong></td><td>Idea 1, Identity-First Recovery</td></tr>
+    <tr><td><strong>The sharpest, shortest question</strong></td><td>Idea 2, Quorum Authorization</td></tr>
+    <tr><td><strong>A link to the internship's AI project</strong></td><td>Idea 3, Agent Rewind</td></tr>
+    <tr><td><strong>An unexpected buyer</strong></td><td>Idea 4, Anomaly Detection</td></tr>
+    <tr><td><strong>UK and London awareness</strong></td><td>Idea 8, UK Sovereign Cyber Recovery Cloud</td></tr>
+  </table>
+
+  <h3>Three drafts you can adapt</h3>
+  <div class="box">
+    <span class="label">Idea 1 (about 110 words)</span>
+    <p>Identity-First Recovery, pitched to the Head of Infrastructure at a UK retailer. After M&amp;S, their board has already asked "could that be us?"</p>
+    <p>First question: "If every domain controller were encrypted tonight, what would your backup admins log in with?" Most backup consoles authenticate against the directory they are meant to restore, so the honest answer is often a pause.</p>
+    <p>Rubrik's control plane sits outside the domain. It lifts only NTDS.dit and SYSVOL onto a freshly built Windows server, so the attacker's foothold in the old operating system is left behind. My second question would be whether they want the directory back clean, or current.</p>
+  </div>
+  <div class="box">
+    <span class="label">Idea 2 (about 80 words)</span>
+    <p>Quorum Authorization, pitched to the Head of IT Audit at a UK building society. First question: "How many people here could delete every backup you hold, acting alone?"</p>
+    <p>Attackers who steal one administrator's login go for the backups first, so the only safe answer is zero. Rubrik writes backups to append-only storage, locks the retention period, and needs two named approvers before anything is deleted. If the answer is one or more, I know what the rest of the meeting is about.</p>
+  </div>
+  <div class="box">
+    <span class="label">Idea 3 (about 90 words)</span>
+    <p>Agent Rewind for Claude Code, pitched to a VP of Engineering who has just rolled out AI coding assistants. First question: "If an agent force-pushed over main and deleted the other branches at 2am, what would you restore from that its own access could not also have deleted?"</p>
+    <p>Version control's undo lives where the damage is. Rubrik keeps immutable copies of the repository outside it, and tracks the files that steer the agent, such as CLAUDE.md. I would pitch it as the thing that lets them say yes to agents faster.</p>
+  </div>
+
+  <div class="box warn">
+    <span class="label">Before you submit</span>
+    <p><strong>Idea 1:</strong> confirm how Rubrik's own sign-in behaves when a customer links it to their login system.</p>
+    <p><strong>Idea 2:</strong> confirm how Quorum Authorization is switched on today. Older material says it involved Rubrik's support team.</p>
+    <p><strong>All ideas:</strong> product details are Rubrik's own claims. Add one line from your own experience so the answer is yours.</p>
+  </div>
+</section>
+
+<!-- ============================ 10 ============================ -->
+<section>
+  <h2><span class="num">10</span>Jargon buster, key numbers and sources</h2>
+
+  <h3>Jargon buster</h3>
+  <table>
+    <tr><th style="width:30%">Term</th><th>Plain English</th></tr>
+    <tr><td><strong>Backup</strong></td><td>A spare copy of data, kept in case the original is lost.</td></tr>
+    <tr><td><strong>Snapshot</strong></td><td>One backup taken at one moment in time.</td></tr>
+    <tr><td><strong>Ransomware</strong></td><td>Malicious software that scrambles systems until money is paid.</td></tr>
+    <tr><td><strong>Immutable</strong></td><td>Cannot be changed or deleted once written.</td></tr>
+    <tr><td><strong>Air gap</strong></td><td>Keeping copies separated so an intruder on the network cannot reach them.</td></tr>
+    <tr><td><strong>Encryption</strong></td><td>Scrambling data so only someone with the key can read it.</td></tr>
+    <tr><td><strong>Entropy</strong></td><td>How random data looks. Scrambled files look very random.</td></tr>
+    <tr><td><strong>Hash</strong></td><td>A short fingerprint calculated from a file. Same file, same fingerprint.</td></tr>
+    <tr><td><strong>Metadata</strong></td><td>Information about data, such as file names, sizes and dates, not the contents.</td></tr>
+    <tr><td><strong>Control plane</strong></td><td>The management screen and the systems behind it.</td></tr>
+    <tr><td><strong>Active Directory</strong></td><td>Microsoft's login system for an organisation's own network.</td></tr>
+    <tr><td><strong>Domain controller</strong></td><td>A server that runs Active Directory.</td></tr>
+    <tr><td><strong>NTDS.dit / SYSVOL</strong></td><td>The database file and settings folder that hold Active Directory.</td></tr>
+    <tr><td><strong>Entra ID / Okta</strong></td><td>Online login systems. Entra is Microsoft's. Okta is an independent rival.</td></tr>
+    <tr><td><strong>AI agent</strong></td><td>An AI assistant that takes actions, not just answers questions.</td></tr>
+    <tr><td><strong>MCP</strong></td><td>A common "plug" standard that lets AI agents connect to tools and data.</td></tr>
+    <tr><td><strong>Fine-tuning</strong></td><td>Extra training of an AI model on specific data so it does one job better.</td></tr>
+    <tr><td><strong>SaaS</strong></td><td>Software used over the internet and paid for by subscription.</td></tr>
+    <tr><td><strong>ARR</strong></td><td>Annual recurring revenue. The yearly value of live subscriptions.</td></tr>
+    <tr><td><strong>Proof of concept (POC)</strong></td><td>A trial of the product on the customer's own systems before buying.</td></tr>
+    <tr><td><strong>Discovery</strong></td><td>The questions a seller asks to find the customer's real problem.</td></tr>
+    <tr><td><strong>Champion</strong></td><td>Someone inside the customer who argues for your product when you are not there.</td></tr>
+    <tr><td><strong>Channel</strong></td><td>The resellers and partners a company sells through.</td></tr>
+    <tr><td><strong>EMEA</strong></td><td>Europe, the Middle East and Africa.</td></tr>
+  </table>
+
+  <h3>Key numbers</h3>
+  <ul>
+    <li><strong>2014:</strong> founded. <strong>April 2024:</strong> listed on the New York Stock Exchange.</li>
+    <li><strong>$1.66 billion:</strong> subscription ARR at July 2026, up 33%.</li>
+    <li><strong>$427 million:</strong> last quarter's revenue, up 38%.</li>
+    <li><strong>About 95%:</strong> share of revenue from subscriptions.</li>
+    <li><strong>3,084:</strong> customers paying over $100,000 a year.</li>
+    <li><strong>About 3,800:</strong> employees.</li>
+    <li><strong>£375 million:</strong> UK investment pledge over five years.</li>
+    <li><strong>2,000:</strong> customers in EMEA.</li>
+    <li><strong>7 years running:</strong> named a leader by Gartner.</li>
+    <li><strong>75,000 backups in under a minute:</strong> the Turbo Threat Hunting claim.</li>
+  </ul>
+
+  <h3>How sure to be about this guide</h3>
+  <p>Financial figures come from Rubrik's results for the quarter to 31 July 2026. Product details come mostly from Rubrik's own announcements, blogs and white papers, and have not been independently tested.</p>
+  <p>Figures for Veeam and Cohesity are their own or estimates, because both are private. The positioning map, the rival comparison on quality and speed, and the answer ideas are my judgement.</p>
+
+  <h3>Main sources</h3>
+  <ul class="src small">
+    <li>Rubrik second-quarter fiscal 2027 results (SEC filing, August 2026): sec.gov/Archives/edgar/data/1943896/000194389626000055/rubrikinc-991pressrelease7.htm</li>
+    <li>Rubrik investor news on Strata, Roll Forward, Agent Identity and Autonomous Business Recovery: ir.rubrik.com/news-events/press-releases</li>
+    <li>Rubrik newsroom on Agent Cloud for Claude Code, the UK investment and DevOps recovery: rubrik.com/company/newsroom</li>
+    <li>Rubrik blogs on Identity-First Recovery, Retention Lock and cloud security: rubrik.com/blog</li>
+    <li>Rubrik white papers on Polaris Radar (anomaly detection) and Rubrik Cloud Vault: rubrik.com/resources</li>
+    <li>Blocks &amp; Files on Rubrik Forward 2026, the Gartner ranking and the Predibase purchase: blocksandfiles.com</li>
+    <li>NAND Research note on Agent Rewind: nand-research.com</li>
+    <li>Techzine and iTWire on Agent Identity (August 2026)</li>
+    <li>Virtualization Review on the Microsoft Defender link (March 2026)</li>
+    <li>IT Pro and UKTN on the London headquarters (July 2026)</li>
+    <li>Rackspace on the UK Sovereign Cyber Recovery Cloud (March 2026)</li>
+    <li>Help Net Security on Turbo Threat Hunting</li>
+    <li>SiliconANGLE on the Predibase purchase (June 2025)</li>
+    <li>Elastio's comparison page, for the rival view on anomaly detection: elastio.com/platform/rubrik</li>
+    <li>Commvault second-quarter fiscal 2027 results (October 2026), via Futurum and StorageNewsletter</li>
+    <li>Business Wire on Veeam completing the Securiti AI purchase (December 2025)</li>
+    <li>Cyber Monitoring Centre estimate for Jaguar Land Rover, via Computer Weekly; M&amp;S impact via The Register</li>
+    <li>Employee count via stockanalysis.com; third-party price guide via eon.io</li>
+  </ul>
+</section>
+
+</body>
+</html>

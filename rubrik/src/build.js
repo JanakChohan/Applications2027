@@ -1,5 +1,5 @@
 // Renders guide.html to a dyslexic-friendly A4 PDF with a full-page cream background.
-// Usage: node build.js   (needs playwright and python3 with pypdf)
+// Usage: node build.js [input.html] [output.pdf] [footer text]   (needs playwright and python3 with pypdf)
 const path = require('path');
 const os = require('os');
 const fs = require('fs');
@@ -9,8 +9,9 @@ const { chromium } = require('playwright');
 const BG = '#FBF4E4';
 
 (async () => {
-  const src = path.join(__dirname, 'guide.html');
-  const out = path.join(__dirname, '..', 'Rubrik_Company_Guide.pdf');
+  const src = path.resolve(process.argv[2] || path.join(__dirname, 'guide.html'));
+  const out = path.resolve(process.argv[3] || path.join(__dirname, '..', 'Rubrik_Company_Guide.pdf'));
+  const footer = process.argv[4] || 'Rubrik: plain-English company guide';
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'guide-'));
   const body = path.join(tmp, 'body.pdf');
   const bg = path.join(tmp, 'bg.pdf');
@@ -27,7 +28,7 @@ const BG = '#FBF4E4';
     headerTemplate: '<span></span>',
     footerTemplate:
       '<div style="width:100%;font-family:DejaVu Sans,Verdana,Arial,sans-serif;font-size:8.5pt;color:#555;padding:0 17mm;display:flex;justify-content:space-between;">' +
-      '<span>Rubrik: plain-English company guide</span>' +
+      '<span>' + footer + '</span>' +
       '<span>Page <span class="pageNumber"></span> of <span class="totalPages"></span></span></div>',
   });
   // One blank cream page, laid underneath every page so the margins are cream too.
@@ -43,9 +44,9 @@ w = PdfWriter()
 for pg in PdfReader(body).pages:
     base = w.add_page(PdfReader(bg).pages[0])
     base.merge_page(pg)
-w.add_metadata({'/Title': 'Rubrik: a plain-English company guide'})
+w.add_metadata({'/Title': sys.argv[4]})
 w.write(out)
-`, body, bg, out], { stdio: 'inherit' });
+`, body, bg, out, footer], { stdio: 'inherit' });
   fs.rmSync(tmp, { recursive: true, force: true });
   console.log('Wrote ' + out);
 })();
