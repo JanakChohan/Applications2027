@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>The Insight Days: what they are and why you want them</title>
+<style>
+@font-face { font-family: "Lexend"; font-weight: 400; src: url("../fonts/Lexend-Regular.ttf"); }
+@font-face { font-family: "Lexend"; font-weight: 500; src: url("../fonts/Lexend-Medium.ttf"); }
+@font-face { font-family: "Lexend"; font-weight: 600; src: url("../fonts/Lexend-SemiBold.ttf"); }
+@font-face { font-family: "Lexend"; font-weight: 700; src: url("../fonts/Lexend-Bold.ttf"); }
+
+:root {
+  --paper: #FBF6EA;
+  --ink: #252A33;
+  --soft-ink: #4A5261;
+  --navy: #1D3B63;
+  --teal: #0E6F66;
+  --amber: #9A4A05;
+  --blue-tint: #E6EEF7;
+  --teal-tint: #DFF1EC;
+  --amber-tint: #FBE9CC;
+  --rose-tint: #F8E1DC;
+  --rose: #9B2C1C;
+  --line: #D9CFB8;
+  --white: #FFFDF7;
+}
+@page { size: A4; margin: 17mm 17mm 19mm 17mm; }
+* { box-sizing: border-box; }
+html { background: var(--paper); }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: "Lexend", Verdana, Arial, sans-serif;
+  font-size: 12pt; line-height: 1.56; letter-spacing: 0.012em; word-spacing: 0.06em;
+  text-align: left; font-weight: 400;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+p { margin: 0 0 9.5pt 0; orphans: 3; widows: 3; }
+strong { font-weight: 600; color: #171B22; }
+h1, h2, h3, h4 { font-weight: 700; color: var(--navy); line-height: 1.3; break-after: avoid; letter-spacing: 0; }
+h1 { font-size: 25pt; margin: 0 0 6pt 0; }
+h2 { font-size: 16pt; margin: 18pt 0 7pt 0; }
+h3 { font-size: 13.5pt; margin: 16pt 0 6pt 0; color: var(--teal); }
+section.chapter { break-before: page; }
+.chapnum {
+  display: inline-block; background: var(--navy); color: var(--white); font-weight: 600;
+  font-size: 11pt; padding: 3pt 11pt; border-radius: 20pt; margin-bottom: 9pt;
+}
+ul, ol { margin: 0 0 11pt 0; padding-left: 20pt; }
+li { margin-bottom: 5pt; padding-left: 3pt; }
+li::marker { color: var(--teal); font-weight: 700; }
+
+/* Boxes */
+.box { border-radius: 9pt; padding: 10pt 14pt; margin: 10pt 0 12pt 0; break-inside: avoid; }
+.box p:last-child, .box ul:last-child, .box ol:last-child { margin-bottom: 0; }
+.box .label { display: block; font-weight: 700; font-size: 11.5pt; margin-bottom: 4pt; }
+.key { background: var(--teal-tint); border-left: 6pt solid var(--teal); }
+.key .label { color: var(--teal); }
+.say { background: var(--blue-tint); border-left: 6pt solid var(--navy); }
+.say .label { color: var(--navy); }
+.care { background: var(--amber-tint); border-left: 6pt solid var(--amber); }
+.care .label { color: var(--amber); }
+.eg { background: var(--white); border: 1.4pt solid var(--line); }
+.eg .label { color: var(--soft-ink); }
+
+/* Confidence tags */
+.tag { display: inline-block; font-size: 9.3pt; font-weight: 600; padding: 1pt 7pt; border-radius: 10pt; white-space: nowrap; letter-spacing: 0; vertical-align: 1pt; }
+.t-aud { background: #CFE8DF; color: #0A5048; }
+.t-co { background: #D5E3F4; color: #173B6B; }
+.t-est { background: #F6DDB4; color: #7A3A02; }
+.t-me { background: #E8DCEF; color: #55306E; }
+
+/* Tables */
+table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 8pt 0 12pt 0; font-size: 11pt; line-height: 1.45; break-inside: avoid; }
+table.long { break-inside: auto; }
+thead { display: table-header-group; }
+th { text-align: left; background: var(--navy); color: var(--white); font-weight: 600; padding: 6.5pt 9pt; vertical-align: bottom; }
+th:first-child { border-top-left-radius: 7pt; } th:last-child { border-top-right-radius: 7pt; }
+td { padding: 6.5pt 9pt; vertical-align: top; border-bottom: 1pt solid var(--line); background: var(--white); }
+tr { break-inside: avoid; }
+td.num, th.num { text-align: right; white-space: nowrap; }
+td.first { font-weight: 600; color: var(--navy); }
+tr.hl td { background: var(--teal-tint); }
+
+/* Figures */
+figure { margin: 11pt 0 13pt 0; padding: 11pt 14pt 10pt 14pt; background: var(--white); border: 1.4pt solid var(--line); border-radius: 10pt; break-inside: avoid; }
+figure .ftitle { font-weight: 700; color: var(--navy); font-size: 12pt; margin-bottom: 9pt; }
+figcaption { margin-top: 10pt; padding-top: 8pt; border-top: 1pt dashed var(--line); font-size: 11pt; line-height: 1.55; color: var(--ink); }
+figcaption b { color: var(--teal); font-weight: 700; }
+svg text { font-family: "Lexend", Verdana, sans-serif; }
+
+/* Steps */
+.vs { display: flex; gap: 11pt; align-items: flex-start; background: var(--blue-tint); border-radius: 8pt; padding: 8pt 12pt; margin-bottom: 6pt; font-size: 11.2pt; line-height: 1.45; }
+.vs .n { flex: none; width: 23pt; height: 23pt; line-height: 23pt; text-align: center; border-radius: 50%; background: var(--navy); color: #fff; font-weight: 700; font-size: 12pt; }
+.vs b { color: var(--navy); font-weight: 700; }
+.vs.money { background: var(--teal-tint); margin-bottom: 0; } .vs.money .n { background: var(--teal); } .vs.money b { color: var(--teal); }
+
+/* $100 bar */
+.bar100 { display: flex; height: 54pt; border-radius: 8pt; overflow: hidden; font-weight: 700; color: #fff; font-size: 14pt; }
+.bar100 div { display: flex; align-items: center; justify-content: center; }
+.legend { margin-top: 9pt; font-size: 11.2pt; line-height: 1.45; }
+.legend div { display: flex; gap: 9pt; align-items: flex-start; margin-bottom: 5pt; }
+.legend i { flex: none; width: 13pt; height: 13pt; border-radius: 3pt; margin-top: 2pt; }
+
+/* Revenue streams */
+.streams { display: flex; gap: 8pt; align-items: stretch; }
+.stream { border-radius: 8pt; padding: 10pt 11pt; font-size: 11pt; line-height: 1.45; }
+.stream b { display: block; font-size: 11.6pt; margin-bottom: 3pt; }
+.stream .size { display: inline-block; margin-top: 6pt; font-size: 9.6pt; font-weight: 700; padding: 1pt 7pt; border-radius: 10pt; background: rgba(255,255,255,.75); }
+
+/* Bars chart */
+.chart { display: flex; align-items: flex-end; gap: 26pt; height: 150pt; padding: 0 20pt; border-bottom: 2pt solid var(--navy); }
+.col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+.col .v { font-weight: 700; color: var(--navy); font-size: 12.5pt; margin-bottom: 3pt; }
+.col .b { width: 100%; background: var(--navy); border-radius: 6pt 6pt 0 0; }
+.chartx { display: flex; gap: 26pt; padding: 5pt 20pt 0 20pt; font-size: 10.6pt; line-height: 1.4; }
+.chartx div { flex: 1; text-align: center; }
+.chartx b { display: block; font-size: 11.5pt; color: var(--navy); }
+
+/* Ladder */
+.ladder { display: flex; gap: 8pt; align-items: flex-end; }
+.rung { flex: 1; border-radius: 8pt 8pt 0 0; background: var(--blue-tint); padding: 9pt 10pt; font-size: 11pt; line-height: 1.42; }
+.rung b { display: block; color: var(--navy); font-size: 11.6pt; }
+.rung .yr { font-weight: 600; color: var(--teal); display: block; margin-bottom: 3pt; }
+
+/* Cover */
+.cover { height: 252mm; display: flex; flex-direction: column; justify-content: space-between; break-after: page; }
+.cover .band { background: var(--navy); color: var(--white); border-radius: 14pt; padding: 30pt 28pt; }
+.cover .band .kicker { font-size: 12pt; font-weight: 500; opacity: .9; margin-bottom: 10pt; }
+.cover .band h1 { color: var(--white); font-size: 34pt; line-height: 1.2; margin: 0 0 12pt 0; }
+.cover .band p { font-size: 14pt; margin: 0; line-height: 1.5; }
+.facts { display: grid; grid-template-columns: 1fr 1fr; gap: 9pt; }
+.fact { background: var(--white); border: 1.4pt solid var(--line); border-radius: 9pt; padding: 10pt 13pt; font-size: 11.2pt; line-height: 1.45; }
+.fact b { display: block; color: var(--teal); font-size: 10.4pt; font-weight: 700; }
+.toc { columns: 2; column-gap: 22pt; font-size: 11.2pt; padding-left: 0; list-style: none; margin: 0; }
+.toc li { break-inside: avoid; margin-bottom: 5pt; padding-left: 0; }
+.toc .n { display: inline-block; width: 21pt; font-weight: 700; color: var(--teal); }
+
+.tiles { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 9pt; margin: 8pt 0 10pt 0; break-inside: avoid; }
+.tile { background: var(--white); border: 1.4pt solid var(--line); border-radius: 9pt; padding: 10pt 12pt; font-size: 11pt; line-height: 1.45; }
+.tile b { display: block; font-size: 20pt; line-height: 1.25; color: var(--navy); font-weight: 700; margin-bottom: 2pt; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 10pt; }
+.two .box { margin: 0; }
+.qa { break-inside: avoid; margin-bottom: 9pt; }
+.qa .q { font-weight: 700; color: var(--navy); margin-bottom: 3pt; }
+.gloss dt { font-weight: 700; color: var(--navy); margin-top: 8pt; }
+.gloss dd { margin: 0 0 2pt 0; }
+.src { font-size: 10.2pt; line-height: 1.5; }
+.src li { margin-bottom: 4.5pt; }
+.small { font-size: 10.6pt; color: var(--soft-ink); }
+
+/* ---- deep dive additions ---- */
+.formula { display: flex; align-items: stretch; gap: 6pt; }
+.lever { flex: 1; background: var(--blue-tint); border-radius: 8pt; padding: 9pt 8pt; text-align: left; font-size: 10.8pt; line-height: 1.4; }
+.lever b { display: block; color: var(--navy); font-size: 13.5pt; font-weight: 700; margin-bottom: 2pt; }
+.op { flex: none; align-self: center; font-size: 20pt; font-weight: 700; color: var(--teal); }
+.equals { margin-top: 9pt; background: var(--navy); color: var(--white); border-radius: 8pt; padding: 8pt 12pt; font-weight: 600; font-size: 12pt; }
+.lanes { display: grid; grid-template-columns: 1fr 1fr; gap: 12pt; }
+.lanehead { color: #fff; font-weight: 700; font-size: 11.5pt; border-radius: 8pt; padding: 6pt 10pt; margin-bottom: 6pt; }
+.chip { background: var(--blue-tint); border-radius: 7pt; padding: 7pt 10pt; margin-bottom: 5pt; font-size: 11pt; line-height: 1.4; }
+.chip.t { background: var(--teal-tint); }
+.lanenote { font-size: 10.8pt; line-height: 1.4; font-weight: 600; color: var(--soft-ink); margin-top: 7pt; }
+table.why td.first { width: 25%; }
+table.why td { background: var(--white); }
+.models { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8pt; }
+.model { border: 1.6pt solid; border-radius: 9pt; overflow: hidden; font-size: 10.8pt; line-height: 1.42; display: flex; flex-direction: column; background: var(--white); }
+.model .mhead { color: #fff; font-weight: 700; font-size: 12pt; padding: 6pt 9pt; }
+.model p { margin: 6pt 9pt 0 9pt; }
+.model .who { margin-top: auto; padding: 7pt 9pt; font-weight: 600; font-size: 10.6pt; }
+.model p:last-of-type { margin-bottom: 8pt; }
+.cmp { font-size: 11pt; }
+.cmph { font-weight: 700; color: var(--navy); margin-bottom: 5pt; }
+.cmprow { display: flex; align-items: center; gap: 8pt; margin-bottom: 5pt; }
+.who2 { flex: none; width: 76pt; font-weight: 600; }
+.track { flex: 1; display: block; }
+.fill { display: block; color: #fff; font-weight: 700; padding: 6pt 10pt; border-radius: 6pt; font-size: 12pt; }
+
+/* ---- part 3 additions ---- */
+.levels { display: grid; grid-template-columns: 1fr auto 1fr; gap: 7pt 8pt; align-items: stretch; }
+.lvhead { font-weight: 700; color: var(--teal); font-size: 11pt; }
+.lv { background: var(--blue-tint); border-radius: 8pt; padding: 8pt 11pt; font-size: 11pt; line-height: 1.42; }
+.lv b { display: block; color: var(--navy); font-size: 12.5pt; font-weight: 700; margin-bottom: 1pt; }
+.lvmid { align-self: center; line-height: 0; }
+.tl { border-left: 3pt solid var(--line); margin-left: 4pt; padding-left: 0; }
+.tlrow { display: flex; gap: 10pt; align-items: flex-start; margin: 0 0 4.5pt -3pt; font-size: 10.9pt; line-height: 1.38; }
+.tlrow.last { margin-bottom: 0; }
+.when { flex: none; width: 78pt; white-space: nowrap; background: var(--navy); color: #fff; font-weight: 600; font-size: 10.2pt; border-radius: 0 12pt 12pt 0; padding: 3pt 8pt 3pt 9pt; margin-top: 1pt; }
+.tlrow.last .when { background: var(--teal); }
+.tlrow b { color: var(--navy); font-weight: 700; }
+.chip.r { background: var(--rose-tint); }
+.wallet { display: flex; height: 38pt; border-radius: 7pt; overflow: hidden; font-weight: 700; font-size: 11pt; color: #fff; }
+.wallet span { display: flex; align-items: center; padding: 0 9pt; line-height: 1.25; }
+.grow .g { margin-bottom: 8pt; }
+.grow .g:last-child { margin-bottom: 0; }
+.gb { display: block; color: #fff; font-weight: 700; font-size: 12pt; padding: 6pt 10pt; border-radius: 6pt; }
+.gt { display: block; font-size: 11pt; line-height: 1.42; margin-top: 2pt; }
+
+/* ---- part 4 additions ---- */
+.quad { display: grid; grid-template-columns: 1fr 1fr; gap: 8pt; }
+.q1 { border-radius: 8pt; padding: 10pt 12pt; font-size: 11pt; line-height: 1.42; }
+.q1 b { display: block; font-size: 13pt; font-weight: 700; color: var(--navy); margin-bottom: 2pt; }
+</style>
+</head>
+<body>
+<!-- ================= COVER ================= -->
+<div class="cover">
+  <div class="band">
+    <div class="kicker">Interview preparation pack · Part 4</div>
+    <h1>The Insight Days:<br>what they are and<br>why you want them</h1>
+    <p>A plain-English guide to the AlphaSights Insight Days 2027. What you get, where it leads, and how to explain why you applied.</p>
+  </div>
+
+  <div>
+    <div class="facts">
+      <div class="fact"><b>Why this pack matters today</b>Your invite says the interview covers “your reasons for applying to our Insight Days”.</div>
+      <div class="fact"><b>If you only have ten minutes</b>Read chapter 1 and chapter 9.</div>
+    </div>
+  </div>
+
+  <div>
+    <h2 style="margin-top:0">What is inside</h2>
+    <ol class="toc">
+      <li><span class="n">1</span>The short version</li>
+      <li><span class="n">2</span>What is an insight day?</li>
+      <li><span class="n">3</span>What this one is</li>
+      <li><span class="n">4</span>Where it leads</li>
+      <li><span class="n">5</span>Eight reasons to want it</li>
+      <li><span class="n">6</span>Why AlphaSights runs it</li>
+      <li><span class="n">7</span>The honest view</li>
+      <li><span class="n">8</span>Getting the most from it</li>
+      <li><span class="n">9</span>“Why did you apply?”</li>
+      <li><span class="n">10</span>Sources</li>
+    </ol>
+  </div>
+
+  <div class="small">Prepared 19 November 2026. Same labels as before:
+    <span class="tag t-aud">Audited</span> <span class="tag t-co">Company says</span> <span class="tag t-est">Industry estimate</span> <span class="tag t-me">My reading</span></div>
+</div>
+
+<!-- ================= 1. SHORT VERSION ================= -->
+<section>
+  <span class="chapnum">Chapter 1</span>
+  <h1>The short version</h1>
+
+  <div class="box key">
+    <span class="label">What it is, in one line</span>
+    <p>Two days inside AlphaSights’ London headquarters, where you try the Associate job through workshops and a client simulation, all paid for, with a head start on a graduate job at the end.</p>
+  </div>
+
+  <h2>Why you would want it</h2>
+  <ol>
+    <li><strong>A head start on a job.</strong> Every attendee joins a list to be fast-tracked for 2028 graduate roles. <span class="tag t-co">Company says</span></li>
+    <li><strong>You try the job before you choose it.</strong> A client brief simulation that “mirrors” the real work. <span class="tag t-co">Company says</span></li>
+    <li><strong>Skills you keep.</strong> Commercial confidence, negotiation, resilience, adaptability and critical thinking.</li>
+    <li><strong>A window into high finance and consulting.</strong> You learn how investors and consultants make big decisions.</li>
+    <li><strong>You meet the people.</strong> Associates, Managers and other ambitious students.</li>
+    <li><strong>It costs you nothing but two days.</strong> Travel, accommodation, breakfast and lunch are covered. <span class="tag t-co">Company says</span></li>
+    <li><strong>A strong name on your CV.</strong> One of the two largest firms in its industry.</li>
+    <li><strong>It tells you if this career suits you.</strong> Better to find out in two days than in two years.</li>
+  </ol>
+
+  <div class="box say">
+    <span class="label">A 30-second answer to “Why did you apply?” (chapter 9 helps you make it your own)</span>
+    <p>“Three reasons. First, I am interested in a commercial, client-facing career, and I would rather test that by doing it than by reading about it. The client brief simulation is the part I am most looking forward to. Second, the skills you focus on, like negotiation and commercial confidence, are ones I want to build early. And third, the more I read about AlphaSights, the more the Associate role appeals to me, so I want to meet the people who do it and see if I would be a good fit.”</p>
+  </div>
+</section>
+
+<!-- ================= 2. WHAT IS AN INSIGHT DAY ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 2</span>
+  <h1>What is an insight day?</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>An insight day is a short taster. A company invites students in to see what the work is really like, long before they apply for a job.</p>
+  </div>
+
+  <h2>Think of it as a test drive</h2>
+  <p>You would not buy a car without driving it. An insight day lets you “drive” a career for a day or two. You see the office, meet the staff and try a small version of the work.</p>
+  <p>It also works the other way. The company gets an early look at you.</p>
+
+  <h2>How it compares</h2>
+  <table>
+    <tr><th style="width:22%"></th><th>Insight day</th><th>Internship</th><th>Graduate job</th></tr>
+    <tr><td class="first">How long</td><td>One or two days</td><td>Several weeks</td><td>Permanent</td></tr>
+    <tr><td class="first">What you do</td><td>Workshops and exercises</td><td>Real work, supervised</td><td>Real work, with targets</td></tr>
+    <tr><td class="first">When</td><td>Early at university</td><td>Usually the summer before final year</td><td>After you graduate</td></tr>
+    <tr><td class="first">Risk to you</td><td>Almost none</td><td>A summer</td><td>A career choice</td></tr>
+    <tr><td class="first">What it leads to</td><td>A head start on later applications</td><td>Often a job offer</td><td>A career</td></tr>
+  </table>
+
+  <div class="box eg">
+    <span class="label">Why this matters to you</span>
+    <p>An insight day is the lowest-risk way to explore a career. You give up two days. In return you learn whether to spend the next two years aiming for that job. Few decisions offer that much information for that little cost.</p>
+  </div>
+</section>
+
+<!-- ================= 3. WHAT THIS ONE IS ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 3</span>
+  <h1>What this one is</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>A two-day event at AlphaSights’ London headquarters for students graduating in 2028, built around the Client Service Associate role.</p>
+  </div>
+
+  <h2>The facts</h2>
+  <table>
+    <tr><th style="width:28%">Question</th><th>Answer</th></tr>
+    <tr><td class="first">What is it called?</td><td>Insight Days, Client Service, 2027</td></tr>
+    <tr><td class="first">Who is it for?</td><td>Students expecting to graduate in 2028</td></tr>
+    <tr><td class="first">When?</td><td>Tuesday 23 and Wednesday 24 March 2027, <strong>or</strong> Wednesday 30 June and Thursday 1 July 2027</td></tr>
+    <tr><td class="first">Where?</td><td>AlphaSights’ London headquarters</td></tr>
+    <tr><td class="first">What does it cost?</td><td>Nothing. Travel and accommodation are paid for successful applicants. Breakfast and lunch are provided.</td></tr>
+    <tr><td class="first">Which job is it about?</td><td>Associate on the Client Service team</td></tr>
+    <tr><td class="first">What comes after?</td><td>All attendees join an exclusive mailing list “to be fast-tracked” for 2028 graduate roles in Client Service</td></tr>
+  </table>
+  <p class="small">All from the Insight Days advert. <span class="tag t-co">Company says</span> The advert does not mention being paid for attending, so assume it is unpaid apart from expenses.</p>
+
+  <div class="box eg">
+    <span class="label">This year’s event is a step up</span>
+    <p>Last year’s London event was listed as a single “Insight Day”, with travel paid, and only “select individuals” offered a fast track. This year it is two days, accommodation is paid too, and the advert says <strong>all</strong> attendees are put on the fast-track list. So the 2027 version gives you more time and a stronger promise. <span class="tag t-co">Company says</span> <span class="tag t-me">My reading</span></p>
+  </div>
+
+  <h2>What happens over the two days</h2>
+  <figure>
+    <div class="ftitle">Diagram 1: The four parts of the Insight Days</div>
+    <div class="quad">
+      <div class="q1" style="background:#1D3B63; color:#FFFDF7"><b style="color:#FFFDF7">1. Learn the firm</b>An introduction to AlphaSights: what it does and how it works.</div>
+      <div class="q1" style="background:#C9DAEE"><b>2. Build skills</b>Interactive workshops led by the Client Service team.</div>
+      <div class="q1" style="background:#DFF1EC"><b style="color:#0E6F66">3. Do the job</b>A client brief simulation and a case competition that mirror the daily work.</div>
+      <div class="q1" style="background:#FBE9CC"><b style="color:#9A4A05">4. Meet people</b>Networking with the team, their career stories, and other students.</div>
+    </div>
+    <figcaption><b>How to read this.</b> Each box is one part of the event. Together they move from listening (box 1), to learning (box 2), to doing (box 3), to connecting (box 4). This is taken from the advert. <span class="tag t-co">Company says</span> AlphaSights has not published an hour-by-hour timetable, so the order across the two days is not known.</figcaption>
+  </figure>
+
+  <h2>The five skills it promises to build</h2>
+  <p>The advert says the days help you build these. Each one is used daily in the Associate job.</p>
+  <table>
+    <tr><th style="width:30%">Skill</th><th>What it means in plain English</th></tr>
+    <tr><td class="first">Commercial confidence</td><td>Being comfortable talking about business and money with senior people.</td></tr>
+    <tr><td class="first">Adaptability</td><td>Staying calm and useful when the plan changes.</td></tr>
+    <tr><td class="first">Resilience</td><td>Carrying on after a “no”.</td></tr>
+    <tr><td class="first">Negotiation</td><td>Reaching an agreement that works for both sides.</td></tr>
+    <tr><td class="first">Critical thinking</td><td>Working out what really matters in a messy problem.</td></tr>
+  </table>
+
+
+</section>
+
+<!-- ================= 4. WHERE IT LEADS ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 4</span>
+  <h1>Where it leads</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>The Insight Days are the first step on a path that can end in a well-paid graduate job with fast promotion.</p>
+  </div>
+
+  <figure>
+    <div class="ftitle">Diagram 2: The path from today to a graduate job</div>
+    <div class="vs money"><span class="n">1</span><div><b>Today: the phone screen.</b> Fifteen minutes with Eve. You are here.</div></div>
+    <div class="vs" style="margin-top:6pt"><span class="n">2</span><div><b>March or June 2027: the Insight Days.</b> Two days in London.</div></div>
+    <div class="vs"><span class="n">3</span><div><b>Afterwards: the fast-track list.</b> You hear early about 2028 graduate roles.</div></div>
+    <div class="vs"><span class="n">4</span><div><b>Final year: the graduate application.</b> Interviews, including a case study.</div></div>
+    <div class="vs" style="margin-bottom:0"><span class="n">5</span><div><b>2028: Associate, Client Service.</b> Your first job after university.</div></div>
+    <figcaption><b>How to read this.</b> Read from top to bottom. The green step is where you are now. Steps 2 and 3 come from the advert. <span class="tag t-co">Company says</span> Nothing is guaranteed: each step still has to be earned.</figcaption>
+  </figure>
+
+  <div style="break-inside: avoid">
+  <h2>What does “fast-tracked” mean?</h2>
+  <p>The advert does not say exactly. At the least, you hear about roles early and the recruiters already know you. It may mean skipping an early stage, but that is not confirmed. It is a good question for Eve: “What does being fast-tracked look like in practice?”</p>
+  </div>
+
+  <h2>The normal graduate process</h2>
+  <p>AlphaSights’ careers pages describe these stages for a graduate applicant. <span class="tag t-co">Company says</span></p>
+  <table>
+    <tr><th style="width:30%">Stage</th><th>What happens</th></tr>
+    <tr><td class="first">Online application</td><td>CV and short questions.</td></tr>
+    <tr><td class="first">First interview</td><td>A video call with the recruiting team about your background and motivation.</td></tr>
+    <tr class="hl"><td class="first">Second interview</td><td>A case study with the Client Service team. A client needs to understand a market, and you must identify two or three relevant experts.</td></tr>
+    <tr><td class="first">Final interview</td><td>With a Vice President. Deeper “why” questions and a frank talk about the demands of the job.</td></tr>
+  </table>
+  <div class="box say">
+    <span class="label">Spot the link</span>
+    <p>Look at the highlighted row. The graduate interview includes a case study where you choose experts for a client. The Insight Days include a client brief simulation. So the event is, in effect, coached practice for the hardest interview stage, a year before you face it. <span class="tag t-me">My reading</span></p>
+  </div>
+
+  <h2>What the job at the end offers</h2>
+  <div class="tiles">
+    <div class="tile"><b style="font-size:16pt">£48,500 to £57,500</b>First-year pay in London, including a £41,500 base <span class="tag t-co">Company says</span></div>
+    <div class="tile"><b style="font-size:16pt">About 2 years</b>To Manager, leading your own team <span class="tag t-co">Company says</span></div>
+    <div class="tile"><b style="font-size:16pt">About 5 years</b>To Vice President, running a business unit <span class="tag t-co">Company says</span></div>
+  </div>
+  <p>AlphaSights also says it runs an MBA sponsorship programme, which can support some leavers with tuition at top business schools. <span class="tag t-co">Company says</span></p>
+</section>
+
+<!-- ================= 5. EIGHT REASONS ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 5</span>
+  <h1>Eight reasons to want it</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>Some reasons are about getting a job. The best ones are about learning: about the work, about business, and about yourself.</p>
+  </div>
+
+  <h2>1. A head start on a graduate job</h2>
+  <p>Graduate jobs at firms like this are competitive. Most applicants are strangers to the recruiters. After the Insight Days you are not. The team has met you, seen you work and put you on the fast-track list.</p>
+  <p><strong>Why it matters:</strong> you would be applying in your final year with an advantage most candidates do not have.</p>
+
+  <h2>2. You try the job before you choose it</h2>
+  <p>The client brief simulation puts you in the Associate’s seat. A client asks for something. You work out who could help.</p>
+  <p><strong>Why it matters:</strong> job adverts all sound good. Doing a small version of the work is the only honest test of whether you would enjoy it.</p>
+
+  <h2>3. Skills you keep, wherever you end up</h2>
+  <p>Negotiation, resilience and commercial confidence are useful in any career: law, banking, consulting, sales or starting a business. They are also hard to learn in a lecture hall.</p>
+  <p><strong>Why it matters:</strong> even if you never work at AlphaSights, you leave better prepared for every interview and job that follows.</p>
+
+  <h2>4. A window into how big decisions are made</h2>
+  <p>AlphaSights’ clients are private equity firms, hedge funds and strategy consultancies. To serve them, you have to understand what they do and why they need to learn fast.</p>
+  <p><strong>Why it matters:</strong> in two days you get a guided tour of three industries that are very hard to see inside as a student. That is real commercial awareness.</p>
+
+  <h2>5. You meet the people</h2>
+  <p>You hear the career stories of Associates and Managers, many only a few years older than you. You also meet other students with similar ambitions.</p>
+  <p><strong>Why it matters:</strong> people tell you things a website never will. And the students in that room are your future network.</p>
+
+  <h2>6. It costs you nothing but two days</h2>
+  <p>Travel, accommodation, breakfast and lunch are all covered.</p>
+  <p><strong>Why it matters:</strong> the event is open to you whatever your budget or wherever you live. The only thing you spend is time.</p>
+
+  <h2>7. A strong name early on your CV</h2>
+  <p>AlphaSights made $652.6 million in revenue in 2025 and is one of the two largest firms in its industry. <span class="tag t-aud">Audited</span> <span class="tag t-est">Industry estimate</span> Being selected shows other employers that a demanding firm picked you.</p>
+  <p><strong>Why it matters:</strong> it is evidence of commercial interest at a stage when most students have none to show.</p>
+
+  <h2>8. It tells you whether this career suits you</h2>
+  <p>The Associate job is fast, target-driven and involves a lot of rejection. Some people love that. Some do not.</p>
+  <p><strong>Why it matters:</strong> finding out that you do not want a job is as valuable as finding out that you do. Either answer saves you time.</p>
+
+  <figure>
+    <div class="ftitle">Diagram 3: What you give and what you get</div>
+    <div class="lanes">
+      <div class="lane">
+        <div class="lanehead" style="background:#5C7FAE">What you give</div>
+        <div class="chip">Two days of your time</div>
+        <div class="chip">Some preparation beforehand</div>
+        <div class="chip">Your full effort in the room</div>
+      </div>
+      <div class="lane">
+        <div class="lanehead" style="background:#0E6F66">What you get</div>
+        <div class="chip t">A fast track towards a graduate job</div>
+        <div class="chip t">Practice at the real work</div>
+        <div class="chip t">Five skills, taught by people who use them</div>
+        <div class="chip t">Contacts at the firm and among students</div>
+        <div class="chip t">A clear answer on whether you want this career</div>
+        <div class="chip t">All costs covered</div>
+      </div>
+    </div>
+    <figcaption><b>How to read this.</b> The left column is what the Insight Days cost you. The right column is what you take away. The right column is much longer. That imbalance is the whole case for going.</figcaption>
+  </figure>
+</section>
+
+<!-- ================= 6. WHY ALPHASIGHTS RUNS IT ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 6</span>
+  <h1>Why AlphaSights runs it</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>AlphaSights is paying for your train, your hotel and two days of its staff’s time. Understanding why tells you what they are looking for.</p>
+  </div>
+
+  <h2>The firm’s reasons</h2>
+  <table>
+    <tr><th style="width:32%">Reason</th><th>What is behind it</th></tr>
+    <tr><td class="first">Its people are its product</td><td>The firm has no factory. Its results come from how good its Associates are. Finding the right graduates is central to the business, not a side task.</td></tr>
+    <tr><td class="first">The job is not for everyone</td><td>It is demanding. The firm would rather you discover that in two days than after it has hired and trained you.</td></tr>
+    <tr><td class="first">A CV does not show the key qualities</td><td>Resilience, curiosity and how you speak to people only show up in a room.</td></tr>
+    <tr><td class="first">Competition for talent</td><td>Banks, consultancies and law firms chase the same students. Meeting you early gives AlphaSights a head start.</td></tr>
+  </table>
+  <p class="small">This is my reading of the firm’s motives, based on its business model. <span class="tag t-me">My reading</span> AlphaSights says its Insight Days are for students who want “to see what your options look like”. <span class="tag t-co">Company says</span></p>
+
+  <div style="break-inside: avoid">
+  <h2>What that tells you about today</h2>
+  <p>If the firm is investing in finding people who truly want this kind of work, then Eve is listening for one thing above all: <strong>is your interest real?</strong></p>
+  <div class="two">
+    <div class="box care"><span class="label">What sounds weak</span>
+      <ul><li>“It will look good on my CV.”</li><li>“I am applying to lots of insight days.”</li><li>“I am not sure what I want to do.”</li></ul></div>
+    <div class="box key"><span class="label">What sounds strong</span>
+      <ul><li>A clear reason you are drawn to client-facing, commercial work.</li><li>Something specific about AlphaSights.</li><li>Curiosity about the role itself.</li></ul></div>
+  </div>
+  </div>
+</section>
+
+<!-- ================= 7. HONEST VIEW ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 7</span>
+  <h1>The honest view</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>The Insight Days are a very good opportunity with almost no downside. The job they lead to is a bigger question, and the event is how you answer it.</p>
+  </div>
+
+  <h2>What the Insight Days are not</h2>
+  <ul>
+    <li><strong>Not a job offer.</strong> You still have to apply and interview in your final year.</li>
+    <li><strong>Not a guarantee.</strong> “Fast-tracked” is a head start, not a promise.</li>
+    <li><strong>Not an internship.</strong> Two days will not make you an expert, and the advert does not mention pay.</li>
+    <li><strong>Not just a nice day out.</strong> You are being observed, especially in the simulation.</li>
+  </ul>
+
+  <h2>The job behind it: both sides</h2>
+  <p>You should go in with open eyes. The Associate role has real attractions and real demands.</p>
+  <div class="two">
+    <div class="box key"><span class="label">What people value</span>
+      <ul>
+        <li>Responsibility for clients from the start</li>
+        <li>Pay linked to your results</li>
+        <li>Fast promotion on merit</li>
+        <li>Learning a new industry every day</li>
+        <li>A young, ambitious team</li>
+      </ul></div>
+    <div class="box care"><span class="label">What people find hard</span>
+      <ul>
+        <li>Monthly targets from the outset</li>
+        <li>Lots of outreach and many people who do not reply</li>
+        <li>Long, intense days tied to client demand</li>
+        <li>Plans that change without warning</li>
+      </ul></div>
+  </div>
+  <p style="margin-top:10pt">Employee reviews are mixed. Glassdoor shows about 3.2 out of 5 for the Client Service Associate role. Some former staff praise the training and the doors it opens. Others say it depends heavily on your team, and views differ on how easy it is to move into other industries afterwards. <span class="tag t-est">Industry estimate</span></p>
+
+  <div class="box say">
+    <span class="label">Why this makes the Insight Days more valuable, not less</span>
+    <p>A job that some people love and some people leave is exactly the kind you should test before committing. The Insight Days let you do that for free. Go in curious, ask Associates what a hard day looks like, and judge for yourself.</p>
+  </div>
+
+  <h2>Questions worth asking while you are there</h2>
+  <ul>
+    <li>“What does a difficult day look like, and how do you handle it?”</li>
+    <li>“What surprised you most in your first three months?”</li>
+    <li>“What kind of person does well here, and who struggles?”</li>
+    <li>“Where have people you started with gone on to?”</li>
+  </ul>
+</section>
+
+<!-- ================= 8. GETTING THE MOST ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 8</span>
+  <h1>Getting the most from it</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>If you are invited, treat the two days as a long, friendly interview and a chance to learn. Prepare, take part and follow up.</p>
+  </div>
+
+  <h2>March or June?</h2>
+  <p>You may be asked which dates you can do. Check both against your university calendar before the call.</p>
+  <table>
+    <tr><th style="width:30%">Dates</th><th>Things to weigh</th></tr>
+    <tr><td class="first">23 and 24 March 2027</td><td>Earlier, so you are known to the firm sooner. Check it does not clash with end-of-term deadlines or exams.</td></tr>
+    <tr><td class="first">30 June and 1 July 2027</td><td>After most exam seasons, so you may have more time to prepare. Check it does not clash with a summer job or internship.</td></tr>
+  </table>
+  <p>If both work, say so. Being flexible makes you easier to place.</p>
+
+  <h2>Before, during and after</h2>
+  <figure>
+    <div class="ftitle">Diagram 4: Three stages of a good Insight Day</div>
+    <div class="models">
+      <div class="model" style="border-color:#5C7FAE">
+        <div class="mhead" style="background:#5C7FAE">Before</div>
+        <p>Re-read Part 1 of this pack.</p>
+        <p>Practise the three scenarios in Part 3.</p>
+        <p>Prepare three questions.</p>
+        <p>Plan your journey.</p>
+      </div>
+      <div class="model" style="border-color:#0E6F66">
+        <div class="mhead" style="background:#0E6F66">During</div>
+        <p>Speak up early in workshops.</p>
+        <p>In group work, listen as well as lead.</p>
+        <p>Ask people about their own path.</p>
+        <p>Note the names of people you meet.</p>
+      </div>
+      <div class="model" style="border-color:#1D3B63">
+        <div class="mhead" style="background:#1D3B63">After</div>
+        <p>Send a short thank-you within a day.</p>
+        <p>Connect on LinkedIn with a personal note.</p>
+        <p>Write down what you learned.</p>
+        <p>Watch for the fast-track emails.</p>
+      </div>
+    </div>
+    <figcaption><b>How to read this.</b> Read the three columns from left to right. Each lists four simple actions for that stage. Most students only think about the middle column. The first and last are where you can stand out.</figcaption>
+  </figure>
+
+  <h2>In the client brief simulation</h2>
+  <p>From Part 3, the pattern that works in almost any client situation:</p>
+  <ol>
+    <li><strong>Respond fast.</strong> Show you are on it.</li>
+    <li><strong>Ask before you assume.</strong> Find the real question behind the brief.</li>
+    <li><strong>Be honest.</strong> Say what you can and cannot deliver.</li>
+    <li><strong>Offer a way forward.</strong> Always suggest a next step.</li>
+  </ol>
+  <p>In a group exercise, how you treat team-mates is noticed as much as your ideas. Bring quieter people in. Build on what others say.</p>
+</section>
+
+<!-- ================= 9. WHY DID YOU APPLY ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 9</span>
+  <h1>“Why did you apply?”</h1>
+
+  <div class="box key">
+    <span class="label">In one line</span>
+    <p>Give three reasons: one about the work, one about what you will learn, and one about AlphaSights. Tie at least one to something true about you.</p>
+  </div>
+
+  <h2>Build your own answer</h2>
+  <p>Pick one line from each row. Then add your own detail where you see the blank.</p>
+  <table>
+    <tr><th style="width:22%">Part</th><th>Choose one</th></tr>
+    <tr><td class="first">1. The work</td><td>
+      “I want a commercial, client-facing career, and I would rather test that by doing it.”<br><br>
+      “I enjoy persuading people and working to a goal. I saw that when I ______.”<br><br>
+      “I like learning new subjects quickly, and the Associate role is built on that.”</td></tr>
+    <tr><td class="first">2. The learning</td><td>
+      “The client brief simulation is the closest I can get to trying the real job.”<br><br>
+      “The skills you focus on, like negotiation and resilience, are ones I want to build early.”<br><br>
+      “I want to understand how investors and consultants make decisions.”</td></tr>
+    <tr><td class="first">3. The firm</td><td>
+      “AlphaSights gives Associates real client responsibility from the start.”<br><br>
+      “It is still led by its founders and has grown into one of the largest firms in its field.”<br><br>
+      “I would like to meet the people and hear how their careers have developed.”</td></tr>
+  </table>
+
+  <h2>A worked example</h2>
+  <div class="box say">
+    <span class="label">About 40 seconds</span>
+    <p>“There are three reasons. The first is that I am drawn to client-facing, commercial work. In my role at ______ I found I enjoyed ______, and I want to test whether that is the right direction for a career. The second is the format. A client brief simulation is the closest I can get to actually trying the Associate job, which will tell me far more than reading about it. And the third is AlphaSights itself. I like that Associates are trusted with clients from the start, and I would value the chance to meet the team and understand what makes someone succeed here.”</p>
+  </div>
+
+  <h2>Likely follow-up questions</h2>
+  <div class="qa"><div class="q">“What do you hope to get out of the two days?”</div>
+    <p>“A real feel for the Associate role, some practice at the skills, and honest conversations with people who do the job.”</p></div>
+  <div class="qa"><div class="q">“Why AlphaSights and not another firm’s insight day?”</div>
+    <p>Use one specific point: Associates own client projects from the start, or the firm finds experts fresh for each project, or it is one of the two largest in its industry.</p></div>
+  <div class="qa"><div class="q">“What do you think the Associate role involves?”</div>
+    <p>“Taking a client’s request, working out who would know the answer, finding and speaking to those experts, and connecting them with the client quickly.”</p></div>
+  <div class="qa"><div class="q">“Are you considering the graduate role afterwards?”</div>
+    <p>Be honest and positive. “Yes, that is a big part of why I applied. I want to use the Insight Days to confirm it is the right fit.”</p></div>
+  <div class="qa"><div class="q">“Which dates suit you?”</div>
+    <p>Know your answer before the call.</p></div>
+
+  <div style="break-inside: avoid">
+  <h2>Three things to avoid</h2>
+  <ul>
+    <li><strong>Leading with the perks.</strong> Do not mention the free travel or the CV boost as reasons.</li>
+    <li><strong>Making it only about the fast track.</strong> Show interest in the work, not just the shortcut.</li>
+    <li><strong>Reciting.</strong> Speak in your own words, with a pause, as if you are thinking. Remember: no AI tools or notes on screen during the call.</li>
+  </ul>
+  </div>
+
+  <div class="box key">
+    <span class="label">One last thought before 2:30pm</span>
+    <p>You have done far more preparation than most candidates will. You do not need to show all of it. Be warm, be clear, and be curious. Good luck.</p>
+  </div>
+</section>
+
+<!-- ================= 10. SOURCES ================= -->
+<section class="chapter">
+  <span class="chapnum">Chapter 10</span>
+  <h1>Sources</h1>
+  <ul class="src">
+    <li>AlphaSights, “Insight Days, Client Service, 2027” advert, and your interview invitation.</li>
+    <li>AlphaSights, “Insight Day (Client Service) 2026” listing, as shown on Bright Network, for the comparison with last year.</li>
+    <li>AlphaSights careers pages: “How the AlphaSights interview process works”, the Client Service careers hub and job adverts, read through search results. Used for the graduate process, pay, promotion and the MBA sponsorship programme.</li>
+    <li>AlphaSights Ltd, group accounts for 2025 (Companies House), for the revenue figure.</li>
+    <li>Glassdoor and Indeed employee reviews, for the mixed views on the Associate role. Treat as anecdotes.</li>
+    <li>Parts 1 to 3 of this pack, for the business, the model and client relationships.</li>
+  </ul>
+
+  <div class="box care">
+    <span class="label">What is not known</span>
+    <p>AlphaSights has not published the timetable for the two days, how many students attend, how many apply, or exactly what “fast-tracked” means. I have not guessed at any of these. They are all fair questions to ask Eve or the team.</p>
+  </div>
+</section>
+
+</body>
+</html>
