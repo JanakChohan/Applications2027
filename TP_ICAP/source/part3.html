@@ -1,0 +1,924 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>TP ICAP Part 3: Inside Global Broking</title>
+<style>
+@font-face{font-family:"Lexend";font-weight:400;src:url("node_modules/@fontsource/lexend/files/lexend-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Lexend";font-weight:600;src:url("node_modules/@fontsource/lexend/files/lexend-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Lexend";font-weight:700;src:url("node_modules/@fontsource/lexend/files/lexend-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"Atkinson";font-weight:400;src:url("node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Atkinson";font-weight:700;src:url("node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2")}
+
+:root{
+  --bg:#FBF6EA; --ink:#1f2a37; --muted:#4f5b69; --navy:#14304b; --teal:#0f6e84;
+  --line:#d9d0bb; --card:#fffdf6;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --grey:#8a94a0;
+}
+@page{size:A4;margin:16mm 17mm 19mm 17mm}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson",Verdana,sans-serif;
+  font-size:12.5pt;line-height:1.62;letter-spacing:.012em;word-spacing:.06em;text-align:left;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3,h4{font-family:"Lexend",Verdana,sans-serif;color:var(--navy);line-height:1.25;letter-spacing:0;break-after:avoid}
+h1{font-size:23pt;font-weight:700;margin:0 0 4mm;padding-bottom:3mm;border-bottom:1.2mm solid var(--teal)}
+h2{font-size:15.5pt;font-weight:600;margin:8mm 0 2.5mm}
+h3{font-size:12.5pt;font-weight:600;margin:5.5mm 0 1.5mm}
+p{margin:0 0 3.2mm;max-width:150mm}
+li{max-width:146mm}
+ul,ol{margin:0 0 3.5mm;padding-left:6.5mm}
+ol{padding-left:8.5mm}
+li{margin-bottom:1.7mm}
+strong{font-weight:700;color:#10202f}
+section{break-before:auto;margin-top:13mm}
+section.pb{break-before:page;margin-top:0}
+.kicker{break-after:avoid}
+.kicker{font-family:"Lexend";font-size:10pt;font-weight:600;color:var(--teal);margin:0 0 1.5mm}
+.lead{font-size:13pt;line-height:1.6}
+.small{font-size:10pt;color:var(--muted);line-height:1.5}
+
+/* boxes */
+.box{border-radius:2.5mm;padding:3.6mm 4.5mm 3mm;margin:4mm 0;font-size:12pt;max-width:162mm;break-inside:avoid;border-left:1.6mm solid var(--teal);background:#E7F1F3}
+.box > :last-child{margin-bottom:.6mm}
+.box .tag{font-family:"Lexend";font-weight:600;font-size:10.5pt;display:block;margin-bottom:1.2mm;color:var(--navy)}
+.box.say{background:#FFEFCF;border-left-color:#c77700}
+.box.warn{background:#FBE4DD;border-left-color:#b6452c}
+.box.read{background:#ECE8F6;border-left-color:#5a48b8}
+.box.fact{background:var(--card);border:.3mm solid var(--line);border-left:1.6mm solid var(--navy)}
+
+/* figures */
+figure{margin:5mm 0 4mm;padding:4.5mm 5mm 4mm;background:var(--card);border:.3mm solid var(--line);border-radius:3mm;break-inside:avoid}
+figcaption{font-family:"Lexend";font-weight:600;font-size:11.5pt;color:var(--navy);margin-bottom:3.5mm}
+figcaption span{display:block;font-family:"Atkinson";font-weight:400;font-size:10pt;color:var(--muted);margin-top:.6mm}
+
+/* bar charts */
+.bars{display:grid;grid-template-columns:47mm 1fr;row-gap:2.6mm;column-gap:3mm;align-items:center}
+.bars .lab{font-size:10.5pt;line-height:1.3;text-align:right}
+.bars .lab small{display:block;color:var(--muted);font-size:9pt}
+.bars .track{display:flex;align-items:center;gap:2.5mm}
+.bars .bar{height:7.5mm;border-radius:0 1.2mm 1.2mm 0;background:var(--s1);min-width:.6mm}
+.bars .val{font-family:"Lexend";font-weight:600;font-size:10.5pt;white-space:nowrap}
+.bars .val small{font-family:"Atkinson";font-weight:400;color:var(--muted);font-size:9.5pt}
+.bars.sub .bar{height:5.5mm;background:#7fb0ea}
+.c1{background:var(--s1)!important}.c2{background:var(--s2)!important}.c3{background:var(--s3)!important}.c4{background:var(--s4)!important}.cg{background:var(--grey)!important}
+.stack{display:flex;gap:.6mm;height:15mm;margin:2mm 0 2.5mm}
+.stack div{display:flex;align-items:center;justify-content:center;color:#fff;font-family:"Lexend";font-weight:600;font-size:10.5pt;border-radius:1mm;text-align:center;line-height:1.2}
+.stack .dark{color:#1f2a37}
+.legend{display:flex;flex-wrap:wrap;gap:2mm 6mm;font-size:10pt}
+.legend i{display:inline-block;width:3.6mm;height:3.6mm;border-radius:.8mm;margin-right:1.6mm;vertical-align:-.5mm}
+
+/* flow diagrams */
+.flow{display:flex;align-items:stretch;gap:1.5mm}
+.node{flex:1;background:#fff;border:.45mm solid var(--navy);border-radius:2.2mm;padding:2.6mm 2.4mm;font-size:10pt;line-height:1.35;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.node b{font-family:"Lexend";font-weight:600;font-size:10.5pt;color:var(--navy);display:block;margin-bottom:.8mm}
+.node.hub{background:var(--navy);border-color:var(--navy);color:#fff}
+.node.hub b{color:#fff}
+.node.soft{border-style:dashed;border-color:#6b7785}
+.arrow{flex:0 0 7mm;display:flex;align-items:center;justify-content:center;font-size:15pt;color:var(--teal);font-weight:700}
+.steps{counter-reset:s;display:grid;gap:2.2mm}
+.step{counter-increment:s;display:grid;grid-template-columns:10mm 1fr;gap:3mm;align-items:start;background:#fff;border:.3mm solid var(--line);border-radius:2mm;padding:2.5mm 3mm}
+.step::before{content:counter(s);font-family:"Lexend";font-weight:700;font-size:13pt;color:#fff;background:var(--teal);width:9mm;height:9mm;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.step p{margin:0;font-size:10.8pt;line-height:1.45}
+.step b{font-family:"Lexend";font-weight:600;color:var(--navy)}
+.cycle{display:grid;grid-template-columns:1fr 7mm 1fr 7mm 1fr;row-gap:1.5mm;align-items:stretch}
+.down{grid-column:5;text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1}
+.up{grid-column:1;text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1}
+
+/* timeline */
+.tl{border-left:.8mm solid var(--teal);margin:2mm 0 0 16mm;padding:0}
+.tl div{position:relative;padding:0 0 3.1mm 6mm;font-size:10.8pt;line-height:1.45;break-inside:avoid}
+.tl div::before{content:"";position:absolute;left:-2.3mm;top:1.2mm;width:3.6mm;height:3.6mm;border-radius:50%;background:var(--teal);border:.5mm solid var(--card)}
+.tl b{position:absolute;left:-19mm;top:0;width:15mm;text-align:right;font-family:"Lexend";font-weight:600;color:var(--navy)}
+.tl .big::before{background:var(--s2);width:4.6mm;height:4.6mm;left:-2.8mm}
+
+/* tables */
+table{border-collapse:collapse;width:100%;margin:3mm 0 4.5mm;font-size:10.6pt;line-height:1.42}
+tr{break-inside:avoid}
+th{font-family:"Lexend";font-weight:600;font-size:10pt;text-align:left;background:var(--navy);color:#fff;padding:2.2mm 2.6mm;vertical-align:bottom}
+td{padding:2.2mm 2.6mm;border-bottom:.3mm solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:#f5efdf}
+td.n,th.n{text-align:right;white-space:nowrap}
+td b{color:#10202f}
+
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin:4mm 0}
+.tile{background:var(--card);border:.3mm solid var(--line);border-radius:2.5mm;padding:3.2mm 3.5mm;break-inside:avoid}
+.tile b{display:block;font-family:"Lexend";font-weight:700;font-size:17pt;color:var(--navy);line-height:1.15}
+.tile span{font-size:10pt;color:var(--muted);line-height:1.35;display:block;margin-top:1mm}
+
+/* cover */
+.cover{break-before:auto;min-height:215mm;display:flex;flex-direction:column}
+.cover h1{font-size:34pt;border:none;margin:8mm 0 3mm;padding:0}
+.cover .sub{font-family:"Lexend";font-size:15pt;color:var(--teal);font-weight:600;margin-bottom:8mm;max-width:150mm;line-height:1.4}
+.cover .band{height:3mm;background:linear-gradient(90deg,var(--navy) 0 55%,var(--teal) 55% 80%,var(--s4) 80% 100%);border-radius:2mm;margin-bottom:9mm}
+.toc{columns:2;column-gap:10mm;font-size:11pt;padding:0;list-style:none;counter-reset:t}
+.toc li{counter-increment:t;margin-bottom:1.8mm;break-inside:avoid}
+.toc li::before{content:counter(t) ".";font-family:"Lexend";font-weight:600;color:var(--teal);display:inline-block;width:8mm}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+.two > div{break-inside:avoid;max-width:none}
+dl{margin:0}
+dt{font-family:"Lexend";font-weight:600;color:var(--navy);font-size:11pt;margin-top:0}
+dd{margin:0 0 0 0;font-size:10.8pt;line-height:1.48}
+a{color:var(--teal);text-decoration:none;overflow-wrap:anywhere}
+thead{display:table-header-group}
+.gloss dl{columns:2;column-gap:9mm}
+.gloss dl div{break-inside:avoid;padding-bottom:2.8mm}
+.legend4{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin:3mm 0}
+.legend4 .box{margin:0;max-width:none}
+.src li{font-size:9.6pt;line-height:1.4;margin-bottom:1.3mm}
+
+.hubgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5mm}
+.hubgrid .node{min-height:17mm}
+.layers{display:grid;gap:2mm}
+.layer{border-radius:2.2mm;padding:3mm 4mm;font-size:10.6pt;line-height:1.4;color:#fff}
+.layer b{display:block;font-family:"Lexend";font-weight:600;font-size:11pt;margin-bottom:.6mm}
+.l1{background:#14304b;margin:0 0 0 0}.l2{background:#0f6e84;margin:0 9mm}.l3{background:#fff;color:#1f2a37;border:.45mm solid #14304b;margin:0 18mm}
+.l3 b{color:#14304b}
+.ladder{display:grid;gap:2mm}
+.rung{background:#fff;border:.45mm solid var(--navy);border-radius:2.2mm;padding:2.4mm 3.5mm;font-size:10.6pt;line-height:1.4}
+.rung b{font-family:"Lexend";font-weight:600;color:var(--navy);display:block}
+.r1{margin-right:44mm}.r2{margin-left:11mm;margin-right:33mm}.r3{margin-left:22mm;margin-right:22mm}.r4{margin-left:33mm;margin-right:11mm}.r5{margin-left:44mm;background:var(--navy);color:#fff}
+.r5 b{color:#fff}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin:3mm 0 5mm}
+.card{background:#fff;border:.5mm dashed #6b7785;border-radius:2.5mm;padding:3.5mm 4mm;font-family:"Lexend";font-size:11.5pt;line-height:1.75;break-inside:avoid}
+.card b{display:block;color:var(--teal);font-size:10pt;margin-bottom:1mm}
+
+.four{display:grid;grid-template-columns:1fr 1fr;gap:2.5mm}
+.four .node{text-align:left;padding:3mm 3.5mm;font-size:10.6pt}
+.mapdown{text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1.5;white-space:nowrap;overflow:hidden}
+figure svg{width:100%;height:auto;display:block}
+svg .ax{stroke:#4f5b69;stroke-width:1.5;fill:none}
+svg .st{font-family:"Atkinson",sans-serif;font-size:13.5px;fill:#4f5b69}
+svg .sb{font-family:"Lexend",sans-serif;font-size:14px;font-weight:600;fill:#14304b}
+svg .ln1{stroke:#2a78d6;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+svg .ln2{stroke:#8a94a0;stroke-width:3.5;fill:none;stroke-dasharray:9 7;stroke-linecap:round}
+</style>
+</head>
+<body>
+<!-- ============ COVER ============ -->
+<div class="cover">
+  <h1>Inside Global Broking</h1>
+  <div class="sub">Part 3. Rates, FX and Money Markets, Equities and Credit, taught from zero. What each one is, what broking it looks like, the maths, and how they all connect</div>
+  <div class="band"></div>
+  <p class="lead">Four words on a job advert: <strong>Rates, FX, Equities, Credit</strong>. Right now they mean nothing to you. In about an hour they will feel obvious. We are going to take them one at a time, with pictures and round numbers, and then snap them together into one map.</p>
+
+  <div class="tiles">
+    <div class="tile"><b>Rates</b><span>The price of borrowing money over time.</span></div>
+    <div class="tile"><b>FX</b><span>The price of one country's money in another's.</span></div>
+    <div class="tile"><b>Money Markets</b><span>Borrowing and lending cash for days or months.</span></div>
+    <div class="tile"><b>Credit</b><span>The price of the risk that a borrower does not pay you back.</span></div>
+    <div class="tile"><b>Equities</b><span>What a slice of a company's future is worth.</span></div>
+    <div class="tile"><b>The link</b><span>They are all the same thing: the price of money, risk and time.</span></div>
+  </div>
+
+  <div class="box">
+    <span class="tag">My assumptions, so you know what is solid</span>
+    <strong>1.</strong> You have never studied any of this. <strong>2.</strong> Every price in a worked example is a <strong>made-up round number</strong>, chosen to make the sums easy. Real prices move every second. <strong>3.</strong> TP ICAP's revenue figures and product lists are from its own reports and website. <strong>4.</strong> How desks run day to day is general industry knowledge. Your desk may differ.
+  </div>
+  <p class="small" style="margin-top:auto">This is Part 3 of your TP ICAP pack. Part 1 covers the firm. Part 2 covers the role, the business model, client relationships and what to say.</p>
+</div>
+
+<!-- ============ CH 1 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 1</div>
+<h1>The big picture: four markets, one company</h1>
+
+<p class="lead">Let's start with a story, because a story sticks better than a definition. Meet <strong>Skyline Air</strong>, an imaginary British airline. Watch how one ordinary company touches all four desks.</p>
+
+<figure>
+  <figcaption>Diagram 1. One company, four markets<span>Skyline Air is invented. The needs are real</span></figcaption>
+  <div class="four">
+    <div class="node"><b>Rates</b>Skyline borrows £500 million to buy planes. The loan rate moves up and down. It wants to fix the cost.</div>
+    <div class="node"><b>FX</b>Skyline sells tickets in pounds but buys fuel and planes in dollars. It needs to swap currencies.</div>
+    <div class="node"><b>Credit</b>Skyline raises money by selling bonds to investors. Those investors worry: will Skyline pay us back?</div>
+    <div class="node"><b>Equities</b>Skyline's shares trade on the stock market. Its investors want protection in case the share price falls.</div>
+  </div>
+  <div class="flow" style="margin-top:3mm">
+    <div class="node hub"><b>Banks sit in the middle of all four</b>A bank does each of these deals with Skyline, and is then left holding risk it wants to pass on. So it calls a broker. That is Global Broking.</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  The four white boxes are four different problems the same company has. Each problem belongs to a different market. The dark box underneath is the key: a bank solves each problem for Skyline, and then needs another bank to share the risk. <strong>Finding that other bank is what a Global Broking desk does.</strong>
+</div>
+
+<h2>The four markets as four questions</h2>
+<table>
+  <thead><tr><th style="width:21%">Market</th><th style="width:39%">The question it answers</th><th>What actually gets traded</th></tr></thead>
+  <tr><td><b>Rates</b></td><td>What does it cost to borrow money for 2, 5, 10 or 30 years?</td><td>Government bonds and interest rate swaps.</td></tr>
+  <tr><td><b>FX</b></td><td>How many dollars is one pound worth, today or on a future date?</td><td>Currencies for future dates, and options on them.</td></tr>
+  <tr><td><b>Money Markets</b></td><td>What does it cost to borrow cash for a day, a week, three months?</td><td>Short-term loans and deposits between institutions.</td></tr>
+  <tr><td><b>Credit</b></td><td>How much extra should a risky borrower pay compared with a safe one?</td><td>Company bonds and default insurance.</td></tr>
+  <tr><td><b>Equities</b></td><td>What is a share of this company's future worth, and how wild might it get?</td><td>At a broker: mostly options and other contracts linked to shares.</td></tr>
+</table>
+
+<h2>How big is each one at TP ICAP?</h2>
+<figure>
+  <figcaption>Diagram 2. Global Broking by desk, first half of 2026<span>Six months of revenue. Growth is against the first half of 2025</span></figcaption>
+  <div class="bars">
+    <div class="lab">Rates<small>46% of the division</small></div><div class="track"><div class="bar" style="width:70%"></div><div class="val">£358m <small>up 10%</small></div></div>
+    <div class="lab">FX &amp; Money Markets<small>22%</small></div><div class="track"><div class="bar" style="width:33.4%"></div><div class="val">£171m <small>up 2%</small></div></div>
+    <div class="lab">Equities<small>21%</small></div><div class="track"><div class="bar" style="width:32.8%"></div><div class="val">£168m <small>up 25%</small></div></div>
+    <div class="lab">Credit<small>9%</small></div><div class="track"><div class="bar" style="width:14.3%"></div><div class="val">£73m <small>up 12%</small></div></div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Longer bar means more revenue. Look at the second and third bars. <strong>Equities is now almost level with FX and Money Markets</strong>, and it is growing more than ten times as fast. If that continues, Equities becomes the second-biggest desk. That is a sharp observation most candidates will not have made.
+</div>
+
+<h2>Where TP ICAP specialises</h2>
+<ul>
+  <li><strong>Over-the-counter derivatives.</strong> Private contracts between institutions, not shares on a public screen. That is the thread through all four desks.</li>
+  <li><strong>Interest rates above all.</strong> The Chief Executive calls interest rate derivatives "the largest asset class in TP ICAP's Global Broking business", where the firm holds "a leading position".</li>
+  <li><strong>The complicated end of each market.</strong> Simple trades go on screens. Brokers earn their fee where a trade is large, unusual or hard to price.</li>
+</ul>
+
+<div class="box">
+  <span class="tag">The one idea to carry through every chapter</span>
+  In each market there is a <strong>simple part</strong> that computers handle, and a <strong>complex part</strong> that needs a human who knows everyone. A broker lives in the complex part. As you read each chapter, ask: "which bit here is too awkward for a screen?" That is where the job is.
+</div>
+</section>
+
+<!-- ============ CH 2 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 2</div>
+<h1>The toolkit: seven ideas all four desks share</h1>
+<p class="lead">Before the four markets, a small toolkit. Learn these seven ideas once and they work everywhere.</p>
+
+<h3>1. The basis point</h3>
+<p>Interest rates move in tiny steps. Saying "nought point nought one per cent" is slow. So the market uses the <strong>basis point</strong>. People write it "bp" and say "bip".</p>
+<div class="box">
+  <span class="tag">Memorise this one line</span>
+  <strong>1 basis point = 0.01%. So 100 basis points = 1%.</strong> A rate going from 4.00% to 4.25% has risen 25 basis points.
+</div>
+
+<h3>2. Bid, offer and mid</h3>
+<ul>
+  <li><strong>Bid:</strong> the price a buyer will pay.</li>
+  <li><strong>Offer:</strong> the price a seller will accept.</li>
+  <li><strong>Mid:</strong> halfway between. Bid 20, offer 22, mid 21.</li>
+</ul>
+
+<h3>3. Notional</h3>
+<p>The headline size of a contract. A "£100 million swap" has a notional of £100 million. Nobody hands over £100 million. It is just the number the payments are worked out from.</p>
+
+<h3>4. Cash versus derivative</h3>
+<ul>
+  <li><strong>Cash:</strong> you buy the real thing. A share. A bond. Some dollars.</li>
+  <li><strong>Derivative:</strong> you sign a contract whose value follows the real thing, without owning it.</li>
+</ul>
+
+<h3>5. The four kinds of derivative</h3>
+<table>
+  <thead><tr><th style="width:18%">Type</th><th>In plain English</th><th style="width:34%">Everyday comparison</th></tr></thead>
+  <tr><td><b>Forward</b></td><td>Agree a price today for a deal that happens on a future date. Private, between two parties.</td><td>Ordering a car today at today's price, for delivery in three months.</td></tr>
+  <tr><td><b>Future</b></td><td>The same idea, but standardised and traded on an exchange.</td><td>The same order, on a standard form, through a central marketplace.</td></tr>
+  <tr><td><b>Swap</b></td><td>Two parties exchange one stream of payments for another, over months or years.</td><td>You pay my fixed phone bill. I pay your pay-as-you-go bill.</td></tr>
+  <tr><td><b>Option</b></td><td>Pay a fee now for the <strong>right, but not the duty</strong>, to buy or sell later at a set price.</td><td>A deposit that holds a house at an agreed price. You can walk away.</td></tr>
+</table>
+
+<h3>6. Hedging versus speculating</h3>
+<ul>
+  <li><strong>Hedging:</strong> doing a trade to remove a risk you already have. Skyline Air fixing its fuel cost.</li>
+  <li><strong>Speculating:</strong> doing a trade to profit from a view. A hedge fund betting rates will fall.</li>
+</ul>
+<p>Both create trades. A broker serves both and takes neither side.</p>
+
+<h3>7. Volatility</h3>
+<p>How much prices are jumping around. Calm market, low volatility. Wild market, high volatility. People shorten it to <strong>"vol"</strong>. It matters twice over: it sets the price of options, and it decides how busy a broking desk is.</p>
+
+<h2>A few bits of floor slang</h2>
+<table>
+  <thead><tr><th style="width:22%">Slang</th><th>Meaning</th></tr></thead>
+  <tr><td><b>A yard</b></td><td>One billion. Mostly used in currencies.</td></tr>
+  <tr><td><b>Cable</b></td><td>The pound against the dollar. Named after the old telegraph cable under the Atlantic.</td></tr>
+  <tr><td><b>A pip</b></td><td>The smallest normal price step in a currency. Usually the fourth decimal place.</td></tr>
+  <tr><td><b>Gilts and Treasuries</b></td><td>UK government bonds, and US government bonds.</td></tr>
+</table>
+</section>
+
+<!-- ============ CH 3 RATES ============ -->
+<section class="pb">
+<div class="kicker">Chapter 3</div>
+<h1>Rates: the price of money over time</h1>
+
+<p class="lead">This is the big one. Nearly half of Global Broking. If you understand Rates, the other three desks become much easier, because they are all built on top of it.</p>
+
+<h2>What "rates" means</h2>
+<p><strong>"Rates" is short for interest rates.</strong> An interest rate is the price of borrowing money. Borrow £100 for a year at 5%, pay back £105.</p>
+<p>Three facts turn that simple idea into a giant market:</p>
+<ol>
+  <li><strong>There is not one interest rate. There are many.</strong> Borrowing for 2 years costs a different rate from borrowing for 10 or 30.</li>
+  <li><strong>They change every second,</strong> as people change their minds about inflation and what the central bank will do.</li>
+  <li><strong>Everyone is exposed.</strong> Every mortgage, pension, loan and government budget depends on them.</li>
+</ol>
+
+<h2>Where rates come from</h2>
+<p>The <strong>central bank</strong> sets the rate for very short-term money. In the UK that is the Bank of England. Its rate was raised to 4% in November 2026 according to news reports. In the US it is the Federal Reserve, often called "the Fed".</p>
+<p>The market then decides every longer rate, by guessing where the central bank will go next. Draw all those rates on one chart and you get the most important picture in finance.</p>
+
+<figure>
+  <figcaption>Diagram 3. The yield curve<span>Illustrative shapes, not today's market</span></figcaption>
+  <svg viewBox="0 0 640 250" role="img" aria-label="Yield curve chart">
+    <line x1="70" y1="20" x2="70" y2="200" class="ax"/><line x1="70" y1="200" x2="610" y2="200" class="ax"/>
+    <text x="22" y="34" class="st">Rate</text>
+    <text x="70" y="222" class="st" text-anchor="middle">3 months</text>
+    <text x="205" y="222" class="st" text-anchor="middle">2 years</text>
+    <text x="340" y="222" class="st" text-anchor="middle">5 years</text>
+    <text x="475" y="222" class="st" text-anchor="middle">10 years</text>
+    <text x="600" y="222" class="st" text-anchor="middle">30 years</text>
+    <text x="340" y="244" class="st" text-anchor="middle">How long you borrow for</text>
+    <path d="M70,160 C200,120 340,85 600,55" class="ln1"/>
+    <path d="M70,70 C200,95 340,120 600,135" class="ln2"/>
+    <text x="600" y="38" class="sb" text-anchor="end">Normal: longer loans cost more</text>
+    <text x="600" y="162" class="sb" text-anchor="end" style="fill:#5b6672">Inverted: short loans cost more</text>
+  </svg>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Left to right is how long you borrow for. Up is a higher interest rate. The solid blue line is the usual shape: lenders want more reward for tying money up longer. The dashed grey line is an <strong>inverted</strong> curve, where short-term borrowing costs more than long-term. That usually means the market expects rates to be cut, and it has often appeared before recessions.
+</div>
+
+<h2>The two main products</h2>
+
+<h3>Product 1: government bonds</h3>
+<p>A bond is a <strong>loan you can sell on to someone else</strong>. A government borrows £100 from you, pays you interest every year, and repays the £100 at the end. In between, you can sell that bond to anyone, at whatever price the market offers.</p>
+<p>Here comes the rule that confuses everybody. Let's kill it properly.</p>
+
+<figure>
+  <figcaption>Diagram 4. The seesaw: when yields go up, bond prices go down<span>The most important rule in fixed income</span></figcaption>
+  <svg viewBox="0 0 640 170" role="img" aria-label="Seesaw showing yields up and prices down">
+    <polygon points="320,150 295,110 345,110" fill="#14304b"/>
+    <line x1="110" y1="60" x2="530" y2="140" stroke="#0f6e84" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="110" cy="60" r="12" fill="#2a78d6"/><circle cx="530" cy="140" r="12" fill="#eb6834"/>
+    <text x="110" y="32" class="sb" text-anchor="middle">Yields go UP</text>
+    <text x="530" y="112" class="sb" text-anchor="middle">Prices go DOWN</text>
+  </svg>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram, and why it is true</span>
+  A seesaw. One end goes up, the other must go down. <strong>Why?</strong> Say you own a bond paying £4 a year. Then rates rise, and brand new bonds pay £5 a year. Nobody will pay full price for your £4 bond any more. Its price must drop until it is as good a deal as the new one. Rates up, old bond prices down. Always.
+</div>
+<p><strong>Yield</strong> just means the return you earn on a bond at today's price. Bond traders talk in yields, not prices.</p>
+
+<h3>Product 2: interest rate swaps</h3>
+<p>This is TP ICAP's heartland. A swap is an agreement to <strong>exchange interest payments</strong>.</p>
+<figure>
+  <figcaption>Diagram 5. An interest rate swap<span>Nobody lends anybody the £100 million. Only the interest payments are exchanged</span></figcaption>
+  <div class="flow">
+    <div class="node"><b>Side A</b>Wants certainty. Pays a <strong>fixed</strong> rate, say 4% a year</div>
+    <div class="arrow">&harr;</div>
+    <div class="node hub"><b>The swap</b>On a notional of £100 million, for 10 years</div>
+    <div class="arrow">&harr;</div>
+    <div class="node"><b>Side B</b>Pays the <strong>floating</strong> rate, which moves with the central bank</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Two sides, one contract in the middle. Side A pays the same 4% every year. Side B pays whatever the short-term rate turns out to be. If rates rise above 4%, Side A wins, because it locked in a lower cost. If rates fall, Side B wins. <strong>The "swap rate" is the fixed rate the market will agree to today.</strong> That number is what Rates brokers shout all day.
+</div>
+<p>The floating rates have names. You will hear them constantly: <strong>SONIA</strong> for pounds, <strong>SOFR</strong> for dollars, <strong>&euro;STR</strong> for euros. They replaced an older benchmark called LIBOR.</p>
+
+<h3>The rest of the Rates family</h3>
+<p>TP ICAP's website lists these Rates products: interest rate swaps, interest rate options, government bonds, repurchase agreements, basis swaps and inflation products.</p>
+<ul>
+  <li><strong>Interest rate options:</strong> the right to lock in a rate later. Insurance against rates moving.</li>
+  <li><strong>Inflation products:</strong> swaps where one side pays whatever inflation turns out to be. Pension funds use these heavily.</li>
+  <li><strong>Basis swaps:</strong> swapping one floating rate for another.</li>
+  <li><strong>Repurchase agreements, or "repos":</strong> borrowing cash overnight and handing over a bond as security.</li>
+</ul>
+
+<h2>Who trades Rates, and why</h2>
+<table>
+  <thead><tr><th style="width:27%">Who</th><th>Why they need it</th></tr></thead>
+  <tr><td><b>Banks</b></td><td>They lend at fixed mortgage rates but pay savers floating rates. Swaps close that gap.</td></tr>
+  <tr><td><b>Pension funds and insurers</b></td><td>They owe pensions for decades. They need assets that behave the same way as those promises.</td></tr>
+  <tr><td><b>Companies</b></td><td>To fix the cost of their borrowing. Skyline Air's plane loan.</td></tr>
+  <tr><td><b>Hedge funds</b></td><td>To bet on what central banks will do next.</td></tr>
+  <tr><td><b>Governments</b></td><td>They sell bonds to fund public spending.</td></tr>
+</table>
+
+<h2>What broking Rates looks like day to day</h2>
+<ul>
+  <li><strong>Desks are split by currency and product.</strong> A sterling swaps desk. A euro swaps desk. An inflation desk. An options desk.</li>
+  <li><strong>Prices are quoted as rates.</strong> "Ten-year sterling, 4.20 bid, 4.21 offered."</li>
+  <li><strong>The diary rules the day.</strong> Central bank meetings, inflation figures and US jobs numbers cause sudden bursts. In between it can be quiet.</li>
+  <li><strong>Many trades are "curve trades".</strong> A client bets on the gap between two points on the yield curve. The most famous is <strong>"2s10s"</strong>: the 10-year rate minus the 2-year rate.</li>
+  <li><strong>After the trade,</strong> most swaps are handed to a clearing house, which stands between the two banks so neither has to worry about the other failing.</li>
+</ul>
+<div class="box">
+  <span class="tag">Which bit is too awkward for a screen?</span>
+  A standard 10-year swap in a normal size trades happily on a screen. But a very large trade, a trade with odd dates, an inflation swap, or a package of several swaps at once needs someone to quietly find the other side. <strong>That is the Rates broker's job.</strong>
+</div>
+
+<h2>Rates maths you would actually use</h2>
+<table>
+  <thead><tr><th style="width:33%">The sum</th><th>How to do it</th><th style="width:25%">Answer</th></tr></thead>
+  <tr><td>Turn 0.35% into basis points</td><td>Multiply by 100.</td><td class="n">35bp</td></tr>
+  <tr><td>10-year rate is 4.60%, 2-year is 4.15%. What is 2s10s?</td><td>Subtract. 4.60 minus 4.15 is 0.45%.</td><td class="n">45bp</td></tr>
+  <tr><td>One year's interest on £50m at 4%</td><td>4% of 50 million.</td><td class="n">£2 million</td></tr>
+  <tr><td>Three months' interest on £50m at 4%</td><td>Three months is a quarter of a year. £2 million divided by 4.</td><td class="n">£500,000</td></tr>
+  <tr><td>What is 1bp on £100m for one year?</td><td>£100m times 0.0001.</td><td class="n">£10,000</td></tr>
+  <tr><td>Mid of 4.205 and 4.215</td><td>Halfway between.</td><td class="n">4.21</td></tr>
+</table>
+<div class="box">
+  <span class="tag">The trick worth learning</span>
+  <strong>One basis point on one million is 100.</strong> Scale up from there. On £10 million it is £1,000. On £100 million it is £10,000. That is for one year. A 10-year swap is hit every year for ten years, so each basis point is worth far more: very roughly <strong>£80,000 per basis point on a £100 million 10-year swap</strong>. Traders call this number the "DV01". It is why a single basis point matters.
+</div>
+
+<h2>Is Rates for you?</h2>
+<ul>
+  <li><strong>You would enjoy it if:</strong> you like economics, central banks, inflation and the big picture.</li>
+  <li><strong>The maths flavour:</strong> small numbers, big notionals, lots of subtraction and basis points.</li>
+  <li><strong>At TP ICAP:</strong> the largest desk and the firm's core strength. £635 million in 2025.</li>
+</ul>
+</section>
+
+<!-- ============ CH 4 FX ============ -->
+<section class="pb">
+<div class="kicker">Chapter 4</div>
+<h1>FX and Money Markets: the price of one money in another</h1>
+
+<p class="lead">FX stands for <strong>foreign exchange</strong>. You have already traded FX. Every time you changed pounds into euros for a holiday, that was an FX trade. Now imagine doing it in billions.</p>
+
+<h2>How a currency price works</h2>
+<p>Currencies come in pairs. One price tells you how much of the second currency buys one unit of the first.</p>
+<div class="box">
+  <span class="tag">Reading a currency price</span>
+  <strong>GBP/USD at 1.3000</strong> means one pound buys 1.30 dollars. If it goes to 1.3100, the pound got stronger. If it drops to 1.2900, the pound got weaker.
+</div>
+<p>London is the world capital of this market. About <strong>38% of all currency trading on earth</strong> happens in the UK, worth around $4.7 trillion a day.</p>
+
+<h2>The FX products, from simple to clever</h2>
+<table>
+  <thead><tr><th style="width:21%">Product</th><th>What it is</th><th style="width:29%">Who mostly trades it</th></tr></thead>
+  <tr><td><b>Spot</b></td><td>Swap currencies now. In practice it settles two working days later.</td><td>Mostly on electronic screens. Little voice broking.</td></tr>
+  <tr><td><b>Forward</b></td><td>Agree today's rate for an exchange on a future date.</td><td>Companies and funds locking in a rate.</td></tr>
+  <tr><td><b>FX swap</b></td><td>Swap currencies today and agree to swap them back later. Really a way of borrowing one currency using another.</td><td>Banks managing their cash. The most traded FX product in the world.</td></tr>
+  <tr><td><b>Non-deliverable forward (NDF)</b></td><td>A forward for a currency you cannot freely move in and out of a country. Only the profit or loss is paid, in dollars.</td><td>Anyone dealing with emerging markets, such as India, Korea or Brazil.</td></tr>
+  <tr><td><b>FX option</b></td><td>The right, not the duty, to exchange at a set rate later.</td><td>Hedgers who want protection but also want to keep the upside.</td></tr>
+</table>
+<p>TP ICAP's website lists its FX products as: <strong>FX options, forward FX, non-deliverable forwards and emerging market interest rate swaps</strong>, across major and emerging market currencies. Notice what is missing: spot. That tells you where the broker adds value.</p>
+
+<div class="box">
+  <span class="tag">Which bit is too awkward for a screen?</span>
+  Spot trading in big currencies is almost entirely electronic. So FX brokers concentrate on <strong>forwards, emerging market currencies and options</strong>, where prices are harder to find and local knowledge counts.
+</div>
+
+<h2>The idea that links FX to Rates</h2>
+<p>Here is a lovely piece of logic. A forward rate is <strong>not a forecast</strong>. It is today's rate adjusted for the difference in interest rates between the two countries.</p>
+<figure>
+  <figcaption>Diagram 6. Why the forward price differs from today's price<span>Made-up round numbers</span></figcaption>
+  <div class="flow">
+    <div class="node"><b>Today</b>£1 buys $1.3000. UK interest rate 4%. US interest rate 5%</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node hub"><b>The gap</b>Dollars earn 1% more than pounds over the year</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node"><b>One year forward</b>So the fair forward price is about 1% higher: roughly $1.3125</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram, and why it is true</span>
+  Left box is today. Right box is the price for a deal one year from now. The middle box is the reason they differ. If you hold dollars for a year you earn 1% more interest than someone holding pounds. The forward price has to cancel that advantage out, or there would be free money. So the forward sits about 1% away from today's price. <strong>This is why FX and interest rates are welded together.</strong>
+</div>
+
+<h2>What "Money Markets" means</h2>
+<p>Money markets are where institutions <strong>borrow and lend cash for short periods</strong>: overnight, a week, three months, up to a year.</p>
+<p>Every bank ends each day with too much cash or too little. The money market is where they fix that. It is the plumbing of the financial system. It sits beside FX because an FX swap is, underneath, a short-term loan in another currency.</p>
+
+<h2>What broking FX looks like day to day</h2>
+<ul>
+  <li><strong>It never really closes.</strong> Trading passes from Asia to London to New York, five days a week.</li>
+  <li><strong>Desks are split by region and product.</strong> Major currency forwards. Emerging markets. Options.</li>
+  <li><strong>News moves it instantly.</strong> A central bank surprise, an election, a war.</li>
+  <li><strong>Prices are quoted in pips.</strong> For forwards, brokers quote "points": how many pips the forward is away from spot.</li>
+  <li><strong>The 4pm London "fix"</strong> is a daily reference price many funds use. Activity bunches around it.</li>
+</ul>
+
+<h2>FX maths you would actually use</h2>
+<table>
+  <thead><tr><th style="width:36%">The sum</th><th>How to do it</th><th style="width:22%">Answer</th></tr></thead>
+  <tr><td>Convert £10m to dollars at 1.3250</td><td>10 million times 1.3250.</td><td class="n">$13.25 million</td></tr>
+  <tr><td>What is one pip on £1m of GBP/USD?</td><td>1 million times 0.0001.</td><td class="n">$100</td></tr>
+  <tr><td>What is one pip on a yard?</td><td>1 billion times 0.0001.</td><td class="n">$100,000</td></tr>
+  <tr><td>A 2-pip spread on £50m costs?</td><td>$100 per pip per million. 100 times 2 times 50.</td><td class="n">$10,000</td></tr>
+  <tr><td>1.3000 to 1.3130 is what % move?</td><td>0.0130 divided by 1.30.</td><td class="n">1%</td></tr>
+  <tr><td>EUR/USD 1.17, GBP/USD 1.30. EUR/GBP?</td><td>Divide: 1.17 by 1.30.</td><td class="n">0.90</td></tr>
+</table>
+<div class="box">
+  <span class="tag">The trick worth learning</span>
+  It is the same trick as Rates. <strong>One pip on one million is 100.</strong> A pip and a basis point are both "one ten-thousandth", so the same mental sum works on both desks.
+</div>
+
+<h2>Is FX for you?</h2>
+<ul>
+  <li><strong>You would enjoy it if:</strong> you follow world news, politics and different countries, or speak another language.</li>
+  <li><strong>The maths flavour:</strong> fast multiplication and division with four decimal places.</li>
+  <li><strong>At TP ICAP:</strong> the second-biggest desk, but the slowest growing. £321 million in 2025, up 2%. The firm blamed softer activity in some emerging markets.</li>
+</ul>
+</section>
+
+<!-- ============ CH 5 EQUITIES ============ -->
+<section class="pb">
+<div class="kicker">Chapter 5</div>
+<h1>Equities: not what you think it is</h1>
+
+<p class="lead">You said: "I know equities is stocks. You buy them on the market. But what does Global Broking mean in equities?" Brilliant question. It is exactly the right thing to be confused about.</p>
+
+<h2>The answer</h2>
+<div class="box">
+  <span class="tag">In plain English</span>
+  Buying and selling ordinary shares happens on public exchanges, by computer, in fractions of a second. Nobody needs a voice broker for that. So Global Broking's equities desks mostly do something else: <strong>equity derivatives</strong>. These are contracts whose value follows shares or stock indices, rather than the shares themselves.
+</div>
+<p>The firm said its 2025 equities growth was "primarily notable in derivative products", driven by clients wanting to "hedge and risk manage portfolios". Its regulated UK venue lists equity swaps, options and forwards.</p>
+<p>So where do big blocks of actual shares get traded? That is <strong>Liquidnet</strong>, a different division. Do not mix the two up.</p>
+
+<h2>First, the basics</h2>
+<ul>
+  <li><strong>A share</strong> is a slice of ownership in a company. "Equity" and "stock" mean the same.</li>
+  <li><strong>An index</strong> is a basket of shares used as a scoreboard. The FTSE 100 tracks the 100 biggest companies listed in London. The S&amp;P 500 tracks 500 large US companies.</li>
+</ul>
+
+<h2>The main product: options</h2>
+<p>An option is a contract that gives you a right. There are two kinds.</p>
+<table>
+  <thead><tr><th style="width:16%">Type</th><th>What it gives you</th><th style="width:38%">When you would want it</th></tr></thead>
+  <tr><td><b>Call</b></td><td>The right to <strong>buy</strong> at a set price.</td><td>You think the price will rise.</td></tr>
+  <tr><td><b>Put</b></td><td>The right to <strong>sell</strong> at a set price.</td><td>You fear the price will fall. This is insurance.</td></tr>
+</table>
+<p>Three words describe every option:</p>
+<ul>
+  <li><strong>Strike:</strong> the set price you can buy or sell at.</li>
+  <li><strong>Expiry:</strong> the date the right runs out.</li>
+  <li><strong>Premium:</strong> what you pay for the option up front.</li>
+</ul>
+
+<figure>
+  <figcaption>Diagram 7. What a call option pays<span>Made-up numbers: strike 100, premium 5</span></figcaption>
+  <svg viewBox="0 0 640 260" role="img" aria-label="Call option payoff chart">
+    <line x1="80" y1="20" x2="80" y2="225" class="ax"/><line x1="80" y1="140" x2="610" y2="140" class="ax"/>
+    <text x="18" y="34" class="st">Profit</text><text x="24" y="218" class="st">Loss</text>
+    <text x="606" y="160" class="st" text-anchor="end">Share price on expiry day</text>
+    <path d="M80,180 L330,180 L570,36" class="ln1"/>
+    <line x1="330" y1="134" x2="330" y2="146" class="ax"/>
+    <text x="330" y="164" class="st" text-anchor="middle">Strike 100</text>
+    <circle cx="397" cy="140" r="6" fill="#eb6834"/>
+    <text x="384" y="120" class="sb" text-anchor="end">Breakeven 105</text>
+    <text x="96" y="204" class="sb">The most you can lose is the premium: 5</text>
+    <text x="455" y="62" class="sb" text-anchor="end">Profit keeps growing</text>
+  </svg>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Left to right is where the share price ends up. Above the middle line is profit, below is loss. If the share finishes below 100, your right to buy at 100 is worthless, and you lose the 5 you paid. That is the flat part. Above 100 you start winning it back. At <strong>105</strong>, the orange dot, you break even: strike plus premium. Beyond that, the profit has no ceiling. <strong>Small fixed loss, large possible gain.</strong> That shape is why options exist.
+</div>
+
+<h2>Why volatility is everything here</h2>
+<p>What should an option cost? It depends mostly on how wild the share is expected to be. A calm share rarely moves far, so the option is cheap. A wild share might do anything, so the option is expensive.</p>
+<p>So option traders do not really trade prices. <strong>They trade volatility.</strong> An equity derivatives broker will quote an option "in vol", as a percentage. There is even a famous index of expected stock market volatility called the <strong>VIX</strong>, nicknamed the fear gauge.</p>
+
+<h3>Two words you will hear</h3>
+<ul>
+  <li><strong>Delta:</strong> how much the option's price moves when the share moves by 1. A delta of 0.5 means the option moves about half as much as the share.</li>
+  <li><strong>Vega:</strong> how much the option's price moves when volatility changes.</li>
+</ul>
+
+<h3>The rest of the family</h3>
+<ul>
+  <li><strong>Equity swaps:</strong> one side receives the full return of a share or index without owning it, and pays a financing cost in exchange.</li>
+  <li><strong>Dividend products:</strong> contracts on how much companies will pay out in dividends.</li>
+  <li><strong>Strategies:</strong> options combined in packages. A <strong>straddle</strong> is a call and a put together: a bet that the price moves a lot in either direction.</li>
+</ul>
+
+<div class="box">
+  <span class="tag">Which bit is too awkward for a screen?</span>
+  A small option trade goes straight onto an exchange screen. But a huge one, or a package of three or four options traded together, would move the market if shown openly. A broker privately finds the other side and agrees one price for the whole package. The finished trade is then reported to the exchange. <strong>That negotiation is the equity derivatives broker's job.</strong>
+</div>
+
+<h2>What broking Equities looks like day to day</h2>
+<ul>
+  <li><strong>Desks are split by product and region.</strong> Index options. Single-stock options. Swaps. Europe, US, Asia.</li>
+  <li><strong>Clients are</strong> banks' derivatives desks, market-making firms and hedge funds.</li>
+  <li><strong>Busy times:</strong> company results seasons, big falls in the market, and monthly expiry days.</li>
+  <li><strong>You talk about</strong> where an index is, what volatility is doing, and which strategies clients are asking for.</li>
+</ul>
+
+<h2>Equities maths you would actually use</h2>
+<table>
+  <thead><tr><th style="width:38%">The sum</th><th>How to do it</th><th style="width:20%">Answer</th></tr></thead>
+  <tr><td>An index at 9,000 falls 2%. How many points?</td><td>1% is 90. Double it.</td><td class="n">180 points</td></tr>
+  <tr><td>Call: strike 100, premium 5. Breakeven?</td><td>Strike plus premium.</td><td class="n">105</td></tr>
+  <tr><td>Put: strike 100, premium 4. Breakeven?</td><td>Strike minus premium.</td><td class="n">96</td></tr>
+  <tr><td>Volatility is 16% a year. Typical daily move?</td><td>Divide by 16.</td><td class="n">about 1%</td></tr>
+  <tr><td>Volatility is 32% a year. Typical daily move?</td><td>Divide by 16.</td><td class="n">about 2%</td></tr>
+  <tr><td>Delta 0.5 on options over 10,000 shares behaves like?</td><td>0.5 times 10,000.</td><td class="n">5,000 shares</td></tr>
+</table>
+<div class="box">
+  <span class="tag">The trick worth learning: the rule of 16</span>
+  Volatility is quoted per year, but people think in days. <strong>Divide yearly volatility by 16 to get a typical daily move.</strong> It works because there are about 256 trading days in a year, and the square root of 256 is 16. Say this in an interview and you will sound like you have sat on a desk.
+</div>
+
+<h2>Is Equities for you?</h2>
+<ul>
+  <li><strong>You would enjoy it if:</strong> you follow companies and stock markets, and you like puzzles and probability.</li>
+  <li><strong>The maths flavour:</strong> percentages, breakevens, and thinking in "what if".</li>
+  <li><strong>At TP ICAP:</strong> the fastest-growing desk. Up 25% in the first half of 2026. The Vantage Capital Markets deal added more equity derivatives brokers.</li>
+</ul>
+</section>
+
+<!-- ============ CH 6 CREDIT ============ -->
+<section class="pb">
+<div class="kicker">Chapter 6</div>
+<h1>Credit: the price of trust</h1>
+
+<p class="lead">Credit is the market for <strong>lending to companies</strong>, and for the risk that they do not pay it back. If Rates is about the price of safe borrowing, Credit is about the extra you charge for risky borrowing.</p>
+
+<h2>The core idea: the credit spread</h2>
+<p>When the UK government borrows, lenders are confident of being repaid. When Skyline Air borrows, they are less sure. So Skyline has to pay more. That extra is the <strong>credit spread</strong>.</p>
+<figure>
+  <figcaption>Diagram 8. What a company's borrowing cost is made of<span>Made-up round numbers</span></figcaption>
+  <div class="stack">
+    <div class="c1" style="width:75%">4.5%<br>The safe rate</div>
+    <div class="c2" style="width:25%">1.5%<br>Credit spread</div>
+  </div>
+  <div class="legend">
+    <span><i class="c1"></i>What a safe government pays. This comes from the Rates market</span>
+    <span><i class="c2"></i>The extra a company pays for being riskier. 1.5% is 150 basis points</span>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  The whole bar is the 6% interest a company pays on its bond. The blue part is what even a safe borrower pays. The orange part is the reward lenders demand for the risk. <strong>Credit traders care almost entirely about the orange part.</strong> When people trust a company more, the orange part shrinks. That is called spreads "tightening". When they worry, it grows. That is "widening".
+</div>
+
+<h2>The two main products</h2>
+
+<h3>Product 1: corporate bonds</h3>
+<p>The same idea as a government bond, but issued by a company. You lend, you receive interest, you get your money back at the end, unless the company fails.</p>
+<p><strong>Credit ratings</strong> grade how safe a borrower is. Agencies such as Moody's and S&amp;P give the grades.</p>
+<table>
+  <thead><tr><th style="width:26%">Group</th><th style="width:26%">Grades</th><th>What it means</th></tr></thead>
+  <tr><td><b>Investment grade</b></td><td>AAA down to BBB</td><td>Considered safe. Lower spread.</td></tr>
+  <tr><td><b>High yield</b></td><td>BB and below</td><td>Riskier. Higher spread. Sometimes called "junk".</td></tr>
+</table>
+
+<h3>Product 2: credit default swaps</h3>
+<p>A credit default swap, or <strong>CDS</strong>, is <strong>insurance against a company failing to repay</strong>. You pay a yearly fee. If the company defaults, the seller of the insurance covers your loss.</p>
+<p>The fee is quoted in basis points per year. "Skyline CDS at 150" means insuring £10 million of Skyline's debt costs 1.5% of £10 million, which is £150,000 a year.</p>
+<p>There are also CDS <strong>indices</strong>: one contract that insures a whole basket of companies. TP ICAP's regulated UK venue lists CDS indices plus CDS on single companies and on governments.</p>
+
+<h2>Why Credit needs humans more than any other desk</h2>
+<p>Here is something that surprises people. A company has <strong>one share</strong> but may have <strong>dozens of different bonds</strong>, each with its own interest rate and end date. Most of those bonds do not trade on any given day.</p>
+<div class="box">
+  <span class="tag">Which bit is too awkward for a screen?</span>
+  Nearly all of it. With thousands of bonds and few of them trading daily, there is often no price on a screen at all. Someone has to know who owns the bond, who wants it, and what it is worth. <strong>Credit is the most relationship-driven of the four desks.</strong>
+</div>
+<p>This is also why TP ICAP is pushing into credit. It bought Neptune Networks, which gathers data from banks on which bonds they want to buy or sell. In June 2026 it launched <strong>RealQ</strong>, a platform connecting those banks with investors.</p>
+
+<h2>What broking Credit looks like day to day</h2>
+<ul>
+  <li><strong>Desks are split by type of borrower.</strong> Investment grade. High yield. Banks and insurers. Emerging markets. CDS.</li>
+  <li><strong>News is company by company.</strong> Results, a rating change, a takeover, a profit warning.</li>
+  <li><strong>New bonds matter.</strong> When a company sells a new bond, trading in its older bonds picks up.</li>
+  <li><strong>The typical question:</strong> "Where can I find a buyer for 10 million of this bond?"</li>
+</ul>
+
+<h2>Credit maths you would actually use</h2>
+<table>
+  <thead><tr><th style="width:40%">The sum</th><th>How to do it</th><th style="width:20%">Answer</th></tr></thead>
+  <tr><td>Company bond yields 6.2%. Government bond yields 4.7%. Spread?</td><td>Subtract.</td><td class="n">150bp</td></tr>
+  <tr><td>CDS at 150bp on £10m. Yearly cost?</td><td>1.5% of 10 million.</td><td class="n">£150,000</td></tr>
+  <tr><td>Bond price 98.50. What do you pay for £5m face value?</td><td>98.5% of 5 million.</td><td class="n">£4.925 million</td></tr>
+  <tr><td>A 5% coupon on £10m pays how much a year?</td><td>5% of 10 million.</td><td class="n">£500,000</td></tr>
+</table>
+<div class="box">
+  <span class="tag">The trick worth learning</span>
+  Bond prices are quoted <strong>out of 100</strong>. A price of 98.50 means you pay 98.5p for every £1 the company owes. Below 100 is "at a discount". Above 100 is "at a premium". A price far below 100 means the market doubts it will be repaid in full.
+</div>
+
+<h2>Is Credit for you?</h2>
+<ul>
+  <li><strong>You would enjoy it if:</strong> you like digging into individual companies, and you are a natural relationship-builder.</li>
+  <li><strong>At TP ICAP:</strong> the smallest desk, £129 million in 2025, but growing in double digits and the focus of fresh investment.</li>
+</ul>
+</section>
+
+<!-- ============ CH 7 LINKS ============ -->
+<section class="pb">
+<div class="kicker">Chapter 7</div>
+<h1>How everything links together</h1>
+
+<p class="lead">You asked the best question of all: how does it all connect? Here is the map. Once you see it, the four desks stop being four subjects and become one.</p>
+
+<figure>
+  <figcaption>Diagram 9. The map of the four markets<span>Rates is the foundation. The others are built on it</span></figcaption>
+  <div class="flow"><div class="node hub"><b>The safe interest rate</b>Set by central banks and the Rates market. The price of money with no risk</div></div>
+  <div class="mapdown">&darr;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&darr;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&darr;</div>
+  <div class="flow">
+    <div class="node"><b>FX</b>The gap between two countries' rates sets the forward price of their currencies</div>
+    <div class="node"><b>Credit</b>The safe rate <strong>plus</strong> a spread for the risk of not being repaid</div>
+    <div class="node"><b>Equities</b>Future profits, valued using the safe rate plus a reward for risk</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Start at the dark box on top. That is the safe interest rate, the foundation. The three arrows show that each other market <strong>starts from that number</strong> and adds something. FX compares two of them. Credit adds a spread. Equities adds a bigger reward for bigger risk. <strong>Move the top box, and all three below it move.</strong>
+</div>
+
+<h2>The five links, one at a time</h2>
+<ol>
+  <li><strong>Rates to FX.</strong> If UK rates rise compared with US rates, pounds become more rewarding to hold. Money flows in. The pound tends to rise.</li>
+  <li><strong>Rates to Credit.</strong> A company's borrowing cost is the safe rate plus its spread. If the safe rate rises, every company's cost rises with it.</li>
+  <li><strong>Rates to Equities.</strong> A share is worth the profits it will earn in future. Higher rates make future money worth less today. So higher rates tend to push share prices down.</li>
+  <li><strong>Credit to Equities.</strong> They are two views of the same company. Lenders get paid first. Shareholders get what is left. When a company is in trouble, its spread widens <strong>and</strong> its share price falls.</li>
+  <li><strong>Fear links everything.</strong> On a scared day, credit spreads widen, shares fall, volatility jumps, and money runs to safe currencies like the dollar.</li>
+</ol>
+
+<h2>One headline, four desks</h2>
+<p>This is the skill that makes you sound like you belong. Take a single news story and walk it across all four desks.</p>
+<table>
+  <thead><tr><th style="width:19%">Headline</th><th>Rates</th><th>FX</th><th>Credit</th><th>Equities</th></tr></thead>
+  <tr><td><b>The Bank of England raises rates by surprise</b></td><td>Short-term rates jump. Swaps are repriced. Very busy.</td><td>The pound usually rises.</td><td>Bond prices fall. Spreads may widen if borrowers look stretched.</td><td>Shares usually fall. Volatility rises.</td></tr>
+  <tr><td><b>A big company warns its profits will be lower</b></td><td>Little effect.</td><td>Little effect.</td><td>Its bonds fall. Its CDS widens.</td><td>Its share falls. Options on it get expensive.</td></tr>
+  <tr><td><b>A geopolitical shock, like the 2026 Middle East conflict</b></td><td>Inflation fears. Rates swing.</td><td>Safe currencies like the dollar gain.</td><td>Spreads widen as investors get nervous.</td><td>Shares drop, then may recover. Volatility spikes.</td></tr>
+  <tr><td><b>Inflation comes in higher than expected</b></td><td>Rates rise as markets expect a tougher central bank.</td><td>That currency often strengthens.</td><td>Borrowing costs rise for companies.</td><td>Shares that depend on cheap borrowing fall most.</td></tr>
+</table>
+<div class="box read">
+  <span class="tag">How to read this table</span>
+  Pick a row. Read across. Each cell is what that desk would see. Notice the first and third rows light up <strong>every</strong> desk, while the second row only touches two. These are typical reactions, not laws. Markets sometimes do the opposite.
+</div>
+
+<h2>Why this matters to a broker</h2>
+<ul>
+  <li><strong>The clients are the same banks.</strong> A bank has a rates desk, an FX desk, a credit desk and an equities desk. TP ICAP serves all of them.</li>
+  <li><strong>One event makes all four busy at once.</strong> That is why the firm's best quarters come after big shocks.</li>
+  <li><strong>The desks are not equally busy at the same time.</strong> In the first half of 2026, Equities grew 25% while FX grew 2%. Having all four smooths the firm's income.</li>
+</ul>
+
+<h2>The four desks side by side</h2>
+<table>
+  <thead><tr><th style="width:17%"></th><th>Rates</th><th>FX &amp; Money Markets</th><th>Equities</th><th>Credit</th></tr></thead>
+  <tr><td><b>Core idea</b></td><td>Price of money over time</td><td>Price of one money in another</td><td>Value and wildness of companies</td><td>Price of the risk of not being repaid</td></tr>
+  <tr><td><b>Quoted in</b></td><td>Rates and basis points</td><td>Pips and points</td><td>Volatility and price</td><td>Spread and price out of 100</td></tr>
+  <tr><td><b>Main driver</b></td><td>Central banks and inflation</td><td>Rate gaps and world events</td><td>Company news and fear</td><td>Company health</td></tr>
+  <tr><td><b>Key products</b></td><td>Swaps, government bonds</td><td>Forwards, NDFs, options</td><td>Options, equity swaps</td><td>Company bonds, CDS</td></tr>
+  <tr><td><b>How electronic</b></td><td>Simple swaps yes, complex no</td><td>Spot fully, the rest partly</td><td>Small trades yes, packages no</td><td>The least</td></tr>
+  <tr><td><b>2025 revenue</b></td><td>£635m</td><td>£321m</td><td>£266m</td><td>£129m</td></tr>
+  <tr><td><b>Growth, first half 2026</b></td><td>Up 10%</td><td>Up 2%</td><td>Up 25%</td><td>Up 12%</td></tr>
+</table>
+</section>
+
+<!-- ============ CH 8 WHERE ============ -->
+<section class="pb">
+<div class="kicker">Chapter 8</div>
+<h1>Do you want this job, and where would you specialise?</h1>
+
+<p class="lead">You said you want to work out whether you actually want this. Good. Let's be honest about it rather than sell it to you.</p>
+
+<h2>What all four desks have in common</h2>
+<p>Whichever desk you land on, the job underneath is the same. You talk to clients all day. You find the other side. You get told "no" a lot. You are measured on revenue. The product changes. The job does not.</p>
+<p>So the first question is not "which desk?" It is <strong>"do I want to be a broker?"</strong> Part 2, Chapter 1 has that self-check. If the answer is yes, then choose the flavour.</p>
+
+<h2>Find your desk</h2>
+<table>
+  <thead><tr><th style="width:36%">If this sounds like you...</th><th style="width:18%">Lean towards</th><th>Why</th></tr></thead>
+  <tr><td>"I read about inflation and central banks for fun. I like the big picture."</td><td><b>Rates</b></td><td>It is pure economics, and it is the firm's largest and strongest desk.</td></tr>
+  <tr><td>"I follow world news and politics. I like different countries and cultures."</td><td><b>FX</b></td><td>Every election and every crisis shows up in currencies first.</td></tr>
+  <tr><td>"I follow companies and stock markets. I enjoy probability and puzzles."</td><td><b>Equities</b></td><td>Options are a puzzle about how wild things might get. Fastest-growing desk.</td></tr>
+  <tr><td>"I like working out whether a business is healthy. I build trust with people easily."</td><td><b>Credit</b></td><td>The least electronic desk. Relationships and company knowledge matter most.</td></tr>
+</table>
+
+<h2>My honest view on each</h2>
+<p>This is opinion, built from the numbers.</p>
+<ul>
+  <li><strong>Rates</strong> is the safest bet on the firm's strength. It is where TP ICAP leads. The flip side: big established desks can be harder for a junior to break into.</li>
+  <li><strong>Equities</strong> has the momentum. Growth of 25%, a fresh acquisition, and new desks moving into the division. Growing desks tend to need more juniors.</li>
+  <li><strong>Credit</strong> is small but is where the firm is building something new with RealQ. It is also the desk where a human broker is hardest to replace with a screen.</li>
+  <li><strong>FX and Money Markets</strong> is the slowest-growing, and the most exposed to electronic trading. It is still a huge market, and emerging market expertise is valuable.</li>
+</ul>
+
+<div class="box say">
+  <span class="tag">The most important truth about choosing</span>
+  In practice, your desk is decided less by the product and more by <strong>the people</strong>. A great senior broker who wants to teach you is worth more than the "right" asset class. Use the rotation to find the desk where you click with the team. And in an interview, never sound closed: say you are open, with a lean.
+</div>
+<div class="box say">
+  <span class="tag">Say this in your interview</span>
+  "I'm open-minded about the desk, because I know I'll learn most from the rotation. But right now I lean towards [desk], because [your reason]. I also noticed [one fact about that desk at TP ICAP]."
+</div>
+
+<h2>A free taste test this week</h2>
+<ol>
+  <li><strong>Follow one headline across four markets.</strong> Pick a story. Guess what Rates, FX, Credit and Equities did. Then check.</li>
+  <li><strong>Do ten minutes of mental maths a day.</strong> Use the drills in the next chapter.</li>
+  <li><strong>Explain a swap to a friend in 30 seconds.</strong> If they understand, you understand.</li>
+  <li><strong>Notice how you feel.</strong> If following markets feels like fun, that tells you something. If it feels like homework, that tells you something too.</li>
+</ol>
+</section>
+
+<!-- ============ CH 9 QUESTIONS ============ -->
+<section class="pb">
+<div class="kicker">Chapter 9</div>
+<h1>What you need to know, and what they might ask</h1>
+
+<p class="lead">Nobody expects an intern to be an expert. They expect you to know the basics cold, be quick with numbers, and be curious. Here is exactly where the bar sits.</p>
+
+<h2>The baseline: twelve things to know cold</h2>
+<ol>
+  <li>A basis point is 0.01%.</li>
+  <li>Bid is what a buyer pays. Offer is what a seller accepts.</li>
+  <li>When yields rise, bond prices fall.</li>
+  <li>A swap exchanges fixed interest payments for floating ones.</li>
+  <li>The yield curve shows the interest rate for each length of loan.</li>
+  <li>GBP/USD at 1.30 means one pound buys 1.30 dollars.</li>
+  <li>A forward fixes today's rate for a future date. Its price reflects the interest rate gap.</li>
+  <li>A call is the right to buy. A put is the right to sell.</li>
+  <li>Options get more expensive when volatility rises.</li>
+  <li>A credit spread is the extra yield a risky borrower pays over a safe one.</li>
+  <li>A CDS is insurance against a borrower defaulting.</li>
+  <li>A broker arranges trades and takes no risk. A trader takes the risk.</li>
+</ol>
+
+<h2>Questions they might ask, with answers</h2>
+<p>Anonymous candidate reports for past TP ICAP broker interviews mention <strong>"why brokerage"</strong>, <strong>quick mental maths</strong>, the <strong>difference between a trader and a broker</strong>, <strong>voice versus electronic broking</strong>, and <strong>what technology the firm uses</strong>. Some later stages included a numerical test, a trading simulation and a group presentation. Treat that as a guide. These are more likely in a manager interview than in your three-question video.</p>
+
+<table>
+  <thead><tr><th style="width:33%">Question</th><th>A good short answer</th></tr></thead>
+  <tr><td><b>What is the difference between a broker and a trader?</b></td><td>"A trader buys and sells with their firm's money and carries the risk. A broker sits between traders, finds the other side, and earns commission without taking risk."</td></tr>
+  <tr><td><b>Voice versus electronic broking?</b></td><td>"Electronic suits simple, frequent trades on a screen. Voice suits large or complex trades that need negotiation. TP ICAP combines them in a hybrid model through its Fusion platform."</td></tr>
+  <tr><td><b>What technology does the firm use?</b></td><td>"Fusion, its electronic platform across asset classes. It also has AI tools such as First Mate, and RealQ in credit."</td></tr>
+  <tr><td><b>What happens to bond prices when interest rates rise?</b></td><td>"They fall. New bonds pay more, so older bonds paying less must drop in price to stay attractive."</td></tr>
+  <tr><td><b>What is an interest rate swap? Who uses one?</b></td><td>"Two parties exchange fixed interest payments for floating ones. A company with a floating-rate loan might use one to fix its costs."</td></tr>
+  <tr><td><b>What is the yield curve?</b></td><td>"A line showing the interest rate for each length of borrowing. Normally it slopes up. When it inverts, the market expects rates to fall."</td></tr>
+  <tr><td><b>Why is a forward FX rate different from spot?</b></td><td>"Because of the gap between the two countries' interest rates. It is not a forecast."</td></tr>
+  <tr><td><b>What is the difference between a call and a put?</b></td><td>"A call is the right to buy at a set price. A put is the right to sell. A put works like insurance."</td></tr>
+  <tr><td><b>What is a credit spread?</b></td><td>"The extra yield a company pays over a safe government bond, for the risk it might not repay."</td></tr>
+  <tr><td><b>If equities trade on an exchange, why does Global Broking have an equities desk?</b></td><td>"Because it mainly brokers equity derivatives. Large or multi-part option trades are negotiated privately, then reported to the exchange."</td></tr>
+  <tr><td><b>The central bank raises rates unexpectedly. What happens?</b></td><td>"Short-term rates jump, the currency usually strengthens, bond prices fall and shares usually fall. All four desks get busy."</td></tr>
+  <tr><td><b>Which desk interests you most?</b></td><td>Use the "open, with a lean" line from Chapter 8, plus one fact about that desk.</td></tr>
+</table>
+
+<h2>The mental maths brokers do most</h2>
+<p>Brokers do the same handful of sums hundreds of times a day. None is hard. All must be fast.</p>
+<table>
+  <thead><tr><th style="width:31%">Type</th><th>Example</th><th style="width:33%">The shortcut</th></tr></thead>
+  <tr><td><b>Finding the mid</b></td><td>Bid 4.20, offer 4.26. Mid is 4.23.</td><td>Add and halve.</td></tr>
+  <tr><td><b>The gap between two prices</b></td><td>4.62 minus 4.15 is 0.47, or 47bp.</td><td>Subtract. Say it in basis points.</td></tr>
+  <tr><td><b>A percentage of a number</b></td><td>16% of 25.</td><td>Flip it: 25% of 16 is 4. Same answer.</td></tr>
+  <tr><td><b>Multiplying two-digit numbers</b></td><td>17 times 18.</td><td>17 times 20 is 340. Take off 17 times 2, which is 34. Answer 306.</td></tr>
+  <tr><td><b>The value of a basis point or pip</b></td><td>1bp on £30m.</td><td>100 per million. So £3,000.</td></tr>
+  <tr><td><b>Average price</b></td><td>30 bought at 100 and 20 bought at 101.</td><td>The extra 1 applies to 20 out of 50. That is 0.4. Average is 100.4.</td></tr>
+  <tr><td><b>Percentage change</b></td><td>80 rising to 84.</td><td>4 over 80 is one twentieth. That is 5%.</td></tr>
+  <tr><td><b>Fractions of a year</b></td><td>Three months of a 6% yearly rate.</td><td>A quarter of 6%. That is 1.5%.</td></tr>
+</table>
+<div class="box">
+  <span class="tag">Two of these came straight from real interviews</span>
+  Candidates have reported being asked <strong>"17 times 18"</strong> and <strong>"16% of 16"</strong>. The first is 306. The second is 2.56: 10% of 16 is 1.6, 5% is 0.8, 1% is 0.16, and they add to 2.56. The interviewer cares less about the answer than about you staying calm and talking through it.
+</div>
+
+<h2>Drills: cover the answers and try</h2>
+<div class="two" style="break-inside:avoid">
+  <table>
+    <thead><tr><th>Question</th><th class="n">Answer</th></tr></thead>
+    <tr><td>0.75% in basis points</td><td class="n">75bp</td></tr>
+    <tr><td>Mid of 1.3248 and 1.3252</td><td class="n">1.3250</td></tr>
+    <tr><td>15% of 480</td><td class="n">72</td></tr>
+    <tr><td>14 times 16</td><td class="n">224</td></tr>
+    <tr><td>1bp on £250m, one year</td><td class="n">£25,000</td></tr>
+    <tr><td>5.10% minus 4.65%, in bp</td><td class="n">45bp</td></tr>
+    <tr><td>£20m into dollars at 1.30</td><td class="n">$26m</td></tr>
+    <tr><td>3 pips on £10m of GBP/USD</td><td class="n">$3,000</td></tr>
+  </table>
+  <table>
+    <thead><tr><th>Question</th><th class="n">Answer</th></tr></thead>
+    <tr><td>12% of 50</td><td class="n">6</td></tr>
+    <tr><td>19 times 21</td><td class="n">399</td></tr>
+    <tr><td>Six months' interest on £40m at 5%</td><td class="n">£1 million</td></tr>
+    <tr><td>Index at 8,000 falls 1.5%</td><td class="n">120 points</td></tr>
+    <tr><td>Put, strike 50, premium 3: breakeven</td><td class="n">47</td></tr>
+    <tr><td>Volatility 24%: typical daily move</td><td class="n">1.5%</td></tr>
+    <tr><td>CDS at 200bp on £5m, per year</td><td class="n">£100,000</td></tr>
+    <tr><td>Bond at 97 on £2m face value</td><td class="n">£1.94m</td></tr>
+  </table>
+</div>
+
+<h2>Three questions that show you understand</h2>
+<p>For a manager interview or a desk conversation during the internship.</p>
+<ul>
+  <li>"Equities was nearly level with FX and Money Markets in the first half of 2026. What is driving that?"</li>
+  <li>"On your desk, which trades have moved onto Fusion, and which still need a phone call?"</li>
+  <li>"How do the desks work together when one event hits rates, currencies and credit at once?"</li>
+</ul>
+
+<h2>Where this comes from</h2>
+<ul class="src">
+  <li>Desk revenue and growth: TP ICAP full-year results 2025 and half-year results 2026. Links are in Part 1, Section 19.</li>
+  <li>Product lists by asset class: TP ICAP's Tullett Prebon asset classes page and its UK venue page. <a href="https://tpicap.com/tullettprebon/asset-classes">tpicap.com/tullettprebon/asset-classes</a> and <a href="https://tpicap.com/regulatory-hub/tpicap-securities-otf">tpicap.com/regulatory-hub/tpicap-securities-otf</a></li>
+  <li>London's share of currency trading: 2025 Annual Report, citing the Bank of England and BIS survey of April 2025.</li>
+  <li>Reported interview questions: anonymous Glassdoor reviews from several years. <a href="https://www.glassdoor.co.uk/Interview/TP-ICAP-Interview-E1621849-RVW104089995.htm">glassdoor.co.uk</a></li>
+  <li>How each market and desk works, the worked examples and the desk recommendations are general market knowledge and my own view. All example prices are invented round numbers.</li>
+</ul>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>TP ICAP Part 4: Your news story</title>
+<style>
+@font-face{font-family:"Lexend";font-weight:400;src:url("node_modules/@fontsource/lexend/files/lexend-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Lexend";font-weight:600;src:url("node_modules/@fontsource/lexend/files/lexend-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Lexend";font-weight:700;src:url("node_modules/@fontsource/lexend/files/lexend-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"Atkinson";font-weight:400;src:url("node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Atkinson";font-weight:700;src:url("node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2")}
+
+:root{
+  --bg:#FBF6EA; --ink:#1f2a37; --muted:#4f5b69; --navy:#14304b; --teal:#0f6e84;
+  --line:#d9d0bb; --card:#fffdf6;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --grey:#8a94a0;
+}
+@page{size:A4;margin:16mm 17mm 19mm 17mm}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson",Verdana,sans-serif;
+  font-size:12.5pt;line-height:1.62;letter-spacing:.012em;word-spacing:.06em;text-align:left;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3,h4{font-family:"Lexend",Verdana,sans-serif;color:var(--navy);line-height:1.25;letter-spacing:0;break-after:avoid}
+h1{font-size:23pt;font-weight:700;margin:0 0 4mm;padding-bottom:3mm;border-bottom:1.2mm solid var(--teal)}
+h2{font-size:15.5pt;font-weight:600;margin:8mm 0 2.5mm}
+h3{font-size:12.5pt;font-weight:600;margin:5.5mm 0 1.5mm}
+p{margin:0 0 3.2mm;max-width:150mm}
+li{max-width:146mm}
+ul,ol{margin:0 0 3.5mm;padding-left:6.5mm}
+ol{padding-left:8.5mm}
+li{margin-bottom:1.7mm}
+strong{font-weight:700;color:#10202f}
+section{break-before:auto;margin-top:13mm}
+section.pb{break-before:page;margin-top:0}
+.kicker{break-after:avoid}
+.kicker{font-family:"Lexend";font-size:10pt;font-weight:600;color:var(--teal);margin:0 0 1.5mm}
+.lead{font-size:13pt;line-height:1.6}
+.small{font-size:10pt;color:var(--muted);line-height:1.5}
+
+/* boxes */
+.box{border-radius:2.5mm;padding:3.6mm 4.5mm 3mm;margin:4mm 0;font-size:12pt;max-width:162mm;break-inside:avoid;border-left:1.6mm solid var(--teal);background:#E7F1F3}
+.box > :last-child{margin-bottom:.6mm}
+.box .tag{font-family:"Lexend";font-weight:600;font-size:10.5pt;display:block;margin-bottom:1.2mm;color:var(--navy)}
+.box.say{background:#FFEFCF;border-left-color:#c77700}
+.box.warn{background:#FBE4DD;border-left-color:#b6452c}
+.box.read{background:#ECE8F6;border-left-color:#5a48b8}
+.box.fact{background:var(--card);border:.3mm solid var(--line);border-left:1.6mm solid var(--navy)}
+
+/* figures */
+figure{margin:5mm 0 4mm;padding:4.5mm 5mm 4mm;background:var(--card);border:.3mm solid var(--line);border-radius:3mm;break-inside:avoid}
+figcaption{font-family:"Lexend";font-weight:600;font-size:11.5pt;color:var(--navy);margin-bottom:3.5mm}
+figcaption span{display:block;font-family:"Atkinson";font-weight:400;font-size:10pt;color:var(--muted);margin-top:.6mm}
+
+/* bar charts */
+.bars{display:grid;grid-template-columns:47mm 1fr;row-gap:2.6mm;column-gap:3mm;align-items:center}
+.bars .lab{font-size:10.5pt;line-height:1.3;text-align:right}
+.bars .lab small{display:block;color:var(--muted);font-size:9pt}
+.bars .track{display:flex;align-items:center;gap:2.5mm}
+.bars .bar{height:7.5mm;border-radius:0 1.2mm 1.2mm 0;background:var(--s1);min-width:.6mm}
+.bars .val{font-family:"Lexend";font-weight:600;font-size:10.5pt;white-space:nowrap}
+.bars .val small{font-family:"Atkinson";font-weight:400;color:var(--muted);font-size:9.5pt}
+.bars.sub .bar{height:5.5mm;background:#7fb0ea}
+.c1{background:var(--s1)!important}.c2{background:var(--s2)!important}.c3{background:var(--s3)!important}.c4{background:var(--s4)!important}.cg{background:var(--grey)!important}
+.stack{display:flex;gap:.6mm;height:15mm;margin:2mm 0 2.5mm}
+.stack div{display:flex;align-items:center;justify-content:center;color:#fff;font-family:"Lexend";font-weight:600;font-size:10.5pt;border-radius:1mm;text-align:center;line-height:1.2}
+.stack .dark{color:#1f2a37}
+.legend{display:flex;flex-wrap:wrap;gap:2mm 6mm;font-size:10pt}
+.legend i{display:inline-block;width:3.6mm;height:3.6mm;border-radius:.8mm;margin-right:1.6mm;vertical-align:-.5mm}
+
+/* flow diagrams */
+.flow{display:flex;align-items:stretch;gap:1.5mm}
+.node{flex:1;background:#fff;border:.45mm solid var(--navy);border-radius:2.2mm;padding:2.6mm 2.4mm;font-size:10pt;line-height:1.35;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.node b{font-family:"Lexend";font-weight:600;font-size:10.5pt;color:var(--navy);display:block;margin-bottom:.8mm}
+.node.hub{background:var(--navy);border-color:var(--navy);color:#fff}
+.node.hub b{color:#fff}
+.node.soft{border-style:dashed;border-color:#6b7785}
+.arrow{flex:0 0 7mm;display:flex;align-items:center;justify-content:center;font-size:15pt;color:var(--teal);font-weight:700}
+.steps{counter-reset:s;display:grid;gap:2.2mm}
+.step{counter-increment:s;display:grid;grid-template-columns:10mm 1fr;gap:3mm;align-items:start;background:#fff;border:.3mm solid var(--line);border-radius:2mm;padding:2.5mm 3mm}
+.step::before{content:counter(s);font-family:"Lexend";font-weight:700;font-size:13pt;color:#fff;background:var(--teal);width:9mm;height:9mm;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.step p{margin:0;font-size:10.8pt;line-height:1.45}
+.step b{font-family:"Lexend";font-weight:600;color:var(--navy)}
+.cycle{display:grid;grid-template-columns:1fr 7mm 1fr 7mm 1fr;row-gap:1.5mm;align-items:stretch}
+.down{grid-column:5;text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1}
+.up{grid-column:1;text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1}
+
+/* timeline */
+.tl{border-left:.8mm solid var(--teal);margin:2mm 0 0 16mm;padding:0}
+.tl div{position:relative;padding:0 0 3.1mm 6mm;font-size:10.8pt;line-height:1.45;break-inside:avoid}
+.tl div::before{content:"";position:absolute;left:-2.3mm;top:1.2mm;width:3.6mm;height:3.6mm;border-radius:50%;background:var(--teal);border:.5mm solid var(--card)}
+.tl b{position:absolute;left:-19mm;top:0;width:15mm;text-align:right;font-family:"Lexend";font-weight:600;color:var(--navy)}
+.tl .big::before{background:var(--s2);width:4.6mm;height:4.6mm;left:-2.8mm}
+
+/* tables */
+table{border-collapse:collapse;width:100%;margin:3mm 0 4.5mm;font-size:10.6pt;line-height:1.42}
+tr{break-inside:avoid}
+th{font-family:"Lexend";font-weight:600;font-size:10pt;text-align:left;background:var(--navy);color:#fff;padding:2.2mm 2.6mm;vertical-align:bottom}
+td{padding:2.2mm 2.6mm;border-bottom:.3mm solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:#f5efdf}
+td.n,th.n{text-align:right;white-space:nowrap}
+td b{color:#10202f}
+
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin:4mm 0}
+.tile{background:var(--card);border:.3mm solid var(--line);border-radius:2.5mm;padding:3.2mm 3.5mm;break-inside:avoid}
+.tile b{display:block;font-family:"Lexend";font-weight:700;font-size:17pt;color:var(--navy);line-height:1.15}
+.tile span{font-size:10pt;color:var(--muted);line-height:1.35;display:block;margin-top:1mm}
+
+/* cover */
+.cover{break-before:auto;min-height:215mm;display:flex;flex-direction:column}
+.cover h1{font-size:34pt;border:none;margin:8mm 0 3mm;padding:0}
+.cover .sub{font-family:"Lexend";font-size:15pt;color:var(--teal);font-weight:600;margin-bottom:8mm;max-width:150mm;line-height:1.4}
+.cover .band{height:3mm;background:linear-gradient(90deg,var(--navy) 0 55%,var(--teal) 55% 80%,var(--s4) 80% 100%);border-radius:2mm;margin-bottom:9mm}
+.toc{columns:2;column-gap:10mm;font-size:11pt;padding:0;list-style:none;counter-reset:t}
+.toc li{counter-increment:t;margin-bottom:1.8mm;break-inside:avoid}
+.toc li::before{content:counter(t) ".";font-family:"Lexend";font-weight:600;color:var(--teal);display:inline-block;width:8mm}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+.two > div{break-inside:avoid;max-width:none}
+dl{margin:0}
+dt{font-family:"Lexend";font-weight:600;color:var(--navy);font-size:11pt;margin-top:0}
+dd{margin:0 0 0 0;font-size:10.8pt;line-height:1.48}
+a{color:var(--teal);text-decoration:none;overflow-wrap:anywhere}
+thead{display:table-header-group}
+.gloss dl{columns:2;column-gap:9mm}
+.gloss dl div{break-inside:avoid;padding-bottom:2.8mm}
+.legend4{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin:3mm 0}
+.legend4 .box{margin:0;max-width:none}
+.src li{font-size:9.6pt;line-height:1.4;margin-bottom:1.3mm}
+
+.hubgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5mm}
+.hubgrid .node{min-height:17mm}
+.layers{display:grid;gap:2mm}
+.layer{border-radius:2.2mm;padding:3mm 4mm;font-size:10.6pt;line-height:1.4;color:#fff}
+.layer b{display:block;font-family:"Lexend";font-weight:600;font-size:11pt;margin-bottom:.6mm}
+.l1{background:#14304b;margin:0 0 0 0}.l2{background:#0f6e84;margin:0 9mm}.l3{background:#fff;color:#1f2a37;border:.45mm solid #14304b;margin:0 18mm}
+.l3 b{color:#14304b}
+.ladder{display:grid;gap:2mm}
+.rung{background:#fff;border:.45mm solid var(--navy);border-radius:2.2mm;padding:2.4mm 3.5mm;font-size:10.6pt;line-height:1.4}
+.rung b{font-family:"Lexend";font-weight:600;color:var(--navy);display:block}
+.r1{margin-right:44mm}.r2{margin-left:11mm;margin-right:33mm}.r3{margin-left:22mm;margin-right:22mm}.r4{margin-left:33mm;margin-right:11mm}.r5{margin-left:44mm;background:var(--navy);color:#fff}
+.r5 b{color:#fff}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin:3mm 0 5mm}
+.card{background:#fff;border:.5mm dashed #6b7785;border-radius:2.5mm;padding:3.5mm 4mm;font-family:"Lexend";font-size:11.5pt;line-height:1.75;break-inside:avoid}
+.card b{display:block;color:var(--teal);font-size:10pt;margin-bottom:1mm}
+
+.four{display:grid;grid-template-columns:1fr 1fr;gap:2.5mm}
+.four .node{text-align:left;padding:3mm 3.5mm;font-size:10.6pt}
+.mapdown{text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1.5;white-space:nowrap;overflow:hidden}
+figure svg{width:100%;height:auto;display:block}
+svg .ax{stroke:#4f5b69;stroke-width:1.5;fill:none}
+svg .st{font-family:"Atkinson",sans-serif;font-size:13.5px;fill:#4f5b69}
+svg .sb{font-family:"Lexend",sans-serif;font-size:14px;font-weight:600;fill:#14304b}
+svg .ln1{stroke:#2a78d6;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+svg .ln2{stroke:#8a94a0;stroke-width:3.5;fill:none;stroke-dasharray:9 7;stroke-linecap:round}
+</style>
+</head>
+<body>
+<!-- ============ COVER ============ -->
+<div class="cover">
+  <h1>Your news story</h1>
+  <div class="sub">Part 4. One recent story, tailored to Global Broking, that other candidates will not tell. What happened, why it matters, and your own take</div>
+  <div class="band"></div>
+  <p class="lead">If they ask <strong>"what recent news has interested you?"</strong>, nine candidates in ten will say "interest rates went up". That is true, and it is forgettable. We are going to take the same event and look at it the way a <strong>broker</strong> would. Same news. Completely different answer.</p>
+
+  <div class="tiles">
+    <div class="tile"><b>5 Nov 2026</b><span>The Bank of England raised its rate to 4%. Its first rise since 2023.</span></div>
+    <div class="tile"><b>8 to 1</b><span>The vote. One member wanted a bigger rise.</span></div>
+    <div class="tile"><b>Halved</b><span>Trading in sterling interest rate swaps, between the first and third quarters of 2026.</span></div>
+    <div class="tile"><b>$99.9 trillion</b><span>Dollar swaps cleared in the third quarter. A record.</span></div>
+    <div class="tile"><b>About 5%</b><span>Where the Bank expects UK inflation to be by mid-2027.</span></div>
+    <div class="tile"><b>Summer 2027</b><span>When you would be on the desk. That is not a coincidence we will waste.</span></div>
+  </div>
+
+  <div class="box">
+    <span class="tag">What is in this pack</span>
+    <strong>Chapter 1:</strong> which interest rates TP ICAP actually deals in. UK? US? &nbsp; <strong>Chapter 2:</strong> the background in five minutes. &nbsp; <strong>Chapter 3:</strong> the story. &nbsp; <strong>Chapter 4:</strong> the effects on clients, the firm, the role and the industry. &nbsp; <strong>Chapter 5:</strong> your take. &nbsp; <strong>Chapter 6:</strong> how to say it. &nbsp; <strong>Chapter 7:</strong> two backup stories.
+  </div>
+  <p class="small" style="margin-top:auto">Facts are from the Bank of England's own November 2026 minutes, Clarus Financial Technology's swap volume reports, and TP ICAP's results. Views marked "my take" are opinion for you to test and make your own. Researched 21 November 2026.</p>
+</div>
+
+<!-- ============ CH 1 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 1</div>
+<h1>First: whose interest rates does TP ICAP deal in?</h1>
+
+<p class="lead">You asked: "What companies' interest rates do they specialise in? Is it UK? Would it be US?" Great instinct to ask. Two things to straighten out.</p>
+
+<h2>Fix one: it is countries, not companies</h2>
+<div class="box">
+  <span class="tag">In plain English</span>
+  The <strong>Rates</strong> desk deals in the interest rates of <strong>currencies and governments</strong>: the pound, the dollar, the euro. What a <strong>company</strong> pays to borrow belongs to the <strong>Credit</strong> desk. Part 3 covers that difference.
+</div>
+
+<h2>Fix two: it is not just the UK</h2>
+<p>The job is in London. But London is where the <strong>world's</strong> interest rate contracts are traded, not just Britain's. About half of all over-the-counter interest rate derivatives on earth are traded in the UK, and a large share of those are in euros and dollars rather than pounds.</p>
+<p>TP ICAP does not publish its Rates revenue by currency. But the evidence points one way:</p>
+<ul>
+  <li><strong>Its swaps platform, i-Swap, covers three currencies:</strong> euros, pounds and dollars.</li>
+  <li><strong>Its data arm publishes swap rate indices in euros and dollars.</strong></li>
+  <li><strong>About 63% of the whole group's revenue is in US dollars.</strong></li>
+</ul>
+
+<figure>
+  <figcaption>Diagram 1. The world's interest rate swaps market by currency<span>Cleared swaps, third quarter of 2026, converted to US dollars. Source: Clarus Financial Technology</span></figcaption>
+  <div class="bars">
+    <div class="lab">US dollar<small>a record quarter</small></div><div class="track"><div class="bar" style="width:74%"></div><div class="val">$99.9 trillion</div></div>
+    <div class="lab">Euro</div><div class="track"><div class="bar" style="width:61.9%"></div><div class="val">$83.6 trillion</div></div>
+    <div class="lab">British pound</div><div class="track"><div class="bar c2" style="width:25.4%"></div><div class="val">$34.3 trillion</div></div>
+    <div class="lab">Japanese yen</div><div class="track"><div class="bar" style="width:21.6%"></div><div class="val">$29.1 trillion</div></div>
+    <div class="lab">Australian dollar</div><div class="track"><div class="bar" style="width:13%"></div><div class="val">$17.6 trillion</div></div>
+    <div class="lab">Canadian dollar</div><div class="track"><div class="bar" style="width:4.6%"></div><div class="val">$6.2 trillion</div></div>
+    <div class="lab">All others</div><div class="track"><div class="bar cg" style="width:19.5%"></div><div class="val">$26.3 trillion</div></div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Each bar is how much was traded in swaps on that currency's interest rate in three months. Longer means more. The orange bar is the pound. <strong>Sterling is only about 12% of the total. Dollars and euros together are over 60%.</strong> So a rates broker in London is watching the US central bank and the European Central Bank just as closely as the Bank of England. The total is about $297 trillion.
+</div>
+<div class="box warn">
+  <span class="tag">Careful with this number</span>
+  These are <strong>headline contract sizes for the whole market</strong>, on every trading venue. They are not money that changed hands, and they are not TP ICAP's revenue. Treat them as a thermometer for how busy each currency was.
+</div>
+
+<div class="box say">
+  <span class="tag">So the answer to your question</span>
+  "TP ICAP's rates business covers the three big currencies: dollars, euros and sterling. London handles about half the world's OTC interest rate derivatives, so a desk here trades global rates, not only UK rates."
+</div>
+</section>
+
+<!-- ============ CH 2 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 2</div>
+<h1>The background in five minutes</h1>
+<p class="lead">To understand the story you need to know how 2026 has gone. Here it is as a timeline.</p>
+
+<figure>
+  <figcaption>Diagram 2. 2026 so far<span>Orange dots are the moments that matter most for our story</span></figcaption>
+  <div class="tl">
+    <div><b>Early 2026</b>Conflict begins in the Middle East. Oil shipping through the Strait of Hormuz is disrupted. Energy prices jump.</div>
+    <div class="big"><b>Jan to Mar</b><strong>Markets scramble.</strong> Sterling swap trading hits a record of £52.5 trillion for the quarter. TP ICAP posts record quarterly revenue of £689 million.</div>
+    <div><b>Apr to Sep</b>The shock fades into a grind. The Bank of England holds its rate at 3.75%. Sterling swap trading falls by more than half.</div>
+    <div><b>Sept</b>UK inflation reaches 3.5%. The target is 2%.</div>
+    <div><b>Oct</b>Oil averages about $108 a barrel in the weeks before the Bank's meeting.</div>
+    <div class="big"><b>5 Nov</b><strong>The Bank of England raises its rate to 4%.</strong> The first rise since 2023. It forecasts inflation near 5% by mid-2027.</div>
+    <div><b>Mid Nov</b>Oil falls back to about $92. But borrowing costs stay high. The US 10-year government yield is around 5%. The US central bank signals it may raise rates in December too.</div>
+    <div><b>17 Dec</b>The Bank of England's next decision.</div>
+    <div class="big"><b>Mid 2027</b><strong>UK inflation is forecast to peak around 5%.</strong> This is exactly when your internship would run.</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Read from top to bottom. The pattern: a shock in the first quarter made everybody trade. Then things went quiet for six months. Then, on 5 November, the Bank of England changed direction. <strong>Our story is about what that change of direction does to trading.</strong>
+</div>
+
+<h2>Four words you need for this story</h2>
+<table>
+  <thead><tr><th style="width:24%">Word</th><th>What it means</th></tr></thead>
+  <tr><td><b>Bank Rate</b></td><td>The interest rate the Bank of England sets. Every other UK rate takes its lead from it.</td></tr>
+  <tr><td><b>The MPC</b></td><td>The Monetary Policy Committee. Nine people at the Bank of England who vote on Bank Rate, eight times a year.</td></tr>
+  <tr><td><b>Hawkish and dovish</b></td><td>A hawk wants higher rates to fight inflation. A dove wants lower rates to help growth.</td></tr>
+  <tr><td><b>Priced in</b></td><td>The market has already bet on something happening, so prices will not move much when it does.</td></tr>
+</table>
+
+<div class="box">
+  <span class="tag">The idea that makes this click</span>
+  How does anyone know what "the market expects" the Bank of England to do? <strong>By looking at swaps.</strong> A sterling swap is literally a bet on where Bank Rate will be. So the swaps market is the scoreboard of everyone's guesses about the Bank of England. And TP ICAP's brokers sit in the middle of that scoreboard.
+</div>
+</section>
+
+<!-- ============ CH 3 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 3</div>
+<h1>The story</h1>
+
+<p class="lead">Here is the headline everyone knows, and then the part underneath it that almost nobody will mention.</p>
+
+<h2>What everybody knows</h2>
+<p>On <strong>5 November 2026</strong> the Bank of England raised Bank Rate from 3.75% to <strong>4%</strong>. The facts, from the Bank's own minutes:</p>
+<ul>
+  <li><strong>The vote was 8 to 1.</strong> The one dissenter did not want to hold. She wanted a bigger rise, to 4.25%.</li>
+  <li><strong>The reason:</strong> the Middle East conflict, then in its ninth month, kept pushing energy prices up.</li>
+  <li><strong>Inflation was 3.5% in September.</strong> The Bank now expects it to reach about 5% by the middle of 2027, then fall.</li>
+  <li><strong>The key sentence:</strong> "Monetary policy is not on a pre-set path." In other words: we do not know what we will do next.</li>
+</ul>
+<p>News reports said markets then bet on about three more quarter-point rises by the end of 2027.</p>
+
+<h2>What almost nobody will mention</h2>
+<p>Most people look at the <strong>price</strong> of money: rates went up. A broker looks at something else. <strong>How much is being traded?</strong> Because that is what a broker is paid on.</p>
+
+<figure>
+  <figcaption>Diagram 3. Trading in sterling interest rate swaps, by quarter<span>Cleared sterling swaps, in trillions of pounds. Source: Clarus Financial Technology</span></figcaption>
+  <div class="bars">
+    <div class="lab">Oct to Dec 2025</div><div class="track"><div class="bar" style="width:60%"></div><div class="val">£45.0 trillion</div></div>
+    <div class="lab">Jan to Mar 2026<small>the record</small></div><div class="track"><div class="bar" style="width:70%"></div><div class="val">£52.5 trillion</div></div>
+    <div class="lab">Apr to Jun 2026</div><div class="track"><div class="bar c2" style="width:29.3%"></div><div class="val">£22.0 trillion</div></div>
+    <div class="lab">Jul to Sep 2026</div><div class="track"><div class="bar c2" style="width:34.5%"></div><div class="val">£25.9 trillion</div></div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Four bars, four quarters, oldest at the top. The blue bars are the busy period. The orange bars are what came next. <strong>Sterling swap trading more than halved.</strong> The third quarter was 51% below the first-quarter record, and 14% lower than the same quarter a year earlier. The Bank of England's rate rise came five weeks after the last bar ends.
+</div>
+
+<h2>Meanwhile, in dollars and euros</h2>
+<p>The same report shows the opposite picture in the other big currencies during that third quarter:</p>
+<ul>
+  <li><strong>Dollar swaps:</strong> a record $99.9 trillion, up 15% on a year earlier.</li>
+  <li><strong>Euro swaps:</strong> up 47% on a year earlier.</li>
+  <li><strong>All currencies together:</strong> up 23% on a year earlier.</li>
+</ul>
+
+<div class="box">
+  <span class="tag">The story in three sentences</span>
+  Sterling interest rate trading hit a record at the start of 2026, then <strong>more than halved</strong> while the Bank of England sat still. On 5 November the Bank <strong>changed direction</strong> for the first time since 2023, and said openly that it does not know its next step. For a firm that is paid on activity rather than direction, <strong>that change is the news</strong>, not the quarter of a percent.
+</div>
+
+<h2>Why volume matters more than price to a broker</h2>
+<p>Remember the toll bridge from Part 2. TP ICAP does not own what crosses the bridge. It collects a toll each time something crosses.</p>
+<ul>
+  <li>Rates at 4% with nobody trading: <strong>bad</strong> for a broker.</li>
+  <li>Rates at 4% with everybody changing their positions: <strong>good</strong> for a broker.</li>
+</ul>
+<p>So the useful question is never "are rates high or low?" It is <strong>"are people being forced to trade?"</strong></p>
+
+<h2>Why did sterling go quiet? My reading</h2>
+<p>The data does not explain itself. This is my interpretation.</p>
+<ol>
+  <li><strong>The first quarter was a shock.</strong> When energy prices jumped, every bank, pension fund and hedge fund had to rethink where UK rates were heading. All at once. Record trading.</li>
+  <li><strong>Then the Bank held still.</strong> With Bank Rate parked at 3.75% and most people agreeing it would stay there, there was less to disagree about. Less disagreement means fewer trades.</li>
+  <li><strong>Agreement is the enemy of a broker.</strong> A trade needs two people who see things differently.</li>
+</ol>
+</section>
+
+<!-- ============ CH 4 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 4</div>
+<h1>The effects: who feels this, and how</h1>
+
+<p class="lead">A good answer follows the news all the way down the chain: from the event, to the clients, to the firm, to the role you want.</p>
+
+<figure>
+  <figcaption>Diagram 4. The chain from a Bank of England decision to a broker's desk<span>My reasoning, step by step</span></figcaption>
+  <div class="steps">
+    <div class="step"><p><b>The Bank changes direction.</b> From holding still to raising rates, and it says it is unsure what comes next.</p></div>
+    <div class="step"><p><b>Opinions split.</b> One committee member already wants bigger rises. Some investors think 5% inflation means many more. Others think the economy cannot take it.</p></div>
+    <div class="step"><p><b>Clients must reposition.</b> Banks, pension funds, mortgage lenders and hedge funds all hold positions built for the old world. They need to adjust.</p></div>
+    <div class="step"><p><b>More swaps get traded.</b> Adjusting means trading interest rate swaps, often in large size and quietly.</p></div>
+    <div class="step"><p><b>Brokers find the other side.</b> Large, urgent, sensitive trades are exactly where a voice broker is worth the fee.</p></div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Follow the numbers from 1 to 5. Each step causes the next. The link most people miss is step 2. A rate rise that everyone agreed on would cause little trading. <strong>It is the disagreement about what happens next that creates the business.</strong>
+</div>
+
+<h2>Effect on the clients</h2>
+<table>
+  <thead><tr><th style="width:26%">Client</th><th>What a new rate-rising cycle does to them</th></tr></thead>
+  <tr><td><b>Banks and mortgage lenders</b></td><td>They lend at fixed rates and pay savers changing rates. When the direction of rates flips, they must re-hedge that gap using swaps.</td></tr>
+  <tr><td><b>Pension funds and insurers</b></td><td>Their promises stretch decades ahead. Higher long-term rates and higher inflation both change what those promises are worth. They use rate and inflation swaps to stay matched.</td></tr>
+  <tr><td><b>Hedge funds</b></td><td>They bet on the path of rates. Uncertainty over the next move is their opportunity.</td></tr>
+  <tr><td><b>Bank trading desks</b></td><td>They take the other side of all of the above, then need to pass the risk on. That is the interdealer market. That is TP ICAP's core.</td></tr>
+</table>
+<p>The big banks' own results show how uneven 2026 has been for them. News reports of third-quarter results said Citigroup's fixed income trading revenue rose 4% to $4.4 billion, while JPMorgan's fell 4% to $5.4 billion. Same market, different outcomes. Clients who are under pressure to perform lean harder on brokers who can find them a better price.</p>
+
+<h2>Effect on TP ICAP</h2>
+<ul>
+  <li><strong>Rates is the firm's biggest earner.</strong> £635 million in 2025, or 27% of the whole group. Anything that wakes up rates trading matters more to TP ICAP than any other single thing.</li>
+  <li><strong>It held up through the quiet patch.</strong> Rates revenue grew 10% in the first half of 2026, and the firm reported "continued good growth in Rates" for the first nine months. That was while sterling trading was halving.</li>
+  <li><strong>The reason is the mix.</strong> Dollar and euro trading stayed strong. A firm covering all three currencies is cushioned when one goes quiet.</li>
+  <li><strong>The data arm benefits too.</strong> When rates move, more firms need reliable swap prices to value their positions. That is what Parameta sells.</li>
+</ul>
+
+<h2>Effect on the role</h2>
+<ul>
+  <li><strong>A turning point is the best time to learn.</strong> Clients need their brokers most when the picture changes. A junior on a rates desk in 2027 will see the market at its most alive.</li>
+  <li><strong>The timing is striking.</strong> The Bank expects inflation to peak around the middle of 2027. The internship runs from late June. You would arrive just as the argument over the next move is at its loudest.</li>
+  <li><strong>Human judgement counts more.</strong> In a calm market, a standard swap trades on a screen. In a turning market, clients want to move size without showing their hand. That needs a person.</li>
+</ul>
+
+<h2>Effect on the industry</h2>
+<ul>
+  <li><strong>Every broker benefits, so the fight for share gets sharper.</strong> BGC and Tradition see the same opportunity.</li>
+  <li><strong>Electronic platforms are growing faster than the market.</strong> Tradeweb, an electronic rival, reported its swaps trading up about 42% on a year earlier in the third quarter, against roughly 23% for the market as a whole.</li>
+  <li><strong>So the work is splitting in two.</strong> Simple swaps go to screens. Complex and sensitive trades stay with people. TP ICAP's answer is to offer both, through Fusion and i-Swap alongside its voice brokers.</li>
+</ul>
+</section>
+
+<!-- ============ CH 5 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 5</div>
+<h1>Your take</h1>
+
+<p class="lead">This is the part that wins the question. Anyone can repeat news. Very few candidates say "and here is what I think happens next, and why." Below is a take with three layers. Read it, argue with it, and keep the parts you believe.</p>
+
+<figure>
+  <figcaption>Diagram 5. A take in three layers<span>From the next few months, to the next few years</span></figcaption>
+  <div class="layers">
+    <div class="layer l1"><b>Layer 3. The long view</b>The simple trades keep moving to screens. The value of a human broker concentrates in moments like this one.</div>
+    <div class="layer l2"><b>Layer 2. The firm</b>Sterling is one currency of three. TP ICAP's strength is that dollars and euros carried it while sterling slept.</div>
+    <div class="layer l3"><b>Layer 1. The next few months</b>Sterling swap trading recovers from its third-quarter low, because a turning point forces people to trade.</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Read from the bottom up. The bottom layer is a short-term prediction. The middle layer is what it tells you about the firm. The top layer is the big picture for the industry. <strong>A strong answer touches all three in under two minutes.</strong>
+</div>
+
+<h2>Layer 1: what I think happens next</h2>
+<div class="box say">
+  <span class="tag">My take</span>
+  "I expect sterling swap activity to recover from that third-quarter low. Not because rates went up, but because the Bank of England has gone from being predictable to being uncertain. It told the market it is not on a pre-set path, one member already wants to go faster, and it is forecasting 5% inflation. That is a recipe for disagreement, and disagreement is what creates trades."
+</div>
+<p><strong>The honest limit:</strong> I would not expect a return to the first-quarter record. That was a one-off shock. This is a slower, steadier kind of busy.</p>
+
+<h2>Layer 2: what it tells you about TP ICAP</h2>
+<div class="box say">
+  <span class="tag">My take</span>
+  "What struck me is that TP ICAP's Rates revenue still grew 10% in the first half, even though sterling volumes had halved. That tells me the franchise isn't a UK business. It's a three-currency business, and dollar swaps hit a record in the third quarter. So a sterling recovery would be an extra on top of a base that was already holding up."
+</div>
+
+<h2>Layer 3: what it means for the industry and the job</h2>
+<div class="box say">
+  <span class="tag">My take</span>
+  "Longer term, I think this is the kind of moment that shows why voice broking survives. Electronic platforms are growing faster than the market on standard swaps. But when the direction of rates changes, clients need to move large positions without revealing them, and that takes a person they trust. So I see the broker's job becoming less about volume and more about the difficult trades."
+</div>
+
+<h2>How the view changes the way we look at things</h2>
+<p>You asked how this news changes the way we view the market. Three shifts:</p>
+<table>
+  <thead><tr><th style="width:36%">Before</th><th>After</th></tr></thead>
+  <tr><td>"Rates are coming down slowly. The only question is when."</td><td>"Rates can go up again. The question is how far."</td></tr>
+  <tr><td>"To predict bonds, watch the oil price."</td><td>"Oil has fallen to about $92, but borrowing costs have stayed high. The market now watches inflation and central banks, not the oil price."</td></tr>
+  <tr><td>"A quiet sterling market."</td><td>"A sterling market with something to argue about."</td></tr>
+</table>
+<p>The second row is worth a moment. For most of 2026, bond yields simply followed oil. Reports in late November say that link broke: oil dropped, yet yields did not. The reason is that price rises have spread beyond energy. <strong>That moves the centre of attention from the oil desk to the rates desk.</strong></p>
+
+<h2>What would prove this take wrong?</h2>
+<p>Saying this out loud makes you sound thoughtful, not unsure.</p>
+<ul>
+  <li><strong>A quick peace deal.</strong> If the conflict ends and energy prices fall fast, the Bank may stop after one rise. The market would go quiet again.</li>
+  <li><strong>The rise was already expected.</strong> Two-year UK yields moved only a few hundredths of a percent on the day. If everyone already agrees on the path, there is less to trade.</li>
+  <li><strong>Trading moves to screens.</strong> Activity could recover without voice brokers getting their share.</li>
+</ul>
+
+<h2>What to watch</h2>
+<ul>
+  <li><strong>17 December 2026:</strong> the Bank of England's next decision.</li>
+  <li><strong>January 2027:</strong> fourth-quarter swap volume figures.</li>
+  <li><strong>11 March 2027:</strong> TP ICAP's full-year results, including Rates revenue.</li>
+</ul>
+</section>
+
+<!-- ============ CH 6 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 6</div>
+<h1>How to say it</h1>
+
+<p class="lead">Built with your method: thanks and a preview in the first 15 seconds, three different parts, a clean close. About 260 words, which is roughly 100 seconds.</p>
+
+<div class="box fact">
+  <span class="tag">The full answer</span>
+  <p>"Thanks for taking the time to watch this. The story I've been following is the Bank of England's rate rise on 5 November, but from the angle I think matters to a rates broker: trading volumes, not prices. I'll cover what happened, what it means for TP ICAP, and my own view.</p>
+  <p>First, what happened. Sterling interest rate swaps set a record in the first quarter of this year, about £52 trillion cleared. By the third quarter that had more than halved, to about £26 trillion, which I put down to the Bank being on hold, so there was little to disagree about. Then on 5 November the committee voted 8 to 1 to raise rates to 4%, its first rise since 2023, and said policy is not on a pre-set path.</p>
+  <p>Second, what it means for TP ICAP. A broker is paid on activity, not direction. Rates is the firm's largest desk, and what impressed me is that it still grew 10% in the first half while sterling volumes were falling, because dollar and euro trading stayed strong. Dollar swaps hit a record in the third quarter.</p>
+  <p>Third, my view. I expect sterling activity to recover, because a turning point with a divided committee forces banks and pension funds to reposition. And those are large, sensitive trades, which is exactly where a voice broker earns the fee.</p>
+  <p>The Bank expects inflation to peak around the middle of next year. That is when I'd be on the desk, and I can't think of a better time to learn."</p>
+</div>
+
+<div class="box say">
+  <span class="tag">The 30-second version</span>
+  "The Bank of England's rate rise on 5 November interested me, but for the volumes rather than the price. Sterling swap trading more than halved between the first and third quarters of this year while the Bank sat still. Now it has changed direction and says it has no pre-set path. A broker is paid on activity, so I'd expect that uncertainty to bring sterling trading back, on top of dollar and euro volumes that were already strong."
+</div>
+
+<h2>Prompt card for under your webcam</h2>
+<div class="cards">
+  <div class="card"><b>Opening</b>Thanks<br>BoE, 5 November<br>Volumes not prices<br>Three things</div>
+  <div class="card"><b>Middle</b>£52tn to £26tn<br>8 to 1, 4%<br>No pre-set path<br>Rates up 10% anyway<br>Dollar record</div>
+  <div class="card"><b>Close</b>Turning point<br>Forced to reposition<br>Voice broker's moment<br>Inflation peak, summer</div>
+</div>
+
+<h2>If they push back: follow-up questions</h2>
+<table>
+  <thead><tr><th style="width:33%">They ask</th><th>You say</th></tr></thead>
+  <tr><td><b>"Where did you get those volume figures?"</b></td><td>"Clarus Financial Technology publishes cleared swap volumes each quarter. They're headline contract sizes for the whole market, so I treat them as a guide to activity, not revenue."</td></tr>
+  <tr><td><b>"What is a sterling swap?"</b></td><td>"An agreement to exchange a fixed interest rate for a floating one in pounds. The floating rate follows Bank Rate, so it's how the market bets on the Bank of England."</td></tr>
+  <tr><td><b>"Aren't higher rates bad for the economy?"</b></td><td>"They can be for borrowers. But a broker is paid on how much clients trade, not on whether rates are high or low."</td></tr>
+  <tr><td><b>"Why did sterling volumes fall?"</b></td><td>"My reading is that the first quarter was a shock that made everyone reposition at once. Then the Bank held at 3.75% and there was less to disagree about."</td></tr>
+  <tr><td><b>"What could make you wrong?"</b></td><td>"A quick end to the conflict. If energy prices fell fast, the Bank might stop after one rise and the market would go quiet again."</td></tr>
+  <tr><td><b>"Does this affect the other desks?"</b></td><td>"Yes. Higher UK rates tend to lift the pound, raise companies' borrowing costs and weigh on shares. So FX, Credit and Equities all react."</td></tr>
+  <tr><td><b>"Is TP ICAP mainly a sterling business?"</b></td><td>"No. Its swaps platform covers euros, sterling and dollars, and most of the group's revenue is in dollars."</td></tr>
+</table>
+
+<div class="box warn">
+  <span class="tag">Three safety rules</span>
+  <strong>1. Check the news on the morning you record.</strong> If the Bank of England or the US central bank has done something new, mention it. <br>
+  <strong>2. Say "about" before the big numbers.</strong> "About £52 trillion", "about half". <br>
+  <strong>3. Present the forecast as your view.</strong> "I expect", not "it will".
+</div>
+</section>
+
+<!-- ============ CH 7 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 7</div>
+<h1>Two backup stories</h1>
+<p class="lead">In case you want a different angle, or they ask for a second story. Both are specific to this industry. Both are harder than the main one, so only use them if they make sense to you.</p>
+
+<h2>Backup 1: the new rule for US government bonds</h2>
+<h3>What is happening</h3>
+<p>The market for US government bonds, called Treasuries, is the biggest bond market in the world. From <strong>31 December 2026</strong>, a new rule from the US regulator requires many trades in it to go through a <strong>clearing house</strong>. A second deadline, for short-term loans secured on those bonds, follows on 30 June 2027.</p>
+<div class="box">
+  <span class="tag">In plain English</span>
+  A clearing house is a safety net. It stands in the middle of a trade. If one side goes bust, the clearing house pays the other. It makes the market safer, but everyone has to post cash as security, which costs money.
+</div>
+<h3>Why it is a broker's story</h3>
+<p>The rule specifically covers trades done through <strong>interdealer brokers</strong>. Law firms have been advising clients to check, platform by platform, whether each venue they use counts as an interdealer broker.</p>
+<h3>A possible take</h3>
+<div class="box say">
+  <span class="tag">My take</span>
+  "I think the clearing rule is a quiet turning point for interdealer brokers in Treasuries. In the short term it adds cost for some clients, which could dampen activity. But longer term, once everyone clears through the same place, it matters less who you are trading against. That could let more types of firm trade with each other through a broker, which widens the network a broker can offer."
+</div>
+<p class="small">Honest note: this is a US market story, and the detail is technical. TP ICAP does not break out how much of its revenue comes from Treasuries. Use it to show you read beyond the headlines, not as your main answer.</p>
+
+<h2>Backup 2: oil and bonds have stopped moving together</h2>
+<h3>What is happening</h3>
+<p>For most of 2026, government bond yields followed the oil price closely. When oil rose, traders expected higher inflation and higher rates, so yields rose too. Reports citing the Financial Times say that link was about 65% in September and fell below 20% by late November. Oil dropped to around $92. Yields stayed high.</p>
+<h3>Why it is a broker's story</h3>
+<p>It connects two TP ICAP divisions. Energy &amp; Commodities had a hard year because oil futures trading dried up. Global Broking had a strong one. If markets now care more about central banks than about oil, attention shifts further towards the Rates desk.</p>
+<h3>A possible take</h3>
+<div class="box say">
+  <span class="tag">My take</span>
+  "For most of this year you could predict bonds by checking the oil price. That link has broken. Oil has fallen but yields haven't, which tells me the market's worry has moved from the price of energy to inflation spreading through the economy. For TP ICAP that suggests rates stay busy even if the oil market calms down, which is a good position for its biggest desk."
+</div>
+<p class="small">Honest note: the correlation figure comes from a news report quoting the Financial Times. I have not seen the original. Say "reports suggest".</p>
+
+<h2>What makes a news story work for this role</h2>
+<table>
+  <thead><tr><th style="width:36%">The test</th><th>Why</th></tr></thead>
+  <tr><td><b>Is it about activity, not just prices?</b></td><td>That is how a broker thinks.</td></tr>
+  <tr><td><b>Is it from the last few weeks?</b></td><td>Shows you actually follow markets.</td></tr>
+  <tr><td><b>Does it have a number few people know?</b></td><td>Passes the competitor test.</td></tr>
+  <tr><td><b>Can you link it to how TP ICAP earns?</b></td><td>Shows you understand the firm.</td></tr>
+  <tr><td><b>Do you have a view on what happens next?</b></td><td>This is the part that wins.</td></tr>
+  <tr><td><b>Could you explain every word in it?</b></td><td>If not, simplify until you can.</td></tr>
+</table>
+
+<h2>Sources</h2>
+<ul class="src">
+  <li>Bank of England, Monetary Policy Summary and Minutes, November 2026: the vote, the inflation figures and the "pre-set path" wording. <a href="https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/november-2026">bankofengland.co.uk</a></li>
+  <li>Clarus Financial Technology, cleared rates swap volumes for the third quarter of 2026: <a href="https://www.clarusft.com/q3-rates-swaps-volumes-new-usd-high-other-majors-off-highs/">clarusft.com, Q3</a>. Second quarter: <a href="https://www.clarusft.com/q2-2026-cleared-rates-swaps-17-below-the-q1-high-but-up-23-yoy/">clarusft.com, Q2</a>. First quarter: <a href="https://www.clarusft.com/q1-2026-cleared-rates-swap-volumes-and-ccp-share/">clarusft.com, Q1</a></li>
+  <li>TP ICAP half-year results 2026 and trading update of 3 November 2026: Rates revenue and growth. Links in Part 1, Section 19.</li>
+  <li>i-Swap currencies: ICAP financial markets page. <a href="https://icap.com/financial-markets">icap.com/financial-markets</a></li>
+  <li>CaixaBank Research, Financial Markets Daily Report, 19 November 2026: oil price, US yields, central bank signals. <a href="https://www.caixabankresearch.com/en/publications/financial-markets-daily-report/19-november-2026">caixabankresearch.com</a></li>
+  <li>Market reaction to the Bank of England decision, bank trading results and Tradeweb's swap volumes: news reports and company results summaries, not checked against the original documents. <a href="https://rallies.ai/news/bank-of-england-delivers-first-rate-hike-in-three-years-gilt-yields-rise-6c4ea0b2eeeccedd">rallies.ai</a>, <a href="https://qz.com/citigroup-q3-2026-earnings-bond-trading-beat-101326">qz.com</a>, <a href="https://www.cnbc.com/2026/10/13/bank-earnings-live-updates.html">cnbc.com</a></li>
+  <li>US Treasury clearing rule: Katten, via Legal 500, 16 October 2026. <a href="https://www.legal500.com/intelligence/united-states/finance-and-banking/to-idb-or-to-ecn-will-your-cash-market-transactions-in-us-treasuries-be-subject-to-the-clearing-mandate-come-december-31-2026">legal500.com</a></li>
+  <li>Oil and bond yields: European Business Magazine, 20 November 2026, citing the Financial Times. <a href="https://europeanbusinessmagazine.com/oil-loses-its-grip-on-bond-markets">europeanbusinessmagazine.com</a></li>
+</ul>
+</section>
+
+</body>
+</html>
