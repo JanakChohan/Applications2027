@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Mental maths cheat sheet</title>
+<style>
+@font-face{font-family:"Lexend";font-weight:400;src:url("node_modules/@fontsource/lexend/files/lexend-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Lexend";font-weight:600;src:url("node_modules/@fontsource/lexend/files/lexend-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Lexend";font-weight:700;src:url("node_modules/@fontsource/lexend/files/lexend-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"Atkinson";font-weight:400;src:url("node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Atkinson";font-weight:700;src:url("node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2")}
+
+:root{
+  --bg:#FBF6EA; --ink:#1f2a37; --muted:#4f5b69; --navy:#14304b; --teal:#0f6e84;
+  --line:#d9d0bb; --card:#fffdf6;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --grey:#8a94a0;
+}
+@page{size:A4;margin:16mm 17mm 19mm 17mm}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson",Verdana,sans-serif;
+  font-size:12.5pt;line-height:1.62;letter-spacing:.012em;word-spacing:.06em;text-align:left;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3,h4{font-family:"Lexend",Verdana,sans-serif;color:var(--navy);line-height:1.25;letter-spacing:0;break-after:avoid}
+h1{font-size:23pt;font-weight:700;margin:0 0 4mm;padding-bottom:3mm;border-bottom:1.2mm solid var(--teal)}
+h2{font-size:15.5pt;font-weight:600;margin:8mm 0 2.5mm}
+h3{font-size:12.5pt;font-weight:600;margin:5.5mm 0 1.5mm}
+p{margin:0 0 3.2mm;max-width:150mm}
+li{max-width:146mm}
+ul,ol{margin:0 0 3.5mm;padding-left:6.5mm}
+ol{padding-left:8.5mm}
+li{margin-bottom:1.7mm}
+strong{font-weight:700;color:#10202f}
+section{break-before:auto;margin-top:13mm}
+section.pb{break-before:page;margin-top:0}
+.kicker{break-after:avoid}
+.kicker{font-family:"Lexend";font-size:10pt;font-weight:600;color:var(--teal);margin:0 0 1.5mm}
+.lead{font-size:13pt;line-height:1.6}
+.small{font-size:10pt;color:var(--muted);line-height:1.5}
+
+/* boxes */
+.box{border-radius:2.5mm;padding:3.6mm 4.5mm 3mm;margin:4mm 0;font-size:12pt;max-width:162mm;break-inside:avoid;border-left:1.6mm solid var(--teal);background:#E7F1F3}
+.box > :last-child{margin-bottom:.6mm}
+.box .tag{font-family:"Lexend";font-weight:600;font-size:10.5pt;display:block;margin-bottom:1.2mm;color:var(--navy)}
+.box.say{background:#FFEFCF;border-left-color:#c77700}
+.box.warn{background:#FBE4DD;border-left-color:#b6452c}
+.box.read{background:#ECE8F6;border-left-color:#5a48b8}
+.box.fact{background:var(--card);border:.3mm solid var(--line);border-left:1.6mm solid var(--navy)}
+
+/* figures */
+figure{margin:5mm 0 4mm;padding:4.5mm 5mm 4mm;background:var(--card);border:.3mm solid var(--line);border-radius:3mm;break-inside:avoid}
+figcaption{font-family:"Lexend";font-weight:600;font-size:11.5pt;color:var(--navy);margin-bottom:3.5mm}
+figcaption span{display:block;font-family:"Atkinson";font-weight:400;font-size:10pt;color:var(--muted);margin-top:.6mm}
+
+/* bar charts */
+.bars{display:grid;grid-template-columns:47mm 1fr;row-gap:2.6mm;column-gap:3mm;align-items:center}
+.bars .lab{font-size:10.5pt;line-height:1.3;text-align:right}
+.bars .lab small{display:block;color:var(--muted);font-size:9pt}
+.bars .track{display:flex;align-items:center;gap:2.5mm}
+.bars .bar{height:7.5mm;border-radius:0 1.2mm 1.2mm 0;background:var(--s1);min-width:.6mm}
+.bars .val{font-family:"Lexend";font-weight:600;font-size:10.5pt;white-space:nowrap}
+.bars .val small{font-family:"Atkinson";font-weight:400;color:var(--muted);font-size:9.5pt}
+.bars.sub .bar{height:5.5mm;background:#7fb0ea}
+.c1{background:var(--s1)!important}.c2{background:var(--s2)!important}.c3{background:var(--s3)!important}.c4{background:var(--s4)!important}.cg{background:var(--grey)!important}
+.stack{display:flex;gap:.6mm;height:15mm;margin:2mm 0 2.5mm}
+.stack div{display:flex;align-items:center;justify-content:center;color:#fff;font-family:"Lexend";font-weight:600;font-size:10.5pt;border-radius:1mm;text-align:center;line-height:1.2}
+.stack .dark{color:#1f2a37}
+.legend{display:flex;flex-wrap:wrap;gap:2mm 6mm;font-size:10pt}
+.legend i{display:inline-block;width:3.6mm;height:3.6mm;border-radius:.8mm;margin-right:1.6mm;vertical-align:-.5mm}
+
+/* flow diagrams */
+.flow{display:flex;align-items:stretch;gap:1.5mm}
+.node{flex:1;background:#fff;border:.45mm solid var(--navy);border-radius:2.2mm;padding:2.6mm 2.4mm;font-size:10pt;line-height:1.35;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.node b{font-family:"Lexend";font-weight:600;font-size:10.5pt;color:var(--navy);display:block;margin-bottom:.8mm}
+.node.hub{background:var(--navy);border-color:var(--navy);color:#fff}
+.node.hub b{color:#fff}
+.node.soft{border-style:dashed;border-color:#6b7785}
+.arrow{flex:0 0 7mm;display:flex;align-items:center;justify-content:center;font-size:15pt;color:var(--teal);font-weight:700}
+.steps{counter-reset:s;display:grid;gap:2.2mm}
+.step{counter-increment:s;display:grid;grid-template-columns:10mm 1fr;gap:3mm;align-items:start;background:#fff;border:.3mm solid var(--line);border-radius:2mm;padding:2.5mm 3mm}
+.step::before{content:counter(s);font-family:"Lexend";font-weight:700;font-size:13pt;color:#fff;background:var(--teal);width:9mm;height:9mm;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.step p{margin:0;font-size:10.8pt;line-height:1.45}
+.step b{font-family:"Lexend";font-weight:600;color:var(--navy)}
+.cycle{display:grid;grid-template-columns:1fr 7mm 1fr 7mm 1fr;row-gap:1.5mm;align-items:stretch}
+.down{grid-column:5;text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1}
+.up{grid-column:1;text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1}
+
+/* timeline */
+.tl{border-left:.8mm solid var(--teal);margin:2mm 0 0 16mm;padding:0}
+.tl div{position:relative;padding:0 0 3.1mm 6mm;font-size:10.8pt;line-height:1.45;break-inside:avoid}
+.tl div::before{content:"";position:absolute;left:-2.3mm;top:1.2mm;width:3.6mm;height:3.6mm;border-radius:50%;background:var(--teal);border:.5mm solid var(--card)}
+.tl b{position:absolute;left:-19mm;top:0;width:15mm;text-align:right;font-family:"Lexend";font-weight:600;color:var(--navy)}
+.tl .big::before{background:var(--s2);width:4.6mm;height:4.6mm;left:-2.8mm}
+
+/* tables */
+table{border-collapse:collapse;width:100%;margin:3mm 0 4.5mm;font-size:10.6pt;line-height:1.42}
+tr{break-inside:avoid}
+th{font-family:"Lexend";font-weight:600;font-size:10pt;text-align:left;background:var(--navy);color:#fff;padding:2.2mm 2.6mm;vertical-align:bottom}
+td{padding:2.2mm 2.6mm;border-bottom:.3mm solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:#f5efdf}
+td.n,th.n{text-align:right;white-space:nowrap}
+td b{color:#10202f}
+
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin:4mm 0}
+.tile{background:var(--card);border:.3mm solid var(--line);border-radius:2.5mm;padding:3.2mm 3.5mm;break-inside:avoid}
+.tile b{display:block;font-family:"Lexend";font-weight:700;font-size:17pt;color:var(--navy);line-height:1.15}
+.tile span{font-size:10pt;color:var(--muted);line-height:1.35;display:block;margin-top:1mm}
+
+/* cover */
+.cover{break-before:auto;min-height:215mm;display:flex;flex-direction:column}
+.cover h1{font-size:34pt;border:none;margin:8mm 0 3mm;padding:0}
+.cover .sub{font-family:"Lexend";font-size:15pt;color:var(--teal);font-weight:600;margin-bottom:8mm;max-width:150mm;line-height:1.4}
+.cover .band{height:3mm;background:linear-gradient(90deg,var(--navy) 0 55%,var(--teal) 55% 80%,var(--s4) 80% 100%);border-radius:2mm;margin-bottom:9mm}
+.toc{columns:2;column-gap:10mm;font-size:11pt;padding:0;list-style:none;counter-reset:t}
+.toc li{counter-increment:t;margin-bottom:1.8mm;break-inside:avoid}
+.toc li::before{content:counter(t) ".";font-family:"Lexend";font-weight:600;color:var(--teal);display:inline-block;width:8mm}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+.two > div{break-inside:avoid;max-width:none}
+dl{margin:0}
+dt{font-family:"Lexend";font-weight:600;color:var(--navy);font-size:11pt;margin-top:0}
+dd{margin:0 0 0 0;font-size:10.8pt;line-height:1.48}
+a{color:var(--teal);text-decoration:none;overflow-wrap:anywhere}
+thead{display:table-header-group}
+.gloss dl{columns:2;column-gap:9mm}
+.gloss dl div{break-inside:avoid;padding-bottom:2.8mm}
+.legend4{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin:3mm 0}
+.legend4 .box{margin:0;max-width:none}
+.src li{font-size:9.6pt;line-height:1.4;margin-bottom:1.3mm}
+
+.hubgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5mm}
+.hubgrid .node{min-height:17mm}
+.layers{display:grid;gap:2mm}
+.layer{border-radius:2.2mm;padding:3mm 4mm;font-size:10.6pt;line-height:1.4;color:#fff}
+.layer b{display:block;font-family:"Lexend";font-weight:600;font-size:11pt;margin-bottom:.6mm}
+.l1{background:#14304b;margin:0 0 0 0}.l2{background:#0f6e84;margin:0 9mm}.l3{background:#fff;color:#1f2a37;border:.45mm solid #14304b;margin:0 18mm}
+.l3 b{color:#14304b}
+.ladder{display:grid;gap:2mm}
+.rung{background:#fff;border:.45mm solid var(--navy);border-radius:2.2mm;padding:2.4mm 3.5mm;font-size:10.6pt;line-height:1.4}
+.rung b{font-family:"Lexend";font-weight:600;color:var(--navy);display:block}
+.r1{margin-right:44mm}.r2{margin-left:11mm;margin-right:33mm}.r3{margin-left:22mm;margin-right:22mm}.r4{margin-left:33mm;margin-right:11mm}.r5{margin-left:44mm;background:var(--navy);color:#fff}
+.r5 b{color:#fff}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin:3mm 0 5mm}
+.card{background:#fff;border:.5mm dashed #6b7785;border-radius:2.5mm;padding:3.5mm 4mm;font-family:"Lexend";font-size:11.5pt;line-height:1.75;break-inside:avoid}
+.card b{display:block;color:var(--teal);font-size:10pt;margin-bottom:1mm}
+
+.four{display:grid;grid-template-columns:1fr 1fr;gap:2.5mm}
+.four .node{text-align:left;padding:3mm 3.5mm;font-size:10.6pt}
+.mapdown{text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1.5;white-space:nowrap;overflow:hidden}
+figure svg{width:100%;height:auto;display:block}
+svg .ax{stroke:#4f5b69;stroke-width:1.5;fill:none}
+svg .st{font-family:"Atkinson",sans-serif;font-size:13.5px;fill:#4f5b69}
+svg .sb{font-family:"Lexend",sans-serif;font-size:14px;font-weight:600;fill:#14304b}
+svg .ln1{stroke:#2a78d6;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+svg .ln2{stroke:#8a94a0;stroke-width:3.5;fill:none;stroke-dasharray:9 7;stroke-linecap:round}
+</style>
+</head>
+<body>
+<style>
+@page{size:A4;margin:11mm 13mm 14mm 13mm}
+body{font-size:11.5pt;line-height:1.5}
+.sheet h1{font-size:21pt;margin:0 0 1mm;padding-bottom:2mm}
+.sheet .subt{font-family:"Lexend";font-weight:600;color:var(--teal);font-size:11pt;margin:0 0 3mm}
+.sheet h2{font-size:12.5pt;margin:3.5mm 0 1.8mm}
+.trick{background:var(--card);border:.3mm solid var(--line);border-left:1.6mm solid var(--teal);border-radius:2.2mm;padding:2.2mm 3.5mm;margin-bottom:2mm;display:grid;grid-template-columns:9mm 1fr;column-gap:2.5mm;break-inside:avoid}
+.trick .num{font-family:"Lexend";font-weight:700;font-size:13pt;color:#fff;background:var(--teal);width:8mm;height:8mm;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:.6mm}
+.trick b.t{font-family:"Lexend";font-weight:600;color:var(--navy);font-size:11.5pt}
+.trick .ex{display:block;margin-top:.4mm}
+.trick .ans{font-family:"Lexend";font-weight:700;color:var(--navy);background:#FFEFCF;border-radius:1mm;padding:0 1.4mm}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:3.5mm}
+.cols .box{margin:0;max-width:none;font-size:11pt;padding:2.6mm 3.6mm 2.2mm}
+.cols .box ol,.cols .box ul{margin:0;padding-left:5.5mm}
+.cols .box li{margin-bottom:.9mm;max-width:none}
+.drill{width:100%;margin:0;font-size:10.8pt}
+.drill td{padding:1.3mm 2mm;border-bottom:.3mm solid var(--line)}
+.drill td.a{font-family:"Lexend";font-weight:600;text-align:right;white-space:nowrap;color:var(--navy)}
+</style>
+<div class="sheet">
+<h1>Mental maths cheat sheet</h1>
+<div class="subt">Do not do the sum you were given. Turn it into easier sums.</div>
+
+<h2>The five tricks</h2>
+<div class="trick"><div class="num">1</div><div><b class="t">Round one number, then fix it.</b> For multiplying.
+  <span class="ex">17 &times; 18: do 17 &times; 20 = 340. Take off 17 &times; 2 = 34. <span class="ans">306</span></span>
+  <span class="ex">14 &times; 16: do 14 &times; 10 = 140. Add 14 &times; 6 = 84. <span class="ans">224</span></span></div></div>
+<div class="trick"><div class="num">2</div><div><b class="t">Build percentages from 10% and 1%.</b> Move the decimal point, then add the pieces.
+  <span class="ex">15% of 480: 10% is 48. 5% is half of that, 24. <span class="ans">72</span></span>
+  <span class="ex">16% of 16: 10% is 1.6. 5% is 0.8. 1% is 0.16. <span class="ans">2.56</span></span></div></div>
+<div class="trick"><div class="num">3</div><div><b class="t">Flip the percentage if that is easier.</b> 16% of 25 is the same as 25% of 16.
+  <span class="ex">25% of 16 is a quarter of 16. <span class="ans">4</span></span></div></div>
+<div class="trick"><div class="num">4</div><div><b class="t">Halve one number and double the other.</b> Good with 5, 25 or 50.
+  <span class="ex">16 &times; 25 becomes 8 &times; 50, then 4 &times; 100. <span class="ans">400</span></span>
+  <span class="ex">23 &times; 5: do 23 &times; 10 = 230, then halve it. <span class="ans">115</span></span></div></div>
+<div class="trick"><div class="num">5</div><div><b class="t">Count up instead of subtracting.</b>
+  <span class="ex">4.62 minus 4.15: count from 4.15 up to 4.62. <span class="ans">0.47</span></span>
+  <span class="ex">Middle of 4.20 and 4.26: the gap is 6, half is 3. <span class="ans">4.23</span></span></div></div>
+
+<div class="cols" style="margin-top:3mm">
+  <div class="box"><span class="tag">Two facts to memorise</span>
+    <ul>
+      <li><strong>One basis point, or one pip, on one million is 100.</strong> So on 30 million it is 3,000.</li>
+      <li><strong>Fractions as percentages:</strong> a half is 50%. A quarter is 25%. A fifth is 20%. A tenth is 10%. A twentieth is 5%.</li>
+    </ul>
+  </div>
+  <div class="box say"><span class="tag">How to answer out loud</span>
+    <ol>
+      <li><strong>Repeat the question.</strong> It buys two seconds.</li>
+      <li><strong>Say your steps.</strong> They are judging calm, not just the answer.</li>
+      <li><strong>Biggest part first.</strong> Tens before units.</li>
+      <li><strong>If you slip, correct it calmly.</strong> "Sorry, 306, not 316."</li>
+    </ol>
+  </div>
+</div>
+
+<h2>Try these. Cover the answers</h2>
+<div class="cols">
+  <table class="drill">
+    <tr><td>19 &times; 21</td><td class="a">399</td></tr>
+    <tr><td>12% of 50</td><td class="a">6</td></tr>
+    <tr><td>36 &times; 25</td><td class="a">900</td></tr>
+    <tr><td>Middle of 1.3248 and 1.3252</td><td class="a">1.3250</td></tr>
+  </table>
+  <table class="drill">
+    <tr><td>5.10 minus 4.65</td><td class="a">0.45</td></tr>
+    <tr><td>One basis point on 250 million</td><td class="a">25,000</td></tr>
+    <tr><td>80 rising to 84, as a percentage</td><td class="a">5%</td></tr>
+    <tr><td>13 &times; 15</td><td class="a">195</td></tr>
+  </table>
+</div>
+<p class="small" style="margin-top:2.5mm;max-width:none">Five minutes a day is enough. Say the steps out loud as you practise. More drills are in Part 3, Chapter 9.</p>
+</div>
+
+</body>
+</html>
