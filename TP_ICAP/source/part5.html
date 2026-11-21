@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>TP ICAP Part 5: The questions</title>
+<style>
+@font-face{font-family:"Lexend";font-weight:400;src:url("node_modules/@fontsource/lexend/files/lexend-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Lexend";font-weight:600;src:url("node_modules/@fontsource/lexend/files/lexend-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Lexend";font-weight:700;src:url("node_modules/@fontsource/lexend/files/lexend-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"Atkinson";font-weight:400;src:url("node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Atkinson";font-weight:700;src:url("node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2")}
+
+:root{
+  --bg:#FBF6EA; --ink:#1f2a37; --muted:#4f5b69; --navy:#14304b; --teal:#0f6e84;
+  --line:#d9d0bb; --card:#fffdf6;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --grey:#8a94a0;
+}
+@page{size:A4;margin:16mm 17mm 19mm 17mm}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson",Verdana,sans-serif;
+  font-size:12.5pt;line-height:1.62;letter-spacing:.012em;word-spacing:.06em;text-align:left;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3,h4{font-family:"Lexend",Verdana,sans-serif;color:var(--navy);line-height:1.25;letter-spacing:0;break-after:avoid}
+h1{font-size:23pt;font-weight:700;margin:0 0 4mm;padding-bottom:3mm;border-bottom:1.2mm solid var(--teal)}
+h2{font-size:15.5pt;font-weight:600;margin:8mm 0 2.5mm}
+h3{font-size:12.5pt;font-weight:600;margin:5.5mm 0 1.5mm}
+p{margin:0 0 3.2mm;max-width:150mm}
+li{max-width:146mm}
+ul,ol{margin:0 0 3.5mm;padding-left:6.5mm}
+ol{padding-left:8.5mm}
+li{margin-bottom:1.7mm}
+strong{font-weight:700;color:#10202f}
+section{break-before:auto;margin-top:13mm}
+section.pb{break-before:page;margin-top:0}
+.kicker{break-after:avoid}
+.kicker{font-family:"Lexend";font-size:10pt;font-weight:600;color:var(--teal);margin:0 0 1.5mm}
+.lead{font-size:13pt;line-height:1.6}
+.small{font-size:10pt;color:var(--muted);line-height:1.5}
+
+/* boxes */
+.box{border-radius:2.5mm;padding:3.6mm 4.5mm 3mm;margin:4mm 0;font-size:12pt;max-width:162mm;break-inside:avoid;border-left:1.6mm solid var(--teal);background:#E7F1F3}
+.box > :last-child{margin-bottom:.6mm}
+.box .tag{font-family:"Lexend";font-weight:600;font-size:10.5pt;display:block;margin-bottom:1.2mm;color:var(--navy)}
+.box.say{background:#FFEFCF;border-left-color:#c77700}
+.box.warn{background:#FBE4DD;border-left-color:#b6452c}
+.box.read{background:#ECE8F6;border-left-color:#5a48b8}
+.box.fact{background:var(--card);border:.3mm solid var(--line);border-left:1.6mm solid var(--navy)}
+
+/* figures */
+figure{margin:5mm 0 4mm;padding:4.5mm 5mm 4mm;background:var(--card);border:.3mm solid var(--line);border-radius:3mm;break-inside:avoid}
+figcaption{font-family:"Lexend";font-weight:600;font-size:11.5pt;color:var(--navy);margin-bottom:3.5mm}
+figcaption span{display:block;font-family:"Atkinson";font-weight:400;font-size:10pt;color:var(--muted);margin-top:.6mm}
+
+/* bar charts */
+.bars{display:grid;grid-template-columns:47mm 1fr;row-gap:2.6mm;column-gap:3mm;align-items:center}
+.bars .lab{font-size:10.5pt;line-height:1.3;text-align:right}
+.bars .lab small{display:block;color:var(--muted);font-size:9pt}
+.bars .track{display:flex;align-items:center;gap:2.5mm}
+.bars .bar{height:7.5mm;border-radius:0 1.2mm 1.2mm 0;background:var(--s1);min-width:.6mm}
+.bars .val{font-family:"Lexend";font-weight:600;font-size:10.5pt;white-space:nowrap}
+.bars .val small{font-family:"Atkinson";font-weight:400;color:var(--muted);font-size:9.5pt}
+.bars.sub .bar{height:5.5mm;background:#7fb0ea}
+.c1{background:var(--s1)!important}.c2{background:var(--s2)!important}.c3{background:var(--s3)!important}.c4{background:var(--s4)!important}.cg{background:var(--grey)!important}
+.stack{display:flex;gap:.6mm;height:15mm;margin:2mm 0 2.5mm}
+.stack div{display:flex;align-items:center;justify-content:center;color:#fff;font-family:"Lexend";font-weight:600;font-size:10.5pt;border-radius:1mm;text-align:center;line-height:1.2}
+.stack .dark{color:#1f2a37}
+.legend{display:flex;flex-wrap:wrap;gap:2mm 6mm;font-size:10pt}
+.legend i{display:inline-block;width:3.6mm;height:3.6mm;border-radius:.8mm;margin-right:1.6mm;vertical-align:-.5mm}
+
+/* flow diagrams */
+.flow{display:flex;align-items:stretch;gap:1.5mm}
+.node{flex:1;background:#fff;border:.45mm solid var(--navy);border-radius:2.2mm;padding:2.6mm 2.4mm;font-size:10pt;line-height:1.35;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.node b{font-family:"Lexend";font-weight:600;font-size:10.5pt;color:var(--navy);display:block;margin-bottom:.8mm}
+.node.hub{background:var(--navy);border-color:var(--navy);color:#fff}
+.node.hub b{color:#fff}
+.node.soft{border-style:dashed;border-color:#6b7785}
+.arrow{flex:0 0 7mm;display:flex;align-items:center;justify-content:center;font-size:15pt;color:var(--teal);font-weight:700}
+.steps{counter-reset:s;display:grid;gap:2.2mm}
+.step{counter-increment:s;display:grid;grid-template-columns:10mm 1fr;gap:3mm;align-items:start;background:#fff;border:.3mm solid var(--line);border-radius:2mm;padding:2.5mm 3mm}
+.step::before{content:counter(s);font-family:"Lexend";font-weight:700;font-size:13pt;color:#fff;background:var(--teal);width:9mm;height:9mm;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.step p{margin:0;font-size:10.8pt;line-height:1.45}
+.step b{font-family:"Lexend";font-weight:600;color:var(--navy)}
+.cycle{display:grid;grid-template-columns:1fr 7mm 1fr 7mm 1fr;row-gap:1.5mm;align-items:stretch}
+.down{grid-column:5;text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1}
+.up{grid-column:1;text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1}
+
+/* timeline */
+.tl{border-left:.8mm solid var(--teal);margin:2mm 0 0 16mm;padding:0}
+.tl div{position:relative;padding:0 0 3.1mm 6mm;font-size:10.8pt;line-height:1.45;break-inside:avoid}
+.tl div::before{content:"";position:absolute;left:-2.3mm;top:1.2mm;width:3.6mm;height:3.6mm;border-radius:50%;background:var(--teal);border:.5mm solid var(--card)}
+.tl b{position:absolute;left:-19mm;top:0;width:15mm;text-align:right;font-family:"Lexend";font-weight:600;color:var(--navy)}
+.tl .big::before{background:var(--s2);width:4.6mm;height:4.6mm;left:-2.8mm}
+
+/* tables */
+table{border-collapse:collapse;width:100%;margin:3mm 0 4.5mm;font-size:10.6pt;line-height:1.42}
+tr{break-inside:avoid}
+th{font-family:"Lexend";font-weight:600;font-size:10pt;text-align:left;background:var(--navy);color:#fff;padding:2.2mm 2.6mm;vertical-align:bottom}
+td{padding:2.2mm 2.6mm;border-bottom:.3mm solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:#f5efdf}
+td.n,th.n{text-align:right;white-space:nowrap}
+td b{color:#10202f}
+
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin:4mm 0}
+.tile{background:var(--card);border:.3mm solid var(--line);border-radius:2.5mm;padding:3.2mm 3.5mm;break-inside:avoid}
+.tile b{display:block;font-family:"Lexend";font-weight:700;font-size:17pt;color:var(--navy);line-height:1.15}
+.tile span{font-size:10pt;color:var(--muted);line-height:1.35;display:block;margin-top:1mm}
+
+/* cover */
+.cover{break-before:auto;min-height:215mm;display:flex;flex-direction:column}
+.cover h1{font-size:34pt;border:none;margin:8mm 0 3mm;padding:0}
+.cover .sub{font-family:"Lexend";font-size:15pt;color:var(--teal);font-weight:600;margin-bottom:8mm;max-width:150mm;line-height:1.4}
+.cover .band{height:3mm;background:linear-gradient(90deg,var(--navy) 0 55%,var(--teal) 55% 80%,var(--s4) 80% 100%);border-radius:2mm;margin-bottom:9mm}
+.toc{columns:2;column-gap:10mm;font-size:11pt;padding:0;list-style:none;counter-reset:t}
+.toc li{counter-increment:t;margin-bottom:1.8mm;break-inside:avoid}
+.toc li::before{content:counter(t) ".";font-family:"Lexend";font-weight:600;color:var(--teal);display:inline-block;width:8mm}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+.two > div{break-inside:avoid;max-width:none}
+dl{margin:0}
+dt{font-family:"Lexend";font-weight:600;color:var(--navy);font-size:11pt;margin-top:0}
+dd{margin:0 0 0 0;font-size:10.8pt;line-height:1.48}
+a{color:var(--teal);text-decoration:none;overflow-wrap:anywhere}
+thead{display:table-header-group}
+.gloss dl{columns:2;column-gap:9mm}
+.gloss dl div{break-inside:avoid;padding-bottom:2.8mm}
+.legend4{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin:3mm 0}
+.legend4 .box{margin:0;max-width:none}
+.src li{font-size:9.6pt;line-height:1.4;margin-bottom:1.3mm}
+
+.hubgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5mm}
+.hubgrid .node{min-height:17mm}
+.layers{display:grid;gap:2mm}
+.layer{border-radius:2.2mm;padding:3mm 4mm;font-size:10.6pt;line-height:1.4;color:#fff}
+.layer b{display:block;font-family:"Lexend";font-weight:600;font-size:11pt;margin-bottom:.6mm}
+.l1{background:#14304b;margin:0 0 0 0}.l2{background:#0f6e84;margin:0 9mm}.l3{background:#fff;color:#1f2a37;border:.45mm solid #14304b;margin:0 18mm}
+.l3 b{color:#14304b}
+.ladder{display:grid;gap:2mm}
+.rung{background:#fff;border:.45mm solid var(--navy);border-radius:2.2mm;padding:2.4mm 3.5mm;font-size:10.6pt;line-height:1.4}
+.rung b{font-family:"Lexend";font-weight:600;color:var(--navy);display:block}
+.r1{margin-right:44mm}.r2{margin-left:11mm;margin-right:33mm}.r3{margin-left:22mm;margin-right:22mm}.r4{margin-left:33mm;margin-right:11mm}.r5{margin-left:44mm;background:var(--navy);color:#fff}
+.r5 b{color:#fff}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin:3mm 0 5mm}
+.card{background:#fff;border:.5mm dashed #6b7785;border-radius:2.5mm;padding:3.5mm 4mm;font-family:"Lexend";font-size:11.5pt;line-height:1.75;break-inside:avoid}
+.card b{display:block;color:var(--teal);font-size:10pt;margin-bottom:1mm}
+
+.four{display:grid;grid-template-columns:1fr 1fr;gap:2.5mm}
+.four .node{text-align:left;padding:3mm 3.5mm;font-size:10.6pt}
+.mapdown{text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1.5;white-space:nowrap;overflow:hidden}
+figure svg{width:100%;height:auto;display:block}
+svg .ax{stroke:#4f5b69;stroke-width:1.5;fill:none}
+svg .st{font-family:"Atkinson",sans-serif;font-size:13.5px;fill:#4f5b69}
+svg .sb{font-family:"Lexend",sans-serif;font-size:14px;font-weight:600;fill:#14304b}
+svg .ln1{stroke:#2a78d6;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+svg .ln2{stroke:#8a94a0;stroke-width:3.5;fill:none;stroke-dasharray:9 7;stroke-linecap:round}
+</style>
+</head>
+<body>
+<!-- ============ COVER ============ -->
+<div class="cover">
+  <h1>The questions</h1>
+  <div class="sub">Part 5. What is likely to come up in your TP ICAP video interview, ranked by evidence, with a short answer built for each</div>
+  <div class="band"></div>
+  <p class="lead">Nobody outside TP ICAP knows your three questions. But past candidates have written down what they were asked, and the same handful of questions keeps appearing. This pack sorts what is <strong>confirmed</strong>, what is <strong>reported</strong>, and what is <strong>my prediction</strong>, so you know where to spend your time.</p>
+
+  <div class="tiles">
+    <div class="tile"><b>3 questions</b><span>Confirmed by your invitation. Recorded on Spark Hire.</span></div>
+    <div class="tile"><b>3 keep recurring</b><span>About you. Why broking. Why TP ICAP.</span></div>
+    <div class="tile"><b>60 seconds?</b><span>One 2026 report says one minute per answer, with no retakes.</span></div>
+    <div class="tile"><b>"What is an interdealer broker?"</b><span>Reported by a London summer intern candidate in February 2026.</span></div>
+    <div class="tile"><b>17 &times; 18</b><span>The mental maths question reported more than once. For later rounds.</span></div>
+    <div class="tile"><b>27 November</b><span>Your deadline. Friday, 11:59 PM GMT.</span></div>
+  </div>
+
+  <div class="box warn">
+    <span class="tag">The single most useful finding</span>
+    One recent candidate reported <strong>one minute to respond and no second attempt</strong>. You will not know your limit until the question appears. So prepare <strong>two sizes of every answer</strong>: 60 seconds and 100 seconds. This pack gives you the 60-second ones.
+  </div>
+  <p class="small" style="margin-top:auto">Reported questions come from anonymous Glassdoor reviews, read through search summaries. A small sample: a well-informed guess, not a leak. Researched 21 November 2026.</p>
+</div>
+
+<!-- ============ CH 1 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 1</div>
+<h1>What we actually know</h1>
+<p class="lead">Let's be strict about evidence. Three levels, from solid to speculative.</p>
+
+<figure>
+  <figcaption>Diagram 1. The evidence ladder<span>The higher the layer, the more you can rely on it</span></figcaption>
+  <div class="layers">
+    <div class="layer l1"><b>Confirmed</b>From your own invitation email and from Spark Hire's help pages</div>
+    <div class="layer l2"><b>Reported</b>What past TP ICAP candidates say they were asked. Anonymous, small sample</div>
+    <div class="layer l3"><b>Predicted</b>My judgement of what your three questions will be, based on the two layers above and the job advert</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Three layers. The dark top layer is fact. The middle layer is other people's memories, which are useful but imperfect. The white bottom layer is my best guess. <strong>Prepare hardest for what all three layers agree on.</strong>
+</div>
+
+<h2>Confirmed: the format</h2>
+<p>From your invitation:</p>
+<ul>
+  <li><strong>Three questions</strong>, answered by video, one at a time.</li>
+  <li><strong>Spark Hire</strong> is the platform. Earlier candidates mention a different one, HireVue, so the firm appears to have switched tools.</li>
+  <li>You can <strong>pause and come back</strong> any time before the deadline.</li>
+  <li>You can <strong>test your setup and practise</strong> before the real questions.</li>
+  <li>After you submit, expect to hear within about two weeks. The next step is usually an interview with a hiring manager.</li>
+</ul>
+<p>From Spark Hire's own help pages:</p>
+<table>
+  <thead><tr><th style="width:28%">Setting</th><th>How it works</th></tr></thead>
+  <tr><td><b>Think time</b></td><td>The employer chooses. It may be a countdown, after which recording starts by itself. Or it may be unlimited, and you press record when ready.</td></tr>
+  <tr><td><b>Answer length</b></td><td>The employer sets a maximum for each question.</td></tr>
+  <tr><td><b>Number of takes</b></td><td>The employer chooses, and it can differ from question to question. If think time is limited, you get <strong>one take only</strong>.</td></tr>
+  <tr><td><b>Seeing questions early</b></td><td>Not possible. You see each question only when you reach it.</td></tr>
+  <tr><td><b>Attempts</b></td><td>Where retakes are allowed, the employer does not see how many you used.</td></tr>
+</table>
+<div class="box say">
+  <span class="tag">What to do with this</span>
+  <strong>Read the screen before every question.</strong> It will tell you the think time, the time limit and the number of takes. Then choose your 60-second or 100-second version to fit. Use the practice question to learn the layout so nothing surprises you.
+</div>
+
+<h2>Reported: what past candidates were asked</h2>
+<table>
+  <thead><tr><th style="width:24%">Who and when</th><th>What they reported</th></tr></thead>
+  <tr><td><b>London summer intern, February 2026</b></td><td>A video stage with "expected intern questions" and a "focus on brokering". The one question they listed: <strong>"What is an interdealer broker?"</strong></td></tr>
+  <tr><td><b>Graduate trainee, March 2026</b></td><td>A video interview with <strong>four questions, no retakes, one minute to respond</strong>. Questions included <strong>"tell me about yourself and why you think you are a good candidate"</strong>, <strong>"why TP ICAP"</strong> and <strong>what a broker is</strong>.</td></tr>
+  <tr><td><b>London intern, April 2026</b></td><td><strong>"Talk about yourself, why this company."</strong> A CV screen followed by an online interview they found "not too demanding".</td></tr>
+  <tr><td><b>Intern, recent</b></td><td>Basic questions such as <strong>"what attracts you to broking"</strong> and <strong>"why TP ICAP"</strong>.</td></tr>
+  <tr><td><b>Broker trainee, various</b></td><td>"Why this role", "why TP ICAP", <strong>"a time you made a mistake"</strong>, <strong>"do you work well under pressure"</strong>, strengths and weaknesses, and mental maths such as <strong>17 &times; 18</strong>.</td></tr>
+  <tr><td><b>Global Broking, older</b></td><td>"Why are you interested in broking as a career", <strong>"what skills will make you successful in this division"</strong>, the difference between a broker and a trader or dealer, <strong>the relationship between bonds and interest rates</strong>, and "a time you didn't agree with someone's decision".</td></tr>
+  <tr><td><b>ICAP, older still</b></td><td>"Why ICAP rather than an investment bank", the future of voice broking, challenges the firm faces from regulation, and even "do you know the share price".</td></tr>
+</table>
+<div class="box read">
+  <span class="tag">How to read this table</span>
+  Newest reports are at the top and matter most. Look for repetition. <strong>"Tell me about yourself", "why broking" and "why TP ICAP" appear again and again.</strong> A question about what a broker actually is appears in both of the most recent video reports.
+</div>
+</section>
+
+<!-- ============ CH 2 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 2</div>
+<h1>The prediction</h1>
+<p class="lead">Here is my ranking. This is judgement, not knowledge. But it tells you how to split your preparation time.</p>
+
+<table>
+  <thead><tr><th style="width:9%">Tier</th><th style="width:37%">Question</th><th style="width:20%">How likely</th><th>Why I think so</th></tr></thead>
+  <tr><td><b>1</b></td><td><b>Why broking?</b> Also asked as "what attracts you to this role?"</td><td>Very likely</td><td>In nearly every report. It is the question that separates a broker from a banker.</td></tr>
+  <tr><td><b>1</b></td><td><b>Why TP ICAP?</b></td><td>Very likely</td><td>In nearly every report.</td></tr>
+  <tr><td><b>1</b></td><td><b>Tell us about yourself.</b> Also "why are you a good candidate?"</td><td>Very likely</td><td>In both the March and April 2026 reports.</td></tr>
+  <tr><td><b>2</b></td><td><b>What is an interdealer broker?</b> Or "what does a broker do?"</td><td>Likely</td><td>In the two most recent video reports. Checks you understand the job.</td></tr>
+  <tr><td><b>2</b></td><td><b>A time you worked under pressure,</b> showed resilience, or made a mistake.</td><td>Likely</td><td>Common in reports, and "resilient" is the first trait in the advert.</td></tr>
+  <tr><td><b>2</b></td><td><b>What skills would make you a good broker?</b></td><td>Possible</td><td>Reported for Global Broking. The advert lists the skills.</td></tr>
+  <tr><td><b>3</b></td><td><b>A recent news story that interests you.</b></td><td>Possible</td><td>Reported at interview stage. Less common on video.</td></tr>
+  <tr><td><b>3</b></td><td><b>Technology or AI.</b></td><td>Possible</td><td>Not in reports, but the advert names AI directly.</td></tr>
+  <tr><td><b>3</b></td><td><b>Why not investment banking?</b></td><td>Outside chance</td><td>Reported years ago for ICAP.</td></tr>
+  <tr><td><b>3</b></td><td><b>Strengths and weaknesses.</b></td><td>Outside chance</td><td>Reported for trainees.</td></tr>
+</table>
+
+<h2>The two most likely sets of three</h2>
+<div class="two">
+  <div class="box" style="margin:0;max-width:none"><span class="tag">Set A: all about motivation</span><strong>1.</strong> Tell us about yourself. <br><strong>2.</strong> Why broking? <br><strong>3.</strong> Why TP ICAP?</div>
+  <div class="box" style="margin:0;max-width:none"><span class="tag">Set B: motivation plus a test</span><strong>1.</strong> Why broking and why TP ICAP? <br><strong>2.</strong> What is an interdealer broker? <br><strong>3.</strong> A time you handled pressure.</div>
+</div>
+
+<h2>How to split your time</h2>
+<figure>
+  <figcaption>Diagram 2. Where your preparation hours should go<span>My suggestion</span></figcaption>
+  <div class="stack">
+    <div class="c1" style="width:60%">60%<br>Tier 1</div>
+    <div class="c3" style="width:30%">30%<br>Tier 2</div>
+    <div class="cg" style="width:10%">10%<br>Tier 3</div>
+  </div>
+  <div class="legend">
+    <span><i class="c1"></i>Tier 1: rehearse on camera until smooth, in both sizes</span>
+    <span><i class="c3"></i>Tier 2: have a clear 60-second answer ready</span>
+    <span><i class="cg"></i>Tier 3: know your opening line and two points</span>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  The bar is all your preparation time. Most of it goes on the three questions that are nearly certain. A good slice goes on the next three. Only a sliver on the long shots. <strong>Do not spend an evening on AI and then stumble on "tell us about yourself".</strong>
+</div>
+
+<h2>The 60-second shape</h2>
+<p>At a normal speaking pace, 60 seconds is about <strong>150 words</strong>. That is not much. So the shape tightens:</p>
+<table>
+  <thead><tr><th style="width:26%">Part</th><th style="width:20%">Time</th><th>What goes in it</th></tr></thead>
+  <tr><td><b>Open</b></td><td>about 10 seconds</td><td>A short thanks, then name your two points. Put your strongest specific here.</td></tr>
+  <tr><td><b>Point one</b></td><td>about 20 seconds</td><td>Something you did. One number.</td></tr>
+  <tr><td><b>Point two</b></td><td>about 20 seconds</td><td>Something specific about the job or the firm. One number.</td></tr>
+  <tr><td><b>Close</b></td><td>about 10 seconds</td><td>One line linking back to the role.</td></tr>
+</table>
+<p><strong>Two points, not three.</strong> Three points in a minute means rushing all of them. If you turn out to have two minutes, add a third point about where the industry is going.</p>
+</section>
+
+<!-- ============ CH 3 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 3</div>
+<h1>Tier 1: the three you must nail</h1>
+<p class="lead">Each one has: what they are really testing, a 60-second answer with a gap for your own story, and the trap to avoid. The longer versions are in Part 2, Chapter 5.</p>
+
+<h2>1. "Tell us about yourself" or "Why are you a good candidate?"</h2>
+<p><strong>What they are testing:</strong> can you be clear and likeable in a minute? Would a client enjoy talking to you?</p>
+<div class="box fact">
+  <span class="tag">60-second answer</span>
+  "Thanks for watching. I'm [name], a final-year [subject] student at [university], and I'd sum myself up in two things: I like persuading people, and I like markets.
+  <br><br>On the first, [YOUR STORY: what you did, with one number. For example a sales role, a campaign where you contacted lots of people, a society or fund you ran]. What I learned is that I enjoy the part most people avoid: picking up the phone again after a no.
+  <br><br>On the second, I follow markets closely. Recently I've been watching how the Bank of England's rate rise is changing trading in interest rate swaps.
+  <br><br>Put together, that is why broking fits me better than any other seat in finance, and why I'm applying to TP ICAP."
+</div>
+<div class="box warn"><span class="tag">The trap</span>Reciting your CV in date order. They have your CV. Give them two themes and one story instead.</div>
+
+<h2>2. "Why broking?"</h2>
+<p><strong>What they are testing:</strong> do you know what a broker does, and do you want <strong>this</strong> job rather than any job in finance?</p>
+<div class="box fact">
+  <span class="tag">60-second answer</span>
+  "Thank you for watching. Two things draw me to broking: I've seen that I'm at my best when I'm persuading people, and I like that a broker is paid for trust and judgement rather than for taking risk.
+  <br><br>First, [YOUR STORY, two sentences, one number]. That showed me I want a role built on relationships and results.
+  <br><br>Second, the job itself. A broker finds the other side of a trade and closes the gap between a bid and an offer, without ever revealing who the client is. About 62% of TP ICAP's revenue comes from name passing, where the broker never holds the position. The skill is knowing who wants what before anyone else does.
+  <br><br>I'd rather build a book of clients who call me first than sit behind a model, and that is why I want to start on a broking desk."
+</div>
+<div class="box warn"><span class="tag">The trap</span>Saying you want to "trade" or "invest". A broker does neither. Also avoid "I love fast-paced environments" with nothing behind it.</div>
+
+<h2>3. "Why TP ICAP?"</h2>
+<p><strong>What they are testing:</strong> have you done real research, or would this answer fit any firm?</p>
+<div class="box fact">
+  <span class="tag">60-second answer</span>
+  "Thanks for taking the time. Two reasons: TP ICAP's strength in the market I find most interesting, and the fact that it is investing in junior brokers right now.
+  <br><br>First, rates. The interest rate desks made £635 million in 2025, more than a quarter of the whole group, and Rates still grew 10% in the first half of this year. With central banks changing direction, I think that is the most interesting place to learn.
+  <br><br>Second, the firm is building. Broker numbers rose 6% in a year, the trainee programmes were expanded, and it completed the Vantage Capital Markets acquisition in July. That tells me there are seats to earn, not just a name to put on a CV.
+  <br><br>Add the rotation across four desks, and this is where I'd most like to start."
+</div>
+<div class="box warn"><span class="tag">The trap</span>"Largest interdealer broker in the world" and nothing else. Every candidate will say it. Use it only as a stepping stone to something specific.</div>
+
+<div class="box say">
+  <span class="tag">If two of these are merged into one question</span>
+  "Why broking and why TP ICAP?" is common. Give <strong>one</strong> point for each: your story for broking, then one firm-specific fact for TP ICAP. Do not try to squeeze four points into a minute.
+</div>
+</section>
+
+<!-- ============ CH 4 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 4</div>
+<h1>Tier 2 and Tier 3: ready answers</h1>
+
+<h2>"What is an interdealer broker?"</h2>
+<p><strong>What they are testing:</strong> the basics. A clear, confident definition is worth more than a clever one.</p>
+<div class="box fact">
+  <span class="tag">45-second answer</span>
+  "An interdealer broker is a middleman between the big institutions in wholesale markets, mainly the trading desks of banks. When a bank needs to pass on risk, the broker finds another institution to take the other side, keeps both names confidential, and earns commission from each. The broker takes no position itself.
+  <br><br>They exist because many markets, like interest rate swaps, have no central exchange, so someone has to find the price and the counterparty. TP ICAP is the largest by revenue, and it does this by voice, electronically, and through a hybrid of the two on its Fusion platform."
+</div>
+
+<h2>"What is the difference between a broker and a trader?"</h2>
+<div class="box fact">
+  <span class="tag">20-second answer</span>
+  "A trader buys and sells with their firm's money and carries the risk. A broker sits between traders, finds the other side and earns commission, without taking risk. The trader is the broker's client."
+</div>
+
+<h2>"Tell us about a time you worked under pressure" or "showed resilience"</h2>
+<p><strong>What they are testing:</strong> will you keep going after the tenth "no" of the morning?</p>
+<div class="box fact">
+  <span class="tag">60-second frame. Fill it with your own story</span>
+  <strong>Situation, one sentence:</strong> "Last year I had to [task] with [deadline or obstacle]." <br>
+  <strong>The pressure, one sentence, with a number:</strong> "After [number] attempts I had [poor result]." <br>
+  <strong>What you did, two or three sentences:</strong> the specific things you changed. This is most of the answer. <br>
+  <strong>Result, one sentence, with a number.</strong> <br>
+  <strong>Link, one sentence:</strong> "A broker hears no all day, and that experience is why I know I can keep dialling."
+</div>
+
+<h2>"Tell us about a time you made a mistake"</h2>
+<p><strong>What they are testing:</strong> honesty. On a desk, an error must be flagged in seconds.</p>
+<ul>
+  <li>Pick a <strong>real</strong> mistake with a real consequence. Not "I work too hard".</li>
+  <li>Say what you did in the first few minutes after spotting it.</li>
+  <li>End with: "On a broking desk a wrong price costs real money, so I'd rather flag an error straight away than hope nobody notices."</li>
+</ul>
+
+<h2>"What skills would make you a successful broker?"</h2>
+<div class="box fact">
+  <span class="tag">45-second answer</span>
+  "Three, and I'd rank them. First, trust: a trader gives the order to the broker who keeps a secret. Second, resilience, because most calls don't end in a trade. Third, speed and accuracy with numbers, since one wrong digit is expensive. I'd point to [YOUR EVIDENCE] for the first two, and I practise mental maths daily for the third."
+</div>
+
+<h2>"What recent news has interested you?"</h2>
+<p>Use the story in Part 4. The 30-second version is ready there. If you have a full minute, add the line about dollar and euro volumes staying strong.</p>
+
+<h2>"How do you see technology or AI affecting broking?"</h2>
+<div class="box fact">
+  <span class="tag">45-second answer</span>
+  "I think it splits the work in two. Simple, standard trades move to screens, and AI speeds that up. But large or sensitive trades still need someone the client trusts. So I see AI making a broker more productive rather than replacing them. TP ICAP's First Mate is a good example: it flags possible matches for sales traders so they can make the call sooner. [If true: I've used AI tools myself to ...]"
+</div>
+
+<h2>"Why not investment banking?"</h2>
+<p>"I want my results to come from client relationships and what I bring in each day, not from building models on long projects. Broking puts me on the phone with the market from the start."</p>
+
+<h2>"What are your strengths and weaknesses?"</h2>
+<p>This one can only lose you points. Be brief and human. One real strength with evidence. One real weakness with what you are doing about it. No finance needed.</p>
+
+<h2>Quick-fire knowledge, in case</h2>
+<table>
+  <thead><tr><th style="width:44%">Question</th><th>Answer</th></tr></thead>
+  <tr><td><b>What is the relationship between bonds and interest rates?</b></td><td>They move in opposite directions. When rates rise, existing bond prices fall.</td></tr>
+  <tr><td><b>If bond prices go up, what happens to yields?</b></td><td>Yields go down.</td></tr>
+  <tr><td><b>What does bid and offer mean?</b></td><td>Bid is what a buyer will pay. Offer is what a seller will accept.</td></tr>
+  <tr><td><b>What is 17 &times; 18?</b></td><td>306. Seventeen twenties are 340, minus 34.</td></tr>
+  <tr><td><b>What is TP ICAP's share price?</b></td><td>About 300p on 20 November 2026. It ended 2025 at 259.5p. Check the live price on the day.</td></tr>
+</table>
+</section>
+
+<!-- ============ CH 5 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 5</div>
+<h1>Looking ahead: the later rounds</h1>
+<p class="lead">Your video is step one. It helps to know what comes after, because the same preparation feeds both.</p>
+
+<figure>
+  <figcaption>Diagram 3. What past candidates report at each stage<span>Reports vary by year and role. Not every candidate gets every stage</span></figcaption>
+  <div class="flow">
+    <div class="node hub"><b>Video interview</b>Motivation, a self-introduction, and what a broker is</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node"><b>Manager interview</b>Conversational. Why broking. Pressure. Quick mental maths</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node"><b>Assessment day</b>Number tests, a timed trading exercise, a group task, more interviews</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node"><b>Time on the floor</b>Some report a final stage sitting with a desk</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Read left to right. The dark box is where you are. Notice how the questions get more practical as you go: from "why do you want this" to "show us you can do it". Your invitation only confirms the first two steps.
+</div>
+
+<h2>What is reported for later rounds</h2>
+<ul>
+  <li><strong>Mental maths, asked out loud.</strong> "17 times 18." "16% of 16."</li>
+  <li><strong>Number and logic tests</strong> against the clock.</li>
+  <li><strong>A timed trading exercise.</strong> One older report describes simple sums with about 60 seconds each, such as currency conversions.</li>
+  <li><strong>A group task.</strong> One older report: "choose an asset class and sell it to investors."</li>
+  <li><strong>Bigger-picture questions.</strong> The future of voice broking. Challenges the firm faces. What it should invest in.</li>
+  <li><strong>One reviewer's summary:</strong> the firm favours people who are quick-thinking and good with people over those with the most experience.</li>
+</ul>
+
+<h2>Three bigger-picture answers to keep ready</h2>
+<table>
+  <thead><tr><th style="width:30%">Question</th><th>A short answer</th></tr></thead>
+  <tr><td><b>What is the future of voice broking?</b></td><td>"Smaller in volume but more valuable per trade. Standard trades go to screens. Large, complex or sensitive ones still need a person. That is why TP ICAP runs a hybrid model."</td></tr>
+  <tr><td><b>What challenges does TP ICAP face?</b></td><td>"Three: electronic platforms taking the simple trades, rivals competing for brokers and market share, and earnings that still depend on how busy markets are. Its answers are Fusion, investing in talent, and steadier income from Parameta."</td></tr>
+  <tr><td><b>What should the firm invest in?</b></td><td>"I'd keep backing the areas already growing fastest: equity derivatives, where revenue rose 25% in the first half, and credit, through RealQ. And AI tools that help brokers spot the other side sooner."</td></tr>
+</table>
+<p>Parts 1 to 3 give you everything behind those answers. For the group task, Part 3 is your friend: it is exactly what you need to "sell" an asset class.</p>
+</section>
+
+<!-- ============ CH 6 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 6</div>
+<h1>What news affects Global Broking's clients?</h1>
+<p class="lead">This was the last question in your notes, and it is a good one for the "news" answer. Here is the rule, then the live list.</p>
+
+<div class="box">
+  <span class="tag">The rule</span>
+  News matters to a broker's clients when it <strong>forces them to change their positions</strong>. A bank's trading desk does not call a broker because something is interesting. It calls because it now holds risk it needs to move. So for any headline, ask: <strong>"who has to trade because of this?"</strong>
+</div>
+
+<h2>The clients, in one line each</h2>
+<ul>
+  <li><strong>Bank trading desks:</strong> the core client. They take trades from customers, then pass the risk on.</li>
+  <li><strong>Hedge funds:</strong> they bet on where prices go, often with borrowed money.</li>
+  <li><strong>Pension funds and insurers:</strong> they must match promises that stretch decades ahead.</li>
+</ul>
+
+<h2>What is affecting them right now</h2>
+<table>
+  <thead><tr><th style="width:36%">The news</th><th style="width:17%">Who feels it most</th><th>What it makes them do, and what that means for Global Broking</th></tr></thead>
+  <tr><td><b>Central banks are raising rates again.</b> The Bank of England went to 4% on 5 November. The US central bank has signalled it may follow in December.</td><td>Banks, pension funds, hedge funds</td><td>Everyone holding positions built for falling rates must adjust. More interest rate swaps traded. Busiest for the <strong>Rates</strong> desk.</td></tr>
+  <tr><td><b>The Middle East conflict, in its ninth month.</b> Energy prices are high and UK inflation is forecast to reach about 5%.</td><td>All of them</td><td>Re-hedging of rates, currencies and inflation. Safe currencies like the dollar gain. Busy for <strong>Rates</strong> and <strong>FX</strong>.</td></tr>
+  <tr><td><b>New bank safety rules start on 1 January 2027.</b> Called Basel 3.1. They change how much of a cushion UK banks must hold against trading positions.</td><td>Bank trading desks</td><td>If holding a position costs a bank more, it wants to pass risk on faster. That is what the interdealer market is for. Part of the rules for banks' own risk models is delayed to 2028.</td></tr>
+  <tr><td><b>A new US rule from 31 December 2026.</b> Many trades in US government bonds must go through a clearing house.</td><td>Banks and hedge funds in US bonds</td><td>Extra cost and paperwork now. A more level playing field later. Trades done through interdealer brokers are specifically covered.</td></tr>
+  <tr><td><b>The Bank of England wants to limit how much hedge funds borrow against UK government bonds.</b></td><td>Hedge funds</td><td>Less borrowing could mean smaller positions and less trading in gilts. Or more careful, more frequent adjusting. Worth watching for the <strong>Rates</strong> desk.</td></tr>
+  <tr><td><b>Banks' trading results were mixed last quarter.</b> Reports say Citigroup's fixed income revenue rose 4% while JPMorgan's fell 4%.</td><td>Bank trading desks</td><td>Desks under pressure to perform care more about getting the best price. That favours brokers who can find it.</td></tr>
+  <tr><td><b>Electronic trading keeps growing.</b> Tradeweb reported swaps trading up about 42% on a year earlier.</td><td>All of them</td><td>Clients send simple trades to screens. They keep using people for hard ones. Changes <strong>how</strong> clients use a broker.</td></tr>
+  <tr><td><b>Company results and profit warnings.</b></td><td>Equity and credit investors</td><td>Share prices and credit spreads move. Clients buy protection. Busy for <strong>Equities</strong> and <strong>Credit</strong>.</td></tr>
+</table>
+<div class="box read">
+  <span class="tag">How to read this table</span>
+  Each row is one piece of news. The middle column says which client feels it. The right column is the chain: what the client does, then what it means for the desk. Practise covering the right column and working it out yourself.
+</div>
+
+<div class="box say">
+  <span class="tag">A line that shows you think like a broker</span>
+  "When I read a headline now, I try to ask who is forced to trade because of it. A rate rise matters to a broker not because rates are higher, but because banks and pension funds have to reposition."
+</div>
+<p class="small">The capital rules, the US clearing rule and the Bank of England's borrowing limits are simplified here. They are technical, and the detail is still being finalised in places. Use them to show awareness. Do not build your main answer on them. Part 4 has the story I recommend.</p>
+</section>
+
+<!-- ============ CH 7 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 7</div>
+<h1>Your final preparation list</h1>
+
+<h2>Build these, in this order</h2>
+<table>
+  <thead><tr><th style="width:8%"></th><th>Answer</th><th style="width:22%">60-second version</th><th style="width:22%">100-second version</th></tr></thead>
+  <tr><td><b>1</b></td><td>Tell us about yourself</td><td>Chapter 3 here</td><td>Add a third theme</td></tr>
+  <tr><td><b>2</b></td><td>Why broking?</td><td>Chapter 3 here</td><td>Part 2, Chapter 5</td></tr>
+  <tr><td><b>3</b></td><td>Why TP ICAP?</td><td>Chapter 3 here</td><td>Part 2, Chapter 5</td></tr>
+  <tr><td><b>4</b></td><td>What is an interdealer broker?</td><td>Chapter 4 here</td><td>Not needed</td></tr>
+  <tr><td><b>5</b></td><td>A time under pressure</td><td>Chapter 4 frame</td><td>Add more on what you changed</td></tr>
+  <tr><td><b>6</b></td><td>A recent news story</td><td>Part 4, short version</td><td>Part 4, Chapter 6</td></tr>
+</table>
+
+<h2>The one thing only you can supply</h2>
+<div class="box warn">
+  <span class="tag">Your story</span>
+  Four of the six answers above lean on <strong>one real story about you</strong>: a time you persuaded people, got knocked back and kept going. Choose it now. It needs a number in it. Without it, every answer above is just research that any candidate could recite.
+</div>
+
+<h2>On the day</h2>
+<ul>
+  <li><strong>Do the practice question first.</strong> Learn where the timer and the buttons are.</li>
+  <li><strong>Read each question's rules</strong> before you start: think time, time limit, takes.</li>
+  <li><strong>If the limit is one minute,</strong> use two points. If it is two minutes, use three.</li>
+  <li><strong>If you only get one take,</strong> slow down for the first sentence. A calm start matters more than a perfect ending.</li>
+  <li><strong>If you run out of time,</strong> stop cleanly. An unfinished sentence is worse than a short answer.</li>
+  <li><strong>Finish a few seconds early</strong> if you can.</li>
+</ul>
+
+<h2>How sure am I?</h2>
+<table>
+  <thead><tr><th style="width:38%">Claim</th><th>Confidence</th></tr></thead>
+  <tr><td>Three questions, on Spark Hire, by 27 November</td><td><b>Certain.</b> From your invitation.</td></tr>
+  <tr><td>Think time, length and takes are set by the employer</td><td><b>High.</b> From Spark Hire's help pages.</td></tr>
+  <tr><td>Motivation questions will feature</td><td><b>High.</b> In almost every candidate report.</td></tr>
+  <tr><td>One minute per answer, no retakes</td><td><b>Uncertain.</b> One report, for a different programme, possibly on a different platform. Prepare for it anyway.</td></tr>
+  <tr><td>The exact three questions</td><td><b>Unknown.</b> Nobody outside the firm knows.</td></tr>
+</table>
+
+<h2>Sources</h2>
+<ul class="src">
+  <li>Your Spark Hire invitation email and the job advert.</li>
+  <li>Spark Hire, one-way video interview help pages: <a href="https://candidates.sparkhire.com/hc/en-us/articles/48167885321755-How-a-Spark-Hire-one-way-video-interview-works">how a one-way interview works</a>, <a href="https://candidates.sparkhire.com/hc/en-us/articles/52660274495259-Answering-one-way-video-interview-questions">answering questions</a>, and <a href="https://support.sparkhire.com/hc/en-us/articles/46258017022747-One-Way-Video-Interview-experience">employer settings</a>.</li>
+  <li>Glassdoor, anonymous TP ICAP interview reviews: <a href="https://www.glassdoor.co.uk/Interview/TP-ICAP-Summer-Intern-Interview-Questions-EI_IE1621849.0,7_KO8,21.htm">summer intern</a>, <a href="https://www.glassdoor.co.uk/Interview/TP-ICAP-Intern-Interview-Questions-EI_IE1621849.0,7_KO8,14.htm">intern</a>, <a href="https://www.glassdoor.co.uk/Interview/TP-ICAP-Graduate-Trainee-Interview-Questions-EI_IE1621849.0,7_KO8,24.htm">graduate trainee</a>, <a href="https://www.glassdoor.co.uk/Interview/TP-ICAP-Broker-Trainee-Interview-Questions-EI_IE1621849.0,7_KO8,22.htm">broker trainee</a>, <a href="https://www.glassdoor.com/Interview/TP-ICAP-Global-Broking-Interview-Questions-EI_IE1621849.0,7_KO8,22.htm">Global Broking</a>. Read through search summaries, not the pages themselves.</li>
+  <li>Older ICAP process: <a href="https://www.wallstreetoasis.com/company/icap/interview">Wall Street Oasis</a> and a WikiJob guide last updated in 2021.</li>
+  <li>Bank of England, November 2026 minutes: <a href="https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/november-2026">bankofengland.co.uk</a></li>
+  <li>Basel 3.1 final rules: <a href="https://www.bankofengland.co.uk/prudential-regulation/publication/2026/january/implementation-of-the-basel-3-1-final-rules-policy-statement">Bank of England, PS1/26</a>, read through search summaries.</li>
+  <li>Other client news: sources listed in Part 4.</li>
+</ul>
+</section>
+
+</body>
+</html>
