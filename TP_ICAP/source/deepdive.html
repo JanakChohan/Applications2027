@@ -1,0 +1,757 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>TP ICAP Deep Dive: the role, the model, the relationships, what to say</title>
+<style>
+@font-face{font-family:"Lexend";font-weight:400;src:url("node_modules/@fontsource/lexend/files/lexend-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Lexend";font-weight:600;src:url("node_modules/@fontsource/lexend/files/lexend-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Lexend";font-weight:700;src:url("node_modules/@fontsource/lexend/files/lexend-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"Atkinson";font-weight:400;src:url("node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Atkinson";font-weight:700;src:url("node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2")}
+
+:root{
+  --bg:#FBF6EA; --ink:#1f2a37; --muted:#4f5b69; --navy:#14304b; --teal:#0f6e84;
+  --line:#d9d0bb; --card:#fffdf6;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --grey:#8a94a0;
+}
+@page{size:A4;margin:16mm 17mm 19mm 17mm}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson",Verdana,sans-serif;
+  font-size:12.5pt;line-height:1.62;letter-spacing:.012em;word-spacing:.06em;text-align:left;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3,h4{font-family:"Lexend",Verdana,sans-serif;color:var(--navy);line-height:1.25;letter-spacing:0;break-after:avoid}
+h1{font-size:23pt;font-weight:700;margin:0 0 4mm;padding-bottom:3mm;border-bottom:1.2mm solid var(--teal)}
+h2{font-size:15.5pt;font-weight:600;margin:8mm 0 2.5mm}
+h3{font-size:12.5pt;font-weight:600;margin:5.5mm 0 1.5mm}
+p{margin:0 0 3.2mm;max-width:150mm}
+li{max-width:146mm}
+ul,ol{margin:0 0 3.5mm;padding-left:6.5mm}
+ol{padding-left:8.5mm}
+li{margin-bottom:1.7mm}
+strong{font-weight:700;color:#10202f}
+section{break-before:auto;margin-top:13mm}
+section.pb{break-before:page;margin-top:0}
+.kicker{break-after:avoid}
+.kicker{font-family:"Lexend";font-size:10pt;font-weight:600;color:var(--teal);margin:0 0 1.5mm}
+.lead{font-size:13pt;line-height:1.6}
+.small{font-size:10pt;color:var(--muted);line-height:1.5}
+
+/* boxes */
+.box{border-radius:2.5mm;padding:3.6mm 4.5mm 3mm;margin:4mm 0;font-size:12pt;max-width:162mm;break-inside:avoid;border-left:1.6mm solid var(--teal);background:#E7F1F3}
+.box > :last-child{margin-bottom:.6mm}
+.box .tag{font-family:"Lexend";font-weight:600;font-size:10.5pt;display:block;margin-bottom:1.2mm;color:var(--navy)}
+.box.say{background:#FFEFCF;border-left-color:#c77700}
+.box.warn{background:#FBE4DD;border-left-color:#b6452c}
+.box.read{background:#ECE8F6;border-left-color:#5a48b8}
+.box.fact{background:var(--card);border:.3mm solid var(--line);border-left:1.6mm solid var(--navy)}
+
+/* figures */
+figure{margin:5mm 0 4mm;padding:4.5mm 5mm 4mm;background:var(--card);border:.3mm solid var(--line);border-radius:3mm;break-inside:avoid}
+figcaption{font-family:"Lexend";font-weight:600;font-size:11.5pt;color:var(--navy);margin-bottom:3.5mm}
+figcaption span{display:block;font-family:"Atkinson";font-weight:400;font-size:10pt;color:var(--muted);margin-top:.6mm}
+
+/* bar charts */
+.bars{display:grid;grid-template-columns:47mm 1fr;row-gap:2.6mm;column-gap:3mm;align-items:center}
+.bars .lab{font-size:10.5pt;line-height:1.3;text-align:right}
+.bars .lab small{display:block;color:var(--muted);font-size:9pt}
+.bars .track{display:flex;align-items:center;gap:2.5mm}
+.bars .bar{height:7.5mm;border-radius:0 1.2mm 1.2mm 0;background:var(--s1);min-width:.6mm}
+.bars .val{font-family:"Lexend";font-weight:600;font-size:10.5pt;white-space:nowrap}
+.bars .val small{font-family:"Atkinson";font-weight:400;color:var(--muted);font-size:9.5pt}
+.bars.sub .bar{height:5.5mm;background:#7fb0ea}
+.c1{background:var(--s1)!important}.c2{background:var(--s2)!important}.c3{background:var(--s3)!important}.c4{background:var(--s4)!important}.cg{background:var(--grey)!important}
+.stack{display:flex;gap:.6mm;height:15mm;margin:2mm 0 2.5mm}
+.stack div{display:flex;align-items:center;justify-content:center;color:#fff;font-family:"Lexend";font-weight:600;font-size:10.5pt;border-radius:1mm;text-align:center;line-height:1.2}
+.stack .dark{color:#1f2a37}
+.legend{display:flex;flex-wrap:wrap;gap:2mm 6mm;font-size:10pt}
+.legend i{display:inline-block;width:3.6mm;height:3.6mm;border-radius:.8mm;margin-right:1.6mm;vertical-align:-.5mm}
+
+/* flow diagrams */
+.flow{display:flex;align-items:stretch;gap:1.5mm}
+.node{flex:1;background:#fff;border:.45mm solid var(--navy);border-radius:2.2mm;padding:2.6mm 2.4mm;font-size:10pt;line-height:1.35;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.node b{font-family:"Lexend";font-weight:600;font-size:10.5pt;color:var(--navy);display:block;margin-bottom:.8mm}
+.node.hub{background:var(--navy);border-color:var(--navy);color:#fff}
+.node.hub b{color:#fff}
+.node.soft{border-style:dashed;border-color:#6b7785}
+.arrow{flex:0 0 7mm;display:flex;align-items:center;justify-content:center;font-size:15pt;color:var(--teal);font-weight:700}
+.steps{counter-reset:s;display:grid;gap:2.2mm}
+.step{counter-increment:s;display:grid;grid-template-columns:10mm 1fr;gap:3mm;align-items:start;background:#fff;border:.3mm solid var(--line);border-radius:2mm;padding:2.5mm 3mm}
+.step::before{content:counter(s);font-family:"Lexend";font-weight:700;font-size:13pt;color:#fff;background:var(--teal);width:9mm;height:9mm;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.step p{margin:0;font-size:10.8pt;line-height:1.45}
+.step b{font-family:"Lexend";font-weight:600;color:var(--navy)}
+.cycle{display:grid;grid-template-columns:1fr 7mm 1fr 7mm 1fr;row-gap:1.5mm;align-items:stretch}
+.down{grid-column:5;text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1}
+.up{grid-column:1;text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1}
+
+/* timeline */
+.tl{border-left:.8mm solid var(--teal);margin:2mm 0 0 16mm;padding:0}
+.tl div{position:relative;padding:0 0 3.1mm 6mm;font-size:10.8pt;line-height:1.45;break-inside:avoid}
+.tl div::before{content:"";position:absolute;left:-2.3mm;top:1.2mm;width:3.6mm;height:3.6mm;border-radius:50%;background:var(--teal);border:.5mm solid var(--card)}
+.tl b{position:absolute;left:-19mm;top:0;width:15mm;text-align:right;font-family:"Lexend";font-weight:600;color:var(--navy)}
+.tl .big::before{background:var(--s2);width:4.6mm;height:4.6mm;left:-2.8mm}
+
+/* tables */
+table{border-collapse:collapse;width:100%;margin:3mm 0 4.5mm;font-size:10.6pt;line-height:1.42}
+tr{break-inside:avoid}
+th{font-family:"Lexend";font-weight:600;font-size:10pt;text-align:left;background:var(--navy);color:#fff;padding:2.2mm 2.6mm;vertical-align:bottom}
+td{padding:2.2mm 2.6mm;border-bottom:.3mm solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:#f5efdf}
+td.n,th.n{text-align:right;white-space:nowrap}
+td b{color:#10202f}
+
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin:4mm 0}
+.tile{background:var(--card);border:.3mm solid var(--line);border-radius:2.5mm;padding:3.2mm 3.5mm;break-inside:avoid}
+.tile b{display:block;font-family:"Lexend";font-weight:700;font-size:17pt;color:var(--navy);line-height:1.15}
+.tile span{font-size:10pt;color:var(--muted);line-height:1.35;display:block;margin-top:1mm}
+
+/* cover */
+.cover{break-before:auto;min-height:215mm;display:flex;flex-direction:column}
+.cover h1{font-size:34pt;border:none;margin:8mm 0 3mm;padding:0}
+.cover .sub{font-family:"Lexend";font-size:15pt;color:var(--teal);font-weight:600;margin-bottom:8mm;max-width:150mm;line-height:1.4}
+.cover .band{height:3mm;background:linear-gradient(90deg,var(--navy) 0 55%,var(--teal) 55% 80%,var(--s4) 80% 100%);border-radius:2mm;margin-bottom:9mm}
+.toc{columns:2;column-gap:10mm;font-size:11pt;padding:0;list-style:none;counter-reset:t}
+.toc li{counter-increment:t;margin-bottom:1.8mm;break-inside:avoid}
+.toc li::before{content:counter(t) ".";font-family:"Lexend";font-weight:600;color:var(--teal);display:inline-block;width:8mm}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+.two > div{break-inside:avoid;max-width:none}
+dl{margin:0}
+dt{font-family:"Lexend";font-weight:600;color:var(--navy);font-size:11pt;margin-top:0}
+dd{margin:0 0 0 0;font-size:10.8pt;line-height:1.48}
+a{color:var(--teal);text-decoration:none;overflow-wrap:anywhere}
+thead{display:table-header-group}
+.gloss dl{columns:2;column-gap:9mm}
+.gloss dl div{break-inside:avoid;padding-bottom:2.8mm}
+.legend4{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin:3mm 0}
+.legend4 .box{margin:0;max-width:none}
+.src li{font-size:9.6pt;line-height:1.4;margin-bottom:1.3mm}
+
+.hubgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5mm}
+.hubgrid .node{min-height:17mm}
+.layers{display:grid;gap:2mm}
+.layer{border-radius:2.2mm;padding:3mm 4mm;font-size:10.6pt;line-height:1.4;color:#fff}
+.layer b{display:block;font-family:"Lexend";font-weight:600;font-size:11pt;margin-bottom:.6mm}
+.l1{background:#14304b;margin:0 0 0 0}.l2{background:#0f6e84;margin:0 9mm}.l3{background:#fff;color:#1f2a37;border:.45mm solid #14304b;margin:0 18mm}
+.l3 b{color:#14304b}
+.ladder{display:grid;gap:2mm}
+.rung{background:#fff;border:.45mm solid var(--navy);border-radius:2.2mm;padding:2.4mm 3.5mm;font-size:10.6pt;line-height:1.4}
+.rung b{font-family:"Lexend";font-weight:600;color:var(--navy);display:block}
+.r1{margin-right:44mm}.r2{margin-left:11mm;margin-right:33mm}.r3{margin-left:22mm;margin-right:22mm}.r4{margin-left:33mm;margin-right:11mm}.r5{margin-left:44mm;background:var(--navy);color:#fff}
+.r5 b{color:#fff}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin:3mm 0 5mm}
+.card{background:#fff;border:.5mm dashed #6b7785;border-radius:2.5mm;padding:3.5mm 4mm;font-family:"Lexend";font-size:11.5pt;line-height:1.75;break-inside:avoid}
+.card b{display:block;color:var(--teal);font-size:10pt;margin-bottom:1mm}
+</style>
+</head>
+<body>
+<!-- ============ COVER ============ -->
+<div class="cover">
+  <h1>TP ICAP Deep Dive</h1>
+  <div class="sub">Part 2. The opportunity, the broker's job, the business model, client relationships, and exactly what to say</div>
+  <div class="band"></div>
+  <p class="lead">Part 1 told you <strong>what</strong> TP ICAP is. This pack is about <strong>understanding</strong> it. We are going to take the business apart like an engine, see how each piece works, and put it back together. By the end you will be able to explain it to a friend, use the ideas in your own business, and say things in your video that other candidates cannot.</p>
+
+  <div class="tiles">
+    <div class="tile"><b>Chapter 1</b><span>The opportunity. What it is and why you would want it.</span></div>
+    <div class="tile"><b>Chapter 2</b><span>The role. What a broker does, from zero.</span></div>
+    <div class="tile"><b>Chapter 3</b><span>The business model, properly. And why it differs from rivals.</span></div>
+    <div class="tile"><b>Chapter 4</b><span>Client relationships. The real product.</span></div>
+    <div class="tile"><b>Chapter 5</b><span>What to say. Lines that pass the competitor test.</span></div>
+    <div class="tile"><b>Deadline</b><span>Friday 27 November 2026, 11:59 PM GMT.</span></div>
+  </div>
+
+  <div class="box">
+    <span class="tag">How we will do this</span>
+    I am your teacher for the next hour. Every chapter follows the same pattern: <strong>a picture first</strong>, then the idea in plain words, then a real number from TP ICAP's own accounts, then how to use it. Nothing here needs memorising. If you understand the picture, the facts stick by themselves.
+  </div>
+  <p class="small" style="margin-top:auto">Figures come from TP ICAP's 2025 Annual Report, its 2026 half-year results and its November 2026 trading update unless stated. Where something is my own reasoning or general industry knowledge, I say so.</p>
+</div>
+
+<!-- ============ CH 1 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 1</div>
+<h1>The opportunity: what it is, and why you would want it</h1>
+
+<p class="lead">Right, let's start with the thing you have actually been invited to. Because it is <strong>better</strong> than you think.</p>
+
+<h2>What it is</h2>
+<p>You called it an insight day. It is not. Here is the difference.</p>
+<table>
+  <thead><tr><th style="width:24%"></th><th style="width:34%">An insight day</th><th>What you have: the Global Broking Summer Internship</th></tr></thead>
+  <tr><td><b>Length</b></td><td>One day.</td><td><b>Six weeks.</b> Late June to July or August 2027.</td></tr>
+  <tr><td><b>What you do</b></td><td>Watch presentations. Take a tour.</td><td>Sit on live trading floors. Rotate across several broking desks. Workshops, off-site events, socials and a charity event.</td></tr>
+  <tr><td><b>What it leads to</b></td><td>A line on your CV.</td><td><b>A job.</b> Interns are assessed at the end for a permanent seat on a broking desk, from August 2027.</td></tr>
+  <tr><td><b>Who it is for</b></td><td>Usually first or second years.</td><td>Final-year students graduating by August 2027.</td></tr>
+  <tr><td><b>Where</b></td><td></td><td>135 Bishopsgate, London, beside Liverpool Street station.</td></tr>
+</table>
+
+<div class="box">
+  <span class="tag">In plain English</span>
+  This is a <strong>six-week job interview that pays you to learn</strong>. The firm gets to see whether you could be a broker. You get to see whether you want to be one. If both say yes, you start your career.
+</div>
+
+<figure>
+  <figcaption>Diagram 1. Where you are on the path<span>The dark box is today</span></figcaption>
+  <div class="flow">
+    <div class="node soft"><b>Application</b>Done. They reviewed it and chose to move you on</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node hub"><b>Video interview</b>3 questions on Spark Hire. You are here</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node"><b>Manager interview</b>Usually a formal interview with the hiring manager</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node"><b>Internship</b>6 weeks rotating across desks</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node"><b>Desk offer</b>A permanent trainee broker seat</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Read left to right. Each box is one stage. The email says the team reviews all the videos and replies within about two weeks. Notice the first box: your application was <strong>read and selected</strong>. That means this video is a real first-round interview, so it deserves real preparation.
+</div>
+
+<h2>Why you would want it: seven honest reasons</h2>
+<ol>
+  <li><strong>It converts straight into a job.</strong> Many internships end with "we'll be in touch". This one is designed to end with a desk.</li>
+  <li><strong>You sit in the middle of the markets.</strong> A broker hears what dozens of banks and funds are doing, all day. Few seats in finance see that much.</li>
+  <li><strong>You learn markets without betting on them.</strong> Brokers take no trading risk. Your job is to connect people, not to be right about prices.</li>
+  <li><strong>You get to try four markets before choosing.</strong> The rotation covers Rates, Credit, Equities, and FX and Money Markets.</li>
+  <li><strong>Reward follows results.</strong> Broker pay moves with the revenue a desk brings in. The firm's accounts show about 63p of every £1 of revenue goes back out on front office costs, mainly broker pay.</li>
+  <li><strong>The firm is hiring juniors.</strong> Broker numbers rose 6% in the year to June 2026, and the firm says it has expanded its trainee broker programmes.</li>
+  <li><strong>The skills travel.</strong> Selling, negotiating, reading people and building a book of clients are useful in any business you ever run.</li>
+</ol>
+
+<div class="box say">
+  <span class="tag">My view: an edge you can use</span>
+  Most finance students prepare for investment banking. Far fewer understand broking. So the bar for sounding informed here is lower, and you can clear it by a mile. That is my opinion, not a statistic, but it is why this pack is worth an hour.
+</div>
+
+<h2>Who this is not for</h2>
+<p>A good teacher tells you the downsides too. Be honest with yourself about these.</p>
+<ul>
+  <li><strong>Early starts.</strong> You are in before the market opens.</li>
+  <li><strong>A loud, fast floor.</strong> If you need quiet to think, it will be tiring.</li>
+  <li><strong>Rejection, daily.</strong> Most calls do not become trades.</li>
+  <li><strong>Variable pay.</strong> A quiet market or a lost client hits your income.</li>
+  <li><strong>Social stamina.</strong> Relationships are built in person as well as on the phone.</li>
+  <li><strong>Technology is changing the job.</strong> Simple trades are moving to screens. The brokers who thrive will be the ones who add something a screen cannot.</li>
+</ul>
+
+<div class="box">
+  <span class="tag">Quick self-check</span>
+  Do you enjoy talking to people more than working alone? Do you bounce back fast from a "no"? Do you like competing and being measured? Are you good with numbers at speed? Would people describe you as trustworthy with a secret? <strong>Four or five yeses means this role fits you.</strong>
+</div>
+</section>
+
+<!-- ============ CH 2 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 2</div>
+<h1>The role: what a broker actually does</h1>
+
+<p class="lead">You said you know nothing about the role. Perfect. We start from zero and build it up.</p>
+
+<h2>The job in one sentence</h2>
+<div class="box">
+  <span class="tag">In plain English</span>
+  A broker <strong>finds two people who want opposite things, gets them to agree a price, and takes a small fee from each</strong>. That is the whole job. Everything else is how you get good at it.
+</div>
+<p>Think of three jobs rolled into one:</p>
+<ul>
+  <li><strong>A matchmaker.</strong> You know who is looking for what.</li>
+  <li><strong>An auctioneer.</strong> You call out prices and nudge both sides towards a deal.</li>
+  <li><strong>A news desk.</strong> You tell your clients what is going on in the market, without ever revealing anyone's secrets.</li>
+</ul>
+
+<h2>Broker, trader, salesperson, analyst: who is who?</h2>
+<table>
+  <thead><tr><th style="width:18%">Job</th><th style="width:22%">Works at</th><th>What they do</th><th style="width:18%">Takes risk?</th></tr></thead>
+  <tr><td><b>Broker</b></td><td>TP ICAP, BGC, Tradition</td><td>Arranges trades between other people. This is the role you are applying for.</td><td><b>No</b></td></tr>
+  <tr><td><b>Trader</b></td><td>A bank or a fund</td><td>Buys and sells with the firm's money and carries the result. <strong>The broker's client.</strong></td><td>Yes</td></tr>
+  <tr><td><b>Salesperson</b></td><td>A bank</td><td>Looks after the bank's investor customers and brings their orders to the bank's traders.</td><td>No</td></tr>
+  <tr><td><b>Analyst</b></td><td>A bank or a fund</td><td>Researches companies or markets and builds financial models.</td><td>No</td></tr>
+</table>
+
+<h2>A broker's world</h2>
+<figure>
+  <figcaption>Diagram 2. One broker and their clients<span>A simplified picture. Real numbers of clients vary by desk</span></figcaption>
+  <div class="hubgrid">
+    <div class="node">Trader at <b>Bank A</b></div>
+    <div class="node">Trader at <b>Bank B</b></div>
+    <div class="node">Trader at <b>Bank C</b></div>
+    <div class="node">Trader at <b>Bank D</b></div>
+    <div class="node hub"><b>You, the broker</b>An open line to every one of them, all day</div>
+    <div class="node">Trader at a <b>hedge fund</b></div>
+    <div class="node">Trader at <b>Bank E</b></div>
+    <div class="node">Trader at <b>Bank F</b></div>
+    <div class="node soft"><b>Rival brokers</b>The same traders also talk to BGC and Tradition</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  You are the dark box in the middle. Every other box is a client you speak to, many times a day. When one of them wants to buy, your job is to know which of the others might sell. The dotted box is the catch: your clients talk to rival brokers too. <strong>You compete for every trade, every day.</strong>
+</div>
+
+<h2>A day on the desk</h2>
+<p>This is a general picture of the job across the industry. Your desk may run differently.</p>
+<figure>
+  <figcaption>Diagram 3. A typical broking day in London<span>Times are approximate</span></figcaption>
+  <div class="tl">
+    <div><b>6:30</b>Arrive. Read what happened overnight in Asia and the US. Work out which clients will need to act.</div>
+    <div><b>7:00</b>Morning calls. "What are you seeing? What do you need today?" You collect interests before the market gets busy.</div>
+    <div class="big"><b>8:00</b><strong>Markets are live.</strong> You show prices, match buyers with sellers, and negotiate. Big economic numbers and central bank decisions cause sudden bursts.</div>
+    <div><b>12:00</b>Lunch, often at the desk. Sometimes with a client.</div>
+    <div class="big"><b>1:30</b><strong>New York opens.</strong> London and New York overlap for a few hours. This is usually the busiest stretch.</div>
+    <div><b>5:00</b>Wind down. Check every trade was recorded correctly. Note what clients still want for tomorrow.</div>
+    <div><b>Evening</b>Sometimes a client dinner or event. Relationships are built face to face.</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Read from top to bottom through the day. The two orange dots are the busiest moments. Notice how much of the day is <strong>talking and listening</strong>, and how little is sitting quietly with a spreadsheet.
+</div>
+
+<h2>The language of the desk</h2>
+<p>Brokers speak in shorthand because speed matters. Here are the basics. Learn these and the floor will make sense on day one.</p>
+<table>
+  <thead><tr><th style="width:24%">Word</th><th>What it means</th></tr></thead>
+  <tr><td><b>Bid</b></td><td>The price someone is willing to <strong>pay</strong> to buy.</td></tr>
+  <tr><td><b>Offer</b></td><td>The price someone is willing to <strong>accept</strong> to sell.</td></tr>
+  <tr><td><b>The spread</b></td><td>The gap between the bid and the offer. The broker's job is to close that gap.</td></tr>
+  <tr><td><b>Size</b></td><td>How much they want to trade.</td></tr>
+  <tr><td><b>"Mine"</b></td><td>"I buy at your offer."</td></tr>
+  <tr><td><b>"Yours"</b></td><td>"I sell at your bid."</td></tr>
+  <tr><td><b>"Done"</b></td><td>The trade is agreed. A broker's favourite word.</td></tr>
+  <tr><td><b>Working an order</b></td><td>Quietly looking for the other side of a client's trade.</td></tr>
+  <tr><td><b>Colour</b></td><td>General information about what the market is doing.</td></tr>
+</table>
+
+<div class="box">
+  <span class="tag">A ten-second example</span>
+  A trader tells you: "I'll pay 20." That is a <strong>bid</strong>. Another says: "I'll sell at 22." That is an <strong>offer</strong>. The market is "20 at 22". You go back to the buyer: "Could you pay 21?" You go to the seller: "Would you take 21?" Both say yes. <strong>Done.</strong> You just earned two commissions by closing a gap of two.
+</div>
+
+<h2>What you would do as an intern</h2>
+<p>The advert confirms rotations across desks, workshops, off-site events, socials and a charity event. Beyond that, based on how internships like this usually run:</p>
+<ul>
+  <li><strong>Shadow brokers.</strong> Sit beside them and watch how they handle clients.</li>
+  <li><strong>Learn the products.</strong> One market at a time as you rotate.</li>
+  <li><strong>Follow the news.</strong> Expect to be asked what is moving and why.</li>
+  <li><strong>Meet people.</strong> Every broker you impress is a possible vote for you at the end.</li>
+</ul>
+<div class="box say">
+  <span class="tag">What gets interns a desk offer</span>
+  You are not judged on knowing everything. You are judged on whether a desk wants you sitting with them every day for years. That means <strong>energy, curiosity, reliability, and being easy to like</strong>. Turn up early. Ask good questions. Remember names. Follow up on what you were told.
+</div>
+
+<h2>The career ladder</h2>
+<figure>
+  <figcaption>Diagram 4. How a broking career builds<span>A typical path. Titles vary by desk</span></figcaption>
+  <div class="flow">
+    <div class="node"><b>Intern</b>6 weeks. Watch, learn, impress</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node"><b>Trainee broker</b>Support the seniors. Learn the product</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node"><b>Broker</b>Your own clients. Your own revenue</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node"><b>Senior broker</b>The biggest client relationships</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node"><b>Desk head</b>Runs the team and its results</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Read left to right. The big jump is from the second box to the third. A trainee helps other people's clients. A broker has <strong>their own</strong>. Everything in the first couple of years is about earning that step.
+</div>
+
+<h2>What makes a great broker</h2>
+<ul>
+  <li><strong>Memory.</strong> Who wanted what, at what price, last Tuesday.</li>
+  <li><strong>Speed with numbers.</strong> Quick mental arithmetic under pressure.</li>
+  <li><strong>Listening.</strong> Hearing what a client did not quite say.</li>
+  <li><strong>Discretion.</strong> You hold everybody's secrets. Leak one and you are finished.</li>
+  <li><strong>Thick skin.</strong> "No" is not personal.</li>
+  <li><strong>Honesty.</strong> Admit a mistake in seconds, not hours.</li>
+</ul>
+</section>
+
+<!-- ============ CH 3 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 3</div>
+<h1>The business model, properly</h1>
+
+<p class="lead">Now the fun part. We are going to open up the engine. A <strong>business model</strong> is just the answer to five questions. Who pays? For what? How are they charged? What does it cost to deliver? And what stops a rival taking it away?</p>
+
+<h2>The picture: a toll bridge</h2>
+<figure>
+  <figcaption>Diagram 5. TP ICAP as a toll bridge<span>The simplest way to see the whole model</span></figcaption>
+  <div class="flow">
+    <div class="node"><b>One side</b>A bank that wants to sell</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node hub"><b>The bridge: TP ICAP</b>Owns the crossing, not the cargo. Collects a toll from both directions</div>
+    <div class="arrow">&larr;</div>
+    <div class="node"><b>Other side</b>A bank that wants to buy</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Two sides need to reach each other. TP ICAP is the bridge between them. It charges a small toll each time someone crosses. It does not own what crosses, so it does not care whether the cargo is worth more or less tomorrow. <strong>It only cares how much traffic there is.</strong>
+</div>
+
+<h2>The five questions, answered</h2>
+<table>
+  <thead><tr><th style="width:25%">Question</th><th>TP ICAP's answer</th></tr></thead>
+  <tr><td><b>Who pays?</b></td><td>Big institutions: banks, funds, energy firms. Usually <strong>both</strong> sides of a trade pay.</td></tr>
+  <tr><td><b>For what?</b></td><td>Finding the other side, fast, anonymously, at a fair price. Plus price data.</td></tr>
+  <tr><td><b>How are they charged?</b></td><td>A small commission per trade, which is about 92% of revenue. A subscription for data, which is about 8%.</td></tr>
+  <tr><td><b>What does it cost?</b></td><td>Mostly people. About 63p of each £1 goes on front office costs. About 23p on support. About 15p is left as profit.</td></tr>
+  <tr><td><b>What protects it?</b></td><td>The network, the relationships, the licences, and the data. We will take each in turn.</td></tr>
+</table>
+
+<h2>The engine up close: one broker</h2>
+<p>Here is a number almost no candidate will have looked at. The firm publishes what an average broker earns for it.</p>
+<figure>
+  <figcaption>Diagram 6. What one average broker generated in 2025<span>Group average. Excludes Parameta and the Liquidnet platform</span></figcaption>
+  <div class="stack">
+    <div class="cg" style="width:64.4%">about £484,000<br>Direct costs</div>
+    <div class="c3" style="width:35.6%">£268,000<br>Contribution</div>
+  </div>
+  <div class="legend">
+    <span><i class="cg"></i>Direct costs of earning it: mainly the broker's pay, plus travel, client entertainment, phones and data screens</span>
+    <span><i class="c3"></i>Contribution: what is left to pay for the rest of the firm and to make a profit</span>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  The whole bar is <strong>£752,000</strong>. That is the revenue an average broker brought in during 2025. The grey part is what it cost to earn it. The green part, £268,000, is what the firm calls <strong>contribution per broker</strong>. Support costs such as technology, offices and compliance come out of the green part before you reach profit. The £484,000 is my subtraction of the two published figures.
+</div>
+<table>
+  <thead><tr><th>Division</th><th class="n">Revenue per broker</th><th class="n">Contribution per broker</th></tr></thead>
+  <tr><td>Global Broking</td><td class="n">£736,000</td><td class="n">£288,000</td></tr>
+  <tr><td>Energy &amp; Commodities</td><td class="n">£700,000</td><td class="n">£192,000</td></tr>
+  <tr><td>Liquidnet (agency desks)</td><td class="n">£1,286,000</td><td class="n">£364,000</td></tr>
+</table>
+<div class="box">
+  <span class="tag">Why this matters</span>
+  This is why the firm cares so much about <strong>each individual broker</strong>, and why it trains juniors. One more productive broker is worth hundreds of thousands of pounds a year. The firm tracks "revenue per broker" as its measure of productivity. In Global Broking it rose 7% in the first half of 2026.
+</div>
+
+<h2>Four things that make this model clever</h2>
+
+<h3>1. It needs very little capital</h3>
+<p>A bank needs billions set aside to absorb losses on loans and trades. A shop needs stock. TP ICAP holds neither. It has no warehouse and no trading book. So the profit it makes turns into cash it can actually spend.</p>
+<p><strong>The proof:</strong> over the last three years it turned an average of 113% of its earnings into free cash. That cash funded about £660 million of dividends and buybacks approved since 2023.</p>
+
+<h3>2. Its biggest cost shrinks when revenue shrinks</h3>
+<p>Brokers are paid largely out of what they bring in. When trading is slow, pay falls. The firm says front office costs are "variable with revenue". That is a built-in shock absorber.</p>
+
+<h3>3. Profit grows faster than revenue</h3>
+<p>Support costs, such as technology and offices, stay roughly fixed. So when revenue rises, most of the extra flows through to profit. This is called <strong>operating leverage</strong>.</p>
+<figure>
+  <figcaption>Diagram 7. Operating leverage in action<span>Global Broking, first half of 2026 against first half of 2025</span></figcaption>
+  <div class="bars">
+    <div class="lab">Revenue</div><div class="track"><div class="bar" style="width:36%"></div><div class="val">up 11%</div></div>
+    <div class="lab">Management and support costs</div><div class="track"><div class="bar cg" style="width:.6%"></div><div class="val">about flat</div></div>
+    <div class="lab">Adjusted operating profit</div><div class="track"><div class="bar c3" style="width:72%"></div><div class="val">up 22%</div></div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Three bars showing growth. Revenue grew 11%. Support costs barely moved. So profit grew 22%, twice as fast as revenue. The division's profit margin rose from 18.4% to 20.3%. <strong>This is the single best piece of evidence that the model is working.</strong>
+</div>
+
+<h3>4. It sells its own by-product</h3>
+<p>Every trade a broker arranges creates a price. In private markets, that price is valuable information that outsiders cannot see. TP ICAP collects those prices and sells them through Parameta Solutions.</p>
+<p><strong>The proof that this is real:</strong> inside the group, Parameta pays the broking divisions for the data they produce. In 2025 it paid Global Broking £25 million and Energy &amp; Commodities £3 million. A broker doing their normal job is creating a second product without lifting a finger.</p>
+
+<h2>The four walls that protect it</h2>
+<p>Investors call these <strong>moats</strong>, like the water around a castle.</p>
+<table>
+  <thead><tr><th style="width:24%">Moat</th><th>Why a rival cannot easily copy it</th></tr></thead>
+  <tr><td><b>The network</b></td><td>A broker is only useful if it can find the other side. The biggest network finds it most often. A new broker with five clients cannot match anybody.</td></tr>
+  <tr><td><b>Relationships</b></td><td>A trader trusts a broker they have dealt with for years. Trust cannot be bought off the shelf. Chapter 4 covers this.</td></tr>
+  <tr><td><b>Licences</b></td><td>Running a trading venue needs approval from regulators in every major country. That takes years and costs a great deal.</td></tr>
+  <tr><td><b>Data</b></td><td>Only someone sitting in the middle of the trades can see the prices. A pure data company cannot create them.</td></tr>
+</table>
+
+<h2>What makes it different from other kinds of firm</h2>
+<table>
+  <thead><tr><th style="width:21%">Type of firm</th><th>How it makes money</th><th style="width:18%">Takes market risk?</th><th style="width:22%">Needs a lot of capital?</th></tr></thead>
+  <tr><td><b>Investment bank</b></td><td>Lending, advice fees, and trading with customers.</td><td>Yes</td><td>Yes, enormous</td></tr>
+  <tr><td><b>Asset manager</b></td><td>A yearly fee on the money it looks after.</td><td>Its clients do</td><td>No</td></tr>
+  <tr><td><b>Exchange</b></td><td>Fees for trading on its central screen, plus data.</td><td>No</td><td>Moderate</td></tr>
+  <tr><td><b>TP ICAP</b></td><td>Commission for arranging private trades, plus data.</td><td><b>No</b></td><td><b>No</b></td></tr>
+</table>
+<p>So TP ICAP earns like an exchange, but in the markets that are <strong>too large, too complex or too private for an exchange</strong>. That is the gap it lives in.</p>
+
+<h2>What makes it different from its direct rivals</h2>
+<p>All three big brokers do the same core job. The difference is the <strong>bet each has made about the future</strong>. This table is my reading of their public strategies.</p>
+<table>
+  <thead><tr><th style="width:17%">Firm</th><th style="width:31%">Its bet</th><th>What it has done about it</th></tr></thead>
+  <tr><td><b>TP ICAP</b></td><td>"Broking alone is too bumpy. Add steadier income and new kinds of client."</td><td>Bought Liquidnet to reach investors. Built Parameta to sell data. Formed a bond trading business part-owned by nine banks.</td></tr>
+  <tr><td><b>BGC</b></td><td>"Go electronic, get bigger fast, and take on the exchanges."</td><td>Built the Fenics electronic platforms. Launched FMX, its own futures exchange. Bought a large energy broker in 2025.</td></tr>
+  <tr><td><b>Tradition</b></td><td>"Stay a focused broker and do it well."</td><td>No big data or investor arm. Grew revenue 11% in 2025 from broking itself.</td></tr>
+</table>
+
+<h3>Why did TP ICAP choose its bet?</h3>
+<ol>
+  <li><strong>Its old customers were shrinking.</strong> After the 2008 crisis, banks were forced to take less risk. Fewer bank traders means fewer customers for an interdealer broker.</li>
+  <li><strong>Broking revenue swings with the market.</strong> A quiet year hurts. Subscriptions do not swing.</li>
+  <li><strong>Stock markets pay more for steady income.</strong> A pound of predictable data profit is valued more highly than a pound of bumpy commission. This is why the firm explored listing Parameta separately in the US.</li>
+</ol>
+<div class="box warn">
+  <span class="tag">The honest weak spots</span>
+  The model is not perfect. It still depends on trading volumes. The brokers keep a large share of what they earn, so they capture much of the value. And electronic platforms threaten to cut out the middleman on simple trades. A strong candidate can name these calmly.
+</div>
+
+<h2>Steal these ideas for your own business</h2>
+<p>You said you want to apply this, not just learn it. Here are four lessons that work at any size.</p>
+<div class="two">
+  <div class="box" style="margin:0"><span class="tag">1. Be the bridge</span>Can you sit between two groups who need each other, and charge for the introduction? You carry no stock and little risk.</div>
+  <div class="box" style="margin:0"><span class="tag">2. Make costs move with sales</span>Pay commission rather than fixed wages where you can. Bad months then hurt far less.</div>
+  <div class="box" style="margin:0"><span class="tag">3. Sell your by-product</span>What does your business create by accident? Data, contacts, know-how? Someone may pay for it.</div>
+  <div class="box" style="margin:0"><span class="tag">4. Win one small network first</span>A marketplace is useless when thin. Become the busiest place in one tiny niche, then widen.</div>
+</div>
+</section>
+
+<!-- ============ CH 4 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 4</div>
+<h1>Client relationships: the real product</h1>
+
+<p class="lead">Here is the most important idea in this whole pack. At TP ICAP, <strong>the relationship is the product</strong>. The firm has no factory and no patent. What it owns is thousands of traders who pick up the phone to its brokers first.</p>
+
+<h2>Proof: the accountants put a price on it</h2>
+<div class="box fact">
+  <span class="tag">A fact almost nobody will mention</span>
+  TP ICAP's 2025 balance sheet carries <strong>£366 million of "customer relationships"</strong> as an asset. It came mainly from buying ICAP and Liquidnet. The accounts spread the cost of those relationships over <strong>2 to 20 years</strong>. In plain English: when TP ICAP bought those firms, a large part of what it paid for was the clients' loyalty, and it expects some of that loyalty to last two decades.
+</div>
+
+<h2>Three levels of relationship</h2>
+<figure>
+  <figcaption>Diagram 8. The three levels<span>My framework for understanding it. Not a TP ICAP diagram</span></figcaption>
+  <div class="layers">
+    <div class="layer l1"><b>Level 3. Firm to firm</b>Contracts, agreed fee rates, the Fusion platform on the client's desk, data subscriptions, shared ownership</div>
+    <div class="layer l2"><b>Level 2. Desk to desk</b>A TP ICAP sterling swaps desk and a bank's sterling swaps desk, dealing every day</div>
+    <div class="layer l3"><b>Level 1. Person to person</b>One broker and one trader who trust each other. Everything starts here</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Read from the bottom up. The foundation is one human trusting another. Above that, whole teams deal with each other. At the top, the two companies are tied together by contracts and technology. <strong>The lower levels are warm but fragile. The top level is cold but sticky.</strong> A strong client relationship has all three.
+</div>
+
+<h2>Level 1: what a trader wants from a broker</h2>
+<p>This is general knowledge of how the market works. Think of it as five currencies a broker pays the client in.</p>
+<table>
+  <thead><tr><th style="width:24%">Currency</th><th>What it means in practice</th></tr></thead>
+  <tr><td><b>Discretion</b></td><td>"Nobody will ever learn from you what I am trying to do." The number one rule.</td></tr>
+  <tr><td><b>Information</b></td><td>"Tell me what is happening out there." Useful colour, without names.</td></tr>
+  <tr><td><b>Speed</b></td><td>"When I need it done, you get it done now."</td></tr>
+  <tr><td><b>Straightness</b></td><td>"You give me the real price. If you make a mistake, you tell me at once."</td></tr>
+  <tr><td><b>Results when it is hard</b></td><td>"Anyone can find a buyer on a calm day. You find one on the bad day."</td></tr>
+</table>
+<p>And one more that matters more than people admit: <strong>being pleasant to deal with</strong>. A trader may speak to their broker dozens of times a day. Nobody wants that to be a chore.</p>
+
+<h2>How a relationship grows</h2>
+<figure>
+  <figcaption>Diagram 9. The relationship ladder<span>Each rung takes months or years to climb</span></figcaption>
+  <div class="ladder">
+    <div class="rung r5"><b>5. First call</b>The trader rings you first with their biggest, most sensitive orders</div>
+    <div class="rung r4"><b>4. Regular flow</b>You get a steady share of their daily business</div>
+    <div class="rung r3"><b>3. Test trades</b>They try you with something small to see how you handle it</div>
+    <div class="rung r2"><b>2. Useful contact</b>You share good market colour. They start taking your calls</div>
+    <div class="rung r1"><b>1. Introduced</b>A senior broker introduces you, or you make the first approach</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Start at the bottom rung and climb. Each step up means more trust and more business. The top rung, <strong>first call</strong>, is the goal: when a trader has something big, yours is the number they dial. A junior broker's first years are spent climbing this ladder with one client after another.
+</div>
+
+<h2>Why the firm treats relationships as both treasure and risk</h2>
+<p>Here is the tension at the heart of every broking firm. The relationship lives mostly at Level 1, between two people. <strong>So if the broker leaves, the client may follow.</strong></p>
+<p>You can see the firm managing this risk in its own accounts:</p>
+<ul>
+  <li><strong>It pays brokers up front to stay.</strong> The accounts describe "broker contract payments": money paid in advance under employment contracts, which must be repaid if the broker leaves early.</li>
+  <li><strong>It pays part of bonuses in shares.</strong> Eligible brokers receive some of their bonus through a share plan, which ties them to the firm's future.</li>
+  <li><strong>It has felt the pain.</strong> The firm said its oil business suffered "significant competitor disruption" at the end of 2024. It then spent heavily on hiring and keeping energy brokers. That division's profit fell from £27 million to £12 million in the first half of 2026.</li>
+</ul>
+
+<h2>How TP ICAP makes relationships stickier</h2>
+<p>The smart move is to add Level 3 glue, so the client is tied to the <strong>firm</strong> and not only to one person. This is my reading of the strategy.</p>
+<table>
+  <thead><tr><th style="width:27%">Glue</th><th>How it works</th></tr></thead>
+  <tr><td><b>Fusion on the client's desk</b></td><td>Once a trader uses TP ICAP's screen every day, switching brokers means changing their tools too.</td></tr>
+  <tr><td><b>Data subscriptions</b></td><td>The same bank that trades through the brokers also pays Parameta for prices. Two ties instead of one.</td></tr>
+  <tr><td><b>Clients as co-owners</b></td><td>Nine banks own 30% of TP ICAP's new credit trading business. Owners want their own venue to succeed.</td></tr>
+  <tr><td><b>Two brands</b></td><td>A bank can deal with a Tullett Prebon desk and an ICAP desk. Two separate relationship networks under one roof.</td></tr>
+  <tr><td><b>Breadth</b></td><td>A client can use TP ICAP for rates, currencies, credit, equities, energy and data. Each extra product deepens the tie.</td></tr>
+</table>
+
+<h2>The same idea in the other divisions</h2>
+<ul>
+  <li><strong>Liquidnet</strong> runs a <strong>community</strong>. More than 1,100 investment firms are members. The more members, the more likely each one finds a match. Its sales traders look after members, and the First Mate AI tool helps them spot matches.</li>
+  <li><strong>Parameta</strong> runs on <strong>renewals</strong>. Its income is 98% subscriptions. The firm reported higher retention rates in 2026 and its largest ever contract with a new US investor client.</li>
+</ul>
+
+<h2>The rules that keep relationships clean</h2>
+<p>Because brokers hold secrets and deal with the same people for years, the job is tightly regulated. In general across the industry:</p>
+<ul>
+  <li><strong>Phone lines and chats are recorded.</strong></li>
+  <li><strong>Client information is confidential.</strong> You never tell one client what another is doing.</li>
+  <li><strong>Gifts and entertainment are logged and limited.</strong></li>
+  <li><strong>Trades must be genuine.</strong> Nothing is arranged just to generate a fee.</li>
+</ul>
+<p>This is why <strong>Accountability</strong> is the first of the firm's three values. Integrity is not a poster on the wall. It is what the whole product rests on.</p>
+
+<h2>What this means for you</h2>
+<div class="box say">
+  <span class="tag">The real test in your video and your internship</span>
+  The reviewer is silently asking one question: <strong>"Would a client enjoy speaking to this person fifty times a day?"</strong> So be warm. Be clear. Be brief. Sound like someone people would trust with a secret. That matters more than any statistic you quote.
+</div>
+<div class="box">
+  <span class="tag">Steal this for your own business</span>
+  Draw the ladder for your own customers. Who is on rung 2? Who is on rung 4? What one thing would move each customer up a rung? And ask: if my best salesperson left tomorrow, would the customers stay? If not, add some Level 3 glue.
+</div>
+</section>
+
+<!-- ============ CH 5 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 5</div>
+<h1>What to say: lines that pass the competitor test</h1>
+
+<p class="lead">This chapter is your ammunition. The rule you gave me is the right one: <strong>if another well-prepared candidate would say the same sentence, cut it.</strong> Named companies, real figures and specific methods pass. Everything else fails.</p>
+
+<div class="box warn">
+  <span class="tag">Three rules before you use any of this</span>
+  <strong>1. Two or three numbers per answer, no more.</strong> A list of statistics sounds memorised. <br>
+  <strong>2. Only say what you can explain.</strong> If they asked "what does that mean?", could you answer? This pack and Part 1 make sure you can. <br>
+  <strong>3. Put it in your own voice.</strong> These are raw materials, not a script.
+</div>
+
+<h2>Swap the generic line for the specific one</h2>
+<table>
+  <thead><tr><th style="width:27%">Fails the test</th><th>Passes the test</th></tr></thead>
+  <tr><td>"TP ICAP is a market leader."</td><td>"TP ICAP's rates desks alone made <b>£635 million</b> in 2025. That is more than its whole Energy &amp; Commodities division."</td></tr>
+  <tr><td>"I'm passionate about markets."</td><td>"I followed how the Strait of Hormuz disruption gave TP ICAP a record <b>£689 million</b> first quarter, then cut oil futures volumes in the second."</td></tr>
+  <tr><td>"I like that it's a people business."</td><td>"The 2025 accounts carry <b>£366 million of customer relationships</b> as an asset. The relationship is literally the product."</td></tr>
+  <tr><td>"It's a fast-paced environment."</td><td>"The result is measurable every day. The average broker generated about <b>£752,000</b> of revenue in 2025."</td></tr>
+  <tr><td>"Brokers don't take risk."</td><td>"About <b>62%</b> of revenue is name passing, where the broker introduces both sides and never holds the position."</td></tr>
+  <tr><td>"TP ICAP is innovative."</td><td>"<b>First Mate</b>, the AI sales trading assistant, went live in spring 2026, and <b>Fusion</b> captures the trade data that Parameta then sells."</td></tr>
+  <tr><td>"It's a diversified business."</td><td>"In the first half of 2026, Energy &amp; Commodities profit fell from £27 million to <b>£12 million</b>, yet group profit still hit a record <b>£196 million</b> because Global Broking's profit grew 22%."</td></tr>
+  <tr><td>"It's a global firm."</td><td>"Completing <b>Vantage Capital Markets</b> in July added over 80 brokers in London, Hong Kong, Tokyo and Dubai."</td></tr>
+  <tr><td>"There's a great culture."</td><td>"<b>ICAP Charity Day</b> has raised over £175 million since 1993, and the firm expanded its trainee broker programmes in 2026."</td></tr>
+  <tr><td>"I want to learn about different markets."</td><td>"I'd like to see why <b>Equities grew 25%</b> in the first half of 2026 when FX grew 2%."</td></tr>
+  <tr><td>"I'm interested in AI."</td><td>"I'd want to use AI the way First Mate does: to flag who might take the other side before I pick up the phone." Then add your own AI project.</td></tr>
+  <tr><td>"I'm resilient."</td><td>Your own story with a number in it. "I contacted 60 people and 4 replied. Here is what I changed."</td></tr>
+</table>
+
+<h2>Fifteen things most candidates will not know</h2>
+<p>Each one comes with the plain meaning, so you can explain it if asked. Pick the four or five you like most.</p>
+<table>
+  <thead><tr><th style="width:5%">#</th><th style="width:43%">The insight</th><th>Why it is worth saying</th></tr></thead>
+  <tr><td>1</td><td><b>Rates is 27% of the whole group.</b> £635 million in 2025.</td><td>Shows you know where the money really comes from.</td></tr>
+  <tr><td>2</td><td><b>Operating leverage in Global Broking.</b> Revenue up 11%, profit up 22%, margin 20.3% in the first half of 2026.</td><td>Shows you understand how the business scales.</td></tr>
+  <tr><td>3</td><td><b>£752,000 revenue and £268,000 contribution per broker</b> in 2025.</td><td>Shows you understand the value of one seat.</td></tr>
+  <tr><td>4</td><td><b>£366 million of customer relationships</b> on the balance sheet, written off over 2 to 20 years.</td><td>The best proof that relationships are the product.</td></tr>
+  <tr><td>5</td><td><b>Brokers create a second product.</b> Parameta paid Global Broking £25 million for its data in 2025.</td><td>Shows you see how the divisions connect.</td></tr>
+  <tr><td>6</td><td><b>The oil paradox.</b> The 2026 conflict helped at first, then hurt, because physical disruption cut futures trading.</td><td>Shows real commercial thinking: volatility helps only while clients can trade.</td></tr>
+  <tr><td>7</td><td><b>Equities is the fastest-growing desk.</b> Up 25% in the first half of 2026, and Vantage adds equity derivatives.</td><td>Links a number to a deal.</td></tr>
+  <tr><td>8</td><td><b>Nine banks own 30% of the new credit business</b> behind RealQ.</td><td>Shows you understand why clients as owners is smart.</td></tr>
+  <tr><td>9</td><td><b>The firm is hiring juniors.</b> Brokers up 6% to 2,736. Trainee programmes expanded.</td><td>Makes "why now" concrete.</td></tr>
+  <tr><td>10</td><td><b>London's share.</b> About 38% of world currency trading and 50% of OTC interest rate derivatives.</td><td>Explains why London is the right place to start.</td></tr>
+  <tr><td>11</td><td><b>About 63% of revenue is in US dollars.</b> A weak dollar was expected to cost £9 to £10 million of profit in 2026.</td><td>A risk most people miss.</td></tr>
+  <tr><td>12</td><td><b>AI has cut the time to build electronic products by more than half.</b></td><td>A specific result, not a buzzword.</td></tr>
+  <tr><td>13</td><td><b>£50 million of yearly savings, delivered a year early,</b> with new hubs in Belfast and Manila.</td><td>Shows you read past the headline.</td></tr>
+  <tr><td>14</td><td><b>Global Broking just got wider.</b> In late 2026, Digital Assets and some Liquidnet desks moved into it.</td><td>Very recent. Few will have seen it.</td></tr>
+  <tr><td>15</td><td><b>The race with BGC is close.</b> Third quarter 2026: TP ICAP £620 million, BGC $833 million.</td><td>Use with care. It shows awareness, but never run down the firm you are applying to.</td></tr>
+</table>
+
+<h2>Your first 15 seconds, ready-built</h2>
+<p>The method: one line of thanks, then preview the whole answer and name your strongest specific. Fill the square brackets with your own material.</p>
+
+<div class="box say">
+  <span class="tag">Opener for "Why TP ICAP?"</span>
+  "Thanks for taking the time to watch this. I'll give three reasons: [your own experience, in six words]; the fact that a TP ICAP broker generates around £750,000 of revenue through relationships alone; and my view that owning the screen, the data and the relationship is the right bet for the next decade."
+</div>
+<div class="box say">
+  <span class="tag">Opener for "Why broking?"</span>
+  "Thank you for watching. Three things draw me to broking: [your sales or persuasion experience, in six words]; that the skill is price discovery, finding where two sides will actually meet; and that with around $845 trillion of over-the-counter derivatives outstanding, the need for a trusted middleman is growing, not shrinking."
+</div>
+<div class="box say">
+  <span class="tag">Opener for "Tell us about something in the news"</span>
+  "Thanks for watching. I'd like to talk about the oil market this year, and specifically why the same event gave TP ICAP a record quarter and then halved the profit of its energy division."
+</div>
+<div class="box say">
+  <span class="tag">Opener for "A challenge you overcame"</span>
+  "Thank you for your time. I'll tell you about [the challenge, with one number], the two things I changed, and why it's the reason I think I'd cope with hearing 'no' on a broking desk."
+</div>
+
+<h2>The three reasons: mix the types</h2>
+<p>Your method says the three reasons must be different <strong>kinds</strong> of reason. Here is a menu for each kind.</p>
+<table>
+  <thead><tr><th style="width:25%">Type</th><th>Options you could use</th></tr></thead>
+  <tr><td><b>Something you did</b></td><td>A sales job. A cold outreach campaign. Running a student fund or society and pitching to people. Fundraising. Competitive sport. Anything where you persuaded people, got knocked back and kept going. <strong>Put a number in it.</strong></td></tr>
+  <tr><td><b>The day-to-day work</b></td><td>Closing the gap between a bid and an offer. Holding many people's interests in your head at once. Being first call for a trader. A result you can measure daily. The mix of phone and Fusion screen.</td></tr>
+  <tr><td><b>Where the industry is going</b></td><td>Simple trades move to screens, so humans matter more on complex ones. Data becomes a second income. AI makes each broker more productive. Electricity and energy transition trading is growing. Frame it over ten years, not this year.</td></tr>
+</table>
+
+<h2>A full answer, built the right way</h2>
+<p>About 250 words, which is roughly 100 seconds spoken. Swap the bracketed part for your real story.</p>
+<div class="box fact">
+  <span class="tag">"Why TP ICAP?"</span>
+  <p>"Thanks for taking the time to watch this. I'll give three reasons: [my experience doing X]; the way a TP ICAP broker turns relationships into around £750,000 of revenue; and my view that owning the screen, the data and the relationship is the right bet for the next decade.</p>
+  <p>First, [YOUR STORY. What you did. One number. What it taught you about persuading people.] That's the closest I've come to what a broker does, and it's the work I enjoy most.</p>
+  <p>Second, the job itself. What draws me to Global Broking is that the relationship is the product. The 2025 accounts carry £366 million of customer relationships as an asset. I like that a desk's result comes down to whether a trader calls you first.</p>
+  <p>Third, where the industry is heading. Simple trades are moving to screens, so I think the winners will own the platform and the data as well as the relationship. TP ICAP is building all three: Fusion for hybrid trading, Parameta with 98% subscription revenue, and Liquidnet's 1,100 buy-side members. Completing Vantage Capital Markets in July tells me it is still investing.</p>
+  <p>So it's the fit with what I've done, the nature of the job, and the direction of the firm. That's why I'd like to start my career on a broking desk at TP ICAP."</p>
+</div>
+
+<div class="box fact">
+  <span class="tag">"Tell us about something in the news that interests you"</span>
+  <p>"Thanks for watching. I'd like to talk about the oil market this year, and why the same event gave TP ICAP a record quarter and then halved the profit of its energy division.</p>
+  <p>When shipping through the Strait of Hormuz was disrupted, oil prices jumped and every bank and fund had to re-hedge. That flood of activity gave TP ICAP record first-quarter revenue of £689 million.</p>
+  <p>But in the second quarter something less obvious happened. With physical oil not flowing, trading in oil futures dropped sharply. Oil is more than half of the Energy &amp; Commodities division, so its profit for the half fell from £27 million to £12 million.</p>
+  <p>What I took from it is that a broker doesn't simply benefit from volatility. It benefits from clients being able to act on volatility. And it showed me why diversification matters: Global Broking's profit grew 22% over the same half, so the group still made a record profit. That resilience is a big part of why I'm applying here."</p>
+</div>
+
+<h2>Know which questions win and which only lose</h2>
+<table>
+  <thead><tr><th style="width:30%">Question type</th><th style="width:20%">It can...</th><th>How to play it</th></tr></thead>
+  <tr><td>Why this firm. Why broking. A challenge you overcame. Something in the news.</td><td><b>Win it for you</b></td><td>Make it specific and technical. Use this chapter.</td></tr>
+  <tr><td>Teamwork. A weakness. Interests outside work.</td><td><b>Only lose it</b></td><td>Be clean, honest and human. Do not force finance into it. They are checking you are a real, likeable person.</td></tr>
+</table>
+
+<h2>Prompt cards for under your webcam</h2>
+<p>Two or three words per line. Never a script. A reviewer can see your eyes reading.</p>
+<div class="cards">
+  <div class="card"><b>Why TP ICAP</b>Thanks + three things<br>My story + number<br>£366m relationships<br>Screen, data, relationship<br>Vantage, July<br>Close: broking desk</div>
+  <div class="card"><b>Why broking</b>Thanks + three things<br>My story + number<br>Price discovery<br>62% name passing<br>$845 trillion OTC<br>Close: start here</div>
+  <div class="card"><b>News story</b>Thanks + oil<br>Hormuz, re-hedge<br>Q1 record £689m<br>Futures volumes fell<br>£27m to £12m<br>Lesson: able to trade</div>
+</div>
+
+<h2>Your week</h2>
+<table>
+  <thead><tr><th style="width:24%">When</th><th>What to do</th></tr></thead>
+  <tr><td><b>Saturday and Sunday</b></td><td>Read both packs. Choose your five favourite insights. Choose your "something you did" story.</td></tr>
+  <tr><td><b>Monday</b></td><td>Draft bullet points for the big three: why TP ICAP, why broking, a challenge. No full scripts.</td></tr>
+  <tr><td><b>Tuesday</b></td><td>Film each one on your phone, 15 to 20 times. Get every answer to 90 to 120 seconds.</td></tr>
+  <tr><td><b>Wednesday</b></td><td>Check the Bank of England rate and the oil price. Do the Spark Hire practice question. Record.</td></tr>
+  <tr><td><b>Thursday and Friday</b></td><td>Spare, in case of a technical problem. The deadline is Friday 11:59 PM GMT.</td></tr>
+</table>
+
+<div class="box">
+  <span class="tag">Final checklist before you press record</span>
+  Does the first 15 seconds name your strongest specific? Are your three reasons three different kinds? Would a rival candidate say any of your sentences? Are all your numbers ones you can explain? Is it 90 to 120 seconds? Did you thank them? Suit on, camera at eye level, light on your face?
+</div>
+
+<h2>Where these facts come from</h2>
+<ul class="src">
+  <li>TP ICAP Annual Report 2025, full-year results 2025, half-year results 2026 and the 3 November 2026 trading update. Links are in Part 1, Section 19.</li>
+  <li>The job advert and Spark Hire invitation you shared: programme details, dates and process.</li>
+  <li>The broker's day, desk language, the relationship ladder and the three levels are general industry knowledge and my own frameworks, not TP ICAP statements.</li>
+</ul>
+</section>
+
+</body>
+</html>

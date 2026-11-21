@@ -1,0 +1,1238 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>TP ICAP: the complete beginner's firm guide</title>
+<style>
+@font-face{font-family:"Lexend";font-weight:400;src:url("node_modules/@fontsource/lexend/files/lexend-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Lexend";font-weight:600;src:url("node_modules/@fontsource/lexend/files/lexend-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Lexend";font-weight:700;src:url("node_modules/@fontsource/lexend/files/lexend-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"Atkinson";font-weight:400;src:url("node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Atkinson";font-weight:700;src:url("node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2")}
+
+:root{
+  --bg:#FBF6EA; --ink:#1f2a37; --muted:#4f5b69; --navy:#14304b; --teal:#0f6e84;
+  --line:#d9d0bb; --card:#fffdf6;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --grey:#8a94a0;
+}
+@page{size:A4;margin:16mm 17mm 19mm 17mm}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson",Verdana,sans-serif;
+  font-size:12.5pt;line-height:1.62;letter-spacing:.012em;word-spacing:.06em;text-align:left;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3,h4{font-family:"Lexend",Verdana,sans-serif;color:var(--navy);line-height:1.25;letter-spacing:0;break-after:avoid}
+h1{font-size:23pt;font-weight:700;margin:0 0 4mm;padding-bottom:3mm;border-bottom:1.2mm solid var(--teal)}
+h2{font-size:15.5pt;font-weight:600;margin:8mm 0 2.5mm}
+h3{font-size:12.5pt;font-weight:600;margin:5.5mm 0 1.5mm}
+p{margin:0 0 3.2mm;max-width:150mm}
+li{max-width:146mm}
+ul,ol{margin:0 0 3.5mm;padding-left:6.5mm}
+ol{padding-left:8.5mm}
+li{margin-bottom:1.7mm}
+strong{font-weight:700;color:#10202f}
+section{break-before:auto;margin-top:13mm}
+section.pb{break-before:page;margin-top:0}
+.kicker{break-after:avoid}
+.kicker{font-family:"Lexend";font-size:10pt;font-weight:600;color:var(--teal);margin:0 0 1.5mm}
+.lead{font-size:13pt;line-height:1.6}
+.small{font-size:10pt;color:var(--muted);line-height:1.5}
+
+/* boxes */
+.box{border-radius:2.5mm;padding:3.6mm 4.5mm 3mm;margin:4mm 0;font-size:12pt;max-width:162mm;break-inside:avoid;border-left:1.6mm solid var(--teal);background:#E7F1F3}
+.box > :last-child{margin-bottom:.6mm}
+.box .tag{font-family:"Lexend";font-weight:600;font-size:10.5pt;display:block;margin-bottom:1.2mm;color:var(--navy)}
+.box.say{background:#FFEFCF;border-left-color:#c77700}
+.box.warn{background:#FBE4DD;border-left-color:#b6452c}
+.box.read{background:#ECE8F6;border-left-color:#5a48b8}
+.box.fact{background:var(--card);border:.3mm solid var(--line);border-left:1.6mm solid var(--navy)}
+
+/* figures */
+figure{margin:5mm 0 4mm;padding:4.5mm 5mm 4mm;background:var(--card);border:.3mm solid var(--line);border-radius:3mm;break-inside:avoid}
+figcaption{font-family:"Lexend";font-weight:600;font-size:11.5pt;color:var(--navy);margin-bottom:3.5mm}
+figcaption span{display:block;font-family:"Atkinson";font-weight:400;font-size:10pt;color:var(--muted);margin-top:.6mm}
+
+/* bar charts */
+.bars{display:grid;grid-template-columns:47mm 1fr;row-gap:2.6mm;column-gap:3mm;align-items:center}
+.bars .lab{font-size:10.5pt;line-height:1.3;text-align:right}
+.bars .lab small{display:block;color:var(--muted);font-size:9pt}
+.bars .track{display:flex;align-items:center;gap:2.5mm}
+.bars .bar{height:7.5mm;border-radius:0 1.2mm 1.2mm 0;background:var(--s1);min-width:.6mm}
+.bars .val{font-family:"Lexend";font-weight:600;font-size:10.5pt;white-space:nowrap}
+.bars .val small{font-family:"Atkinson";font-weight:400;color:var(--muted);font-size:9.5pt}
+.bars.sub .bar{height:5.5mm;background:#7fb0ea}
+.c1{background:var(--s1)!important}.c2{background:var(--s2)!important}.c3{background:var(--s3)!important}.c4{background:var(--s4)!important}.cg{background:var(--grey)!important}
+.stack{display:flex;gap:.6mm;height:15mm;margin:2mm 0 2.5mm}
+.stack div{display:flex;align-items:center;justify-content:center;color:#fff;font-family:"Lexend";font-weight:600;font-size:10.5pt;border-radius:1mm;text-align:center;line-height:1.2}
+.stack .dark{color:#1f2a37}
+.legend{display:flex;flex-wrap:wrap;gap:2mm 6mm;font-size:10pt}
+.legend i{display:inline-block;width:3.6mm;height:3.6mm;border-radius:.8mm;margin-right:1.6mm;vertical-align:-.5mm}
+
+/* flow diagrams */
+.flow{display:flex;align-items:stretch;gap:1.5mm}
+.node{flex:1;background:#fff;border:.45mm solid var(--navy);border-radius:2.2mm;padding:2.6mm 2.4mm;font-size:10pt;line-height:1.35;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.node b{font-family:"Lexend";font-weight:600;font-size:10.5pt;color:var(--navy);display:block;margin-bottom:.8mm}
+.node.hub{background:var(--navy);border-color:var(--navy);color:#fff}
+.node.hub b{color:#fff}
+.node.soft{border-style:dashed;border-color:#6b7785}
+.arrow{flex:0 0 7mm;display:flex;align-items:center;justify-content:center;font-size:15pt;color:var(--teal);font-weight:700}
+.steps{counter-reset:s;display:grid;gap:2.2mm}
+.step{counter-increment:s;display:grid;grid-template-columns:10mm 1fr;gap:3mm;align-items:start;background:#fff;border:.3mm solid var(--line);border-radius:2mm;padding:2.5mm 3mm}
+.step::before{content:counter(s);font-family:"Lexend";font-weight:700;font-size:13pt;color:#fff;background:var(--teal);width:9mm;height:9mm;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.step p{margin:0;font-size:10.8pt;line-height:1.45}
+.step b{font-family:"Lexend";font-weight:600;color:var(--navy)}
+.cycle{display:grid;grid-template-columns:1fr 7mm 1fr 7mm 1fr;row-gap:1.5mm;align-items:stretch}
+.down{grid-column:5;text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1}
+.up{grid-column:1;text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1}
+
+/* timeline */
+.tl{border-left:.8mm solid var(--teal);margin:2mm 0 0 16mm;padding:0}
+.tl div{position:relative;padding:0 0 3.1mm 6mm;font-size:10.8pt;line-height:1.45;break-inside:avoid}
+.tl div::before{content:"";position:absolute;left:-2.3mm;top:1.2mm;width:3.6mm;height:3.6mm;border-radius:50%;background:var(--teal);border:.5mm solid var(--card)}
+.tl b{position:absolute;left:-19mm;top:0;width:15mm;text-align:right;font-family:"Lexend";font-weight:600;color:var(--navy)}
+.tl .big::before{background:var(--s2);width:4.6mm;height:4.6mm;left:-2.8mm}
+
+/* tables */
+table{border-collapse:collapse;width:100%;margin:3mm 0 4.5mm;font-size:10.6pt;line-height:1.42}
+tr{break-inside:avoid}
+th{font-family:"Lexend";font-weight:600;font-size:10pt;text-align:left;background:var(--navy);color:#fff;padding:2.2mm 2.6mm;vertical-align:bottom}
+td{padding:2.2mm 2.6mm;border-bottom:.3mm solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:#f5efdf}
+td.n,th.n{text-align:right;white-space:nowrap}
+td b{color:#10202f}
+
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin:4mm 0}
+.tile{background:var(--card);border:.3mm solid var(--line);border-radius:2.5mm;padding:3.2mm 3.5mm;break-inside:avoid}
+.tile b{display:block;font-family:"Lexend";font-weight:700;font-size:17pt;color:var(--navy);line-height:1.15}
+.tile span{font-size:10pt;color:var(--muted);line-height:1.35;display:block;margin-top:1mm}
+
+/* cover */
+.cover{break-before:auto;min-height:215mm;display:flex;flex-direction:column}
+.cover h1{font-size:34pt;border:none;margin:8mm 0 3mm;padding:0}
+.cover .sub{font-family:"Lexend";font-size:15pt;color:var(--teal);font-weight:600;margin-bottom:8mm;max-width:150mm;line-height:1.4}
+.cover .band{height:3mm;background:linear-gradient(90deg,var(--navy) 0 55%,var(--teal) 55% 80%,var(--s4) 80% 100%);border-radius:2mm;margin-bottom:9mm}
+.toc{columns:2;column-gap:10mm;font-size:11pt;padding:0;list-style:none;counter-reset:t}
+.toc li{counter-increment:t;margin-bottom:1.8mm;break-inside:avoid}
+.toc li::before{content:counter(t) ".";font-family:"Lexend";font-weight:600;color:var(--teal);display:inline-block;width:8mm}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+.two > div{break-inside:avoid;max-width:none}
+dl{margin:0}
+dt{font-family:"Lexend";font-weight:600;color:var(--navy);font-size:11pt;margin-top:0}
+dd{margin:0 0 0 0;font-size:10.8pt;line-height:1.48}
+a{color:var(--teal);text-decoration:none;overflow-wrap:anywhere}
+thead{display:table-header-group}
+.gloss dl{columns:2;column-gap:9mm}
+.gloss dl div{break-inside:avoid;padding-bottom:2.8mm}
+.legend4{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin:3mm 0}
+.legend4 .box{margin:0;max-width:none}
+.src li{font-size:9.6pt;line-height:1.4;margin-bottom:1.3mm}
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<div class="cover">
+  <h1>TP ICAP</h1>
+  <div class="sub">The complete beginner's guide to the firm, the business, and the market it sits in</div>
+  <div class="band"></div>
+  <p class="lead">Written for the <strong>Global Broking Summer Internship 2027 (London)</strong>. It assumes zero prior knowledge. Every piece of jargon is explained the first time it appears.</p>
+
+  <div class="tiles">
+    <div class="tile"><b>£2.35bn</b><span>Revenue in 2025. A record for the firm.</span></div>
+    <div class="tile"><b>£348m</b><span>Adjusted operating profit in 2025. About 15p of every £1.</span></div>
+    <div class="tile"><b>5,600</b><span>Staff at June 2026. About 2,700 of them are brokers.</span></div>
+    <div class="tile"><b>28 countries</b><span>More than 60 offices. London base: 135 Bishopsgate.</span></div>
+    <div class="tile"><b>4 divisions</b><span>Global Broking is the biggest. You are applying to it.</span></div>
+    <div class="tile"><b>0</b><span>Bets taken with its own money. It is a middleman, not a trader.</span></div>
+  </div>
+
+  <div class="box say" style="margin-top:5mm">
+    <span class="tag">Your deadline</span>
+    Spark Hire video interview: <strong>3 questions</strong>, due by <strong>Friday 27 November 2026, 11:59 PM GMT</strong>. Aim to record by Wednesday or Thursday so a tech problem cannot sink you.
+  </div>
+  <div class="box warn">
+    <span class="tag">One correction before you start</span>
+    This is not an insight day. It is a <strong>6-week internship that works as a job trial</strong>. Interns are assessed at the end for a permanent seat on a broking desk. So the video asks one thing: <strong>could this person become a broker?</strong>
+  </div>
+  <p class="small" style="margin-top:auto">Figures come from TP ICAP's own results announcements and 2025 Annual Report unless stated. Market prices and news are as of 20 to 21 November 2026. Section 19 lists every source and tells you which numbers to re-check on the day.</p>
+</div>
+
+<!-- ============ CONTENTS ============ -->
+<section class="pb">
+<h1>What is inside</h1>
+<ol class="toc">
+  <li>The 60-second version</li>
+  <li>Six ideas you need first</li>
+  <li>What TP ICAP actually is</li>
+  <li>Why clients need a middleman</li>
+  <li>One trade, step by step</li>
+  <li>How TP ICAP makes money</li>
+  <li>The four divisions</li>
+  <li>The clients</li>
+  <li>Where the money goes</li>
+  <li>History in one page</li>
+  <li>People, roles and the broker's job</li>
+  <li>Recent deals and news</li>
+  <li>Strategy: where the firm is heading</li>
+  <li>Competitors</li>
+  <li>Commercial awareness</li>
+  <li>Strengths, weaknesses and risks</li>
+  <li>Your video interview</li>
+  <li>Glossary</li>
+  <li>Sources and numbers to re-check</li>
+</ol>
+
+<h2>How to use this guide</h2>
+<ul>
+  <li><strong>Short on time?</strong> Read sections 1, 6, 15 and 17. That is about 20 minutes.</li>
+  <li><strong>Got an evening?</strong> Read it all once. Then re-read the coloured boxes only.</li>
+  <li><strong>Stuck on a word?</strong> Section 18 is a plain-English glossary.</li>
+</ul>
+
+<h3>What the coloured boxes mean</h3>
+<div class="legend4">
+<div class="box"><span class="tag">In plain English</span>Blue-green boxes strip an idea down to the bottom line.</div>
+<div class="box say"><span class="tag">Say this in your interview</span>Amber boxes are lines you can adapt and say out loud. Put them in your own words.</div>
+<div class="box read"><span class="tag">How to read this diagram</span>Purple boxes sit under a diagram and explain what it shows.</div>
+<div class="box warn"><span class="tag">Careful</span>Red boxes flag common mistakes, or facts that sound right but are not.</div>
+</div>
+</section>
+
+<!-- ============ 1 ============ -->
+<section class="pb">
+<div class="kicker">Section 1</div>
+<h1>The 60-second version</h1>
+
+<p class="lead"><strong>TP ICAP is a matchmaker for the world's biggest financial institutions.</strong> When a bank wants to buy or sell something huge and complicated, TP ICAP finds another institution to take the other side. It charges a small fee on each trade. It never bets its own money.</p>
+
+<div class="box">
+  <span class="tag">In plain English</span>
+  Think of an <strong>estate agent</strong>. The agent does not own houses. The agent knows who wants to sell and who wants to buy, puts them together, and takes a fee when the deal completes. TP ICAP does that, but its "houses" are things like interest rate contracts, currencies, bonds, oil and electricity. Its customers are banks, investment funds and energy companies.
+</div>
+
+<h2>The ten facts to remember</h2>
+<ol>
+  <li><strong>What it is:</strong> the world's largest <strong>interdealer broker</strong> by revenue. "Interdealer" means it sits between dealers, which are mostly big banks.</li>
+  <li><strong>What it sells:</strong> a service, not a product. It sells <strong>finding the other side of a trade</strong>, and it sells <strong>price data</strong>.</li>
+  <li><strong>How it earns:</strong> commission on every trade it arranges, plus subscription fees for data.</li>
+  <li><strong>Size:</strong> revenue of <strong>£2,353 million</strong> in 2025. Adjusted operating profit of <strong>£348 million</strong>.</li>
+  <li><strong>Four divisions:</strong> Global Broking, Energy &amp; Commodities, Liquidnet, and Parameta Solutions.</li>
+  <li><strong>Biggest earner:</strong> Global Broking brings in about <strong>58% of revenue</strong>. Inside it, the <strong>Rates</strong> desks alone made <strong>£635 million</strong>, which is 27% of the whole group.</li>
+  <li><strong>Most profitable per pound:</strong> Parameta Solutions, the data business. It keeps about 38p of every £1 as profit.</li>
+  <li><strong>What it loves:</strong> busy, jumpy markets. More trading means more commission. The direction of prices matters much less.</li>
+  <li><strong>Main rivals:</strong> BGC Group (American) and Tradition (Swiss).</li>
+  <li><strong>Right now:</strong> 2026 is a strong year. Global Broking revenue grew 16% in the third quarter. The firm is investing in junior brokers, electronic trading and AI.</li>
+</ol>
+
+<div class="box say">
+  <span class="tag">Say this in your interview</span>
+  "TP ICAP sits in the middle of the wholesale markets. It doesn't take risk itself. It connects banks, funds and energy firms that need to trade with each other, and it earns commission for finding the other side. What attracts me is that it's a people business at heart: the firm's product is the relationships and judgement of its brokers, now backed by technology like Fusion."
+</div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section>
+<div class="kicker">Section 2</div>
+<h1>Six ideas you need first</h1>
+<p>You do not need a finance degree. You need these six ideas. Everything else in the guide builds on them.</p>
+
+<h3>1. A market is just buyers meeting sellers</h3>
+<p>A market is any place where people who want to buy meet people who want to sell. A fruit market works this way. So does the market for interest rate contracts.</p>
+
+<h3>2. Some things trade on an exchange. Many do not.</h3>
+<p>An <strong>exchange</strong> is a central marketplace with a public screen of prices. The London Stock Exchange is one. Anyone can see the price of a share.</p>
+<p>But a huge part of finance has no central marketplace. Deals are agreed privately between two parties, by phone, chat or private electronic system. This is called <strong>over the counter</strong>, or <strong>OTC</strong>.</p>
+<div class="box">
+  <span class="tag">In plain English</span>
+  Exchange trading is like buying from a supermarket. The price is on the shelf. OTC trading is like buying a second-hand car. There is no shelf price. You have to find a seller and agree a price. <strong>OTC is TP ICAP's home turf.</strong>
+</div>
+<p>OTC markets are enormous. The Bank for International Settlements counted about <strong>$845 trillion</strong> of OTC derivative contracts outstanding at the end of 2025.</p>
+
+<h3>3. Dealers are the shopkeepers of finance</h3>
+<p>A <strong>dealer</strong> is usually a big bank, such as JPMorgan, Barclays or Goldman Sachs. Dealers stand ready to buy from, and sell to, their customers. This is called <strong>making a market</strong>.</p>
+
+<h3>4. Sell side and buy side</h3>
+<ul>
+  <li><strong>Sell side:</strong> the dealers. Banks that sell trading services.</li>
+  <li><strong>Buy side:</strong> the investors. Pension funds, asset managers, hedge funds and insurers. They manage other people's money.</li>
+</ul>
+
+<h3>5. Liquidity means how easy it is to trade</h3>
+<p>A market is <strong>liquid</strong> when you can buy or sell quickly, in big size, without moving the price. A market is <strong>illiquid</strong> when it is hard to find anyone to trade with. TP ICAP's whole job is to <strong>create liquidity</strong> by finding the other side.</p>
+
+<h3>6. A derivative is a contract whose value comes from something else</h3>
+<p>A <strong>derivative</strong> is an agreement between two parties. Its value depends on something else, such as an interest rate, a currency or the oil price. Firms use derivatives to protect themselves. This protection is called <strong>hedging</strong>.</p>
+<div class="box">
+  <span class="tag">Example: an interest rate swap</span>
+  A company has a loan where the interest rate moves up and down. It wants certainty. So it agrees a <strong>swap</strong> with a bank: the company pays a fixed rate, and the bank pays the moving rate. Now the company knows its costs. The bank has taken on the risk, and will often want to pass that risk to someone else. <strong>That is where TP ICAP comes in.</strong>
+</div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section>
+<div class="kicker">Section 3</div>
+<h1>What TP ICAP actually is</h1>
+
+<p class="lead">TP ICAP is an <strong>interdealer broker</strong>, often shortened to <strong>IDB</strong>. It is the middleman that dealers use when they need to trade with each other.</p>
+
+<p>Here is the chain of events that creates TP ICAP's business:</p>
+
+<figure>
+  <figcaption>Diagram 1. Where TP ICAP sits in the market<span>The classic "interdealer" trade</span></figcaption>
+  <div class="flow">
+    <div class="node soft"><b>Investor</b>Pension fund, asset manager, hedge fund or company</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node"><b>Bank A</b>A dealer. Takes the trade from its customer</div>
+    <div class="arrow">&harr;</div>
+    <div class="node hub"><b>TP ICAP</b>Finds the other side. Keeps both names secret</div>
+    <div class="arrow">&harr;</div>
+    <div class="node"><b>Bank B</b>Another dealer who wants the opposite trade</div>
+    <div class="arrow">&larr;</div>
+    <div class="node soft"><b>Investor</b>Bank B's own customers</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Read left to right. <strong>1.</strong> An investor does a trade with Bank A. <strong>2.</strong> Bank A is now holding risk it may not want. <strong>3.</strong> Bank A asks TP ICAP, in the dark box, to find someone to take that risk. <strong>4.</strong> TP ICAP finds Bank B. <strong>5.</strong> The two banks trade, and each pays TP ICAP a fee. The dotted boxes are investors. In the classic model they deal with banks, not with TP ICAP directly.
+</div>
+
+<h2>What TP ICAP is not</h2>
+<table>
+  <thead><tr><th style="width:33%">It is not...</th><th>Why that matters</th></tr></thead>
+  <tr><td><b>A bank</b></td><td>It does not take deposits, lend money, or advise on mergers.</td></tr>
+  <tr><td><b>A trading firm</b></td><td>It does no "proprietary trading". It never bets its own money on prices going up or down.</td></tr>
+  <tr><td><b>A stockbroker for the public</b></td><td>Its clients are institutions only. This is the <strong>wholesale</strong> market.</td></tr>
+  <tr><td><b>An exchange</b></td><td>It runs regulated trading venues, but it is not a central public exchange like the London Stock Exchange.</td></tr>
+</table>
+
+<div class="box warn">
+  <span class="tag">Careful</span>
+  Never call TP ICAP a bank, and never call its brokers "traders". A <strong>trader</strong> works at a bank or fund and takes risk. A <strong>broker</strong> arranges trades between traders and takes no risk. Mixing these up is the fastest way to show you have not done the reading.
+</div>
+
+<h2>How the firm describes itself today</h2>
+<p>The modern TP ICAP is more than the classic interdealer model in Diagram 1. Over the last decade it has added three things:</p>
+<ul>
+  <li><strong>An energy and commodities broker</strong>, where the clients are oil companies and trading houses as well as banks.</li>
+  <li><strong>Liquidnet</strong>, which serves investors (the buy side) directly.</li>
+  <li><strong>Parameta Solutions</strong>, which sells the price data that the broking business creates.</li>
+</ul>
+<p>That is why the Chief Executive now calls it a <strong>"technology-enabled market infrastructure and data services platform"</strong>, and "the network at the centre of the world's most complex financial markets". Strip away the corporate language and it means: <strong>we connect everyone who needs to trade, and we sell the data that comes out of it.</strong></p>
+</section>
+
+<!-- ============ 4 ============ -->
+<section>
+<div class="kicker">Section 4</div>
+<h1>Why clients need a middleman</h1>
+<p class="lead">Banks are sophisticated. They could phone each other directly. So why do they pay TP ICAP? Because the broker solves real problems.</p>
+
+<table>
+  <thead><tr><th style="width:27%">The client's problem</th><th style="width:36%">What it looks like in real life</th><th>How TP ICAP fixes it</th></tr></thead>
+  <tr>
+    <td><b>"I can't show my hand"</b></td>
+    <td>If Bank A tells Bank B it needs to sell a huge position, Bank B can move the price against it.</td>
+    <td><b>Anonymity.</b> The broker shows the order to the market without saying whose it is.</td>
+  </tr>
+  <tr>
+    <td><b>"I don't know who wants the other side"</b></td>
+    <td>There is no central screen. Phoning 30 banks takes time, and the price moves while you search.</td>
+    <td><b>Reach.</b> One call to the broker reaches the whole market. The broker already knows who is looking.</td>
+  </tr>
+  <tr>
+    <td><b>"I don't know the fair price"</b></td>
+    <td>Many OTC products trade rarely. No public price exists.</td>
+    <td><b>Price discovery.</b> The broker sees flow from everyone, so it knows where the market really is.</td>
+  </tr>
+  <tr>
+    <td><b>"My trade is too big or too complicated"</b></td>
+    <td>A very large or custom trade cannot simply be clicked on a screen.</td>
+    <td><b>Skill.</b> The broker works the order quietly, in pieces, and negotiates between both sides.</td>
+  </tr>
+  <tr>
+    <td><b>"I need to follow the rules"</b></td>
+    <td>Since the 2008 crisis, regulators want many trades done on supervised venues and reported.</td>
+    <td><b>Regulated venues.</b> TP ICAP runs approved trading venues and handles the reporting.</td>
+  </tr>
+  <tr>
+    <td><b>"I need to know what's going on"</b></td>
+    <td>Traders need a feel for the market: who is buying, what is moving, and why.</td>
+    <td><b>Market colour.</b> Brokers share general information all day. This is a big part of the relationship.</td>
+  </tr>
+</table>
+
+<div class="box">
+  <span class="tag">In plain English: the value in one sentence</span>
+  The client pays a small fee so it can trade <strong>faster</strong>, in <strong>bigger size</strong>, at a <strong>better price</strong>, <strong>without revealing who it is</strong>. On a trade worth hundreds of millions, getting a slightly better price is worth far more than the broker's fee. That is why the service is worth paying for.
+</div>
+
+<h2>The network effect: why big brokers stay big</h2>
+<p>A broker is only useful if it can find the other side. The more clients a broker has, the more likely it is to find a match. So clients go to the broker that already has the most clients. That brings even more clients.</p>
+<p>This is called a <strong>network effect</strong>. People in the market say <strong>"liquidity attracts liquidity"</strong>. It is the main reason a handful of big firms dominate, and why being the largest matters so much to TP ICAP.</p>
+
+<div class="box say">
+  <span class="tag">Say this in your interview</span>
+  "The way I understand it, a broker's value comes from its network. The more participants it speaks to, the better the prices and the faster it finds the other side. So scale reinforces itself, and that is TP ICAP's core advantage as the largest interdealer broker."
+</div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section>
+<div class="kicker">Section 5</div>
+<h1>One trade, step by step</h1>
+<p>This is the most common type of trade TP ICAP arranges. It is called <strong>name passing</strong>, because at the end the broker passes each side the name of the other.</p>
+
+<figure>
+  <figcaption>Diagram 2. The life of one brokered trade<span>A simplified interest rate swap between two banks</span></figcaption>
+  <div class="steps">
+    <div class="step"><p><b>A client calls with an interest.</b> A trader at Bank A tells their TP ICAP broker: "I want to buy a 10-year sterling swap, in large size." The broker now holds a secret.</p></div>
+    <div class="step"><p><b>The broker shows the market, without naming anyone.</b> By phone, chat and the Fusion screen, the broker tells other clients a buyer is around at a certain price. Nobody knows it is Bank A.</p></div>
+    <div class="step"><p><b>The broker finds the other side and negotiates.</b> Bank B is willing to sell, but at a slightly higher price. The broker goes back and forth until both agree.</p></div>
+    <div class="step"><p><b>The trade is done and the names are passed.</b> The broker confirms the deal, then tells each bank who the other side is. The two banks now have a contract with each other. TP ICAP is not part of it.</p></div>
+    <div class="step"><p><b>TP ICAP invoices both banks.</b> Each side pays a small commission. It is billed monthly. TP ICAP has taken no market risk at any point.</p></div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Follow the numbers from 1 to 5. The key points are step 2, where the broker hides the client's identity, and step 5, where <strong>both</strong> sides pay. One trade can mean two fees.
+</div>
+
+<h2>How does the fee work? A made-up example</h2>
+<div class="box warn">
+  <span class="tag">Careful: these numbers are invented</span>
+  Real commission rates are private. They differ by product and by client. The numbers below only show the mechanics. Do not quote them as facts.
+</div>
+<ul>
+  <li>Say the trade size is <strong>£100 million</strong>.</li>
+  <li>Say the commission is <strong>£10 for every £1 million</strong> traded.</li>
+  <li>Bank A pays £10 &times; 100 = <strong>£1,000</strong>. Bank B pays the same.</li>
+  <li>TP ICAP earns <strong>£2,000</strong> for one phone conversation.</li>
+</ul>
+<p>The fee is tiny compared with the trade. But a good desk does this all day, every day, across many clients. That is how the tiny fees add up to billions.</p>
+
+<div class="box fact">
+  <span class="tag">A real number to anchor this</span>
+  In 2025 the average TP ICAP broker generated about <strong>£752,000 of revenue</strong> for the firm. That is the firm's own figure for "revenue per broker". It shows why each individual broker, and each client relationship, matters so much.
+</div>
+
+<h2>Voice, hybrid and electronic</h2>
+<p>Brokers arrange trades in three ways. You will hear these words a lot.</p>
+<ul>
+  <li><strong>Voice:</strong> a human broker on the phone or on chat. Best for big, complex or rare trades.</li>
+  <li><strong>Electronic:</strong> clients click prices on a screen. Best for simple, frequent trades.</li>
+  <li><strong>Hybrid:</strong> a mix. The screen shows the prices, and the broker steps in to negotiate. TP ICAP's hybrid platform is called <strong>Fusion</strong>.</li>
+</ul>
+</section>
+
+<!-- ============ 6 ============ -->
+<section>
+<div class="kicker">Section 6</div>
+<h1>How TP ICAP makes money</h1>
+<p class="lead">Two income streams. <strong>Commission on trades</strong> is about 92% of revenue. <strong>Data subscriptions</strong> are about 8%.</p>
+
+<figure>
+  <figcaption>Diagram 3. Revenue by division, 2025<span>Total group revenue: £2,353 million</span></figcaption>
+  <div class="bars">
+    <div class="lab">Global Broking<small>about 58% of the group</small></div><div class="track"><div class="bar c1" style="width:78%"></div><div class="val">£1,376m</div></div>
+    <div class="lab">Energy &amp; Commodities<small>about 19%</small></div><div class="track"><div class="bar c2" style="width:25.5%"></div><div class="val">£449m</div></div>
+    <div class="lab">Liquidnet<small>about 16%</small></div><div class="track"><div class="bar c3" style="width:20.7%"></div><div class="val">£365m</div></div>
+    <div class="lab">Parameta Solutions<small>about 9%</small></div><div class="track"><div class="bar c4" style="width:11.5%"></div><div class="val">£202m</div></div>
+  </div>
+  <p class="small" style="margin:3.5mm 0 1.5mm"><strong>Inside Global Broking</strong>, the division you are applying to:</p>
+  <div class="bars sub">
+    <div class="lab">Rates</div><div class="track"><div class="bar" style="width:36%"></div><div class="val">£635m <small>up 12%</small></div></div>
+    <div class="lab">FX &amp; Money Markets</div><div class="track"><div class="bar" style="width:18.2%"></div><div class="val">£321m <small>up 2%</small></div></div>
+    <div class="lab">Equities</div><div class="track"><div class="bar" style="width:15.1%"></div><div class="val">£266m <small>up 12%</small></div></div>
+    <div class="lab">Credit</div><div class="track"><div class="bar" style="width:7.3%"></div><div class="val">£129m <small>up 15%</small></div></div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Longer bar means more revenue. The top four bars are the four divisions. The four paler bars underneath break Global Broking into its desks. Growth figures compare 2025 with 2024, with currency swings removed. The division shares add up to slightly more than 100% because divisions also bill each other about £39 million, which is removed from the group total.
+</div>
+
+<div class="box">
+  <span class="tag">The single biggest money-maker</span>
+  <strong>Rates</strong>. The interest rate desks made £635 million in 2025. That is more than the whole Energy &amp; Commodities division, and 27% of the entire group. If someone asks "what drives this firm?", the honest answer is <strong>interest rate broking</strong>.
+</div>
+
+<h2>The four ways it charges for a trade</h2>
+<p>TP ICAP uses four "execution models". You do not need to memorise them. You do need to know the first one is by far the biggest.</p>
+
+<figure>
+  <figcaption>Diagram 4. Revenue by how the firm gets paid, 2025<span>Source: 2025 Annual Report</span></figcaption>
+  <div class="bars">
+    <div class="lab">Name passing<small>about 62%</small></div><div class="track"><div class="bar" style="width:78%"></div><div class="val">£1,454m</div></div>
+    <div class="lab">Matched principal<small>about 21%</small></div><div class="track"><div class="bar" style="width:26%"></div><div class="val">£485m</div></div>
+    <div class="lab">Data subscriptions<small>about 8%</small></div><div class="track"><div class="bar" style="width:10.3%"></div><div class="val">£192m</div></div>
+    <div class="lab">Executing broker<small>about 6%</small></div><div class="track"><div class="bar" style="width:7.6%"></div><div class="val">£142m</div></div>
+    <div class="lab">Introducing broker<small>about 3%</small></div><div class="track"><div class="bar" style="width:4.3%"></div><div class="val">£80m</div></div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Each bar is one way of getting paid. All five bars add up to total revenue of £2,353 million. The table below explains each one.
+</div>
+
+<table>
+  <thead><tr><th style="width:24%">Model</th><th>What happens, in plain English</th><th style="width:26%">How TP ICAP is paid</th></tr></thead>
+  <tr><td><b>Name passing</b></td><td>The broker introduces buyer and seller. They then deal with each other directly. This is Diagram 2.</td><td>A commission, invoiced monthly.</td></tr>
+  <tr><td><b>Matched principal</b></td><td>TP ICAP stands in the middle for a moment. It buys from the seller and sells to the buyer at the same instant, so the two sides stay anonymous even after the trade.</td><td>The small gap between the two prices.</td></tr>
+  <tr><td><b>Executing broker</b></td><td>TP ICAP places the client's order on an exchange, then hands the finished trade to the client.</td><td>A commission per trade.</td></tr>
+  <tr><td><b>Introducing broker</b></td><td>TP ICAP arranges a match, and a separate clearing firm stands in the middle. This is mainly Liquidnet.</td><td>A commission per trade.</td></tr>
+  <tr><td><b>Data subscriptions</b></td><td>Clients pay to receive TP ICAP's price data. This is Parameta Solutions.</td><td>A recurring subscription fee.</td></tr>
+</table>
+
+<div class="box warn">
+  <span class="tag">Careful</span>
+  "Matched principal" sounds like risk-taking. It is not a bet. Every purchase is matched with an identical sale at the same moment. The firm describes its model as <strong>low-risk with no proprietary trading</strong>. The remaining risk is that one side fails to pay or settle, not that prices move.
+</div>
+</section>
+
+<!-- ============ 7 ============ -->
+<section>
+<div class="kicker">Section 7</div>
+<h1>The four divisions</h1>
+<p>Revenue tells you how big each division is. Profit tells you how much each one actually keeps. They paint different pictures.</p>
+
+<figure>
+  <figcaption>Diagram 5. Who really makes the profit, 2025<span>Adjusted operating profit by division, with the profit margin</span></figcaption>
+  <div class="bars">
+    <div class="lab">Global Broking</div><div class="track"><div class="bar c1" style="width:72%"></div><div class="val">£241m <small>keeps 17.5p per £1</small></div></div>
+    <div class="lab">Parameta Solutions</div><div class="track"><div class="bar c4" style="width:22.7%"></div><div class="val">£76m <small>keeps 37.6p per £1</small></div></div>
+    <div class="lab">Liquidnet</div><div class="track"><div class="bar c3" style="width:16.7%"></div><div class="val">£56m <small>keeps 15.3p per £1</small></div></div>
+    <div class="lab">Energy &amp; Commodities</div><div class="track"><div class="bar c2" style="width:12.2%"></div><div class="val">£41m <small>keeps 9.1p per £1</small></div></div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Longer bar means more profit. The small grey text is the <strong>margin</strong>: how many pence of profit the division keeps from each £1 of revenue. Compare with Diagram 3. Parameta is the smallest division by revenue but the second biggest by profit, because data is cheap to sell once you have it. These four add up to £414 million. Head office costs of £66 million bring the group to £348 million.
+</div>
+
+<h2>1. Global Broking: the engine room</h2>
+<p><strong>What it does:</strong> arranges trades between banks and other big institutions in four areas. These are the same four desks your internship rotates through.</p>
+<table>
+  <thead><tr><th style="width:21%">Desk</th><th>What gets traded, in plain English</th><th class="n" style="width:27%">First half of 2026</th></tr></thead>
+  <tr><td><b>Rates</b></td><td>Contracts linked to interest rates: swaps, government bonds, inflation contracts. Used by anyone exposed to borrowing costs.</td><td class="n">£358m, up 10%</td></tr>
+  <tr><td><b>FX &amp; Money Markets</b></td><td>Currencies for future dates, currency options, and very short-term borrowing and lending between institutions.</td><td class="n">£171m, up 2%</td></tr>
+  <tr><td><b>Equities</b></td><td>Mostly equity <strong>derivatives</strong>: contracts linked to share prices and stock indices, used to hedge portfolios.</td><td class="n">£168m, up 25%</td></tr>
+  <tr><td><b>Credit</b></td><td>Company bonds, and contracts that insure against a company failing to repay its debts.</td><td class="n">£73m, up 12%</td></tr>
+</table>
+<ul>
+  <li><strong>Brands:</strong> Tullett Prebon and ICAP. They are kept as separate brands with separate desks.</li>
+  <li><strong>Clients:</strong> mainly the trading desks of large banks.</li>
+  <li><strong>Brokers:</strong> about 1,890 on average in the first half of 2026.</li>
+  <li><strong>Latest:</strong> revenue up 16% in the third quarter of 2026. The margin rose to 20.3% in the first half.</li>
+</ul>
+
+<h2>2. Energy &amp; Commodities</h2>
+<p><strong>What it does:</strong> the same matchmaking job, but for oil, gas, electricity, and newer areas like freight, farm goods and nuclear fuel.</p>
+<ul>
+  <li><strong>Brands:</strong> PVM (a famous name in oil broking), Tullett Prebon and ICAP.</li>
+  <li><strong>Clients:</strong> oil producers, commodity trading houses, power companies, banks and hedge funds.</li>
+  <li><strong>Key fact:</strong> oil is more than half of this division's revenue.</li>
+  <li><strong>Latest:</strong> a tough patch. Profit fell from £27 million to £12 million in the first half of 2026. The firm is hiring and opening new desks, which costs money now and should pay back later.</li>
+</ul>
+
+<h2>3. Liquidnet</h2>
+<p><strong>What it does:</strong> helps big investors trade large blocks of shares with each other, anonymously. TP ICAP bought it in 2021.</p>
+<div class="box">
+  <span class="tag">In plain English</span>
+  If a pension fund tries to sell 5 million shares on the public stock exchange, everyone sees it and the price drops before it finishes. On Liquidnet the fund is quietly matched with another big investor who wants to buy. Nobody else sees it. The price holds.
+</div>
+<ul>
+  <li><strong>Clients:</strong> more than 1,100 investment firms, managing about $26 trillion between them.</li>
+  <li><strong>Why TP ICAP bought it:</strong> its traditional clients were banks. Liquidnet gave it a direct line to the <strong>buy side</strong>.</li>
+  <li><strong>Latest:</strong> roughly flat revenue in 2026, as nervous investors did fewer big block trades.</li>
+</ul>
+
+<h2>4. Parameta Solutions</h2>
+<p><strong>What it does:</strong> sells data. Because TP ICAP's brokers sit in the middle of private markets, they see prices nobody else sees. Parameta packages those prices and sells them.</p>
+<ul>
+  <li><strong>Clients:</strong> banks, investors and others who need to value their holdings, manage risk, or prove to regulators they got a fair price.</li>
+  <li><strong>Why it is special:</strong> 98% of its revenue is subscriptions. That income arrives every year whether markets are busy or quiet.</li>
+  <li><strong>Latest:</strong> growth has slowed to about 4% in 2026. A planned sale of a minority share on a US stock market has been on hold since 2025.</li>
+</ul>
+
+<figure>
+  <figcaption>Diagram 6. How the divisions feed each other<span>The loop that rivals find hard to copy</span></figcaption>
+  <div class="cycle">
+    <div class="node"><b>1. Brokers arrange trades</b>Global Broking and Energy &amp; Commodities</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node"><b>2. Trades create private prices</b>Captured by the Fusion platform</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node"><b>3. Parameta sells the prices</b>As data subscriptions</div>
+    <div class="up">&uarr;</div><div></div><div></div><div></div><div class="down">&darr;</div>
+    <div class="node"><b>6. More clients, more trades</b>The network gets stronger</div>
+    <div class="arrow">&larr;</div>
+    <div class="node"><b>5. Invest in technology and people</b>Fusion, AI tools, new desks</div>
+    <div class="arrow">&larr;</div>
+    <div class="node"><b>4. Steady, high-margin income</b>Arrives in quiet markets too</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Start at box 1 and follow the arrows clockwise. The point: the data business only exists because of the broking business. A pure data company cannot copy it without the brokers. This loop is my summary of the firm's stated strategy, not a diagram the firm publishes.
+</div>
+</section>
+
+<!-- ============ 8 ============ -->
+<section>
+<div class="kicker">Section 8</div>
+<h1>The clients</h1>
+<p class="lead">TP ICAP only serves institutions. The firm lists seven types: banks, asset managers, hedge funds, corporates, producers, trading houses and market makers.</p>
+
+<table>
+  <thead><tr><th style="width:23%">Client type</th><th style="width:27%">Who they are</th><th>Why they come to TP ICAP</th><th style="width:20%">Which division</th></tr></thead>
+  <tr><td><b>Banks (dealers)</b></td><td>The trading arms of global banks.</td><td>To pass on risk from their own customers, quickly and anonymously.</td><td>Global Broking mainly</td></tr>
+  <tr><td><b>Hedge funds and market makers</b></td><td>Fast, active trading firms.</td><td>To get access to prices and trades they cannot find on a screen.</td><td>All broking divisions</td></tr>
+  <tr><td><b>Asset managers and pension funds</b></td><td>The "buy side". They invest savings.</td><td>To move big blocks of shares or bonds without moving the price.</td><td>Liquidnet</td></tr>
+  <tr><td><b>Producers and trading houses</b></td><td>Oil companies, power generators, commodity merchants.</td><td>To lock in the price of what they produce or ship.</td><td>Energy &amp; Commodities</td></tr>
+  <tr><td><b>Corporates</b></td><td>Large companies with energy or currency exposure.</td><td>To protect themselves against price swings.</td><td>Energy &amp; Commodities</td></tr>
+  <tr><td><b>Data users</b></td><td>Risk, finance and compliance teams at all of the above.</td><td>To value positions and satisfy regulators.</td><td>Parameta Solutions</td></tr>
+</table>
+
+<h2>Why these clients? What does TP ICAP like about them?</h2>
+<p>This part is my own reasoning from how the business works. It is not a quote from the firm.</p>
+<ul>
+  <li><strong>They trade in huge size.</strong> A tiny percentage of a very large number is still a good fee.</li>
+  <li><strong>They trade again and again.</strong> A bank trading desk needs a broker every day, not once a year. Revenue repeats.</li>
+  <li><strong>They are both customer and supply.</strong> Every client that joins is also a possible "other side" for every other client. More clients make the service better for all of them.</li>
+  <li><strong>They are reliable payers.</strong> Large regulated institutions rarely fail to pay an invoice.</li>
+  <li><strong>They are sticky.</strong> A trader trusts a broker they have spoken to for years. Relationships move slowly.</li>
+  <li><strong>They need OTC markets.</strong> Their needs are too large or too tailored for a simple public exchange.</li>
+</ul>
+
+<h2>Why the firm wanted new types of client</h2>
+<p>Relying only on banks is risky. After the 2008 financial crisis, banks were made to hold more capital and take less risk. Many cut their trading desks. Fewer and smaller bank desks means fewer customers for an interdealer broker.</p>
+<p>So TP ICAP set out to <strong>diversify</strong>, which simply means spreading out. It moved into energy clients, bought Liquidnet to reach investors, and built Parameta to sell data. This is the first pillar of its strategy.</p>
+
+<div class="box say">
+  <span class="tag">Say this in your interview</span>
+  "What I found interesting is how the client base has widened. The traditional client was the bank trading desk. But through Liquidnet the firm now reaches over 1,100 buy-side firms, and through Energy &amp; Commodities it serves producers and trading houses. So it is less dependent on any one type of client than a classic interdealer broker."
+</div>
+
+<div class="box warn">
+  <span class="tag">Careful: client names</span>
+  TP ICAP does not publish a list of named clients, and trades are confidential. Do not claim "TP ICAP's clients include JPMorgan" as a fact. It is safe to say "the world's largest banks, hedge funds, pension funds and asset managers", which is the wording in the job advert.
+</div>
+</section>
+
+<!-- ============ 9 ============ -->
+<section>
+<div class="kicker">Section 9</div>
+<h1>Where the money goes</h1>
+<p class="lead">A broker's biggest cost is its brokers. Most of what a broker earns for the firm is shared with that broker and their desk.</p>
+
+<figure>
+  <figcaption>Diagram 7. What happens to each £1 of revenue, 2025<span>Based on revenue of £2,353 million</span></figcaption>
+  <div class="stack">
+    <div class="c1" style="width:62.6%">about 63p<br>Front office</div>
+    <div class="cg" style="width:22.6%">about 23p<br>Support</div>
+    <div class="c3" style="width:14.8%">about 15p<br>Profit</div>
+  </div>
+  <div class="legend">
+    <span><i class="c1"></i>Front office costs, £1,472m: mainly broker pay, plus travel, client entertainment and data screens</span>
+    <span><i class="cg"></i>Management and support, about £533m net: technology, offices, compliance, finance</span>
+    <span><i class="c3"></i>Adjusted operating profit, £348m</span>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  The bar is one pound of revenue, split into three slices. The blue slice shows that roughly 63p goes straight back out on the people and tools that earned it. The three rounded numbers add to 101p. That is only rounding.
+</div>
+
+<h2>Why this cost structure matters</h2>
+<ul>
+  <li><strong>Pay moves with revenue.</strong> The firm says front office costs are "variable with revenue". In a bad year, pay falls too. That protects profit.</li>
+  <li><strong>It is a performance culture.</strong> Brokers are rewarded for what they bring in. This is why the advert stresses resilience, sales ability and an entrepreneurial mindset.</li>
+  <li><strong>Support costs are the lever.</strong> The firm cannot easily cut what it pays brokers. So it attacks the grey slice: moving systems to the cloud, simplifying its legal structure, and opening lower-cost hubs in Belfast and Manila. The target is at least <strong>£50 million of yearly savings by the end of 2026</strong>, a year ahead of plan.</li>
+</ul>
+
+<h2>The scorecard</h2>
+<table>
+  <thead><tr><th>Measure</th><th class="n">2024</th><th class="n">2025</th><th class="n">First half 2026</th></tr></thead>
+  <tr><td>Revenue</td><td class="n">£2,253m</td><td class="n"><b>£2,353m</b></td><td class="n">£1,292m</td></tr>
+  <tr><td>Adjusted operating profit</td><td class="n">£324m</td><td class="n"><b>£348m</b></td><td class="n">£196m</td></tr>
+  <tr><td>Adjusted profit margin</td><td class="n">14.4%</td><td class="n"><b>14.8%</b></td><td class="n">15.2%</td></tr>
+  <tr><td>Reported operating profit</td><td class="n">£236m</td><td class="n"><b>£264m</b></td><td class="n">£152m</td></tr>
+  <tr><td>Dividend per share</td><td class="n">16.1p</td><td class="n"><b>16.8p</b></td><td class="n">5.6p interim</td></tr>
+</table>
+<p><strong>Nine months of 2026:</strong> revenue of £1,912 million, up 9%. The third quarter alone was £620 million, up 11%. Analysts expect adjusted profit of about <strong>£367 million</strong> for the full year. Full-year results come out on <strong>11 March 2027</strong>.</p>
+
+<div class="box">
+  <span class="tag">In plain English: "adjusted" versus "reported"</span>
+  <strong>Reported</strong> profit is the official number. <strong>Adjusted</strong> profit removes one-off items, such as restructuring costs and the accounting cost of past takeovers, to show how the day-to-day business is doing. Companies prefer to talk about adjusted. Knowing there are two numbers makes you sound informed.
+</div>
+
+<h2>How it treats shareholders</h2>
+<ul>
+  <li><strong>Listed in London.</strong> Ticker: TCAP. Part of the FTSE 250 index. The share price was about 300p on 20 November 2026, valuing the firm at roughly £2.2 billion.</li>
+  <li><strong>Dividends:</strong> it pays out half of adjusted profit after tax each year.</li>
+  <li><strong>Buybacks:</strong> it has approved £110 million of share buybacks in 2026. A buyback means the company buys its own shares, which rewards the remaining shareholders.</li>
+  <li><strong>Total returned:</strong> about £660 million in dividends and buybacks approved since 2023.</li>
+</ul>
+</section>
+
+<!-- ============ 10 ============ -->
+<section>
+<div class="kicker">Section 10</div>
+<h1>History in one page</h1>
+<p>The name tells the story. <strong>TP</strong> stands for Tullett Prebon. <strong>ICAP</strong> was its great rival. In 2016 one bought the broking business of the other.</p>
+
+<figure>
+  <figcaption>Diagram 8. Timeline<span>Orange dots mark the three moments that shaped today's firm</span></figcaption>
+  <div class="tl">
+    <div><b>1971</b>Derek Tullett founds a currency broker in London, trading as Tullett &amp; Riley.</div>
+    <div><b>1986</b>Michael Spencer founds Intercapital, which grows into ICAP and becomes the largest broker of its kind.</div>
+    <div><b>2004</b>Tullett buys rival broker Prebon. Two years later the combined firm lists in London as Tullett Prebon.</div>
+    <div><b>2014</b>Tullett Prebon buys PVM, a leading oil broker. This is the root of today's Energy &amp; Commodities division.</div>
+    <div class="big"><b>2016</b><strong>Tullett Prebon buys ICAP's voice broking business and renames itself TP ICAP.</strong> It becomes the world's largest interdealer broker. The rest of ICAP was renamed NEX and later sold to the US exchange group CME.</div>
+    <div><b>2018</b>Nicolas Breteau becomes Chief Executive. He still leads the firm today.</div>
+    <div class="big"><b>2021</b><strong>TP ICAP buys Liquidnet,</strong> gaining a direct connection to investors. The data business is by now branded Parameta Solutions.</div>
+    <div><b>2025</b>Buys Neptune Networks, a bond data firm, and forms a new credit business part-owned by nine banks. A plan to list part of Parameta in the US is paused because of rough markets.</div>
+    <div class="big"><b>2026</b><strong>Record results.</strong> Buys Vantage Capital Markets. Launches the RealQ credit platform, the First Mate AI assistant, and a new operations hub in Manila.</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Read from top to bottom, oldest to newest. The pattern to notice: the firm grew by <strong>buying other firms</strong>, and each big purchase added a new kind of client or product.
+</div>
+
+<h2>Why the history matters for you</h2>
+<ul>
+  <li><strong>Two brands, one owner.</strong> Tullett Prebon and ICAP still operate as separate brands. You may rotate through desks from both.</li>
+  <li><strong>The 2016 deal created the scale.</strong> Remember the network effect from Section 4. Combining two of the biggest networks was the whole point.</li>
+  <li><strong>The direction of travel is clear.</strong> From pure voice broker in 1971, to a group that also owns an investor network and a data company.</li>
+</ul>
+
+<div class="box fact">
+  <span class="tag">A good detail to know: ICAP Charity Day</span>
+  Once a year, ICAP gives away all its revenue and its brokers' commission for that day. Celebrities come to the trading floor and help close deals by phone. It has raised more than <strong>£175 million since 1993</strong>. The 2025 day raised £5.7 million. It usually falls in early December. Your internship advert mentions "a charity event" as part of the programme.
+</div>
+</section>
+
+<!-- ============ 11 ============ -->
+<section>
+<div class="kicker">Section 11</div>
+<h1>People, roles and the broker's job</h1>
+
+<div class="tiles">
+  <div class="tile"><b>5,611</b><span>Total staff at 30 June 2026</span></div>
+  <div class="tile"><b>2,736</b><span>Brokers at 30 June 2026. Up 6% in a year</span></div>
+  <div class="tile"><b>£752k</b><span>Average revenue per broker in 2025</span></div>
+</div>
+
+<h2>Who runs it</h2>
+<ul>
+  <li><strong>Nicolas Breteau</strong>, Group Chief Executive since 2018.</li>
+  <li><strong>Robin Stewart</strong>, Chief Financial Officer.</li>
+  <li><strong>Richard Berliand</strong>, Chair of the Board.</li>
+</ul>
+<p>The London office is at <strong>135 Bishopsgate</strong>, next to Liverpool Street station. The firm is legally registered in Jersey. The UK is the natural home for this business: London handles about 38% of world currency trading and about 50% of OTC interest rate derivatives.</p>
+
+<h2>The main roles in the firm</h2>
+<table>
+  <thead><tr><th style="width:27%">Role</th><th>What they do</th></tr></thead>
+  <tr><td><b>Broker</b></td><td>Talks to clients all day, finds the other side of trades, and negotiates prices. This is the revenue-earning role and the one your internship leads to.</td></tr>
+  <tr><td><b>Sales trader</b></td><td>Mainly at Liquidnet. Looks after investor clients and helps them get large orders done.</td></tr>
+  <tr><td><b>Data sales and product</b></td><td>At Parameta Solutions. Builds data products and sells subscriptions.</td></tr>
+  <tr><td><b>Technology</b></td><td>Builds and runs Fusion and the firm's other platforms. Includes an AI and innovation team.</td></tr>
+  <tr><td><b>Operations</b></td><td>Makes sure every trade is confirmed, recorded and settled correctly after it is agreed.</td></tr>
+  <tr><td><b>Compliance, risk and legal</b></td><td>Keeps the firm within the rules. Vital in a regulated business.</td></tr>
+  <tr><td><b>Finance, HR and others</b></td><td>The corporate functions every large company has.</td></tr>
+</table>
+
+<h2>What a broker actually does all day</h2>
+<p>This is a general picture of the job across the industry. Your desk may differ.</p>
+<ul>
+  <li><strong>Early start.</strong> Brokers are in before markets open, reading overnight news and working out what clients will want.</li>
+  <li><strong>Constant contact.</strong> Phone lines and chat screens are open to clients all day. A broker may speak to the same traders dozens of times.</li>
+  <li><strong>Fast, exact communication.</strong> Prices and sizes are called out quickly. A single wrong digit is costly. This is why the advert asks for "excellent attention to detail".</li>
+  <li><strong>Relationships.</strong> Trust is everything. A trader gives the order to the broker they trust to keep a secret and get it done. Meeting clients in person is part of the job.</li>
+  <li><strong>Rejection.</strong> Most calls do not end in a trade. Brokers hear "no" all day and keep going. This is why the advert asks for resilience.</li>
+</ul>
+
+<h2>How a broking career starts</h2>
+<p>New joiners typically start as a <strong>trainee or junior broker</strong>. They support senior brokers, learn the product, and slowly build their own client relationships. Over time they earn their own clients and their own share of commission.</p>
+<div class="box">
+  <span class="tag">A sign the firm is investing in people like you</span>
+  In 2025 TP ICAP launched a <strong>Global Broking Broker Trainee Programme</strong>. In its 2026 half-year report it said it had <strong>"further expanded our global junior and trainee broker programmes"</strong>. Broker numbers are up 6% in a year. This is a firm that is hiring and training juniors, not shrinking.
+</div>
+
+<h2>What the firm says it values</h2>
+<p>TP ICAP calls these its <strong>Triple-A values</strong>:</p>
+<ul>
+  <li><strong>Accountability:</strong> honesty and integrity. Own your results.</li>
+  <li><strong>Adaptability:</strong> be open to new ideas. Be entrepreneurial.</li>
+  <li><strong>Authenticity:</strong> have honest conversations. Build trust.</li>
+</ul>
+<p>Its stated mission: "Through our talent and technology, we connect clients to superior liquidity and data solutions." In its 2025 staff survey, 72% of respondents would recommend it as a great place to work.</p>
+</section>
+
+<!-- ============ 12 ============ -->
+<section>
+<div class="kicker">Section 12</div>
+<h1>Recent deals and news</h1>
+
+<div class="box">
+  <span class="tag">First, a note on the word "mandates"</span>
+  Investment banks "win mandates", meaning a company hires them for a specific deal. <strong>Brokers do not work like that.</strong> A broker wins business trade by trade, every day. So TP ICAP's news is about <strong>firms it has bought, platforms it has launched, and partnerships it has formed</strong>. Those are below.
+</div>
+
+<h2>Things TP ICAP has bought</h2>
+<table>
+  <thead><tr><th style="width:24%">Deal</th><th style="width:17%">When</th><th>What it is and why it matters</th></tr></thead>
+  <tr><td><b>Vantage Capital Markets</b></td><td>Announced January 2026. Completed 1 July 2026.</td><td>A broker specialising in equity derivatives and fixed income, with more than 80 brokers and over 800 institutional clients. Offices in London, Hong Kong, Tokyo and Dubai. TP ICAP paid £22 million in cash. <strong>Why:</strong> more reach in Asia and the Middle East, and a stronger Equities and Credit offering.</td></tr>
+  <tr><td><b>Neptune Networks</b></td><td>June 2025</td><td>A bond data company connected to 35 major banks. TP ICAP combined it with Liquidnet's bond business. Nine banks own 30% of the combined business. <strong>Why:</strong> having banks as co-owners means they are motivated to use it.</td></tr>
+</table>
+
+<h2>Things TP ICAP has launched</h2>
+<table>
+  <thead><tr><th style="width:24%">Launch</th><th style="width:17%">When</th><th>What it is and why it matters</th></tr></thead>
+  <tr><td><b>RealQ</b></td><td>June 2026</td><td>A new platform for trading company bonds. It joins Neptune's data from banks with Liquidnet's links to investors. <strong>Why:</strong> a push into the "dealer-to-client" bond market, where TP ICAP has been small.</td></tr>
+  <tr><td><b>First Mate</b></td><td>Live from spring 2026</td><td>An AI assistant for Liquidnet's sales traders. It spots orders that were left unfinished and suggests possible matches. Built with Amazon Web Services.</td></tr>
+  <tr><td><b>Meridian and SuperBlock TI</b></td><td>Third quarter 2026</td><td>Meridian brings Liquidnet's trading tools, analytics and AI under one name. SuperBlock TI is aimed at finding more large block trades.</td></tr>
+  <tr><td><b>Fusion Digital Assets upgrade</b></td><td>March 2026</td><td>TP ICAP's regulated venue for institutions to trade Bitcoin and Ether. It switched to a matched principal model, with Standard Chartered bank holding the assets. It handled over $2 billion of trades in the last quarter of 2025.</td></tr>
+  <tr><td><b>Manila hub</b></td><td>May 2026</td><td>A new operations centre in the Philippines, alongside Belfast. Part of the cost-saving plan.</td></tr>
+</table>
+
+<h2>Other headlines worth knowing</h2>
+<ul>
+  <li><strong>Record first quarter.</strong> Revenue of £689 million in the first three months of 2026, a record, as the Middle East conflict made markets very active.</li>
+  <li><strong>Cloud and AI.</strong> A partnership with Amazon Web Services aims to move most of the firm's technology to the cloud by the end of 2026. The firm says AI has already cut the time needed to build new electronic products by more than half.</li>
+  <li><strong>Parameta wins.</strong> In autumn 2026 Parameta signed its largest ever contract with a new US investor client. Its interest rate swap indices won "Index of the Year" at an industry awards event.</li>
+  <li><strong>Parameta listing on hold.</strong> The plan to sell a minority share of Parameta on a US stock market is still "under review". The firm says conditions remain challenging.</li>
+  <li><strong>Buybacks.</strong> An £80 million buyback in March 2026 and a further £30 million in August.</li>
+  <li><strong>A small reshuffle.</strong> In the third quarter of 2026, some Liquidnet desks and the Digital Assets business were moved into Global Broking. So the division you are applying to just got a little wider.</li>
+</ul>
+
+<div class="box say">
+  <span class="tag">Say this in your interview</span>
+  "I noticed the firm is growing both ways at once. It completed the Vantage Capital Markets acquisition in July, which adds over 80 brokers and expands the footprint in Asia and the Middle East. And it's building organically, with RealQ in credit and AI tools like First Mate. That tells me it's a business investing for growth, which is the kind of place I'd want to start a career."
+</div>
+</section>
+
+<!-- ============ 13 ============ -->
+<section>
+<div class="kicker">Section 13</div>
+<h1>Strategy: where the firm is heading</h1>
+<p class="lead">The firm's stated vision is "to be the world's most trusted, and innovative, liquidity and data solutions specialist". It has three strategic pillars.</p>
+
+<table>
+  <thead><tr><th style="width:26%">Pillar</th><th style="width:30%">What it means in plain English</th><th>What they are actually doing</th></tr></thead>
+  <tr><td><b>1. Diversification</b></td><td>Do not rely on one type of client, product or region.</td><td>Buying Vantage for Asia. Building RealQ in credit. Adding energy desks in freight, farm goods and nuclear fuel. Growing Parameta's data sales to US investors.</td></tr>
+  <tr><td><b>2. Transformation</b></td><td>Run the firm more cheaply and with better technology.</td><td>Moving to the cloud with Amazon. Using AI. Hubs in Belfast and Manila. Target of at least £50 million yearly savings by end of 2026.</td></tr>
+  <tr><td><b>3. Dynamic capital management</b></td><td>Be smart with spare cash.</td><td>Invest in growth first. Pay half of profits as dividends. Return any extra through buybacks. Free up at least £200 million of surplus cash by end of 2027.</td></tr>
+</table>
+
+<h2>The firm's medium-term goal</h2>
+<p>Revenue growth in the <strong>"mid-to-high single digits"</strong> each year, meaning roughly 5% to 9%, with profit growing faster than revenue. Profit growing faster than revenue is called <strong>operating leverage</strong>. It happens when you add revenue without adding the same amount of cost.</p>
+
+<h2>The big idea behind the strategy</h2>
+<div class="box">
+  <span class="tag">In plain English</span>
+  Old-style voice broking is a good business but a bumpy one. It booms when markets are wild and sags when they are calm. Investors pay less for bumpy profits. So TP ICAP is trying to become <strong>part broker, part technology platform, part data company</strong>. Platform and data income is steadier and more profitable. That is what "market infrastructure" is code for.
+</div>
+
+<h2>Fusion: the technology at the centre</h2>
+<ul>
+  <li><strong>What it is:</strong> TP ICAP's cloud-based electronic platform. Clients see prices on screen and can trade electronically or with a broker's help.</li>
+  <li><strong>Why it matters to brokers:</strong> it handles the simple trades, which frees brokers to focus on the complex, valuable ones.</li>
+  <li><strong>Why it matters to data:</strong> every trade on Fusion is captured cleanly. That feeds Parameta.</li>
+  <li><strong>Why it matters defensively:</strong> if clients are going to trade on screens anyway, TP ICAP wants it to be TP ICAP's screen.</li>
+</ul>
+
+<h2>Where AI fits</h2>
+<p>The job advert says an interest in AI "would be beneficial". That is not a throwaway line. The firm says it is:</p>
+<ul>
+  <li>Using AI to spot likely matches between buyers and sellers faster.</li>
+  <li>Automating routine work such as handling orders.</li>
+  <li>Using AI to turn raw broking data into new products for Parameta.</li>
+  <li>Building software faster with AI coding tools.</li>
+</ul>
+<div class="box say">
+  <span class="tag">Say this in your interview</span>
+  "I don't see AI replacing brokers, because the hard part of the job is trust and judgement. But I can see it making a broker more productive, by flagging who might want the other side of a trade before the broker has picked up the phone. The firm's First Mate assistant at Liquidnet is a good example of that."
+</div>
+</section>
+
+<!-- ============ 14 ============ -->
+<section>
+<div class="kicker">Section 14</div>
+<h1>Competitors</h1>
+<p class="lead">Interdealer broking is dominated by three global firms. Everyone else is much smaller or specialist.</p>
+
+<figure>
+  <figcaption>Diagram 9. The big three by 2025 revenue<span>Converted to pounds at rough 2025 average exchange rates. Approximate.</span></figcaption>
+  <div class="bars">
+    <div class="lab">TP ICAP<small>UK, listed in London</small></div><div class="track"><div class="bar" style="width:74%"></div><div class="val">£2.35bn <small>up 6%</small></div></div>
+    <div class="lab">BGC Group<small>USA, listed on Nasdaq</small></div><div class="track"><div class="bar cg" style="width:70%"></div><div class="val">about £2.2bn <small>$2.94bn, up 30%</small></div></div>
+    <div class="lab">Tradition<small>Switzerland</small></div><div class="track"><div class="bar cg" style="width:34.6%"></div><div class="val">about £1.1bn <small>CHF 1.2bn, up 11%</small></div></div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Longer bar means more revenue. TP ICAP is blue and its two main rivals are grey. The message: TP ICAP is still the biggest, but <strong>BGC is right behind it and growing much faster</strong>. BGC's growth includes a large acquisition. The pound figures for BGC and Tradition are my own currency conversions, so treat them as rough.
+</div>
+
+<h2>Know your rivals</h2>
+<table>
+  <thead><tr><th style="width:19%">Firm</th><th>What to know</th><th style="width:33%">How it differs from TP ICAP</th></tr></thead>
+  <tr><td><b>BGC Group</b></td><td>American. Bought OTC Global Holdings, a big energy broker, in 2025. Owns Fenics, its electronic trading arm, and FMX, a new futures exchange set up to challenge the dominant US exchange. Third quarter 2026 revenue: a record $833 million, up 13%.</td><td>More aggressive on acquisitions and electronic trading. Has gone all-in on energy and on running its own exchange.</td></tr>
+  <tr><td><b>Tradition</b></td><td>Swiss. Full name Compagnie Financi&egrave;re Tradition. About half TP ICAP's size. Had a record 2025.</td><td>A purer interdealer broker. No big data or investor-network arm.</td></tr>
+  <tr><td><b>Marex</b></td><td>London-based, listed in the US. Strong in commodities.</td><td>A different model. It also clears trades and makes markets. Competes with TP ICAP for energy clients and brokers, yet it also partners with Parameta on data.</td></tr>
+  <tr><td><b>Electronic platforms</b></td><td>Tradeweb, MarketAxess, Bloomberg and the big exchange groups.</td><td>These let banks and investors trade on screen with no voice broker at all. The long-term threat.</td></tr>
+  <tr><td><b>Data giants</b></td><td>Bloomberg, LSEG and ICE.</td><td>Compete with Parameta. Far larger, but they do not have TP ICAP's private broker prices.</td></tr>
+</table>
+
+<h2>How TP ICAP stands out</h2>
+<ol>
+  <li><strong>Scale.</strong> The largest network of clients and brokers, which matters because of the network effect.</li>
+  <li><strong>Breadth.</strong> Four divisions with different clients. A weak year in oil can be offset by a strong year in rates. That is exactly what happened in 2026.</li>
+  <li><strong>A real data business.</strong> Parameta earns about £200 million a year, almost all on subscription, at the group's highest margin.</li>
+  <li><strong>Direct access to investors.</strong> Liquidnet's 1,100-plus buy-side members are a client group its interdealer rivals lack at that scale.</li>
+  <li><strong>Banks as partners.</strong> Nine banks co-own its new credit business. Clients with a stake are loyal clients.</li>
+  <li><strong>Two heritage brands.</strong> Tullett Prebon and ICAP are both long-established names with their own client loyalties.</li>
+</ol>
+
+<div class="box warn">
+  <span class="tag">Careful: two claims that need handling with care</span>
+  <p><strong>"Largest interdealer broker in the world."</strong> True on 2025 full-year revenue, and it is the firm's own claim. But in the third quarter of 2026, TP ICAP made £620 million and BGC made $833 million. Converted, those are almost level. Say "the largest" with confidence, but know the race is now close.</p>
+  <p><strong>"Number one Energy &amp; Commodities broker."</strong> The job advert says this. The 2025 Annual Report uses the softer phrase "a world-leading broker". After buying OTC Global Holdings, BGC's energy revenue was $257.5 million in the last quarter of 2025 alone. That is a much higher run-rate than TP ICAP's whole division. In your answers say "a leading energy broker".</p>
+</div>
+
+<div class="box say">
+  <span class="tag">Say this in your interview</span>
+  "Compared with BGC and Tradition, what stands out to me is the diversification. TP ICAP isn't only an interdealer broker. It has Liquidnet connecting it to the buy side and Parameta turning its broking data into subscription revenue. That mix looks harder for a competitor to copy than any single desk."
+</div>
+</section>
+
+<!-- ============ 15 ============ -->
+<section>
+<div class="kicker">Section 15</div>
+<h1>Commercial awareness</h1>
+<p class="lead">Commercial awareness means understanding what makes a business earn more or less money. For TP ICAP there is one golden rule.</p>
+
+<div class="box">
+  <span class="tag">The golden rule</span>
+  <strong>TP ICAP earns from activity, not direction.</strong> It does not care much whether prices go up or down. It cares whether clients are <strong>trading</strong>. Uncertainty makes clients change their positions. That means more trades and more commission. Calm, predictable markets are bad for business.
+  <br><br>The word for jumpy markets is <strong>volatility</strong>. Brokers like volatility.
+</div>
+
+<h2>Diagram 10. What moves TP ICAP's revenue</h2>
+<table>
+  <thead><tr><th style="width:27%">When this happens...</th><th style="width:33%">...clients do this...</th><th>...and TP ICAP sees this</th></tr></thead>
+  <tr><td><b>Central banks change interest rates, or might</b></td><td>Banks and funds rush to adjust their interest rate positions.</td><td>Rates desks get busier. This is the firm's biggest earner.</td></tr>
+  <tr><td><b>A geopolitical shock</b></td><td>Everyone re-hedges currencies, oil and rates at once.</td><td>A burst of revenue across most desks.</td></tr>
+  <tr><td><b>Stock markets swing</b></td><td>Investors buy protection for their portfolios.</td><td>Equity derivatives desks get busier.</td></tr>
+  <tr><td><b>Markets go quiet</b></td><td>Clients sit on their hands.</td><td>Broking revenue drops. Only Parameta's subscriptions hold steady.</td></tr>
+  <tr><td><b>The US dollar falls against the pound</b></td><td>Nothing changes for clients.</td><td>Reported revenue falls, because about 63% of revenue is in dollars but results are in pounds.</td></tr>
+  <tr><td><b>Banks merge or cut trading desks</b></td><td>Fewer traders to serve.</td><td>Fewer clients for Global Broking over the long run.</td></tr>
+</table>
+<div class="box read">
+  <span class="tag">How to read this table</span>
+  Read each row left to right as a chain: an event, then what clients do, then the effect on TP ICAP. Use it to turn any news headline into a "so what for TP ICAP".
+</div>
+
+<h2>The live stories, as of late November 2026</h2>
+
+<h3>1. Interest rates are rising again</h3>
+<ul>
+  <li>The Bank of England raised its rate to <strong>4% on 5 November 2026</strong>, its first rise since 2023.</li>
+  <li>The US central bank is widely expected to raise rates in December.</li>
+  <li>The UK government's 10-year borrowing cost is around <strong>5.3%</strong>.</li>
+</ul>
+<p><strong>So what:</strong> a change in the direction of rates forces everyone to re-think their positions. That is good for Rates desks, which made £358 million in the first half of 2026.</p>
+
+<h3>2. The Middle East conflict and the oil market</h3>
+<ul>
+  <li>From early 2026, conflict disrupted oil shipping through the Strait of Hormuz, a narrow sea route out of the Gulf. The International Energy Agency called it the largest supply disruption in the history of the oil market.</li>
+  <li>Oil prices spiked above $110 a barrel in the spring. Brent crude, the main oil benchmark, is now around <strong>$92</strong>.</li>
+</ul>
+<p><strong>So what, part one:</strong> the shock gave TP ICAP a record first quarter in 2026, at £689 million.</p>
+<p><strong>So what, part two:</strong> this is the clever point. When physical oil stopped flowing, <strong>trading in oil contracts fell sharply</strong>. Oil is over half of the Energy &amp; Commodities division, so its profit more than halved. Volatility helps a broker only while clients can still trade. Extreme disruption can shut a market down.</p>
+
+<h3>3. Voice broking is slowly moving to screens</h3>
+<p>Every year, more simple trades are done electronically. That can cut out the human broker. TP ICAP's answer is Fusion: keep the client on TP ICAP's own screen, and move brokers towards complex trades where a human adds value.</p>
+
+<h3>4. Artificial intelligence</h3>
+<p>Both TP ICAP and BGC are promoting AI tools. The open question for the industry: does AI make each broker more productive, or does it mean fewer brokers are needed? TP ICAP's line is productivity. Revenue per broker in Global Broking rose 7% in the first half of 2026.</p>
+
+<h3>5. The fight for talent</h3>
+<p>A broker's clients often follow them if they move firms. So rivals poach whole teams. TP ICAP said its oil business suffered "significant competitor disruption" at the end of 2024, and it has since spent heavily on hiring and keeping energy brokers. That is a big reason Energy &amp; Commodities profit is down.</p>
+
+<h3>6. Electricity demand and the energy transition</h3>
+<p>The International Energy Agency expects electricity use to grow at least 2.5 times faster than total energy demand through 2030. Data centres for AI are part of that. More power trading means more for brokers to arrange. TP ICAP said strong growth in <strong>Power</strong> helped its energy division recover in the third quarter of 2026.</p>
+
+<h3>7. Digital assets</h3>
+<p>Large institutions are starting to trade cryptocurrencies and "tokenised" assets. The UK's full rulebook for crypto is due in 2027. TP ICAP is positioning early with Fusion Digital Assets, so it is ready when banks arrive in size.</p>
+
+<h3>8. Demand for data</h3>
+<p>Global spending on financial market data reached about $49 billion in 2025. Regulators keep asking firms to prove their prices are fair. That is a tailwind for Parameta.</p>
+
+<h3>9. London versus New York</h3>
+<p>TP ICAP considered listing Parameta in New York rather than London, because US investors tend to pay more for data companies. It is part of a wider debate about London losing listings to the US.</p>
+
+<div class="box say">
+  <span class="tag">Say this in your interview</span>
+  "One thing I've been following is the oil market this year. I found it interesting that the Middle East conflict helped TP ICAP at first, with a record first quarter, but then hurt the energy division once physical oil flows were disrupted and futures volumes dropped. It showed me that brokers benefit from volatility, but only while clients are still able to trade."
+</div>
+<div class="box warn">
+  <span class="tag">Careful</span>
+  Market levels move daily. Before you record, spend two minutes checking today's Bank of England rate and the Brent oil price. If you quote a number, say "around".
+</div>
+</section>
+
+<!-- ============ 16 ============ -->
+<section>
+<div class="kicker">Section 16</div>
+<h1>Strengths, weaknesses and risks</h1>
+<p>A balanced view makes you credible. Use the strengths for "why TP ICAP". Keep the weaknesses for a question like "what challenges does the firm face?"</p>
+
+<div class="two">
+  <div class="box" style="margin:0">
+    <span class="tag">Strengths</span>
+    <ul>
+      <li>Largest interdealer broker by 2025 revenue.</li>
+      <li>Four divisions that balance each other.</li>
+      <li>No bets with its own money. Low-risk model.</li>
+      <li>Parameta: steady, high-margin data income.</li>
+      <li>Record profit. Strong cash generation.</li>
+      <li>Global Broking margin rising above 20%.</li>
+    </ul>
+  </div>
+  <div class="box warn" style="margin:0">
+    <span class="tag">Weaknesses</span>
+    <ul>
+      <li>Earnings still swing with market activity.</li>
+      <li>Energy &amp; Commodities profit has fallen hard.</li>
+      <li>Liquidnet and Parameta growth is slow in 2026.</li>
+      <li>Around 63p of each £1 goes on front office costs.</li>
+      <li>Dollar earnings, pound reporting.</li>
+      <li>Parameta listing has stalled.</li>
+    </ul>
+  </div>
+  <div class="box say" style="margin:0">
+    <span class="tag">Opportunities</span>
+    <ul>
+      <li>Asia and the Middle East, helped by Vantage.</li>
+      <li>Company bond trading through RealQ.</li>
+      <li>Power, gas and energy transition products.</li>
+      <li>AI making brokers more productive.</li>
+      <li>Selling more data to US investors.</li>
+      <li>Digital assets as banks move in.</li>
+    </ul>
+  </div>
+  <div class="box read" style="margin:0">
+    <span class="tag">Threats</span>
+    <ul>
+      <li>BGC growing fast and buying rivals.</li>
+      <li>Electronic platforms cutting out voice brokers.</li>
+      <li>Rivals poaching broker teams.</li>
+      <li>A long spell of calm markets.</li>
+      <li>Tighter regulation or legal cases.</li>
+      <li>Cyber attack or technology failure.</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Legal and regulatory background</h2>
+<p>Any firm of this size and age has legacy legal matters. The Annual Report discloses several, mostly inherited from ICAP before 2016:</p>
+<ul>
+  <li><strong>"Cum-ex" investigations in Germany.</strong> Prosecutors in Frankfurt and Cologne are looking at old share-trading schemes linked to dividend tax. The firm says the outcome is uncertain and it has set aside no money for it.</li>
+  <li><strong>Benchmark lawsuits.</strong> Long-running court cases about how interest rate benchmarks such as LIBOR were set in the past.</li>
+</ul>
+<div class="box warn">
+  <span class="tag">Careful</span>
+  Know these exist. <strong>Do not raise them in your video.</strong> They are background in case you are ever asked about risks. The point for a broker is simple: integrity and following the rules are part of the job from day one.
+</div>
+
+<h2>Three "what if" questions to think through</h2>
+<p>Having a view on these puts you ahead of most candidates.</p>
+<ol>
+  <li><strong>What if markets go quiet in 2027?</strong> Broking revenue would fall. Broker pay would fall with it, which cushions profit. Parameta's subscriptions would hold up.</li>
+  <li><strong>What if more trading goes fully electronic?</strong> Commission per trade falls, but volumes can rise and costs are lower. The winners will be whoever owns the platform. That is why Fusion matters.</li>
+  <li><strong>What if BGC overtakes TP ICAP on revenue?</strong> The headline title would be lost. But what clients care about is which broker has the best network in their particular product. TP ICAP's strength in rates is the thing to protect.</li>
+</ol>
+</section>
+
+<!-- ============ 17 ============ -->
+<section class="pb">
+<div class="kicker">Section 17</div>
+<h1>Your video interview</h1>
+<p class="lead">Three recorded questions on Spark Hire. Due <strong>Friday 27 November 2026 at 11:59 PM GMT</strong>. You can test your camera and practise before you start.</p>
+
+<h2>What they are likely to ask</h2>
+<p>The firm has not published the questions. Based on anonymous candidate reports for past TP ICAP intern interviews, the first-round video tends to cover basics like these. Treat it as a guide, not a guarantee.</p>
+<ul>
+  <li><strong>Why broking?</strong> Or: what attracts you to this role?</li>
+  <li><strong>Why TP ICAP?</strong></li>
+  <li><strong>Something about you:</strong> a time you showed resilience, built a relationship, influenced someone, or worked in a team.</li>
+  <li><strong>Possibly a market question:</strong> a recent news story and why it matters.</li>
+</ul>
+
+<h2>What they are really testing</h2>
+<p>The advert tells you. It asks for someone who is:</p>
+<table>
+  <thead><tr><th style="width:30%">The advert says</th><th>What that means for a broker</th><th style="width:30%">Evidence you could use</th></tr></thead>
+  <tr><td><b>"Resilient"</b></td><td>You hear "no" all day and keep dialling.</td><td>Sport, sales jobs, a setback you came back from.</td></tr>
+  <tr><td><b>"Entrepreneurial"</b></td><td>You build your own client book. Nobody hands it to you.</td><td>Anything you started or sold yourself.</td></tr>
+  <tr><td><b>"Build relationships with ease"</b></td><td>Clients trade with people they like and trust.</td><td>Customer-facing work, societies, networking.</td></tr>
+  <tr><td><b>"Ability to influence"</b></td><td>You persuade two sides to meet on price.</td><td>Negotiation, fundraising, leading a team.</td></tr>
+  <tr><td><b>"High pressured sales"</b></td><td>It is fast, loud and measured in revenue.</td><td>Targets you hit. Busy, time-critical work.</td></tr>
+  <tr><td><b>"Attention to detail"</b></td><td>One wrong digit costs real money.</td><td>Work where accuracy mattered.</td></tr>
+</table>
+
+<h2>Building your "why broking" answer</h2>
+<ol>
+  <li><strong>Show you know what the job is.</strong> "A broker connects buyers and sellers and earns commission. It's a relationship and sales role inside financial markets."</li>
+  <li><strong>Link it to who you are.</strong> One specific piece of evidence that you enjoy dealing with people, competing, or selling.</li>
+  <li><strong>Say why not something else.</strong> For example: "I want to be close to markets, but I'm more drawn to building client relationships than to sitting behind a model."</li>
+</ol>
+
+<h2>Building your "why TP ICAP" answer</h2>
+<p>Pick <strong>three</strong> reasons. Give one fact for each. Then link back to yourself.</p>
+<table>
+  <thead><tr><th style="width:27%">Reason</th><th>Fact to use</th></tr></thead>
+  <tr><td><b>Scale and position</b></td><td>The largest interdealer broker by revenue. The interest rate desks alone earned £635 million in 2025.</td></tr>
+  <tr><td><b>Momentum</b></td><td>Record 2025. Global Broking revenue up 16% in the third quarter of 2026.</td></tr>
+  <tr><td><b>Investing in juniors</b></td><td>Expanded trainee broker programmes. Broker numbers up 6% in a year. The internship leads straight to a desk.</td></tr>
+  <tr><td><b>People plus technology</b></td><td>Fusion, the Amazon partnership, and AI tools like First Mate, built to support brokers.</td></tr>
+  <tr><td><b>Breadth</b></td><td>Rotation across Rates, Credit, Equities and FX. Four divisions with different clients.</td></tr>
+  <tr><td><b>Culture</b></td><td>ICAP Charity Day: over £175 million raised since 1993.</td></tr>
+</table>
+
+<div class="box say">
+  <span class="tag">A structure for any 2-minute answer</span>
+  <strong>First 15 seconds:</strong> one line of thanks, then preview the whole answer and name your strongest specific. "Thanks for watching. I'll cover three things: X, Y and Z." <br>
+  <strong>Middle:</strong> three reasons that are different from each other. One thing you did, one thing about the day-to-day job, one view on where the industry is going. <br>
+  <strong>Close:</strong> one line that links back to the role. <br>
+  Rehearse to 90 to 120 seconds. The companion Deep Dive pack has a full bank of lines built this way.
+</div>
+
+<h2>Mistakes that cost candidates</h2>
+<ul>
+  <li>Calling TP ICAP a <strong>bank</strong>, or saying you want to be a <strong>trader</strong>.</li>
+  <li>Saying the firm "invests" or "takes positions". It does not.</li>
+  <li>Reciting numbers with no "so what". One fact with a reason beats five facts in a list.</li>
+  <li>Reading from a script. Use bullet prompts next to the camera instead.</li>
+  <li>Sounding flat. This is a sales job. Energy and warmth are part of the test.</li>
+</ul>
+
+<h2>On the day</h2>
+<ul>
+  <li>Quiet room. Light in front of you, not behind. Camera at eye level.</li>
+  <li>Dress as you would for an interview in the City.</li>
+  <li>Look at the camera lens, not at your own face on screen.</li>
+  <li>Use the practice question first. Check whether you get retakes and how long you get to think.</li>
+  <li>Smile at the start. Speak a little slower than feels natural.</li>
+</ul>
+
+<h2>Questions to keep ready for the next round</h2>
+<ul>
+  <li>"How is Fusion changing the day-to-day work of a junior broker on your desk?"</li>
+  <li>"Which desks have gained most from Vantage Capital Markets joining?"</li>
+  <li>"What separates the interns who get a return offer from those who don't?"</li>
+</ul>
+</section>
+
+<!-- ============ 18 ============ -->
+<section class="pb">
+<div class="kicker">Section 18</div>
+<h1>Glossary</h1>
+<p>Plain-English meanings for every term in this guide.</p>
+<div class="gloss">
+<dl>
+  <div><dt>Adjusted profit</dt><dd>Profit with one-off costs removed, to show how the normal business is doing.</dd></div>
+  <div><dt>Asset class</dt><dd>A category of thing that is traded, such as rates, currencies, shares, bonds or oil.</dd></div>
+  <div><dt>Block trade</dt><dd>One very large trade, done privately so it does not move the price.</dd></div>
+  <div><dt>Bond</dt><dd>A loan you can trade. Governments and companies issue bonds to borrow money.</dd></div>
+  <div><dt>Broker</dt><dd>A middleman who arranges trades for a fee and takes no risk.</dd></div>
+  <div><dt>Buy side</dt><dd>Investors: pension funds, asset managers, hedge funds, insurers.</dd></div>
+  <div><dt>Buyback</dt><dd>When a company buys its own shares to reward shareholders.</dd></div>
+  <div><dt>Commission</dt><dd>The fee a broker charges for arranging a trade. Also called brokerage.</dd></div>
+  <div><dt>Constant currency</dt><dd>Growth with exchange rate swings removed, so you see real progress.</dd></div>
+  <div><dt>Credit</dt><dd>The market for company debt, and contracts linked to it.</dd></div>
+  <div><dt>Dealer</dt><dd>A firm, usually a bank, that stands ready to buy from and sell to customers.</dd></div>
+  <div><dt>Derivative</dt><dd>A contract whose value depends on something else, like a rate or a price.</dd></div>
+  <div><dt>Desk</dt><dd>A team of brokers covering one product. For example, the sterling swaps desk.</dd></div>
+  <div><dt>EBIT</dt><dd>Earnings before interest and tax. Another name for operating profit.</dd></div>
+  <div><dt>Exchange</dt><dd>A central public marketplace with visible prices.</dd></div>
+  <div><dt>Fusion</dt><dd>TP ICAP's electronic trading platform.</dd></div>
+  <div><dt>FX</dt><dd>Foreign exchange. Swapping one currency for another.</dd></div>
+  <div><dt>Hedging</dt><dd>Doing a trade to protect yourself against a price moving the wrong way.</dd></div>
+  <div><dt>Hybrid broking</dt><dd>A mix of screen trading and human brokers.</dd></div>
+  <div><dt>Interdealer broker (IDB)</dt><dd>A broker whose main clients are dealers trading with each other.</dd></div>
+  <div><dt>Liquidity</dt><dd>How easy it is to trade quickly, in size, without moving the price.</dd></div>
+  <div><dt>Margin</dt><dd>Profit as a share of revenue. A 15% margin means 15p profit per £1.</dd></div>
+  <div><dt>Matched principal</dt><dd>The broker briefly stands in the middle, buying and selling at the same instant.</dd></div>
+  <div><dt>Money markets</dt><dd>Very short-term borrowing and lending between institutions.</dd></div>
+  <div><dt>Name passing</dt><dd>The broker introduces two sides, who then deal with each other directly.</dd></div>
+  <div><dt>Notional</dt><dd>The headline size of a derivative contract. Used to calculate payments.</dd></div>
+  <div><dt>OTC</dt><dd>Over the counter. Traded privately between two parties, not on an exchange.</dd></div>
+  <div><dt>Price discovery</dt><dd>Working out what something is worth when there is no public price.</dd></div>
+  <div><dt>Proprietary trading</dt><dd>Betting a firm's own money on markets. TP ICAP does not do this.</dd></div>
+  <div><dt>Rates</dt><dd>Products linked to interest rates. TP ICAP's biggest area.</dd></div>
+  <div><dt>Sell side</dt><dd>Banks and dealers that provide trading services.</dd></div>
+  <div><dt>Spread</dt><dd>The gap between the price to buy and the price to sell.</dd></div>
+  <div><dt>Swap</dt><dd>An agreement to exchange one set of payments for another, such as fixed for floating interest.</dd></div>
+  <div><dt>Trader</dt><dd>Someone at a bank or fund who buys and sells and carries the risk. A broker's client.</dd></div>
+  <div><dt>Voice broking</dt><dd>Arranging trades by phone or chat.</dd></div>
+  <div><dt>Volatility</dt><dd>How much prices are jumping around. More volatility usually means more trading.</dd></div>
+  <div><dt>Volume</dt><dd>The amount of trading taking place.</dd></div>
+  <div><dt>Wholesale markets</dt><dd>Markets where only large institutions trade, not the public.</dd></div>
+</dl>
+</div>
+</section>
+
+<!-- ============ 19 ============ -->
+<section class="pb">
+<div class="kicker">Section 19</div>
+<h1>Sources and numbers to re-check</h1>
+
+<h2>Re-check these on the day you record</h2>
+<ul>
+  <li><strong>Bank of England rate.</strong> 4% after the 5 November 2026 rise. This came from news reports, not from the Bank directly.</li>
+  <li><strong>Brent oil price.</strong> About $92 on 20 November 2026.</li>
+  <li><strong>TP ICAP share price.</strong> About 300p on 20 November 2026.</li>
+  <li><strong>Any fresh TP ICAP news.</strong> Look at the press releases page on tpicap.com.</li>
+</ul>
+
+<h2>How sure am I of each part?</h2>
+<table>
+  <thead><tr><th style="width:36%">Part of the guide</th><th>Where it comes from</th></tr></thead>
+  <tr><td><b>Company financials, headcount, strategy, deals</b></td><td>Read directly from TP ICAP's own filings. High confidence.</td></tr>
+  <tr><td><b>Share of revenue in US dollars (63%)</b></td><td>From a chart in the 2025 Annual Report. The report says the majority of revenue is in dollars. Treat the exact figure as approximate.</td></tr>
+  <tr><td><b>Competitor figures</b></td><td>From news coverage of BGC's and Tradition's results. Currency conversions are mine and rough.</td></tr>
+  <tr><td><b>Market levels and oil crisis timeline</b></td><td>From news reports in November 2026. Fast-moving. Re-check.</td></tr>
+  <tr><td><b>History before 2014</b></td><td>General knowledge and public reference sources. Dates are reliable; do not lean on fine detail.</td></tr>
+  <tr><td><b>The broker's day, career path, why clients are attractive</b></td><td>General industry knowledge and my own reasoning. Not TP ICAP statements.</td></tr>
+  <tr><td><b>Likely interview questions</b></td><td>Anonymous candidate reviews from past years. May have changed.</td></tr>
+</table>
+
+<h2>Sources</h2>
+<ul class="src">
+  <li>TP ICAP, Interim results for the six months to 30 June 2026 (5 August 2026): <a href="https://tpicap.com/tpicap/sites/g/files/escbpb106/files/2026-08/TP%20ICAP%20H1%202026%20Interim%20results.pdf">tpicap.com, H1 2026 Interim results PDF</a></li>
+  <li>TP ICAP, Full year results for 2025 (12 March 2026): <a href="https://tpicap.com/tpicap/sites/g/files/escbpb106/files/2026-03/TP%20ICAP%20-%20FY%202025%20RNS%20-%20FINAL.pdf">tpicap.com, FY 2025 results PDF</a></li>
+  <li>TP ICAP, Annual Report and Accounts 2025: <a href="https://tpicap.com/tpicap/sites/g/files/escbpb106/files/2026-04/ARA_Full%20report.pdf">tpicap.com, Annual Report PDF</a></li>
+  <li>TP ICAP, Trading update for the nine months to 30 September 2026 (3 November 2026): <a href="https://www.tradingview.com/news/reuters.com,2026-11-03:newsml_RSC5060Ba:0-reg-tp-icap-group-plc-trading-statement/">regulatory announcement via TradingView</a></li>
+  <li>TP ICAP press release, completion of Vantage Capital Markets (1 July 2026): <a href="https://tpicap.com/tpicap/media/press-releases/2026/tp-icap-completes-acquisition-vantage-capital-markets">tpicap.com</a></li>
+  <li>TP ICAP press release, launch of RealQ (June 2026): <a href="https://tpicap.com/media/press-releases/2026/tp-icap-launches-realq-new-institutional-credit-trading-and-data-platform">tpicap.com</a></li>
+  <li>The TRADE, TP ICAP and Neptune Networks: <a href="https://www.thetradenews.com/tp-icap-creates-new-dealer-to-client-credit-business-with-acquisition-of-neptune/">thetradenews.com</a></li>
+  <li>Finance Magnates, TP ICAP first quarter 2026 revenue: <a href="https://www.financemagnates.com/institutional-forex/tp-icap-q1-revenue-rises-13-to-record-689-million-as-broking-and-commodities-lead/">financemagnates.com</a></li>
+  <li>FinanceFeeds, Parameta listing on hold: <a href="https://financefeeds.com/tp-icap-puts-parameta-ipo-plans-on-hold-despite-record-quarter/">financefeeds.com</a></li>
+  <li>Finance Magnates, BGC 2025 results: <a href="https://www.financemagnates.com/institutional-forex/bgcs-revenue-jumps-30-on-strong-markets-and-otc-acquisition/">financemagnates.com</a></li>
+  <li>LeapRate, BGC third quarter 2026 results: <a href="https://www.leaprate.com/institutional/bgc-posts-record-q3-as-fmx-volumes-surge/">leaprate.com</a></li>
+  <li>Compagnie Financi&egrave;re Tradition, 2025 results: <a href="https://www.newsfilecorp.com/release/289312/Growth-in-Revenue-of-11.4-to-CHF-1203.6m-EBITDA-of-CHF-209.9m-Increasing-24.6-Net-Profit-Group-Share-of-CHF-134.2m-Increasing-22.2">newsfilecorp.com</a></li>
+  <li>Sharecast, TP ICAP share price: <a href="https://www.sharecast.com/equity/TP_Icap_Group/share-prices">sharecast.com</a></li>
+  <li>CaixaBank Research, Financial Markets Daily Report (19 November 2026): <a href="https://www.caixabankresearch.com/en/publications/financial-markets-daily-report/19-november-2026">caixabankresearch.com</a></li>
+  <li>Fortune, price of oil (20 November 2026): <a href="https://fortune.com/article/price-of-oil-11-20-2026">fortune.com</a></li>
+  <li>International Energy Agency, Oil Market Report (March 2026): <a href="https://iea.blob.core.windows.net/assets/a25ddf53-cd6c-4910-ac90-16bfd28399e7/-12MAR2026_OilMarketReport.pdf">iea.org PDF</a></li>
+  <li>Wikipedia, TP ICAP history: <a href="https://en.wikipedia.org/wiki/TP_ICAP">en.wikipedia.org/wiki/TP_ICAP</a></li>
+  <li>TP ICAP press release, ICAP Charity Day 2025: <a href="https://tpicap.com/media/press-releases/2025/icaps-33rd-annual-global-charity-day-raises-ps57-million">tpicap.com</a></li>
+  <li>Glassdoor, TP ICAP intern interview reviews: <a href="https://www.glassdoor.com/Interview/TP-ICAP-Interview-E1621849-RVW1189309.htm">glassdoor.com</a></li>
+</ul>
+</section>
+
+</body>
+</html>
