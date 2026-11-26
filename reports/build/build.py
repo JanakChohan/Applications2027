@@ -153,6 +153,66 @@ figcaption { font-size: 8.6pt; color: var(--muted); margin-top: 2.4mm; }
 .card table { margin-bottom: 2mm; }
 """
 
+# Applied on top of CSS when the config sets "style": "accessible".
+# Follows the British Dyslexia Association style guide: clear sans serif,
+# larger text, wide line and paragraph spacing, short left-aligned lines,
+# an off-white background, bold for emphasis and no italics or capitals.
+CSS_ACCESSIBLE = r"""
+@font-face { font-family: "Atkinson Hyperlegible"; font-weight: 400; src: url("%%FONTS%%/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Atkinson Hyperlegible"; font-weight: 700; src: url("%%FONTS%%/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2"); }
+@page { size: A4; margin: 21mm 30mm 23mm 30mm; background: #fbf6ea;
+  @bottom-center { content: counter(page); font: 10pt "Atkinson Hyperlegible", sans-serif; color: #4f5661; }
+  @bottom-left { content: none; }
+}
+@page :first { margin: 0; }
+:root { --ink:#1c2230; --muted:#454c58; --rule:#cfc8b6; --accent:#0b4f6c; --accent-2:#8a4b12; --tint:#e9f1f5; --tint-2:#f4ead8; }
+html { font-family: "Atkinson Hyperlegible", "DejaVu Sans", Arial, sans-serif; font-size: 12.5pt; line-height: 1.72;
+  letter-spacing: .012em; word-spacing: .06em; background: #fbf6ea; font-feature-settings: normal; }
+p { margin: 0 0 1em; text-align: left; hyphens: none; }
+strong, b { font-weight: 700; }
+em, i { font-style: normal; font-weight: 700; }
+a { color: var(--accent); font-weight: 700; }
+h2 { font-family: inherit; font-size: 23pt; line-height: 1.25; letter-spacing: 0; border-bottom: 3px solid var(--accent);
+  padding-bottom: 4mm; margin-bottom: 7mm; }
+h3 { font-size: 16pt; line-height: 1.35; margin: 10mm 0 3.5mm; color: var(--accent); }
+h4 { font-size: 13.5pt; margin: 7mm 0 2.5mm; break-after: avoid; }
+ul, ol { padding-left: 7mm; margin-bottom: 1em; }
+li { margin-bottom: .62em; padding-left: 1mm; }
+ol > li::marker { font-weight: 700; color: var(--accent); }
+table { font-size: 11pt; line-height: 1.5; margin: 4mm 0 7mm; }
+th { background: var(--accent); padding: 2.8mm 3.2mm; }
+td { padding: 2.8mm 3.2mm; border-bottom: 1px solid var(--rule); }
+tbody tr:nth-child(even) td { background: #f5efdf; }
+blockquote { margin: 4mm 0 7mm; padding: 4.5mm 6mm 1.5mm; font-size: 12pt; border-radius: 1.5mm;
+  background: var(--tint); border-left: 5px solid var(--accent); }
+blockquote.weak { background: #ecebe6; border-left-color: #6d7178; }
+blockquote.strong { background: #e4f0e9; border-left-color: #1f6b4a; }
+blockquote.say { background: var(--tint); border-left-color: var(--accent); }
+blockquote.remember { background: var(--tint-2); border-left-color: var(--accent-2); }
+blockquote.try { background: #fffdf6; border: 1.5px solid var(--accent); border-left-width: 5px; }
+blockquote .tag { display: block; font-weight: 700; font-size: 11pt; margin-bottom: 1.2mm; }
+blockquote.weak .tag { color: #4a4e55; } blockquote.strong .tag { color: #1f6b4a; }
+blockquote.say .tag { color: var(--accent); } blockquote.remember .tag { color: var(--accent-2); }
+blockquote.try .tag { color: var(--accent); }
+figcaption { font-size: 10.5pt; }
+.cover { background: #fbf6ea; color: var(--ink); padding: 36mm 30mm 26mm; border-left: 12mm solid var(--accent); }
+.cover .kicker { color: var(--accent); text-transform: none; letter-spacing: .02em; font-size: 12pt; font-weight: 700; }
+.cover h1 { font-family: inherit; font-size: 40pt; line-height: 1.16; letter-spacing: 0; max-width: 140mm; }
+.cover .sub { color: var(--ink); font-size: 15pt; line-height: 1.55; max-width: 130mm; }
+.cover .points { border-top: 2px solid var(--accent); grid-template-columns: 1fr; gap: 4mm; }
+.cover .points div { color: var(--ink); font-size: 12pt; line-height: 1.55; }
+.cover .points b { color: var(--accent); font-size: 12.5pt; display: inline; margin-right: 1.5mm; }
+.cover .meta { color: var(--muted); font-size: 10.5pt; }
+.toc li { padding: 3.2mm 0; }
+.toc li::before { font-size: 11pt; width: 9mm; }
+.toc li a { font-weight: 400; }
+.toc .how { font-size: 11.5pt; background: var(--tint); }
+.card { border: 2px solid var(--accent); padding: 5mm 6mm 2mm; background: #fffdf6; }
+.entry .lab { text-transform: none; letter-spacing: 0; font-size: 10.5pt; }
+li input[type=checkbox] { width: 4.4mm; height: 4.4mm; border: 1.5px solid var(--ink); margin-top: 1.4mm; background: #fffdf6; }
+"""
+
+
 def pandoc(md: str) -> str:
     return subprocess.run(
         ["pandoc", "-f", "gfm+smart", "-t", "html", "--wrap=none", "--columns=100000"],
@@ -171,7 +231,9 @@ def build_html(pages: dict) -> str:
     first_h2 = body.index("<h2")
     lead = body[:first_h2].replace("<ul>", '<ul class="short">', 1)
     rest = body[first_h2:]
-    body = '<h2 id="the-short-answer">The short answer</h2>\n' + lead + rest
+    lead_title = CFG.get("lead_title", "The short answer")
+    lead_id = re.sub(r"[^a-z0-9]+", "-", lead_title.lower()).strip("-")
+    body = f'<h2 id="{lead_id}">{html.escape(lead_title)}</h2>\n' + lead + rest
 
     # figures
     def figure(m):
@@ -182,6 +244,16 @@ def build_html(pages: dict) -> str:
     for first, cls in CFG.get("table_classes", {}).items():
         body = re.sub(r'<table>(\s*<thead>\s*<tr[^>]*>\s*<th>' + re.escape(first) + '</th>)',
                       r'<table class="' + cls + r'">\1', body)
+
+    # callouts: a blockquote whose first words are a bold tag gets a class
+    tags = {"weak": "weak", "strong": "strong", "say": "say", "remember": "remember", "try": "try"}
+    def callout(m):
+        word = m.group(2).split()[0].lower().strip(".:")
+        cls = tags.get(word)
+        if not cls:
+            return m.group(0)
+        return f'<blockquote class="{cls}">{m.group(1)}<span class="tag">{m.group(2).rstrip(".: ")}</span>'
+    body = re.sub(r"<blockquote>(\s*<p>)<strong>([^<]{2,40})</strong>\s*", callout, body)
 
     # boxed entries: a bold numbered question line followed by its labelled list
     def entry(m):
@@ -221,6 +293,8 @@ def build_html(pages: dict) -> str:
 </section>"""
 
     css = CSS.replace("%%FOOTER%%", TITLE.replace('"', "'"))
+    if CFG.get("style") == "accessible":
+        css += CSS_ACCESSIBLE.replace("%%FONTS%%", (HERE / "fonts").as_uri())
     return f"""<!doctype html><html lang="en-GB"><head><meta charset="utf-8">
 <title>{html.escape(TITLE)}</title><style>{css}</style></head>
 <body>{cover}{toc}<main>{body}</main></body></html>""", heads
