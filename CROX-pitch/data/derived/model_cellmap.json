@@ -1,0 +1,361 @@
+{
+ "inputs": {
+  "price": "Inputs!$B$4",
+  "shares": "Inputs!$B$5",
+  "dil": "Inputs!$B$6",
+  "debt": "Inputs!$B$7",
+  "cash": "Inputs!$B$8",
+  "leases": "Inputs!$B$9",
+  "rf": "Inputs!$B$10",
+  "erp": "Inputs!$B$11",
+  "beta": "Inputs!$B$12",
+  "kd": "Inputs!$B$13",
+  "ctax": "Inputs!$B$14",
+  "ntax": "Inputs!$B$15",
+  "g": "Inputs!$B$16",
+  "sbcdil": "Inputs!$B$17",
+  "mcap": "Inputs!$B$19",
+  "nd": "Inputs!$B$20",
+  "ev": "Inputs!$B$21",
+  "ke": "Inputs!$B$22",
+  "we": "Inputs!$B$23",
+  "wacc_calc": "Inputs!$B$24",
+  "wacc": "Inputs!$B$25"
+ },
+ "valuation": {
+  "prob": [
+   "Valuation!B5",
+   "Valuation!C5",
+   "Valuation!D5"
+  ],
+  "eps27": [
+   "Valuation!B6",
+   "Valuation!C6",
+   "Valuation!D6",
+   "Valuation!E6"
+  ],
+  "eps28": [
+   "Valuation!B7",
+   "Valuation!C7",
+   "Valuation!D7",
+   "Valuation!E7"
+  ],
+  "exit": [
+   "Valuation!B8",
+   "Valuation!C8",
+   "Valuation!D8"
+  ],
+  "pt": [
+   "Valuation!B9",
+   "Valuation!C9",
+   "Valuation!D9",
+   "Valuation!E9"
+  ],
+  "ret": [
+   "Valuation!B10",
+   "Valuation!C10",
+   "Valuation!D10",
+   "Valuation!E10"
+  ],
+  "dcf": [
+   "Valuation!B11",
+   "Valuation!C11",
+   "Valuation!D11",
+   "Valuation!E11"
+  ],
+  "dcf_ret": [
+   "Valuation!B12",
+   "Valuation!C12",
+   "Valuation!D12",
+   "Valuation!E12"
+  ],
+  "rcagr": [
+   "Valuation!B13",
+   "Valuation!C13",
+   "Valuation!D13"
+  ],
+  "margin28": [
+   "Valuation!B14",
+   "Valuation!C14",
+   "Valuation!D14"
+  ],
+  "vs_cons": [
+   "Valuation!B15",
+   "Valuation!C15",
+   "Valuation!D15"
+  ],
+  "lev28": [
+   "Valuation!B16",
+   "Valuation!C16",
+   "Valuation!D16"
+  ]
+ },
+ "key": {
+  "Current price ($)": "Valuation!$B$20",
+  "Base-case price target ($)": "Valuation!$B$21",
+  "Base-case upside": "Valuation!$B$22",
+  "Probability-weighted value ($)": "Valuation!$B$23",
+  "Expected return (probability-weighted)": "Valuation!$B$24",
+  "Bear-case downside": "Valuation!$B$25",
+  "Bull-case upside": "Valuation!$B$26",
+  "Upside/downside ratio, base vs bear (x)": "Valuation!$B$27",
+  "Upside/downside ratio, probability-weighted (x)": "Valuation!$B$28",
+  "Break-even bear probability (EV = 0, base:bull kept 2:1)": "Valuation!$B$29",
+  "P/E on FY27E consensus EPS (Yahoo $16.01)": "Valuation!$B$30",
+  "P/E on my FY27E base EPS": "Valuation!$B$31",
+  "FCF yield, TTM ($754m / market cap)": "Valuation!$B$32",
+  "EV / TTM adjusted EBITDA": "Valuation!$B$33",
+  "Market-implied probability of the bear case (base:bull 2:1)": "Valuation!$B$34"
+ },
+ "rar": {
+  "at_risk_pct": "RevAtRisk!$E$14",
+  "at_risk": "RevAtRisk!$F$14",
+  "eps1": "RevAtRisk!$C$29",
+  "eps0": "RevAtRisk!$B$29",
+  "ebitda1": "RevAtRisk!$C$27",
+  "ebitda0": "RevAtRisk!$B$27",
+  "val": "RevAtRisk!$C$30",
+  "rev1": "RevAtRisk!$C$22",
+  "ebit1": "RevAtRisk!$C$25",
+  "decr": "RevAtRisk!$C$31",
+  "vs_cons": "RevAtRisk!$B$44",
+  "px_over_stress": "RevAtRisk!$B$45",
+  "val_vs_px": "RevAtRisk!$B$46",
+  "minus1_pct": "RevAtRisk!$B$52",
+  "minus1_eps": "RevAtRisk!$C$52",
+  "plus1_pct": "RevAtRisk!$B$54",
+  "plus1_eps": "RevAtRisk!$C$54"
+ },
+ "sens": {
+  "+1% group revenue": [
+   "Sens!$B$32",
+   "Sens!$C$32"
+  ],
+  "+1% Crocs North America revenue": [
+   "Sens!$B$33",
+   "Sens!$C$33"
+  ],
+  "+1% Crocs International revenue": [
+   "Sens!$B$34",
+   "Sens!$C$34"
+  ],
+  "+100 bps adjusted EBIT margin": [
+   "Sens!$B$35",
+   "Sens!$C$35"
+  ],
+  "+100 bps adjusted gross margin": [
+   "Sens!$B$36",
+   "Sens!$C$36"
+  ],
+  "+1 pt US tariff rate on imports": [
+   "Sens!$B$37",
+   "Sens!$C$37"
+  ],
+  "+1% USD vs all currencies": [
+   "Sens!$B$38",
+   "Sens!$C$38"
+  ],
+  "+100 bps interest rates": [
+   "Sens!$B$39",
+   "Sens!$C$39"
+  ],
+  "+$100m share repurchases (full-year effect)": [
+   "Sens!$B$40",
+   "Sens!$C$40"
+  ],
+  "+10% average repurchase price": [
+   "Sens!$B$41",
+   "Sens!$C$41"
+  ],
+  "No buybacks at all in FY27 (cash retained)": [
+   "Sens!$B$42",
+   "Sens!$C$42"
+  ]
+ },
+ "scen_rows": {
+  "Bear": {
+   "na": 5,
+   "intl": 6,
+   "crocs": 7,
+   "hd": 8,
+   "rev": 9,
+   "g": 10,
+   "margin": 11,
+   "ebit": 12,
+   "da": 13,
+   "ebitda": 14,
+   "int": 15,
+   "other": 16,
+   "pbt": 17,
+   "tax": 18,
+   "ni": 19,
+   "sh_avg": 20,
+   "eps": 21,
+   "epsg": 22,
+   "_b1": 23,
+   "capex": 24,
+   "nwc": 25,
+   "ctax": 26,
+   "fcf": 27,
+   "bb": 28,
+   "bbpx": 29,
+   "sh_rep": 30,
+   "sh_end": 31,
+   "nd": 32,
+   "lev": 33,
+   "_b2": 34,
+   "fcff": 35,
+   "t": 36,
+   "df": 37,
+   "pv": 38,
+   "_b3": 39
+  },
+  "Base": {
+   "na": 5,
+   "intl": 6,
+   "crocs": 7,
+   "hd": 8,
+   "rev": 9,
+   "g": 10,
+   "margin": 11,
+   "ebit": 12,
+   "da": 13,
+   "ebitda": 14,
+   "int": 15,
+   "other": 16,
+   "pbt": 17,
+   "tax": 18,
+   "ni": 19,
+   "sh_avg": 20,
+   "eps": 21,
+   "epsg": 22,
+   "_b1": 23,
+   "capex": 24,
+   "nwc": 25,
+   "ctax": 26,
+   "fcf": 27,
+   "bb": 28,
+   "bbpx": 29,
+   "sh_rep": 30,
+   "sh_end": 31,
+   "nd": 32,
+   "lev": 33,
+   "_b2": 34,
+   "fcff": 35,
+   "t": 36,
+   "df": 37,
+   "pv": 38,
+   "_b3": 39
+  },
+  "Bull": {
+   "na": 5,
+   "intl": 6,
+   "crocs": 7,
+   "hd": 8,
+   "rev": 9,
+   "g": 10,
+   "margin": 11,
+   "ebit": 12,
+   "da": 13,
+   "ebitda": 14,
+   "int": 15,
+   "other": 16,
+   "pbt": 17,
+   "tax": 18,
+   "ni": 19,
+   "sh_avg": 20,
+   "eps": 21,
+   "epsg": 22,
+   "_b1": 23,
+   "capex": 24,
+   "nwc": 25,
+   "ctax": 26,
+   "fcf": 27,
+   "bb": 28,
+   "bbpx": 29,
+   "sh_rep": 30,
+   "sh_end": 31,
+   "nd": 32,
+   "lev": 33,
+   "_b2": 34,
+   "fcff": 35,
+   "t": 36,
+   "df": 37,
+   "pv": 38,
+   "_b3": 39
+  }
+ },
+ "scen_dcf": {
+  "Bear": {
+   "sumpv": "Bear!$B$41",
+   "tv": "Bear!$B$42",
+   "pvtv": "Bear!$B$43",
+   "ev": "Bear!$B$44",
+   "nd": "Bear!$B$45",
+   "eq": "Bear!$B$46",
+   "sh": "Bear!$B$47",
+   "dcf": "Bear!$B$48",
+   "dcf_up": "Bear!$B$49",
+   "tvpct": "Bear!$B$50",
+   "evx": "Bear!$B$51",
+   "pt": "Bear!$B$52",
+   "pt_up": "Bear!$B$53",
+   "exit": "Bear!$B$54",
+   "vs_cons": "Bear!$B$55",
+   "cagr": "Bear!$B$56",
+   "rcagr": "Bear!$B$57",
+   "cumbb": "Bear!$B$58"
+  },
+  "Base": {
+   "sumpv": "Base!$B$41",
+   "tv": "Base!$B$42",
+   "pvtv": "Base!$B$43",
+   "ev": "Base!$B$44",
+   "nd": "Base!$B$45",
+   "eq": "Base!$B$46",
+   "sh": "Base!$B$47",
+   "dcf": "Base!$B$48",
+   "dcf_up": "Base!$B$49",
+   "tvpct": "Base!$B$50",
+   "evx": "Base!$B$51",
+   "pt": "Base!$B$52",
+   "pt_up": "Base!$B$53",
+   "exit": "Base!$B$54",
+   "vs_cons": "Base!$B$55",
+   "cagr": "Base!$B$56",
+   "rcagr": "Base!$B$57",
+   "cumbb": "Base!$B$58"
+  },
+  "Bull": {
+   "sumpv": "Bull!$B$41",
+   "tv": "Bull!$B$42",
+   "pvtv": "Bull!$B$43",
+   "ev": "Bull!$B$44",
+   "nd": "Bull!$B$45",
+   "eq": "Bull!$B$46",
+   "sh": "Bull!$B$47",
+   "dcf": "Bull!$B$48",
+   "dcf_up": "Bull!$B$49",
+   "tvpct": "Bull!$B$50",
+   "evx": "Bull!$B$51",
+   "pt": "Bull!$B$52",
+   "pt_up": "Bull!$B$53",
+   "exit": "Bull!$B$54",
+   "vs_cons": "Bull!$B$55",
+   "cagr": "Bull!$B$56",
+   "rcagr": "Bull!$B$57",
+   "cumbb": "Bull!$B$58"
+  }
+ },
+ "reverse": {
+  "implied_g": "ReverseDCF!B12",
+  "implied_margin": "ReverseDCF!B13",
+  "implied_cagr": "ReverseDCF!B29",
+  "fcf": "ReverseDCF!B11",
+  "grid": "ReverseDCF!A17:H24"
+ },
+ "sens_dcf_grid": "Sens!A5:E12",
+ "sens_pt_grid": "Sens!A16:D27",
+ "checks": "Checks!A4:C13",
+ "peers_derived": "Peers!A27:E32"
+}
