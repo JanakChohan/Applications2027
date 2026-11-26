@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>TP ICAP Part 11: What the desks are talking about</title>
+<style>
+@font-face{font-family:"Lexend";font-weight:400;src:url("node_modules/@fontsource/lexend/files/lexend-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Lexend";font-weight:600;src:url("node_modules/@fontsource/lexend/files/lexend-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Lexend";font-weight:700;src:url("node_modules/@fontsource/lexend/files/lexend-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"Atkinson";font-weight:400;src:url("node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Atkinson";font-weight:700;src:url("node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2")}
+
+:root{
+  --bg:#FBF6EA; --ink:#1f2a37; --muted:#4f5b69; --navy:#14304b; --teal:#0f6e84;
+  --line:#d9d0bb; --card:#fffdf6;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --grey:#8a94a0;
+}
+@page{size:A4;margin:16mm 17mm 19mm 17mm}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson",Verdana,sans-serif;
+  font-size:12.5pt;line-height:1.62;letter-spacing:.012em;word-spacing:.06em;text-align:left;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3,h4{font-family:"Lexend",Verdana,sans-serif;color:var(--navy);line-height:1.25;letter-spacing:0;break-after:avoid}
+h1{font-size:23pt;font-weight:700;margin:0 0 4mm;padding-bottom:3mm;border-bottom:1.2mm solid var(--teal)}
+h2{font-size:15.5pt;font-weight:600;margin:8mm 0 2.5mm}
+h3{font-size:12.5pt;font-weight:600;margin:5.5mm 0 1.5mm}
+p{margin:0 0 3.2mm;max-width:150mm}
+li{max-width:146mm}
+ul,ol{margin:0 0 3.5mm;padding-left:6.5mm}
+ol{padding-left:8.5mm}
+li{margin-bottom:1.7mm}
+strong{font-weight:700;color:#10202f}
+section{break-before:auto;margin-top:13mm}
+section.pb{break-before:page;margin-top:0}
+.kicker{break-after:avoid}
+.kicker{font-family:"Lexend";font-size:10pt;font-weight:600;color:var(--teal);margin:0 0 1.5mm}
+.lead{font-size:13pt;line-height:1.6}
+.small{font-size:10pt;color:var(--muted);line-height:1.5}
+
+/* boxes */
+.box{border-radius:2.5mm;padding:3.6mm 4.5mm 3mm;margin:4mm 0;font-size:12pt;max-width:162mm;break-inside:avoid;border-left:1.6mm solid var(--teal);background:#E7F1F3}
+.box > :last-child{margin-bottom:.6mm}
+.box .tag{font-family:"Lexend";font-weight:600;font-size:10.5pt;display:block;margin-bottom:1.2mm;color:var(--navy)}
+.box.say{background:#FFEFCF;border-left-color:#c77700}
+.box.warn{background:#FBE4DD;border-left-color:#b6452c}
+.box.read{background:#ECE8F6;border-left-color:#5a48b8}
+.box.fact{background:var(--card);border:.3mm solid var(--line);border-left:1.6mm solid var(--navy)}
+
+/* figures */
+figure{margin:5mm 0 4mm;padding:4.5mm 5mm 4mm;background:var(--card);border:.3mm solid var(--line);border-radius:3mm;break-inside:avoid}
+figcaption{font-family:"Lexend";font-weight:600;font-size:11.5pt;color:var(--navy);margin-bottom:3.5mm}
+figcaption span{display:block;font-family:"Atkinson";font-weight:400;font-size:10pt;color:var(--muted);margin-top:.6mm}
+
+/* bar charts */
+.bars{display:grid;grid-template-columns:47mm 1fr;row-gap:2.6mm;column-gap:3mm;align-items:center}
+.bars .lab{font-size:10.5pt;line-height:1.3;text-align:right}
+.bars .lab small{display:block;color:var(--muted);font-size:9pt}
+.bars .track{display:flex;align-items:center;gap:2.5mm}
+.bars .bar{height:7.5mm;border-radius:0 1.2mm 1.2mm 0;background:var(--s1);min-width:.6mm}
+.bars .val{font-family:"Lexend";font-weight:600;font-size:10.5pt;white-space:nowrap}
+.bars .val small{font-family:"Atkinson";font-weight:400;color:var(--muted);font-size:9.5pt}
+.bars.sub .bar{height:5.5mm;background:#7fb0ea}
+.c1{background:var(--s1)!important}.c2{background:var(--s2)!important}.c3{background:var(--s3)!important}.c4{background:var(--s4)!important}.cg{background:var(--grey)!important}
+.stack{display:flex;gap:.6mm;height:15mm;margin:2mm 0 2.5mm}
+.stack div{display:flex;align-items:center;justify-content:center;color:#fff;font-family:"Lexend";font-weight:600;font-size:10.5pt;border-radius:1mm;text-align:center;line-height:1.2}
+.stack .dark{color:#1f2a37}
+.legend{display:flex;flex-wrap:wrap;gap:2mm 6mm;font-size:10pt}
+.legend i{display:inline-block;width:3.6mm;height:3.6mm;border-radius:.8mm;margin-right:1.6mm;vertical-align:-.5mm}
+
+/* flow diagrams */
+.flow{display:flex;align-items:stretch;gap:1.5mm}
+.node{flex:1;background:#fff;border:.45mm solid var(--navy);border-radius:2.2mm;padding:2.6mm 2.4mm;font-size:10pt;line-height:1.35;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.node b{font-family:"Lexend";font-weight:600;font-size:10.5pt;color:var(--navy);display:block;margin-bottom:.8mm}
+.node.hub{background:var(--navy);border-color:var(--navy);color:#fff}
+.node.hub b{color:#fff}
+.node.soft{border-style:dashed;border-color:#6b7785}
+.arrow{flex:0 0 7mm;display:flex;align-items:center;justify-content:center;font-size:15pt;color:var(--teal);font-weight:700}
+.steps{counter-reset:s;display:grid;gap:2.2mm}
+.step{counter-increment:s;display:grid;grid-template-columns:10mm 1fr;gap:3mm;align-items:start;background:#fff;border:.3mm solid var(--line);border-radius:2mm;padding:2.5mm 3mm}
+.step::before{content:counter(s);font-family:"Lexend";font-weight:700;font-size:13pt;color:#fff;background:var(--teal);width:9mm;height:9mm;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.step p{margin:0;font-size:10.8pt;line-height:1.45}
+.step b{font-family:"Lexend";font-weight:600;color:var(--navy)}
+.cycle{display:grid;grid-template-columns:1fr 7mm 1fr 7mm 1fr;row-gap:1.5mm;align-items:stretch}
+.down{grid-column:5;text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1}
+.up{grid-column:1;text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1}
+
+/* timeline */
+.tl{border-left:.8mm solid var(--teal);margin:2mm 0 0 16mm;padding:0}
+.tl div{position:relative;padding:0 0 3.1mm 6mm;font-size:10.8pt;line-height:1.45;break-inside:avoid}
+.tl div::before{content:"";position:absolute;left:-2.3mm;top:1.2mm;width:3.6mm;height:3.6mm;border-radius:50%;background:var(--teal);border:.5mm solid var(--card)}
+.tl b{position:absolute;left:-19mm;top:0;width:15mm;text-align:right;font-family:"Lexend";font-weight:600;color:var(--navy)}
+.tl .big::before{background:var(--s2);width:4.6mm;height:4.6mm;left:-2.8mm}
+
+/* tables */
+table{border-collapse:collapse;width:100%;margin:3mm 0 4.5mm;font-size:10.6pt;line-height:1.42}
+tr{break-inside:avoid}
+th{font-family:"Lexend";font-weight:600;font-size:10pt;text-align:left;background:var(--navy);color:#fff;padding:2.2mm 2.6mm;vertical-align:bottom}
+td{padding:2.2mm 2.6mm;border-bottom:.3mm solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:#f5efdf}
+td.n,th.n{text-align:right;white-space:nowrap}
+td b{color:#10202f}
+
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin:4mm 0}
+.tile{background:var(--card);border:.3mm solid var(--line);border-radius:2.5mm;padding:3.2mm 3.5mm;break-inside:avoid}
+.tile b{display:block;font-family:"Lexend";font-weight:700;font-size:17pt;color:var(--navy);line-height:1.15}
+.tile span{font-size:10pt;color:var(--muted);line-height:1.35;display:block;margin-top:1mm}
+
+/* cover */
+.cover{break-before:auto;min-height:215mm;display:flex;flex-direction:column}
+.cover h1{font-size:34pt;border:none;margin:8mm 0 3mm;padding:0}
+.cover .sub{font-family:"Lexend";font-size:15pt;color:var(--teal);font-weight:600;margin-bottom:8mm;max-width:150mm;line-height:1.4}
+.cover .band{height:3mm;background:linear-gradient(90deg,var(--navy) 0 55%,var(--teal) 55% 80%,var(--s4) 80% 100%);border-radius:2mm;margin-bottom:9mm}
+.toc{columns:2;column-gap:10mm;font-size:11pt;padding:0;list-style:none;counter-reset:t}
+.toc li{counter-increment:t;margin-bottom:1.8mm;break-inside:avoid}
+.toc li::before{content:counter(t) ".";font-family:"Lexend";font-weight:600;color:var(--teal);display:inline-block;width:8mm}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+.two > div{break-inside:avoid;max-width:none}
+dl{margin:0}
+dt{font-family:"Lexend";font-weight:600;color:var(--navy);font-size:11pt;margin-top:0}
+dd{margin:0 0 0 0;font-size:10.8pt;line-height:1.48}
+a{color:var(--teal);text-decoration:none;overflow-wrap:anywhere}
+thead{display:table-header-group}
+.gloss dl{columns:2;column-gap:9mm}
+.gloss dl div{break-inside:avoid;padding-bottom:2.8mm}
+.legend4{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin:3mm 0}
+.legend4 .box{margin:0;max-width:none}
+.src li{font-size:9.6pt;line-height:1.4;margin-bottom:1.3mm}
+
+.hubgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5mm}
+.hubgrid .node{min-height:17mm}
+.layers{display:grid;gap:2mm}
+.layer{border-radius:2.2mm;padding:3mm 4mm;font-size:10.6pt;line-height:1.4;color:#fff}
+.layer b{display:block;font-family:"Lexend";font-weight:600;font-size:11pt;margin-bottom:.6mm}
+.l1{background:#14304b;margin:0 0 0 0}.l2{background:#0f6e84;margin:0 9mm}.l3{background:#fff;color:#1f2a37;border:.45mm solid #14304b;margin:0 18mm}
+.l3 b{color:#14304b}
+.ladder{display:grid;gap:2mm}
+.rung{background:#fff;border:.45mm solid var(--navy);border-radius:2.2mm;padding:2.4mm 3.5mm;font-size:10.6pt;line-height:1.4}
+.rung b{font-family:"Lexend";font-weight:600;color:var(--navy);display:block}
+.r1{margin-right:44mm}.r2{margin-left:11mm;margin-right:33mm}.r3{margin-left:22mm;margin-right:22mm}.r4{margin-left:33mm;margin-right:11mm}.r5{margin-left:44mm;background:var(--navy);color:#fff}
+.r5 b{color:#fff}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin:3mm 0 5mm}
+.card{background:#fff;border:.5mm dashed #6b7785;border-radius:2.5mm;padding:3.5mm 4mm;font-family:"Lexend";font-size:11.5pt;line-height:1.75;break-inside:avoid}
+.card b{display:block;color:var(--teal);font-size:10pt;margin-bottom:1mm}
+
+.four{display:grid;grid-template-columns:1fr 1fr;gap:2.5mm}
+.four .node{text-align:left;padding:3mm 3.5mm;font-size:10.6pt}
+.mapdown{text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1.5;white-space:nowrap;overflow:hidden}
+figure svg{width:100%;height:auto;display:block}
+svg .ax{stroke:#4f5b69;stroke-width:1.5;fill:none}
+svg .st{font-family:"Atkinson",sans-serif;font-size:13.5px;fill:#4f5b69}
+svg .sb{font-family:"Lexend",sans-serif;font-size:14px;font-weight:600;fill:#14304b}
+svg .ln1{stroke:#2a78d6;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+svg .ln2{stroke:#8a94a0;stroke-width:3.5;fill:none;stroke-dasharray:9 7;stroke-linecap:round}
+</style>
+</head>
+<body>
+<style>
+.trick{background:var(--card);border:.3mm solid var(--line);border-left:1.6mm solid var(--teal);border-radius:2.2mm;padding:3mm 4mm;margin-bottom:3mm;display:grid;grid-template-columns:10mm 1fr;column-gap:3mm;break-inside:avoid}
+.trick .num{font-family:"Lexend";font-weight:700;font-size:12.5pt;color:#fff;background:var(--teal);width:9mm;height:9mm;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:.4mm}
+.trick b.t{font-family:"Lexend";font-weight:600;color:var(--navy);font-size:12pt}
+.trick .ex{display:block;margin-top:1.2mm;max-width:150mm}
+ul.chk{list-style:none;padding-left:0;margin:0 0 3mm}
+ul.chk li{position:relative;padding-left:8mm;margin-bottom:1.9mm;font-size:11.5pt;max-width:none}
+ul.chk li::before{content:"";position:absolute;left:0;top:1.2mm;width:4mm;height:4mm;border:.45mm solid var(--navy);border-radius:.8mm;background:#fff}
+</style>
+<!-- ============ COVER ============ -->
+<div class="cover" style="min-height:0">
+  <h1 style="font-size:27pt">What the desks are talking about</h1>
+  <div class="sub">Part 11. This week's news on each of the four desks, and how to answer if it comes up</div>
+  <div class="band"></div>
+  <p class="lead">If they ask about the news, you do not need to know everything. You need <strong>one story you understand</strong>, told in three steps. This pack gives you the week's talking points for each desk, in plain English, as of <strong>Thursday 26 November 2026</strong>.</p>
+
+  <div class="box">
+    <span class="tag">The week in one line</span>
+    <strong>Central banks are about to raise rates again, technology shares have fallen hard, and oil will not settle.</strong>
+  </div>
+
+  <div class="tiles">
+    <div class="tile"><b>Rates</b><span>The US central bank meets on 8 to 9 December. A rise is almost fully expected.</span></div>
+    <div class="tile"><b>Equities</b><span>A sharp sell-off in technology shares. The fear gauge jumped.</span></div>
+    <div class="tile"><b>Credit</b><span>Risky companies suddenly pay more to borrow.</span></div>
+    <div class="tile"><b>FX</b><span>The pound is about $1.31. Safe currencies gain on scared days.</span></div>
+    <div class="tile"><b>Oil</b><span>Brent in the low to mid $90s after new attacks in the Gulf.</span></div>
+    <div class="tile"><b>Check first</b><span>Markets move daily. Look at the news on the morning you record.</span></div>
+  </div>
+
+  <div class="box warn">
+    <span class="tag">How sure is this?</span>
+    These figures come from news reports and market summaries, not from the central banks or exchanges themselves. Different sources gave slightly different numbers. So <strong>say "about"</strong>, and check the big ones before you record. US markets were shut on Thursday for Thanksgiving, so trading is thin this week.
+  </div>
+</div>
+
+<!-- ============ 1 ============ -->
+<section class="pb">
+<div class="kicker">First</div>
+<h1>How to answer any news question</h1>
+
+<figure>
+  <figcaption>Diagram 1. The three steps for a news answer<span>The same three steps as your other packs</span></figcaption>
+  <div class="flow">
+    <div class="node"><b>1. What happened</b>One or two plain sentences. One number</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node"><b>2. Which means</b>Who has to trade because of it?</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node hub"><b>3. My view</b>What I think happens next, or why it interests me</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Left to right. Most people stop at box 1. That is just reading the news out. Box 2 is what makes it a <strong>broker's</strong> answer. Box 3, the dark one, is what makes it <strong>yours</strong>.
+</div>
+
+<div class="box">
+  <span class="tag">The broker's question</span>
+  For every headline, ask: <strong>"Who has to trade because of this?"</strong> A broker is paid when clients trade. So news matters when it forces banks and funds to change what they hold.
+</div>
+
+<h2>How this week's stories connect</h2>
+<figure>
+  <figcaption>Diagram 2. One chain runs through all four desks<span>My reading of the week</span></figcaption>
+  <div class="steps">
+    <div class="step"><p><b>Prices are rising faster than central banks want.</b> Energy is expensive and it is spreading to other prices.</p></div>
+    <div class="step"><p><b>So central banks are raising interest rates.</b> The Bank of England did in November. The US is expected to in December. <strong>Rates desk.</strong></p></div>
+    <div class="step"><p><b>Higher rates hit shares that depend on future growth.</b> Technology shares have fallen sharply. <strong>Equities desk.</strong></p></div>
+    <div class="step"><p><b>Lenders get nervous about companies that borrowed a lot.</b> Risky firms now pay more to borrow. <strong>Credit desk.</strong></p></div>
+    <div class="step"><p><b>Nervous money moves to safe currencies.</b> And rate changes move currencies too. <strong>FX desk.</strong></p></div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Top to bottom. Each step causes the next. <strong>It is one story, seen from four desks.</strong> If you can say this chain, you can handle a news question about any of them.
+</div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section class="pb">
+<div class="kicker">Desk 1</div>
+<h1>Rates</h1>
+<p class="lead">The biggest desk at TP ICAP. This is the safest topic to pick.</p>
+
+<h2>What happened</h2>
+<ul>
+  <li><strong>The US central bank meets on 8 to 9 December.</strong> Markets put the chance of a rate rise at about 96% or more. Its rate is 3.75% to 4% now.</li>
+  <li><strong>The Bank of England meets on 17 December.</strong> It raised its rate to 4% on 5 November.</li>
+  <li><strong>UK inflation for October was 3.6%.</strong> That is the highest in a year, but a little below the 3.7% expected.</li>
+  <li><strong>So a December rise in the UK became slightly less certain.</strong> Reports say the chance slipped from about 90% to about 80%.</li>
+  <li><strong>UK 10-year government borrowing costs eased</strong> to about 5.15%, the lowest in over two weeks.</li>
+</ul>
+
+<h2>Which means</h2>
+<p>When people are <strong>sure</strong> what a central bank will do, there is little to trade. When they are <strong>unsure</strong>, banks and funds keep adjusting. The UK has just become a little less sure. That doubt is what keeps a rates desk busy.</p>
+
+<div class="box say">
+  <span class="tag">Say it like this. About 30 seconds</span>
+  "I've been following the two central bank meetings in December. Markets are almost certain the US will raise rates on the 9th. The UK on the 17th is less clear. Inflation came in at 3.6%, just under forecast, and the chance of a rise slipped from about 90% to about 80%. For a broker that doubt matters more than the rate itself, because banks and pension funds have to keep adjusting until they know."
+</div>
+
+<div class="box">
+  <span class="tag">If you want a deeper version</span>
+  Part 4 has your full story: sterling swap trading more than halved earlier this year, then the Bank of England changed direction. This week's news fits straight on the end of it.
+</div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section>
+<div class="kicker">Desk 2</div>
+<h1>Equities</h1>
+<p class="lead">The loudest story of the week.</p>
+
+<h2>What happened</h2>
+<ul>
+  <li><strong>Technology shares sold off sharply.</strong> On Wednesday 25 November the Nasdaq 100, an index of big US technology firms, was briefly about 20% below its October high. It recovered most of the day's fall by the close.</li>
+  <li><strong>The fear gauge jumped.</strong> The VIX, which measures how wild investors expect shares to be, closed around 28 after touching about 35.</li>
+  <li><strong>The worry:</strong> companies have spent and borrowed huge sums to build AI data centres. Investors are asking whether that will pay back. Higher interest rates make it worse.</li>
+</ul>
+
+<h2>Which means</h2>
+<p>When shares swing like this, investors rush to <strong>buy protection</strong>. Protection means options. Options are what the Equities desk at a broker deals in. So a scared stock market is a busy equity derivatives desk.</p>
+
+<div class="box say">
+  <span class="tag">Say it like this. About 30 seconds</span>
+  "This week technology shares fell hard. The Nasdaq 100 was briefly about 20% below its October high, and the VIX, the fear gauge, closed around 28. The worry is whether the money spent on AI will pay back. For a broker, that means investors rushing to buy protection through options, which is what the equities desk deals in. It was already TP ICAP's fastest-growing desk this year."
+</div>
+
+<div class="box">
+  <span class="tag">A neat extra, if you want it</span>
+  Use the <strong>rule of 16</strong> from Part 3. Divide the VIX by 16 to get a typical daily move. 28 divided by 16 is about 1.75. So the market expects shares to move about 1.75% a day. Normal is under 1%.
+</div>
+</section>
+
+<!-- ============ 4 ============ -->
+<section>
+<div class="kicker">Desk 3</div>
+<h1>Credit</h1>
+<p class="lead">The quiet story that few candidates will mention. It links straight to the equities one.</p>
+
+<h2>What happened</h2>
+<ul>
+  <li><strong>Risky companies suddenly pay more to borrow.</strong> The extra interest they pay over a safe government, called the credit spread, rose from about 3.3% to about 3.8% in the week to 20 November.</li>
+  <li><strong>Safer companies barely moved.</strong> Their spread went from about 0.90% to about 0.98%.</li>
+  <li><strong>The weakest companies were hit hardest.</strong></li>
+  <li><strong>The worry is the same as in shares:</strong> heavy borrowing to pay for AI building.</li>
+</ul>
+
+<h2>Which means</h2>
+<p>Lenders are getting pickier. When spreads move like this, investors sell the bonds they are worried about and buy insurance against companies failing. Both go through a Credit desk. And because many bonds have no screen price, people need a broker to find a buyer.</p>
+
+<div class="box say">
+  <span class="tag">Say it like this. About 30 seconds</span>
+  "What caught my eye this week was the bond market, not just shares. The extra interest that risky companies pay to borrow rose by nearly half a percentage point in a week, while safer companies barely moved. So lenders are getting pickier, mostly over debt taken on to build AI. For a broker that means investors selling the bonds they are worried about, and in credit many bonds have no screen price, so they need someone to find the buyer."
+</div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section>
+<div class="kicker">Desk 4, and one extra</div>
+<h1>FX, and oil</h1>
+
+<h2>FX: what happened</h2>
+<ul>
+  <li><strong>The pound is about $1.31</strong> and about &euro;1.19.</li>
+  <li><strong>Against the euro it hit its highest level of 2026 on 18 November,</strong> then slipped.</li>
+  <li><strong>On scared days, money moved into the Japanese yen and Swiss franc.</strong> These are seen as safe.</li>
+</ul>
+<h2>Which means</h2>
+<p>Currencies follow interest rates. With the UK and the US both raising rates, the question is who goes faster. Every change in that guess moves the pound against the dollar, and companies and funds have to re-fix their currency deals.</p>
+<div class="box say">
+  <span class="tag">Say it like this. About 20 seconds</span>
+  "The pound is around $1.31. What moves it now is which central bank raises rates faster, the UK or the US. Each time that guess changes, firms have to re-fix their currency deals, and that is what an FX desk arranges."
+</div>
+
+<h2>Oil: what happened</h2>
+<ul>
+  <li><strong>Brent, the main oil price, is in the low to mid $90s.</strong> It rose about 3% on Wednesday.</li>
+  <li><strong>Iran said two tankers hit mines</strong> in the Strait of Hormuz. That claim has not been confirmed. Attacks on Saudi oil sites were also reported.</li>
+  <li><strong>But a surplus of oil is expected next year,</strong> which holds the price down.</li>
+</ul>
+<h2>Which means</h2>
+<p>Oil is not one of your four desks. It belongs to Energy and Commodities. But it drives inflation, so it sits behind the whole rates story. And it is over half of that division's revenue.</p>
+<div class="box warn">
+  <span class="tag">Careful</span>
+  Oil news changes by the hour, and some claims are unconfirmed. If you mention it, say "reports of" and do not quote a precise price.
+</div>
+</section>
+
+<!-- ============ 6 ============ -->
+<section>
+<div class="kicker">Your answer</div>
+<h1>Which story to use</h1>
+
+<table>
+  <thead><tr><th style="width:30%">Story</th><th style="width:36%">Why pick it</th><th>Risk</th></tr></thead>
+  <tr><td><b>Rates: the December meetings</b></td><td>The firm's biggest desk. Simple. Links to your Part 4 story.</td><td>Many candidates will say "rates went up". Use the 90% to 80% detail.</td></tr>
+  <tr><td><b>Shares and credit together</b></td><td>Fresh this week. Shows you see how desks connect. Few will mention credit.</td><td>Slightly more to explain.</td></tr>
+  <tr><td><b>FX or oil alone</b></td><td>Fine as a second story.</td><td>Thinner. Oil is not your division.</td></tr>
+</table>
+<div class="box say">
+  <span class="tag">My suggestion</span>
+  Prepare <strong>one main story and one spare</strong>. Use the rates story as your main one, because Rates is what TP ICAP is strongest in. Keep "shares and credit together" as your spare. Do not try to cover all four desks in one answer.
+</div>
+
+<h2>The full answer: shares and credit together</h2>
+<div class="box fact">
+  <span class="tag">About 60 seconds</span>
+  "Thanks for watching. The story I've followed this week is the sell-off in technology shares, and how it spread into the bond market.
+  <br><br>On Wednesday the Nasdaq 100 was briefly about 20% below its October high. In the same week, the extra interest that risky companies pay to borrow rose by nearly half a percentage point. The worry behind both is the same: firms have borrowed heavily to build AI, and investors are asking whether it will pay back.
+  <br><br>Which means two desks at a broker get busy at once. Investors buy protection on shares, which is equity derivatives. And they sell the company debt they are worried about, which is credit.
+  <br><br>What interests me is that link. One worry, two markets. It is why I like that the internship rotates through all four desks."
+</div>
+
+<h2>The full answer: rates</h2>
+<div class="box fact">
+  <span class="tag">About 60 seconds</span>
+  "Thanks for watching. I've been following interest rates, and in particular the two central bank meetings in December.
+  <br><br>The Bank of England raised rates to 4% on 5 November, its first rise since 2023. Markets are now almost certain the US will raise on the 9th of December. But the UK on the 17th is less clear. Inflation came in at 3.6%, just under forecast, and the chance of another rise slipped from about 90% to about 80%.
+  <br><br>Which means there is real doubt, and doubt is what makes banks and pension funds keep adjusting their positions.
+  <br><br>A broker is paid when clients trade, not when rates are high or low. So I think this is a busy period for a rates desk, and Rates is TP ICAP's largest desk."
+</div>
+
+<h2>If they ask a follow-up</h2>
+<table>
+  <thead><tr><th style="width:36%">They ask</th><th>You say</th></tr></thead>
+  <tr><td><b>"Why do higher rates hurt technology shares?"</b></td><td>"Their value depends on profits far in the future. Higher rates make future money worth less today."</td></tr>
+  <tr><td><b>"What is the VIX?"</b></td><td>"A measure of how much investors expect US shares to move. It is called the fear gauge."</td></tr>
+  <tr><td><b>"What is a credit spread?"</b></td><td>"The extra interest a company pays to borrow, compared with a safe government."</td></tr>
+  <tr><td><b>"Is falling share prices bad for a broker?"</b></td><td>"Not directly. A broker is paid on how much clients trade, and they trade more when markets move."</td></tr>
+  <tr><td><b>"What happens if the Bank does not raise in December?"</b></td><td>"Then everyone who bet on a rise has to undo it. That is trading too."</td></tr>
+</table>
+
+<h2>Dates to know</h2>
+<table>
+  <thead><tr><th style="width:36%">When</th><th>What</th></tr></thead>
+  <tr><td><b>Friday 27 November</b></td><td>Your deadline, 11:59 PM GMT. US markets close early.</td></tr>
+  <tr><td><b>8 to 9 December</b></td><td>US central bank decision.</td></tr>
+  <tr><td><b>17 December</b></td><td>Bank of England decision.</td></tr>
+</table>
+
+<h2>Check on the morning you record</h2>
+<ul class="chk">
+  <li>Has either central bank said anything new?</li>
+  <li>Where is the pound against the dollar?</li>
+  <li>Did technology shares fall or recover overnight?</li>
+  <li>Any big oil headline?</li>
+</ul>
+
+<h2>Where this comes from</h2>
+<ul class="src">
+  <li>Daily market summaries for 26 November 2026: <a href="https://www.caixabankresearch.com/en/publications/financial-markets-daily-report/26-november-2026">CaixaBank Research</a> and <a href="https://www.home.saxo/en-mena/content/articles/macro/market-quick-take---nasdaq-briefly-hits-bear-market-territory-before-paring-losses---26-november-2026-26112026">Saxo</a>.</li>
+  <li>UK inflation, gilt yields and rate expectations: <a href="https://tradingeconomics.com/united-kingdom/government-bond-yield">Trading Economics</a> and <a href="https://amp.cnbc.com/amp/2026/11/05/interest-rates-inflation-uk.html?hostDomain=www.cnbc.com">CNBC</a>.</li>
+  <li>US rate expectations: <a href="https://www.fxempire.com/forecasts/article/interest-rate-forecast-december-fed-hike-bets-support-us-dollar-1646310">FX Empire</a> and <a href="https://thestreet.com/fed/fed-rate-hike-bets-deliver-fresh-blow-to-your-holiday-budget">TheStreet</a>.</li>
+  <li>Technology shares and the VIX: <a href="https://www.cnbc.com/2026/11/25/nvidia-ai-stock-tech-selloff.html">CNBC</a> and <a href="https://www.forbes.com/sites/zacharyfolk/2026/11/25/nvidia-down-8-as-tech-stocks-extend-selloff/?streamIndex=0">Forbes</a>.</li>
+  <li>Credit spreads: <a href="https://www.macroradar.io/high-yield-spread">MacroRadar</a>, <a href="https://www.forbes.com/sites/chrisgunster/2026/11/24/what-the-bond-market-is-saying-about-the-stock-market-correction/">Forbes</a> and <a href="https://www.nuveen.com/en-us/insights/fixed-income/fixed-income-weekly-commentary">Nuveen</a>.</li>
+  <li>Currencies: <a href="https://www.exchangerates.org.uk/news/47855/2026-11-26-pound-to-euro-forecast-uk-cost-of-living-fears-weigh-on-gbp.html">Exchange Rates UK</a> and <a href="https://www.poundsterlinglive.com/data/currencies/gbp-pairs/GBPEUR-exchange-rate">Pound Sterling Live</a>.</li>
+  <li>Oil: <a href="https://investing.com/news/commodities-news/oil-mixed-as-hormuz-attacks-mount-supply-surplus-and-weak-fuel-margins-weigh-5049487">Investing.com</a> and <a href="https://oilprice.com/Latest-Energy-News/World-News/Oil-Prices-Hold-Near-Three-Month-Lows-Despite-Hormuz-Mine-Claims.html">OilPrice</a>.</li>
+  <li>All read through search summaries. The chain linking the four desks, and which story to choose, are my own view.</li>
+</ul>
+</section>
+
+</body>
+</html>
