@@ -13,6 +13,7 @@ Institutional-style stock pitch on Crocs, Inc. (NASDAQ: CROX), prepared 2026-11-
 | `model.xlsx` | Forecast, three scenarios, DCF, reverse DCF, sensitivities, revenue-at-risk stress test, peers. 1,046 live formulas |
 | `deep-dive.md` | Full research report, Phases 1-7 |
 | `one-pager.md` | One-page summary |
+| `study-guide-risk-and-catalysts.pdf` | Beginner's study guide to the pitch, focused on risk and catalysts, with speaking scripts and likely questions |
 | `qa-prep.md` | 20 toughest questions with 30-second answers |
 | `cheat-sheet.md` | 25 numbers to know |
 | `sources.md` | Every source with URL, label and as-of date; where sources disagree; what was not found |

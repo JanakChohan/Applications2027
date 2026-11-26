@@ -361,7 +361,7 @@ Written as a short-seller would. Three red flags ranked by severity, then the ch
 ## Red flag 3: insiders are selling into the rally, and management turnover is high
 
 - Open-market insider sales in the last twelve months: ${F['insider']['sales_12m_usd']/1e6:.1f}m. Purchases: ${F['insider']['buys_12m_usd']/1e6:.1f}m. None of the sales is flagged as a 10b5-1 trade. (R) [S11]
-- CEO Andrew Rees sold {F['insider']['ceo_sales_sh']:,.0f} shares for ${F['insider']['ceo_sales_usd']/1e6:.1f}m in June, August and November 2026, at $117-154. In the eight trading days after the Q3 print insiders sold ${F['insider']['post_q3_sales_usd']/1e6:.1f}m.
+- CEO Andrew Rees sold {F['insider']['ceo_sales_sh']:,.0f} shares for ${F['insider']['ceo_sales_usd']/1e6:.1f}m in June, August and November 2026, at $117-154. In the week after the Q3 print insiders sold ${F['insider']['post_q3_sales_usd']/1e6:.1f}m.
 - Three CFOs in 16 months; one resigned with immediate effect three weeks after a guide-down. Four HEYDUDE leaders in four years. The chief digital officer left in 2025.
 - A securities class action (Carretta v. Crocs, D. Del.) alleges HEYDUDE's 2022-24 revenue was inflated by overstocking wholesalers; a motion to dismiss has been pending since February 2026. Four derivative suits. Only $0.6m is accrued for all legal matters. [S2] [S22]
 - **Bull's rebuttal.** The CEO still holds about {F['insider']['ceo_shares_after']:,} shares (roughly ${F['insider']['ceo_shares_after']*price/1e6:.0f}m); he sold about 13% of his position after a stock that doubled. Directors Replogle, Smach and Kaplan bought at $75-112 between August 2025 and September 2026. The new CFO and HEYDUDE president are credible hires. Securities suits after a 19% one-day drop are routine.
