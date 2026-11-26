@@ -194,7 +194,7 @@ What is wrong with it:
 
 ### A full example to hear the shape
 
-Sam is made up. Sam is a second-year student and the treasurer of a student society. Nothing here is about you. It is here so you can hear a complete answer.
+Sam is made up. Sam is a final-year student and the treasurer of a student society. Nothing here is about you. It is here so you can hear a complete answer.
 
 > **Strong answer.** "The project was moving my society's accounts onto a new system. It took the whole autumn term, about ten weeks, and I was the treasurer.
 >
@@ -225,7 +225,7 @@ Your 50 market openings could fit this question, if the work ran over several we
 
 Fill the brackets with what really happened. If you never tracked a number, say what you saw change.
 
-> **Try it now.** Pick the project. Say only the three opening lines: "The project was…", "To stay engaged…", "To make sure the deadlines were met…". Then open the Practice Room. Both of these questions are in it now.
+> **Try it now.** Pick the project. Say only the three opening lines: "The project was…", "To stay engaged…", "To make sure the deadlines were met…". Then open the [HireVue Practice Room](https://claude.ai/artifact/FbfrGNoYHcAxtKQ4P8QWt8). Both of these questions are in it now.
 
 ## Part 3: The thinking, as one routine
 
