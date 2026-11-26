@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>TP ICAP Part 6: What is a broker?</title>
+<style>
+@font-face{font-family:"Lexend";font-weight:400;src:url("node_modules/@fontsource/lexend/files/lexend-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Lexend";font-weight:600;src:url("node_modules/@fontsource/lexend/files/lexend-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Lexend";font-weight:700;src:url("node_modules/@fontsource/lexend/files/lexend-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"Atkinson";font-weight:400;src:url("node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Atkinson";font-weight:700;src:url("node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2")}
+
+:root{
+  --bg:#FBF6EA; --ink:#1f2a37; --muted:#4f5b69; --navy:#14304b; --teal:#0f6e84;
+  --line:#d9d0bb; --card:#fffdf6;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --grey:#8a94a0;
+}
+@page{size:A4;margin:16mm 17mm 19mm 17mm}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson",Verdana,sans-serif;
+  font-size:12.5pt;line-height:1.62;letter-spacing:.012em;word-spacing:.06em;text-align:left;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3,h4{font-family:"Lexend",Verdana,sans-serif;color:var(--navy);line-height:1.25;letter-spacing:0;break-after:avoid}
+h1{font-size:23pt;font-weight:700;margin:0 0 4mm;padding-bottom:3mm;border-bottom:1.2mm solid var(--teal)}
+h2{font-size:15.5pt;font-weight:600;margin:8mm 0 2.5mm}
+h3{font-size:12.5pt;font-weight:600;margin:5.5mm 0 1.5mm}
+p{margin:0 0 3.2mm;max-width:150mm}
+li{max-width:146mm}
+ul,ol{margin:0 0 3.5mm;padding-left:6.5mm}
+ol{padding-left:8.5mm}
+li{margin-bottom:1.7mm}
+strong{font-weight:700;color:#10202f}
+section{break-before:auto;margin-top:13mm}
+section.pb{break-before:page;margin-top:0}
+.kicker{break-after:avoid}
+.kicker{font-family:"Lexend";font-size:10pt;font-weight:600;color:var(--teal);margin:0 0 1.5mm}
+.lead{font-size:13pt;line-height:1.6}
+.small{font-size:10pt;color:var(--muted);line-height:1.5}
+
+/* boxes */
+.box{border-radius:2.5mm;padding:3.6mm 4.5mm 3mm;margin:4mm 0;font-size:12pt;max-width:162mm;break-inside:avoid;border-left:1.6mm solid var(--teal);background:#E7F1F3}
+.box > :last-child{margin-bottom:.6mm}
+.box .tag{font-family:"Lexend";font-weight:600;font-size:10.5pt;display:block;margin-bottom:1.2mm;color:var(--navy)}
+.box.say{background:#FFEFCF;border-left-color:#c77700}
+.box.warn{background:#FBE4DD;border-left-color:#b6452c}
+.box.read{background:#ECE8F6;border-left-color:#5a48b8}
+.box.fact{background:var(--card);border:.3mm solid var(--line);border-left:1.6mm solid var(--navy)}
+
+/* figures */
+figure{margin:5mm 0 4mm;padding:4.5mm 5mm 4mm;background:var(--card);border:.3mm solid var(--line);border-radius:3mm;break-inside:avoid}
+figcaption{font-family:"Lexend";font-weight:600;font-size:11.5pt;color:var(--navy);margin-bottom:3.5mm}
+figcaption span{display:block;font-family:"Atkinson";font-weight:400;font-size:10pt;color:var(--muted);margin-top:.6mm}
+
+/* bar charts */
+.bars{display:grid;grid-template-columns:47mm 1fr;row-gap:2.6mm;column-gap:3mm;align-items:center}
+.bars .lab{font-size:10.5pt;line-height:1.3;text-align:right}
+.bars .lab small{display:block;color:var(--muted);font-size:9pt}
+.bars .track{display:flex;align-items:center;gap:2.5mm}
+.bars .bar{height:7.5mm;border-radius:0 1.2mm 1.2mm 0;background:var(--s1);min-width:.6mm}
+.bars .val{font-family:"Lexend";font-weight:600;font-size:10.5pt;white-space:nowrap}
+.bars .val small{font-family:"Atkinson";font-weight:400;color:var(--muted);font-size:9.5pt}
+.bars.sub .bar{height:5.5mm;background:#7fb0ea}
+.c1{background:var(--s1)!important}.c2{background:var(--s2)!important}.c3{background:var(--s3)!important}.c4{background:var(--s4)!important}.cg{background:var(--grey)!important}
+.stack{display:flex;gap:.6mm;height:15mm;margin:2mm 0 2.5mm}
+.stack div{display:flex;align-items:center;justify-content:center;color:#fff;font-family:"Lexend";font-weight:600;font-size:10.5pt;border-radius:1mm;text-align:center;line-height:1.2}
+.stack .dark{color:#1f2a37}
+.legend{display:flex;flex-wrap:wrap;gap:2mm 6mm;font-size:10pt}
+.legend i{display:inline-block;width:3.6mm;height:3.6mm;border-radius:.8mm;margin-right:1.6mm;vertical-align:-.5mm}
+
+/* flow diagrams */
+.flow{display:flex;align-items:stretch;gap:1.5mm}
+.node{flex:1;background:#fff;border:.45mm solid var(--navy);border-radius:2.2mm;padding:2.6mm 2.4mm;font-size:10pt;line-height:1.35;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.node b{font-family:"Lexend";font-weight:600;font-size:10.5pt;color:var(--navy);display:block;margin-bottom:.8mm}
+.node.hub{background:var(--navy);border-color:var(--navy);color:#fff}
+.node.hub b{color:#fff}
+.node.soft{border-style:dashed;border-color:#6b7785}
+.arrow{flex:0 0 7mm;display:flex;align-items:center;justify-content:center;font-size:15pt;color:var(--teal);font-weight:700}
+.steps{counter-reset:s;display:grid;gap:2.2mm}
+.step{counter-increment:s;display:grid;grid-template-columns:10mm 1fr;gap:3mm;align-items:start;background:#fff;border:.3mm solid var(--line);border-radius:2mm;padding:2.5mm 3mm}
+.step::before{content:counter(s);font-family:"Lexend";font-weight:700;font-size:13pt;color:#fff;background:var(--teal);width:9mm;height:9mm;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.step p{margin:0;font-size:10.8pt;line-height:1.45}
+.step b{font-family:"Lexend";font-weight:600;color:var(--navy)}
+.cycle{display:grid;grid-template-columns:1fr 7mm 1fr 7mm 1fr;row-gap:1.5mm;align-items:stretch}
+.down{grid-column:5;text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1}
+.up{grid-column:1;text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1}
+
+/* timeline */
+.tl{border-left:.8mm solid var(--teal);margin:2mm 0 0 16mm;padding:0}
+.tl div{position:relative;padding:0 0 3.1mm 6mm;font-size:10.8pt;line-height:1.45;break-inside:avoid}
+.tl div::before{content:"";position:absolute;left:-2.3mm;top:1.2mm;width:3.6mm;height:3.6mm;border-radius:50%;background:var(--teal);border:.5mm solid var(--card)}
+.tl b{position:absolute;left:-19mm;top:0;width:15mm;text-align:right;font-family:"Lexend";font-weight:600;color:var(--navy)}
+.tl .big::before{background:var(--s2);width:4.6mm;height:4.6mm;left:-2.8mm}
+
+/* tables */
+table{border-collapse:collapse;width:100%;margin:3mm 0 4.5mm;font-size:10.6pt;line-height:1.42}
+tr{break-inside:avoid}
+th{font-family:"Lexend";font-weight:600;font-size:10pt;text-align:left;background:var(--navy);color:#fff;padding:2.2mm 2.6mm;vertical-align:bottom}
+td{padding:2.2mm 2.6mm;border-bottom:.3mm solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:#f5efdf}
+td.n,th.n{text-align:right;white-space:nowrap}
+td b{color:#10202f}
+
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin:4mm 0}
+.tile{background:var(--card);border:.3mm solid var(--line);border-radius:2.5mm;padding:3.2mm 3.5mm;break-inside:avoid}
+.tile b{display:block;font-family:"Lexend";font-weight:700;font-size:17pt;color:var(--navy);line-height:1.15}
+.tile span{font-size:10pt;color:var(--muted);line-height:1.35;display:block;margin-top:1mm}
+
+/* cover */
+.cover{break-before:auto;min-height:215mm;display:flex;flex-direction:column}
+.cover h1{font-size:34pt;border:none;margin:8mm 0 3mm;padding:0}
+.cover .sub{font-family:"Lexend";font-size:15pt;color:var(--teal);font-weight:600;margin-bottom:8mm;max-width:150mm;line-height:1.4}
+.cover .band{height:3mm;background:linear-gradient(90deg,var(--navy) 0 55%,var(--teal) 55% 80%,var(--s4) 80% 100%);border-radius:2mm;margin-bottom:9mm}
+.toc{columns:2;column-gap:10mm;font-size:11pt;padding:0;list-style:none;counter-reset:t}
+.toc li{counter-increment:t;margin-bottom:1.8mm;break-inside:avoid}
+.toc li::before{content:counter(t) ".";font-family:"Lexend";font-weight:600;color:var(--teal);display:inline-block;width:8mm}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+.two > div{break-inside:avoid;max-width:none}
+dl{margin:0}
+dt{font-family:"Lexend";font-weight:600;color:var(--navy);font-size:11pt;margin-top:0}
+dd{margin:0 0 0 0;font-size:10.8pt;line-height:1.48}
+a{color:var(--teal);text-decoration:none;overflow-wrap:anywhere}
+thead{display:table-header-group}
+.gloss dl{columns:2;column-gap:9mm}
+.gloss dl div{break-inside:avoid;padding-bottom:2.8mm}
+.legend4{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin:3mm 0}
+.legend4 .box{margin:0;max-width:none}
+.src li{font-size:9.6pt;line-height:1.4;margin-bottom:1.3mm}
+
+.hubgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5mm}
+.hubgrid .node{min-height:17mm}
+.layers{display:grid;gap:2mm}
+.layer{border-radius:2.2mm;padding:3mm 4mm;font-size:10.6pt;line-height:1.4;color:#fff}
+.layer b{display:block;font-family:"Lexend";font-weight:600;font-size:11pt;margin-bottom:.6mm}
+.l1{background:#14304b;margin:0 0 0 0}.l2{background:#0f6e84;margin:0 9mm}.l3{background:#fff;color:#1f2a37;border:.45mm solid #14304b;margin:0 18mm}
+.l3 b{color:#14304b}
+.ladder{display:grid;gap:2mm}
+.rung{background:#fff;border:.45mm solid var(--navy);border-radius:2.2mm;padding:2.4mm 3.5mm;font-size:10.6pt;line-height:1.4}
+.rung b{font-family:"Lexend";font-weight:600;color:var(--navy);display:block}
+.r1{margin-right:44mm}.r2{margin-left:11mm;margin-right:33mm}.r3{margin-left:22mm;margin-right:22mm}.r4{margin-left:33mm;margin-right:11mm}.r5{margin-left:44mm;background:var(--navy);color:#fff}
+.r5 b{color:#fff}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin:3mm 0 5mm}
+.card{background:#fff;border:.5mm dashed #6b7785;border-radius:2.5mm;padding:3.5mm 4mm;font-family:"Lexend";font-size:11.5pt;line-height:1.75;break-inside:avoid}
+.card b{display:block;color:var(--teal);font-size:10pt;margin-bottom:1mm}
+
+.four{display:grid;grid-template-columns:1fr 1fr;gap:2.5mm}
+.four .node{text-align:left;padding:3mm 3.5mm;font-size:10.6pt}
+.mapdown{text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1.5;white-space:nowrap;overflow:hidden}
+figure svg{width:100%;height:auto;display:block}
+svg .ax{stroke:#4f5b69;stroke-width:1.5;fill:none}
+svg .st{font-family:"Atkinson",sans-serif;font-size:13.5px;fill:#4f5b69}
+svg .sb{font-family:"Lexend",sans-serif;font-size:14px;font-weight:600;fill:#14304b}
+svg .ln1{stroke:#2a78d6;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+svg .ln2{stroke:#8a94a0;stroke-width:3.5;fill:none;stroke-dasharray:9 7;stroke-linecap:round}
+</style>
+</head>
+<body>
+<!-- ============ COVER ============ -->
+<div class="cover">
+  <h1>What is a broker?</h1>
+  <div class="sub">Part 6. The word, the job, and how a TP ICAP broker differs from an insurance broker, a stockbroker, a salesperson and a relationship manager</div>
+  <div class="band"></div>
+  <p class="lead">"Broker" is one of the most confusing words in business. An insurance broker, a mortgage broker, a stockbroker and a TP ICAP broker all share the name, and do very different jobs. Today we untangle it, so that when someone asks <strong>"what is a broker?"</strong> you answer in one breath, and when they ask <strong>"why broking?"</strong> you know exactly what you are choosing.</p>
+
+  <div class="box">
+    <span class="tag">The whole pack in one sentence</span>
+    <strong>A broker arranges a deal between two other parties and is paid a fee for it, without owning the thing being traded.</strong> Every kind of broker fits that sentence. What changes is who the customers are, whose side the broker is on, and what gets traded.
+  </div>
+
+  <div class="tiles">
+    <div class="tile"><b>Chapter 1</b><span>What a broker is. The idea that fits every kind.</span></div>
+    <div class="tile"><b>Chapter 2</b><span>The broker family. Insurance, mortgage, stock, interdealer and more.</span></div>
+    <div class="tile"><b>Chapter 3</b><span>Broker against salesperson, relationship manager, trader and adviser.</span></div>
+    <div class="tile"><b>Chapter 4</b><span>A TP ICAP broker, specifically.</span></div>
+    <div class="tile"><b>Chapter 5</b><span>Why broking exists, and whether it is what you want.</span></div>
+    <div class="tile"><b>Chapter 6</b><span>How to say it. Short answers, ready to use.</span></div>
+  </div>
+  <p class="small" style="margin-top:auto">How each kind of broker works is general knowledge of UK practice, simplified. TP ICAP figures are from its 2025 Annual Report. Where a comparison is my own framing, I say so.</p>
+</div>
+
+<!-- ============ CH 1 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 1</div>
+<h1>What a broker is</h1>
+
+<p class="lead">Forget finance for a minute. A broker is one of the oldest jobs there is. Wherever two people could do a deal but cannot easily find or trust each other, someone steps into the middle.</p>
+
+<figure>
+  <figcaption>Diagram 1. The shape of every broking job<span>This picture is the same for insurance, houses, ships and interest rate swaps</span></figcaption>
+  <div class="flow">
+    <div class="node"><b>One party</b>Wants something</div>
+    <div class="arrow">&harr;</div>
+    <div class="node hub"><b>The broker</b>Finds them, connects them, helps them agree. Owns nothing</div>
+    <div class="arrow">&harr;</div>
+    <div class="node"><b>Another party</b>Has it, or wants the opposite</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Three boxes. The two white boxes are the people doing the actual deal. The dark box is the broker. The broker is <strong>not</strong> one of the two parties. When the deal is done, the thing traded passes between the white boxes. The broker keeps only the fee.
+</div>
+
+<h2>The three tests</h2>
+<p>If you are ever unsure whether someone is really a broker, ask three questions.</p>
+<div class="steps">
+  <div class="step"><p><b>Is it somebody else's deal?</b> A broker arranges a deal between two <strong>other</strong> parties. A shop selling its own stock is not a broker.</p></div>
+  <div class="step"><p><b>Are they paid for arranging, not for owning?</b> A broker earns a fee or commission when the deal happens. They do not profit from the thing going up in value.</p></div>
+  <div class="step"><p><b>Do they avoid taking the risk?</b> If the price moves tomorrow, the broker neither gains nor loses. The two parties carry that.</p></div>
+</div>
+<p>Three yeses, and you are looking at a broker.</p>
+
+<h2>What the broker actually adds</h2>
+<p>Why would anyone pay a middleman? Because the broker brings four things the two parties lack.</p>
+<table>
+  <thead><tr><th style="width:25%">The broker brings</th><th>In plain English</th></tr></thead>
+  <tr><td><b>Knowledge of who</b></td><td>The broker knows who is out there. You do not have to search.</td></tr>
+  <tr><td><b>Knowledge of price</b></td><td>The broker sees many deals, so knows what is fair.</td></tr>
+  <tr><td><b>Trust</b></td><td>Both sides know the broker. They may not know each other.</td></tr>
+  <tr><td><b>Negotiation</b></td><td>The broker carries messages back and forth until both say yes.</td></tr>
+</table>
+
+<h2>The five questions that separate one broker from another</h2>
+<p>Every kind of broker passes the three tests. They differ on these five questions. Keep them in mind for the next chapter.</p>
+<ol>
+  <li><strong>Who are the customers?</strong> Ordinary people, or giant institutions?</li>
+  <li><strong>Whose side is the broker on?</strong> The buyer's, the seller's, or neither?</li>
+  <li><strong>What gets arranged?</strong> A policy, a loan, shares, a swap?</li>
+  <li><strong>Who pays the broker?</strong> One side, or both?</li>
+  <li><strong>Does the broker give advice?</strong> Or only find and connect?</li>
+</ol>
+
+<div class="box fact">
+  <span class="tag">Where the word comes from</span>
+  "Broker" has been an English word for more than 600 years. Its exact origin is uncertain. One popular theory links it to wine sellers who "broached", or tapped, a barrel and sold the wine on in small amounts. Whatever the truth, the meaning settled long ago: a go-between in trade.
+</div>
+
+<div class="box warn">
+  <span class="tag">One more confusing word</span>
+  <strong>"Brokerage"</strong> means two things. It can mean the firm, as in "a brokerage". Or it can mean the fee, as in "we charge brokerage on each trade". On a broking floor it almost always means the fee.
+</div>
+</section>
+
+<!-- ============ CH 2 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 2</div>
+<h1>The broker family</h1>
+<p class="lead">Now let's meet the relatives. Same surname, very different lives.</p>
+
+<h2>The big dividing line: whose side are you on?</h2>
+<figure>
+  <figcaption>Diagram 2. Who does the broker work for?<span>My framing. The most useful way to tell brokers apart</span></figcaption>
+  <div class="flow">
+    <div class="node"><b>For the buyer</b>Insurance broker. Mortgage broker. Stockbroker. They shop around on the customer's behalf</div>
+    <div class="node hub"><b>For the deal itself</b>Interdealer broker. Neutral. Both sides are clients. This is TP ICAP's Global Broking</div>
+    <div class="node"><b>For the seller</b>Estate agent. Hired by the person selling, to get the best price</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Three positions. On the left, the broker is on the customer's team, hunting for the best deal for them. On the right, the broker is on the seller's team. In the dark middle box, the broker is on <strong>nobody's</strong> team. Both sides are clients, and the broker's job is to get the trade done fairly. <strong>That neutral middle is what makes an interdealer broker unusual.</strong>
+</div>
+
+<h2>The family, one by one</h2>
+<table>
+  <thead><tr><th style="width:17%">Type</th><th style="width:19%">Customers</th><th style="width:17%">Whose side</th><th>What they arrange</th><th style="width:21%">Who pays</th></tr></thead>
+  <tr><td><b>Insurance broker</b></td><td>People and businesses needing cover</td><td>The customer's</td><td>An insurance policy, chosen from many insurers</td><td>Usually commission from the insurer</td></tr>
+  <tr><td><b>Mortgage broker</b></td><td>Home buyers</td><td>The borrower's</td><td>A home loan, chosen from many lenders</td><td>A fee from the lender, the borrower, or both</td></tr>
+  <tr><td><b>Finance broker</b></td><td>Businesses and individuals needing credit</td><td>The borrower's</td><td>Business loans, equipment leases, car finance</td><td>Usually commission from the lender</td></tr>
+  <tr><td><b>Stockbroker</b></td><td>Investors, often private individuals</td><td>The investor's</td><td>Buying and selling shares on a stock exchange</td><td>A dealing fee from the investor</td></tr>
+  <tr><td><b>Interdealer broker</b></td><td>Banks and other giant institutions</td><td><b>Neither. Neutral</b></td><td>Very large private trades between institutions</td><td>Commission, usually from both sides</td></tr>
+  <tr><td><b>Energy and commodity broker</b></td><td>Oil firms, trading houses, banks</td><td>Neutral</td><td>Trades in oil, gas and power</td><td>Commission</td></tr>
+  <tr><td><b>Shipbroker</b></td><td>Ship owners and firms that need ships</td><td>Varies</td><td>The hire or sale of ships</td><td>Commission</td></tr>
+  <tr><td><b>Estate agent</b></td><td>People selling homes</td><td>The seller's</td><td>The sale of a house</td><td>A percentage from the seller</td></tr>
+</table>
+<div class="box read">
+  <span class="tag">How to read this table</span>
+  Each row is one kind of broker. Read across to see how it answers the five questions from Chapter 1. The row in the middle is the one you are applying for. Notice the two things that set it apart: its customers are <strong>giant institutions</strong>, and it is <strong>neutral</strong>.
+</div>
+
+<h2>Three of them in more detail</h2>
+
+<h3>The insurance broker</h3>
+<p>You need to insure a factory. There are dozens of insurers. An insurance broker knows them all, works out what cover you need, and finds the best policy. The broker <strong>works for you</strong>, and usually gives advice.</p>
+<p>There is a London twist worth knowing. Large and unusual risks are insured at <strong>Lloyd's of London</strong>, where brokers walk the floor negotiating face to face with underwriters. That is a wholesale, relationship-driven market, and in spirit it is a close cousin of interdealer broking.</p>
+
+<h3>The mortgage broker and the finance broker</h3>
+<p>The same idea, for loans. You want to borrow. The broker searches lenders for the best deal and handles the paperwork. Again the broker is <strong>on the borrower's side</strong> and gives advice. "Finance broker" is the wider term, covering business loans and equipment finance too.</p>
+
+<h3>The stockbroker</h3>
+<p>This is the one people picture. A stockbroker buys and sells shares on the stock exchange <strong>for an investor</strong>. There are three levels of service:</p>
+<ul>
+  <li><strong>Execution only:</strong> you decide, they carry out the order. Investing apps are this.</li>
+  <li><strong>Advisory:</strong> they suggest what to buy. You decide.</li>
+  <li><strong>Discretionary:</strong> they decide for you and manage your money.</li>
+</ul>
+<div class="box warn">
+  <span class="tag">Careful: the film version</span>
+  When people hear "broker" they often picture a film scene: someone cold-calling the public to push shares. That is a caricature of a <strong>retail stockbroker</strong>. A TP ICAP broker does not deal with the public, does not recommend investments, and does not push a product. If you say "stockbroker" in your interview, you have described the wrong job.
+</div>
+
+<h2>How TP ICAP's broker differs from the three everyday ones</h2>
+<table>
+  <thead><tr><th style="width:24%"></th><th>Insurance, mortgage or stock broker</th><th>TP ICAP interdealer broker</th></tr></thead>
+  <tr><td><b>Customers</b></td><td>The public and ordinary businesses</td><td>Banks, hedge funds, big institutions only</td></tr>
+  <tr><td><b>Whose side</b></td><td>The customer's</td><td>Neutral. Both sides are clients</td></tr>
+  <tr><td><b>Advice</b></td><td>Often yes</td><td>No. Gives market information, not recommendations</td></tr>
+  <tr><td><b>The other side</b></td><td>A company with a price list: an insurer, a lender, an exchange</td><td>Another client, who must be found and persuaded</td></tr>
+  <tr><td><b>Size of each deal</b></td><td>Thousands to millions</td><td>Often hundreds of millions</td></tr>
+  <tr><td><b>How often</b></td><td>A customer might deal once a year</td><td>The same client may deal many times a day</td></tr>
+  <tr><td><b>Price</b></td><td>Largely set by the provider</td><td>Negotiated live, in seconds</td></tr>
+</table>
+
+<h2>Words that sound like brokers but are something else</h2>
+<table>
+  <thead><tr><th style="width:24%">Term</th><th>What it really is</th></tr></thead>
+  <tr><td><b>Dealer</b></td><td>The opposite of a broker. A dealer buys and sells with its own money and takes the risk.</td></tr>
+  <tr><td><b>Broker-dealer</b></td><td>An American legal term for a firm allowed to do both jobs.</td></tr>
+  <tr><td><b>Prime broker</b></td><td>Not a matchmaker at all. A bank department that lends money and shares to hedge funds and looks after their assets.</td></tr>
+  <tr><td><b>Corporate broker</b></td><td>A UK term. A bank that advises a listed company on its shareholders and helps it raise money.</td></tr>
+  <tr><td><b>Agency broker</b></td><td>A broker that acts purely for its client and never trades for itself. TP ICAP's Liquidnet is one.</td></tr>
+</table>
+</section>
+
+<!-- ============ CH 3 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 3</div>
+<h1>Broker against other jobs</h1>
+<p class="lead">You asked how a broker compares with a salesman and a customer relationship manager. This is the right question, because broking borrows from both. Let's line them up.</p>
+
+<h2>Broker against salesperson</h2>
+<p>The job advert calls broking a "high pressured sales" environment. So is a broker just a salesperson? <strong>Partly yes, and the difference is the interesting bit.</strong></p>
+<table>
+  <thead><tr><th style="width:23%"></th><th>A salesperson</th><th>A TP ICAP broker</th></tr></thead>
+  <tr><td><b>What they sell</b></td><td>Their company's product: software, cars, advertising</td><td>No product. They sell access to the other side, and their own service</td></tr>
+  <tr><td><b>Sides</b></td><td>One customer. The company is the other side</td><td>Two customers. The firm is on neither side</td></tr>
+  <tr><td><b>Price</b></td><td>Set by the company, with some room to discount</td><td>Not theirs to set. Discovered between the two clients</td></tr>
+  <tr><td><b>Customers</b></td><td>Often new ones. Much time spent finding them</td><td>A small circle of the same traders, every day</td></tr>
+  <tr><td><b>The "close"</b></td><td>Days, weeks or months</td><td>Seconds. Many times a day</td></tr>
+  <tr><td><b>What they share</b></td><td colspan="2">Picking up the phone. Persuading. Hearing "no". Being measured on revenue. Being paid on results.</td></tr>
+</table>
+<div class="box">
+  <span class="tag">In plain English</span>
+  A salesperson says: <strong>"Buy my product."</strong> A broker says: <strong>"I've found someone who wants what you have. Shall we get it done?"</strong> The energy is the same. The thing being sold is completely different. A broker can never win by pushing, because pushing one client hurts the other, and both are customers.
+</div>
+
+<h2>Broker against relationship manager</h2>
+<p>A <strong>customer relationship manager</strong>, also called an account manager or relationship manager, looks after existing customers. They keep them happy, sort out problems and encourage them to stay and buy more.</p>
+<p class="small">The phrase also names a kind of software, usually shortened to CRM, which stores customer records. Here we mean the job.</p>
+<table>
+  <thead><tr><th style="width:23%"></th><th>A relationship manager</th><th>A TP ICAP broker</th></tr></thead>
+  <tr><td><b>Main aim</b></td><td>Keep the customer happy over months and years</td><td>Get this trade done now, and keep the client for years</td></tr>
+  <tr><td><b>Contact</b></td><td>Regular check-ins, reviews, the odd problem</td><td>Constant. Possibly dozens of conversations a day</td></tr>
+  <tr><td><b>Doing deals</b></td><td>Usually hands the deal to a sales or product team</td><td>Does the deal personally, live</td></tr>
+  <tr><td><b>Scoreboard</b></td><td>Retention, satisfaction, account growth</td><td>Commission earned, visible every day</td></tr>
+  <tr><td><b>The test of the relationship</b></td><td>Does the customer renew?</td><td>Does the trader call you first when it matters?</td></tr>
+  <tr><td><b>What they share</b></td><td colspan="2">Trust built over years. Knowing the client's world. Remembering details. Being the person they ring.</td></tr>
+</table>
+<div class="box">
+  <span class="tag">In plain English</span>
+  A relationship manager <strong>looks after</strong> the relationship. A broker <strong>trades on</strong> it, many times a day. Every single call tests whether the client still trusts you.
+</div>
+
+<h2>Broker against the other finance jobs</h2>
+<table>
+  <thead><tr><th style="width:23%">Job</th><th style="width:37%">What they do</th><th>How a broker differs</th></tr></thead>
+  <tr><td><b>Trader</b></td><td>Buys and sells with the firm's money. Carries the profit or loss.</td><td>A broker carries no position. The trader is the broker's client.</td></tr>
+  <tr><td><b>Bank salesperson</b></td><td>Looks after a bank's investor customers and brings their orders to the bank's own traders.</td><td>Behind a bank salesperson stands the bank, taking the other side. Behind a broker stands nobody. The broker must find the other side.</td></tr>
+  <tr><td><b>Financial adviser</b></td><td>Tells clients what they should do with their money.</td><td>A broker gives information about the market, not recommendations. The client decides.</td></tr>
+  <tr><td><b>Investment banker</b></td><td>Advises companies on big one-off deals, over months.</td><td>A broker does many small-fee deals a day, in seconds.</td></tr>
+  <tr><td><b>Exchange</b></td><td>A central screen where orders match automatically.</td><td>A broker is a person who finds and persuades. Used where no screen can do the job.</td></tr>
+</table>
+
+<h2>The recipe</h2>
+<figure>
+  <figcaption>Diagram 3. A broker is built from four other jobs<span>My framing</span></figcaption>
+  <div class="four">
+    <div class="node"><b>From the salesperson</b>The drive. Picking up the phone again after a "no". Closing.</div>
+    <div class="node"><b>From the relationship manager</b>The care. Years of trust with the same small circle of clients.</div>
+    <div class="node"><b>From the trader</b>The market knowledge. Knowing where prices are and why they are moving.</div>
+    <div class="node"><b>From the referee</b>The fairness. Standing between two sides without favouring either.</div>
+  </div>
+  <div class="flow" style="margin-top:3mm">
+    <div class="node hub"><b>The broker</b>All four at once, in real time, with no product to hide behind and no risk on the book</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Four white boxes, each one ingredient borrowed from another job. The dark box is the result. <strong>The fourth ingredient, fairness, is the one that salespeople and relationship managers do not need.</strong> It is what makes broking its own profession.
+</div>
+
+<h2>A closer everyday comparison than you might expect</h2>
+<p>If you want one familiar job that feels most like interdealer broking, try a <strong>good recruiter</strong>. A recruiter has two sets of clients, companies and candidates. They hold confidential information from both. They are paid only when a match is made. Their whole value is who they know and whether both sides trust them.</p>
+<p>The differences: a recruiter is paid by one side, a match takes weeks, and they place a person rather than close a trade. But the instinct is the same.</p>
+</section>
+
+<!-- ============ CH 4 ============ -->
+<section>
+<div class="kicker">Chapter 4</div>
+<h1>A TP ICAP broker, specifically</h1>
+<p class="lead">Now we can say exactly what a broker is <strong>here</strong>, and you will see why each word matters.</p>
+
+<div class="box">
+  <span class="tag">The definition</span>
+  A TP ICAP broker is a <strong>neutral go-between for the world's largest financial institutions</strong>. They find the other side of very large trades, keep both clients' identities confidential, help the two sides agree a price, and earn commission, without ever taking a position themselves.
+</div>
+
+<h2>Five things that define the job</h2>
+<table>
+  <thead><tr><th style="width:27%">Feature</th><th>What it means</th></tr></thead>
+  <tr><td><b>1. Wholesale</b></td><td>Clients are institutions only: banks, hedge funds, asset managers, energy firms. Never the public.</td></tr>
+  <tr><td><b>2. Neutral</b></td><td>Both sides of every trade are clients. The broker cannot favour one.</td></tr>
+  <tr><td><b>3. No risk</b></td><td>The firm does no proprietary trading. If prices move, the clients gain or lose. The broker does not.</td></tr>
+  <tr><td><b>4. Confidential</b></td><td>The broker knows what everyone is trying to do and tells no one. This is the heart of the trust.</td></tr>
+  <tr><td><b>5. Real time</b></td><td>Trades are found, negotiated and agreed in seconds or minutes, by phone, chat and screen.</td></tr>
+</table>
+
+<h2>Why "interdealer"?</h2>
+<p><strong>"Inter" means between. "Dealer" means a firm that trades with its own money, usually a bank.</strong> So an interdealer broker is a broker between dealers.</p>
+<p>That explains the neutrality. An insurance broker can take your side because the insurer is not their client. But when <strong>both</strong> sides are your clients, and you will speak to both again in ten minutes, the only way to survive is to be fair to each.</p>
+
+<h2>TP ICAP is several kinds of broker under one roof</h2>
+<p>Here is something neat. TP ICAP's accounts list four ways it arranges trades. Each one matches a kind of broker from Chapter 2.</p>
+<figure>
+  <figcaption>Diagram 4. Four kinds of broking inside TP ICAP<span>2025 revenue. Source: 2025 Annual Report</span></figcaption>
+  <div class="four">
+    <div class="node"><b>Name passing: £1,454m, about 62%</b>The pure matchmaker. Introduce the two sides, who then deal with each other directly.</div>
+    <div class="node"><b>Matched principal: £485m, about 21%</b>Stand in the middle for an instant, buying from one and selling to the other, so they stay anonymous.</div>
+    <div class="node"><b>Executing broker: £142m, about 6%</b>Place a client's order on an exchange for them. The nearest thing to a stockbroker, but for institutions.</div>
+    <div class="node"><b>Introducing broker: £80m, about 3%</b>Arrange a match for an investor client, with a clearing firm in the middle. Mainly Liquidnet, an agency broker.</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Four boxes, four ways of being a broker. The top left box is by far the biggest and is the classic interdealer job. The bottom two are closer to "acting for one client". The rest of the firm's revenue, about 8%, is data subscriptions. <strong>So when someone asks "what kind of broker is TP ICAP?", the honest answer is "mostly a neutral matchmaker, with other kinds alongside".</strong>
+</div>
+
+<h2>What the broker is selling, if there is no product</h2>
+<p>A salesperson has a product. So what does a broker offer a trader who could ring five other brokers?</p>
+<ul>
+  <li><strong>Liquidity:</strong> "I can find you the other side."</li>
+  <li><strong>Information:</strong> "Here is what the market is doing right now."</li>
+  <li><strong>Discretion:</strong> "Nobody will know it was you."</li>
+  <li><strong>Speed:</strong> "It will be done before the price moves."</li>
+  <li><strong>Themselves:</strong> "You know I'll be straight with you."</li>
+</ul>
+<p>That last one is why the firm's accounts carry £366 million of "customer relationships" as an asset, and why one average broker generated about £752,000 of revenue in 2025. <strong>The broker is the product.</strong></p>
+
+<h2>The different brokers inside the firm</h2>
+<table>
+  <thead><tr><th style="width:27%">Where</th><th>What kind of broking</th></tr></thead>
+  <tr><td><b>Global Broking</b></td><td>Neutral interdealer broking in rates, currencies, equity derivatives and credit. Your internship.</td></tr>
+  <tr><td><b>Energy &amp; Commodities</b></td><td>The same neutral model, for oil, gas and power.</td></tr>
+  <tr><td><b>Liquidnet</b></td><td>Agency broking. Acts for investors moving large blocks of shares and bonds.</td></tr>
+  <tr><td><b>Parameta Solutions</b></td><td>Not broking. Sells the price data the brokers generate.</td></tr>
+</table>
+</section>
+
+<!-- ============ CH 5 ============ -->
+<section>
+<div class="kicker">Chapter 5</div>
+<h1>Why broking exists, and whether you want it</h1>
+<p class="lead">Two different questions hide inside "why broking?". One is about the world. One is about you. Be ready for both.</p>
+
+<h2>Question one: why does the world need brokers?</h2>
+<p>Big banks are clever and well connected. They could call each other. They pay a broker because the broker solves five problems.</p>
+<table>
+  <thead><tr><th style="width:30%">Problem</th><th>How the broker solves it</th></tr></thead>
+  <tr><td><b>Finding the other side takes time</b></td><td>One call to a broker reaches the whole market.</td></tr>
+  <tr><td><b>Showing your hand is dangerous</b></td><td>The broker hides who is buying or selling.</td></tr>
+  <tr><td><b>Many products have no public price</b></td><td>The broker sees everyone's interest, so knows where the price really is.</td></tr>
+  <tr><td><b>Big trades move the market</b></td><td>The broker works them quietly, piece by piece.</td></tr>
+  <tr><td><b>Rivals do not like to haggle directly</b></td><td>The broker carries the negotiation between them.</td></tr>
+</table>
+<div class="box">
+  <span class="tag">In plain English</span>
+  On a trade worth hundreds of millions, getting a slightly better price is worth far more than the broker's fee. <strong>The broker is paid a little to save the client a lot.</strong> As long as that is true, broking exists.
+</div>
+
+<h2>Question two: why would you want it?</h2>
+<p>Now use everything from Chapter 3. Broking is the right choice if you want a particular mix that the neighbouring jobs do not offer.</p>
+<table>
+  <thead><tr><th style="width:34%">If you like this...</th><th style="width:30%">...but not this</th><th>Then broking fits because</th></tr></thead>
+  <tr><td>The drive and scoreboard of <strong>sales</strong></td><td>Pushing one product on strangers</td><td>You close deals all day, with clients you know, and no product to push.</td></tr>
+  <tr><td>The trust of <strong>relationship management</strong></td><td>A slow pace and a vague scoreboard</td><td>You build relationships for years, and see the result every day.</td></tr>
+  <tr><td>Being close to <strong>markets</strong>, like a trader</td><td>Betting money and carrying losses</td><td>You see more of the market than any one trader, and take no risk.</td></tr>
+  <tr><td>The pace of <strong>finance</strong></td><td>Long nights building spreadsheets</td><td>The work is talking to people, not modelling.</td></tr>
+</table>
+
+<h2>An honest self-test</h2>
+<p>Read each line. Be truthful. There is no shame in a "no".</p>
+<ul>
+  <li>I would rather talk to someone than email them.</li>
+  <li>When someone says no, I want to try again.</li>
+  <li>I like being measured against a number.</li>
+  <li>I can keep a secret, even when sharing it would make me look clever.</li>
+  <li>I can be fair to two people who want opposite things.</li>
+  <li>I enjoy quick sums more than long analysis.</li>
+  <li>I would rather have twenty clients for ten years than two hundred for a week.</li>
+</ul>
+<div class="box say">
+  <span class="tag">What your answers tell you</span>
+  <strong>Five or more yeses:</strong> broking suits you, and you can say why with conviction. <br>
+  <strong>Mostly yes to the first three, no to the rest:</strong> you may be a natural salesperson, and plain sales might suit you better. <br>
+  <strong>Yes to the secret and the fairness, no to the phone and the number:</strong> relationship management or advice may fit you more.
+</div>
+
+<h2>What the choice costs</h2>
+<p>To decide properly you need the other side of the ledger too.</p>
+<ul>
+  <li><strong>Your income depends on market activity</strong> and on keeping your clients.</li>
+  <li><strong>You do not own the decision.</strong> The client decides. You help it happen. Some people find that frustrating.</li>
+  <li><strong>You will know things you can never say.</strong></li>
+  <li><strong>The simple part of the job is moving to screens.</strong> The future belongs to brokers who handle what a screen cannot.</li>
+</ul>
+</section>
+
+<!-- ============ CH 6 ============ -->
+<section>
+<div class="kicker">Chapter 6</div>
+<h1>How to say it</h1>
+<p class="lead">Short answers for every version of the question. Each one is built from this pack, so you can explain any word in it.</p>
+
+<h2>"What is a broker?"</h2>
+<div class="box fact">
+  <span class="tag">15 seconds</span>
+  "A broker arranges a deal between two other parties and earns a fee for it, without owning what is traded or taking the risk."
+</div>
+<div class="box fact">
+  <span class="tag">45 seconds, for TP ICAP</span>
+  "A broker arranges a deal between two other parties and earns a fee, without taking the risk. At TP ICAP that means being a neutral go-between for the largest banks and institutions. When a bank needs to pass on risk, the broker finds another institution to take the other side, keeps both names confidential, and helps them agree a price.
+  <br><br>What makes it different from an insurance broker or a stockbroker is that both sides are clients, so the broker has to be fair to each. About 62% of TP ICAP's revenue comes from name passing, where the broker simply introduces the two sides and never holds the position."
+</div>
+
+<h2>"How is that different from a stockbroker or an insurance broker?"</h2>
+<div class="box fact">
+  <span class="tag">30 seconds</span>
+  "Three ways. The clients: a stockbroker or insurance broker usually serves the public or ordinary businesses, while an interdealer broker serves only large institutions. The side: those brokers act for their customer, while an interdealer broker is neutral because both sides are clients. And advice: they often recommend what to do, whereas an interdealer broker gives market information and the client decides."
+</div>
+
+<h2>"Isn't broking just sales?"</h2>
+<div class="box fact">
+  <span class="tag">30 seconds</span>
+  "It has the drive of sales: you're on the phone, you hear no, and you're measured on revenue. But a salesperson sells their company's product to one customer. A broker has no product and two customers on every trade. You can't win by pushing, because pushing one client hurts the other. What you're really selling is trust and your ability to find the other side."
+</div>
+
+<h2>"How is it different from being a relationship manager?"</h2>
+<div class="box fact">
+  <span class="tag">20 seconds</span>
+  "A relationship manager looks after a client over months and usually hands the deal to someone else. A broker builds the same long-term trust, but does the deal personally, many times a day. Every call tests the relationship."
+</div>
+
+<h2>"What is the difference between a broker and a trader?"</h2>
+<div class="box fact">
+  <span class="tag">15 seconds</span>
+  "A trader buys and sells with their firm's money and carries the risk. A broker sits between traders, finds the other side and earns commission without taking risk. The trader is the broker's client."
+</div>
+
+<h2>"Why broking?"</h2>
+<p>This version uses the comparison itself as the answer. Few candidates will do that, because few have thought it through.</p>
+<div class="box fact">
+  <span class="tag">60 seconds. Put your own story in the gap</span>
+  "Thanks for watching. I want broking because it combines the two things I'm best at, and I worked that out by comparing it with the jobs next to it.
+  <br><br>I like what sales involves: [YOUR STORY, one sentence, one number]. But I don't want to push one product at strangers. And I like building long relationships, but I want a scoreboard I can see every day.
+  <br><br>Broking is the only role I found that has both. You deal with the same clients for years, and you're neutral between them, so the only thing you can sell is trust. At TP ICAP the average broker generated about £750,000 of revenue last year on exactly that.
+  <br><br>That mix of drive, trust and markets, without taking risk, is what I want to do."
+</div>
+
+<h2>Prompt cards</h2>
+<div class="cards">
+  <div class="card"><b>What is a broker</b>Arranges a deal<br>Two other parties<br>Earns a fee<br>No risk</div>
+  <div class="card"><b>At TP ICAP</b>Neutral go-between<br>Largest institutions<br>Confidential<br>62% name passing</div>
+  <div class="card"><b>Why broking</b>Drive of sales<br>Trust of relationships<br>No product, two clients<br>Scoreboard every day</div>
+</div>
+
+<h2>The mistakes to avoid</h2>
+<ul>
+  <li>Saying <strong>"stockbroker"</strong>. Wrong job.</li>
+  <li>Saying a broker <strong>"advises clients on what to buy"</strong>. An interdealer broker does not advise.</li>
+  <li>Saying a broker <strong>"sells products"</strong>. There is no product.</li>
+  <li>Saying a broker <strong>"works for the client"</strong> as if there were one. There are two, and the broker is neutral.</li>
+  <li>Saying a broker <strong>"trades"</strong>. The clients trade. The broker arranges.</li>
+</ul>
+
+</section>
+
+</body>
+</html>
