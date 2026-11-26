@@ -30,6 +30,8 @@ One piece of jargon appears throughout. A **correlation**, written *r*, is a num
 
 **HireVue** is an American company whose software lets an employer set interview questions that you answer alone, on camera, with nobody on the other end. This is called a **one-way**, **on-demand** or **asynchronous** video interview: the recording is stored and assessed later. People use "HireVue" loosely for every interview of this kind, but some firms use other suppliers. PwC UK runs its video interview on a platform called SHL, and Schroders' online stages use tools from a company called Aon ([PwC UK](https://www.pwc.co.uk/careers/early-careers/apply/selection-process.html)) ([Schroders](https://www.schroders.com/en-gb/uk/individual/about-us/careers/graduates/faqs/)). The detail about AI below applies to HireVue only.
 
+<!-- figure:routes -->
+
 The employer, not HireVue, sets almost everything you experience: how many questions, how long you get to think, how long you get to answer and how many attempts you have. Banks are reported to give about **30 seconds to prepare and 90 or 120 seconds to answer**, over three to five questions ([Mergers & Inquisitions](https://mergersandinquisitions.com/hirevue-interview/)); BlackRock is reported to give 180 seconds to prepare and 90 to answer, although candidates on Glassdoor describe about 30 seconds there, so settings differ by programme ([eFinancialCareers](https://www.efinancialcareers.com/news/how-long-to-answer-hirevue-interview)) ([Glassdoor](https://www.glassdoor.ca/Interview/BlackRock-Spring-Insight-Program-Interview-Questions-EI_IE9331.0,9_KO10,32.htm)). Three mechanical facts are confirmed by HireVue's help pages. An early screen tells you how many attempts you have per question. You are "not required to use the full response time" and can click "Done Answering". And if you re-record, "the last recording that was made is the video the recruiter will see"; you cannot go back and choose an earlier take ([HireVue support](https://hirevuesupport.zendesk.com/hc/en-us/articles/360028433751-Getting-Started-with-Your-On-Demand-Interview-Computer)) ([HireVue help centre](https://hirevuehelpcenter.zendesk.com/hc/en-us/articles/45490713395348-Can-a-candidate-make-multiple-interview-recordings-and-select-the-best-one)).
 
 ### HireVue is two products: a video player for human markers, and an optional AI score
@@ -202,6 +204,8 @@ The two camps are closer than they look. Nobody reports being rejected for a com
 | Result | 9 seconds | 11 seconds |
 | Learning or link to the role (the part you can drop) | 4 seconds | 5 seconds |
 | Motivation or markets answer: aim to finish at | 50 to 65 seconds | 60 to 85 seconds |
+
+<!-- figure:timebar -->
 
 Measure your own pace from a transcript before you trust the word counts; debaters often speak faster than 125 words a minute. If the timer shows about 15 seconds left and you are still describing actions, jump straight to "The result was...". If a firm gives you only 30 seconds to answer, as Blackstone is reported to do, collapse to point, one reason, one fact, point again ([eFinancialCareers](https://www.efinancialcareers.com/news/how-long-to-answer-hirevue-interview)).
 

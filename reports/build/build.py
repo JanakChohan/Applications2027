@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
-"""Build the HireVue guide PDF from the markdown report.
+"""Build a guide PDF from a markdown report.
 
-Usage: build.py <report.md> <out.pdf>
+Usage: build.py <report.md> <out.pdf> <config.json>
+
+The config holds the cover text and layout hints for one guide. A line
+`<!-- figure:name -->` in the markdown is replaced by figures/name.html.
 Two passes: the first finds the page each section starts on, the second
 writes those numbers into the contents page.
 """
+import json
 import html
 import re
 import subprocess
@@ -16,15 +20,13 @@ from pypdf import PdfReader
 
 HERE = Path(__file__).parent
 SRC, OUT = Path(sys.argv[1]), Path(sys.argv[2])
-TITLE = "Pass HireVues by answering the marking scheme"
-SUBTITLE = ("Why one-way video interviews get rejected, how they are really "
-            "marked, and what to change. Written from zero.")
-DATE = "26 November 2026"
+CFG = json.loads(Path(sys.argv[3]).read_text(encoding="utf-8"))
+TITLE = CFG["title"]
 
 CSS = r"""
 @page { size: A4; margin: 20mm 19mm 21mm 19mm;
   @bottom-center { content: counter(page); font: 8.5pt Inter, sans-serif; color: #6b7480; }
-  @bottom-left { content: "Pass HireVues by answering the marking scheme"; font: 8pt Inter, sans-serif; color: #9aa2ac; }
+  @bottom-left { content: "%%FOOTER%%"; font: 8pt Inter, sans-serif; color: #9aa2ac; }
 }
 @page :first { margin: 0; @bottom-center { content: none } @bottom-left { content: none } }
 :root { --ink:#1b2230; --muted:#5d6673; --rule:#d9dee4; --accent:#0e5a6b; --accent-2:#b4532a;
@@ -135,54 +137,6 @@ figcaption { font-size: 8.6pt; color: var(--muted); margin-top: 2.4mm; }
 .barlabel { display: flex; justify-content: space-between; font-size: 8pt; color: var(--muted); margin-top: 1.2mm; }
 """
 
-FIG_ROUTES = """
-<figure>
-<div class="flow">
-  <div class="start">Your recorded answers<small>The employer chooses which route applies. Most do not say.</small></div>
-  <div class="route human">
-    <div class="name">Route 1: people mark it <span>(what Goldman Sachs and PwC say they do)</span></div>
-    <div class="steps">
-      <div class="s">A recruiter or member of the business plays each answer, at any speed</div><div class="arr">&rarr;</div>
-      <div class="s">Gives each question a star rating on a 3-, 4- or 5-point scale</div><div class="arr">&rarr;</div>
-      <div class="s">System averages the stars; reviewer adds Yes, Maybe or No</div><div class="arr">&rarr;</div>
-      <div class="s">You are ranked against other applicants, with your CV alongside</div>
-    </div>
-  </div>
-  <div class="route ai">
-    <div class="name">Route 2: AI scores it first <span>(optional extra; you see a consent page)</span></div>
-    <div class="steps">
-      <div class="s">Speech is turned into a typed transcript. Face, voice and background are not used</div><div class="arr">&rarr;</div>
-      <div class="s">Words are compared with past answers that trained people marked 1 to 5</div><div class="arr">&rarr;</div>
-      <div class="s">You get a percentile and a band: top, middle or bottom third</div><div class="arr">&rarr;</div>
-      <div class="s">Top band advanced, middle band watched, bottom band often not watched</div>
-    </div>
-  </div>
-</div>
-<figcaption>What happens to a HireVue recording. Both routes use the same kind of marking scheme, so an answer built for that scheme serves both. Source: HireVue help centre and 2025 Explainability Statement, cited in the text.</figcaption>
-</figure>
-"""
-
-FIG_BAR = """
-<figure>
-<div class="bar">
-  <div class="h" style="flex:8">8s</div>
-  <div class="si" style="flex:17">17s</div>
-  <div class="t" style="flex:9">9s</div>
-  <div class="a" style="flex:55"><b>Action: what you did, in &ldquo;I&rdquo; sentences</b>55s</div>
-  <div class="r" style="flex:11">11s</div>
-  <div class="l" style="flex:5">5s</div>
-  <div class="spare" style="flex:15">unused</div>
-</div>
-<div class="barlabel"><span>0:00 recording starts</span><span>stop at about 1:45</span><span>2:00 cut-off</span></div>
-<div class="legend">
-  <span><i class="h"></i>Headline sentence</span><span><i class="si"></i>Situation</span><span><i class="t"></i>Task</span>
-  <span><i class="a"></i>Action</span><span><i class="r"></i>Result</span><span><i class="l"></i>Lesson or link to the role</span>
-</div>
-<figcaption>A story answer inside a two-minute limit. More than half the time goes on your own actions. The last five seconds, the lesson or link to the role, is the part to drop if the clock is tight.</figcaption>
-</figure>
-"""
-
-
 def pandoc(md: str) -> str:
     return subprocess.run(
         ["pandoc", "-f", "gfm+smart", "-t", "html", "--wrap=none", "--columns=100000"],
@@ -204,17 +158,14 @@ def build_html(pages: dict) -> str:
     body = '<h2 id="the-short-answer">The short answer</h2>\n' + lead + rest
 
     # figures
-    sec = body.index('<h2 id="what-a-hirevue-is')
-    k = body.index("</p>", sec) + len("</p>")
-    body = body[:k] + FIG_ROUTES + body[k:]
-    i = body.index("90-second limit</th>")
-    j = body.index("</table>", i) + len("</table>")
-    body = body[:j] + FIG_BAR + body[j:]
+    def figure(m):
+        return (HERE / "figures" / (m.group(1) + ".html")).read_text(encoding="utf-8")
+    body = re.sub(r"<!--\s*figure:([a-z0-9_-]+)\s*-->", figure, body)
 
-    # table column hints
-    for first, cls in (("Rank", "narrow-first"), ("Mark", "narrow-first"), ("Date", "narrow-first"), ("Claim", "wide-first")):
-        body, n = re.subn(r'<table>(\s*<thead>\s*<tr[^>]*>\s*<th>' + first + '</th>)', r'<table class="' + cls + r'">\1', body)
-        assert n == 1, first
+    # table column hints, keyed by the first header cell
+    for first, cls in CFG.get("table_classes", {}).items():
+        body = re.sub(r'<table>(\s*<thead>\s*<tr[^>]*>\s*<th>' + re.escape(first) + '</th>)',
+                      r'<table class="' + cls + r'">\1', body)
 
     def keep(m):
         t = m.group(0)
@@ -225,23 +176,20 @@ def build_html(pages: dict) -> str:
     toc_items = "\n".join(
         f'<li><a href="#{i}">{t}</a><span class="pg">{pages.get(i, "")}</span></li>' for i, t in heads)
     toc = f"""<section class="toc"><h2>Contents</h2><ol>{toc_items}</ol>
-<div class="how"><p><strong>How to read this.</strong> Sections 1 to 6 explain how the stage works and why people are cut. Sections 7 to 10 are what to do about it. Square brackets in example answers, like [result you measured], mark facts only you can supply.</p>
-<p><strong>Sources.</strong> Bracketed names in the text are links to the source for the sentence before them. Where the evidence is weak or sources disagree, the text says so.</p></div></section>"""
+<div class="how">{"".join(f"<p>{p}</p>" for p in CFG["how"])}</div></section>"""
 
+    points = "".join(f"<div><b>{p['head']}</b>{p['text']}</div>" for p in CFG["points"])
     cover = f"""<section class="cover">
-<div class="kicker">HireVue deep dive &middot; 2027 applications</div>
+<div class="kicker">{CFG["kicker"]}</div>
 <h1>{html.escape(TITLE)}</h1>
-<div class="sub">{html.escape(SUBTITLE)}</div>
-<div class="points">
-<div><b>It is marked on content</b>HireVue&rsquo;s AI reads only a transcript of your words. Human markers count evidence against a rating scale.</div>
-<div><b>It is a ranking, not a pass mark</b>Under 1% of applicants at the largest banks get an offer, and some rejections are decided before the video.</div>
-<div><b>You can test which problem is yours</b>A one-week diagnosis separates content, script, camera and causes outside the video.</div>
-</div>
-<div class="meta">Prepared {DATE} &middot; Based on five research strands and 225 cited sources &middot; Evidence limits stated throughout</div>
+<div class="sub">{html.escape(CFG["subtitle"])}</div>
+<div class="points">{points}</div>
+<div class="meta">{CFG["meta"]}</div>
 </section>"""
 
+    css = CSS.replace("%%FOOTER%%", TITLE.replace('"', "'"))
     return f"""<!doctype html><html lang="en-GB"><head><meta charset="utf-8">
-<title>{html.escape(TITLE)}</title><style>{CSS}</style></head>
+<title>{html.escape(TITLE)}</title><style>{css}</style></head>
 <body>{cover}{toc}<main>{body}</main></body></html>""", heads
 
 
