@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>TP ICAP Part 8: The simple version</title>
+<style>
+@font-face{font-family:"Lexend";font-weight:400;src:url("node_modules/@fontsource/lexend/files/lexend-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Lexend";font-weight:600;src:url("node_modules/@fontsource/lexend/files/lexend-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Lexend";font-weight:700;src:url("node_modules/@fontsource/lexend/files/lexend-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"Atkinson";font-weight:400;src:url("node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Atkinson";font-weight:700;src:url("node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2")}
+
+:root{
+  --bg:#FBF6EA; --ink:#1f2a37; --muted:#4f5b69; --navy:#14304b; --teal:#0f6e84;
+  --line:#d9d0bb; --card:#fffdf6;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --grey:#8a94a0;
+}
+@page{size:A4;margin:16mm 17mm 19mm 17mm}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson",Verdana,sans-serif;
+  font-size:12.5pt;line-height:1.62;letter-spacing:.012em;word-spacing:.06em;text-align:left;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3,h4{font-family:"Lexend",Verdana,sans-serif;color:var(--navy);line-height:1.25;letter-spacing:0;break-after:avoid}
+h1{font-size:23pt;font-weight:700;margin:0 0 4mm;padding-bottom:3mm;border-bottom:1.2mm solid var(--teal)}
+h2{font-size:15.5pt;font-weight:600;margin:8mm 0 2.5mm}
+h3{font-size:12.5pt;font-weight:600;margin:5.5mm 0 1.5mm}
+p{margin:0 0 3.2mm;max-width:150mm}
+li{max-width:146mm}
+ul,ol{margin:0 0 3.5mm;padding-left:6.5mm}
+ol{padding-left:8.5mm}
+li{margin-bottom:1.7mm}
+strong{font-weight:700;color:#10202f}
+section{break-before:auto;margin-top:13mm}
+section.pb{break-before:page;margin-top:0}
+.kicker{break-after:avoid}
+.kicker{font-family:"Lexend";font-size:10pt;font-weight:600;color:var(--teal);margin:0 0 1.5mm}
+.lead{font-size:13pt;line-height:1.6}
+.small{font-size:10pt;color:var(--muted);line-height:1.5}
+
+/* boxes */
+.box{border-radius:2.5mm;padding:3.6mm 4.5mm 3mm;margin:4mm 0;font-size:12pt;max-width:162mm;break-inside:avoid;border-left:1.6mm solid var(--teal);background:#E7F1F3}
+.box > :last-child{margin-bottom:.6mm}
+.box .tag{font-family:"Lexend";font-weight:600;font-size:10.5pt;display:block;margin-bottom:1.2mm;color:var(--navy)}
+.box.say{background:#FFEFCF;border-left-color:#c77700}
+.box.warn{background:#FBE4DD;border-left-color:#b6452c}
+.box.read{background:#ECE8F6;border-left-color:#5a48b8}
+.box.fact{background:var(--card);border:.3mm solid var(--line);border-left:1.6mm solid var(--navy)}
+
+/* figures */
+figure{margin:5mm 0 4mm;padding:4.5mm 5mm 4mm;background:var(--card);border:.3mm solid var(--line);border-radius:3mm;break-inside:avoid}
+figcaption{font-family:"Lexend";font-weight:600;font-size:11.5pt;color:var(--navy);margin-bottom:3.5mm}
+figcaption span{display:block;font-family:"Atkinson";font-weight:400;font-size:10pt;color:var(--muted);margin-top:.6mm}
+
+/* bar charts */
+.bars{display:grid;grid-template-columns:47mm 1fr;row-gap:2.6mm;column-gap:3mm;align-items:center}
+.bars .lab{font-size:10.5pt;line-height:1.3;text-align:right}
+.bars .lab small{display:block;color:var(--muted);font-size:9pt}
+.bars .track{display:flex;align-items:center;gap:2.5mm}
+.bars .bar{height:7.5mm;border-radius:0 1.2mm 1.2mm 0;background:var(--s1);min-width:.6mm}
+.bars .val{font-family:"Lexend";font-weight:600;font-size:10.5pt;white-space:nowrap}
+.bars .val small{font-family:"Atkinson";font-weight:400;color:var(--muted);font-size:9.5pt}
+.bars.sub .bar{height:5.5mm;background:#7fb0ea}
+.c1{background:var(--s1)!important}.c2{background:var(--s2)!important}.c3{background:var(--s3)!important}.c4{background:var(--s4)!important}.cg{background:var(--grey)!important}
+.stack{display:flex;gap:.6mm;height:15mm;margin:2mm 0 2.5mm}
+.stack div{display:flex;align-items:center;justify-content:center;color:#fff;font-family:"Lexend";font-weight:600;font-size:10.5pt;border-radius:1mm;text-align:center;line-height:1.2}
+.stack .dark{color:#1f2a37}
+.legend{display:flex;flex-wrap:wrap;gap:2mm 6mm;font-size:10pt}
+.legend i{display:inline-block;width:3.6mm;height:3.6mm;border-radius:.8mm;margin-right:1.6mm;vertical-align:-.5mm}
+
+/* flow diagrams */
+.flow{display:flex;align-items:stretch;gap:1.5mm}
+.node{flex:1;background:#fff;border:.45mm solid var(--navy);border-radius:2.2mm;padding:2.6mm 2.4mm;font-size:10pt;line-height:1.35;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.node b{font-family:"Lexend";font-weight:600;font-size:10.5pt;color:var(--navy);display:block;margin-bottom:.8mm}
+.node.hub{background:var(--navy);border-color:var(--navy);color:#fff}
+.node.hub b{color:#fff}
+.node.soft{border-style:dashed;border-color:#6b7785}
+.arrow{flex:0 0 7mm;display:flex;align-items:center;justify-content:center;font-size:15pt;color:var(--teal);font-weight:700}
+.steps{counter-reset:s;display:grid;gap:2.2mm}
+.step{counter-increment:s;display:grid;grid-template-columns:10mm 1fr;gap:3mm;align-items:start;background:#fff;border:.3mm solid var(--line);border-radius:2mm;padding:2.5mm 3mm}
+.step::before{content:counter(s);font-family:"Lexend";font-weight:700;font-size:13pt;color:#fff;background:var(--teal);width:9mm;height:9mm;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.step p{margin:0;font-size:10.8pt;line-height:1.45}
+.step b{font-family:"Lexend";font-weight:600;color:var(--navy)}
+.cycle{display:grid;grid-template-columns:1fr 7mm 1fr 7mm 1fr;row-gap:1.5mm;align-items:stretch}
+.down{grid-column:5;text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1}
+.up{grid-column:1;text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1}
+
+/* timeline */
+.tl{border-left:.8mm solid var(--teal);margin:2mm 0 0 16mm;padding:0}
+.tl div{position:relative;padding:0 0 3.1mm 6mm;font-size:10.8pt;line-height:1.45;break-inside:avoid}
+.tl div::before{content:"";position:absolute;left:-2.3mm;top:1.2mm;width:3.6mm;height:3.6mm;border-radius:50%;background:var(--teal);border:.5mm solid var(--card)}
+.tl b{position:absolute;left:-19mm;top:0;width:15mm;text-align:right;font-family:"Lexend";font-weight:600;color:var(--navy)}
+.tl .big::before{background:var(--s2);width:4.6mm;height:4.6mm;left:-2.8mm}
+
+/* tables */
+table{border-collapse:collapse;width:100%;margin:3mm 0 4.5mm;font-size:10.6pt;line-height:1.42}
+tr{break-inside:avoid}
+th{font-family:"Lexend";font-weight:600;font-size:10pt;text-align:left;background:var(--navy);color:#fff;padding:2.2mm 2.6mm;vertical-align:bottom}
+td{padding:2.2mm 2.6mm;border-bottom:.3mm solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:#f5efdf}
+td.n,th.n{text-align:right;white-space:nowrap}
+td b{color:#10202f}
+
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin:4mm 0}
+.tile{background:var(--card);border:.3mm solid var(--line);border-radius:2.5mm;padding:3.2mm 3.5mm;break-inside:avoid}
+.tile b{display:block;font-family:"Lexend";font-weight:700;font-size:17pt;color:var(--navy);line-height:1.15}
+.tile span{font-size:10pt;color:var(--muted);line-height:1.35;display:block;margin-top:1mm}
+
+/* cover */
+.cover{break-before:auto;min-height:215mm;display:flex;flex-direction:column}
+.cover h1{font-size:34pt;border:none;margin:8mm 0 3mm;padding:0}
+.cover .sub{font-family:"Lexend";font-size:15pt;color:var(--teal);font-weight:600;margin-bottom:8mm;max-width:150mm;line-height:1.4}
+.cover .band{height:3mm;background:linear-gradient(90deg,var(--navy) 0 55%,var(--teal) 55% 80%,var(--s4) 80% 100%);border-radius:2mm;margin-bottom:9mm}
+.toc{columns:2;column-gap:10mm;font-size:11pt;padding:0;list-style:none;counter-reset:t}
+.toc li{counter-increment:t;margin-bottom:1.8mm;break-inside:avoid}
+.toc li::before{content:counter(t) ".";font-family:"Lexend";font-weight:600;color:var(--teal);display:inline-block;width:8mm}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+.two > div{break-inside:avoid;max-width:none}
+dl{margin:0}
+dt{font-family:"Lexend";font-weight:600;color:var(--navy);font-size:11pt;margin-top:0}
+dd{margin:0 0 0 0;font-size:10.8pt;line-height:1.48}
+a{color:var(--teal);text-decoration:none;overflow-wrap:anywhere}
+thead{display:table-header-group}
+.gloss dl{columns:2;column-gap:9mm}
+.gloss dl div{break-inside:avoid;padding-bottom:2.8mm}
+.legend4{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin:3mm 0}
+.legend4 .box{margin:0;max-width:none}
+.src li{font-size:9.6pt;line-height:1.4;margin-bottom:1.3mm}
+
+.hubgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5mm}
+.hubgrid .node{min-height:17mm}
+.layers{display:grid;gap:2mm}
+.layer{border-radius:2.2mm;padding:3mm 4mm;font-size:10.6pt;line-height:1.4;color:#fff}
+.layer b{display:block;font-family:"Lexend";font-weight:600;font-size:11pt;margin-bottom:.6mm}
+.l1{background:#14304b;margin:0 0 0 0}.l2{background:#0f6e84;margin:0 9mm}.l3{background:#fff;color:#1f2a37;border:.45mm solid #14304b;margin:0 18mm}
+.l3 b{color:#14304b}
+.ladder{display:grid;gap:2mm}
+.rung{background:#fff;border:.45mm solid var(--navy);border-radius:2.2mm;padding:2.4mm 3.5mm;font-size:10.6pt;line-height:1.4}
+.rung b{font-family:"Lexend";font-weight:600;color:var(--navy);display:block}
+.r1{margin-right:44mm}.r2{margin-left:11mm;margin-right:33mm}.r3{margin-left:22mm;margin-right:22mm}.r4{margin-left:33mm;margin-right:11mm}.r5{margin-left:44mm;background:var(--navy);color:#fff}
+.r5 b{color:#fff}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin:3mm 0 5mm}
+.card{background:#fff;border:.5mm dashed #6b7785;border-radius:2.5mm;padding:3.5mm 4mm;font-family:"Lexend";font-size:11.5pt;line-height:1.75;break-inside:avoid}
+.card b{display:block;color:var(--teal);font-size:10pt;margin-bottom:1mm}
+
+.four{display:grid;grid-template-columns:1fr 1fr;gap:2.5mm}
+.four .node{text-align:left;padding:3mm 3.5mm;font-size:10.6pt}
+.mapdown{text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1.5;white-space:nowrap;overflow:hidden}
+figure svg{width:100%;height:auto;display:block}
+svg .ax{stroke:#4f5b69;stroke-width:1.5;fill:none}
+svg .st{font-family:"Atkinson",sans-serif;font-size:13.5px;fill:#4f5b69}
+svg .sb{font-family:"Lexend",sans-serif;font-size:14px;font-weight:600;fill:#14304b}
+svg .ln1{stroke:#2a78d6;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+svg .ln2{stroke:#8a94a0;stroke-width:3.5;fill:none;stroke-dasharray:9 7;stroke-linecap:round}
+</style>
+</head>
+<body>
+<style>
+.trick{background:var(--card);border:.3mm solid var(--line);border-left:1.6mm solid var(--teal);border-radius:2.2mm;padding:3mm 4mm;margin-bottom:3mm;display:grid;grid-template-columns:10mm 1fr;column-gap:3mm;break-inside:avoid}
+.trick .num{font-family:"Lexend";font-weight:700;font-size:12.5pt;color:#fff;background:var(--teal);width:9mm;height:9mm;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:.4mm}
+.trick b.t{font-family:"Lexend";font-weight:600;color:var(--navy);font-size:12pt}
+.trick .ex{display:block;margin-top:1.2mm;max-width:150mm}
+ul.chk{list-style:none;padding-left:0;margin:0 0 3mm}
+ul.chk li{position:relative;padding-left:8mm;margin-bottom:1.9mm;font-size:11.5pt;max-width:none}
+ul.chk li::before{content:"";position:absolute;left:0;top:1.2mm;width:4mm;height:4mm;border:.45mm solid var(--navy);border-radius:.8mm;background:#fff}
+</style>
+<!-- ============ COVER ============ -->
+<div class="cover">
+  <h1>The simple version</h1>
+  <div class="sub">Part 8. Your twenty sentences for TP ICAP, filled in, in plain English</div>
+  <div class="band"></div>
+  <p class="lead">Your HireVue pack gave you the method: <strong>eight things</strong> every firm checks, <strong>twenty sentences</strong> that cover them, and <strong>three steps</strong> for every fact. This pack fills it all in for TP ICAP, in short simple words.</p>
+
+  <div class="box">
+    <span class="tag">The method in three lines</span>
+    <strong>1.</strong> Every question is checking one of eight worries. <br>
+    <strong>2.</strong> Twenty sentences settle all eight. Fourteen about the firm and the job. Six about you. <br>
+    <strong>3.</strong> Never give a fact alone. Say: <strong>the fact</strong>, then <strong>which means</strong>, then <strong>which is why I</strong>.
+  </div>
+
+  <div class="tiles">
+    <div class="tile"><b>Sentences 1 to 14</b><span>Written for you. Learn what they say, not the exact words.</span></div>
+    <div class="tile"><b>Sentences 15 to 20</b><span>About you. I give the shape. You add the truth.</span></div>
+    <div class="tile"><b>Deadline</b><span>Friday 27 November, 11:59 PM GMT.</span></div>
+  </div>
+
+  <div class="box warn">
+    <span class="tag">Two things I changed from your other pack</span>
+    <strong>The job advert.</strong> Your other pack could not read the London advert. You gave it to me, so sentences 12 and 14 use its real words. <br>
+    <strong>Answer length.</strong> One past candidate reported one minute per answer and no retakes. So everything here is short.
+  </div>
+  <p class="small" style="margin-top:auto">TP ICAP facts are from its 2025 Annual Report, its 3 November 2026 trading update and the London job advert. The values wording is from your HireVue pack. Check for newer news before you record.</p>
+</div>
+
+<!-- ============ 1 ============ -->
+<section class="pb">
+<div class="kicker">Page 1</div>
+<h1>The eight things they are checking</h1>
+<p>Before each answer, ask yourself: which number is this?</p>
+<table>
+  <thead><tr><th style="width:7%">#</th><th style="width:36%">Their worry</th><th>A question that checks it</th></tr></thead>
+  <tr><td><b>1</b></td><td>Do you know what we do?</td><td>"What makes us stand out?"</td></tr>
+  <tr><td><b>2</b></td><td>Do you know what this job is?</td><td>"What does a broker do?"</td></tr>
+  <tr><td><b>3</b></td><td>Why do you want it?</td><td>"Why broking?" "Why TP ICAP?"</td></tr>
+  <tr><td><b>4</b></td><td>Can you do it?</td><td>"Why should we choose you?"</td></tr>
+  <tr><td><b>5</b></td><td>What are you like to work with?</td><td>"Tell me about a time you..."</td></tr>
+  <tr><td><b>6</b></td><td>Can we trust you?</td><td>"What would you do if you made a mistake?"</td></tr>
+  <tr><td><b>7</b></td><td>Are you interested in our world?</td><td>"Tell us about something in the news."</td></tr>
+  <tr><td><b>8</b></td><td>Will you stay?</td><td>"Where do you see yourself in five years?"</td></tr>
+</table>
+
+<h2>The three steps, once more</h2>
+<figure>
+  <figcaption>The three steps<span>Use them on every fact you say</span></figcaption>
+  <div class="flow">
+    <div class="node"><b>1. The fact</b>"TP ICAP does not trade for itself."</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node"><b>2. Which means</b>"It only earns if both sides trust it enough to come back."</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node hub"><b>3. Which is why I</b>"...want it. I've been happiest as the person both sides ring."</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Left to right. A fact, then what follows from it, then why it matters to you. The dark box is the one most people forget. <strong>Without step 3, it is just trivia.</strong>
+</div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section class="pb">
+<div class="kicker">Sentences 1 to 5</div>
+<h1>The kind of work</h1>
+
+<div class="trick"><div class="num">1</div><div><b class="t">What it is.</b>
+  <span class="ex">"Broking means connecting big buyers and sellers who want to trade with each other. The broker finds the other side."</span></div></div>
+
+<div class="trick"><div class="num">2</div><div><b class="t">How it earns money.</b>
+  <span class="ex">"It earns a small fee, called commission, on each trade it arranges. It does not bet its own money."</span></div></div>
+
+<div class="trick"><div class="num">3</div><div><b class="t">Who the clients are, and what they want.</b>
+  <span class="ex">"Banks, hedge funds, asset managers and energy firms. They want the other side of their trade found fast, at a fair price, without anyone knowing it is them."</span></div></div>
+
+<div class="trick"><div class="num">4</div><div><b class="t">How it differs from the two nearest jobs.</b>
+  <span class="ex">"A trader takes the risk. A broker takes none. A bank salesperson offers one bank's prices. A broker sits between many banks."</span></div></div>
+
+<div class="trick"><div class="num">5</div><div><b class="t">One thing changing it, and what you think.</b>
+  <span class="ex">"More simple trades are moving onto screens. I think that makes people matter more for the big, difficult trades, where a client needs someone they trust."</span></div></div>
+
+<div class="box">
+  <span class="tag">The test</span>
+  Say these five to someone who does not work in finance. If they can say it back, you understand it.
+</div>
+
+<div class="box say">
+  <span class="tag">Add your step 3 to sentence 4</span>
+  "...which is why I want broking and not trading. I like being in the middle, getting two sides to agree, more than I like taking a bet."
+</div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section class="pb">
+<div class="kicker">Sentences 6 to 10</div>
+<h1>The firm</h1>
+
+<div class="trick"><div class="num">6</div><div><b class="t">What the firm is.</b>
+  <span class="ex">"TP ICAP is one of the world's largest interdealer brokers. That means it is a broker between big banks and other large firms. It made about £2.35 billion in 2025."</span></div></div>
+
+<div class="trick"><div class="num">7</div><div><b class="t">Its parts, and where you would be.</b>
+  <span class="ex">"It has four parts. Global Broking is the biggest, at about 58%. The others are Energy and Commodities, Liquidnet, and Parameta Solutions. I would be in Global Broking, in London."</span></div></div>
+
+<div class="trick"><div class="num">8</div><div><b class="t">What makes it different from two rivals you can name.</b>
+  <span class="ex">"Its main rivals are BGC and Tradition. Two things stand out to me. It owns Liquidnet, which serves investors and not just banks. And it sells the price data its own brokers create, through Parameta."</span>
+  <span class="ex"><strong>Which means:</strong> "it earns from more than commission, and it reaches both sides of the market."</span></div></div>
+
+<div class="trick"><div class="num">9</div><div><b class="t">Its values, and one you can prove.</b>
+  <span class="ex">"Accountability, Adaptability and Authenticity. The firm calls them Triple-A. Under Accountability it says: speak up when things are not right."</span>
+  <span class="ex"><strong>Your proof:</strong> one time you spoke up, or owned a mistake. One sentence.</span></div></div>
+
+<div class="trick"><div class="num">10</div><div><b class="t">One recent thing, with the date.</b>
+  <span class="ex">"On 3 November 2026 it reported revenue of about £1.9 billion for the first nine months, up 9%. Global Broking grew 16% in the third quarter."</span>
+  <span class="ex"><strong>Which means:</strong> "the part I am applying to is the part growing fastest."</span></div></div>
+
+<div class="box warn">
+  <span class="tag">Three numbers is plenty</span>
+  For the whole interview, pick three: <strong>£2.35 billion</strong> (size), <strong>58%</strong> (Global Broking's share), <strong>16%</strong> (its growth last quarter). More than three and you sound like you are reading a list.
+</div>
+<div class="box warn">
+  <span class="tag">Say "one of the largest"</span>
+  Not "the largest". A rival, BGC, reported similar revenue.
+</div>
+</section>
+
+<!-- ============ 4 ============ -->
+<section>
+<div class="kicker">Sentences 11 to 14</div>
+<h1>The job</h1>
+
+<div class="trick"><div class="num">11</div><div><b class="t">What the job produces, and for whom.</b>
+  <span class="ex">"Trades that are matched for clients, and commission for the desk. As an intern I would be learning how the brokers do that."</span></div></div>
+
+<div class="trick"><div class="num">12</div><div><b class="t">Three things you would do on a normal day.</b>
+  <span class="ex">"Sit with brokers and watch how they deal with clients. Move between the Rates, Credit, Equities and FX desks. Go to workshops to learn the products."</span></div></div>
+
+<div class="trick"><div class="num">13</div><div><b class="t">What is hard about it.</b>
+  <span class="ex">"It is fast and high-pressure. You hear 'no' a lot. And your results are seen every day."</span>
+  <span class="ex"><strong>Which is why I:</strong> "...think I'd suit it. I'd rather be measured openly than not know how I'm doing."</span></div></div>
+
+<div class="trick"><div class="num">14</div><div><b class="t">What makes someone good at it.</b> In the advert's own words.
+  <span class="ex">"Someone resilient and entrepreneurial, who builds relationships with ease. Good in a high-pressure sales team. Careful with detail. Comfortable when things keep changing."</span></div></div>
+
+</section>
+
+<!-- ============ 5 ============ -->
+<section class="pb">
+<div class="kicker">Sentences 15 to 20</div>
+<h1>You</h1>
+<p>Only you can write these. Here is the shape of each. Fill the gaps with true things.</p>
+
+<div class="trick"><div class="num">15</div><div><b class="t">Who you are and what you are aiming at.</b>
+  <span class="ex">"I'm a final-year [subject] student at [university]. I want to start my career as a broker."</span></div></div>
+
+<div class="trick"><div class="num">16</div><div><b class="t">Why this kind of work. Where it started.</b>
+  <span class="ex">"It started when I [what you did]. I liked [the part that is like broking]."</span></div></div>
+
+<div class="trick"><div class="num">17</div><div><b class="t">Why this firm.</b> Sentence 8, then "which is why I".
+  <span class="ex">"TP ICAP reaches both banks and investors, and sells its own data. Which is why I want to start here: [what that gives you]."</span></div></div>
+
+<div class="trick"><div class="num">18</div><div><b class="t">Why this job.</b> Sentence 14, matched to two things you have done.
+  <span class="ex">"The job needs someone who builds relationships and stays calm when it is busy. I've [thing one], and I've [thing two]."</span></div></div>
+
+<div class="trick"><div class="num">19</div><div><b class="t">Two strengths with proof. One weakness with what you are doing about it.</b>
+  <span class="ex">"I'm good at [strength]. For example [proof]. I'm also [strength]. For example [proof]. I'm working on [weakness] by [action]."</span></div></div>
+
+<div class="trick"><div class="num">20</div><div><b class="t">Where you want to be, and why start here.</b>
+  <span class="ex">"In a few years I want my own clients on a broking desk. This internship leads straight to a desk, so it is the right place to start."</span></div></div>
+
+<h2>Things from your own life you could use</h2>
+<p>Your other pack pointed to these. Only you know which ones you really enjoyed.</p>
+<table>
+  <thead><tr><th style="width:38%">The job needs</th><th>You could use</th></tr></thead>
+  <tr><td><b>Building relationships</b></td><td>Running the client inbox at the asset manager. Or your meetings with brokerage firms.</td></tr>
+  <tr><td><b>Care with detail, and not giving up</b></td><td>Chasing documents across fifty market openings.</td></tr>
+  <tr><td><b>A view on markets</b></td><td>Your stock pitch. Or your week on a trading floor.</td></tr>
+  <tr><td><b>Calm when it is fast</b></td><td>Debating an unseen topic with fifteen minutes to prepare.</td></tr>
+</table>
+<div class="box say">
+  <span class="tag">Put a number in it</span>
+  "Fifty market openings." "Fifteen minutes to prepare." A number makes a story sound real.
+</div>
+</section>
+
+<!-- ============ 6 ============ -->
+<section>
+<div class="kicker">The three extras</div>
+<h1>Stories, mistakes and news</h1>
+
+<h2>1. Six real things that happened to you</h2>
+<p>Give each a short nickname so you can find it fast.</p>
+<table>
+  <thead><tr><th style="width:8%">#</th><th style="width:44%">The kind of story</th><th>Your nickname for it</th></tr></thead>
+  <tr><td><b>1</b></td><td>A time you were under pressure</td><td>[ ]</td></tr>
+  <tr><td><b>2</b></td><td>A time you won someone over</td><td>[ ]</td></tr>
+  <tr><td><b>3</b></td><td>A time you kept going after a "no"</td><td>[ ]</td></tr>
+  <tr><td><b>4</b></td><td>A time you worked in a team</td><td>[ ]</td></tr>
+  <tr><td><b>5</b></td><td>A time you made a mistake</td><td>[ ]</td></tr>
+  <tr><td><b>6</b></td><td>A time you disagreed with someone</td><td>[ ]</td></tr>
+</table>
+<p><strong>The shape of every story:</strong> what was happening, what you did, what happened next, and one line linking it to broking.</p>
+
+<h2>2. Your steps when something goes wrong</h2>
+<div class="steps">
+  <div class="step"><p><b>Stop it getting worse.</b></p></div>
+  <div class="step"><p><b>Tell your manager straight away.</b></p></div>
+  <div class="step"><p><b>Fix it openly.</b></p></div>
+  <div class="step"><p><b>Work out how it happened.</b></p></div>
+</div>
+<p>This matches the firm's value: "speak up when things are not right".</p>
+
+<h2>3. One news story and your view</h2>
+<div class="box fact">
+  <span class="tag">Say it like this</span>
+  "On 5 November the Bank of England raised interest rates to 4%. It was the first rise since 2023. What interests me is not the price but the trading. Trading in sterling interest rate swaps had more than halved earlier this year, while the Bank sat still. Now the Bank has changed direction. A broker is paid when clients trade, so I expect that trading to pick up again."
+</div>
+<p class="small">Part 4 has the full story. Check the news on the morning you record.</p>
+</section>
+
+<!-- ============ 7 ============ -->
+<section class="pb">
+<div class="kicker">Putting it together</div>
+<h1>Which sentences answer which question</h1>
+<table>
+  <thead><tr><th style="width:52%">The question</th><th>Use these sentences</th></tr></thead>
+  <tr><td><b>"Tell us about yourself."</b></td><td>15, 16 and 18</td></tr>
+  <tr><td><b>"Why broking?"</b></td><td>1 or 2, then 16</td></tr>
+  <tr><td><b>"Why TP ICAP?"</b></td><td>8, then 17</td></tr>
+  <tr><td><b>"What is an interdealer broker?"</b></td><td>1, 2 and 6</td></tr>
+  <tr><td><b>"Why broking and not trading?"</b></td><td>4, then 16</td></tr>
+  <tr><td><b>"What do you know about us?"</b></td><td>6, 7 and 10</td></tr>
+  <tr><td><b>"What does someone in this job do?"</b></td><td>11 and 12</td></tr>
+  <tr><td><b>"Why should we choose you?"</b></td><td>14, then 19</td></tr>
+  <tr><td><b>"What will you find hardest?"</b></td><td>13, then 19</td></tr>
+  <tr><td><b>"Tell me about a time you..."</b></td><td>One of your six stories</td></tr>
+  <tr><td><b>"Something in the news?"</b></td><td>Your news story, or 5</td></tr>
+  <tr><td><b>"Where do you see yourself?"</b></td><td>20</td></tr>
+</table>
+
+<h2>Four answers, ready to shape</h2>
+<p>Each is about 60 seconds. The words in square brackets are yours to add.</p>
+
+<div class="box fact">
+  <span class="tag">"Tell us about yourself."</span>
+  "Thanks for watching. I'm a final-year [subject] student at [university], and I want to start my career as a broker. It started when I [what you did]. I liked being the person in the middle, getting two sides to agree. The job needs someone who builds relationships and stays calm when it is busy. I've [thing one], and I've [thing two]. That is why I'm applying."
+</div>
+
+<div class="box fact">
+  <span class="tag">"Why broking?"</span>
+  "Thank you for watching. Broking means connecting big buyers and sellers and finding the other side of a trade. The broker earns a fee and does not take the risk. I want that because of [what you did]. I found I'm happiest in the middle, getting two people to agree. A trader takes a bet. I'd rather build clients who call me first."
+</div>
+
+<div class="box fact">
+  <span class="tag">"Why TP ICAP?"</span>
+  "Thanks for watching. Two things stand out to me against rivals like BGC and Tradition. TP ICAP owns Liquidnet, which serves investors and not just banks. And it sells the price data its own brokers create. Which means it reaches both sides of the market and earns from more than commission. Which is why I want to start here. [What that gives you.] And Global Broking grew 16% last quarter, so it is a good time to learn."
+</div>
+
+<div class="box fact">
+  <span class="tag">"Why should we choose you?"</span>
+  "The advert asks for someone resilient, who builds relationships with ease and is careful with detail. I can show each one. [Proof one.] [Proof two.] [Proof three.] And I know the job is fast and that you hear no a lot. That is the kind of place I do my best work."
+</div>
+</section>
+
+<!-- ============ 8 ============ -->
+<section class="pb">
+<div class="kicker">Last page</div>
+<h1>The checklist</h1>
+<p>Tick each one when you can say it out loud, with no notes, in under fifteen seconds.</p>
+
+<div class="two">
+  <div>
+    <h3>The kind of work</h3>
+    <ul class="chk">
+      <li>1. What broking is</li>
+      <li>2. How it earns money</li>
+      <li>3. Who the clients are</li>
+      <li>4. Broker against trader and salesperson</li>
+      <li>5. What is changing, and my view</li>
+    </ul>
+    <h3>The firm</h3>
+    <ul class="chk">
+      <li>6. What TP ICAP is</li>
+      <li>7. Its four parts, and mine</li>
+      <li>8. What makes it different</li>
+      <li>9. Its values, and my proof</li>
+      <li>10. One recent thing, with the date</li>
+    </ul>
+    <h3>The job</h3>
+    <ul class="chk">
+      <li>11. What the job produces</li>
+      <li>12. Three things in a day</li>
+      <li>13. What is hard about it</li>
+      <li>14. What makes someone good at it</li>
+    </ul>
+  </div>
+  <div>
+    <h3>Me</h3>
+    <ul class="chk">
+      <li>15. Who I am</li>
+      <li>16. Why broking, and where it started</li>
+      <li>17. Why this firm</li>
+      <li>18. Why this job</li>
+      <li>19. Two strengths, one weakness</li>
+      <li>20. Where I want to be</li>
+    </ul>
+    <h3>Also ready</h3>
+    <ul class="chk">
+      <li>Six stories, each with a nickname</li>
+      <li>My four steps when something goes wrong</li>
+      <li>One news story and my view</li>
+    </ul>
+    <h3>Before I record</h3>
+    <ul class="chk">
+      <li>Every fact has "which means" and "which is why I"</li>
+      <li>I checked today's news</li>
+      <li>I did the practice question</li>
+      <li>I read each question's time limit</li>
+    </ul>
+  </div>
+</div>
+
+<div class="box say" style="margin-top:5mm">
+  <span class="tag">On the day</span>
+  Say thanks. Say the number of the worry in your head. Give one fact, what it means, and why it matters to you. Stop cleanly.
+</div>
+</section>
+
+</body>
+</html>
