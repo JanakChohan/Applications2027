@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>TP ICAP Part 10: The role, do you want it?</title>
+<style>
+@font-face{font-family:"Lexend";font-weight:400;src:url("node_modules/@fontsource/lexend/files/lexend-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Lexend";font-weight:600;src:url("node_modules/@fontsource/lexend/files/lexend-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Lexend";font-weight:700;src:url("node_modules/@fontsource/lexend/files/lexend-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"Atkinson";font-weight:400;src:url("node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Atkinson";font-weight:700;src:url("node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2")}
+
+:root{
+  --bg:#FBF6EA; --ink:#1f2a37; --muted:#4f5b69; --navy:#14304b; --teal:#0f6e84;
+  --line:#d9d0bb; --card:#fffdf6;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --grey:#8a94a0;
+}
+@page{size:A4;margin:16mm 17mm 19mm 17mm}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson",Verdana,sans-serif;
+  font-size:12.5pt;line-height:1.62;letter-spacing:.012em;word-spacing:.06em;text-align:left;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3,h4{font-family:"Lexend",Verdana,sans-serif;color:var(--navy);line-height:1.25;letter-spacing:0;break-after:avoid}
+h1{font-size:23pt;font-weight:700;margin:0 0 4mm;padding-bottom:3mm;border-bottom:1.2mm solid var(--teal)}
+h2{font-size:15.5pt;font-weight:600;margin:8mm 0 2.5mm}
+h3{font-size:12.5pt;font-weight:600;margin:5.5mm 0 1.5mm}
+p{margin:0 0 3.2mm;max-width:150mm}
+li{max-width:146mm}
+ul,ol{margin:0 0 3.5mm;padding-left:6.5mm}
+ol{padding-left:8.5mm}
+li{margin-bottom:1.7mm}
+strong{font-weight:700;color:#10202f}
+section{break-before:auto;margin-top:13mm}
+section.pb{break-before:page;margin-top:0}
+.kicker{break-after:avoid}
+.kicker{font-family:"Lexend";font-size:10pt;font-weight:600;color:var(--teal);margin:0 0 1.5mm}
+.lead{font-size:13pt;line-height:1.6}
+.small{font-size:10pt;color:var(--muted);line-height:1.5}
+
+/* boxes */
+.box{border-radius:2.5mm;padding:3.6mm 4.5mm 3mm;margin:4mm 0;font-size:12pt;max-width:162mm;break-inside:avoid;border-left:1.6mm solid var(--teal);background:#E7F1F3}
+.box > :last-child{margin-bottom:.6mm}
+.box .tag{font-family:"Lexend";font-weight:600;font-size:10.5pt;display:block;margin-bottom:1.2mm;color:var(--navy)}
+.box.say{background:#FFEFCF;border-left-color:#c77700}
+.box.warn{background:#FBE4DD;border-left-color:#b6452c}
+.box.read{background:#ECE8F6;border-left-color:#5a48b8}
+.box.fact{background:var(--card);border:.3mm solid var(--line);border-left:1.6mm solid var(--navy)}
+
+/* figures */
+figure{margin:5mm 0 4mm;padding:4.5mm 5mm 4mm;background:var(--card);border:.3mm solid var(--line);border-radius:3mm;break-inside:avoid}
+figcaption{font-family:"Lexend";font-weight:600;font-size:11.5pt;color:var(--navy);margin-bottom:3.5mm}
+figcaption span{display:block;font-family:"Atkinson";font-weight:400;font-size:10pt;color:var(--muted);margin-top:.6mm}
+
+/* bar charts */
+.bars{display:grid;grid-template-columns:47mm 1fr;row-gap:2.6mm;column-gap:3mm;align-items:center}
+.bars .lab{font-size:10.5pt;line-height:1.3;text-align:right}
+.bars .lab small{display:block;color:var(--muted);font-size:9pt}
+.bars .track{display:flex;align-items:center;gap:2.5mm}
+.bars .bar{height:7.5mm;border-radius:0 1.2mm 1.2mm 0;background:var(--s1);min-width:.6mm}
+.bars .val{font-family:"Lexend";font-weight:600;font-size:10.5pt;white-space:nowrap}
+.bars .val small{font-family:"Atkinson";font-weight:400;color:var(--muted);font-size:9.5pt}
+.bars.sub .bar{height:5.5mm;background:#7fb0ea}
+.c1{background:var(--s1)!important}.c2{background:var(--s2)!important}.c3{background:var(--s3)!important}.c4{background:var(--s4)!important}.cg{background:var(--grey)!important}
+.stack{display:flex;gap:.6mm;height:15mm;margin:2mm 0 2.5mm}
+.stack div{display:flex;align-items:center;justify-content:center;color:#fff;font-family:"Lexend";font-weight:600;font-size:10.5pt;border-radius:1mm;text-align:center;line-height:1.2}
+.stack .dark{color:#1f2a37}
+.legend{display:flex;flex-wrap:wrap;gap:2mm 6mm;font-size:10pt}
+.legend i{display:inline-block;width:3.6mm;height:3.6mm;border-radius:.8mm;margin-right:1.6mm;vertical-align:-.5mm}
+
+/* flow diagrams */
+.flow{display:flex;align-items:stretch;gap:1.5mm}
+.node{flex:1;background:#fff;border:.45mm solid var(--navy);border-radius:2.2mm;padding:2.6mm 2.4mm;font-size:10pt;line-height:1.35;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.node b{font-family:"Lexend";font-weight:600;font-size:10.5pt;color:var(--navy);display:block;margin-bottom:.8mm}
+.node.hub{background:var(--navy);border-color:var(--navy);color:#fff}
+.node.hub b{color:#fff}
+.node.soft{border-style:dashed;border-color:#6b7785}
+.arrow{flex:0 0 7mm;display:flex;align-items:center;justify-content:center;font-size:15pt;color:var(--teal);font-weight:700}
+.steps{counter-reset:s;display:grid;gap:2.2mm}
+.step{counter-increment:s;display:grid;grid-template-columns:10mm 1fr;gap:3mm;align-items:start;background:#fff;border:.3mm solid var(--line);border-radius:2mm;padding:2.5mm 3mm}
+.step::before{content:counter(s);font-family:"Lexend";font-weight:700;font-size:13pt;color:#fff;background:var(--teal);width:9mm;height:9mm;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.step p{margin:0;font-size:10.8pt;line-height:1.45}
+.step b{font-family:"Lexend";font-weight:600;color:var(--navy)}
+.cycle{display:grid;grid-template-columns:1fr 7mm 1fr 7mm 1fr;row-gap:1.5mm;align-items:stretch}
+.down{grid-column:5;text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1}
+.up{grid-column:1;text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1}
+
+/* timeline */
+.tl{border-left:.8mm solid var(--teal);margin:2mm 0 0 16mm;padding:0}
+.tl div{position:relative;padding:0 0 3.1mm 6mm;font-size:10.8pt;line-height:1.45;break-inside:avoid}
+.tl div::before{content:"";position:absolute;left:-2.3mm;top:1.2mm;width:3.6mm;height:3.6mm;border-radius:50%;background:var(--teal);border:.5mm solid var(--card)}
+.tl b{position:absolute;left:-19mm;top:0;width:15mm;text-align:right;font-family:"Lexend";font-weight:600;color:var(--navy)}
+.tl .big::before{background:var(--s2);width:4.6mm;height:4.6mm;left:-2.8mm}
+
+/* tables */
+table{border-collapse:collapse;width:100%;margin:3mm 0 4.5mm;font-size:10.6pt;line-height:1.42}
+tr{break-inside:avoid}
+th{font-family:"Lexend";font-weight:600;font-size:10pt;text-align:left;background:var(--navy);color:#fff;padding:2.2mm 2.6mm;vertical-align:bottom}
+td{padding:2.2mm 2.6mm;border-bottom:.3mm solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:#f5efdf}
+td.n,th.n{text-align:right;white-space:nowrap}
+td b{color:#10202f}
+
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin:4mm 0}
+.tile{background:var(--card);border:.3mm solid var(--line);border-radius:2.5mm;padding:3.2mm 3.5mm;break-inside:avoid}
+.tile b{display:block;font-family:"Lexend";font-weight:700;font-size:17pt;color:var(--navy);line-height:1.15}
+.tile span{font-size:10pt;color:var(--muted);line-height:1.35;display:block;margin-top:1mm}
+
+/* cover */
+.cover{break-before:auto;min-height:215mm;display:flex;flex-direction:column}
+.cover h1{font-size:34pt;border:none;margin:8mm 0 3mm;padding:0}
+.cover .sub{font-family:"Lexend";font-size:15pt;color:var(--teal);font-weight:600;margin-bottom:8mm;max-width:150mm;line-height:1.4}
+.cover .band{height:3mm;background:linear-gradient(90deg,var(--navy) 0 55%,var(--teal) 55% 80%,var(--s4) 80% 100%);border-radius:2mm;margin-bottom:9mm}
+.toc{columns:2;column-gap:10mm;font-size:11pt;padding:0;list-style:none;counter-reset:t}
+.toc li{counter-increment:t;margin-bottom:1.8mm;break-inside:avoid}
+.toc li::before{content:counter(t) ".";font-family:"Lexend";font-weight:600;color:var(--teal);display:inline-block;width:8mm}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+.two > div{break-inside:avoid;max-width:none}
+dl{margin:0}
+dt{font-family:"Lexend";font-weight:600;color:var(--navy);font-size:11pt;margin-top:0}
+dd{margin:0 0 0 0;font-size:10.8pt;line-height:1.48}
+a{color:var(--teal);text-decoration:none;overflow-wrap:anywhere}
+thead{display:table-header-group}
+.gloss dl{columns:2;column-gap:9mm}
+.gloss dl div{break-inside:avoid;padding-bottom:2.8mm}
+.legend4{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin:3mm 0}
+.legend4 .box{margin:0;max-width:none}
+.src li{font-size:9.6pt;line-height:1.4;margin-bottom:1.3mm}
+
+.hubgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5mm}
+.hubgrid .node{min-height:17mm}
+.layers{display:grid;gap:2mm}
+.layer{border-radius:2.2mm;padding:3mm 4mm;font-size:10.6pt;line-height:1.4;color:#fff}
+.layer b{display:block;font-family:"Lexend";font-weight:600;font-size:11pt;margin-bottom:.6mm}
+.l1{background:#14304b;margin:0 0 0 0}.l2{background:#0f6e84;margin:0 9mm}.l3{background:#fff;color:#1f2a37;border:.45mm solid #14304b;margin:0 18mm}
+.l3 b{color:#14304b}
+.ladder{display:grid;gap:2mm}
+.rung{background:#fff;border:.45mm solid var(--navy);border-radius:2.2mm;padding:2.4mm 3.5mm;font-size:10.6pt;line-height:1.4}
+.rung b{font-family:"Lexend";font-weight:600;color:var(--navy);display:block}
+.r1{margin-right:44mm}.r2{margin-left:11mm;margin-right:33mm}.r3{margin-left:22mm;margin-right:22mm}.r4{margin-left:33mm;margin-right:11mm}.r5{margin-left:44mm;background:var(--navy);color:#fff}
+.r5 b{color:#fff}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin:3mm 0 5mm}
+.card{background:#fff;border:.5mm dashed #6b7785;border-radius:2.5mm;padding:3.5mm 4mm;font-family:"Lexend";font-size:11.5pt;line-height:1.75;break-inside:avoid}
+.card b{display:block;color:var(--teal);font-size:10pt;margin-bottom:1mm}
+
+.four{display:grid;grid-template-columns:1fr 1fr;gap:2.5mm}
+.four .node{text-align:left;padding:3mm 3.5mm;font-size:10.6pt}
+.mapdown{text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1.5;white-space:nowrap;overflow:hidden}
+figure svg{width:100%;height:auto;display:block}
+svg .ax{stroke:#4f5b69;stroke-width:1.5;fill:none}
+svg .st{font-family:"Atkinson",sans-serif;font-size:13.5px;fill:#4f5b69}
+svg .sb{font-family:"Lexend",sans-serif;font-size:14px;font-weight:600;fill:#14304b}
+svg .ln1{stroke:#2a78d6;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+svg .ln2{stroke:#8a94a0;stroke-width:3.5;fill:none;stroke-dasharray:9 7;stroke-linecap:round}
+</style>
+</head>
+<body>
+<style>
+.trick{background:var(--card);border:.3mm solid var(--line);border-left:1.6mm solid var(--teal);border-radius:2.2mm;padding:3mm 4mm;margin-bottom:3mm;display:grid;grid-template-columns:10mm 1fr;column-gap:3mm;break-inside:avoid}
+.trick .num{font-family:"Lexend";font-weight:700;font-size:12.5pt;color:#fff;background:var(--teal);width:9mm;height:9mm;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:.4mm}
+.trick b.t{font-family:"Lexend";font-weight:600;color:var(--navy);font-size:12pt}
+.trick .ex{display:block;margin-top:1.2mm;max-width:150mm}
+ul.chk{list-style:none;padding-left:0;margin:0 0 3mm}
+ul.chk li{position:relative;padding-left:8mm;margin-bottom:1.9mm;font-size:11.5pt;max-width:none}
+ul.chk li::before{content:"";position:absolute;left:0;top:1.2mm;width:4mm;height:4mm;border:.45mm solid var(--navy);border-radius:.8mm;background:#fff}
+</style>
+<!-- ============ COVER ============ -->
+<div class="cover">
+  <h1>The role: do you want it?</h1>
+  <div class="sub">Part 10. What a broker does, the skills you really need, the best parts and the hardest parts, in plain English</div>
+  <div class="band"></div>
+  <p class="lead">Every other pack helps you <strong>get</strong> the job. This one helps you decide whether you <strong>want</strong> it. So it is honest. It covers the good and the bad, and it ends with a simple test.</p>
+
+  <div class="box">
+    <span class="tag">The role in one sentence</span>
+    A broker <strong>talks to traders all day, finds two who want opposite things, and helps them agree a price</strong>. The firm earns a small fee from each. The broker never bets on the price.
+  </div>
+
+  <div class="tiles">
+    <div class="tile"><b>Chapter 1</b><span>The role, simply. How it connects to markets.</span></div>
+    <div class="tile"><b>Chapter 2</b><span>The ten skills you really need, and why.</span></div>
+    <div class="tile"><b>Chapter 3</b><span>The best parts of the job.</span></div>
+    <div class="tile"><b>Chapter 4</b><span>The hardest parts of the job.</span></div>
+    <div class="tile"><b>Chapter 5</b><span>Do you want it? A simple test.</span></div>
+    <div class="tile"><b>Chapter 6</b><span>How to talk about all this in the interview.</span></div>
+  </div>
+  <p class="small" style="margin-top:auto">How the job works day to day is general knowledge of the industry. What people like and dislike comes from anonymous Glassdoor reviews of TP ICAP brokers and older careers articles, read through search summaries. Desks differ, so treat this as a guide.</p>
+</div>
+
+<!-- ============ CH 1 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 1</div>
+<h1>The role, simply</h1>
+
+<h2>How a broker connects to the markets</h2>
+<figure>
+  <figcaption>Diagram 1. From a news headline to a broker's phone<span>This chain happens hundreds of times a day</span></figcaption>
+  <div class="steps">
+    <div class="step"><p><b>Something happens in the world.</b> A central bank moves interest rates. A company warns on profits. Oil jumps.</p></div>
+    <div class="step"><p><b>Big firms need to change their positions.</b> Banks, pension funds and hedge funds now hold things they want to buy more of, or get rid of.</p></div>
+    <div class="step"><p><b>A trader calls a broker.</b> "I need to buy this, in size. Who is selling?"</p></div>
+    <div class="step"><p><b>The broker finds the other side.</b> By phone, chat and screen, without saying who the buyer is.</p></div>
+    <div class="step"><p><b>The two agree a price. Done.</b> Each pays the firm a small fee.</p></div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Top to bottom. The world changes, firms need to trade, and the broker is the person who connects them. <strong>The broker does not decide what to buy. The broker makes it possible.</strong>
+</div>
+
+<h2>What you do, and what you do not do</h2>
+<table>
+  <thead><tr><th style="width:50%">You do</th><th>You do not</th></tr></thead>
+  <tr><td>Talk to clients all day</td><td>Sit alone with a spreadsheet</td></tr>
+  <tr><td>Find the other side of a trade</td><td>Decide what to buy or sell</td></tr>
+  <tr><td>Help two sides agree a price</td><td>Bet the firm's money</td></tr>
+  <tr><td>Tell clients what the market is doing</td><td>Tell clients what they should do</td></tr>
+  <tr><td>Keep everyone's secrets</td><td>Deal with the public</td></tr>
+</table>
+
+<h2>The four markets you would rotate through</h2>
+<table>
+  <thead><tr><th style="width:28%">Desk</th><th>What gets traded, in a line</th></tr></thead>
+  <tr><td><b>Rates</b></td><td>Contracts linked to interest rates.</td></tr>
+  <tr><td><b>FX and Money Markets</b></td><td>Currencies, and very short-term loans.</td></tr>
+  <tr><td><b>Equities</b></td><td>Contracts linked to share prices.</td></tr>
+  <tr><td><b>Credit</b></td><td>Company bonds, and insurance against companies failing.</td></tr>
+</table>
+<p>The product changes from desk to desk. <strong>The job does not.</strong> On every desk you talk, listen, match and agree. Part 3 explains each market.</p>
+
+<h2>A normal day</h2>
+<figure>
+  <figcaption>Diagram 2. A broker's day<span>Typical for the industry. Times vary by desk</span></figcaption>
+  <div class="tl">
+    <div><b>Early</b>At your desk around 7am. One junior broker at a rival firm said no later than 7:30. Read the overnight news.</div>
+    <div><b>Morning</b>Call clients. Find out what they need today.</div>
+    <div class="big"><b>All day</b><strong>The main event.</strong> Phones and chats open all day. Prices called out. Trades matched. Sudden rushes when news breaks.</div>
+    <div><b>Lunch</b>Often at the desk.</div>
+    <div><b>5pm</b>Check every trade was written down correctly.</div>
+    <div><b>Evening</b>Sometimes, dinner or drinks with clients.</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Top to bottom through the day. The orange dot is where the work really happens. Notice the day <strong>starts early and usually ends around five</strong>. That is different from investment banking, where late nights are normal.
+</div>
+
+<h2>As an intern</h2>
+<p>For six weeks you would mostly <strong>watch and learn</strong>. You would sit with brokers on each of the four desks, go to workshops, and meet a lot of people. At the end the firm decides whether to offer you a desk.</p>
+</section>
+
+<!-- ============ CH 2 ============ -->
+<section>
+<div class="kicker">Chapter 2</div>
+<h1>The ten skills you really need</h1>
+<p class="lead">Not the skills on a CV. The ones a desk actually uses. Each has a small scene so you can picture it.</p>
+
+<figure>
+  <figcaption>Diagram 3. What matters, and what does not<span>My ranking</span></figcaption>
+  <div class="layers">
+    <div class="layer l1"><b>Must have</b>Listening. Keeping secrets. Bouncing back. Trust. Speed with numbers.</div>
+    <div class="layer l2"><b>Makes you better</b>Memory. Short clear speech. Calm in a rush. Curiosity about markets. Owning mistakes.</div>
+    <div class="layer l3"><b>Not needed</b>Advanced maths. Coding. Financial modelling. A finance degree.</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Three layers. The dark top layer is what the job cannot be done without. The middle layer separates a good broker from an average one. The white bottom layer is what people <strong>think</strong> they need, and do not. <strong>This is a people job with numbers in it, not a numbers job with people in it.</strong>
+</div>
+
+<div class="trick"><div class="num">1</div><div><b class="t">Listening</b>
+  <span class="ex"><strong>Why:</strong> clients rarely say exactly what they want. You have to hear it.</span>
+  <span class="ex"><strong>Picture this:</strong> a trader says, "Nothing for me today... where's the ten-year?" He just told you he is interested. A good broker hears that. A poor one hears "nothing".</span></div></div>
+
+<div class="trick"><div class="num">2</div><div><b class="t">Keeping secrets</b>
+  <span class="ex"><strong>Why:</strong> you know what every client is trying to do. If you leak it, nobody calls you again.</span>
+  <span class="ex"><strong>Picture this:</strong> Bank A is selling. Bank B asks, "Who's the seller?" The answer is always, "I can't say." Even when telling them would close the trade.</span></div></div>
+
+<div class="trick"><div class="num">3</div><div><b class="t">Bouncing back</b>
+  <span class="ex"><strong>Why:</strong> most calls end in "no".</span>
+  <span class="ex"><strong>Picture this:</strong> you spend an hour on a trade. At the last second one side walks away. You have ten seconds to feel bad. Then the phone rings.</span></div></div>
+
+<div class="trick"><div class="num">4</div><div><b class="t">Building trust over time</b>
+  <span class="ex"><strong>Why:</strong> a trader gives the big orders to the broker they trust most.</span>
+  <span class="ex"><strong>Picture this:</strong> for six months a trader gives you small trades. You handle each one well. One day he rings you first with the biggest trade of his year. That call took six months to earn.</span></div></div>
+
+<div class="trick"><div class="num">5</div><div><b class="t">Speed and care with numbers</b>
+  <span class="ex"><strong>Why:</strong> prices are called fast, and one wrong digit costs real money.</span>
+  <span class="ex"><strong>Picture this:</strong> "Bid 4.20, offered 4.26." You need the middle, 4.23, before the trader finishes his sentence. And you must never say 4.32.</span></div></div>
+
+<div class="trick"><div class="num">6</div><div><b class="t">Memory</b>
+  <span class="ex"><strong>Why:</strong> yesterday's "no" is today's match.</span>
+  <span class="ex"><strong>Picture this:</strong> on Tuesday a client wanted to sell but found no buyer. On Thursday a different client wants to buy the same thing. If you remember Tuesday, you have a trade.</span></div></div>
+
+<div class="trick"><div class="num">7</div><div><b class="t">Short, clear speech</b>
+  <span class="ex"><strong>Why:</strong> nobody has time for a long sentence.</span>
+  <span class="ex"><strong>Picture this:</strong> not "I think there might be someone who could be interested." Just: "I have a buyer at 21."</span></div></div>
+
+<div class="trick"><div class="num">8</div><div><b class="t">Staying calm in a rush</b>
+  <span class="ex"><strong>Why:</strong> the busiest minutes are the most valuable, and the easiest to get wrong.</span>
+  <span class="ex"><strong>Picture this:</strong> a central bank surprises everyone. Four phones ring at once. The broker who stays calm earns a week's fees in ten minutes.</span></div></div>
+
+<div class="trick"><div class="num">9</div><div><b class="t">Curiosity about markets</b>
+  <span class="ex"><strong>Why:</strong> clients ring the broker who has something useful to say.</span>
+  <span class="ex"><strong>Picture this:</strong> two brokers call the same trader at 7:15. One says "morning". The other says, "Did you see what the Bank of England said?" Guess who gets called back.</span></div></div>
+
+<div class="trick"><div class="num">10</div><div><b class="t">Owning a mistake fast</b>
+  <span class="ex"><strong>Why:</strong> a mistake grows every minute it is hidden.</span>
+  <span class="ex"><strong>Picture this:</strong> you told a client the wrong price. You tell your desk head within the minute. It costs a little. Hidden until 5pm, it costs a lot.</span></div></div>
+
+<h2>You already have more of these than you think</h2>
+<table>
+  <thead><tr><th style="width:36%">Skill</th><th>Where you built it</th></tr></thead>
+  <tr><td><b>Listening, trust, bouncing back</b></td><td>The shop. Years of parents, some stressed, many coming back.</td></tr>
+  <tr><td><b>Keeping secrets, care with detail</b></td><td>Pictet. Working with big clients inside an asset manager.</td></tr>
+  <tr><td><b>Calm in a rush, short clear speech</b></td><td>Debating. Fifteen minutes to prepare, and interrupted mid-speech.</td></tr>
+  <tr><td><b>Speed with numbers</b></td><td>The till. And you can train it. See the mental maths cheat sheet.</td></tr>
+</table>
+</section>
+
+<!-- ============ CH 3 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 3</div>
+<h1>The best parts</h1>
+<p class="lead">What people who do the job say they like, and what follows from how the job works.</p>
+
+<div class="trick"><div class="num">1</div><div><b class="t">You know how you are doing, every day.</b>
+  <span class="ex">Your result is a number. No waiting a year for a review to find out.</span></div></div>
+
+<div class="trick"><div class="num">2</div><div><b class="t">You are in the middle of the markets.</b>
+  <span class="ex">A broker hears what dozens of banks and funds are doing. Few seats in finance see as much.</span></div></div>
+
+<div class="trick"><div class="num">3</div><div><b class="t">You do not carry the risk.</b>
+  <span class="ex">If prices crash, the clients win or lose. You do not go home having lost money on a bet.</span></div></div>
+
+<div class="trick"><div class="num">4</div><div><b class="t">The people.</b>
+  <span class="ex">In reviews of TP ICAP, brokers most often praise their colleagues and their team. A desk is a close group.</span></div></div>
+
+<div class="trick"><div class="num">5</div><div><b class="t">Pay follows results.</b>
+  <span class="ex">Broker pay is tied to the revenue a desk brings in. Reviews often name pay as a plus, and one called it "a good first graduate job".</span></div></div>
+
+<div class="trick"><div class="num">6</div><div><b class="t">The day usually ends.</b>
+  <span class="ex">Early start, but often finished around five. Not the late nights of investment banking.</span></div></div>
+
+<div class="trick"><div class="num">7</div><div><b class="t">What you build is yours.</b>
+  <span class="ex">Your clients trust <strong>you</strong>. That list of people is the most valuable thing a broker owns.</span></div></div>
+
+<div class="box">
+  <span class="tag">One number</span>
+  On Glassdoor, brokers rate TP ICAP about <strong>4.3 out of 5</strong>, across roughly 73 reviews. That is a small, self-chosen group, so treat it as a rough signal.
+</div>
+</section>
+
+<!-- ============ CH 4 ============ -->
+<section>
+<div class="kicker">Chapter 4</div>
+<h1>The hardest parts</h1>
+<p class="lead">You asked for the truth. Here it is. None of these should surprise you on day one.</p>
+
+<div class="trick"><div class="num">1</div><div><b class="t">The early starts.</b>
+  <span class="ex">At your desk around 7am, every day.</span></div></div>
+
+<div class="trick"><div class="num">2</div><div><b class="t">Long, intense days.</b>
+  <span class="ex">"Long hours and no lunch" is one of the most common complaints in reviews. You are "on" from the first call to the last.</span></div></div>
+
+<div class="trick"><div class="num">3</div><div><b class="t">Hearing "no" all day.</b>
+  <span class="ex">Most calls do not become trades. Trades fall apart at the last second.</span></div></div>
+
+<div class="trick"><div class="num">4</div><div><b class="t">Your income moves.</b>
+  <span class="ex">A quiet market means less pay. Some reviews complain of low bonuses.</span></div></div>
+
+<div class="trick"><div class="num">5</div><div><b class="t">Clients can leave.</b>
+  <span class="ex">A trader changes jobs, or picks another broker, and a slice of your income goes with them.</span></div></div>
+
+<div class="trick"><div class="num">6</div><div><b class="t">You never get to decide.</b>
+  <span class="ex">The client chooses. You help. Some people find that frustrating.</span></div></div>
+
+<div class="trick"><div class="num">7</div><div><b class="t">Evenings are part of the job.</b>
+  <span class="ex">Relationships are built over dinner and drinks, not only on the phone.</span></div></div>
+
+<div class="trick"><div class="num">8</div><div><b class="t">It depends on your desk.</b>
+  <span class="ex">Reviews say the experience "varies depending on the brokers you work with". Some juniors complain of little training. A few individual reviews describe a harsh culture, including bullying, on some desks.</span></div></div>
+
+<div class="trick"><div class="num">9</div><div><b class="t">The job is changing.</b>
+  <span class="ex">Simple trades are moving to screens. The future belongs to brokers who handle what a screen cannot.</span></div></div>
+
+<div class="box warn">
+  <span class="tag">About number 8</span>
+  These are anonymous, individual accounts, some of them years old. I cannot check them. But they point to something true of every broking firm: <strong>the desk you land on matters more than the firm's name.</strong> The six-week internship is your chance to see the desks for yourself before you commit.
+</div>
+
+<h2>Side by side</h2>
+<table>
+  <thead><tr><th style="width:50%">The best</th><th>The hardest</th></tr></thead>
+  <tr><td>You see your result every day</td><td>So does everyone else</td></tr>
+  <tr><td>Pay follows results</td><td>Pay falls in quiet markets</td></tr>
+  <tr><td>Your clients are yours</td><td>Clients can leave</td></tr>
+  <tr><td>No risk on your shoulders</td><td>No say in the decision</td></tr>
+  <tr><td>The day ends around five</td><td>It starts around seven, and some evenings are work</td></tr>
+  <tr><td>A close team</td><td>Much depends on which team</td></tr>
+</table>
+<div class="box read">
+  <span class="tag">How to read this table</span>
+  Read each row across. <strong>Every best part has a hard part attached to it.</strong> They are the same thing seen from two sides. If you love the left column, you have to accept the right.
+</div>
+</section>
+
+<!-- ============ CH 5 ============ -->
+<section>
+<div class="kicker">Chapter 5</div>
+<h1>Do you want it?</h1>
+<p class="lead">Be honest. Nobody is marking this.</p>
+
+<h2>Tick the ones that are true</h2>
+<ul class="chk">
+  <li>I would rather talk to someone than write to them.</li>
+  <li>I get energy from a busy, noisy room.</li>
+  <li>When someone says no, I want to try again.</li>
+  <li>I like being measured against a number.</li>
+  <li>I am fine with pay that goes up and down.</li>
+  <li>I can keep a secret, even when sharing it would help me.</li>
+  <li>I can be fair to two people who want opposite things.</li>
+  <li>I am a morning person, or can become one.</li>
+  <li>I enjoy quick sums more than long analysis.</li>
+  <li>I would rather have twenty clients for ten years than a new project every month.</li>
+</ul>
+
+<div class="box say">
+  <span class="tag">What your ticks tell you</span>
+  <strong>Eight or more:</strong> this job fits you. Go for it with confidence. <br>
+  <strong>Five to seven:</strong> it could fit. Use the internship to test the ones you were unsure about. <br>
+  <strong>Four or fewer:</strong> think hard. You might enjoy sales or client work somewhere slower and steadier more.
+</div>
+
+<h2>Who it suits, and who it does not</h2>
+<table>
+  <thead><tr><th style="width:50%">It suits someone who</th><th>It does not suit someone who</th></tr></thead>
+  <tr><td>Loves talking to people</td><td>Needs quiet to think</td></tr>
+  <tr><td>Likes to compete</td><td>Takes "no" personally</td></tr>
+  <tr><td>Wants a clear scoreboard</td><td>Wants a steady, fixed income</td></tr>
+  <tr><td>Enjoys the same clients for years</td><td>Wants to make the decisions</td></tr>
+  <tr><td>Likes markets but not betting</td><td>Wants deep, slow analysis</td></tr>
+</table>
+
+<h2>The internship is the real test</h2>
+<p>You do not have to decide today. Six weeks on the desks will tell you more than any pack. If you get there, watch for these:</p>
+<ul>
+  <li><strong>Do I enjoy the noise,</strong> or does it wear me out by Wednesday?</li>
+  <li><strong>How do the senior brokers treat the juniors?</strong></li>
+  <li><strong>Does anyone actually teach?</strong></li>
+  <li><strong>Which desk has people I would want to sit with for years?</strong></li>
+  <li><strong>Do I still want to pick up the phone after a bad day?</strong></li>
+</ul>
+
+<div class="box">
+  <span class="tag">My honest read, from what you have told me</span>
+  You sold to the public from 14. You liked the middle seat at Pictet. You debate for fun, on fifteen minutes' notice. Those are the habits of someone who would enjoy this job. But you know yourself better than I do. <strong>Trust your ticks above my guess.</strong>
+</div>
+</section>
+
+<!-- ============ CH 6 ============ -->
+<section>
+<div class="kicker">Chapter 6</div>
+<h1>How to talk about it in the interview</h1>
+<p class="lead">Knowing the hard parts is a strength. It shows you have thought about doing the job, not just getting it.</p>
+
+<h2>"What does a broker do?"</h2>
+<div class="box fact">
+  <span class="tag">20 seconds</span>
+  "A broker talks to traders at banks and funds all day, finds two who want opposite things, and helps them agree a price. The firm earns a small fee from each side. The broker never takes the risk."
+</div>
+
+<h2>"What skills does a broker need?"</h2>
+<div class="box fact">
+  <span class="tag">40 seconds</span>
+  "I'd pick three. Listening, because clients rarely say exactly what they want. Trust, because a trader gives the big orders to the broker who keeps a secret. And bouncing back, because most calls end in no. I built the first and third selling school uniform to parents from the age of 14, and the second working with pension fund clients at Pictet."
+</div>
+
+<h2>"What do you think will be hardest?"</h2>
+<div class="box fact">
+  <span class="tag">30 seconds</span>
+  "I think it will be hearing no so often, and having my results seen every day. I'd rather that than not know how I'm doing. And I've had practice: in debating you lose a round and are back up an hour later, and in the shop not every customer was pleased to see you."
+</div>
+
+<h2>"What appeals to you most about the role?"</h2>
+<div class="box fact">
+  <span class="tag">30 seconds</span>
+  "Two things. The middle seat: helping two sides agree is the part of work I've enjoyed most. And the scoreboard: I like knowing each day how I did. Broking is the one role I've found with both."
+</div>
+
+<h2>"Why would you be good at it?"</h2>
+<p>Use the three-proof answer in Part 9: the shop, Pictet and debating.</p>
+
+<div class="box warn">
+  <span class="tag">What not to say</span>
+  Do not mention pay as your reason. Do not repeat the complaints from reviews. And do not say the hardest part is "working too hard". Pick a real hard part of the job, then show you have met something like it before.
+</div>
+
+<h2>Where this comes from</h2>
+<ul class="src">
+  <li>What brokers like and dislike: anonymous Glassdoor reviews of TP ICAP brokers, read through a search summary. <a href="https://www.glassdoor.co.uk/Reviews/TP-ICAP-Broker-London-Reviews-EI_IE1621849.0,7_KO8,14_IL.15,21_IC2671300.htm">glassdoor.co.uk</a>. A small, self-chosen sample.</li>
+  <li>Hours and the working day: a junior broker's account at a rival firm on <a href="https://www.brightnetwork.co.uk/employer-advice/bgc-partners/day-life-junior-broker-bgc-partners">Bright Network</a>, and older eFinancialCareers guides to interdealer broking.</li>
+  <li>Pay being tied to revenue: TP ICAP's 2025 Annual Report says front office costs vary with revenue.</li>
+  <li>The internship details: the job advert you shared.</li>
+  <li>The ten skills, the scenes and the test are my own, built from how the job works. They are not TP ICAP's list.</li>
+</ul>
+</section>
+
+</body>
+</html>
