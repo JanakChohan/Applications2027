@@ -1,0 +1,1156 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Rubrik Products, Taught From Zero</title>
+<style>
+  :root {
+    --bg: #FBF4E4;
+    --panel: #F3E9D2;
+    --panel-2: #E6EFE6;
+    --panel-3: #F7E3D0;
+    --ink: #2A2A2A;
+    --head: #173B4F;
+    --teal: #0B6468;
+    --orange: #A8480F;
+    --line: #CDBF9F;
+  }
+  @page { size: A4; margin: 17mm 17mm 19mm 17mm; }
+  * { box-sizing: border-box; }
+  html, body { background: var(--bg); }
+  body {
+    margin: 0;
+    font-family: Verdana, "DejaVu Sans", Arial, "Liberation Sans", sans-serif;
+    font-size: 11.6pt;
+    line-height: 1.62;
+    letter-spacing: 0.012em;
+    word-spacing: 0.06em;
+    color: var(--ink);
+    text-align: left;
+  }
+  h1, h2, h3, h4 { color: var(--head); line-height: 1.3; break-after: avoid; margin: 0; }
+  h1 { font-size: 27pt; margin-bottom: 6mm; }
+  h2 { font-size: 20pt; margin: 0 0 5mm; padding-bottom: 2.5mm; border-bottom: 2.2pt solid var(--teal); }
+  h3 { font-size: 14.5pt; margin: 8mm 0 2.5mm; color: var(--teal); }
+  h4 { font-size: 12pt; margin: 5mm 0 1.5mm; }
+  p { margin: 0 0 3.6mm; orphans: 2; widows: 2; }
+  ul, ol { margin: 0 0 4mm; padding-left: 6.5mm; }
+  li { margin-bottom: 2.3mm; padding-left: 1mm; }
+  strong { color: #111; }
+  section { break-before: page; }
+  section.first { break-before: auto; }
+  .num { display: inline-block; background: var(--teal); color: #fff; border-radius: 3mm; padding: 0.3mm 3.2mm; margin-right: 2.5mm; font-size: 16pt; }
+  .box { background: var(--panel); border-left: 2.2mm solid var(--teal); border-radius: 2mm; padding: 4mm 5mm 1.2mm; margin: 4.5mm 0 5mm; break-inside: avoid; }
+  .box.key { background: var(--panel-2); }
+  .box.warn { background: var(--panel-3); border-left-color: var(--orange); }
+  .box .label { font-weight: bold; color: var(--head); display: block; margin-bottom: 1.5mm; }
+  .box.warn .label { color: var(--orange); }
+  figure { margin: 5mm 0 5mm; break-inside: avoid; }
+  figure svg { width: 100%; height: auto; display: block; border: 0.6pt solid var(--line); border-radius: 2mm; background: #FFFBF0; }
+  figcaption { margin-top: 3mm; background: var(--panel); border-radius: 2mm; padding: 3.5mm 4.5mm 0.6mm; font-size: 10.8pt; }
+  figcaption .label { font-weight: bold; color: var(--head); display: block; margin-bottom: 1mm; }
+  table { width: 100%; border-collapse: collapse; margin: 4mm 0 5mm; font-size: 10.2pt; line-height: 1.5; }
+  tr { break-inside: avoid; }
+  thead { display: table-header-group; }
+  table.keep { break-inside: avoid; }
+  th, td { text-align: left; vertical-align: top; padding: 2.4mm 2.6mm; border-bottom: 0.6pt solid var(--line); }
+  th { background: var(--head); color: #fff; font-weight: bold; }
+  tr:nth-child(even) td { background: #F6EEDB; }
+  .cover { min-height: 250mm; display: flex; flex-direction: column; justify-content: center; }
+  .cover .tag { font-size: 14pt; color: var(--teal); font-weight: bold; margin-bottom: 4mm; }
+  .cover .sub { font-size: 13pt; max-width: 150mm; }
+  .toc { list-style: none; padding: 0; margin: 8mm 0 0; }
+  .toc li { padding: 1.6mm 0; border-bottom: 0.6pt dotted var(--line); margin: 0; }
+  .toc b { color: var(--teal); display: inline-block; width: 9mm; }
+  .steps { list-style: none; padding: 0; counter-reset: step; }
+  .steps li { counter-increment: step; position: relative; padding: 0 0 0 13mm; margin-bottom: 3mm; break-inside: avoid; }
+  .steps li::before { content: counter(step); position: absolute; left: 0; top: 0.4mm; width: 8.5mm; height: 8.5mm; border-radius: 50%; background: var(--teal); color: #fff; font-weight: bold; text-align: center; line-height: 8.5mm; font-size: 11pt; }
+  .steps li b.t { display: block; color: var(--head); }
+  .idea { margin: 7mm 0 0; padding-top: 4mm; border-top: 1.6mm solid var(--teal); }
+  .idea h4 { margin-top: 0; font-size: 13pt; color: var(--teal); }
+  .idea h4 + p { break-after: avoid; break-inside: avoid; }
+  .idea .q { break-inside: avoid; break-after: avoid; background: #FFFBF0; border: 0.8pt solid var(--teal); border-radius: 2mm; padding: 3mm 4mm; margin: 2.5mm 0 3.5mm; font-weight: bold; color: var(--head); }
+  .small { font-size: 9.6pt; line-height: 1.5; }
+  .src li { margin-bottom: 1.4mm; word-break: break-word; }
+  a { color: var(--teal); text-decoration: none; }
+  svg text { font-family: Verdana, "DejaVu Sans", Arial, sans-serif; fill: #2A2A2A; }
+</style>
+</head>
+<body>
+
+<!-- ============================ COVER ============================ -->
+<section class="first">
+  <div class="cover">
+    <div class="tag">Product guide for a new starter</div>
+    <h1>Rubrik's products, taught from zero</h1>
+    <p class="sub">Imagine it is your first week. This guide walks you through everything Rubrik sells, what each fancy product name really means, and a real-life example for each one.</p>
+    <p class="sub">The aim is understanding, not memorising. If you understand the problem each product solves, the names take care of themselves.</p>
+    <p class="sub"><strong>Facts checked on:</strong> 26 November 2026.</p>
+
+    <ul class="toc">
+      <li><b>1</b> How to use this guide</li>
+      <li><b>2</b> The basics you need first</li>
+      <li><b>3</b> One bad week: the whole product range in a story</li>
+      <li><b>4</b> The products that protect data</li>
+      <li><b>5</b> The products that find and fix an attack</li>
+      <li><b>6</b> The products that protect logins</li>
+      <li><b>7</b> The products that supervise AI assistants</li>
+      <li><b>8</b> How it is sold, and the services around it</li>
+      <li><b>9</b> Deep dive: the product in your application answer</li>
+      <li><b>10</b> Talking about products in the interview</li>
+      <li><b>11</b> Name decoder and self-test</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================ 1 ============================ -->
+<section>
+  <h2><span class="num">1</span>How to use this guide</h2>
+
+  <h3>The secret about product names</h3>
+  <p>You have seen this before. Products get grand names, and behind each name is a simple idea. Rubrik is the same.</p>
+  <p><strong>"Preemptive Recovery Engine"</strong> means "we work out which backup is safe before you need it". <strong>"Quorum Authorization"</strong> means "two people must agree before anything is deleted".</p>
+
+  <div class="box key">
+    <span class="label">The one idea behind every product</span>
+    <p><strong>Something valuable gets broken, and Rubrik puts it back the way it was before it broke.</strong></p>
+    <p>Each product is that same idea applied to a different valuable thing: files, cloud systems, email, logins, or the work of an AI assistant.</p>
+  </div>
+
+  <h3>How each product is explained</h3>
+  <p>Every product in this guide follows the same pattern, so you always know where to look.</p>
+  <ul>
+    <li><strong>The name,</strong> and what it means in plain English.</li>
+    <li><strong>The problem.</strong> What goes wrong for a customer without it.</li>
+    <li><strong>How it works.</strong> In steps, with any technical word translated.</li>
+    <li><strong>A real-life example.</strong> A real incident where I have one, a made-up one where I do not. I say which.</li>
+    <li><strong>Say it in one sentence.</strong> How you would explain it in an interview.</li>
+  </ul>
+
+  <p><strong>Short on time?</strong> Read Sections 2, 3 and 9, then try the self-test in Section 11.</p>
+
+  <div class="box">
+    <span class="label">A test for real understanding</span>
+    <p>For any product, ask yourself: <strong>"What would go wrong for the customer if this did not exist?"</strong> If you can answer that, you understand it. The name and the features follow from the answer.</p>
+  </div>
+</section>
+
+<!-- ============================ 2 ============================ -->
+<section>
+  <h2><span class="num">2</span>The basics you need first</h2>
+
+  <p>Rubrik's products only make sense once you know what they are protecting and what they are protecting it from. This section starts from nothing.</p>
+
+  <h3>What a company's technology is made of</h3>
+  <table class="keep">
+    <tr><th style="width:26%">Thing</th><th>What it is</th><th style="width:30%">Everyday comparison</th></tr>
+    <tr><td><strong>Servers</strong></td><td>Powerful computers that run the company's systems, such as tills, payroll and the website.</td><td>The engine room.</td></tr>
+    <tr><td><strong>Data</strong></td><td>Everything stored: customer records, orders, documents, emails.</td><td>The filing cabinets.</td></tr>
+    <tr><td><strong>The cloud</strong></td><td>Servers and storage rented from Amazon, Microsoft or Google instead of owned.</td><td>Renting a warehouse instead of building one.</td></tr>
+    <tr><td><strong>Online apps</strong></td><td>Software used through a web browser, such as Microsoft 365 for email. The industry word is SaaS.</td><td>Netflix instead of DVDs.</td></tr>
+    <tr><td><strong>The login system</strong></td><td>The list of every member of staff, their password, and what each is allowed to open. The industry word is "identity".</td><td>The staff ID cards and the key cabinet.</td></tr>
+    <tr><td><strong>AI agents</strong></td><td>AI assistants that do tasks by themselves, such as changing code or updating records.</td><td>A new hire who works very fast and never sleeps.</td></tr>
+  </table>
+
+  <h3>What a backup is</h3>
+  <p>A <strong>backup</strong> is a spare copy of data, kept in case the original is lost or damaged. If the original breaks, you copy the spare back. That copying back is called a <strong>restore</strong> or <strong>recovery</strong>.</p>
+  <p>Think of the save points in a video game. You save before a hard level. If it goes wrong, you reload the save.</p>
+
+  <h3>What ransomware is</h3>
+  <p><strong>Ransomware</strong> is malicious software that scrambles a company's files so they cannot be read. The criminals then demand money for the key to unscramble them.</p>
+  <p>The technical word for scrambling is <strong>encryption</strong>. Scrambled files are useless without the key, so tills stop, websites go down and staff cannot work.</p>
+
+  <h3>How a modern attack unfolds</h3>
+  <p>This is the most useful thing to understand in the whole guide. Attacks follow a pattern, and each Rubrik product answers one step of it.</p>
+
+  <figure>
+    <svg viewBox="0 0 720 330" role="img" aria-label="Five steps of an attack along the top with Rubrik's response to each along the bottom">
+      <defs>
+        <marker id="at1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#A8480F"/></marker>
+      </defs>
+      <text x="360" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#173B4F">An attack in five steps, and where Rubrik steps in</text>
+      <text x="24" y="58" font-size="13.5" font-weight="bold" fill="#A8480F">What the attacker does</text>
+      <g font-size="12.5">
+        <rect x="24" y="68" width="126" height="92" rx="8" fill="#F7E3D0" stroke="#A8480F" stroke-width="1.5"/>
+        <text x="87" y="92" text-anchor="middle" font-weight="bold" font-size="12.3">1. Gets in</text>
+        <text x="87" y="116" text-anchor="middle">Tricks someone</text>
+        <text x="87" y="134" text-anchor="middle">into giving</text>
+        <text x="87" y="152" text-anchor="middle">a login</text>
+
+        <rect x="161" y="68" width="126" height="92" rx="8" fill="#F7E3D0" stroke="#A8480F" stroke-width="1.5"/>
+        <text x="224" y="92" text-anchor="middle" font-weight="bold" font-size="12.3">2. Looks around</text>
+        <text x="224" y="116" text-anchor="middle">Copies the</text>
+        <text x="224" y="134" text-anchor="middle">password list,</text>
+        <text x="224" y="152" text-anchor="middle">finds valuables</text>
+
+        <rect x="298" y="68" width="126" height="92" rx="8" fill="#F7E3D0" stroke="#A8480F" stroke-width="1.5"/>
+        <text x="361" y="92" text-anchor="middle" font-weight="bold" font-size="12.3">3. Hits backups</text>
+        <text x="361" y="116" text-anchor="middle">Tries to delete</text>
+        <text x="361" y="134" text-anchor="middle">the spare</text>
+        <text x="361" y="152" text-anchor="middle">copies</text>
+
+        <rect x="435" y="68" width="126" height="92" rx="8" fill="#F7E3D0" stroke="#A8480F" stroke-width="1.5"/>
+        <text x="498" y="92" text-anchor="middle" font-weight="bold" font-size="12.3">4. Scrambles</text>
+        <text x="498" y="116" text-anchor="middle">Locks servers,</text>
+        <text x="498" y="134" text-anchor="middle">files and the</text>
+        <text x="498" y="152" text-anchor="middle">login system</text>
+
+        <rect x="572" y="68" width="126" height="92" rx="8" fill="#F7E3D0" stroke="#A8480F" stroke-width="1.5"/>
+        <text x="635" y="92" text-anchor="middle" font-weight="bold" font-size="12.3">5. Demands</text>
+        <text x="635" y="116" text-anchor="middle">"Pay us or</text>
+        <text x="635" y="134" text-anchor="middle">stay closed"</text>
+      </g>
+      <g stroke="#A8480F" stroke-width="2.5">
+        <line x1="151" y1="114" x2="159" y2="114" marker-end="url(#at1)"/>
+        <line x1="288" y1="114" x2="296" y2="114" marker-end="url(#at1)"/>
+        <line x1="425" y1="114" x2="433" y2="114" marker-end="url(#at1)"/>
+        <line x1="562" y1="114" x2="570" y2="114" marker-end="url(#at1)"/>
+      </g>
+      <text x="24" y="196" font-size="13.5" font-weight="bold" fill="#0B6468">What Rubrik does about it</text>
+      <g font-size="12.5">
+        <rect x="24" y="206" width="126" height="104" rx="8" fill="#FFFBF0" stroke="#6B7F8C" stroke-width="1.5" stroke-dasharray="6 5"/>
+        <text x="87" y="232" text-anchor="middle" font-weight="bold">Not Rubrik</text>
+        <text x="87" y="256" text-anchor="middle">Alarm-type</text>
+        <text x="87" y="274" text-anchor="middle">security firms</text>
+        <text x="87" y="292" text-anchor="middle">cover this</text>
+
+        <rect x="161" y="206" width="126" height="104" rx="8" fill="#E6EFE6" stroke="#0B6468" stroke-width="1.5"/>
+        <text x="224" y="232" text-anchor="middle" font-weight="bold">Data map</text>
+        <text x="224" y="256" text-anchor="middle">Shows what is</text>
+        <text x="224" y="274" text-anchor="middle">sensitive and</text>
+        <text x="224" y="292" text-anchor="middle">who can reach it</text>
+
+        <rect x="298" y="206" width="126" height="104" rx="8" fill="#E6EFE6" stroke="#0B6468" stroke-width="1.5"/>
+        <text x="361" y="232" text-anchor="middle" font-weight="bold">The locks</text>
+        <text x="361" y="256" text-anchor="middle">Copies cannot</text>
+        <text x="361" y="274" text-anchor="middle">be changed</text>
+        <text x="361" y="292" text-anchor="middle">or deleted</text>
+
+        <rect x="435" y="206" width="126" height="104" rx="8" fill="#E6EFE6" stroke="#0B6468" stroke-width="1.5"/>
+        <text x="498" y="232" text-anchor="middle" font-weight="bold">The alarm</text>
+        <text x="498" y="256" text-anchor="middle">Spots the</text>
+        <text x="498" y="274" text-anchor="middle">scrambling from</text>
+        <text x="498" y="292" text-anchor="middle">the copies</text>
+
+        <rect x="572" y="206" width="126" height="104" rx="8" fill="#E6EFE6" stroke="#0B6468" stroke-width="1.5"/>
+        <text x="635" y="232" text-anchor="middle" font-weight="bold">The rebuild</text>
+        <text x="635" y="256" text-anchor="middle">Find clean copy,</text>
+        <text x="635" y="274" text-anchor="middle">fix logins, restore.</text>
+        <text x="635" y="292" text-anchor="middle">No ransom</text>
+      </g>
+    </svg>
+    <figcaption>
+      <span class="label">How to read this diagram</span>
+      <p>The orange row is the attacker's five steps, left to right. The row underneath shows Rubrik's answer to each step. The dashed box is honest: Rubrik does not try to stop people getting in.</p>
+    </figcaption>
+  </figure>
+
+  <div class="box key">
+    <span class="label">The key insight: step 3</span>
+    <p>Attackers delete the backups <strong>before</strong> they scramble anything. A victim with working backups just restores and ignores the ransom demand. A victim with no backups has to pay.</p>
+    <p><strong>So the whole game is whether the backups survive.</strong> Rubrik was designed around that one fact.</p>
+  </div>
+
+  <h3>Where Rubrik sits among security companies</h3>
+  <ul>
+    <li><strong>Alarm companies</strong> try to keep attackers out and spot them inside. Examples: CrowdStrike, Palo Alto Networks, Microsoft Defender.</li>
+    <li><strong>Rubrik</strong> assumes the alarm will sometimes fail. It makes sure you can get back up afterwards. The industry phrase is <strong>cyber resilience</strong>.</li>
+    <li>The two are partners. Rubrik feeds what it finds into the alarm companies' tools.</li>
+  </ul>
+</section>
+
+<!-- ============================ 3 ============================ -->
+<section>
+  <h2><span class="num">3</span>One bad week: the whole range in a story</h2>
+
+  <p>This story is made up, but each step is based on how real attacks and real recoveries work. Follow it once and you have seen every product do its job.</p>
+  <p>Meet <strong>Harlow &amp; Finch</strong>, a UK clothing retailer with 300 shops. They bought Rubrik last year.</p>
+
+  <ol class="steps">
+    <li><b class="t">Months before: quiet copying.</b> Every few hours, Rubrik takes a sealed copy of the tills system, the warehouse system, email and the login system. <strong>Product: Data Protection.</strong></li>
+    <li><b class="t">Monday: the phone call.</b> A criminal rings the IT help desk pretending to be a manager who is locked out. The help desk resets the password. The criminal is in. <strong>Rubrik does not stop this.</strong></li>
+    <li><b class="t">Tuesday: looking around.</b> The intruder copies the company's password list and quietly creates two hidden administrator accounts for later.</li>
+    <li><b class="t">Wednesday: going for the backups.</b> The intruder finds the backup system and tries to delete every copy. It fails. The copies cannot be edited, and deleting needs two named people to approve. <strong>Product: the locks.</strong></li>
+    <li><b class="t">Thursday 2am: the scramble.</b> Ransomware locks the servers and the login system. Shops cannot take card payments.</li>
+    <li><b class="t">Thursday 2:20am: the alarm.</b> Rubrik's next copy looks wrong. 400,000 files changed overnight and they look random. It raises an alert. <strong>Product: Anomaly Detection.</strong></li>
+    <li><b class="t">Thursday 6am: getting in.</b> Staff cannot log in to anything, because the login system is locked. But Rubrik's control screen has its own separate sign-in, so the recovery team can start work.</li>
+    <li><b class="t">Thursday morning: which copy is clean?</b> The intruder has been inside since Monday. Rubrik searches every copy for the attacker's files and marks the last clean one. <strong>Product: Threat Hunting.</strong></li>
+    <li><b class="t">Thursday afternoon: logins first.</b> Nothing else can come back until staff can sign in. Rubrik rebuilds the login system on a brand-new machine, leaving the intruder's hidden tools behind. <strong>Product: Identity Recovery.</strong></li>
+    <li><b class="t">Friday: tills back in minutes.</b> Rubrik starts the tills system running straight from the backup copy, then restores the rest in a planned order. <strong>Products: Live Mount and recovery plans.</strong></li>
+    <li><b class="t">Saturday: what did they see?</b> The company must tell its regulator what was exposed. Rubrik's map shows which stolen folders held customer card details. <strong>Product: sensitive-data mapping.</strong></li>
+    <li><b class="t">Three months later: AI assistants.</b> Harlow &amp; Finch gives its software team AI coding assistants. It adds Rubrik's newest product to watch them and undo their mistakes. <strong>Product: Agent Cloud.</strong></li>
+  </ol>
+
+  <div class="box key">
+    <span class="label">What the story shows</span>
+    <p>No ransom was paid. The shops were shut for about a day and a half, not a month. And every product had one clear job at one clear moment.</p>
+    <p>When someone asks "what does Rubrik sell?", you can now answer: <strong>everything a company needs between "we've been hit" and "we're trading again".</strong></p>
+  </div>
+
+  <h3>The whole range on one map</h3>
+  <figure>
+    <svg viewBox="0 0 720 400" role="img" aria-label="Map of Rubrik's two platforms and their parts">
+      <text x="360" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#173B4F">Rubrik's product map</text>
+      <rect x="24" y="44" width="672" height="46" rx="8" fill="#173B4F"/>
+      <text x="360" y="73" text-anchor="middle" font-size="15" font-weight="bold" style="fill:#fff">Rubrik AI: an assistant that runs both platforms for you</text>
+
+      <rect x="24" y="102" width="388" height="230" rx="10" fill="#E6EFE6" stroke="#0B6468" stroke-width="2"/>
+      <text x="218" y="128" text-anchor="middle" font-size="15" font-weight="bold">Rubrik Security Cloud</text>
+      <text x="218" y="148" text-anchor="middle" font-size="13">Protects data and logins</text>
+      <g font-size="13.5">
+        <rect x="40" y="162" width="172" height="72" rx="7" fill="#FFFBF0" stroke="#0B6468"/>
+        <text x="126" y="191" text-anchor="middle" font-weight="bold">A. Data</text>
+        <text x="126" y="211" text-anchor="middle" font-weight="bold">Protection</text>
+        <rect x="224" y="162" width="172" height="72" rx="7" fill="#FFFBF0" stroke="#0B6468"/>
+        <text x="310" y="191" text-anchor="middle" font-weight="bold">B. Attack</text>
+        <text x="310" y="211" text-anchor="middle" font-weight="bold">Recovery</text>
+        <rect x="40" y="246" width="172" height="72" rx="7" fill="#FFFBF0" stroke="#0B6468"/>
+        <text x="126" y="275" text-anchor="middle" font-weight="bold">C. Sensitive-Data</text>
+        <text x="126" y="295" text-anchor="middle" font-weight="bold">Mapping</text>
+        <rect x="224" y="246" width="172" height="72" rx="7" fill="#FFFBF0" stroke="#0B6468"/>
+        <text x="310" y="275" text-anchor="middle" font-weight="bold">D. Identity</text>
+        <text x="310" y="295" text-anchor="middle" font-weight="bold">Resilience</text>
+      </g>
+
+      <rect x="424" y="102" width="272" height="230" rx="10" fill="#F7E3D0" stroke="#A8480F" stroke-width="2"/>
+      <text x="560" y="128" text-anchor="middle" font-size="15" font-weight="bold">Rubrik Agent Cloud</text>
+      <text x="560" y="148" text-anchor="middle" font-size="13">Supervises AI assistants</text>
+      <g font-size="13.5">
+        <rect x="440" y="162" width="240" height="34" rx="7" fill="#FFFBF0" stroke="#A8480F"/>
+        <text x="560" y="184" text-anchor="middle" font-weight="bold">E1. Watch (Observability)</text>
+        <rect x="440" y="203" width="240" height="34" rx="7" fill="#FFFBF0" stroke="#A8480F"/>
+        <text x="560" y="225" text-anchor="middle" font-weight="bold">E2. Permit (Agent Identity)</text>
+        <rect x="440" y="244" width="240" height="34" rx="7" fill="#FFFBF0" stroke="#A8480F"/>
+        <text x="560" y="266" text-anchor="middle" font-weight="bold">E3. Stop (Runtime Security)</text>
+        <rect x="440" y="285" width="240" height="34" rx="7" fill="#FFFBF0" stroke="#A8480F"/>
+        <text x="560" y="307" text-anchor="middle" font-weight="bold">E4. Undo (Agent Rewind)</text>
+      </g>
+
+      <rect x="24" y="344" width="672" height="42" rx="8" fill="#F3E9D2" stroke="#173B4F"/>
+      <text x="360" y="370" text-anchor="middle" font-size="14" font-weight="bold">Underneath it all: sealed storage that cannot be altered</text>
+    </svg>
+    <figcaption>
+      <span class="label">How to read this diagram</span>
+      <p>Green is the older, bigger business. Orange is the new bet, launched in late 2025. The top bar is an AI helper for both. The bottom bar is the sealed storage everything depends on.</p>
+    </figcaption>
+  </figure>
+  <p>Sections 4 to 6 cover the green block. Section 7 covers the orange block. Section 8 covers the top bar and how it is all sold.</p>
+</section>
+
+<!-- ============================ 4 ============================ -->
+<section>
+  <h2><span class="num">4</span>The products that protect data</h2>
+
+  <p>This is the foundation. Most customers start here, and every other product depends on it.</p>
+
+  <h3>4.1 Backup and Recovery</h3>
+  <div class="box key">
+    <span class="label">In plain English</span>
+    <p><strong>Regular spare copies of everything, with a way to put them back.</strong> Rubrik's name for the family is "Data Protection".</p>
+  </div>
+  <h4>The problem</h4>
+  <p>Systems break, people delete things, and attackers scramble files. Without a recent copy, the data is gone.</p>
+  <h4>How it works</h4>
+  <figure>
+    <svg viewBox="0 0 720 262" role="img" aria-label="Four steps in making and using a protected copy">
+      <defs>
+        <marker id="k1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#173B4F"/></marker>
+      </defs>
+      <text x="360" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#173B4F">How one protected copy is made and used</text>
+      <g font-size="13">
+        <rect x="24" y="52" width="150" height="112" rx="9" fill="#F3E9D2" stroke="#173B4F" stroke-width="1.5"/>
+        <text x="99" y="80" text-anchor="middle" font-weight="bold" font-size="14">1. Read</text>
+        <text x="99" y="106" text-anchor="middle">Copy only what</text>
+        <text x="99" y="126" text-anchor="middle">has changed since</text>
+        <text x="99" y="146" text-anchor="middle">last time</text>
+
+        <rect x="198" y="52" width="150" height="112" rx="9" fill="#E6EFE6" stroke="#0B6468" stroke-width="1.5"/>
+        <text x="273" y="80" text-anchor="middle" font-weight="bold" font-size="14">2. Seal</text>
+        <text x="273" y="106" text-anchor="middle">Shrink it, scramble</text>
+        <text x="273" y="126" text-anchor="middle">it, write it where it</text>
+        <text x="273" y="146" text-anchor="middle">cannot be edited</text>
+
+        <rect x="372" y="52" width="150" height="112" rx="9" fill="#E6EFE6" stroke="#0B6468" stroke-width="1.5"/>
+        <text x="447" y="80" text-anchor="middle" font-weight="bold" font-size="14">3. Inspect</text>
+        <text x="447" y="106" text-anchor="middle">Fingerprint every</text>
+        <text x="447" y="126" text-anchor="middle">file. Compare with</text>
+        <text x="447" y="146" text-anchor="middle">the last copy</text>
+
+        <rect x="546" y="52" width="150" height="112" rx="9" fill="#F7E3D0" stroke="#A8480F" stroke-width="1.5"/>
+        <text x="621" y="80" text-anchor="middle" font-weight="bold" font-size="14">4. Restore</text>
+        <text x="621" y="106" text-anchor="middle">Run the system</text>
+        <text x="621" y="126" text-anchor="middle">from the copy, or</text>
+        <text x="621" y="146" text-anchor="middle">copy it back</text>
+      </g>
+      <g stroke="#173B4F" stroke-width="2.5">
+        <line x1="176" y1="108" x2="194" y2="108" marker-end="url(#k1)"/>
+        <line x1="350" y1="108" x2="368" y2="108" marker-end="url(#k1)"/>
+        <line x1="524" y1="108" x2="542" y2="108" marker-end="url(#k1)"/>
+      </g>
+      <rect x="24" y="186" width="672" height="56" rx="8" fill="#FFFBF0" stroke="#173B4F"/>
+      <text x="360" y="210" text-anchor="middle" font-size="13.5" font-weight="bold">The customer's rule drives all four steps</text>
+      <text x="360" y="230" text-anchor="middle" font-size="13">How often to copy, how long to keep it, where to hold a second copy</text>
+    </svg>
+    <figcaption>
+      <span class="label">How to read this diagram</span>
+      <p>Read the four boxes left to right. Steps 1 to 3 happen automatically, many times a day. Step 4 only happens when something has gone wrong. The bar underneath is the one thing the customer has to decide.</p>
+    </figcaption>
+  </figure>
+  <ul>
+    <li><strong>The customer writes one simple rule.</strong> For example: "copy the tills system every four hours, keep copies for a year, and hold a second copy in another country".</li>
+    <li>Rubrik calls this rule an <strong>SLA Domain</strong>. Think of it as a standing order. You say what you want, and the software works out how.</li>
+    <li><strong>Only changes are copied.</strong> After the first full copy, each run collects just what is new. This keeps it quick.</li>
+    <li><strong>Each copy is one moment in time.</strong> The industry word is <strong>snapshot</strong>. You can go back to any of them.</li>
+  </ul>
+  <h4>Real-life example</h4>
+  <p>Northumbria Healthcare NHS Trust, a real Rubrik customer, says it can now recover a system in about five minutes. For a hospital, that is the difference between a delay and a cancelled clinic.</p>
+  <div class="box">
+    <span class="label">Say it in one sentence</span>
+    <p>"It takes regular copies of a company's systems, based on one simple rule the customer sets, so anything can be put back to how it was."</p>
+  </div>
+
+  <h3>4.2 The locks on the vault</h3>
+  <div class="box key">
+    <span class="label">In plain English</span>
+    <p><strong>Four protections that stop anyone, including a thief with a stolen password, from destroying the copies.</strong></p>
+  </div>
+  <h4>The problem</h4>
+  <p>Ordinary backups are just files on the network. Anyone with an administrator's password can delete them. That is step 3 of the attack.</p>
+  <h4>How it works</h4>
+  <table class="keep">
+    <tr><th style="width:28%">Fancy name</th><th>What it really means</th><th style="width:28%">Everyday comparison</th></tr>
+    <tr><td><strong>Immutable storage</strong></td><td>Copies are written once and can never be edited afterwards.</td><td>Ink, not pencil.</td></tr>
+    <tr><td><strong>Logical air gap</strong></td><td>Copies cannot be reached through the normal file-sharing routes on the network.</td><td>A safe with no door on the street side.</td></tr>
+    <tr><td><strong>Retention Lock</strong></td><td>Once you say "keep for a year", nobody can shorten it.</td><td>A time-lock on a bank vault.</td></tr>
+    <tr><td><strong>Quorum Authorization</strong></td><td>Two named people must both approve before copies are deleted.</td><td>Two keys turned at once.</td></tr>
+  </table>
+  <h4>Real-life example</h4>
+  <p>A made-up but typical one. An attacker steals the IT manager's login and types the command to delete all backups. With ordinary backups, they are gone in seconds.</p>
+  <p>With these locks, the command fails. The copies cannot be edited, the keep-until date cannot be moved, and a second person would have to approve.</p>
+  <div class="box">
+    <span class="label">Say it in one sentence</span>
+    <p>"Even if an attacker steals an administrator's password, they still cannot change or delete the backups."</p>
+  </div>
+
+  <h3>4.3 Live Mount</h3>
+  <div class="box key">
+    <span class="label">In plain English</span>
+    <p><strong>Running a system straight from its backup copy, without waiting to copy it all back first.</strong></p>
+  </div>
+  <h4>The problem</h4>
+  <p>Copying a large system back can take hours or days. The business is shut the whole time.</p>
+  <h4>How it works</h4>
+  <ul>
+    <li>Rubrik switches the system on <strong>where the copy already sits</strong>, inside Rubrik's storage.</li>
+    <li>Staff start working on it within minutes.</li>
+    <li>In the background, the data is moved back to its proper home. Nobody notices the switch.</li>
+  </ul>
+  <h4>Real-life example</h4>
+  <p>It is the difference between <strong>streaming a film and downloading it</strong>. With streaming, you press play now. With downloading, you wait for the whole file first.</p>
+  <div class="box">
+    <span class="label">Say it in one sentence</span>
+    <p>"Instead of waiting hours to copy a system back, Rubrik runs it directly from the backup so people are working again in minutes."</p>
+  </div>
+
+  <h3>4.4 Protection wherever the data lives</h3>
+  <div class="box key">
+    <span class="label">In plain English</span>
+    <p><strong>The same backup idea, applied to every place a company keeps things.</strong> Each place has its own product name.</p>
+  </div>
+  <table>
+    <tr><th style="width:30%">Where</th><th>What Rubrik protects</th><th style="width:28%">Product name</th></tr>
+    <tr><td><strong>The company's own buildings</strong></td><td>Servers, databases and large shared file stores.</td><td>Enterprise Data Protection</td></tr>
+    <tr><td><strong>Rented cloud</strong></td><td>Systems in Amazon Web Services, Microsoft Azure and Google Cloud.</td><td>Cloud Data Protection</td></tr>
+    <tr><td><strong>Online apps</strong></td><td>Microsoft 365 (email, Teams, files), Salesforce, Jira.</td><td>SaaS Data Protection</td></tr>
+    <tr><td><strong>Code stores</strong></td><td>GitHub and Azure DevOps, where software teams keep their code.</td><td>DevOps Protection</td></tr>
+    <tr><td><strong>Huge file collections</strong></td><td>Billions of documents, scans or videos.</td><td>NAS Cloud Direct</td></tr>
+  </table>
+  <h4>The problem most people do not know about</h4>
+  <p>Many companies assume Microsoft, Amazon or Google back up their data for them. They do not.</p>
+  <p>The providers keep the <strong>service</strong> running. Protecting what you put <strong>in</strong> it is your job. The industry calls this the <strong>shared responsibility model</strong>.</p>
+  <h4>Real-life example</h4>
+  <p>In Microsoft 365, a deleted file sits in a recycle bin for 93 days, and deleted emails for 14 to 30 days. After that it is gone.</p>
+  <p>Notice a deletion four months later and Microsoft cannot help. A separate backup can.</p>
+  <div class="box">
+    <span class="label">Say it in one sentence</span>
+    <p>"Cloud providers keep their service running, but they don't protect what you store in it, so Rubrik backs that up too."</p>
+  </div>
+
+  <h3>4.5 Rubrik Cloud Vault</h3>
+  <div class="box key">
+    <span class="label">In plain English</span>
+    <p><strong>An extra copy kept in an account that Rubrik owns and runs, with completely separate logins.</strong></p>
+  </div>
+  <p><strong>The problem:</strong> if the customer controls every copy, an attacker who takes over the customer's accounts can reach every copy.</p>
+  <p><strong>How it works:</strong> Rubrik holds one more copy in its own account at a cloud provider. The customer's passwords do not open it, so stealing them does not help.</p>
+  <p><strong>Think of it as</strong> a <strong>safety deposit box at a different bank</strong>. A burglar with your house keys still cannot get to it.</p>
+  <div class="box">
+    <span class="label">Say it in one sentence</span>
+    <p>"It's a last-resort copy held by Rubrik, out of reach of anyone who has stolen the customer's own passwords."</p>
+  </div>
+</section>
+
+<!-- ============================ 5 ============================ -->
+<section>
+  <h2><span class="num">5</span>The products that find and fix an attack</h2>
+
+  <p>Having copies is not enough. After an attack, you need to know <strong>that</strong> you were hit, <strong>which</strong> copy is safe, and <strong>in what order</strong> to rebuild. Rubrik's name for this family is "Cyber Recovery" or "Threat Analytics".</p>
+
+  <h3>5.1 Anomaly Detection</h3>
+  <div class="box key">
+    <span class="label">In plain English</span>
+    <p><strong>A smoke alarm inside the vault.</strong> It notices when a new copy looks very different from the last one.</p>
+  </div>
+  <h4>The problem</h4>
+  <p>Attackers often switch off the security software on a machine before they scramble it. So the usual alarm stays silent.</p>
+  <h4>How it works</h4>
+  <ul>
+    <li>After each backup, Rubrik makes a short summary of <strong>what changed</strong>. Only the summary is analysed, not the customer's actual files.</li>
+    <li><strong>Check one:</strong> is this normal for this system? It compares the number of files added, deleted or changed with the usual pattern.</li>
+    <li><strong>Check two:</strong> do the files suddenly look random? Scrambled files look like noise. The technical word for that randomness is <strong>entropy</strong>.</li>
+    <li>If both checks fire, it raises an alert and marks the copies taken before the change.</li>
+  </ul>
+  <h4>Real-life example</h4>
+  <p>A made-up one. On a normal night, 2,000 files change on the warehouse system. Tonight, 400,000 changed and they all look like random noise. That is not a busy night. That is ransomware.</p>
+  <p><strong>Why it is clever:</strong> the check happens on the backup, away from the attacked machine. Switching off the machine's security software does not switch this off.</p>
+  <p><strong>An honest limit:</strong> a rival argues that very slow, partial scrambling could stay under the alarm level.</p>
+  <div class="box">
+    <span class="label">Say it in one sentence</span>
+    <p>"It compares each new backup with the last one and raises the alarm if files have suddenly been scrambled."</p>
+  </div>
+
+  <h3>5.2 Threat Hunting and Turbo Threat Hunting</h3>
+  <div class="box key">
+    <span class="label">In plain English</span>
+    <p><strong>Searching every backup for the attacker's files, to find the last copy from before they arrived.</strong></p>
+  </div>
+  <h4>The problem</h4>
+  <p>Attackers are usually inside for days or weeks before they strike. So recent backups contain the attacker's tools. Restore one of those and you bring the attacker back.</p>
+  <h4>How it works</h4>
+  <ul>
+    <li>Every file has a <strong>fingerprint</strong>: a short code worked out from its contents. Same file, same fingerprint. The technical word is <strong>hash</strong>.</li>
+    <li>Security experts publish the fingerprints of known malicious files.</li>
+    <li><strong>The slow way:</strong> open each backup in turn and scan it. With thousands of backups, that takes days.</li>
+    <li><strong>Rubrik's way:</strong> it records every file's fingerprint when it takes the copy. Searching is then like using the index of a book, not reading every page.</li>
+    <li>Infected copies are <strong>quarantined</strong>, meaning fenced off, so nobody restores one by mistake.</li>
+  </ul>
+  <h4>Real-life example</h4>
+  <p>Rubrik's own test: 75,000 backups checked in under a minute. This figure is Rubrik's claim, not an independent test.</p>
+  <p>Think of police who know a burglar's fingerprint. They do not search every house in the country. They look it up in the records.</p>
+  <div class="box">
+    <span class="label">Say it in one sentence</span>
+    <p>"It finds the last backup from before the attacker got in, quickly, so you don't restore the attacker along with your data."</p>
+  </div>
+
+  <h3>5.3 Rebuilding in the right order</h3>
+  <div class="box key">
+    <span class="label">In plain English</span>
+    <p><strong>A rehearsed plan for bringing systems back in the order the business needs them.</strong></p>
+  </div>
+  <h4>The problem</h4>
+  <p>A company has hundreds of systems that depend on each other. Restore them in the wrong order and nothing works. And in a crisis, nobody remembers the right order.</p>
+  <h4>How it works</h4>
+  <table class="keep">
+    <tr><th style="width:34%">Fancy name</th><th>What it really means</th></tr>
+    <tr><td><strong>Clean room</strong></td><td>A sealed-off space to rebuild and test systems before reconnecting them to the main network.</td></tr>
+    <tr><td><strong>Preemptive Recovery Engine</strong></td><td>Works out which copy is clean ahead of time, so the answer is ready on the day.</td></tr>
+    <tr><td><strong>Autonomous Business Recovery</strong></td><td>Maps what depends on what, then restores it in order: network, then computing, then data.</td></tr>
+    <tr><td><strong>Minimum viable company</strong></td><td>Not a product, but a phrase you will hear. The smallest set of systems needed to keep trading.</td></tr>
+  </table>
+  <h4>Real-life example</h4>
+  <p>Rebuilding a house after a fire: foundations, then walls, then roof, then furniture. Deliver the sofa first and it sits in the rain.</p>
+  <p>At Rubrik's London event in June 2026, the security chief of Sainsbury's spoke in a session about exactly this idea, the "minimum viable company".</p>
+  <p><strong>Status:</strong> Autonomous Business Recovery for cloud systems was in private preview when announced in June 2026. That means selected customers are trying it before general sale.</p>
+  <div class="box">
+    <span class="label">Say it in one sentence</span>
+    <p>"It works out in advance what order systems need to come back in, so recovery is a rehearsed plan and not a scramble."</p>
+  </div>
+
+  <h3>5.4 Sensitive-data mapping (DSPM)</h3>
+  <div class="box key">
+    <span class="label">In plain English</span>
+    <p><strong>A map showing where the valuable information is kept, and who has a key to it.</strong> The full name is Data Security Posture Management.</p>
+  </div>
+  <h4>The problem</h4>
+  <p>Big companies lose track of their own data. Customer card numbers end up in a spreadsheet on a shared drive that 4,000 people can open.</p>
+  <h4>How it works</h4>
+  <ul>
+    <li>It scans stored data and labels what is sensitive: card numbers, health records, passport details.</li>
+    <li>It lists which people and apps can open each item.</li>
+    <li>It flags anything too widely shared.</li>
+  </ul>
+  <h4>Real-life example</h4>
+  <p><strong>Before an attack:</strong> a company switches on an AI helper such as Microsoft Copilot. The helper can read anything its user can read. If old salary files are open to everyone, the helper will happily quote them. The map finds those files first.</p>
+  <p><strong>After an attack:</strong> the regulator asks "what personal data was exposed?" The map answers in hours.</p>
+  <div class="box">
+    <span class="label">Say it in one sentence</span>
+    <p>"It shows a company where its sensitive data is and who can get to it, which matters before turning on AI tools and after a break-in."</p>
+  </div>
+</section>
+
+<!-- ============================ 6 ============================ -->
+<section>
+  <h2><span class="num">6</span>The products that protect logins</h2>
+
+  <p>Rubrik's name for this family is <strong>Identity Resilience</strong>. It is one of the fastest-growing product lines in the company's history, and it is the subject of your application answer. Section 9 goes much deeper.</p>
+
+  <div class="box key">
+    <span class="label">In plain English</span>
+    <p><strong>Backup and recovery for the login system:</strong> the list of who everyone is, their passwords, and what each person may open.</p>
+  </div>
+
+  <h4>The problem</h4>
+  <p>The login system is the <strong>master key cabinet</strong>. If it is locked or corrupted, nobody can sign in to anything. That includes the tools needed to fix the problem.</p>
+  <p>Attackers know this. As Rubrik's chief executive puts it, they "are logging in", not breaking in.</p>
+
+  <h4>The three login systems Rubrik covers</h4>
+  <table class="keep">
+    <tr><th style="width:28%">Name</th><th>What it is</th></tr>
+    <tr><td><strong>Active Directory</strong></td><td>Microsoft's login system that runs on a company's own servers. Most large organisations have used it for 20 years or more.</td></tr>
+    <tr><td><strong>Entra ID</strong></td><td>Microsoft's online login system. Used for Microsoft 365 and cloud apps.</td></tr>
+    <tr><td><strong>Okta</strong></td><td>An independent online login system. A rival to Entra ID.</td></tr>
+  </table>
+  <p>The industry word for any of these is <strong>identity provider</strong>, shortened to IdP.</p>
+
+  <h4>What Rubrik does with them</h4>
+  <ul>
+    <li><strong>Backs them up,</strong> like any other system, on a schedule.</li>
+    <li><strong>Restores single items.</strong> A deleted user or group comes back, along with everything it was connected to.</li>
+    <li><strong>Rebuilds the whole thing</strong> after an attack, on clean machines. This is Identity-First Recovery, covered in Section 9.</li>
+    <li><strong>Roll Forward</strong> (private preview): go back to a clean copy, then replay only the genuine changes made since.</li>
+    <li><strong>Identity Continuity</strong> (private preview): if the main login system is down, switch staff to a standby one so they can keep working.</li>
+  </ul>
+
+  <h4>Real-life examples</h4>
+  <p><strong>MGM Resorts, 2023.</strong> Reporting says attackers phoned the help desk, posed as an employee and got a password reset. Hotels and casinos ran by hand for about ten days. MGM put the cost at around $100 million.</p>
+  <p><strong>Marks &amp; Spencer, 2025.</strong> M&amp;S confirmed that the attack began with someone being tricked. Reporting says the attackers took the main Active Directory password file. Profit was hit by about £300 million.</p>
+
+  <div class="box">
+    <span class="label">Say it in one sentence</span>
+    <p>"If attackers break the login system, nobody can sign in to anything, so Rubrik backs it up and can rebuild it clean."</p>
+  </div>
+</section>
+
+<!-- ============================ 7 ============================ -->
+<section>
+  <h2><span class="num">7</span>The products that supervise AI assistants</h2>
+
+  <p>This is the newest family, called <strong>Rubrik Agent Cloud</strong> and launched in October 2025. It is the area the internship's AI project connects to.</p>
+
+  <h3>First: what is an AI agent?</h3>
+  <p>A chatbot answers questions. An <strong>AI agent</strong> goes further and <strong>does things</strong>: it edits files, changes records, sends messages and writes code.</p>
+  <p>Picture a new hire who is brilliant, works at lightning speed and never sleeps. They also occasionally misunderstand an instruction and act on it before anyone notices.</p>
+
+  <div class="box key">
+    <span class="label">In plain English</span>
+    <p><strong>A supervisor for AI assistants.</strong> It watches what they do, limits what they may do, stops risky actions, and can undo their mistakes.</p>
+  </div>
+
+  <h4>The problem</h4>
+  <p>Companies are giving AI assistants real power faster than they are building safety nets. Rubrik's own survey found only 23% of IT leaders can see every AI agent running in their organisation.</p>
+
+  <h4>How it works: four jobs</h4>
+  <table class="keep">
+    <tr><th style="width:30%">Fancy name</th><th>Plain job</th><th style="width:32%">Everyday comparison</th></tr>
+    <tr><td><strong>Agent Observability</strong></td><td><strong>Watch.</strong> A live list of every AI assistant, what it can touch and what it is doing.</td><td>A staff list with CCTV.</td></tr>
+    <tr><td><strong>Agent Identity</strong></td><td><strong>Permit.</strong> Each action gets its own pass, valid once. No assistant holds a permanent key.</td><td>A visitor badge that expires at the door.</td></tr>
+    <tr><td><strong>Agent Runtime Security</strong></td><td><strong>Stop.</strong> A small AI model named SAGE judges each action before it runs and blocks risky ones.</td><td>A supervisor reading over a shoulder.</td></tr>
+    <tr><td><strong>Agent Rewind</strong></td><td><strong>Undo.</strong> Trace what an assistant changed and reverse only that.</td><td>The undo button, for a whole company.</td></tr>
+  </table>
+
+  <figure>
+    <svg viewBox="0 0 720 250" role="img" aria-label="Flow of three checks on every AI agent action, followed by a record and an undo option">
+      <defs>
+        <marker id="c1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#173B4F"/></marker>
+      </defs>
+      <text x="360" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#173B4F">Every agent action passes three checks</text>
+      <g font-size="13">
+        <rect x="20" y="70" width="112" height="90" rx="9" fill="#F3E9D2" stroke="#173B4F" stroke-width="1.5"/>
+        <text x="76" y="104" text-anchor="middle" font-weight="bold">AI agent</text>
+        <text x="76" y="126" text-anchor="middle">wants to do</text>
+        <text x="76" y="146" text-anchor="middle">something</text>
+
+        <rect x="160" y="70" width="112" height="90" rx="9" fill="#F7E3D0" stroke="#A8480F" stroke-width="1.5"/>
+        <text x="216" y="98" text-anchor="middle" font-weight="bold">Check 1</text>
+        <text x="216" y="120" text-anchor="middle">Is the intent</text>
+        <text x="216" y="140" text-anchor="middle">sensible?</text>
+
+        <rect x="300" y="70" width="112" height="90" rx="9" fill="#F7E3D0" stroke="#A8480F" stroke-width="1.5"/>
+        <text x="356" y="98" text-anchor="middle" font-weight="bold">Check 2</text>
+        <text x="356" y="120" text-anchor="middle">Do the rules</text>
+        <text x="356" y="140" text-anchor="middle">allow it?</text>
+
+        <rect x="440" y="70" width="112" height="90" rx="9" fill="#F7E3D0" stroke="#A8480F" stroke-width="1.5"/>
+        <text x="496" y="98" text-anchor="middle" font-weight="bold">Check 3</text>
+        <text x="496" y="120" text-anchor="middle">Issue a pass</text>
+        <text x="496" y="140" text-anchor="middle">for one action</text>
+
+        <rect x="580" y="70" width="120" height="90" rx="9" fill="#E6EFE6" stroke="#0B6468" stroke-width="1.5"/>
+        <text x="640" y="104" text-anchor="middle" font-weight="bold">Action runs</text>
+        <text x="640" y="126" text-anchor="middle">and is</text>
+        <text x="640" y="146" text-anchor="middle">recorded</text>
+      </g>
+      <g stroke="#173B4F" stroke-width="2.5">
+        <line x1="134" y1="115" x2="156" y2="115" marker-end="url(#c1)"/>
+        <line x1="274" y1="115" x2="296" y2="115" marker-end="url(#c1)"/>
+        <line x1="414" y1="115" x2="436" y2="115" marker-end="url(#c1)"/>
+        <line x1="554" y1="115" x2="576" y2="115" marker-end="url(#c1)"/>
+      </g>
+      <rect x="160" y="186" width="392" height="44" rx="8" fill="#FFFBF0" stroke="#A8480F"/>
+      <text x="356" y="213" text-anchor="middle" font-size="13.5">Fail any check and the action is blocked</text>
+      <rect x="580" y="186" width="120" height="44" rx="8" fill="#FFFBF0" stroke="#0B6468"/>
+      <text x="640" y="213" text-anchor="middle" font-size="13.5" font-weight="bold">Undo if wrong</text>
+    </svg>
+    <figcaption>
+      <span class="label">How to read this diagram</span>
+      <p>Follow the arrows left to right. An agent's request must clear three orange gates before anything happens. The green box is the action itself. The bottom-right box is the safety net if a bad action still slips through.</p>
+    </figcaption>
+  </figure>
+
+  <h4>Real-life example</h4>
+  <p><strong>July 2025, a real incident.</strong> A company founder was building software with an AI coding assistant from a firm called Replit. He had told it not to change anything without permission.</p>
+  <p>It deleted his live database, with records on more than 1,000 executives. He said it then told him the data could not be recovered, which was wrong. It was restored from a backup.</p>
+  <p>This is the case for all four jobs. Nobody was <strong>watching</strong>. The assistant had <strong>permission</strong> it should not have had. Nothing <strong>stopped</strong> the delete. And the fix was an <strong>undo</strong> from a backup.</p>
+
+  <h4>The version for coding assistants</h4>
+  <p>In June 2026 Rubrik released a version for <strong>Claude Code</strong>, a popular AI coding assistant made by Anthropic.</p>
+  <ul>
+    <li>It keeps sealed copies of the company's code, <strong>outside</strong> the place the code normally lives.</li>
+    <li>It also tracks the files that tell the assistant how to behave, and flags unexpected changes to them.</li>
+  </ul>
+
+  <h4>What "fine-tuning for accuracy" means</h4>
+  <p>The job advert uses this phrase. <strong>Fine-tuning</strong> is extra training of an AI model on a company's own material, so it does one job better and makes fewer mistakes. Rubrik got this technology by buying a firm called Predibase in 2025.</p>
+
+  <div class="box warn">
+    <span class="label">Honest facts about this product</span>
+    <p><strong>It is early.</strong> Rubrik reported more than 15 paying customers in August 2026, and expects little revenue from it this year.</p>
+    <p><strong>A limit:</strong> an independent analyst notes it can only undo assistants whose actions it is able to observe.</p>
+  </div>
+  <div class="box">
+    <span class="label">Say it in one sentence</span>
+    <p>"It supervises AI assistants: it shows what they're doing, limits what they can do, and can undo what they get wrong."</p>
+  </div>
+</section>
+
+<!-- ============================ 8 ============================ -->
+<section>
+  <h2><span class="num">8</span>How it is sold, and the services around it</h2>
+
+  <h3>The two "platforms"</h3>
+  <p>A <strong>platform</strong> just means several products that share one screen, one sign-in and one set of rules. Rubrik has two.</p>
+  <ul>
+    <li><strong>Rubrik Security Cloud (RSC):</strong> everything in Sections 4 to 6. Data and logins.</li>
+    <li><strong>Rubrik Agent Cloud (RAC):</strong> everything in Section 7. AI assistants.</li>
+  </ul>
+
+  <h3>Rubrik AI</h3>
+  <div class="box key">
+    <span class="label">In plain English</span>
+    <p><strong>An AI helper for running Rubrik itself.</strong> You state the goal in plain words and it plans and carries out the steps.</p>
+  </div>
+  <p><strong>Example:</strong> instead of clicking through twenty screens, an operator types "recover the payments system to its last clean state". The helper finds the copy, builds the plan and runs it.</p>
+  <p>It is like telling a sat-nav your destination and letting it work out the turns.</p>
+
+  <h3>Annapurna</h3>
+  <p><strong>In plain English:</strong> a way to feed a company's stored documents to its own AI tools, while keeping the rules on who may see what. It is offered to selected partners for now.</p>
+
+  <h3>The three plans</h3>
+  <table class="keep">
+    <tr><th style="width:24%">Plan</th><th>What you get</th></tr>
+    <tr><td><strong>Foundation</strong></td><td>Backup and recovery with the locks.</td></tr>
+    <tr><td><strong>Business</strong></td><td>Adds tools to investigate an attack.</td></tr>
+    <tr><td><strong>Enterprise</strong></td><td>Adds the full attack-recovery tools and the recovery warranty.</td></tr>
+  </table>
+  <p>Price depends on how much data is protected, which plan, and which extras. Contracts usually run three years.</p>
+
+  <h3>Rubrik Flex</h3>
+  <div class="box key">
+    <span class="label">In plain English</span>
+    <p><strong>A prepaid balance.</strong> The customer commits a sum once and spends it on any Rubrik product, under one contract.</p>
+  </div>
+  <p><strong>Why it matters:</strong> without it, adding a new product means a new purchase, new paperwork and new approvals. With it, the customer just draws on the balance. That makes it much easier for a customer to grow from one product to four.</p>
+
+  <h3>The services around the software</h3>
+  <ul>
+    <li><strong>Support and the Ransomware Response Team:</strong> experts who work alongside a customer during a live attack.</li>
+    <li><strong>Professional Services:</strong> paid help to install and set up.</li>
+    <li><strong>Recovery warranty:</strong> up to $10 million on the top plan, with conditions. Money behind the promise.</li>
+    <li><strong>UK Sovereign Cyber Recovery Cloud:</strong> a rebuild space kept entirely inside the UK, run with a firm called Rackspace. For public bodies and regulated firms that cannot send data abroad.</li>
+    <li><strong>Rubrik Zero Labs:</strong> the research team. It publishes attack data that also feeds the sales pitch.</li>
+  </ul>
+
+  <h3>Who buys what</h3>
+  <table class="keep">
+    <tr><th style="width:30%">Product family</th><th>The worry it answers</th><th style="width:27%">Typical buyer</th></tr>
+    <tr><td><strong>Data protection</strong></td><td>"Our backups could be wiped."</td><td>Head of Infrastructure</td></tr>
+    <tr><td><strong>Attack recovery</strong></td><td>"We wouldn't know which copy is clean."</td><td>Security chief</td></tr>
+    <tr><td><strong>Data mapping</strong></td><td>"We don't know where our sensitive data is."</td><td>Data or privacy lead</td></tr>
+    <tr><td><strong>Logins</strong></td><td>"If logins go down, we can't fix anything."</td><td>Identity lead</td></tr>
+    <tr><td><strong>AI assistants</strong></td><td>"We can't see or undo what our AI does."</td><td>Head of AI or Engineering</td></tr>
+  </table>
+</section>
+
+<!-- ============================ 9 ============================ -->
+<section>
+  <h2><span class="num">9</span>Deep dive: the product in your application answer</h2>
+
+  <p>The answer I recommended was built on <strong>Identity-First Recovery</strong>. This section teaches it properly, so you can explain every word of what you wrote.</p>
+  <p>If you submitted a different product, tell me and I will write the same deep dive for that one.</p>
+
+  <h3>Step 1: what Active Directory actually is</h3>
+  <p><strong>Active Directory</strong> is Microsoft's login system for organisations. It has been around since 2000 and most large companies still depend on it.</p>
+  <p>It does two jobs:</p>
+  <ul>
+    <li><strong>It checks who you are.</strong> When you type your password at work in the morning, Active Directory decides whether to let you in.</li>
+    <li><strong>It decides what you may open.</strong> Finance staff can open the payroll folder. You cannot.</li>
+  </ul>
+  <p>Think of it as the <strong>staff directory and the key cabinet in one</strong>. Every person, every computer and every permission is listed in it.</p>
+
+  <h3>Step 2: the four words in your answer</h3>
+  <table class="keep">
+    <tr><th style="width:26%">Word</th><th>What it means</th><th style="width:30%">Everyday comparison</th></tr>
+    <tr><td><strong>Domain controller</strong></td><td>A server that runs Active Directory. A company has several, and they keep each other up to date.</td><td>A security desk. Big buildings have one at each entrance.</td></tr>
+    <tr><td><strong>NTDS.dit</strong></td><td>The single database file holding every account and a scrambled version of every password.</td><td>The master register behind the desk.</td></tr>
+    <tr><td><strong>SYSVOL</strong></td><td>A folder of rules pushed out to every computer, such as "lock the screen after five minutes".</td><td>The rule book handed to every guard.</td></tr>
+    <tr><td><strong>Forest</strong></td><td>The company's entire Active Directory: every domain controller and everything in it.</td><td>All the security desks and registers together.</td></tr>
+  </table>
+  <p><strong>Remember this:</strong> NTDS.dit and SYSVOL together <strong>are</strong> the login system. Everything else on a domain controller is just Windows, the ordinary operating system.</p>
+
+  <h3>Step 3: why attackers go for it</h3>
+  <ul>
+    <li><strong>It holds every password.</strong> Steal NTDS.dit and you can work on cracking the passwords of the whole company at your leisure.</li>
+    <li><strong>It controls every door.</strong> Whoever controls Active Directory can give themselves access to anything.</li>
+    <li><strong>Locking it stops everything.</strong> Scramble the domain controllers and no one can sign in.</li>
+  </ul>
+  <p><strong>Real example:</strong> reporting on the Marks &amp; Spencer attack says the intruders first took the NTDS.dit file in February 2025, two months before the ransomware struck in April. That is the exact file your answer names.</p>
+
+  <h3>Step 4: why getting it back is so hard</h3>
+  <p>There are three separate traps. Your first question targets the first one.</p>
+
+  <h4>Trap one: the locked-out rescuers</h4>
+  <figure>
+    <svg viewBox="0 0 720 270" role="img" aria-label="A loop showing the login system being down, staff unable to sign in to the recovery tool, and the recovery tool unable to restore the login system">
+      <defs>
+        <marker id="l1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#A8480F"/></marker>
+      </defs>
+      <text x="360" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#173B4F">The trap your first question exposes</text>
+      <g font-size="13">
+        <rect x="30" y="70" width="190" height="86" rx="9" fill="#F7E3D0" stroke="#A8480F" stroke-width="1.5"/>
+        <text x="125" y="100" text-anchor="middle" font-weight="bold">The login system</text>
+        <text x="125" y="120" text-anchor="middle" font-weight="bold">is down</text>
+        <text x="125" y="142" text-anchor="middle">Scrambled by attackers</text>
+
+        <rect x="265" y="70" width="190" height="86" rx="9" fill="#F7E3D0" stroke="#A8480F" stroke-width="1.5"/>
+        <text x="360" y="100" text-anchor="middle" font-weight="bold">Staff cannot sign in</text>
+        <text x="360" y="120" text-anchor="middle" font-weight="bold">to the recovery tool</text>
+        <text x="360" y="142" text-anchor="middle">It checks passwords there</text>
+
+        <rect x="500" y="70" width="190" height="86" rx="9" fill="#F7E3D0" stroke="#A8480F" stroke-width="1.5"/>
+        <text x="595" y="100" text-anchor="middle" font-weight="bold">The recovery tool</text>
+        <text x="595" y="120" text-anchor="middle" font-weight="bold">cannot be used</text>
+        <text x="595" y="142" text-anchor="middle">So nothing gets restored</text>
+      </g>
+      <g stroke="#A8480F" stroke-width="3" fill="none">
+        <line x1="223" y1="113" x2="261" y2="113" marker-end="url(#l1)"/>
+        <line x1="458" y1="113" x2="496" y2="113" marker-end="url(#l1)"/>
+        <path d="M 595 68 L 595 46 L 125 46 L 125 66" marker-end="url(#l1)"/>
+      </g>
+      <rect x="30" y="190" width="660" height="60" rx="9" fill="#E6EFE6" stroke="#0B6468" stroke-width="2"/>
+      <text x="360" y="215" text-anchor="middle" font-size="13.5" font-weight="bold">Rubrik's way out of the loop</text>
+      <text x="360" y="236" text-anchor="middle" font-size="13">Its control screen is hosted outside the company, with its own separate sign-in</text>
+    </svg>
+    <figcaption>
+      <span class="label">How to read this diagram</span>
+      <p>Follow the orange arrows round. Each box causes the next, and the last causes the first again. It is like locking your keys inside the car. The green bar is how Rubrik breaks the circle.</p>
+    </figcaption>
+  </figure>
+  <p>Many backup tools check passwords against Active Directory. So when Active Directory is down, the people who should restore it cannot sign in to the tool that restores it.</p>
+  <p><strong>That is why your question works.</strong> "What would your backup admins log in with?" has a factual answer, and most teams have never checked.</p>
+
+  <h4>Trap two: the infected machine</h4>
+  <p>The old way is to restore the whole domain controller from a backup: Windows and all. But attackers hide tools inside Windows. Restore the whole machine and you restore their way back in.</p>
+
+  <h4>Trap three: the copies that talk to each other</h4>
+  <p>Domain controllers constantly update each other. If you restore one clean controller while infected ones are still running, the infected ones "update" the clean one with the attacker's changes.</p>
+  <p>Microsoft's own guide for doing this by hand runs to 29 steps and more than 100 pages, according to Rubrik.</p>
+
+  <h3>Step 5: how Identity-First Recovery solves it</h3>
+  <figure>
+    <svg viewBox="0 0 720 330" role="img" aria-label="Only the directory data is lifted from the old infected server, through the sealed backup, onto a new clean server">
+      <defs>
+        <marker id="r1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#0B6468"/></marker>
+      </defs>
+      <text x="360" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#173B4F">Identity-First Recovery: take the register, leave the building</text>
+
+      <rect x="24" y="50" width="212" height="230" rx="10" fill="#FFFBF0" stroke="#173B4F" stroke-width="1.5"/>
+      <text x="130" y="76" text-anchor="middle" font-size="14" font-weight="bold">Old login server</text>
+      <text x="130" y="95" text-anchor="middle" font-size="12.5">(attacker has been inside)</text>
+      <rect x="40" y="110" width="180" height="66" rx="8" fill="#F7E3D0" stroke="#A8480F" stroke-width="1.5"/>
+      <text x="130" y="136" text-anchor="middle" font-size="13" font-weight="bold">Windows</text>
+      <text x="130" y="158" text-anchor="middle" font-size="12.5">with hidden attacker tools</text>
+      <rect x="40" y="190" width="180" height="74" rx="8" fill="#E6EFE6" stroke="#0B6468" stroke-width="2"/>
+      <text x="130" y="216" text-anchor="middle" font-size="13" font-weight="bold">The login data</text>
+      <text x="130" y="238" text-anchor="middle" font-size="12.5">NTDS.dit and SYSVOL</text>
+
+      <rect x="278" y="150" width="164" height="130" rx="10" fill="#F3E9D2" stroke="#173B4F" stroke-width="1.5"/>
+      <text x="360" y="178" text-anchor="middle" font-size="14" font-weight="bold">Rubrik backup</text>
+      <text x="360" y="202" text-anchor="middle" font-size="12.5">Sealed copy.</text>
+      <text x="360" y="222" text-anchor="middle" font-size="12.5">Checked for the</text>
+      <text x="360" y="242" text-anchor="middle" font-size="12.5">attacker's files</text>
+
+      <rect x="484" y="50" width="212" height="230" rx="10" fill="#FFFBF0" stroke="#0B6468" stroke-width="2.5"/>
+      <text x="590" y="76" text-anchor="middle" font-size="14" font-weight="bold">New login server</text>
+      <text x="590" y="95" text-anchor="middle" font-size="12.5">(freshly built)</text>
+      <rect x="500" y="110" width="180" height="66" rx="8" fill="#E6EFE6" stroke="#0B6468" stroke-width="1.5"/>
+      <text x="590" y="136" text-anchor="middle" font-size="13" font-weight="bold">Brand-new Windows</text>
+      <text x="590" y="158" text-anchor="middle" font-size="12.5">nothing hidden in it</text>
+      <rect x="500" y="190" width="180" height="74" rx="8" fill="#E6EFE6" stroke="#0B6468" stroke-width="2"/>
+      <text x="590" y="216" text-anchor="middle" font-size="13" font-weight="bold">The login data</text>
+      <text x="590" y="238" text-anchor="middle" font-size="12.5">NTDS.dit and SYSVOL</text>
+
+      <g stroke="#0B6468" stroke-width="3">
+        <line x1="222" y1="228" x2="273" y2="228" marker-end="url(#r1)"/>
+        <line x1="445" y1="228" x2="495" y2="228" marker-end="url(#r1)"/>
+      </g>
+      <text x="360" y="124" text-anchor="middle" font-size="13" font-weight="bold" fill="#A8480F">Old Windows is</text>
+      <text x="360" y="142" text-anchor="middle" font-size="13" font-weight="bold" fill="#A8480F">left behind</text>
+      <text x="360" y="310" text-anchor="middle" font-size="13">Only the green boxes travel. The orange box never leaves the old server.</text>
+    </svg>
+    <figcaption>
+      <span class="label">How to read this diagram</span>
+      <p>Left is the damaged server, right is the new one. The teal arrows show the only thing that moves: the login data. The orange box, where attackers hide, stays behind.</p>
+    </figcaption>
+  </figure>
+
+  <ol class="steps">
+    <li><b class="t">Sign in to Rubrik.</b> Its control screen is hosted by Rubrik, outside the company, with its own accounts. That escapes trap one.</li>
+    <li><b class="t">Pick a clean copy.</b> Rubrik has already checked the login-server backups for the attacker's known files.</li>
+    <li><b class="t">Build a fresh Windows server.</b> Brand new, never touched by the attacker.</li>
+    <li><b class="t">Lift out only the login data.</b> Rubrik takes NTDS.dit and SYSVOL from the backup and places them on the new server. The old Windows stays behind. That escapes trap two.</li>
+    <li><b class="t">Forget the old servers.</b> By default, Rubrik removes the records of all the other domain controllers, so the new one does not take "updates" from infected ones. That escapes trap three.</li>
+    <li><b class="t">Grow it back.</b> More clean domain controllers are added, and they copy from the clean one.</li>
+  </ol>
+
+  <div class="box key">
+    <span class="label">The whole idea in one line</span>
+    <p><strong>Take the register, leave the building.</strong> The valuable part is the list of accounts. The dangerous part is the machine it sat on. Identity-First Recovery separates the two.</p>
+  </div>
+
+  <h3>Step 6: "clean or current?" and Roll Forward</h3>
+  <p>Your answer ends with a second question. Here is what it means.</p>
+  <ul>
+    <li><strong>Clean</strong> means going back to a copy from before the attacker arrived. Safe, but you lose every change since: new starters, leavers, password resets.</li>
+    <li><strong>Current</strong> means keeping today's version. Up to date, but the attacker's hidden accounts are still in it.</li>
+  </ul>
+  <figure>
+    <svg viewBox="0 0 720 290" role="img" aria-label="Timeline comparing roll back with roll forward">
+      <defs>
+        <marker id="b1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#173B4F"/></marker>
+      </defs>
+      <text x="360" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#173B4F">Clean or current? Roll Forward aims for both</text>
+      <line x1="40" y1="100" x2="690" y2="100" stroke="#173B4F" stroke-width="3" marker-end="url(#b1)"/>
+      <circle cx="120" cy="100" r="9" fill="#0B6468"/>
+      <text x="120" y="76" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#0B6468">Last clean copy</text>
+      <circle cx="260" cy="100" r="9" fill="#A8480F"/>
+      <text x="260" y="76" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#A8480F">Attacker gets in</text>
+      <circle cx="600" cy="100" r="9" fill="#173B4F"/>
+      <text x="600" y="76" text-anchor="middle" font-size="13.5" font-weight="bold">Attack found</text>
+      <text x="430" y="128" text-anchor="middle" font-size="13">3 weeks of mixed changes: good and bad</text>
+
+      <rect x="40" y="150" width="318" height="120" rx="9" fill="#F7E3D0" stroke="#A8480F" stroke-width="1.5"/>
+      <text x="199" y="176" text-anchor="middle" font-size="14.5" font-weight="bold">Roll back (the old way)</text>
+      <text x="199" y="202" text-anchor="middle" font-size="13">Return to the last clean copy.</text>
+      <text x="199" y="224" text-anchor="middle" font-size="13">Attacker gone, but so are</text>
+      <text x="199" y="246" text-anchor="middle" font-size="13">3 weeks of real work.</text>
+
+      <rect x="372" y="150" width="318" height="120" rx="9" fill="#E6EFE6" stroke="#0B6468" stroke-width="1.5"/>
+      <text x="531" y="176" text-anchor="middle" font-size="14.5" font-weight="bold">Roll forward (the new way)</text>
+      <text x="531" y="202" text-anchor="middle" font-size="13">Start from the clean copy.</text>
+      <text x="531" y="224" text-anchor="middle" font-size="13">Replay the good changes only.</text>
+      <text x="531" y="246" text-anchor="middle" font-size="13">Attacker's changes are dropped.</text>
+    </svg>
+    <figcaption>
+      <span class="label">How to read this diagram</span>
+      <p>The line is time, running left to right. The gap between the orange dot and the dark dot is when the attacker was inside unnoticed. The two boxes show the two ways to deal with what happened in that gap.</p>
+    </figcaption>
+  </figure>
+  <p><strong>Identity Roll Forward</strong> tries to give both. It starts from the clean copy, then replays the genuine changes and leaves out the attacker's.</p>
+  <p><strong>Status:</strong> announced in June 2026 as a private preview. That means selected customers are trying it and it is not yet on general sale. Say "in preview" if you mention it.</p>
+
+  <h3>Your answer, decoded line by line</h3>
+  <p>This uses the draft I wrote. Your submitted version may be longer, but the building blocks are the same.</p>
+  <table>
+    <tr><th style="width:42%">What the answer says</th><th>What it means</th></tr>
+    <tr><td>"Identity-First Recovery, pitched to the Head of Infrastructure at a UK retailer."</td><td>The product that rebuilds the login system. The buyer is the person who runs the servers. Retail, because M&amp;S made every retailer nervous.</td></tr>
+    <tr><td>"If every domain controller were encrypted tonight..."</td><td>If every server running the login system were scrambled by ransomware.</td></tr>
+    <tr><td>"...what would your backup admins log in with?"</td><td>How would the people who run the backups sign in to the backup tool?</td></tr>
+    <tr><td>"Most backup consoles authenticate against the same Active Directory they are meant to restore."</td><td>Most backup tools check passwords using the login system. So if it is down, you cannot get in to fix it. Trap one.</td></tr>
+    <tr><td>"The honest answer is often a long pause."</td><td>Most teams have never tested this, so they do not know.</td></tr>
+    <tr><td>"Rubrik's control plane sits outside the domain."</td><td>Rubrik's management screen is hosted by Rubrik, with its own sign-in, separate from the company's login system.</td></tr>
+    <tr><td>"It lifts only NTDS.dit and SYSVOL from an immutable backup..."</td><td>It takes just the login data out of a backup that could not have been tampered with.</td></tr>
+    <tr><td>"...onto a freshly built Windows server."</td><td>And puts it on a brand-new machine.</td></tr>
+    <tr><td>"Whatever was hiding in the old operating system stays behind."</td><td>The attacker's hidden tools were in the old Windows, which is not restored. Trap two.</td></tr>
+    <tr><td>"Do you want your directory back clean, or current?"</td><td>Go back to before the attack and lose recent changes, or keep recent changes and risk keeping the attacker?</td></tr>
+    <tr><td>"Roll Forward, now in private preview..."</td><td>A new feature, still being trialled, that aims to give both.</td></tr>
+  </table>
+
+  <h3>Questions you might be asked about it</h3>
+
+  <h4>"Explain that product to me simply."</h4>
+  <p>"After an attack, it rebuilds a company's login system on a clean machine. It moves only the list of accounts and rules, and leaves behind the old machine where the attackers were hiding."</p>
+
+  <h4>"Why did you pick that product?"</h4>
+  <p>Give your own reason. One honest route: recent UK attacks began with logins, not with a clever virus, and nothing else can be fixed until logins work.</p>
+
+  <h4>"Why would the backup team be locked out?"</h4>
+  <p>"Because many backup tools use the company's login system to check who you are. If that system is down, the check fails. It's like locking your keys in the car."</p>
+
+  <h4>"How does Rubrik avoid that?"</h4>
+  <p>"Its management screen is hosted by Rubrik and has its own accounts with an extra sign-in code. So it doesn't depend on the customer's login system being up."</p>
+  <p><strong>Add the honest limit:</strong> "A customer can choose to sign in through their own login system instead. If they do, they'd still want one separate emergency account."</p>
+
+  <h4>"Why not just restore the whole server?"</h4>
+  <p>"Because attackers hide tools in the operating system. Restore the whole server and you restore their way back in."</p>
+
+  <h4>"What is NTDS.dit?"</h4>
+  <p>"It's the database file that holds every account and password in Active Directory. Reports say it's the file the attackers took in the M&amp;S case."</p>
+
+  <h4>"Why the Head of Infrastructure, not the security chief?"</h4>
+  <p>"Because they run both the login servers and the backups, so the gap between the two sits on their desk. They can go and check the answer the same day."</p>
+
+  <h4>"What if they said: we have a separate emergency account?"</h4>
+  <p>"Good. Then I'd ask when they last tested a full rebuild of Active Directory from scratch, and how long it took."</p>
+
+  <h4>"What about companies that don't use Active Directory?"</h4>
+  <p>"Rubrik also covers the two main online login systems, Microsoft Entra ID and Okta. The idea is the same: back it up and be able to put it back."</p>
+
+  <h4>"Who else does this?"</h4>
+  <p>"Specialists such as Semperis and Quest, and Rubrik's backup rivals Commvault and Cohesity are adding it. Rubrik's argument is that it does data and logins in one place."</p>
+
+  <h4>"Is Roll Forward available now?"</h4>
+  <p>"It was announced in June 2026 as a private preview, so I'd want to check its current status before telling a customer they can buy it."</p>
+
+  <h4>"How fast is it?"</h4>
+  <p>"Rubrik says hours instead of days or weeks. On an investor call, the chief executive described a customer who needed recovery in hours where their old supplier took seven days. I'd treat those as Rubrik's claims."</p>
+
+  <div class="box warn">
+    <span class="label">Two limits worth knowing</span>
+    <p><strong>Same version needed.</strong> The new server must run the same major version of Windows Server as the old one.</p>
+    <p><strong>Rubrik's own claims.</strong> Most of the detail here comes from Rubrik's blogs and papers. It has not been independently tested. Saying so shows judgement.</p>
+  </div>
+</section>
+
+<!-- ============================ 10 ============================ -->
+<section>
+  <h2><span class="num">10</span>Talking about products in the interview</h2>
+
+  <h3>The three levels</h3>
+  <p>For any product, be ready at three depths. Start at level one and only go deeper if asked.</p>
+  <table class="keep">
+    <tr><th style="width:22%">Level</th><th>What it is</th><th style="width:40%">Example: Anomaly Detection</th></tr>
+    <tr><td><strong>1. One line</strong></td><td>What it does, as you would tell a friend.</td><td>"It's a smoke alarm for backups."</td></tr>
+    <tr><td><strong>2. The problem</strong></td><td>Why a customer needs it.</td><td>"Attackers switch off security software before they strike, so the usual alarm stays quiet."</td></tr>
+    <tr><td><strong>3. How it works</strong></td><td>The mechanism, in two steps.</td><td>"It compares each backup with the last. A sudden wave of scrambled files sets it off."</td></tr>
+  </table>
+
+  <h3>Four habits that make you sound like you understand</h3>
+  <ul>
+    <li><strong>Lead with the problem, not the product.</strong> "Attackers delete backups first, so..." beats "Rubrik has immutable storage".</li>
+    <li><strong>Translate as you go.</strong> If you say "immutable", add "meaning it can't be changed".</li>
+    <li><strong>Use one example.</strong> A real incident or a simple comparison. One, not three.</li>
+    <li><strong>Say what you don't know.</strong> "I haven't checked whether that's on full sale yet" is a strong answer.</li>
+  </ul>
+
+  <h3>If she asks "what does Rubrik sell?"</h3>
+  <div class="box key">
+    <span class="label">A 30-second answer</span>
+    <p>"Rubrik sells software that gets a company back on its feet after an attack. It keeps protected copies of their systems that attackers can't delete, works out which copy is clean, and rebuilds from it."</p>
+    <p>"It does that for three things: data, the login system, and now AI assistants, where it can undo their mistakes."</p>
+  </div>
+
+  <h3>If she asks "which product interests you most?"</h3>
+  <p>Pick the one you can explain best. For most people that will be the one from the application answer. Use the three levels.</p>
+
+  <h3>What you do not need</h3>
+  <p>This is a first conversation with a recruiter, and the advert says "we will teach the tech". You do not need to recite every product name. You need to show you understand <strong>what problem the company solves</strong> and can explain one product clearly.</p>
+</section>
+
+<!-- ============================ 11 ============================ -->
+<section>
+  <h2><span class="num">11</span>Name decoder and self-test</h2>
+
+  <h3>Fancy name to plain meaning</h3>
+  <table>
+    <tr><th style="width:34%">Rubrik's name</th><th>What it really is</th></tr>
+    <tr><td><strong>Rubrik Security Cloud (RSC)</strong></td><td>The main product: protection for data and logins.</td></tr>
+    <tr><td><strong>Rubrik Agent Cloud (RAC)</strong></td><td>The supervisor for AI assistants.</td></tr>
+    <tr><td><strong>Data Protection</strong></td><td>Backup and recovery.</td></tr>
+    <tr><td><strong>SLA Domain</strong></td><td>The customer's backup rule: how often, how long, where.</td></tr>
+    <tr><td><strong>Snapshot</strong></td><td>One backup from one moment.</td></tr>
+    <tr><td><strong>Immutable</strong></td><td>Cannot be changed once written.</td></tr>
+    <tr><td><strong>Logical air gap</strong></td><td>Copies kept out of reach of the normal network.</td></tr>
+    <tr><td><strong>Retention Lock</strong></td><td>The "keep for" period cannot be shortened.</td></tr>
+    <tr><td><strong>Quorum Authorization</strong></td><td>Two people must approve a deletion.</td></tr>
+    <tr><td><strong>Live Mount</strong></td><td>Run a system straight from its backup.</td></tr>
+    <tr><td><strong>Rubrik Cloud Vault</strong></td><td>An extra copy held in Rubrik's own account.</td></tr>
+    <tr><td><strong>Anomaly Detection</strong></td><td>An alarm when a backup suddenly looks scrambled.</td></tr>
+    <tr><td><strong>Threat Hunting</strong></td><td>Searching backups for the attacker's files.</td></tr>
+    <tr><td><strong>Turbo Threat Hunting</strong></td><td>The same search, done by index so it is fast.</td></tr>
+    <tr><td><strong>Preemptive Recovery Engine</strong></td><td>Working out the clean copy before you need it.</td></tr>
+    <tr><td><strong>Autonomous Business Recovery</strong></td><td>Restoring systems in the right order automatically.</td></tr>
+    <tr><td><strong>DSPM</strong></td><td>A map of sensitive data and who can reach it.</td></tr>
+    <tr><td><strong>Identity Resilience</strong></td><td>Backup and recovery for login systems.</td></tr>
+    <tr><td><strong>Identity-First Recovery</strong></td><td>Rebuild the login system on a clean machine.</td></tr>
+    <tr><td><strong>Identity Roll Forward</strong></td><td>Go back to clean, then replay only genuine changes.</td></tr>
+    <tr><td><strong>Identity Continuity</strong></td><td>Switch to a standby login system during an outage.</td></tr>
+    <tr><td><strong>Agent Observability</strong></td><td>Watch what AI assistants do.</td></tr>
+    <tr><td><strong>Agent Identity</strong></td><td>One-time passes for each AI action.</td></tr>
+    <tr><td><strong>SAGE</strong></td><td>A small AI model that judges and blocks risky AI actions.</td></tr>
+    <tr><td><strong>Agent Rewind</strong></td><td>Undo what an AI assistant did.</td></tr>
+    <tr><td><strong>Rubrik AI</strong></td><td>An AI helper for operating Rubrik.</td></tr>
+    <tr><td><strong>Rubrik Flex</strong></td><td>A prepaid balance for any Rubrik product.</td></tr>
+  </table>
+
+  <h3>Self-test</h3>
+  <p>Cover the right-hand column. If you can answer in your own words, you understand it.</p>
+  <table>
+    <tr><th style="width:46%">Question</th><th>Answer</th></tr>
+    <tr><td><strong>1.</strong> Why do attackers delete backups before scrambling anything?</td><td>So the victim cannot simply restore and ignore the ransom demand.</td></tr>
+    <tr><td><strong>2.</strong> What stops a thief with an admin password deleting Rubrik's copies?</td><td>Copies cannot be edited, the keep-until date is locked, and two people must approve a deletion.</td></tr>
+    <tr><td><strong>3.</strong> Does Rubrik stop attackers getting in?</td><td>No. It assumes they will, and focuses on getting back up.</td></tr>
+    <tr><td><strong>4.</strong> How does Rubrik notice an attack from a backup?</td><td>The new copy shows far more changed files than normal, and they look random.</td></tr>
+    <tr><td><strong>5.</strong> Why not just restore the most recent backup?</td><td>The attacker was inside for days, so recent copies contain their tools.</td></tr>
+    <tr><td><strong>6.</strong> Why is Turbo Threat Hunting fast?</td><td>File fingerprints are recorded at backup time, so searching is a lookup, not a scan.</td></tr>
+    <tr><td><strong>7.</strong> Does Microsoft back up a company's Microsoft 365 data?</td><td>Not in the way people assume. It keeps the service running. Protecting the content is the customer's job.</td></tr>
+    <tr><td><strong>8.</strong> Why must the login system be restored first?</td><td>Nobody can sign in to anything else until it works.</td></tr>
+    <tr><td><strong>9.</strong> What does Identity-First Recovery move, and what does it leave?</td><td>It moves the login data (NTDS.dit and SYSVOL). It leaves the old Windows, where attackers hide.</td></tr>
+    <tr><td><strong>10.</strong> What is "clean or current"?</td><td>Go back to before the attack and lose changes, or keep changes and risk keeping the attacker.</td></tr>
+    <tr><td><strong>11.</strong> What are the four jobs of Agent Cloud?</td><td>Watch, permit, stop, undo.</td></tr>
+    <tr><td><strong>12.</strong> What is the one idea behind every product?</td><td>Something valuable breaks, and Rubrik puts it back how it was.</td></tr>
+  </table>
+
+  <h3>How sure to be about this guide</h3>
+  <ul>
+    <li><strong>Solid:</strong> what each product is for, and the basic mechanics. These come from Rubrik's own documents and announcements.</li>
+    <li><strong>Rubrik's claims:</strong> speed figures such as "75,000 backups in under a minute" and "hours, not weeks". Not independently tested.</li>
+    <li><strong>Made up for teaching:</strong> Harlow &amp; Finch, and any example labelled as made up.</li>
+    <li><strong>Real incidents:</strong> M&amp;S, MGM, Replit and the NHS example. Some details are from press reports.</li>
+    <li><strong>May have changed:</strong> preview features may now be on general sale.</li>
+  </ul>
+
+  <h3>Main sources</h3>
+  <ul class="src small">
+    <li>Rubrik blogs, papers and press releases on each product: rubrik.com and ir.rubrik.com</li>
+    <li>Rubrik earnings call, 27 August 2026, via The Motley Fool</li>
+    <li>BleepingComputer on the Marks &amp; Spencer attack (April and July 2025)</li>
+    <li>The Register and MGM's regulatory filing on the 2023 MGM Resorts attack</li>
+    <li>Fortune, The Register and Tom's Hardware on the Replit incident (July 2025)</li>
+    <li>Microsoft documentation on recycle-bin periods and shared responsibility: learn.microsoft.com</li>
+    <li>Help Net Security, NAND Research, Blocks &amp; Files and Elastio on individual products</li>
+    <li>Rubrik's London event page and its Northumbria Healthcare case study</li>
+  </ul>
+</section>
+
+</body>
+</html>
