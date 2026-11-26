@@ -176,7 +176,8 @@ h2 { font-family: inherit; font-size: 23pt; line-height: 1.25; letter-spacing: 0
   padding-bottom: 4mm; margin-bottom: 7mm; }
 h3 { font-size: 16pt; line-height: 1.35; margin: 10mm 0 3.5mm; color: var(--accent); }
 h4 { font-size: 13.5pt; margin: 7mm 0 2.5mm; break-after: avoid; }
-ul, ol { padding-left: 7mm; margin-bottom: 1em; }
+ul { padding-left: 7mm; margin-bottom: 1em; }
+ol { padding-left: 10mm; margin-bottom: 1em; }
 li { margin-bottom: .62em; padding-left: 1mm; }
 ol > li::marker { font-weight: 700; color: var(--accent); }
 table { font-size: 11pt; line-height: 1.5; margin: 4mm 0 7mm; }
@@ -260,7 +261,8 @@ def build_html(pages: dict) -> str:
         inner = re.sub(r"<li>([A-Z][A-Za-z ]{2,11}):\s*(.*?)</li>",
                        r'<li><span class="lab">\1</span><span class="val">\2</span></li>', m.group(0), flags=re.S)
         return '<div class="entry">' + inner + "</div>"
-    body = re.sub(r"<p><strong>\d+\. .*?</p>\s*<ul>.*?</ul>", entry, body, flags=re.S)
+    if CFG.get("entries"):
+        body = re.sub(r"<p><strong>\d+\. (?:(?!</p>).)*</p>\s*<ul>.*?</ul>", entry, body, flags=re.S)
 
     # boxed cards: every h3 block inside the configured section
     card_id = CFG.get("card_section")
