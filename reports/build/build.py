@@ -135,6 +135,22 @@ figcaption { font-size: 8.6pt; color: var(--muted); margin-top: 2.4mm; }
 .legend .h { background: #0e5a6b; } .legend .si { background: #5b8a94; } .legend .t { background: #7ea2aa; }
 .legend .a { background: #b4532a; } .legend .r { background: #0e5a6b; } .legend .l { background: #8c97a2; }
 .barlabel { display: flex; justify-content: space-between; font-size: 8pt; color: var(--muted); margin-top: 1.2mm; }
+.dsteps { display: flex; gap: 1.8mm; align-items: stretch; }
+.dsteps .d { flex: 1; background: var(--tint); border-top: 3px solid var(--accent); border-radius: 1mm; padding: 2.4mm 2.6mm 2.8mm; }
+.d .n { font-weight: 700; color: var(--accent); font-size: 8.4pt; }
+.d .t { font-weight: 680; font-size: 10.4pt; margin: .4mm 0 1mm; }
+.d .q { font-size: 8.5pt; line-height: 1.34; font-weight: 560; margin-bottom: 1.6mm; }
+.d .e { font-size: 8pt; line-height: 1.36; color: var(--muted); }
+.burden { margin-top: 2mm; background: var(--tint-2); border-left: 3px solid var(--accent-2); padding: 2.6mm 3.4mm; font-size: 9pt; }
+.entry { break-inside: avoid; margin: 0 0 4.2mm; padding: 3mm 4mm 1.4mm; border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: 1mm; }
+.entry > p { margin-bottom: 1.6mm; font-size: 10pt; }
+.entry ul { list-style: none; padding: 0; margin: 0 0 1mm; font-size: 9.3pt; }
+.entry li { margin-bottom: .9mm; display: flex; align-items: baseline; }
+.entry .val { flex: 1; }
+.entry .lab { flex: 0 0 20mm; font-weight: 650; color: var(--accent); font-size: 8.4pt; text-transform: uppercase; letter-spacing: .03em; }
+.card { break-inside: avoid; border: 1.2px solid #123f4b; border-radius: 1.6mm; padding: 4mm 5mm 2mm; margin: 0 0 5mm; }
+.card h3 { margin-top: 0; }
+.card table { margin-bottom: 2mm; }
 """
 
 def pandoc(md: str) -> str:
@@ -166,6 +182,23 @@ def build_html(pages: dict) -> str:
     for first, cls in CFG.get("table_classes", {}).items():
         body = re.sub(r'<table>(\s*<thead>\s*<tr[^>]*>\s*<th>' + re.escape(first) + '</th>)',
                       r'<table class="' + cls + r'">\1', body)
+
+    # boxed entries: a bold numbered question line followed by its labelled list
+    def entry(m):
+        inner = re.sub(r"<li>([A-Z][A-Za-z ]{2,11}):\s*(.*?)</li>",
+                       r'<li><span class="lab">\1</span><span class="val">\2</span></li>', m.group(0), flags=re.S)
+        return '<div class="entry">' + inner + "</div>"
+    body = re.sub(r"<p><strong>\d+\. .*?</p>\s*<ul>.*?</ul>", entry, body, flags=re.S)
+
+    # boxed cards: every h3 block inside the configured section
+    card_id = CFG.get("card_section")
+    if card_id:
+        a = body.index(f'<h2 id="{card_id}"')
+        a = body.index("</h2>", a) + len("</h2>")
+        b = body.find("<h2", a)
+        b = len(body) if b < 0 else b
+        chunks = re.split(r"(?=<h3)", body[a:b])
+        body = body[:a] + chunks[0] + "".join(f'<div class="card">{c}</div>' for c in chunks[1:]) + body[b:]
 
     def keep(m):
         t = m.group(0)
@@ -202,10 +235,10 @@ def render(html_text: str, out: Path):
 
 def find_pages(pdf: Path, heads) -> dict:
     reader = PdfReader(str(pdf))
-    texts = [re.sub(r"\s+", "", p.extract_text() or "") for p in reader.pages]
+    texts = [re.sub(r"[^A-Za-z0-9]", "", p.extract_text() or "") for p in reader.pages]
     pages = {}
     for hid, title in heads:
-        key = re.sub(r"\s+", "", html.unescape(re.sub(r"<[^>]+>", "", title)))
+        key = re.sub(r"[^A-Za-z0-9]", "", html.unescape(re.sub(r"<[^>]+>", "", title)))
         for n, t in enumerate(texts):
             if n < 2:  # cover and contents
                 continue
