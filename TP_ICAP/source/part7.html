@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>TP ICAP Part 7: Why here?</title>
+<style>
+@font-face{font-family:"Lexend";font-weight:400;src:url("node_modules/@fontsource/lexend/files/lexend-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Lexend";font-weight:600;src:url("node_modules/@fontsource/lexend/files/lexend-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Lexend";font-weight:700;src:url("node_modules/@fontsource/lexend/files/lexend-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"Atkinson";font-weight:400;src:url("node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Atkinson";font-weight:700;src:url("node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2")}
+
+:root{
+  --bg:#FBF6EA; --ink:#1f2a37; --muted:#4f5b69; --navy:#14304b; --teal:#0f6e84;
+  --line:#d9d0bb; --card:#fffdf6;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --grey:#8a94a0;
+}
+@page{size:A4;margin:16mm 17mm 19mm 17mm}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson",Verdana,sans-serif;
+  font-size:12.5pt;line-height:1.62;letter-spacing:.012em;word-spacing:.06em;text-align:left;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3,h4{font-family:"Lexend",Verdana,sans-serif;color:var(--navy);line-height:1.25;letter-spacing:0;break-after:avoid}
+h1{font-size:23pt;font-weight:700;margin:0 0 4mm;padding-bottom:3mm;border-bottom:1.2mm solid var(--teal)}
+h2{font-size:15.5pt;font-weight:600;margin:8mm 0 2.5mm}
+h3{font-size:12.5pt;font-weight:600;margin:5.5mm 0 1.5mm}
+p{margin:0 0 3.2mm;max-width:150mm}
+li{max-width:146mm}
+ul,ol{margin:0 0 3.5mm;padding-left:6.5mm}
+ol{padding-left:8.5mm}
+li{margin-bottom:1.7mm}
+strong{font-weight:700;color:#10202f}
+section{break-before:auto;margin-top:13mm}
+section.pb{break-before:page;margin-top:0}
+.kicker{break-after:avoid}
+.kicker{font-family:"Lexend";font-size:10pt;font-weight:600;color:var(--teal);margin:0 0 1.5mm}
+.lead{font-size:13pt;line-height:1.6}
+.small{font-size:10pt;color:var(--muted);line-height:1.5}
+
+/* boxes */
+.box{border-radius:2.5mm;padding:3.6mm 4.5mm 3mm;margin:4mm 0;font-size:12pt;max-width:162mm;break-inside:avoid;border-left:1.6mm solid var(--teal);background:#E7F1F3}
+.box > :last-child{margin-bottom:.6mm}
+.box .tag{font-family:"Lexend";font-weight:600;font-size:10.5pt;display:block;margin-bottom:1.2mm;color:var(--navy)}
+.box.say{background:#FFEFCF;border-left-color:#c77700}
+.box.warn{background:#FBE4DD;border-left-color:#b6452c}
+.box.read{background:#ECE8F6;border-left-color:#5a48b8}
+.box.fact{background:var(--card);border:.3mm solid var(--line);border-left:1.6mm solid var(--navy)}
+
+/* figures */
+figure{margin:5mm 0 4mm;padding:4.5mm 5mm 4mm;background:var(--card);border:.3mm solid var(--line);border-radius:3mm;break-inside:avoid}
+figcaption{font-family:"Lexend";font-weight:600;font-size:11.5pt;color:var(--navy);margin-bottom:3.5mm}
+figcaption span{display:block;font-family:"Atkinson";font-weight:400;font-size:10pt;color:var(--muted);margin-top:.6mm}
+
+/* bar charts */
+.bars{display:grid;grid-template-columns:47mm 1fr;row-gap:2.6mm;column-gap:3mm;align-items:center}
+.bars .lab{font-size:10.5pt;line-height:1.3;text-align:right}
+.bars .lab small{display:block;color:var(--muted);font-size:9pt}
+.bars .track{display:flex;align-items:center;gap:2.5mm}
+.bars .bar{height:7.5mm;border-radius:0 1.2mm 1.2mm 0;background:var(--s1);min-width:.6mm}
+.bars .val{font-family:"Lexend";font-weight:600;font-size:10.5pt;white-space:nowrap}
+.bars .val small{font-family:"Atkinson";font-weight:400;color:var(--muted);font-size:9.5pt}
+.bars.sub .bar{height:5.5mm;background:#7fb0ea}
+.c1{background:var(--s1)!important}.c2{background:var(--s2)!important}.c3{background:var(--s3)!important}.c4{background:var(--s4)!important}.cg{background:var(--grey)!important}
+.stack{display:flex;gap:.6mm;height:15mm;margin:2mm 0 2.5mm}
+.stack div{display:flex;align-items:center;justify-content:center;color:#fff;font-family:"Lexend";font-weight:600;font-size:10.5pt;border-radius:1mm;text-align:center;line-height:1.2}
+.stack .dark{color:#1f2a37}
+.legend{display:flex;flex-wrap:wrap;gap:2mm 6mm;font-size:10pt}
+.legend i{display:inline-block;width:3.6mm;height:3.6mm;border-radius:.8mm;margin-right:1.6mm;vertical-align:-.5mm}
+
+/* flow diagrams */
+.flow{display:flex;align-items:stretch;gap:1.5mm}
+.node{flex:1;background:#fff;border:.45mm solid var(--navy);border-radius:2.2mm;padding:2.6mm 2.4mm;font-size:10pt;line-height:1.35;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.node b{font-family:"Lexend";font-weight:600;font-size:10.5pt;color:var(--navy);display:block;margin-bottom:.8mm}
+.node.hub{background:var(--navy);border-color:var(--navy);color:#fff}
+.node.hub b{color:#fff}
+.node.soft{border-style:dashed;border-color:#6b7785}
+.arrow{flex:0 0 7mm;display:flex;align-items:center;justify-content:center;font-size:15pt;color:var(--teal);font-weight:700}
+.steps{counter-reset:s;display:grid;gap:2.2mm}
+.step{counter-increment:s;display:grid;grid-template-columns:10mm 1fr;gap:3mm;align-items:start;background:#fff;border:.3mm solid var(--line);border-radius:2mm;padding:2.5mm 3mm}
+.step::before{content:counter(s);font-family:"Lexend";font-weight:700;font-size:13pt;color:#fff;background:var(--teal);width:9mm;height:9mm;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.step p{margin:0;font-size:10.8pt;line-height:1.45}
+.step b{font-family:"Lexend";font-weight:600;color:var(--navy)}
+.cycle{display:grid;grid-template-columns:1fr 7mm 1fr 7mm 1fr;row-gap:1.5mm;align-items:stretch}
+.down{grid-column:5;text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1}
+.up{grid-column:1;text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1}
+
+/* timeline */
+.tl{border-left:.8mm solid var(--teal);margin:2mm 0 0 16mm;padding:0}
+.tl div{position:relative;padding:0 0 3.1mm 6mm;font-size:10.8pt;line-height:1.45;break-inside:avoid}
+.tl div::before{content:"";position:absolute;left:-2.3mm;top:1.2mm;width:3.6mm;height:3.6mm;border-radius:50%;background:var(--teal);border:.5mm solid var(--card)}
+.tl b{position:absolute;left:-19mm;top:0;width:15mm;text-align:right;font-family:"Lexend";font-weight:600;color:var(--navy)}
+.tl .big::before{background:var(--s2);width:4.6mm;height:4.6mm;left:-2.8mm}
+
+/* tables */
+table{border-collapse:collapse;width:100%;margin:3mm 0 4.5mm;font-size:10.6pt;line-height:1.42}
+tr{break-inside:avoid}
+th{font-family:"Lexend";font-weight:600;font-size:10pt;text-align:left;background:var(--navy);color:#fff;padding:2.2mm 2.6mm;vertical-align:bottom}
+td{padding:2.2mm 2.6mm;border-bottom:.3mm solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:#f5efdf}
+td.n,th.n{text-align:right;white-space:nowrap}
+td b{color:#10202f}
+
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin:4mm 0}
+.tile{background:var(--card);border:.3mm solid var(--line);border-radius:2.5mm;padding:3.2mm 3.5mm;break-inside:avoid}
+.tile b{display:block;font-family:"Lexend";font-weight:700;font-size:17pt;color:var(--navy);line-height:1.15}
+.tile span{font-size:10pt;color:var(--muted);line-height:1.35;display:block;margin-top:1mm}
+
+/* cover */
+.cover{break-before:auto;min-height:215mm;display:flex;flex-direction:column}
+.cover h1{font-size:34pt;border:none;margin:8mm 0 3mm;padding:0}
+.cover .sub{font-family:"Lexend";font-size:15pt;color:var(--teal);font-weight:600;margin-bottom:8mm;max-width:150mm;line-height:1.4}
+.cover .band{height:3mm;background:linear-gradient(90deg,var(--navy) 0 55%,var(--teal) 55% 80%,var(--s4) 80% 100%);border-radius:2mm;margin-bottom:9mm}
+.toc{columns:2;column-gap:10mm;font-size:11pt;padding:0;list-style:none;counter-reset:t}
+.toc li{counter-increment:t;margin-bottom:1.8mm;break-inside:avoid}
+.toc li::before{content:counter(t) ".";font-family:"Lexend";font-weight:600;color:var(--teal);display:inline-block;width:8mm}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+.two > div{break-inside:avoid;max-width:none}
+dl{margin:0}
+dt{font-family:"Lexend";font-weight:600;color:var(--navy);font-size:11pt;margin-top:0}
+dd{margin:0 0 0 0;font-size:10.8pt;line-height:1.48}
+a{color:var(--teal);text-decoration:none;overflow-wrap:anywhere}
+thead{display:table-header-group}
+.gloss dl{columns:2;column-gap:9mm}
+.gloss dl div{break-inside:avoid;padding-bottom:2.8mm}
+.legend4{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin:3mm 0}
+.legend4 .box{margin:0;max-width:none}
+.src li{font-size:9.6pt;line-height:1.4;margin-bottom:1.3mm}
+
+.hubgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5mm}
+.hubgrid .node{min-height:17mm}
+.layers{display:grid;gap:2mm}
+.layer{border-radius:2.2mm;padding:3mm 4mm;font-size:10.6pt;line-height:1.4;color:#fff}
+.layer b{display:block;font-family:"Lexend";font-weight:600;font-size:11pt;margin-bottom:.6mm}
+.l1{background:#14304b;margin:0 0 0 0}.l2{background:#0f6e84;margin:0 9mm}.l3{background:#fff;color:#1f2a37;border:.45mm solid #14304b;margin:0 18mm}
+.l3 b{color:#14304b}
+.ladder{display:grid;gap:2mm}
+.rung{background:#fff;border:.45mm solid var(--navy);border-radius:2.2mm;padding:2.4mm 3.5mm;font-size:10.6pt;line-height:1.4}
+.rung b{font-family:"Lexend";font-weight:600;color:var(--navy);display:block}
+.r1{margin-right:44mm}.r2{margin-left:11mm;margin-right:33mm}.r3{margin-left:22mm;margin-right:22mm}.r4{margin-left:33mm;margin-right:11mm}.r5{margin-left:44mm;background:var(--navy);color:#fff}
+.r5 b{color:#fff}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin:3mm 0 5mm}
+.card{background:#fff;border:.5mm dashed #6b7785;border-radius:2.5mm;padding:3.5mm 4mm;font-family:"Lexend";font-size:11.5pt;line-height:1.75;break-inside:avoid}
+.card b{display:block;color:var(--teal);font-size:10pt;margin-bottom:1mm}
+
+.four{display:grid;grid-template-columns:1fr 1fr;gap:2.5mm}
+.four .node{text-align:left;padding:3mm 3.5mm;font-size:10.6pt}
+.mapdown{text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1.5;white-space:nowrap;overflow:hidden}
+figure svg{width:100%;height:auto;display:block}
+svg .ax{stroke:#4f5b69;stroke-width:1.5;fill:none}
+svg .st{font-family:"Atkinson",sans-serif;font-size:13.5px;fill:#4f5b69}
+svg .sb{font-family:"Lexend",sans-serif;font-size:14px;font-weight:600;fill:#14304b}
+svg .ln1{stroke:#2a78d6;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+svg .ln2{stroke:#8a94a0;stroke-width:3.5;fill:none;stroke-dasharray:9 7;stroke-linecap:round}
+</style>
+</head>
+<body>
+<!-- ============ COVER ============ -->
+<div class="cover">
+  <h1>Why here?</h1>
+  <div class="sub">Part 7. What you can say about TP ICAP's business model that you could not say about any rival, and how to turn it into your own reason</div>
+  <div class="band"></div>
+  <p class="lead">"Why TP ICAP?" is the hardest question to answer honestly, because most true things about the firm are also true of its competitors. So we are going to be strict. We will find the <strong>two things that are distinctive</strong>, understand them properly, and then connect them to you, so the answer stops feeling forced.</p>
+
+  <div class="box">
+    <span class="tag">The answer in three lines</span>
+    <strong>1.</strong> TP ICAP connects <strong>both halves of the market</strong>: the banks, and the investors. <br>
+    <strong>2.</strong> It turns broking into a <strong>data business at real scale</strong>. <br>
+    <strong>3.</strong> Together that makes it a broker, an investor network and a data company in one. Its rivals each made a different bet.
+  </div>
+
+  <div class="tiles">
+    <div class="tile"><b>1,100+</b><span>Investment firms on Liquidnet, managing about $26 trillion.</span></div>
+    <div class="tile"><b>£202m</b><span>Parameta's 2025 revenue. 98% of it subscriptions.</span></div>
+    <div class="tile"><b>£25m</b><span>What Parameta paid Global Broking in 2025 for the data its brokers produced.</span></div>
+  </div>
+  <p class="small" style="margin-top:auto">TP ICAP figures are from its 2025 Annual Report and 2026 half-year results. Rival figures are from BGC's 2025 results release and news coverage. The comparison is my reading of public information. Someone inside the industry will know details I cannot see. Researched 26 November 2026.</p>
+</div>
+
+<!-- ============ CH 1 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 1</div>
+<h1>The swap test</h1>
+<p class="lead">Before we look for good reasons, we need a way to throw out bad ones. Here is a tool you can use on every sentence you plan to say.</p>
+
+<figure>
+  <figcaption>Diagram 1. The swap test<span>Run this on every line of your "why TP ICAP" answer</span></figcaption>
+  <div class="steps">
+    <div class="step"><p><b>Write your sentence.</b> For example: "I want to join TP ICAP because it combines voice and electronic broking."</p></div>
+    <div class="step"><p><b>Swap the name.</b> Cross out "TP ICAP" and write "BGC" or "Tradition".</p></div>
+    <div class="step"><p><b>Is it still true?</b> "BGC combines voice and electronic broking." Yes, it does.</p></div>
+    <div class="step"><p><b>If still true, cut it or sharpen it.</b> It tells the reviewer nothing about why <strong>this</strong> firm.</p></div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Four steps, top to bottom. The whole trick is step 2. If your sentence survives with a rival's name in it, it is a reason to work in broking, not a reason to work at TP ICAP. <strong>That is why your earlier answers felt forced. Most of them fail this test.</strong>
+</div>
+
+<h2>What fails the test</h2>
+<table>
+  <thead><tr><th style="width:27%">What people say</th><th style="width:36%">Why it fails</th><th>How to rescue it</th></tr></thead>
+  <tr><td><b>"It is the largest by scale."</b></td><td>In the third quarter of 2026, BGC's revenue roughly matched it: £620 million against $833 million.</td><td>Name the part where it leads: "Its rates desks alone made £635 million in 2025."</td></tr>
+  <tr><td><b>"It kept two brands separate."</b></td><td>BGC also runs several brands, such as GFI.</td><td>Say what it means for you: "The rotation lets me see both Tullett Prebon and ICAP desks."</td></tr>
+  <tr><td><b>"Banks are co-owners."</b></td><td>BGC did the same. Ten banks and trading firms own about a quarter of its FMX exchange.</td><td>Use it as evidence for something bigger, not as the point itself.</td></tr>
+  <tr><td><b>"It combines voice and electronic."</b></td><td>BGC has Fenics. Every broker says this.</td><td>Name the product: Fusion, or First Mate.</td></tr>
+  <tr><td><b>"It does not bet its own money."</b></td><td>True of every interdealer broker.</td><td>This is a reason for broking. Move it to your "why broking" answer.</td></tr>
+  <tr><td><b>"It values client relationships."</b></td><td>Every broker lives on relationships. The £366 million on the balance sheet is standard accounting after a takeover.</td><td>Use the number to explain the industry, not the firm's character.</td></tr>
+</table>
+<div class="box read">
+  <span class="tag">How to read this table</span>
+  Left column: a common line. Middle: why a rival could say it too. Right: how to keep the idea but make it specific. Nothing here is false. It just is not <strong>distinctive</strong>.
+</div>
+
+<div class="box say">
+  <span class="tag">The good news</span>
+  Two things pass the test cleanly. The next two chapters take them one at a time. Understand these two and you have an answer almost nobody else will give.
+</div>
+</section>
+
+<!-- ============ CH 2 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 2</div>
+<h1>Distinctive thing one: both halves of the market</h1>
+
+<p class="lead">To see why this matters, you need one picture of how the market is divided.</p>
+
+<h2>The market has two halves</h2>
+<ul>
+  <li><strong>The sell side: the dealers.</strong> Mostly big banks. They quote prices and trade with customers.</li>
+  <li><strong>The buy side: the investors.</strong> Pension funds, asset managers, hedge funds. They manage other people's money.</li>
+</ul>
+<p>For most of history, an interdealer broker only ever touched the first half. "Interdealer" means "between dealers". The investors were the banks' customers, not the broker's.</p>
+
+<figure>
+  <figcaption>Diagram 2. TP ICAP reaches both halves<span>Most interdealer broking only covers the right-hand side</span></figcaption>
+  <div class="flow">
+    <div class="node"><b>The investors</b>More than 1,100 investment firms, managing about $26 trillion</div>
+    <div class="arrow">&harr;</div>
+    <div class="node hub"><b>TP ICAP</b>Liquidnet on this side. Global Broking on that side. RealQ joining them in bonds</div>
+    <div class="arrow">&harr;</div>
+    <div class="node"><b>The dealers</b>The trading desks of the world's largest banks</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Three boxes. On the left are the investors. On the right are the banks. TP ICAP, in the dark box, has a business facing each. <strong>Liquidnet</strong> faces left. <strong>Global Broking</strong>, where your internship is, faces right. A traditional interdealer broker has only the right-hand arrow.
+</div>
+
+<h2>The pieces, in plain English</h2>
+<table>
+  <thead><tr><th style="width:23%">Piece</th><th>What it is</th></tr></thead>
+  <tr><td><b>Global Broking</b></td><td>The classic interdealer business. Brokers arrange trades between banks. This is your division.</td></tr>
+  <tr><td><b>Liquidnet</b></td><td>A network TP ICAP bought in 2021. Investment firms use it to trade large blocks of shares and bonds with each other, anonymously. More than 1,100 firms are members.</td></tr>
+  <tr><td><b>Neptune</b></td><td>A data network TP ICAP bought in 2025. It carries information from 35 banks about which bonds they want to buy or sell.</td></tr>
+  <tr><td><b>RealQ</b></td><td>Launched June 2026. It puts Neptune's bank data together with Liquidnet's investor connections, so banks and investors can find each other in the bond market. Nine banks own 30% of it.</td></tr>
+</table>
+
+<h2>Why this is distinctive</h2>
+<ul>
+  <li><strong>Tradition</strong> is, as far as public reports show, an interdealer broker through and through.</li>
+  <li><strong>BGC</strong> has an electronic arm, Fenics, and its own futures exchange, FMX. Its bet is technology and exchanges. It does not own an investor network like Liquidnet.</li>
+  <li><strong>TP ICAP</strong> is the one of the three that bought its way directly onto the investors' desks.</li>
+</ul>
+
+<h2>Why it matters for the future</h2>
+<p>The wall between the two halves is slowly coming down. More trading now happens directly between banks and investors, and even between investors themselves. TP ICAP's own annual report lists four ways of connecting people:</p>
+<table>
+  <thead><tr><th style="width:30%">Short name</th><th>Who trades with whom</th></tr></thead>
+  <tr><td><b>Dealer to dealer</b></td><td>Bank with bank. The traditional interdealer market.</td></tr>
+  <tr><td><b>Dealer to client</b></td><td>Bank with investor.</td></tr>
+  <tr><td><b>Client to client</b></td><td>Investor with investor. This is Liquidnet's home ground.</td></tr>
+  <tr><td><b>All to all</b></td><td>Anyone with anyone.</td></tr>
+</table>
+<p>A firm that only knows the dealers can serve the first row. A firm that knows both halves can serve all four.</p>
+
+<h2>Why a junior broker should care</h2>
+<div class="box">
+  <span class="tag">In plain English</span>
+  A broker's career is a list of people who trust them. At a firm with one half of the market, that list can only ever contain bank traders. At a firm with both halves, the kinds of client you could serve over twenty years is wider. <strong>You are choosing the size of the room you will work in.</strong>
+</div>
+
+<div class="box warn">
+  <span class="tag">Be honest about the limits</span>
+  <strong>Liquidnet is a separate division from Global Broking.</strong> As an intern you would be on interdealer desks, not on Liquidnet. And Liquidnet's revenue was roughly flat in 2026. So do not claim you would be "working with investors" on day one. The honest claim is about <strong>direction</strong>: the two sides are being joined up. The evidence is RealQ, and the fact that in late 2026 some Liquidnet desks were moved into Global Broking.
+</div>
+</section>
+
+<!-- ============ CH 3 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 3</div>
+<h1>Distinctive thing two: broking turned into data</h1>
+
+<p class="lead">This one is quietly brilliant, and it starts with something a broker creates by accident.</p>
+
+<h2>The by-product</h2>
+<p>Every time a broker arranges a trade, a <strong>price</strong> is created. In a public market, everyone can see prices. In the private markets where TP ICAP works, nobody outside the trade sees them. So the firm in the middle ends up holding something valuable: a record of what things are really trading at.</p>
+<p>Who would pay for that?</p>
+<ul>
+  <li><strong>Banks</strong>, to value the positions they hold.</li>
+  <li><strong>Investors</strong>, to check they got a fair price.</li>
+  <li><strong>Risk and compliance teams</strong>, to prove things to regulators.</li>
+</ul>
+<p>TP ICAP packages those prices and sells them through its division <strong>Parameta Solutions</strong>.</p>
+
+<h2>The numbers</h2>
+<div class="tiles">
+  <div class="tile"><b>£202m</b><span>Parameta's revenue in 2025</span></div>
+  <div class="tile"><b>98%</b><span>Of that revenue is subscriptions, which repeat every year</span></div>
+  <div class="tile"><b>About 38p</b><span>Profit kept from each £1. The highest of any TP ICAP division</span></div>
+</div>
+
+<figure>
+  <figcaption>Diagram 3. Data businesses compared, 2025 revenue<span>BGC converted to pounds at a rough 2025 average rate. Approximate, and not exactly like for like</span></figcaption>
+  <div class="bars">
+    <div class="lab">TP ICAP: Parameta Solutions<small>about 9% of group revenue</small></div><div class="track"><div class="bar" style="width:66%"></div><div class="val">£202m</div></div>
+    <div class="lab">BGC: data, network and post-trade<small>about 5% of group revenue</small></div><div class="track"><div class="bar cg" style="width:34.3%"></div><div class="val">about £105m <small>$139m</small></div></div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Two bars. The blue one is TP ICAP's data division. The grey one is the nearest thing BGC reports, and that figure also includes network and after-trade services, not only data. <strong>Parameta is roughly twice the size, and a bigger share of its parent.</strong> Tradition sells data too, but does not publish a separate figure that I could find. The pound figure for BGC is my own conversion.
+</div>
+
+<h2>What "benchmark administrator" means</h2>
+<p>A <strong>benchmark</strong> is an official reference price that contracts are tied to. Because so much money depends on benchmarks, the regulator decides who is allowed to run them.</p>
+<p>In 2022 Parameta was authorised by the UK regulator, the FCA, as a benchmark administrator. TP ICAP said this made it the first interdealer broker to run benchmarks for private markets. Its first ones were interest rate swap benchmarks built from prices in Global Broking.</p>
+<div class="box">
+  <span class="tag">In plain English</span>
+  The prices that TP ICAP's brokers create are trusted enough that the regulator lets the firm publish them as official reference rates. <strong>That is a stamp on the quality of what the broking desks produce.</strong>
+</div>
+
+<h2>Why a junior broker should care</h2>
+<table>
+  <thead><tr><th style="width:30%">Reason</th><th>In plain English</th></tr></thead>
+  <tr><td><b>Your trades count twice</b></td><td>Inside the group, Parameta pays the broking divisions for the data they generate. In 2025 it paid Global Broking £25 million. A broker doing the normal job is creating a second product.</td></tr>
+  <tr><td><b>The firm is steadier</b></td><td>Broking income rises and falls with how busy markets are. Subscriptions arrive every year regardless. A steadier firm can keep hiring and training in a quiet patch.</td></tr>
+  <tr><td><b>It shows where the industry is going</b></td><td>The firm thought the data business valuable enough to consider listing it separately on a US stock market.</td></tr>
+</table>
+
+<div class="box warn">
+  <span class="tag">Be honest about the limits</span>
+  Parameta is still under a tenth of the group. Its growth slowed in 2026, to about 4% for the first nine months and flat in the third quarter. The stock market listing has been on hold since 2025. So do not call it the engine of the firm. <strong>Call it what it is: a second, steadier source of income that rivals have less of.</strong>
+</div>
+</section>
+
+<!-- ============ CH 4 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 4</div>
+<h1>Put together: three firms, three bets</h1>
+<p class="lead">Here is the fairest way to see it. All three big interdealer brokers do the same core job. Each has made a different bet about what to add on top.</p>
+
+<table>
+  <thead><tr><th style="width:28%"></th><th>TP ICAP</th><th>BGC</th><th>Tradition</th></tr></thead>
+  <tr><td><b>Large interdealer broking business</b></td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+  <tr><td><b>Its own network of investors</b></td><td><b>Yes.</b> Liquidnet</td><td>Not on that scale</td><td>No</td></tr>
+  <tr><td><b>Data division</b></td><td><b>About £202m</b></td><td>About £105m, including other services</td><td>Not published</td></tr>
+  <tr><td><b>Its own exchange</b></td><td>No</td><td><b>Yes.</b> FMX</td><td>No</td></tr>
+  <tr><td><b>Energy broking</b></td><td>Large</td><td><b>Larger,</b> after a 2025 takeover</td><td>Not compared here</td></tr>
+  <tr><td><b>The bet, in a sentence</b></td><td>"Add investors and data to the broker."</td><td>"Add technology, an exchange and energy to the broker."</td><td>"Be an excellent broker."</td></tr>
+</table>
+<div class="box read">
+  <span class="tag">How to read this table</span>
+  Three firms across the top. Each row is something a firm might have. Bold marks who leads. Notice that <strong>BGC has things TP ICAP does not</strong>. This is not a table of who is best. It is a table of who chose what. Your answer is: "I prefer the choice TP ICAP made, and here is why."
+</div>
+
+<div class="box say">
+  <span class="tag">Why being fair to rivals helps you</span>
+  If you say "TP ICAP is better at everything", a reviewer who knows the industry stops believing you. If you say "BGC has bet on running its own exchange, while TP ICAP has bet on connecting investors and selling data, and the second fits what I want", you sound like someone who has actually compared them.
+</div>
+
+<h2>The one-line version of TP ICAP's bet</h2>
+<div class="box">
+  <span class="tag">In plain English</span>
+  <strong>TP ICAP is a broker, an investor network and a data company in one.</strong> The broker creates the trades. The trades create the data. The investor network widens who can trade. Each part makes the other two more useful.
+</div>
+</section>
+
+<!-- ============ CH 5 ============ -->
+<section>
+<div class="kicker">Chapter 5</div>
+<h1>Make it yours</h1>
+<p class="lead">A fact about a firm is not a reason to work there. It becomes a reason only when you connect it to something you want. This is the step that stops an answer sounding forced.</p>
+
+<figure>
+  <figcaption>Diagram 4. The shape of an honest "why here" answer<span>Start with you, not with the firm</span></figcaption>
+  <div class="flow">
+    <div class="node hub"><b>1. What I want</b>From my first job</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node"><b>2. What is only here</b>The distinctive thing</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node"><b>3. The proof</b>One number or name</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node"><b>4. So what, for me</b>Why that matters to a junior broker</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Four boxes, left to right. Most candidates start at box 2 or 3 and never reach box 4. You start at box 1, the dark one. <strong>When the firm's facts arrive as evidence for something you already said you want, they stop sounding like a list you memorised.</strong>
+</div>
+
+<h2>Choose your "what I want"</h2>
+<p>Only pick the ones that are true. A reviewer can hear the difference.</p>
+<table>
+  <thead><tr><th style="width:31%">If you want this</th><th style="width:31%">Use this distinctive thing</th><th>And say this "so what"</th></tr></thead>
+  <tr><td>A career that can <strong>grow in several directions</strong></td><td>Both halves of the market</td><td>"I could build relationships with banks first, and the firm is joining that up with investors."</td></tr>
+  <tr><td>To be <strong>trained properly</strong>, even in a quiet market</td><td>The data business</td><td>"Subscription income arrives when trading is slow, which helps a firm keep investing in juniors."</td></tr>
+  <tr><td>Work where <strong>what you produce has lasting value</strong></td><td>The data business</td><td>"The prices a broker creates are sold on, and even published as official benchmarks."</td></tr>
+  <tr><td>To be where the <strong>industry is changing</strong></td><td>The three-part mix</td><td>"I'd rather learn broking at the firm that is building what comes next."</td></tr>
+</table>
+
+<h2>The answer, in two sizes</h2>
+<div class="box fact">
+  <span class="tag">60 seconds</span>
+  "Thanks for watching. What I want from my first job is to build client relationships somewhere that career can keep widening, and that is what stands out to me about TP ICAP.
+  <br><br>Most interdealer brokers face one half of the market, the banks. TP ICAP faces both. Global Broking serves the dealers, and Liquidnet connects more than 1,100 investment firms. With RealQ launched this year, the firm is joining those two sides up.
+  <br><br>The second thing is the data business. Parameta made about £200 million last year, almost all subscriptions. That income arrives in quiet markets, which I think is part of why the firm can keep expanding its trainee programmes.
+  <br><br>So it is a broker, an investor network and a data company in one, and that is the place I'd most like to learn."
+</div>
+<div class="box fact">
+  <span class="tag">100 seconds. Add your own story where shown</span>
+  "Thanks for taking the time to watch this. I'll give three reasons: something I've learned about myself, the fact that TP ICAP faces both halves of the market, and the way it turns broking into data.
+  <br><br>First, [YOUR STORY: a time you built relationships from nothing, with one number]. That taught me I want a career built on a list of people who trust me, and I want that list to be able to grow.
+  <br><br>That is why the second point matters. Most interdealer brokers serve the banks. TP ICAP also owns Liquidnet, with more than 1,100 investment firms, and this year it launched RealQ to connect the two sides in bonds. Its rivals have made different bets. BGC, for example, has built its own exchange. I prefer TP ICAP's choice, because it widens who a broker can serve.
+  <br><br>Third, the data. Every trade a broker arranges creates a price, and Parameta sells those prices: about £200 million last year, 98% of it subscriptions. I like that the work has a second life, and that it makes the firm steadier when markets are quiet.
+  <br><br>So what stands out to me is that it is a broker, an investor network and a data company together. That is where I'd most like to start."
+</div>
+
+<h2>Prompt card</h2>
+<div class="cards">
+  <div class="card"><b>Open</b>Thanks<br>What I want<br>Relationships that widen</div>
+  <div class="card"><b>Middle</b>Both halves<br>Liquidnet, 1,100+<br>RealQ this year<br>Parameta, £200m<br>98% subscriptions</div>
+  <div class="card"><b>Close</b>Steadier firm<br>Trains juniors<br>Broker, network, data<br>Where I'd learn</div>
+</div>
+
+<h2>If they push back</h2>
+<table>
+  <thead><tr><th style="width:34%">They say</th><th>You say</th></tr></thead>
+  <tr><td><b>"You'd be in Global Broking, not Liquidnet."</b></td><td>"Understood. My point is about direction. RealQ and the move of some Liquidnet desks into Global Broking suggest the two sides are being joined up."</td></tr>
+  <tr><td><b>"Doesn't BGC have electronic platforms too?"</b></td><td>"Yes, Fenics, and its own exchange in FMX. I see that as a different bet. TP ICAP's is investors and data."</td></tr>
+  <tr><td><b>"Why should a broker care about data?"</b></td><td>"Because the broker creates it. Parameta paid Global Broking £25 million last year for exactly that, and it steadies the firm."</td></tr>
+  <tr><td><b>"Parameta's growth has slowed."</b></td><td>"It has, to around 4% this year. But it is still 98% subscriptions, so it does its job of steadying income."</td></tr>
+  <tr><td><b>"So why not work at a data company?"</b></td><td>"Because I want to be on the phone with clients. The data is a reason to choose this broker, not a reason to leave broking."</td></tr>
+</table>
+
+<h2>Four safety rules</h2>
+<ul>
+  <li><strong>Say "what stands out to me"</strong>, not "the only firm that".</li>
+  <li><strong>Never run a rival down.</strong> "A different bet" is the phrase.</li>
+  <li><strong>Say "about"</strong> before the numbers.</li>
+  <li><strong>Only use a "what I want" that is true.</strong> If none of the four fits, tell the truth about what you do want, and find the fact that matches.</li>
+</ul>
+
+<h2>Where this comes from</h2>
+<ul class="src">
+  <li>TP ICAP Annual Report 2025, full-year results 2025, half-year results 2026 and the 3 November 2026 trading update: Liquidnet, Neptune, RealQ, Parameta figures, the four ways of connecting clients. Links in Part 1, Section 19.</li>
+  <li>Parameta's benchmark authorisation: <a href="https://tpicap.com/media/press-releases/2022/parameta-solutions-becomes-authorised-benchmark-administrator">TP ICAP press release, 2022</a>. The "first interdealer broker" claim is the company's own.</li>
+  <li>BGC's data, network and post-trade revenue of $139.0 million: <a href="https://www.bgcg.com/wp-content/uploads/2026/02/BGC-Q4-2025-Earnings-ReleasevF.pdf">BGC fourth-quarter 2025 results release</a>, read through a search summary.</li>
+  <li>FMX ownership: <a href="https://www.bgcg.com/wp-content/uploads/2024/04/FINAL-FMX-Partners-Press-Release.pdf">BGC press release, April 2024</a> and trade press.</li>
+  <li>Tradition: company and press descriptions. I found no published split for its data business.</li>
+  <li>The "three bets" comparison and the "what I want" framework are my own reading, not statements by any of the firms.</li>
+</ul>
+</section>
+
+</body>
+</html>
