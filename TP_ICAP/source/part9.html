@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>TP ICAP Part 9: Linking it back to you</title>
+<style>
+@font-face{font-family:"Lexend";font-weight:400;src:url("node_modules/@fontsource/lexend/files/lexend-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Lexend";font-weight:600;src:url("node_modules/@fontsource/lexend/files/lexend-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Lexend";font-weight:700;src:url("node_modules/@fontsource/lexend/files/lexend-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"Atkinson";font-weight:400;src:url("node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Atkinson";font-weight:700;src:url("node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2")}
+
+:root{
+  --bg:#FBF6EA; --ink:#1f2a37; --muted:#4f5b69; --navy:#14304b; --teal:#0f6e84;
+  --line:#d9d0bb; --card:#fffdf6;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --grey:#8a94a0;
+}
+@page{size:A4;margin:16mm 17mm 19mm 17mm}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson",Verdana,sans-serif;
+  font-size:12.5pt;line-height:1.62;letter-spacing:.012em;word-spacing:.06em;text-align:left;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3,h4{font-family:"Lexend",Verdana,sans-serif;color:var(--navy);line-height:1.25;letter-spacing:0;break-after:avoid}
+h1{font-size:23pt;font-weight:700;margin:0 0 4mm;padding-bottom:3mm;border-bottom:1.2mm solid var(--teal)}
+h2{font-size:15.5pt;font-weight:600;margin:8mm 0 2.5mm}
+h3{font-size:12.5pt;font-weight:600;margin:5.5mm 0 1.5mm}
+p{margin:0 0 3.2mm;max-width:150mm}
+li{max-width:146mm}
+ul,ol{margin:0 0 3.5mm;padding-left:6.5mm}
+ol{padding-left:8.5mm}
+li{margin-bottom:1.7mm}
+strong{font-weight:700;color:#10202f}
+section{break-before:auto;margin-top:13mm}
+section.pb{break-before:page;margin-top:0}
+.kicker{break-after:avoid}
+.kicker{font-family:"Lexend";font-size:10pt;font-weight:600;color:var(--teal);margin:0 0 1.5mm}
+.lead{font-size:13pt;line-height:1.6}
+.small{font-size:10pt;color:var(--muted);line-height:1.5}
+
+/* boxes */
+.box{border-radius:2.5mm;padding:3.6mm 4.5mm 3mm;margin:4mm 0;font-size:12pt;max-width:162mm;break-inside:avoid;border-left:1.6mm solid var(--teal);background:#E7F1F3}
+.box > :last-child{margin-bottom:.6mm}
+.box .tag{font-family:"Lexend";font-weight:600;font-size:10.5pt;display:block;margin-bottom:1.2mm;color:var(--navy)}
+.box.say{background:#FFEFCF;border-left-color:#c77700}
+.box.warn{background:#FBE4DD;border-left-color:#b6452c}
+.box.read{background:#ECE8F6;border-left-color:#5a48b8}
+.box.fact{background:var(--card);border:.3mm solid var(--line);border-left:1.6mm solid var(--navy)}
+
+/* figures */
+figure{margin:5mm 0 4mm;padding:4.5mm 5mm 4mm;background:var(--card);border:.3mm solid var(--line);border-radius:3mm;break-inside:avoid}
+figcaption{font-family:"Lexend";font-weight:600;font-size:11.5pt;color:var(--navy);margin-bottom:3.5mm}
+figcaption span{display:block;font-family:"Atkinson";font-weight:400;font-size:10pt;color:var(--muted);margin-top:.6mm}
+
+/* bar charts */
+.bars{display:grid;grid-template-columns:47mm 1fr;row-gap:2.6mm;column-gap:3mm;align-items:center}
+.bars .lab{font-size:10.5pt;line-height:1.3;text-align:right}
+.bars .lab small{display:block;color:var(--muted);font-size:9pt}
+.bars .track{display:flex;align-items:center;gap:2.5mm}
+.bars .bar{height:7.5mm;border-radius:0 1.2mm 1.2mm 0;background:var(--s1);min-width:.6mm}
+.bars .val{font-family:"Lexend";font-weight:600;font-size:10.5pt;white-space:nowrap}
+.bars .val small{font-family:"Atkinson";font-weight:400;color:var(--muted);font-size:9.5pt}
+.bars.sub .bar{height:5.5mm;background:#7fb0ea}
+.c1{background:var(--s1)!important}.c2{background:var(--s2)!important}.c3{background:var(--s3)!important}.c4{background:var(--s4)!important}.cg{background:var(--grey)!important}
+.stack{display:flex;gap:.6mm;height:15mm;margin:2mm 0 2.5mm}
+.stack div{display:flex;align-items:center;justify-content:center;color:#fff;font-family:"Lexend";font-weight:600;font-size:10.5pt;border-radius:1mm;text-align:center;line-height:1.2}
+.stack .dark{color:#1f2a37}
+.legend{display:flex;flex-wrap:wrap;gap:2mm 6mm;font-size:10pt}
+.legend i{display:inline-block;width:3.6mm;height:3.6mm;border-radius:.8mm;margin-right:1.6mm;vertical-align:-.5mm}
+
+/* flow diagrams */
+.flow{display:flex;align-items:stretch;gap:1.5mm}
+.node{flex:1;background:#fff;border:.45mm solid var(--navy);border-radius:2.2mm;padding:2.6mm 2.4mm;font-size:10pt;line-height:1.35;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.node b{font-family:"Lexend";font-weight:600;font-size:10.5pt;color:var(--navy);display:block;margin-bottom:.8mm}
+.node.hub{background:var(--navy);border-color:var(--navy);color:#fff}
+.node.hub b{color:#fff}
+.node.soft{border-style:dashed;border-color:#6b7785}
+.arrow{flex:0 0 7mm;display:flex;align-items:center;justify-content:center;font-size:15pt;color:var(--teal);font-weight:700}
+.steps{counter-reset:s;display:grid;gap:2.2mm}
+.step{counter-increment:s;display:grid;grid-template-columns:10mm 1fr;gap:3mm;align-items:start;background:#fff;border:.3mm solid var(--line);border-radius:2mm;padding:2.5mm 3mm}
+.step::before{content:counter(s);font-family:"Lexend";font-weight:700;font-size:13pt;color:#fff;background:var(--teal);width:9mm;height:9mm;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.step p{margin:0;font-size:10.8pt;line-height:1.45}
+.step b{font-family:"Lexend";font-weight:600;color:var(--navy)}
+.cycle{display:grid;grid-template-columns:1fr 7mm 1fr 7mm 1fr;row-gap:1.5mm;align-items:stretch}
+.down{grid-column:5;text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1}
+.up{grid-column:1;text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1}
+
+/* timeline */
+.tl{border-left:.8mm solid var(--teal);margin:2mm 0 0 16mm;padding:0}
+.tl div{position:relative;padding:0 0 3.1mm 6mm;font-size:10.8pt;line-height:1.45;break-inside:avoid}
+.tl div::before{content:"";position:absolute;left:-2.3mm;top:1.2mm;width:3.6mm;height:3.6mm;border-radius:50%;background:var(--teal);border:.5mm solid var(--card)}
+.tl b{position:absolute;left:-19mm;top:0;width:15mm;text-align:right;font-family:"Lexend";font-weight:600;color:var(--navy)}
+.tl .big::before{background:var(--s2);width:4.6mm;height:4.6mm;left:-2.8mm}
+
+/* tables */
+table{border-collapse:collapse;width:100%;margin:3mm 0 4.5mm;font-size:10.6pt;line-height:1.42}
+tr{break-inside:avoid}
+th{font-family:"Lexend";font-weight:600;font-size:10pt;text-align:left;background:var(--navy);color:#fff;padding:2.2mm 2.6mm;vertical-align:bottom}
+td{padding:2.2mm 2.6mm;border-bottom:.3mm solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:#f5efdf}
+td.n,th.n{text-align:right;white-space:nowrap}
+td b{color:#10202f}
+
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin:4mm 0}
+.tile{background:var(--card);border:.3mm solid var(--line);border-radius:2.5mm;padding:3.2mm 3.5mm;break-inside:avoid}
+.tile b{display:block;font-family:"Lexend";font-weight:700;font-size:17pt;color:var(--navy);line-height:1.15}
+.tile span{font-size:10pt;color:var(--muted);line-height:1.35;display:block;margin-top:1mm}
+
+/* cover */
+.cover{break-before:auto;min-height:215mm;display:flex;flex-direction:column}
+.cover h1{font-size:34pt;border:none;margin:8mm 0 3mm;padding:0}
+.cover .sub{font-family:"Lexend";font-size:15pt;color:var(--teal);font-weight:600;margin-bottom:8mm;max-width:150mm;line-height:1.4}
+.cover .band{height:3mm;background:linear-gradient(90deg,var(--navy) 0 55%,var(--teal) 55% 80%,var(--s4) 80% 100%);border-radius:2mm;margin-bottom:9mm}
+.toc{columns:2;column-gap:10mm;font-size:11pt;padding:0;list-style:none;counter-reset:t}
+.toc li{counter-increment:t;margin-bottom:1.8mm;break-inside:avoid}
+.toc li::before{content:counter(t) ".";font-family:"Lexend";font-weight:600;color:var(--teal);display:inline-block;width:8mm}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+.two > div{break-inside:avoid;max-width:none}
+dl{margin:0}
+dt{font-family:"Lexend";font-weight:600;color:var(--navy);font-size:11pt;margin-top:0}
+dd{margin:0 0 0 0;font-size:10.8pt;line-height:1.48}
+a{color:var(--teal);text-decoration:none;overflow-wrap:anywhere}
+thead{display:table-header-group}
+.gloss dl{columns:2;column-gap:9mm}
+.gloss dl div{break-inside:avoid;padding-bottom:2.8mm}
+.legend4{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin:3mm 0}
+.legend4 .box{margin:0;max-width:none}
+.src li{font-size:9.6pt;line-height:1.4;margin-bottom:1.3mm}
+
+.hubgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5mm}
+.hubgrid .node{min-height:17mm}
+.layers{display:grid;gap:2mm}
+.layer{border-radius:2.2mm;padding:3mm 4mm;font-size:10.6pt;line-height:1.4;color:#fff}
+.layer b{display:block;font-family:"Lexend";font-weight:600;font-size:11pt;margin-bottom:.6mm}
+.l1{background:#14304b;margin:0 0 0 0}.l2{background:#0f6e84;margin:0 9mm}.l3{background:#fff;color:#1f2a37;border:.45mm solid #14304b;margin:0 18mm}
+.l3 b{color:#14304b}
+.ladder{display:grid;gap:2mm}
+.rung{background:#fff;border:.45mm solid var(--navy);border-radius:2.2mm;padding:2.4mm 3.5mm;font-size:10.6pt;line-height:1.4}
+.rung b{font-family:"Lexend";font-weight:600;color:var(--navy);display:block}
+.r1{margin-right:44mm}.r2{margin-left:11mm;margin-right:33mm}.r3{margin-left:22mm;margin-right:22mm}.r4{margin-left:33mm;margin-right:11mm}.r5{margin-left:44mm;background:var(--navy);color:#fff}
+.r5 b{color:#fff}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin:3mm 0 5mm}
+.card{background:#fff;border:.5mm dashed #6b7785;border-radius:2.5mm;padding:3.5mm 4mm;font-family:"Lexend";font-size:11.5pt;line-height:1.75;break-inside:avoid}
+.card b{display:block;color:var(--teal);font-size:10pt;margin-bottom:1mm}
+
+.four{display:grid;grid-template-columns:1fr 1fr;gap:2.5mm}
+.four .node{text-align:left;padding:3mm 3.5mm;font-size:10.6pt}
+.mapdown{text-align:center;font-size:15pt;color:var(--teal);font-weight:700;line-height:1.5;white-space:nowrap;overflow:hidden}
+figure svg{width:100%;height:auto;display:block}
+svg .ax{stroke:#4f5b69;stroke-width:1.5;fill:none}
+svg .st{font-family:"Atkinson",sans-serif;font-size:13.5px;fill:#4f5b69}
+svg .sb{font-family:"Lexend",sans-serif;font-size:14px;font-weight:600;fill:#14304b}
+svg .ln1{stroke:#2a78d6;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+svg .ln2{stroke:#8a94a0;stroke-width:3.5;fill:none;stroke-dasharray:9 7;stroke-linecap:round}
+</style>
+</head>
+<body>
+<style>
+.trick{background:var(--card);border:.3mm solid var(--line);border-left:1.6mm solid var(--teal);border-radius:2.2mm;padding:3mm 4mm;margin-bottom:3mm;display:grid;grid-template-columns:10mm 1fr;column-gap:3mm;break-inside:avoid}
+.trick .num{font-family:"Lexend";font-weight:700;font-size:12.5pt;color:#fff;background:var(--teal);width:9mm;height:9mm;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:.4mm}
+.trick b.t{font-family:"Lexend";font-weight:600;color:var(--navy);font-size:12pt}
+.trick .ex{display:block;margin-top:1.2mm;max-width:150mm}
+ul.chk{list-style:none;padding-left:0;margin:0 0 3mm}
+ul.chk li{position:relative;padding-left:8mm;margin-bottom:1.9mm;font-size:11.5pt;max-width:none}
+ul.chk li::before{content:"";position:absolute;left:0;top:1.2mm;width:4mm;height:4mm;border:.45mm solid var(--navy);border-radius:.8mm;background:#fff}
+</style>
+<!-- ============ COVER ============ -->
+<div class="cover">
+  <h1>Linking it back to you</h1>
+  <div class="sub">Part 9. Your three experiences, and how each one connects to the broker's job and to TP ICAP</div>
+  <div class="band"></div>
+  <p class="lead">You said linking it back to yourself is the hardest part. Good news: your three experiences cover the broker's job almost exactly. You do not need clever facts. You need to <strong>say plainly what you did</strong>, then <strong>say what a broker does that is the same</strong>.</p>
+
+  <div class="tiles">
+    <div class="tile"><b>The shop</b><span>Selling school uniform to parents, from age 14. This is your <strong>selling</strong> proof.</span></div>
+    <div class="tile"><b>Pictet</b><span>The bridge between big clients and portfolio managers. This is your <strong>middle seat</strong> proof.</span></div>
+    <div class="tile"><b>Debating</b><span>British Parliamentary debates. This is your <strong>fast thinking</strong> proof.</span></div>
+  </div>
+
+  <div class="box">
+    <span class="tag">The big idea</span>
+    A broker <strong>sells</strong>, sits <strong>in the middle</strong> of two sides, and thinks <strong>fast</strong>. You have done each of those three things already, in three different places. That is your whole case.
+  </div>
+
+  <div class="box warn">
+    <span class="tag">How to use this pack</span>
+    I know what these experiences are in general. I do not know your details. Wherever you see <strong>[square brackets]</strong>, put in what is true. If a line I wrote does not match what really happened, change it or cut it.
+  </div>
+  <p class="small" style="margin-top:auto">The words in quotation marks from "the advert" are from the TP ICAP job advert you shared. The links between your experiences and the job are my suggestions for you to test against your own memory.</p>
+</div>
+
+<!-- ============ 1 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 1</div>
+<h1>How to link anything back to the job</h1>
+<p class="lead">One simple chain. Use it for every experience.</p>
+
+<figure>
+  <figcaption>Diagram 1. The link chain<span>Four short steps. One sentence each</span></figcaption>
+  <div class="flow">
+    <div class="node"><b>1. What I did</b>Plain words. No jargon</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node"><b>2. What that was really like</b>The hard part, or the part you liked</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node"><b>3. A broker does the same</b>Name the matching part of the job</div>
+    <div class="arrow">&rarr;</div>
+    <div class="node hub"><b>4. Which is why I</b>Want this, or would be good at this</div>
+  </div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Left to right. You start with your own life, not with the firm. Step 3 is the bridge: it names the part of broking that matches. Step 4, the dark box, is the point of the whole answer. <strong>If you only do steps 1 and 2, you have told a story. Steps 3 and 4 make it a reason.</strong>
+</div>
+
+<h2>An example with the shop</h2>
+<div class="steps">
+  <div class="step"><p><b>What I did.</b> "From the age of 14 I worked in a shop selling school uniform to parents."</p></div>
+  <div class="step"><p><b>What that was really like.</b> "The same families came back every year, so I learned that being honest with a customer matters more than one sale."</p></div>
+  <div class="step"><p><b>A broker does the same.</b> "A broker deals with the same clients again and again, and only earns if they come back."</p></div>
+  <div class="step"><p><b>Which is why I.</b> "That is the kind of selling I enjoy, and it is why I want broking."</p></div>
+</div>
+
+<h2>Your three experiences, and what each one proves</h2>
+<figure>
+  <figcaption>Diagram 2. Three experiences make one broker<span>Each one covers a different part of the job</span></figcaption>
+  <div class="flow">
+    <div class="node"><b>The shop</b>Selling to people, face to face, for years</div>
+    <div class="node"><b>Pictet</b>Standing between big clients and the experts</div>
+    <div class="node"><b>Debating</b>Thinking fast, and seeing both sides</div>
+  </div>
+  <div class="mapdown">&darr;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&darr;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&darr;</div>
+  <div class="flow"><div class="node hub"><b>A broker</b>Sells, sits in the middle of two sides, and thinks fast</div></div>
+</figure>
+<div class="box read">
+  <span class="tag">How to read this diagram</span>
+  Three white boxes on top, one for each experience. They all feed the dark box underneath. <strong>No single experience makes you a broker. The three together do.</strong> That is a line you can say out loud.
+</div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 2</div>
+<h1>The shop</h1>
+<p class="lead">Do not undersell this one. Years of real selling, starting at 14, is rare. Most candidates have never sold anything to anyone.</p>
+
+<h2>What it was, in plain words</h2>
+<div class="box fact">
+  <span class="tag">Say it like this</span>
+  "From the age of 14 I worked in a shop selling school uniform to parents. I did it for [number] years."
+</div>
+
+<h2>How it matches the broker's job</h2>
+<table>
+  <thead><tr><th style="width:50%">In the shop</th><th>On a broking desk</th></tr></thead>
+  <tr><td>You talked to customers all day.</td><td>A broker talks to clients all day.</td></tr>
+  <tr><td>The same families came back each year.</td><td>A broker deals with the same clients again and again.</td></tr>
+  <tr><td>Parents trusted you to tell them what they really needed.</td><td>A client trusts a broker to give a straight price.</td></tr>
+  <tr><td>Some weeks were a rush, such as just before term.</td><td>Markets have rushes too, when news breaks.</td></tr>
+  <tr><td>Some customers were stressed, or said no.</td><td>A broker hears "no" many times a day.</td></tr>
+  <tr><td>You added up prices quickly at the till.</td><td>A broker does quick sums all day.</td></tr>
+</table>
+<div class="box read">
+  <span class="tag">How to read this table</span>
+  Left is what you did. Right is the same thing in broking. Pick the <strong>two rows that are most true for you</strong>. You do not need all six.
+</div>
+
+<h2>Link to the job advert</h2>
+<p>The advert asks for someone who enjoys a <strong>"high pressured sales"</strong> environment, has <strong>"a passion for working with people"</strong>, and is <strong>"resilient"</strong>. The shop is your proof for all three.</p>
+
+<h2>Link to the firm</h2>
+<div class="box">
+  <span class="tag">In plain English</span>
+  TP ICAP does not sell a product. It earns a fee each time a client chooses to trade through it. So it only does well if clients <strong>keep coming back</strong>. You learned that lesson in a shop: look after the customer and they return next year.
+</div>
+
+<h2>Ready to say</h2>
+<div class="box say">
+  <span class="tag">20 seconds</span>
+  "From the age of 14 I worked in a shop selling school uniform to parents. The same families came back every year, so I learned early that being straight with a customer matters more than one sale. A broker works the same way: the same clients, every day, and you only earn if they trust you enough to come back."
+</div>
+
+<h2>Details that would make it stronger</h2>
+<ul>
+  <li><strong>How many years</strong> you worked there.</li>
+  <li><strong>One real moment:</strong> a difficult parent, a very busy day, or a customer who came back and asked for you.</li>
+  <li><strong>A number:</strong> how many customers on a busy day, or how many seasons you worked.</li>
+  <li><strong>Why you started at 14.</strong> That shows drive. The advert's word is "entrepreneurial".</li>
+</ul>
+
+<h2>Use it for these questions</h2>
+<p>"Why broking?" &nbsp; "Tell us about yourself." &nbsp; "A time you dealt with a difficult person." &nbsp; "A time you worked under pressure."</p>
+</section>
+
+<!-- ============ 3 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 3</div>
+<h1>Pictet Asset Management</h1>
+<p class="lead">This is your strongest link, because of where you sat: <strong>in the middle</strong>. And the people on one side of you were exactly the kind of institutions TP ICAP serves.</p>
+
+<h2>What it was, in plain words</h2>
+<div class="box fact">
+  <span class="tag">Say it like this</span>
+  "I did a summer internship in the Global Client Group at Pictet Asset Management. I sat between the clients, which were pension funds and sovereign wealth funds, and the portfolio managers inside the firm."
+</div>
+
+<h2>How it matches the broker's job</h2>
+<table>
+  <thead><tr><th style="width:50%">At Pictet</th><th>On a broking desk</th></tr></thead>
+  <tr><td>You sat between two groups: clients and portfolio managers.</td><td>A broker sits between two sides of a trade.</td></tr>
+  <tr><td>The two groups spoke differently. You had to put one side's message into words the other could use.</td><td>A broker carries messages between two sides until they agree.</td></tr>
+  <tr><td>The clients were huge institutions.</td><td>A broker's clients are huge institutions.</td></tr>
+  <tr><td>The relationship was built on trust and getting details right.</td><td>The same.</td></tr>
+  <tr><td>You saw the world from the client's chair.</td><td>A good broker understands what the client needs before they ask.</td></tr>
+</table>
+
+<h2>Link to the job advert</h2>
+<ul>
+  <li>The advert says the firm's clients include <strong>"pension and hedge funds, and asset managers"</strong>. You have already worked with pension funds, from inside an asset manager.</li>
+  <li>It asks for someone who can <strong>"understand and translate data to a wide-ranging audience"</strong>. Passing a portfolio manager's thinking on to a client is exactly that.</li>
+  <li>It asks for <strong>"excellent attention to detail"</strong>. [Add what you did at Pictet that needed care.]</li>
+</ul>
+
+<h2>Link to the firm</h2>
+<div class="box">
+  <span class="tag">In plain English</span>
+  TP ICAP sits in the middle of the market, between big institutions. Through its Liquidnet business it connects more than 1,100 investment firms. <strong>You have worked inside one of those kinds of firm.</strong> You know what they care about. Few candidates can say that.
+</div>
+
+<h2>Ready to say</h2>
+<div class="box say">
+  <span class="tag">25 seconds</span>
+  "At Pictet Asset Management I interned in the Global Client Group. I sat between the clients, which were pension funds and sovereign wealth funds, and the portfolio managers. My job was to help each side understand the other. That middle seat was the part I liked most, and it is what a broker does all day, only faster."
+</div>
+
+<h2>The honest contrast, and why it helps you</h2>
+<p>They may ask: <strong>"If you liked Pictet, why not stay in asset management?"</strong> Have a true answer ready. Here is one shape. Only use it if it is how you really feel.</p>
+<div class="box say">
+  <span class="tag">If this is true for you</span>
+  "At Pictet I liked being the bridge. But those relationships move slowly, over months. What draws me to broking is the same bridge, live, many times a day, with a result I can see."
+</div>
+
+<div class="box warn">
+  <span class="tag">Three things to be careful about</span>
+  <strong>1. It was a summer internship.</strong> Say "I helped" or "I supported". Do not claim you ran client relationships. <br>
+  <strong>2. Do not say Pictet is a TP ICAP client.</strong> You do not know that. Say "the kind of institution a broker serves". <br>
+  <strong>3. Keep client names private.</strong> "Pension funds and sovereign wealth funds" is enough. That discretion is itself a broker's skill.
+</div>
+
+<h2>Details that would make it stronger</h2>
+<ul>
+  <li><strong>One thing you actually did</strong> in a normal week. [For example: answering client questions, preparing material for a meeting, chasing documents.]</li>
+  <li><strong>One time you were the go-between</strong> and it worked.</li>
+  <li><strong>A number.</strong> Your other pack mentions "fifty market openings". If that is yours, use it.</li>
+  <li><strong>If you sat in meetings with brokerage firms,</strong> say so. It means you have seen brokers from the client's side of the table.</li>
+</ul>
+
+<h2>Use it for these questions</h2>
+<p>"Why broking?" &nbsp; "Why TP ICAP?" &nbsp; "Tell us about yourself." &nbsp; "A time you built a relationship." &nbsp; "Why should we choose you?"</p>
+</section>
+
+<!-- ============ 4 ============ -->
+<section class="pb">
+<div class="kicker">Chapter 4</div>
+<h1>Debating</h1>
+<p class="lead">You said you love this one but cannot see the link. There is a strong link. You just have to look at <strong>how</strong> a debate works, not what it is about.</p>
+
+<h2>What it was, in plain words</h2>
+<div class="box fact">
+  <span class="tag">Say it like this</span>
+  "At university I compete in British Parliamentary debating. You get the topic fifteen minutes before you speak, and you are told which side to argue."
+</div>
+
+<h2>How it matches the broker's job</h2>
+<table>
+  <thead><tr><th style="width:50%">In a debate</th><th>On a broking desk</th></tr></thead>
+  <tr><td>You get the topic fifteen minutes before. You must think fast with little information.</td><td>News breaks and prices move. A broker must react in seconds.</td></tr>
+  <tr><td>You do not choose your side. You have to understand both.</td><td>A broker stands between a buyer and a seller and must understand what each one wants.</td></tr>
+  <tr><td>Other speakers interrupt you with questions while you are talking.</td><td>A trading floor is constant interruption. You answer and carry on.</td></tr>
+  <tr><td>You have a strict time limit, so every word must count.</td><td>A broker has to be short, clear and exact.</td></tr>
+  <tr><td>You must listen closely to everyone before you, or your reply misses the point.</td><td>Listening is most of a broker's job.</td></tr>
+  <tr><td>Four teams are ranked. You lose rounds, and go again an hour later.</td><td>A broker hears "no", and picks up the phone again.</td></tr>
+  <tr><td>You work with a partner.</td><td>A broker works as part of a desk.</td></tr>
+</table>
+<div class="box read">
+  <span class="tag">How to read this table</span>
+  Seven links. The <strong>first three are the strongest</strong>: thinking fast, seeing both sides, and handling interruptions. Choose two and you have your answer.
+</div>
+
+<h2>Link to the job advert</h2>
+<ul>
+  <li><strong>"Comfortable with ambiguous, ever-changing situations in a fast-paced environment."</strong> An unseen topic and fifteen minutes is exactly that.</li>
+  <li><strong>"The ability not only to work with others, but to influence."</strong> Debating is practice at influencing people.</li>
+  <li><strong>"Analytical thinking and problem-solving."</strong> You break down a topic you have never seen and build a case.</li>
+</ul>
+
+<h2>Link to the firm</h2>
+<div class="box">
+  <span class="tag">In plain English</span>
+  At TP ICAP both sides of every trade are clients. So a broker cannot take one side. They have to see the deal from both ends. <strong>Debating trained you to do that</strong>, because you never get to choose which side you argue.
+</div>
+
+<h2>Ready to say</h2>
+<div class="box say">
+  <span class="tag">25 seconds</span>
+  "I compete in British Parliamentary debating. You get the topic fifteen minutes before, and you don't choose your side. So I've learned to think quickly with little information, and to understand both sides of an argument. A broker stands between a buyer and a seller, in a market that moves fast, so I think it is good training."
+</div>
+
+<div class="box warn">
+  <span class="tag">One trap to avoid</span>
+  A debater wants to <strong>win the argument</strong>. A broker wants two people to <strong>agree</strong>. Do not make yourself sound like someone who argues with clients. Lead with thinking fast, listening, and seeing both sides.
+</div>
+
+<h2>Details that would make it stronger</h2>
+<ul>
+  <li><strong>How long</strong> you have debated, and roughly how many competitions.</li>
+  <li><strong>A result,</strong> if you have a good one.</li>
+  <li><strong>One round that went badly</strong> and what you did in the next one. That is a resilience story.</li>
+</ul>
+
+<h2>Use it for these questions</h2>
+<p>"A time you worked under pressure." &nbsp; "A time you had to think on your feet." &nbsp; "What do you do outside your studies?" &nbsp; "Why should we choose you?"</p>
+</section>
+
+<!-- ============ 5 ============ -->
+<section>
+<div class="kicker">Chapter 5</div>
+<h1>Putting the three together</h1>
+
+<h2>What the advert asks for, and which experience proves it</h2>
+<table>
+  <thead><tr><th style="width:44%">The advert asks for</th><th style="width:19%">The shop</th><th style="width:19%">Pictet</th><th>Debating</th></tr></thead>
+  <tr><td>"High pressured sales"</td><td><b>Yes</b></td><td></td><td></td></tr>
+  <tr><td>"A passion for working with people"</td><td><b>Yes</b></td><td>Yes</td><td></td></tr>
+  <tr><td>"Build relationships with ease"</td><td>Yes</td><td><b>Yes</b></td><td></td></tr>
+  <tr><td>"Resilient"</td><td><b>Yes</b></td><td></td><td>Yes</td></tr>
+  <tr><td>"Translate data to a wide-ranging audience"</td><td></td><td><b>Yes</b></td><td>Yes</td></tr>
+  <tr><td>"Attention to detail"</td><td></td><td><b>Yes</b></td><td></td></tr>
+  <tr><td>"Ambiguous, ever-changing situations"</td><td></td><td></td><td><b>Yes</b></td></tr>
+  <tr><td>"Ability to influence"</td><td>Yes</td><td></td><td><b>Yes</b></td></tr>
+  <tr><td>"Team-oriented"</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+</table>
+<div class="box read">
+  <span class="tag">How to read this table</span>
+  Each row is a phrase from the advert. A bold "Yes" marks your best proof for it. <strong>Every row has at least one.</strong> You have something true to say about everything they ask for.
+</div>
+
+<h2>Which experience to use for which question</h2>
+<table>
+  <thead><tr><th style="width:45%">The question</th><th>Lead with</th></tr></thead>
+  <tr><td><b>"Tell us about yourself."</b></td><td>All three, one line each</td></tr>
+  <tr><td><b>"Why broking?"</b></td><td>The shop, then Pictet</td></tr>
+  <tr><td><b>"Why TP ICAP?"</b></td><td>Pictet</td></tr>
+  <tr><td><b>"Why should we choose you?"</b></td><td>All three, as three proofs</td></tr>
+  <tr><td><b>"A time under pressure."</b></td><td>Debating, or the busiest week in the shop</td></tr>
+  <tr><td><b>"A time you built a relationship."</b></td><td>Pictet, or a returning customer in the shop</td></tr>
+  <tr><td><b>"A time you dealt with someone difficult."</b></td><td>The shop</td></tr>
+</table>
+
+<h2>Four answers, ready to shape</h2>
+<p>About 60 seconds each. Change anything that is not true.</p>
+
+<div class="box fact">
+  <span class="tag">"Tell us about yourself."</span>
+  "Thanks for watching. I'm a final-year [subject] student at [university], and three things have led me to broking.
+  <br><br>From the age of 14 I worked in a shop selling school uniform to parents, so I've been selling to people face to face for [number] years.
+  <br><br>On my summer internship at Pictet Asset Management I sat between big clients, like pension funds, and the portfolio managers. I found I like being the person in the middle.
+  <br><br>And I debate at university, where you get the topic fifteen minutes before, so I'm used to thinking fast.
+  <br><br>Selling, the middle seat, and thinking fast. Put together, that is a broker, and that is why I'm applying."
+</div>
+
+<div class="box fact">
+  <span class="tag">"Why broking?"</span>
+  "Thank you for watching. Two experiences made me want broking.
+  <br><br>The first is the shop. From 14 I sold school uniform to parents. The same families came back every year, so I learned that being straight with a customer matters more than one sale.
+  <br><br>The second is Pictet. I sat between the clients and the portfolio managers, and that middle seat was the part I liked most.
+  <br><br>A broker does both of those at once. You deal with the same clients every day, you sit between two sides, and you only earn if they trust you. That is the work I've enjoyed most, and it is why I want to do it."
+</div>
+
+<div class="box fact">
+  <span class="tag">"Why TP ICAP?"</span>
+  "Thanks for watching. My main reason comes from my summer at Pictet Asset Management. I worked with pension funds and sovereign wealth funds, so I've seen the market from the client's side.
+  <br><br>What stands out to me about TP ICAP is that it serves both sides. Global Broking serves the banks, and Liquidnet serves investment firms like the one I worked in.
+  <br><br>Which means a broker here can understand the whole market, not just one half. Which is why I want to start here. I already know what one side cares about, and I want to learn the other."
+</div>
+
+<div class="box fact">
+  <span class="tag">"Why should we choose you?"</span>
+  "The advert asks for three things I can show.
+  <br><br>Sales under pressure: I sold school uniform to parents from the age of 14, including [your busiest time].
+  <br><br>Building relationships with big institutions: at Pictet I sat between pension fund clients and the portfolio managers.
+  <br><br>Staying calm when things change fast: in debating I get the topic fifteen minutes before I speak, and I'm interrupted while I'm speaking.
+  <br><br>None of those alone makes a broker. Together I think they do."
+</div>
+
+<h2>Prompt cards</h2>
+<div class="cards">
+  <div class="card"><b>The shop</b>From 14<br>School uniform, parents<br>Same families return<br>Straight with customers</div>
+  <div class="card"><b>Pictet</b>Global Client Group<br>Pension funds<br>Middle seat<br>Seen the client's side</div>
+  <div class="card"><b>Debating</b>Fifteen minutes<br>Don't choose your side<br>Interrupted<br>Think fast, both sides</div>
+</div>
+</section>
+
+<!-- ============ 6 ============ -->
+<section class="pb">
+<div class="kicker">Last page</div>
+<h1>Fill these in before you record</h1>
+<p>These are the gaps only you can close. Write one line for each.</p>
+
+<h3>The shop</h3>
+<ul class="chk">
+  <li>How many years I worked there: [ ]</li>
+  <li>My busiest time, in one line: [ ]</li>
+  <li>One customer I remember, and why: [ ]</li>
+</ul>
+
+<h3>Pictet</h3>
+<ul class="chk">
+  <li>One thing I did in a normal week: [ ]</li>
+  <li>One time I was the go-between and it worked: [ ]</li>
+  <li>One number I can use: [ ]</li>
+  <li>What I liked most, in my own words: [ ]</li>
+</ul>
+
+<h3>Debating</h3>
+<ul class="chk">
+  <li>How long I have debated: [ ]</li>
+  <li>One round that went badly, and what I did next: [ ]</li>
+</ul>
+
+<h3>Checks</h3>
+<ul class="chk">
+  <li>Every experience ends with "a broker does the same" and "which is why I"</li>
+  <li>I said "I helped" for Pictet, not "I ran"</li>
+  <li>I named no clients</li>
+  <li>Everything I say is true</li>
+</ul>
+
+<div class="box say" style="margin-top:5mm">
+  <span class="tag">The line to remember</span>
+  "The shop taught me to sell. Pictet taught me to sit in the middle. Debating taught me to think fast. A broker does all three."
+</div>
+</section>
+
+</body>
+</html>
